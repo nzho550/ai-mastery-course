@@ -1,0 +1,43 @@
+{
+  "id": "1-1",
+  "title": "What is Artificial Intelligence?",
+  "part": 1,
+  "estimatedMinutes": 15,
+  "tags": ["foundations", "beginner", "no-code"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to explain AI, machine learning, and large language models in plain English — to anyone, including someone who has never heard of them.\n\nNo math. No jargon. Just a clear mental model you'll use for the entire course."
+    },
+    {
+      "type": "text",
+      "content": "## AI Is Pattern Recognition at Scale\n\nAt its core, artificial intelligence is software that learns patterns from data and uses those patterns to make decisions or generate outputs — without being explicitly programmed for every situation.\n\nThink about how you learned to recognise a cat. Nobody gave you a rulebook that said *\"if it has pointy ears AND whiskers AND fur AND says meow, it's a cat.\"* You saw hundreds of cats over years, and your brain built a pattern automatically.\n\nAI does the same thing — just with millions of examples instead of hundreds, and in hours instead of years.\n\n**Machine learning** is the branch of AI where systems learn from data. **Deep learning** uses neural networks (loosely inspired by the brain) to learn very complex patterns. **Large language models (LLMs)** — like Claude, GPT-4, and Gemini — are deep learning systems trained on enormous amounts of text to understand and generate language."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The one-sentence version:** AI is software that learns from examples rather than following hand-written rules."
+    },
+    {
+      "type": "text",
+      "content": "## Three Terms You'll Hear Constantly\n\n**Artificial Intelligence (AI)** — The broad field of making computers do things that normally require human intelligence: understanding language, recognising images, making decisions.\n\n**Machine Learning (ML)** — A subset of AI. Instead of programmers writing rules, the system learns rules from data automatically.\n\n**Large Language Model (LLM)** — A specific type of ML system trained on text. It learns the statistical patterns of language across billions of documents, which gives it the ability to read, write, summarise, translate, and reason about text. Claude is an LLM. So is ChatGPT.\n\nThese three terms are often used interchangeably in casual conversation, but they're nested: LLMs are a type of ML, which is a type of AI."
+    },
+    {
+      "type": "text",
+      "content": "## What AI Is Not\n\nBefore going further, clear out some common misconceptions:\n\n- **AI is not magic.** It's software running on computers. It can fail, make mistakes, and be wrong.\n- **AI is not sentient.** It doesn't have feelings, intentions, or consciousness. It's very good at *simulating* these things in text.\n- **AI is not all-knowing.** Every model has a training cutoff date. It doesn't know what happened after that, and it doesn't have access to real-time information unless specifically connected to the internet.\n- **AI is not infallible.** LLMs can \"hallucinate\" — generate confident-sounding text that is factually wrong. You'll learn how to handle this in lesson 1-4."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "The Mirror Test",
+      "content": "Open [Claude.ai](https://claude.ai) and try these two prompts back to back.\n\n**Prompt 1:**\n```\nExplain artificial intelligence to me as if I'm a 10-year-old who loves cooking.\n```\n\n**Prompt 2:**\n```\nNow explain it to me as if I'm a retired accountant.\n```\n\nObserve how the same AI completely changes its explanation — the analogies, vocabulary, and framing — based on the audience you described.\n\n**Write one sentence** in your notes summarising what you witnessed. This single observation captures the most important property of modern LLMs: they're not rigid programs, they're flexible responders."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 1-1.** You now have a clear, honest mental model of what AI is and what it isn't. Everything in this course builds on this foundation."
+    }
+  ],
+  "nextLesson": "1-2",
+  "prevLesson": null
+}

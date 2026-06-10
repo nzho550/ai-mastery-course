@@ -1,0 +1,30 @@
+{
+  "marked": {
+    "version": "15.0.12",
+    "localFile": "vendor/marked.min.js",
+    "cdn": "https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js",
+    "license": "MIT"
+  },
+  "dompurify": {
+    "version": "3.2.6",
+    "localFile": "vendor/purify.min.js",
+    "cdn": "https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js",
+    "license": "Apache-2.0"
+  },
+  "fusejs": {
+    "version": "7.1.0",
+    "localFile": "vendor/fuse.min.js",
+    "cdn": "https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js",
+    "license": "Apache-2.0"
+  },
+  "highlightjs": {
+    "version": "11.11.1",
+    "files": {
+      "core":        { "local": "vendor/highlight/highlight.min.js",                    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" },
+      "powershell":  { "local": "vendor/highlight/languages/powershell.min.js",         "cdn": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/powershell.min.js" },
+      "theme-dark":  { "local": "vendor/highlight/github-dark.min.css",                 "cdn": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css" },
+      "theme-light": { "local": "vendor/highlight/github.min.css",                      "cdn": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" }
+    },
+    "license": "BSD-3-Clause"
+  }
+}

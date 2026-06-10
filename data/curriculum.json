@@ -1,0 +1,986 @@
+{
+  "title": "AI Mastery Course",
+  "version": "1.0",
+  "parts": [
+    {
+      "id": 1,
+      "title": "AI Foundations",
+      "lessons": [
+        {
+          "id": "1-1",
+          "title": "What is Artificial Intelligence?",
+          "estimatedMinutes": 15,
+          "tags": ["foundations", "beginner", "concepts"],
+          "nextLesson": "1-2",
+          "prevLesson": null
+        },
+        {
+          "id": "1-2",
+          "title": "How Language Models Work (Plain English)",
+          "estimatedMinutes": 20,
+          "tags": ["foundations", "beginner", "llm", "concepts"],
+          "nextLesson": "1-3",
+          "prevLesson": "1-1"
+        },
+        {
+          "id": "1-3",
+          "title": "The AI Tools Landscape (2025)",
+          "estimatedMinutes": 20,
+          "tags": ["foundations", "beginner", "tools", "overview"],
+          "nextLesson": "1-4",
+          "prevLesson": "1-2"
+        },
+        {
+          "id": "1-4",
+          "title": "AI Hallucinations & Limitations",
+          "estimatedMinutes": 15,
+          "tags": ["foundations", "beginner", "safety", "hallucinations"],
+          "nextLesson": "1-5",
+          "prevLesson": "1-3"
+        },
+        {
+          "id": "1-5",
+          "title": "Privacy & Safety — What NOT to Share with AI",
+          "estimatedMinutes": 15,
+          "tags": ["foundations", "beginner", "privacy", "safety"],
+          "nextLesson": "1-6",
+          "prevLesson": "1-4"
+        },
+        {
+          "id": "1-6",
+          "title": "Responsible & Ethical AI Use",
+          "estimatedMinutes": 20,
+          "tags": ["foundations", "beginner", "ethics", "safety"],
+          "nextLesson": "2-1",
+          "prevLesson": "1-5"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Your First AI Tools",
+      "lessons": [
+        {
+          "id": "2-1",
+          "title": "Claude.ai — First Real Conversation",
+          "estimatedMinutes": 20,
+          "tags": ["tools", "beginner", "claude", "hands-on"],
+          "nextLesson": "2-2",
+          "prevLesson": "1-6"
+        },
+        {
+          "id": "2-2",
+          "title": "Claude Projects & Memory",
+          "estimatedMinutes": 20,
+          "tags": ["tools", "beginner", "claude", "projects", "memory"],
+          "nextLesson": "2-3",
+          "prevLesson": "2-1"
+        },
+        {
+          "id": "2-3",
+          "title": "ChatGPT & GPT-4o",
+          "estimatedMinutes": 20,
+          "tags": ["tools", "beginner", "chatgpt", "openai", "hands-on"],
+          "nextLesson": "2-4",
+          "prevLesson": "2-2"
+        },
+        {
+          "id": "2-4",
+          "title": "Google Gemini",
+          "estimatedMinutes": 20,
+          "tags": ["tools", "beginner", "gemini", "google", "hands-on"],
+          "nextLesson": "2-5",
+          "prevLesson": "2-3"
+        },
+        {
+          "id": "2-5",
+          "title": "Perplexity AI — AI-Powered Search",
+          "estimatedMinutes": 15,
+          "tags": ["tools", "beginner", "perplexity", "search", "hands-on"],
+          "nextLesson": "2-6",
+          "prevLesson": "2-4"
+        },
+        {
+          "id": "2-6",
+          "title": "Microsoft Copilot",
+          "estimatedMinutes": 20,
+          "tags": ["tools", "beginner", "copilot", "microsoft", "hands-on"],
+          "nextLesson": "2-7",
+          "prevLesson": "2-5"
+        },
+        {
+          "id": "2-7",
+          "title": "AI Media Generation — Images, Audio & Video",
+          "estimatedMinutes": 20,
+          "tags": ["tools", "beginner", "image-generation", "media", "hands-on"],
+          "nextLesson": "2-8",
+          "prevLesson": "2-6"
+        },
+        {
+          "id": "2-8",
+          "title": "Choosing the Right AI Tool",
+          "estimatedMinutes": 15,
+          "tags": ["tools", "beginner", "strategy", "overview"],
+          "nextLesson": "3-1",
+          "prevLesson": "2-7"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Prompt Engineering",
+      "lessons": [
+        {
+          "id": "3-1",
+          "title": "Why Prompting Matters",
+          "estimatedMinutes": 15,
+          "tags": ["prompting", "intermediate", "concepts"],
+          "nextLesson": "3-2",
+          "prevLesson": "2-8"
+        },
+        {
+          "id": "3-2",
+          "title": "The Anatomy of a Good Prompt",
+          "estimatedMinutes": 20,
+          "tags": ["prompting", "intermediate", "technique"],
+          "nextLesson": "3-3",
+          "prevLesson": "3-1"
+        },
+        {
+          "id": "3-3",
+          "title": "Role & Persona Prompting",
+          "estimatedMinutes": 20,
+          "tags": ["prompting", "intermediate", "technique", "persona"],
+          "nextLesson": "3-4",
+          "prevLesson": "3-2"
+        },
+        {
+          "id": "3-4",
+          "title": "Chain-of-Thought Prompting",
+          "estimatedMinutes": 20,
+          "tags": ["prompting", "intermediate", "technique", "chain-of-thought"],
+          "nextLesson": "3-5",
+          "prevLesson": "3-3"
+        },
+        {
+          "id": "3-5",
+          "title": "Few-Shot Examples",
+          "estimatedMinutes": 20,
+          "tags": ["prompting", "intermediate", "technique", "few-shot"],
+          "nextLesson": "3-6",
+          "prevLesson": "3-4"
+        },
+        {
+          "id": "3-6",
+          "title": "Structured Output (JSON, Tables, Lists)",
+          "estimatedMinutes": 20,
+          "tags": ["prompting", "intermediate", "technique", "structured-output"],
+          "nextLesson": "3-7",
+          "prevLesson": "3-5"
+        },
+        {
+          "id": "3-7",
+          "title": "Iterative Refinement",
+          "estimatedMinutes": 20,
+          "tags": ["prompting", "intermediate", "technique", "iteration"],
+          "nextLesson": "3-8",
+          "prevLesson": "3-6"
+        },
+        {
+          "id": "3-8",
+          "title": "Prompt Templates & Reuse",
+          "estimatedMinutes": 20,
+          "tags": ["prompting", "intermediate", "templates", "workflow"],
+          "nextLesson": "4-1",
+          "prevLesson": "3-7"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Computer & Command Line Basics",
+      "lessons": [
+        {
+          "id": "4-1",
+          "title": "How Computers Organize Files",
+          "estimatedMinutes": 15,
+          "tags": ["computer-basics", "beginner", "filesystem", "concepts"],
+          "nextLesson": "4-2",
+          "prevLesson": "3-8"
+        },
+        {
+          "id": "4-2",
+          "title": "Windows: File Explorer & Paths",
+          "estimatedMinutes": 20,
+          "tags": ["computer-basics", "beginner", "windows", "filesystem", "hands-on"],
+          "nextLesson": "4-3",
+          "prevLesson": "4-1"
+        },
+        {
+          "id": "4-3",
+          "title": "Opening the Terminal (PowerShell)",
+          "estimatedMinutes": 25,
+          "tags": ["computer-basics", "beginner", "terminal", "powershell", "hands-on"],
+          "nextLesson": "4-4",
+          "prevLesson": "4-2"
+        },
+        {
+          "id": "4-4",
+          "title": "Essential Terminal Commands",
+          "estimatedMinutes": 25,
+          "tags": ["computer-basics", "beginner", "terminal", "commands", "hands-on"],
+          "nextLesson": "4-5",
+          "prevLesson": "4-3"
+        },
+        {
+          "id": "4-5",
+          "title": "What is Code? A Plain-English Introduction",
+          "estimatedMinutes": 15,
+          "tags": ["computer-basics", "beginner", "programming", "concepts"],
+          "nextLesson": "4-6",
+          "prevLesson": "4-4"
+        },
+        {
+          "id": "4-6",
+          "title": "Your First HTML File (Without VS Code)",
+          "estimatedMinutes": 25,
+          "tags": ["computer-basics", "beginner", "html", "hands-on"],
+          "nextLesson": "5-1",
+          "prevLesson": "4-5"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "VS Code: Complete Beginner Guide",
+      "lessons": [
+        {
+          "id": "5-1",
+          "title": "What is VS Code and Why Use It",
+          "estimatedMinutes": 15,
+          "tags": ["vscode", "beginner", "concepts", "overview"],
+          "nextLesson": "5-2",
+          "prevLesson": "4-6"
+        },
+        {
+          "id": "5-2",
+          "title": "Downloading & Installing VS Code",
+          "estimatedMinutes": 25,
+          "tags": ["vscode", "beginner", "install", "setup"],
+          "nextLesson": "5-3",
+          "prevLesson": "5-1"
+        },
+        {
+          "id": "5-3",
+          "title": "The Interface: A Named Tour",
+          "estimatedMinutes": 20,
+          "tags": ["vscode", "beginner", "interface", "tour"],
+          "nextLesson": "5-4",
+          "prevLesson": "5-2"
+        },
+        {
+          "id": "5-4",
+          "title": "Opening a Folder / Workspace",
+          "estimatedMinutes": 15,
+          "tags": ["vscode", "beginner", "workspace", "hands-on"],
+          "nextLesson": "5-5",
+          "prevLesson": "5-3"
+        },
+        {
+          "id": "5-5",
+          "title": "Creating, Renaming & Deleting Files",
+          "estimatedMinutes": 15,
+          "tags": ["vscode", "beginner", "files", "hands-on"],
+          "nextLesson": "5-6",
+          "prevLesson": "5-4"
+        },
+        {
+          "id": "5-6",
+          "title": "The Command Palette — VS Code's Superpower",
+          "estimatedMinutes": 15,
+          "tags": ["vscode", "beginner", "command-palette", "productivity"],
+          "nextLesson": "5-7",
+          "prevLesson": "5-5"
+        },
+        {
+          "id": "5-7",
+          "title": "The Integrated Terminal",
+          "estimatedMinutes": 20,
+          "tags": ["vscode", "beginner", "terminal", "hands-on"],
+          "nextLesson": "5-8",
+          "prevLesson": "5-6"
+        },
+        {
+          "id": "5-8",
+          "title": "Extensions — Installing & Managing",
+          "estimatedMinutes": 25,
+          "tags": ["vscode", "beginner", "extensions", "hands-on"],
+          "nextLesson": "5-9",
+          "prevLesson": "5-7"
+        },
+        {
+          "id": "5-9",
+          "title": "Settings — UI Mode & JSON Mode",
+          "estimatedMinutes": 20,
+          "tags": ["vscode", "beginner", "settings", "configuration"],
+          "nextLesson": "5-10",
+          "prevLesson": "5-8"
+        },
+        {
+          "id": "5-10",
+          "title": "Essential Keyboard Shortcuts",
+          "estimatedMinutes": 20,
+          "tags": ["vscode", "beginner", "shortcuts", "productivity"],
+          "nextLesson": "5-11",
+          "prevLesson": "5-9"
+        },
+        {
+          "id": "5-11",
+          "title": "Split Editor & Working With Multiple Files",
+          "estimatedMinutes": 15,
+          "tags": ["vscode", "beginner", "editor", "productivity"],
+          "nextLesson": "5-12",
+          "prevLesson": "5-10"
+        },
+        {
+          "id": "5-12",
+          "title": "VS Code Git Integration (Source Control)",
+          "estimatedMinutes": 25,
+          "tags": ["vscode", "beginner", "git", "source-control"],
+          "nextLesson": "6-1",
+          "prevLesson": "5-11"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "AI Inside VS Code",
+      "lessons": [
+        {
+          "id": "6-1",
+          "title": "GitHub Copilot — Setup & First Suggestion",
+          "estimatedMinutes": 25,
+          "tags": ["vscode", "intermediate", "copilot", "setup", "hands-on"],
+          "nextLesson": "6-2",
+          "prevLesson": "5-12"
+        },
+        {
+          "id": "6-2",
+          "title": "Copilot Autocomplete in Practice",
+          "estimatedMinutes": 20,
+          "tags": ["vscode", "intermediate", "copilot", "autocomplete", "hands-on"],
+          "nextLesson": "6-3",
+          "prevLesson": "6-1"
+        },
+        {
+          "id": "6-3",
+          "title": "Copilot Chat — Explain, Refactor, Debug",
+          "estimatedMinutes": 25,
+          "tags": ["vscode", "intermediate", "copilot", "chat", "debugging"],
+          "nextLesson": "6-4",
+          "prevLesson": "6-2"
+        },
+        {
+          "id": "6-4",
+          "title": "Continue.dev — Free, Open-Source AI in VS Code",
+          "estimatedMinutes": 25,
+          "tags": ["vscode", "intermediate", "continue-dev", "open-source", "setup"],
+          "nextLesson": "6-5",
+          "prevLesson": "6-3"
+        },
+        {
+          "id": "6-5",
+          "title": "AI-Assisted Debugging in VS Code",
+          "estimatedMinutes": 25,
+          "tags": ["vscode", "intermediate", "debugging", "ai-assisted", "hands-on"],
+          "nextLesson": "6-6",
+          "prevLesson": "6-4"
+        },
+        {
+          "id": "6-6",
+          "title": "Cursor IDE — The AI-Native Editor",
+          "estimatedMinutes": 25,
+          "tags": ["vscode", "intermediate", "cursor", "ai-editor", "setup"],
+          "nextLesson": "6-7",
+          "prevLesson": "6-5"
+        },
+        {
+          "id": "6-7",
+          "title": "Windsurf — Another AI-First Editor",
+          "estimatedMinutes": 25,
+          "tags": ["vscode", "intermediate", "windsurf", "ai-editor", "setup"],
+          "nextLesson": "6-8",
+          "prevLesson": "6-6"
+        },
+        {
+          "id": "6-8",
+          "title": "Choosing Your AI Editor Setup",
+          "estimatedMinutes": 15,
+          "tags": ["vscode", "intermediate", "strategy", "overview"],
+          "nextLesson": "7-1",
+          "prevLesson": "6-7"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Claude Code: Complete Guide",
+      "lessons": [
+        {
+          "id": "7-1",
+          "title": "What is Claude Code?",
+          "estimatedMinutes": 15,
+          "tags": ["claude-code", "intermediate", "concepts", "overview"],
+          "nextLesson": "7-2",
+          "prevLesson": "6-8"
+        },
+        {
+          "id": "7-2",
+          "title": "Installing Claude Code",
+          "estimatedMinutes": 25,
+          "tags": ["claude-code", "intermediate", "install", "setup"],
+          "nextLesson": "7-3",
+          "prevLesson": "7-1"
+        },
+        {
+          "id": "7-3",
+          "title": "First Session — Reading a Project",
+          "estimatedMinutes": 30,
+          "tags": ["claude-code", "intermediate", "hands-on", "first-session"],
+          "nextLesson": "7-4",
+          "prevLesson": "7-2"
+        },
+        {
+          "id": "7-4",
+          "title": "Asking Claude to Write a File",
+          "estimatedMinutes": 30,
+          "tags": ["claude-code", "intermediate", "hands-on", "file-writing"],
+          "nextLesson": "7-5",
+          "prevLesson": "7-3"
+        },
+        {
+          "id": "7-5",
+          "title": "Reviewing & Accepting Changes",
+          "estimatedMinutes": 20,
+          "tags": ["claude-code", "intermediate", "workflow", "review"],
+          "nextLesson": "7-6",
+          "prevLesson": "7-4"
+        },
+        {
+          "id": "7-6",
+          "title": "CLAUDE.md — Your Project Instruction File",
+          "estimatedMinutes": 25,
+          "tags": ["claude-code", "intermediate", "claude-md", "configuration"],
+          "nextLesson": "7-7",
+          "prevLesson": "7-5"
+        },
+        {
+          "id": "7-7",
+          "title": "Custom Slash Commands",
+          "estimatedMinutes": 30,
+          "tags": ["claude-code", "intermediate", "slash-commands", "customization"],
+          "nextLesson": "7-8",
+          "prevLesson": "7-6"
+        },
+        {
+          "id": "7-8",
+          "title": "Hooks — Automate Actions Around Claude's Work",
+          "estimatedMinutes": 30,
+          "tags": ["claude-code", "intermediate", "hooks", "automation"],
+          "nextLesson": "7-9",
+          "prevLesson": "7-7"
+        },
+        {
+          "id": "7-9",
+          "title": "The Memory System",
+          "estimatedMinutes": 25,
+          "tags": ["claude-code", "intermediate", "memory", "configuration"],
+          "nextLesson": "7-10",
+          "prevLesson": "7-8"
+        },
+        {
+          "id": "7-10",
+          "title": "Plan Mode & Permissions",
+          "estimatedMinutes": 25,
+          "tags": ["claude-code", "intermediate", "plan-mode", "permissions"],
+          "nextLesson": "7-11",
+          "prevLesson": "7-9"
+        },
+        {
+          "id": "7-11",
+          "title": "Sub-Agents & Parallel Work",
+          "estimatedMinutes": 30,
+          "tags": ["claude-code", "advanced", "sub-agents", "parallel"],
+          "nextLesson": "7-12",
+          "prevLesson": "7-10"
+        },
+        {
+          "id": "7-12",
+          "title": "Claude Code Settings Deep Dive",
+          "estimatedMinutes": 30,
+          "tags": ["claude-code", "advanced", "settings", "configuration"],
+          "nextLesson": "8-1",
+          "prevLesson": "7-11"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "MCP: Model Context Protocol",
+      "lessons": [
+        {
+          "id": "8-1",
+          "title": "What is MCP and Why It's a Big Deal",
+          "estimatedMinutes": 20,
+          "tags": ["mcp", "intermediate", "concepts", "overview"],
+          "nextLesson": "8-2",
+          "prevLesson": "7-12"
+        },
+        {
+          "id": "8-2",
+          "title": "MCP Architecture — Client, Server, Transport",
+          "estimatedMinutes": 20,
+          "tags": ["mcp", "intermediate", "architecture", "concepts"],
+          "nextLesson": "8-3",
+          "prevLesson": "8-1"
+        },
+        {
+          "id": "8-3",
+          "title": "Installing Your First MCP Server",
+          "estimatedMinutes": 30,
+          "tags": ["mcp", "intermediate", "install", "setup", "hands-on"],
+          "nextLesson": "8-4",
+          "prevLesson": "8-2"
+        },
+        {
+          "id": "8-4",
+          "title": "context7 — Live Documentation for Any Library",
+          "estimatedMinutes": 30,
+          "tags": ["mcp", "intermediate", "context7", "documentation", "hands-on"],
+          "nextLesson": "8-5",
+          "prevLesson": "8-3"
+        },
+        {
+          "id": "8-5",
+          "title": "sequential-thinking — Structured Reasoning",
+          "estimatedMinutes": 30,
+          "tags": ["mcp", "intermediate", "sequential-thinking", "reasoning", "hands-on"],
+          "nextLesson": "8-6",
+          "prevLesson": "8-4"
+        },
+        {
+          "id": "8-6",
+          "title": "The Self-Critique Pattern — Actor-Critic Thinking",
+          "estimatedMinutes": 25,
+          "tags": ["mcp", "intermediate", "actor-critic", "self-critique", "pattern"],
+          "nextLesson": "8-7",
+          "prevLesson": "8-5"
+        },
+        {
+          "id": "8-7",
+          "title": "task-master-ai — AI Project Management",
+          "estimatedMinutes": 30,
+          "tags": ["mcp", "intermediate", "task-master", "project-management", "hands-on"],
+          "nextLesson": "8-8",
+          "prevLesson": "8-6"
+        },
+        {
+          "id": "8-8",
+          "title": "GitHub MCP — Issues, PRs, and Code via Chat",
+          "estimatedMinutes": 30,
+          "tags": ["mcp", "intermediate", "github", "hands-on"],
+          "nextLesson": "8-9",
+          "prevLesson": "8-7"
+        },
+        {
+          "id": "8-9",
+          "title": "Filesystem MCP — AI Navigates Your Files",
+          "estimatedMinutes": 25,
+          "tags": ["mcp", "intermediate", "filesystem", "hands-on"],
+          "nextLesson": "8-10",
+          "prevLesson": "8-8"
+        },
+        {
+          "id": "8-10",
+          "title": "Browser / Playwright MCP — AI Controls a Real Browser",
+          "estimatedMinutes": 30,
+          "tags": ["mcp", "advanced", "browser", "playwright", "automation"],
+          "nextLesson": "8-11",
+          "prevLesson": "8-9"
+        },
+        {
+          "id": "8-11",
+          "title": "Gmail MCP — Real Inbox Cleanup Session",
+          "estimatedMinutes": 30,
+          "tags": ["mcp", "intermediate", "gmail", "email", "hands-on"],
+          "nextLesson": "8-12",
+          "prevLesson": "8-10"
+        },
+        {
+          "id": "8-12",
+          "title": "Google Drive & Calendar MCP — Real Workspace Organisation",
+          "estimatedMinutes": 30,
+          "tags": ["mcp", "intermediate", "google-drive", "google-calendar", "hands-on"],
+          "nextLesson": "8-13",
+          "prevLesson": "8-11"
+        },
+        {
+          "id": "8-13",
+          "title": "Database MCP — SQLite",
+          "estimatedMinutes": 30,
+          "tags": ["mcp", "intermediate", "database", "sqlite", "hands-on"],
+          "nextLesson": "8-14",
+          "prevLesson": "8-12"
+        },
+        {
+          "id": "8-14",
+          "title": "Finding Community MCP Servers",
+          "estimatedMinutes": 20,
+          "tags": ["mcp", "intermediate", "community", "discovery"],
+          "nextLesson": "8-15",
+          "prevLesson": "8-13"
+        },
+        {
+          "id": "8-15",
+          "title": "Build a Simple Custom MCP Server",
+          "estimatedMinutes": 60,
+          "tags": ["mcp", "advanced", "build", "custom", "hands-on"],
+          "nextLesson": "9-1",
+          "prevLesson": "8-14"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Other AI Coding Tools",
+      "lessons": [
+        {
+          "id": "9-1",
+          "title": "Aider — Terminal-Based AI Coding",
+          "estimatedMinutes": 25,
+          "tags": ["ai-coding", "intermediate", "aider", "terminal", "hands-on"],
+          "nextLesson": "9-2",
+          "prevLesson": "8-15"
+        },
+        {
+          "id": "9-2",
+          "title": "Cody by Sourcegraph — Enterprise Codebase AI",
+          "estimatedMinutes": 25,
+          "tags": ["ai-coding", "intermediate", "cody", "sourcegraph", "enterprise"],
+          "nextLesson": "9-3",
+          "prevLesson": "9-1"
+        },
+        {
+          "id": "9-3",
+          "title": "Tabnine — Privacy-First Completion",
+          "estimatedMinutes": 20,
+          "tags": ["ai-coding", "intermediate", "tabnine", "privacy", "autocomplete"],
+          "nextLesson": "9-4",
+          "prevLesson": "9-2"
+        },
+        {
+          "id": "9-4",
+          "title": "The Full AI Coding Tool Landscape",
+          "estimatedMinutes": 20,
+          "tags": ["ai-coding", "intermediate", "overview", "strategy"],
+          "nextLesson": "10-1",
+          "prevLesson": "9-3"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "AI Automation & Workflow",
+      "lessons": [
+        {
+          "id": "10-1",
+          "title": "What is Workflow Automation?",
+          "estimatedMinutes": 15,
+          "tags": ["automation", "intermediate", "concepts", "overview"],
+          "nextLesson": "10-2",
+          "prevLesson": "9-4"
+        },
+        {
+          "id": "10-2",
+          "title": "n8n — Open-Source AI Automation",
+          "estimatedMinutes": 30,
+          "tags": ["automation", "intermediate", "n8n", "open-source", "hands-on"],
+          "nextLesson": "10-3",
+          "prevLesson": "10-1"
+        },
+        {
+          "id": "10-3",
+          "title": "Zapier + AI Actions",
+          "estimatedMinutes": 25,
+          "tags": ["automation", "intermediate", "zapier", "hands-on"],
+          "nextLesson": "10-4",
+          "prevLesson": "10-2"
+        },
+        {
+          "id": "10-4",
+          "title": "Make (Integromat) — Visual Automation",
+          "estimatedMinutes": 25,
+          "tags": ["automation", "intermediate", "make", "integromat", "hands-on"],
+          "nextLesson": "10-5",
+          "prevLesson": "10-3"
+        },
+        {
+          "id": "10-5",
+          "title": "AI-Assisted Git Workflows",
+          "estimatedMinutes": 25,
+          "tags": ["automation", "intermediate", "git", "workflow"],
+          "nextLesson": "10-6",
+          "prevLesson": "10-4"
+        },
+        {
+          "id": "10-6",
+          "title": "GitHub Actions + AI",
+          "estimatedMinutes": 30,
+          "tags": ["automation", "intermediate", "github-actions", "ci-cd", "hands-on"],
+          "nextLesson": "10-7",
+          "prevLesson": "10-5"
+        },
+        {
+          "id": "10-7",
+          "title": "Designing Your Personal AI Workflow",
+          "estimatedMinutes": 20,
+          "tags": ["automation", "intermediate", "workflow", "strategy"],
+          "nextLesson": "11-1",
+          "prevLesson": "10-6"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "AI APIs & Building Your First AI Tool",
+      "lessons": [
+        {
+          "id": "11-1",
+          "title": "What is an API? (Plain English)",
+          "estimatedMinutes": 15,
+          "tags": ["api", "intermediate", "concepts", "overview"],
+          "nextLesson": "11-2",
+          "prevLesson": "10-7"
+        },
+        {
+          "id": "11-2",
+          "title": "The Anthropic API — Overview",
+          "estimatedMinutes": 20,
+          "tags": ["api", "intermediate", "anthropic", "claude", "overview"],
+          "nextLesson": "11-3",
+          "prevLesson": "11-1"
+        },
+        {
+          "id": "11-3",
+          "title": "Getting Your First API Key",
+          "estimatedMinutes": 20,
+          "tags": ["api", "intermediate", "anthropic", "api-key", "setup"],
+          "nextLesson": "11-4",
+          "prevLesson": "11-2"
+        },
+        {
+          "id": "11-4",
+          "title": "First API Call with curl",
+          "estimatedMinutes": 25,
+          "tags": ["api", "intermediate", "curl", "hands-on"],
+          "nextLesson": "11-5",
+          "prevLesson": "11-3"
+        },
+        {
+          "id": "11-5",
+          "title": "Using the Anthropic SDK",
+          "estimatedMinutes": 30,
+          "tags": ["api", "intermediate", "sdk", "python", "hands-on"],
+          "nextLesson": "11-6",
+          "prevLesson": "11-4"
+        },
+        {
+          "id": "11-6",
+          "title": "Understanding Tokens & Cost",
+          "estimatedMinutes": 20,
+          "tags": ["api", "intermediate", "tokens", "cost", "concepts"],
+          "nextLesson": "11-7",
+          "prevLesson": "11-5"
+        },
+        {
+          "id": "11-7",
+          "title": "Streaming Responses",
+          "estimatedMinutes": 25,
+          "tags": ["api", "intermediate", "streaming", "hands-on"],
+          "nextLesson": "11-8",
+          "prevLesson": "11-6"
+        },
+        {
+          "id": "11-8",
+          "title": "Build a Simple AI Tool — Text Summarizer CLI",
+          "estimatedMinutes": 60,
+          "tags": ["api", "intermediate", "build", "cli", "project"],
+          "nextLesson": "11-9",
+          "prevLesson": "11-7"
+        },
+        {
+          "id": "11-9",
+          "title": "Cost Engineering — Token Minimization, Model Routing & Prompt Caching",
+          "estimatedMinutes": 30,
+          "tags": ["api", "advanced", "cost", "optimization", "caching"],
+          "nextLesson": "12-1",
+          "prevLesson": "11-8"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Local AI with Ollama",
+      "lessons": [
+        {
+          "id": "12-1",
+          "title": "Why Run AI Locally?",
+          "estimatedMinutes": 15,
+          "tags": ["local-ai", "intermediate", "ollama", "concepts", "privacy"],
+          "nextLesson": "12-2",
+          "prevLesson": "11-9"
+        },
+        {
+          "id": "12-2",
+          "title": "Installing Ollama",
+          "estimatedMinutes": 25,
+          "tags": ["local-ai", "intermediate", "ollama", "install", "setup"],
+          "nextLesson": "12-3",
+          "prevLesson": "12-1"
+        },
+        {
+          "id": "12-3",
+          "title": "Running Your First Local Model",
+          "estimatedMinutes": 25,
+          "tags": ["local-ai", "intermediate", "ollama", "hands-on"],
+          "nextLesson": "12-4",
+          "prevLesson": "12-2"
+        },
+        {
+          "id": "12-4",
+          "title": "LM Studio — GUI for Local Models",
+          "estimatedMinutes": 25,
+          "tags": ["local-ai", "intermediate", "lm-studio", "gui", "setup"],
+          "nextLesson": "12-5",
+          "prevLesson": "12-3"
+        },
+        {
+          "id": "12-5",
+          "title": "Connecting Local Models to Continue.dev in VS Code",
+          "estimatedMinutes": 30,
+          "tags": ["local-ai", "intermediate", "continue-dev", "vscode", "hands-on"],
+          "nextLesson": "12-6",
+          "prevLesson": "12-4"
+        },
+        {
+          "id": "12-6",
+          "title": "Connecting Local Models to Claude Code",
+          "estimatedMinutes": 30,
+          "tags": ["local-ai", "advanced", "claude-code", "configuration", "hands-on"],
+          "nextLesson": "12-7",
+          "prevLesson": "12-5"
+        },
+        {
+          "id": "12-7",
+          "title": "Choosing the Right Local Model",
+          "estimatedMinutes": 20,
+          "tags": ["local-ai", "intermediate", "strategy", "overview"],
+          "nextLesson": "13-1",
+          "prevLesson": "12-6"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "AI Safety, Privacy & Cost Management",
+      "lessons": [
+        {
+          "id": "13-1",
+          "title": "AI Hallucinations — Deep Dive",
+          "estimatedMinutes": 20,
+          "tags": ["safety", "intermediate", "hallucinations", "concepts"],
+          "nextLesson": "13-2",
+          "prevLesson": "12-7"
+        },
+        {
+          "id": "13-2",
+          "title": "What NOT to Share With Cloud AI",
+          "estimatedMinutes": 15,
+          "tags": ["safety", "intermediate", "privacy", "security"],
+          "nextLesson": "13-3",
+          "prevLesson": "13-1"
+        },
+        {
+          "id": "13-3",
+          "title": "API Cost Management — Budgets, Monitoring & Architecture",
+          "estimatedMinutes": 25,
+          "tags": ["safety", "intermediate", "cost", "budgeting", "monitoring"],
+          "nextLesson": "13-4",
+          "prevLesson": "13-2"
+        },
+        {
+          "id": "13-4",
+          "title": "AI & Copyright — What You Need to Know",
+          "estimatedMinutes": 20,
+          "tags": ["safety", "intermediate", "copyright", "legal", "ethics"],
+          "nextLesson": "13-5",
+          "prevLesson": "13-3"
+        },
+        {
+          "id": "13-5",
+          "title": "Security Risks in AI Workflows",
+          "estimatedMinutes": 20,
+          "tags": ["safety", "intermediate", "security", "risks"],
+          "nextLesson": "14-1",
+          "prevLesson": "13-4"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Capstone Projects",
+      "lessons": [
+        {
+          "id": "14-1",
+          "title": "Capstone: Personal Portfolio Website",
+          "estimatedMinutes": 60,
+          "tags": ["capstone", "advanced", "project", "html", "build"],
+          "nextLesson": "14-2",
+          "prevLesson": "13-5"
+        },
+        {
+          "id": "14-2",
+          "title": "Capstone: AI-Powered Research Tool",
+          "estimatedMinutes": 60,
+          "tags": ["capstone", "advanced", "project", "api", "build"],
+          "nextLesson": "14-3",
+          "prevLesson": "14-1"
+        },
+        {
+          "id": "14-3",
+          "title": "Capstone: Automated Email Workflow",
+          "estimatedMinutes": 60,
+          "tags": ["capstone", "advanced", "project", "automation", "build"],
+          "nextLesson": "14-4",
+          "prevLesson": "14-2"
+        },
+        {
+          "id": "14-4",
+          "title": "Capstone: Your Full AI-Powered Dev Environment",
+          "estimatedMinutes": 60,
+          "tags": ["capstone", "advanced", "project", "dev-environment", "build"],
+          "nextLesson": "14-5",
+          "prevLesson": "14-3"
+        },
+        {
+          "id": "14-5",
+          "title": "Capstone: Your Own Project",
+          "estimatedMinutes": 60,
+          "tags": ["capstone", "advanced", "project", "open-ended"],
+          "nextLesson": null,
+          "prevLesson": "14-4"
+        }
+      ]
+    }
+  ]
+}

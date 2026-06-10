@@ -1,0 +1,50 @@
+{
+  "id": "1-2",
+  "title": "How Language Models Work (Plain English)",
+  "part": 1,
+  "estimatedMinutes": 20,
+  "tags": ["foundations", "beginner", "llm"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll build a mental model for three concepts that will make you a better AI user for the rest of your life: **tokens**, **context windows**, and **prediction**. No math required."
+    },
+    {
+      "type": "text",
+      "content": "## The Core Idea: Next-Token Prediction\n\nAt the most fundamental level, a language model does one thing: **predict the most likely next token** given everything that came before it.\n\nA **token** is roughly a word or word-fragment. The sentence *\"The cat sat on the mat\"* is about 7 tokens. Claude processes everything — your question, the conversation history, its instructions — as a sequence of tokens.\n\nWhen you send Claude a message, it doesn't \"think\" the way humans do. It repeatedly runs one calculation: *given all the tokens so far, what token should come next?* It does this thousands of times per second to generate a response.\n\nThis sounds too simple to produce intelligent output. But trained on enough data, next-token prediction turns out to be a surprisingly deep skill. To predict what comes next in text about physics, medicine, code, or poetry, you have to implicitly learn a lot about physics, medicine, code, and poetry."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The cooking analogy:** A language model is like a chef who has eaten at a million restaurants. They don't have a rulebook for every cuisine — they've absorbed so many patterns that they can produce authentic-tasting food in any style. They're not *copying* recipes; they've internalised the underlying logic."
+    },
+    {
+      "type": "text",
+      "content": "## The Context Window\n\nEvery LLM has a **context window** — the maximum amount of text it can \"see\" and reason about at once. Think of it as the model's working memory.\n\nEverything inside the context window, the model knows. Everything outside it, the model has no access to.\n\nThis is why:\n- Claude doesn't remember your conversation from yesterday (that conversation is gone — outside the window)\n- Very long documents can hit limits (the document might not fit in the window)\n- Starting a new chat \"resets\" Claude (empty context = no memory of previous chats)\n\nContext windows have grown dramatically. Early models had windows of a few thousand tokens. Modern Claude models can handle hundreds of thousands of tokens — equivalent to a full novel.\n\n**Practical implication:** If you want Claude to remember something across sessions, you have to give it that information yourself. Paste it in, upload a file, or use Claude's Projects feature to persist context."
+    },
+    {
+      "type": "text",
+      "content": "## Training vs. Runtime\n\nThere are two distinct phases:\n\n**Training** — The model learns by processing billions of documents and adjusting its internal parameters to get better at next-token prediction. This happens once (or periodically) and takes enormous compute. You don't control this.\n\n**Runtime (inference)** — When you send a message, the trained model uses its learned parameters to generate a response. This is what happens every time you use Claude. It's much cheaper and faster than training.\n\nThis distinction matters because: the model's *knowledge* comes from training (and has a cutoff date), but its *behaviour* in a conversation depends on what's in the context window at runtime."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "The Context Window Experiment",
+      "content": "This experiment makes the context window concept visceral and unforgettable.\n\n**Step 1:** Open [Claude.ai](https://claude.ai) and paste a long Wikipedia article (3,000+ words — try the article on \"World War II\" or \"Climate change\").\n\n**Step 2:** Ask Claude to summarise it in one sentence. It will do it perfectly — the full article is in its context window.\n\n**Step 3:** Start a **brand new conversation** (click \"New Chat\"). Ask Claude about a specific fact from that article without pasting anything.\n\n**Step 4:** Notice that Claude has no memory of the article. It was never in *this* conversation's context window.\n\n**Write two sentences** in your notes explaining:\n1. What the context window is\n2. One practical implication for how you'll use AI going forward"
+    },
+    {
+      "type": "quiz",
+      "question": "You paste a 5,000-word document into Claude and have a conversation about it. You then close the chat and open a new one. What does Claude remember about your document?",
+      "options": [
+        "Everything — Claude stores all your conversations in memory",
+        "Nothing — the new chat has an empty context window",
+        "A summary — Claude auto-saves summaries between chats",
+        "The last few messages — Claude has a short-term memory buffer"
+      ],
+      "correct": 1,
+      "explanation": "Each new chat starts with an empty context window. Claude has no access to previous conversations unless you paste the content in again or use a feature like Claude Projects that persists context."
+    }
+  ],
+  "nextLesson": "1-3",
+  "prevLesson": "1-1"
+}

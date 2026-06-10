@@ -1,0 +1,51 @@
+/* Dark mode is the default — variables.css defines dark values as :root.
+   Light mode overrides are in the @media (prefers-color-scheme: light) block.
+   Manual overrides via body.theme-dark / body.theme-light classes. */
+
+body.theme-light {
+  --accent:         #6366f1;
+  --accent-hover:   #4f46e5;
+  --accent-dim:     rgb(99 102 241 / 0.1);
+  --accent-glow:    0 0 12px rgb(99 102 241 / 0.35);
+  --secondary:      #7c3aed;
+  --success:        #16a34a;
+  --warning:        #d97706;
+  --danger:         #dc2626;
+
+  --bg:             #f8fafc;
+  --bg-surface:     #ffffff;
+  --bg-elevated:    #f1f5f9;
+  --bg-hover:       #e2e8f0;
+  --border:         rgb(0 0 0 / 0.08);
+  --border-strong:  rgb(0 0 0 / 0.16);
+
+  --text:           #0f172a;
+  --text-muted:     #475569;
+  --text-faint:     #94a3b8;
+
+  --sidebar-bg:     #f1f5f9;
+}
+
+body.theme-dark {
+  --accent:         #818cf8;
+  --accent-hover:   #a5b4fc;
+  --accent-dim:     rgb(129 140 248 / 0.15);
+  --accent-glow:    0 0 12px rgb(129 140 248 / 0.5);
+  --secondary:      #a78bfa;
+  --success:        #4ade80;
+  --warning:        #fbbf24;
+  --danger:         #f87171;
+
+  --bg:             #0f1117;
+  --bg-surface:     #161b27;
+  --bg-elevated:    #1e2535;
+  --bg-hover:       #252d40;
+  --border:         rgb(255 255 255 / 0.08);
+  --border-strong:  rgb(255 255 255 / 0.16);
+
+  --text:           #e2e8f0;
+  --text-muted:     #94a3b8;
+  --text-faint:     #475569;
+
+  --sidebar-bg:     #0d1018;
+}
