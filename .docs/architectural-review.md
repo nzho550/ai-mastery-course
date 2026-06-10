@@ -725,3 +725,58 @@ Unfixed post-v4: C1 (13.2/1.5 duplication — **FIXED in v5**: 13.2 now extends 
 | Make/Claude integration | Vague | HTTP module approach documented |
 | n8n click-by-click | Incomplete | API accuracy fixed; UI steps still pending |
 | Cross-references consistent | Yes | Yes |
+
+---
+
+## Implementation Log
+
+### Phase 1 — Site Scaffolding (2026-06-10)
+
+Branch: `feature/phase-1-scaffolding`
+
+**Files created (29 files, ~4,300 lines):**
+
+| File | Purpose |
+|------|---------|
+| `index.html` | App shell — header, sidebar, main content area, theme flash prevention |
+| `404.html` | Custom 404 page |
+| `css/reset.css` | Browser normalisation |
+| `css/variables.css` | CSS custom properties (dark default, light via media + class) |
+| `css/dark.css` | Manual `.theme-dark` / `.theme-light` overrides |
+| `css/layout.css` | Fixed header, sidebar, main area, responsive breakpoint |
+| `css/components.css` | Sidebar nav, part cards, hero, stats, search, progress bars |
+| `css/lesson.css` | Lesson typography, callouts, quiz, workshop, lesson nav, complete bar |
+| `js/icons.js` | 20 inline SVG icon exports (Lucide) |
+| `js/utils.js` | `slugify`, `formatMinutes`, `qs`, `qsa`, `el`, `debounce` |
+| `js/router.js` | Hash-based routing (`#/`, `#/lesson/1-1`), `hashchange` listener |
+| `js/progress.js` | `localStorage` progress, theme persistence, stats helpers |
+| `js/sidebar.js` | Collapsible sidebar nav, status icons, active-lesson highlight |
+| `js/search.js` | Fuse.js fuzzy search, keyboard nav, `'/'` shortcut |
+| `js/lesson.js` | `renderLesson`, all section type renderers, quiz, copy buttons, mark-complete |
+| `js/app.js` | `boot()`, `renderDashboard()`, hash router wiring, theme toggle |
+| `data/curriculum.json` | 14 parts, 112 lessons, full prev/next chain |
+| `data/lessons/part-01/1-1.json` | Full lesson content — What is AI? |
+| `data/lessons/part-01/1-2.json` | Full lesson content — How LLMs Work |
+| `vendor/*` | marked v15, DOMPurify v3, Fuse.js v7, highlight.js v11 + PowerShell lang |
+| `scripts/serve.js` | Node dev server (no Python required) |
+| `scripts/update-vendors.{ps1,sh}` | Vendor refresh scripts |
+| `.gitattributes` | LF line endings for all text files |
+| `.gitignore` | Excludes `.claude/settings.json` (contains API keys) |
+
+**Bugs fixed before / on commit:**
+- Blank page on load — `app.js` `boot()` suspended at `await` before registering the route handler; DOMContentLoaded fired to empty listeners. Fix: call `handleRoute(getRoute())` at end of `boot()`.
+- `sidebar.js` `updateLessonIcon` — dead first `outerHTML` replacement before re-query. Fix: removed the dead block.
+- Scroll listener leak — `setupScrollProgress` accumulated `scroll` listeners across lesson navigations. Fix: module-level `scrollHandler` reference, remove old listener before adding new.
+- CRLF line endings — `.gitattributes` added.
+- Security: `.claude/settings.json` (contains GitHub PAT + Context7 key) excluded via `.gitignore`. PAT `ghp_ttNml…` and Context7 key `ctx7sk-d0cd…` were briefly exposed and must be rotated.
+
+**Content status:**
+- 2 lesson JSON files written (1-1, 1-2). Remaining 110 lessons show "Coming Soon" card.
+- All 112 curriculum entries fully populated (id, title, estimatedMinutes, tags, prev/next).
+
+**To run locally:**
+```
+node scripts/serve.js
+# then open http://localhost:8080
+```
+ES modules require a server — `file://` protocol will fail in Chrome/Edge.

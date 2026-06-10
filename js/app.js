@@ -33,8 +33,9 @@ async function boot() {
   initLesson(curriculum);
   initSearch(curriculum);
 
-  // Route handler
+  // Route handler — register first, then fire for the current URL
   onRouteChange(handleRoute);
+  handleRoute(getRoute());
 
   // Theme toggle
   const themeBtn = qs('#theme-toggle');

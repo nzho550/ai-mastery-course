@@ -5,6 +5,7 @@ import { navigate } from './router.js';
 import { qs, formatMinutes } from './utils.js';
 
 let curriculum = null;
+let scrollHandler = null;
 
 export function initLesson(curriculumData) {
   curriculum = curriculumData;
@@ -202,12 +203,13 @@ function buildComingSoon(meta) {
 function setupScrollProgress() {
   const bar = qs('#scroll-progress');
   if (!bar) return;
-  const update = () => {
+  if (scrollHandler) window.removeEventListener('scroll', scrollHandler);
+  scrollHandler = () => {
     const el = document.documentElement;
     const pct = el.scrollTop / (el.scrollHeight - el.clientHeight) || 0;
     bar.style.transform = `scaleX(${pct})`;
   };
-  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('scroll', scrollHandler, { passive: true });
 }
 
 function setupCopyButtons() {

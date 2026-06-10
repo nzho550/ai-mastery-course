@@ -42,15 +42,10 @@ function statusIcon(status) {
 }
 
 function updateLessonIcon(id, status) {
-  const icon = document.querySelector(`.lesson-link[data-id="${id}"] .lesson-status`);
-  if (!icon) return;
-  icon.outerHTML = statusIcon(status).replace('<span', '<span');
-  // Rebuild the icon element properly
   const link = document.querySelector(`.lesson-link[data-id="${id}"]`);
-  if (link) {
-    const existing = link.querySelector('.lesson-status');
-    if (existing) existing.outerHTML = statusIcon(status);
-  }
+  if (!link) return;
+  const existing = link.querySelector('.lesson-status');
+  if (existing) existing.outerHTML = statusIcon(status);
 }
 
 function render() {
