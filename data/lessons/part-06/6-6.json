@@ -1,0 +1,43 @@
+{
+  "id": "6-6",
+  "title": "Cursor IDE — The AI-Native Editor",
+  "part": 6,
+  "estimatedMinutes": 25,
+  "tags": ["cursor", "ai-coding", "ide"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nCopilot and Continue add AI *to* VS Code. **Cursor** takes a different approach: it's VS Code rebuilt from scratch with AI as a first-class citizen, not an extension. This lesson covers what makes Cursor different, how to get started, and when the distinction actually matters."
+    },
+    {
+      "type": "text",
+      "content": "## What Cursor Is\n\nCursor is a fork of VS Code — meaning it starts with the same open-source codebase and adds AI features that can't be implemented as extensions. It looks almost identical to VS Code (same layout, same keybindings, same extension marketplace), so switching feels familiar immediately.\n\n**Download:** cursor.com — free tier available, with a Pro plan at $20/month.\n\n**Import from VS Code on first launch:** When you open Cursor for the first time, it offers to import all your VS Code extensions and settings. Accepting this takes about 30 seconds and means you start with your familiar environment — with AI added on top.\n\nCursor's free tier is generous: you get a monthly budget of \"fast\" AI requests (powered by Claude and GPT-4) and unlimited \"slow\" requests. For a learning environment, the free tier is sufficient."
+    },
+    {
+      "type": "text",
+      "content": "## Cursor's Key Features\n\n**Ctrl+K — Inline AI editing**\nSelect any code (or place your cursor anywhere), press **Ctrl+K**, and a command bar appears. Type what you want to happen: \"Add error handling\", \"Convert this to async/await\", \"Make this function accept an optional second parameter\". Cursor applies the change as a diff you can accept or reject.\n\n**Ctrl+L — Chat panel**\nOpens the AI chat sidebar. Like Copilot Chat, but with a crucial difference: Cursor can reference any file in your project with the **@** symbol. Type `@filename` in the chat to pull that file into context instantly. You can also type `@docs` to reference external documentation.\n\n**Composer (Ctrl+Shift+I) — Multi-file editing**\nThis is Cursor's most distinctive feature. The Composer is an AI agent that can read and edit *multiple files at once*. You describe a feature — \"Create a contact form in HTML that sends data to a JavaScript validation function in a separate file\" — and Cursor writes both files, keeping them consistent with each other. VS Code + Copilot works file by file. Cursor's Composer thinks about the whole project."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**VS Code + Copilot vs. Cursor — the real difference:** For editing a single file, the experience is similar. Where Cursor wins is multi-file changes: refactoring a function that's called in 10 places, renaming a variable consistently across a project, or creating a feature that touches HTML, CSS, and JS simultaneously. If your work is mostly single-file scripts, VS Code + Copilot is fine. If you're building applications with many interconnected files, Cursor's architecture is a meaningful upgrade."
+    },
+    {
+      "type": "text",
+      "content": "## Cursor's Privacy Settings\n\nBy default, Cursor sends your code to its servers for AI processing. If you're working with sensitive code, check **Cursor Settings → Privacy Mode** — this enables a mode where code is not stored on Cursor's servers. The free tier supports Privacy Mode. This is worth reviewing before using Cursor on any professional or client work."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Install Cursor and Build a Multi-File Project",
+      "content": "**Step 1 — Download and install Cursor**\n1. Open your browser and go to cursor.com\n2. Click **Download** — it detects your OS automatically\n3. Run the installer (same process as VS Code: Next → Accept → Install → Finish)\n4. On first launch, Cursor asks whether to import VS Code settings — click **Import from VS Code** to copy your extensions and settings\n5. Sign up for a free Cursor account when prompted (required for AI features)\n\n**Step 2 — Open your project**\n1. In Cursor: click **File → Open Folder**\n2. Navigate to and select your `ai-course-projects` folder\n3. The familiar VS Code layout appears — the main difference is the AI elements integrated throughout\n\n**Step 3 — Try Ctrl+K inline editing**\n1. Open `exercises/practice.js`\n2. Select the sort function\n3. Press **Ctrl+K**\n4. Type: \"Add a JSDoc comment above this function\"\n5. Cursor shows a diff — green for additions, red for removals\n6. Press **Accept** (or **Tab**) to apply it\n\n**Step 4 — Try the Composer for a two-file project**\n1. Press **Ctrl+Shift+I** to open Composer\n2. Type this prompt:\n```\nCreate two new files in the exercises folder:\n1. contact-form.html — a clean contact form with name, email, and message fields\n2. form-validator.js — a JavaScript file with a validateForm() function that checks all fields are filled and the email contains @ and .\nLink the JS file from the HTML file.\n```\n3. Watch Cursor propose both files simultaneously\n4. Review the generated code for each file, then click **Accept All** to create them\n5. Open `contact-form.html` and right-click → Open with Live Server (if installed) to see it in the browser\n\n**Step 5 — Compare the experience**\nIn your notes, write one sentence: what did Cursor do in this workshop that would have required more steps using VS Code + Copilot alone?"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-6 complete.** You've installed Cursor and experienced its three main AI features: Ctrl+K for inline edits, Ctrl+L for chat with @-references, and Composer for multi-file changes. In lesson 6-7, you'll try Windsurf — another AI-native editor from a different team — so you can make an informed comparison."
+    }
+  ],
+  "nextLesson": "6-7",
+  "prevLesson": "6-5"
+}

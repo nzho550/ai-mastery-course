@@ -6,11 +6,23 @@ const dirs = [
   'data/lessons/part-01',
   'data/lessons/part-02',
   'data/lessons/part-03',
+  'data/lessons/part-04',
+  'data/lessons/part-05',
+  'data/lessons/part-06',
+  'data/lessons/part-07',
+  'data/lessons/part-08',
+  'data/lessons/part-09',
+  'data/lessons/part-10',
+  'data/lessons/part-11',
+  'data/lessons/part-12',
+  'data/lessons/part-13',
+  'data/lessons/part-14',
 ];
 
 let fixedCount = 0;
 
 dirs.forEach(dir => {
+  if (!fs.existsSync(dir)) return;
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
   files.forEach(f => {
     const fp = path.join(dir, f);
@@ -19,7 +31,6 @@ dirs.forEach(dir => {
       JSON.parse(raw);
       process.stdout.write('OK  ' + f + '\n');
     } catch (e) {
-      // Escape bare newlines/tabs/CRs inside JSON string values
       const normalized = raw.replace(/\r\n/g, '\n');
       let inStr = false;
       let esc = false;
@@ -35,7 +46,7 @@ dirs.forEach(dir => {
         out += c;
       }
       try {
-        JSON.parse(out); // confirm fix worked
+        JSON.parse(out);
         fs.writeFileSync(fp, out, 'utf8');
         process.stdout.write('FIX ' + f + '\n');
         fixedCount++;

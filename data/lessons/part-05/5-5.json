@@ -1,0 +1,51 @@
+{
+  "id": "5-5",
+  "title": "Creating, Renaming & Deleting Files",
+  "part": 5,
+  "estimatedMinutes": 15,
+  "tags": ["vscode", "beginner", "files", "explorer"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to create new files, rename them, move them, and delete them — all from inside VS Code, without ever switching to File Explorer.\n\nOnce this becomes habit, your hands never leave your editor."
+    },
+    {
+      "type": "text",
+      "content": "## The Explorer Panel is Your File Manager\n\nWith your project folder open, the Explorer panel in the Primary Sidebar shows your complete file and folder tree. You don't need Windows File Explorer for day-to-day file operations — you can do everything from here.\n\n**How to reveal the icons:** Hover your mouse over any folder or file name in the Explorer panel. A row of small icons appears to the right of the name:\n- **New File** (page with a + sign) — creates a new file inside that folder\n- **New Folder** (folder with a + sign) — creates a new subfolder\n- **Refresh** (circular arrow) — refreshes the file tree if changes were made outside VS Code\n- **Collapse All** (chevrons) — collapses all expanded folders at once\n\nThese same options also appear when you right-click any file or folder."
+    },
+    {
+      "type": "text",
+      "content": "## Creating a New File\n\n**Method 1 — Using the Explorer panel icons:**\n1. In the Explorer panel, hover over the folder where you want the new file\n2. Click the **New File** icon (page with + sign) that appears\n3. A text field appears where you can type the file name\n4. Type the name including the extension (e.g., `notes.md`, `index.html`, `config.json`)\n5. Press Enter — the file is created and opened in the Editor Area\n\n**Method 2 — Right-click context menu:**\n1. Right-click any folder in the Explorer panel\n2. Click **New File**\n3. Type the name → press Enter\n\n**Method 3 — Keyboard shortcut:**\nPress **Ctrl+N** — this creates a new unsaved file (called \"Untitled-1\"). When you press Ctrl+S to save it, VS Code asks where you want to save it and what to name it.\n\n**Tip:** Always include the file extension when naming files. VS Code uses the extension to know which language to apply — `.md` triggers Markdown highlighting, `.html` triggers HTML, `.json` triggers JSON, etc."
+    },
+    {
+      "type": "text",
+      "content": "## Renaming Files and Folders\n\n**Method 1 — Right-click:**\n1. Right-click the file or folder in the Explorer panel\n2. Click **Rename**\n3. The name becomes editable — type the new name\n4. Press Enter to confirm, or Esc to cancel\n\n**Method 2 — Keyboard shortcut:**\n1. Click the file or folder once to select it\n2. Press **F2**\n3. Type the new name → press Enter\n\nRenaming a file in VS Code automatically keeps any open tabs up to date — if the renamed file was already open in the editor, the tab title updates immediately."
+    },
+    {
+      "type": "text",
+      "content": "## Deleting Files and Folders\n\n**To delete a file or folder:**\n1. Right-click it in the Explorer panel\n2. Click **Delete**\n3. VS Code asks: \"Are you sure you want to delete [filename]?\"\n4. Click **Move to Trash** (or **Delete** on some systems)\n\n**Important:** Deleting in VS Code sends the file to the **Recycle Bin** — it is NOT permanently deleted immediately. You can go to the Recycle Bin on your Desktop to restore it if you deleted the wrong thing."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Before you delete a folder:** Make sure you're deleting the right one. VS Code will delete the folder and everything inside it. If the folder contained important files, you have one safety net: the Recycle Bin. But it's better to double-check first. Right-click → delete → the confirmation prompt will show you the name — read it carefully."
+    },
+    {
+      "type": "text",
+      "content": "## Saving Files\n\nCreating a file and saving it are two separate things.\n\n- **Ctrl+S** — save the current file. If the file has unsaved changes, the tab title shows a dot (•) next to the name. After saving, the dot disappears.\n- **Ctrl+Shift+S** — \"Save As\" — saves the file with a new name or location.\n- **Auto Save** — VS Code can save automatically. We'll configure this in lesson 5-9 (Settings). You can enable it now via File → Auto Save.\n\nA file with a dot in its tab name has unsaved changes. Don't close VS Code or turn off your computer without saving important files.\n\n**Other useful keyboard shortcuts for files:**\n- **Ctrl+W** — close the current tab\n- **Ctrl+Tab** — switch between open tabs\n- **Ctrl+P** — quick-open any file by typing its name (much faster than clicking through the Explorer)"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Build the Course File Structure",
+      "content": "You'll create the file structure you'll use for the rest of this course. All work is done in the Explorer panel — no File Explorer windows.\n\n**Step 1 — Create a README.md at the project root:**\n1. In the Explorer panel, hover over the top-level `ai-course-projects` folder (the root)\n2. Click the **New File** icon\n3. Name it `README.md` and press Enter\n4. The file opens in the Editor Area — type: `# My AI Course Projects`\n5. Press Ctrl+S to save\n\n**Step 2 — Create files in the notes folder:**\n1. Hover over the `notes` folder → click **New File**\n2. Name it `prompt-experiments.md` → press Enter\n3. Hover over the `notes` folder again → click **New File**\n4. Name it `lesson-notes.md` → press Enter\n\n**Step 3 — Create files in the exercises folder:**\n1. Hover over the `exercises` folder → click **New File**\n2. Name it `part-01-notes.md` → press Enter\n\n**Step 4 — Rename a file using F2:**\n1. Click `part-01-notes.md` once in the Explorer to select it\n2. Press **F2**\n3. Change the name to `part-05-notes.md` → press Enter\n\n**Step 5 — Confirm your structure:**\nYour Explorer panel should now show:\n```\nai-course-projects/\n  exercises/\n    hello.html\n    part-05-notes.md\n  notes/\n    lesson-notes.md\n    prompt-experiments.md\n  prompts/\n  README.md\n```\n\n- [ ] README.md exists at the root level\n- [ ] `lesson-notes.md` and `prompt-experiments.md` are in the `notes` folder\n- [ ] `part-05-notes.md` is in the `exercises` folder\n- [ ] All files are saved (no dots in their tab names)"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-5.** You can now create, rename, and delete files without leaving VS Code. Your course project has a solid file structure to build on. Next: the Command Palette — VS Code's most powerful feature."
+    }
+  ],
+  "nextLesson": "5-6",
+  "prevLesson": "5-4"
+}

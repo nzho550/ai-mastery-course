@@ -1,0 +1,55 @@
+{
+  "id": "4-5",
+  "title": "What is Code? A Plain-English Introduction",
+  "part": 4,
+  "estimatedMinutes": 15,
+  "tags": ["computer-basics", "beginner", "code", "programming"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBefore writing any code yourself, it helps to understand what code actually *is* — not technically, but conceptually. This lesson gives you a clear mental model of what code does, why it's written in text files, and what the main languages are for. You won't write code in this lesson. That comes in 4-6."
+    },
+    {
+      "type": "text",
+      "content": "## Code Is Instructions\n\nAt the most basic level, **code is a set of instructions written in a language a computer can understand**.\n\nYour computer's processor can only do a handful of primitive operations: add numbers, compare values, move data from one place to another. But it can do these at billions of operations per second. A programming language is a way of describing complex tasks using those primitive operations, written in a form that humans can read and reason about.\n\nWhen you write code, you're writing a recipe. Just as a recipe tells a chef *exactly* what to do in *exactly* what order, code tells a computer *exactly* what to do. Computers don't guess, infer, or use common sense. If your instruction is wrong, they execute it wrong — perfectly and efficiently.\n\nThis precision is both the power and the challenge of code. It also explains why even experienced programmers make mistakes: any ambiguity in the instruction becomes a bug."
+    },
+    {
+      "type": "text",
+      "content": "## Compiled vs Interpreted: How Code Runs\n\nDifferent programming languages are executed in different ways. You don't need to memorize this, but understanding it demystifies a lot of confusing terminology.\n\n**Compiled languages** translate your entire code file into machine instructions *before* running it. Think of it like translating a whole book before you read it. Languages like C, C++, and Rust are compiled. The translation step (compilation) takes a moment, but the result runs very fast.\n\n**Interpreted languages** translate and run code *one line at a time* as you execute it. Think of it like having a live interpreter at a meeting who translates each sentence as it's spoken. Python and JavaScript are interpreted (roughly). There's no separate compilation step — you just run the file directly. Slightly slower in some scenarios, but much more flexible for beginners.\n\nWhy does this matter? When you see instructions that say \"run the compiler\" or \"just run the script,\" this is the distinction being made. For this course, you'll mostly work with interpreted languages — HTML, CSS, JavaScript — where you can write code, open a browser, and immediately see the result."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Why text files?** Everything in software development is text files. Your HTML is a text file. Your Python script is a text file. Even complex applications are collections of text files. This is deliberate: text is universal, readable by humans and machines, storable in any system, searchable, diffable (you can compare two versions), and doesn't require special software to open. A `.py` file opened in Notepad is just text. This is why understanding file paths and the terminal — the previous two lessons — is foundational: you're navigating and manipulating text files."
+    },
+    {
+      "type": "text",
+      "content": "## The Main Languages and What They're For\n\nThere are hundreds of programming languages, but a small set covers the majority of what you'll encounter in this course and in the real world:\n\n**HTML** — HyperText Markup Language. The *structure* of a webpage. HTML defines what's on the page: headings, paragraphs, images, links, buttons. It's not technically a programming language (it can't perform logic or calculations), but it's the foundation of every website. You'll write HTML in lesson 4-6.\n\n**CSS** — Cascading Style Sheets. The *appearance* of a webpage. CSS controls colours, fonts, spacing, layout, and animations. HTML and CSS work together: HTML says \"here is a heading,\" CSS says \"make that heading blue and 24px\".\n\n**JavaScript** — The *behaviour* of a webpage. JavaScript makes things happen: buttons that respond when clicked, forms that validate before submitting, content that updates without reloading the page. It's the only programming language that runs natively in every web browser. It also runs outside browsers via Node.js (which Claude Code is built on).\n\n**Python** — A general-purpose language known for readability and versatility. Used for data analysis, automation, machine learning, web servers, and scripting. The first language many beginners learn because the syntax is close to plain English.\n\n**PowerShell** — The Windows automation language. The commands you ran in lessons 4-3 and 4-4 are PowerShell scripts. Used for system administration, automating repetitive computer tasks, and building Windows tools.\n\n**One important note:** This course does not require you to become fluent in any of these. Claude writes the code. Your job is to understand what it wrote, know which language to ask for, and recognize when something looks wrong."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The leverage point of this course:** Instead of spending months learning to write Python, you'll learn to describe what you want in plain English, have Claude write the code, and understand it well enough to verify and modify it. This is a genuinely different — and genuinely faster — path to building things with code."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "What Would You Use Each Language For?",
+      "content": "Open your notes (Notepad, a text file in `ai-course-projects/notes`, wherever you keep things).\n\nFor each of the five languages below, write **one sentence** describing a real, specific thing you would want to use it for — based on your own life, work, or interests. Don't use the examples from this lesson; make them yours.\n\n- **HTML** — I would use this to...\n- **CSS** — I would use this to...\n- **JavaScript** — I would use this to...\n- **Python** — I would use this to...\n- **PowerShell** — I would use this to...\n\nThere are no wrong answers. The goal is to attach the language to something real, so it stops being abstract.\n\nIf you're stuck on one, ask Claude: *\"What's a practical thing someone like me [describe yourself briefly] might use [language] for?\"*\n\nSave your notes. You'll reference this perspective as you work through the rest of the course."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to change the colour of a heading on your webpage from black to dark blue. Which language handles this?",
+      "options": [
+        "HTML — because HTML defines the heading",
+        "CSS — because CSS controls the appearance of elements",
+        "JavaScript — because JavaScript runs in the browser",
+        "Python — because Python is the most versatile language"
+      ],
+      "correct": 1,
+      "explanation": "CSS (Cascading Style Sheets) controls the visual appearance of HTML elements — colour, font, spacing, layout. HTML defines what's on the page; CSS defines how it looks. You'd write something like `h1 { color: darkblue; }` in your CSS."
+    }
+  ],
+  "nextLesson": "4-6",
+  "prevLesson": "4-4"
+}

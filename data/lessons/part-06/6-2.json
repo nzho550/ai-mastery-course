@@ -1,0 +1,43 @@
+{
+  "id": "6-2",
+  "title": "Copilot Autocomplete in Practice",
+  "part": 6,
+  "estimatedMinutes": 20,
+  "tags": ["copilot", "vscode", "ai-coding", "autocomplete"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nAccepting a Copilot suggestion is easy. Using Copilot *well* — knowing when to accept, when to reject, how to steer suggestions, and how to verify what you get — is a skill that separates effective AI-assisted developers from people who just click Tab and hope for the best."
+    },
+    {
+      "type": "text",
+      "content": "## The Full Keyboard Map\n\nYou learned **Tab** in lesson 6-1. Here's the complete set of controls:\n\n| Key | Action |\n|-----|--------|\n| `Tab` | Accept the full suggestion |\n| `Ctrl+Right` | Accept the next word only (partial accept) |\n| `Alt+]` | Cycle to the next suggestion |\n| `Alt+[` | Cycle to the previous suggestion |\n| `Ctrl+Enter` | Open the Copilot completions panel (up to 10 options) |\n| `Esc` | Dismiss the current suggestion |\n\nThe **partial accept** (`Ctrl+Right`) is underused and extremely useful. Instead of accepting an entire function you're 70% happy with, you accept word by word until you reach the point where you disagree, then type the rest yourself."
+    },
+    {
+      "type": "text",
+      "content": "## Comment-Driven Development\n\nCopilot is context-sensitive: it reads the file name, your existing code, and especially your comments. Writing precise comments is the primary way to control what Copilot suggests.\n\n**Weak comment → generic suggestion:**\n```javascript\n// sort array\n```\n\n**Strong comment → specific suggestion:**\n```javascript\n// Sort an array of user objects alphabetically by last name, case-insensitive\n```\n\nThe difference is constraint. More constraints = more predictable output. This mirrors the prompting principles from Part 3 — you're prompting the AI, just through a comment rather than a chat box.\n\n**Multi-line comments work even better.** If you write a comment block explaining what a function should do, its parameters, and its return value — like a docstring before the function exists — Copilot often generates a near-complete implementation."
+    },
+    {
+      "type": "text",
+      "content": "## Inline vs. Multi-Line Completions\n\nCopilot produces two types of completions:\n\n**Inline completions** — finish the current line. You're typing `const greeting = ` and Copilot fills in `\"Hello, \" + name + \"!\";`. These are fast and usually trustworthy for simple expressions.\n\n**Multi-line completions** — Copilot suggests an entire block: a function body, a class, a series of conditions. These need more scrutiny. Check:\n- Does the logic match your comment?\n- Are edge cases handled (empty arrays, null values, type mismatches)?\n- Are variable names readable?\n- Would you be able to explain every line in this code?\n\nThat last question is the critical one."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Never accept code you can't explain.** If Copilot writes a function and you're not sure what it does, ask it to explain — either by hovering, using Copilot Chat (lesson 6-3), or pasting it into Claude. Code you don't understand is a liability: you can't debug it, you can't maintain it, and you can't catch errors in it. The goal is always to understand the code, not just have the code."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Guide the AI — Three Scenarios",
+      "content": "Open `exercises/practice.js` from lesson 6-1. You'll run three separate scenarios to practice controlling Copilot.\n\n**Scenario 1 — Accept and verify**\n1. On a new line, type: `// Sort an array of names alphabetically, case-insensitive`\n2. Press Enter and wait for Copilot's suggestion\n3. Press **Tab** to accept\n4. Now verify: mentally trace through the function. If the names array is `['Zara', 'alice', 'Bob']`, what does it return? Is that what you'd expect?\n5. If you're unsure, open Copilot Chat (`Ctrl+Alt+I`) and type: `/explain` with the function selected\n\n**Scenario 2 — Reject and refine**\n1. On a new line, type: `// Convert temperature`\n2. When the suggestion appears, press **Esc** to dismiss it — this comment is too vague\n3. Rewrite it more specifically: `// Convert temperature from Celsius to Fahrenheit, rounded to 1 decimal place`\n4. Press Enter — compare the new suggestion to what you got before\n5. If you still don't like the first suggestion, press **Alt+]** to see alternatives\n\n**Scenario 3 — Partial accept**\n1. On a new line, type: `// Validate an email address using a regular expression`\n2. Press Enter and let Copilot suggest a function\n3. Instead of pressing Tab for the full suggestion, press **Ctrl+Right** repeatedly — accept word by word\n4. Stop where you disagree with the implementation and type the rest manually\n\n**After all three:** In your notes, write one sentence per scenario answering: \"Did the suggestion do exactly what the comment said? How would I know if it was wrong?\""
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-2 complete.** You can now control Copilot with precision — accepting in full, partially, or rejecting and steering with better comments. The verification habit you practiced here will serve you throughout the course. In lesson 6-3, you'll move from inline completions to Copilot Chat — where you can have a full conversation about your code."
+    }
+  ],
+  "nextLesson": "6-3",
+  "prevLesson": "6-1"
+}

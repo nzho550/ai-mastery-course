@@ -1,0 +1,44 @@
+{
+  "id": "4-4",
+  "title": "Essential Terminal Commands",
+  "part": 4,
+  "estimatedMinutes": 25,
+  "tags": ["computer-basics", "beginner", "terminal", "powershell", "commands"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou only need about 10 commands to do almost everything you'll do in this course. This lesson covers all of them with real examples you can run immediately. By the end, navigating and managing files from the terminal will feel natural."
+    },
+    {
+      "type": "text",
+      "content": "## The Essential Commands\n\n### Where am I? — `pwd`\n\n`pwd` stands for **print working directory**. It shows your current location.\n\n```powershell\npwd\n```\nOutput: `Path: C:\\Users\\Alice`\n\nRun this whenever you're unsure where you are. In PowerShell the output is formatted slightly differently than on Mac/Linux, but `pwd` works on all platforms.\n\n---\n\n### What's in here? — `ls`\n\n`ls` lists the contents of your current directory. (PowerShell also accepts `dir`, the legacy Command Prompt version — both work.)\n\n```powershell\nls\n```\n\nTo see a specific folder without navigating into it:\n\n```powershell\nls Documents\n```\n\nTo see hidden files (those starting with `.`):\n\n```powershell\nls -Force\n```\n\n---\n\n### Move around — `cd`\n\n`cd` stands for **change directory**. This is how you navigate.\n\nMove into a subfolder:\n```powershell\ncd Documents\n```\n\nGo up one level (the two dots `..` always mean \"parent folder\"):\n```powershell\ncd ..\n```\n\nGo up two levels at once:\n```powershell\ncd ..\\..\n```\n\nJump to an absolute path:\n```powershell\ncd C:\\Users\\Alice\\Documents\\ai-course-projects\n```\n\nGo straight to your home folder from anywhere:\n```powershell\ncd ~\n```\n\n**Tab autocomplete** — Type the first few letters of a folder name and press `Tab`. PowerShell completes it automatically. Press `Tab` again to cycle through matches. This single habit saves more time than anything else in this lesson."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The Tab key is your best friend.** Instead of typing `cd Documents\\ai-course-projects\\exercises`, type `cd Doc` → Tab → `\\ai` → Tab → `\\ex` → Tab → Enter. PowerShell completes each segment. You'll never mistype a folder name again."
+    },
+    {
+      "type": "text",
+      "content": "### Create a folder — `mkdir`\n\n`mkdir` stands for **make directory**. It creates a new folder.\n\n```powershell\nmkdir my-new-folder\n```\n\nCreate nested folders in one command with `-Force`:\n```powershell\nmkdir -Force projects\\website\\images\n```\n\nThis creates `projects`, then `website` inside it, then `images` inside that — all at once.\n\n---\n\n### Create or write a file — `New-Item` and `echo`\n\nTo create an empty file:\n```powershell\nNew-Item -Name \"hello.txt\" -ItemType File\n```\n\nTo create a file with content in one step:\n```powershell\necho \"This is my first file\" > notes.txt\n```\n\nThe `>` redirects the output of `echo` into a file. If the file exists it overwrites it. Use `>>` to *append* without overwriting:\n```powershell\necho \"A second line\" >> notes.txt\n```\n\n---\n\n### Copy a file — `Copy-Item`\n\n```powershell\nCopy-Item notes.txt notes-backup.txt\n```\n\nCopy to a different folder:\n```powershell\nCopy-Item notes.txt C:\\Users\\Alice\\Desktop\\notes.txt\n```\n\n---\n\n### Delete a file — `Remove-Item`\n\n```powershell\nRemove-Item notes-backup.txt\n```\n\nDelete a folder and everything inside it (use with care):\n```powershell\nRemove-Item my-folder -Recurse\n```\n\nThe `-Recurse` flag is required to delete a folder that contains files. Without it, PowerShell refuses to delete a non-empty folder — a useful safety feature.\n\n---\n\n### Print something — `Write-Host`\n\n`Write-Host` prints text to the terminal. Useful for scripts and for confirming things are working:\n```powershell\nWrite-Host \"Hello from PowerShell\"\n```\n\n---\n\n### Open VS Code in the current folder — `code .`\n\nThis one command is used hundreds of times throughout the course. The `.` means \"here\" (the current directory):\n```powershell\ncode .\n```\n\nVS Code opens with the current folder already loaded as a workspace. Requires VS Code to be installed and added to PATH (the installer does this automatically — see lesson 5.2)."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**A note on errors:** PowerShell errors are almost always self-explanatory. \"Cannot find path\" means the path doesn't exist or you're in the wrong folder. \"Access is denied\" means you need administrator rights. \"The term is not recognized\" means the command isn't installed or isn't in your PATH. When in doubt: copy the error and ask Claude what it means."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "The 10-Command Challenge",
+      "content": "Open PowerShell and complete every step in order. This is your hands-on test of everything in this lesson.\n\n**Step 1 — Start from home:**\n```powershell\ncd ~\n```\n```powershell\npwd\n```\nConfirm you're at `C:\\Users\\YourName`.\n\n**Step 2 — Navigate to your course folder:**\n```powershell\ncd Documents\n```\n```powershell\ncd ai-course-projects\n```\n\n**Step 3 — See what's there:**\n```powershell\nls\n```\nYou should see `exercises`, `notes`, and `prompts`.\n\n**Step 4 — Create a new folder:**\n```powershell\nmkdir terminal-practice\n```\n\n**Step 5 — Move into it:**\n```powershell\ncd terminal-practice\n```\n\n**Step 6 — Create two files:**\n```powershell\necho \"I learned this from the terminal\" > first-file.txt\n```\n```powershell\necho \"Tab autocomplete is very useful\" > second-file.txt\n```\n\n**Step 7 — Confirm they exist:**\n```powershell\nls\n```\n\n**Step 8 — Copy one file:**\n```powershell\nCopy-Item first-file.txt first-file-backup.txt\n```\n\n**Step 9 — Go back up and confirm:**\n```powershell\ncd ..\n```\n```powershell\nls\n```\nYou should see `terminal-practice` listed alongside the others.\n\n**Step 10 — Print a confirmation:**\n```powershell\nWrite-Host \"Terminal lesson complete!\"\n```\n\nBonus: if VS Code is installed, try `code .` from inside `ai-course-projects` and watch it open."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 4-4.** You can now navigate, create, copy, and delete files entirely from the terminal. These 10 commands handle 90% of what you'll do in this course."
+    }
+  ],
+  "nextLesson": "4-5",
+  "prevLesson": "4-3"
+}

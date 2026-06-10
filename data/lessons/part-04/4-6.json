@@ -1,0 +1,43 @@
+{
+  "id": "4-6",
+  "title": "Your First HTML File (Without VS Code)",
+  "part": 4,
+  "estimatedMinutes": 25,
+  "tags": ["computer-basics", "beginner", "html", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou're going to write a real webpage from scratch using nothing but Notepad. No frameworks, no tutorials, no dependencies. Just a text file and a browser. By the end of this lesson you'll have a working webpage that you built yourself — and a clear understanding of how every website on the internet starts."
+    },
+    {
+      "type": "text",
+      "content": "## HTML Is Just a Text File\n\nHere's the thing most people don't realize about websites: at the bottom of every webpage — from a simple blog to a complex web app — is a plain text file with a `.html` extension. The browser reads that file and renders it visually. That's it.\n\nHTML (HyperText Markup Language) is not magic. It's a set of **tags** — labels wrapped in angle brackets `< >` — that describe the *structure* of a document. The browser reads those tags and knows: \"this is a heading,\" \"this is a paragraph,\" \"this is a link.\"\n\nA tag looks like this: `<h1>` opens a heading, `</h1>` closes it. Everything between the opening and closing tags is the content. The `/` before the name signals a closing tag.\n\n```html\n<h1>This is a heading</h1>\n<p>This is a paragraph.</p>\n```\n\nThis pattern — open tag, content, close tag — is almost everything you need to know to read HTML."
+    },
+    {
+      "type": "text",
+      "content": "## The Minimum Valid HTML File\n\nEvery HTML file has the same basic skeleton. Here's the minimum structure that every webpage needs:\n\n```html\n<!DOCTYPE html>\n<html>\n  <head>\n    <title>Page Title</title>\n  </head>\n  <body>\n    <h1>Hello, world!</h1>\n    <p>This is my first webpage.</p>\n  </body>\n</html>\n```\n\nLet's read every line:\n\n**`<!DOCTYPE html>`** — Tells the browser \"this is an HTML5 document.\" Not technically a tag, but required at the top of every HTML file. Think of it as a declaration of intent.\n\n**`<html>` and `</html>`** — The root element. Everything on the page lives inside these tags.\n\n**`<head>` and `</head>`** — Contains information *about* the page that isn't displayed directly: the page title (shown in the browser tab), links to stylesheets, meta information. The browser reads it, but the user doesn't see it directly.\n\n**`<title>Page Title</title>`** — The text that appears in the browser tab at the top of the screen.\n\n**`<body>` and `</body>`** — Everything inside `<body>` is what the user *sees* in the browser window. This is where your content lives.\n\n**`<h1>Hello, world!</h1>`** — A level-1 heading. The largest, most prominent heading. There are six heading levels: `<h1>` through `<h6>`.\n\n**`<p>This is my first webpage.</p>`** — A paragraph of text.\n\nThe indentation (spaces before tags) is purely for human readability — the browser ignores it. But consistent indentation is a universal habit among developers because it makes the structure obvious at a glance."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The Notepad trap:** When you save a file in Notepad, it defaults to saving as `.txt`. If you name your file `hello.html` but the \"Save as type\" is still \"Text Documents (*.txt)\", Windows saves it as `hello.html.txt` — and the browser won't open it as a webpage. **Always change \"Save as type\" to \"All Files (*.*)\"** when saving HTML in Notepad. Then type the full filename including the extension: `hello.html`."
+    },
+    {
+      "type": "text",
+      "content": "## How to Open Your File in a Browser\n\nOnce you've saved `hello.html`, you don't need a server, a hosting account, or any other tool to view it. Just:\n\n1. Open File Explorer\n2. Navigate to where you saved the file\n3. Double-click `hello.html`\n\nYour default browser opens and displays the page. The address bar will show something like `file:///C:/Users/Alice/Documents/ai-course-projects/exercises/hello.html` — that's a local file URL, not an internet URL. It works entirely on your computer.\n\nWhen you make a change in Notepad and save, press `F5` in the browser to refresh and see the update. This edit-save-refresh cycle is the core workflow of web development."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Hello Web — Build Your First Webpage",
+      "content": "You're going to build a real webpage about yourself. Follow every step.\n\n**Step 1 — Open Notepad:**\nPress the Windows key, type `notepad`, press Enter.\n\n**Step 2 — Type your HTML:**\nType the following exactly — or personalize it with your own name, quote, and content:\n\n```html\n<!DOCTYPE html>\n<html>\n  <head>\n    <title>My First Webpage</title>\n  </head>\n  <body>\n    <h1>Hello, I'm [Your Name]</h1>\n    <p>I'm currently learning AI tools and how to work with code.</p>\n    <h2>A Quote I Like</h2>\n    <p>\"[Write your favourite quote here]\"</p>\n    <h2>Why I'm Taking This Course</h2>\n    <p>[Write one sentence about what you want to get out of this course]</p>\n  </body>\n</html>\n```\n\nReplace everything in square brackets `[ ]` with your own content.\n\n**Step 3 — Save correctly:**\n1. Click **File** → **Save As**\n2. Navigate to `Documents\\ai-course-projects\\exercises`\n3. Change **\"Save as type\"** dropdown to **\"All Files (*.*)\"**\n4. In the **\"File name\"** field, type exactly: `hello.html`\n5. Click **Save**\n\n**Step 4 — Open in your browser:**\n1. Open File Explorer\n2. Navigate to `Documents\\ai-course-projects\\exercises`\n3. Double-click `hello.html`\n\nYour browser opens with your first webpage. Your name is in a heading. Your quote is there. You built this.\n\n**Step 5 — Make a change:**\n1. Go back to Notepad\n2. Change the `<title>` text to something more personal\n3. Add another `<p>` tag with a second thought about the course\n4. Save (`Ctrl+S`)\n5. Press `F5` in the browser to refresh\n\nYou just completed your first edit-save-refresh cycle — the fundamental loop of all web development."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 4.** You understand how files are organized, you can navigate the terminal, you know what code is and what the main languages do, and you've built and opened your first webpage. In Part 5 you'll install VS Code — a professional editor that makes all of this much faster — and open the `hello.html` you just created inside it."
+    }
+  ],
+  "nextLesson": "5-1",
+  "prevLesson": "4-5"
+}

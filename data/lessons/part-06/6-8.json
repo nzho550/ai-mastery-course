@@ -1,0 +1,44 @@
+{
+  "id": "6-8",
+  "title": "Choosing Your AI Editor Setup",
+  "part": 6,
+  "estimatedMinutes": 15,
+  "tags": ["vscode", "copilot", "cursor", "windsurf", "continue-dev", "decision"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou've tried four different AI-in-editor setups over the past seven lessons. This final lesson synthesizes everything into a practical decision framework — and ends with a commitment: pick your primary setup for the rest of this course."
+    },
+    {
+      "type": "text",
+      "content": "## The Four Options\n\n**Option 1: VS Code + Continue.dev (free, any model)**\n- Cost: Free — you pay only for API usage (or use local Ollama models at zero cost)\n- Setup: Install the extension, configure a model in `config.json`\n- Best for: Students who want to use Claude or other models without a GitHub subscription; anyone who wants to run AI locally for privacy; maximum model flexibility\n- Limitation: Autocomplete quality depends on the model you choose; no multi-file composer\n\n**Option 2: VS Code + GitHub Copilot (GitHub subscription)**\n- Cost: Free tier available; $10/month Copilot Pro for unlimited use\n- Setup: Install two extensions, sign in with GitHub\n- Best for: Developers already using GitHub; those who want the most polished autocomplete experience; anyone doing code review or PR workflows\n- Limitation: Tied to GitHub's model choices (though Copilot now lets you select Claude/GPT)\n\n**Option 3: Cursor (free tier generous)**\n- Cost: Free tier (monthly fast-request budget); $20/month Pro\n- Setup: Download and install; imports VS Code settings automatically\n- Best for: Building multi-file projects; anyone who finds the Composer workflow faster than writing prompts piecemeal; more complex codebases\n- Limitation: Sends code to Cursor's servers by default (Privacy Mode available); separate app from VS Code\n\n**Option 4: Windsurf (free tier)**\n- Cost: Free tier (credit-based); paid plans available\n- Setup: Download and install; imports VS Code settings\n- Best for: Those who prefer Cascade's real-time visual feedback; anyone who found Windsurf more intuitive in lesson 6-7\n- Limitation: Smaller community than Cursor; less third-party documentation"
+    },
+    {
+      "type": "text",
+      "content": "## Decision Matrix\n\nUse this table to evaluate each option against your specific situation:\n\n| Factor | VS Code + Continue | VS Code + Copilot | Cursor | Windsurf |\n|--------|--------------------|-------------------|--------|----------|\n| **Cost** | Free (+ API) | Free tier / $10/mo | Free tier / $20/mo | Free tier |\n| **Setup effort** | Medium (config file) | Low (sign in) | Low (import from VS Code) | Low (import from VS Code) |\n| **Autocomplete quality** | Model-dependent | Excellent | Excellent | Excellent |\n| **Multi-file editing** | No | No | Yes (Composer) | Yes (Cascade) |\n| **Model choice** | Any (Claude, local, etc.) | GitHub's selection | Claude + GPT-4 | Codeium + Claude |\n| **Data privacy** | Configurable | Microsoft/GitHub | Privacy Mode available | Privacy Mode available |\n| **Best use case** | Flexibility, local AI | GitHub-integrated work | Complex projects | Visual, agent-driven work |\n\nFor the rest of this course — primarily building web projects and working with APIs — **any option works**. The difference becomes meaningful when you're working on larger projects later in the course (Parts 13–14)."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Recommendation for most students:** Start with **VS Code + GitHub Copilot** (free tier) for the rest of this course. It requires the least configuration, has the most documentation and community support, and the free tier is sufficient for everything in Parts 6–12. When you reach Part 13 (building a complete project), revisit this decision — Cursor's Composer becomes significantly more valuable when you're working across many files simultaneously."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**You can switch at any time.** Your code lives in your project folder — it's not locked to any editor. Cursor, Windsurf, and VS Code can all open the same folder. Trying a different tool for a week costs nothing and takes 5 minutes. Don't over-optimize this decision now."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Pick Your Setup and Document Your Choice",
+      "content": "This workshop has two parts: a decision and a commitment.\n\n**Part 1 — Fill in the matrix**\nOpen `notes/prompt-experiments.md` (or create a new file `notes/editor-setup-decision.md`) and paste this table:\n\n```\n| Factor       | VS Code + Continue | VS Code + Copilot | Cursor | Windsurf |\n|--------------|--------------------|-------------------|--------|----------|\n| Cost         |                    |                   |        |          |\n| Setup effort |                    |                   |        |          |\n| My experience|                    |                   |        |          |\n| My score /5  |                    |                   |        |          |\n```\n\nFill in the \"My experience\" row based on what you actually felt using each tool in lessons 6-1 through 6-7. Score each one from 1–5 for how much you enjoyed using it.\n\n**Part 2 — Write your commitment**\nBelow the table, write one sentence in this format:\n\n```\nFor this course and beyond, I'm going to primarily use _____ \nbecause _____.\n```\n\nExamples:\n- *\"For this course and beyond, I'm going to primarily use VS Code + Copilot because I already have a GitHub account and the autocomplete just works.\"*\n- *\"For this course and beyond, I'm going to primarily use Cursor because I liked being able to generate multiple files at once.\"*\n- *\"For this course and beyond, I'm going to primarily use VS Code + Continue because I want to use Claude as my model and keep data off Microsoft's servers.\"*\n\nSave the file. This is your decision. You're committing to reduce tool-switching friction — not choosing forever."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Part 6 complete.** You've gone from zero to a fully configured AI-assisted coding environment. You know how Copilot autocomplete works, how to use Copilot Chat for explanations and debugging, what Continue.dev offers as a free alternative, how Cursor's Composer handles multi-file edits, and what makes Windsurf's Cascade different. You've picked your setup. In Part 7, you'll leave the extension ecosystem behind and learn Claude Code — a terminal-based AI agent that can read, edit, and reason about entire projects."
+    }
+  ],
+  "nextLesson": "7-1",
+  "prevLesson": "6-7"
+}

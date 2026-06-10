@@ -1,0 +1,51 @@
+{
+  "id": "5-8",
+  "title": "Extensions — Installing & Managing",
+  "part": 5,
+  "estimatedMinutes": 25,
+  "tags": ["vscode", "beginner", "extensions", "marketplace"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have installed three essential extensions and understand how the VS Code Extensions Marketplace works. Extensions are what turn VS Code from a capable editor into a complete professional environment.\n\nYou'll install: **Live Server**, **Prettier - Code formatter**, and **GitLens**."
+    },
+    {
+      "type": "text",
+      "content": "## The Extensions Marketplace\n\nExtensions are add-ons that give VS Code new abilities. They're built by Microsoft, companies, and individual developers — and there are over 30,000 of them available for free.\n\nThink of it as an app store for your editor. Some examples of what extensions can do:\n- **Automatically format your code** so it always looks neat (Prettier)\n- **Show your HTML file live in a browser** that updates as you type (Live Server)\n- **Add powerful Git information** to every line of code (GitLens)\n- **Add AI autocomplete** to your editor (GitHub Copilot — covered in Part 6)\n- **Highlight syntax for any language** — Python, Rust, SQL, you name it\n- **Change the colour theme** of the entire editor\n\n**How to open the Extensions panel:**\n- Click the **puzzle piece icon** in the Activity Bar on the left\n- Or: press **Ctrl+Shift+X**\n- Or: use the Command Palette (Ctrl+Shift+P) → type `Extensions: Install Extensions`\n\nThe Extensions panel opens in the Primary Sidebar. At the top is a search box — type any keyword to find extensions."
+    },
+    {
+      "type": "text",
+      "content": "## How to Install an Extension\n\nInstalling an extension is simple:\n1. Open the Extensions panel (Ctrl+Shift+X)\n2. Type the name of the extension in the search box\n3. Find the right one in the results (check the author name and install count to confirm it's the official version)\n4. Click the **Install** button\n5. Wait a few seconds — VS Code downloads and installs it\n\nSome extensions activate immediately. Others require a **Reload** — a button will appear in the extension's panel saying \"Reload Required.\" Click it to restart VS Code's window (your files stay open).\n\n**The Extensions panel has three sections:**\n- **Installed** — extensions you have installed (active or disabled)\n- **Enabled** — currently active extensions\n- **Disabled** — installed but turned off\n\nYou can disable an extension without uninstalling it by right-clicking it → Disable. This is useful if an extension is causing issues — you can turn it off temporarily."
+    },
+    {
+      "type": "text",
+      "content": "## Extension 1: Live Server\n\n**Author:** Ritwick Dey\n**What it does:** Instantly opens your HTML files in a browser with live reload — meaning the browser updates automatically every time you save the file. No more manually refreshing the browser after each change.\n\n**How to use it after installing:**\n1. Open your project folder in VS Code\n2. Click any `.html` file in the Explorer panel\n3. Right-click the file → **Open with Live Server**\n4. Your browser opens showing the page\n5. Go back to VS Code, make a change to the HTML, and press Ctrl+S — the browser updates instantly\n\nYou'll also see a \"Go Live\" button in the Status Bar at the bottom of VS Code once it's installed — click that to start Live Server for the currently open file.\n\n**Search for:** `Live Server` (by Ritwick Dey, 40M+ installs)"
+    },
+    {
+      "type": "text",
+      "content": "## Extension 2: Prettier - Code Formatter\n\n**Author:** Prettier\n**What it does:** Automatically reformats your code so it always looks clean and consistent — correct indentation, consistent quote style, proper spacing. Instead of manually fixing formatting, you save the file and Prettier fixes it instantly.\n\n**After installing, you need to set it as the default formatter:**\n1. Press Ctrl+Shift+P → type `Format Document`\n2. VS Code may ask \"Select a default formatter\" — choose **Prettier - Code formatter**\n3. Or: go to Settings (Ctrl+,) → search `default formatter` → select `Prettier - Code formatter`\n\nOnce configured, either:\n- Press Ctrl+Shift+P → `Format Document` to format the current file manually, OR\n- Enable Format on Save in Settings so it happens automatically when you press Ctrl+S (we set this up in lesson 5-9)\n\n**Search for:** `Prettier - Code formatter` (by Prettier, 35M+ installs — make sure it says Prettier in the author field)"
+    },
+    {
+      "type": "text",
+      "content": "## Extension 3: GitLens\n\n**Author:** GitKraken\n**What it does:** Supercharges VS Code's built-in Git integration. GitLens shows you, for every single line of code, who wrote it and when. It adds inline \"blame\" annotations, a timeline view, history comparisons, and much more.\n\nThis might sound advanced, but you'll notice it right away: after you initialise a Git repo in lesson 5-12, hovering over any line of code shows a subtle annotation like \"You, 2 minutes ago — Initial commit.\" This becomes invaluable when you're working on code you wrote weeks ago or collaborating with others.\n\n**Note:** GitLens won't show much until after you initialise a Git repo in lesson 5-12. Installing it now is correct — it will activate automatically once Git is set up.\n\n**Search for:** `GitLens — Git supercharged` (by GitKraken, 20M+ installs)"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Optional bonus: Peacock**\nIf you ever work with multiple VS Code windows open at once (common when working on multiple projects), the **Peacock** extension (by John Papa) lets you give each window a different colour border. Red for one project, blue for another — so you always know which window you're typing in at a glance."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Install Your First Extensions",
+      "content": "Install all three extensions and confirm each one is working.\n\n**Step 1 — Open the Extensions panel:**\nClick the puzzle piece icon in the Activity Bar, or press Ctrl+Shift+X.\n\n**Step 2 — Install Live Server:**\n1. Type `Live Server` in the search box\n2. Find the result by **Ritwick Dey** (40M+ installs)\n3. Click **Install**\n4. Wait for installation to complete\n5. Open `hello.html` from your exercises folder\n6. Right-click the file in Explorer → **Open with Live Server**\n7. Your browser should open showing your page from lesson 4.6\n8. Go back to VS Code, edit a word in the `<h1>` tag, press Ctrl+S — the browser updates!\n9. Close the browser and stop Live Server (click \"Port: 5500\" in the Status Bar → Stop Server)\n\n**Step 3 — Install Prettier:**\n1. Type `Prettier - Code formatter` in the search box\n2. Find the result by **Prettier** (look for the official one with 35M+ installs)\n3. Click **Install**\n4. Press Ctrl+Shift+P → type `Format Document` → press Enter\n5. If prompted to choose a formatter, select **Prettier - Code formatter**\n6. Open `hello.html` — notice Prettier has reformatted the indentation\n\n**Step 4 — Install GitLens:**\n1. Type `GitLens` in the search box\n2. Find **GitLens — Git supercharged** by GitKraken\n3. Click **Install**\n4. GitLens won't show much yet — that's expected. It will activate in lesson 5-12.\n\n**Step 5 — Verify your installed extensions:**\n1. In the Extensions panel, scroll to the **Installed** section\n2. Confirm Live Server, Prettier, and GitLens all appear there\n3. None should show a red error icon\n\n**Check:**\n- [ ] Live Server installed and opened hello.html in the browser\n- [ ] Prettier installed and formatted a file\n- [ ] GitLens installed (no errors, activation in lesson 5-12)\n- [ ] All three appear in your Installed extensions list"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-8.** You've installed three essential extensions and understand how the Marketplace works. Your VS Code now has live browser preview, auto-formatting, and Git superpowers waiting. Next: customising VS Code's settings."
+    }
+  ],
+  "nextLesson": "5-9",
+  "prevLesson": "5-7"
+}

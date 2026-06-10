@@ -1,0 +1,51 @@
+{
+  "id": "5-11",
+  "title": "Split Editor & Working With Multiple Files",
+  "part": 5,
+  "estimatedMinutes": 15,
+  "tags": ["vscode", "beginner", "split-editor", "layout", "multitasking"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to view two or more files side by side in VS Code. This is how you'll follow along with course instructions while writing your own code — and how professional developers reference one file while editing another."
+    },
+    {
+      "type": "text",
+      "content": "## Why Split the Editor?\n\nMost of the time you'll be focused on one file. But situations where two files at once are essential include:\n\n- **Following instructions while writing code.** Have the lesson notes on the left, your exercise file on the right.\n- **HTML + CSS side by side.** Edit your HTML structure while keeping the CSS file visible.\n- **Comparing two versions.** Before and after, or two different approaches.\n- **JSON config + documentation.** The config file on one side, a reference doc on the other.\n- **Diff view.** Seeing exactly what changed in a file before vs after a Git commit.\n\nVS Code supports splitting the editor horizontally (top/bottom) or vertically (left/right). You can have as many splits as your screen allows — though two is the most practical for most tasks."
+    },
+    {
+      "type": "text",
+      "content": "## How to Split the Editor\n\n**Method 1 — Right-click a tab:**\n1. Click on any open file tab at the top of the Editor Area\n2. Right-click the tab\n3. Select **Split Right** — the file opens in a new column to the right\n4. In the right column's Explorer, click a different file to open it there\n\n**Method 2 — Drag a tab:**\n1. Click and hold on a file tab\n2. Drag it to the right side of the editor — a blue indicator shows where it will land\n3. Release — the file splits into a new column\n\n**Method 3 — Keyboard shortcut:**\n- Press **Ctrl+\\** (backslash) to split the current file into a new column\n\n**Method 4 — Menu:**\n- View → Editor Layout → Two Columns\n\nAll four methods create a split view."
+    },
+    {
+      "type": "text",
+      "content": "## Navigating Between Split Columns\n\nOnce you have two columns open:\n\n- **Click** anywhere in a column to focus it — you can then type, scroll, and edit in that column\n- **Ctrl+1** — focus the leftmost column\n- **Ctrl+2** — focus the second column\n- **Ctrl+3** — focus the third column (if you have three)\n\nEach column has its own tabs. You can open multiple files in each column — they get their own tab row.\n\nTo close a split: click the X on every tab in that column, or drag all tabs back to the other column."
+    },
+    {
+      "type": "text",
+      "content": "## Editor Layout Options\n\nVS Code gives you full control over the layout:\n\n- **Two Columns** (most common) — two side-by-side editors\n- **Three Columns** — three side-by-side editors\n- **Two Rows** — top/bottom split instead of left/right\n- **Grid (2x2)** — four panels in a grid\n- **Single** — back to one editor\n\nTo access these: View → Editor Layout → choose a layout.\n\nFor this course, Two Columns is all you need."
+    },
+    {
+      "type": "text",
+      "content": "## Diff View: Seeing What Changed\n\nVS Code has a built-in diff viewer — it shows you exactly what changed between two states of a file in a colour-coded side-by-side format.\n\n**How to use it:**\n1. In the Explorer panel, right-click a modified file\n2. Click **Compare with Saved** — shows current unsaved changes vs the saved version\n\nOr after a Git commit is set up (lesson 5-12):\n1. Click the Source Control icon in the Activity Bar\n2. Click any file listed under \"Changes\"\n3. The diff view opens automatically, showing additions in green and removals in red\n\nYou'll use diff view constantly once you start using Git — it's how you review your own changes before committing them."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Side-by-Side Coding",
+      "content": "Set up a split editor and practise working in two files at once.\n\n**Step 1 — Open two files side by side:**\n1. Make sure your `ai-course-projects` folder is open in VS Code\n2. Click `hello.html` in the Explorer to open it\n3. Right-click the `hello.html` tab at the top of the Editor Area\n4. Click **Split Right**\n5. Now click `README.md` in the Explorer — it opens in the right column\n6. You should see `hello.html` on the left and `README.md` on the right\n\n**Step 2 — Edit both files:**\n1. Click anywhere in the left column (hello.html) — the tab highlights to show it's focused\n2. Press Ctrl+1 to confirm focus on the left\n3. Make a small edit — change `<h1>Hello, world!</h1>` to `<h1>Hello from VS Code!</h1>`\n4. Press Ctrl+S to save\n5. Press Ctrl+2 to focus the right column\n6. Add a line to README.md: `VS Code split editor works.`\n7. Press Ctrl+S\n\n**Step 3 — Explore layouts:**\n1. Click View in the menu bar → **Editor Layout**\n2. Select **Two Rows** — the files are now top/bottom instead of left/right\n3. Select **Two Columns** again to go back to side-by-side\n4. Select **Single** to collapse back to one editor\n\n**Step 4 — Split with keyboard shortcut:**\n1. Make sure only one editor column is open\n2. Open `part-05-notes.md`\n3. Press **Ctrl+\\** (backslash) — the file splits\n4. Click `prompt-experiments.md` in the Explorer to open it in the new column\n5. Press Ctrl+1 and Ctrl+2 to confirm focus switching works\n\n**Check:**\n- [ ] Two files were open side by side\n- [ ] Ctrl+1 and Ctrl+2 switched focus between columns\n- [ ] You tried at least two layout options\n- [ ] Ctrl+\\ split the editor"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Course workflow tip:** For the rest of this course, keep the lesson you're following in the left column and your exercise file in the right column. This lets you read and work simultaneously without switching windows. Many learners find this significantly speeds up their progress."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-11.** You can now split your editor and work on two files at once. This is your last lesson before the most important one in this part: VS Code's Git integration."
+    }
+  ],
+  "nextLesson": "5-12",
+  "prevLesson": "5-10"
+}

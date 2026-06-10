@@ -1,0 +1,47 @@
+{
+  "id": "5-7",
+  "title": "The Integrated Terminal",
+  "part": 5,
+  "estimatedMinutes": 20,
+  "tags": ["vscode", "beginner", "terminal", "powershell"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll use the terminal that lives inside VS Code — instead of switching to a separate PowerShell window. You'll understand why this matters, how to open and close it, how to navigate with it, and how to run basic commands without leaving your editor.\n\nThis is one of the features that makes VS Code feel like a complete working environment rather than just a text editor."
+    },
+    {
+      "type": "text",
+      "content": "## Why Have a Terminal Inside the Editor?\n\nIn lessons 4.3 and 4.4 you worked with a separate PowerShell window. That works fine, but it creates friction: you're constantly switching between two windows — the editor and the terminal.\n\nVS Code's integrated terminal solves this. It's a full PowerShell (or bash on Mac) session running inside the same window as your code. You can see your code and your terminal at the same time, in the same place.\n\nPractical benefits:\n- **Starts in the right folder automatically.** The integrated terminal always opens in your project folder. No `cd` required to get to where you need to be.\n- **No window switching.** Write code, run a command, see the result — without changing windows.\n- **You can have multiple terminals open at once.** Each is a separate session.\n- **It's the same terminal.** Everything you learned about PowerShell in Part 4 works exactly the same here.\n\nFrom this lesson forward, use the integrated terminal whenever you need a command line while working in VS Code."
+    },
+    {
+      "type": "text",
+      "content": "## Opening and Closing the Terminal\n\n**To open the terminal:**\n- Press **Ctrl+`** (the backtick key — top-left of the keyboard, directly under the Esc key, shares a key with the tilde ~)\n- Or: click **Terminal** in the menu bar → **New Terminal**\n- Or: use the Command Palette (Ctrl+Shift+P) → type `new terminal`\n\n**To toggle it (show/hide):**\n- Press **Ctrl+`** again — it hides the terminal panel. Press it again to show it.\n- Or: press **Ctrl+J** to toggle the entire Panel section (which includes Terminal, Problems, Output)\n\n**To close a specific terminal session:**\n- Click the trash icon (🗑) in the terminal toolbar, or\n- Type `exit` in the terminal and press Enter\n\nThe terminal appears at the bottom of the window as part of the Panel section."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Can't find the backtick key?** On a standard keyboard it's in the top-left corner of the main key area, sharing a key with the tilde (~). It's directly to the left of the `1` key, and directly below the Esc key. If Ctrl+` doesn't work for you, use the menu: Terminal → New Terminal."
+    },
+    {
+      "type": "text",
+      "content": "## The Terminal Starts in Your Project Folder\n\nThis is the key advantage of the integrated terminal. When VS Code opens a folder as a workspace, the terminal automatically starts in that same folder. You don't need to navigate.\n\nType `pwd` to confirm:\n```\nPS C:\\Users\\YourName\\Documents\\ai-course-projects>\n```\n\nThe prompt shows you exactly where you are. If you open the terminal and see the wrong folder, it means VS Code was opened with a different folder (or no folder at all). Go back to File → Open Folder to open the right one.\n\n**Basic navigation commands (from lesson 4.4):**\n- `pwd` — print current directory (where am I?)\n- `ls` — list files and folders here\n- `cd foldername` — move into a subfolder\n- `cd ..` — go up one level\n- `cd ~` — go to your home folder (C:\\Users\\YourName)"
+    },
+    {
+      "type": "text",
+      "content": "## Multiple Terminals and Split Terminals\n\nVS Code lets you have more than one terminal session running at the same time. This is useful when you want one terminal for running a server and another for general commands.\n\n**Create a new terminal session:**\n- Click the **+** button in the terminal toolbar (top-right of the terminal panel)\n- Or: press Ctrl+Shift+` (Ctrl+Shift+backtick)\n\nA new terminal tab appears. You can switch between them by clicking the tab names in the terminal panel's right sidebar.\n\n**Split the terminal into two side-by-side panes:**\n- Click the **split terminal** icon in the terminal toolbar (looks like a column split)\n- Or: press **Ctrl+Shift+5**\n\nNow you have two terminal sessions visible simultaneously, side by side. Click in either one to type in it.\n\n**Close a terminal session:**\n- Click the X next to its name in the terminal list, or type `exit`"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Terminal Inside VS Code",
+      "content": "Complete these steps using only the integrated terminal inside VS Code. Do not open a separate PowerShell window.\n\n**Step 1 — Open the terminal:**\n1. Press **Ctrl+`** (backtick)\n2. The terminal panel appears at the bottom of the window\n3. Type `pwd` and press Enter\n4. Confirm you see your `ai-course-projects` folder path\n\n**Step 2 — Explore your project:**\n1. Type `ls` and press Enter — you should see your folders: `exercises`, `notes`, `prompts`, and `README.md`\n2. Type `cd exercises` and press Enter\n3. Type `ls` — you should see `hello.html` and `part-05-notes.md`\n4. Type `cd ..` to go back up to the project root\n\n**Step 3 — Create a file from the terminal:**\n1. Make sure you're at the project root (`pwd` should show `ai-course-projects`)\n2. Type this command and press Enter:\n   `echo \"# My Notes\" > notes/terminal-test.md`\n3. In the Explorer panel, look inside the `notes` folder — `terminal-test.md` appeared!\n4. Click it in the Explorer — it opens in the Editor Area with the text \"# My Notes\"\n\n**Step 4 — Toggle and split the terminal:**\n1. Press Ctrl+` to hide the terminal\n2. Press Ctrl+` again to show it\n3. Click the split icon in the terminal toolbar (or press Ctrl+Shift+5)\n4. You now have two terminal panes side by side\n5. Click in the right pane and type `ls` — it also shows your project files\n6. Close the right pane by clicking its X\n\n**Check:**\n- [ ] Terminal opens and shows your project folder\n- [ ] `ls` shows your folder structure\n- [ ] `terminal-test.md` was created and appears in the Explorer\n- [ ] You successfully toggled and split the terminal"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-7.** The integrated terminal is now a core part of your workflow. You'll use it constantly throughout this course — it's how you run Git commands, install Node packages, launch Claude Code, and much more. Next: the VS Code Extensions Marketplace."
+    }
+  ],
+  "nextLesson": "5-8",
+  "prevLesson": "5-6"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "6-4",
+  "title": "Continue.dev — Free, Open-Source AI in VS Code",
+  "part": 6,
+  "estimatedMinutes": 25,
+  "tags": ["continue-dev", "vscode", "ai-coding", "open-source", "claude"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nGitHub Copilot is excellent, but it's a closed product tied to GitHub's model choices. **Continue.dev** is a free, open-source VS Code extension that gives you the same in-editor AI experience — but you choose the model. Claude, GPT-4o, Gemini, or a local Ollama model running on your own machine. One interface, any backend."
+    },
+    {
+      "type": "text",
+      "content": "## What Continue.dev Does\n\nContinue adds two things to VS Code:\n\n**1. Inline autocomplete** — similar to Copilot ghost text. As you type, Continue suggests completions using whichever model you've configured.\n\n**2. A chat panel** — a sidebar chat that is deeply context-aware. You can highlight code, add it to the chat context, and have a conversation about it. Unlike copying and pasting into a browser tab, Continue sends the code with proper context and can write changes back to your files.\n\nThe key command you'll use constantly: **highlight code in the editor → press Ctrl+L** to instantly add it to Continue's chat context. Then ask your question in the chat panel. The code is already there — no copy-pasting required.\n\nAlternatively, press **Ctrl+I** directly on selected code to open an inline edit prompt."
+    },
+    {
+      "type": "text",
+      "content": "## Configuration — Connecting a Model\n\nContinue stores its settings in a file called `config.json` (or `config.yaml` in newer versions) which lives at `C:\\Users\\YourName\\.continue\\`. You can open it from inside VS Code using the Continue settings panel.\n\nHere's a minimal configuration connecting Continue to Claude via the Anthropic API:\n\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Claude Sonnet\",\n      \"provider\": \"anthropic\",\n      \"model\": \"claude-sonnet-4-5\",\n      \"apiKey\": \"YOUR_ANTHROPIC_API_KEY\"\n    }\n  ],\n  \"tabAutocompleteModel\": {\n    \"title\": \"Claude Haiku (autocomplete)\",\n    \"provider\": \"anthropic\",\n    \"model\": \"claude-haiku-4-5\",\n    \"apiKey\": \"YOUR_ANTHROPIC_API_KEY\"\n  }\n}\n```\n\nYou can also add Ollama models (covered in Part 12) for fully local, private code assistance with no API key needed:\n\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Llama 3 (local)\",\n      \"provider\": \"ollama\",\n      \"model\": \"llama3\"\n    }\n  ]\n}\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Timing note:** Continue needs either an Anthropic API key (covered in lesson 11-3) or a local Ollama model (covered in lesson 12-2) before it can do anything useful. **Install the extension now** — it's harmless without a model connected. Then come back to steps 3–5 of the workshop after completing lesson 11-3 or 12-2. The important thing to understand today is what Continue *is* and how it differs from Copilot."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Continue vs. Copilot — when to use which:**\n- **Copilot** — already have a GitHub account, want zero configuration, mostly want autocomplete\n- **Continue** — want to use Claude or a local model, care about data privacy (local Ollama means no data leaves your machine), or want one interface that works with multiple providers\n\nYou don't have to choose just one. Many developers have both installed and switch based on the task."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Install Continue and Connect Claude",
+      "content": "**Step 1 — Install the extension**\n1. Open the Extensions panel in VS Code (puzzle icon in Activity Bar)\n2. Search: `Continue`\n3. Install **Continue - Codestral, Claude, and more** (publisher: Continue)\n4. After installation, the Continue icon appears in the Activity Bar — a small triangle/play symbol\n5. Click it to open the Continue panel\n\n**Step 2 — Explore the UI (even without a model)**\n1. Click the Continue icon in the Activity Bar\n2. The panel shows a chat interface and a model selector at the top\n3. Click the model selector — it shows available providers and a link to the config file\n4. Click **Open config.json** to see where settings live\n\n**Step 3 — Connect Claude (requires Anthropic API key from lesson 11-3)**\n\n*If you have your API key already:*\n1. Open the config file (from the model selector, or navigate to `C:\\Users\\YourName\\.continue\\config.json`)\n2. Replace the contents with the Claude configuration from this lesson\n3. Replace `YOUR_ANTHROPIC_API_KEY` with your actual key\n4. Save the file — Continue reconnects automatically\n5. Type a message in the Continue panel to test: \"Hello — what model are you?\"\n\n*If you don't have an API key yet:*\n- Bookmark this lesson and return after completing lesson 11-3\n- The extension is installed and ready — it just needs credentials\n\n**Step 4 — Use it on real code**\n1. Open `exercises/practice.js`\n2. Select the sort function (or any function in the file)\n3. Press **Ctrl+L** — the selected code is added to the Continue chat context\n4. Type in the chat panel: \"Is there a more readable way to write this?\"\n5. Compare Continue's response to what Copilot Chat suggested for the same code in lesson 6-3"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-4 complete.** You understand what Continue.dev is, how it differs from Copilot, and how to configure it. The extension is installed and waiting for credentials. In lesson 6-5, you'll learn the AI-assisted debugging workflow — using both Copilot and Claude to diagnose errors faster than any traditional debugging approach."
+    }
+  ],
+  "nextLesson": "6-5",
+  "prevLesson": "6-3"
+}

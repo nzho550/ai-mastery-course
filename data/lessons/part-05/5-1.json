@@ -1,0 +1,43 @@
+{
+  "id": "5-1",
+  "title": "What is VS Code and Why Use It",
+  "part": 5,
+  "estimatedMinutes": 15,
+  "tags": ["vscode", "beginner", "tools"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what Visual Studio Code is, why professional developers use it, and why it's worth learning before we go any further in this course.\n\nNo installation yet — that's next lesson. This lesson is about building the mental model."
+    },
+    {
+      "type": "text",
+      "content": "## VS Code Is Not Just Notepad\n\nWhen you write code in Notepad, you get a blank white box. Nothing tells you if you made a mistake. Nothing helps you navigate. Nothing auto-completes anything. It's like writing an essay in a plain text box with no spell-check.\n\n**Visual Studio Code** (VS Code) is a free code editor made by Microsoft that changes all of this. It understands the structure of code — it knows the difference between a keyword, a variable name, and a string. It highlights problems as you type, suggests completions, shows you your whole project as a tree of files, and contains a fully working terminal right inside the window.\n\nBut the most important thing: **VS Code is extensible.** It has a marketplace of thousands of extensions — add-ons that give it new abilities. This includes AI assistants like GitHub Copilot, code formatters like Prettier, live browser preview, Git tools, and much more. You'll install several of these in upcoming lessons.\n\nFor this course, VS Code is our home base. Every hands-on exercise from here forward happens inside it."
+    },
+    {
+      "type": "text",
+      "content": "## Comparing the Options\n\nHere is an honest comparison of the tools you might consider for editing files:\n\n| Feature | Notepad | Microsoft Word | VS Code |\n|---------|---------|---------------|--------|\n| Free | Yes | No (Microsoft 365) | Yes |\n| Made for code | No | No | Yes |\n| Syntax highlighting (colour-codes code) | No | No | Yes |\n| Shows errors as you type | No | Grammar only | Yes |\n| File explorer built-in | No | No | Yes |\n| Built-in terminal | No | No | Yes |\n| Git integration | No | No | Yes |\n| AI assistant add-ons | No | Limited | Yes |\n| Extensions/plugins | No | Limited | 30,000+ |\n| Best for | Quick notes | Documents | Code, config, everything technical |\n\nNotepad is fine for jotting a quick note. Word is for formatted documents. VS Code is for anything technical — code, configuration files, Markdown, JSON, HTML, CSS, scripts, and more. Once you start using VS Code, you'll find yourself reaching for it far beyond just code."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**VS Code by the numbers:** In the 2024 Stack Overflow Developer Survey, 73% of professional developers use VS Code as their primary editor — more than all other editors combined. Every tutorial, every StackOverflow answer, and every colleague on a technical team will assume you know it."
+    },
+    {
+      "type": "text",
+      "content": "## Why It Matters for AI Work\n\nThis is an AI course, so you might be wondering: why are we spending a whole part on a code editor?\n\nHere's why: **everything AI-related that goes beyond chatting in a browser lives in files.** API keys, prompt templates, configuration files, automation scripts, MCP server configs, project notes — all of it is plain text in files. VS Code is the best tool in existence for working with those files.\n\nBeyond that, VS Code is where you'll install GitHub Copilot (Part 6), Claude Code (Part 7), Continue.dev, and other AI tools that work *inside your editor*. The editor is not separate from the AI workflow — it is the AI workflow.\n\nFinally, VS Code is free and open source. Microsoft maintains it, but the source code is public. It works on Windows, Mac, and Linux. There is no lock-in."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Read the Numbers",
+      "content": "Visit the Stack Overflow Developer Survey results at **stackoverflow.com/survey** and find the section on \"Most popular development environments\" (or \"Integrated development environment\").\n\n1. Note VS Code's percentage among professional developers.\n2. Note which editor is in second place and by how much.\n3. Write two sentences in your notes:\n   - What the numbers tell you about VS Code's dominance\n   - One reason you think it became so popular (based on what you read in this lesson)\n\nThis single data point is the practical argument for learning VS Code before anything else technical: whatever resource you use next — YouTube tutorial, GitHub README, blog post — the author almost certainly uses VS Code. You'll be following along without friction."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-1.** You now understand what VS Code is, how it compares to the alternatives, and why it's the right tool for AI work. Next lesson: install it."
+    }
+  ],
+  "nextLesson": "5-2",
+  "prevLesson": "4-6"
+}

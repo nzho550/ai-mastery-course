@@ -1,0 +1,57 @@
+{
+  "id": "5-12",
+  "title": "VS Code Git Integration (Source Control)",
+  "part": 5,
+  "estimatedMinutes": 25,
+  "tags": ["vscode", "beginner", "git", "source-control", "version-control"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what version control is, have Git installed, and be able to initialise a repository, stage files, write a commit message, and make your first commit — all from inside VS Code, without typing a single Git command.\n\nThis is a landmark lesson. Version control is the foundation of every serious project."
+    },
+    {
+      "type": "text",
+      "content": "## What is Version Control?\n\nImagine writing an important document and saving it as versions:\n- `report-v1.docx`\n- `report-v2.docx`\n- `report-final.docx`\n- `report-final-REAL.docx`\n- `report-final-REAL-2.docx`\n\nThis gets out of hand fast. And if you want to know what changed between v1 and v3, you have to open both files and compare manually.\n\n**Version control** replaces this chaos with a system that:\n- Tracks every change you make automatically\n- Lets you label snapshots with a message (\"Added the introduction section\")\n- Lets you go back to any snapshot at any time\n- Shows you exactly what changed between any two snapshots\n- Lets multiple people work on the same project without overwriting each other's work\n\n**Git** is the tool that does this tracking on your own computer. It's free, open source, and used by virtually every professional developer on the planet.\n\n**GitHub** is a separate website where you can store your Git-tracked projects online — for backup, sharing, or collaboration. Git and GitHub are not the same thing. Git is local; GitHub is cloud. You can use Git without GitHub.\n\nFor this lesson, we only use Git. GitHub comes later in the course."
+    },
+    {
+      "type": "text",
+      "content": "## Four Words You Must Know\n\n**Repository (repo)** — A folder that Git is tracking. When you initialise a repo, Git creates a hidden `.git` folder inside your project folder. This is where Git stores all the version history. Do not delete the `.git` folder.\n\n**Commit** — A saved snapshot of your project at a moment in time. Every commit has a message you write (e.g., `Added README file`) so you can understand the history later. Commits are permanent — once made, they're in the history forever (unless you deliberately remove them).\n\n**Stage** — Deciding which changes to include in the next commit. You might have changed three files, but only want to commit changes in two of them. Staging lets you select which files go into the snapshot.\n\n**Branch** — A parallel version of your project you can work on without affecting the main version. Branches are an advanced topic covered later in the course. For now, you'll work on the default branch called `main`."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Prerequisite — Git must be installed.** Open the integrated terminal (Ctrl+`) and type `git --version`. If you see `git version 2.x.x`, you're ready — skip to the workshop. If you see an error message like `'git' is not recognized`: go to **git-scm.com/downloads**, click **Download for Windows**, run the installer with all default settings, click Finish, then close and reopen the terminal and try `git --version` again.\n\n**One required one-time setup after installing Git** — tell Git who you are. Run these two commands (replace the values with your own name and email):\n```\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"you@example.com\"\n```\nGit uses this information to label your commits. You only do this once per computer."
+    },
+    {
+      "type": "text",
+      "content": "## The Source Control Panel in VS Code\n\nVS Code has Git built in. You access it through the **Source Control** panel:\n- Click the **branch icon** in the Activity Bar (it looks like a tree branch with circles)\n- Or: press **Ctrl+Shift+G**\n\nOnce a Git repo is initialised, this panel shows:\n\n**Changes** — files you've modified since the last commit. Each file has a letter showing its status:\n- `U` — Untracked (new file Git has never seen before)\n- `M` — Modified (a file Git knows about that has changed)\n- `A` — Added/Staged (you've marked this file for the next commit)\n- `D` — Deleted\n\n**Staged Changes** — files you've explicitly marked to include in the next commit (by clicking the `+` button).\n\n**Commit message box** — at the top, where you type your commit description.\n\n**Checkmark button** (✓) — press this (or Ctrl+Enter) to make the commit with the staged files."
+    },
+    {
+      "type": "text",
+      "content": "## What Happens When You Commit\n\nHere's the flow, step by step:\n\n1. You make changes to files in your project (editing, creating, deleting)\n2. Those files appear in the **Changes** section of the Source Control panel with a `U` or `M` marker\n3. You click the `+` button next to a file to **stage** it (move it to Staged Changes)\n4. You type a commit message in the box at the top\n5. You press Ctrl+Enter or click the ✓ button\n6. VS Code (via Git) saves a permanent snapshot — a commit — with your message\n7. The Changes list clears — you're back to a clean state\n\nEvery commit is saved in the history permanently. You can see the history at any time using GitLens (which you installed in lesson 5-8) or by running `git log` in the terminal."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Good commit messages matter.** A commit message should complete the sentence: \"This commit...\" Examples of good messages: `Add README with project description`, `Fix typo in lesson notes`, `Create exercises folder structure`. Avoid vague messages like `update` or `changes`. You'll thank yourself when you look at the history six months later."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Your First Git Commit",
+      "content": "You'll initialise a Git repository for your course project and make your first commit — entirely through VS Code's Source Control panel.\n\n**Step 1 — Verify Git is installed:**\n1. Press Ctrl+` to open the integrated terminal\n2. Type `git --version` and press Enter\n3. You should see something like `git version 2.44.0.windows.1`\n4. If you see an error, install Git first (see the callout above this workshop)\n\n**Step 2 — Set up your Git identity (first time only):**\nIn the terminal, run these two commands with your own details:\n```\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"you@example.com\"\n```\nPress Enter after each one. No confirmation message is normal.\n\n**Step 3 — Initialise the repository:**\n1. Click the **branch icon** in the Activity Bar (or press Ctrl+Shift+G)\n2. You'll see a button that says **Initialize Repository** — click it\n3. VS Code initialises Git for your `ai-course-projects` folder\n4. All your existing files immediately appear in the Changes section with `U` (Untracked) markers — Git sees them for the first time\n\n**Step 4 — Stage your files:**\n1. In the Source Control panel, you'll see all your files listed under \"Changes\"\n2. Hover over the `README.md` file — a `+` button appears to its right\n3. Click the `+` to stage it — it moves to the \"Staged Changes\" section\n4. Now click the `+` next to the entire \"Changes\" header to stage ALL remaining files at once\n5. All files should now appear under \"Staged Changes\"\n\n**Step 5 — Write your commit message:**\n1. Click in the text box at the very top of the Source Control panel (it says \"Message (Ctrl+Enter to commit)\")\n2. Type: `Initial commit - set up AI course project structure`\n\n**Step 6 — Make the commit:**\n1. Press **Ctrl+Enter** — or click the ✓ (checkmark) button\n2. VS Code makes the commit\n3. The Staged Changes and Changes sections clear — you have 0 changes\n4. Look at the Status Bar at the bottom — you'll see a branch icon and `main` (or `master`)\n\n**Step 7 — Make a change and commit again:**\n1. Open `README.md` in the editor\n2. Add a second line: `This project contains my AI course exercises.`\n3. Save (Ctrl+S)\n4. Go to Source Control — README.md appears with an `M` (Modified) marker\n5. Stage it (click the `+`)\n6. Type the commit message: `Update README with project description`\n7. Press Ctrl+Enter to commit\n8. Changes clear again — clean state\n\n**You did it if:**\n- [ ] `git --version` returned a version number\n- [ ] The Source Control panel showed your files\n- [ ] All files were staged and committed\n- [ ] After committing, the Changes list is empty\n- [ ] The Status Bar shows a branch name at the bottom\n\nNothing was pushed to GitHub. This is all stored locally on your computer, in the hidden `.git` folder inside `ai-course-projects`. Your snapshots are safe."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**GitLens is now active.** Now that you have a Git repo, the GitLens extension you installed in lesson 5-8 wakes up. Open any file and hover over a line — you'll see a subtle annotation showing who made that change and when. In a solo project it will just say your name and the commit time, but the pattern becomes invaluable in team projects."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-12 and all of Part 5.** You now have a fully configured VS Code environment: a workspace, a file structure, a colour theme, extensions, auto-formatting, keyboard shortcuts you're starting to memorise, a split editor, and your first Git repository with a commit history. This is the professional setup used by developers worldwide. Part 6 builds on everything you just learned: adding AI directly inside VS Code."
+    }
+  ],
+  "nextLesson": "6-1",
+  "prevLesson": "5-11"
+}

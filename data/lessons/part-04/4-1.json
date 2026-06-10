@@ -1,0 +1,50 @@
+{
+  "id": "4-1",
+  "title": "How Computers Organize Files",
+  "part": 4,
+  "estimatedMinutes": 15,
+  "tags": ["computer-basics", "beginner", "files"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand how every file on your computer is organized, what a file path actually means, and why this matters the moment you start working with code. None of this is complicated — it's just a mental model most people never get taught explicitly."
+    },
+    {
+      "type": "text",
+      "content": "## The File System Is a Tree\n\nYour computer organizes all its files in a **hierarchy** — think of it as an upside-down tree. At the very top (the root) is a drive, typically `C:\\` on Windows. Every folder on your computer is a branch off that root, and every file is a leaf at the end of a branch.\n\nHere's what that looks like:\n\n```\nC:\\\n├── Users\\\n│   └── Alice\\\n│       ├── Documents\\\n│       │   ├── Work\\\n│       │   └── Personal\\\n│       └── Desktop\\\n└── Program Files\\\n```\n\nThis structure — folders inside folders inside folders — is called a **directory tree**. The terms *folder* and *directory* mean the same thing; older documentation uses *directory*, modern interfaces use *folder*.\n\n**Drives** are the top-level containers. Most Windows computers have one main drive called `C:`. If you plug in a USB stick or external hard drive, Windows assigns it another letter like `D:` or `E:`. The colon after the letter is how Windows signals \"this is a drive.\" Everything starts from here."
+    },
+    {
+      "type": "text",
+      "content": "## Anatomy of a File\n\nEvery file has four things that define it:\n\n**Name** — The human-readable label, like `report` or `photo`.\n\n**Extension** — The two-to-four letters after the dot that tell your computer *what kind of file this is*: `.txt` means plain text, `.jpg` means a photo, `.html` means a webpage, `.py` means a Python script. The extension is how Windows knows which program to open when you double-click a file.\n\n**Path** — The full address of the file in the directory tree. More on this below.\n\n**Icon** — The visual shortcut your computer uses to represent the file type. The icon is generated from the extension — it isn't stored in the file itself.\n\nBy default, Windows *hides* file extensions. This means `resume.docx` appears as just `resume`. This is unhelpful when you're learning to code, because the extension is crucial. Lesson 4-2 covers how to show extensions permanently."
+    },
+    {
+      "type": "text",
+      "content": "## Paths: The Address of a File\n\nA **path** is the full address that tells your computer exactly where a file lives. There are two types:\n\n**Absolute path** — starts from the root of the drive and gives the complete location of a file, no matter where you currently are:\n```\nC:\\Users\\Alice\\Documents\\Work\\report.docx\n```\nThis is unambiguous. It will find the file from anywhere on the computer.\n\n**Relative path** — describes a location *relative to where you currently are*. If you're already inside `C:\\Users\\Alice\\Documents`, then the relative path to the same file is just:\n```\nWork\\report.docx\n```\n\nThink of the difference this way: an **absolute path** is like a GPS address — it works from anywhere. A **relative path** is like saying \"turn left, then the second door on the right\" — it only makes sense if you already know where you're starting from.\n\n**The backslash `\\`** separates folders on Windows. You'll also see forward slashes `/` — that's the convention on Mac and Linux. Many tools accept either."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The key insight for coding:** Code files are just files. When you write a program, you're creating text files in a folder. When that code references another file (an image, a stylesheet, a database), it uses a path to find it. If you get the path wrong, the file doesn't load. Understanding paths is not optional — it's one of the most practical skills in this entire course."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Draw Your File Tree",
+      "content": "Open Notepad (or any notes app) and draw the folder structure of your Documents folder as a tree. Follow this pattern:\n\n```\nDocuments\\\n├── [Folder 1]\\\n│   ├── [Subfolder]\\\n│   └── [Another subfolder]\\\n├── [Folder 2]\\\n└── [Folder 3]\\\n    └── [File inside it]\n```\n\nDon't worry about getting every folder — just the ones you actually use and recognise.\n\nThen, write the **absolute path** to one specific file inside your Documents folder. It should look something like:\n```\nC:\\Users\\YourName\\Documents\\SomeFolder\\SomeFile.docx\n```\n\nFinally, write one sentence answering: *\"Why does a coder need to understand file paths?\"*\n\nSave this — it's the foundation everything in Parts 4 and 5 builds on."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the difference between an absolute path and a relative path?",
+      "options": [
+        "An absolute path starts from the drive root and works from anywhere; a relative path describes a location from where you currently are",
+        "An absolute path uses backslashes; a relative path uses forward slashes",
+        "An absolute path is for files; a relative path is for folders",
+        "An absolute path is longer; a relative path is shorter"
+      ],
+      "correct": 0,
+      "explanation": "An absolute path always starts from the root (like C:\\) and unambiguously identifies a file from anywhere on the computer. A relative path only makes sense in the context of a current location — it describes how to get to a file from where you already are."
+    }
+  ],
+  "nextLesson": "4-2",
+  "prevLesson": "3-8"
+}

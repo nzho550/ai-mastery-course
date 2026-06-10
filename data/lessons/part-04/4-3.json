@@ -1,0 +1,43 @@
+{
+  "id": "4-3",
+  "title": "Opening the Terminal (PowerShell)",
+  "part": 4,
+  "estimatedMinutes": 25,
+  "tags": ["computer-basics", "beginner", "terminal", "powershell"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThe terminal is the text-based interface to your computer. It looks intimidating — a blank window with a blinking cursor and no buttons — but it's actually simpler and more powerful than it appears. By the end of this lesson you'll have it open, understand what you're looking at, and have run your first commands."
+    },
+    {
+      "type": "text",
+      "content": "## What Is a Terminal?\n\nWhen you use Windows normally, you're using a **GUI** (Graphical User Interface) — folders you can see and click, buttons, icons, windows. This is the interface designed for everyday users.\n\nThe **terminal** (also called the command line or command prompt) is a **text interface** to the same computer. Instead of clicking a folder to open it, you type `cd Documents` and press Enter. Instead of right-clicking to create a folder, you type `mkdir my-folder`.\n\n**Why would anyone use this instead of clicking?**\n\n- **Speed.** Once learned, typed commands are often faster than navigating menus\n- **Automation.** You can write a file with 50 commands and run them all at once\n- **Access.** Some tools — including Claude Code, Node.js, Git, and Python — *only* work from the terminal; they have no GUI\n- **Precision.** Text commands are exact and repeatable; clicking around is not\n\nFor this course, you'll use the terminal primarily to run tools like Claude Code and Git. You don't need to become a command-line expert — you need to be comfortable enough that a blinking cursor doesn't stop you."
+    },
+    {
+      "type": "text",
+      "content": "## The Windows Terminal Options\n\nWindows has several terminal programs. Here's what they are and which to use:\n\n**PowerShell** — The modern, recommended terminal for Windows. Built by Microsoft, it's powerful, well-documented, and handles both Windows-specific commands and many Unix-style commands (like `ls`, `pwd`). **This is what we use throughout this course.**\n\n**Command Prompt (cmd.exe)** — The older, legacy terminal. It's been in Windows since the 1980s. It works for basic tasks but lacks many modern features. You may encounter it in older tutorials. The commands are slightly different from PowerShell.\n\n**Windows Subsystem for Linux (WSL)** — A full Linux environment running inside Windows. Powerful for advanced development, but more complex to set up. Not needed for this course.\n\n**Windows Terminal** — A modern *host* application that can run PowerShell, Command Prompt, or WSL inside a tabbed interface. If you have it, great — use it. If not, plain PowerShell works perfectly.\n\n**The short answer:** Use PowerShell. If someone says \"open the terminal,\" open PowerShell."
+    },
+    {
+      "type": "text",
+      "content": "## How to Open PowerShell\n\nThere are three ways — learn all of them, because different situations call for different approaches:\n\n**Method 1 — Win + X menu (fastest):**\nPress `Windows key + X` simultaneously. A menu appears in the bottom-left corner. Look for:\n- **\"Windows PowerShell\"** (Windows 10)\n- **\"Terminal\"** or **\"Windows PowerShell\"** (Windows 11)\n\nClick it. A blue or black window opens.\n\n**Method 2 — Start menu search:**\n1. Press the Windows key or click the Start button\n2. Type `powershell`\n3. Click **\"Windows PowerShell\"** in the results\n\n**Method 3 — Right-click a folder (most useful for coding):**\nIn File Explorer, hold `Shift` and right-click any folder (or right-click an empty space inside a folder). Look for:\n- **\"Open PowerShell window here\"** (Windows 10)\n- **\"Open in Terminal\"** (Windows 11)\n\nThis opens PowerShell *already pointed at that folder* — incredibly useful when you want to work inside a specific project folder.\n\n## Reading the Prompt\n\nWhen PowerShell opens, you'll see something like this:\n\n```\nPS C:\\Users\\Alice>\n```\n\nBreaking this down:\n- **`PS`** — tells you this is PowerShell (not Command Prompt or another shell)\n- **`C:\\Users\\Alice`** — your current location in the file system (your current directory)\n- **`>`** — the prompt character, indicating PowerShell is ready and waiting for your command\n\nThe current directory shown in the prompt updates as you move around. It always tells you exactly where you are."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**On colour:** PowerShell windows can be blue, black, or any colour depending on your Windows version and settings. The colour doesn't matter — the `PS` prefix and the `>` at the end are what identify PowerShell. If you see just `C:\\Users\\Alice>` without the `PS` prefix, you've opened Command Prompt instead. Close it and open PowerShell."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Hello, Terminal",
+      "content": "Time to run your first terminal commands. Don't just read — open PowerShell and type each one.\n\n**Step 1 — Open PowerShell:**\nUse any of the three methods above. You should see `PS C:\\Users\\YourName>`.\n\n**Step 2 — Run your first commands:**\n\nType each command and press Enter after each one:\n\n```powershell\necho \"Hello! I'm not scared of the terminal.\"\n```\nYou should see your message printed back. `echo` just prints text.\n\n```powershell\nGet-Date\n```\nShows the current date and time. This is a PowerShell-specific command.\n\n```powershell\n$env:USERNAME\n```\nPrints your Windows username.\n\n```powershell\npwd\n```\nPrints your current location (\"print working directory\"). You should see your user folder.\n\n**Step 3 — Navigate to your Desktop:**\n```powershell\ncd Desktop\n```\n```powershell\npwd\n```\nConfirm the path ends with `\\Desktop`.\n\n**Step 4 — Create a folder:**\n```powershell\nmkdir my-first-terminal-folder\n```\nNo output means success. Check your Desktop in File Explorer — the folder is there.\n\n**Step 5 — Exit cleanly:**\n```powershell\nexit\n```\n\nYou just ran 7 terminal commands. Every tool in this course is accessed exactly this way."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 4-3.** You can open PowerShell three different ways, you understand what the prompt is telling you, and you've run your first commands. The terminal is no longer a mystery."
+    }
+  ],
+  "nextLesson": "4-4",
+  "prevLesson": "4-2"
+}
