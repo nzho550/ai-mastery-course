@@ -1,0 +1,58 @@
+{
+  "id": "7-8",
+  "title": "Hooks — Automate Actions Around Claude's Work",
+  "part": 7,
+  "estimatedMinutes": 30,
+  "tags": ["claude-code", "hooks", "automation", "settings-json"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what hooks are, know the three main hook types, and have a working hook that fires automatically when Claude Code modifies a file."
+    },
+    {
+      "type": "text",
+      "content": "## What Are Hooks?\n\nHooks are shell commands that Claude Code runs automatically at specific points in its workflow — before Claude uses a tool, after it uses a tool, or when it finishes a response.\n\nThink of hooks as automation triggers: *\"every time Claude edits a file, also do X.\"* You define X, and Claude Code handles the triggering.\n\nHooks are defined in `.claude/settings.json` under the `hooks` key. This file lives in your project root (not inside the `commands/` folder).\n\nCommon real-world uses:\n- **Auto-lint:** Run `prettier --write` or `eslint --fix` on every file Claude edits, so your code is always formatted\n- **Auto-test:** Run your test suite after Claude makes changes, so you see immediately if something broke\n- **Logging:** Write a log entry every time Claude modifies a file, so you have an audit trail\n- **Notifications:** Send a desktop notification or beep when Claude finishes a long task\n- **Git auto-commit:** Automatically create a commit after every accepted change"
+    },
+    {
+      "type": "text",
+      "content": "## The Three Hook Types\n\n**`PreToolUse`**\nRuns *before* Claude uses a tool. Use cases: confirm you're in the right directory, check that a dependency is installed before Claude tries to use it, log what Claude is about to do.\n\n**`PostToolUse`**\nRuns *after* Claude uses a tool. This is the most commonly used hook. Use cases: lint the file that was just edited, run tests after a code change, log what was modified.\n\n**`Stop`**\nRuns when Claude finishes generating a complete response and is waiting for your input. Use cases: play a sound to signal Claude is done, send a notification.\n\nEach hook type takes a list of matchers. The `matcher` field is a regex pattern that matches tool names — so you can trigger a hook only on `Write` calls, only on `Bash` calls, or any combination."
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude just edited a file\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Matcher syntax:** The `matcher` field uses regular expressions. Common patterns:\n- `\"Write\"` — fires only on Write tool calls (creating or overwriting files)\n- `\"Edit\"` — fires only on Edit tool calls (in-place edits)\n- `\"Write|Edit\"` — fires on either\n- `\"Bash\"` — fires when Claude runs a shell command\n- `\".*\"` — fires on every tool use (broad — use carefully)"
+    },
+    {
+      "type": "text",
+      "content": "## A Real-World Hooks Example\n\nHere's a `settings.json` with three useful hooks for a web development project:\n\n- A PostToolUse hook that logs which file was modified\n- A Stop hook that prints a \"Claude is done\" message\n- A PreToolUse hook that echoes a warning before any Bash command runs"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo [HOOK] Claude is about to run a shell command\"\n          }\n        ]\n      }\n    ],\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo [HOOK] File modified by Claude Code\"\n          }\n        ]\n      }\n    ],\n    \"Stop\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo [HOOK] Claude finished responding\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Hooks run with your user permissions.** A hook that runs `rm -rf` would actually delete files. Keep hooks simple and deterministic. If you're adding a hook that runs a linter or formatter, make sure that tool is installed and working before you wire it up — a failing hook will interrupt Claude's workflow."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Set Up a File-Edit Hook",
+      "content": "Add a PostToolUse hook that prints a message in the terminal every time Claude modifies a file. Verify it fires.\n\n**Step 1 — Create or open `.claude/settings.json`:**\nIn VS Code Explorer, look for `.claude/settings.json` in your project root. If it doesn't exist, create it. (The `.claude/` folder should already exist from lesson 7-7 when you created the `commands/` subfolder.)\n\n**Step 2 — Add the hook:**\nPaste this content into `.claude/settings.json`:\n```json\n{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude just edited a file\"\n          }\n        ]\n      }\n    ]\n  }\n}\n```\nSave the file.\n\n**Step 3 — Launch Claude Code:**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**Step 4 — Trigger the hook:**\nAsk Claude to make a small change to any file:\n```\nAdd an HTML comment at the top of exercises/about-me.html that says\n\"Last updated by Claude Code\"\n```\nReview the diff and accept it.\n\n**Step 5 — Observe the hook output:**\nAfter Claude applies the change, you should see:\n```\nClaude just edited a file\n```\nPrinted in your terminal. That's your hook firing.\n\n**Step 6 — Upgrade the hook (optional):**\nChange the hook to something more informative. On Windows (PowerShell), update the command to:\n```\necho File modified at %TIME%\n```\nThis prints the time of each edit, giving you a lightweight audit log.\n\n**Real-world extension:** If you have Prettier installed (`npm install -g prettier`), replace the echo command with:\n```\nprettier --write %CLAUDE_TOOL_INPUT_PATH%\n```\nThis auto-formats every file Claude touches. That single hook line eliminates an entire class of manual formatting work."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-8.** You've configured a working hook and understand the three hook types. Hooks are one of Claude Code's most powerful features for building reliable, repeatable workflows. Next: the memory system."
+    }
+  ],
+  "nextLesson": "7-9",
+  "prevLesson": "7-7"
+}

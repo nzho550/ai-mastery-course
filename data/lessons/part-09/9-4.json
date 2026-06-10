@@ -1,0 +1,47 @@
+{
+  "id": "9-4",
+  "title": "The Full AI Coding Tool Landscape",
+  "part": 9,
+  "estimatedMinutes": 20,
+  "tags": ["comparison", "decision-making", "ai-coding", "synthesis"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have a complete map of every AI coding tool covered in this course, a decision matrix for choosing between them, and a personal reference card you've written yourself — the one you'll actually use."
+    },
+    {
+      "type": "text",
+      "content": "## You've Covered a Lot of Ground\n\nParts 6 through 9 covered eight AI coding tools. That's a lot to hold in your head. Before we move on to automation and APIs, let's step back and make sense of the whole landscape.\n\nHere is every tool, with its honest positioning:\n\n**GitHub Copilot** — The market leader. Best-in-class inline completions. Deep VS Code and JetBrains integration. Free tier available. The default choice for most developers.\n\n**Continue.dev** — Open source, works with any model. Ideal if you want Claude-quality completions without a Copilot subscription, or want to use a local model.\n\n**Cursor** — AI-native editor built on VS Code. The best tool for complex multi-file edits where you want AI to understand the whole project and make larger changes.\n\n**Windsurf** — Cursor competitor with a different interface style. Worth knowing. The Cascade feature is its distinguishing experience.\n\n**Claude Code** — The tool you've been using throughout this course. An agentic CLI that can read, plan, and edit entire projects. Best for whole-project tasks, MCP integrations, and when you want AI that can reason about architecture.\n\n**Aider** — Terminal-based, git-native. Every edit becomes a commit. Best when you want a clean, auditable AI edit history and a focused workflow.\n\n**Cody** — VS Code extension designed for large codebases. Best at cross-file understanding. The right tool when you need to ask \"how does this all fit together?\" on a project with hundreds of files.\n\n**Tabnine** — Privacy-first completions. Can run entirely locally. The correct choice for regulated industries and environments where code can't leave the machine."
+    },
+    {
+      "type": "text",
+      "content": "## Decision Matrix\n\nUse this table as a starting point. Fill in your own scores as you try each tool.\n\n| Tool | Best for | Cost | Privacy | Works offline |\n|---|---|---|---|---|\n| GitHub Copilot | Daily completions, general coding | Free tier / $10/mo | Cloud (Microsoft) | No |\n| Continue.dev | Free Claude completions, model flexibility | Free (OSS) | Configurable | Yes (with Ollama) |\n| Cursor | Complex multi-file edits, AI-first workflow | Free tier / $20/mo | Some telemetry | No |\n| Windsurf | Alternative to Cursor, Cascade flow | Free tier / $15/mo | Codeium cloud | No |\n| Claude Code | Whole-project agentic work, MCP | Claude Pro / API usage | Anthropic cloud | No |\n| Aider | Git-native edits, clean AI commit history | Free (OSS + API cost) | Depends on model | Yes (with local model) |\n| Cody | Large codebase navigation and understanding | Free tier / $19/mo | Sourcegraph cloud | No |\n| Tabnine | Privacy-required environments, regulated industries | Free tier / $12/mo | Local mode available | Yes (local mode) |\n\nNotice the pattern: every tool makes a tradeoff between capability and control. The most capable tools (Claude Code, Cursor) send the most context to the cloud. The most private tools (Tabnine local, Aider with Ollama) require more setup and run with smaller models."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The meta-skill matters more than the tools.** The tools in this table will change. Copilot will add features. New tools will launch. Prices will shift. What won't change is the underlying skill: knowing how to evaluate a new AI coding tool. When the next one drops, you now know the questions to ask — model quality, context window size, multi-file editing capability, privacy model, IDE integration, pricing tier structure. You can assess any tool in 30 minutes."
+    },
+    {
+      "type": "text",
+      "content": "## What to Watch Going Forward\n\nThe AI coding tool space is moving faster than almost any other software category. Here are the signals worth tracking:\n\n**Model quality** — The underlying model matters more than the wrapper. When a tool upgrades to a better base model, its suggestions improve overnight. Check what model each tool is using, not just the tool itself.\n\n**Context window size** — How much of your codebase can the tool \"see\" at once? Larger context windows mean better cross-file understanding. This number has grown dramatically in two years and will keep growing.\n\n**Multi-file editing** — Can the tool edit three files at once based on one instruction? This is the line between \"autocomplete\" and \"coding agent.\" Tools crossing this line are getting much more powerful.\n\n**IDE integration depth** — Is AI embedded in the editor, or bolted on? Cursor and Windsurf are building toward AI-first editors. VS Code is adding AI features to an existing foundation. Both approaches have advantages.\n\n**Pricing stability** — Several tools in this list have changed pricing structures in the last 12 months. Free tiers that exist today may change. Keep an eye on the business models, especially for tools you rely on.\n\n**Consolidation** — There are currently more AI coding tools than the market will sustainably support. Expect acquisitions, pivots, and shutdowns over the next 2–3 years. The underlying workflows you've learned survive any individual tool."
+    },
+    {
+      "type": "text",
+      "content": "## The Honest Prediction\n\nIn 2–3 years, the AI coding tool landscape will likely look different:\n\n- Fewer standalone tools — the major IDE players (VS Code, JetBrains) will have absorbed most of the functionality that Copilot and Cody currently provide as extensions\n- Cursor-style AI-native editors will either win a meaningful market share or be absorbed by larger players\n- Local models will be capable enough to handle most routine completions without cloud calls — making privacy-first tools more competitive\n- The distinction between \"AI coding assistant\" and \"coding agent\" will blur further\n\nWhat stays constant: the ability to direct AI to write, refactor, debug, and understand code. That skill compounds. The student who finishes this course and uses these tools daily for a year will be dramatically more capable than one who doesn't — regardless of which specific tools are still standing."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Build Your Personal AI Coding Reference Card",
+      "content": "**Goal:** Write a personal reference card in `notes/ai-tools-guide.md` that answers the real scenarios you'll face. This is the document you'll actually consult when you're starting a new project or onboarding somewhere new.\n\n**Open VS Code and create the file:**\n```\nnotes/ai-tools-guide.md\n```\n\n**Fill in each section with your honest answer based on everything you've tried:**\n\n```markdown\n# My AI Coding Tool Guide\n\n## For everyday coding — quick completions while I write\nTool: ___\nWhy I chose it: ___\nBackup if it's unavailable: ___\n\n## For a big refactor across multiple files\nTool: ___\nWhy: ___\n\n## For understanding a large codebase I'm joining\nTool: ___\nWhy: ___\n\n## For an environment where code can't leave the machine\nTool: ___\nWhy: ___\n\n## For free with maximum model quality\nTool: ___\nWhy: ___\n\n## My daily setup right now\nPrimary: ___\nFor chat/planning: ___\nFor agentic tasks: ___\n\n## Tools I want to revisit in 6 months\n-\n-\n```\n\n**Do this properly.** Write real answers, not placeholders. This is the synthesis of four parts of the course.\n\nWhen you're done, commit the file to git:\n```bash\ngit add notes/ai-tools-guide.md\ngit commit -m \"Add personal AI coding tool reference card\"\n```\n\n**Accomplishment check:** You have a committed, personal reference document that reflects your actual experience with these tools — not a generic list, but *your* judgment. This is more valuable than any comparison article you'll find online."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Part 9 complete.** You've covered the full AI coding tool landscape — from GitHub Copilot to Aider to Cody to Tabnine — and you have a clear mental model for when each one is the right call. The tools will keep changing. Your ability to evaluate, install, and get productive with a new one in under an hour will not. That's the durable skill."
+    }
+  ],
+  "nextLesson": "10-1",
+  "prevLesson": "9-3"
+}

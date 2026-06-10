@@ -1,0 +1,48 @@
+{
+  "id": "8-11",
+  "title": "Gmail MCP — Real Inbox Cleanup Session",
+  "part": 8,
+  "estimatedMinutes": 30,
+  "tags": ["mcp", "gmail", "email", "claude-code", "productivity"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson your inbox will have fewer emails than when you started, you'll have active filters preventing future clutter, and you'll have a repeatable process for AI-assisted email triage that you'll use long after this course ends."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The Accomplishment Standard:** This is not a demo. By the time you finish the workshop, your inbox should have fewer emails, at least two filters that prevent future clutter, and a label system you'll actually use. The goal is a real, lasting change to your inbox — not a proof of concept."
+    },
+    {
+      "type": "text",
+      "content": "## What the Gmail MCP Can Do\n\nThe Gmail MCP server exposes these capabilities:\n\n- **`search_threads`** — Search your inbox with Gmail's full query syntax\n- **`get_thread`** — Read the complete content of an email thread\n- **`label_thread`** / **`unlabel_thread`** — Apply or remove labels\n- **`label_message`** / **`unlabel_message`** — Label individual messages within a thread\n- **`create_label`** — Create new Gmail labels\n- **`list_labels`** — List all your existing labels\n- **`create_draft`** — Draft a reply (does not send automatically)\n- **`list_drafts`** — See existing drafts\n\nNotice what it does NOT do: it cannot send emails or delete emails directly. Every destructive or outgoing action requires your confirmation. You remain in control."
+    },
+    {
+      "type": "text",
+      "content": "## Setup — OAuth Authentication\n\nThe Gmail MCP uses OAuth to connect to your Google account securely. Your email password is never stored anywhere — OAuth issues a limited-access token.\n\nThe exact setup steps depend on which Gmail MCP server package you're using. The most common is the one included in the Claude Code MCP ecosystem. Check your current MCP configuration (`/mcp` in Claude Code) — if `gmail` or `claude_ai_Gmail` already appears, it's already configured and you can skip to the workshop.\n\nIf you need to add it, the Gmail MCP should be listed in your current MCP setup from the course prerequisites. If it's not present, ask Claude Code: `\"How do I add the Gmail MCP to my configuration?\"` — it will give you the current setup steps."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Security note:** The Gmail MCP gets read access to your email and can create labels and drafts. It uses OAuth, which means you grant access through Google's own authorization flow — not by giving your password to anyone. You can revoke this access at any time at myaccount.google.com/permissions."
+    },
+    {
+      "type": "text",
+      "content": "## Gmail Search Syntax\n\nThe Gmail MCP supports Gmail's full search syntax. These are the most useful patterns:\n\n- `from:sender@example.com` — emails from a specific sender\n- `is:unread` — unread emails\n- `label:inbox` — emails currently in inbox\n- `newer_than:7d` — emails from the last 7 days\n- `older_than:6m` — emails older than 6 months\n- `has:noreply` — emails with no-reply addresses (bulk senders)\n- `subject:invoice` — emails with 'invoice' in the subject\n- `unsubscribe` — emails containing an unsubscribe link (newsletters)\n- Combine with spaces: `is:unread newer_than:7d from:newsletter@example.com`\n\nPassing these directly to Claude is fine — it knows how to construct them."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Real Inbox Cleanup Session",
+      "content": "This workshop is structured in six phases. Complete all six for the full benefit.\n\n**Pre-check:** Type `/mcp` in Claude Code — confirm your Gmail MCP server is listed and connected. If it's not connected, authenticate it now using your Google account.\n\n---\n\n**Phase 1 — Audit (understand what you have)**\n\nStart with a clear picture of your inbox:\n```\nAsk: \"Using the Gmail MCP, tell me:\n1. How many unread emails I have total\n2. The top 10 senders by volume in my inbox\n3. Any unread emails older than 6 months\n4. Any emails that contain an unsubscribe link that I've never replied to\"\n```\nRead the report. This is the map of your inbox problem.\n\n---\n\n**Phase 2 — Mass cleanup (delete the obvious junk)**\n```\nAsk: \"Search for emails from senders that look like bulk mailers,\nnewsletters, or marketing lists. List them grouped by sender\nwith the count of emails from each. Do not delete anything yet\n— just show me the list.\"\n```\nReview the list. For each sender you're ready to remove, confirm:\n```\nAsk: \"Show me how many emails are from [sender@example.com],\nthen archive all of them.\"\n```\nWatch your unread count drop.\n\n---\n\n**Phase 3 — Label and organize (what should stay)**\n```\nAsk: \"Create these Gmail labels if they don't exist:\n- 'Receipts' (for order confirmations and invoices)\n- 'Action Required' (for emails I need to respond to)\n- 'Reference' (for emails to keep but not act on)\n- 'AI Course' (for learning and technology emails)\"\n```\nThen:\n```\nAsk: \"Search for emails that look like receipts or order\nconfirmations from the last 3 months. Apply the 'Receipts'\nlabel to all of them.\"\n```\n```\nAsk: \"Search for emails where someone appears to be waiting\nfor a response from me. Apply the 'Action Required' label\nand list each one.\"\n```\n\n---\n\n**Phase 4 — Handle 'Action Required' emails**\n\nFor each email Claude labeled 'Action Required':\n```\nAsk: \"Read the thread from [sender] with subject [subject].\nDraft a reply that [what you want to say].\"\n```\nReview each draft. Edit as needed. Send directly from Gmail.\n\n---\n\n**Phase 5 — Unsubscribe from newsletters**\n```\nAsk: \"Find email subscriptions — emails with unsubscribe links\n— from senders I've never replied to. List the top 10 by volume\nalong with when the most recent one arrived.\"\n```\nFor each newsletter you no longer want:\n```\nAsk: \"Find the unsubscribe link in the most recent email from\n[sender] and show it to me.\"\n```\nClick the link yourself to unsubscribe directly.\n\n---\n\n**Phase 6 — Verify and document**\n```\nAsk: \"Give me a summary of what we accomplished today:\n- How many emails were archived?\n- How many labels were created?\n- How many 'Action Required' emails were found?\n- What does my inbox look like now?\"\n```\nSave the summary to `notes/inbox-cleanup-session.md` — it's a template for your next triage session.\n\n---\n\n**Accomplishment check:** If your unread count dropped and you have new labels and at least two Action Required emails identified, you've completed this workshop. If your inbox is still overwhelming, run the phases again — this process scales to any inbox size."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-11.** Your inbox is cleaner and you have a repeatable process. Lesson 8-12 extends this to Google Drive and Calendar."
+    }
+  ],
+  "nextLesson": "8-12",
+  "prevLesson": "8-10"
+}

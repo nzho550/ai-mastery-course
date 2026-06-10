@@ -1,0 +1,56 @@
+{
+  "id": "8-1",
+  "title": "What is MCP and Why It's a Big Deal",
+  "part": 8,
+  "estimatedMinutes": 20,
+  "tags": ["mcp", "claude-code", "integrations"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to explain what MCP is, why it matters, and what kinds of tools it unlocks — in plain English, to anyone.\n\nNo code yet. Just the mental model."
+    },
+    {
+      "type": "text",
+      "content": "## Before MCP: Claude in a Box\n\nBefore MCP, Claude only knew what was inside the conversation window. You had to paste in every piece of context manually — file contents, search results, calendar data, database records.\n\nClaude was powerful, but isolated. Like a brilliant consultant locked in a room with no phone, no laptop, and no window to the outside world.\n\nWith MCP, that changes completely. Claude can now:\n- Read and write files on your computer\n- Query your email inbox\n- Search GitHub repositories\n- Run queries against a database\n- Control a real web browser\n- Check your calendar\n\nThe information flows to Claude automatically, on demand, without you copying and pasting anything."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The one-sentence version:** MCP is the standard plug that lets Claude connect to any external tool — the same way USB lets a computer connect to any device."
+    },
+    {
+      "type": "text",
+      "content": "## The USB Analogy\n\nBefore USB existed, every peripheral — mouse, keyboard, printer, camera — needed its own special port. Hardware manufacturers had to build a different connector for every device and every computer.\n\nUSB changed that. One standard port. Any device. Plug in, it works.\n\nMCP does the same thing for AI and tools.\n\n**Before MCP:**\n- Every tool needed its own custom integration with every AI model\n- OpenAI built its own plugins system, Google built its own, Anthropic built its own\n- Developers had to write different code for every combination\n\n**With MCP:**\n- One standard protocol that any AI client and any tool can implement\n- Build one MCP server for your database → it works with Claude, Cursor, Zed, and any other MCP-compatible client\n- Build one MCP client (like Claude Code) → it connects to any MCP server anyone builds\n\nThis is why it's a big deal. It's not a feature — it's a standard."
+    },
+    {
+      "type": "text",
+      "content": "## Why the Open Standard Matters\n\nMCP is open. Anyone can read the specification. Anyone can build an MCP server. Anyone can build an MCP client.\n\nThis means:\n- A developer in Germany can build an MCP server for their company's internal tool, and it just works with Claude Code\n- A startup can ship an MCP server alongside their product and get AI integration for free\n- A hobbyist can build an MCP server for their home automation system\n\nAt the time of writing, hundreds of MCP servers already exist for tools like:\n- GitHub, GitLab, Jira, Linear (development)\n- Gmail, Slack, Discord, Notion (communication and productivity)\n- PostgreSQL, MySQL, SQLite, Redis (databases)\n- Playwright, Puppeteer (browser automation)\n- Google Drive, Dropbox, OneDrive (file storage)\n- Spotify, Google Maps, weather services (consumer services)\n\nAnd the list grows every week. Because the protocol is open, the ecosystem compounds."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**MCP was created by Anthropic** and released as an open standard in late 2024. It has since been adopted by other AI clients including Cursor, Zed, and others. The official specification lives at modelcontextprotocol.io."
+    },
+    {
+      "type": "text",
+      "content": "## The Three Things MCP Servers Can Expose\n\nEvery MCP server exposes one or more of three things:\n\n**Tools** — Actions Claude can take. Examples: send an email, create a GitHub issue, run a SQL query, click a button in a browser. Tools have inputs and outputs.\n\n**Resources** — Data Claude can read. Examples: a file, a database record, a calendar event. Resources are like read-only windows into external data.\n\n**Prompts** — Pre-written prompt templates that users can invoke. These are less common but let MCP servers package up useful interactions.\n\nMost MCP servers you'll use expose tools. When you ask Claude to 'list my GitHub issues,' Claude is calling the `list_issues` tool on the GitHub MCP server."
+    },
+    {
+      "type": "text",
+      "content": "## What This Part of the Course Covers\n\nPart 8 is a hands-on tour through the most useful MCP servers available today:\n\n- **8-2:** How MCP architecture works under the hood\n- **8-3:** Installing your very first MCP server\n- **8-4 to 8-13:** Ten specific MCP servers, each with a real workshop task\n- **8-14:** How to find and evaluate community MCP servers\n- **8-15:** How to build your own MCP server from scratch\n\nBy the end of Part 8, Claude will have access to your files, your GitHub, your email, your calendar, your browser, and a database. And you'll know how to add more."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Your MCP Wishlist",
+      "content": "Before we install anything, spend 5 minutes thinking about what you'd actually want Claude to have access to.\n\nOpen a text file (or a piece of paper) and answer:\n\n1. **Which 3 tools do you use every single day** where AI assistance would save you the most time? (email? calendar? a project tracker? a codebase? a spreadsheet?)\n\n2. **What's the most repetitive task you do** that follows a clear pattern — the kind of thing where you think 'this could probably be automated'?\n\n3. **What data does Claude currently lack access to** that would make it dramatically more useful to you?\n\nWrite at least 3 specific tools or data sources you want connected. These answers will guide which MCP servers you prioritize in the lessons ahead.\n\nSave this to `notes/mcp-wishlist.md` in your project."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-1.** You now understand what MCP is, why the open standard matters, and what tools it can connect. Lesson 8-2 digs into how the architecture actually works."
+    }
+  ],
+  "nextLesson": "8-2",
+  "prevLesson": "7-12"
+}

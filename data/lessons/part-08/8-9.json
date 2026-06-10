@@ -1,0 +1,61 @@
+{
+  "id": "8-9",
+  "title": "Filesystem MCP — AI Navigates Your Files",
+  "part": 8,
+  "estimatedMinutes": 25,
+  "tags": ["mcp", "filesystem", "claude-code", "file-management"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou installed the filesystem MCP in lesson 8-3. This lesson goes deeper: the full set of operations it supports, how to configure multiple directories, and how the security model protects you."
+    },
+    {
+      "type": "text",
+      "content": "## The Filesystem MCP's Full Capabilities\n\nThe filesystem MCP exposes these operations to Claude:\n\n- **`read_file`** — Read the complete contents of a file\n- **`read_multiple_files`** — Read several files in one call\n- **`write_file`** — Create or overwrite a file\n- **`edit_file`** — Make targeted changes within a file\n- **`create_directory`** — Create a new folder\n- **`list_directory`** — List files and folders in a path\n- **`directory_tree`** — Show the full folder structure recursively\n- **`move_file`** — Move or rename a file\n- **`search_files`** — Search for files by name pattern\n- **`get_file_info`** — Get metadata: size, creation date, modified date\n\nThese operations let Claude navigate, read, and modify files in your allowed directories without you copying or pasting anything."
+    },
+    {
+      "type": "text",
+      "content": "## The Security Model: Sandboxing\n\nThe most important thing to understand about the filesystem MCP is what it cannot do.\n\nThe server only has access to directories you explicitly list in the configuration. Claude cannot:\n- Read files outside those directories\n- Access parent folders of your allowed directories\n- Access the Windows system files (`C:\\Windows\\`)\n- Access other users' files\n- Access anything you didn't explicitly permit\n\nThis is by design. The MCP server literally refuses requests for paths outside its configured scope.\n\nThink of it as a permission fence: you draw the boundary, and Claude operates inside it."
+    },
+    {
+      "type": "text",
+      "content": "## Configuring Multiple Allowed Directories\n\nYou can give Claude access to multiple directories by adding multiple path arguments. Update your `settings.json`:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@modelcontextprotocol/server-filesystem\",\n        \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\",\n        \"C:\\\\Users\\\\YourName\\\\Documents\\\\notes\",\n        \"C:\\\\Users\\\\YourName\\\\Desktop\"\n      ]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Start narrow, expand as needed.** Begin with just your active project folder. Add more directories only when you have a specific reason to. The more directories you allow, the more powerful Claude's reach — which is useful, but also means more care is needed when Claude proposes changes."
+    },
+    {
+      "type": "text",
+      "content": "## Using the Filesystem MCP Effectively\n\nThe filesystem MCP is most useful for tasks that would otherwise require you to manually gather context:\n\n**Project analysis:**\n`\"Read every file in exercises/ and give me a summary of what each one does.\"`\n\n**Search and find:**\n`\"Search for all .md files across the whole project and list their paths.\"`\n`\"Find any file that contains the word 'TODO'.\"`\n\n**Batch operations:**\n`\"Read all .html files and tell me which ones are missing a <meta charset> tag.\"`\n\n**Create structured outputs:**\n`\"Read every file and create a notes/project-map.md that documents what each file is and what it does.\"`\n\n**Navigation and exploration:**\n`\"Show me the full folder structure of this project as a tree.\"`"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Writing files is permanent.** The filesystem MCP can write and edit files, not just read them. When Claude proposes creating or modifying a file, review the change before confirming. There is no undo at the filesystem level (though git history can recover changes to tracked files)."
+    },
+    {
+      "type": "text",
+      "content": "## When to Use the Filesystem vs. Claude Code's Native File Access\n\nClaude Code already has some native file access in the directory where you launched it. So why use the filesystem MCP?\n\n- **Access directories outside your current folder** — the MCP can reach any configured path, regardless of where you launched Claude Code\n- **More reliable for large-scale file operations** — reading many files systematically\n- **Explicit tool calls** — the MCP's operations appear as distinct tool calls in the conversation, making it easier to see exactly what Claude is accessing\n\nFor files in your current working directory during a normal coding session, Claude Code's native access is fine. For navigating multiple directories, large file trees, or cross-project analysis, the filesystem MCP is better."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Full Project Analysis With the Filesystem MCP",
+      "content": "**Setup:**\nIf not already done, update your `settings.json` to include your Documents folder in the filesystem MCP's allowed paths (shown above). Restart `claude`.\n\n**Task 1 — Full project inventory:**\nAsk: `\"Use the filesystem MCP to show me the complete folder structure of my ai-course-projects folder as a tree. Then read each file and give me a one-sentence description of what it does.\"`\n\nSave the output to `notes/project-inventory.md`.\n\n**Task 2 — Find all Markdown files:**\nAsk: `\"Search my Documents folder for all .md files and list their paths. Then tell me what each one is about based on its content.\"`\n\n**Task 3 — Cross-file analysis:**\nAsk: `\"Read all .html files in exercises/ and check each one for these common problems:\n- Missing meta charset tag\n- Missing viewport meta tag\n- Images without alt attributes\n- Links without meaningful text (e.g., 'click here')\nReport what you find for each file.\"`\n\n**Task 4 — Create a summary document:**\nAsk: `\"Based on everything you've read in this project, create notes/project-summary.md with:\n- A table of contents of all project files\n- A brief description of each one\n- A 'status' field for each: complete, in-progress, or empty\"`\n\nOpen `notes/project-summary.md` in VS Code — it should be a useful reference document you'll actually keep."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-9.** You now understand the filesystem MCP's full capabilities and security model. Lesson 8-10 introduces Playwright — the MCP that lets Claude control a real web browser."
+    }
+  ],
+  "nextLesson": "8-10",
+  "prevLesson": "8-8"
+}

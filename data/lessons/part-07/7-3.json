@@ -1,0 +1,53 @@
+{
+  "id": "7-3",
+  "title": "First Session — Reading a Project",
+  "part": 7,
+  "estimatedMinutes": 30,
+  "tags": ["claude-code", "context", "codebase", "first-session"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have run Claude Code inside a real project folder, asked it questions about the codebase, and seen how it reads files automatically — without you pasting anything."
+    },
+    {
+      "type": "text",
+      "content": "## How to Start a Claude Code Session\n\nClaude Code is always started from inside your project folder. The folder you're in when you type `claude` becomes Claude's working directory — the root of what it can see and act on.\n\nThe pattern is always:\n```\ncd your-project-folder\nclaude\n```\n\nOnce Claude Code launches, you'll see a welcome screen showing:\n- The current directory it's working in\n- A summary of any CLAUDE.md instructions it found (we'll cover that in lesson 7-6)\n- A prompt where you type your requests\n\nFrom here, you can ask questions, give instructions, or use slash commands — all in plain English."
+    },
+    {
+      "type": "code",
+      "language": "powershell",
+      "content": "# Navigate to your project folder first\ncd Documents\\ai-course-projects\n\n# Launch Claude Code\nclaude"
+    },
+    {
+      "type": "text",
+      "content": "## What Happens When Claude Reads Your Project\n\nWhen you ask Claude Code a question about your project, it doesn't just guess — it reads the actual files. Here's what happens under the hood:\n\n1. Claude identifies which files are relevant to your question\n2. It reads those files into its context window\n3. It uses that content to give you an accurate, specific answer\n\nFor small projects (a few dozen files), Claude can often read the whole thing in one go. For larger projects, it selectively reads the most relevant files based on your question — and you can guide it by explicitly mentioning files.\n\n**The context window limit:** Claude can hold a certain number of tokens (chunks of text) in memory at once. Very large projects with thousands of files won't all fit. In those cases, be specific: instead of asking \"what does this project do?\", ask \"what does `src/api/auth.js` do?\" — Claude will read exactly what you pointed at."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Add files to context explicitly:** In the Claude Code prompt, type `#` followed by a filename to add it to context directly. Example: `# CLAUDE.md` tells Claude to read that file before answering your next question. Use this when Claude seems to be working from incomplete information."
+    },
+    {
+      "type": "text",
+      "content": "## Useful First Questions\n\nWhen you open Claude Code in an unfamiliar project (or revisit one after a break), these questions quickly orient both you and Claude:\n\n- **\"What files are in this project and what does each one do?\"** — Claude lists the files and summarizes their purpose.\n- **\"What does this project do?\"** — A higher-level summary of the whole codebase.\n- **\"Summarize `filename.js` for me\"** — Deep-dive on a specific file.\n- **\"What's the entry point of this project?\"** — Where does execution start?\n- **\"Are there any obvious issues or TODOs in this codebase?\"** — A quick health check.\n\nThese aren't just useful for beginners. Senior engineers use this exact pattern to orient themselves in unfamiliar repos."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Slash commands in Claude Code:**\n- `/help` — list all available commands\n- `/exit` — quit Claude Code\n- `/clear` — clear the conversation context (start fresh)\n- `/mcp` — list connected MCP servers\n- `/model` — check or change the current model\n\nType a `/` in the prompt to see a list of all available commands."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Explore Your Project",
+      "content": "Open Claude Code in your `ai-course-projects` folder and run these tasks in order.\n\n**Step 1 — Launch:**\nIn VS Code's integrated terminal (`Ctrl+\\``) or any PowerShell window:\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**Step 2 — Get the lay of the land:**\nType this in the Claude Code prompt:\n```\nWhat files are in this project and what does each one do?\n```\nRead Claude's response. It should list your files and describe them accurately.\n\n**Step 3 — Ask about a specific file:**\n```\nRead hello.html and tell me what it does\n```\nNotice that you did NOT paste the file contents — Claude read it directly from disk.\n\n**Step 4 — Ask for a suggestion:**\n```\nWhat could I add to hello.html to make it look better? Give me 3 specific suggestions.\n```\nThis is the \"consult\" mode — asking for ideas without asking Claude to make changes yet.\n\n**Step 5 — Try the # context hint:**\nType: `# README.md` and press Enter. Then ask:\n```\nBased on the README, what is this project's purpose?\n```\nIf there's no README yet, Claude will tell you — that's also useful information.\n\n**Step 6 — Exit cleanly:**\n```\n/exit\n```\n\n**What to notice:** Claude knew the contents of your files without you pasting them. It answered questions specifically about *your* project, not a generic example. That specificity is the entire value of a coding agent vs. a chat window."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-3.** You've run your first real Claude Code session, asked questions about a codebase, and seen how automatic file reading works. Next: asking Claude to write a file from scratch."
+    }
+  ],
+  "nextLesson": "7-4",
+  "prevLesson": "7-2"
+}

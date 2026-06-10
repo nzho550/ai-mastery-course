@@ -1,0 +1,70 @@
+{
+  "id": "8-3",
+  "title": "Installing Your First MCP Server",
+  "part": 8,
+  "estimatedMinutes": 30,
+  "tags": ["mcp", "filesystem", "claude-code", "setup"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have installed the filesystem MCP server, added it to your Claude Code configuration, and verified that Claude can read files from a directory on your computer."
+    },
+    {
+      "type": "text",
+      "content": "## Why Start With the Filesystem MCP?\n\nThere are hundreds of MCP servers to choose from. We're starting with the filesystem server because:\n\n- **No accounts required** — no API keys, no OAuth, no sign-ups\n- **Immediately useful** — Claude can read your actual project files\n- **Safe to experiment with** — you control exactly which folders it can access\n- **The installation pattern is identical** to every other npm-based MCP server\n\nOnce you've done this once, you know how to install any MCP server that uses npx."
+    },
+    {
+      "type": "text",
+      "content": "## Step 1 — Open Your Global Settings File\n\nMCP servers configured in your global settings file are available in every Claude Code session, regardless of which project folder you're in. That's where we want the filesystem server.\n\nThe global settings file is at:\n`C:\\Users\\YourName\\.claude\\settings.json`\n\nReplace `YourName` with your actual Windows username (the name you see in `C:\\Users\\` in File Explorer).\n\nIf the file doesn't exist yet, you'll create it. If it already has content (from earlier lessons), you'll add to it."
+    },
+    {
+      "type": "text",
+      "content": "## Step 2 — Add the Filesystem Server Configuration\n\nOpen `settings.json` in VS Code and add the `mcpServers` block. Replace `YourName` in the path with your actual Windows username:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@modelcontextprotocol/server-filesystem\",\n        \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"\n      ]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Windows path escaping:** In JSON, backslashes must be doubled. `C:\\Users\\YourName` becomes `C:\\\\Users\\\\YourName` inside a JSON string. This is standard JSON — not MCP-specific."
+    },
+    {
+      "type": "text",
+      "content": "## What That Configuration Does\n\nBreaking down the entry:\n\n- `\"command\": \"npx\"` — use npx to run the package without installing it permanently\n- `\"-y\"` — automatically accept any npx prompts (so it doesn't hang waiting for your input)\n- `\"@modelcontextprotocol/server-filesystem\"` — the official filesystem MCP server package\n- `\"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"` — the **allowed directory**. Claude can only access files inside this folder. It cannot read anything outside it.\n\nYou can add multiple allowed directories by adding more path arguments to the `args` array."
+    },
+    {
+      "type": "text",
+      "content": "## Step 3 — Restart Claude Code\n\nMCP servers are only loaded when Claude Code starts. After saving `settings.json`, you must exit and relaunch:\n\n1. If Claude Code is running, type `/exit`\n2. Relaunch with `claude`\n3. Type `/mcp` — you should now see `filesystem` listed with a green status indicator"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Troubleshooting — server not appearing?**\n- Double-check the path in `settings.json` (wrong path is the most common mistake)\n- Confirm the JSON is valid — a missing comma or bracket breaks the whole file. Paste it into jsonlint.com to check\n- Confirm Node.js is installed: run `node --version` in PowerShell\n- Try running the server manually: `npx -y @modelcontextprotocol/server-filesystem C:\\\\Users\\\\YourName\\\\Documents` — if it prints errors, that tells you exactly what's wrong"
+    },
+    {
+      "type": "text",
+      "content": "## Step 4 — Test It\n\nWith Claude Code running and the filesystem server connected, try these prompts:\n\n- `\"List all files in my ai-course-projects folder\"`\n- `\"Read the contents of exercises/hello.html\"`\n- `\"What files are in the exercises folder?\"`\n\nClaude should respond with real information from your actual files — without you pasting anything."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**What changed?** Before the filesystem MCP, asking Claude about your files would produce a generic response about HTML files in general. Now it reads your actual file and tells you specifically what's in it. This is the fundamental shift MCP creates."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Install, Configure, and Verify the Filesystem MCP",
+      "content": "Complete these steps in order:\n\n**Step 1 — Verify Node.js is installed:**\nOpen PowerShell and run:\n```\nnode --version\nnpm --version\n```\nBoth should print version numbers. If not, install Node.js from nodejs.org (covered in lesson 7.2).\n\n**Step 2 — Edit your global settings:**\nOpen `C:\\Users\\YourName\\.claude\\settings.json` in VS Code.\nAdd the filesystem server entry shown above, replacing `YourName` with your actual username.\nSave the file.\n\n**Step 3 — Relaunch and verify:**\nIn PowerShell:\n```\nclaude\n```\nOnce Claude Code starts:\n```\n/mcp\n```\nConfirm `filesystem` appears in the list.\n\n**Step 4 — Run a real task:**\nAsk: `\"List every file in my ai-course-projects folder, including subfolders, and tell me what each one does based on its name and content.\"`\n\nClaude should produce a complete inventory of your project. If it does, the filesystem MCP is working correctly.\n\nSave the output to `notes/project-inventory.md` — it's a useful reference as your project grows."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-3.** You've installed your first MCP server, configured it, and verified it works. This same pattern — edit settings.json, add an entry, restart Claude — is how every MCP server in this course gets installed. Lesson 8-4 adds context7 for live documentation."
+    }
+  ],
+  "nextLesson": "8-4",
+  "prevLesson": "8-2"
+}

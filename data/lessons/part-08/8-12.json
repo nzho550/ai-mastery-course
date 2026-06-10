@@ -1,0 +1,52 @@
+{
+  "id": "8-12",
+  "title": "Google Drive & Calendar MCP — Real Workspace Organisation",
+  "part": 8,
+  "estimatedMinutes": 30,
+  "tags": ["mcp", "google-drive", "google-calendar", "claude-code", "productivity"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson your calendar will have protected study time blocked out, your Google Drive will have a course folder structure, and you'll have a master notes document you'll use for the rest of the course."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The Accomplishment Standard:** You leave this lesson with real, lasting changes in your actual calendar and Drive — not a demo. Your study schedule will be blocked out for the next 8 weeks. Your Drive will have a folder structure you'll actually use."
+    },
+    {
+      "type": "text",
+      "content": "## What the Google Drive MCP Can Do\n\nThe Google Drive MCP enables Claude to:\n\n- **List files** — Browse your Drive, filter by type or folder\n- **Search files** — Find documents by name, content, or date\n- **Read documents** — Get the text content of Google Docs\n- **Create folders** — Organize your Drive structure\n- **Create documents** — Create new Google Docs with content\n- **Move files** — Reorganize files into folders\n\nIt works on Google Docs, Sheets, Slides, PDFs, and other file types in your Drive."
+    },
+    {
+      "type": "text",
+      "content": "## What the Google Calendar MCP Can Do\n\nThe Google Calendar MCP enables Claude to:\n\n- **List events** — Show your schedule for any date range\n- **Search events** — Find events by title, attendee, or description\n- **Create events** — Add new events to your calendar\n- **Create recurring events** — Block out repeating time slots\n- **Check availability** — Find free time in your schedule\n- **Describe your schedule** — Summarize what's coming up\n\nIt works with your primary Google Calendar and any shared calendars you have access to."
+    },
+    {
+      "type": "text",
+      "content": "## Setup — OAuth Authentication\n\nBoth Drive and Calendar use Google OAuth, the same authentication system as Gmail. Check your MCP status:\n\n1. Launch `claude`, type `/mcp`\n2. Look for entries for Google Drive and Google Calendar (they may appear as `claude_ai_Google_Drive` and `claude_ai_Google_Calendar` depending on your setup)\n3. If they appear as not authenticated, ask Claude Code: `\"Authenticate the Google Drive MCP\"` — it will walk you through the OAuth flow\n\nThe authentication process:\n- Claude generates an authorization URL\n- You open it in your browser\n- You sign in with your Google account and grant the requested permissions\n- Google redirects back with an authorization code\n- Claude completes the OAuth handshake\n\nYou can revoke access at any time at myaccount.google.com/permissions."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Permissions you're granting:** The Drive MCP requests read and write access to your Google Drive. The Calendar MCP requests read and write access to your calendars. Review the exact permission scopes shown during the OAuth flow before approving. You can use the MCP in read-only mode by simply not confirming any write operations Claude proposes."
+    },
+    {
+      "type": "text",
+      "content": "## Calendar Strategy: Protect Your Learning Time\n\nThe biggest obstacle to finishing an online course isn't difficulty — it's scheduling. Things fill in around unprotected time.\n\nThe most effective approach is to:\n1. Find recurring time slots that are genuinely free\n2. Create weekly calendar blocks that say 'AI Course — Study Session'\n3. Treat these blocks as immovable commitments\n\nWith the Calendar MCP, Claude can scan your schedule, find the best slots, and create all the recurring events in one conversation."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Organise Your Calendar and Drive for the Course",
+      "content": "**Pre-check:** Type `/mcp` to confirm Google Drive and Google Calendar MCPs are listed and authenticated. If they show as unauthenticated, authenticate them now.\n\n---\n\n**Calendar — Phase 1: Audit your schedule**\n```\nAsk: \"Show me everything I have scheduled in the next 14 days.\nIdentify:\n1. Days that look completely free\n2. Recurring events (meetings, commitments)\n3. Any scheduling conflicts or double-bookings\"\n```\nRead the output. Get a clear picture of where your time currently goes.\n\n**Calendar — Phase 2: Find study slots**\n```\nAsk: \"Based on my schedule, find 3 recurring weekly time slots\nwhere I consistently have nothing scheduled — ideally morning\nor early afternoon, at least 1 hour each. Suggest specific\ndays and times.\"\n```\nReview the suggestions. Pick the slots that feel realistic for you.\n\n**Calendar — Phase 3: Block out study sessions**\n```\nAsk: \"Create a recurring weekly calendar event for each of the\nslots we identified:\nTitle: 'AI Course — Study Session'\nDuration: 1 hour\nRecurrence: weekly for 8 weeks\nDescription: 'Dedicated time for the AI Mastery Course.'\"\n```\nOpen Google Calendar in your browser and confirm the events are there.\n\n**Calendar — Phase 4: Add course milestones**\n```\nAsk: \"Create calendar events for these course milestones,\nspacing them 1 week apart starting from next Monday:\n1. Complete Parts 1-3 (AI Foundations + Prompting)\n2. Complete Parts 4-5 (VS Code mastery)\n3. Complete Parts 6-7 (Claude Code)\n4. Complete Part 8 (MCP servers)\n5. Complete Parts 9-11 (Tools + APIs)\n6. Complete Parts 12-13 (Local AI + Safety)\n7. Complete all Capstone Projects\"\n```\n\n---\n\n**Drive — Phase 1: Audit your current Drive**\n```\nAsk: \"List the 20 most recently modified files in my Google Drive.\nGroup them by likely category: work, personal, learning, other.\"\n```\nGet a sense of what's in your Drive.\n\n**Drive — Phase 2: Create course folder structure**\n```\nAsk: \"Create a folder in my Google Drive called 'AI Mastery Course'\nwith these subfolders:\n- Resources\n- Notes\n- Projects\n- References\"\n```\nConfirm in Google Drive that the folders exist.\n\n**Drive — Phase 3: Find relevant existing documents**\n```\nAsk: \"Search my Drive for any documents related to learning,\ntechnology, programming, or AI. List them so I can decide\nwhich to move into the AI Mastery Course folder.\"\n```\nFor any relevant documents, ask Claude to move them.\n\n**Drive — Phase 4: Create your course master notes document**\n```\nAsk: \"Create a new Google Doc in the 'AI Mastery Course/Notes'\nfolder with this structure:\nTitle: 'AI Course Master Notes'\n\n- Table of Contents with all 14 parts listed\n- Under each part: a section header with space for notes\n- A 'Key Prompts I Use Daily' section at the end\n- A 'My AI Tool Stack' section at the end\"\n```\nOpen the document in Google Drive and verify it's there.\n\n---\n\n**Final verification:**\n- Open Google Calendar — your 8 weeks of study sessions should be blocked out\n- Open Google Drive — your AI Mastery Course folder structure should exist\n- Your master notes document should be in Drive/AI Mastery Course/Notes\n\nSave a summary of what you set up to `notes/workspace-setup.md`."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-12.** Your workspace is now organized for the course. Lesson 8-13 connects Claude to a local database using the SQLite MCP."
+    }
+  ],
+  "nextLesson": "8-13",
+  "prevLesson": "8-11"
+}

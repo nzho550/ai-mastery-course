@@ -1,0 +1,56 @@
+{
+  "id": "8-6",
+  "title": "The Self-Critique Pattern — Actor-Critic Thinking",
+  "part": 8,
+  "estimatedMinutes": 25,
+  "tags": ["mcp", "prompting", "self-critique", "actor-critic", "claude-code"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll know how to use the self-critique pattern to systematically improve any output Claude produces — code, writing, plans, or analyses. This technique works with or without any MCP server."
+    },
+    {
+      "type": "text",
+      "content": "## Why First Drafts Are Not Final Drafts\n\nWhen you ask Claude to write something — a function, a paragraph, a project plan — it produces the most statistically likely good answer based on your prompt. That's not the same as the best possible answer.\n\nFirst drafts have predictable weaknesses:\n- Missing edge cases in code\n- Unexamined assumptions in plans\n- Weak arguments in writing\n- Unclear logic in explanations\n\nThe problem is that Claude doesn't know what it doesn't know. It generates an answer and presents it with whatever confidence the phrasing warrants.\n\nThe self-critique pattern solves this by asking Claude to switch roles: from author to critic."
+    },
+    {
+      "type": "text",
+      "content": "## The Three-Step Pattern\n\nThe pattern has three steps:\n\n**Step 1 — Generate (Actor)**\nAsk Claude to produce the output: write the code, draft the email, plan the project.\n\n**Step 2 — Critique (Critic)**\nAsk Claude to critique its own output. Be specific about what to look for:\n- For code: edge cases, error handling, performance, readability\n- For writing: weak arguments, unclear phrasing, missing evidence, logical gaps\n- For plans: missing steps, wrong ordering, unexamined risks\n\n**Step 3 — Revise (Actor again)**\nAsk Claude to produce an improved version that addresses every issue identified in the critique.\n\nThe output of step 3 is almost always substantially better than the output of step 1. The critique step forces the model to apply a different lens to its own work — catching things that the generation step glossed over."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**This is a prompting pattern, not a magic command.** You don't need any MCP server for this technique. It works in Claude.ai, Claude Code, or any other interface. The pattern is the tool."
+    },
+    {
+      "type": "text",
+      "content": "## The actor-critic-thinking MCP Server\n\nThe `actor-critic-thinking` MCP server (a community tool — search github.com/modelcontextprotocol for the current package name) automates this loop. When available, it:\n\n- Structures the generate-critique-revise cycle as a formal tool call\n- Makes each step explicit in the conversation\n- Allows Claude to iterate through multiple critique cycles before finalizing\n\nIf you have it configured, you can invoke it with: `\"Use actor-critic-thinking to review and rewrite this function.\"`\n\nIf you don't have it — the manual three-step pattern below achieves the same result. The pattern is the substance; the MCP is a convenience wrapper."
+    },
+    {
+      "type": "text",
+      "content": "## The Pattern Applied to Code\n\nHere is what a complete self-critique session looks like:\n\n**Prompt 1 (Generate):**\n`\"Write a JavaScript function that takes a list of product objects and returns the top 3 most expensive ones.\"`\n\n**Prompt 2 (Critique):**\n`\"Now list what's weak about that function. Look specifically for: missing error handling, assumptions about the data shape, edge cases it doesn't handle, and anything that could cause a bug with real-world input.\"`\n\n**Prompt 3 (Revise):**\n`\"Rewrite the function addressing every issue you identified. Show me what changed and why.\"`\n\nThe typical critique in step 2 catches things like:\n- What if the list is empty?\n- What if price is undefined on some objects?\n- What if price is a string ('$29.99') instead of a number?\n- What if there are fewer than 3 items?\n- What's the expected field name for price — 'price'? 'amount'? 'cost'?\n\nThese are all real bugs that step 1 silently introduced. Step 2 exposes them. Step 3 fixes them."
+    },
+    {
+      "type": "text",
+      "content": "## The Pattern Applied to Writing\n\nThe same three steps work for any writing:\n\n**Generate:** `\"Write a 150-word summary of why MCP matters for AI users.\"`\n\n**Critique:** `\"What's weak about that summary? Look for: vague claims, missing examples, jargon that beginners won't understand, and anything that could be cut without losing meaning.\"`\n\n**Revise:** `\"Rewrite it, fixing each weakness you identified.\"`\n\nThe pattern works for emails, documentation, social media posts, cover letters, proposals — anything where 'better' matters more than 'fast'."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**How many critique rounds?** One round catches most issues. Two rounds catches nearly all of them. Beyond two, you get diminishing returns. For most tasks, the generate-critique-revise cycle done once is enough to produce a substantially better output."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Apply the Self-Critique Pattern",
+      "content": "Run the full three-step self-critique pattern on at least two of these tasks:\n\n**Task A — Code critique:**\nIn Claude Code:\n1. Ask: `\"Write a JavaScript function that validates a user's email and password. Password must be at least 8 characters, contain a number, and contain at least one capital letter.\"`\n2. Ask: `\"Critique that function: missing error handling, edge cases it doesn't cover, security assumptions, and anything else that could fail with real input.\"`\n3. Ask: `\"Rewrite it, addressing every issue from the critique. Comment the changes.\"`\n\nCompare step-1 vs step-3. List 3 specific improvements the critique surfaced.\n\n**Task B — Writing critique:**\n1. Ask: `\"Write a 100-word explanation of why the command line is useful for beginners learning to code.\"`\n2. Ask: `\"Critique that explanation: what's vague, what's jargon, what's missing, what could be cut?\"`\n3. Ask: `\"Rewrite it based on the critique.\"`\n\n**Task C — If actor-critic-thinking MCP is configured:**\nAsk: `\"Use actor-critic-thinking to write and improve a function that takes an array of numbers and returns statistics: min, max, mean, and median.\"` Compare the structured MCP output to the manual three-step approach.\n\nSave your best before/after pair to `notes/self-critique-examples.md`. This is a pattern you'll use for the rest of the course."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-6.** The generate-critique-revise pattern is now in your toolkit. It's one of the highest-leverage prompting habits in this course — use it whenever quality matters. Lesson 8-7 introduces task-master-ai for AI-assisted project management."
+    }
+  ],
+  "nextLesson": "8-7",
+  "prevLesson": "8-5"
+}

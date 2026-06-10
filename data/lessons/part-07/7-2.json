@@ -1,0 +1,53 @@
+{
+  "id": "7-2",
+  "title": "Installing Claude Code",
+  "part": 7,
+  "estimatedMinutes": 25,
+  "tags": ["claude-code", "install", "terminal", "node"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson, `claude --version` will return a version number and `claude` will launch Claude Code's interface in your terminal. You'll also understand *why* Node.js is a prerequisite — so that the requirement makes sense instead of feeling like an arbitrary hoop."
+    },
+    {
+      "type": "text",
+      "content": "## What is Node.js? (And Why Do You Need It?)\n\nNode.js is JavaScript running outside a browser. Normally JavaScript only runs inside Chrome, Firefox, or similar — it's the language that makes web pages interactive. Node.js takes JavaScript off the web and lets it run directly on your computer, like Python or any other language.\n\nNode.js also comes with **npm** — the Node Package Manager. Think of npm as the \"app store for JavaScript command-line tools.\" When a developer builds a tool like Claude Code and publishes it for everyone to use, they publish it to npm. When you run `npm install -g @anthropic-ai/claude-code`, npm downloads and installs it.\n\nYou don't need to write any Node.js code. You just need it installed so Claude Code has a runtime to live in — the same way you'd install Java to run a Java application, without ever learning Java.\n\nIf you've already installed Node.js in a previous lesson (for example, when setting up an MCP server), skip Step 1 below and start at Step 2."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Windows note:** Some global npm installs require elevated permissions. If `npm install -g` returns an `EACCES` or permission error, try opening PowerShell as Administrator: press `Win`, search for \"PowerShell\", right-click → **Run as administrator**, then run the install command again."
+    },
+    {
+      "type": "text",
+      "content": "## The Three-Step Install\n\n**Step 1 — Install Node.js**\n\nNode.js is a required prerequisite. If you already have it, skip ahead.\n\n1. Go to **nodejs.org** in your browser\n2. Click the **LTS** (Long Term Support) download button — this is the stable version\n3. Run the installer, keeping all defaults\n4. When it finishes, open PowerShell (`Win + X` → Windows PowerShell or Terminal)\n5. Type: `node --version` — you should see something like `v22.x.x`\n6. Type: `npm --version` — you should see a version number (npm installs alongside Node)\n\n**Step 2 — Install Claude Code**\n\nWith Node.js in place, installing Claude Code is one command:\n\nIn PowerShell, run:\n```\nnpm install -g @anthropic-ai/claude-code\n```\n\nThe `-g` flag means \"install globally\" — so `claude` becomes available as a command anywhere on your system, not just in one folder. The install takes 1–2 minutes.\n\n**Step 3 — Verify the install**\n\nType:\n```\nclaude --version\n```\n\nYou should see a version number. If you see `command not found`, close PowerShell and reopen it — the PATH sometimes needs a fresh shell to update."
+    },
+    {
+      "type": "code",
+      "language": "powershell",
+      "content": "# Step 1: Verify Node.js\nnode --version\nnpm --version\n\n# Step 2: Install Claude Code\nnpm install -g @anthropic-ai/claude-code\n\n# Step 3: Verify installation\nclaude --version"
+    },
+    {
+      "type": "text",
+      "content": "## Authentication\n\nThe first time you launch Claude Code, it needs to connect your installation to an Anthropic account. This is a one-time step.\n\n1. In PowerShell, type: `claude`\n2. Claude Code detects you're not authenticated and opens a browser window\n3. Sign in with your Anthropic account (the same account you use for Claude.ai)\n4. The browser redirects back and your terminal shows a success message\n5. You're now in the Claude Code REPL — a prompt where you can type requests\n\nType `/help` to see the available commands, then type `/exit` to quit.\n\nIf you don't have an Anthropic account, go to **console.anthropic.com** and create one. You'll need it for API access throughout Parts 7–13 of this course."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**How billing works:** Claude Code uses your Anthropic API credits. If you authenticated via Claude.ai (consumer), you may be redirected to set up an API account at console.anthropic.com. Anthropic offers free credits for new API accounts. Check the current pricing at anthropic.com/pricing — costs for typical learning use are very low."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Full Install Walkthrough",
+      "content": "Work through every step and don't move on until each one produces the expected output.\n\n**Step 1 — Node.js check or install:**\n```\nnode --version\n```\nExpected: `v20.x.x` or higher. If you see an error, install Node.js from nodejs.org first.\n\n**Step 2 — Install Claude Code:**\n```\nnpm install -g @anthropic-ai/claude-code\n```\nWait for it to finish. You'll see a lot of output ending with something like `added 847 packages`.\n\n**Step 3 — Verify:**\n```\nclaude --version\n```\nExpected: a version number like `1.x.x`.\n\n**Step 4 — Authenticate:**\n```\nclaude\n```\nFollow the browser prompt to log in. Once authenticated, you'll see Claude Code's welcome screen.\n\n**Step 5 — Explore:**\nInside the Claude Code prompt, type:\n```\n/help\n```\nRead through the available commands. Then type:\n```\n/exit\n```\n\n**You did it if:** `claude --version` returns a version number and `claude` launches the interface without an authentication error."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-2.** Claude Code is installed and authenticated. In the next lesson you'll open it inside a real project for the first time."
+    }
+  ],
+  "nextLesson": "7-3",
+  "prevLesson": "7-1"
+}

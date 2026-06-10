@@ -1,0 +1,60 @@
+{
+  "id": "9-1",
+  "title": "Aider — Terminal-Based AI Coding",
+  "part": 9,
+  "estimatedMinutes": 25,
+  "tags": ["aider", "ai-coding", "terminal", "git"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have Aider installed and running, understand why it exists alongside tools like Claude Code, and see its defining feature in action: every AI edit becomes a git commit automatically."
+    },
+    {
+      "type": "text",
+      "content": "## What is Aider?\n\nAider is an open-source, terminal-based AI coding assistant. Like Claude Code, you run it in your terminal and give it instructions in plain English. Unlike Claude Code, it is opinionated about one thing above all else: **git**.\n\nEvery single change Aider makes to your code is automatically committed to your git history with a meaningful commit message. You always have a complete, reversible record of what the AI did and why.\n\nAider was created by Paul Gauthier and is free and open source. It works with most major AI models — Claude, GPT-4, Gemini, and local models via Ollama. In this lesson we'll use it with Claude."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Prerequisites:** Python must be installed on your machine. Check by running `python --version` in PowerShell. If you see `Python 3.x.x` you're ready. If not, download Python from python.org and install it with default settings, making sure to check **\"Add Python to PATH\"** during setup."
+    },
+    {
+      "type": "text",
+      "content": "## Installing Aider\n\nInstall Aider using pip, Python's package manager:\n\n```bash\npip install aider-chat\n```\n\nAfter installation, verify it worked:\n\n```bash\naider --version\n```\n\nYou should see a version number like `aider 0.x.x`.\n\nAider needs access to an AI model. Since you already have an Anthropic API key from Part 11 setup, you can set it before launching:\n\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\n```\n\nOr create a `.env` file in your project folder containing:\n\n```plaintext\nANTHROPIC_API_KEY=sk-ant-your-key-here\n```\n\nAider reads `.env` automatically, so you don't have to set the variable every session."
+    },
+    {
+      "type": "text",
+      "content": "## Launching Aider\n\nAider must be run inside a **git repository**. Navigate to your project folder and launch it:\n\n```bash\ncd Documents\\ai-course-projects\naider --model claude-sonnet-4-6\n```\n\nThe `--model` flag tells Aider which AI model to use. `claude-sonnet-4-6` is the current Claude Sonnet model — fast and capable for most coding tasks.\n\nYou'll see a prompt like this:\n\n```plaintext\nAider v0.x.x\nModel: claude-sonnet-4-6\nGit repo: .git\nRepo-map: using 1024 tokens\n> \n```\n\nThat `>` is where you type your instructions."
+    },
+    {
+      "type": "text",
+      "content": "## The /add Command — Putting Files in Context\n\nAider doesn't automatically read every file in your project. You tell it which files to work on using the `/add` command:\n\n```plaintext\n/add exercises/about-me.html\n/add exercises/practice.js\n```\n\nNow Aider knows about those two files and can edit both in a single instruction. This is intentional — it keeps the context focused and the AI's edits precise.\n\nYou can add as many files as needed. List what's loaded with `/ls`."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Why specify files?** Aider builds a \"repo map\" — a summary of every file in your project — but only deeply reads the files you `/add`. This keeps token usage low and responses fast. Add only what's relevant to your current task."
+    },
+    {
+      "type": "text",
+      "content": "## The Git-Native Workflow\n\nHere's what makes Aider different from every other tool in this course.\n\nWhen you ask Aider to make a change and approve it, Aider:\n1. Edits the files\n2. Stages the changes\n3. Commits them with a descriptive message — automatically\n\nYou never need to write a commit message. After a session you can run `git log` and see a clean history of every change the AI made:\n\n```plaintext\ncommit a3f1b2c\nAuthor: Aider <aider@example.com>\nDate:   ...\n\n    Add navigation bar to about-me.html and date formatter to practice.js\n```\n\nThis is powerful when something breaks. You can `git diff`, `git revert`, or `git bisect` your way back through AI edits just like you would with human-written code."
+    },
+    {
+      "type": "text",
+      "content": "## Aider vs Claude Code — When to Use Each\n\nBoth tools are strong. The right choice depends on your workflow:\n\n| | Aider | Claude Code |\n|---|---|---|\n| Interface | Terminal only | Terminal (with VS Code integration) |\n| Git commits | Automatic, every change | Manual — you commit when ready |\n| File selection | You specify with /add | Claude reads the whole project |\n| Model support | Many providers | Claude only |\n| Cost | Free (open source) | Subscription (Claude Pro / API) |\n| Best for | Focused edits, clean git history | Whole-project tasks, agentic work |\n\nMany developers use both: Aider for quick targeted edits with automatic commit history, Claude Code for larger exploratory work.\n\nThe fact that Aider commits everything automatically is either its greatest strength or a reason to be careful — make sure you're in a git repo with a clean state before you start."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Install Aider and Watch It Commit",
+      "content": "**Goal:** Install Aider, run it in your project, ask it to create a Python script, and observe the automatic git commit.\n\n**Step 1 — Install:**\n```bash\npip install aider-chat\naider --version\n```\n\n**Step 2 — Set up API key:**\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\n```\nOr create a `.env` file in your project with the key.\n\n**Step 3 — Navigate to your project and verify it's a git repo:**\n```bash\ncd Documents\\ai-course-projects\ngit status\n```\nYou should see output like `On branch main, nothing to commit`. If the folder isn't a git repo, run `git init` first.\n\n**Step 4 — Launch Aider:**\n```bash\naider --model claude-sonnet-4-6\n```\n\n**Step 5 — Add a target file and give an instruction:**\n```plaintext\n/add exercises/practice.js\nAdd a function called formatDate that takes a JavaScript Date object and returns a nicely formatted string like \"Tuesday, June 10 2025\"\n```\n\nAider will show you the proposed change. Review it, then type `y` to accept.\n\n**Step 6 — Check the git log:**\n```bash\n/exit\ngit log --oneline -5\n```\n\nYou should see a commit Aider created automatically — something like `\"Add formatDate function to practice.js\"`.\n\n**What to observe:** The code changed, and git history updated, without you typing a single git command. That's the Aider workflow.\n\n**Bonus:** Run `git show HEAD` to see the full diff of what Aider committed."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson complete.** You've installed Aider, used it to edit a file, and seen its automatic git commit in action. Aider's niche is clear: it's the best tool when you want a clean, auditable history of every AI edit — with no extra steps."
+    }
+  ],
+  "nextLesson": "9-2",
+  "prevLesson": "8-15"
+}

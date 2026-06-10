@@ -1,0 +1,48 @@
+{
+  "id": "7-4",
+  "title": "Asking Claude to Write a File",
+  "part": 7,
+  "estimatedMinutes": 30,
+  "tags": ["claude-code", "file-creation", "diff", "workflow"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have used Claude Code to create a real file from a natural language description, reviewed the proposed content before accepting it, and seen the file appear on disk."
+    },
+    {
+      "type": "text",
+      "content": "## Natural Language File Creation\n\nOne of Claude Code's most immediately useful capabilities is creating files from a plain English description. You don't need to know the syntax — you describe what you want, and Claude writes it.\n\nExamples of how this looks in practice:\n\n- *\"Create a file called `calculator.py` that takes two numbers and supports add, subtract, multiply, and divide\"*\n- *\"Create `styles/main.css` with a clean, modern dark theme — dark background, white text, a readable sans-serif font\"*\n- *\"Create `utils/date-helpers.js` with three functions: one that formats a date as YYYY-MM-DD, one that calculates days between two dates, and one that checks if a date is in the past\"*\n\nThe more specific your description, the better the output. Mention the filename, the format, what it should contain, and any constraints (no external libraries, add comments, use ES6 syntax, etc.)."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Specificity is a skill:** Vague request: *\"make a webpage.\"* Specific request: *\"Create `exercises/about-me.html` — a single-page about-me site with a header, a bio paragraph with a [Name] placeholder, and a skills list. Use inline CSS for a clean look. No frameworks, no external files.\"* The second request produces a usable result on the first try."
+    },
+    {
+      "type": "text",
+      "content": "## The Review-Then-Accept Workflow\n\nClaude Code never writes a file silently. Before making any change to your filesystem, it shows you exactly what it plans to do and waits for your approval.\n\nFor new files, you'll see the complete proposed content displayed in the terminal. For changes to existing files, you'll see a diff (covered in lesson 7-5).\n\nAt the approval prompt you have three options:\n\n1. **Type `yes` (or press Enter)** — Claude creates the file exactly as shown\n2. **Type `no`** — Claude abandons the change and waits for a new instruction\n3. **Type feedback** — Instead of yes/no, describe what to change: *\"Make the CSS simpler — remove the animations\"*. Claude revises and shows you the updated version before asking again.\n\nThis loop — propose → review → accept/revise — is the core workflow for all of Part 7. Never skip the review step."
+    },
+    {
+      "type": "text",
+      "content": "## Asking for Multiple Files at Once\n\nYou can request several files in a single message. Claude will propose and ask for approval on each one in sequence:\n\n*\"Create three files: `index.html` (a homepage), `about.html` (an about page), and `styles.css` (shared styles for both). Use a consistent blue and white color scheme.\"*\n\nClaude will show you each file before creating it. Review each one before accepting — it's easy to approve the first file carefully and then rush through the others.\n\nFor complex multi-file requests, consider using Plan Mode (lesson 7-10) which shows you the complete plan before any files are written."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Always read before you accept.** Claude is good at generating plausible-looking code, but it can make subtle mistakes — wrong variable names, logic errors, missing edge cases. The review step is not a formality. Read the proposed file the same way you'd read code before merging a pull request."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Generate Your First File",
+      "content": "Create a real file from scratch using Claude Code, review it carefully, and verify it works.\n\n**Step 1 — Launch:**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**Step 2 — Make a specific request:**\nType this in the prompt (feel free to customize the details):\n```\nCreate a new file called exercises/about-me.html.\nIt should be a clean, styled about-me page with:\n- A header with [Your Name] as a placeholder\n- A short bio paragraph mentioning that I'm learning AI tools\n- A list of 3 things I'm currently learning\n- Simple, readable CSS inline in the file (no external stylesheets)\n- No JavaScript, no frameworks\n```\n\n**Step 3 — Review the proposed file:**\nClaude displays the full file content before creating it. Read it top to bottom:\n- Does the HTML structure make sense?\n- Does the CSS look reasonable?\n- Are there any placeholders you'd want to fill in?\n\n**Step 4 — Accept or refine:**\n- If it looks good: type `yes` and press Enter\n- If something's off: type your feedback — for example, *\"Make the font larger and use a blue color scheme instead\"* — Claude will revise\n\n**Step 5 — Open the file in VS Code:**\nAfter accepting, switch to VS Code. The file should appear in the Explorer panel under `exercises/`.\n\n**Step 6 — View it in the browser:**\nRight-click `about-me.html` in VS Code → **Open with Live Server**. You should see your page in the browser.\n\n**Step 7 — Ask for a second file:**\nBack in Claude Code, try:\n```\nNow create exercises/contact.html — a simple contact page\nwith a form containing Name, Email, and Message fields.\nMatch the style of about-me.html.\n```\nReview this one carefully too before accepting.\n\n**What to notice:** You described what you wanted in plain English and got working HTML. The review step gave you control over the output before anything was written to disk."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-4.** You've generated real files from natural language descriptions and practiced the review-then-accept workflow. Next lesson: making changes to existing files and reading diffs."
+    }
+  ],
+  "nextLesson": "7-5",
+  "prevLesson": "7-3"
+}

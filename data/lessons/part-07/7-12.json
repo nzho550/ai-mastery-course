@@ -1,0 +1,62 @@
+{
+  "id": "7-12",
+  "title": "Claude Code Settings Deep Dive",
+  "part": 7,
+  "estimatedMinutes": 30,
+  "tags": ["claude-code", "settings-json", "configuration", "model", "api-key"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand the full `settings.json` structure, know the difference between project-level and user-level settings, and have a working configuration that sets your model preference and permission rules."
+    },
+    {
+      "type": "text",
+      "content": "## Two Settings Files\n\nClaude Code has two settings files, analogous to the CLAUDE.md hierarchy:\n\n**Project-level: `.claude/settings.json`**\nLives inside your project's `.claude/` folder. Applies only to this project. You've been building this file throughout Part 7 — it already has your `hooks` and `permissions` sections.\n\n**User-level: `~/.claude/settings.json`**\nLives in your home directory's `.claude/` folder (`C:\\Users\\YourName\\.claude\\settings.json` on Windows). Applies to all Claude Code sessions across all projects. Good for model preferences, API configuration, and defaults you want everywhere.\n\nWhen both files exist, they are merged. Project-level settings take precedence over user-level settings for any key that appears in both."
+    },
+    {
+      "type": "text",
+      "content": "## Key Settings to Know\n\n**`model`**\nSpecifies which Claude model to use. If not set, Claude Code uses its default (usually the latest Sonnet). Set this explicitly if you want to use a specific model for cost, speed, or capability reasons.\n\n**`allowedTools` / `deniedTools`**\nAlternate permission syntax (older — prefer `permissions.allow` and `permissions.deny` from lesson 7-10, but both work).\n\n**`hooks`**\nThe hooks configuration from lesson 7-8.\n\n**`permissions`**\nThe allow/deny configuration from lesson 7-10.\n\n**`env`**\nEnvironment variables to inject for Claude Code sessions. Use this to set `ANTHROPIC_API_KEY` or any other env var your hooks or tools need.\n\n**`mcpServers`**\nMCP server configurations (covered fully in Part 8). Defines which external tools Claude can connect to."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Never put your API key directly in `settings.json` if that file is inside a git repo.** The file will be committed and the key will be in your version history forever (even if you delete it later). Use an environment variable instead: set `ANTHROPIC_API_KEY` in PowerShell before launching Claude, or use a `.env` file that is listed in `.gitignore`."
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"model\": \"claude-sonnet-4-6\",\n\n  \"permissions\": {\n    \"allow\": [\n      \"Read(**)\",\n      \"Write(exercises/**)\",\n      \"Write(notes/**)\",\n      \"Write(.claude/**)\",\n      \"Bash(echo *)\",\n      \"Bash(ls *)\",\n      \"Bash(node *)\",\n      \"Bash(npm run *)\"\n    ],\n    \"deny\": [\n      \"Bash(rm *)\",\n      \"Bash(del *)\",\n      \"Bash(rmdir *)\",\n      \"Write(.env)\",\n      \"Write(**/*.env)\"\n    ]\n  },\n\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude edited a file\"\n          }\n        ]\n      }\n    ]\n  },\n\n  \"env\": {\n    \"NODE_ENV\": \"development\"\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "## Setting the Model\n\nThe `model` key accepts a Claude model ID. The current production models as of mid-2025:\n\n- `claude-opus-4-5` — most capable, higher cost, best for complex reasoning tasks\n- `claude-sonnet-4-6` — balanced capability and speed, recommended for most development work\n- `claude-haiku-4-5` — fastest and most economical, great for simple tasks and high-volume operations\n\nFor day-to-day development work, Sonnet is usually the best balance. For complex architecture decisions or difficult debugging, try Opus. For repetitive tasks (generating boilerplate, summarizing many files), Haiku keeps costs low.\n\nYou can override the model mid-session with the `/model` command in the Claude Code prompt."
+    },
+    {
+      "type": "text",
+      "content": "## API Key Configuration\n\nClaude Code needs an Anthropic API key to operate. There are three ways to provide it, in order of preference:\n\n**1. Environment variable (recommended for development)**\nSet it in PowerShell before launching Claude:\n```\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\nclaude\n```\nThis keeps the key out of any files and disappears when you close PowerShell.\n\n**2. In `settings.json` `env` block (only for non-git projects)**\nIf your settings.json is not tracked by git, you can put it in the `env` block:\n```json\n{\n  \"env\": {\n    \"ANTHROPIC_API_KEY\": \"sk-ant-your-key-here\"\n  }\n}\n```\n\n**3. First-launch authentication**\nClaude Code stores a token after you authenticate via the browser on first launch. This is the token from lesson 7-2 — it persists across sessions and is the easiest option for personal development."
+    },
+    {
+      "type": "code",
+      "language": "powershell",
+      "content": "# Set API key for the current PowerShell session (disappears on close)\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\n\n# Verify it's set\necho $env:ANTHROPIC_API_KEY\n\n# Then launch Claude Code\nclaude"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Where to get your API key:** Log in to console.anthropic.com → click your profile → API Keys → Create Key. Copy the key immediately — it's only shown once. Store it in a password manager, not in a text file."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Configure Your Full Settings",
+      "content": "Build a complete `settings.json` that brings together everything from Part 7, then test it.\n\n**Step 1 — Open `.claude/settings.json` in VS Code:**\nThis file should already exist with your hooks and permissions from lessons 7-8 and 7-10.\n\n**Step 2 — Add the model preference:**\nAdd a `model` field at the top level of your JSON:\n```json\n{\n  \"model\": \"claude-sonnet-4-6\",\n  \"permissions\": { ... },\n  \"hooks\": { ... }\n}\n```\n\n**Step 3 — Add an env variable:**\nAdd a non-sensitive environment variable to verify the `env` block works:\n```json\n{\n  \"model\": \"claude-sonnet-4-6\",\n  \"env\": {\n    \"CLAUDE_PROJECT\": \"ai-course-projects\"\n  },\n  \"permissions\": { ... },\n  \"hooks\": { ... }\n}\n```\n\n**Step 4 — Validate the JSON:**\nJSON must be syntactically correct or Claude Code will fail to load the settings. In VS Code:\n- Look for red underlines in the file — those are JSON syntax errors\n- Check that every `{` has a matching `}`, every `[` has a `]`, and every property except the last one in an object has a trailing comma\n\n**Step 5 — Test the model setting:**\nLaunch Claude Code:\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\nType `/model` to see which model Claude Code is using. It should reflect the model you set in settings.json.\n\n**Step 6 — Create a user-level settings.json:**\nFor settings that should apply across all your projects, create `~/.claude/settings.json`:\n```json\n{\n  \"model\": \"claude-sonnet-4-6\",\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(rm -rf *)\",\n      \"Bash(del /s *)\"\n    ]\n  }\n}\n```\nThis gives you a global safety net — even if a project's `settings.json` doesn't deny destructive commands, your user-level settings do.\n\n**What you've built in Part 7:** A complete Claude Code setup with CLAUDE.md (project + user), custom slash commands, hooks, permissions, and model configuration. This is the foundation every professional Claude Code user works from."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-12 and all of Part 7.** You now have a production-ready Claude Code setup: CLAUDE.md for context, custom commands for your workflows, hooks for automation, permissions for safety, and settings configured for your preferred model. Part 8 extends Claude Code further with MCP servers — connecting it to Gmail, GitHub, your browser, and more."
+    }
+  ],
+  "nextLesson": "8-1",
+  "prevLesson": "7-11"
+}

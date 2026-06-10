@@ -1,0 +1,70 @@
+{
+  "id": "8-13",
+  "title": "Database MCP — SQLite",
+  "part": 8,
+  "estimatedMinutes": 30,
+  "tags": ["mcp", "sqlite", "database", "claude-code", "sql"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have a working SQLite database connected to Claude Code via MCP — and you'll have used natural language to create tables, insert data, run queries, and explore a schema without writing a single line of SQL yourself."
+    },
+    {
+      "type": "text",
+      "content": "## What SQLite Is\n\nSQLite is a lightweight database that lives in a single file. Unlike PostgreSQL or MySQL, there's no server to set up, no service to run, no accounts to configure. The entire database is one `.db` file on your hard drive.\n\nThis makes it perfect for:\n- Personal projects and scripts\n- Learning how databases work\n- Storing structured data that JSON or CSV doesn't handle well\n- Prototyping database designs before scaling to a real server\n\nSQLite is used in iOS apps, Android apps, browsers, and embedded systems. It's one of the most widely deployed database engines in the world."
+    },
+    {
+      "type": "text",
+      "content": "## What the SQLite MCP Does\n\nThe SQLite MCP server exposes these tools to Claude:\n\n- **`read_query`** — Run a SELECT query and return results\n- **`write_query`** — Run INSERT, UPDATE, DELETE, or DDL statements\n- **`create_table`** — Create a new table with a schema\n- **`list_tables`** — Show all tables in the database\n- **`describe_table`** — Show the schema of a specific table\n- **`append_insight`** — Log an observation about the data (for analysis workflows)\n\nThis means you can ask Claude 'which books have I read in the last 3 months?' and it writes the SQL, runs it, and returns the answer — no SQL knowledge required."
+    },
+    {
+      "type": "text",
+      "content": "## Installation\n\nInstall the SQLite MCP server and add it to your configuration:"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "npm install -g @modelcontextprotocol/server-sqlite"
+    },
+    {
+      "type": "text",
+      "content": "Add it to your global `settings.json`, replacing `YourName` with your actual Windows username:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"sqlite\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@modelcontextprotocol/server-sqlite\",\n        \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\\\\exercises\\\\practice.db\"\n      ]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The database file path:** The last argument is the path to the `.db` file. If the file doesn't exist yet, the SQLite MCP will create it when Claude first tries to write to it. You don't need to create the file manually."
+    },
+    {
+      "type": "text",
+      "content": "## How Claude Interacts With a Database\n\nHere's what the experience looks like when you ask Claude a data question:\n\n1. You ask: `\"How many books have I read this year?\"`\n2. Claude calls `list_tables` to see what tables exist\n3. Claude calls `describe_table` on the relevant table to see its schema\n4. Claude writes the SQL: `SELECT COUNT(*) FROM books WHERE date_read >= '2026-01-01'`\n5. Claude calls `read_query` with that SQL\n6. The MCP server runs the query against your database file\n7. Results come back: `[{\"count\": 7}]`\n8. Claude reports: 'You've read 7 books so far this year.'\n\nYou never wrote SQL. You never looked at the schema. You just asked in plain English."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**SQL is still worth learning.** The SQLite MCP reduces the friction of working with data, but understanding basic SQL makes you a much better collaborator — you can catch when Claude writes an inefficient or incorrect query. Lesson 11 covers database concepts in more depth."
+    },
+    {
+      "type": "text",
+      "content": "## Ideas for What to Store in SQLite\n\nSome personal databases that are genuinely useful:\n\n- **Book log** — title, author, date read, rating, notes\n- **Movie tracker** — title, year, date watched, genre, rating\n- **Habit tracker** — habit name, date, completed (1/0)\n- **Expense log** — date, amount, category, description\n- **Link library** — URL, title, category, date saved, notes\n- **Recipe collection** — name, ingredients, instructions, cuisine, prep time\n\nOnce the data is in SQLite and Claude has access, you can ask questions like 'what's my average book rating by genre?' or 'how many habits did I complete last week?' — and get real answers instantly."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build a Personal Book Log Database",
+      "content": "**Setup:**\n1. Run `npm install -g @modelcontextprotocol/server-sqlite` in PowerShell\n2. Add the sqlite entry to your `settings.json` (shown above)\n3. Relaunch `claude`, type `/mcp` — confirm `sqlite` is listed\n\n**Task 1 — Create the database:**\nAsk: `\"Using the SQLite MCP, create a table called 'books' with these columns:\n- id (integer, primary key, auto-increment)\n- title (text, required)\n- author (text, required)\n- genre (text)\n- date_read (text, format: YYYY-MM-DD)\n- rating (integer, 1–5)\n- notes (text)\"\n`\nConfirm it was created by asking: `\"List all tables in the database and describe the books table schema.\"`\n\n**Task 2 — Add real data:**\nAsk: `\"Add these 5 books to the database:\n1. 'Deep Work' by Cal Newport, Non-Fiction, read 2026-01-15, rating 5\n2. 'The Pragmatic Programmer' by Dave Thomas, Technology, read 2026-02-10, rating 4\n3. 'Atomic Habits' by James Clear, Self-Help, read 2026-03-01, rating 5\n4. 'The Phoenix Project' by Gene Kim, Technology, read 2026-04-20, rating 4\n5. 'Thinking Fast and Slow' by Daniel Kahneman, Psychology, read 2026-05-05, rating 3\"\n`\n\n**Task 3 — Query with natural language:**\nAsk these questions one at a time and let Claude write and run the SQL:\n- `\"Show me all my books sorted by rating, highest first.\"`\n- `\"How many books have I read in each genre?\"`\n- `\"What's my average rating across all books?\"`\n- `\"Which books did I rate 5 stars?\"`\n\n**Task 4 — Add your own books:**\nAsk: `\"Add 3 books I've actually read recently.\"` and give Claude real titles and authors from books you've actually read. Add ratings you'd genuinely give them.\n\n**Task 5 — Explore the schema:**\nAsk: `\"What's the SQL schema for the books table? Show me the CREATE TABLE statement.\"`\n\nNote what it looks like — this is what Claude generated and executed on your behalf.\n\nThe database file `exercises/practice.db` now exists on your hard drive. You can open it with any SQLite browser (like DB Browser for SQLite, available free at sqlitebrowser.org) to see it visually."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-13.** You can now use natural language to interact with a real database. Lesson 8-14 covers how to find MCP servers beyond the ones covered in this course."
+    }
+  ],
+  "nextLesson": "8-14",
+  "prevLesson": "8-12"
+}

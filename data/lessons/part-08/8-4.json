@@ -1,0 +1,61 @@
+{
+  "id": "8-4",
+  "title": "context7 — Live Documentation for Any Library",
+  "part": 8,
+  "estimatedMinutes": 30,
+  "tags": ["mcp", "context7", "documentation", "claude-code"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have context7 configured and working — and you'll understand why having live, current documentation inside Claude Code changes how you write code."
+    },
+    {
+      "type": "text",
+      "content": "## The Documentation Problem\n\nEvery AI model has a training cutoff date. Everything Claude knows about React, Python, TypeScript, or any other library comes from training data collected before that date.\n\nThis creates a real problem:\n\n- React 19 shipped with new features. Claude might not know about them.\n- A library you're using released a major version that broke its API. Claude might still give you the old API.\n- An npm package you're installing has a known vulnerability in the version Claude knows about.\n\nYou might not even know when Claude is giving you stale information. It will give you an answer confidently either way.\n\n**context7 solves this** by fetching current, live documentation from the official source and injecting it into the conversation. Claude then answers using the real, current docs instead of its training data."
+    },
+    {
+      "type": "text",
+      "content": "## How context7 Works\n\ncontext7 is an MCP server that:\n\n1. Accepts a library name (e.g. `react`, `tailwindcss`, `prisma`)\n2. Fetches the current official documentation for that library\n3. Returns relevant sections to Claude as context\n4. Claude uses that context to answer your question\n\nThe result: Claude answers about the library's actual current API, not a version from a year ago."
+    },
+    {
+      "type": "text",
+      "content": "## Installation\n\nAdd context7 to your global `settings.json` (`C:\\Users\\YourName\\.claude\\settings.json`):"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"context7\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@upstash/context7-mcp\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**No API key required.** context7 does not need an account or API key for basic usage. Just add the config and restart Claude Code."
+    },
+    {
+      "type": "text",
+      "content": "## Using context7 in Practice\n\nOnce configured, you can invoke context7 in any Claude Code conversation by explicitly asking for it:\n\n- `\"Using context7, get me the current documentation for React hooks\"`\n- `\"Using context7, show me how to configure Tailwind v4\"`\n- `\"Using context7, what's the current API for Prisma's findMany method?\"`\n\nYou can also use it inline while writing code:\n\n- `\"Add a modal dialog to this page. Use context7 to check the current HTML dialog element API before you write the code.\"`\n\nClaude will fetch the docs, read them, and write code that matches the current API — not whatever version it was trained on."
+    },
+    {
+      "type": "text",
+      "content": "## When to Use context7\n\nUse context7 whenever you're working with:\n\n- **Any npm package** — especially ones that release frequently (React, Next.js, Vite, Prisma)\n- **Framework configuration** — Tailwind, Webpack, ESLint configs that change between major versions\n- **APIs with versioned endpoints** — when the version matters and you need the current behavior\n- **Libraries you haven't used recently** — their API may have changed since you last used them\n\nYou don't need it for everything. For stable, rarely-changing things like basic HTML or CSS fundamentals, Claude's training data is perfectly accurate. Use context7 selectively where currency matters."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Build the habit:** Whenever you start working with a new library or package, ask Claude to pull its docs via context7 at the start of the conversation. One prompt upfront prevents hours of debugging stale API mistakes."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Query Live Docs While Coding",
+      "content": "**Setup:**\n1. Add the context7 config block to your `settings.json` (shown above)\n2. Save the file, relaunch `claude`\n3. Type `/mcp` — confirm `context7` appears\n\n**Task 1 — Fetch live docs:**\nAsk: `\"Using context7, get me the current documentation for the HTML5 dialog element — specifically how to open and close it with JavaScript.\"`\n\nRead what Claude returns. Notice it's citing the actual current spec, not a vague recollection.\n\n**Task 2 — Apply the docs to your project:**\nAsk: `\"Using those docs, add a modal dialog to exercises/about-me.html. The dialog should open when a 'Contact Me' button is clicked and close when the user clicks 'Close'.\"`\n\nOpen the file with Live Server — the dialog should work correctly.\n\n**Task 3 — Compare with and without context7:**\nStart a new Claude Code session (type `/clear` to clear the conversation).\nAsk the same dialog question WITHOUT mentioning context7.\nCompare the two answers:\n- Did Claude use the same API?\n- Was one more confident or more current-sounding?\n- Did either have outdated patterns?\n\nNote your observations in `notes/context7-experiment.md`.\n\n**Bonus — query a library you actually use:**\nIf you're learning or using any specific library (Python, Vue, Svelte, Express, anything), ask context7 for its current docs on one topic you're curious about."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-4.** context7 is now part of your toolchain. Lesson 8-5 adds sequential-thinking — a server that makes Claude reason step-by-step through complex problems."
+    }
+  ],
+  "nextLesson": "8-5",
+  "prevLesson": "8-3"
+}

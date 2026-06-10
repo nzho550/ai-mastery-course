@@ -1,0 +1,53 @@
+{
+  "id": "7-10",
+  "title": "Plan Mode & Permissions",
+  "part": 7,
+  "estimatedMinutes": 25,
+  "tags": ["claude-code", "plan-mode", "permissions", "settings-json", "safety"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll know how to use Plan Mode to see Claude's intended actions before it executes them, and how to configure permissions in `settings.json` to control exactly what Claude is allowed to do in your project."
+    },
+    {
+      "type": "text",
+      "content": "## Plan Mode: Propose Before You Act\n\nIn normal mode, when you give Claude a task, it starts executing immediately — reading files, writing changes, running commands. For simple, low-risk tasks, that's fine. For larger or riskier changes, you may want to see the *plan* before anything happens.\n\n**Plan Mode** (sometimes called \"think first\" mode) changes this behavior: Claude analyses your request and produces a detailed plan of what it intends to do — all the files it will touch, all the steps it will take — and then *pauses and waits*. Nothing changes on disk until you approve the plan.\n\nTo activate Plan Mode: press **Shift+Tab** at the Claude Code prompt. The prompt indicator changes to show you're in plan mode. Ask your question. Claude responds with a plan. You review and either approve (Claude executes) or reject (Claude tries a different approach).\n\nYou can also ask for a plan in prose without switching modes: *\"Before making any changes, tell me exactly what you plan to do to refactor this file.\"* Claude will describe its intentions first."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**When to use Plan Mode:**\n- Any request that touches more than 2–3 files\n- Refactoring tasks (reorganizing code, renaming things)\n- Changes to an unfamiliar codebase\n- Any time your gut says \"this could go wrong in interesting ways\"\n- Before running database migrations, build scripts, or deployment steps"
+    },
+    {
+      "type": "text",
+      "content": "## Permissions: Allow and Deny\n\nClaude Code can read files, write files, run bash commands, and use MCP tools. That's a lot of power. The permissions system lets you define exactly which operations Claude is allowed to perform — and which ones require a prompt, are silently blocked, or require an explicit override.\n\nPermissions are configured in `.claude/settings.json` under the `permissions` key. The `allow` list specifies what Claude can do without asking. The `deny` list specifies what Claude can never do — even if you ask it to.\n\nPermission strings use a `Tool(pattern)` syntax:\n- `Read(**)` — read any file anywhere\n- `Write(exercises/**)` — write files only inside the `exercises/` folder\n- `Bash(echo *)` — run bash commands that start with `echo`\n- `Bash(rm *)` — run `rm` commands (put this in `deny` to prevent accidental deletions)"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"permissions\": {\n    \"allow\": [\n      \"Read(**)\",\n      \"Write(exercises/**)\",\n      \"Write(notes/**)\",\n      \"Bash(echo *)\",\n      \"Bash(ls *)\",\n      \"Bash(node *)\",\n      \"Bash(npm run *)\"\n    ],\n    \"deny\": [\n      \"Bash(rm *)\",\n      \"Bash(del *)\",\n      \"Bash(rmdir *)\",\n      \"Write(.env)\",\n      \"Write(**/*.env)\"\n    ]\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The `--dangerously-skip-permissions` flag:** This flag disables all permission checks and approval prompts. It's designed for automated CI/CD pipelines where a human reviewer is not part of the loop. Do not use it during normal development sessions. If you find yourself tempted to use it because the permission prompts are annoying, the right answer is to update your `allow` list — not to disable safety checks entirely."
+    },
+    {
+      "type": "text",
+      "content": "## The Principle of Least Privilege\n\nThe permissions model follows a security principle called **least privilege**: give Claude exactly the permissions it needs for the current task, and no more.\n\nFor a project where you're only working on HTML/CSS files:\n- Allow reads everywhere (so Claude can understand context)\n- Allow writes only to `exercises/` and `notes/`\n- Deny all destructive bash commands\n- Deny writes to configuration files and secrets\n\nThis protects you from two failure modes:\n1. **Your mistake:** You accidentally ask Claude to delete something important\n2. **Claude's mistake:** Claude misunderstands a task and tries to make a change you didn't intend\n\nThe permission system catches both."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Plan Before You Act",
+      "content": "Practice Plan Mode with a multi-file change, then configure permissions in your settings.json.\n\n**Part 1 — Plan Mode**\n\n**Step 1 — Launch Claude Code:**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**Step 2 — Enter Plan Mode:**\nPress **Shift+Tab** at the prompt. You should see the prompt indicator change to show plan mode is active.\n\n**Step 3 — Request a multi-file change:**\n```\nRefactor the exercises folder: create a shared styles.css file with the CSS\nthat is common across all HTML files. Update each HTML file to link to\nstyles.css instead of having duplicate inline styles.\n```\n\n**Step 4 — Review the plan:**\nClaude will list every file it intends to touch and what it plans to do to each one. Ask yourself:\n- Does this plan match what I asked for?\n- Are there any files listed that I'm surprised to see?\n- Is the order of operations sensible?\n- Any step I want Claude to skip or do differently?\n\n**Step 5 — Approve or modify:**\nIf the plan looks good, approve it and watch Claude execute step by step.\nIf something looks off, type your concern — Claude will revise the plan.\n\n**Part 2 — Configure Permissions**\n\n**Step 6 — Open settings.json:**\nIn VS Code, open `.claude/settings.json`. You should already have a `hooks` section from lesson 7-8. Add a `permissions` section:\n\n```json\n{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude just edited a file\"\n          }\n        ]\n      }\n    ]\n  },\n  \"permissions\": {\n    \"allow\": [\n      \"Read(**)\",\n      \"Write(exercises/**)\",\n      \"Write(notes/**)\",\n      \"Bash(echo *)\",\n      \"Bash(ls *)\"\n    ],\n    \"deny\": [\n      \"Bash(rm *)\",\n      \"Bash(del *)\"\n    ]\n  }\n}\n```\n\n**Step 7 — Test the deny rule:**\nRelaunch Claude Code (`/exit` then `claude`) and ask:\n```\nDelete the file exercises/test-card.html\n```\nClaude should refuse because `Bash(rm *)` and `Bash(del *)` are in the deny list.\n\n**Step 8 — Test the allow rule:**\nNow ask:\n```\nCreate a new file in exercises/ called sandbox.html with a minimal HTML boilerplate\n```\nThis should work because `Write(exercises/**)` is in the allow list."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-10.** You can use Plan Mode for complex changes and configure fine-grained permissions. These two features together give you full control over what Claude does and when. Next: sub-agents and parallel work."
+    }
+  ],
+  "nextLesson": "7-11",
+  "prevLesson": "7-9"
+}

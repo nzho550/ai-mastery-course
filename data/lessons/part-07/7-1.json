@@ -1,0 +1,48 @@
+{
+  "id": "7-1",
+  "title": "What is Claude Code?",
+  "part": 7,
+  "estimatedMinutes": 15,
+  "tags": ["claude-code", "beginner", "cli"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to explain what Claude Code is, how it differs from chat AI tools like Claude.ai, and what kinds of tasks it's built to handle.\n\nYou've spent Part 6 learning AI tools that work *inside* VS Code. Claude Code is different — it's a terminal-based coding agent that reads your entire project and acts on it."
+    },
+    {
+      "type": "text",
+      "content": "## Claude Code Is an Agent, Not a Chatbot\n\nMost AI tools you've used so far are conversational: you type a message, the AI replies, and nothing changes on your computer unless you copy and paste the response yourself.\n\nClaude Code is different. It is a **coding agent** — a program that runs in your terminal, reads the files in your project, and can write changes directly to them. It doesn't just suggest code; it *does things* on your filesystem.\n\nThe loop looks like this:\n\n1. You type a request in plain English: *\"Add dark mode support to my website\"*\n2. Claude Code reads the relevant files in your project\n3. It proposes changes — you see exactly what it plans to do\n4. You review and accept (or reject, or refine) the changes\n5. The files are updated on disk\n\nThe key difference from GitHub Copilot or Continue.dev: those tools help you write code one line at a time. Claude Code can understand and modify *the whole project* in a single conversation."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Mental model:** Think of Claude Code as a junior developer sitting next to you. It can read all your files, make changes, run commands — but every significant action goes past you for review before it happens."
+    },
+    {
+      "type": "text",
+      "content": "## What Claude Code Is Good At\n\nClaude Code is particularly strong at tasks that require reading multiple files and making coordinated changes across them:\n\n- **Building features:** \"Add a contact form to this page and wire it up to the backend\"\n- **Fixing bugs:** \"This function returns undefined sometimes — find out why and fix it\"\n- **Explaining unfamiliar code:** \"I inherited this codebase — walk me through what `utils.js` does\"\n- **Refactoring:** \"This file is 800 lines — break it into smaller modules\"\n- **Writing tests:** \"Generate unit tests for every function in `helpers.js`\"\n- **Documentation:** \"Write a README for this project based on the actual files\"\n\nThese tasks are painful in a chat window because you have to copy/paste files back and forth. Claude Code eliminates that friction entirely."
+    },
+    {
+      "type": "text",
+      "content": "## What Claude Code Is Not\n\nIt's worth being honest about limits before you start:\n\n- **It makes mistakes.** It may misunderstand your intent, change the wrong file, or introduce a subtle bug. Your job is to review every change carefully — not just accept blindly.\n- **It doesn't know your business context.** It knows code patterns, but not *why* your system works the way it does. You provide that context through conversation.\n- **It's not a magic button.** Large, vague requests produce large, vague results. Specific, scoped requests produce excellent results.\n- **It costs API credits.** Each request uses Claude API capacity. Tight, focused requests are both faster and cheaper than sprawling ones.\n\nApproach Claude Code as a powerful collaborator, not an infallible oracle."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**References:**\n- Claude Code official docs — docs.anthropic.com/en/docs/claude-code\n- Claude Code announcement blog — anthropic.com/news/claude-code\n- Claude Code GitHub — github.com/anthropics/claude-code"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Your Claude Code Wishlist",
+      "content": "Before you install anything, take 5 minutes to think about what you actually want to use this tool for.\n\nIn your notes file (`notes/prompt-experiments.md` or a new file `notes/claude-code-goals.md`), write answers to these three prompts:\n\n1. **Something you want to build:** A project, feature, or file you've been putting off because coding feels hard.\n2. **Something you want to fix:** A piece of code (or a folder of files) that's messy, broken, or confusing.\n3. **Something you want to understand:** Code someone else wrote, a file you inherited, or a pattern you never quite got.\n\nThese three items are your personal curriculum for Part 7. You'll use them as the raw material for the workshops in lessons 7-3 through 7-12.\n\nSave the file before moving on."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-1.** You understand what Claude Code is, how it differs from chat AI and autocomplete tools, and you have three concrete goals for using it. Next: install it."
+    }
+  ],
+  "nextLesson": "7-2",
+  "prevLesson": "6-8"
+}

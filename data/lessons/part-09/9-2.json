@@ -1,0 +1,56 @@
+{
+  "id": "9-2",
+  "title": "Cody by Sourcegraph — Enterprise Codebase AI",
+  "part": 9,
+  "estimatedMinutes": 25,
+  "tags": ["cody", "sourcegraph", "enterprise", "ai-coding", "vscode"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have Cody installed in VS Code, understand what makes it different from GitHub Copilot, and have used it to ask questions about how files in your project relate to each other."
+    },
+    {
+      "type": "text",
+      "content": "## What is Cody?\n\nCody is an AI coding assistant built by Sourcegraph, the company behind enterprise code search. While GitHub Copilot excels at inline autocomplete — finishing the line you're typing — Cody is built around a different question: **\"How does this codebase actually work?\"**\n\nIts defining capability is **code graph understanding**. Cody doesn't just read the file you have open. It understands how files reference each other — which functions call which, how modules import each other, where a class is defined vs where it's used. This is the kind of understanding you need when you join a new project with hundreds of files and need to get oriented fast.\n\nCody is available as a free VS Code extension. There's also an Enterprise tier designed for teams, with support for private code hosts and custom models."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Free tier:** Cody's free plan gives you access to Claude Sonnet and other models for chat and inline completions. The Enterprise tier ($19/user/month at time of writing) adds features like code graph indexing across large private repos, SSO, and admin controls. For this lesson, the free tier is all you need."
+    },
+    {
+      "type": "text",
+      "content": "## Installing Cody in VS Code\n\n1. Open VS Code\n2. Click the **Extensions** icon in the Activity Bar (or press `Ctrl+Shift+X`)\n3. Search for **\"Cody AI\"**\n4. Install the extension by **Sourcegraph** — look for the verified publisher badge\n5. Once installed, a Cody icon appears in the Activity Bar on the left\n\nOn first launch, Cody will ask you to sign in. You can create a free Sourcegraph account at sourcegraph.com — it only takes an email address. You can also sign in with GitHub or Google."
+    },
+    {
+      "type": "text",
+      "content": "## Opening Cody Chat\n\nWith Cody installed and signed in:\n\n- Click the Cody icon in the Activity Bar to open the sidebar\n- Or press `Ctrl+Shift+C` to open Cody chat directly\n\nThe chat interface works like Claude or Copilot Chat. You can ask questions, request code changes, or ask for explanations. The difference is in **what Cody knows** when it answers.\n\nWhen you ask Cody a question about your codebase, it uses the code graph to retrieve relevant context automatically — you don't need to paste code or manually point it to files."
+    },
+    {
+      "type": "text",
+      "content": "## Cody's Inline Completions\n\nCody also provides inline autocomplete suggestions as you type, similar to GitHub Copilot. You'll see greyed-out suggestions appear — press `Tab` to accept, `Escape` to dismiss.\n\nYou can have both Copilot and Cody installed at the same time. They may conflict on completions, so most developers pick one as their primary completion tool and use the other for chat/navigation.\n\n**Quick tip:** If you're getting suggestions from both tools at once and it's confusing, disable inline completions in one. In Cody's settings, you can toggle `cody.autocomplete.enabled` to `false` to use Cody for chat only while keeping Copilot for completions."
+    },
+    {
+      "type": "text",
+      "content": "## Cody vs Copilot — Honest Comparison\n\nBoth tools are good. The question is what you're trying to do.\n\n| | Cody | GitHub Copilot |\n|---|---|---|\n| Inline autocomplete | Good | Excellent |\n| Single-file chat | Good | Good |\n| Cross-file understanding | Excellent | Limited |\n| Large codebase navigation | Excellent | Limited |\n| Explain how two files interact | Yes | Less reliable |\n| Free tier | Yes | Yes (limited) |\n| Enterprise pricing | $19/user/mo | $19/user/mo |\n\n**When Cody wins:** You're onboarding to a large existing codebase. You want to ask \"where is the payment logic handled?\" or \"what does the auth middleware do and which routes use it?\" — questions that span multiple files.\n\n**When Copilot wins:** You're writing new code from scratch. You want fast, accurate inline completions. You're working mostly in a single file at a time.\n\nFor someone working on a solo learning project like `ai-course-projects`, Copilot's completions feel more immediately useful. Cody's advantage grows proportionally with codebase size."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Best practice for large projects:** Use Cody chat to understand the codebase before making changes. Ask \"What does the AuthService do and what depends on it?\" before touching auth code. This prevents the classic mistake of breaking something you didn't know was connected."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Install Cody and Explore a Codebase",
+      "content": "**Goal:** Install Cody, sign in, and use it to understand how files in your project relate to each other.\n\n**Step 1 — Install the extension:**\n1. Open VS Code Extensions (`Ctrl+Shift+X`)\n2. Search `Cody AI`\n3. Install the one by Sourcegraph\n4. Click the Cody icon in the Activity Bar and sign in with a free Sourcegraph account\n\n**Step 2 — Open your project:**\nMake sure `ai-course-projects` is open in VS Code (`File → Open Folder`).\n\n**Step 3 — Ask a codebase question:**\nOpen Cody chat (`Ctrl+Shift+C`) and ask:\n```\nExplain the overall structure of this project. What files exist and what does each one do?\n```\nRead the response. Cody reads your project structure and describes it.\n\n**Step 4 — Ask about file relationships:**\n```\nHow do about-me.html and practice.js relate to each other? Do they share any logic?\n```\nThis is the question Cody is built for. Compare the depth of its answer to what you'd get from a file-by-file reading.\n\n**Step 5 — Test inline chat:**\n1. Open `exercises/practice.js`\n2. Select the `formatDate` function (or any function in the file)\n3. Right-click → **Cody: Explain Selected Code**\n4. Read Cody's explanation in the sidebar\n\n**Step 6 — Reflect:**\nWrite 3 sentences in your notes: in what kind of project would Cody's cross-file understanding make the biggest difference? What is one scenario in your own work where this would save you time?\n\n**What to observe:** Cody answered questions about the whole project without you having to specify which files to look at. That's the difference from Copilot's file-level awareness."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson complete.** You've installed Cody and experienced its codebase-level understanding firsthand. The tool earns its place in the toolbox for large codebases — keep it installed and reach for it next time you need to understand unfamiliar code quickly."
+    }
+  ],
+  "nextLesson": "9-3",
+  "prevLesson": "9-1"
+}

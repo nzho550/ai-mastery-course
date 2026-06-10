@@ -1,0 +1,49 @@
+{
+  "id": "7-6",
+  "title": "CLAUDE.md — Your Project Instruction File",
+  "part": 7,
+  "estimatedMinutes": 25,
+  "tags": ["claude-code", "claude-md", "context", "configuration"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have created a CLAUDE.md file for your project, understand what belongs in it, and have seen Claude automatically apply your instructions in a fresh session — without you having to repeat yourself."
+    },
+    {
+      "type": "text",
+      "content": "## What is CLAUDE.md?\n\nEvery time you start a new Claude Code session, Claude starts with no memory of your previous conversations. Without help, you'd need to re-explain your project, your conventions, and your preferences every single session.\n\nCLAUDE.md solves this. It's a Markdown file in your project root that Claude reads automatically at the start of every session. Think of it as a standing briefing document — the things you'd tell a new developer on their first day on your project.\n\nClaude reads it, loads those instructions into its context, and applies them throughout the session. You never have to say \"don't use TypeScript\" or \"add comments to every function\" more than once."
+    },
+    {
+      "type": "text",
+      "content": "## What to Put in CLAUDE.md\n\nA good CLAUDE.md covers five categories:\n\n**1. Project description**\nWhat the project is, who it's for, what it does. One paragraph is usually enough.\n\n**2. Tech stack**\nLanguages, frameworks, and libraries in use. This stops Claude from suggesting solutions that require tools you're not using.\n\n**3. Conventions**\nNaming patterns, code style, formatting rules. \"Use 2-space indentation\", \"prefer const over let\", \"name CSS classes in kebab-case\".\n\n**4. Commands**\nBuild, test, and lint commands. \"Run tests with `npm test`\", \"lint with `npm run lint`\". Claude will run these automatically when appropriate.\n\n**5. Rules and constraints**\nExplicit do's and don'ts. \"Never use external CDNs\", \"always add a JSDoc comment to new functions\", \"don't modify the `dist/` folder\".\n\nKeep it concise. CLAUDE.md is a briefing, not a novel. A file under 100 lines is usually better than one over 300."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The CLAUDE.md hierarchy:**\nClaude Code loads CLAUDE.md files from multiple locations, with the more specific file taking precedence:\n\n1. `~/.claude/CLAUDE.md` — your user-level instructions (applies to ALL projects)\n2. `CLAUDE.md` in any parent folder between your home directory and the project\n3. `CLAUDE.md` in your project root — project-level instructions\n4. `CLAUDE.md` in subdirectories — applies when Claude is working in that directory\n\nUser-level CLAUDE.md is covered in lesson 7-9 (The Memory System). For now, focus on the project-level file."
+    },
+    {
+      "type": "code",
+      "language": "markdown",
+      "content": "# AI Course Projects\n\n## About This Project\nThis is a learning project for an AI skills course. The student is a beginner\nbuilding their first HTML/CSS/JS projects while learning AI-assisted development.\n\n## Tech Stack\n- HTML5, CSS3, vanilla JavaScript only\n- No frameworks (no React, Vue, Angular)\n- No build tools (no Webpack, Vite, etc.)\n- No package.json / npm dependencies\n\n## Coding Style\n- Use 2-space indentation\n- Add a comment explaining every function\n- Use semantic HTML5 elements (header, main, section, etc.)\n- Name CSS classes in kebab-case (e.g., .hero-section, .nav-link)\n- Prefer const over let; avoid var\n\n## File Structure\n- exercises/  — hands-on lesson exercises (HTML, CSS, JS files)\n- notes/      — personal notes and reflections (Markdown)\n- prompts/    — saved prompt templates (Markdown)\n\n## Rules\n- Never use external CDNs unless explicitly asked\n- Never add dependencies that require npm install\n- Always use inline styles or a linked local CSS file\n- Keep files small and readable — under 200 lines when possible\n- When creating HTML, include a proper <!DOCTYPE html> and meta charset"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Test your CLAUDE.md:** After creating it, start a fresh Claude Code session (`/exit` first, then `claude` again). Ask Claude: *\"Summarize the project you're working in.\"* If it accurately reflects your CLAUDE.md, the file is being read correctly. If Claude sounds generic, check that the file is named exactly `CLAUDE.md` (uppercase) and is in the project root folder."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Write Your First CLAUDE.md",
+      "content": "Create a CLAUDE.md for the `ai-course-projects` folder, then verify Claude reads it in a new session.\n\n**Step 1 — Create the file in VS Code:**\nIn the VS Code Explorer, click on `ai-course-projects` (the root) and create a new file called `CLAUDE.md`. Make sure it's at the root level, not inside a subfolder.\n\n**Step 2 — Write your instructions:**\nUse the example above as a starting point. Customize these sections to match how you actually work:\n- Adjust the tech stack section to match what you've been building\n- Add any conventions you care about (tab vs spaces, etc.)\n- Add at least 3 rules in the Rules section\n\nSave the file.\n\n**Step 3 — Launch Claude Code and verify:**\nIn the terminal:\n```\nclaude\n```\nWatch the welcome screen — Claude Code should mention reading your CLAUDE.md.\n\nNow ask:\n```\nSummarize the project you're working in and tell me your instructions for it.\n```\nClaude should accurately describe what you wrote in CLAUDE.md.\n\n**Step 4 — Test the instructions:**\nAsk Claude to create a small new file:\n```\nCreate exercises/test-card.html — a simple product card component.\n```\nWithout any extra instructions from you, Claude should:\n- Use semantic HTML5\n- Add CSS inline or in a `<style>` tag (not external)\n- Add comments to the code\n- Follow the conventions you defined\n\nIf it doesn't follow your rules, review your CLAUDE.md wording and make it more explicit.\n\n**Step 5 — Exit and relaunch to confirm persistence:**\n```\n/exit\nclaude\n```\nAsk the same summary question again. Claude should still know your project context — it's reading CLAUDE.md fresh each time, not from conversation memory."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-6.** Your project now has a standing briefing document that Claude reads every session. You'll never have to re-explain your conventions again. Next: creating custom slash commands to automate your most common Claude Code requests."
+    }
+  ],
+  "nextLesson": "7-7",
+  "prevLesson": "7-5"
+}

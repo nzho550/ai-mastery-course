@@ -1,0 +1,106 @@
+{
+  "id": "8-15",
+  "title": "Build a Simple Custom MCP Server",
+  "part": 8,
+  "estimatedMinutes": 60,
+  "tags": ["mcp", "python", "custom-server", "claude-code", "build"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have built a working MCP server in Python, configured Claude Code to load it, and successfully called its tools in a real conversation. This is the capstone for Part 8 — moving from user to builder."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Prerequisite — Python 3.10+:** Open PowerShell and type `python --version`. If you see `Python 3.10.x` or higher, you're ready. If not: go to python.org/downloads → click Download Python 3.12 (or latest stable) → run the installer → on the FIRST screen, check **\"Add Python to PATH\"** before clicking Install → complete the install → close and reopen PowerShell → verify with `python --version`. Without checking that box, `python` and `pip` won't work from the terminal."
+    },
+    {
+      "type": "text",
+      "content": "## Why Build Your Own MCP Server?\n\nEvery server you've used in Part 8 was built by someone who decided 'I want Claude to have access to this' and wrote the code. That's all an MCP server is.\n\nOnce you understand the pattern, you can build a server for:\n- Your company's internal APIs\n- A database that doesn't have a public MCP server\n- A personal tool you've built\n- Any data source that matters to your specific workflow\n\nThe pattern is always the same. This lesson teaches it on a simple example. Once you understand the pattern, scaling to complex servers is just a matter of adding more tools."
+    },
+    {
+      "type": "text",
+      "content": "## The Server We're Building\n\nWe'll build a server with one tool: `get_motivation`.\n\nWhen Claude calls this tool, the server returns a random motivational quote from a hardcoded list.\n\nThis is intentionally trivial. No external dependencies, no API keys, no databases. Pure Python that runs instantly. The point isn't the quotes — it's understanding the server structure. Once you see how it works, you'll know how to replace the quotes with any tool you want to build."
+    },
+    {
+      "type": "text",
+      "content": "## Install the MCP Python SDK\n\nOpen PowerShell and run:"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "pip install mcp"
+    },
+    {
+      "type": "text",
+      "content": "## The Complete Server Code\n\nCreate a new file in VS Code: `exercises/my-mcp-server.py`\n\nHere is the complete server. Read through it carefully — every section has a comment explaining what it does:"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "# my-mcp-server.py\n# A minimal MCP server that exposes one tool: get_motivation\n\nimport random\nfrom mcp.server.fastmcp import FastMCP\n\n# Create the MCP server instance.\n# The string argument is the server's display name.\nmcp = FastMCP(\"My Motivation Server\")\n\n# A hardcoded list of motivational quotes.\n# In a real server, this might come from a database or an API.\nQUOTES = [\n    \"The best time to plant a tree was 20 years ago. The second best time is now.\",\n    \"Every expert was once a beginner. Every pro was once an amateur.\",\n    \"Progress, not perfection.\",\n    \"Small steps every day add up to big results.\",\n    \"The only way to do great work is to love what you do.\",\n]\n\n# Define a tool using the @mcp.tool() decorator.\n# The function name becomes the tool name Claude calls.\n# The docstring becomes the tool's description — Claude reads this to\n# understand when and how to use the tool.\n@mcp.tool()\ndef get_motivation() -> str:\n    \"\"\"Returns a random motivational quote to encourage the user.\n    Use this when the user needs a boost or asks for motivation.\"\"\"\n    return random.choice(QUOTES)\n\n# Start the server.\n# stdio transport means Claude Code communicates with this server\n# via standard input/output — the same way all npx-based servers work.\nif __name__ == \"__main__\":\n    mcp.run(transport=\"stdio\")"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**This file is Python, not JavaScript.** The code block above uses Python syntax. The `language: javascript` label is a display formatting choice in the course platform — the actual code you're writing is Python (`.py` file, `import random`, Python function syntax)."
+    },
+    {
+      "type": "text",
+      "content": "## Test the Server Directly\n\nBefore connecting it to Claude Code, verify the server starts without errors:\n\nIn PowerShell:"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "cd C:\\Users\\YourName\\Documents\\ai-course-projects\npython exercises/my-mcp-server.py"
+    },
+    {
+      "type": "text",
+      "content": "The server will start and wait for input. You won't see much — that's correct. It's listening on stdio, waiting for an MCP client to connect.\n\nPress `Ctrl+C` to stop it.\n\nIf you see an error, the most common cause is that `mcp` isn't installed. Run `pip install mcp` and try again."
+    },
+    {
+      "type": "text",
+      "content": "## Connect It to Claude Code\n\nAdd your server to your global `settings.json`. Replace `YourName` with your actual Windows username:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"my-motivation-server\": {\n      \"command\": \"python\",\n      \"args\": [\n        \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\\\\exercises\\\\my-mcp-server.py\"\n      ]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Use absolute paths for Python MCP servers.** Unlike npx servers, Python servers need a full absolute path because the working directory when Claude Code launches the server may differ from your project folder. If you get a 'file not found' error, double-check the path."
+    },
+    {
+      "type": "text",
+      "content": "## Verify and Use Your Server\n\n1. Save `settings.json`\n2. Relaunch `claude`\n3. Type `/mcp` — you should see `my-motivation-server` listed\n4. Ask: `\"Get me some motivation\"`\n\nClaude calls your `get_motivation` tool and returns a quote from your Python server.\n\nYou just created a tool that Claude can use. That's all it takes."
+    },
+    {
+      "type": "text",
+      "content": "## Extending the Pattern: Adding More Tools\n\nTo add more tools to your server, add more `@mcp.tool()` functions. Each function becomes a tool Claude can call.\n\nFor example, to add a tool that returns today's date:"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "from datetime import date\n\n@mcp.tool()\ndef get_todays_date() -> str:\n    \"\"\"Returns today's date in a human-readable format.\n    Use when the user asks what day or date it is.\"\"\"\n    today = date.today()\n    return today.strftime(\"%A, %B %d, %Y\")"
+    },
+    {
+      "type": "text",
+      "content": "Add this function to your `my-mcp-server.py` file, restart Claude Code, and ask: `\"What day is it today?\"`\n\nClaude calls your new tool and tells you the real current date — not a guess from training data.\n\nThis is the fundamental pattern: any capability you can express as a Python function, you can expose to Claude via MCP."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build, Configure, and Extend Your MCP Server",
+      "content": "**Step 1 — Install and create:**\n1. Run `pip install mcp` in PowerShell\n2. In VS Code, create `exercises/my-mcp-server.py` with the complete code shown above\n3. Test it: `python exercises/my-mcp-server.py` — confirm it starts, press Ctrl+C to stop\n\n**Step 2 — Connect to Claude Code:**\n1. Add the `my-motivation-server` entry to your `settings.json`\n2. Relaunch `claude`\n3. Type `/mcp` — confirm `my-motivation-server` is listed\n4. Ask: `\"Get me some motivation\"` — confirm a quote comes back from your server\n\n**Step 3 — Add a date tool:**\nAdd the `get_todays_date` function (shown above) to your server.\nRestart Claude Code (the server reloads when you restart).\nAsk: `\"What day is it today?\"`\nConfirm it returns today's actual date.\n\n**Step 4 — Add your own tool:**\nThis is the creative part. Add one more tool that does something you'd actually find useful. Ideas:\n\n- `get_word_of_the_day()` — returns a word and definition from a hardcoded list\n- `flip_coin()` — returns 'Heads' or 'Tails' randomly\n- `get_pomodoro_reminder()` — returns a reminder message about taking breaks\n- `get_project_checklist()` — returns a checklist of things to do before committing code\n\nWrite the function, add the `@mcp.tool()` decorator, write a clear docstring, restart Claude Code, and test it.\n\n**Step 5 — Reflect:**\nAsk Claude Code: `\"What tools does my-motivation-server expose? Describe each one based on its documentation.\"`\n\nClaude reads your docstrings and describes your tools accurately. This is why docstrings matter — they're the interface Claude uses to understand what each tool does.\n\nSave the final version of your server and document it in `notes/my-mcp-stack.md`.\n\n---\n\n**You just built an MCP server.** Everything in Part 8 was about using other people's servers. Now you've made one. The gap between user and builder is smaller than it looks."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-15 and all of Part 8.** You've installed, configured, and used ten different MCP servers — and you've built your own. Claude Code now has access to your files, your code repositories, your email, your calendar, a database, a web browser, live documentation, and your custom tools. Part 9 covers additional AI coding tools that complement this setup."
+    }
+  ],
+  "nextLesson": "9-1",
+  "prevLesson": "8-14"
+}

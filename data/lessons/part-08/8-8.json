@@ -1,0 +1,65 @@
+{
+  "id": "8-8",
+  "title": "GitHub MCP — Issues, PRs, and Code via Chat",
+  "part": 8,
+  "estimatedMinutes": 30,
+  "tags": ["mcp", "github", "claude-code", "version-control"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have the GitHub MCP configured with a Personal Access Token, and you'll have used Claude Code to interact with a real GitHub repository — listing issues, reading code, and creating a new issue — entirely through conversation."
+    },
+    {
+      "type": "text",
+      "content": "## What the GitHub MCP Enables\n\nWith the GitHub MCP, Claude Code can:\n\n- List and read issues and pull requests\n- Create new issues with full descriptions\n- Search code across one or more repositories\n- Read file contents directly from GitHub\n- Create and manage branches\n- Post comments on issues and PRs\n- Get commit history\n\nThis means your workflow can shift from:\n1. Open browser\n2. Navigate to GitHub\n3. Find the repo\n4. Find the issue\n5. Copy the text\n6. Paste into Claude\n\nTo:\n1. Ask Claude 'what are my open issues?'\n\nThe round-trip through GitHub happens invisibly."
+    },
+    {
+      "type": "text",
+      "content": "## Step 1 — Create a GitHub Repository\n\nIf you don't already have a repo to connect to, create one:\n\n1. Go to github.com and sign in\n2. Click the `+` icon in the top-right → **New repository**\n3. Name it `ai-course-exercises`\n4. Set it to Private (recommended for learning projects)\n5. Check **Add a README file**\n6. Click **Create repository**\n\nYou now have a repo. The GitHub MCP will work with this repo and any others in your account."
+    },
+    {
+      "type": "text",
+      "content": "## Step 2 — Generate a Personal Access Token\n\nThe GitHub MCP needs a token to authenticate on your behalf.\n\n1. In GitHub, click your profile photo → **Settings**\n2. Scroll down the left sidebar → **Developer settings**\n3. Click **Personal access tokens** → **Tokens (classic)**\n4. Click **Generate new token (classic)**\n5. Give it a name: `claude-code-mcp`\n6. Set expiration to 90 days (or however long you want)\n7. Under **Select scopes**, check: `repo` (this gives full repo access)\n8. Click **Generate token**\n9. **Copy the token immediately** — GitHub only shows it once\n\nStore the token somewhere safe (a password manager) before closing the page."
+    },
+    {
+      "type": "text",
+      "content": "## Step 3 — Add the GitHub MCP to Your Configuration\n\nAdd the GitHub server to your global `settings.json`:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"ghp_your-token-here\"\n      }\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Security: Keep your token out of git.** Your `settings.json` at `C:\\Users\\YourName\\.claude\\settings.json` is in your home directory, not inside a git repository — so this location is safe. But if you ever copy this config into a project folder that IS a git repo, add `settings.json` to `.gitignore` immediately. A committed token gives anyone who finds it full access to your GitHub account."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Environment variable alternative:** If you'd prefer not to put the token directly in the file, set it as a Windows environment variable instead:\n```powershell\n[System.Environment]::SetEnvironmentVariable('GITHUB_PERSONAL_ACCESS_TOKEN', 'ghp_your-token', 'User')\n```\nThen in your config, omit the `env` block entirely — the server will find the variable automatically."
+    },
+    {
+      "type": "text",
+      "content": "## Step 4 — Restart and Test\n\n1. Save `settings.json` and relaunch `claude`\n2. Type `/mcp` — confirm `github` appears\n3. Try: `\"List all repositories in my GitHub account\"`\n4. Try: `\"List open issues in my ai-course-exercises repo\"`\n5. Try: `\"What's in the README of my ai-course-exercises repo?\"`"
+    },
+    {
+      "type": "text",
+      "content": "## GitHub MCP Capabilities in Practice\n\nHere are the most useful things to do with the GitHub MCP:\n\n**Issue management:**\n- `\"Create an issue titled 'Add contact form to about-me page' in ai-course-exercises\"`\n- `\"Show me all open issues and summarize what needs attention\"`\n- `\"Which issues have been open more than a week?\"`\n\n**Code search:**\n- `\"Search my repos for any file that contains a TODO comment\"`\n- `\"Find all JavaScript files in ai-course-exercises\"`\n\n**PR review:**\n- `\"List open pull requests in [repo]\"`\n- `\"Summarize what changed in PR #5\"`\n\n**Cross-repo work:**\n- `\"Which of my repos hasn't had a commit in the last month?\"` (good for identifying abandoned projects)"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Manage GitHub Through Conversation",
+      "content": "**Setup:**\n1. Complete steps 1–4 above: create a repo, get a token, update settings.json, restart\n2. Type `/mcp` to confirm `github` is listed\n\n**Task 1 — Get a repo overview:**\nAsk: `\"List all my GitHub repositories with their descriptions and when they were last updated.\"`\n\n**Task 2 — Create a real issue:**\nThink of one genuine improvement or task for any of your repos (or for `ai-course-exercises`).\nAsk: `\"Create an issue in ai-course-exercises titled '[your title]' with a description of [what you want to track].\"`\nGo to github.com and confirm the issue is there.\n\n**Task 3 — Search across your code:**\nAsk: `\"Search all my repositories for any file containing a TODO comment. List the file paths and the TODO text.\"`\n\n**Task 4 — Read a file from GitHub:**\nAsk: `\"Read the README from my ai-course-exercises repository and tell me what it currently says.\"`\n\n**Bonus — issue triage:**\nIf you have repos with open issues:\nAsk: `\"Look at all open issues across my repos and group them by type: bugs, features, questions, and other. Suggest which one I should tackle first.\"`\n\nDocument what you accomplished in `notes/github-mcp-session.md`."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-8.** Claude Code now has access to your GitHub account. Lesson 8-9 goes deeper on the filesystem MCP — exploring its full capabilities and security model."
+    }
+  ],
+  "nextLesson": "8-9",
+  "prevLesson": "8-7"
+}

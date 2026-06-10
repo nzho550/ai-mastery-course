@@ -1,0 +1,48 @@
+{
+  "id": "7-11",
+  "title": "Sub-Agents & Parallel Work",
+  "part": 7,
+  "estimatedMinutes": 30,
+  "tags": ["claude-code", "sub-agents", "parallel", "agents", "automation"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what sub-agents are, when Claude Code uses them, how to describe tasks that trigger parallel execution, and how to observe the results when multiple agents complete work simultaneously."
+    },
+    {
+      "type": "text",
+      "content": "## What Are Sub-Agents?\n\nWhen you give Claude Code a large task, it sometimes decomposes that task into independent subtasks and spawns additional Claude instances — called sub-agents — to work on each one in parallel. Sub-agents are separate Claude contexts, each focused on one piece of the work.\n\nThe pattern is similar to a manager delegating to a team:\n- The parent Claude (\"the manager\") understands the overall goal and breaks it down\n- Each sub-agent receives one clearly scoped subtask\n- Each sub-agent works independently, without knowledge of what the others are doing\n- When all sub-agents finish, the parent collects and merges the results\n\nSub-agents are most useful for tasks with **independent parts** — work that doesn't depend on other work finishing first. If task B depends on task A's output, they need to run sequentially, not in parallel. If task A and task B are completely independent, parallel execution is faster."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**How to trigger sub-agents:** Describe a task that has clearly separable parts and affects multiple independent files. Claude recognizes the opportunity for parallel execution and proposes it. You don't need a special command — the task description itself signals the opportunity.\n\nExample triggers:\n- \"Summarize each file in this folder and save results to a summaries/ folder\"\n- \"Write unit tests for every function in utils.js\" (each function is independent)\n- \"Convert every .md file in notes/ to a formatted HTML page\""
+    },
+    {
+      "type": "text",
+      "content": "## What Sub-Agents Can and Can't Do\n\nSub-agents inherit the same tools as the parent Claude — they can read files, write files, and run bash commands. They follow the same permissions from your `settings.json`.\n\nThey cannot do things the parent can't do. If you haven't configured a browser MCP (lesson 8-10), sub-agents can't browse the internet either. If your permissions deny `Bash(rm *)`, sub-agents can't delete files either.\n\nSub-agents also don't share context with each other. If Agent A reads a file, Agent B has no knowledge of what Agent A found. The parent coordinates results — it's the only entity that sees the whole picture.\n\nThis isolation is a feature, not a bug. It prevents one agent's mistakes from cascading into another agent's work."
+    },
+    {
+      "type": "text",
+      "content": "## Practical Use Cases\n\n**Batch file analysis:**\n\"Read every file in `exercises/` and write a one-paragraph analysis of each one to `notes/exercise-analyses/`. Create one analysis file per exercise file.\"\n\n**Test generation at scale:**\n\"Write a unit test file for each `.js` file in `src/`. Save them to `tests/` with matching names.\"\n\n**Multi-file refactoring:**\n\"Update every HTML file in `exercises/` to use the shared `styles.css` instead of inline styles. Each file is independent — update them all.\"\n\n**Documentation generation:**\n\"Generate a README.md for each subfolder in this project describing what's in it. Work on each folder independently.\"\n\nIn all these cases, the work is uniform (same operation applied to multiple items) and independent (each item can be processed without knowing about the others)."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**A note on internet access:** Sub-agents share the same tools as the parent — meaning they can read/write files and run commands, but they cannot browse the internet unless the Playwright MCP (lesson 8-10) is configured. For the workshop below, the task is intentionally file-based so it works reliably at this stage of the course. After completing lesson 8-10, revisit this pattern with an internet-facing task."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Spawn a Research Agent",
+      "content": "Give Claude Code a batch file-analysis task and observe how it handles the subtasks.\n\n**Step 1 — Set up test files:**\nIf you don't have several files in `exercises/` yet, create 3–4 small ones first. In VS Code, create:\n- `exercises/page-one.html` — a minimal HTML page about topic 1\n- `exercises/page-two.html` — a minimal HTML page about topic 2\n- `exercises/page-three.html` — a minimal HTML page about topic 3\n\nOr just use the files you already have from lessons 7-4 through 7-10.\n\n**Step 2 — Launch Claude Code:**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**Step 3 — Give a multi-file batch task:**\n```\nRead every file in the exercises/ folder. For each file, write a summary\nto a new file in notes/summaries/ — one summary file per exercise file.\nName each summary file to match the original (e.g., about-me.md for about-me.html).\nEach summary should be 3–5 sentences describing what the file does and what it contains.\n```\n\n**Step 4 — Watch the execution:**\nObserve Claude's process in the terminal:\n- Does it describe a plan before acting?\n- Does it mention spawning sub-agents or working on files separately?\n- How does it handle the results?\n\n**Step 5 — Verify the output:**\nWhen Claude finishes, open VS Code and check `notes/summaries/`. You should see one `.md` file per exercise file, each containing an accurate summary.\n\n**Step 6 — Ask a meta question:**\nAsk Claude:\n```\nHow did you approach that task? Did you work on the files sequentially\nor in parallel? Explain your process.\n```\nClaude will describe its execution strategy — this gives you insight into when and how it uses parallel approaches.\n\n**What to notice:** The work was identical for each file (read → summarize → write), and the files were independent. That's the pattern that benefits most from sub-agent decomposition."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-11.** You understand sub-agents, how to describe tasks that benefit from parallel execution, and how to verify the results. The pattern scales to large codebases — the same approach that works on 3 files works on 300. Next: the Claude Code settings deep dive."
+    }
+  ],
+  "nextLesson": "7-12",
+  "prevLesson": "7-10"
+}

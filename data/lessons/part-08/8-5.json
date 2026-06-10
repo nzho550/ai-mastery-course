@@ -1,0 +1,61 @@
+{
+  "id": "8-5",
+  "title": "sequential-thinking — Structured Reasoning",
+  "part": 8,
+  "estimatedMinutes": 30,
+  "tags": ["mcp", "sequential-thinking", "reasoning", "claude-code"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what sequential-thinking does, have it configured, and have used it to work through a real complex problem in a way that makes Claude's reasoning transparent and trustworthy."
+    },
+    {
+      "type": "text",
+      "content": "## The Problem With Direct Answers\n\nFor simple questions — 'what's the capital of France?' — a direct answer is perfect. But for complex questions with many variables, a direct answer can be misleading.\n\nImagine asking: 'Should I learn Python or JavaScript first?' A direct answer misses a lot. The right answer depends on your goals, your background, what you want to build, the job market you're targeting, and more.\n\nWhen Claude answers complex questions without structure, it tends to:\n- Jump to a conclusion before fully exploring the problem\n- Miss important considerations\n- State an opinion as if it were obvious when the tradeoffs are actually nuanced\n- Produce an answer that sounds authoritative but didn't account for your specific situation\n\n**sequential-thinking** changes this by forcing Claude to reason through the problem step by step, making each step visible to you."
+    },
+    {
+      "type": "text",
+      "content": "## What sequential-thinking Actually Does\n\nThe sequential-thinking MCP server provides a structured `think` tool. When Claude uses it:\n\n1. Claude identifies the key dimensions of the problem\n2. It reasons through each dimension in an explicit step\n3. Each step can revise or build on previous steps\n4. The final answer is grounded in the visible reasoning chain\n\nThe output is not just an answer — it's a reasoning trace. You can see exactly where Claude's logic came from, which makes it much easier to spot when a step is wrong or when Claude missed something."
+    },
+    {
+      "type": "text",
+      "content": "## Installation\n\nAdd sequential-thinking to your global `settings.json`:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"context7\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@upstash/context7-mcp\"]\n    },\n    \"sequential-thinking\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-sequential-thinking\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Already configured?** If you followed the MCP setup in lesson 7.12 or configured Claude Code early in the course, sequential-thinking may already be in your settings. Type `/mcp` to check — if it's listed, skip the installation step."
+    },
+    {
+      "type": "text",
+      "content": "## When to Use sequential-thinking\n\nSequential thinking is most valuable for problems with multiple dimensions, tradeoffs, or dependencies:\n\n**Architecture decisions:**\n'Should I use a monorepo or separate repositories for this project?'\n\n**Technology choices:**\n'Which database is right for this use case: PostgreSQL, MongoDB, or SQLite?'\n\n**Planning multi-step projects:**\n'What's the right order to build the features for this app?'\n\n**Debugging complex bugs:**\n'This function returns wrong results for negative inputs — what could be causing it?'\n\n**Personal decisions with tradeoffs:**\n'Should I take the job offer or stay and wait for a promotion?'\n\nFor straightforward tasks — write a function, fix this typo, explain this term — you don't need sequential thinking. Use it when depth matters more than speed."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Invoking sequential-thinking:** You can ask Claude to use it explicitly: `\"Use sequential-thinking to reason through this problem.\"` Or for complex questions, Claude will sometimes use it automatically when it detects the question warrants deeper reasoning."
+    },
+    {
+      "type": "text",
+      "content": "## Comparing Direct vs. Structured Reasoning\n\nHere is what the difference looks like in practice.\n\n**Without sequential-thinking:**\n> *User:* Should I learn Python or JavaScript first?\n> *Claude:* Both are great choices. Python is better for data science and AI, while JavaScript is essential for web development. If you want to work with AI, start with Python.\n\n**With sequential-thinking:**\n> *Claude:* Let me think through this step by step.\n> *Step 1 — What are your stated goals?* You want to work with AI tools. Let me evaluate both languages against this goal...\n> *Step 2 — Python's position in the AI ecosystem:* Python dominates AI/ML: TensorFlow, PyTorch, scikit-learn, Jupyter, Anthropic's SDK — all Python-first...\n> *Step 3 — JavaScript's role:* JavaScript is also present in AI (LangChain.js, Vercel AI SDK) but the tooling depth is shallower...\n> *Step 4 — Practical considerations:* Python is easier to read for beginners. JavaScript requires understanding browsers and async...\n> *Step 5 — Conclusion:* Given the goal of working with AI tools, Python is the stronger choice. But note the caveat: if you also want to build web UIs for your AI tools, JavaScript will be needed alongside it.\n\nThe second answer is longer — but it's also more defensible, more nuanced, and easier to disagree with productively ('actually, step 3 is wrong because...')."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Solve a Complex Decision With Structured Reasoning",
+      "content": "**Setup:**\n1. Add sequential-thinking to your `settings.json` (shown above)\n2. Relaunch `claude`, type `/mcp` to confirm it's listed\n\n**Task 1 — Test it on a tech decision:**\nAsk: `\"Use sequential-thinking to help me decide whether I should learn Python or JavaScript as my first programming language. I want to work with AI tools and potentially build web projects.\"`\n\nWatch Claude work through each step. Notice:\n- How many distinct considerations does it identify?\n- Does it revise its thinking at any step?\n- Is the conclusion different from what you expected?\n\n**Task 2 — Bring a real decision:**\nThis is the more valuable exercise. Think of a real decision you are currently wrestling with. It could be:\n- A technology choice for a project\n- A career direction question\n- How to approach a difficult technical problem\n- A learning plan decision\n\nAsk: `\"Use sequential-thinking to help me decide [your real decision]. Here's the context: [relevant background].\"` \n\nRead through Claude's reasoning carefully. After it finishes:\n- Do you agree with each step?\n- Did it surface a consideration you hadn't thought of?\n- Do you want to challenge any of the steps?\n\n**Task 3 — Compare without sequential-thinking:**\nAsk the same question again without mentioning sequential-thinking (use `/clear` to start fresh). Compare the depth and structure of the two responses.\n\nSave both answers to `notes/sequential-thinking-comparison.md`."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-5.** You now have a tool for structured reasoning on complex problems. Lesson 8-6 covers the self-critique pattern — a technique for improving any output Claude produces."
+    }
+  ],
+  "nextLesson": "8-6",
+  "prevLesson": "8-4"
+}
