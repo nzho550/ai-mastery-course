@@ -1,0 +1,49 @@
+{
+  "id": "14-2",
+  "title": "Capstone: AI-Powered Research Tool",
+  "part": 14,
+  "estimatedMinutes": 60,
+  "tags": ["capstone", "python", "api", "cli", "streaming", "build"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Build\n\nA command-line research tool that takes any topic as input and produces a structured, well-organized research brief — saved as a timestamped markdown file you can actually use.\n\nRunning `python research.py \"quantum computing basics\"` will produce a file containing a summary, key facts, open questions, and research directions. You'll use it every time you need to get up to speed on an unfamiliar topic.\n\nThis capstone uses: Python, Anthropic SDK, streaming, file I/O, Claude Code."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Prerequisites:** Python installed (lesson 7-2), Anthropic SDK installed (`pip install anthropic python-dotenv`), API key in `.env` file (lesson 11-3). If you haven't built `hello-claude.py` from lesson 11-5, do that first — it confirms your setup works."
+    },
+    {
+      "type": "text",
+      "content": "## Step 1 — Set Up the Project (5 min)\n\nCreate a new folder for this tool:\n\n```\nmkdir C:\\Users\\YourName\\Documents\\research-tool\ncd C:\\Users\\YourName\\Documents\\research-tool\n```\n\nCreate a `.env` file:\n```\nANTHROPIC_API_KEY=sk-ant-your-key-here\n```\n\nCreate a `.gitignore` file containing:\n```\n.env\nresearch-outputs/\n```\n\nOpen the folder in VS Code:\n```\ncode .\n```\n\nThen launch Claude Code:\n```\nclaude\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Step 2 — Define the Output First (5 min)\n\nBefore asking Claude Code to write any code, define what the tool's output should look like. This is the spec.\n\nIn VS Code, create `research-template.md` — the format you want every research brief to follow:\n\n```markdown\n# Research Brief: [Topic]\n\nGenerated: [timestamp]\n\n## Summary\n[2–3 paragraph overview of the topic]\n\n## Key Facts\n- [Fact 1]\n- [Fact 2]\n- [Fact 3]\n- [Fact 4]\n- [Fact 5]\n\n## Core Concepts\n[The 3–5 concepts someone needs to understand to make sense of this topic]\n\n## Open Questions\n[2–3 questions this field is actively trying to answer]\n\n## Research Directions\n[Suggested reading topics, not specific links — the model doesn't have current URLs]\n\n## What to Search For\n[Exact search queries that would find good material on this topic]\n```\n\nHaving the template written before the code makes the system prompt much clearer."
+    },
+    {
+      "type": "text",
+      "content": "## Step 3 — Build the Tool with Claude Code (20 min)\n\nIn Claude Code, give this prompt:\n\n```\nBuild me a Python command-line research tool called `research.py`.\n\nBehavior:\n- Takes a topic as a command-line argument: python research.py \"quantum computing basics\"\n- Loads ANTHROPIC_API_KEY from .env\n- Calls Claude claude-sonnet-4-6 with a carefully engineered system prompt that produces\n  output matching the template in research-template.md\n- Uses streaming so the output appears progressively in the terminal\n- Saves the complete output to research-outputs/YYYY-MM-DD_topic-slug.md\n  (create the research-outputs folder if it doesn't exist)\n- Prints the output file path when done\n\nSystem prompt guidance:\n- The system prompt should instruct Claude to be a rigorous research analyst\n- Ask for factual accuracy, appropriate hedging on uncertain claims,\n  and genuine usefulness — not generic summaries\n- Use the template structure from research-template.md\n\nRequirements:\n- Handle errors gracefully (no API key, empty argument, API errors)\n- Keep dependencies minimal: anthropic, python-dotenv, only stdlib beyond that\n- Add a docstring to every function\n```\n\nReview every file Claude Code proposes. Read the system prompt it writes — is it actually well-engineered, or generic? If it's generic, ask Claude Code to improve it specifically."
+    },
+    {
+      "type": "text",
+      "content": "## Step 4 — Test and Refine (15 min)\n\nRun the tool on three different topics:\n\n```\npython research.py \"how neural networks learn\"\npython research.py \"the history of public key cryptography\"\npython research.py \"[something you actually want to know about]\"\n```\n\nFor each output, evaluate:\n- Is the summary accurate to what you already know?\n- Are the key facts specific enough to be useful, or vague?\n- Are the open questions genuinely interesting?\n- Would you actually use this as a starting point for learning?\n\nIf the quality is mediocre, the problem is almost certainly the system prompt. Ask Claude Code: \"The research brief quality isn't great — the summaries are too vague. Rewrite the system prompt to produce more specific, actionable output.\"\n\n**Refine until the output is something you'd actually use.** That's the bar."
+    },
+    {
+      "type": "text",
+      "content": "## Step 5 — Add the Finishing Touches (10 min)\n\nOnce the basic tool works, ask Claude Code to add these improvements:\n\n**1. Progress indicator:**\n```\nAsk: \"Add a spinner or progress indicator that shows while the API call\nis being made and streaming — so the user knows it's working.\"\n```\n\n**2. Word count / cost estimate:**\n```\nAsk: \"After generating, print the word count of the output and a rough\ncost estimate based on the token counts from the API response.\"\n```\n\n**3. A help flag:**\n```\nAsk: \"Add a --help flag that shows usage examples and what the tool does.\"\n```\n\nRun the tool one more time after each addition to confirm nothing broke."
+    },
+    {
+      "type": "text",
+      "content": "## What to Do If You Get Stuck\n\n**Problem: The tool runs but output quality is poor**\nThe system prompt is the most important part. Ask Claude Code to show you the current system prompt. Then ask it to critique the system prompt and produce a better version. Run the same test topic with the new prompt and compare.\n\n**Problem: Streaming doesn't work as expected**\nCheck that you're using the streaming SDK methods from lesson 11-7 (`client.messages.stream()`). If the output appears all at once, you're probably using the non-streaming `create()` method.\n\n**Problem: Files aren't saving correctly**\nAsk Claude Code: \"The file isn't saving to research-outputs/ correctly. Check the file path construction and folder creation logic.\" Paste the error message for faster diagnosis.\n\n**Problem: API key not found**\nConfirm: `.env` file exists in the same folder as `research.py`; `load_dotenv()` is called before `anthropic.Anthropic()`; the variable name is exactly `ANTHROPIC_API_KEY`."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Capstone 14-2 complete.** You've built a real AI-powered tool from scratch — spec, code, test, refine. The research briefs in your `research-outputs/` folder are things you made, with a tool you built. Next capstone: automating your email with n8n and Claude."
+    }
+  ],
+  "nextLesson": "14-3",
+  "prevLesson": "14-1"
+}

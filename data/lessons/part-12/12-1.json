@@ -1,0 +1,52 @@
+{
+  "id": "12-1",
+  "title": "Why Run AI Locally?",
+  "part": 12,
+  "estimatedMinutes": 15,
+  "tags": ["local-ai", "privacy", "ollama", "offline"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand why someone would run AI on their own machine instead of using a cloud service — and when it's the right choice versus when it isn't.\n\nWe've spent most of this course using cloud AI: Claude.ai, the Anthropic API, Copilot. All of those services send your data to someone else's servers. That's usually fine. But not always."
+    },
+    {
+      "type": "text",
+      "content": "## The Case for Local AI\n\nLocal AI runs entirely on your machine. The model weights are downloaded to your computer, inference happens on your CPU or GPU, and nothing leaves your device. There are four reasons this matters:\n\n**Privacy.** Every prompt you send to a cloud AI goes to a company's servers. Most providers have privacy policies that allow using your data to improve their models (though Anthropic's API does not train on your data by default). For sensitive documents — client contracts, medical records, personal journals, proprietary code — local AI keeps your data where it belongs: with you.\n\n**Offline capability.** A local model works on a plane, in a basement with no WiFi, or during an internet outage. If you've ever been in the middle of a flow state and lost your internet connection, you'll appreciate this.\n\n**Zero ongoing cost.** After the one-time setup, every conversation is free. No tokens, no subscription, no API bill. For high-volume tasks like processing hundreds of documents, this matters enormously.\n\n**Lower latency for small tasks.** A locally cached 3B model can respond to a simple request in under a second on modern hardware — faster than a round-trip to a cloud API."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**What does \"local\" actually mean?** When you run a local AI, you download the model weights — a file between 2GB and 70GB+ depending on the model — to your computer. The model runs as a process on your machine, using your RAM and (ideally) your GPU. No internet connection is required after the initial download."
+    },
+    {
+      "type": "text",
+      "content": "## The Tradeoffs\n\nLocal AI is not free lunch. Here's what you give up:\n\n**Quality gap.** The best local models available today (Phi-4, Llama 3.3, Mistral) are impressive — but they're not as capable as Claude Sonnet or GPT-4o for complex reasoning, long-context tasks, or nuanced writing. For many tasks this doesn't matter. For some tasks it does.\n\n**Hardware requirements.** Model size determines RAM needed. A 3B model needs about 3–4GB of RAM. A 7B model needs 6–8GB. A 70B model needs 64GB+ (usually a dedicated GPU). If your machine is older or has limited RAM, your options narrow to the smaller, less capable models.\n\n**Setup complexity.** Installing Ollama is easy (covered in the next lesson). But troubleshooting GPU acceleration, understanding quantization formats, or wiring a local model into your development tools takes more effort than signing up for Claude.ai.\n\n**No latest models.** Frontier models like Claude Opus and GPT-4 are not available locally. The open-source models released for local use typically lag behind the frontier by 6–12 months in capability."
+    },
+    {
+      "type": "text",
+      "content": "## When to Use Local vs Cloud\n\nThis isn't an either/or choice. The practical approach is routing tasks to the right tool:\n\n**Use local AI when:**\n- The document contains PII, client data, or anything under NDA\n- You're processing high volumes of documents where API cost adds up\n- You need to work offline\n- The task is simple enough that a smaller model handles it fine (summarizing, rewriting, short Q&A)\n- You're experimenting and don't want to burn API credits\n\n**Use cloud AI when:**\n- The task requires complex reasoning across a large context\n- You need the very best output quality — for client work, presentations, critical decisions\n- You're using the latest features (extended thinking, tool use, vision)\n- You're in a hurry and need a reliable, fast response\n\nMost working developers end up with a hybrid setup: local models for day-to-day coding assistance and private tasks, cloud APIs for anything that demands frontier-level quality."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The sweet spot for local AI in 2025:** Code completion and explanation, summarizing your own documents, drafting emails about private matters, and running experiments without paying per token. For anything that requires genuine reasoning quality — architecture decisions, complex debugging, creative writing — cloud models still win."
+    },
+    {
+      "type": "text",
+      "content": "## The Tools: Ollama and LM Studio\n\nTwo tools dominate local AI for developers:\n\n**Ollama** is a command-line first tool that makes running local models as simple as `ollama run llama3.2`. It manages model downloads, runs a local API server, and works perfectly from the terminal. This is what most developers reach for.\n\n**LM Studio** is a desktop GUI application that lets you browse a model catalog, download models with a click, and chat with them in a polished interface. It also exposes an OpenAI-compatible API server, which means any tool that works with OpenAI can use your local model.\n\nWe'll install and use both in the next few lessons."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Your Local AI Use Cases",
+      "content": "Think back through the last two weeks of your life. Consider the things you've asked AI tools — or wanted to ask but didn't because of privacy concerns.\n\nIn your notes, write answers to these three questions:\n\n1. **What are 3 tasks or questions where you'd prefer the data never left your machine?**\n   (Examples: reviewing a client's contract, processing your medical insurance documents, working with your employer's proprietary code)\n\n2. **What tasks do you do frequently enough that API costs could add up?**\n   (Examples: summarizing meeting notes daily, processing a backlog of PDFs, generating first drafts of repeated document types)\n\n3. **Is your machine likely capable of running local models?**\n   - Check your RAM: Settings → System → About (Windows) or Apple menu → About This Mac\n   - 8GB RAM → 3B–7B models work well\n   - 16GB+ RAM → 7B–13B models work well\n   - 32GB+ RAM → 13B+ models are accessible\n\nSave these notes — they'll help you choose the right models in lesson 12-7."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 12-1.** You now have a clear mental model of when local AI earns its place in a workflow. The next lesson covers installing Ollama — your gateway to running models locally."
+    }
+  ],
+  "nextLesson": "12-2",
+  "prevLesson": "11-9"
+}

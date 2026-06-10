@@ -1,0 +1,52 @@
+{
+  "id": "13-2",
+  "title": "What NOT to Share With Cloud AI",
+  "part": 13,
+  "estimatedMinutes": 15,
+  "tags": ["safety", "privacy", "data-protection", "policy"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nIn lesson 1-5, you wrote your first AI privacy policy — a starting point built on general principles. That was before you had a real API key, connected to MCP servers, ran code through Claude Code, or set up Gmail automation. Now you have context. This lesson is about updating your rules to match your actual usage."
+    },
+    {
+      "type": "text",
+      "content": "## What You've Actually Been Doing With AI\n\nLook back at what this course has had you do:\n\n- Sent prompts to Claude.ai about your background, projects, and goals\n- Set up an API key that can call Claude programmatically\n- Configured Claude Code with access to your entire project folder\n- Connected MCP servers to your Gmail, Google Drive, and Google Calendar\n- Built automation workflows that read and process your real emails\n\nEach of these is a choice about data access. Most were fine — the data involved was low-sensitivity. But now you're building more sophisticated tools, and some of those tools will touch more sensitive data. This is the moment to get specific about your rules."
+    },
+    {
+      "type": "text",
+      "content": "## The Five Categories You Should Never Send to Cloud AI\n\n**1. Credentials and secrets**\nPasswords, API keys, OAuth tokens, SSH keys, database connection strings. These belong in `.env` files (you set this up in lesson 11-3) and should never appear in prompts. If you accidentally paste an API key into a conversation, rotate it immediately.\n\n**2. Personal Identifiable Information (PII)**\nFull names combined with addresses, government ID numbers, passport details, social security/national insurance numbers, phone numbers linked to names. Anonymize examples before sharing them. \"My client John Smith at 123 Main Street...\" should become \"My client [Name] at [Address]...\"\n\n**3. Client and employer data**\nAnything that belongs to someone who trusted you with it: client contracts, employee records, customer databases, internal pricing, unreleased products, business strategies. Your company's data is not yours to share with a third party.\n\n**4. Medical and financial records**\nHealth conditions, prescriptions, diagnoses, insurance details, bank account numbers, credit card numbers, tax returns. Even anonymized, medical data carries re-identification risks.\n\n**5. Proprietary code with sensitive logic**\nCode that contains business logic, algorithms with competitive value, security implementations, or encryption keys hardcoded into it. Open-source code and generic examples are fine. \"Here's my company's fraud detection algorithm\" is not."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**How cloud AI providers use your data:** Anthropic's API does not use your API conversations to train models by default. Claude.ai (the website) has separate terms — check the privacy policy if you use it for sensitive work. Either way, your data goes to their servers, and your organization may have its own policies about what can leave your network. When in doubt, use local AI (Part 12)."
+    },
+    {
+      "type": "text",
+      "content": "## Safe Anonymization Techniques\n\nYou often want AI's help on something real but sensitive. Anonymization lets you get the help without exposing the sensitive details.\n\n**Replace names with roles:** \"My client Sarah\" → \"My client (let's call them Client A)\"\n\n**Abstract specifics:** \"Our internal system that processes 50,000 transactions a day\" → \"A high-volume transaction processing system\"\n\n**Use placeholders:** `SELECT * FROM users WHERE email = 'real@email.com'` → `SELECT * FROM users WHERE email = '[USER_EMAIL]'`\n\n**Describe the pattern, not the instance:** \"I have code that connects to our production database. The logic I need help with is...\" and then paste only the logic, not the connection string.\n\nMost AI tasks can be done with anonymized examples. The model helps you with the structure, the logic, the approach — it doesn't need the actual data to do that."
+    },
+    {
+      "type": "text",
+      "content": "## Personal Use vs Workplace Use\n\nFor personal use, you set your own policy. For workplace use, there are often additional constraints:\n\n- Many employers have policies about using external AI tools for work tasks\n- Regulated industries (finance, healthcare, law) have legal requirements about data handling\n- Contractors and consultants are often bound by client NDAs that prohibit sharing data with third parties\n- Some enterprise AI subscriptions (Microsoft 365 Copilot, Google Workspace AI) have different data terms than consumer versions\n\nIf you work in a regulated industry or handle client data, the safest default is: if in doubt, use local AI or don't use AI for that specific task. The productivity gain isn't worth the compliance risk."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The quick check:** Before pasting something into a cloud AI prompt, ask yourself: \"Would I be comfortable if a junior employee at this AI company could read this?\" If the answer is no, anonymize it or use a local model."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Harden Your AI Privacy Policy",
+      "content": "This workshop updates the `my-ai-rules.md` file you created in lesson 1-5. Don't create a new file — extend the existing one.\n\n**Step 1 — Find the file:**\nIn VS Code Explorer, look for `my-ai-rules.md` in your `ai-course-projects` folder. If you created it on a different path in lesson 1-5, find it there.\n\n**Step 2 — Open and review your original rules:**\nRead what you wrote in lesson 1-5. How has your understanding changed? Which rules were right? Which were vague?\n\n**Step 3 — Add these concrete sections** (keep your original rules, add these below them):\n\n```\n## Updated as of: [today's date]\n\n## NEVER send to cloud AI:\n- Passwords, API keys, tokens (use .env files)\n- Full names + home addresses together\n- Client data or customer PII\n- Employer proprietary information or code\n- Medical records or health information\n- Any code containing hardcoded secrets\n\n## OK to send to cloud AI:\n- Public code and open-source projects\n- General questions without personal context\n- Anonymized examples with placeholders\n- My own creative work with no third-party data\n\n## Use local AI (Ollama/LM Studio) instead for:\n- Internal company code\n- Anything under NDA\n- Personal documents I wouldn't share with strangers\n- High-volume processing where cost matters\n\n## MCP-specific rules:\n- Gmail MCP: review every proposed action before confirming\n- Never store API tokens directly in settings.json inside a git repo\n- GitHub token lives in environment variable, not config file\n```\n\n**Step 4 — Add 2–3 rules specific to YOUR situation:**\nThink about your actual life: your job, the tools you use, the people whose data you handle. Add rules that are specific to your context, not generic advice.\n\n**Step 5 — Commit the file:**\nSave it, stage it in VS Code's Source Control, and commit with message: `Update AI privacy policy after completing course`\n\nThis file should travel with you. Copy it to wherever you keep your personal notes."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 13-2.** Your AI privacy policy is now grounded in real experience, not just principles. The next lesson covers cost management — how to control your API spending and not get surprised by a bill."
+    }
+  ],
+  "nextLesson": "13-3",
+  "prevLesson": "13-1"
+}

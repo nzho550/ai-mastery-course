@@ -1,0 +1,45 @@
+{
+  "id": "14-5",
+  "title": "Capstone: Your Own Project",
+  "part": 14,
+  "estimatedMinutes": 60,
+  "tags": ["capstone", "build", "open-project", "graduation"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Build\n\nThis is the open capstone. You choose the project. You define what \"done\" means. You use whatever tools from the course fit the job.\n\nThe constraint: it has to solve a real problem for you. Not a tutorial. Not a demo. Something that, once built, you will actually use."
+    },
+    {
+      "type": "text",
+      "content": "## Before You Start: The Project Brief\n\nThe biggest mistake in projects like this is starting to build before you've thought it through. Spend the first 15 minutes writing a one-page brief. This brief becomes your CLAUDE.md and your planning document.\n\nOpen VS Code and create `notes/my-project-brief.md`. Answer these questions in writing:\n\n**1. What problem does this solve?**\nBe specific. \"I want to be more productive\" is not a problem. \"I spend 30 minutes every morning manually reading through 5 news sources and summarizing what matters to me\" is a problem.\n\n**2. Who is it for?**\nJust you? A specific person in your life? Your team at work? The answer changes what \"good enough\" means.\n\n**3. What does the minimum working version do?**\nNot the dream version — the version that solves the core problem with minimal features. The minimum version of an email reply tool is: it drafts one reply when you click a button. Not a full workflow with labels and scheduling.\n\n**4. Which tools from the course will you use and why?**\nBe specific: \"Claude Code to build it, Python + Anthropic SDK to call the API, n8n for the automation trigger, Gmail MCP to interact with my inbox.\"\n\n**5. What will you have learned by building it?**\nThis isn't required for the project to be worthwhile, but naming it helps you stay motivated when things are frustrating."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**If you're not sure what to build:** That's normal. Here are some project ideas that use course tools and produce something genuinely useful:\n\n- **Daily briefing tool:** Pulls from a few RSS feeds or web pages and sends you a morning summary via email\n- **Meeting notes processor:** Takes a transcript (from Otter.ai or similar) and extracts action items, decisions, and summaries\n- **Personal changelog:** Automatically creates a weekly summary of your git commits across all repos\n- **Idea capture and organization:** A CLI tool that lets you type an idea, Claude categorizes and stores it, and you can search/browse your ideas later\n- **Job application tracker:** A spreadsheet + automation that tracks status, drafts follow-up emails, and reminds you when to follow up\n- **Website feature for your portfolio:** Add a contact form, a blog section, a projects gallery\n\nPick one that makes you say \"I would actually use that.\" If none of these resonate, think about the most annoying recurring task in your life and ask: \"Could AI help with this?\""
+    },
+    {
+      "type": "text",
+      "content": "## The AI-Assisted Planning Workflow\n\nOnce your brief is written, use AI to plan the build — don't start coding immediately.\n\n**Step 1 — Ask Claude to break it into tasks:**\nLaunch Claude Code in your project folder and say:\n\n```\nI want to build [your project]. I've written a brief — let me share it with you:\n\n[paste your brief from my-project-brief.md]\n\nPlease:\n1. Ask me any clarifying questions before we start\n2. Break this into a concrete task list, ordered by dependencies\n3. Identify the 2-3 highest-risk parts (things most likely to be harder than expected)\n4. Tell me what we should build first to get a working proof of concept as fast as possible\n```\n\n**Step 2 — Review the plan:**\nRead Claude's breakdown. Push back on anything that seems wrong. The conversation at this stage is cheap — the changes are in text, not code.\n\n**Step 3 — Optionally set up task-master-ai:**\nIf you have task-master-ai configured (lesson 8-7), ask Claude Code to create a task list from your brief. This gives you a tracking system you can update as you work.\n\n**Step 4 — Build the proof of concept first:**\nStart with the smallest version that proves the approach works. Don't add features until the core works."
+    },
+    {
+      "type": "text",
+      "content": "## Building and Iterating\n\nAs you build, apply the habits from the course:\n\n**Use Plan Mode for multi-file changes** (`Shift+Tab` in Claude Code). Don't let the agent make sweeping changes without seeing the plan first.\n\n**Write a CLAUDE.md for your project.** Even a simple one helps:\n```markdown\n# [Project Name]\n\n## What This Is\n[one sentence]\n\n## Tech Stack\n[language, libraries, services]\n\n## How to Run\n[command to run the project]\n\n## Current Status\n[what works, what doesn't yet]\n```\n\n**Commit frequently.** After each working milestone: `git add . && git commit -m \"[what just started working]\"`. If something breaks, you have a restore point.\n\n**When stuck, describe the problem to Claude Code precisely:**\n- What you expected to happen\n- What actually happened\n- The exact error message (if there is one)\n- What you've already tried\n\nVague \"it's not working\" questions get vague answers. Specific descriptions of the failure get specific solutions."
+    },
+    {
+      "type": "text",
+      "content": "## Defining Done\n\nA project can always be improved. \"Done\" for this capstone means:\n\n- The minimum working version you defined in your brief is complete\n- You've run it at least once on real input (not test data)\n- The result is something you will actually use\n- The code is committed to a repository\n\nPerfect is the enemy of shipped. A working first version you use is better than a polished one you never finish."
+    },
+    {
+      "type": "text",
+      "content": "## When You Finish\n\nAdd your project to `notes/my-ai-dev-environment.md` under **Live Projects**:\n- Project name\n- What it does\n- URL or path to the code\n- What you'd build next if you had more time\n\nThen share it somewhere — a GitHub repository, a message to someone who might find it useful, a post on LinkedIn or wherever you're active. Sharing your work is how you consolidate the learning and get feedback."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed the AI Mastery Course.**\n\nFourteen parts. Eighty-two lessons. You went from \"what is AI\" to building real tools, automating real workflows, and setting up a professional AI development environment.\n\nYou know how to use AI tools, how to build with AI APIs, how to connect systems with MCP, how to automate with n8n, how to run AI locally for privacy, and how to do all of it safely.\n\nThe tools will keep changing. New models will release. New capabilities will emerge. But the fundamentals you've built — how to learn a new tool quickly, how to evaluate AI output critically, how to build instead of just consume — those don't expire.\n\n**What to do next:**\n- Keep your `notes/my-ai-workflow.md` up to date as your setup evolves\n- Return to capstone projects when you want to extend them\n- Follow Anthropic's changelog, Simon Willison's blog, and Hacker News to stay current\n- Build something for someone else\n\nThe best way to deepen what you've learned is to teach it or apply it. You're ready for both."
+    }
+  ],
+  "nextLesson": null,
+  "prevLesson": "14-4"
+}

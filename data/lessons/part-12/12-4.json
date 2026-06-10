@@ -1,0 +1,52 @@
+{
+  "id": "12-4",
+  "title": "LM Studio — GUI for Local Models",
+  "part": 12,
+  "estimatedMinutes": 25,
+  "tags": ["local-ai", "lm-studio", "gui", "models"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nOllama is CLI-first. Some people prefer a visual interface for browsing models, managing downloads, and chatting without opening a terminal. LM Studio provides exactly that — and it also runs an OpenAI-compatible API server, which means the same tools that connect to Ollama can connect to LM Studio too."
+    },
+    {
+      "type": "text",
+      "content": "## What is LM Studio?\n\nLM Studio is a free desktop application for Windows, macOS, and Linux that lets you:\n\n- **Browse and download models** from Hugging Face's model hub, filtered by size and task\n- **Chat with models** in a polished interface with system prompt configuration\n- **Run a local API server** on port 1234 that mimics the OpenAI API format\n- **Compare models** by running multiple ones and switching between them\n\nThe key difference from Ollama: LM Studio downloads models in **GGUF format** (a compressed model format from the llama.cpp project), which is the same underlying format Ollama uses. The models available are largely the same; the difference is the interface.\n\n**When to use LM Studio vs Ollama:**\n- Use LM Studio if you prefer a GUI, want to browse the model catalog visually, or want a built-in chat interface\n- Use Ollama if you're comfortable in the terminal, need it for scripting, or want tighter integration with development tools\n- You can run both at the same time — they use different ports (Ollama: 11434, LM Studio: 1234)"
+    },
+    {
+      "type": "text",
+      "content": "## Installing LM Studio\n\n**Windows:**\n1. Go to `lmstudio.ai` → click **Download for Windows**\n2. Run the installer and follow the prompts\n3. Launch LM Studio from the Start menu\n\n**macOS:**\n1. Go to `lmstudio.ai` → click **Download for Mac**\n2. Open the `.dmg` file and drag LM Studio to Applications\n3. Launch from Applications\n\n**On first launch:** LM Studio asks for a models folder — this is where GGUF files will be stored. The default location is fine. Leave at least 20GB free on that drive."
+    },
+    {
+      "type": "text",
+      "content": "## The LM Studio Interface\n\nLM Studio has four main sections accessible from the left sidebar:\n\n**Discover** — Browse and download models. You can search by name, filter by size (ideal for finding models that fit your RAM), and see community ratings. Download by clicking the model, selecting a quantization level (Q4 is recommended for most users), and clicking Download.\n\n**Chat** — Load a downloaded model and start a conversation. The system prompt is editable, giving you control similar to the API's system parameter.\n\n**Developer / Local Server** — Start the OpenAI-compatible API server. Once enabled, any tool that supports OpenAI can connect to `http://localhost:1234/v1`. You'll use this in the next two lessons.\n\n**My Models** — View all your downloaded models, their sizes, and manage storage."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Choosing a quantization level:** When downloading a model in LM Studio, you'll see options like `Q4_K_M`, `Q5_K_M`, `Q8_0`, `fp16`. Higher numbers mean higher quality but larger files and more RAM usage.\n\n- **Q4_K_M** — The practical default. Good quality, ~4GB for a 7B model. Best for most users.\n- **Q5_K_M** — Slightly better quality, slightly larger. Good if you have spare RAM.\n- **Q8_0** — Near-lossless quality, roughly 2× the size of Q4. Use if quality matters more than speed.\n\nUnless you have a specific reason, start with Q4_K_M."
+    },
+    {
+      "type": "text",
+      "content": "## Running the Local Server\n\nThe local server is LM Studio's most powerful feature for developers. Once enabled:\n\n1. Open LM Studio → go to the **Developer** tab (sometimes labeled \"Local Server\")\n2. Select a loaded model in the server model selector\n3. Click **Start Server**\n4. The server runs at `http://localhost:1234/v1`\n\nThe server exposes these endpoints (same format as OpenAI):\n- `POST /v1/chat/completions` — the main chat endpoint\n- `GET /v1/models` — list available models\n\nTo test that it's working, open PowerShell and run:\n```\nInvoke-RestMethod http://localhost:1234/v1/models\n```\nYou should see a JSON list with your loaded model."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Port conflict note:** If you're running both Ollama (port 11434) and LM Studio (port 1234) at the same time, they won't conflict — they use different ports. When connecting tools in the next lessons, make sure to use the correct port for whichever server you want to use: 11434 for Ollama, 1234 for LM Studio."
+    },
+    {
+      "type": "workshop",
+      "tag": "LOCAL",
+      "title": "Install LM Studio and Run a Chat",
+      "content": "**Step 1 — Install LM Studio:**\nDownload and install from `lmstudio.ai`. Follow the prompts.\n\n**Step 2 — Download a model:**\n1. Open LM Studio → click **Discover** in the sidebar\n2. Search for `phi-4` or `llama-3.2`\n3. Click on a result and choose a Q4_K_M version\n4. Click **Download** — this downloads the GGUF file\n\nNote: If you already downloaded models via Ollama, you can point LM Studio at the same folder to avoid re-downloading, but the simplest approach is to just download one directly in LM Studio.\n\n**Step 3 — Start a chat:**\n1. Click **Chat** in the sidebar\n2. At the top of the chat panel, click the model selector and choose your downloaded model\n3. LM Studio loads the model (first load takes 30–60 seconds)\n4. Type a message and observe the response\n5. Click the **System Prompt** section and add: `You are a concise assistant. Always reply in 2 sentences or fewer.`\n6. Ask the same question again — observe how the system prompt constrains the output\n\n**Step 4 — Start the local server:**\n1. Click **Developer** (or **Local Server**) in the sidebar\n2. Select your model in the server model dropdown\n3. Click **Start Server**\n4. Confirm it says \"Running\" on port 1234\n\n**Step 5 — Test the server:**\nIn PowerShell:\n```\n$body = @{\n    model = \"local-model\"\n    messages = @(@{role=\"user\"; content=\"Say hello in exactly 5 words.\"})\n} | ConvertTo-Json\n\nInvoke-RestMethod -Uri \"http://localhost:1234/v1/chat/completions\" `\n    -Method POST `\n    -ContentType \"application/json\" `\n    -Body $body\n```\nYou should get a JSON response with a `choices` array.\n\n**You're done when:** The chat works and the local server responds to your test request."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 12-4.** You now have two ways to run local models: Ollama for terminal-first workflows and LM Studio for a GUI experience with a built-in chat interface. Next: connecting these local models to VS Code's Continue.dev extension."
+    }
+  ],
+  "nextLesson": "12-5",
+  "prevLesson": "12-3"
+}

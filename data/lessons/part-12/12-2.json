@@ -1,0 +1,56 @@
+{
+  "id": "12-2",
+  "title": "Installing Ollama",
+  "part": 12,
+  "estimatedMinutes": 25,
+  "tags": ["local-ai", "ollama", "install", "terminal"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson, Ollama will be installed and running on your machine. You'll understand what the Ollama service does in the background, and you'll have confirmed it works by listing your available models."
+    },
+    {
+      "type": "text",
+      "content": "## What Is Ollama?\n\nOllama is a tool that handles the hard parts of running local AI:\n\n- **Model management:** Downloads model weights from the Ollama library and stores them on your disk.\n- **Runtime:** Runs the model as a local process, handling memory management and GPU acceleration automatically.\n- **API server:** Exposes the model at `http://localhost:11434` using an API compatible with OpenAI's format — so any tool built for OpenAI can use your local model with a URL change.\n\nYou interact with Ollama two ways: through the terminal (the `ollama` command) and through that API (other tools connect to it automatically).\n\nOllama is free, open source, and available for Windows, macOS, and Linux."
+    },
+    {
+      "type": "text",
+      "content": "## Installing on Windows\n\n**Step 1 — Download the installer:**\n1. Open your browser and go to `ollama.com/download`\n2. Click **Download for Windows**\n3. The installer file (`OllamaSetup.exe`) downloads to your Downloads folder\n\n**Step 2 — Run the installer:**\n1. Open your Downloads folder and double-click `OllamaSetup.exe`\n2. Click through the installer — all defaults are fine\n3. When it completes, Ollama starts automatically and a small icon appears in your system tray (bottom-right of the taskbar)\n\n**Step 3 — Verify the installation:**\n1. Open PowerShell (press `Win + X` → Windows PowerShell, or search \"PowerShell\" in the Start menu)\n2. Type:\n```\nollama --version\n```\nYou should see something like `ollama version 0.x.x`."
+    },
+    {
+      "type": "text",
+      "content": "## Installing on macOS\n\n1. Go to `ollama.com/download` → click **Download for Mac**\n2. Open the downloaded `.zip` file — a folder appears\n3. Drag the Ollama app to your Applications folder\n4. Open it from Applications (first launch: right-click → Open to bypass Gatekeeper)\n5. Ollama starts and appears as a llama icon in your menu bar\n6. Open Terminal and type: `ollama --version` to verify"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**How Ollama runs in the background:** After installation, Ollama runs as a background service. On Windows it appears in the system tray. On macOS it's in the menu bar. You don't need to start it manually — it starts automatically when your computer boots. The API server at `localhost:11434` is always available as long as Ollama is running."
+    },
+    {
+      "type": "text",
+      "content": "## Understanding the Ollama API\n\nWhen Ollama is running, it serves a local HTTP API at:\n\n```\nhttp://localhost:11434\n```\n\nThis API follows the OpenAI format, which matters because it means any tool that was built to use OpenAI — VS Code extensions, automation tools, scripts — can be redirected to your local model by just changing the URL.\n\nThe main endpoints you'll encounter:\n\n- `POST /api/generate` — send a prompt, get a response\n- `POST /api/chat` — multi-turn conversation (the format Continue.dev and Claude Code use)\n- `GET /api/tags` — list your installed models\n\nYou usually don't interact with these directly. Tools like Continue.dev and LM Studio do it for you. But knowing the API exists explains why \"connecting\" these tools is just a matter of pointing them at the right URL."
+    },
+    {
+      "type": "text",
+      "content": "## Key Ollama Commands\n\nHere are the commands you'll use most:\n\n```\nollama pull <model>       # Download a model\nollama run <model>        # Start an interactive chat session\nollama list               # Show all downloaded models\nollama rm <model>         # Delete a model to free disk space\nollama show <model>       # Show model details (size, parameters)\nollama serve              # Manually start the API server (usually automatic)\n```\n\nModels are identified by name and optional tag: `llama3.2`, `phi4`, `mistral`, `llama3.2:3b`. If you omit the tag, Ollama uses the default (usually the 7B or standard version)."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Disk space note:** Models range from about 2GB (small 3B parameter models) to 70GB+ (large models). Make sure you have at least 10GB of free disk space before pulling your first model. If disk space is tight, stick to the smaller models: `llama3.2:3b` is only ~2GB and surprisingly capable for many tasks."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Install Ollama and Pull Your First Model",
+      "content": "Complete these steps in order. The model download will take several minutes — that's normal.\n\n**Step 1 — Install Ollama:**\nFollow the installation steps for your OS above. Come back here when you see the Ollama icon in your system tray (Windows) or menu bar (macOS).\n\n**Step 2 — Verify the install:**\nOpen PowerShell (Windows) or Terminal (macOS) and run:\n```\nollama --version\n```\nYou should see a version number. If you get \"command not found\", restart your terminal and try again — the PATH needs to refresh after installation.\n\n**Step 3 — Pull a model:**\nStart with `phi4` from Microsoft — a high-quality model for its size:\n```\nollama pull phi4\n```\nThis downloads about 9GB. While it's downloading, read the next lesson (12-3) to learn what to do with it.\n\n**If you have limited disk space**, use the smaller Llama model instead:\n```\nollama pull llama3.2:3b\n```\nThis is only ~2GB and still useful for many tasks.\n\n**Step 4 — Verify the model downloaded:**\n```\nollama list\n```\nYou should see your model listed with its size.\n\n**Step 5 — Confirm the API is running:**\nIn PowerShell:\n```\nInvoke-RestMethod http://localhost:11434/api/tags\n```\nOr just open your browser and go to `http://localhost:11434` — you should see `Ollama is running`.\n\n**You're done when:** `ollama list` shows at least one model and the API is responding."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 12-2.** Ollama is installed and your first model is downloaded. The next lesson walks through running it interactively and comparing its output to Claude."
+    }
+  ],
+  "nextLesson": "12-3",
+  "prevLesson": "12-1"
+}

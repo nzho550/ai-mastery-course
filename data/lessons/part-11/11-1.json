@@ -1,0 +1,52 @@
+{
+  "id": "11-1",
+  "title": "What is an API? (Plain English)",
+  "part": 11,
+  "estimatedMinutes": 15,
+  "tags": ["api", "beginner", "foundations"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what an API is using two real-world analogies, understand the request/response pattern, and have made your first API call — without writing any code."
+    },
+    {
+      "type": "text",
+      "content": "## The Restaurant Analogy\n\nImagine a restaurant. You're the customer. The kitchen is the server (it does the work — prepares the food, stores the data). You can't walk into the kitchen yourself and rummage around. Instead, there's a waiter.\n\nThe waiter is the API.\n\nYou tell the waiter what you want (the request). The waiter goes to the kitchen, gets the food, and brings it back to you (the response). You never see the kitchen internals — you just get the result.\n\nIn software: your application is the customer. A web server (or AI model) is the kitchen. The API is the agreed-upon set of \"what you can order\" and \"how to order it.\"\n\n**A second analogy — the power socket:** Every power socket has the same interface: two holes, a specific voltage. Your phone charger, your laptop charger, your lamp — they all speak the same interface. You don't need to know how electricity is generated to use it. APIs work the same way: a standardized interface that hides the complexity behind it."
+    },
+    {
+      "type": "text",
+      "content": "## The Request / Response Pattern\n\nEvery API interaction follows the same pattern:\n\n1. **You send a request** — a message with a specific structure: a URL (where to go), a method (what to do), optional headers (metadata like authentication), and an optional body (data you're sending)\n2. **The server processes it** — runs whatever logic it needs\n3. **The server sends a response** — typically JSON data plus a status code\n\n**HTTP methods you'll see:**\n- `GET` — retrieve data (no body needed)\n- `POST` — send data and get a result (most AI API calls use POST)\n- `PUT/PATCH` — update existing data\n- `DELETE` — remove data\n\n**Status codes you'll encounter:**\n- `200` — OK, everything worked\n- `201` — Created successfully\n- `400` — Bad request (you sent something wrong)\n- `401` — Unauthorized (missing or wrong API key)\n- `429` — Too many requests (rate limit hit)\n- `500` — Server error (their problem, not yours)\n\n**JSON** is the data format almost all APIs use for responses. It looks like this:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"id\": \"msg_abc123\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"Hello! How can I help you today?\"\n    }\n  ],\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"usage\": {\n    \"input_tokens\": 12,\n    \"output_tokens\": 10\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "This is a simplified version of what the Anthropic API returns. Notice the structure: nested objects, arrays (the `[]`), and key-value pairs. In the next lesson you'll see the real response and know exactly where to find Claude's reply."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**You don't need to understand HTTP deeply.** The Anthropic SDK (lesson 11-5) handles the low-level details automatically. Understanding the concept at this level is enough — just know that a request goes out and a response comes back, and you're reading a field from that response."
+    },
+    {
+      "type": "text",
+      "content": "## Why APIs Matter for AI\n\nClaude.ai is a polished interface built on top of the Anthropic API. When you use Claude.ai, you're using Anthropic's interface layer — their buttons, conversation history, projects, and so on.\n\nThe API is the layer underneath. With API access you can:\n- Build your own interface (your own app, CLI tool, website)\n- Integrate Claude into anything — a spreadsheet, a VS Code extension, a Slack bot, a script that runs every night\n- Control exactly which model, system prompt, parameters, and data are sent\n- Build tools that automate work at scale\n\nPart 11 teaches you to work at the API level. By the end you'll have built a real CLI tool that summarizes text files — something Claude.ai can't do from your command line automatically."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Your First API Call (No Account Required)",
+      "content": "You'll call a free public API right now — no authentication, no sign-up. This proves you already understand the pattern.\n\n**Option A — Using the REST Client VS Code extension:**\n1. In VS Code Extensions, search \"REST Client\" → install by Huachao Mao\n2. Create a new file: `exercises/api-test.http`\n3. Type:\n```\nGET https://api.coindesk.com/v1/bpi/currentprice.json\n```\n4. A \"Send Request\" link appears above the line — click it\n5. A panel opens showing the JSON response: the current Bitcoin price in USD, EUR, and GBP\n\n**Option B — Using your browser:**\n1. Open any browser\n2. In the address bar, type: `https://api.coindesk.com/v1/bpi/currentprice.json`\n3. Press Enter\n4. Raw JSON appears in the browser — that's an API response\n\n**Option C — Try a different public API:**\n```\nGET https://v2.jokeapi.dev/joke/Programming?type=single\n```\nThis returns a random programming joke as JSON. No key needed.\n\n**What to observe:**\n- You sent a GET request to a URL\n- The server responded with JSON\n- The JSON has a predictable structure you can read and extract fields from\n\nThis is exactly what the Anthropic API does — except it's a POST request with your message in the body, and the response contains Claude's reply."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 11-1.** You now understand what an API is, how request/response works, and what JSON looks like. The rest of Part 11 builds on this foundation to connect to the Anthropic API specifically."
+    }
+  ],
+  "nextLesson": "11-2",
+  "prevLesson": "10-7"
+}

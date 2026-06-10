@@ -1,0 +1,65 @@
+{
+  "id": "11-5",
+  "title": "Using the Anthropic SDK",
+  "part": 11,
+  "estimatedMinutes": 30,
+  "tags": ["api", "anthropic", "sdk", "javascript", "python"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have working scripts in both Python and Node.js that call Claude via the official SDK and print the response — the foundation for every AI tool you'll build."
+    },
+    {
+      "type": "text",
+      "content": "## What the SDK Does For You\n\nThe SDK (Software Development Kit) is a library that wraps the raw HTTP API. Instead of building headers, serializing JSON, and parsing responses manually, you call a clean function and get a structured result back.\n\nIn lesson 11-4 you wrote 12+ lines of PowerShell. With the Node.js SDK, the same call is 5 lines. With Python it's similarly concise.\n\nBoth official SDKs are maintained by Anthropic:\n- **Python SDK:** `pip install anthropic`\n- **Node.js SDK:** `npm install @anthropic-ai/sdk`\n\nFor this course you have Node.js installed (Part 7). Python may also be installed if you did Part 8. Both examples work — use whichever you prefer. The Node.js version is covered first since it's already set up."
+    },
+    {
+      "type": "text",
+      "content": "## Node.js Example\n\nCreate `exercises/hello-claude.js`:"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n// The SDK automatically reads ANTHROPIC_API_KEY from the environment\n\nconst message = await client.messages.create({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 200,\n  messages: [\n    {\n      role: 'user',\n      content: 'What is the most exciting thing about AI in 2025? One paragraph.'\n    }\n  ]\n});\n\nconsole.log(message.content[0].text);"
+    },
+    {
+      "type": "text",
+      "content": "To run this, you need `\"type\": \"module\"` in your `package.json` (for the `import` syntax), or you can use `require` instead. The setup steps in the workshop below handle this.\n\n**What each line does:**\n- `import Anthropic` — loads the SDK\n- `new Anthropic()` — creates a client. Reads `ANTHROPIC_API_KEY` from the environment automatically.\n- `client.messages.create({...})` — sends the API request\n- `await` — waits for the response (the SDK is async)\n- `message.content[0].text` — extracts Claude's reply"
+    },
+    {
+      "type": "text",
+      "content": "## Python Example\n\nCreate `exercises/hello-claude.py`:"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import anthropic\nfrom dotenv import load_dotenv\n\nload_dotenv()  # reads .env file\n\nclient = anthropic.Anthropic()\n# SDK reads ANTHROPIC_API_KEY from environment automatically\n\nmessage = client.messages.create(\n    model=\"claude-haiku-4-5-20251001\",\n    max_tokens=200,\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": \"What is the most exciting thing about AI in 2025? One paragraph.\"\n        }\n    ]\n)\n\nprint(message.content[0].text)"
+    },
+    {
+      "type": "text",
+      "content": "The Python version is nearly identical in structure — same parameter names, same response shape. The main difference is `load_dotenv()` to read the `.env` file (the Node.js `dotenv/config` import does the same thing)."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**System prompts** are how you give Claude persistent instructions for the whole conversation. Add a `system` parameter to any `messages.create()` call:\n```javascript\nsystem: 'You are a concise technical writer. Never use bullet points. Always use plain prose.'\n```\nThis shapes every response in that call."
+    },
+    {
+      "type": "text",
+      "content": "## Async Usage in Node.js\n\nThe `await` keyword means the SDK call is asynchronous — it doesn't block while waiting for the response. This matters when you build applications that make multiple API calls or handle user input while waiting.\n\nThe script above works with `await` at the top level because modern Node.js supports top-level await in ES modules. If you're inside a function, wrap it:\n\n```javascript\nasync function askClaude(question) {\n  const message = await client.messages.create({\n    model: 'claude-haiku-4-5-20251001',\n    max_tokens: 200,\n    messages: [{ role: 'user', content: question }]\n  });\n  return message.content[0].text;\n}\n\nconst answer = await askClaude('What is recursion?');\nconsole.log(answer);\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "API",
+      "title": "Write Your First SDK Script",
+      "content": "You'll install the SDK, set up the project, and run a working script that calls Claude.\n\n**Node.js setup:**\n\n1. Open the integrated terminal in VS Code (`Ctrl+backtick`) and navigate to the exercises folder:\n```powershell\ncd exercises\n```\n\n2. Initialize a package.json if one doesn't exist:\n```powershell\nnpm init -y\n```\n\n3. Add `\"type\": \"module\"` to enable ES module syntax. In VS Code, open `package.json` and add the line:\n```json\n{\n  \"name\": \"exercises\",\n  \"version\": \"1.0.0\",\n  \"type\": \"module\",\n  ...\n}\n```\n\n4. Install the SDK and dotenv:\n```powershell\nnpm install @anthropic-ai/sdk dotenv\n```\n\n5. Create `hello-claude.js` with the code from the Node.js example above\n\n6. Make sure `.env` exists with `ANTHROPIC_API_KEY=sk-ant-...`\n\n7. Run it:\n```powershell\nnode hello-claude.js\n```\nYou should see Claude's response printed to the terminal.\n\n---\n\n**Python setup (if you have Python installed):**\n\n1. Install the libraries:\n```powershell\npip install anthropic python-dotenv\n```\n\n2. Create `hello-claude.py` with the Python example code above\n\n3. Run it:\n```powershell\npython hello-claude.py\n```\n\n---\n\n**Extend the script:**\n\nOnce the basic call works, add a system prompt and see how it changes the output:\n\n```javascript\nconst message = await client.messages.create({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 200,\n  system: 'You are a pirate. Respond in pirate dialect.',\n  messages: [\n    { role: 'user', content: 'What is the most exciting thing about AI in 2025?' }\n  ]\n});\n```\n\nThen try passing a longer `max_tokens` value (500) and asking a question that deserves a longer answer. Observe how the response length scales."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 11-5.** You have a working script that calls Claude via the SDK. Every AI tool you build from here — the summarizer, the research tool, anything — starts from exactly this pattern. Next: understanding what tokens cost and how to estimate API spend."
+    }
+  ],
+  "nextLesson": "11-6",
+  "prevLesson": "11-4"
+}

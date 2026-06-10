@@ -1,0 +1,48 @@
+{
+  "id": "10-5",
+  "title": "AI-Assisted Git Workflows",
+  "part": 10,
+  "estimatedMinutes": 25,
+  "tags": ["git", "automation", "claude-code", "developer-workflow"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll use AI to write better commit messages, generate changelogs, create PR descriptions, and suggest branch names — turning git history from an afterthought into a self-documenting record."
+    },
+    {
+      "type": "text",
+      "content": "## The Problem With Manual Git Messages\n\nGit is supposed to tell the story of your project. But in practice, most git histories look like this:\n\n- `fixed bug`\n- `update`\n- `more changes`\n- `final`\n- `FINAL REAL`\n- `ok now it works`\n\nThese messages are useless. When something breaks six months later, you can't tell from the history what changed or why.\n\nThe solution isn't discipline — it's automation. AI can look at exactly what you changed and write a precise, conventional commit message for you. The quality goes up and the friction goes down."
+    },
+    {
+      "type": "text",
+      "content": "## Conventional Commits\n\nBefore AI can help, it helps to know the standard it should follow. **Conventional Commits** is a widely used format:\n\n```\n<type>(<scope>): <description>\n\n[optional body]\n\n[optional footer]\n```\n\nTypes:\n- `feat`: a new feature\n- `fix`: a bug fix\n- `docs`: documentation only\n- `style`: formatting, no logic change\n- `refactor`: code change that neither fixes a bug nor adds a feature\n- `test`: adding tests\n- `chore`: maintenance, dependencies\n\nExamples:\n- `feat(auth): add OAuth2 login with Google`\n- `fix(api): handle null response from messages endpoint`\n- `docs(readme): add installation instructions for Windows`\n\nWhen you ask Claude to write a commit message, it knows this format and uses it by default."
+    },
+    {
+      "type": "text",
+      "content": "## Four AI Git Workflow Patterns\n\n**Pattern 1 — Commit message from diff**\n\nStage your changes, then ask Claude to describe what changed.\n\nIn the terminal:\n```\ngit add -A\ngit diff --cached | claude \"Write a conventional commit message for these staged changes. Format: type(scope): description. Max 72 characters for the title line.\"\n```\n\nOr inside Claude Code:\n```\nLook at my staged git changes and write a conventional commit message for them.\n```\n\n**Pattern 2 — PR description from diff**\n\nWhen your changes span multiple files and commits, a PR description saves reviewers time.\n\n```\ngit diff main...HEAD | claude \"Write a GitHub pull request description. Include: what changed, why, and how to test it. Use markdown headers.\"\n```\n\n**Pattern 3 — Changelog from git log**\n\nFor release notes:\n\n```\ngit log --oneline v1.0.0..HEAD | claude \"Convert these git commits into a user-facing changelog section. Group by: New Features, Bug Fixes, Other Changes. Use plain English — not technical jargon.\"\n```\n\n**Pattern 4 — Branch name from task description**\n\nWhen you have a task and need a branch name:\n```\nclaude \"Suggest 3 git branch names for this task: 'Add ability for users to export their data as CSV'. Use kebab-case.\"\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The most important habit:** Before every commit, spend 10 seconds letting Claude review your diff and write the message. You get better git history automatically, and you occasionally catch something you forgot to clean up before committing."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "AI-Written Commit Messages",
+      "content": "You'll stage a real change and use Claude Code to write the commit message.\n\n**Step 1 — Make a change worth committing**\n1. Open your `ai-course-projects` folder in VS Code\n2. Make a meaningful change to any file — add a section to `README.md`, improve `about-me.html`, or create a new exercise file\n3. Save the file\n\n**Step 2 — Stage the change**\nIn VS Code's Source Control panel, click `+` next to the changed file to stage it.\n\nOr in the integrated terminal: `git add -A`\n\n**Step 3 — Ask Claude Code for the commit message**\n1. Launch `claude` in your project folder\n2. Type: `Look at my staged git changes and write a conventional commit message for them. Format it as type(scope): description. Keep the title under 72 characters.`\n3. Claude will run `git diff --cached`, read what changed, and write a precise message\n\n**Step 4 — Use the message**\n1. Copy Claude's suggested message\n2. In VS Code's Source Control panel, paste it in the commit message box\n3. Press `Ctrl+Enter` to commit\n\n**Bonus: Write a PR description**\nIf you have a branch with multiple commits different from main:\n```\nLook at the commits since main and write a GitHub PR description. Include what changed, why, and how to test it.\n```\n\n**What to notice:** The message is specific and informative — not vague like \"update README.\" It describes the actual change in a way that will make sense to you in 6 months."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Tools that automate this further:** Git hooks can run Claude automatically every time you commit. Lesson 7-8 covered hooks — you could add a `prepare-commit-msg` hook that runs Claude on your staged diff and pre-fills the message box. That's the full automation version of what you just did manually."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 10-5.** Your git history is now self-documenting — without extra mental effort. Every future commit is a chance to practice. Next: baking AI into GitHub Actions CI/CD pipelines."
+    }
+  ],
+  "nextLesson": "10-6",
+  "prevLesson": "10-4"
+}

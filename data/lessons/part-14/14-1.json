@@ -1,0 +1,62 @@
+{
+  "id": "14-1",
+  "title": "Capstone: Personal Portfolio Website",
+  "part": 14,
+  "estimatedMinutes": 60,
+  "tags": ["capstone", "portfolio", "html", "claude-code", "github-pages", "build"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Build\n\nA complete personal portfolio website — live on the internet at your own GitHub Pages URL before this session ends. Not a template you filled out. Not a demo. A real website with your name, your bio, your projects, and your skills, built with Claude Code and deployed publicly.\n\nThis capstone uses: Claude Code, VS Code, Live Server, Git, GitHub Pages.\n\n**By the end of this session you will have a URL you can send to people.**"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The Accomplishment Standard:** This capstone is complete when you can open a browser, type your GitHub Pages URL, and see your portfolio. Not when the code is written. Not when it looks good locally. When it's live. Set that as your goal before you start."
+    },
+    {
+      "type": "text",
+      "content": "## Prerequisites\n\nBefore starting, confirm you have:\n- Claude Code installed and authenticated (lesson 7-2)\n- VS Code with Live Server extension (lesson 5-8)\n- Git installed (lesson 5-12)\n- A GitHub account (lesson 6-1)\n- Your refined bio from lesson 3-7 (or write one now — 3 sentences about who you are and what you're learning)"
+    },
+    {
+      "type": "text",
+      "content": "## Step 1 — Create the Project Folder (5 min)\n\nOpen PowerShell and create a new folder for the portfolio:\n\n```\nmkdir C:\\Users\\YourName\\Documents\\portfolio\ncd C:\\Users\\YourName\\Documents\\portfolio\n```\n\nOpen this folder in VS Code:\n```\ncode .\n```\n\nThen open the VS Code terminal (`Ctrl+\\``) and launch Claude Code from the portfolio folder:\n```\nclaude\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Step 2 — Brief Claude Code (10 min)\n\nYou get better results when you give Claude a complete brief rather than vague instructions. Paste this, filled in with your real details:\n\n```\nBuild me a personal portfolio website. Here is everything about me:\n\nName: [your name]\nBio: [paste your refined bio from lesson 3-7, or write 3 sentences]\nBackground: [what you do or study, your city if comfortable]\nSkills I'm learning: [list 5-8 AI tools from this course you've used]\nA project I want to highlight: [describe one thing you've built — even if it's from this course]\n\nRequirements:\n- Modern, clean design — dark background with blue or indigo accents\n- Single HTML file with inline CSS (no external frameworks or CDNs)\n- Sections: Hero (name + tagline), About, Skills, Projects, Contact\n- Fully responsive — works on mobile and desktop\n- Fast to load — no JavaScript dependencies\n- A 'Tools I Use' section listing AI tools from my learning\n- Subtle animated gradient in the hero section\n- Footer with GitHub link placeholder\n```\n\nReview what Claude Code proposes before accepting. If anything in the plan looks wrong, say so before it writes the files."
+    },
+    {
+      "type": "text",
+      "content": "## Step 3 — Review and Refine in Browser (15 min)\n\n**Open the site locally:**\n1. Right-click `index.html` in VS Code Explorer\n2. Select **Open with Live Server**\n3. Your browser opens the portfolio\n\n**Review it honestly.** Ask yourself:\n- Does the hero section feel like me, or like a template?\n- Is the color scheme something I'd actually choose?\n- Are there any placeholder texts I need to fill in?\n- Does it look right on a narrow window (mobile simulation)?\n\n**Make specific change requests to Claude Code.** Not \"make it better\" — specific:\n- \"Change the accent color from blue to #6366F1 (indigo)\"\n- \"Replace the placeholder project with this description: [your actual project]\"\n- \"The about section feels too formal — rewrite it to match the tone of this text: [your bio]\"\n- \"Add a second project card for my work on [something from this course]\"\n\nRun your `/review` custom command (from lesson 7-7) on the generated files to check for issues."
+    },
+    {
+      "type": "text",
+      "content": "## Step 4 — Add Your Personal Touch (10 min)\n\nEvery portfolio built from the same prompt risks looking generic. Ask Claude Code:\n\n```\nBased on everything I've told you about myself, suggest one unique section\nor design element that would make this portfolio feel specifically mine —\nnot something you'd add to a generic template.\n```\n\nReview the suggestion. If it resonates, implement it. If not, ask for a different idea. This is the difference between a portfolio that shows up in your browser and one you'd actually share."
+    },
+    {
+      "type": "text",
+      "content": "## Step 5 — Deploy to GitHub Pages (10 min)\n\n**Create the repository:**\n1. Go to `github.com` and log in\n2. Click **New repository**\n3. Name it exactly: `yourusername.github.io` (replace `yourusername` with your actual GitHub username)\n4. Set it to Public\n5. Don't initialize with a README — leave it empty\n6. Click **Create repository**\n\n**Push your code:**\n\nBack in the VS Code terminal (make sure you're in the `portfolio` folder):\n\n```\ngit init\ngit add .\ngit commit -m \"Launch portfolio — built with Claude Code\"\ngit branch -M main\ngit remote add origin https://github.com/yourusername/yourusername.github.io.git\ngit push -u origin main\n```\n\nReplace `yourusername` with your actual GitHub username in both places.\n\n**Enable GitHub Pages:**\n1. Go to your repository on github.com\n2. Settings → Pages\n3. Under Source, select **Deploy from a branch**\n4. Branch: `main`, folder: `/ (root)`\n5. Click **Save**\n\n**Wait 2–3 minutes**, then go to: `https://yourusername.github.io`"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**If the deployment page shows a 404:** Wait another 2 minutes and refresh. GitHub Pages takes a few minutes to build on first deploy. If it still shows 404 after 5 minutes, check: Settings → Pages confirms the source is set to main branch; your repository is named exactly `yourusername.github.io` (lowercase)."
+    },
+    {
+      "type": "text",
+      "content": "## Step 6 — Share It (5 min)\n\nOnce the site is live:\n\n1. Copy the URL: `https://yourusername.github.io`\n2. Send it to someone — a friend, a colleague, anyone. This makes it real.\n3. Add the URL to `notes/my-ai-dev-environment.md` under a new section: **Live Projects**\n4. In Claude Code, ask: \"Create a README.md for this repository that describes the portfolio and notes it was built with Claude Code\"\n\nYou built a website. It's on the internet. You wrote zero lines from scratch."
+    },
+    {
+      "type": "text",
+      "content": "## What to Do If You Get Stuck\n\n**Problem: Claude Code produces broken HTML/CSS**\nAsk Claude Code to open the browser console (right-click → Inspect → Console) and fix any errors it sees there.\n\n**Problem: GitHub push fails with authentication error**\nGitHub no longer accepts password authentication for pushes. You need a Personal Access Token: GitHub Settings → Developer settings → Personal access tokens → Generate new token (classic) → check `repo` scope. Use this token as your password when git prompts you.\n\n**Problem: GitHub Pages deploys but shows an empty page**\nConfirm your main file is named `index.html` (not `portfolio.html` or similar). GitHub Pages serves `index.html` from the root.\n\n**Problem: Styles look wrong**\nOpen the browser's developer tools (F12), find the Elements panel, and look for any CSS errors. Ask Claude Code: \"I'm seeing this issue in the browser: [describe it]. Please fix it.\""
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Capstone 14-1 complete.** You have a live portfolio website. Every tool you learned — Claude Code, VS Code, Git, GitHub — came together in this single hour. The next capstone builds a command-line research tool using the Anthropic API."
+    }
+  ],
+  "nextLesson": "14-2",
+  "prevLesson": "13-5"
+}

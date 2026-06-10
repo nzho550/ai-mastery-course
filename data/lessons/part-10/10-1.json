@@ -1,0 +1,48 @@
+{
+  "id": "10-1",
+  "title": "What is Workflow Automation?",
+  "part": 10,
+  "estimatedMinutes": 15,
+  "tags": ["automation", "beginner", "no-code"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what workflow automation is, how the trigger → action model works, and how AI adds a reasoning layer in the middle. You'll also have a clear map of the tools covered in Part 10."
+    },
+    {
+      "type": "text",
+      "content": "## Automation = Connecting Apps So They Talk\n\nWorkflow automation means wiring two or more apps together so that when something happens in one, something else happens automatically in another — without you doing it manually.\n\nYou already understand this concept intuitively:\n- You get a new email → you copy the data into a spreadsheet\n- A customer fills out a form → you send them a welcome message\n- You push code to GitHub → someone on Slack gets a notification\n\nRight now, a human is doing the connecting step. Automation removes that human step and makes it instant, reliable, and free.\n\nThe core model is always the same: **Trigger → Action**.\n\nA **trigger** is the event that starts the workflow. Something happens — an email arrives, a form is submitted, a schedule fires at 9am.\n\nAn **action** is what happens in response. Send a message, add a row to a spreadsheet, create a task, call an API.\n\nMulti-step workflows look like: Trigger → Action 1 → Action 2 → Action 3.\n\nHere are simple examples:\n- New row in Google Sheets → Send email via Gmail\n- GitHub issue opened → Create Notion task\n- Form submitted → Add to Airtable + Send Slack notification\n- Calendar event starts → Send SMS reminder"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The one-sentence version:** Automation means \"every time X happens, do Y automatically\" — and you only set it up once."
+    },
+    {
+      "type": "text",
+      "content": "## Where AI Fits In\n\nTraditional automation is rule-based: IF new email FROM boss@company.com, THEN forward to assistant@company.com. The rules are rigid — if the email is from boss@company.com but arrives on a different domain, the rule breaks.\n\nAI adds a **reasoning step** in the middle:\n\n**Trigger → AI processes → Action**\n\nNow instead of rigid rules, you can have flexible intelligence:\n- New email arrives → Claude reads it and decides if it needs action → Creates a task only if it does\n- RSS article published → Claude summarizes it into 2 sentences → Posts summary to Slack\n- GitHub issue opened → Claude drafts a response based on similar past issues → Creates a draft reply\n\nThe AI step can classify, summarize, extract, decide, write, or transform — anything you'd ask a smart assistant to do.\n\nThis is why the automation tools in this part have an \"AI node\" or \"AI action\": they're designed specifically for this trigger → AI → action pattern."
+    },
+    {
+      "type": "text",
+      "content": "## The Tools Landscape\n\nPart 10 covers four tools at different points on the complexity spectrum:\n\n**n8n** (lesson 10-2) — Open-source, can be self-hosted or run in the cloud via n8n.io. The most powerful free option. Has a native Claude/AI node. Slightly more technical than Zapier but far more flexible and free.\n\n**Zapier** (lesson 10-3) — The most polished no-code option. Easiest setup. The AI action step requires a paid plan. Best for people who want simple workflows without any technical friction.\n\n**Make (formerly Integromat)** (lesson 10-4) — Visual, cloud-based, module-oriented. Free tier is generous. No official Claude module, but the HTTP module lets you call the Anthropic API directly. Good middle ground between Zapier and n8n.\n\n**GitHub Actions** (lesson 10-6) — Code-based CI/CD automation that runs on git events. Less \"app connector\" and more \"developer pipeline.\" AI helps by generating the YAML configuration files you need.\n\nThe right tool depends on your situation:\n- Want free + powerful → n8n\n- Want easiest setup → Zapier (free tier for non-AI workflows)\n- Want visual + flexible → Make\n- Working with code/git → GitHub Actions"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**You don't need to use all of them.** The goal of Part 10 is to understand what's possible with each tool. Most people pick one or two that fit their life and use only those."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Automation Audit",
+      "content": "Before touching any tools, do this audit. Open a notes file (in VS Code, Notepad, or a Google Doc) and write down **5 tasks you do repeatedly** that follow a pattern.\n\nUse this format for each:\n```\nTrigger: [something that happens]\nWhat I currently do: [the manual step]\nDesired action: [what should happen automatically]\n```\n\nExamples to get you thinking:\n- \"Every time I get a receipt email, I manually log it in a spreadsheet\"\n- \"Every morning I check 3 news sites to see what happened overnight\"\n- \"Every time I finish a GitHub task, I update a Notion board\"\n- \"Every week I summarize what I worked on for a report\"\n\nThese 5 tasks are your automation targets. You'll build at least one of them in lessons 10-2 through 10-4."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 10-1.** You now understand the trigger → action model, how AI slots into the middle, and which tool fits which situation. The next three lessons build real, working automations using n8n, Zapier, and Make."
+    }
+  ],
+  "nextLesson": "10-2",
+  "prevLesson": "9-4"
+}

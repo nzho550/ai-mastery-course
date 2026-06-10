@@ -1,0 +1,61 @@
+{
+  "id": "11-4",
+  "title": "First API Call with curl",
+  "part": 11,
+  "estimatedMinutes": 25,
+  "tags": ["api", "anthropic", "terminal", "curl"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll make a real API call from the terminal, see a live Claude response as raw JSON, and understand what each part of the request does."
+    },
+    {
+      "type": "text",
+      "content": "## Why Start With the Terminal?\n\nBefore using an SDK, it's valuable to see the raw request once. The SDK is an abstraction — it hides the HTTP details. Making one raw call first means you understand exactly what the SDK is doing for you later. When something breaks, you can strip back to the raw request to diagnose it.\n\nIn this lesson you'll use PowerShell's `Invoke-RestMethod` command, which is the PowerShell equivalent of `curl` on Mac/Linux. It sends HTTP requests and parses JSON responses automatically."
+    },
+    {
+      "type": "text",
+      "content": "## The Request, Piece by Piece\n\nHere is the full PowerShell command to call the Anthropic API:"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "$response = Invoke-RestMethod `\n  -Uri \"https://api.anthropic.com/v1/messages\" `\n  -Method POST `\n  -Headers @{\n    \"x-api-key\"         = $env:ANTHROPIC_API_KEY\n    \"anthropic-version\" = \"2023-06-01\"\n    \"content-type\"      = \"application/json\"\n  } `\n  -Body '{\n    \"model\": \"claude-haiku-4-5-20251001\",\n    \"max_tokens\": 100,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Say hello in exactly 10 words.\"}\n    ]\n  }'\n\n$response.content[0].text"
+    },
+    {
+      "type": "text",
+      "content": "Breaking down each part:\n\n**`-Uri`** — the endpoint URL. This is the one URL for all messages calls.\n\n**`-Method POST`** — we're sending data to the server, so we use POST (not GET).\n\n**`-Headers`** — three required headers:\n- `x-api-key`: your API key (read from the environment variable, never hardcoded)\n- `anthropic-version`: always `2023-06-01` — this pins the API version so your code doesn't break if Anthropic changes the response format\n- `content-type`: tells the server the body is JSON\n\n**`-Body`** — the JSON request body with model, max_tokens, and messages.\n\n**`$response.content[0].text`** — extracts Claude's reply from the nested response object."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The backtick (`) at the end of each line** is PowerShell's line continuation character — it means \"the command continues on the next line.\" This is just for readability. You could write the entire command on one line."
+    },
+    {
+      "type": "text",
+      "content": "## What the Full Response Looks Like\n\nIf you print `$response` instead of `$response.content[0].text`, you'll see the full response object:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"id\": \"msg_01XFDUDYJgAACzvnptvVoYEL\",\n  \"type\": \"message\",\n  \"role\": \"assistant\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"Hello there! Greetings to you on this fine day.\"\n    }\n  ],\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"stop_reason\": \"end_turn\",\n  \"stop_sequence\": null,\n  \"usage\": {\n    \"input_tokens\": 17,\n    \"output_tokens\": 10\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "## Common Errors and What They Mean\n\n**401 Unauthorized:**\n```\nInvoke-RestMethod: Response status code does not indicate success: 401 (Unauthorized).\n```\nYour API key is wrong, missing, or expired. Check: is `$env:ANTHROPIC_API_KEY` set? Run `echo $env:ANTHROPIC_API_KEY` to verify.\n\n**429 Too Many Requests:**\n```\nInvoke-RestMethod: Response status code does not indicate success: 429 (Too Many Requests).\n```\nYou hit the rate limit. Wait 30-60 seconds and try again. New API keys have lower rate limits that increase with usage.\n\n**400 Bad Request:**\n```\nInvoke-RestMethod: Response status code does not indicate success: 400 (Bad Request).\n```\nThe JSON body is malformed. Check for missing quotes, extra commas, or invalid model name. Use a JSON validator if needed.\n\n**Model not found:**\nIf you get a 404 or model error, the model ID may have changed. Check `docs.anthropic.com/en/docs/about-claude/models` for the current Haiku model ID."
+    },
+    {
+      "type": "workshop",
+      "tag": "API",
+      "title": "Make a Real API Call",
+      "content": "You'll run the command above and get a live response from Claude.\n\n**Step 1 — Set your API key**\nIn the VS Code integrated terminal:\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-api03-your-key-here\"\n```\nVerify: `echo $env:ANTHROPIC_API_KEY`\n\n**Step 2 — Run the API call**\nCopy and run this command:\n```powershell\n$response = Invoke-RestMethod `\n  -Uri \"https://api.anthropic.com/v1/messages\" `\n  -Method POST `\n  -Headers @{\n    \"x-api-key\"         = $env:ANTHROPIC_API_KEY\n    \"anthropic-version\" = \"2023-06-01\"\n    \"content-type\"      = \"application/json\"\n  } `\n  -Body '{\"model\":\"claude-haiku-4-5-20251001\",\"max_tokens\":100,\"messages\":[{\"role\":\"user\",\"content\":\"Say hello in exactly 10 words.\"}]}'\n\n$response.content[0].text\n```\n\n**Step 3 — Look at the full response**\nNow print the whole response to see all the fields:\n```powershell\n$response | ConvertTo-Json -Depth 10\n```\nFind and read:\n- `content[0].text` — Claude's reply\n- `usage.input_tokens` — tokens in your request\n- `usage.output_tokens` — tokens in Claude's reply\n- `stop_reason` — why Claude stopped\n\n**Step 4 — Modify the prompt**\nChange the prompt and re-run:\n```powershell\n$body = '{\"model\":\"claude-haiku-4-5-20251001\",\"max_tokens\":200,\"messages\":[{\"role\":\"user\",\"content\":\"List 3 benefits of learning to code. Use bullet points.\"}]}'\n\n$r = Invoke-RestMethod `\n  -Uri \"https://api.anthropic.com/v1/messages\" `\n  -Method POST `\n  -Headers @{\"x-api-key\"=$env:ANTHROPIC_API_KEY;\"anthropic-version\"=\"2023-06-01\";\"content-type\"=\"application/json\"} `\n  -Body $body\n\n$r.content[0].text\n```\n\n**What to notice:** The response arrives as a structured object. You navigate to the text with `.content[0].text`. The `usage` field is always there — you'll use it to calculate costs in lesson 11-6."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 11-4.** You've talked to Claude at the raw API level — no SDK, no library, just an HTTP request. Every AI tool you'll ever build is doing exactly this under the hood. Next: using the SDK so you don't have to write raw HTTP every time."
+    }
+  ],
+  "nextLesson": "11-5",
+  "prevLesson": "11-3"
+}

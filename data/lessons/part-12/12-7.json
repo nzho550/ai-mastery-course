@@ -1,0 +1,47 @@
+{
+  "id": "12-7",
+  "title": "Choosing the Right Local Model",
+  "part": 12,
+  "estimatedMinutes": 20,
+  "tags": ["local-ai", "models", "ollama", "model-selection"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou've installed Ollama, run models interactively, and connected them to your tools. Now the practical question: which model should you actually use? This lesson gives you a framework for choosing — and a benchmark exercise that produces a personal recommendation based on your actual hardware and use cases."
+    },
+    {
+      "type": "text",
+      "content": "## The Model Families\n\nLocal models come from several major open-source families. Here's what you need to know about each:\n\n**Llama (Meta)**\nThe most widely supported family. `llama3.2:3b` is the go-to for speed-sensitive tasks. `llama3.3:70b` approaches frontier quality but needs 64GB+ RAM or a dedicated GPU. The 3B and 8B versions are excellent starting points.\n\n**Phi (Microsoft)**\nMicrosoft's compact research models. Known for punching above their weight on code and reasoning tasks relative to their size. `phi4` (~9GB) is one of the best quality-per-GB models available. `phi3.5-mini` is faster but less capable. Good default choice if you have 12GB+ RAM.\n\n**Mistral / Mixtral (Mistral AI)**\nFrench AI lab. `mistral:7b` is a reliable workhorse with strong instruction-following. `mixtral:8x7b` (a mixture-of-experts model) has excellent quality but requires ~48GB RAM.\n\n**Gemma (Google)**\nStrong at following instructions precisely. `gemma2:9b` is well-regarded for its size. Good for tasks where you need the model to do exactly what you ask, no more.\n\n**Qwen (Alibaba)**\nStrong multilingual performance, particularly for Chinese. `qwen2.5:7b` is competitive with Mistral at the same size and has good coding ability.\n\n**DeepSeek-R1**\nReasoning-focused model. `deepseek-r1:7b` is surprisingly capable at math and logic problems for its size. Good if your local use case involves reasoning tasks."
+    },
+    {
+      "type": "text",
+      "content": "## The Selection Decision Tree\n\nWalk through these questions in order:\n\n**1. How much RAM does your machine have?**\n- 8GB → stick to 3B models: `llama3.2:3b`, `phi3.5-mini`\n- 16GB → 7B–9B models work well: `phi4`, `mistral:7b`, `llama3.1:8b`\n- 32GB+ → 13B models are accessible: `llama3.1:13b`, `qwen2.5:14b`\n- 64GB+ → 70B models become feasible: `llama3.3:70b`, `qwen2.5:72b`\n\n**2. What kind of tasks will you run?**\n- Code writing/explanation → `phi4` or `deepseek-r1`\n- General Q&A and summarization → `llama3.2` or `mistral`\n- Following precise instructions → `gemma2`\n- Multilingual work → `qwen2.5`\n- Fast, simple tasks → smallest model that gets the job done\n\n**3. How important is response speed?**\n- Under 2 seconds → use a 3B model\n- 2–10 seconds is acceptable → 7B is your sweet spot\n- Willing to wait longer for quality → 13B+\n\n**4. Do you have a GPU?**\nA CUDA-compatible NVIDIA GPU (8GB VRAM+) dramatically speeds up inference. Ollama detects and uses it automatically. With GPU acceleration, a 7B model responds in under a second."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Practical starting point for most people:** If you have 16GB+ RAM, start with `phi4`. It's a strong general-purpose model that handles code, summarization, and Q&A well. If it feels slow for quick tasks, keep `llama3.2:3b` around for speed-sensitive work where quality is less critical."
+    },
+    {
+      "type": "text",
+      "content": "## How to Pull Additional Models\n\nPull models from the Ollama library using their names from `ollama.ai/library`:\n\n```\nollama pull mistral\nollama pull llama3.2:3b\nollama pull gemma2:9b\nollama pull qwen2.5:7b\nollama pull deepseek-r1:7b\n```\n\nCheck what you have installed: `ollama list`\n\nRemove a model to free disk space: `ollama rm modelname`\n\nYou don't need all of them. Two or three models that cover different use cases (one fast, one quality) is plenty."
+    },
+    {
+      "type": "text",
+      "content": "## The Benchmark Matrix\n\nBenchmark results from the internet are useful but impersonal — they measure average performance across many tasks, not your specific tasks on your specific hardware. Running your own benchmarks takes 20 minutes and produces a guide you'll actually trust.\n\nTest each model on these four tasks, and score each 1–5 for quality:\n\n| Task | What to test |\n|------|--------------|\n| Technical explanation | \"Explain what a REST API is to a beginner using a real-world analogy\" |\n| Code writing | \"Write a JavaScript function that validates an email address format\" |\n| Summarization | Paste 3 paragraphs of text and ask for a 2-sentence summary |\n| Factual Q&A | Ask a verifiable fact you know the answer to |\n\nAlso note response time for each model (roughly — fast / medium / slow).\n\nThe model with the best score for your most common task type is your primary local model."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Build Your Personal Local Model Guide",
+      "content": "This workshop has two parts: a benchmark test and a written recommendation.\n\n**Part 1 — Run the benchmark (if you have multiple models):**\n\nIf you only have one model installed, run the four test prompts below and note the quality and speed.\n\nFor each model you have installed, run these four prompts (substituting your model name):\n```\nollama run phi4 \"Explain what a REST API is to a beginner using a real-world analogy.\"\n```\n```\nollama run phi4 \"Write a JavaScript function that checks if a string is a valid email address.\"\n```\n```\nollama run phi4 \"Summarize the following in 2 sentences: [paste 2-3 paragraphs from any article]\"\n```\n```\nollama run phi4 \"What year was the Python programming language first released?\"\n```\nRepeat for each model you have. Score each response 1–5 and note speed.\n\n**Part 2 — Write your personal guide:**\n\nIn VS Code, open `notes/my-ai-workflow.md` and add a section:\n```\n## Local AI Setup\n\n### Hardware\n- RAM: [your amount]\n- GPU: [yes/no, and model if yes]\n\n### Installed Models\n- [model name]: [what I use it for]\n- [model name]: [what I use it for]\n\n### My Routing Rules\n- For fast, simple tasks: [model name]\n- For quality work on private code: [model name]\n- For offline coding assistance: [model name] via Continue.dev\n\n### When I use local vs cloud\n- Local: [your specific criteria]\n- Cloud: [your specific criteria]\n```\n\nThis section of your workflow document is worth keeping up to date as new models release. A better 7B model that fits your RAM is worth switching to — the configuration changes are minimal."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 12 — Local AI.** You can now install, run, and connect local models to your development tools. Part 13 shifts from tools to wisdom: hallucinations, privacy, cost, copyright, and security — the things you need to know to use AI professionally and safely."
+    }
+  ],
+  "nextLesson": "13-1",
+  "prevLesson": "12-6"
+}

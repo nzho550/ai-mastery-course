@@ -1,0 +1,43 @@
+{
+  "id": "10-7",
+  "title": "Designing Your Personal AI Workflow",
+  "part": 10,
+  "estimatedMinutes": 20,
+  "tags": ["automation", "workflow-design", "productivity", "reflect"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have a documented, personal AI workflow playbook that covers which tool you use for what, your daily automation routine, and the specific automations you plan to build next."
+    },
+    {
+      "type": "text",
+      "content": "## Reviewing What You've Built\n\nIn Part 10 you covered five different automation layers:\n\n**n8n** — Free, powerful, open-source. Native AI nodes. Best for: complex multi-step workflows, AI processing, batch jobs, anything where you want full control at no cost.\n\n**Zapier** — Most polished, easiest setup, 6,000+ integrations. Best for: quick connections between mainstream apps, non-technical users, one-step automations. AI step requires paid plan.\n\n**Make** — Visual canvas, generous free tier. Best for: teams that think visually, complex data transformations, calling any API via the HTTP module.\n\n**AI-Assisted Git** — Using Claude to write commit messages, PR descriptions, changelogs. Best for: developers who want better git history with zero extra effort.\n\n**GitHub Actions** — Code-based CI/CD. Best for: automated testing, deployment, and AI review on every push. Requires a GitHub repo."
+    },
+    {
+      "type": "text",
+      "content": "## Decision Framework: Which Tool for Which Job?\n\nUse this as a starting point — adjust based on what you've found works for you:\n\n| Situation | Best tool |\n|-----------|----------|\n| Connecting two cloud apps, no AI needed | Zapier free tier or n8n |\n| AI processing step in a workflow, cost matters | n8n (free AI nodes) |\n| AI processing step, fastest setup matters | Zapier (paid) |\n| Calling a REST API with no native module | Make HTTP module or n8n HTTP node |\n| Recurring scheduled jobs with AI | n8n Cloud |\n| Git commit messages and PRs | Claude Code in terminal |\n| Automated testing and deployment | GitHub Actions |\n| Code review on every PR | GitHub Actions + AI review action |\n\nThe honest answer is: most people pick **one** of n8n, Zapier, or Make and use it for 90% of their automation needs. The git and GitHub Actions patterns apply to everyone writing code regardless of which automation platform they use."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The single best automation you can build:** A daily morning digest. Pick the information sources you check manually every morning (email, news, GitHub notifications, calendar). Wire them through an AI summarization step. Deliver to your inbox by 7am. You've just saved 15-20 minutes per day — over a year that's 90+ hours returned to your life."
+    },
+    {
+      "type": "text",
+      "content": "## The Personal AI Stack\n\nYour \"personal AI stack\" is your specific combination of tools that handles your work. It's personal — someone who manages client projects needs different automations than a developer shipping code or a student managing research.\n\nThe questions to ask:\n1. **What do I do repeatedly?** (from your audit in lesson 10-1)\n2. **Which of those could be fully automated?** (no human judgment needed)\n3. **Which could be semi-automated?** (AI does the first draft, I review)\n4. **For the ones I want to automate — which tool fits?**\n5. **What's the one automation that would save me the most time?** (Start there.)\n\nDon't try to automate everything at once. Build one thing, let it run for a week, verify it's doing what you want, then build the next one."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Design Your Personal AI Workflow",
+      "content": "Create `notes/my-ai-workflow.md` in your VS Code project. Write your personal AI workflow playbook using this structure:\n\n```markdown\n# My AI Workflow\n\n## Tools I Use\n- Automation platform: [n8n / Zapier / Make — and why]\n- Git workflow: [which AI git patterns I've adopted]\n- CI/CD: [GitHub Actions — yes/no, what workflows are active]\n\n## Daily Routine\n- Morning: [which automation runs, what it delivers]\n- Before starting work: [any AI-assisted checks or briefs]\n- During development: [git patterns, Claude Code use]\n- End of day: [any wrap-up automations]\n\n## Active Automations\n[List each running workflow: what it does, when it runs, what tool it's on]\n\n## Next 3 Automations I'll Build\n1. [Automation]: [Tool]: [Why this one next]\n2. [Automation]: [Tool]: [Why]\n3. [Automation]: [Tool]: [Why]\n\n## Tool Routing\n- Research questions → [tool]\n- Writing help → [tool]\n- Code work → [tool]\n- Email management → [tool]\n- Automation → [tool]\n- [add your own rows]\n\n## What I Don't Automate (and why)\n[Be honest — some things should stay manual]\n```\n\nThis document is the most practical output of Part 10. It turns what you've learned into a living system you'll actually use. Update it whenever you add a new automation or change a tool."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 10.** You've covered the full automation landscape — from no-code app connectors to AI-powered git workflows to CI/CD pipelines. You have real automations running and a documented personal workflow system. Part 11 takes the next step: building your own AI tools from scratch using the Anthropic API."
+    }
+  ],
+  "nextLesson": "11-1",
+  "prevLesson": "10-6"
+}

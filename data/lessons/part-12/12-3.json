@@ -1,0 +1,52 @@
+{
+  "id": "12-3",
+  "title": "Running Your First Local Model",
+  "part": 12,
+  "estimatedMinutes": 25,
+  "tags": ["local-ai", "ollama", "terminal", "llama", "models"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nIn this lesson you'll have a real conversation with a local model, understand how model sizes affect speed and quality, and see how Ollama's API works — the same API that Continue.dev and Claude Code will use in the next two lessons."
+    },
+    {
+      "type": "text",
+      "content": "## Running a Model Interactively\n\nOnce a model is downloaded, running it is a single command:\n\n```\nollama run phi4\n```\n\nThis starts an interactive session. You type your message, press Enter, and the model responds — all on your machine.\n\nTo exit the session, type `/bye` and press Enter.\n\nSome useful commands inside an Ollama session:\n```\n/help        — list all session commands\n/clear       — clear conversation history\n/show info   — show the current model's details\n/bye         — exit\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Understanding Model Sizes\n\nModels are described by their parameter count: 3B, 7B, 13B, 70B. The number refers to billions of parameters — the learned numerical weights that make up the model's \"knowledge.\"\n\nHere's the practical guide:\n\n| Size | RAM Needed | Speed | Quality | Best For |\n|------|-----------|-------|---------|----------|\n| 3B | ~4GB | Very fast | Basic | Simple Q&A, short summaries, fast completion |\n| 7B | ~8GB | Fast | Good | Most everyday tasks, code explanation, drafting |\n| 13B | ~16GB | Moderate | Better | Reasoning, longer documents, more nuanced output |\n| 70B | ~64GB | Slow (CPU) | Excellent | Near-frontier quality (needs dedicated GPU for speed) |\n\nFor most people, the 7B tier is the practical sweet spot: capable enough for real work, fast enough to feel responsive, and manageable in RAM.\n\n**Quantization:** You'll see model tags like `:q4_K_M` or `:fp16`. These indicate how the model weights are compressed. Q4 quantization (4-bit) makes models about 4× smaller with minimal quality loss — most Ollama models use this by default, which is why the file sizes are smaller than you'd expect."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Why does \"3B\" mean 3 billion?** Each parameter is a number that the model learned during training. GPT-3 had 175B parameters. Claude and GPT-4 are estimated at hundreds of billions to trillions. A 3B local model is genuinely small by comparison — but modern training techniques mean small models punch above their weight for focused tasks."
+    },
+    {
+      "type": "text",
+      "content": "## The Ollama Model Library\n\nOllama hosts a curated library at `ollama.com/library`. The major model families you'll encounter:\n\n**Llama (Meta)** — The most widely used family. `llama3.2:3b` is great for fast tasks. `llama3.3:70b` rivals frontier models but needs serious hardware.\n\n**Phi (Microsoft)** — Microsoft's compact models punch above their weight for code and reasoning. `phi4` is excellent for 9GB. `phi3.5:mini` is smaller and very fast.\n\n**Mistral / Mixtral** — French AI lab known for strong coding ability. `mistral:7b` is a reliable workhorse.\n\n**Gemma (Google)** — Google's open model family. `gemma2:9b` has strong instruction-following.\n\n**Qwen (Alibaba)** — Strong multilingual models, particularly good for Chinese text. `qwen2.5:7b` is a solid choice.\n\n**DeepSeek-R1** — Strong reasoning model from a Chinese lab. Good for math and code at small sizes.\n\nPull any of these with `ollama pull <name>`."
+    },
+    {
+      "type": "text",
+      "content": "## Using the API Directly\n\nOllama's API at `localhost:11434` works even when you're not in an interactive session. Here's how to call it from PowerShell:\n\n```\n$body = @{\n    model = \"phi4\"\n    prompt = \"What is the capital of France? One word answer.\"\n    stream = $false\n} | ConvertTo-Json\n\nInvoke-RestMethod -Uri \"http://localhost:11434/api/generate\" `\n    -Method POST `\n    -ContentType \"application/json\" `\n    -Body $body\n```\n\nYou'll see a JSON response with a `response` field containing the model's answer.\n\nThe API also supports the OpenAI chat format at `/v1/chat/completions` — which is exactly what Connect.dev, Claude Code, and other tools use to connect."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Speed tip:** The first response after loading a model is slow — the model has to load into RAM (\"warm up\"). Subsequent responses in the same session are much faster because the model stays loaded. If you're doing repeated tasks, keep the session open instead of relaunching."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Run a Model and Compare to Claude",
+      "content": "You need at least one model downloaded from lesson 12-2. Use `phi4` or `llama3.2:3b` depending on what you pulled.\n\n**Step 1 — Pull a second model (if you only have one):**\nIf you pulled `phi4`, also get the small Llama:\n```\nollama pull llama3.2:3b\n```\nIf you pulled `llama3.2:3b`, get Phi-4 (if you have the disk space):\n```\nollama pull phi4\n```\n\n**Step 2 — Ask both models the same question:**\n\nRun this prompt in each model:\n```\nollama run phi4 \"Explain recursion in programming using a real-world analogy. Be concise.\"\n```\nThen:\n```\nollama run llama3.2:3b \"Explain recursion in programming using a real-world analogy. Be concise.\"\n```\n\n**Observe:** Which was faster? Which gave a better explanation?\n\n**Step 3 — Ask a coding question:**\n```\nollama run phi4 \"Write a JavaScript function that takes an array of numbers and returns only the even ones.\"\n```\nRun the same prompt on your other model. Compare the code quality.\n\n**Step 4 — Test it on a private task:**\nType something you would NOT want to send to a cloud service — maybe summarizing a personal note, reviewing a private document, or asking a question you'd prefer to keep private. See how well the local model handles it.\n\n**Step 5 — Compare to Claude:**\nOpen Claude.ai and ask the same recursion question. Write two observations:\n- What did the local model do better or worse?\n- Was the quality difference enough to matter for this specific task?\n\n**Save your notes.** In lesson 12-7 you'll build a full model selection guide based on observations like these."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 12-3.** You've run local models interactively and have a first-hand sense of the quality/speed tradeoffs. Next: LM Studio, the GUI interface for the same models."
+    }
+  ],
+  "nextLesson": "12-4",
+  "prevLesson": "12-2"
+}

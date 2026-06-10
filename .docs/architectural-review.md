@@ -771,9 +771,12 @@ Branch: `feature/phase-1-scaffolding`
 - Security: `.claude/settings.json` (contains GitHub PAT + Context7 key) excluded via `.gitignore`. PAT `ghp_ttNml…` and Context7 key `ctx7sk-d0cd…` were briefly exposed and must be rotated.
 
 **Content status (updated 2026-06-10):**
-- 22 lesson JSON files written: Parts 1–3 complete (1-1 through 3-8). Remaining 90 lessons show "Coming Soon" card.
+- **ALL 112 lesson JSON files written** — Parts 1–14 complete (1-1 through 14-5). No "Coming Soon" cards remain.
 - All 112 curriculum entries fully populated (id, title, estimatedMinutes, tags, prev/next).
-- JSON fixer script added (`scripts/fix-json.js`) to catch and repair literal control characters in JSON strings.
+- 107/112 lessons have a hands-on workshop section. All next/prev chains validated.
+- JSON fixer script (`scripts/fix-json.js`) guards against literal control characters in JSON strings.
+
+**Implementation complete — Phase 4 (Content Authoring) done.**
 
 **To run locally:**
 ```

@@ -1,0 +1,56 @@
+{
+  "id": "10-4",
+  "title": "Make (Integromat) — Visual Automation",
+  "part": 10,
+  "estimatedMinutes": 25,
+  "tags": ["automation", "make", "no-code", "ai-workflows"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand Make's module-based visual approach to automation and be able to call the Anthropic API directly from a Make scenario using the HTTP module."
+    },
+    {
+      "type": "text",
+      "content": "## What is Make?\n\nMake (formerly Integromat) is a visual automation platform at make.com. Like n8n and Zapier, it connects apps and services. What distinguishes Make:\n\n- **Visual canvas** — circular nodes connected by lines, very visual\n- **Module-based** — every step is a \"module\" you configure\n- **Generous free tier** — 1,000 operations/month free (an operation = one module execution)\n- **Cloud-only** — no self-hosting option (unlike n8n)\n- **Scheduling** — scenarios run on a schedule you define\n\nMake sits between Zapier (most polished) and n8n (most powerful) in terms of complexity. It's popular with marketers and operations teams because its visual interface makes complex data transformations very readable."
+    },
+    {
+      "type": "text",
+      "content": "## Calling Claude from Make\n\nMake has a built-in OpenAI module, but **no official Anthropic/Claude module**. This is not a showstopper — Make's HTTP module lets you call any REST API, including the Anthropic Messages API.\n\nThe HTTP module sends a raw HTTP request. For Claude, that means:\n- URL: `https://api.anthropic.com/v1/messages`\n- Method: POST\n- Headers: three required headers\n- Body: JSON with your model, max_tokens, and messages array\n\nThis is more setup than a dedicated module, but it gives you full control over the request and works with any Anthropic model."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Alternative approaches:** If you want less HTTP configuration, you can (1) use the OpenAI module pointed at a Claude-compatible proxy, or (2) use n8n's native Claude integration from lesson 10-2 instead. The concept this lesson teaches — calling an API via HTTP in a visual tool — applies everywhere."
+    },
+    {
+      "type": "text",
+      "content": "## The HTTP Module Configuration\n\nHere is the exact configuration you'll use to call Claude from Make's HTTP module:\n\n**URL:** `https://api.anthropic.com/v1/messages`\n\n**Method:** POST\n\n**Headers:**\n- `x-api-key` → your Anthropic API key\n- `anthropic-version` → `2023-06-01`\n- `content-type` → `application/json`\n\n**Body (Raw / JSON):**"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"{{your_input_from_previous_module}}\"\n    }\n  ]\n}"
+    },
+    {
+      "type": "text",
+      "content": "The `{{your_input_from_previous_module}}` part is Make's dynamic variable syntax — you map data from a previous module (like a Google Sheets row or email body) into the prompt.\n\nThe response comes back as a JSON object. To extract Claude's text response, parse: `body > content > 0 > text`."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Build a Make Scenario Calling the Anthropic API",
+      "content": "You'll build a scenario that watches a Google Sheet for new rows, sends the row content to Claude via the HTTP module for processing, and emails you the result.\n\n**Setup:**\n1. Go to make.com and sign up for the free tier\n2. Have your Anthropic API key from lesson 11-3 ready (if you haven't done Part 11 yet, use a placeholder and come back)\n3. Create a new Google Sheet with two columns: `Topic` and `Status`\n\n**Build the Scenario:**\n\n**Step 1 — Add the Google Sheets module (trigger)**\n1. Click **Create a new scenario**\n2. Click the large `+` on the canvas\n3. Search for **Google Sheets** → choose **Watch new rows**\n4. Connect your Google account\n5. Select your spreadsheet and sheet\n6. Set \"Maximum number of returned rows\" to 1\n\n**Step 2 — Add the HTTP module**\n1. Click the `+` on the right of the Google Sheets module\n2. Search for **HTTP** → choose **Make a request**\n3. Configure:\n   - URL: `https://api.anthropic.com/v1/messages`\n   - Method: POST\n   - Headers (click Add item for each):\n     - Name: `x-api-key` / Value: `sk-ant-your-key-here`\n     - Name: `anthropic-version` / Value: `2023-06-01`\n     - Name: `content-type` / Value: `application/json`\n   - Body type: Raw\n   - Content type: JSON (application/json)\n   - Request content (paste and replace the topic variable):\n```\n{\"model\":\"claude-haiku-4-5-20251001\",\"max_tokens\":200,\"messages\":[{\"role\":\"user\",\"content\":\"Write a 3-sentence social media post about this topic: {{1.Topic}}\"}]}\n```\n   - Parse response: Yes\n\n**Step 3 — Add the Gmail module**\n1. Click `+` after the HTTP module\n2. Search for **Gmail** → **Send an email**\n3. To: your email address\n4. Subject: `Social Post Draft — {{1.Topic}}`\n5. Content: Click in the field, then map: HTTP module → body → content → 0 → text\n\n**Test and Activate:**\n1. Click **Run once**\n2. Add a row to your Google Sheet with a topic (e.g., \"The future of AI coding tools\")\n3. Watch the scenario execute — the flow turns green on each successful module\n4. Check your inbox for the drafted social post\n5. Click the clock icon to schedule: every 15 minutes (or any interval)\n6. Toggle the scenario ON\n\n**What to observe:** The HTTP module gives you direct access to any API Make doesn't have a native module for. This pattern works for any REST API — not just Anthropic."
+    },
+    {
+      "type": "text",
+      "content": "## Make vs n8n vs Zapier: The Honest Comparison\n\n| | Make | n8n | Zapier |\n|--|------|-----|--------|\n| Free tier AI | HTTP module only | Native AI nodes free | Paid plan required |\n| Visual style | Circular canvas | Flowchart canvas | Step-by-step form |\n| Best for | Visual thinkers, data transformation | Maximum power + free | Fastest setup |\n| Claude native | No (use HTTP) | Yes | No (use Webhook or paid) |\n| Complexity | Medium | Medium-high | Low |\n\nNone of these tools is objectively best — they're tradeoffs. Most people settle on one and learn it well."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 10-4.** You've seen all three major no-code automation platforms and know how to call the Anthropic API from any of them, even without a native module. Next: using AI to improve your git workflows."
+    }
+  ],
+  "nextLesson": "10-5",
+  "prevLesson": "10-3"
+}

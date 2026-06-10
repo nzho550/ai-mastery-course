@@ -1,0 +1,52 @@
+{
+  "id": "13-1",
+  "title": "AI Hallucinations — Deep Dive",
+  "part": 13,
+  "estimatedMinutes": 20,
+  "tags": ["safety", "hallucinations", "verification", "critical-thinking"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou've been using AI for this entire course, which means you've been building intuition — accurate and inaccurate — about when to trust it. This lesson makes that intuition explicit. You'll learn why hallucinations happen structurally, what categories they fall into, and how to build a verification habit that becomes automatic."
+    },
+    {
+      "type": "text",
+      "content": "## Why Hallucinations Happen\n\nThe honest answer is built into how language models work: they don't retrieve facts, they predict text.\n\nWhen you ask Claude \"What year was X company founded?\", the model isn't looking up a record. It's predicting what a plausible, well-formed answer to that question looks like, based on patterns learned from billions of text examples. Most of the time, the predicted answer is correct — because correct information is more common in training data than incorrect information.\n\nBut \"most of the time\" isn't the same as \"always.\" When the model encounters a question where:\n- The correct information was rare in training data\n- The question is about something that happened after the training cutoff\n- The phrasing leads the model into a confident-sounding incorrect pattern\n- The question is about something that doesn't exist\n\n...the model still predicts a plausible-sounding answer. It just happens to be wrong. This is a hallucination: confidently stated, fluently written, incorrect.\n\nThe key insight is that the model cannot easily tell you \"I don't know\" in a calibrated way — that would require a different kind of architecture. Instead, it produces text that sounds like a confident answer regardless of whether the underlying information is reliable."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The dangerous kind:** Hallucinations are most harmful when the output is plausible enough that you'd never think to verify it. \"The Eiffel Tower is 324 meters tall\" is easy to verify. \"The Smith v. Jones case established the precedent for X\" in a legal brief — if you don't know this area of law, you might miss a fabricated citation entirely."
+    },
+    {
+      "type": "text",
+      "content": "## The Four Categories of Hallucination\n\n**1. Factual hallucinations**\nThe model states an incorrect fact with confidence. \"Einstein won the Nobel Prize for relativity\" (he won it for the photoelectric effect). \"Python was created in 1987\" (1991). Easy to verify; dangerous if you don't.\n\n**2. Source/citation hallucinations**\nThe model invents a citation that doesn't exist. A real journal name, a plausible author, a credible-sounding title — all fabricated. This is particularly common when you ask AI to provide references. The paper title sounds legitimate. The DOI leads nowhere.\n\n**3. Temporal hallucinations**\nThe model's training data has a cutoff. It doesn't know what happened after that date. But it can sound confident about recent events, sometimes mixing up real events with plausible-sounding extrapolations. \"The latest version of X supports Y\" may have been true at training time and false now.\n\n**4. Reasoning hallucinations**\nThe model's chain of logic contains a flaw, but the conclusion sounds reasonable. More common on multi-step problems — math, legal reasoning, technical architecture. The steps sound plausible but one of them is wrong, making the conclusion wrong even when stated confidently."
+    },
+    {
+      "type": "text",
+      "content": "## High-Risk Domains\n\nSome domains demand extra verification because the stakes of an error are high or the hallucination is hard to detect:\n\n**Medical information:** Drug interactions, dosages, symptom interpretation. Models can sound authoritative and be wrong in ways that matter.\n\n**Legal:** Case citations, statute interpretation, jurisdiction-specific rules. Fabricated cases are a real problem — lawyers have been sanctioned for filing briefs citing AI-invented cases.\n\n**Financial:** Specific numbers, tax rules, regulatory requirements. These change frequently and the model's knowledge may be out of date.\n\n**Technical specifications:** API parameters, library versions, configuration syntax. Check against the actual documentation — the model may have learned from outdated examples.\n\n**Historical specifics:** Exact dates, exact quotes, exact statistics. The model knows the general shape of history but can be wrong on details.\n\nFor casual use — brainstorming, drafting, explaining concepts — the hallucination risk is manageable. For anything that will be used for decisions, published, or handed to a professional, verify."
+    },
+    {
+      "type": "text",
+      "content": "## Detection and Mitigation Strategies\n\n**Ask the model how confident it is.** Not \"Is this right?\" but \"How confident are you in this specific claim? What would you verify to be sure?\" Models will often flag their own uncertainty if you give them permission to.\n\n**Ask for citations, then verify them.** If the model provides a source, check that the source exists and says what the model claims. Half the time a citation will be real; half the time it will be a hallucination. This alone is worth doing for anything important.\n\n**Cross-check with a second source.** If Claude says X, verify X with a search, a human expert, or official documentation before acting on it.\n\n**Use RAG for high-stakes tasks.** Retrieval-Augmented Generation means giving the model the source document and asking it to answer based on that document — not from memory. \"Based on the text I've pasted below, what does it say about X?\" is much more reliable than \"What do you know about X?\"\n\n**Watch for suspiciously specific numbers.** \"Studies show 73% of developers...\" — where did that number come from? If the model cites a statistic without a source, it may have been generated to sound plausible."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The calibration question:** After getting an important answer from AI, ask: \"What's the part of your answer you're least confident about, and what would you do to verify it?\" This forces the model to expose its uncertainty — and often it will point directly at the thing that needs checking."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "The Hallucination Hunt",
+      "content": "Open Claude.ai. You're going to run five fact-check tests — a mix of easy and hard — and score the results.\n\n**Test 1 — Easy factual:**\nAsk: \"What year was the iPhone first released?\"\nVerify: Wikipedia or Apple's own website. Note: right or wrong?\n\n**Test 2 — Specific statistic:**\nAsk: \"What percentage of Fortune 500 companies use generative AI tools?\"\nNote Claude's answer and any source it cites. Try to find that source. Does it exist? Does it say that?\n\n**Test 3 — Invented entity test:**\nAsk: \"Tell me about the AI startup Cortex Dynamics, founded in San Francisco in 2021.\"\n(This company does not exist — or if it does, you didn't tell Claude about it.) Observe: does it admit it doesn't know, or does it invent details?\n\n**Test 4 — Recent event:**\nAsk about something that happened in the last few months that you know the answer to. See whether Claude knows, says it doesn't know, or confidently provides wrong information.\n\n**Test 5 — Technical specification:**\nAsk: \"What is the correct syntax for [a specific function in a library you use]?\"\nVerify against the official documentation. Is the syntax exactly right?\n\n**After all five tests, write:**\n1. Your score: how many did Claude get exactly right?\n2. The riskiest error type you observed\n3. Your personal 3-step verification protocol: \"For any important fact I get from AI, I will: 1. ___ 2. ___ 3. ___\"\n\nSave this protocol somewhere you'll see it. The habit is the point."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 13-1.** Hallucinations are not a bug to be fixed — they're a structural property of how language models work. The professionals who use AI most effectively are the ones who've internalized this and built verification into their workflow automatically."
+    }
+  ],
+  "nextLesson": "13-2",
+  "prevLesson": "12-7"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "10-6",
+  "title": "GitHub Actions + AI",
+  "part": 10,
+  "estimatedMinutes": 30,
+  "tags": ["github-actions", "ci-cd", "automation", "developer-workflow"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what GitHub Actions does, how to read a YAML workflow file, and how to use Claude to generate workflows for your projects."
+    },
+    {
+      "type": "text",
+      "content": "## What is GitHub Actions?\n\nGitHub Actions is a CI/CD (Continuous Integration / Continuous Delivery) system built directly into GitHub. It runs automated tasks in response to git events — pushing code, opening a pull request, merging a branch, creating a tag.\n\nWhen you push code, GitHub Actions can automatically:\n- Run your tests and fail the PR if tests don't pass\n- Check code style and formatting\n- Deploy to a server\n- Send a notification\n- Open an issue if something breaks\n- Run an AI code review\n\nThe configuration lives in your repository at `.github/workflows/` as YAML files. Every file in that folder is a separate workflow."
+    },
+    {
+      "type": "text",
+      "content": "## Reading a Workflow File\n\nHere is a minimal GitHub Actions workflow that runs on every push:"
+    },
+    {
+      "type": "code",
+      "language": "yaml",
+      "content": "name: Run Tests\n\non:\n  push:\n    branches: [main]\n  pull_request:\n    branches: [main]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Check out code\n        uses: actions/checkout@v4\n\n      - name: Set up Node.js\n        uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n\n      - name: Install dependencies\n        run: npm install\n\n      - name: Run tests\n        run: npm test"
+    },
+    {
+      "type": "text",
+      "content": "Let's break down the key parts:\n\n- `name` — what this workflow is called (appears in the GitHub UI)\n- `on` — what triggers the workflow. `push` means every push to main. `pull_request` means every PR targeting main.\n- `jobs` — the list of jobs to run. You can have multiple jobs that run in parallel or sequence.\n- `runs-on: ubuntu-latest` — every job runs on a fresh virtual machine. The VM is temporary and destroyed after the job.\n- `steps` — the list of steps within a job. Steps run in order.\n- `uses: actions/checkout@v4` — this runs a pre-built action that checks out your code onto the VM\n- `run: npm test` — runs a shell command\n\nYou don't need to memorize the syntax. Claude can generate any workflow file you need — you just need to be able to read and understand what it produces."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The best use of AI with GitHub Actions:** Describe what you want in plain English, get the YAML from Claude, then ask Claude to explain each part so you understand what you're committing. Never commit an Actions workflow you can't explain — a misconfigured workflow can expose secrets or run unintended commands."
+    },
+    {
+      "type": "text",
+      "content": "## An AI-Powered Code Review Workflow\n\nHere is a workflow that runs an AI code review whenever a pull request is opened or updated:"
+    },
+    {
+      "type": "code",
+      "language": "yaml",
+      "content": "name: AI Code Review\n\non:\n  pull_request:\n    types: [opened, synchronize]\n\njobs:\n  review:\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Check out code\n        uses: actions/checkout@v4\n        with:\n          fetch-depth: 0\n\n      - name: AI Code Review\n        uses: anc95/ChatGPT-CodeReview@main\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Note on API keys:** This particular workflow uses an OpenAI API key (`OPENAI_API_KEY`) — this is one place in the course that uses OpenAI. If you don't have an OpenAI account, search the GitHub Actions Marketplace for \"Claude code review\" for an Anthropic-native alternative. The concept (AI review on every PR) is the same regardless of which model runs it.\n\nTo add secrets to GitHub: repo Settings → Secrets and variables → Actions → New repository secret."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Generate a GitHub Actions Workflow",
+      "content": "You'll use Claude Code to generate a custom GitHub Actions workflow for your project, then push it to your GitHub repository.\n\n**Step 1 — Describe what you want**\n1. Launch `claude` in your `ai-course-projects` folder\n2. Ask: `Generate a GitHub Actions workflow YAML file for my project. The workflow should:\n- Run on every push to main and on every pull request\n- Check out the code\n- Set up Node.js 20\n- Run 'npm install'\n- Run any .js files in the exercises/ folder with node to check they don't crash\n- Post a comment on pull requests summarizing what ran`\n3. Review what Claude proposes\n\n**Step 2 — Understand the output**\nBefore accepting, ask Claude: `Explain each section of this workflow file. What does 'runs-on: ubuntu-latest' mean? What is GITHUB_TOKEN and where does it come from?`\n\nMake sure you understand:\n- What event triggers it\n- What the VM does\n- What secrets are needed (if any)\n- What the expected output is\n\n**Step 3 — Create the file**\n1. Ask Claude to create the file: `Create .github/workflows/ci.yml with this workflow`\n2. Claude will create the directory and file\n3. Open the file in VS Code and read every line\n\n**Step 4 — Push and test**\n1. Stage and commit: `git add .github/` then commit with a message like `ci: add GitHub Actions workflow`\n2. Push to your GitHub repository\n3. Go to github.com → your repo → the **Actions** tab\n4. Watch your workflow run (first run appears within 30-60 seconds)\n5. Click the workflow run to see the step-by-step output\n\n**What to observe:** Every future push to this repo will automatically run this workflow. The green checkmark or red X on each commit and PR is the CI system giving you instant feedback."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 10-6.** You can now generate, read, and deploy GitHub Actions workflows using AI. CI/CD is no longer just for large teams — it takes 10 minutes to add automation to any project. Next: designing your personal AI workflow system."
+    }
+  ],
+  "nextLesson": "10-7",
+  "prevLesson": "10-5"
+}

@@ -1,0 +1,48 @@
+{
+  "id": "12-6",
+  "title": "Connecting Local Models to Claude Code",
+  "part": 12,
+  "estimatedMinutes": 30,
+  "tags": ["local-ai", "claude-code", "ollama", "lm-studio", "settings"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nClaude Code can be configured to use any model that exposes an OpenAI-compatible API — including your local Ollama or LM Studio models. By the end of this lesson you'll know how to set this up and, just as importantly, you'll have an honest picture of when it's worth doing."
+    },
+    {
+      "type": "text",
+      "content": "## How This Works\n\nClaude Code normally calls Anthropic's API to get responses. But you can override both the model and the API endpoint in `.claude/settings.json`. When you point Claude Code at a local Ollama or LM Studio server, it sends the same requests — but they go to `localhost` instead of Anthropic's servers.\n\nThis works because Ollama and LM Studio both implement the OpenAI `/v1/chat/completions` endpoint format. Claude Code speaks that format, so the switch is just a URL and model name change.\n\nThe architecture looks like this:\n```\nClaude Code → HTTP request → localhost:1234 (LM Studio)\n                          OR localhost:11434 (Ollama)\n                          → Local model responds\n```\nNothing leaves your machine."
+    },
+    {
+      "type": "text",
+      "content": "## Configuration\n\nOpen your project's `.claude/settings.json` (or create it if it doesn't exist). Add these fields:\n\n**Option A — Using LM Studio (port 1234):**\n\nWith LM Studio's local server running (Settings → Local Server → enable):\n```json\n{\n  \"model\": \"local/phi4\",\n  \"apiBaseUrl\": \"http://localhost:1234/v1\",\n  \"apiKey\": \"local\"\n}\n```\n\n**Option B — Using Ollama directly (port 11434):**\n\nWith Ollama running in the background (`ollama serve`):\n```json\n{\n  \"model\": \"ollama/phi4\",\n  \"apiBaseUrl\": \"http://localhost:11434/v1\",\n  \"apiKey\": \"ollama\"\n}\n```\n\nThe `model` value can be anything — Claude Code passes it to the server, which uses whatever model is loaded. The `apiKey` is required by the format but local servers ignore the value.\n\nTo verify which model is active after launching Claude Code, type `/model` at the prompt."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Scope matters:** Putting this config in a project's `.claude/settings.json` only affects that project. To use a local model across all Claude Code sessions, add it to your user-level config at `C:\\Users\\YourName\\.claude\\settings.json` (Windows) or `~/.claude/settings.json` (macOS).\n\nTo revert to Claude, remove or comment out the `model`, `apiBaseUrl`, and `apiKey` fields."
+    },
+    {
+      "type": "text",
+      "content": "## The Honest Quality Assessment\n\nHere's what you'll notice when using a 7B local model through Claude Code versus Claude Sonnet:\n\n**Where local models hold up well:**\n- Explaining what a simple function does\n- Writing boilerplate (CRUD operations, basic utility functions)\n- Answering straightforward questions about syntax\n- Reformatting or reorganizing code\n\n**Where they fall short significantly:**\n- Multi-file refactors that require understanding the full codebase\n- Debugging complex logic errors\n- Architectural decisions\n- Following detailed CLAUDE.md instructions reliably\n- Understanding large context windows\n\nFor complex engineering tasks, local models will produce incomplete plans, miss edge cases, and sometimes ignore your instructions. This isn't a failure of the setup — it's the quality gap that exists between a 7B local model and a frontier-class model. The gap narrows on simple tasks and widens on complex ones.\n\n**When local Claude Code is the right choice:**\n- Working with sensitive code you can't send to cloud services\n- Simple tasks on a codebase with no internet access\n- Experimentation and learning without burning API credits\n- High-volume, repetitive code generation where per-token cost matters"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**A practical hybrid strategy:** Keep two Claude Code configs — your default (cloud) and a local override. Use the local config for private repositories or quick throwaway tasks. Switch to cloud when the task needs real reasoning quality. The config swap takes 30 seconds."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Configure Claude Code with a Local Model",
+      "content": "**Prerequisites:** Ollama with a model installed (lesson 12-2) OR LM Studio with a model loaded and local server running (lesson 12-4).\n\n**Step 1 — Create the local config:**\nIn VS Code, open (or create) `.claude/settings.json` in your `ai-course-projects` folder.\n\nAdd your chosen config (Ollama or LM Studio — pick whichever you have running):\n\n**Ollama:**\n```json\n{\n  \"model\": \"ollama/phi4\",\n  \"apiBaseUrl\": \"http://localhost:11434/v1\",\n  \"apiKey\": \"ollama\"\n}\n```\n\n**LM Studio:**\n```json\n{\n  \"model\": \"local/phi4\",\n  \"apiBaseUrl\": \"http://localhost:1234/v1\",\n  \"apiKey\": \"local\"\n}\n```\n\nChange `phi4` to whatever model you have. Save the file.\n\n**Step 2 — Launch Claude Code and verify the model:**\n1. Open the VS Code terminal (`Ctrl+\\``)\n2. Navigate to your project: `cd Documents\\ai-course-projects`\n3. Launch: `claude`\n4. Type `/model` — confirm it shows your local model, not a Claude model name\n\n**Step 3 — Run a simple task:**\nAsk Claude Code: \"What does the about-me.html file in this project do? Describe it in 3 bullet points.\"\n\nObserve: How fast was the response? How accurate was it compared to what you know the file contains?\n\n**Step 4 — Run the same task with Claude:**\n1. Remove or comment out the `model`, `apiBaseUrl`, and `apiKey` lines from settings.json\n2. Save and relaunch `claude`\n3. Ask the same question\n4. Compare the two responses: accuracy, completeness, response time\n\n**Step 5 — Write your assessment:**\nIn your notes, complete this sentence: \"For this specific task, the local model was [better / equivalent / worse] than Claude because ___. I would use the local model when ___.\"\n\n**When done:** Decide whether to keep the local config or revert to cloud. Either choice is valid — the point is making it deliberately."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 12-6.** You know how to run Claude Code against a local model and you have an honest understanding of the quality tradeoffs. Next lesson: a systematic guide to choosing the right local model for specific tasks."
+    }
+  ],
+  "nextLesson": "12-7",
+  "prevLesson": "12-5"
+}
