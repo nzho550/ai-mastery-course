@@ -1,0 +1,50 @@
+{
+  "id": "1-3",
+  "title": "The AI Tools Landscape (2025)",
+  "part": 1,
+  "estimatedMinutes": 20,
+  "tags": ["foundations", "beginner", "tools"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThe AI ecosystem has exploded. There are tools for chat, search, images, audio, video, writing, coding, and dozens of other categories — and the number grows every week. By the end of this lesson you'll be able to name the major categories, understand why different tools exist for different jobs, and know which ones to try first.\n\nYou won't need to learn every tool. You need to know the landscape well enough to reach for the right one."
+    },
+    {
+      "type": "text",
+      "content": "## The Landscape at a Glance\n\nAI tools aren't competing for the same job — they're built for fundamentally different tasks. Here's the current map:\n\n| Category | What it does | Key tools |\n|----------|--------------|-----------|\n| Chat / general assistant | Conversation, writing, analysis | Claude, ChatGPT, Gemini |\n| AI search | Web search with sourced answers | Perplexity, Bing Copilot |\n| Image generation | Create images from text | DALL-E, Midjourney, Bing Image Creator |\n| Audio / music / voice | Generate speech, music, sound | ElevenLabs, Suno |\n| Video generation | Create short video clips from text | Sora, Runway |\n| Research & summarization | Turn long docs/podcasts into notes | NotebookLM |\n| Presentations | Slides from a prompt | Gamma, Beautiful.ai |\n| Writing assistant | Improve drafts, grammar, tone | Grammarly AI, Notion AI, Jasper |\n| Speech-to-text | Convert voice/audio to text | Whisper (OpenAI), Otter.ai |\n| Coding assistant | Write and explain code | Claude Code, Copilot, Cursor |\n| Automation | Connect apps, build workflows | Zapier, n8n, Make |\n\nThis table will mean more to you as you work through the course — you'll use tools from most of these categories personally. For now, treat it as a reference."
+    },
+    {
+      "type": "text",
+      "content": "## Why Different Tools for Different Jobs?\n\nYou might wonder: if Claude can write text, why does Perplexity exist? If ChatGPT can answer questions, why use NotebookLM? The answer is that these tools are optimised for different constraints.\n\n**General chat AI** (Claude, ChatGPT, Gemini) is optimised for flexible, open-ended conversation. It can do almost anything with text — but it doesn't cite sources by default, and it doesn't have real-time internet access unless specifically connected.\n\n**AI search** (Perplexity) is optimised for factual research with citations. Every answer links back to the source. This makes it far better than general chat AI when you need to verify information — you can click the source and check it yourself.\n\n**NotebookLM** (Google) is in a category of its own. You upload your own documents — PDFs, YouTube videos, web links — and it builds an interactive knowledge base around *your* sources. It won't make up facts because it only answers from what you gave it. For students, researchers, or anyone trying to absorb a large body of material, it functions like a personal research assistant that has read everything you've handed it.\n\n**Image generation** tools (Midjourney, DALL-E, Bing Image Creator) are entirely separate neural networks trained on images, not text. You can ask a text AI to describe a picture, but you can't ask it to *generate* one — those are different models with different architectures.\n\nThe principle: **always use the tool built for your actual job.** Using a general chat AI for everything is like using a Swiss Army knife when you have a full kitchen — it works, but it's not optimal."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**A tool for building a map:** Visit [theresanaiforthat.com](https://theresanaiforthat.com) — a directory of thousands of AI tools organised by use case. You don't need to explore it now, but it's useful any time you have a task and wonder whether there's an AI built specifically for it. There usually is."
+    },
+    {
+      "type": "text",
+      "content": "## The Tools You'll Actually Use in This Course\n\nYou don't need accounts for everything today. Here's what you'll use, and when:\n\n- **Claude.ai** — Starting in Part 2. The primary tool for this course.\n- **Perplexity.ai** — Part 2, lesson 2.5. AI-powered research with citations.\n- **Bing Image Creator** — Part 2, lesson 2.7. Free AI image generation, no account required.\n- **NotebookLM** — Today's workshop, plus anytime you have a large document to learn from.\n- **ChatGPT / Gemini / Copilot** — Part 2, for direct comparison against Claude.\n- **VS Code + GitHub Copilot / Cursor** — Parts 5 and 6, when you start working with code.\n- **Claude Code** — Part 7. The most powerful tool in this course for technical work.\n\nThe rest of the table — Suno, ElevenLabs, Runway, Zapier — you'll encounter in later parts. Notice that the course is structured so you always have the tool installed before you need it."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Tool Safari",
+      "content": "Visit each of these four tools and spend 3 minutes with each. The goal is *first contact* — you're not learning them deeply, just getting a feel for what each one is.\n\n**Stop 1 — Claude.ai** (if you haven't used it yet)\nGo to [claude.ai](https://claude.ai). Type: *\"What are three things I could do with you today that I couldn't do with a regular Google search?\"* Notice the conversational, nuanced response — no links, no ads, just thinking.\n\n**Stop 2 — Perplexity.ai**\nGo to [perplexity.ai](https://perplexity.ai). Search the same question or something you genuinely want to know. Notice how every answer has numbered citations. Click one citation — it goes to the original source. This is the fundamental difference from Claude: Perplexity shows its work.\n\n**Stop 3 — Bing Image Creator** (free, no account needed in Edge)\nGo to [bing.com/images/create](https://bing.com/images/create). Type a description: *\"A friendly robot reading a book in a cosy library, warm light, digital art style.\"* Generate it. This is not text — it's an entirely different kind of AI model producing a visual from your words.\n\n**Stop 4 — NotebookLM**\nGo to [notebooklm.google.com](https://notebooklm.google.com) (requires a Google account). Create a new notebook. Click \"Add source\" and paste a link to any Wikipedia article you find interesting. Once it processes, ask it a question about the article. Notice: it only answers from that source, and it cites the exact passage.\n\n**After the safari:** Write one sentence per tool describing what it does that the others don't. Four sentences total. This is your first draft of a personal AI toolkit — you'll refine it throughout the course."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to research a health question and need to verify that the information comes from real, checkable sources. Which tool is best suited for this?",
+      "options": [
+        "Claude or ChatGPT — they have the most knowledge",
+        "Bing Image Creator — it can visualise medical diagrams",
+        "Perplexity — it provides sourced answers with citations you can verify",
+        "NotebookLM — it works with any topic"
+      ],
+      "correct": 2,
+      "explanation": "Perplexity is built specifically for research with citations. Every answer links to its sources, so you can click through and verify the original. General chat AI like Claude is excellent for many things but doesn't cite sources by default, making it harder to verify factual claims."
+    }
+  ],
+  "nextLesson": "1-4",
+  "prevLesson": "1-2"
+}

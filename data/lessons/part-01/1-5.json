@@ -1,0 +1,46 @@
+{
+  "id": "1-5",
+  "title": "Privacy & Safety — What NOT to Share with AI",
+  "part": 1,
+  "estimatedMinutes": 15,
+  "tags": ["foundations", "beginner", "privacy", "safety"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nAI tools are enormously useful — and they involve sending your text to a third-party server. Before you build a habit of reaching for AI for every task, you need a clear personal policy for what you will and won't share. By the end of this lesson you'll have a specific list of data categories to keep off AI platforms, and you'll write that list down as a document you can actually refer to."
+    },
+    {
+      "type": "text",
+      "content": "## How Your Data Is Used\n\nWhen you type a message into Claude.ai, ChatGPT, or most cloud AI tools, that message travels over the internet to a server, gets processed by the model, and a response is sent back. What happens to the message after that depends on the provider's privacy policy.\n\nFor Claude.ai, Anthropic's policy specifies that conversations may be used to improve models unless you opt out or use a paid plan with different terms. Most major providers have similar policies. This isn't inherently sinister — it's how these services improve — but it means you should think of cloud AI conversations as *semi-public* by default, not private.\n\nThe practical rule: **don't send anything to a cloud AI that you would be uncomfortable with Anthropic (or OpenAI, or Google) seeing.** Not because the data will be read by a human tomorrow, but because it may be retained, it may be reviewed for safety purposes, and policies can change.\n\nThere are also enterprise plans and API modes with stronger privacy guarantees — Anthropic's API, for example, does not use your inputs to train models by default. You'll learn about this in Part 11. For now, assume consumer-tier tools have consumer-tier privacy."
+    },
+    {
+      "type": "text",
+      "content": "## The 5 Categories to Keep Off Cloud AI\n\nThese are the data types with the clearest risk profile. A practical policy keeps all five off cloud AI tools by default:\n\n**1. Credentials — passwords, API keys, secret tokens**\nThis is the most important category. Never paste a password, a private API key, an OAuth token, or any secret into a chat AI. Even if the service is trustworthy, this habit is dangerous — you might accidentally paste the same credential into a less trustworthy tool, or someone might see your screen. API keys in particular can cause real financial damage if compromised (a leaked key can rack up thousands of dollars in charges).\n\n**2. Personally Identifiable Information (PII) — full name + address, passport/ID numbers, date of birth**\nYour name alone is fine. Your name combined with your address, date of birth, and ID number is identity-theft material. Before pasting anything about a real person, ask: could this be used to identify and locate them? If yes, strip or anonymise it first.\n\n**3. Client and employer data — contracts, internal strategy, customer lists**\nIf your employer's documents aren't meant to be public, they probably shouldn't go into a cloud AI. Many companies are establishing formal AI use policies precisely because employees were pasting confidential contracts and strategy documents into ChatGPT. If you're not sure whether your workplace has a policy, assume the conservative position.\n\n**4. Medical records — diagnoses, test results, prescription details**\nUsing AI to understand a medical document is genuinely useful. But upload a de-identified summary (\"patient has type 2 diabetes, prescribed metformin\") rather than a full scan of a medical record with your name, date of birth, and NHS or insurance number visible.\n\n**5. Unreleased or proprietary work — product plans, unpublished research, source code with secrets**\nCode is a common trap here. Pasting code to ask for debugging help is fine in principle, but code sometimes contains hardcoded credentials, internal API endpoints, or business logic that constitutes a trade secret. Scan code before pasting it, or use a local AI model (covered in Part 12) for sensitive codebases."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**What IS safe to share:** General questions, publicly available information, your own creative writing, anonymised versions of real problems, code with secrets removed, and drafts of documents that don't contain sensitive details. The goal isn't to avoid using AI — it's to use it with the same judgement you'd apply to any online service."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Write Your AI Privacy Policy",
+      "content": "By the end of this workshop you'll have a written personal policy — a file you can refer back to and update as your AI usage grows.\n\n**Note on tools:** This workshop uses VS Code, which you'll install fully in Part 5. If you haven't reached that part yet, **Notepad works perfectly fine** — open it from the Start menu (search \"Notepad\"), complete the steps, and save the file somewhere you'll find it. You can open it in VS Code later.\n\n**Step 1 — Create the file:**\n- In VS Code: `File` → `New File`, or click the New File icon in the Explorer panel. Name it `my-ai-rules.md`.\n- In Notepad: Open Notepad, then `File` → `Save As` → name it `my-ai-rules.md`. In the \"Save as type\" dropdown, choose \"All Files\" so it saves as `.md` rather than `.txt`. Save it in `Documents` or wherever you keep course files.\n\n**Step 2 — Write your 5 rules.**\nUse this as a starting template and personalise it:\n\n```\n# My AI Privacy Rules\n\n## What I will NEVER share with cloud AI\n1. Passwords, API keys, and secret tokens of any kind\n2. My full name combined with address, ID number, or date of birth\n3. Client or employer documents that aren't publicly available\n4. Medical records containing my name and identifying details\n5. Source code that contains credentials or trade secrets\n\n## What I'm comfortable sharing\n- General questions and research\n- My own creative writing and drafts\n- Anonymised versions of real problems\n- Code with any secrets removed\n- Publicly available information\n\n## Tools I'm using and their privacy level\n- Claude.ai (Anthropic) — consumer plan, assume data may be reviewed\n- [Add others as you start using them]\n\n## Last reviewed: [date]\n```\n\n**Step 3 — Personalise at least two rules.**\nThink about your actual life. Do you work with client data? Medical information? Open-source code? Edit the template to reflect your real situation — not just the generic answers.\n\n**Step 4 — Save the file.**\n`Ctrl+S` in VS Code or Notepad.\n\nIn Part 2 (lesson 2.2), you'll upload this file as context into a Claude Project — so it will already have your rules when you start using it for real work. Keep the file somewhere permanent."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague asks you to help them improve a client contract using Claude.ai. The contract contains the client's company name, financial terms, and legal obligations. What is the safest approach?",
+      "options": [
+        "Paste the full contract — Claude's privacy policy guarantees it won't be used for training",
+        "Paste only the specific clause you need help with, after checking it contains no identifying details",
+        "Use Claude freely — client contracts are not sensitive because they're legal documents",
+        "Ask Claude to sign an NDA before pasting the contract"
+      ],
+      "correct": 1,
+      "explanation": "The safest approach is to share only the minimum necessary — the specific clause you need help with — after removing any identifying details if possible. Even if you trust the AI provider's policy today, your employer or client may have confidentiality expectations that go beyond the provider's privacy terms. Less data shared means less exposure."
+    }
+  ],
+  "nextLesson": "1-6",
+  "prevLesson": "1-4"
+}

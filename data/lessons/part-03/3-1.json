@@ -1,0 +1,66 @@
+{
+  "id": "3-1",
+  "title": "Why Prompting Matters",
+  "part": 3,
+  "estimatedMinutes": 15,
+  "tags": ["prompting", "beginner", "foundations"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand why the quality of what you type into an AI tool is the single biggest lever on the quality of what you get back — and you'll have a concrete before/after comparison to prove it."
+    },
+    {
+      "type": "text",
+      "content": "## Garbage In, Garbage Out\n\nThere's an old computing saying: *garbage in, garbage out*. Feed a system bad input and it produces bad output — not because the system is broken, but because you didn't give it enough to work with.\n\nThis is exactly what happens with AI. A language model is extraordinarily capable, but it is also extraordinarily literal. It responds to what you actually say, not what you meant to say. When your prompt is vague, the model has to fill in the blanks — and it fills them in with assumptions that may have nothing to do with what you wanted.\n\nThis isn't a flaw in the AI. It's the nature of the tool. A skilled contractor doesn't guess what you want — they work from a brief. If your brief says \"build something in the garden\", don't be surprised when they show up with a pergola instead of a raised vegetable bed.\n\n**Prompting is briefing.** The quality of your brief determines the quality of the work."
+    },
+    {
+      "type": "text",
+      "content": "## The Same Task, Two Prompts\n\nNothing makes this clearer than a side-by-side comparison. Here's the same task asked two different ways:\n\n**Prompt A — vague:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Write about Python"
+    },
+    {
+      "type": "text",
+      "content": "What does the model do with \"Write about Python\"? It has no idea:\n- Is Python the programming language or the snake?\n- Who is the audience — a 10-year-old, a data scientist, a hiring manager?\n- How long should it be — one sentence or ten pages?\n- What's the purpose — education, marketing, documentation?\n\nThe model guesses. Maybe it writes a technical overview. Maybe it writes a Wikipedia-style summary. Maybe it writes a poem about snakes. The output is whatever the model considers a statistically average response to that phrase — which is almost certainly not what you had in mind.\n\n**Prompt B — specific:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Write a 200-word beginner-friendly explanation of Python as a programming language.\nUse a cooking analogy to explain what code is.\nEnd with one specific thing a complete beginner could build with Python in their first week."
+    },
+    {
+      "type": "text",
+      "content": "That's 37 words of instruction producing something genuinely useful. Let's count what changed:\n\n- **Length specified:** 200 words — no guessing whether you want a sentence or an essay\n- **Audience specified:** beginner-friendly — the model calibrates vocabulary and assumptions\n- **Format specified:** use a cooking analogy — constrains the explanation to a specific framing\n- **Purpose specified:** end with a practical suggestion — the model knows the output needs to be actionable\n\nThe difference in output quality isn't because Prompt B was magic. It's because Prompt B gave the model a complete brief. You didn't add intelligence — you removed ambiguity.\n\nThis is the core insight of prompt engineering: **you are not programming the AI, you are briefing a contractor.** The better your brief, the better the work."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The 10-word rule:** Before sending any prompt, ask yourself: can I add 10 words that would make this significantly more specific? Almost always the answer is yes — and those 10 words are the highest-leverage thing you can do."
+    },
+    {
+      "type": "text",
+      "content": "## Why This Applies to Every AI Tool\n\nPrompt quality isn't just a Claude thing. The same principle applies to every AI tool you'll use in this course and beyond:\n\n- In image generation tools like DALL-E or Midjourney, the prompt determines whether you get a generic stock-photo look or exactly the visual you imagined.\n- In coding assistants like Copilot or Cursor, a vague comment produces generic boilerplate; a specific comment produces production-ready code.\n- In automation tools like Zapier AI, an unclear instruction produces a workflow that barely resembles what you wanted.\n\nInvesting time in prompt quality scales across every AI interaction you'll ever have. That's why this is Part 3 of the course, not Part 13 — it's the skill that makes every other skill work better."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**What prompt engineering is not:** It's not a mystical art, it's not about memorizing magic phrases, and it doesn't require a computer science degree. It's applied clarity. The same thinking that makes a great email subject line or a well-scoped work ticket makes a great prompt."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Bad Prompt vs Good Prompt",
+      "content": "Open [Claude.ai](https://claude.ai) and run both prompts below. Read the outputs side by side.\n\n**Prompt 1 — vague:**\n```\nWrite about Python\n```\n\n**Prompt 2 — specific:**\n```\nWrite a 200-word beginner-friendly explanation of Python as a programming language.\nUse a cooking analogy to explain what code is.\nEnd with one specific thing a complete beginner could build with Python in their first week.\n```\n\nAfter reading both outputs, write one sentence in your notes answering: *What changed between the two outputs, and what in the prompt caused it?*\n\nThis isn't a trick question — the answer is exactly what it looks like. The prompt changed, so the output changed. The AI didn't get smarter. You gave it a better brief."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 3-1.** You now understand the core mechanic of prompting: specificity drives quality. The next seven lessons give you a systematic toolkit for applying this every time."
+    }
+  ],
+  "nextLesson": "3-2",
+  "prevLesson": "2-8"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "2-4",
+  "title": "Google Gemini",
+  "part": 2,
+  "estimatedMinutes": 20,
+  "tags": ["gemini", "beginner", "tools"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll understand what Google Gemini is, what makes it uniquely useful if you live inside Google's ecosystem, what multimodal means in practice, and how Gemini is embedded into Gmail, Google Docs, and the rest of Google Workspace."
+    },
+    {
+      "type": "text",
+      "content": "## What is Google Gemini?\n\nGemini is Google's family of large language models, developed by Google DeepMind. It's Google's answer to GPT-4 and Claude — a capable general-purpose AI that can reason about text, images, audio, video, and code.\n\nYou access it at **gemini.google.com**, and it uses your existing Google account — no separate signup required if you already use Gmail.\n\n**A brief history:** Google was actually a pioneer in the transformer research that underpins all modern LLMs (the famous \"Attention Is All You Need\" paper came from Google researchers in 2017). Despite this head start, Google was caught off guard by ChatGPT's launch and rushed to release its first chatbot, Bard, in early 2023. Bard was quickly superseded and rebranded as Gemini as Google reorganized its AI efforts under Google DeepMind. The current Gemini models — Gemini 1.5 Pro, Gemini 2.0 Flash, and Gemini Ultra — are genuinely competitive with GPT-4 and Claude.\n\n## Gemini's Key Strengths\n\n**Multimodal input and output:** Gemini was designed from the ground up to work with multiple types of content. In practice, you can:\n- Upload a photo and ask questions about it\n- Share a YouTube video URL and ask Gemini to summarize it\n- Upload audio and have it transcribed and analyzed\n- Share a document and ask Gemini to work with its contents\n\n**Google Search integration:** Gemini has native access to Google Search, which means it can pull current information into its responses. This is a significant advantage over Claude (which doesn't have real-time web access by default) — Gemini can tell you current prices, recent news, or today's weather alongside its reasoning.\n\n**Google Workspace integration:** This is where Gemini becomes genuinely powerful for anyone who uses Google's tools. Gemini is embedded directly inside:\n\n- **Gmail** — Summarize long email threads, draft replies, flag what needs action\n- **Google Docs** — Generate drafts, rewrite sections, summarize documents, improve writing\n- **Google Sheets** — Analyze data, generate formulas, create summaries from spreadsheet content\n- **Google Slides** — Generate presentation outlines, suggest visual layouts, write speaker notes\n- **Google Meet** — Take notes, generate meeting summaries\n\nYou don't leave Gmail to use AI on your email. Gemini is already inside it, accessible with a click.\n\n## Gemini Advanced\n\nThe free tier of Gemini gives you access to Gemini 1.5 Flash — a fast, capable model. **Gemini Advanced** (part of a Google One AI Premium subscription) gives you access to Gemini 1.5 Pro and 2.0 Ultra — the most powerful models in the family, with larger context windows and better reasoning.\n\nFor most beginners, the free tier is more than sufficient to learn the tool and decide whether it fits your workflow.\n\n## Where Gemini Fits in Your Toolkit\n\nGemini shines in specific situations:\n\n1. **You're already in Gmail.** Instead of switching tabs to use Claude or ChatGPT, you can ask Gemini to help right where the email is.\n2. **You need current information.** Gemini's Google Search integration means its answers reflect recent events.\n3. **You're working in Google Docs.** Gemini can help you write and edit inside the document — not in a separate chat window.\n4. **You upload multimedia.** Video and audio analysis are built in.\n\nFor tasks like deep analytical writing, long coding sessions, or nuanced reasoning, Claude and ChatGPT remain strong. But if your work happens inside Google's tools, Gemini reduces friction enormously."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Best fit for the Google ecosystem:** If you use Gmail, Google Docs, or Google Sheets daily, Gemini is probably the AI tool that will slot most naturally into your existing workflow. You don't have to change how you work — Gemini meets you inside the tools you already use."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Gemini in Your Google World",
+      "content": "This workshop has two tracks — choose based on how much you use Google Workspace.\n\n**Track A — If you use Gmail or Google Docs regularly:**\n\n1. Open [gemini.google.com](https://gemini.google.com) and sign in with your Google account\n2. In the chat, type:\n```\nSummarize my last 5 emails from real senders and tell me which ones need action.\n```\n*(Gemini will ask permission to access your Gmail if it hasn't before — click Allow)*\n3. Review the summary. Is it accurate? Did it correctly identify what needs a reply?\n4. Now open Gmail directly, find a long email thread, and look for the Gemini icon inside Gmail. Click it and ask it to summarize the thread.\n\n**Track B — If you don't use Google Workspace:**\n\n1. Open [gemini.google.com](https://gemini.google.com)\n2. Find or write a long article (300+ words) on any topic that interests you\n3. Paste it into Gemini and ask:\n```\nCreate a structured outline for a Google Doc from this article, \nwith a clear hierarchy of headings and subheadings.\n```\n4. Notice how Gemini formats the outline — does it feel like it \"knows\" Google Docs structure?\n\n**For everyone — comparison step:**\nTake the same article or email you worked with above, and run the same task in Claude. Compare the results:\n- Which gave a more useful output?\n- Which felt more natural to use in context?\n- What would you choose for this type of task going forward?"
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main practical advantage of using Gemini inside Gmail rather than copying email content into a separate AI tool?",
+      "options": [
+        "Gemini is more accurate than other AI tools when reading email",
+        "Gemini inside Gmail can access the full email thread context without you copying and pasting anything",
+        "Gmail automatically corrects any AI mistakes before showing you the result",
+        "Gemini inside Gmail is always free, while other tools charge for email tasks"
+      ],
+      "correct": 1,
+      "explanation": "The main advantage is workflow integration — Gemini embedded in Gmail can read the full thread context directly, without you having to copy email content out and paste it somewhere else. This removes friction and makes it practical to use AI on routine email tasks throughout the day."
+    }
+  ],
+  "nextLesson": "2-5",
+  "prevLesson": "2-3"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "2-3",
+  "title": "ChatGPT & GPT-4o",
+  "part": 2,
+  "estimatedMinutes": 20,
+  "tags": ["chatgpt", "beginner", "tools"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll understand ChatGPT's history, what the current GPT-4o model can do, how ChatGPT differs from Claude in practice, and when each tool is the better choice. By the end of this lesson you'll have used both and formed a firsthand opinion."
+    },
+    {
+      "type": "text",
+      "content": "## A Brief History of ChatGPT\n\nChatGPT launched in November 2022 and reached one million users in five days — faster than any product in history at the time. It introduced most of the world to the idea of conversational AI and fundamentally shifted how people think about computers.\n\nThe timeline:\n- **2022 — ChatGPT with GPT-3.5:** The original launch. Fast, fluent, and shockingly good at writing tasks. The model that made AI mainstream.\n- **2023 — GPT-4:** Dramatically more capable. Better reasoning, longer context, and the ability to analyze images. Available on the paid tier (ChatGPT Plus).\n- **2024 — GPT-4o (\"omni\"):** The current flagship. Faster than GPT-4, available on the free tier with limits, and capable of understanding and generating text, images, and audio in a single model.\n\n**ChatGPT is made by OpenAI.** OpenAI was founded in 2015 as a non-profit research lab (Elon Musk and Sam Altman were among the founders). It has since transitioned to a \"capped-profit\" structure and received major investment from Microsoft. Microsoft has integrated OpenAI's models into nearly all of its products — which is why Bing search, Microsoft Copilot, and GitHub Copilot are all powered by the same underlying technology.\n\n## What GPT-4o Can Do\n\n**Vision (image input):** You can upload an image and ask questions about it. \"What's in this photo?\" \"Explain this chart.\" \"Find the error in this screenshot.\" GPT-4o processes images directly, not by extracting text from them.\n\n**File upload:** Upload documents (PDFs, Word files, spreadsheets) and GPT-4o can analyze, summarize, and answer questions about them.\n\n**Voice:** In the ChatGPT mobile app, you can have a spoken conversation with GPT-4o. It responds with synthesized voice in real time, not just text-to-speech after the fact. The voice mode is genuinely conversational — it can hear you interrupt and respond accordingly.\n\n**Code interpreter:** A built-in Python environment where GPT-4o can actually execute code, create charts, analyze data, and show you the output. Useful for data analysis without needing your own Python setup.\n\n**DALL-E image generation:** Paid ChatGPT users can generate images inside the same conversation interface using DALL-E 3, OpenAI's image model.\n\n## ChatGPT vs. Claude — What You'll Notice\n\nBoth tools are excellent. You'll likely use both. But they have different personalities and strengths:\n\n**ChatGPT tends to be:**\n- More \"personality-flexible\" — it more readily adopts personas, tones, and styles\n- More willing to write in first-person from a character's perspective\n- Better integrated into the broader OpenAI ecosystem (DALL-E, Code Interpreter, plugins)\n- More comfortable with casual, playful, or entertainment-oriented prompts\n\n**Claude tends to be:**\n- More careful with safety-sensitive topics — it adds more caveats and declines more readily\n- Better at long-form analytical writing and nuanced reasoning tasks\n- More consistent in its own voice and harder to push into problematic territory\n- Preferred by many users for professional writing, research, and coding tasks\n\nNeither tool is universally \"better.\" The differences are real but subtle for most everyday tasks. The best approach is to try both and develop your own opinion through use."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Claude vs. ChatGPT — a practical guide:**\n\n| Use Claude when... | Use ChatGPT when... |\n|--------------------|---------------------|\n| Writing carefully argued essays or analysis | You need image generation in the same chat |\n| Working on sensitive topics where nuance matters | You want to run Python code and see the output |\n| You prefer a consistent, careful voice | You're using Microsoft tools (Copilot is GPT-powered) |\n| Long coding projects with careful review | Voice conversation on mobile |\n| You want a model that stays on-task | Creative roleplay or persona work |"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Head-to-Head Comparison",
+      "content": "The best way to understand these two tools is to run the same prompt in both and observe the differences firsthand.\n\n**Step 1 — Open both tools**\n- [Claude.ai](https://claude.ai) in one tab\n- [ChatGPT](https://chatgpt.com) in another tab (create a free account if you don't have one)\n\n**Step 2 — Run this prompt in both**\n```\nExplain the difference between supervised and unsupervised machine learning \nusing a real-world analogy. Then give me three practical use cases for each.\n```\n\n**Step 3 — Compare and record your observations**\nAnswer these three questions for yourself:\n1. Which response was easier to read — and why?\n2. Which used better, more memorable analogies?\n3. Which answer would you trust more, and what made it feel trustworthy?\n\n**Step 4 — Test a follow-up**\nIn both chats, follow up with:\n```\nNow give me the same explanation but aimed at a business manager \nwho doesn't have a technical background.\n```\n\nWatch how each tool adapts its tone and vocabulary. This audience-shift test is one of the most revealing things you can do to understand a model's strengths.\n\nWrite 3 observations about the differences. There are no right answers here — your observations are the point."
+    },
+    {
+      "type": "quiz",
+      "question": "GPT-4o's 'omni' designation refers to what capability?",
+      "options": [
+        "It can access the internet and any website in real time",
+        "It handles text, images, and audio within a single unified model",
+        "It has unlimited context window length",
+        "It can run on any device without an internet connection"
+      ],
+      "correct": 1,
+      "explanation": "GPT-4o ('o' for omni) was designed to handle text, images, and audio natively within a single model — rather than routing different input types to separate specialized models. This is what made it possible to have a real-time voice conversation that also understands images shown to the camera."
+    }
+  ],
+  "nextLesson": "2-4",
+  "prevLesson": "2-2"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "2-2",
+  "title": "Claude Projects & Memory",
+  "part": 2,
+  "estimatedMinutes": 20,
+  "tags": ["claude", "beginner", "tools"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll understand what Claude Projects are, how to write custom instructions that shape every conversation, how to attach your own files as knowledge that Claude can draw from, and why Projects solve the single biggest frustration new users have: Claude not remembering anything between sessions."
+    },
+    {
+      "type": "text",
+      "content": "## The Memory Problem — And How Projects Solve It\n\nBy default, every Claude conversation is a fresh start. You close the tab, and Claude has no memory of what you discussed. Open a new chat and you're back to square one.\n\nThis isn't a bug — it's a consequence of how context windows work (covered in lesson 1-2). But it creates a real friction: if you use Claude regularly, you end up repeating the same context over and over. \"I'm a software developer who prefers concise answers...\" typed out for the hundredth time.\n\n**Claude Projects** solve this. A Project is a persistent workspace where:\n- **Custom instructions** you write are sent to Claude at the start of every conversation inside that Project, automatically\n- **Uploaded files** (documents, code, notes) are available to Claude throughout all conversations in the Project\n- **Conversation history** within the Project persists so you can refer back to earlier chats\n\nThink of a Project as a configured context that travels with every conversation inside it.\n\n## Creating a Project\n\nIn Claude.ai, look for the **Projects** section in the left sidebar. Click **New Project** and give it a name. You can have multiple projects for different areas of your life — one for work, one for a hobby, one for this course.\n\n## Writing Custom Instructions\n\nThe most powerful part of a Project is the **instructions** field. Whatever you write here is sent to Claude before every conversation in the Project — like a private briefing it reads before talking to you.\n\nGood instructions answer questions Claude would otherwise have to guess at:\n- Who you are and what you're working on\n- Your preferred tone and detail level\n- What you want Claude to do by default\n- What you want Claude to avoid\n\n**Example instructions for a learning project:**\n```\nI'm working through an AI skills course. I'm a complete beginner to programming \nand AI tools. When I ask questions:\n- Give practical examples, not just theory\n- Assume I don't know jargon — define technical terms when you use them\n- Keep responses concise unless I ask for more depth\n- If I ask something outside your knowledge, say so directly\n```\n\nYou'll refine these over time. Start with the most important things and add more as you discover what Claude gets wrong without them.\n\n## Attaching Files as Knowledge\n\nYou can upload documents, text files, code files, and PDFs to a Project. Claude can then reference this content in any conversation inside the Project — without you having to paste it in every time.\n\nUseful things to attach:\n- **Reference documents** you return to frequently (a company style guide, a specification, a set of rules)\n- **Personal context** (a bio, your background, your goals)\n- **Files you want Claude to reason about** (a spreadsheet, a code file, a draft document)\n\nWhen Claude needs to use the content from an attached file, it simply draws on it — you don't have to do anything special. You can also explicitly ask: *\"Using the file I uploaded, tell me...\"*\n\nIn lesson 1-5, you wrote a `my-ai-rules.md` file — your personal AI privacy policy. This is a perfect file to attach to a Project, because it's context that should inform every conversation about AI tools."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Projects vs. regular chats:** Regular conversations in Claude.ai are ephemeral — each one starts fresh. Projects add a persistent layer on top. If you find yourself typing the same context at the start of every Claude conversation, that context belongs in Project instructions."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Build Your Learning Project",
+      "content": "You're going to create a Claude Project that will serve as your workspace for the rest of this course.\n\n**Step 1 — Create the Project**\nIn [Claude.ai](https://claude.ai), find **Projects** in the left sidebar and click **New Project**. Name it: `AI Course`.\n\n**Step 2 — Write your Project Instructions**\nIn the Project Instructions field, write something like this (personalise it):\n```\nI'm working through an AI skills course. When I ask questions, assume I'm a \ncomplete beginner. Always give me practical examples, not just theory. Define \njargon when you use it. Keep responses to a useful length — not too short, \nnot too long. If I'm confused about something, I'll say \"I don't follow\" \nand I'd like you to try a different explanation.\n```\n\n**Step 3 — Upload your `my-ai-rules.md`**\nFind the file you created in lesson 1-5. Attach it to the Project as knowledge. (If you haven't completed lesson 1-5 yet, create a simple text file with 3 things you won't share with AI.)\n\n**Step 4 — Test it**\nStart a new conversation *inside* the Project. Ask:\n```\nWhat should I learn after I understand basic prompting?\n```\n\nObserve how Claude responds — it should reflect the instructions you wrote. Now start a new conversation outside the Project (use the regular New Chat button) and ask the same question. Notice the difference in how Claude frames its response.\n\n**This Project is now your home base.** Use it for questions about the rest of this course."
+    },
+    {
+      "type": "quiz",
+      "question": "You have a Claude Project with instructions that say 'I prefer bullet points over long paragraphs.' You start a conversation inside the project and ask a detailed question. What happens?",
+      "options": [
+        "Nothing — Project instructions only apply to the first message in a conversation",
+        "Claude follows the instruction and formats its answer using bullet points",
+        "You need to remind Claude of your preference at the start of each conversation",
+        "The instruction is ignored — Claude always chooses its own formatting"
+      ],
+      "correct": 1,
+      "explanation": "Project instructions are sent to Claude at the start of every conversation within that Project, automatically. Claude reads them before responding and adjusts its behaviour accordingly. You don't need to repeat them."
+    }
+  ],
+  "nextLesson": "2-3",
+  "prevLesson": "2-1"
+}

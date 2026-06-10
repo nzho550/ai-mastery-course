@@ -1,0 +1,93 @@
+{
+  "id": "3-3",
+  "title": "Role & Persona Prompting",
+  "part": 3,
+  "estimatedMinutes": 20,
+  "tags": ["prompting", "beginner", "role-prompting"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll learn the \"Act as...\" technique — one of the most powerful single additions you can make to any prompt. You'll also learn what a system prompt is, how it differs from your user message, and why role prompting works at a technical level."
+    },
+    {
+      "type": "text",
+      "content": "## Why Telling AI to Play a Role Works\n\nWhen you ask a language model to adopt a specific role, something meaningful happens. The model's training contains enormous amounts of text written from different perspectives: code review comments written by senior engineers, explanations written by teachers, analyses written by lawyers, advice columns written by coaches. By specifying a role, you're essentially tuning in to a specific frequency of that training data.\n\n*\"Act as a senior software engineer\"* shifts the model's output distribution toward responses that resemble how senior engineers talk, think, and structure their advice. It's not magic — it's pattern activation.\n\nWithout a role, the model defaults to a generalist register: helpful, polite, and often frustratingly non-committal. With a well-chosen role, the model becomes opinionated, specific, and calibrated to a domain.\n\nHere's the same question with and without a role:"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Without role:\nReview my Python function and tell me if it's good.\n\nWith role:\nAct as a senior software engineer doing a code review.\nBe direct and specific. Point out any inefficiencies, edge cases I haven't\nhandled, and anything that would fail a PR review at a serious company.\nReview this Python function: [paste function here]"
+    },
+    {
+      "type": "text",
+      "content": "The difference in output depth and specificity is substantial. The role instruction unlocks a mode of response that the model knows exists but doesn't default to."
+    },
+    {
+      "type": "text",
+      "content": "## The \"Act as...\" Technique in Practice\n\nThe structure is simple: start your prompt with a role definition, then give your actual request. The role frames everything that follows.\n\nHere are three role prompts for different situations:\n\n**For technical expertise:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Act as a senior software engineer who values clean, readable code over\nclever solutions. Review this function and suggest how to make it\nmore maintainable for a junior developer to understand:\n\n[paste your code]"
+    },
+    {
+      "type": "text",
+      "content": "**For explanation and teaching:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Act as a patient teacher explaining to a curious 10-year-old.\nUse everyday analogies, no jargon, and keep sentences short.\nExplain what a database is and why websites use them."
+    },
+    {
+      "type": "text",
+      "content": "**For critical feedback:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Act as a brutally honest editor who has published three books on\nbusiness writing. Do not soften your feedback. Tell me exactly what's\nweak about this introduction paragraph and how to fix it:\n\n[paste paragraph]"
+    },
+    {
+      "type": "text",
+      "content": "Notice that the role defines not just *who* the AI is pretending to be, but *how* it should behave. \"Brutally honest\" and \"do not soften\" are behavioral instructions that get much stronger compliance when attached to a role that would naturally behave that way."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Specificity matters.** \"Act as an expert\" is weak — expert at what? \"Act as a UX researcher who specialises in mobile app usability\" is specific and activates a much more targeted response profile. The more specific the role, the more calibrated the output."
+    },
+    {
+      "type": "text",
+      "content": "## What Is a System Prompt?\n\nEvery AI conversation has three layers:\n\n1. **System prompt** — instructions set before the conversation starts, invisible to the user\n2. **User message** — what you type\n3. **Assistant response** — what the AI says\n\nWhen you use Claude.ai, Anthropic has already written a system prompt you never see. It establishes Claude's core behavior, safety guidelines, and personality. When businesses build products with Claude (a customer support bot, a coding assistant, a writing tool), they write their own system prompt that customises Claude's behavior for their specific product.\n\nHere's an example of how a system prompt shapes the entire conversation:"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "System prompt (set by the developer, invisible to the user):\n\"You are a customer support agent for Acme Software. You only answer\nquestions about Acme products. If asked about anything else, politely\nredirect to Acme topics. Always end your response by asking if the\ncustomer's issue was resolved.\"\n\nUser message: \"What's the best programming language to learn?\"\n\nAssistant response (shaped by the system prompt):\n\"That's an interesting question! For Acme Software specifically, our\ntools work best with Python and JavaScript. Would you like resources\non getting started with Acme's Python SDK? Did that answer your question?\""
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Role prompting in chat vs. the API:** When you put a role instruction at the start of your message in Claude.ai, you're approximating what a system prompt does — it frames the entire conversation. When you build with the API (covered in Part 11), you write a real system prompt in a dedicated field, which is cleaner and more reliable. For now, putting the role in your user message achieves the same practical effect."
+    },
+    {
+      "type": "text",
+      "content": "## When to Use Role Prompting\n\nRole prompting is highest-value in these situations:\n\n- **Domain expertise you don't have:** \"Act as a contract lawyer\" before asking about an agreement you need to understand\n- **Specific communication style:** \"Act as a Hemingway-style editor\" for a specific writing register\n- **Calibrated feedback:** \"Act as a skeptical investor\" before pitching an idea, to stress-test it\n- **Adjusted complexity:** \"Act as someone explaining this to a non-technical executive\" when you need layperson-friendly output\n\nFor straightforward tasks — summarising a document, answering a factual question, reformatting data — role prompting adds little value. Save it for situations where perspective and domain knowledge change the output meaningfully."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "The Expert Panel",
+      "content": "Ask the same question three times in [Claude.ai](https://claude.ai) — each with a different role. Use three separate conversations so they don't influence each other.\n\n**The question:** \"How should I approach learning a new technical skill?\"\n\n**Run 1 — no role:**\n```\nHow should I approach learning a new technical skill?\n```\n\n**Run 2 — learning scientist role:**\n```\nYou are an experienced learning scientist who specialises in adult education\nand skill acquisition research. How should I approach learning a new technical skill?\n```\n\n**Run 3 — self-taught engineer role:**\n```\nYou are a senior software engineer who is entirely self-taught — no university\ndegree, everything learned from tutorials, books, and building real projects.\nHow should I approach learning a new technical skill?\n```\n\nRead all three responses. Write in your notes:\n- What changed between Run 1 and Runs 2 and 3?\n- Which response was most useful to you personally, and why?\n- What role would you add to a prompt for a task you do regularly at work or in life?\n\n**Bonus:** Write 3 role prompts for tasks that matter to you — use the specificity tip above to make the roles precise, not generic."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 3-3.** You can now use the \"Act as...\" technique to unlock domain-specific responses and you understand the system prompt concept that underpins all production AI tools."
+    }
+  ],
+  "nextLesson": "3-4",
+  "prevLesson": "3-2"
+}

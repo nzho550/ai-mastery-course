@@ -1,0 +1,42 @@
+{
+  "id": "2-7",
+  "title": "AI Media Generation — Images, Audio & Video",
+  "part": 2,
+  "estimatedMinutes": 20,
+  "tags": ["tools", "images", "media", "beginner"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll understand the landscape of AI media generation tools — images, speech, music, and video — know which free tools are worth trying right now, understand what each category is genuinely useful for, and generate your first AI image. This lesson is about awareness and experimentation, not mastery."
+    },
+    {
+      "type": "text",
+      "content": "## The AI Media Generation Landscape\n\nText AI (Claude, ChatGPT) gets most of the attention, but a parallel revolution has happened in media generation. Tools that would have required professional software, a production budget, and specialist skills now produce usable outputs in seconds.\n\nHere's the current landscape:\n\n| Type | Free options | Best-in-class | What it's for |\n|------|-------------|---------------|---------------|\n| Image | Bing Image Creator, DALL-E (ChatGPT free) | Midjourney | Illustrations, concept art, social media visuals |\n| Text-to-speech | ElevenLabs free tier | ElevenLabs | Voiceovers, narration, realistic voice synthesis |\n| Speech-to-text | Whisper (free, open source) | Whisper, Otter.ai | Transcribe meetings, lectures, voice notes |\n| Music | Suno free tier | Suno, Udio | Background music, jingles, demos, exploration |\n| Video | Runway free tier | Sora, Runway Gen-3 | Short video clips from text or images |\n\n## Image Generation — The Most Mature Category\n\nAI image generation is the most developed and accessible of the media categories. You describe what you want in text, and the model generates an image.\n\n**What makes a good image prompt:**\n- Be specific about subject, setting, and style: *\"a cozy wooden cabin in a snowy forest at dusk, watercolor illustration style\"*\n- Describe lighting and mood: *\"golden hour light\"*, *\"dramatic shadows\"*, *\"soft and warm\"*\n- Mention the artistic style if you have one in mind: *\"digital art\"*, *\"oil painting\"*, *\"photorealistic\"*, *\"flat design\"*\n- Include technical parameters if relevant: *\"wide shot\"*, *\"close-up portrait\"*, *\"bird's eye view\"*\n\n**What AI images still get wrong:** Hands (too many or too few fingers is still common), readable text (AI struggles to render legible words inside images), complex faces in crowds, and accurate depictions of specific real people or places.\n\n**The free tier reality:** Bing Image Creator (powered by DALL-E 3) is genuinely free, produces high-quality images, and doesn't require an account if you use Microsoft Edge. For most non-professional use cases, it's all you need.\n\n## Text-to-Speech — AI Voice Generation\n\n**ElevenLabs** is the leading tool in this category. Paste in any text, choose from a library of voices, and ElevenLabs generates speech that sounds genuinely human — with natural pacing, breathing, and intonation.\n\nUse cases:\n- Voiceovers for videos without hiring a voice actor\n- Creating audio versions of written content\n- Prototyping podcast or narration content\n- Making your own content accessible to people who prefer listening\n\nThe free tier allows a limited number of characters per month, which is enough to understand the tool and use it occasionally.\n\n## Speech-to-Text — Transcription at Scale\n\n**Whisper** (by OpenAI, open-source and free) can transcribe audio files to text with impressive accuracy across many languages. **Otter.ai** provides a polished interface around similar technology, with meeting transcription that works in real time.\n\nThis category is quietly transforming how people process information: record a meeting, get a transcript, run it through Claude for a summary. The workflow is already practical and fast.\n\n## Music Generation\n\n**Suno** generates music from a text description. Describe a genre, mood, and tempo, and Suno creates a 30–60 second track — with instruments, structure, and even singing (if you ask for it). The free tier is generous for exploration.\n\nThis isn't replacing professional music production. But for background music for a video, a jingle prototype, or just creative exploration, it's remarkable.\n\n## Video Generation\n\nVideo generation is the newest and most rapidly improving category. **Runway** provides free-tier access to AI video tools, including text-to-video (describe a scene, get a short clip) and image-to-video (animate a still image).\n\n**Sora** (by OpenAI) generates longer, higher-quality video clips from text prompts and is increasingly accessible, though with limitations.\n\nCurrent video generation is best for short clips (5–15 seconds), abstract or artistic content, and prototyping visual ideas. Longer narrative video is still a work in progress."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**This space is moving faster than any other AI category.** What feels like an impressive demo today will be routine production quality in 12 months. The tools listed here are current as of this writing, but new entrants appear constantly and best-in-class shifts. The skill to develop is not memorizing which tool to use — it's knowing what category of tool to look for and how to evaluate new ones when they emerge."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Your First AI Image (and Media Taste Test)",
+      "content": "**Part 1 — Generate an AI Image (required)**\n\nGo to [Bing Image Creator](https://www.bing.com/images/create) — it's free and works in any browser.\n\nType this prompt:\n```\nA friendly robot sitting at a wooden desk, studying an open book, \nwarm lamp light, cozy library background, digital art style\n```\n\nWait a few seconds. You'll get 4 image variations.\n\nLook at each one carefully:\n- What did the AI get right about your description?\n- What looks off or strange? (Check the hands, any text, the proportions)\n- Which variation is your favorite, and why?\n\n**Try a second prompt with something personal** — a scene from a hobby, a concept you find interesting, or a visual that represents something you're working on.\n\n---\n\n**Part 2 — Media Taste Test (try at least one)**\n\nYou're not learning these tools deeply — just building awareness of what they feel like.\n\n**Music — Suno:**\n1. Go to [suno.com](https://suno.com)\n2. Click \"Create\"\n3. Describe a genre and mood: *\"upbeat acoustic folk, morning coffee vibes, no lyrics\"*\n4. Listen to the 30-second result\n\n**Voice — ElevenLabs:**\n1. Go to [elevenlabs.io](https://elevenlabs.io) and sign in (free account)\n2. Click \"Text to Speech\"\n3. Paste a short paragraph of text — something you wrote, a quote you like\n4. Pick a voice and click Generate. Listen.\n\n**Video — Runway:**\n1. Go to [runwayml.com](https://runwayml.com) and sign in (free tier)\n2. Try \"Text to Video\": describe a simple scene — *\"a time-lapse of clouds moving over a mountain\"*\n3. Generate and watch the clip\n\nAfter your exploration, write one sentence about which category surprised you most and why."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to create a short voiceover for a how-to video you're publishing online. Which tool category and tool is the best starting point?",
+      "options": [
+        "Image generation — Midjourney, because it can generate visuals for the video",
+        "Text-to-speech — ElevenLabs, because it generates natural-sounding human voice from text",
+        "Music generation — Suno, because it creates background audio",
+        "Video generation — Runway, because it handles all audio and video tasks"
+      ],
+      "correct": 1,
+      "explanation": "For a voiceover you need text-to-speech, not image or video generation. ElevenLabs is the leading tool for this — you paste your script, choose a voice, and get realistic spoken narration. Suno generates music (not speech), and Runway generates video clips (not narration)."
+    }
+  ],
+  "nextLesson": "2-8",
+  "prevLesson": "2-6"
+}

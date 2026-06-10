@@ -1,0 +1,42 @@
+{
+  "id": "2-6",
+  "title": "Microsoft Copilot",
+  "part": 2,
+  "estimatedMinutes": 20,
+  "tags": ["tools", "beginner", "automation"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll understand what Microsoft Copilot is and where it lives, how to use Copilot in the Edge browser sidebar to work with web pages, what Copilot in Windows (Win+C) does, and how Copilot for Microsoft 365 integrates AI into Word, Excel, Outlook, and Teams. You'll also understand the GPT-4 foundation that powers it all."
+    },
+    {
+      "type": "text",
+      "content": "## What is Microsoft Copilot?\n\nMicrosoft Copilot is Microsoft's AI assistant, powered by OpenAI's GPT-4 models. Microsoft made a major investment in OpenAI and integrated their technology across nearly every product in the Microsoft ecosystem.\n\nThe name \"Copilot\" now appears in many places — which can be confusing. Here's a map:\n\n- **Copilot (web)** — the standalone chat interface at copilot.microsoft.com, similar to ChatGPT.com. This is the free, general-purpose version.\n- **Copilot in Edge** — a sidebar inside the Microsoft Edge browser that can see the page you're reading and help you interact with it\n- **Copilot in Windows** — accessed with the keyboard shortcut Win+C, a sidebar assistant for Windows tasks\n- **Microsoft 365 Copilot** — AI built into Word, Excel, Outlook, PowerPoint, and Teams (paid add-on for enterprise Microsoft 365 subscribers)\n- **GitHub Copilot** — the coding assistant in VS Code (covered in lesson 6.1 — same branding, entirely different product)\n\nAll of these run on GPT-4 under the hood (with Microsoft customizations). Understanding one helps you understand all of them.\n\n## Copilot in Edge — The Browser Sidebar\n\nCopilot in Edge is built into the Microsoft Edge browser, which comes pre-installed on every Windows computer. The Copilot icon lives in the top-right corner of the browser window. Click it and a sidebar opens alongside whatever page you're reading.\n\nThis is genuinely useful because the sidebar is **context-aware** — it knows what's on the page you're viewing. You can ask it to:\n- Summarize the article without losing your place in it\n- Extract the key facts or claims from a news story\n- Explain a term used on the page\n- Find information that seems to be missing from what you're reading\n- Compare what you're reading to something else\n\nYou stay on the page while the AI works alongside it. No copying and pasting into a separate chat window.\n\n## Copilot in Windows (Win+C)\n\nOn Windows 11 (and some Windows 10 configurations), pressing **Win+C** opens Copilot as a sidebar on the right side of your desktop. From here you can:\n- Ask general questions without opening a browser\n- Change Windows settings with a natural language request (\"Turn on dark mode\")\n- Get summaries of what you've been working on\n- Draft content and copy it into any open window\n\nThis is AI at the operating system level — accessible regardless of what app you're using.\n\n## Microsoft 365 Copilot\n\nFor users who pay for Microsoft 365 Copilot (an enterprise add-on), AI is woven into every Microsoft Office application:\n\n**Word:** Generate drafts, rewrite sections, summarize documents, change tone, catch inconsistencies.\n\n**Excel:** Ask questions about your data in plain English. \"What were our top 5 revenue months?\" Copilot can also generate formulas and create charts from your data.\n\n**Outlook:** Summarize email threads, draft replies, flag what needs action, prepare for meetings.\n\n**PowerPoint:** Generate complete presentations from a prompt, add images, redesign slides, write speaker notes.\n\n**Teams:** Take meeting notes, generate summaries, catch up on meetings you missed with AI-written recaps.\n\nIf your workplace uses Microsoft 365, this integration is worth knowing because it's the AI layer that works where your work already lives.\n\n## When Copilot Makes Sense\n\nCopilot is the natural choice when:\n- You're already using Edge as your browser and want AI alongside a webpage\n- Your employer provides Microsoft 365 Copilot and it's built into Word or Outlook\n- You need a quick AI assistant without opening another tab or app\n- You want to control Windows settings by speaking naturally\n\nFor creative writing, deep reasoning, or longer analytical tasks, Claude and ChatGPT remain strong alternatives. Copilot's strength is **frictionless access inside existing Microsoft workflows** — you don't have to break your context."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**One key practical note:** Microsoft Edge comes installed on every Windows computer and you can access Copilot in Edge for free, right now, with no account required. If you're on Windows and haven't explored this yet, the sidebar is one click away — try it on the next long article or document you read online."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Copilot in Edge — Summarize a Web Page",
+      "content": "This workshop uses Microsoft Edge, which is already installed on your Windows computer.\n\n**Step 1 — Find a long article to work with**\nOpen Microsoft Edge and navigate to a long news article or in-depth web page — something with at least 5–6 paragraphs. Good options:\n- A long BBC or Reuters news story\n- A Wikipedia article on a topic you're curious about\n- A technical blog post or documentation page\n\n**Step 2 — Open the Copilot sidebar**\nLook for the Copilot icon in the top-right corner of the Edge window (it looks like a small star or sparkle symbol). Click it. The sidebar slides open alongside the page.\n\nIf you don't see the icon: try the keyboard shortcut **Ctrl+Shift+Period (.)** or go to Edge Settings → Copilot and enable it.\n\n**Step 3 — Ask Copilot about the page**\nType this in the sidebar:\n```\nSummarize this article in 3 bullet points and tell me what I should fact-check.\n```\n\nRead the result. Notice two things:\n1. Copilot read the page automatically — you didn't paste anything\n2. It produced a summary *and* highlighted what claims deserve verification\n\n**Step 4 — Ask a follow-up question**\nStay on the same page and ask:\n```\nWhat questions does this article leave unanswered?\n```\n\nThis is one of the most useful prompts you can run on any article — it shows you the gaps in the reporting.\n\n**Step 5 — Compare the experience**\nTry the same article in Claude.ai: copy a few paragraphs, paste them in, and ask the same questions. Compare the experience of working alongside the page (Copilot in Edge) vs. working in a separate tab (Claude). Which felt more natural for this type of task?"
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main advantage of using Copilot in Edge's sidebar rather than copying article text into a separate chat window like Claude.ai?",
+      "options": [
+        "Copilot in Edge produces more accurate summaries than Claude",
+        "You can interact with the full page in context without copying anything, while staying on the page",
+        "The Edge sidebar automatically translates articles into any language",
+        "Copilot in Edge has a larger context window than Claude"
+      ],
+      "correct": 1,
+      "explanation": "The key advantage is friction-free, in-context usage. Copilot in Edge can see the whole page you're reading without you needing to copy and paste anything — and you never have to leave the page to use it. This makes it practical to use AI assistance on every article you read, not just the ones worth the effort of switching apps."
+    }
+  ],
+  "nextLesson": "2-7",
+  "prevLesson": "2-5"
+}

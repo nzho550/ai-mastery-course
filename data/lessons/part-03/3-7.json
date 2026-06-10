@@ -1,0 +1,127 @@
+{
+  "id": "3-7",
+  "title": "Iterative Refinement",
+  "part": 3,
+  "estimatedMinutes": 20,
+  "tags": ["prompting", "beginner", "refinement", "iteration"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll learn to treat AI output as a first draft, not a final answer — and you'll build a refinement habit that consistently transforms mediocre initial output into something you're actually proud to use."
+    },
+    {
+      "type": "text",
+      "content": "## First Drafts Are Supposed to Be Imperfect\n\nProfessional writers don't expect their first draft to be good. They expect it to be something they can work with. The same mental model applies to AI output.\n\nThe single most common mistake new AI users make is accepting the first response and either using it as-is or abandoning the tool in frustration because it wasn't perfect. Both reactions miss the point. The real workflow looks like this:\n\n**First draft** → **Identify what's wrong** → **Give specific feedback** → **Improved draft** → **Repeat until good**\n\nThis loop — the refinement loop — is how AI output becomes genuinely excellent. The key word is *specific*. Vague feedback produces vague improvements. Specific feedback produces targeted changes.\n\n**Vague feedback:**\n\"Make it better.\"\n\"I don't like this.\"\n\"Try again.\"\n\n**Specific feedback:**\n\"The second paragraph is too abstract — add a concrete example.\"\n\"Cut 30% of the length by removing the redundant sentences in paragraphs 1 and 3.\"\n\"Change the tone from formal to conversational — write like you're talking to a colleague, not filing a report.\""
+    },
+    {
+      "type": "text",
+      "content": "## The \"What's Wrong With This?\" Technique\n\nOne of the most powerful refinement moves is to ask the model to critique its own output before you do. This often surfaces problems you wouldn't have caught — and frames the next improvement automatically.\n\nHere's how it works:"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Step 1 — Generate a first draft:\nWrite a short professional bio for my LinkedIn profile. I'm a project manager\nwith 8 years of experience in construction, recently transitioning to tech.\nHighlight that I'm learning AI tools.\n\nStep 2 — Ask it to critique itself:\nNow list what's weak about that bio. What assumptions did you make that might\nbe wrong? What's generic that should be specific? What's missing?\n\nStep 3 — Apply the critique:\nRewrite the bio addressing each issue you identified."
+    },
+    {
+      "type": "text",
+      "content": "By making the model articulate what it got wrong, you often get a third-step output that's substantially better than anything you'd get from rephrasing your original prompt. The model has essentially done the feedback work for you."
+    },
+    {
+      "type": "text",
+      "content": "## A Toolkit of Refinement Moves\n\nHere are the most useful refinement instructions, organised by what you're trying to fix:\n\n**Length adjustments:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Cut this to 3 sentences maximum. Keep the most important information."
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "This is too brief. Expand the second point with a specific example."
+    },
+    {
+      "type": "text",
+      "content": "**Tone adjustments:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "The tone is too formal. Rewrite it to sound like a smart, direct colleague\ntalking to another colleague — not a legal document."
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Make it warmer. The current version reads as cold and transactional."
+    },
+    {
+      "type": "text",
+      "content": "**Specificity adjustments:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Replace all the generic phrases ('leveraged synergies', 'drove results')\nwith specific descriptions of what actually happened."
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Add an example to paragraph 2. The claim is abstract without one."
+    },
+    {
+      "type": "text",
+      "content": "**Structure adjustments:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Reorder these points so the most important one comes first."
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Break this into short paragraphs. The current wall of text is hard to read."
+    },
+    {
+      "type": "text",
+      "content": "**Targeted rewrites:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Keep paragraphs 1 and 3. Rewrite paragraph 2 entirely — it's not landing."
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "The ending is weak. The last sentence should leave the reader with\nsomething memorable or with a clear next action. Rewrite just the ending."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Reference the draft when giving feedback.** Say \"paragraph 2\" or \"the third bullet point\" rather than describing content abstractly. The model can't know which part you mean if you only describe your feeling about it. Precision in feedback produces precision in improvement."
+    },
+    {
+      "type": "text",
+      "content": "## How Many Rounds of Refinement?\n\nFor most tasks, two or three refinement rounds produces a result better than anything you'd achieve in one shot. Here's a rough calibration:\n\n- **One round:** Fix the most obvious problem — length, tone, a missing element\n- **Two rounds:** Address the structural issue and then polish the details\n- **Three rounds:** Deeper rewrites — significant tone shift, major restructure, adding substance\n\nAfter three rounds, you're often better off starting fresh with a better-structured initial prompt (using the four elements from lesson 3-2) than continuing to patch a draft that has fundamental problems.\n\nThe threshold question: *Is this a draft I can edit, or a draft I need to replace?* If the core structure is wrong, refinement won't fix it. Start over with a clearer prompt."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Saving a conversation state:** If you've run several rounds of refinement and produced a good draft, save the final version before closing the conversation. Claude doesn't retain conversation history between sessions — if you close the tab, the refinement history is gone. Keep the final output in your notes."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "The Refinement Ladder",
+      "content": "Open [Claude.ai](https://claude.ai) and run the full refinement loop. Use this five-step sequence in one conversation, each step building on the previous output.\n\n**Step 1 — Deliberately vague first draft:**\n```\nWrite a short about-me bio for a professional website.\n```\n(This will produce something generic — that's intentional.)\n\n**Step 2 — Add your real context:**\n```\nMake it more specific. Include that I'm learning AI tools, and use my\nreal background: [add 2–3 sentences about your actual background here].\n```\n\n**Step 3 — Fix the tone:**\n```\nThe tone is too formal. Make it conversational but still professional —\nlike how I'd introduce myself at a networking event, not in a cover letter.\n```\n\n**Step 4 — Cut the length:**\n```\nIt's too long. Cut it to 3 sentences maximum. Keep what's most distinctive.\n```\n\n**Step 5 — Strengthen the ending:**\n```\nEnd with something that invites people to connect — a question, a shared\ninterest, or a clear call to action. Rewrite just the final sentence.\n```\n\nSave the Step 5 output. You now have a professional bio you can actually use — built in 5 iterations from a vague starting point."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 3-7.** You now have a refinement toolkit — specific moves you can make to improve any AI output. First drafts are starting points, not final answers."
+    }
+  ],
+  "nextLesson": "3-8",
+  "prevLesson": "3-6"
+}

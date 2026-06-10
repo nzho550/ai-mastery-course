@@ -1,0 +1,50 @@
+{
+  "id": "1-4",
+  "title": "AI Hallucinations & Limitations",
+  "part": 1,
+  "estimatedMinutes": 15,
+  "tags": ["foundations", "beginner", "safety"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nAI systems can generate confident, fluent, completely wrong information — and they do it without any warning sign. This is called hallucination, and understanding it is arguably the most important safety concept in this course. By the end of this lesson you'll know what hallucinations are, why they happen, how to spot them, and how to build a 3-step fact-check habit that protects you from acting on bad information."
+    },
+    {
+      "type": "text",
+      "content": "## What is a Hallucination?\n\nA **hallucination** is when an AI generates output that is factually incorrect but presented with complete confidence. There's no stutter, no \"I'm not sure about this,\" no asterisk. The AI states it as if it were established fact.\n\nExamples of the kinds of things AI hallucinates:\n- A legal citation that doesn't exist (real cases with made-up details)\n- A scientific study with a plausible title, journal name, and author list — that was never published\n- Historical events with the right general shape but wrong dates, names, or outcomes\n- Code that looks syntactically correct but has a subtle logic error\n- A person's biography that mixes real facts with invented ones\n\nWhat makes this particularly dangerous is the *packaging*. Hallucinated content looks exactly like correct content. The writing is clear, the tone is authoritative, the details are specific. There's no visual cue that something is wrong."
+    },
+    {
+      "type": "text",
+      "content": "## Why Does This Happen?\n\nTo understand hallucinations, go back to lesson 1-2: language models predict the most likely next token given everything that came before. They are, at their core, pattern-completion engines.\n\nWhen you ask \"What is the population of Paris?\", the model doesn't look up the answer in a database. It generates the answer the same way it generates everything else: by predicting the most plausible continuation of the text, based on patterns learned during training.\n\nMost of the time, this produces the right answer — because the training data contained many accurate references to Paris's population. But the model is not reasoning from ground truth. It's generating plausible text. When it encounters a question whose answer wasn't well-represented in training data, or a question about something obscure, or a question that requires combining information in a novel way, it can generate a confident-sounding answer that is simply wrong.\n\nThis is sometimes called **overconfident prediction**: the model is not uncertain in the way a human is uncertain. Humans say \"I think it was around 1850\" when they're not sure. LLMs, by default, don't have that calibrated hesitation — they generate whatever token sequence is most probable, even if the underlying fact is wrong.\n\n**The model is not lying.** This is an important distinction. Lying requires knowing the truth and choosing to say otherwise. The model genuinely doesn't have access to ground truth — it only has patterns. The hallucination is an emergent property of how it works, not a design flaw or malicious behaviour."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The high-risk domains for hallucination:** Medical dosages and drug interactions, legal citations and case law, financial figures and statistics, academic citations, and historical details about obscure events. In all of these, a confident wrong answer can cause real harm. Always verify before acting on AI output in these areas."
+    },
+    {
+      "type": "text",
+      "content": "## The 3-Step Fact-Check Habit\n\nYou don't need to verify every sentence an AI writes. Most AI output is fine — summaries, explanations of concepts, drafts of emails, writing suggestions. The habit is about knowing *when* to verify and having a fast process for doing it.\n\n**Step 1: Ask yourself — does this claim matter?**\nIf you're asking Claude to help rewrite a paragraph, a hallucinated fact is low-stakes. If you're asking for medical information, a legal deadline, or a statistic you're about to put in a presentation, that's high-stakes. Apply verification effort proportional to the consequence of being wrong.\n\n**Step 2: Cross-reference the specific claim.**\nDon't ask Claude to verify Claude. Go to a primary source: Wikipedia for general facts (it's a good first-pass even if imperfect), official websites for statistics, PubMed for medical studies, Google Scholar for academic papers. The key is that you're checking against an independent source, not asking the same model to confirm its own answer.\n\n**Step 3: Be especially sceptical of specifics.**\nDates, names, numbers, titles, URLs, and citations are the most hallucination-prone elements. Vague statements (\"Python is widely used for data science\") are rarely hallucinated because they're so general. Specific claims (\"Python was created in 1991 by Guido van Rossum at the National Research Institute for Mathematics and Computer Science in the Netherlands\") have specific facts that can be wrong — check them individually.\n\nWith practice, this habit takes 30 seconds for most claims and becomes automatic."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Catch the Lie",
+      "content": "This exercise builds the verification instinct before you actually need it.\n\n**Part 1 — Trigger a hallucination deliberately:**\nOpen [Claude.ai](https://claude.ai) and ask:\n```\nWhat is the population of the fictional city of Emerald Falls, California?\n```\nEmeralds Falls does not exist. Watch what happens. Does Claude answer confidently with a number? Does it hesitate? Does it acknowledge the city is fictional? Whatever it does, note it.\n\n**Part 2 — Test with something real but obscure:**\nAsk Claude a factual question about something real but not widely covered — a minor historical event, an obscure scientist, a small country's GDP, a specific regulation. Choose something you can verify.\n\nExample: *\"What year was the Aarhus Convention on Access to Information signed, and which body drafted it?\"*\n\n**Part 3 — Verify the answer:**\nTake the specific facts from Claude's answer and check them against Wikipedia or the relevant official source. Document:\n- What Claude said\n- What the source says\n- Were they the same?\n\n**Part 4 — Ask Claude to flag its own uncertainty:**\nRe-run your obscure question with this addition: *\"Please flag any facts in your answer that you're less than fully confident about.\"* Compare this response to the first one.\n\n**The takeaway:** You're not learning to distrust AI — you're learning to use it like a smart but imperfect colleague. You'd fact-check a colleague's research before putting it in a presentation. Apply the same standard here."
+    },
+    {
+      "type": "quiz",
+      "question": "Why do language models hallucinate — generating confident but incorrect information?",
+      "options": [
+        "They are deliberately programmed to sometimes give wrong answers to test users",
+        "They generate text by predicting likely next tokens from patterns, not by looking up ground truth — so plausible-sounding text can be factually wrong",
+        "Their training data was mostly inaccurate, so they learned wrong facts",
+        "They only hallucinate when the question is too complex for their capability level"
+      ],
+      "correct": 1,
+      "explanation": "Language models don't retrieve facts from a database — they generate text token by token based on patterns learned during training. This means they can produce confident, fluent output that has the statistical shape of a correct answer but contains factual errors. It's a property of how the technology works, not a bug that can simply be patched away."
+    }
+  ],
+  "nextLesson": "1-5",
+  "prevLesson": "1-3"
+}

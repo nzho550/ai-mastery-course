@@ -1,0 +1,93 @@
+{
+  "id": "3-8",
+  "title": "Prompt Templates & Reuse",
+  "part": 3,
+  "estimatedMinutes": 20,
+  "tags": ["prompting", "beginner", "templates", "productivity"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll learn how to turn the best prompts you've written into reusable templates — and how to build a personal prompt library that grows with you throughout this course and beyond."
+    },
+    {
+      "type": "text",
+      "content": "## The Problem With Starting From Scratch\n\nEvery time you sit down with an AI tool and type a prompt from scratch, you're leaving efficiency on the table. You've already figured out what works for your recurring tasks — your prompts for email replies, meeting summaries, code reviews, status updates. Writing them fresh each time wastes time and produces inconsistent results.\n\nThe solution is a prompt library: a collection of your best prompts, formatted as templates with variable slots, stored somewhere you can access instantly.\n\nThis is the prompting equivalent of keyboard shortcuts. The first time you invest a few minutes setting one up, you save that time on every future use. A good prompt library built during this course will save you hours every month for years.\n\n**The shift in mindset:** Stop thinking of prompts as throwaway text you type once. Start thinking of them as tools you build once and reach for repeatedly."
+    },
+    {
+      "type": "text",
+      "content": "## Template Syntax: Using [BRACKETS] for Variables\n\nThe simplest way to make a prompt reusable is to replace the parts that change with bracketed placeholders. The convention is `[VARIABLE_NAME]` in uppercase — it's immediately visible and easy to find-and-replace.\n\nHere's a prompt you might write once:\n\n\"Write a polite follow-up email to Marcus at Acme Corp about the proposal I sent on May 5th, reminding him that the deadline is May 20th.\"\n\nTurned into a reusable template:"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Write a polite follow-up email to [RECIPIENT_NAME] at [COMPANY] about\n[TOPIC]. I sent my initial message on [DATE_SENT]. The deadline or next\nstep is [DEADLINE_OR_NEXT_STEP].\n\nKeep the tone friendly but direct. Three paragraphs maximum. Do not use\nphrases like 'I hope this email finds you well.'"
+    },
+    {
+      "type": "text",
+      "content": "Now you have a template you fill in for any follow-up email. The constraint at the bottom (no clichés) is pre-baked because you already know you don't want that.\n\nLet's look at more examples."
+    },
+    {
+      "type": "text",
+      "content": "## Four Ready-to-Use Templates\n\n**Meeting summary:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Summarise this meeting in the following format:\n\n**Meeting:** [MEETING_NAME]\n**Date:** [DATE]\n**Attendees:** [NAMES]\n\n**Key Decisions Made:**\n[bullet list]\n\n**Action Items:**\n[Name — Task — Due Date]\n\n**Open Questions / Parking Lot:**\n[bullet list]\n\nMeeting notes to summarise:\n[PASTE NOTES HERE]"
+    },
+    {
+      "type": "text",
+      "content": "**Code review request:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Act as a senior [LANGUAGE] developer doing a thorough code review.\n\nReview this code for:\n1. Correctness — does it do what it's supposed to do?\n2. Edge cases — what inputs could break it?\n3. Readability — would a junior developer understand it?\n4. Anything that would fail a PR review at a professional company\n\nBe specific about line numbers or sections. Don't be diplomatic.\n\nCode:\n[PASTE CODE HERE]"
+    },
+    {
+      "type": "text",
+      "content": "**Weekly status update:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Write a concise weekly status update for my [ROLE] role at [COMPANY].\n\nAudience: my manager and the team.\nTone: professional and direct — no fluff.\n\nUse this structure:\n**This week:** [3 bullet points of what I accomplished]\n**Next week:** [3 bullet points of what I'm working on]\n**Blockers:** [Any issues I need help with, or 'None']\n\nMy notes for this week:\n[PASTE YOUR RAW NOTES OR BULLET POINTS HERE]"
+    },
+    {
+      "type": "text",
+      "content": "**Learning a new topic:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Teach me [TOPIC] as if I'm a smart adult with no prior knowledge of it.\n\nStructure your explanation as:\n1. The core idea in one sentence\n2. Why it matters (a real-world consequence of not understanding it)\n3. How it works — use an analogy from [ANALOGY_DOMAIN, e.g. 'cooking', 'sport', 'construction']\n4. One concrete example\n5. The one thing I should learn next\n\nNo jargon. If you use a technical term, define it immediately."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Build the constraints into the template.** Every time you refine a prompt — removing a cliché, capping the length, adding a specific format — bake that refinement into the template. The template should reflect your fully-learned preferences, not your first attempt."
+    },
+    {
+      "type": "text",
+      "content": "## Where to Store Your Prompt Library\n\nYou have several good options. Pick the one you'll actually use:\n\n**VS Code snippet file** — Create a markdown file in your project's `prompts/` folder. This is searchable and lives with your code. If you use VS Code daily, this is the most accessible option.\n\n**Text expansion tool** — Apps like AutoHotkey (Windows) or Espanso let you type a short abbreviation (e.g. `;;email`) and it expands to your full template. The fastest option if you run prompts frequently.\n\n**Claude Project Instructions** — Paste your most-used templates into the instructions of a Claude Project. They're there every time you open that project without copy-pasting.\n\n**Notion or Google Docs** — A simple table: Template Name | Category | Template Text | Notes. Easy to search and share with a team.\n\nThe format matters less than the habit. The habit is: **every time a prompt works well, save it before you close the tab.**"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The Anthropic Prompt Library** at anthropic.com/research/prompt-library is an excellent source of starting templates. The community resource Awesome ChatGPT Prompts (github.com/f/awesome-chatgpt-prompts) has hundreds more. Neither replaces your personal library — they're raw material you'll adapt to your real needs."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Build Your Prompt Library",
+      "content": "This workshop is different from the others in Part 3 — it's a documentation and organisation task, not a browser session. You're building something that will save you time every week from here on.\n\n**Step 1 — Create the file**\n\nOpen VS Code (or Notepad if VS Code isn't installed yet) and create a file called `prompts/my-prompt-library.md`.\n\n**Step 2 — Add your Part 3 prompts**\n\nGo back through lessons 3-1 through 3-7. Find every prompt you wrote or saved during those workshops. Add the best ones to your library using this format for each:\n\n```\n## [Category / Use Case Name]\n\n[The template text with [VARIABLE] placeholders]\n\n**Example (filled in):**\n[One filled-in example showing the template in use]\n\n**Notes:**\n[Any constraints, context, or tips for using this template]\n```\n\n**Step 3 — Add 3 new templates**\n\nNow think about your own recurring tasks — things you do at work, at home, or in your learning. Write 3 prompt templates for tasks specific to your life:\n\n- What do you write repeatedly? (emails, reports, messages)\n- What do you research repeatedly? (prices, products, topics)\n- What do you analyse repeatedly? (decisions, documents, data)\n\nFor each one, write the template with `[VARIABLE]` placeholders and one filled-in example.\n\n**Step 4 — Save and commit**\n\nSave the file. If you've set up Git (from Part 5), commit it: `git commit -m \"Add prompt library\"`\n\nThis file will grow throughout the course. Treat it as a living document — add to it whenever you find a prompt that works."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 3 — Prompt Engineering.** You now have a systematic toolkit: the four-element framework, role prompting, chain-of-thought, few-shot examples, structured output, iterative refinement, and a personal prompt library. These are the skills that separate people who get mediocre AI output from people who get excellent AI output — consistently."
+    }
+  ],
+  "nextLesson": "4-1",
+  "prevLesson": "3-7"
+}

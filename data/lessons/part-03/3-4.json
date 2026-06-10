@@ -1,0 +1,131 @@
+{
+  "id": "3-4",
+  "title": "Chain-of-Thought Prompting",
+  "part": 3,
+  "estimatedMinutes": 20,
+  "tags": ["prompting", "beginner", "chain-of-thought", "reasoning"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll learn why asking an AI to \"think step by step\" measurably improves accuracy on reasoning tasks — and how to use this technique to get answers you can actually audit, not just accept on faith."
+    },
+    {
+      "type": "text",
+      "content": "## Why AI Gets Reasoning Wrong (and How to Fix It)\n\nLanguage models are very good at pattern matching and very bad at multi-step arithmetic and logic — unless you force them to slow down.\n\nHere's why: when you ask for a direct answer, the model generates the most statistically likely response token by token. On simple factual questions, this works fine. On multi-step reasoning — maths problems, logical deductions, decision trees — the model often shortcuts to a plausible-sounding answer that skips the actual reasoning chain. This is how you get confidently wrong answers.\n\nChain-of-thought prompting breaks this pattern. By instructing the model to reason through each step before answering, you force it to build the logical structure in its output rather than jumping to a conclusion. And here's the key insight: **reasoning is in the context window**. When the model writes out Step 1, that step becomes input for Step 2. The intermediate reasoning is literally part of what gets processed next — which is why showing the work produces more accurate results than guessing the answer.\n\nThis isn't a prompt trick. It's a structural fix for a known model limitation."
+    },
+    {
+      "type": "text",
+      "content": "## The Zero-Shot Trigger\n\nThe simplest way to activate chain-of-thought reasoning is to add a single phrase to any prompt: **\"Let's think step by step.\"** This is called zero-shot chain-of-thought prompting — it works without any examples, just the instruction.\n\n**Without chain-of-thought:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "If a train leaves Station A at 2:00pm travelling at 60 mph, and another\ntrain leaves Station B at 3:00pm travelling at 90 mph toward Station A,\nand the two stations are 300 miles apart, at what time do they meet?"
+    },
+    {
+      "type": "text",
+      "content": "When asked this directly, models frequently produce a wrong answer or an answer with hidden errors you can't catch. Now add the trigger:\n\n**With chain-of-thought:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "If a train leaves Station A at 2:00pm travelling at 60 mph, and another\ntrain leaves Station B at 3:00pm travelling at 90 mph toward Station A,\nand the two stations are 300 miles apart, at what time do they meet?\n\nThink through this step by step, showing each calculation."
+    },
+    {
+      "type": "text",
+      "content": "With the step-by-step instruction, the model works through the problem visibly: how far has the first train travelled by 3pm? What's the combined closing speed after that point? How long until they cover the remaining distance? Each step is checkable. If an error appears, you can spot it and correct it.\n\nThis is the second benefit of chain-of-thought prompting: **auditability**. You're not just getting a better answer — you're getting an answer you can verify."
+    },
+    {
+      "type": "text",
+      "content": "## Chain-of-Thought Trigger Phrases\n\nSeveral phrasings activate the same reasoning behaviour. Use whichever fits naturally into your prompt:\n\n**For general reasoning:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Let's think step by step."
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Think through this carefully before answering."
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Reason through this out loud, then give me your conclusion."
+    },
+    {
+      "type": "text",
+      "content": "**For decisions and recommendations:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Walk me through your reasoning before giving me your recommendation."
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Think about the pros and cons of each option before concluding."
+    },
+    {
+      "type": "text",
+      "content": "**For showing work explicitly:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Show your work. I want to see each step."
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Explain your reasoning at each stage."
+    },
+    {
+      "type": "text",
+      "content": "## Beyond Maths: Chain-of-Thought for Real Decisions\n\nChain-of-thought is even more valuable for complex, real-world decisions than for maths problems — because those decisions have no single correct answer, and seeing the reasoning helps you catch flawed assumptions before you act on them.\n\nHere's an example for a real decision:\n\n**Without chain-of-thought:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Should I accept a job offer that pays 20% more but requires 2 hours of\ncommuting per day?"
+    },
+    {
+      "type": "text",
+      "content": "This produces a vague \"it depends\" answer or generic advice about work-life balance. Not useful.\n\n**With chain-of-thought:**"
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "I have a job offer that pays 20% more than my current salary but requires\n2 hours of commuting per day (I currently work from home). I have two young\nchildren and work roughly 8-hour days.\n\nThink through this step by step:\n1. Calculate the real financial gain after commuting costs\n2. Calculate the hours per year lost to commuting\n3. Consider the impact on family time\n4. Weigh the career trajectory against the lifestyle cost\n5. Then give me your recommendation with your reasoning visible."
+    },
+    {
+      "type": "text",
+      "content": "Now the model builds a structured analysis you can interrogate. If you think its commuting cost estimate is off, you can correct it. If you think it's underweighting family time, you can push back. You're in a dialogue with visible reasoning — not receiving an oracle's verdict."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Chain-of-thought doesn't fix hallucination.** It improves logical consistency and catches arithmetic errors, but it won't prevent the model from reasoning correctly from a false premise. If the model's starting facts are wrong, it will reason correctly from wrong information. Always verify factual claims independently."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Extended thinking:** Claude's latest models support a feature called extended thinking, where the model performs a longer internal reasoning process before responding. This is chain-of-thought at the architecture level — the reasoning happens before you see the output, not in it. You can enable it in the Claude.ai interface. For most tasks, the prompting technique above achieves the same practical result."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Step-by-Step vs Direct",
+      "content": "Open [Claude.ai](https://claude.ai) and run the same logic-heavy question two ways — in two separate conversations.\n\n**Run 1 — direct answer:**\n```\nIf a train leaves Station A at 2:00pm travelling at 60 mph, and another\ntrain leaves Station B at 3:00pm travelling at 90 mph toward Station A,\nand the two stations are 300 miles apart, at what time do they meet?\n```\n\n**Run 2 — chain-of-thought:**\n```\nIf a train leaves Station A at 2:00pm travelling at 60 mph, and another\ntrain leaves Station B at 3:00pm travelling at 90 mph toward Station A,\nand the two stations are 300 miles apart, at what time do they meet?\n\nThink through this step by step, showing each calculation.\n```\n\nCompare: did both give the same final answer? Could you spot an error in Run 1 if there was one? Could you in Run 2?\n\n**Now apply it to something real:** Think of one complex decision you're currently facing — a purchase, a career choice, a project plan. Write a chain-of-thought prompt that asks Claude to reason through it step by step before concluding. Run it and read the reasoning. Is there a step where Claude's logic differs from your instinct? That's the most useful part."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 3-4.** You now know how to trigger step-by-step reasoning from any AI — improving accuracy on complex tasks and giving you reasoning you can audit and push back on."
+    }
+  ],
+  "nextLesson": "3-5",
+  "prevLesson": "3-3"
+}

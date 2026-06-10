@@ -1,0 +1,42 @@
+{
+  "id": "2-8",
+  "title": "Choosing the Right AI Tool",
+  "part": 2,
+  "estimatedMinutes": 15,
+  "tags": ["tools", "foundations", "beginner"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll build a personal decision framework for picking the right AI tool for any task. After meeting seven distinct tools in lessons 2-1 through 2-7, the question is no longer \"what is AI?\" — it's \"which tool do I reach for, and when?\""
+    },
+    {
+      "type": "text",
+      "content": "## Why Tool Selection Matters\n\nUsing the wrong AI tool isn't fatal — most of them can do most things adequately. But using the *right* tool is noticeably better. The difference between asking a research question in Claude versus Perplexity is the difference between an answer you have to trust blindly and an answer you can verify in 30 seconds.\n\nA few principles before the framework:\n\n**Don't be loyal to one tool.** The best AI users maintain a small toolkit and route tasks to the right one. Becoming a one-tool person means missing the genuine strengths of tools you're not using.\n\n**Use both and compare when unsure.** If you genuinely can't decide between Claude and ChatGPT for a task, run it in both. The comparison will tell you more than any guide.\n\n**Your routing will evolve.** This framework is a starting point. As you do more with these tools, you'll develop strong personal preferences that may differ from the defaults below. Trust your experience over any guide.\n\n## The Decision Framework\n\nStart with the nature of the task:\n\n**\"I need real sources and citations.\"**\nReach for **Perplexity**. This is its core strength — synthesized answers with clickable citations from live web sources. Health questions, current events, fact-checking claims, and anything where you'd normally open 5 browser tabs all belong here.\n\n**\"I need to write, analyze, or think something through.\"**\nReach for **Claude**. Long-form writing, nuanced analysis, careful reasoning, coding help, and tasks where you want a thoughtful, measured response. Claude's strength is quality of reasoning over breadth of access.\n\n**\"I need to generate, roleplay, or want a broader personality range.\"**\nReach for **ChatGPT**. ChatGPT is more flexible in tone and style, better integrated with DALL-E for images, and has the Code Interpreter for running Python on your data.\n\n**\"I'm working inside Gmail, Docs, or Sheets.\"**\nReach for **Gemini**. It's already inside those tools — reducing friction to near zero. The best AI tool for a task is often the one you don't have to leave your current app to use.\n\n**\"I'm reading a long web page and want AI alongside it.\"**\nReach for **Copilot in Edge**. It reads the page you're on without you copying anything, right there in the sidebar.\n\n**\"I need an image, audio clip, or short video.\"**\nReach for the **specialist tools** — Bing Image Creator (free images), ElevenLabs (voice), Suno (music), Runway (video). General chat AIs won't produce these outputs directly.\n\n**\"I want to compare models or can't decide.\"**\nRun the task in two tools and judge the output yourself. This is the most valuable learning habit in the early weeks.\n\n## The Decision Cheat Sheet\n\n| Task | Reach for | Why |\n|------|-----------|-----|\n| Quick question / writing help | Claude or ChatGPT | Fast, conversational, high-quality output |\n| Research with sources | Perplexity | Shows citations so you can verify |\n| Summarize a document or video | NotebookLM or Claude | Upload and ask — no need to copy-paste manually |\n| Generate an image | Bing Image Creator (free) → Midjourney | Bing costs nothing; Midjourney quality is higher |\n| Generate audio / voice | ElevenLabs | Best quality speech synthesis |\n| Generate background music | Suno | Fastest music generation, free tier |\n| Generate a short video clip | Runway | Reliable, free tier available |\n| Work inside Gmail or Docs | Gemini | Already integrated — no tab switching |\n| Summarize the webpage you're reading | Copilot in Edge | Works in context alongside the page |\n| Code help with file awareness | Claude Code or Copilot | Reads your actual project files |\n| Connect apps / automate | Zapier (no-code) or n8n (self-hosted) | Covered in Part 10 |\n\n## A Word on \"Best\"\n\nNotice the cheat sheet doesn't say any tool is best overall. That's intentional. The question \"which AI is best?\" is the wrong question. The right question is \"which AI is best *for this specific task*?\"\n\nA beginner who learns this routing instinct early will do more useful work with AI than someone who has mastered a single tool."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've finished Part 2.** You've now used seven distinct AI tools and built a mental model for when each one belongs. In Part 3, the focus shifts from *which tool* to *how to talk to it* — the craft of prompting that makes every tool in your toolkit dramatically more powerful."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Your Personal AI Toolkit",
+      "content": "This is a reflection workshop. You're going to build a personal reference document you'll actually use.\n\n**Step 1 — Create the document**\nOpen Notepad, VS Code, or a Google Doc. Create a document called `my-ai-toolkit.md` (or save it wherever you keep notes).\n\n**Step 2 — Fill in the routing table**\nStart with this template and fill in every row based on your own experience from Part 2:\n\n```\n# My AI Toolkit\n\n| Task Type | Best Tool | Why | Backup Tool |\n|-----------|-----------|-----|-------------|\n| Research / fact-checking | | | |\n| Writing and drafting | | | |\n| Coding help | | | |\n| Image creation | | | |\n| Working in Gmail | | | |\n| Reading long web pages | | | |\n| Transcribing audio | | | |\n| Generating music | | | |\n| Learning a new topic | | | |\n| Brainstorming ideas | | | |\n```\n\nUse the decision cheat sheet as a starting point. **Override any row** where you have a different preference based on your actual experience from lessons 2-1 through 2-7.\n\n**Step 3 — Add your own rows**\nThink about 2–3 tasks you do regularly in your work or personal life. Add them as rows and fill in which tool you'd reach for.\n\n**Step 4 — Keep this document**\nYou'll update it throughout the course as you discover more tools and develop stronger preferences. The goal is a living reference card that reflects *your* actual workflow — not someone else's recommendation."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to research whether a new supplement has been shown to be effective, and you need to be able to cite your sources. Which tool is the best starting point?",
+      "options": [
+        "Claude — because it has deep medical knowledge from training",
+        "ChatGPT — because it can run Python to analyze the data",
+        "Perplexity — because it searches the web and shows citations from actual studies",
+        "Gemini — because it integrates with Google Scholar"
+      ],
+      "correct": 2,
+      "explanation": "When you need citations you can actually verify — especially for health claims — Perplexity is the right starting tool. It pulls from live web sources and shows you numbered citations linking to the original pages, so you can check whether the evidence actually says what the summary claims."
+    }
+  ],
+  "nextLesson": "3-1",
+  "prevLesson": "2-7"
+}

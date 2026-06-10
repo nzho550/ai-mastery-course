@@ -1,0 +1,42 @@
+{
+  "id": "2-5",
+  "title": "Perplexity AI — AI-Powered Search",
+  "part": 2,
+  "estimatedMinutes": 15,
+  "tags": ["search", "beginner", "tools"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll understand what makes Perplexity fundamentally different from ChatGPT and Claude, when real citations matter, how Perplexity's Pro and free tiers compare, and how to use Copilot mode for follow-up research. Most importantly, you'll develop an instinct for *when* to reach for Perplexity versus a general-purpose chat AI."
+    },
+    {
+      "type": "text",
+      "content": "## What Makes Perplexity Different\n\nClaude and ChatGPT are **language models with conversation interfaces** — they generate text based on patterns learned during training. Perplexity is built on a fundamentally different idea: it's an **AI-native search engine** that retrieves live web pages, reads them, synthesizes an answer, and shows you the sources.\n\nThis distinction matters enormously in practice.\n\nWhen you ask Claude \"What are the current treatments for Type 2 diabetes?\", you get a response based on what was in Claude's training data — which has a cutoff date and doesn't know what's been published since. When you ask Perplexity the same question, it searches the web, reads recent medical articles and authoritative sources, and gives you an answer *with numbered citations you can click*.\n\n## How Perplexity Works\n\nEvery Perplexity response includes:\n\n- **Citations as numbered sources** — each fact in the answer is linked to the page it came from\n- **Source list** — a panel showing the actual websites used, so you can click through and verify\n- **Follow-up suggestions** — related questions to continue researching\n\nThis is what sets Perplexity apart from other \"AI with web access\" implementations. The citations aren't an afterthought — they're built into the interface, surfaced prominently, and designed to make verification easy.\n\n## When Citations Actually Matter\n\nFor casual questions — \"explain the difference between affect and effect\" or \"help me brainstorm ideas for a birthday party\" — you don't need citations. Claude or ChatGPT is faster and more conversational.\n\nBut for a growing class of tasks, citations are essential:\n\n- **Health and medical questions** — you need to know if an answer comes from the Mayo Clinic or a random blog\n- **Legal or financial questions** — the source jurisdiction and date matter enormously\n- **Current events and recent news** — training data cutoffs make chat AIs unreliable here\n- **Academic or professional research** — you'll need to cite sources in your work\n- **Fact-checking a claim** — \"Is this statistic real and where does it come from?\"\n- **Any question where you'd Google multiple tabs** — Perplexity does the tab-opening for you\n\nThe mental rule: **use Perplexity when the source matters**. Use Claude when you need writing, analysis, or thinking.\n\n## Copilot Mode and Follow-up Research\n\nPerplexity includes a **Copilot mode** (sometimes called Pro Search) that goes beyond a single search and response. In Copilot mode, Perplexity asks clarifying questions before searching, performs multiple rounds of searches to build a comprehensive answer, and synthesizes results more deeply.\n\nThis is useful when your question has multiple dimensions — \"What are the pros and cons of solar panels for a house in a northern climate?\" requires understanding cost, climate, incentives, efficiency, and installation, and Copilot mode will search for all of them.\n\n## Perplexity Free vs. Pro\n\nThe **free tier** is surprisingly capable:\n- Unlimited questions with web search\n- Real citations on every answer\n- Follow-up questions in the same thread\n- Access to Copilot mode with daily limits\n\n**Perplexity Pro** (paid subscription) adds:\n- Unlimited Copilot searches\n- Ability to choose which AI model powers the answers (Claude, GPT-4, etc.)\n- File upload for research on your own documents\n- Higher limits across the board\n\nFor most beginners, the free tier is more than enough to learn and use the tool meaningfully."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The tool-routing rule:** Use **Perplexity** when you're researching something where the source matters — health, news, current events, or anything you'd normally open 5 browser tabs for. Use **Claude or ChatGPT** when you're generating, writing, analyzing, or thinking through a problem. These tools complement each other rather than compete."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Research a Real Question",
+      "content": "Pick something you genuinely want to know more about. Not a made-up example — a real question you've had. A health question, a technology trend, a historical event, a recent news story, a financial concept, anything.\n\n**Step 1 — Search in Perplexity**\nGo to [perplexity.ai](https://perplexity.ai) and search your question.\n- Read the answer\n- Look at the numbered citations in the response text\n- Scroll down and look at the source list\n\n**Step 2 — Verify one source**\nClick on one of the citations. Does the linked page actually say what Perplexity attributed to it? This is the verification habit — and Perplexity makes it very easy to build.\n\n**Step 3 — Search the same question in Claude**\nGo to [claude.ai](https://claude.ai) and ask the exact same question. Read that response.\n\n**Step 4 — Compare**\nAnswer these questions for yourself:\n- Which answer felt more trustworthy, and why?\n- Did either answer contain information the other didn't?\n- For this specific question, which tool would you use in the future?\n\nThere's no right answer — the point is building your own mental model of when each tool is appropriate. Write two sentences in your notes summarizing what you decided."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to find out whether a specific medication is safe to take alongside another medication you already take. Which tool should you reach for first, and why?",
+      "options": [
+        "Claude — because it gives more detailed, conversational answers",
+        "ChatGPT — because it has more medical knowledge from its training data",
+        "Perplexity — because it shows citations so you can verify the sources and confirm they're authoritative",
+        "Google Search — because AI tools should never be used for medical questions"
+      ],
+      "correct": 2,
+      "explanation": "For health questions, knowing the source is as important as the answer itself. Perplexity shows you which medical authority or research institution the information came from, so you can tell whether you're reading advice from the Mayo Clinic or an obscure blog. Always follow up with a healthcare professional for personal medical decisions."
+    }
+  ],
+  "nextLesson": "2-6",
+  "prevLesson": "2-4"
+}

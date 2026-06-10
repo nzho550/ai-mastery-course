@@ -1,0 +1,42 @@
+{
+  "id": "2-1",
+  "title": "Claude.ai — First Real Conversation",
+  "part": 2,
+  "estimatedMinutes": 20,
+  "tags": ["claude", "beginner", "tools", "prompting"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll know how to start a productive conversation with Claude, how to iterate on its responses using a 5-turn technique, what Artifacts are and when they appear, and what makes Claude's personality and voice distinctive compared to other AI tools."
+    },
+    {
+      "type": "text",
+      "content": "## Getting Started at Claude.ai\n\nClaude.ai is Anthropic's consumer interface for Claude — the place where you have conversations in your browser without writing any code. It's free to use, with a generous daily limit on the free tier, and a paid subscription (Claude Pro) for heavier usage.\n\nTo start, go to **claude.ai** and sign up with your email. The interface is intentionally minimal: a text box at the bottom, and a blank conversation above it. There's no toolbar to click through, no modes to configure. You just start talking.\n\n**Starting your first conversation** is simpler than most people expect. You don't need to phrase things perfectly. Claude is designed to interpret intent, so a rough question gets a useful answer. The skill isn't in crafting a perfect opening — it's in knowing how to guide the conversation from there.\n\n## How Claude Thinks and Responds\n\nClaude is trained by Anthropic with a focus on being **helpful, harmless, and honest**. In practice, this means a few things you'll notice immediately:\n\n- **Claude is careful.** It will decline requests that could cause harm, add caveats when the topic is sensitive, and tell you when it doesn't know something rather than making something up.\n- **Claude is thorough.** Its default response length tends toward complete answers rather than quick soundbites. You can ask it to be more concise.\n- **Claude has a voice.** It's not robotic. It explains things with genuine clarity, uses analogies, and sometimes expresses something like intellectual curiosity. This isn't an act — it's a product of training on high-quality writing.\n- **Claude doesn't have real-time internet access** in a standard conversation. Its knowledge has a training cutoff. If you need current information, use Perplexity (lesson 2-5) or mention that Claude should ask you for the relevant context.\n\n## The 5-Turn Iteration Technique\n\nMost beginners read the first response, decide whether they liked it, and either use it or give up. This is the single biggest mistake you can make with AI tools.\n\nThe real value comes from **iteration** — treating the first response as a rough draft and refining it through follow-up turns. Here is a proven 5-turn structure:\n\n1. **Turn 1 — Ask your initial question.** Don't over-engineer it. Get something on the page.\n2. **Turn 2 — Go deeper on one part.** Pick the section that interests you most and say \"Tell me more about [specific part].\"\n3. **Turn 3 — Change the format.** Ask Claude to reformat the answer as bullet points, a numbered list, a table, or a short summary.\n4. **Turn 4 — Clarify a term.** Find one word or concept Claude used that isn't clear to you and ask it to explain that term in simpler language.\n5. **Turn 5 — Synthesize.** Ask Claude to summarize everything you've discussed in one paragraph.\n\nThis technique works because each turn is cheap (a few seconds) but builds dramatically on the last. By turn 5, you have something far more useful than you would have gotten by crafting a perfect opening prompt.\n\n## What Are Artifacts?\n\nWhen Claude generates something that stands on its own — a document, a piece of code, a table, a structured plan — it sometimes displays it in a separate **Artifact panel** to the right of the conversation. Think of it as a canvas: the conversation is the dialogue, and the Artifact is the output.\n\nArtifacts are useful because:\n- They stay visible while the conversation scrolls\n- You can copy them cleanly without selecting around the conversation text\n- Claude can update the Artifact in later turns without reproducing it in full\n\nYou don't have to do anything to trigger an Artifact — Claude decides when an output benefits from being displayed that way. If you ask for a long document, a code file, or a structured table, watch for it to appear on the right side of the screen."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The single most useful habit:** Never treat Claude's first response as final. Type \"go deeper on [part]\" or \"make this shorter\" or \"give me an example\" — at least one follow-up turn almost always produces a meaningfully better result."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "The 5-Turn Challenge",
+      "content": "Open [Claude.ai](https://claude.ai) and pick a topic you genuinely care about — a hobby, a work problem, a question you've had for a while. Then complete all 5 turns:\n\n**Turn 1 — Initial question**\nAsk Claude about your topic. Don't overthink the wording.\n\n**Turn 2 — Go deeper**\n```\nTell me more about [the most interesting part of what you just said].\n```\n\n**Turn 3 — Change the format**\n```\nCan you reformat the key points from this conversation as a numbered list?\n```\n\n**Turn 4 — Clarify a term**\n```\nYou used the word [term you didn't fully understand]. Explain that in simpler language, as if I've never encountered the concept.\n```\n\n**Turn 5 — Synthesize**\n```\nSummarize everything we've covered in this conversation in one clear paragraph.\n```\n\nAfter you're done, write one sentence in your notes about what the final response is like compared to what Turn 1 gave you. This is the skill of iteration — and it applies to every AI tool you'll use in this course."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude a question and get a response that's close to what you wanted, but too long and missing a specific example. What is the best next step?",
+      "options": [
+        "Start a new conversation and rephrase your original question",
+        "Accept the response — Claude's first answer is usually the best it can do",
+        "Follow up in the same conversation: ask Claude to shorten it and add a specific example",
+        "Copy the response and edit it yourself without involving Claude further"
+      ],
+      "correct": 2,
+      "explanation": "Iterating in the same conversation is almost always better than starting over. Claude has the full context of what you asked and what it produced, so a targeted follow-up ('shorten this and add a concrete example') usually lands much better than re-prompting from scratch."
+    }
+  ],
+  "nextLesson": "2-2",
+  "prevLesson": "1-6"
+}
