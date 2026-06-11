@@ -26,7 +26,7 @@ export async function renderLesson(id) {
   // Load lesson JSON
   let data;
   try {
-    const res = await fetch(`data/lessons/part-${String(meta.part).padStart(2,'0')}/${id}.json`);
+    const res = await fetch(`data/lessons/part-${String(meta.partId).padStart(2,'0')}/${id}.json`);
     if (!res.ok) throw new Error('not found');
     data = await res.json();
   } catch {
