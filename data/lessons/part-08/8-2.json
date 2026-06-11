@@ -57,7 +57,7 @@
         "The server (the MCP server program)",
         "Claude's language model"
       ],
-      "correctIndex": 2,
+      "correct": 2,
       "explanation": "The MCP server is the component that executes the tool. It receives a request from the client, calls the external service (like GitHub's API), and returns the result. The client (Claude Code) coordinates the call and passes results to Claude, but it doesn't do the actual work of querying external systems."
     },
     {
