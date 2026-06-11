@@ -1,114 +1,69 @@
 {
   "id": "3-6",
-  "title": "Structured Output (JSON, Tables, Lists)",
+  "title": "Structured Output — JSON, Tables, and Data Extraction",
   "part": 3,
-  "estimatedMinutes": 20,
+  "estimatedMinutes": 25,
   "tags": ["prompting", "beginner", "structured-output", "json"],
   "sections": [
     {
       "type": "text",
-      "content": "## What You'll Learn\n\nYou'll learn how to ask an AI to return data in structured formats — JSON, markdown tables, bullet lists, CSV — and why this matters beyond aesthetics. Structured output is the bridge between AI and everything else: spreadsheets, databases, APIs, and automation tools."
+      "content": "## What You'll Learn\n\nYou'll learn how to ask an AI to return data in structured formats — JSON, markdown tables, CSV, YAML — and why this matters beyond aesthetics. Structured output is the bridge between AI and everything else: spreadsheets, databases, APIs, and automation tools. Even if you never write code, structured output will save you hours of manual reformatting every week. You'll also learn how to define precise output schemas, handle large batches consistently, and validate AI-generated data before using it."
     },
     {
       "type": "text",
-      "content": "## Why Structured Output Matters\n\nWhen an AI responds in flowing prose, the output is for humans to read. When it responds in structured format, the output is machine-readable — it can be fed directly into other systems.\n\nConsider the difference:\n\n**Prose output:**\n\"John Smith is a backend developer with five years of experience who primarily works in Python. Jane Doe is a frontend developer with three years of experience in React. Marcus Lee is a DevOps engineer with seven years of experience working with AWS and Kubernetes.\"\n\n**JSON output:**\nThe same information as a JSON array that can be imported into a spreadsheet, pasted into a database, processed by a Python script, or fed into another API call.\n\nStructured output matters in three practical scenarios:\n1. **You need to copy data somewhere else** — a table pastes directly into a spreadsheet; JSON pastes into a database import tool\n2. **You need consistent format across many items** — extracting data from 50 emails in the same structure\n3. **You're building an automated workflow** — a later step needs to read the AI's output programmatically\n\nEven if you never write code, structured output is useful. A markdown table pasted into a Google Doc or Notion looks clean and is easy to read. A numbered list is easier to act on than a paragraph."
+      "content": "## Why Structure Changes Everything\n\nWhen an AI responds in flowing prose, the output is for humans to read. When it responds in a structured format, the output is **machine-readable** — it can be fed directly into other systems without transformation.\n\nConsider the same information in two formats:\n\n**Prose output:**\n\"John Smith is a backend developer with five years of experience who primarily works in Python. Jane Doe is a frontend developer with three years of experience in React. Marcus Lee is a DevOps engineer with seven years of experience working with AWS and Kubernetes.\"\n\n**JSON output:**\n```json\n[\n  {\"name\": \"John Smith\", \"role\": \"Backend Developer\", \"years\": 5, \"skills\": [\"Python\"]},\n  {\"name\": \"Jane Doe\", \"role\": \"Frontend Developer\", \"years\": 3, \"skills\": [\"React\"]},\n  {\"name\": \"Marcus Lee\", \"role\": \"DevOps Engineer\", \"years\": 7, \"skills\": [\"AWS\", \"Kubernetes\"]}\n]\n```\n\nThe JSON version can be:\n- Imported directly into a spreadsheet (Google Sheets, Excel) with a single paste\n- Loaded into a database import tool\n- Processed by a Python script in 3 lines of code\n- Fed into another API call as input\n- Compared, filtered, or sorted programmatically\n\nStructured output solves three practical problems:\n1. **Copy-paste problems** — a table pastes into a spreadsheet perfectly; prose doesn't\n2. **Consistency problems** — when processing 50 items, you need every output in the same shape\n3. **Automation problems** — the next step in a workflow needs to read the AI's output, not just a human"
     },
     {
       "type": "text",
-      "content": "## Asking for JSON\n\nJSON (JavaScript Object Notation) is a standard format for structured data. You don't need to understand the technical details — you just need to ask for it and specify the fields you want.\n\n**The prompt:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Extract the team information from this paragraph and return it as a JSON\narray. Each person should have these fields: name, role, years_experience,\nprimary_skills (as an array of strings).\n\nParagraph:\n\"Our team has three members: Sarah handles backend development and has\n5 years of experience, primarily in Python. Marcus does frontend work,\n3 years in, and specialises in React. Priya leads DevOps with 7 years\nof experience across AWS and Kubernetes.\""
+      "content": "## Defining Your Schema: The Critical Step\n\nThe most common structured output mistake is asking for a format without specifying what fields to include. \"Return this as JSON\" produces whatever fields the model considers relevant. That's unreliable when you need a specific schema.\n\n**Always specify your fields explicitly:**\n\n```\n❌  Extract team information and return it as JSON.\n\n✅  Extract team information and return it as a JSON array.\n    Each object must have exactly these fields:\n    - name (string)\n    - role (string)\n    - years_experience (number)\n    - primary_skills (array of strings)\n    - location (string or null if not mentioned)\n```\n\n**Why this matters:** When you specify the schema, you get the same structure across 1 item or 100. When you let the model decide, the 37th item might have different field names than the 1st — and that breaks any automation.\n\n**For complex nested structures, show the shape:**\n```\nReturn results as JSON with this exact structure:\n{\n  \"summary\": \"one sentence overview\",\n  \"key_points\": [\"point 1\", \"point 2\", \"point 3\"],\n  \"action_items\": [\n    {\"owner\": \"name\", \"task\": \"description\", \"due\": \"date or null\"}\n  ],\n  \"sentiment\": \"positive\" | \"neutral\" | \"negative\"\n}\n```\n\nShowing the shape prevents ambiguity about nested arrays, optional fields, and data types."
     },
     {
       "type": "text",
-      "content": "**The output you'll get:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "[\n  {\n    \"name\": \"Sarah\",\n    \"role\": \"Backend Developer\",\n    \"years_experience\": 5,\n    \"primary_skills\": [\"Python\"]\n  },\n  {\n    \"name\": \"Marcus\",\n    \"role\": \"Frontend Developer\",\n    \"years_experience\": 3,\n    \"primary_skills\": [\"React\"]\n  },\n  {\n    \"name\": \"Priya\",\n    \"role\": \"DevOps Engineer\",\n    \"years_experience\": 7,\n    \"primary_skills\": [\"AWS\", \"Kubernetes\"]\n  }\n]"
+      "content": "## JSON in Practice: High-Value Patterns\n\n**Meeting notes → action items:**\n```\nRead these meeting notes and extract all action items as a JSON array.\nEach action item must have exactly these fields:\n- owner: name of person responsible (string)\n- task: what they need to do (string, 1 sentence)\n- due_date: deadline if mentioned (string) or null if not specified\n- priority: HIGH, MEDIUM, or LOW based on context in the notes\n\nMeeting notes:\n[paste your notes here]\n```\n\n**Email → structured contact:**\n```\nExtract the contact information from this email signature as JSON:\n{\n  \"name\": \"\",\n  \"title\": \"\",\n  \"company\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\" or null,\n  \"linkedin\": \"\" or null,\n  \"location\": \"\" or null\n}\n\nEmail signature:\n[paste signature here]\n```\n\n**Research → structured comparison:**\n```\nI'll describe 4 software tools. Return a JSON array comparing them.\nEach tool object must have:\n- name: tool name\n- price: monthly price or \"free\" or \"custom pricing\"\n- best_for: one sentence describing the ideal user\n- limitations: array of 2-3 key limitations\n- rating: your assessment 1-10 for [your specific use case]\n\nTools to analyse: [describe your tools or paste descriptions]\n```"
     },
     {
       "type": "text",
-      "content": "That output can be pasted directly into a JSON file, imported into a spreadsheet tool, or fed into a Python script. You've turned unstructured prose into structured data in one prompt."
+      "content": "## Markdown Tables: Fast, Human-Readable, Widely Compatible\n\nMarkdown tables are the easiest structured format to work with — they render in Notion, GitHub, GitLab, Obsidian, Linear, and any markdown-aware tool, and they paste into Google Docs and Word as actual tables.\n\n**Requesting a comparison table:**\n```\nCompare these three project management tools — Trello, Asana, and Notion —\nacross these criteria:\n- Monthly pricing (free tier → pro tier)\n- Learning curve (Low / Medium / High)\n- Best for (team size and type)\n- One standout feature\n- One significant limitation\n\nFormat as a markdown table with columns:\nTool | Pricing | Learning Curve | Best For | Standout Feature | Main Limitation\n```\n\n**Tips for better tables:**\n- Name every column explicitly — \"Tool | Pricing\" beats \"make a comparison table\"\n- Specify what values are valid for categorical columns (\"Low / Medium / High\", not free text)\n- Ask for a maximum row count to prevent bloated tables: \"top 5 rows only\"\n- Ask for consistent value formats: \"price as $/month\" not just \"price\"\n\n**Converting a table back to another format:**\n```\n[Paste the markdown table Claude just generated]\n\nConvert this table to CSV format, comma-delimited, with headers in the first row.\n```\n\nThis allows you to go: natural language → markdown table → CSV → spreadsheet in three prompts."
     },
     {
       "type": "text",
-      "content": "## Asking for Tables and Lists\n\nMarkdown tables are useful when you want a visual grid you can paste into Notion, GitHub, a Google Doc, or any markdown-aware tool.\n\n**The prompt:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Compare these three project management tools — Trello, Asana, and Notion —\nacross these criteria: pricing, learning curve, best for (team size),\nand standout feature.\n\nFormat as a markdown table with columns: Tool | Pricing | Learning Curve |\nBest For | Standout Feature."
+      "content": "## Batch Processing: Consistent Output Across Many Items\n\nOne of the highest-ROI uses of structured output is processing a long list of items — all in the same format, all in one pass.\n\n**Classify a list of items:**\n```\nFor each email subject line below, return a JSON object with:\n- subject: the original subject line\n- category: one of SALES, SUPPORT, INTERNAL, SPAM, OTHER\n- urgency: HIGH, MEDIUM, or LOW\n- suggested_folder: folder name to file it in\n\nReturn as a JSON array, one object per email.\n\nEmail subjects:\n1. \"Your invoice is overdue — action required\"\n2. \"Team lunch this Friday?\"\n3. \"CLICK HERE WIN £1000 AMAZING DEAL\"\n4. \"Re: Q3 roadmap discussion\"\n5. \"Your order has shipped!\"\n```\n\n**Analyse a reading list:**\n```\nFor each book title below, return a JSON object with:\n- title: the book title\n- category: genre or field (one word)\n- audience: who this is primarily for (one sentence)\n- core_idea: the central argument or insight (one sentence)\n- read_if: specific trigger that should make someone pick this up\n\nReturn as a JSON array.\n\nBooks:\n- Atomic Habits\n- The Pragmatic Programmer\n- Thinking, Fast and Slow\n- Zero to One\n- Deep Work\n- The Mom Test\n```\n\nThis kind of batch prompt replaces hours of manual research and note-taking with one prompt and 30 seconds of processing time."
     },
     {
       "type": "text",
-      "content": "For numbered lists, bullet lists, or any other format, just name it:\n\n**Numbered steps:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Give me a step-by-step process for onboarding a new freelancer.\nFormat as a numbered list. Maximum 10 steps."
-    },
-    {
-      "type": "text",
-      "content": "**Consistent bullet structure:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "List the 5 most important things to know before buying a used car.\nFor each item, use this structure:\n- **[Item name]**: [One sentence explanation] → [One specific action to take]"
-    },
-    {
-      "type": "callout",
-      "variant": "tip",
-      "content": "**Always specify the fields you want.** \"Return as JSON\" alone produces whatever fields the model thinks are relevant. \"Return as JSON with fields: title, summary, author, date, tags\" produces exactly the schema you need. Be explicit."
-    },
-    {
-      "type": "text",
-      "content": "## Using Structured Output for Real Work\n\nHere are some high-value patterns you can apply immediately:\n\n**Extract tasks from meeting notes:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Read these meeting notes and extract all action items as JSON.\nEach action item should have: owner, task, due_date (if mentioned, else null),\npriority (HIGH/MEDIUM/LOW based on context).\n\nMeeting notes:\n[paste your notes here]"
-    },
-    {
-      "type": "text",
-      "content": "**Analyse a list of items consistently:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Analyse each book title in this list and return a JSON array.\nFor each book, include: title, likely_genre, target_audience,\nand one_sentence_description.\n\nBooks:\n- Atomic Habits\n- The Pragmatic Programmer\n- Thinking, Fast and Slow\n- Zero to One\n- Deep Work"
-    },
-    {
-      "type": "text",
-      "content": "**Convert prose to CSV:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Convert this list of contacts into CSV format with columns:\nfirst_name, last_name, company, email (if present), role.\n\n[paste contact list here]"
+      "content": "## CSV and YAML: Two More Useful Formats\n\n**CSV (Comma-Separated Values)** — best for spreadsheet import:\n```\nConvert this list of contacts into CSV format.\nColumns: first_name, last_name, company, email, role, city.\nInclude a header row. If a field is not mentioned, leave it blank.\n\nContact list:\n[paste unstructured contact list]\n```\nCSV output pastes directly into any spreadsheet row-by-row without reformatting.\n\n**YAML** — preferred for configuration files and developer tools:\n```\nConvert this JSON into YAML format:\n[paste JSON here]\n```\n\nYAML is used extensively in DevOps, CI/CD pipelines, and configuration files (Docker Compose, GitHub Actions). If you work with developers, they often prefer YAML over JSON for readability.\n\n**Nested structure for complex documents:**\n```\nExtract the key terms from this contract and return as YAML:\n\ndefinitions:\n  [term]: [definition]\n  [term]: [definition]\n\nkey_dates:\n  effective_date:\n  expiry_date:\n  renewal_notice_deadline:\n\nobligations:\n  client:\n    - [obligation]\n  vendor:\n    - [obligation]\n\nContract text:\n[paste contract here]\n```"
     },
     {
       "type": "callout",
       "variant": "warning",
-      "content": "**Validate before using.** AI-generated JSON sometimes has minor formatting errors — misplaced commas, unclosed brackets, inconsistent field names. Before feeding AI-generated JSON into another tool, paste it into a free JSON validator (jsonlint.com) to check it's valid. This takes 10 seconds and prevents confusing errors downstream."
+      "content": "**Validate before using.** AI-generated JSON sometimes has minor formatting errors — misplaced commas, unclosed brackets, inconsistent field names. Before feeding AI-generated JSON into another tool or script, paste it into a free JSON validator (jsonlint.com or jsonformatter.curiousconcept.com) to confirm it's valid. This takes 10 seconds and prevents confusing downstream errors.\n\nAlso verify: if you asked for specific values (HIGH/MEDIUM/LOW), check a sample to confirm the model used exactly those values and didn't substitute \"High\" or \"URGENT\" — case and spelling inconsistencies break sorting and filtering."
+    },
+    {
+      "type": "text",
+      "content": "## Structured Output + Automation: The Bigger Picture\n\nStructured output is what makes AI useful in automated workflows. Once an AI produces consistent, schema-valid JSON, you can:\n\n- Import it into Airtable, Notion, or Coda databases automatically\n- Trigger Zapier or Make actions based on specific field values\n- Feed it as input to another API call\n- Save it to a file that another system reads\n- Track it in a spreadsheet that updates over time\n\n**Example automated pipeline:**\n1. New customer email arrives → Zapier triggers\n2. Email text sent to Claude API with your classification prompt → JSON output\n3. JSON fields mapped to Airtable fields → ticket created automatically\n4. If priority = HIGH → Slack notification sent\n5. If category = BILLING → Finance team notified\n\nYou'll build this kind of pipeline in Part 13 (Automation). For now, the key point is: every time you get AI to produce structured output, you're creating a foundation for automation. Even if you never automate anything, the structured output itself saves time — it's ready to use without reformatting."
     },
     {
       "type": "workshop",
       "tag": "BROWSER",
-      "title": "Data Extraction Pipeline",
-      "content": "Open [Claude.ai](https://claude.ai) and run this three-part exercise:\n\n**Part 1 — Extract as JSON:**\nPaste this paragraph and ask for JSON output:\n```\nOur team has three members: Sarah (backend, 5 years experience, Python),\nMarcus (frontend, 3 years, React), and Priya (DevOps, 7 years, AWS/Kubernetes).\n\nExtract this as a JSON array where each person has fields:\nname, role, years_experience, skills (array).\n```\n\n**Part 2 — Reformat as Markdown table:**\nIn the same conversation, ask:\n```\nNow reformat that same data as a Markdown table with columns:\nName | Role | Experience | Skills\n```\n\n**Part 3 — Your real data:**\nNow pick something from your own work or life — a list of tasks, a set of contacts, meeting notes, a product list, a reading list. Ask Claude to extract or organise it as JSON with fields you specify.\n\nSave the JSON output. Even if you never code, you'll find a use for it: it can be imported into Notion, Airtable, or any spreadsheet tool."
+      "title": "Build a Data Extraction Pipeline",
+      "content": "Open [Claude.ai](https://claude.ai) and complete this three-part exercise. By the end, you'll have a reusable prompt that turns unstructured text into structured data you can actually use.\n\n**Part 1 — Schema-first JSON extraction (8 minutes)**\n\nPaste this text and request JSON output with a specific schema:\n```\nExtract team member information as a JSON array.\nEach object must have exactly these fields:\n- name (string)\n- role (string)\n- years_experience (number)\n- skills (array of strings)\n- location (string or null if not mentioned)\n\nText:\nOur team has grown this year. Sarah joined the backend team two years ago\nand has become our Python specialist. Marcus has been doing frontend work\nfor three years — he's our React lead. Priya heads DevOps and brings seven\nyears of AWS and Kubernetes expertise. She's based in our London office.\n```\n\nVerify: does the output exactly match the schema you specified?\n\n**Part 2 — Table and format conversion (5 minutes)**\n\nIn the same conversation:\n```\nNow reformat that same data as a markdown table with columns:\nName | Role | Experience | Skills | Location\n```\n\nThen:\n```\nNow convert the table to CSV format, comma-delimited, header row first.\n```\n\nNotice: same data, three different formats in three prompts.\n\n**Part 3 — Your real data (10 minutes)**\n\nChoose something from your own work. Options:\n- A list of tasks or projects you're tracking\n- A set of contacts or companies you manage\n- Notes from a recent meeting\n- A collection of links or resources you want to organise\n- Product features you need to compare\n\nDesign your own schema first — write out the exact field names and types you want before running the prompt. Then run it.\n\nAfter getting the output:\n1. Paste the JSON into jsonlint.com to validate it\n2. If it's not valid, ask Claude to fix any formatting errors\n3. Import the result into a spreadsheet tool (Google Sheets: use Import Data > Paste JSON, or just paste into Notion and use its import)\n\n**Save your extraction prompt.** This is your data-extraction template for this type of content — add it to your prompt library."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to extract data from 50 email signatures and return JSON — but you notice that some objects have a 'phone_number' field, others have 'phone', and some have 'tel'. This breaks your spreadsheet import. What should you have done differently?",
+      "options": [
+        "Used a different AI tool — Claude doesn't produce consistent field names",
+        "Specified the exact field names in your prompt schema and asked the model to use those names only, including for empty values (null) rather than omitting the field",
+        "Run it again until you get consistent results",
+        "Ask Claude to guess the right field name after the fact"
+      ],
+      "correct": 1,
+      "explanation": "Inconsistent field names are a schema specification problem. When you don't specify field names, the model chooses names it considers reasonable — and 'phone', 'phone_number', and 'tel' are all reasonable for the same concept. The fix is specifying exact field names in your prompt: 'Each object must have exactly these fields: name, email, phone (string or null), company'. Explicitly using 'or null' (rather than omitting the field when empty) ensures the schema is complete and consistent across all outputs."
     },
     {
       "type": "callout",
       "variant": "success",
-      "content": "**You've completed lesson 3-6.** You can now extract structured, machine-readable data from AI output — turning unstructured text into JSON, tables, and lists that work with any other tool."
+      "content": "**You've completed lesson 3-6.** You can now extract structured data in JSON, markdown tables, CSV, and YAML — with precise schemas that produce consistent output across any number of items. This skill is the foundation for everything in the automation section of this course."
     }
   ],
   "nextLesson": "3-7",
