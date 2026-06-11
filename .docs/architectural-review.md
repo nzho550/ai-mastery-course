@@ -234,7 +234,7 @@ Every lesson must:
 | 1.3 | The AI Tools Landscape (2025) | Knows the major tools and categories | 12 |
 | 1.4 | AI Hallucinations & Limitations | Knows when NOT to trust AI output | 12 |
 | 1.5 | Privacy & Safety — What NOT to Share | Never sends PII, credentials, or secrets to AI | 10 |
-| 1.6 | Responsible & Ethical AI Use | Has a personal framework for AI use | 10 |
+| 1.6 | AI & The Law: Legal Limits You Need to Know | Understands copyright, defamation, privacy law (GDPR/CCPA), ToS, professional rules, EU AI Act | 20 |
 
 ---
 
@@ -775,6 +775,8 @@ Branch: `feature/phase-1-scaffolding`
 - All 112 curriculum entries fully populated (id, title, estimatedMinutes, tags, prev/next).
 - 107/112 lessons have a hands-on workshop section. All next/prev chains validated.
 - JSON fixer script (`scripts/fix-json.js`) guards against literal control characters in JSON strings.
+
+**Lesson 1-6 rewritten (2026-06-10):** Changed from "Responsible & Ethical AI Use" (values/norms framing) to "AI & The Law: Legal Limits You Need to Know" (factual legal content only). New coverage: copyright law and AI output, defamation liability, GDPR/CCPA/Australian Privacy Act, platform ToS as contract, professional licensing rules (legal/medical/financial/academic), EU AI Act overview. Workshop changed from "write 3 personal commitments" to a legal self-audit document. Tags updated: `ethics` → `legal`.
 
 **Implementation complete — Phase 4 (Content Authoring) done.**
 
