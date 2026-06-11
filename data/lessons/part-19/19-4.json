@@ -1,0 +1,64 @@
+{
+  "id": "19-4",
+  "title": "AI for Health & Wellbeing",
+  "part": 19,
+  "estimatedMinutes": 25,
+  "tags": ["personal-life", "beginner", "health", "wellbeing", "research", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nAI is increasingly useful in health contexts — not as a doctor, but as a research tool, a document translator, and an appointment preparation assistant. By the end you'll know how to use AI to understand medical information, prepare for appointments, interpret health documents, plan fitness and nutrition, and support your mental wellbeing — with a clear understanding of where the limits are and when to stop using AI and call a professional."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**AI is not a medical professional.** AI can help you research, understand, and prepare — it cannot examine you, doesn't know your full medical history, and should never be the final basis for a medical decision. Research consistently shows AI hallucination rates of 3–18% on medical facts, with models often sounding most confident when wrong. Use AI for information and preparation; see a qualified healthcare professional for diagnosis, treatment, and advice."
+    },
+    {
+      "type": "text",
+      "content": "## Pre-Appointment Research — Making the Most of Your Time with a Doctor\n\nOne of the highest-value health uses of AI is preparing for medical appointments. Appointments are short; preparation makes them more productive.\n\n**Appointment preparation prompt:**\n```\nI have a GP / specialist / consultant appointment for [reason] in [timeframe].\n\nMy symptoms / situation: [describe in detail — when it started, what it feels like, what makes it better or worse, what you've already tried]\nMy relevant medical history: [key conditions, medications, allergies]\nMy main concerns: [what you're most worried about or want to understand]\n\nHelp me prepare by:\n1. Suggesting the key questions I should ask in this appointment\n2. Explaining what tests or referrals the doctor might typically consider for this presentation\n3. Medical terms I might hear — and what they mean in plain English\n4. Things I should tell the doctor proactively that patients often forget to mention\n5. What to bring or have ready (test results, list of current medications, etc.)\n```\n\n**Translating what your doctor said:**\n```\nMy doctor told me [describe what they said] and prescribed [medication/treatment].\n\nIn plain language:\n1. What is this diagnosis (if any) — what is actually happening in my body?\n2. How does this treatment work?\n3. What should I expect during recovery or treatment?\n4. What side effects should I watch for?\n5. What questions should I have asked that I forgot to?\n```\n\n**Understanding a prescription:**\n```\nI've been prescribed [medication name, dose, frequency].\n\nExplain:\n1. What this medication does\n2. Common side effects and what to watch for\n3. Any interactions with food, drink, or other medications I should know about\n4. How long before I should notice it working\n5. What to do if I miss a dose\n\nNote: I'll verify these details with the pharmacist.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Understanding Health Documents and Test Results\n\nMedical documents — blood test results, radiology reports, discharge summaries — are written for clinicians. AI can translate them into plain language while preserving the important nuances.\n\n**Blood test results:**\n```\nHere are my recent blood test results: [paste the values and reference ranges]\n\nPlease:\n1. Explain what each test measures in plain language\n2. Flag any values that are outside the normal range and explain what that typically means\n3. Which results should I ask my doctor about specifically?\n4. Are there any results that, taken together, suggest something I should raise with my GP?\n\nNote: I'll discuss interpretation with my doctor — I want to understand what I'm looking at.\n```\n\n**Radiology or pathology report:**\n```\nI've received this report: [paste or describe key findings]\n\nTranslate the medical terminology into plain language.\nWhat does this report actually say in simple terms?\nAre there any terms that suggest something concerning I should ask about?\n```\n\n**Discharge summary or clinic letter:**\n```\nHere is a summary from my recent [hospital / clinic] visit: [paste]\n\nWhat did they find? What are they recommending I do? What follow-up is expected?\nAre there any terms or recommendations I should make sure I understand before my next appointment?\n```\n\n**Important:** AI can translate medical language into plain language well. It can misinterpret clinical nuance, especially for complex or rare conditions. Always bring AI-translated summaries back to your doctor for confirmation — 'I understand this to mean X — is that right?'"
+    },
+    {
+      "type": "text",
+      "content": "## Symptom Research — The Right Way to Use It\n\nSearching symptoms online has a deserved reputation for catastrophising — 'headache + tired = brain tumour' being the classic outcome. AI is better at this than traditional search because it can provide context and probability, not just a list of worst-case diagnoses.\n\n**The structured symptom prompt:**\n```\nI have the following symptoms: [describe each symptom with timing, severity, location, and what makes it better or worse]\n\nMy relevant medical history: [existing conditions, recent illnesses, current medications]\nI am [age, general health context if relevant]\n\nI'm not seeking a diagnosis — I want to understand:\n1. What are the most likely explanations for this combination of symptoms? (Most common first)\n2. What are the red flags — symptoms that, if I develop them, mean I should seek urgent care?\n3. Is this the kind of thing that typically resolves on its own, or should I see a doctor?\n4. What self-care measures are generally recommended while monitoring this?\n5. What information should I bring when I do see a doctor?\n```\n\n**Dedicated symptom checkers:** Tools like **Doctronic** and **Docus.ai** are specifically designed for symptom assessment and provide structured triage recommendations ('self-care', 'see a GP this week', 'seek urgent care'). They're not a substitute for professional assessment, but they're designed for this task more specifically than a general AI.\n\n**The rule for symptom research:** If AI research (or the symptoms themselves) tells you to seek urgent care — do so. Do not use AI to talk yourself out of seeing a doctor when you have a genuine concern."
+    },
+    {
+      "type": "text",
+      "content": "## Fitness, Nutrition, and Wellness Planning\n\nFor everyday wellness goals, AI is a practical and flexible planning tool — no subscription needed, infinitely adjustable to your constraints.\n\n**Fitness plan creation:**\n```\nCreate a [duration: 4-week / 8-week / ongoing] fitness plan for me.\n\nCurrent fitness level: [honest description: sedentary / lightly active / some exercise history]\nGoal: [e.g., general fitness and energy / lose weight / build strength / run 5km / rehabilitation after injury]\nTime available: [e.g., 30 minutes, 3 times per week]\nEquipment and access: [gym with weights / home with no equipment / outdoor running only]\nConstraints: [e.g., bad knees / lower back issues / can't jump due to neighbours below]\n\nFor each week, provide:\n- Session plan with exercises, sets, reps, and rest\n- What to notice — how should I feel? How do I know I'm progressing?\n- What to do if a session feels too hard or too easy\n```\n\n**Nutrition guidance:**\n```\nI want to eat better for [goal: more energy / weight management / supporting training / managing [condition]].\n\nCurrent eating patterns: [honest description of what you typically eat]\nDietary requirements: [any restrictions or preferences]\nTime for cooking: [e.g., 30 minutes on weekdays, more at weekends]\n\nGive me:\n1. The 3-4 most impactful changes I could make (not an overhaul — sustainable changes)\n2. Specific foods to add more of and why\n3. One meal per day I could make healthier without it feeling like a sacrifice\n4. A realistic approach to the food I enjoy that I shouldn't give up entirely\n```\n\n**Mental wellbeing and stress:**\n```\nI've been [describe situation: stressed / struggling to sleep / feeling anxious about X].\n\nI'm not in crisis — I'm looking for practical strategies.\nWhat evidence-based approaches are most commonly recommended for this?\nWhat can I try today, and what requires longer-term habit change?\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The 10-minute daily wellbeing check:** One effective use of AI for mental health is a simple daily check-in. Open a conversation with Claude and write 5–10 sentences about how you're doing, what's on your mind, and what you're finding hard. Then ask: 'What do you notice about what I've described? Is there anything I might be overlooking or patterns worth noting?' This isn't therapy — it's a structured self-reflection prompt. Many people find it helpful for processing thoughts before a stressful day or winding down at night. Dedicated apps like Rosebud, Mindsera, and Life Note build this into a structured journaling workflow (covered in lesson 19-6)."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Your Health AI Session",
+      "content": "Choose one of the following tasks based on what's most relevant to you right now:\n\n**Option A — Prepare for a medical appointment**\n\nIf you have an upcoming appointment (or one you've been putting off), run the appointment preparation prompt. After reviewing Claude's output:\n- What questions hadn't you thought to ask?\n- What medical terms do you now understand better?\n- What will you bring to the appointment that you might have forgotten?\n\n**Option B — Understand a health document**\n\nFind a medical document you've never fully understood — a blood test result, a prescription leaflet, a discharge summary. Run the translation prompt. What did you understand better after reading Claude's explanation?\n\n**Option C — Create a simple wellness plan**\n\nRun the fitness plan or nutrition prompt for a real goal you have. After reviewing:\n- Is this something you could actually commit to?\n- Where would you need to adjust for your real life?\n- What's the single most important change you'd make based on this?\n\n**Reflect:** For any option, what would you have done before AI was available to help with this? Would you have researched it at all, or just ignored it?"
+    },
+    {
+      "type": "quiz",
+      "question": "You describe your symptoms to Claude and it says they're 'most likely a minor muscle strain, probably resolves in 1–2 weeks.' You also notice one of the symptoms it listed as a red flag for urgent care. What should you do?",
+      "options": [
+        "Follow Claude's most likely explanation — minor strain — since it said that's the most likely cause",
+        "Seek urgent care, as Claude explicitly flagged that symptom as requiring it",
+        "Wait a few days and see if the symptoms improve before deciding",
+        "Ask Claude a more detailed question to get a clearer answer before deciding"
+      ],
+      "correct": 1,
+      "explanation": "When AI identifies a red flag symptom — one that indicates potential serious pathology requiring prompt evaluation — that flag overrides the 'most likely' framing. AI cannot examine you, doesn't know your full history, and the 'most likely' explanation is a statistical statement, not a guarantee. A symptom on the urgent care list means: seek urgent care, have a professional rule it out. The cost of an unnecessary urgent care visit is low; the cost of ignoring a true urgent symptom can be very high. Never use AI to argue yourself out of seeking care when a red flag is present."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-4.** You can now use AI for pre-appointment preparation, understanding medical documents, structured symptom research, fitness and nutrition planning, and everyday wellbeing support. The key principle throughout: AI accelerates your understanding and preparation; qualified healthcare professionals make diagnoses and treatment decisions."
+    }
+  ],
+  "nextLesson": "19-5",
+  "prevLesson": "19-3"
+}

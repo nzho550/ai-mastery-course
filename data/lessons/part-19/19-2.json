@@ -1,0 +1,63 @@
+{
+  "id": "19-2",
+  "title": "AI for Travel Planning",
+  "part": 19,
+  "estimatedMinutes": 25,
+  "tags": ["personal-life", "beginner", "travel", "planning", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nTravel planning is one of the highest-value personal use cases for AI — the logistics complexity is high, the decisions are numerous, and the cost of poor planning is real. By the end of this lesson you'll have a complete AI-assisted travel planning workflow: from initial inspiration to a mobile-ready itinerary, with specific techniques for each stage and an understanding of which AI tools to use at each step."
+    },
+    {
+      "type": "text",
+      "content": "## The Right Tool at Each Stage\n\nDifferent travel planning tasks need different tools:\n\n| Task | Best tool | Why |\n|------|-----------|-----|\n| Current prices, availability, recent traveller reports | **Perplexity AI** | Searches live web; cites current sources |\n| Practical logistics (timings, distances, realistic schedules) | **Claude** | Strong at constraint-aware planning; produces structured itineraries |\n| Experiential suggestions (restaurants, hidden gems, atmosphere) | **ChatGPT** | Strong on cultural and experiential recommendations |\n| Visa requirements, entry rules, travel advisories | **Perplexity** + official government sites | Information changes; always verify with authority |\n| Flight and accommodation research | **Perplexity** then dedicated tools (Skyscanner, Booking.com) | Current pricing and availability requires live search |\n| Packing lists tailored to your trip | **Claude or ChatGPT** | Static task, well within training data |\n\n**The core principle:** Use Perplexity for anything that might have changed in the last year (prices, policies, operating hours, current conditions). Use Claude or ChatGPT for planning, logistics, and structure."
+    },
+    {
+      "type": "text",
+      "content": "## Stage 1 — Destination Research\n\nBefore planning any logistics, understand what you're going to.\n\n**Destination overview prompt (Claude):**\n```\nI'm considering [destination] for a [length] trip in [month/season].\nWe are [travel party description: e.g., couple in our 40s / family with two kids 6 and 10 / solo traveller].\nOur interests: [list: food, history, outdoor activities, art, nightlife, etc.]\nOur travel style: [e.g., mix of relaxing and exploring / very active / slow travel, one base]\n\nGive me:\n1. A honest overview of [destination] for this type of trip — what works well and what's harder than expected\n2. Best areas to stay and why (with trade-offs between them)\n3. The 5 things we absolutely shouldn't miss\n4. The 3 most common tourist mistakes to avoid\n5. The best time of year to visit and how [month] compares\n6. A realistic daily budget range per person (accommodation, food, activities)\n```\n\n**Current conditions check (Perplexity):**\n```\nWhat do travellers say about visiting [destination] right now?\nAny recent changes to entry requirements, popular attractions, or safety considerations?\nAre there any current issues I should know about (strikes, construction, crowds, etc.)?\n```\n\nCheck Perplexity's cited sources — click through to verify entry requirements on official government sites, since AI can misrepresent or carry outdated information."
+    },
+    {
+      "type": "text",
+      "content": "## Stage 2 — Building the Itinerary\n\nThis is where Claude excels — taking your constraints and preferences and producing a realistic, detailed schedule.\n\n**The itinerary generation prompt:**\n```\nCreate a [X]-day itinerary for [destination].\n\nOur group: [description]\nArrival: [day/time, e.g., fly in Tuesday afternoon]\nDeparture: [day/time, e.g., fly out Sunday morning — need to be at airport by 8am]\nStaying: [area or specific accommodation]\nTransport: [e.g., renting a car / relying on public transport / walking distance only]\n\nInterests and must-sees:\n- [list specific things you want to do or see]\n\nConstraints:\n- [e.g., one of us has limited mobility / travelling with a toddler who naps / avoid early starts]\n- [e.g., budget for paid attractions: £X per day per person]\n- [e.g., we want at least 2 proper sit-down meal experiences]\n\nFor each day:\n- Morning, afternoon, and evening activities\n- Recommended time at each location (realistic, not rushed)\n- Transit time between locations\n- A specific restaurant recommendation for one meal\n- One 'if we have time or energy' optional extra\n\nAt the end, note any day where the plan is tight and might need to be trimmed.\n```\n\n**Key tip:** Be honest about your energy level and pace. Most AI-generated itineraries are optimistic. Ask Claude explicitly: *\"Is this realistic for a family with young children?\"* or *\"Are we trying to do too much?\"* Claude will often flag if you're overloading a day.\n\n**Format for mobile use:**\n```\nNow reformat the above itinerary for mobile. Use this structure for each day:\n\nDAY [X]: [day name]\n[Short thematic title for the day]\n\n09:00 — [Activity] [Approx. time: X hrs] [Address or landmark]\n10:30 — Transit to [next location] [Approx. time]\n...\n\n💡 [One tip or note for that day]\n\nMake it easy to read on a phone screen while navigating.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Stage 3 — Logistics and Practical Details\n\n**Visa and entry requirements:**\nAlways verify on the official government website for your nationality — never rely solely on AI for this. AI can tell you what the requirements typically are, but they change, and a mistake is costly.\n\nUseful prompt for a starting point:\n```\nI'm a [nationality] citizen visiting [destination] for [duration] as a tourist.\nWhat are the typical visa requirements? I'll verify this on the official government site,\nbut I want to understand what documentation I'll likely need to prepare.\n```\n\n**Packing list (this AI handles well):**\n```\nCreate a packing list for [X] days in [destination] in [season/month].\nActivities will include: [list: beach, hiking, formal dinners, etc.]\nClimate: [hot/cold/wet/variable]\nWe're travelling with [carry-on only / checked bags].\nNote any destination-specific items (dress codes for temples, specific medications to bring, etc.).\n```\n\n**Restaurant shortlist:**\n```\nSuggest 5 specific restaurants in [destination/neighbourhood] for [meal type].\nOur preferences: [cuisine, price range, atmosphere — e.g., local not touristy]\n\nFor each: name, what to order, approximate cost per person, and why it's worth going.\n\nNote: I'll verify these are still open on Google Maps or TripAdvisor before going.\n```\n\n**Day trips and side trips:**\n```\nFrom [base city], what are the best day trips for [our group type]?\nWe have a car / we prefer public transport.\nList 3-4 options with: distance and travel time, what makes it worth the trip,\nbest time to go (morning vs. afternoon), and whether to book in advance.\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**What to always verify before relying on AI travel information:**\n- Visa and entry requirements (official government sites only)\n- Attraction opening hours (they change seasonally and for renovations)\n- Specific restaurant recommendations (places close; use Google Maps or TripAdvisor to confirm)\n- Transport schedules and prices (use the operator's website)\n- Safety advisories (check your government's official travel advisory)\n\nFor itinerary logistics and general guidance, AI is reliable. For anything that changes frequently or has high consequences if wrong, verify with primary sources."
+    },
+    {
+      "type": "text",
+      "content": "## During the Trip — AI as On-the-Ground Assistant\n\nAI continues to be useful once you're travelling, not just in the planning phase.\n\n**Translating menus, signs, and conversations:**\nPaste or describe what you're seeing. ChatGPT and Claude can translate and explain context — is this a local specialty? What's actually in this dish?\n\n**Navigating unexpected changes:**\n```\nOur original plan was [describe]. We've had to change because [reason].\nWe're currently at [location], have [time] remaining, and want to [goal].\nWhat are our options?\n```\n\n**Local knowledge on the spot:**\n```\nWe're in [specific area] and have 2 free hours we hadn't planned for.\nWe've already done [list what you've seen]. What would you suggest for this neighbourhood?\n```\n\n**Voice mode for hands-free navigation:** Claude and ChatGPT's voice modes let you ask questions without stopping to type — useful when walking, driving, or in a loud environment. (Voice AI is covered in depth in lesson 19-7.)"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Plan a Real Trip",
+      "content": "Use a real upcoming trip — or plan a trip you'd genuinely want to take (even if hypothetical, make the preferences real).\n\n**Step 1 — Destination research (10 minutes)**\n\nRun the destination overview prompt with your actual trip context. After reviewing the response:\n- What did you learn that you didn't already know?\n- What does Claude think you might be overestimating or underestimating about this destination?\n\nThen run one Perplexity search: *\"What do recent travellers say about [destination] in [current year]?\"* Click at least one cited source to verify.\n\n**Step 2 — Build a draft itinerary (10 minutes)**\n\nRun the itinerary generation prompt. Be specific about your group, constraints, and what you care about. After reviewing:\n- Is the pace realistic for your travel style?\n- Ask: *\"Which day is the most ambitious? What would you cut if we need to slow down?\"*\n\n**Step 3 — Format for mobile (5 minutes)**\n\nRun the mobile reformat prompt. Copy the result into your notes app (Apple Notes, Google Keep, Notion). This is your trip reference you can use offline.\n\n**Step 4 — Verify one critical detail**\n\nIf you're actually going: look up entry/visa requirements on your government's official travel advice page. Compare to what Claude said. Are they the same? This builds the habit of verifying AI travel information."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to confirm the visa requirements for your nationality visiting a specific country. Claude gives a confident, detailed answer. What should you do next?",
+      "options": [
+        "Proceed based on Claude's answer — it was detailed and specific",
+        "Ask Perplexity to confirm — if they agree, it's probably correct",
+        "Verify on the official government website for your nationality — AI travel information about visas must always be verified",
+        "Check Reddit travel communities to see if recent travellers had the same experience"
+      ],
+      "correct": 2,
+      "explanation": "Visa and entry requirements are exactly the type of information that changes without warning, has serious consequences if wrong, and where AI confidence doesn't equal accuracy. Claude's training data has a cutoff, and visa rules can change with political relationships, reciprocity agreements, or new policies. Always verify on your government's official foreign travel advice page (e.g., gov.uk/foreign-travel-advice, travel.state.gov, smartraveller.gov.au) and on the destination country's official immigration site. Perplexity (B) searches the web but may surface unofficial or outdated sources. Reddit (D) provides traveller experience but not authoritative rules. Only official sources are authoritative for entry requirements."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-2.** You now have a complete AI-assisted travel planning workflow: destination research, realistic itinerary building with mobile formatting, logistics planning, and on-the-ground assistance. The key habit: use AI for planning and structure, verify time-sensitive details with official sources."
+    }
+  ],
+  "nextLesson": "19-3",
+  "prevLesson": "19-1"
+}
