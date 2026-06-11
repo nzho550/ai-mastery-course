@@ -1,0 +1,55 @@
+{
+  "id": "8-20",
+  "title": "The Unified Office — Chaining MCPs Across All Your Tools",
+  "part": 8,
+  "estimatedMinutes": 30,
+  "tags": ["mcp", "intermediate", "workflow", "integration", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThis is the synthesis lesson for Part 8. You've connected individual tools — email, calendar, GitHub, Slack, Notion, Teams — to Claude Code. Now you'll use them together. A single Claude Code session with multiple MCPs active can perform workflows that span every tool in your stack simultaneously. This lesson demonstrates that capability and shows you how to design your own multi-tool workflows."
+    },
+    {
+      "type": "text",
+      "content": "## The Paradigm Shift\n\nBefore MCP, your workday looked like this:\n\n1. Open Outlook — read emails, reply to some, flag others\n2. Switch to Teams — check channel messages, review meeting agenda\n3. Open Slack — scan channels, respond to DMs\n4. Switch to Notion — add meeting notes, update project status\n5. Open Calendar — schedule follow-ups\n6. Switch back to email to send a follow-up\n7. Repeat, continuously\n\nThe cognitive cost is not the individual tasks — it's the constant context switching. Every switch costs 10–20 minutes of focused attention.\n\nWith MCP, the same workday looks like:\n\n1. Open Claude Code — one session with all tools connected\n2. Give high-level commands in natural language\n3. Review and confirm Claude's actions\n4. Close Claude Code\n\nYou stop being a router between apps and become a decision-maker. Claude does the navigation."
+    },
+    {
+      "type": "text",
+      "content": "## What Multi-MCP Composition Looks Like\n\nThese are real workflows enabled by combining the MCPs you've set up in Part 8:\n\n**Morning briefing (email + calendar + Slack):**\n*\"Good morning. Look at my inbox, my calendar for today, and my Slack channels from overnight. Give me a briefing: what needs my attention first, what meetings am I in today and do I need to prepare for any of them, and is there anything urgent in Slack?\"*\n\n**Pre-meeting prep (email + Teams + Notion):**\n*\"I have a meeting about the Henderson project in 30 minutes. Search my email for any recent correspondence about Henderson, check the Teams channel for recent discussion, and read my Notion project notes. Give me a one-page briefing: current status, open issues, and the three things most likely to come up in the meeting.\"*\n\n**End-of-day capture (Notion + calendar + Slack):**\n*\"It's end of day. Look at my calendar — what meetings did I have today? For each one, create a meeting note in Notion with the title, date, and a placeholder for action items. Then check Slack for any messages sent to me today that I haven't replied to.\"*\n\n**Weekly review (email + Slack + Notion + calendar):**\n*\"Run my weekly review. Check: emails flagged for follow-up, Slack messages where someone is waiting on me, Notion tasks overdue or due this week, and my calendar for next week. Give me a prioritized list of what to address before Monday.\"*\n\n**Project handover (email + Slack + Notion + GitHub):**\n*\"I'm handing the Acme project to a new team member. Gather everything: email threads about Acme, the Slack channel history, Notion project pages, and open GitHub issues. Produce a handover document with: project overview, current status, key decisions made, open issues, and the main people involved.\"*"
+    },
+    {
+      "type": "text",
+      "content": "## Designing Your Own Workflows\n\nEvery effective multi-MCP workflow follows the same structure:\n\n**1. Specify the tools:** Tell Claude which sources to check. Don't assume it knows — be explicit: *\"Check my email, my Slack channels, and my Notion workspace.\"*\n\n**2. Specify the timeframe:** *\"In the last 7 days\"*, *\"since last Friday\"*, *\"from this month\"* — vague timeframes produce vague results.\n\n**3. Specify the output format:** *\"Give me a bulleted list\"*, *\"produce a one-page document\"*, *\"create a Notion page with this structure\"* — structured outputs are more actionable than prose summaries.\n\n**4. Specify what to do with the result:** *\"List it\"*, *\"create a calendar event\"*, *\"post to Slack\"*, *\"save to Notion\"* — the final action is where the workflow pays off.\n\n**Template:**\n```\n[Verb] across [list of tools]. Look at [timeframe].\nFocus on [what matters]. Output as [format].\nThen [action to take with the result].\n```\n\nExample: *\"Search across my email and Slack. Look at the last 2 weeks. Focus on any mentions of the Acme contract. Output as a timeline of events. Then save it as a new Notion page called 'Acme Contract Timeline'.\"*"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**MCP servers you have connected (from Part 8):** Review your `claude_desktop_config.json` and the `/mcp` output in Claude Code. Make a list of every server that is active. This is your current tool palette. The unified office workflows above only work if the relevant MCPs are connected — if Teams isn't connected, Claude cannot read Teams data, period. Your config file is the source of truth for what Claude can access."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build Your Morning Briefing Workflow",
+      "content": "This is the capstone workshop for Part 8. You will design and run a real multi-tool workflow that you will actually use going forward.\n\n**Step 1 — Check what you have connected (2 minutes)**\n\nLaunch Claude Code and type `/mcp`. Write down every server listed as connected. These are the tools available for your workflow.\n\n**Step 2 — Run the morning briefing (10 minutes)**\n\nAdapt this prompt to the tools you actually have connected:\n```\nRun my morning briefing. Do the following:\n\n1. [If email MCP connected]: Check my inbox for emails received since\n   yesterday 5pm. Flag any that require a reply from me today.\n\n2. [If calendar MCP connected]: Show me all my meetings for today.\n   For any meeting in the next 2 hours, tell me who is attending and\n   if there is any recent email or Slack discussion about its topic.\n\n3. [If Slack MCP connected]: Check my Slack channels and DMs from\n   overnight. Highlight anything where someone is waiting on me.\n\n4. [If Notion MCP connected]: Check my task database for anything\n   due today or overdue.\n\nFormat the output as a numbered priority list — the most urgent item first.\n```\n\nRemove any bullet that references a tool you don't have connected. Add any tool you do have that isn't listed.\n\n**Step 3 — Evaluate the output (5 minutes)**\n\nAnswer in your notes:\n- Did the briefing accurately reflect your actual situation?\n- What would you change in the prompt to make it more useful?\n- How long would this have taken to assemble manually?\n\n**Step 4 — Save your workflow prompt (5 minutes)**\n\nCreate a Claude Code custom slash command for your morning briefing:\n\n1. Create the file: `.claude/commands/morning.md` in your project root\n2. Paste your refined prompt into the file\n3. In Claude Code, type `/morning` — your briefing runs with one command\n\nYou now have a repeatable, one-command morning briefing that reads your actual tools.\n\n**Step 5 — Design one more workflow (10 minutes)**\n\nChoose one other workflow from the examples earlier in this lesson (pre-meeting prep, end-of-day capture, weekly review, or project handover) and write the prompt for it. Save it as another command in `.claude/commands/`.\n\nYou are building a personal AI operations layer — a set of commands that represent how you work, automating the parts that used to require manual app-switching."
+    },
+    {
+      "type": "quiz",
+      "question": "You want Claude Code to run a weekly review that checks email, Slack, and your Notion task database. You have all three MCPs configured but Claude says it cannot access your Notion task database. Email and Slack work fine. What is the most likely fix?",
+      "options": [
+        "Reinstall the Notion MCP server",
+        "Grant your Notion integration access to the specific task database page in Notion's share settings",
+        "Upgrade your Notion plan — the API requires a paid plan",
+        "Restart Claude Code and try again"
+      ],
+      "correct": 1,
+      "explanation": "Notion requires explicit page-level access grants for each page or database. Having a valid Notion integration token is not enough — the token only accesses pages you've specifically shared with the integration via the 'Add connections' menu. Email and Slack MCP working fine confirms the Claude Code config is correct; the issue is specifically that the Notion task database was not shared with the claude-mcp integration. Open the database in Notion → ... → Add connections → select your integration."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-20 and all of Part 8.** You've built a unified office stack: email, calendar, GitHub, file systems, Slack, Notion, Teams, and custom tools — all accessible from one Claude Code session. You've designed repeatable workflows and saved them as custom commands. This is the MCP layer working as intended: not individual tools, but an integrated system you control with natural language."
+    }
+  ],
+  "nextLesson": "9-1",
+  "prevLesson": "8-19"
+}

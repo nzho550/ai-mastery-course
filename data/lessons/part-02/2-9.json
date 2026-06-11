@@ -1,0 +1,68 @@
+{
+  "id": "2-9",
+  "title": "Copilot for Microsoft 365 — AI in Outlook, Teams, Word & Excel",
+  "part": 2,
+  "estimatedMinutes": 25,
+  "tags": ["tools", "beginner", "microsoft", "outlook", "office", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nMicrosoft 365 Copilot is AI built directly into the apps hundreds of millions of office workers use every day — Outlook, Teams, Word, Excel, and PowerPoint. This lesson covers what each integration does, how to access it, and what you can accomplish with it right now."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Subscription note:** Copilot for Microsoft 365 requires either a Microsoft 365 Personal/Family subscription (which includes limited Copilot features) or a Microsoft 365 Copilot add-on license ($30/user/month, enterprise). Many workplace Microsoft 365 plans now include Copilot. Check your organization's license or the Copilot button in your apps — if it appears, you have access. If not, the free Microsoft Copilot at copilot.microsoft.com covers some of the same tasks via web interface."
+    },
+    {
+      "type": "text",
+      "content": "## Copilot in Outlook\n\nOutlook Copilot does three things that save real time:\n\n**Summarize email threads:** Long email chains with many replies can be collapsed into a short summary. Click **Copilot** in the ribbon → **Summarize** on any thread. You get the key decisions, outstanding questions, and action items in a paragraph.\n\n**Draft replies:** Open an email you need to respond to. Click **Reply**, then in the compose window click the **Copilot** icon → **Draft with Copilot**. Describe what you want to say and Copilot writes the first draft. You edit and send.\n\n**Coaching:** After writing a reply, click **Coaching by Copilot**. It evaluates your tone, clarity, and whether your message achieves its intent — and suggests specific improvements.\n\n**Finding things fast:** In the Outlook search bar, you can type natural language queries: *\"emails from Sarah about the Q3 budget last month\"* and Copilot surfaces them.\n\n**Where to find it:** Look for the Copilot icon (sparkle) in the ribbon when reading or composing email. In the new Outlook (web and Windows app), it appears in the top-right of the reading pane."
+    },
+    {
+      "type": "text",
+      "content": "## Copilot in Microsoft Teams\n\nTeams Copilot is most powerful in two scenarios:\n\n**During meetings:** If your meeting has transcription enabled, Copilot can answer questions in real time — *\"What did Maria say about the timeline?\"*, *\"Has anyone raised a concern about budget?\"* — without you needing to track the entire conversation.\n\n**After meetings:** Once the meeting recording is processed, Copilot generates a structured summary: key discussion points, decisions made, and action items with owners. This appears in the meeting chat and can be exported.\n\n**Channel summaries:** In any Teams channel, click **Copilot** in the top-right and ask: *\"Catch me up on the last 3 days\"* or *\"What decisions were made this week?\"*\n\n**How to enable:** Meeting transcription must be turned on by the meeting organizer or your admin. Go to Teams settings → Meetings → enable transcription. Once enabled, the Copilot button appears in the meeting toolbar.\n\n**Teams chat:** In any chat thread, use Copilot to summarize long threads, identify open questions, or find specific information someone mentioned days ago."
+    },
+    {
+      "type": "text",
+      "content": "## Copilot in Word\n\nWord Copilot turns a description into a working document — or improves what you've already written.\n\n**Draft from scratch:** Open Word → new blank document → click **Copilot** in the ribbon → **Draft with Copilot**. Type a description: *\"Write a one-page project proposal for moving our file storage to SharePoint. Include goals, timeline, and risks.\"* Copilot produces a structured draft you edit from.\n\n**Rewrite selected text:** Highlight a paragraph, right-click → **Copilot** → **Rewrite with Copilot**. Choose from tone options (professional, casual, concise, expand).\n\n**Ask about your document:** With a long document open, click **Copilot** in the sidebar and ask questions: *\"What is the main argument in section 3?\"*, *\"Does this document contradict anything from the executive summary?\"*\n\n**Reference other files:** In the Draft prompt, type `/` to reference other documents from your OneDrive or SharePoint — Copilot can draft by combining information across multiple files."
+    },
+    {
+      "type": "text",
+      "content": "## Copilot in Excel\n\nExcel Copilot bridges the gap between having data and understanding it.\n\n**Analyse data in plain English:** Click any cell in a data range → **Copilot** in the ribbon. Ask: *\"Show me which product had the highest revenue growth month-over-month.\"* Copilot highlights relevant cells and explains the finding.\n\n**Generate formulas:** Instead of looking up XLOOKUP syntax, describe what you want: *\"Create a formula in column F that looks up the customer ID from column A in the Customers sheet and returns their account tier.\"* Copilot writes the formula, explains it, and you click **Insert**.\n\n**Create charts:** Select a data range → Copilot → *\"Create a bar chart showing sales by region for Q3\"* → Copilot inserts a formatted chart.\n\n**Spot patterns:** Ask *\"Are there any unusual spikes or drops in this data I should investigate?\"* and Copilot summarizes anomalies.\n\n**Limitation:** Copilot in Excel works best with data in named Excel Tables (Insert → Table). If your data is a flat range without headers properly set, results are less reliable."
+    },
+    {
+      "type": "text",
+      "content": "## Copilot in PowerPoint\n\n**Create a presentation from a prompt:** New presentation → Copilot → *\"Create a 10-slide presentation about our Q3 results. Audience: executive team. Tone: confident and concise.\"* Copilot generates slides with titles, bullet points, and suggested images.\n\n**Create from a Word document:** Click **Copilot** → **Create presentation from file** → select a Word document from OneDrive. Copilot converts the document structure into slides, preserving headings as slide titles.\n\n**Summarize existing presentations:** Open a long presentation → Copilot → *\"Summarize this presentation in 5 bullet points\"* — useful when reviewing decks you've received.\n\n**Designer:** Separate from Copilot, PowerPoint Designer (right panel) automatically suggests professional slide layouts as you add content. It's free and always available."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Start with Outlook.** Email is where most office workers spend 2–3 hours daily. The thread summarization and draft-reply features alone save most people 30–60 minutes per day. Master these two before exploring the rest."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Copilot in Your Inbox",
+      "content": "Pick whichever of these you have access to. Do at least one.\n\n**Option A — You have Microsoft 365 Copilot in Outlook:**\n\n1. Open Outlook (web at outlook.com or desktop app)\n2. Find an email thread with 5 or more replies\n3. Click the **Copilot** icon in the reading pane → **Summarize this thread**\n4. Read the summary — does it accurately capture the key decisions and open questions?\n5. Find an email you need to reply to. Click **Reply** → in the compose window click the Copilot icon → **Draft with Copilot**\n6. Type: *\"Confirm I'll attend, ask if the agenda will be shared beforehand, keep it brief and professional\"*\n7. Review the draft, edit what needs changing, and send (or discard if it's not a real email)\n\n**Option B — Free Microsoft Copilot at copilot.microsoft.com:**\n\n1. Go to copilot.microsoft.com and sign in with your Microsoft account\n2. Paste the text of a long email thread you've received recently\n3. Ask: *\"Summarize this email thread. List the key decisions made and any action items with owners.\"*\n4. Then ask: *\"Draft a professional reply from my perspective confirming I'll complete my action item by Friday.\"*\n\n**Either way:** Note how long this took vs. reading the thread yourself and drafting from scratch. That time delta is the daily value of this tool.\n\nIn your notes, write: *\"Using Copilot for email saves me approximately ___ minutes per day.\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You receive a 40-message email thread about a project decision that was made while you were on leave. What is the fastest way to get up to speed using Copilot in Outlook?",
+      "options": [
+        "Read all 40 messages from the beginning to understand the full context",
+        "Use Copilot's thread summarization to get the key decisions and action items in one click",
+        "Ask a colleague to summarize it for you since Copilot is not reliable for long threads",
+        "Reply asking for a summary since Copilot only works on short threads"
+      ],
+      "correct": 1,
+      "explanation": "Thread summarization is exactly what Outlook Copilot is designed for. It reads the entire thread and returns key decisions, open questions, and action items — in seconds. Copilot handles long threads well; length is not a limitation. This is one of the highest-ROI use cases for Microsoft 365 Copilot in an office setting."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-9.** You now know how AI is built into each Microsoft 365 app — Outlook for email, Teams for meetings, Word for documents, Excel for data, PowerPoint for presentations — and you've used at least one of them on a real task."
+    }
+  ],
+  "nextLesson": "2-10",
+  "prevLesson": "2-8"
+}

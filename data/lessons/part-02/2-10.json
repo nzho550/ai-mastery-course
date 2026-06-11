@@ -1,0 +1,63 @@
+{
+  "id": "2-10",
+  "title": "AI Meeting Tools — Zoom, Otter.ai & Teams Summaries",
+  "part": 2,
+  "estimatedMinutes": 20,
+  "tags": ["tools", "beginner", "meetings", "productivity", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nMeetings produce decisions, action items, and context — but almost all of it evaporates within 24 hours unless someone captures it. AI meeting tools solve this: they transcribe, summarize, and extract action items automatically. This lesson covers the main tools, how to set them up, and how to run the full pipeline from recording to action items."
+    },
+    {
+      "type": "text",
+      "content": "## The Meeting AI Pipeline\n\nEvery AI meeting tool runs the same basic pipeline:\n\n1. **Record** — audio and video captured (cloud or local)\n2. **Transcribe** — speech converted to searchable text, usually speaker-labelled\n3. **Summarize** — key discussion points, decisions, and action items extracted\n4. **Distribute** — summary sent to participants or saved to a shared location\n\nThe difference between tools is where they run (inside Zoom/Teams vs. standalone), what's included in the free tier, and how accurately they transcribe different accents and technical vocabulary."
+    },
+    {
+      "type": "text",
+      "content": "## Zoom AI Companion\n\nZoom AI Companion is built into paid Zoom accounts (Pro and above) at no extra cost since late 2023.\n\n**What it does:**\n- During the meeting: generates a live summary you can check without reading the full transcript; you can ask *\"What did we just decide?\"* at any point\n- After the meeting: produces a Meeting Summary in the Zoom web portal — structured by topics, with decisions and action items listed\n- Smart recording: chapters the recording by topic so you can jump to relevant sections\n\n**How to enable:**\n1. Log into zoom.us → Account Settings → AI Companion\n2. Enable **Meeting Summary**, **Smart Recording**, and **In-Meeting Questions**\n3. In your next meeting, click **AI Companion** in the toolbar → **Start Summary**\n4. After the meeting ends, find the summary at zoom.us → Recordings → AI Summary tab\n\n**Participant notice:** Zoom notifies all participants when AI Companion is active. You cannot run it silently — this is by design and required in most jurisdictions."
+    },
+    {
+      "type": "text",
+      "content": "## Otter.ai — Free Tier, Works Everywhere\n\nOtter.ai is the most accessible meeting AI tool because it has a generous free tier and works with any audio source — Zoom, Teams, Google Meet, in-person conversations, or audio files you upload.\n\n**Free tier includes:**\n- 300 minutes of transcription per month\n- Automated summary after each meeting\n- Speaker identification\n- Search across all transcripts\n\n**How to use it:**\n\n*Option 1 — Browser bot (automated):*\n1. Go to otter.ai and create a free account\n2. Connect your Google Calendar or paste a meeting link\n3. Otter sends a bot (called OtterPilot) to join your Zoom/Teams/Meet call\n4. The bot records, transcribes in real time, and emails you a summary when the call ends\n\n*Option 2 — Upload an audio file:*\n1. Record any meeting or conversation to an audio file (MP3, M4A, WAV)\n2. In otter.ai, click **Import** → upload the file\n3. Otter transcribes and summarizes it, usually within a few minutes\n\n*Option 3 — Live capture on your device:*\n1. In the Otter mobile app, tap the record button to capture any conversation\n2. Real-time transcript appears as people speak\n\n**Best for:** Teams that don't all have Zoom Pro or M365 Copilot — one person with Otter can capture and share summaries for the whole team."
+    },
+    {
+      "type": "text",
+      "content": "## Microsoft Teams — Recording & Copilot Summaries\n\nIf your organisation uses Microsoft Teams and has Microsoft 365 Copilot licenses:\n\n**Start a recording:**\n1. In a meeting, click **More actions (...)** → **Record and transcribe** → **Start recording**\n2. All participants are notified that recording has started\n\n**Get the AI summary:**\n- During the meeting: click **Copilot** in the meeting toolbar → ask questions about what's been discussed so far\n- After the meeting: go to the meeting in your Teams calendar → **Recap** tab → view the AI-generated summary, transcript, and action items\n\n**Without Copilot (free Teams):** Recordings are saved to OneDrive/SharePoint and you get a basic transcript. You can paste the transcript into Claude.ai for a summary — it works well.\n\n**Action items:** Teams Copilot extracts tasks with assignees when people use language like *\"I'll handle that\"*, *\"Can you take that?\"*, or *\"Action item for...\"* — coach your team to use clear ownership language in meetings for better extraction."
+    },
+    {
+      "type": "text",
+      "content": "## Other Tools Worth Knowing\n\n**Fireflies.ai** — Similar to Otter, bot joins calls and produces transcripts + summaries. Integrates with Salesforce, HubSpot, and Slack. Better for sales teams tracking customer conversations.\n\n**Fathom** — Free for Zoom, Teams, and Meet. No minutes cap on the free tier (as of 2025). Focuses on highlight clips and CRM integration. Good alternative if Otter's free limit is too low.\n\n**Grain** — Focused on video highlight clipping — useful if you need to share specific moments from a meeting rather than a full transcript.\n\n**Google Meet + Gemini:** If your organisation uses Google Workspace with Gemini AI, Meet has built-in transcription and Gemini can summarize meet recordings stored in Google Drive."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Always tell participants when AI is recording.** In most countries (Australia, UK, EU, many US states) recording a conversation without the consent of all parties is illegal. Every tool listed here notifies participants — do not use workarounds to bypass this. If someone objects to being recorded, stop the recording immediately."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Your First AI Meeting Summary",
+      "content": "You will run the full pipeline — record, transcribe, summarize — using free tools. No subscription required.\n\n**Option A — Set up Otter.ai (recommended, fully free):**\n\n1. Go to otter.ai → **Sign up free** (use Google or email)\n2. On the dashboard, click **Record** → allow microphone access\n3. Speak for 3–5 minutes. You can summarise a recent meeting from memory, describe a project you're working on, or read a short document aloud — the content doesn't matter\n4. Click **Stop** when done\n5. Otter will transcribe in about 60 seconds\n6. Click **AI Summary** — review the key topics, action items, and outline it extracted\n7. Test the search: type a word you said into the search bar and click the result to jump to that moment in the transcript\n\n**Option B — Test with an existing recording:**\n\n1. If you have any audio or video recording of a meeting (even a phone voice memo), go to otter.ai → **Import**\n2. Upload the file\n3. Wait for transcription, then review the summary\n\n**After either option, answer these in your notes:**\n- How accurate was the transcript? Did it mishandle any technical terms or names?\n- Were the action items it extracted actually the right ones?\n- Would you trust this output to share with a team without reviewing it first?\n\nThe last question matters — AI summaries are 80% of the way there. The 20% you review and fix is where your judgment adds value."
+    },
+    {
+      "type": "quiz",
+      "question": "Your team has a 1-hour weekly meeting. Three people take turns writing notes but the notes are always incomplete and action items get lost. Which AI meeting tool approach best solves this with the least disruption?",
+      "options": [
+        "Have everyone install Otter.ai — each person runs their own transcription",
+        "Use one person's Otter.ai account with OtterPilot joining automatically, then share the summary link with the team after each meeting",
+        "Manually paste the meeting transcript into Claude.ai after each meeting",
+        "Upgrade to Zoom Pro so Zoom AI Companion can summarize the meeting"
+      ],
+      "correct": 1,
+      "explanation": "One OtterPilot joining automatically is the lowest-friction approach — it requires no action from participants (beyond consent), produces a shareable link immediately after the call, and uses one free account for the whole team. Everyone installing their own Otter (A) creates duplicate transcripts and confusion. Manual paste into Claude (C) works but requires someone to do it every week — it won't happen consistently. Zoom Pro (D) costs money and only helps if everyone is already on Zoom."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-10.** You now know the AI meeting pipeline (record → transcribe → summarize → distribute) and the main tools: Zoom AI Companion, Otter.ai, Teams Copilot, Fathom, and Fireflies. You've run the pipeline yourself on real audio."
+    }
+  ],
+  "nextLesson": "2-11",
+  "prevLesson": "2-9"
+}

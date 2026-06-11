@@ -330,6 +330,65 @@ Keep this document — you'll update it as you learn more tools throughout the c
 
 ---
 
+### 2.9 Copilot for Microsoft 365 — AI in Outlook, Teams, Word & Excel
+**Outcome:** Student has used Microsoft 365 Copilot in at least one app (Outlook, Teams, Word, Excel, or PowerPoint) for a real task and understands what each integration does.
+
+**References:**
+- Microsoft 365 Copilot overview — microsoft.com/en-us/microsoft-365/copilot
+- Copilot in Outlook — support.microsoft.com/en-us/office/copilot-in-outlook
+- Copilot in Teams — support.microsoft.com/en-us/office/copilot-in-microsoft-teams
+
+**Coverage:** Thread summarization and reply drafting in Outlook; live meeting assistance and post-meeting summaries in Teams; document drafting and rewriting in Word; formula generation and data analysis in Excel; slide generation from prompt or Word doc in PowerPoint.
+
+**Workshop: `BROWSER` — Copilot in Your Inbox**
+Use M365 Copilot in Outlook or free copilot.microsoft.com to summarize a real email thread and draft a reply. Compare the time vs. doing it manually.
+
+---
+
+### 2.10 AI Meeting Tools — Zoom, Otter.ai & Teams Summaries
+**Outcome:** Student has run the full meeting AI pipeline (record → transcribe → summarize → action items) using free tools.
+
+**References:**
+- Otter.ai — otter.ai
+- Zoom AI Companion — zoom.us/ai-companion
+- Fathom (free) — fathom.video
+
+**Coverage:** Pipeline concept (record → transcribe → summarize → distribute); Zoom AI Companion setup; Otter.ai free tier with OtterPilot bot; Teams Copilot meeting recap; Fireflies.ai and Fathom as alternatives. Legal: always notify participants — required in most jurisdictions.
+
+**Workshop: `BROWSER` — Your First AI Meeting Summary**
+Record 3–5 minutes of speech in Otter.ai or upload an audio file. Review transcript accuracy and the AI summary. Evaluate whether action items were correct.
+
+---
+
+### 2.11 Browser AI Extensions — AI on Every Page
+**Outcome:** Student has a browser AI extension installed and has used it to summarize a page, improve text in a web form, and ask questions about a document.
+
+**References:**
+- Sider — sider.ai
+- Edge Copilot — microsoft.com/en-us/edge/features/copilot
+- Grammarly — grammarly.com
+
+**Coverage:** Edge Copilot sidebar (free, no install, built into Edge); Sider for Chrome/Edge (multi-model, free tier); Monica as alternative; Grammarly for writing quality; DeepL for translation. Privacy note: use Edge Copilot or direct API for sensitive content, not third-party extensions.
+
+**Workshop: `BROWSER` — Install and Use a Browser AI Extension**
+Install Sider (Chrome) or open Edge Copilot. Summarize a long article in 5 bullets. Use it to improve a rough email draft in a web compose window.
+
+---
+
+### 2.12 Slack AI & Notion AI — AI in Your Work Apps
+**Outcome:** Student understands what Slack AI and Notion AI do, how to access them, and has mapped which AI tools are available in their own workplace stack.
+
+**References:**
+- Slack AI — slack.com/ai
+- Notion AI — notion.so/product/ai
+
+**Coverage:** Slack AI channel summaries, thread summaries, natural language search, catch-up after absence (Pro plan+); Notion AI drafting, improve writing, page Q&A, database queries (add-on); free fallback using Claude.ai. Teaser: Part 8 connects both directly to Claude Code via MCP.
+
+**Workshop: `REFLECT` — Map Your Workplace AI Stack**
+Create `my-ai-stack.md` documenting which AI tools are actually available to you. Identify your biggest workplace time sink and write one sentence naming the tool to try first.
+
+---
+
 ## Part 3 — Prompt Engineering
 
 ### 3.1 Why Prompting Matters
@@ -1849,6 +1908,77 @@ Document in `notes/my-mcp-stack.md`: what server you added and why.
 ```
 Replace `YourName` with your actual Windows username. Save, relaunch `claude`, type `/mcp` to confirm your server is listed, then ask: "Get me some motivation."
 You just built an MCP server. Everything in Part 8 was using other people's servers — now you made one.
+
+---
+
+### 8.16 Outlook MCP — Your Inbox Inside Claude Code
+**Outcome:** Student connects Outlook (via Microsoft Graph API) to Claude Code and runs a real inbox triage — finding emails needing replies — without opening Outlook.
+
+**References:**
+- Microsoft Graph API — learn.microsoft.com/en-us/graph/overview
+- Azure app registration — portal.azure.com
+- MCP Outlook server — search npm or github.com/modelcontextprotocol/servers
+
+**Coverage:** Why Outlook MCP surpasses native Copilot (multi-tool chaining, bulk operations, scripting); available servers (Graph API vs. community options); Azure app registration walkthrough (one-time, 10 minutes); config JSON; inbox triage query pattern. Gmail users: skip to 8-17 or 8-20 (already done in 8.11).
+
+**Workshop: `CLAUDECODE` — Connect Outlook to Claude Code**
+Complete Azure app registration, install the server, configure Claude Code, verify connection, then run a real triage query: find emails where someone is waiting for a reply.
+
+---
+
+### 8.17 Microsoft Teams MCP — Channels & Meetings in Claude Code
+**Outcome:** Student connects Teams to Claude Code (reusing the Azure registration from 8.16) and retrieves a channel summary and meeting transcript.
+
+**References:**
+- Microsoft Graph Teams API — learn.microsoft.com/en-us/graph/teams-concept-overview
+- Teams MCP server — search npm or github.com/modelcontextprotocol/servers
+
+**Coverage:** What Teams MCP exposes (channels, messages, meeting transcripts, files); adding Teams scopes to the existing Azure app; combined email + Teams search for project context; workshop chains across both sources.
+
+**Workshop: `CLAUDECODE` — Teams Channel Intelligence**
+Run: workspace map, channel catch-up, buried decision search, and a combined email + Teams project briefing query.
+
+---
+
+### 8.18 Slack MCP — Channels, Threads & Messages in Claude Code
+**Outcome:** Student installs the official Slack MCP, connects their workspace, and runs a full catch-up: channel summaries, action item triage, and a posted message.
+
+**References:**
+- Slack API app registration — api.slack.com/apps
+- Official Slack MCP — github.com/modelcontextprotocol/servers (Slack section)
+
+**Coverage:** Official Slack MCP server; Slack app creation and OAuth scopes (channels, groups, im, search, chat:write, users); bot vs. user token distinction; workspace Team ID; workshop runs catch-up, search, action item triage, and a draft-and-post task.
+
+**Workshop: `CLAUDECODE` — Slack Intelligence Across Your Workspace**
+Five tasks: workspace overview, channel catch-up, information search, action item triage, and optional message draft + post.
+
+---
+
+### 8.19 Notion MCP — Your Knowledge Base in Claude Code
+**Outcome:** Student connects Notion to Claude Code, grants page-level access to key databases, and runs real queries — page search, database query, meeting note creation.
+
+**References:**
+- Notion API integrations — notion.so/my-integrations
+- Notion MCP server — github.com/modelcontextprotocol/servers (Notion section)
+
+**Coverage:** Notion integration token; page-level access grants (the key gotcha — token alone not enough); install and config; workspace search, database query, page read, meeting note creation, cross-tool synthesis with email/Slack.
+
+**Workshop: `CLAUDECODE` — Query and Extend Your Notion Workspace**
+Five tasks: workspace search, database query, page summarization, meeting note creation, and cross-tool synthesis combining email, Slack, and Notion in one briefing.
+
+---
+
+### 8.20 The Unified Office — Chaining MCPs Across All Your Tools
+**Outcome:** Student runs a real multi-tool workflow (at least 2 MCPs chained in one command) and saves it as a custom Claude Code slash command they will actually use.
+
+**References:**
+- Claude Code custom commands — `.claude/commands/` directory
+- All MCP servers from Part 8 lessons
+
+**Coverage:** The paradigm shift (app-switching → natural language commands); five example multi-tool workflows (morning briefing, pre-meeting prep, end-of-day capture, weekly review, project handover); workflow design template (verb + tools + timeframe + output format + action); building custom commands in `.claude/commands/`.
+
+**Workshop: `CLAUDECODE` — Build Your Morning Briefing Workflow**
+Check connected MCPs, run a morning briefing across email + calendar + Slack + Notion, evaluate accuracy, refine the prompt, save as `/morning` custom command, and design one more workflow command.
 
 ---
 

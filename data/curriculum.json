@@ -121,8 +121,40 @@
           "title": "Choosing the Right AI Tool",
           "estimatedMinutes": 15,
           "tags": ["tools", "beginner", "strategy", "overview"],
-          "nextLesson": "3-1",
+          "nextLesson": "2-9",
           "prevLesson": "2-7"
+        },
+        {
+          "id": "2-9",
+          "title": "Copilot for Microsoft 365 — AI in Outlook, Teams, Word & Excel",
+          "estimatedMinutes": 25,
+          "tags": ["tools", "beginner", "microsoft", "outlook", "office", "hands-on"],
+          "nextLesson": "2-10",
+          "prevLesson": "2-8"
+        },
+        {
+          "id": "2-10",
+          "title": "AI Meeting Tools — Zoom, Otter.ai & Teams Summaries",
+          "estimatedMinutes": 20,
+          "tags": ["tools", "beginner", "meetings", "productivity", "hands-on"],
+          "nextLesson": "2-11",
+          "prevLesson": "2-9"
+        },
+        {
+          "id": "2-11",
+          "title": "Browser AI Extensions — AI on Every Page",
+          "estimatedMinutes": 15,
+          "tags": ["tools", "beginner", "browser", "chrome", "extensions", "hands-on"],
+          "nextLesson": "2-12",
+          "prevLesson": "2-10"
+        },
+        {
+          "id": "2-12",
+          "title": "Slack AI & Notion AI — AI in Your Work Apps",
+          "estimatedMinutes": 15,
+          "tags": ["tools", "beginner", "slack", "notion", "productivity"],
+          "nextLesson": "3-1",
+          "prevLesson": "2-11"
         }
       ]
     },
@@ -136,7 +168,7 @@
           "estimatedMinutes": 15,
           "tags": ["prompting", "intermediate", "concepts"],
           "nextLesson": "3-2",
-          "prevLesson": "2-8"
+          "prevLesson": "2-12"
         },
         {
           "id": "3-2",
@@ -645,8 +677,48 @@
           "title": "Build a Simple Custom MCP Server",
           "estimatedMinutes": 60,
           "tags": ["mcp", "advanced", "build", "custom", "hands-on"],
-          "nextLesson": "9-1",
+          "nextLesson": "8-16",
           "prevLesson": "8-14"
+        },
+        {
+          "id": "8-16",
+          "title": "Outlook MCP — Your Inbox Inside Claude Code",
+          "estimatedMinutes": 25,
+          "tags": ["mcp", "intermediate", "outlook", "email", "office", "hands-on"],
+          "nextLesson": "8-17",
+          "prevLesson": "8-15"
+        },
+        {
+          "id": "8-17",
+          "title": "Microsoft Teams MCP — Channels & Meetings in Claude Code",
+          "estimatedMinutes": 25,
+          "tags": ["mcp", "intermediate", "teams", "microsoft", "meetings", "hands-on"],
+          "nextLesson": "8-18",
+          "prevLesson": "8-16"
+        },
+        {
+          "id": "8-18",
+          "title": "Slack MCP — Channels, Threads & Messages in Claude Code",
+          "estimatedMinutes": 25,
+          "tags": ["mcp", "intermediate", "slack", "messaging", "hands-on"],
+          "nextLesson": "8-19",
+          "prevLesson": "8-17"
+        },
+        {
+          "id": "8-19",
+          "title": "Notion MCP — Your Knowledge Base in Claude Code",
+          "estimatedMinutes": 20,
+          "tags": ["mcp", "intermediate", "notion", "knowledge", "hands-on"],
+          "nextLesson": "8-20",
+          "prevLesson": "8-18"
+        },
+        {
+          "id": "8-20",
+          "title": "The Unified Office — Chaining MCPs Across All Your Tools",
+          "estimatedMinutes": 30,
+          "tags": ["mcp", "intermediate", "workflow", "integration", "hands-on"],
+          "nextLesson": "9-1",
+          "prevLesson": "8-19"
         }
       ]
     },
@@ -660,7 +732,7 @@
           "estimatedMinutes": 25,
           "tags": ["ai-coding", "intermediate", "aider", "terminal", "hands-on"],
           "nextLesson": "9-2",
-          "prevLesson": "8-15"
+          "prevLesson": "8-20"
         },
         {
           "id": "9-2",

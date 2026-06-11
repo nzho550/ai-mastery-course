@@ -1,0 +1,51 @@
+{
+  "id": "8-17",
+  "title": "Microsoft Teams MCP — Channels & Meetings in Claude Code",
+  "part": 8,
+  "estimatedMinutes": 25,
+  "tags": ["mcp", "intermediate", "teams", "microsoft", "meetings", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nMicrosoft Teams holds a lot of organizational knowledge — channel discussions, meeting recordings, decisions buried in threads. This lesson connects Teams to Claude Code via MCP so you can search conversations, get channel summaries, retrieve meeting transcripts, and compose messages without switching apps."
+    },
+    {
+      "type": "text",
+      "content": "## What Teams MCP Can Do\n\nThe Teams MCP server (via Microsoft Graph API — the same registration you created in lesson 8-16) exposes:\n\n**Channels:**\n- List all teams and channels you belong to\n- Read recent messages from any channel\n- Search channel history across all your Teams\n- Post messages to a channel\n\n**Meetings:**\n- List your recent and upcoming meetings\n- Retrieve meeting transcripts (if transcription was enabled)\n- Get meeting attendee lists\n\n**Chats:**\n- Read recent direct messages and group chats\n- Search chat history for specific decisions or information\n\n**Files:**\n- List files shared in a channel (Teams stores files in SharePoint)\n\n**Combined with Outlook MCP:** You can ask Claude Code to correlate an email thread with the Teams conversation about the same topic — finding all the relevant context across both tools in one query."
+    },
+    {
+      "type": "text",
+      "content": "## Setup — Using the Graph API Registration from Lesson 8-16\n\nIf you completed lesson 8-16, you already have an Azure app registration. You only need to add Teams-specific permissions and configure the server.\n\n**Step 1 — Add Teams permissions to your Azure app**\n\n1. Go to portal.azure.com → App registrations → your `claude-outlook-mcp` app\n2. Go to **API permissions** → **Add a permission** → **Microsoft Graph** → **Delegated**\n3. Add: `Team.ReadBasic.All`, `Channel.ReadBasic.All`, `ChannelMessage.Read.All`, `Chat.Read`, `OnlineMeetings.Read`\n4. Click **Grant admin consent**\n\n(If you skipped lesson 8-16, complete the full Azure app registration steps there first.)\n\n**Step 2 — Find or install a Teams MCP server**\n\nSearch npm for `teams-mcp` or check github.com/modelcontextprotocol for an official Microsoft Teams server. As of 2025, both community and official options exist. Install your chosen server:\n```\nnpm install -g teams-mcp-server\n```\n(Use the exact package name from your search.)\n\n**Step 3 — Add to Claude Code config**\n\nIn `%APPDATA%\\Claude\\claude_desktop_config.json`, add alongside your existing entries:\n```json\n\"teams\": {\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"teams-mcp-server\"],\n  \"env\": {\n    \"AZURE_CLIENT_ID\": \"your-application-client-id\",\n    \"AZURE_CLIENT_SECRET\": \"your-client-secret-value\",\n    \"AZURE_TENANT_ID\": \"your-tenant-id-or-common\"\n  }\n}\n```\nSave and relaunch Claude Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Teams Channel Intelligence",
+      "content": "Once your Teams MCP is connected (`/mcp` shows it as active), run these tasks in Claude Code.\n\n**Task 1 — Map your Teams landscape**\n```\nAsk: \"List all the Microsoft Teams teams and channels I have access to.\nFor each team, tell me how many channels it has.\"\n```\nThis gives you a bird's-eye view of your Teams structure — useful for deciding which channels to monitor closely.\n\n**Task 2 — Catch up on a channel**\n```\nAsk: \"Read the last 3 days of messages in [your busiest channel name].\nSummarize: what was discussed, what decisions were made, and what\nquestions are still unresolved?\"\n```\nReplace `[your busiest channel name]` with an actual channel. Compare the summary to your memory of what happened — how accurate is it?\n\n**Task 3 — Find a buried decision**\nThink of a decision your team made in Teams in the last 2–3 months that you'd have to scroll to find manually. Ask:\n```\nAsk: \"Search my Teams channels for any discussion about [topic]. Summarize\nwhat was decided and who made the call.\"\n```\n\n**Task 4 — Combined email + Teams search (if you have Outlook MCP from 8-16)**\n```\nAsk: \"I need to prepare for a meeting about [project name]. Check both my\nemail inbox and my Teams channels for any messages about this project in\nthe last 2 weeks. Give me a combined briefing: key decisions, open questions,\nand who the main stakeholders are.\"\n```\nThis is the multi-tool composition that makes MCP genuinely different from single-app AI tools.\n\n**Task 5 — Meeting transcript retrieval (if transcription is enabled)**\n```\nAsk: \"Find my most recent Teams meeting that had a transcript. Retrieve\nthe transcript and give me: a 5-bullet summary, a list of action items,\nand any decisions that were made.\"\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Teams MCP maturity:** The Teams MCP ecosystem is newer than Gmail or GitHub MCP. If a specific capability doesn't work with your chosen server, check the server's GitHub issues page — it may be a known limitation with a workaround, or a feature in development. The Microsoft Graph API covers all these capabilities; it is a matter of which server has implemented them."
+    },
+    {
+      "type": "quiz",
+      "question": "You need to prepare a status update for your manager about a project. The project has had discussions in Teams channels AND email threads over the past month. What is the most efficient approach with MCP?",
+      "options": [
+        "Manually read all Teams messages and emails, then write the update yourself",
+        "Ask Claude Code (with Outlook + Teams MCPs active) to search both sources and produce a combined project briefing, then review and edit it",
+        "Ask your team to forward all relevant emails and Teams messages to you first",
+        "Use Teams Copilot for Teams and Outlook Copilot for email separately, then merge the two summaries manually"
+      ],
+      "correct": 1,
+      "explanation": "With both Outlook and Teams MCPs active in one Claude Code session, a single natural language command can search both sources simultaneously and synthesize the results into a unified briefing. This is the key advantage of MCP over using each app's native Copilot: you get cross-tool synthesis in one query instead of bouncing between apps and merging results manually."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-17.** Microsoft Teams is now accessible from Claude Code. You can summarize channels, retrieve meeting transcripts, and combine Teams data with email and calendar context in a single query."
+    }
+  ],
+  "nextLesson": "8-18",
+  "prevLesson": "8-16"
+}

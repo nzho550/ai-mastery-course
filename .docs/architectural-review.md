@@ -550,20 +550,20 @@ data/lessons/
 | Part | Lessons |
 |------|---------|
 | 1 — AI Foundations | 6 |
-| 2 — First AI Tools | 8 |
+| 2 — First AI Tools | 12 |
 | 3 — Prompt Engineering | 8 |
 | 4 — Computer & Command Line | 6 |
 | 5 — VS Code Complete Guide | 12 |
 | 6 — AI Inside VS Code | 8 |
 | 7 — Claude Code Complete Guide | 12 |
-| 8 — MCP | 15 |
+| 8 — MCP | 20 |
 | 9 — Other AI Coding Tools | 4 |
 | 10 — AI Automation & Workflow | 7 |
 | 11 — AI APIs & Building Tools | **9** (was 8 — added 11.9) |
 | 12 — Local AI | 7 |
 | 13 — Safety, Privacy & Cost | 5 |
 | 14 — Capstone Projects | 5 |
-| **Total** | **112** |
+| **Total** | **121** |
 
 ---
 
@@ -771,10 +771,15 @@ Branch: `feature/phase-1-scaffolding`
 - Security: `.claude/settings.json` (contains GitHub PAT + Context7 key) excluded via `.gitignore`. PAT `ghp_ttNml…` and Context7 key `ctx7sk-d0cd…` were briefly exposed and must be rotated.
 
 **Content status (updated 2026-06-10):**
-- **ALL 112 lesson JSON files written** — Parts 1–14 complete (1-1 through 14-5). No "Coming Soon" cards remain.
-- All 112 curriculum entries fully populated (id, title, estimatedMinutes, tags, prev/next).
-- 107/112 lessons have a hands-on workshop section. All next/prev chains validated.
+- **ALL 121 lesson JSON files written** — Parts 1–14 complete. No "Coming Soon" cards remain.
+- All 121 curriculum entries fully populated (id, title, estimatedMinutes, tags, prev/next). Zero chain errors.
+- All 121 lessons have a hands-on workshop section. All next/prev chains validated.
 - JSON fixer script (`scripts/fix-json.js`) guards against literal control characters in JSON strings.
+
+**Office worker integrations added (2026-06-10):**
+- Part 2: 4 new lessons (2-9 through 2-12) — Copilot for M365 (Outlook/Teams/Word/Excel/PowerPoint), AI meeting tools (Zoom/Otter.ai/Teams), browser AI extensions (Edge Copilot/Sider), Slack AI + Notion AI
+- Part 8: 5 new MCP lessons (8-16 through 8-20) — Outlook MCP, Teams MCP, Slack MCP (full lesson), Notion MCP, and The Unified Office (multi-MCP chaining synthesis)
+- Lesson 8-20 ("The Unified Office") is the capstone: designing and saving repeatable multi-tool workflows as custom Claude Code slash commands
 
 **Lesson 1-6 rewritten (2026-06-10):** Changed from "Responsible & Ethical AI Use" (values/norms framing) to "AI & The Law: Legal Limits You Need to Know" (factual legal content only). New coverage: copyright law and AI output, defamation liability, GDPR/CCPA/Australian Privacy Act, platform ToS as contract, professional licensing rules (legal/medical/financial/academic), EU AI Act overview. Workshop changed from "write 3 personal commitments" to a legal self-audit document. Tags updated: `ethics` → `legal`.
 
