@@ -2,7 +2,7 @@
   "id": "9-2",
   "title": "Cody by Sourcegraph — Enterprise Codebase AI",
   "part": 9,
-  "estimatedMinutes": 25,
+  "estimatedMinutes": 60,
   "tags": ["cody", "sourcegraph", "enterprise", "ai-coding", "vscode"],
   "sections": [
     {
@@ -44,6 +44,54 @@
       "tag": "VSCODE",
       "title": "Install Cody and Explore a Codebase",
       "content": "**Goal:** Install Cody, sign in, and use it to understand how files in your project relate to each other.\n\n**Step 1 — Install the extension:**\n1. Open VS Code Extensions (`Ctrl+Shift+X`)\n2. Search `Cody AI`\n3. Install the one by Sourcegraph\n4. Click the Cody icon in the Activity Bar and sign in with a free Sourcegraph account\n\n**Step 2 — Open your project:**\nMake sure `ai-course-projects` is open in VS Code (`File → Open Folder`).\n\n**Step 3 — Ask a codebase question:**\nOpen Cody chat (`Ctrl+Shift+C`) and ask:\n```\nExplain the overall structure of this project. What files exist and what does each one do?\n```\nRead the response. Cody reads your project structure and describes it.\n\n**Step 4 — Ask about file relationships:**\n```\nHow do about-me.html and practice.js relate to each other? Do they share any logic?\n```\nThis is the question Cody is built for. Compare the depth of its answer to what you'd get from a file-by-file reading.\n\n**Step 5 — Test inline chat:**\n1. Open `exercises/practice.js`\n2. Select the `formatDate` function (or any function in the file)\n3. Right-click → **Cody: Explain Selected Code**\n4. Read Cody's explanation in the sidebar\n\n**Step 6 — Reflect:**\nWrite 3 sentences in your notes: in what kind of project would Cody's cross-file understanding make the biggest difference? What is one scenario in your own work where this would save you time?\n\n**What to observe:** Cody answered questions about the whole project without you having to specify which files to look at. That's the difference from Copilot's file-level awareness."
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop A — Quick Drill: Cody Cross-File Question Sprint",
+      "content": "**Goal:** Ask Cody 5 increasingly complex questions about your project's codebase and compare the answer quality to what a single-file tool would produce. (5-10 min)\n\n1. Open VS Code with `ai-course-projects` loaded\n2. Open Cody chat (Ctrl+Shift+C)\n3. Ask question 1 — single-file baseline:\n```\nWhat does practice.js do?\n```\nNote: any tool could answer this.\n\n4. Ask question 2 — cross-file relationship:\n```\nWhich HTML files in this project load JavaScript, and what scripts do they reference?\n```\nNote how Cody navigates across files automatically.\n\n5. Ask question 3 — dependency chain:\n```\nIf I delete the formatDate function from practice.js, what else in the project would break?\n```\n\n6. Ask question 4 — pattern scan:\n```\nAre there any functions defined in one file but never called anywhere in the project?\n```\n\n7. Ask question 5 — refactor planning:\n```\nIf I wanted to add a shared utilities module that both about-me.html and practice.js could use, what would be the cleanest way to restructure the project?\n```\n\n8. In your notes, rate each question 1-5 for how helpful Cody's answer was. Which question type benefited most from cross-file context?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build It With AI: Cody-Assisted Feature Addition",
+      "content": "**Goal:** Use Cody as your coding partner to add a real feature to the project — one that touches multiple files. (25-35 min)\n\n1. Open the Cody chat panel. Start by asking Cody to orient you:\n```\nGive me an overview of this project's architecture. What files exist, what does each one do, and what patterns does the project follow for adding new functionality?\n```\nRead the full response before proceeding.\n\n2. Plan the feature with Cody:\n```\nI want to add a 'dark mode' toggle to about-me.html. It should: (1) add a button in the HTML, (2) add CSS for dark mode variables, (3) add JavaScript to toggle a class on the body and save the preference to localStorage. Before writing any code, tell me which files will need to change and in what order.\n```\n\n3. Implement step by step — for each file, select it in VS Code, then ask Cody in its inline chat (right-click → Cody → Edit Code):\n   - For the HTML: `Add a dark mode toggle button in the nav area. Use a sun/moon icon (Unicode: ☀️/🌙). The button should have id='theme-toggle'.`\n   - For the CSS: `Add CSS custom properties for a dark color scheme. Include --bg-color, --text-color, --accent-color. Apply them when body has class 'dark-mode'.`\n   - For the JS: `Add a theme toggle function. On button click, toggle 'dark-mode' on document.body and save 'theme' to localStorage. On page load, read localStorage and apply saved theme.`\n\n4. After each step, open the browser and test before moving to the next\n\n5. Once all three parts work, ask Cody for a final review:\n```\nReview the dark mode implementation across all three files. Check for: missing edge cases, accessibility issues (aria-label on the button?), and any inconsistency between the HTML, CSS, and JS.\n```\n\n6. **AI REVIEW step:** Copy your full implementation to Claude Code or Claude.ai and say: \"Review this dark mode implementation — find 3 failure modes or inefficiencies. Do not validate it, find problems.\" Fix at least one finding.\n\n7. Commit the working feature:\n```bash\ngit add .\ngit commit -m \"feat(ui): add dark mode toggle with localStorage persistence\"\n```\n\n**Keep the result:** A working dark mode feature built with Cody's cross-file awareness guiding the implementation order and catching inconsistencies."
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop C — Failure Mode Testing: Where Does Cody's Context Break Down?",
+      "content": "**Goal:** Find the edges of Cody's cross-file understanding so you know when to trust it and when to verify independently. (10-15 min)\n\n1. **Test 1 — Ask about a file that doesn't exist:**\n```\nWhat does the authentication module do in this project?\n```\nThe project has no auth module. Does Cody hallucinate one, say it doesn't exist, or ask for clarification?\n\n2. **Test 2 — Ask about a future change:**\n```\nIf we added a backend API server, what would need to change in the existing files to support fetching data from it?\n```\nEvaluate whether Cody's answer is grounded in the actual project or generic advice.\n\n3. **Test 3 — Contradictory context:**\nOpen `practice.js` and temporarily add a comment at the top: `// THIS FILE IS DEPRECATED — do not use formatDate`. Then ask Cody:\n```\nShould I call formatDate from about-me.html for date rendering?\n```\nDoes Cody notice the deprecation comment or ignore it?\n\n4. **Test 4 — Staleness check:**\nMake a change to a function in `practice.js` (rename it in VS Code). Without saving, ask Cody:\n```\nWhat is the current signature of the formatDate function?\n```\nDoes it reflect the unsaved change or the last saved version?\n\n5. **Ask AI to diagnose patterns:**\nOpen Claude Code and ask: \"What are 3 common ways that enterprise AI coding assistants like Cody give confidently wrong answers about a codebase? How should a developer verify before acting on the answer?\"\n\n6. Document your findings in `notes/cody-limitations.md` — this becomes your personal guide for when to trust Cody vs double-check manually."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Real Workflow: Cody as Onboarding Guide",
+      "content": "**Goal:** Use Cody to create a real onboarding document for your project — the kind you'd share with a new team member or collaborator. (15-25 min)\n\n1. Open Cody chat. Tell it the goal:\n```\nI want you to act as a technical writer who has just read this entire codebase. Generate a ONBOARDING.md file for a new developer joining this project. Include: project purpose, file structure explanation, how to run the project locally, the coding patterns used, and 5 common tasks a new developer would do with file references for each.\n```\n\n2. Review Cody's draft. Identify any sections that are vague, missing, or wrong.\n\n3. Iterate with follow-up questions:\n```\nThe 'how to run locally' section is missing the step about the .env file. Add that. Also, add a 'Common Errors' section covering the 3 most likely errors a new developer would hit.\n```\n\n4. Once the document is solid, ask Cody to also generate a `CONTRIBUTING.md`:\n```\nUsing the same codebase context, write a CONTRIBUTING.md. Cover: commit message format, branch naming, how to add a new exercise file, and the code quality checks that run in CI.\n```\n\n5. Save both files to your project:\n```bash\n# (paste Cody's output into these files via VS Code)\ngit add ONBOARDING.md CONTRIBUTING.md\ngit commit -m \"docs: add onboarding and contributing guides via Cody\"\n```\n\n6. The real workflow: next time you join an unfamiliar project, use Cody in this exact way within the first 30 minutes. The onboarding document it generates becomes your personal reference for the codebase."
+    },
+    {
+      "type": "quiz",
+      "question": "A developer on a 500-file codebase says: 'I asked Cody which routes use the AuthMiddleware, and it gave me a list of 8 routes. I only expected 3.' What should they do next?",
+      "options": [
+        "Trust Cody's answer — it has full codebase access and cross-file understanding",
+        "Discard Cody's answer — it clearly hallucinated",
+        "Verify by searching the codebase manually (grep for 'AuthMiddleware') — Cody's answers should be treated as starting points, not final answers",
+        "Restart Cody with a fresh context window — the answer is probably a caching issue"
+      ],
+      "correct": 2,
+      "explanation": "Cody's cross-file understanding is powerful but not infallible — especially on large codebases where the context window may truncate some files. Treat Cody's answers as informed starting points. A quick grep or file search to verify the claim takes 30 seconds and prevents the mistake of acting on a wrong answer. The value is still there: Cody narrowed the search from 500 files to 8 candidates, which is a huge improvement over starting from scratch."
+    },
+    {
+      "type": "quiz",
+      "question": "You're evaluating Cody vs GitHub Copilot for a new project that is a 200-file TypeScript monorepo with a complex dependency graph. Which tool is likely to provide more value for navigating this codebase?",
+      "options": [
+        "GitHub Copilot — it has better inline completions so you'll write code faster overall",
+        "Cody — its cross-file code graph understanding is specifically designed for large, complex codebases",
+        "Neither — at 200 files, you need an enterprise search tool like Sourcegraph itself, not an AI extension",
+        "Tabnine — its local model will handle the complexity without sending proprietary code to the cloud"
+      ],
+      "correct": 1,
+      "explanation": "Cody is built by Sourcegraph, the code search company, and its core differentiator is exactly this scenario: understanding how files relate to each other in a large, complex codebase. The 200-file TypeScript monorepo with a complex dependency graph is precisely the environment where Cody's code graph understanding shines. Copilot excels at inline completions in a single file context, but Cody wins on cross-file navigation and understanding."
     },
     {
       "type": "callout",

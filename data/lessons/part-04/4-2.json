@@ -2,7 +2,7 @@
   "id": "4-2",
   "title": "Windows: File Explorer & Paths",
   "part": 4,
-  "estimatedMinutes": 20,
+  "estimatedMinutes": 55,
   "tags": ["computer-basics", "beginner", "windows", "files"],
   "sections": [
     {
@@ -31,6 +31,54 @@
       "tag": "TERMINAL",
       "title": "Create the Course Project Folder & Collect Paths",
       "content": "**Part 1 — Set up your course folder structure:**\n1. Open File Explorer (`Win + E`)\n2. Navigate to `C:\\Users\\[YourName]\\Documents`\n3. Right-click in the empty space → **New** → **Folder** → name it `ai-course-projects` → press Enter\n4. Double-click to open it, then create three subfolders inside it: `exercises`, `notes`, `prompts`\n5. Enable **File name extensions**: View → Show → File name extensions (Windows 11) or View tab → uncheck \"Hide extensions for known file types\" (Windows 10)\n6. Shift+right-click the `ai-course-projects` folder → **Copy as path** → paste it into Notepad\n\n**Part 2 — Find 3 real files and copy their paths:**\nUsing Shift+right-click, find 3 files anywhere on your computer that you actually use (a document, a photo, anything) and copy their full paths. Paste all three into the same Notepad window.\n\nYour Notepad should now have 4 paths total. Save it as `notes\\file-paths-exercise.txt` inside your new `ai-course-projects` folder.\n\nYou now have your course workspace ready and the path-copying habit in your muscle memory."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Quick Drill: File Explorer Navigation Speed Run",
+      "content": "7-minute timed drill. Goal: navigate to 5 locations using ONLY the address bar — no clicking folders.\n\n1. Open File Explorer (Win+E).\n2. Click in the address bar. Type each path below and press Enter. Note how fast it is compared to clicking:\n   - `C:\\Windows\\System32`\n   - `C:\\Users\\%USERNAME%\\Desktop` (notice: %USERNAME% is a variable Windows fills in automatically)\n   - `C:\\Program Files`\n   - `C:\\Users\\%USERNAME%\\AppData\\Local` (this is a hidden folder — you'll see it if you enabled hidden files)\n   - `C:\\Users\\%USERNAME%\\Documents\\ai-course-projects`\n3. At each location, use Details view (View menu → Details) and note the columns shown.\n4. Shift+right-click the `ai-course-projects` folder → Copy as path. Open Notepad, paste it.\n5. Now enable file extensions if you haven't: View → Show → File name extensions.\n6. Navigate to your exercises folder and verify `hello.html` shows the .html extension.\n7. Ask AI to check: paste your copied path from step 4 to Claude and say: \"Is this a valid Windows file path? What does the path tell you about the folder's location?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build It With AI: Custom Course Folder Structure",
+      "content": "Use Claude.ai to design and build a professional folder structure for your entire learning journey.\n\n1. Open Claude.ai.\n2. Send this prompt: \"I'm taking an AI course with 17 parts covering AI tools, VS Code, Git, automation, APIs, and building projects. Help me design a folder structure inside C:\\Users\\[YourName]\\Documents\\ai-course-projects that will keep everything organized throughout the course. Include folders for exercises by part number, notes, prompts I save, mini-projects, and reference materials.\"\n3. Read Claude's suggestion carefully. Ask: \"Can you show this as a Windows tree diagram with actual backslash paths?\"\n4. Review the structure. Ask a follow-up: \"Which three folders will I use most often? Why?\"\n5. Open File Explorer and navigate to your ai-course-projects folder.\n6. Create every top-level subfolder Claude suggested (right-click → New Folder).\n7. Inside each folder, create a file called `_README.txt` (the underscore makes it sort to the top). Type one sentence explaining what goes in that folder.\n8. Go back to Claude and ask: \"What are the most important file naming conventions to follow for a programming course? Give me 5 rules.\"\n9. Write those 5 rules in your `notes` folder as `naming-conventions.txt`.\n10. AI REVIEW step: Share your completed folder structure screenshot description with Claude: \"I created this folder structure: [list your folders]. Review this. Find 3 things wrong or that could be improved. Don't say it looks good.\" Fix at least one issue.\n11. Take a screenshot of your final folder structure using the Snipping Tool (Win+Shift+S) and save it as `my-folder-structure.png` in your `notes` folder."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — AI-Assisted Troubleshooting: Hidden File Mystery",
+      "content": "Practice diagnosing the \"file not found\" problem caused by hidden files and extensions — a real issue developers face constantly.\n\n1. Open File Explorer and navigate to C:\\Users\\YourName.\n2. WITHOUT enabling hidden files, note what folders you can see.\n3. Now enable hidden files: View → Show → Hidden items.\n4. Notice what appeared — especially the AppData folder. Click into it: AppData\\Roaming and AppData\\Local contain configuration for almost every app you use.\n5. Navigate to C:\\Users\\YourName\\AppData\\Roaming and find a folder for a program you recognize (browsers, editors, etc.).\n6. Paste this scenario to Claude: \"I'm a beginner and I'm told my Claude Code configuration is in a folder called .claude inside my user directory, but I can't find it in File Explorer. What could be wrong and how do I find it?\"\n7. Apply Claude's answer — use the hidden files toggle to find it.\n8. Now try the extension problem: Create a file in Notepad, name it test.html, but leave 'Save as type' as Text Documents. Save it to your Desktop. Turn file extensions ON in Explorer. What does the file actually show as?\n9. Paste the result to Claude: \"I tried to save a file as test.html in Notepad but File Explorer shows it as [whatever you see]. What happened and how do I fix it?\"\n10. Apply the fix. Confirm the file now has the correct .html extension."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Real-World Application: Path Collection for Your Work",
+      "content": "Build a personal reference sheet of important paths on your computer — something you'll actually consult when tools ask for locations.\n\n1. Think about your typical work day. What folders do you navigate to most often?\n2. Open a new text file in Notepad. Title it: MY IMPORTANT PATHS.\n3. Use Shift+right-click (Copy as path) to collect and paste the paths for:\n   - Your main work project folder (or a project you're currently working on)\n   - Where you save downloaded files you want to keep\n   - Your Desktop\n   - The ai-course-projects folder you just created\n   - Any other folder you navigate to daily\n4. For each path, write a one-line description of what it's for.\n5. Now identify which of those paths you navigate to using clicks vs typing. For any you navigate by clicking, practice typing the path directly into the File Explorer address bar instead.\n6. Open Claude.ai and send: \"I use these folders daily on Windows: [paste your list]. Suggest keyboard shortcuts or Windows tricks that would make navigating to these folders faster.\"\n7. Apply at least one suggestion Claude makes (e.g., pinning a folder to Quick Access: right-click any folder → Pin to Quick Access).\n8. Save your paths file as `important-paths.txt` in your `notes` folder."
+    },
+    {
+      "type": "quiz",
+      "question": "You need to give a colleague the exact path to a file on your computer so they can find the same file on their computer. What is the best method?",
+      "options": [
+        "Screenshot the File Explorer window showing the file",
+        "Shift+right-click the file → Copy as path, then paste it",
+        "Describe the folder structure in words (e.g., inside Documents, then Work, then Projects)",
+        "Type out the path manually from memory"
+      ],
+      "correct": 1,
+      "explanation": "Shift+right-click → Copy as path gives you the exact absolute path in a format ready to paste: \"C:\\Users\\Alice\\Documents\\Work\\report.docx\". It's precise, copy-pasteable, and unambiguous. Screenshots require the other person to manually type out what they see. Verbal descriptions are error-prone. Typing from memory risks typos. The Copy as path method is what professional developers use whenever a tool or colleague asks for a file location."
+    },
+    {
+      "type": "quiz",
+      "question": "You saved a Python script as 'analyze.py' in Notepad but when you open the terminal and run 'python analyze.py' it says the file doesn't exist. What is the most likely cause?",
+      "options": [
+        "Python is not installed correctly",
+        "The file was saved as analyze.py.txt because Notepad added the .txt extension automatically",
+        "Python scripts must be in the C:\\Python folder to run",
+        "You need to restart your computer before new files are visible to the terminal"
+      ],
+      "correct": 1,
+      "explanation": "This is the most common beginner mistake with Notepad. When 'Save as type' is set to 'Text Documents (*.txt)', Notepad appends .txt to whatever name you type — so 'analyze.py' becomes 'analyze.py.txt'. The terminal looks for analyze.py, finds nothing, and reports an error. The fix: always set 'Save as type' to 'All Files (*.*)' when saving code files in Notepad. Enabling file extensions in File Explorer lets you see and catch this problem immediately."
     },
     {
       "type": "callout",

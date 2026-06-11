@@ -2,7 +2,7 @@
   "id": "11-1",
   "title": "What is an API? (Plain English)",
   "part": 11,
-  "estimatedMinutes": 20,
+  "estimatedMinutes": 55,
   "tags": ["api", "beginner", "foundations"],
   "sections": [
     {
@@ -45,6 +45,30 @@
       "content": "You'll call a free public API right now — no authentication, no sign-up. This proves you already understand the request/response pattern.\n\n**Option A — Using the REST Client VS Code extension:**\n1. In VS Code Extensions, search \"REST Client\" → install by Huachao Mao (1M+ installs)\n2. Create a new file: `exercises/api-test.http`\n3. Type the following requests, each separated by `###`:\n\n```http\n### Get current Bitcoin price\nGET https://api.coindesk.com/v1/bpi/currentprice.json\n\n### Get a random programming joke\nGET https://v2.jokeapi.dev/joke/Programming?type=single\n\n### Get a public GitHub user profile\nGET https://api.github.com/users/anthropics\n```\n\n4. A \"Send Request\" link appears above each line — click it\n5. A panel opens showing the JSON response\n\n**Option B — Using your browser (even simpler):**\n1. Open any browser\n2. In the address bar, type: `https://api.github.com/users/anthropics`\n3. Press Enter — raw JSON appears showing Anthropic's GitHub profile\n\n**What to observe in the GitHub response:**\n- `\"login\": \"anthropics\"` — the username\n- `\"public_repos\"` — number of public repositories\n- `\"created_at\"` — when the account was created\n\nThis is exactly the JSON structure you'd navigate in code: `data[\"login\"]` gets the username, `data[\"public_repos\"]` gets the repo count.\n\n**Option C — Try an API that requires a key (for reference):**\nYou'll need an OpenWeatherMap account (free tier), but this shows the authentication pattern:\n```http\nGET https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY\n```\nWithout a valid `appid`, you get `{\"cod\":401, \"message\": \"Invalid API key\"}` — that's the 401 status code in action.\n\n**After your experiments, write:**\n1. What did the JSON response from GitHub contain? (Name 3 fields)\n2. What would you write in Python to get just the `public_repos` value?\n3. What error would you get if you sent the GitHub request without the correct URL format?"
     },
     {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Quick API Drill",
+      "content": "Practice reading and navigating real JSON API responses in under 10 minutes.\n\n1. Open your browser and navigate to: `https://api.github.com/repos/anthropics/anthropic-sdk-python`\n2. You'll see a large JSON object describing the SDK repository. Identify these fields:\n   - `stargazers_count` — how many GitHub stars\n   - `language` — primary programming language\n   - `open_issues_count` — number of open issues\n   - `license.name` — the software license\n3. Now navigate to: `https://api.github.com/repos/anthropics/anthropic-sdk-python/releases/latest`\n4. Find the `tag_name` field — this is the latest SDK version.\n5. In VS Code, create `exercises/json-nav.js` and write:\n```javascript\n// Simulate parsing an API response\nconst mockResponse = {\n  id: \"msg_abc123\",\n  content: [{ type: \"text\", text: \"Hello from Claude!\" }],\n  usage: { input_tokens: 12, output_tokens: 8 }\n};\n\n// Navigate to the text\nconsole.log(mockResponse.content[0].text);\n// Navigate to token counts\nconsole.log(`Input: ${mockResponse.usage.input_tokens}, Output: ${mockResponse.usage.output_tokens}`);\n```\n6. Run it: `node exercises/json-nav.js`\n7. Confirm you see `Hello from Claude!` and the token counts printed.\n8. Ask Claude Code: \"Look at this output. What does `content[0].text` mean in the context of the Anthropic API response structure?\"\n\nYou've now navigated real API JSON and confirmed the path that extracts Claude's reply."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build an API Explorer Tool",
+      "content": "Build a working Node.js script that calls any public JSON API and pretty-prints the result with field navigation.\n\n1. Create `exercises/api-explorer.js`\n2. Install node-fetch if needed: `npm install node-fetch`\n3. Write the full script:\n```javascript\nimport fetch from 'node-fetch';\n\nasync function exploreAPI(url, fieldPaths = []) {\n  console.log(`\\nFetching: ${url}`);\n  console.log('---');\n  \n  const response = await fetch(url);\n  const statusText = `Status: ${response.status} ${response.statusText}`;\n  console.log(statusText);\n  \n  if (!response.ok) {\n    console.error(`Error: HTTP ${response.status}`);\n    return null;\n  }\n  \n  const data = await response.json();\n  console.log('\\nFull response (first 500 chars):');\n  console.log(JSON.stringify(data, null, 2).slice(0, 500) + '...');\n  \n  if (fieldPaths.length > 0) {\n    console.log('\\nExtracted fields:');\n    for (const path of fieldPaths) {\n      // navigate nested path like \"usage.input_tokens\"\n      const value = path.split('.').reduce((obj, key) => obj?.[key], data);\n      console.log(`  ${path}: ${value}`);\n    }\n  }\n  \n  return data;\n}\n\n// Test with GitHub API\nawait exploreAPI(\n  'https://api.github.com/users/anthropics',\n  ['login', 'public_repos', 'created_at']\n);\n\n// Test with a joke API\nawait exploreAPI(\n  'https://v2.jokeapi.dev/joke/Programming?type=single',\n  ['joke', 'type']\n);\n\n// Test with an invalid endpoint to see error handling\nawait exploreAPI('https://api.github.com/users/this-user-does-not-exist-xyz-999');\n```\n4. Add `\"type\": \"module\"` to your `package.json` if not already present.\n5. Run it: `node exercises/api-explorer.js`\n6. Verify all three calls work: a successful response with field extraction, a second successful response, and an error case.\n7. Observe the 404 response for the nonexistent user.\n8. **AI REVIEW step:** Open Claude Code and paste the full script. Say: \"Review this. Find 3 bugs, security issues, or inefficiencies. Don't say it looks good.\" Fix at least one issue the review identifies.\n9. After fixing, re-run: `node exercises/api-explorer.js` — confirm it still works.\n10. Add a fourth test: call `https://api.github.com/repos/anthropics/claude-code` and extract `stargazers_count` and `open_issues_count`.\n\nYou now have a reusable API exploration tool and hands-on experience with real HTTP responses and error handling."
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop C — API Response & Latency Audit",
+      "content": "Measure real API performance — latency, response size, and what drives variation.\n\n1. Create `exercises/api-timing.js`:\n```javascript\nimport fetch from 'node-fetch';\n\nasync function timedFetch(label, url) {\n  const start = Date.now();\n  const response = await fetch(url);\n  const data = await response.json();\n  const elapsed = Date.now() - start;\n  const bodySize = JSON.stringify(data).length;\n  \n  console.log(`\\n${label}`);\n  console.log(`  Status:  ${response.status}`);\n  console.log(`  Latency: ${elapsed}ms`);\n  console.log(`  Size:    ${bodySize} bytes`);\n  \n  return { elapsed, bodySize };\n}\n\nconsole.log('=== API Latency Audit ===');\n\n// Small response\nawait timedFetch('GitHub user (small)', 'https://api.github.com/users/anthropics');\n\n// Medium response\nawait timedFetch('GitHub repos (medium)', 'https://api.github.com/users/anthropics/repos?per_page=10');\n\n// Run the same endpoint 3 times to observe variance\nconsole.log('\\nLatency variance (same endpoint x3):');\nfor (let i = 1; i <= 3; i++) {\n  await timedFetch(`  Run ${i}`, 'https://api.github.com/users/anthropics');\n}\n```\n2. Run it: `node exercises/api-timing.js`\n3. Record your results:\n   - What is the minimum, maximum, and average latency across 3 runs?\n   - How does response size affect latency?\n4. Ask Claude Code: \"Based on these latency numbers, what strategies would reduce the perceived wait time in a user-facing application that calls a slow API?\"\n5. Apply one suggestion — for example, add a loading indicator message before the fetch:\n```javascript\nprocess.stdout.write(`Fetching ${label}...`);\n// ... fetch ...\nconsole.log(` done (${elapsed}ms)`);\n```\n6. Re-run and confirm the improvement in user experience.\n\nYou now understand API latency patterns and have applied an AI-suggested optimisation."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Extend the API Explorer",
+      "content": "Add two real features to your `api-explorer.js` tool from Workshop B.\n\n**Feature 1 — Error retry with backoff:**\n```javascript\nasync function fetchWithRetry(url, maxRetries = 3) {\n  for (let attempt = 1; attempt <= maxRetries; attempt++) {\n    try {\n      const response = await fetch(url);\n      if (response.status === 429) {\n        const waitMs = attempt * 1000;\n        console.log(`  Rate limited. Waiting ${waitMs}ms before retry ${attempt}/${maxRetries}...`);\n        await new Promise(resolve => setTimeout(resolve, waitMs));\n        continue;\n      }\n      return response;\n    } catch (err) {\n      if (attempt === maxRetries) throw err;\n      console.log(`  Network error. Retrying (${attempt}/${maxRetries})...`);\n      await new Promise(resolve => setTimeout(resolve, 500 * attempt));\n    }\n  }\n}\n```\nReplace the `fetch(url)` calls in your `exploreAPI` function with `fetchWithRetry(url)`.\n\n**Feature 2 — Save results to a file:**\n```javascript\nimport { writeFileSync } from 'fs';\n\n// At the end of exploreAPI, after logging:\nconst filename = `api-result-${Date.now()}.json`;\nwriteFileSync(filename, JSON.stringify(data, null, 2));\nconsole.log(`  Saved to: ${filename}`);\n```\n\n1. Implement both features in your `api-explorer.js`\n2. Run it: `node exercises/api-explorer.js`\n3. Verify a JSON file is created in your project folder with the API response.\n4. Open the saved file in VS Code and confirm it's valid, readable JSON.\n5. Test the retry logic by temporarily changing one URL to `https://httpstat.us/429` (a test endpoint that returns 429) — watch the retry messages appear.\n6. Restore the original URLs and run once more.\n\nYou've extended a working tool with production-quality error handling and output persistence."
+    },
+    {
       "type": "quiz",
       "question": "You're calling the Anthropic API and get back a 429 response. What has happened and what should you do?",
       "options": [
@@ -55,6 +79,30 @@
       ],
       "correct": 2,
       "explanation": "A 429 status code means Too Many Requests — you've hit the rate limit. The server often includes a Retry-After header telling you how many seconds to wait. The fix is to add a delay between requests and reduce throughput. This is a 4xx error (your side), not a 5xx error (their side), so the servers are fine. A 401 would mean invalid key, a 400 would mean bad request format, and 5xx codes indicate server problems."
+    },
+    {
+      "type": "quiz",
+      "question": "You receive a JSON response from an API. The structure is: `{ \"results\": [ { \"name\": \"Alice\", \"score\": 95 }, { \"name\": \"Bob\", \"score\": 87 } ] }`. How do you access Bob's score in JavaScript?",
+      "options": [
+        "data.results[1].score",
+        "data.results[2].score",
+        "data[\"results\"].Bob.score",
+        "data.results.score[1]"
+      ],
+      "correct": 0,
+      "explanation": "Arrays in JSON are zero-indexed. results[0] is Alice, results[1] is Bob. To get Bob's score: data.results[1].score. Option B uses index 2 which would be undefined. Options C and D use invalid navigation syntax."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the correct HTTP method to use when sending data to the Anthropic API to generate a Claude response?",
+      "options": [
+        "GET, because you are retrieving a response",
+        "POST, because you are sending data (the message) and receiving a result",
+        "PUT, because you are creating a new message",
+        "PATCH, because you are modifying the conversation"
+      ],
+      "correct": 1,
+      "explanation": "POST is used when you send data to a server and expect a computed result back. The Anthropic Messages API uses POST because you're sending your message payload (model, max_tokens, messages array) and getting a generated response. GET is for retrieving resources without a body. PUT/PATCH are for updating existing resources."
     },
     {
       "type": "callout",

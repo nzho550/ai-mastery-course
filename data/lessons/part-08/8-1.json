@@ -2,7 +2,7 @@
   "id": "8-1",
   "title": "What is MCP and Why It's a Big Deal",
   "part": 8,
-  "estimatedMinutes": 25,
+  "estimatedMinutes": 60,
   "tags": ["mcp", "claude-code", "integrations"],
   "sections": [
     {
@@ -65,6 +65,54 @@
       ],
       "correct": 1,
       "explanation": "Building an MCP server is the right answer for future-proofing. Because MCP is an open standard adopted by Claude Code, Cursor, Zed, VS Code extensions, and more, you build once and it works with every compliant client. Building separate integrations for each AI tool (option A) means n-times the work and ongoing maintenance as new tools emerge. The key insight from the USB analogy: the value of a standard multiplies as adoption grows. An MCP server built today works with every MCP client released in the future."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Quick MCP Concept Drill",
+      "content": "Solidify the core MCP mental model with a short terminal exercise. No MCP server is installed yet — this drill uses Claude Code's `/mcp` command and conversation to map the architecture.\n\n**Step 1 — Launch Claude Code and check current MCP state:**\n```\nclaude\n```\nThen inside the session:\n```\n/mcp\n```\nNote whatever servers are listed (or confirm none are present yet). This is your baseline.\n\n**Step 2 — Ask Claude to explain the flow for a specific tool call:**\nAsk: `\"Walk me through exactly what happens at the protocol level when I ask you to 'list my open GitHub issues' — step by step from my keypress to your answer. Name each MCP component involved.\"`\n\nCompare Claude's answer to the request flow described in this lesson. Are the steps consistent?\n\n**Step 3 — Identify tool types:**\nAsk: `\"For each of these operations, tell me whether it would be a Tool, Resource, or Prompt in MCP — and why: (1) reading a file, (2) sending an email, (3) a pre-written template for code review.\"`\n\n**Step 4 — Review your answers with Claude:**\nAfter the exercise, ask: `\"Review my understanding of MCP architecture. I believe: [paste your summary of how client/server/transport work]. What did I get right, and what should I correct?\"`\n\nAct on at least one correction Claude suggests before moving on."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Map the MCP Ecosystem for Your Tech Stack",
+      "content": "Use Claude Code in a long-form research session to build a personalised MCP server map for your actual development environment. This produces a real reference document you will use throughout Part 8.\n\n**Step 1 — Identify your current toolchain:**\nMake a quick list of every tool you use regularly: code editor, version control host, project tracker, communication tools, databases you work with, cloud providers, documentation sites you visit often.\n\n**Step 2 — Research available MCP servers for each tool:**\nAsk Claude: `\"For each tool in this list, tell me if there is a known MCP server for it, what package name to install, and what capabilities it exposes. Tools: [paste your list]. Check github.com/modelcontextprotocol/servers and any other known community registries.\"`\n\n**Step 3 — Evaluate each server:**\nFor the top 5 servers most relevant to your work, ask Claude: `\"For [server name], what are the most powerful use cases? What tasks that take me 10+ minutes today could this server reduce to a single Claude prompt? Give concrete examples based on a developer's daily workflow.\"`\n\n**Step 4 — Prioritise by ROI:**\nAsk Claude: `\"Based on the servers we've researched, rank them by likely time savings for a developer who [describe your role and main tasks]. Which 3 should I install first and why?\"`\n\n**Step 5 — Create your MCP roadmap document:**\nAsk Claude: `\"Create a markdown document called mcp-server-roadmap.md. It should have a table with columns: Server Name, Package, Status (to-install/installed/skipped), Use Cases, Priority (1-5). Populate it with everything we've researched.\"`\n\nSave the output to `notes/mcp-server-roadmap.md`.\n\n**Step 6 — AI REVIEW:**\nAsk Claude: `\"Review the research session we just completed. What gaps are there in our MCP ecosystem map? What important servers might we have missed? What assumptions did we make that could be wrong? What should we double-check?\"`\n\nAct on at least one finding — add a missing server to the roadmap or flag an assumption to verify.\n\n**Keep the result:** `notes/mcp-server-roadmap.md` will guide which servers you install in lessons 8-3 through 8-10."
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop C — MCP Chain: Research + Structure",
+      "content": "Chain Claude's conversational reasoning with the concept of MCP tools to design a multi-server workflow that neither approach achieves alone. (No servers are installed yet — this is a design exercise that previews the chains you will build in later lessons.)\n\n**Step 1 — Design a multi-MCP workflow for a realistic task:**\nChoose one of these real developer workflows:\n- A: 'When a GitHub issue is created, research the topic with context7, write a solution plan using sequential-thinking, and save it as a comment on the issue'\n- B: 'Analyse the files in my project folder, look up the current docs for each library used, and produce an upgrade report'\n- C: 'Search GitHub for open issues tagged as bugs, triage them using sequential-thinking, and write prioritised task entries in task-master'\n\n**Step 2 — Map the chain step by step:**\nAsk Claude: `\"For workflow [A/B/C], map out every MCP tool call that would be needed. Show: which server handles each step, what input each tool receives, what output it produces, and how that output becomes input for the next step.\"`\n\n**Step 3 — Identify the dependency graph:**\nAsk Claude: `\"Draw a dependency graph for this workflow as text — show which steps can run in parallel and which must be sequential.\"`\n\n**Step 4 — Write the prompt chain:**\nAsk Claude: `\"Write the sequence of Claude Code prompts a user would type to execute this full workflow. One prompt per step, with each prompt referencing the previous output.\"`\n\nSave the workflow design to `notes/mcp-chain-design.md`. You will implement this chain in a later lesson when the servers are installed."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Apply MCP Thinking to a Real Project",
+      "content": "Take a task you have been doing manually in your real work and redesign it as an MCP-powered workflow.\n\n**Step 1 — Choose a real repetitive task:**\nPick something you do at least weekly that involves multiple tools. Examples:\n- Reviewing what changed in a codebase since last week\n- Summarising open issues and deciding what to work on\n- Researching a new library before adding it to a project\n- Writing a status update about project progress\n\n**Step 2 — Document the current manual workflow:**\nAsk Claude: `\"I currently [describe the task] manually by doing: [list your steps]. Help me document this as a workflow diagram — what tools do I touch, what data moves between them, and where do I spend the most time?\"`\n\n**Step 3 — Redesign with MCP servers:**\nAsk Claude: `\"Now redesign this workflow assuming I have these MCP servers installed: filesystem, GitHub, context7, sequential-thinking. Which manual steps disappear? What does the new workflow look like?\"`\n\n**Step 4 — Estimate the time savings:**\nAsk Claude: `\"Estimate how much time per week this MCP-powered version would save compared to my current manual process. What are the assumptions in that estimate?\"`\n\n**Step 5 — Write the implementation plan:**\nAsk Claude: `\"Write a concrete implementation plan for this workflow: which MCP servers to install first, what Claude Code prompts to run, and how to verify it worked correctly.\"`\n\nSave this to `notes/mcp-real-task-redesign.md`. This document gives you a concrete goal for the rest of Part 8 — by lesson 8-10, you should be able to execute this workflow."
+    },
+    {
+      "type": "quiz",
+      "question": "An MCP server is running locally via stdio transport. What happens to Claude Code if the MCP server process crashes mid-session?",
+      "options": [
+        "Claude Code also crashes, because it depends on the server process being alive",
+        "Claude Code continues running but loses access to that server's tools until the server is restarted",
+        "Claude Code automatically restarts the server and the tool call is retried transparently",
+        "Claude Code switches to HTTP transport as a fallback"
+      ],
+      "correct": 1,
+      "explanation": "MCP servers are separate processes from Claude Code. If a server crashes, Claude Code keeps running — it just can no longer call tools from that server. The tool calls will fail with an error until you restart the server (which means restarting Claude Code, since servers are launched as subprocesses on startup). There is no automatic retry or fallback — these are separate processes with no shared state."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to give Claude access to your work email and your personal files, but not your company's production database. How should you structure your MCP configuration?",
+      "options": [
+        "Add all three to your global settings.json — you can limit what Claude does via careful prompting",
+        "Add email and filesystem MCP servers to your global settings.json, and explicitly omit any database server until you are ready to use it safely",
+        "Put all three in a project-level settings.json so they are only available when you open that specific project",
+        "MCP servers cannot be selectively configured — it is all or nothing"
+      ],
+      "correct": 1,
+      "explanation": "The right approach is to configure only the servers you actually need right now. Adding a server to settings.json makes it active in every session, so omitting the database server is the correct boundary. You can always add a server later. Relying on careful prompting alone (option A) is risky — Claude can use any available tool if the conversation leads there. The global vs. project-level distinction is real and useful, but putting everything in a project file doesn't solve the 'don't add the database' problem."
     },
     {
       "type": "callout",

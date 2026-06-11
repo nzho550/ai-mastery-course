@@ -2,7 +2,7 @@
   "id": "3-2",
   "title": "The Anatomy of a Good Prompt",
   "part": 3,
-  "estimatedMinutes": 25,
+  "estimatedMinutes": 60,
   "tags": ["prompting", "beginner", "structure"],
   "sections": [
     {
@@ -54,6 +54,54 @@
       ],
       "correct": 2,
       "explanation": "The task was clear enough (rewrite professionally), and context/format would improve it but aren't the root cause. The problem was missing constraints: you didn't specify what must NOT change (the structure, the key information, the specific request). Without constraints, the AI is free to make any changes it thinks improve 'professionalism' — including restructuring and removing content it perceives as less formal. The fix: 'Keep the structure and all specific facts/requests unchanged. Only improve: sentence formality, grammar, and word choice.'"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Quick Prompt Drill — Three Variations on One Professional Task",
+      "content": "Open [Claude.ai](https://claude.ai). Pick a real professional task you face regularly (preparing for a review conversation, writing a project update, explaining a concept to a new hire, drafting a proposal section).\n\n**Variation 1 — Context only:**\nSend just the context, no explicit task, format, or constraints. Note what the AI chooses to do with it.\n\n**Variation 2 — Task + Format, no Context:**\nSend: \"[Action verb] [deliverable] in [format]. [Length constraint].\" — leave out who you are and what the output is for. Note the difference.\n\n**Variation 3 — All four elements:**\nAdd your personal context (role, situation), a precise task verb, format specification, and at least two constraints (including one 'do not' instruction). Send it.\n\n**Compare the three outputs:**\n- Which output would you actually use as-is?\n- Which element — when added — made the biggest single jump in quality?\n- Write one sentence describing your personal pattern: which element do you most naturally forget to include?\n\nShare the full four-element prompt in your prompt library file."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build a Work Document Using All Four Elements",
+      "content": "You'll use the full four-element framework to produce a real, useful work output — something you'd actually send or use.\n\n**Step 1 — Choose your output (2 min)**\nPick one:\n- A performance review section for someone on your team (real or practice)\n- A one-page proposal or business case for an initiative you're working on\n- A training document or onboarding guide for a task you own\n- A structured analysis of a decision currently in front of you\n- A set of interview questions for a role you're hiring for\n\n**Step 2 — Write your four-element prompt (5 min)**\nDraft it explicitly with four labelled sections:\n\n```\nContext: [who you are, what this document is for, who reads it]\nTask: [specific verb + deliverable — e.g., 'Write a two-paragraph performance review section for...']\nFormat: [structure, length, tone, any required headings or sections]\nConstraints: [specific phrases to avoid, what must stay unchanged, what this must NOT become]\n\nA bad response would be: [describe exactly what you don't want]\nA good response would be: [describe the mark of success]\n\nStart with: [first line the AI should write]\n\n[Any content the AI needs — paste here]\n```\n\n**Step 3 — Run and evaluate (5 min)**\nSend it. Rate the output 1-10 against the 'good response' standard you defined.\n\n**Step 4 — AI REVIEW (10 min)**\nIn the same conversation, paste:\n\n> \"Look at the prompt I just gave you and the output you produced. Critique my prompt construction — what's missing, what's underspecified, what constraint would have changed the output for the better? Don't tell me the output is good. Tell me where my prompting technique failed.\"\n\nTake notes. Apply at least two of the suggestions.\n\n**Step 5 — Improved run (5 min)**\nRun the improved prompt. Compare to Step 3.\n\n**Step 6 — Save as template**\nReplace specific details with [VARIABLE] placeholders. Add to your prompt library under: `## [Document Type] — Four-Element Template`.\n\n**Deliverable:** A real document you can use (or adapt for immediate use) + a reusable four-element template for this document type."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Adversarial Prompt Review — Anatomise Your Own Prompts",
+      "content": "This workshop trains your diagnostic eye — the ability to look at any prompt and immediately identify which element is missing or underspecified.\n\n**Step 1 — Collect three prompts you've recently written (3 min)**\nThink of three prompts you've sent to any AI tool in the past week. Write them down from memory (they don't have to be exact). If you haven't used AI recently, write three prompts you'd naturally write for tasks coming up this week.\n\n**Step 2 — Self-diagnosis before AI feedback (5 min)**\nFor each prompt, fill in this diagnostic table before asking AI:\n\n| Element | Present? | What's missing? |\n|---|---|---|\n| Context | Y/N | |\n| Task | Y/N | |\n| Format | Y/N | |\n| Constraints | Y/N | |\n\n**Step 3 — Adversarial AI review (7 min)**\nFor your weakest prompt (the one missing the most elements), open [Claude.ai](https://claude.ai) and paste:\n\n```\nHere is a prompt someone wrote:\n\n[your prompt]\n\nYou are an expert prompt engineer. Identify:\n1. Which of the four elements (Context, Task, Format, Constraints) is missing or underspecified\n2. What assumptions the AI was forced to make because of the missing information\n3. Rewrite this prompt with all four elements properly specified\n\nDo not be encouraging. Be diagnostic and specific.\n```\n\n**Step 4 — Pattern identification (3 min)**\nLook across all three diagnoses. Which element do you consistently omit? Write that down. That is your personal prompting blind spot — the thing to consciously add to every prompt you write from now on."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Prompt Library Entry — The Four-Element Master Template",
+      "content": "You'll build and save a four-element master template for your highest-frequency recurring task.\n\n**Step 1 — Identify your top recurring task (2 min)**\nWhat task do you do most often that would benefit from a consistent, high-quality AI output every time? Examples: summarising meeting notes, writing client communications, explaining technical work to non-technical people, generating agenda items, drafting proposals.\n\n**Step 2 — Generate your template using meta-prompting (8 min)**\nOpen [Claude.ai](https://claude.ai) and paste:\n\n```\nI need a reusable four-element prompt template for this task:\n\n[Describe the task in detail]\n\nThe output is used for: [who reads it, what they do with it]\nIt must always include: [required elements]\nIt must never include: [exclusions — jargon, phrases, tone problems]\nFormat preference: [structure, length, tone]\n\nGenerate the template with:\n1. A Context block with [VARIABLE] placeholders for personal/situational details\n2. A precise Task specification\n3. A Format instruction that enforces the structure I described\n4. At least three specific Constraints including one 'bad response looks like' and one 'start your response with'\n\nAfter generating, explain which element you found hardest to specify and why.\n```\n\n**Step 3 — Test with real content (5 min)**\nFill in the variables with a real example. Run it. Check: does the output meet your standard on the first run?\n\n**Step 4 — Save to your prompt library (3 min)**\nAdd this to `prompt-library.md`:\n\n```markdown\n## [Task Name] — Four-Element Template\n**Category:** [writing / analysis / communication / research]\n**Frequency:** [daily / weekly / monthly]\n**Template:**\n[full template text]\n**Best for:** [when to use this vs. a simpler approach]\n```\n\nThis is the template you'll reach for every time this task comes up. Refine it as you use it."
+    },
+    {
+      "type": "quiz",
+      "question": "You build a prompt template for summarising project updates. It works well — until a team member uses it for a financial report and the output misses all the numbers and focuses on narrative. What does this reveal about your template?",
+      "options": [
+        "The template is broken and needs to be rebuilt from scratch",
+        "AI tools cannot handle financial content",
+        "The Context element in your template assumed a narrative document type — a good template should either be scoped to one document type or use a [DOCUMENT_TYPE] variable that changes the task and constraints accordingly",
+        "The team member should have used a different AI tool for financial reports"
+      ],
+      "correct": 2,
+      "explanation": "This is a template scope problem, not a broken template. Your original template was calibrated for narrative project updates — the context and constraints assumed prose content, not numerical data. A well-designed template either (a) explicitly states the document type it's designed for, or (b) uses a variable like [DOCUMENT_TYPE] that allows the user to swap in 'financial report' and adds adaptive instructions like 'if the document is financial, prioritise all numerical figures, variances, and trends over narrative explanation.' This is how robust templates handle edge cases — through scope documentation or adaptive variables, not by rebuilding from scratch each time."
+    },
+    {
+      "type": "quiz",
+      "question": "Which of the following prompt openings most effectively uses the 'Output Preview' advanced pattern to control what the AI produces?",
+      "options": [
+        "'Please write a good summary of the following document.'",
+        "'I need a summary. Make it professional and useful.'",
+        "'Summarise this document. Start your response with: The three critical findings are: (1)'",
+        "'Write a very detailed and comprehensive summary covering all the important points.'"
+      ],
+      "correct": 2,
+      "explanation": "The Output Preview pattern tells the AI exactly what its first line should be, which forces the structure of everything that follows. 'Start your response with: The three critical findings are: (1)' eliminates filler openings, forces the AI to commit to exactly three findings in a numbered list from the first token, and structures the entire response around those three points. The other options describe the desired output in general terms but leave the AI to choose how to open — which often produces padding sentences before getting to the content."
     },
     {
       "type": "callout",

@@ -2,7 +2,7 @@
   "id": "6-1",
   "title": "GitHub Copilot — Setup & First Suggestion",
   "part": 6,
-  "estimatedMinutes": 25,
+  "estimatedMinutes": 60,
   "tags": ["copilot", "vscode", "ai-coding"],
   "sections": [
     {
@@ -32,6 +32,66 @@
       "tag": "VSCODE",
       "title": "Activate Copilot and Accept Your First Suggestion",
       "content": "**Step 1 — Create a GitHub account and enable Copilot (if you haven't already)**\n1. Go to github.com and sign in (or create a free account)\n2. Go to github.com/features/copilot and click **Start using Copilot for free**\n3. Follow the prompts — no credit card required for the free tier\n\n**Step 2 — Install the GitHub Copilot extension in VS Code**\n1. Open VS Code\n2. Click the puzzle-piece icon in the Activity Bar (Extensions panel)\n3. In the search box, type: `GitHub Copilot`\n4. Click the result named **GitHub Copilot** (publisher: GitHub) — NOT \"GitHub Copilot Chat\" (install both, but start here)\n5. Click **Install**\n6. A notification appears: **Sign in to use GitHub Copilot** — click it\n7. Complete the browser-based sign-in flow (it opens GitHub in your browser)\n8. Return to VS Code — the Copilot icon (a small circle) appears in the Status Bar at the bottom\n\n**Step 3 — Also install GitHub Copilot Chat**\n1. Back in the Extensions panel, search `GitHub Copilot Chat`\n2. Install the one published by GitHub\n3. This adds the chat panel (used in lesson 6-3) — install it now while you're here\n\n**Step 4 — Your first suggestion**\n1. In the Explorer panel, navigate to `exercises/`\n2. Create a new file: `practice.js`\n3. On line 1, type this comment exactly:\n```\n// Function to calculate the average of an array of numbers\n```\n4. Press Enter and wait 1–2 seconds\n5. Copilot's ghost text appears — a complete function in faded gray\n6. Press **Tab** to accept it\n7. Now press **Ctrl+Enter** — a Copilot Completions panel opens showing alternative suggestions\n8. Browse through them — same prompt, different implementations\n\n**You've written code with AI.** The function appeared because your comment was specific. Now try changing the comment to something more vague — watch how the suggestion changes."
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop A — Quick Skill Drill: Ghost Text Mastery",
+      "content": "Practice the full ghost-text keyboard controls in under 10 minutes. Open `exercises/practice.js` in VS Code.\n\n**1. Accept full suggestion (Tab)**\nType: `// Check if a string is a valid email address`\nPress Enter, wait for ghost text, press Tab. Inspect the result.\n\n**2. Accept word by word (Ctrl+Right)**\nType: `// Reverse the words in a sentence`\nPress Enter, wait for ghost text. Press Ctrl+Right five times — accept the first five words only. Type the rest manually.\n\n**3. Cycle through alternatives (Alt+] and Alt+[)**\nType: `// Convert a hex color code to RGB values`\nPress Enter, then Alt+] three times to see three different implementations. Choose the one you like most and press Tab.\n\n**4. Open the completions panel (Ctrl+Enter)**\nType: `// Format a number as currency with dollar sign and two decimal places`\nPress Enter, then Ctrl+Enter. The Completions panel opens with up to 10 options. Compare them — which is shortest? Which has best error handling?\n\n**5. AI Review Step**\nSelect all four functions you just accepted. Open Copilot Chat (Ctrl+Alt+I). Type:\n`Review the code we just wrote. Don't validate it — find 3 bugs, edge cases, or improvements.`\nRead its response carefully and fix at least one issue it identifies."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build It With AI: String Utility Library",
+      "content": "Use Copilot to build a real, working string utility library with 8 functions. This is comment-driven development in practice.\n\n**1.** Create `exercises/string-utils.js`. Add a file-level comment at the top:\n```javascript\n// String utility library — helper functions for common string operations\n```\n\n**2.** Write each comment below on a new line, press Enter, and accept Copilot's suggestion. Read each suggestion before pressing Tab:\n```javascript\n// Truncate a string to maxLength characters, adding '...' if truncated\n\n// Capitalize the first letter of each word in a string (title case)\n\n// Count how many times a substring appears in a string (case-insensitive)\n\n// Remove all HTML tags from a string, returning plain text\n\n// Pad a string on the left with a character until it reaches a target length\n\n// Convert a camelCase string to kebab-case (e.g. 'myFunctionName' -> 'my-function-name')\n\n// Extract all URLs from a string and return them as an array\n\n// Check if a string is a palindrome, ignoring spaces and punctuation\n```\n\n**3.** After all 8 functions are written, add at the bottom:\n```javascript\n// Export all functions for use in other files\n```\nAccept the module.exports suggestion.\n\n**4.** Create `exercises/string-utils-test.js`. Write:\n```javascript\n// Test all string utility functions with simple examples and log results\n```\nAccept Copilot's test scaffold. Run it: `node exercises/string-utils-test.js`\n\n**5.** Fix any errors until tests pass.\n\n**6. AI REVIEW STEP**\nSelect all of `string-utils.js`. In Copilot Chat, type:\n`Review the code we just wrote. Don't validate it — find 3 bugs, edge cases, or improvements.`\nFix at least one issue it identifies — edit the function, re-run the test file.\n\n**7.** Keep `string-utils.js` — you'll use it in future workshops."
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop C — AI-Assisted Debugging: Fix the Broken Utility",
+      "content": "Here is a deliberately broken version of a string utility. Use Copilot to diagnose and fix all bugs, then verify with a test.\n\n**1.** Create `exercises/buggy-utils.js` and paste this code:\n```javascript\nfunction truncateString(str, maxLength) {\n  if (str.length > maxLength) {\n    return str.slice(0, maxLength) + '...';\n  }\n  return str\n}\n\nfunction titleCase(str) {\n  return str.split(' ').map(word => {\n    return word[0].toUpperCase() + word.slice(0);\n  }).join(' ');\n}\n\nfunction countOccurrences(str, sub) {\n  let count = 0;\n  let pos = str.indexOf(sub);\n  while (pos != -1) {\n    count++;\n    pos = str.indexOf(sub, pos);\n  }\n  return count;\n}\n\nfunction isPalindrome(str) {\n  const clean = str.replace(/[^a-z0-9]/g, '').toLowerCase();\n  return clean == clean.split('').reverse().join('');\n}\n```\n\n**2.** Select the entire file. In Copilot Chat (`Ctrl+Alt+I`), type:\n`Find all bugs in this code. For each bug: identify the line, explain what's wrong, and show the fix.`\n\n**3.** Apply each fix to the file.\n\n**4.** At the bottom of the file, write a comment:\n```javascript\n// Quick test: run all four functions and log the output\n```\nAccept Copilot's test code, run it with `node exercises/buggy-utils.js`, and verify correct output.\n\n**Bugs to find:** `truncateString` — missing semicolon after return (minor); `titleCase` — `word.slice(0)` should be `word.slice(1)`; `countOccurrences` — infinite loop because `pos` never advances (should be `pos + 1`); `isPalindrome` — should also remove spaces and handle uppercase input (already does with `toLowerCase`, but is missing a space in the regex — `[^a-z0-9]` already excludes spaces so this is correct — verify yourself)."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Real Project Application: Copilot on Your Own Code",
+      "content": "Open a real file from a project you're working on (or use `exercises/string-utils.js` from Workshop B).\n\n**1.** Open the file in VS Code.\n\n**2.** Find a function that could benefit from improvement — something repetitive, poorly named, or missing error handling.\n\n**3.** Place your cursor at the end of that function. Write a comment describing what you want to add:\n```javascript\n// TODO: Add input validation — throw TypeError if argument is not a string\n```\nAccept Copilot's implementation.\n\n**4.** Look for a section that is repetitive (same pattern written multiple times). Write a comment before it:\n```javascript\n// Refactor: extract repeated logic into a reusable helper function\n```\nAccept the suggestion. Remove the duplicated code.\n\n**5.** At the bottom of the file, write:\n```javascript\n// Generate JSDoc comments for all functions in this file\n```\nAccept Copilot's documentation output.\n\n**6.** Save and verify the file still works (run it or open it in a browser).\n\n**Result:** You've applied Copilot to code that actually matters to you — not a toy example."
+    },
+    {
+      "type": "quiz",
+      "question": "A developer types `// sort` and presses Enter in a JavaScript file. Copilot suggests a generic bubble sort implementation. The developer then rewrites the comment as `// Sort an array of product objects by price ascending, then by name alphabetically if prices are equal` and presses Enter again. What is the most likely outcome?",
+      "options": [
+        "Copilot produces the same generic bubble sort because it ignores comments",
+        "Copilot produces a more targeted implementation using a comparator function that handles both sort criteria",
+        "Copilot refuses to generate code for complex sort requirements",
+        "Copilot generates a sort function but always uses external libraries"
+      ],
+      "correct": 1,
+      "explanation": "More specific comments produce more targeted suggestions. The detailed comment gives Copilot two explicit sorting criteria (price ascending, then name alphabetically as a tiebreaker), which it can translate directly into a comparator function. The original vague comment produced a generic implementation because Copilot had no constraints to work with."
+    },
+    {
+      "type": "quiz",
+      "question": "You press Tab to accept a Copilot suggestion and immediately realize it introduced a bug — the function returns undefined instead of the computed value. What should you do first?",
+      "options": [
+        "Undo the acceptance with Ctrl+Z, then examine the ghost text more carefully before re-accepting",
+        "Ask Copilot Chat to fix it with /fix",
+        "Delete the file and start over",
+        "Accept the bug and plan to fix it later"
+      ],
+      "correct": 0,
+      "explanation": "Ctrl+Z undoes the Tab acceptance, putting you back to the ghost text state. You can then read the suggestion more carefully, use Ctrl+Right to accept word by word to the point where you see the bug, or press Esc to dismiss and write the return statement manually. The undo pattern is the fastest recovery — much faster than fixing a bug after the fact."
+    },
+    {
+      "type": "quiz",
+      "question": "Which keyboard shortcut opens a panel showing up to 10 alternative Copilot suggestions for the same comment?",
+      "options": [
+        "Alt+] pressed repeatedly",
+        "Ctrl+Enter",
+        "Ctrl+Shift+P then type Copilot",
+        "Tab then Ctrl+Z"
+      ],
+      "correct": 1,
+      "explanation": "Ctrl+Enter opens the Copilot Completions panel, which displays up to 10 alternative suggestions side by side. This is the best way to compare different approaches Copilot has generated for the same prompt before committing to one. Alt+] only cycles through suggestions one at a time in the inline ghost text view."
     },
     {
       "type": "callout",

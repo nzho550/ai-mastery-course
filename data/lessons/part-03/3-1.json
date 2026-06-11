@@ -2,7 +2,7 @@
   "id": "3-1",
   "title": "Why Prompting Matters",
   "part": 3,
-  "estimatedMinutes": 20,
+  "estimatedMinutes": 55,
   "tags": ["prompting", "beginner", "foundations"],
   "sections": [
     {
@@ -60,6 +60,54 @@
       ],
       "correct": 1,
       "explanation": "Generic results are almost always the symptom of a vague prompt. When a prompt lacks specificity about audience, tone, format, length, and purpose, the model produces a statistically average response — which is correct for some hypothetical average request, but wrong for the specific actual need. The fix is not a different tool or technical jargon — it's specifying the five elements: who this is for, what exactly to write, what context they need, what format to use, and what the output is trying to accomplish. Almost every 'AI doesn't work for me' complaint traces back to underbriefing the model."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Quick Prompt Drill — Three Variations, One Task",
+      "content": "Open [Claude.ai](https://claude.ai). Pick ONE real task you need to do this week (a report section, a summary for your manager, a response to a difficult message, a how-to explanation for a colleague).\n\n**Write and send three prompt variations for that task:**\n\n**Variation 1 — Minimal (under 10 words):** Send the most stripped-down version of your request. Note what assumptions the AI made.\n\n**Variation 2 — Standard (add audience + format):** Add who this is for and what shape the output should take. Send it.\n\n**Variation 3 — Full brief (all five elements):** Add role/context, specific task verb, any input the AI needs, format constraints, and the purpose the output serves.\n\n**After all three outputs, answer these questions:**\n- Which output could you use directly without editing?\n- What single addition between Variation 1 and 2 made the biggest difference?\n- Which of the five elements were you most often forgetting before this lesson?\n\n**Save Variation 3** — this is the beginning of a prompt template for this task type. Keep it somewhere accessible."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build a Real Output Using the Five-Element Framework",
+      "content": "You'll use the five-element framework to create a genuinely useful work document — something you'll actually keep and use.\n\n**Step 1 — Choose your output (2 min)**\nPick one of these targets or substitute your own:\n- A briefing document on a topic you need to explain to a colleague or manager\n- A set of talking points for an upcoming meeting or presentation\n- A template email for a recurring communication (project updates, client check-ins, requests for input)\n- A one-page explainer of a process or concept you're responsible for\n- A structured self-review of your work for the past month\n\n**Step 2 — Draft your five-element prompt (5 min)**\nWrite it out longhand before pasting:\n1. Role/context: who you are and what situation this is for\n2. Task: the exact verb + deliverable\n3. Input context: any information the AI needs to do this well (paste it in)\n4. Format/constraints: structure, length, what to avoid\n5. Purpose: who will read this and what they need to do with it\n\n**Step 3 — Run the prompt and review (5 min)**\nSend it to Claude. Read the output critically — what's missing, what's wrong, what's excellent?\n\n**Step 4 — AI REVIEW (10 min)**\nPaste your prompt and the output back to Claude and say:\n\n> \"Critique my prompt technique — what's weak about how I briefed you? What's missing that would have produced a better result? Don't say it looks good. Be specific about what a more experienced prompt writer would have done differently.\"\n\nRead the critique carefully. Implement at least two of the suggested improvements in a revised prompt.\n\n**Step 5 — Revised run (5 min)**\nSend your improved prompt. Compare the two outputs.\n\n**Step 6 — Save the winner**\nKeep the improved prompt with [VARIABLE] placeholders replacing the specific details. This is your first templated prompt for this task type.\n\n**Deliverable:** You should have (a) a useful real output you'll keep, and (b) a reusable prompt template with the five-element structure baked in."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Adversarial Prompt Review — What Would a Better Prompter Write?",
+      "content": "This exercise trains your eye for prompt quality by having AI critique your prompts the way a skilled prompt engineer would.\n\n**Step 1 — Write a prompt for a real task (3 min)**\nChoose something you genuinely need help with. Write the prompt you'd normally send — don't over-think it, just write what comes naturally.\n\n**Step 2 — Run the adversarial review (5 min)**\nOpen a NEW conversation in [Claude.ai](https://claude.ai) and paste:\n\n```\nHere is a prompt someone wrote:\n\n[paste your prompt]\n\nActing as an expert prompt engineer who trains professionals to get better results from AI:\n1. What are the three biggest weaknesses in this prompt?\n2. What assumptions is the AI forced to make that the prompter should have specified?\n3. How would a skilled prompter rewrite this to get dramatically better output?\n\nBe direct and specific — not encouraging. The goal is to identify every gap.\n```\n\n**Step 3 — Apply the feedback (5 min)**\nTake the rewritten prompt the AI suggests. Make any further adjustments. Send it to Claude and compare the output to your original.\n\n**Step 4 — Document your pattern (2 min)**\nWrite one sentence about your most common prompting gap — the thing the adversarial review consistently found missing. This is your personal baseline to improve."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Prompt Library Entry — Your First Recurring-Task Template",
+      "content": "Every time you write a good prompt, you should capture it before closing the tab. This workshop formalises that habit by creating your first prompt library entry.\n\n**Step 1 — Identify your most frequent AI task (2 min)**\nWhat's one thing you'd use AI for every week if you had a reliable prompt for it? Examples:\n- Summarising documents for busy readers\n- Writing project status updates\n- Explaining technical concepts to non-technical colleagues\n- Drafting responses to difficult emails\n- Creating agendas from rough notes\n\n**Step 2 — Build the template prompt (10 min)**\nOpen [Claude.ai](https://claude.ai) and use this meta-prompt to generate your template:\n\n```\nI need a reusable prompt template for the following task:\n\nTask: [describe the recurring task]\nWho uses the output: [audience description]\nWhat the output must always contain: [required elements]\nWhat format works best: [structure, length, tone]\nWhat the output must never contain: [exclusions, clichés, things that would make it unusable]\n\nGenerate a template using [VARIABLE] placeholders for the parts that change each time.\nMake it production-ready — something I can use immediately without editing.\nAfter generating it, explain what you optimised for.\n```\n\n**Step 3 — Test with a real input (5 min)**\nFill in the variables with a real example from your work. Run it. Evaluate the output.\n\n**Step 4 — Refine once (3 min)**\nIdentify one thing to improve. Ask Claude to adjust the template accordingly.\n\n**Step 5 — Save it**\nCreate a file called `prompt-library.md` in a folder you'll remember. Add this entry:\n\n```markdown\n## [Task Name]\n**When to use:** [one sentence]\n**Template:**\n[paste your final template]\n**Example output:** [paste one good output]\n```\n\nThis file is your prompt library. Every lesson in Part 3 adds at least one entry."
+    },
+    {
+      "type": "quiz",
+      "question": "Which of the following best describes why adding 'This is for a non-technical audience who will make a budget decision by end of day' to a prompt improves the output?",
+      "options": [
+        "It makes the AI work harder because the stakes are higher",
+        "It narrows the probability space — the AI can now eliminate responses calibrated for technical readers or for low-urgency situations",
+        "It triggers a special mode in the AI designed for executive communication",
+        "Longer prompts always produce better outputs regardless of what is added"
+      ],
+      "correct": 1,
+      "explanation": "Every piece of context in a prompt narrows the space of valid responses. Specifying a non-technical audience eliminates any response that uses jargon without explanation. Specifying a budget decision tells the AI the output must be actionable in that domain. Specifying end-of-day urgency tells it the output must be concise and skimmable. None of this is magic — it's elimination of irrelevant response patterns, leaving only those that fit all specified constraints."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask AI to 'help you prepare for a presentation' and get a generic list of presentation tips. Which single addition to the prompt would produce the most targeted improvement?",
+      "options": [
+        "Adding 'please' to make the request more polite",
+        "Repeating the request in bold text to emphasise it",
+        "Specifying the audience, topic, goal of the presentation, and your specific concern — for example, 'I tend to over-explain technical detail to non-technical stakeholders'",
+        "Asking it to 'try harder' and 'be more specific'"
+      ],
+      "correct": 2,
+      "explanation": "The original prompt omits every contextual element: who the presentation is for, what it's about, what outcome you're trying to achieve, and what your actual challenge is. Any one of these additions would help. All four together transform the output from generic presentation advice to targeted coaching for your specific situation. Politeness, emphasis, and exhortations to 'try harder' do not add information and therefore do not improve the output."
     },
     {
       "type": "callout",

@@ -2,7 +2,7 @@
   "id": "6-2",
   "title": "Copilot Autocomplete in Practice",
   "part": 6,
-  "estimatedMinutes": 20,
+  "estimatedMinutes": 55,
   "tags": ["copilot", "vscode", "ai-coding", "autocomplete"],
   "sections": [
     {
@@ -31,6 +31,54 @@
       "tag": "VSCODE",
       "title": "Guide the AI — Three Scenarios",
       "content": "Open `exercises/practice.js` from lesson 6-1. You'll run three separate scenarios to practice controlling Copilot.\n\n**Scenario 1 — Accept and verify**\n1. On a new line, type: `// Sort an array of names alphabetically, case-insensitive`\n2. Press Enter and wait for Copilot's suggestion\n3. Press **Tab** to accept\n4. Now verify: mentally trace through the function. If the names array is `['Zara', 'alice', 'Bob']`, what does it return? Is that what you'd expect?\n5. If you're unsure, open Copilot Chat (`Ctrl+Alt+I`) and type: `/explain` with the function selected\n\n**Scenario 2 — Reject and refine**\n1. On a new line, type: `// Convert temperature`\n2. When the suggestion appears, press **Esc** to dismiss it — this comment is too vague\n3. Rewrite it more specifically: `// Convert temperature from Celsius to Fahrenheit, rounded to 1 decimal place`\n4. Press Enter — compare the new suggestion to what you got before\n5. If you still don't like the first suggestion, press **Alt+]** to see alternatives\n\n**Scenario 3 — Partial accept**\n1. On a new line, type: `// Validate an email address using a regular expression`\n2. Press Enter and let Copilot suggest a function\n3. Instead of pressing Tab for the full suggestion, press **Ctrl+Right** repeatedly — accept word by word\n4. Stop where you disagree with the implementation and type the rest manually\n\n**After all three:** In your notes, write one sentence per scenario answering: \"Did the suggestion do exactly what the comment said? How would I know if it was wrong?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop A — Quick Skill Drill: Comment Precision Testing",
+      "content": "Run a controlled experiment: write the same function three times with increasingly specific comments. Measure how comment quality affects suggestion quality.\n\n**1.** Create `exercises/comment-experiment.js`.\n\n**2. Round 1 — Vague comment:**\n```javascript\n// validate input\n```\nAccept the suggestion with Tab. Note what you got.\n\n**3. Round 2 — Medium specificity:**\n```javascript\n// validate that a user's age is a number between 0 and 150\n```\nAccept the suggestion. Compare to Round 1.\n\n**4. Round 3 — Full specification:**\n```javascript\n// Validate user age: must be an integer between 0 and 150 inclusive.\n// Returns { valid: true } if valid, or { valid: false, error: 'reason' } if not.\n// Handles: non-number types, negative values, decimals, values over 150.\n```\nAccept the suggestion. This is likely the best one.\n\n**5.** At the bottom write:\n```javascript\n// Test all three validators: call each with -1, 25, 200, 'hello', null\n```\nAccept the test code, run `node exercises/comment-experiment.js`.\n\n**6. AI Review Step:**\nSelect all three validator functions. In Copilot Chat type:\n`Review the code we just wrote. Don't validate it — find 3 bugs, edge cases, or improvements.`\nFix at least one identified issue."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build It With AI: Number Formatting Library",
+      "content": "Build a complete number formatting library that handles currency, percentages, file sizes, and more. 10+ working functions.\n\n**1.** Create `exercises/number-utils.js`. Start with:\n```javascript\n// Number formatting utilities — production-ready helpers for displaying numbers\n'use strict';\n```\n\n**2.** Add each comment in sequence and accept Copilot's suggestion for each:\n```javascript\n// Format a number as USD currency: 1234.5 -> '$1,234.50'\n\n// Format a number as a percentage with configurable decimal places: 0.856 -> '85.6%'\n\n// Format bytes as human-readable file size: 1536 -> '1.5 KB', 1048576 -> '1 MB'\n\n// Clamp a number between a min and max value (inclusive)\n\n// Calculate percentage change between two values: returns signed float\n\n// Round to significant figures: roundSigFig(1234, 2) -> 1200\n\n// Format a large number with K/M/B suffixes: 1500 -> '1.5K', 2000000 -> '2M'\n\n// Check if a value is a finite number (not NaN, not Infinity)\n\n// Linear interpolation between two values at a given ratio (0-1)\n\n// Map a number from one range to another: mapRange(5, 0, 10, 0, 100) -> 50\n```\n\n**3.** Add at the bottom:\n```javascript\n// Export all utility functions\nmodule.exports = { formatCurrency, formatPercent, formatFileSize, clamp, percentChange, roundSigFig, formatCompact, isFiniteNumber, lerp, mapRange };\n```\n\n**4.** Create `exercises/number-utils-demo.js`:\n```javascript\n// Demo: import and call every number utility with example values, log results\n```\nAccept the demo code. Run: `node exercises/number-utils-demo.js`\n\n**5.** Fix errors until all functions produce correct output.\n\n**6. AI REVIEW STEP:**\nSelect all of `number-utils.js`. In Copilot Chat type:\n`Review the code we just wrote. Don't validate it — find 3 bugs, edge cases, or improvements.`\nFix at least one issue. Re-run the demo to confirm the fix works.\n\n**7.** Keep the file — you'll reuse it in later lessons."
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop C — AI-Assisted Debugging: The Broken Formatter",
+      "content": "Debug a broken number formatter using Copilot. The code runs but produces wrong output.\n\n**1.** Create `exercises/broken-formatter.js` and paste:\n```javascript\nfunction formatCurrency(amount, currency) {\n  currency = currency || 'USD';\n  return currency + amount.toFixed(2);\n}\n\nfunction formatPercent(value) {\n  return (value * 100).toFixed(1) + %;\n}\n\nfunction formatFileSize(bytes) {\n  const units = ['B', 'KB', 'MB', 'GB'];\n  let i = 0;\n  while (bytes >= 1000) {\n    bytes /= 1000;\n    i++;\n  }\n  return bytes.toFixed(1) + ' ' + units[i];\n}\n\nfunction clamp(value, min, max) {\n  return Math.min(max, Math.max(min, max));\n}\n\n// Test them\nconsole.log(formatCurrency(1234.5));       // Expected: $1,234.50\nconsole.log(formatPercent(0.856));         // Expected: 85.6%\nconsole.log(formatFileSize(1536));         // Expected: 1.5 KB\nconsole.log(clamp(15, 0, 10));             // Expected: 10\n```\n\n**2.** Try running it: `node exercises/broken-formatter.js`. Note the errors.\n\n**3.** Select the full file. In Copilot Chat type:\n`Find every bug in this file — syntax errors and logic errors. List each bug with line number, description, and fix.`\n\n**4.** Apply all fixes. Re-run until all four console.log calls produce the expected values.\n\n**Key bugs:** `formatCurrency` — missing commas in output and currency symbol is after value not before; `formatPercent` — syntax error (% is not a string); `formatFileSize` — uses 1000 instead of 1024 for binary sizes (KB = 1024 bytes); `clamp` — `Math.max(min, max)` should be `Math.max(min, value)`."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Real Project Application: Add Copilot-Generated Utilities to Your Project",
+      "content": "Apply Copilot to solve a real formatting or data-manipulation need in one of your actual projects (or the course exercises folder).\n\n**1.** Think of a task in your project that involves repetitive data formatting, string manipulation, or calculation. If you don't have a personal project, use: write a function that generates a formatted invoice summary.\n\n**2.** Open the relevant file (or create `exercises/project-utils.js`).\n\n**3.** Write a precise multi-line comment describing exactly what you need:\n```javascript\n// [Your description here — be specific about inputs, outputs, and edge cases]\n```\nAccept Copilot's implementation.\n\n**4.** Test the function immediately with three real values from your use case. If it doesn't produce the right output, update your comment and try again.\n\n**5.** Once working, ask Copilot to add a JSDoc block to the function:\n```javascript\n// Add a complete JSDoc comment to the function above: @param, @returns, @example\n```\n\n**6.** Save and integrate the utility into your actual project (import it where needed).\n\n**Result:** You've shipped a real Copilot-generated utility — not a classroom exercise."
+    },
+    {
+      "type": "quiz",
+      "question": "A developer writes `// parse date` and Copilot suggests a function that parses MM/DD/YYYY format. The developer actually needs DD/MM/YYYY (European format). What is the fastest correction path?",
+      "options": [
+        "Accept the suggestion, then manually rewrite the parsing logic",
+        "Press Esc to dismiss, rewrite the comment as '// parse date in DD/MM/YYYY European format', and accept the new suggestion",
+        "Open Copilot Chat and ask it to fix the accepted code",
+        "Use Alt+] to cycle through alternatives and hope one uses DD/MM/YYYY"
+      ],
+      "correct": 1,
+      "explanation": "The fastest path is to dismiss the suggestion with Esc before accepting it, then write a more specific comment. The comment 'parse date in DD/MM/YYYY European format' gives Copilot the exact constraint it was missing. Once accepted, you can also use Ctrl+Right to partially accept up to the format string and type the correct one manually. Never accept code and then rewrite it when you can improve the prompt first."
+    },
+    {
+      "type": "quiz",
+      "question": "You're reviewing a Copilot-suggested function that processes user input. The code looks correct for normal inputs. What additional cases should you always check before accepting any Copilot suggestion that processes user input?",
+      "options": [
+        "Only check the happy path — if it works for normal input it will work for everything",
+        "Empty string, null/undefined, wrong type (e.g., passing a number where a string is expected), and extremely long inputs",
+        "Just check that it compiles without errors",
+        "Run it once with a test value and if it passes, accept"
+      ],
+      "correct": 1,
+      "explanation": "Copilot frequently generates functions that handle the happy path correctly but skip edge case validation. For any function that accepts user input, always manually test: empty string (''), null, undefined, wrong type (e.g., a number input to a string function), and boundary values. Copilot's suggestions reflect common patterns in training data — which often prioritize conciseness over robust input validation."
     },
     {
       "type": "callout",
