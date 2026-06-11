@@ -135,15 +135,26 @@ function renderSection(section) {
           <pre><code class="language-${section.language || 'plaintext'}">${escapeHtml(section.content || '')}</code></pre>
         </div>`;
 
-    case 'workshop':
+    case 'workshop': {
+      const tagIconMap = {
+        BROWSER: icons.globe, VSCODE: icons.code2, TERMINAL: icons.terminal,
+        CLAUDECODE: icons.zap, REFLECT: icons.bookOpen, BUILD: icons.wrench,
+        API: icons.zap, LOCAL: icons.terminal,
+      };
+      const tag = (section.tag || 'WORKSHOP').toUpperCase();
+      const tagIcon = tagIconMap[tag] || icons.zap;
       return `
         <div class="workshop">
           <div class="workshop-header">
-            <span class="workshop-tag">${icons.terminal} ${section.tag || 'Workshop'}</span>
-            <span class="workshop-title">${section.title || ''}</span>
+            <div class="workshop-meta">
+              <span class="workshop-label">Workshop</span>
+              <span class="workshop-tag">${tagIcon} ${tag}</span>
+            </div>
+            <div class="workshop-title">${section.title || ''}</div>
           </div>
           <div>${DOMPurify.sanitize(marked.parse(section.content || ''))}</div>
         </div>`;
+    }
 
     case 'quiz':
       return `
