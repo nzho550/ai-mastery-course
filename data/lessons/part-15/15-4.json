@@ -1,0 +1,55 @@
+{
+  "id": "15-4",
+  "title": "Working with Documents & PDFs",
+  "part": 15,
+  "estimatedMinutes": 20,
+  "tags": ["research", "beginner", "pdf", "notebooklm", "documents", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nDocuments are where knowledge lives in the real world — PDFs, Word files, reports, contracts, research papers, manuals. This lesson covers how to use AI to read, question, summarise, and extract from documents of any length — without reading them word by word yourself."
+    },
+    {
+      "type": "text",
+      "content": "## Claude.ai — Upload and Question Any Document\n\nClaude.ai supports file uploads directly in the chat interface. You can upload PDFs, Word documents, text files, spreadsheets, and images.\n\n**How to upload:**\n1. In Claude.ai, click the paperclip icon (or drag a file into the chat)\n2. Select your document\n3. Ask your question\n\n**Useful document prompts:**\n\n*Get oriented quickly:*\n```\nI've uploaded a [report/contract/paper]. I have 5 minutes.\nGive me: the main purpose of this document, the key claims or decisions,\nand anything I'd want to read in full.\n```\n\n*Extract specific information:*\n```\nExtract every date, deadline, and obligation from this contract.\nFormat as a table: Party | Obligation | Deadline.\n```\n\n*Find answers:*\n```\nDoes this document say anything about [specific topic]?\nQuote the relevant passage and the page number if available.\n```\n\n*Critical review:*\n```\nRead this report. What assumptions does it make?\nWhat evidence is provided vs. asserted?\nWhat would a sceptical reader question?\n```\n\n*Compare two documents:*\nUpload both files in the same conversation, then:\n```\nI've uploaded two versions of this policy document.\nWhat has changed between them? List additions, deletions, and modifications.\n```\n\n**Length limits:** Claude can handle very long documents (up to ~200,000 tokens — equivalent to roughly 150,000 words or several hundred pages). For most business documents, there is no practical limit."
+    },
+    {
+      "type": "text",
+      "content": "## NotebookLM — AI Research Across Multiple Documents\n\nNotebookLM (from Google, free) is purpose-built for research across a collection of documents. You upload all your sources and it creates an AI that answers questions using only those sources — with citations back to the exact passage.\n\n**Why NotebookLM is different from Claude with files:**\n- **Multiple documents:** Create a \"notebook\" with up to 50 sources (PDFs, Google Docs, web URLs, YouTube videos, audio files)\n- **Always cited:** Every answer links to the exact source passage — essential for research integrity\n- **Audio overview:** NotebookLM can generate a podcast-style audio conversation summarising your sources\n- **Never hallucinates outside your sources:** It only answers from what you've uploaded — good for primary source research\n\n**How to use NotebookLM:**\n1. Go to notebooklm.google.com (free with a Google account)\n2. Create a new notebook\n3. Add sources: upload PDFs, paste URLs, or connect Google Docs\n4. Ask questions in the chat panel — answers come with source citations\n5. Use the \"Notebook Guide\" (auto-generated) for a structural overview of all your sources\n\n**Best for:**\n- Research across multiple academic papers\n- Understanding a set of policy documents or reports\n- Due diligence on a company (upload all relevant documents)\n- Studying for an exam or certification (upload your study materials)\n- Analysing a set of meeting notes or project documents\n\n**Audio Overview:** Click \"Generate\" in NotebookLM to produce a 5–10 minute audio discussion between two AI hosts covering your sources. Useful for getting oriented in a new field while commuting or doing other tasks."
+    },
+    {
+      "type": "text",
+      "content": "## ChatGPT — File Analysis and Data Extraction\n\nChatGPT (GPT-4o, paid tier) has strong file analysis capabilities, especially for spreadsheets and data-heavy documents.\n\n**Where ChatGPT shines over Claude for documents:**\n- **Excel and CSV files:** ChatGPT can execute Python code internally to analyse spreadsheet data, run calculations, and generate charts — without you writing any code\n- **Image-heavy PDFs:** GPT-4o reads images within PDFs well (diagrams, charts, tables as images)\n\n**Example: analyse a spreadsheet**\n1. Upload a CSV or Excel file\n2. Ask: *\"What are the trends in this data? Create a chart showing [column] over time.\"*\nChatGPT will run code, generate a chart, and return it as an image you can download.\n\n**Example: extract tables from a scanned PDF:**\n1. Upload a scanned document (image-based PDF)\n2. Ask: *\"Extract all the tables from this document into text format.\"*"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Which tool for which document task:**\n- Single document, deep analysis → Claude.ai\n- Multiple documents, cited answers → NotebookLM\n- Spreadsheet or data file → ChatGPT\n- Quick summary while browsing → Browser AI extension (Sider, Edge Copilot)"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Question a Real Document",
+      "content": "Choose a real document from your work or personal life — something you've been meaning to read but haven't had time for, or something you need to extract specific information from.\n\nGood candidates:\n- A long report or whitepaper\n- A contract or agreement\n- A research paper\n- A policy document or set of guidelines\n- Meeting notes from a long meeting\n- A user manual or technical specification\n\n**If you have one document — use Claude.ai:**\n\n1. Go to Claude.ai → upload your document\n2. First ask: *\"Give me a 5-bullet summary of this document. What is its purpose, main conclusions, and key action items?\"*\n3. Then ask 2–3 specific questions that matter to you about the document\n4. Finally ask: *\"Is there anything in this document I should be concerned about or follow up on?\"*\n\n**If you have multiple documents on the same topic — use NotebookLM:**\n\n1. Go to notebooklm.google.com → New notebook\n2. Upload 2–5 related documents (PDFs, Docs, or URLs)\n3. Ask: *\"What is the main theme across all these documents?\"*\n4. Ask a specific question: *\"Do any of these documents contradict each other on [topic]?\"*\n5. Click on any cited source to verify the answer came from the right place\n\n**Record in your notes:**\n- How long would it have taken to read and extract this information manually?\n- Was the AI summary accurate? Did you spot any errors?\n- What would you use this for regularly?"
+    },
+    {
+      "type": "quiz",
+      "question": "You have 12 research papers to review for a literature review. You need answers that always cite the exact paper and passage they come from. Which tool is best suited?",
+      "options": [
+        "Claude.ai — upload all 12 papers and ask questions",
+        "NotebookLM — upload all sources and get cited answers from your specific documents",
+        "Perplexity — it searches the web for research papers automatically",
+        "ChatGPT — its file analysis is strongest for large volumes"
+      ],
+      "correct": 1,
+      "explanation": "NotebookLM is specifically designed for this use case: multiple documents, answers grounded exclusively in your uploaded sources, with citations back to exact passages. Claude can accept multiple files but doesn't always cite precisely. Perplexity searches the web, not your specific uploaded papers. ChatGPT's code interpreter excels at data and spreadsheets rather than multi-document literature analysis with citations."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 15-4.** You can now use Claude.ai for single-document deep analysis, NotebookLM for multi-document cited research, and ChatGPT for spreadsheets and data files. Documents you previously didn't have time to read are now accessible in minutes."
+    }
+  ],
+  "nextLesson": "15-5",
+  "prevLesson": "15-3"
+}

@@ -1049,8 +1049,186 @@
           "title": "Capstone: Your Own Project",
           "estimatedMinutes": 60,
           "tags": ["capstone", "advanced", "project", "open-ended"],
-          "nextLesson": null,
+          "nextLesson": "15-1",
           "prevLesson": "14-4"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "AI for Research & Knowledge Work",
+      "lessons": [
+        {
+          "id": "15-1",
+          "title": "AI as Your Research Partner",
+          "estimatedMinutes": 15,
+          "tags": ["research", "beginner", "workflow", "knowledge-work"],
+          "nextLesson": "15-2",
+          "prevLesson": "14-5"
+        },
+        {
+          "id": "15-2",
+          "title": "Deep Research with Perplexity & Claude",
+          "estimatedMinutes": 20,
+          "tags": ["research", "beginner", "perplexity", "search", "hands-on"],
+          "nextLesson": "15-3",
+          "prevLesson": "15-1"
+        },
+        {
+          "id": "15-3",
+          "title": "AI Web Search & Web Crawling",
+          "estimatedMinutes": 20,
+          "tags": ["research", "intermediate", "web", "crawl", "playwright", "hands-on"],
+          "nextLesson": "15-4",
+          "prevLesson": "15-2"
+        },
+        {
+          "id": "15-4",
+          "title": "Working with Documents & PDFs",
+          "estimatedMinutes": 20,
+          "tags": ["research", "beginner", "pdf", "notebooklm", "documents", "hands-on"],
+          "nextLesson": "15-5",
+          "prevLesson": "15-3"
+        },
+        {
+          "id": "15-5",
+          "title": "Organizing & Synthesizing Research",
+          "estimatedMinutes": 20,
+          "tags": ["research", "beginner", "synthesis", "organization", "hands-on"],
+          "nextLesson": "15-6",
+          "prevLesson": "15-4"
+        },
+        {
+          "id": "15-6",
+          "title": "Writing Research Reports with AI",
+          "estimatedMinutes": 25,
+          "tags": ["research", "beginner", "writing", "reports", "hands-on"],
+          "nextLesson": "15-7",
+          "prevLesson": "15-5"
+        },
+        {
+          "id": "15-7",
+          "title": "Research Capstone — A Complete Research Sprint",
+          "estimatedMinutes": 60,
+          "tags": ["research", "intermediate", "capstone", "hands-on"],
+          "nextLesson": "16-1",
+          "prevLesson": "15-6"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "AI for Document Creation & Office Work",
+      "lessons": [
+        {
+          "id": "16-1",
+          "title": "The AI Writing Workflow",
+          "estimatedMinutes": 20,
+          "tags": ["office", "beginner", "writing", "workflow"],
+          "nextLesson": "16-2",
+          "prevLesson": "15-7"
+        },
+        {
+          "id": "16-2",
+          "title": "Reports, Proposals & Business Documents",
+          "estimatedMinutes": 25,
+          "tags": ["office", "beginner", "reports", "proposals", "hands-on"],
+          "nextLesson": "16-3",
+          "prevLesson": "16-1"
+        },
+        {
+          "id": "16-3",
+          "title": "Data Analysis Without Coding",
+          "estimatedMinutes": 25,
+          "tags": ["office", "beginner", "excel", "data", "analysis", "hands-on"],
+          "nextLesson": "16-4",
+          "prevLesson": "16-2"
+        },
+        {
+          "id": "16-4",
+          "title": "AI-Powered Presentations",
+          "estimatedMinutes": 25,
+          "tags": ["office", "beginner", "presentations", "powerpoint", "hands-on"],
+          "nextLesson": "16-5",
+          "prevLesson": "16-3"
+        },
+        {
+          "id": "16-5",
+          "title": "Email & Communication Templates",
+          "estimatedMinutes": 20,
+          "tags": ["office", "beginner", "email", "communication", "hands-on"],
+          "nextLesson": "16-6",
+          "prevLesson": "16-4"
+        },
+        {
+          "id": "16-6",
+          "title": "The End-to-End Meeting Workflow",
+          "estimatedMinutes": 20,
+          "tags": ["office", "beginner", "meetings", "workflow", "hands-on"],
+          "nextLesson": "16-7",
+          "prevLesson": "16-5"
+        },
+        {
+          "id": "16-7",
+          "title": "Creating Process Documentation & SOPs",
+          "estimatedMinutes": 20,
+          "tags": ["office", "beginner", "documentation", "sop", "hands-on"],
+          "nextLesson": "17-1",
+          "prevLesson": "16-6"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "AI for Project Planning & Management",
+      "lessons": [
+        {
+          "id": "17-1",
+          "title": "Planning Any Project with AI",
+          "estimatedMinutes": 25,
+          "tags": ["project-management", "beginner", "planning", "hands-on"],
+          "nextLesson": "17-2",
+          "prevLesson": "16-7"
+        },
+        {
+          "id": "17-2",
+          "title": "Breaking Down Complex Problems",
+          "estimatedMinutes": 20,
+          "tags": ["project-management", "beginner", "problem-solving", "hands-on"],
+          "nextLesson": "17-3",
+          "prevLesson": "17-1"
+        },
+        {
+          "id": "17-3",
+          "title": "Research + Planning Combined",
+          "estimatedMinutes": 20,
+          "tags": ["project-management", "beginner", "research", "planning", "hands-on"],
+          "nextLesson": "17-4",
+          "prevLesson": "17-2"
+        },
+        {
+          "id": "17-4",
+          "title": "Documentation & Decision Capture as You Work",
+          "estimatedMinutes": 20,
+          "tags": ["project-management", "beginner", "documentation", "decisions"],
+          "nextLesson": "17-5",
+          "prevLesson": "17-3"
+        },
+        {
+          "id": "17-5",
+          "title": "Review, Quality Check & Stakeholder Communication",
+          "estimatedMinutes": 20,
+          "tags": ["project-management", "beginner", "review", "communication", "hands-on"],
+          "nextLesson": "17-6",
+          "prevLesson": "17-4"
+        },
+        {
+          "id": "17-6",
+          "title": "Project Capstone — The AI-Augmented Work Sprint",
+          "estimatedMinutes": 90,
+          "tags": ["project-management", "intermediate", "capstone", "hands-on"],
+          "nextLesson": null,
+          "prevLesson": "17-5"
         }
       ]
     }

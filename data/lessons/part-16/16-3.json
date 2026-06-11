@@ -1,0 +1,59 @@
+{
+  "id": "16-3",
+  "title": "Data Analysis Without Coding",
+  "part": 16,
+  "estimatedMinutes": 25,
+  "tags": ["office", "beginner", "excel", "data", "analysis", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou don't need to know how to code — or even how to write complex Excel formulas — to get meaningful insights from data. This lesson covers how to use AI to describe what you want from a spreadsheet in plain English and receive analysis, formulas, charts, and written summaries in return."
+    },
+    {
+      "type": "text",
+      "content": "## Upload a Spreadsheet to ChatGPT\n\nChatGPT (GPT-4o, paid tier) has a built-in code interpreter that can directly analyse spreadsheet data, run calculations, create charts, and explain its findings — all without you writing a single line of code.\n\n**How to use it:**\n1. Open ChatGPT → start a new conversation\n2. Click the paperclip icon to attach a file\n3. Upload your CSV or Excel file (.csv, .xlsx, .xls)\n4. Ask your question in plain English\n\n**Useful first questions:**\n```\nGive me an overview of this spreadsheet. What data does it contain,\nhow many rows, and what are the column headers?\n```\n\n```\nWhat are the top 5 insights from this data?\n```\n\n```\nWhich [product / region / salesperson] had the highest and lowest\nperformance, and by how much?\n```\n\n```\nCreate a bar chart showing [column A] by [column B].\n```\n\n```\nAre there any unusual patterns, outliers, or anomalies in this data?\n```\n\nChatGPT will execute code internally, show its work, and return a clear answer — plus any generated charts as downloadable images."
+    },
+    {
+      "type": "text",
+      "content": "## Upload a Spreadsheet to Claude.ai\n\nClaude.ai also accepts spreadsheet uploads and can analyse data, spot patterns, and answer questions — without the code interpreter, but often with more nuanced written analysis.\n\n**When to use Claude over ChatGPT for data:**\n- When you want written analysis and interpretation rather than charts\n- When your data involves text (customer feedback, survey responses, notes) rather than just numbers\n- When you want a narrative explanation alongside the numbers\n\n```\nI've uploaded a spreadsheet of [describe what it contains].\nPlease analyse it and write a 3-paragraph summary covering:\n1. What the overall trends show\n2. The most notable finding\n3. What this suggests we should do or investigate further\n```\n\n```\nI've uploaded customer feedback data. Categorise the feedback into\nthemes, count how many comments fall into each theme, and identify\nthe most common complaint and the most common compliment.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Copilot in Excel — Ask Questions About Your Own Spreadsheet\n\nIf you use Microsoft 365 Copilot (covered in lesson 2-9), Copilot is built into Excel and lets you ask questions about the data in your open spreadsheet without leaving the application.\n\n**How to use:**\n1. Open your spreadsheet in Excel\n2. Click **Copilot** in the Home ribbon\n3. The Copilot panel opens on the right\n4. Type your question\n\n**Example questions:**\n```\nShow me a summary of total sales by region\n```\n```\nCreate a pivot table showing average revenue by product category\n```\n```\nHighlight any rows where the margin is below 10%\n```\n```\nAdd a column that calculates year-over-year growth for each row\n```\n\nCopilot will suggest the formula, chart, or formatting — you click to apply it. No formula knowledge required.\n\n**Gemini in Google Sheets:** Same functionality. Click the **Ask Gemini** button in Sheets to analyse your data in natural language."
+    },
+    {
+      "type": "text",
+      "content": "## Generating Formulas by Describing What You Want\n\nEven without Copilot, you can ask Claude or ChatGPT to write Excel or Google Sheets formulas for you. Describe what you want in plain English:\n\n```\nI have an Excel spreadsheet.\nColumn A has dates, Column B has product names, Column C has sales amounts.\nWrite a formula for column D that shows the total sales for each product\nacross all rows.\n```\n\n```\nI want a formula that looks up the value in cell A2 in a table on\nthe 'Customers' sheet, column B, and returns the value in column D\nof that same row. What's the Excel formula?\n```\n\n```\nI need to flag any row where column C is more than 2x the average of\nall values in column C. What formula or conditional formatting rule\nshould I use?\n```\n\nCopy the formula directly into Excel. AI-generated formulas are usually correct for standard operations — verify on a few sample rows before applying to the whole column."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Turning numbers into a narrative:** After getting your analysis, always ask AI to explain what it means in plain language: *\"Write a 3-sentence plain English summary of these findings for a non-technical audience.\"* This is what turns data analysis into a useful document."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Analyse a Real Dataset",
+      "content": "Use real data from your work — a spreadsheet you already have. If you don't have a suitable spreadsheet, create a simple one with 20–30 rows of made-up data for practice.\n\n**Option A — ChatGPT file analysis (if you have paid ChatGPT):**\n\n1. Open ChatGPT → attach your spreadsheet file\n2. Ask: *\"Give me an overview of this data — what does it contain and what are the key statistics?\"*\n3. Ask: *\"What are the top 3 insights from this data that I should know?\"*\n4. Ask: *\"Create a chart that best visualises the most important trend in this data.\"*\n5. Download the chart image\n6. Finally ask: *\"Write a 150-word plain English summary of these findings, suitable for a manager who doesn't read spreadsheets.\"*\n\n**Option B — Claude.ai analysis:**\n\n1. Export your spreadsheet as CSV, or copy the contents\n2. Upload to Claude.ai or paste the data\n3. Ask: *\"Analyse this data. What are the main patterns, the most notable outliers, and what would you recommend investigating further?\"*\n4. Ask: *\"Write a short narrative summary of these findings I could include in a report.\"*\n\n**Option C — Generate a formula:**\n\nIf you have a specific calculation you've been doing manually:\n1. Describe it to Claude: *\"In my Excel spreadsheet, [describe the columns and what you need calculated]\"*\n2. Get the formula\n3. Test it in Excel\n\n**Outcome:** You now have data insights and a written summary ready to paste into a report."
+    },
+    {
+      "type": "quiz",
+      "question": "You have an Excel spreadsheet with 3 years of sales data across 15 products. You need a chart showing monthly revenue trend and a 150-word written summary for your quarterly report. What is the fastest approach?",
+      "options": [
+        "Manually build the chart in Excel and write the summary yourself",
+        "Hire a data analyst to process the spreadsheet",
+        "Upload the spreadsheet to ChatGPT, ask for the monthly trend chart and a written summary",
+        "Copy the data into a table in Word and describe the trends manually"
+      ],
+      "correct": 2,
+      "explanation": "ChatGPT's file analysis generates both the chart (as a downloadable image) and the written summary in a single conversation — typically in under 2 minutes. Manual chart building (A) is time-consuming and requires Excel skill. Hiring a data analyst (B) is overkill for a standard quarterly chart. Copying to Word (D) creates extra manual work and doesn't produce charts."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-3.** You can now analyse any spreadsheet using AI — without formulas, code, or data skills. Upload to ChatGPT for charts and calculations, Claude for written analysis and text data, or use Copilot in Excel to ask questions in your open spreadsheet."
+    }
+  ],
+  "nextLesson": "16-4",
+  "prevLesson": "16-2"
+}

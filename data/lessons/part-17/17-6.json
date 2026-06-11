@@ -1,0 +1,51 @@
+{
+  "id": "17-6",
+  "title": "Project Capstone — The AI-Augmented Work Sprint",
+  "part": 17,
+  "estimatedMinutes": 60,
+  "tags": ["projects", "beginner", "capstone", "hands-on", "workflow"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThis capstone lesson brings together everything from Parts 15, 16, and 17 into a single, realistic work sprint. You'll plan, research, document, and communicate a real project or initiative from start to finish — using AI as your partner throughout. Unlike previous workshops, this one runs as an end-to-end simulation of how professional AI-augmented work actually looks."
+    },
+    {
+      "type": "text",
+      "content": "## What You're Going to Build\n\nYou'll run a complete work sprint on a real project, initiative, or significant task from your professional life. The sprint produces four outputs:\n\n1. **A research brief** — What you need to know before planning\n2. **A project plan** — Phases, tasks, timeline, risks\n3. **A key document** — A report, proposal, SOP, or presentation relevant to the project\n4. **A stakeholder communication** — Status or launch communication for a relevant audience\n\nThis is not a simulation on a made-up topic. Use something real. The value comes from producing work you'll actually use."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Choosing your project:** Pick something at the right scale — real enough to be meaningful, scoped enough to be completable in a sprint. Good examples: launching a new team process, writing a business case for a tool or resource, planning a department event, creating onboarding documentation, proposing a change to how your team works. Avoid: multi-year programmes, anything requiring extensive external data you don't have, or anything confidential you can't paste into an AI tool."
+    },
+    {
+      "type": "text",
+      "content": "## Phase 1: Research (15 minutes)\n\n**Define your planning questions:**\n```\nI'm planning [project]. To plan it properly, I need answers to these questions.\nBased on the goal and context below, what additional questions should I be able to answer?\n\nGoal: [describe]\nContext: [what you know]\n```\n\n**Research the top 3 questions:**\nUse Perplexity for current factual questions. Use Claude for analysis and synthesis.\nTake rough notes in a document as you go — don't try to write polished text yet.\n\n**Synthesise:**\n```\nHere are my research notes: [paste]\nSummarise the 5 most important findings that should inform my project plan.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Phase 2: Plan (15 minutes)\n\n**Run the kickoff prompt:**\n```\nI'm planning [project]. Here is what I know and what my research has found:\n[paste your goal, context, research summary]\n\nPlease:\n1. Break the project into phases and key tasks\n2. Identify the 5 biggest risks with mitigations\n3. List assumptions that need to be verified\n4. Suggest a realistic timeline\n5. Identify who should be involved\n```\n\n**Create the project plan document:**\n```\nConvert this into a shareable project plan with:\nProject overview | Success criteria | Scope (in/out) |\nPhases and tasks table | Risk register | Open decisions\n```\n\n**Add one decision record:**\nFor the most important decision your plan reflects (e.g., which approach to take, which tool to use), write a decision record using the template from lesson 17-4."
+    },
+    {
+      "type": "text",
+      "content": "## Phase 3: Create a Key Document (20 minutes)\n\nChoose the document type most relevant to your project:\n\n**Option A — Business proposal or report** (use lesson 16-2 workflow)\n**Option B — Presentation** (use lesson 16-4 workflow with Gamma or Claude)\n**Option C — SOP or process document** (use lesson 16-7 workflow)\n**Option D — Data analysis writeup** (use lesson 16-3 if you have data)\n\nFor whichever you choose:\n1. Provide Claude with your research findings and project plan as context\n2. Generate a full draft\n3. Run the quality review prompt (from lesson 17-5)\n4. Fix at least 2 issues the review surfaces\n5. Write the executive summary last"
+    },
+    {
+      "type": "text",
+      "content": "## Phase 4: Communicate (10 minutes)\n\n**Write two stakeholder communications:**\n\n*For the decision-maker or approver:*\n```\nWrite a 150-word communication to [decision-maker role] about this project.\nThey need to: approve / be informed / provide input.\nFocus on: goal, key approach, timeline, what I need from them.\nTone: professional, concise.\n```\n\n*For the team or people doing the work:*\n```\nWrite a brief team communication announcing this project.\nCover: what we're doing, why, what's expected of them, timeline.\nTone: clear, direct, motivating.\n```\n\n**Anticipate the hardest question:**\n```\nWhat is the single most likely objection or concern [decision-maker] will raise?\nHow should I respond to it?\n```\nPrepare that answer before any meetings."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Run the Full Sprint",
+      "content": "This is the capstone workshop. Run all four phases with a real project.\n\n**Your deliverables (keep all of these):**\n- [ ] Research notes document (rough is fine)\n- [ ] Research synthesis (5 key findings)\n- [ ] Project plan document (phases, tasks, risks, timeline)\n- [ ] One decision record\n- [ ] Key document (proposal / report / SOP / presentation)\n- [ ] Two stakeholder communications\n- [ ] Prepared answer to the hardest objection\n\n**Estimated time: 60 minutes.** Break it into sessions if needed — the phases are designed to be independent.\n\n**After completing the sprint, reflect:**\n\n1. Which phase produced the most useful output relative to the time invested?\n2. What would you have done differently if you hadn't used AI?\n3. Where did AI improve the quality of your work? Where did it just speed it up?\n4. What would you want to learn next to use AI even more effectively in your work?\n\nWrite your answers in a brief reflection note. This captures the learning from the entire course for your specific context — not just in general."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 17 and the non-programmer track of this course.**\n\nYou've built a complete AI-augmented professional workflow covering:\n- **Part 15:** Research — finding, collecting, synthesising, and writing from information\n- **Part 16:** Documents — writing, analysis, presentations, emails, meetings, SOPs\n- **Part 17:** Projects — planning, problem-solving, documentation, quality review, stakeholder communication\n\nThese skills compound. Every week you use them, you build pattern recognition for when and how AI is most valuable in your specific role. The workflows you've built in this course are starting points — adapt them to your context, your tools, and your way of working."
+    }
+  ],
+  "nextLesson": null,
+  "prevLesson": "17-5"
+}

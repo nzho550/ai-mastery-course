@@ -1,0 +1,58 @@
+{
+  "id": "16-4",
+  "title": "AI-Powered Presentations",
+  "part": 16,
+  "estimatedMinutes": 25,
+  "tags": ["office", "beginner", "presentations", "powerpoint", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nCreating a presentation from scratch is time-consuming: research, outline, slide content, speaker notes, visual design. AI can handle most of this — especially the parts that feel like work before the real work (structuring the argument, filling slides, writing speaker notes). This lesson covers the full AI presentation workflow."
+    },
+    {
+      "type": "text",
+      "content": "## The Presentation Creation Workflow\n\nThe best AI-assisted presentations follow this sequence:\n\n1. **Define the objective** — What should the audience think, feel, or do after this presentation?\n2. **Build the narrative** — What is the story arc? (Problem → insight → solution → call to action)\n3. **Create the outline** — What are the 6–12 slides and what does each one say?\n4. **Fill the content** — Write the key message for each slide\n5. **Add speaker notes** — What will you say aloud on each slide?\n6. **Design** — Apply visual structure (or use a tool that does it automatically)\n\nAI is most useful in steps 2–5. Step 1 requires your strategic thinking. Step 6 is handled by PowerPoint Designer, Copilot, or Gamma."
+    },
+    {
+      "type": "text",
+      "content": "## Building the Narrative First\n\nThe biggest mistake in presentations: jumping straight to slides without knowing the story. Before you open PowerPoint, ask Claude:\n\n```\nI need to give a presentation to [audience] about [topic].\nThe purpose is [objective — what should they do or believe after?].\n\nDesign a narrative arc for this presentation:\n- What is the core problem or opportunity?\n- What is the key insight that reframes it?\n- What is the solution or recommendation?\n- What is the call to action?\n\nThen suggest 8–10 slide titles that follow this arc.\nFor each slide title, write one sentence: what is the single point this slide makes?\n```\n\nReview the narrative before doing anything else. If the story doesn't work, no amount of design fixes it."
+    },
+    {
+      "type": "text",
+      "content": "## Filling Slides with AI\n\nOnce you have the outline, fill each slide:\n\n```\nFor each slide below, write 3–4 bullet points (max 10 words each)\nthat capture the key points. Also write 2–3 sentences of speaker notes\n(what I would say aloud while showing this slide).\n\nSlide 1: [title + one-line description]\nSlide 2: [title + one-line description]\n[etc.]\n\nContext: [paste your research notes or any source material]\nAudience: [who they are and their level of knowledge]\n```\n\n**Key rules for slide bullets:**\n- Maximum 6 bullets per slide\n- Maximum 10 words per bullet\n- Each bullet is a standalone insight, not a sentence fragment\n- No bullet should begin with a verb (\"Implement\", \"Consider\", \"Drive\") — these feel hollow\n\nAsk AI to check your bullets: *\"Review these bullets. Flag any that are vague, generic, or over 10 words.\"*"
+    },
+    {
+      "type": "text",
+      "content": "## Tools That Build Slides Automatically\n\n**Gamma (gamma.app) — Best for creating polished slides from a prompt:**\n1. Go to gamma.app → Create with AI\n2. Describe your presentation: topic, audience, number of slides, tone\n3. Gamma generates a complete, visually designed presentation\n4. Edit slides, swap layouts, and adjust content\n5. Export to PowerPoint or PDF\n\nGamma is the fastest route from idea to designed presentation. Free tier includes unlimited AI generations.\n\n**PowerPoint Copilot (M365 Copilot):**\n- Open PowerPoint → New presentation → Copilot → \"Create a presentation about [topic]\"\n- Or: open an existing Word document → Copilot → \"Create presentation from this document\"\n- Copilot generates slides using your document structure as the outline\n\n**Beautiful.ai:**\nAutomatic slide design — paste content, Beautiful.ai formats it. Less AI content generation than Gamma, but strong design templates.\n\n**Canva AI:**\nCanva's \"Magic Design\" generates presentation templates. Good for visually polished outputs with custom branding."
+    },
+    {
+      "type": "text",
+      "content": "## Converting a Document to a Presentation\n\nIf you've already written a report (from lessons 15-6 or 16-2), converting it to a presentation takes minutes:\n\n**Method 1 — Claude outline, then PowerPoint:**\n```\nHere is a report I've written: [paste document]\nConvert it to a presentation outline:\n- Keep only the most important points from each section\n- Max 8 slides\n- Each slide: 1 headline (the key point), 3 bullets (supporting evidence)\n- Add speaker notes: 2 sentences of what I'd say on each slide\n```\nCopy the outline into PowerPoint and apply a template.\n\n**Method 2 — PowerPoint Copilot from Word:**\nSave your report as a Word document → Open PowerPoint → Copilot → \"Create presentation from file\" → Select the Word document.\nCopilot converts the document structure directly into slides."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Build a Presentation on a Real Topic",
+      "content": "Build a presentation you could actually deliver — on a topic relevant to your work, a project you're running, or a subject you've been researching.\n\n**Option A — Gamma (fastest, most visual):**\n\n1. Go to gamma.app → Sign in free\n2. Click **Create** → **Generate**\n3. Describe your presentation:\n*\"A 10-slide presentation for [audience] about [topic]. Purpose: [what they should think/do after]. Tone: [professional / conversational]\"*\n4. Review what Gamma generates\n5. Click any slide to edit the text\n6. Adjust the design theme if needed\n7. Export to PowerPoint or share the link\n\n**Option B — Claude outline + PowerPoint:**\n\n1. In Claude.ai, run the narrative arc prompt with your topic\n2. Then run the slide fill prompt\n3. Open PowerPoint, apply a professional template\n4. Create slides using Claude's outline\n5. Paste speaker notes into the Notes panel\n\n**After building, assess:**\n- Does the first slide immediately tell the audience why they should care?\n- Does each slide make exactly ONE point?\n- Could someone read the slides without your narration and still understand the argument?\n- Are the speaker notes detailed enough that you could deliver this presentation with minimal preparation?\n\nIf the answer to any of these is no, fix those slides specifically."
+    },
+    {
+      "type": "quiz",
+      "question": "You need to turn a 1,200-word report you wrote last week into an 8-slide presentation for a board meeting tomorrow. What is the fastest path to a professional result?",
+      "options": [
+        "Manually read the report and design slides from memory",
+        "Use PowerPoint Copilot's 'Create presentation from file' to convert the Word document directly, then review and refine the generated slides",
+        "Ask Claude to summarise the report and then manually type each slide",
+        "Build slides in Gamma by pasting the full report text into the prompt"
+      ],
+      "correct": 1,
+      "explanation": "PowerPoint Copilot's 'Create presentation from file' is specifically designed for this conversion — it reads the Word document structure, maps headings to slide titles, and converts the content into slides automatically. This is faster than manual summarisation (C) and more tightly integrated than pasting into Gamma (D). Gamma (D) is also valid but requires copying the text out of Word and into Gamma rather than the direct Word → PowerPoint workflow. Manual reading (A) is slowest."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-4.** You can now build a complete presentation using AI — from narrative arc to slide content to speaker notes — using Gamma, PowerPoint Copilot, or Claude's outline workflow."
+    }
+  ],
+  "nextLesson": "16-5",
+  "prevLesson": "16-3"
+}

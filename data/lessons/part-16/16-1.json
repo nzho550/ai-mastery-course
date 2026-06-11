@@ -1,0 +1,42 @@
+{
+  "id": "16-1",
+  "title": "The AI Writing Workflow",
+  "part": 16,
+  "estimatedMinutes": 20,
+  "tags": ["office", "beginner", "writing", "workflow"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nWriting well with AI is a skill distinct from both traditional writing and from the basic prompting covered in Part 3. This lesson gives you a complete workflow for producing professional written content — documents, reports, emails, proposals — using AI as a writing partner while keeping your voice, judgment, and accountability."
+    },
+    {
+      "type": "text",
+      "content": "## Why Most People Use AI Writing Wrong\n\nThe typical mistake: *\"Write me a report on X.\"* → AI produces a generic, slightly hollow document → person publishes it → readers notice it sounds like AI → trust erodes.\n\nThe better approach has three principles:\n\n**1. You provide the substance, AI provides the structure and polish.**\nAI is a brilliant editor and drafter. It is not a subject-matter expert on your specific situation. The facts, context, insights, and decisions in your document must come from you. AI shapes them into clear, professional prose.\n\n**2. Plan before writing.**\nProfessional writers plan. They know their argument before they start. AI can help you plan — often more usefully than it helps you draft. A 10-minute planning conversation with Claude produces a better document than immediately asking for a draft.\n\n**3. Write in cycles, not one shot.**\nThe best AI-assisted writing involves multiple passes: draft → review → refine → review → polish. Each pass improves something specific. Expecting perfection from the first draft wastes your reviewing time on a document that needs more work."
+    },
+    {
+      "type": "text",
+      "content": "## The Four-Phase AI Writing Workflow\n\n**Phase 1 — Clarify (before you write anything):**\n```\nI need to write a [document type] for [audience] about [topic].\nThe purpose is [what should they understand or do?].\nThe key message I want to communicate is [main point].\n\nAsk me up to 5 questions that would help you understand my\nsituation better before we start. Then suggest an outline.\n```\nLet AI ask you questions. Your answers surface the content that makes the document specific and credible.\n\n**Phase 2 — Outline (get agreement before drafting):**\nReview the outline AI suggests. Change any sections that don't match your thinking. Once the outline is right, drafting is fast.\n\n**Phase 3 — Draft (section by section or all at once):**\nFor short documents (under 500 words): draft all at once.\nFor longer documents: draft one section at a time — easier to review and refine.\n\n**Phase 4 — Refine (two passes):**\n- Pass 1: Substance — are the facts right? Is anything missing? Are the claims supported?\n- Pass 2: Style — does it sound right? Is the tone consistent? Does it sound like you?"
+    },
+    {
+      "type": "text",
+      "content": "## Matching Tone to Document Type\n\nTelling AI the tone you want produces dramatically better results than leaving it to guess:\n\n| Document Type | Tone to specify |\n|--------------|----------------|\n| Executive briefing | Concise, direct, no jargon, conclusion-first |\n| Academic or technical report | Formal, evidence-based, hedged where uncertain |\n| Business proposal | Persuasive, confident, benefit-focused |\n| Internal memo | Plain English, practical, action-oriented |\n| Client-facing report | Professional but accessible, relationship-aware |\n| Email to management | Respectful, concise, clear ask |\n| Newsletter or blog post | Conversational, engaging, accessible |\n\nAlways tell AI: audience, tone, and what action or understanding you want the reader to leave with."
+    },
+    {
+      "type": "text",
+      "content": "## Making It Sound Like You\n\nEven a well-prompted AI draft needs personalisation. The fastest way to find where it doesn't sound like you:\n\n1. Read it aloud — anywhere you stumble is where to edit\n2. Replace any sentence starting with \"It is important to note that...\" or \"In conclusion...\" — these are AI filler phrases\n3. Add at least one sentence in your own words that couldn't have come from anyone else's research\n4. Check the opening sentence — AI tends to open with throat-clearing; yours should immediately state the point\n\nYou don't need to rewrite everything. 10–15% rewriting to inject your specific voice is usually enough."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Plan Before You Write",
+      "content": "This workshop practices Phase 1 and Phase 2 — the planning stages that most people skip.\n\nChoose a document you genuinely need to write in the next week. It can be anything: a proposal, a report, an email pitch, a policy note, a cover letter, an internal update.\n\n**Step 1 — Start with the clarification prompt**\n\nIn Claude.ai:\n```\nI need to write a [document type] for [audience] about [topic].\nThe purpose is [what should they do or understand after reading?].\n\nBefore we start writing, ask me up to 5 questions that would help\nyou understand my situation and produce something genuinely useful.\n```\n\nAnswer Claude's questions honestly and in detail. This is not a test — the more context you give, the better the output.\n\n**Step 2 — Review the outline**\n\nOnce Claude has your answers, ask:\n```\nBased on my answers, suggest an outline for this document.\nFor each section, write one sentence explaining what it should accomplish.\n```\n\nRead the outline. Ask yourself:\n- Does this match how I would structure this?\n- Is anything missing?\n- Is anything there that I don't need?\n\nEdit the outline until it matches your thinking. Save it.\n\n**Step 3 — Stop here (for now)**\n\nYou've done the hardest part. A clear outline is 60% of the writing work done. Come back to this outline in lesson 16-2 (for reports and proposals) or use it to generate a draft in any lesson in Part 16.\n\nIn your notes: Did Claude's questions surface anything you hadn't thought to include?"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-1.** You have the four-phase AI writing workflow: Clarify → Outline → Draft → Refine. The most important insight: you provide the substance, AI provides the structure and polish. The next six lessons apply this to specific document types."
+    }
+  ],
+  "nextLesson": "16-2",
+  "prevLesson": "15-7"
+}

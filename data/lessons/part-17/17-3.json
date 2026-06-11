@@ -1,0 +1,59 @@
+{
+  "id": "17-3",
+  "title": "Research + Planning Combined",
+  "part": 17,
+  "estimatedMinutes": 22,
+  "tags": ["projects", "beginner", "research", "planning", "workflow", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nResearch and planning are most powerful when they're integrated: the best project plans are grounded in research, and research is most useful when it's structured around specific planning questions. This lesson covers how to combine the research skills from Part 15 with the planning skills from Part 17 into a single, efficient workflow."
+    },
+    {
+      "type": "text",
+      "content": "## When Research and Planning Overlap\n\nMost real projects require both:\n- **Before planning:** You need research to understand the landscape, constraints, and what others have done\n- **During planning:** Research fills specific gaps in your plan (legal requirements, costs, timelines, risks)\n- **After planning:** Research validates your assumptions and stress-tests your approach\n\nThe mistake is treating them as completely separate phases. In practice, they feed each other: research questions come from planning gaps; planning decisions open new research questions.\n\n**The integrated workflow:**\n1. Define the goal and key planning questions\n2. Research to answer those specific questions\n3. Plan with your research findings incorporated\n4. Identify new questions the plan raises\n5. Research to fill those gaps\n6. Finalise the plan"
+    },
+    {
+      "type": "text",
+      "content": "## Step 1 — Define Your Planning Questions\n\nBefore researching, identify exactly what your plan needs to know. Vague research produces vague plans.\n\n```\nI'm planning [project]. To plan it properly, I need to know:\n- [question 1]\n- [question 2]\n\nGiven this goal, what additional questions should I be able to answer\nbefore I can build a credible plan? What would I need to know about:\n- Regulations, legal requirements, or compliance?\n- Costs and resources?\n- Technical feasibility or constraints?\n- What similar organisations or people have done?\n- Common risks or failure modes?\n```\n\nThis gives you a research brief — a targeted list of questions rather than an open-ended topic."
+    },
+    {
+      "type": "text",
+      "content": "## Step 2 — Conduct Targeted Research\n\nWith your questions defined, use the research tools from Part 15:\n\n**For current, factual questions** (regulations, costs, market data):\nUse Perplexity AI — it searches current web sources and cites them:\n```\nSearch: [your specific question]\n```\nAsk follow-up questions to dig deeper.\n\n**For conceptual understanding and synthesis:**\nUse Claude — explain the landscape, compare approaches, analyse tradeoffs:\n```\nExplain the main approaches to [topic] and the tradeoffs between them.\nI'm specifically interested in [your context].\n```\n\n**For documents and existing reports:**\nUpload PDFs or paste reports to Claude.ai for analysis (covered in lesson 15-4).\n\n**Capture everything in one place:**\nAs you research, maintain a running document:\n```\nResearch Findings for [Project Name]\n\nQuestion 1: [question]\nAnswer: [findings + source]\n\nQuestion 2: [question]\nAnswer: [findings + source]\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Step 3 — Integrate Research into Your Plan\n\nOnce you have research findings, feed them back into your planning prompt:\n\n```\nI'm now planning [project]. Here is the research I've done:\n[paste research findings document]\n\nUsing this research:\n1. Update the project phases based on what the research reveals\n   (new steps, things to avoid, regulatory requirements to meet)\n2. Update the risk register — which risks does the research confirm?\n   Which new risks does it reveal?\n3. Update the timeline if the research suggests any tasks are more complex\n   or time-consuming than assumed\n4. Update the assumptions list — which assumptions does the research\n   confirm or challenge?\n```\n\n**The feedback loop:**\nAfter updating the plan, ask:\n```\nLooking at this updated plan, what questions does it raise that\nwe still need to answer before starting work?\n```\nThese become your next round of research questions."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The 80/20 research rule:** Research diminishing returns are real. At some point, additional research stops changing your plan. When the same answers keep appearing from different sources and your planning questions are all answered, stop researching and start planning. The goal is a good plan, not exhaustive research."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Combined Research & Planning Sprint",
+      "content": "This workshop runs a full research-into-planning cycle on a real project or decision.\n\n**Choose your topic:**\nPick something you're planning or deciding that requires both research and planning. Examples:\n- Implementing a new tool or process at work\n- Evaluating a vendor or service\n- Planning a team initiative or change\n- Writing a business case for something you want approved\n\n**The sprint (30 minutes total):**\n\n**Minutes 1–5: Define planning questions**\nRun the \"planning questions\" prompt with your project. Get Claude to generate a list of questions your plan needs to answer.\n\n**Minutes 5–20: Research**\nFor the top 3–4 questions, search Perplexity or ask Claude. Take brief notes in a running document.\n\n**Minutes 20–28: Build the plan**\nRun the project kickoff prompt (from lesson 17-1) and include your research findings. Ask Claude to incorporate what the research revealed.\n\n**Minutes 28–30: Identify remaining gaps**\nAsk: *\"What questions does this plan raise that we haven't answered yet?\"*\nNote these as follow-up research items — but don't chase them now. The plan is good enough to share.\n\n**Output:** A research-grounded project plan you could share with a manager or stakeholder today."
+    },
+    {
+      "type": "quiz",
+      "question": "You're planning a new workplace initiative and you've been doing research for two days. You have a lot of information but your plan is still vague. What should you do?",
+      "options": [
+        "Keep researching until you have all the information you need",
+        "Stop and ask: what specific planning questions remain unanswered? Research only those, then build the plan",
+        "Build the plan first and do research after to validate it",
+        "Summarise all your research into a single document before planning"
+      ],
+      "correct": 1,
+      "explanation": "Two days of research with a still-vague plan is a sign of undirected research — collecting information without being specific about what the plan needs. The fix is to switch from open-ended research to question-driven research: identify exactly what your plan still needs to know, research only that, and then build. Continuing open-endedly (A) produces more information but not more plan clarity. Building first (C) can work but risks building on a false premise if key constraints aren't known. Summarising first (D) delays planning further without resolving the vagueness."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 17-3.** You can now run an integrated research-into-planning workflow: define planning questions → conduct targeted research → build the plan with research incorporated → identify remaining gaps. This produces plans that are grounded in reality rather than assumptions."
+    }
+  ],
+  "nextLesson": "17-4",
+  "prevLesson": "17-2"
+}

@@ -1,0 +1,59 @@
+{
+  "id": "15-6",
+  "title": "Writing Research Reports with AI",
+  "part": 15,
+  "estimatedMinutes": 25,
+  "tags": ["research", "beginner", "writing", "reports", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou've researched a topic, organized your notes, and have a structured outline. Now you need to turn that into a polished written output — a report, briefing note, summary, or recommendation. This lesson covers the full AI-assisted writing process for research outputs: from outline to first draft to finished document."
+    },
+    {
+      "type": "text",
+      "content": "## The Critical Rule: Write From YOUR Notes\n\nThe most common mistake when using AI to write research reports is asking AI to write the report without providing your research. The result is a generic output based on the AI's general knowledge — not your specific research, your specific sources, or your specific context.\n\n**Wrong approach:**\n```\nWrite me a 1,000-word report on climate policy in Australia.\n```\nThis gives you a generic report AI could write for anyone. It may be factually wrong, and it contains none of your specific research.\n\n**Right approach:**\n```\nHere are my research notes on climate policy in Australia: [paste all your notes].\nHere is the outline I've developed: [paste outline].\nWrite a 1,000-word report following this outline, using only the information\nin my notes. Where my notes are thin, mark [NEEDS MORE RESEARCH] in brackets\nrather than filling in with general knowledge.\n```\n\nThis produces a report that is:\n- Based on your actual research\n- Consistent with your sources\n- Honest about gaps (which you can then fill)\n- Closer to your voice and perspective"
+    },
+    {
+      "type": "text",
+      "content": "## Standard Report Structures\n\nFor most professional research outputs, AI works best when you give it a structure to follow. Common structures:\n\n**Executive Briefing (1–2 pages):**\n- Background (what prompted this research)\n- Key findings (3–5 bullets)\n- Implications (what this means)\n- Recommendations (what to do)\n- Sources\n\n**Full Research Report:**\n- Executive summary (standalone)\n- Introduction and scope\n- Method (how you researched)\n- Findings by theme\n- Analysis and interpretation\n- Conclusions\n- Recommendations\n- Appendices (sources, data)\n\n**Comparison Report:**\n- Overview of the comparison\n- Criteria for comparison\n- Analysis per option\n- Summary comparison table\n- Recommendation\n\n**Literature Review:**\n- Introduction and research question\n- Scope and sources reviewed\n- Themes across the literature\n- Key debates and positions\n- Gaps and unanswered questions\n- Conclusion\n\nTell the AI which structure to use, or paste the structure directly into the prompt."
+    },
+    {
+      "type": "text",
+      "content": "## The Draft → Refine → Polish Cycle\n\n**Step 1 — Generate the first draft:**\nProvide your notes + outline + target audience + target length:\n```\nAudience: [who will read this — e.g., non-technical executives, academic peers, general public]\nLength: [e.g., 500 words, 1,500 words]\nTone: [e.g., formal and analytical, plain English, persuasive]\nStructure: [paste your outline]\nNotes: [paste your research notes]\n\nWrite the first draft of this report.\n```\n\n**Step 2 — Section-by-section refinement:**\nDon't refine the whole document at once. Work section by section:\n```\nHere is the Introduction section you wrote: [paste]\nProblems:\n- Second paragraph is too vague — add a specific example from my notes\n- Third sentence is jargon — rewrite in plain English\n- Add a sentence explaining why this matters to [audience]\n```\n\n**Step 3 — Whole-document checks:**\nOnce sections are refined:\n```\nRead this full draft. Check for:\n1. Consistency — do section conclusions support each other?\n2. Tone — is it consistent throughout?\n3. Gaps — are there claims without supporting evidence?\n4. Length — which sections could be cut by 20% without losing meaning?\n```\n\n**Step 4 — Final polish:**\nFor professional documents:\n```\nPerform a final edit on this document:\n- Fix any grammatical errors\n- Ensure active voice throughout\n- Ensure headings are parallel in structure\n- Ensure the executive summary accurately reflects the body\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Make it sound like you.** AI-generated prose has recognizable patterns — overly smooth, slightly generic, fond of the word 'delve'. After AI produces a draft, read it aloud. Anywhere it doesn't sound like how you'd actually say it, rewrite that sentence yourself. Two or three such rewrites per section is usually enough to make it feel authentic."
+    },
+    {
+      "type": "text",
+      "content": "## Formatting for Different Outputs\n\n**Word document:** Copy your finalized text into Word. Use Copilot (if available) to apply consistent formatting, or format manually.\n\n**PDF report:** Most professional reports are formatted in Word first, then exported to PDF. AI can't directly produce a formatted PDF, but it can produce well-structured Markdown that you format in Word.\n\n**Google Docs:** Paste your AI draft directly. Use Gemini AI (if available) to refine in-context.\n\n**Notion page:** Paste into Notion and use Notion AI to polish individual sections.\n\n**Presentation:** Use your report as source material for lesson 16-4 (AI-Powered Presentations) to convert it into slides."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Write a Real Research Brief",
+      "content": "Use the research and outline you developed in lessons 15-2 through 15-5, or start fresh with a topic relevant to your work.\n\n**Step 1 — Prepare your inputs (5 minutes)**\n\nGather:\n- Your research notes (from your `research-[topic].md` file or wherever you saved them)\n- Your outline (from the synthesis exercise in 15-5, or create one now: 4–6 section headings)\n- Your target: who will read this? How long should it be? What should they do after reading it?\n\n**Step 2 — Generate the draft (5 minutes)**\n\nIn Claude.ai, send this prompt:\n```\nI need to write a research brief on [topic].\n\nAudience: [describe your reader]\nLength: 600–800 words\nTone: [professional / plain English / formal]\nPurpose: [what should the reader understand or do after reading?]\n\nOutline:\n[paste your 4-6 section headings]\n\nMy research notes:\n[paste your notes — messy is fine]\n\nWrite the full draft. Use [NEEDS MORE RESEARCH] wherever my notes\ndon't have enough detail. Do not add general knowledge not in my notes.\n```\n\n**Step 3 — Refine one section (5 minutes)**\n\nRead the draft. Pick the weakest section and ask Claude to improve it specifically:\n```\nThe [section name] section isn't working because [reason].\nRewrite it to [specific improvement].\nKeep everything else the same.\n```\n\n**Step 4 — Final check (5 minutes)**\n\nAsk Claude:\n```\nDoes the executive summary accurately reflect the body?\nIs the tone consistent throughout?\nWhat is the single most important thing a reader would take away?\nIs that clearly stated?\n```\n\nMake any final edits. You now have a genuine, research-grounded brief you could send to a colleague or manager today."
+    },
+    {
+      "type": "quiz",
+      "question": "You've done thorough research on a topic and want AI to write the report. What should you always include in your writing prompt to get the best result?",
+      "options": [
+        "Just the topic name — AI knows enough to write a good report",
+        "Your actual research notes, a target outline, the intended audience, and the desired length",
+        "The report title and a list of sections — AI will fill in the content",
+        "Several examples of good reports you've read on similar topics"
+      ],
+      "correct": 1,
+      "explanation": "AI writes the best research reports when it has your actual research notes (so the output is grounded in your specific sources), a target outline (so it follows your structure rather than guessing), the intended audience (so it calibrates vocabulary and depth), and desired length (so it doesn't over- or under-write). Providing just the topic (A) produces a generic output with no connection to your research. Section titles alone (C) without content produces a similarly generic result. Example reports (D) help with style but not with grounding the content in your research."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 15-6.** You can now write research-grounded reports using AI — from notes and outline to polished draft — using the Draft → Refine → Polish cycle. The output sounds like your research, not generic AI prose."
+    }
+  ],
+  "nextLesson": "15-7",
+  "prevLesson": "15-5"
+}

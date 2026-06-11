@@ -1,0 +1,31 @@
+{
+  "id": "15-7",
+  "title": "Research Capstone — A Complete Research Sprint",
+  "part": 15,
+  "estimatedMinutes": 60,
+  "tags": ["research", "intermediate", "capstone", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Do\n\nThis capstone runs you through the complete research workflow — from a question you don't yet know the answer to, to a polished written output — in a single 60-minute session. Every technique from lessons 15-1 through 15-6 is used. By the end you'll have produced a real deliverable on a topic that matters to you."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Choose a real topic.** This capstone is most valuable when the research question is something you actually care about — a decision you're facing, a topic you need to understand for work, a question relevant to your industry. If you pick something artificial, you won't be able to evaluate the quality of the output."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "60-Minute Research Sprint",
+      "content": "**Before you start:** Choose your research question. It should be:\n- Specific enough to answer in 60 minutes\n- Something you currently don't know well\n- Relevant to a real decision or output you need\n\nExamples:\n- *\"What are the main AI regulation requirements that will affect my industry in the next 2 years?\"*\n- *\"What are the leading approaches to [topic in my field] and which has the best evidence?\"*\n- *\"What is the competitive landscape for [product/service category] in Australia?\"*\n- *\"How are organisations in [industry] currently using AI, and what results are they seeing?\"*\n\n---\n\n**STAGE 1 — MAP (10 minutes)**\n\nOpen Claude.ai. Tell it your research question and ask:\n```\nI need to research: [your question].\nI have 60 minutes.\n\n1. What are the 5 most important things I need to understand about this topic?\n2. What are the main debates, perspectives, or schools of thought?\n3. What are the best sources I should look at (types of sources, not specific URLs)?\n4. What questions should I try to answer?\n```\n\nSave Claude's response. This is your research map.\n\n---\n\n**STAGE 2 — COLLECT (15 minutes)**\n\nUsing Claude's suggested questions, run at least 3 searches in Perplexity:\n- The broad overview question\n- One specific sub-question\n- One question about recent developments or data\n\nFor each search:\n1. Copy the Perplexity summary\n2. Verify 1–2 cited sources by clicking through\n3. Add to your `research-[topic].md` notes file\n\nIf there are key documents you can access (reports, PDFs, articles), upload them to Claude.ai and ask for a 5-bullet summary.\n\n---\n\n**STAGE 3 — SYNTHESIZE (10 minutes)**\n\nPaste all your collected notes into Claude and run the Brain Dump Organiser:\n```\nHere are my research notes: [paste everything]\n\n1. Group into 4-5 clear themes\n2. Under each theme, list the most important points\n3. Flag any contradictions between sources\n4. List the 3 most important questions I still haven't answered\n5. Create an outline for a 600-word briefing note based on this research\n```\n\nReview the outline. Adjust any sections that don't match what you found.\n\n---\n\n**STAGE 4 — WRITE (20 minutes)**\n\nSend Claude the writing prompt:\n```\nAudience: [who will read this]\nLength: 600 words\nTone: [professional / plain English]\nPurpose: [what should they understand or do after reading?]\n\nOutline: [paste from Stage 3]\nNotes: [paste your research notes]\n\nWrite the full briefing note.\nUse [NEEDS MORE RESEARCH] wherever my notes are thin.\nDo not add general knowledge not in my notes.\n```\n\nRead the draft. Refine one or two sections that aren't right.\n\n---\n\n**STAGE 5 — REVIEW (5 minutes)**\n\nFinal quality check:\n```\nRead this briefing. Answer:\n1. Is every key claim supported by evidence from my notes?\n2. Is there anything a sceptical reader would immediately question?\n3. What is the single most important sentence in this document?\n4. What should I verify before sending this to anyone?\n```\n\nAddress any issues it raises. Save the final version.\n\n---\n\n**What you now have:**\n- A research map for your topic\n- A set of notes with verified sources\n- A structured synthesis\n- A 600-word polished briefing note\n\n**Reflect:** How long would this have taken without AI? What would have been different about the output? What did you have to contribute that AI couldn't do?"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 15 — AI for Research & Knowledge Work.** You can now run a complete research sprint from question to polished output using AI at every stage: mapping, web research, document analysis, synthesis, and writing. Part 16 builds on this to cover the full range of office documents and communications."
+    }
+  ],
+  "nextLesson": "16-1",
+  "prevLesson": "15-6"
+}

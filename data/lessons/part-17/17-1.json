@@ -1,0 +1,54 @@
+{
+  "id": "17-1",
+  "title": "Planning Any Project with AI",
+  "part": 17,
+  "estimatedMinutes": 20,
+  "tags": ["projects", "beginner", "planning", "workflow", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nAI is one of the most effective project planning tools available — not because it knows your project, but because it asks the right questions, surfaces assumptions, and converts vague goals into concrete plans faster than any planning template. This lesson covers how to use AI to plan projects of any size: from a small departmental initiative to a complex multi-team effort."
+    },
+    {
+      "type": "text",
+      "content": "## Why Projects Fail (And How AI Helps)\n\nMost project failures stem from problems that exist at the start:\n- **Unclear scope** — nobody agrees on what 'done' means\n- **Hidden dependencies** — steps no one noticed relied on other steps\n- **Missing stakeholders** — someone key wasn't consulted early\n- **Optimistic timelines** — best-case estimates, no buffer for reality\n- **Unspoken assumptions** — everyone assumed someone else was handling it\n\nAI can surface all of these before work starts — not because it knows your project, but because it can ask every question a seasoned project manager would ask."
+    },
+    {
+      "type": "text",
+      "content": "## The Project Kickoff Prompt\n\nThis is the most useful planning prompt you'll use. Fill it in for your project and let Claude help you structure it:\n\n```\nI'm planning a project. Help me think through it thoroughly.\n\nProject name: [name]\nWhat we're trying to achieve: [goal — what does success look like?]\nWhy this matters: [business or personal value]\nDeadline (if any): [date or timeframe]\nTeam / people involved: [list who's involved]\nBudget / resources available: [if relevant]\nMain constraints: [what can't change?]\n\nPlease:\n1. Clarify the goal — restate it as a clear outcome sentence\n2. Break the project into 4–8 phases or major workstreams\n3. For each phase, list the key tasks\n4. Identify the 5 biggest risks or things that could go wrong\n5. List any assumptions we're making that should be verified\n6. Suggest who should be involved or consulted that might not be on the list above\n7. Suggest a realistic milestone timeline\n```\n\nThis one prompt typically surfaces at least two things you hadn't considered."
+    },
+    {
+      "type": "text",
+      "content": "## Creating a Project Plan Document\n\nOnce you have Claude's output, convert it into a shareable project plan:\n\n```\nBased on the analysis above, create a project plan document with:\n\n1. Project overview (name, owner, goal, deadline, budget if relevant)\n2. Success criteria — how will we know the project succeeded?\n3. Scope — what is IN scope and what is OUT of scope\n4. Phases and key tasks (table format: Phase | Tasks | Owner | Target date)\n5. Dependencies — what must happen before what\n6. Risk register (table: Risk | Likelihood | Impact | Mitigation)\n7. Stakeholders and communication plan\n8. Open decisions / things still to be confirmed\n```\n\n**The scope section is the most important.** The \"out of scope\" list is what prevents scope creep. AI will often suggest things to explicitly exclude that you hadn't thought to write down."
+    },
+    {
+      "type": "text",
+      "content": "## Estimating Time Realistically\n\nOne of AI's most useful project planning contributions is realistic time estimation — because it has no emotional investment in telling you what you want to hear.\n\n```\nHere are the tasks for our project: [list]\nI initially estimated this would take [your estimate].\n\nFor each task:\n- Suggest a realistic time estimate based on typical project experience\n- Flag any tasks that are often underestimated and why\n- Suggest where buffer time should be added\n- Give me a realistic overall project duration\n```\n\nAsk it to assume things will go slightly wrong: *\"Assume 20% of tasks take longer than expected. What's the realistic completion date?\"*\n\nPlanning for some slack isn't pessimism — it's the difference between a plan that gets delivered and one that gets revised three times."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Plan a Real Project",
+      "content": "Use a real project you're currently planning or about to start — even a small one.\n\n**Step 1 — Run the kickoff prompt (10 minutes)**\n\nFill in the project kickoff prompt with your actual project details. Don't simplify or be vague — the more specific you are, the more useful the output.\n\nAfter Claude responds, read the risks and assumptions section carefully. For each item:\n- Is this a real risk you'd overlooked?\n- Is this assumption actually confirmed, or just assumed?\n\n**Step 2 — Identify the most important risk (5 minutes)**\n\nPick the single risk that would most derail the project. Ask:\n```\nThe biggest risk in this project is [risk]. Help me think through:\n- What specifically causes this risk?\n- What can be done before the project starts to reduce it?\n- What early warning signs should we watch for during the project?\n- What is the contingency plan if it happens anyway?\n```\n\n**Step 3 — Create the project plan document**\n\nRun the project plan document prompt. Save the output to Notion, Word, or wherever your team tracks projects.\n\n**Step 4 — Share with one other person**\n\nShare the draft plan with the person most likely to spot gaps. Ask them: *\"What's missing? What would you add?\"*\n\nThe combination of AI-assisted planning + human review catches most of the gaps before work starts."
+    },
+    {
+      "type": "quiz",
+      "question": "You've just been assigned to plan a project that needs to launch in 3 months. You're not sure exactly what's involved. What's the best first step using AI?",
+      "options": [
+        "Create a Gantt chart and assign tasks to team members immediately",
+        "Run the project kickoff prompt with everything you currently know — even if it's incomplete — to surface what you don't know yet",
+        "Wait until you have all the information before using AI to plan",
+        "Ask AI to generate a project plan for you without providing any context"
+      ],
+      "correct": 1,
+      "explanation": "Running the kickoff prompt with what you currently know is valuable precisely because you're not sure what's involved. AI will surface the assumptions, risks, and missing information — turning 'I'm not sure what's involved' into a list of concrete things to find out. Creating a Gantt chart (A) before you understand scope is premature. Waiting for complete information (C) is a trap — in most projects, you never have complete information at the start. Providing no context (D) results in generic output."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 17-1.** You can now use AI to structure any project from scratch — turning a vague goal into a phased plan with risks identified, assumptions surfaced, and a realistic timeline before a single task begins."
+    }
+  ],
+  "nextLesson": "17-2",
+  "prevLesson": "16-7"
+}

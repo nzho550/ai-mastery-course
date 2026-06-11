@@ -1,0 +1,54 @@
+{
+  "id": "17-4",
+  "title": "Documentation & Decision Capture as You Work",
+  "part": 17,
+  "estimatedMinutes": 18,
+  "tags": ["projects", "beginner", "documentation", "decisions", "workflow", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThe biggest documentation problem in projects isn't the final write-up — it's the decisions, context, and rationale that get lost in real time. Why was this approach chosen? What alternatives were considered? What changed and why? This lesson covers how to use AI to capture documentation and decisions as you work, so you never lose the thinking behind the work."
+    },
+    {
+      "type": "text",
+      "content": "## Why Decisions Get Lost\n\nAt the start of a project, everyone involved knows the context. By the time someone new joins — or by the time you need to explain a decision six months later — the reasoning has usually disappeared:\n- The person who made the decision has moved on\n- The Slack thread is buried or deleted\n- The meeting notes say *\"agreed to proceed with Option A\"* but not why\n- Everyone remembers a different version of the decision\n\nThe cost: relitigating settled decisions, re-explaining context, repeating mistakes, and new team members operating without the knowledge that experienced members have accumulated.\n\n**The fix:** Capture decisions when they're made, not retrospectively."
+    },
+    {
+      "type": "text",
+      "content": "## Decision Records — The Most Useful Document You're Not Writing\n\nA decision record is a short document that captures a single significant decision: what was decided, why, what alternatives were considered, and who was involved.\n\n**Decision record prompt:**\n```\nHelp me write a decision record for the following decision:\n\nDecision made: [what was decided]\nDate: [date]\nDecision maker(s): [who decided]\nContext: [what situation prompted this decision]\nOptions considered:\n- Option A: [description] — Pros: [list] / Cons: [list]\n- Option B: [description] — Pros: [list] / Cons: [list]\nChosen option: [which one and why]\nConstraints that influenced the decision: [budget, time, skills, existing systems]\nRisks of this decision: [what could go wrong]\nHow to revisit: [what would change your mind? When should this be reconsidered?]\n\nWrite this as a structured, 300-word decision record I can save for future reference.\n```\n\nSave decision records in your project's Notion space, SharePoint, or shared document folder. Link them from the project plan."
+    },
+    {
+      "type": "text",
+      "content": "## Capturing Project Context in Real Time\n\nBeyond formal decisions, there's the ongoing context of a project — status, blockers, pivots, what worked and what didn't.\n\n**Weekly project log — 5 minutes every Friday:**\n```\nCreate a brief project log entry for this week.\n\nProject: [name]\nWeek of: [date]\n\nWhat was accomplished: [list]\nWhat was blocked or delayed — and why: [list]\nDecisions made this week: [list]\nWhat changed from the original plan: [describe]\nKey insights or lessons: [anything worth remembering]\nPriorities for next week: [list]\n\nFormat this as a 200-word project log entry.\n```\n\nFive minutes a week for 10 weeks is a complete project journal — far more valuable than a retrospective write-up after everything has faded from memory.\n\n**Capturing informal decisions from Slack or email:**\n```\nHere is a Slack thread / email chain where we made a decision: [paste]\nExtract: what was decided, why, and what alternatives were discussed.\nFormat it as a one-paragraph decision summary.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## AI-Assisted Project Retrospectives\n\nAt the end of a project or milestone, a retrospective captures what the team learned. AI can structure this from your rough notes:\n\n**Project retrospective prompt:**\n```\nHelp me structure a retrospective for [project].\nHere are my rough notes and observations: [paste notes]\n\nCreate a structured retrospective covering:\n1. What went well — and why (so we can repeat it)\n2. What went poorly — root causes, not blame\n3. What we would do differently next time\n4. Specific recommendations for future projects\n5. Key metrics (if available): timeline vs. actual, budget vs. actual, quality issues\n```\n\nDistribute the retrospective to the team for additions before finalising — AI gives you a structure, the team fills it with accuracy."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Capture a Decision You've Recently Made",
+      "content": "This workshop builds the habit of decision capture by practising on a recent decision.\n\n**Step 1 — Choose a decision (2 minutes)**\n\nThink of a significant decision you've made in the last month — work or personal. It should be one where:\n- Multiple options were considered (even informally)\n- You might need to explain your reasoning later\n- Someone else might question or revisit it\n\n**Step 2 — Write the decision record (10 minutes)**\n\nUse the decision record prompt. Fill in what you remember. If you can't recall all the alternatives, note what you do remember — partial records are better than none.\n\nAfter Claude formats it, read it and ask:\n- *Is this accurate?*\n- *Is the reasoning clear enough that someone unfamiliar with the project would understand why this decision was made?*\n- *Is there a risk I didn't note?*\n\n**Step 3 — Set up a decision log (5 minutes)**\n\nCreate a simple location for future decision records:\n- A Notion page called \"Decision Log\"\n- A Word doc in your project folder\n- A note in your project management tool\n\nAdd today's decision record as the first entry. Commit to adding one whenever a significant project decision is made.\n\n**The goal:** In six months, when someone asks \"why did we do it this way?\", you have an answer ready — and it's the accurate one, not a reconstructed one."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague joins a project that started 3 months ago. They keep asking questions about decisions that were made before they joined, and the project is slowing down as people explain context repeatedly. What practice would have prevented this?",
+      "options": [
+        "Better onboarding for new team members",
+        "Decision records created at the time each significant decision was made — now available for the new colleague to read without interrupting the team",
+        "A longer project kickoff meeting at the start",
+        "Assigning one person to be the project memory keeper"
+      ],
+      "correct": 1,
+      "explanation": "Decision records created at the time of each decision are exactly what the new colleague needs: structured documents that explain what was decided, why, and what alternatives were considered. This lets them get context independently without interrupting existing team members repeatedly. Better onboarding (A) helps but doesn't substitute for the actual documentation. A longer kickoff (C) only captures initial decisions, not the many decisions made during the project. A single memory keeper (D) creates a bottleneck and single point of failure."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 17-4.** You now have a system for capturing decisions and project context as work happens — decision records, weekly project logs, and retrospective frameworks. The value compounds: documentation written now is usable forever; documentation written retrospectively is rarely written at all."
+    }
+  ],
+  "nextLesson": "17-5",
+  "prevLesson": "17-3"
+}

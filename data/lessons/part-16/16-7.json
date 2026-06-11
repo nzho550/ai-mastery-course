@@ -1,0 +1,55 @@
+{
+  "id": "16-7",
+  "title": "Creating Process Documentation & SOPs",
+  "part": 16,
+  "estimatedMinutes": 20,
+  "tags": ["office", "beginner", "documentation", "sops", "process", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nProcess documentation — standard operating procedures (SOPs), how-to guides, onboarding documents, and procedure manuals — is one of the most high-value things a team can create and one of the most consistently neglected. The reason: it takes time and writing skill that people don't feel they have. AI removes both obstacles."
+    },
+    {
+      "type": "text",
+      "content": "## Why Process Documentation Gets Ignored\n\nMost teams have processes that exist only in individuals' heads. When those people are unavailable, sick, or leave, the process breaks. Documentation solves this — but people avoid writing it because:\n\n- *\"I don't have time.\"* — A Claude-assisted SOP takes 15–20 minutes, not hours\n- *\"I don't know how to structure it.\"* — AI provides a professional structure instantly\n- *\"My notes aren't polished enough.\"* — You don't need polished notes; you need rough steps\n\nThe most effective approach: **talk through the process, then let AI write it**."
+    },
+    {
+      "type": "text",
+      "content": "## The Brain Dump Method — Fastest SOP Creation\n\nYou don't need to write a perfect document. You need to describe what you do in rough steps, then let AI convert it.\n\n**Step 1 — Brain dump:**\n```\nI need to document a process for [process name].\nHere are my rough notes — this is not polished:\n\n[Paste or type your rough steps, even messy bullet points]\n\nConvert this into a proper SOP with:\n- Title\n- Purpose (one sentence: what this process achieves)\n- When to use it (what triggers this process)\n- What you need before starting (tools, access, information)\n- Step-by-step procedure (numbered, with action verbs)\n- What to do if something goes wrong\n- Related processes or documents\n```\n\n**Step 2 — Review:**\nRead through the output. Ask: *\"Is there any step a new person would get stuck on?\"*\nFor any step that's unclear:\n```\nStep [X] won't be clear to someone doing this for the first time.\nAdd more detail: [explain what's missing]\n```\n\n**Step 3 — Test:**\nHave someone unfamiliar with the process follow your SOP. Every point they get confused is a gap to fill."
+    },
+    {
+      "type": "text",
+      "content": "## Creating Different Types of Process Documents\n\n**Onboarding checklist:**\n```\nCreate an onboarding checklist for a new [role] joining [team/org].\nThey need to learn: [list of systems, processes, people]\nIn their first week they should be able to: [outcomes]\nFormat: checklist with tick boxes, grouped by day/week\n```\n\n**Decision flowchart in text:**\n```\nDocument our decision process for [situation].\nThe decision points are:\n- If [condition A] → do [X]\n- If [condition B] → do [Y]\n- If [condition C] → escalate to [person]\n\nConvert this into a clearly formatted decision flowchart (text-based,\nusing indentation and arrows).\n```\n\n**Troubleshooting guide:**\n```\nCreate a troubleshooting guide for [system/process].\nThe most common problems are:\n1. [Problem]: [what causes it] → [how to fix it]\n2. [Problem]: [what causes it] → [how to fix it]\n\nFormat it as a troubleshooting table: Problem | Likely Cause | Solution\n```\n\n**Handover document:**\n```\nI'm handing over [project/role] to [person].\nKey information they need: [list]\nCurrent status: [where things stand]\nOpen items: [what's in progress]\nPending decisions: [what hasn't been decided yet]\nWho to contact for what: [key contacts]\n\nCreate a comprehensive handover document I can share with them.\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Record, then transcribe.** If you find it easier to talk than type: record yourself explaining the process (voice memo on your phone, or Otter.ai). Then paste the transcript into Claude and ask it to convert your spoken explanation into a structured SOP. This is often the fastest method."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Document a Process You Own",
+      "content": "This workshop produces a real SOP for a process you own — something that will save your team time and protect against knowledge loss.\n\n**Step 1 — Choose your process (2 minutes)**\n\nIdentify a process you do regularly that isn't written down anywhere. Good candidates:\n- Something you had to teach a colleague recently\n- Something that breaks when you're away\n- Something you had to figure out the first time and don't want others to repeat\n- Something that has several steps people regularly skip or get wrong\n\n**Step 2 — Rough notes (5 minutes)**\n\nDon't write it properly. Just bullet point the steps from memory:\n- What triggers this process?\n- What do you need before you start?\n- What are the steps, in order?\n- What are the common mistakes?\n- What does done look like?\n\n**Step 3 — Generate the SOP (5 minutes)**\n\nPaste your rough notes into Claude using the brain dump prompt:\n```\nConvert these rough notes into a professional SOP that a new person\ncould follow without help. Use: Title, Purpose, Trigger, Prerequisites,\nStep-by-step procedure (numbered), Common problems and how to fix them.\n\n[paste your notes]\n```\n\n**Step 4 — Review and save**\n\nRead through the output. Identify any step that would confuse a first-timer and ask Claude to expand it. Then save the SOP somewhere your team can find it — a shared folder, a Notion page, or a Teams wiki.\n\n**Bonus:** Use the Notion MCP (lesson 8-19) to create the SOP directly in Notion from Claude without copy-pasting."
+    },
+    {
+      "type": "quiz",
+      "question": "A long-serving team member is leaving in two weeks. They're the only person who knows how 3 critical processes work. What is the fastest way to capture that knowledge before they go?",
+      "options": [
+        "Ask them to write detailed SOPs during their notice period",
+        "Shadow them for two weeks and take notes manually",
+        "Have them talk through each process in 15 minutes while you record it, then use Claude to convert the transcript into structured SOPs — review together before they leave",
+        "Accept the knowledge loss and rebuild the process after they've gone"
+      ],
+      "correct": 2,
+      "explanation": "Recording a spoken explanation and converting it to a structured SOP is the fastest path because it captures the expert's knowledge in their natural form (speaking) rather than demanding writing — which is slow and often avoided. The SOP can then be reviewed together to fill gaps before they leave. Asking them to write SOPs (A) is the traditional approach but competes with handover and other exit tasks. Shadowing (B) is time-consuming and requires your availability to follow them. Accepting knowledge loss (D) creates future risk and cost."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 16.** You now have a complete AI-powered document workflow: writing, reports, proposals, data analysis, presentations, emails, meeting management, and process documentation. These tools work for any office role — no coding or technical background required."
+    }
+  ],
+  "nextLesson": "17-1",
+  "prevLesson": "16-6"
+}

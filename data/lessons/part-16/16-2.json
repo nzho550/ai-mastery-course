@@ -1,0 +1,59 @@
+{
+  "id": "16-2",
+  "title": "Reports, Proposals & Business Documents",
+  "part": 16,
+  "estimatedMinutes": 25,
+  "tags": ["office", "beginner", "reports", "proposals", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nReports and proposals are the most common high-stakes written documents in professional life. This lesson covers how to use AI to produce well-structured, persuasive business documents — from a one-page briefing note to a full proposal — faster and to a higher standard than writing from scratch."
+    },
+    {
+      "type": "text",
+      "content": "## The Executive Summary — Write This Last, Present It First\n\nEvery professional report should begin with an executive summary: a 150–250 word standalone section that tells the reader everything they need to know before they decide whether to read further.\n\nWrite it last — after the full document is complete — so it accurately reflects the content.\n\n**Executive summary prompt:**\n```\nHere is the full report I've written: [paste document]\n\nWrite an executive summary of 200 words that:\n- States the purpose of the report in one sentence\n- Lists the 3–4 key findings\n- States the main recommendation or conclusion\n- Is self-contained (readable without reading the rest)\n```\n\nThe executive summary is what your reader will likely share with others. It must stand alone."
+    },
+    {
+      "type": "text",
+      "content": "## Writing a Business Proposal\n\nA business proposal makes a case for something: a new project, a budget, a change in approach, a partnership. It must convince a specific reader to approve or fund something.\n\n**Proposal structure prompt:**\n```\nI need to write a business proposal. Here is my context:\n\nWhat I'm proposing: [describe]\nWho will read it: [decision-maker + their priorities]\nBudget or resource required: [amount / team / time]\nProblem being solved: [current situation]\nProposed solution: [your approach]\nExpected outcomes: [measurable results]\nAlternatives considered: [what else you looked at]\nRisks: [what could go wrong]\n\nWrite a business proposal using this structure:\n1. Executive summary (one page max)\n2. Problem statement (why this matters)\n3. Proposed solution and approach\n4. Expected outcomes and success metrics\n5. Resource requirements and timeline\n6. Risk considerations\n7. Recommendation / call to action\n```\n\n**Making it persuasive:**\nOnce you have a draft, ask:\n```\nRead this proposal from the perspective of [the decision-maker's name/role].\nWhat objections would they have?\nWhich sections are weakest?\nWhat evidence or data would make the case stronger?\n```\nThen address each objection in the proposal."
+    },
+    {
+      "type": "text",
+      "content": "## Writing Status Reports and Updates\n\nStatus reports are short, frequent, and often the most-read documents a manager produces. The key: be honest, be specific, be brief.\n\n**Weekly status report prompt:**\n```\nWrite a professional weekly status report based on these notes:\n\nProject: [name]\nPeriod: [date range]\nCompleted this week: [list what was done]\nIn progress: [what's currently underway]\nBlockers: [anything slowing progress]\nNext week's priorities: [what comes next]\nRAG status: [Red / Amber / Green and why]\n\nFormat: bullet points under clear headings. Total length: under 300 words.\nTone: factual, honest, professional. Don't downplay problems.\n```\n\n**The honesty principle:** Status reports that hide problems reduce trust faster than the problems themselves. Ask AI to help you communicate bad news clearly:\n```\nI need to report that [problem or delay]. The cause was [reason].\nI'm addressing it by [your plan]. How do I write this clearly\nand professionally without sounding defensive?\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Policy Documents and Recommendations\n\nFor formal policy recommendations or governance documents:\n\n```\nI need to write a policy recommendation on [topic].\n\nContext: [situation that triggered the need]\nOptions considered: [list 2-4 options]\nRecommended option: [which one and why]\nImplementation steps: [how to put it in place]\nStakeholders affected: [who is impacted]\nRisks and mitigations: [what could go wrong]\n\nWrite a formal policy recommendation document. Use the structure:\n1. Background\n2. Options analysis (table format if multiple options)\n3. Recommendation and rationale\n4. Implementation plan\n5. Risk register\n6. Approval / sign-off section\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The strongest sentence in any document is the first one.** Most professional documents bury the key point at the end (\"In conclusion, we recommend...\"). Ask AI to rewrite your opening sentence so it states the main point or recommendation immediately. Decision-makers read the first sentence — always."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Write a Real Business Document",
+      "content": "Use the outline you developed in lesson 16-1, or start fresh. Choose a document you actually need to write.\n\n**Option A — Report or briefing note**\n\n```\nI need to write a [report / briefing note] on [topic].\n\nAudience: [who reads it]\nPurpose: [what decision or action should it enable?]\nKey points I want to make: [list 4-6 specific points from your knowledge]\nSupporting evidence: [data, examples, sources you have]\nLength: [500 / 800 / 1200 words]\nTone: [formal / professional plain English]\n\nWrite the full document with an executive summary at the top.\n```\n\n**Option B — Business proposal**\n\nFill in all the fields from the proposal structure prompt above with your real situation. Send it to Claude. Then:\n\n```\nRead this proposal from the perspective of my manager/client.\nList the 3 biggest objections they would have.\nFor each objection, write one paragraph that addresses it.\n```\n\nAdd the objection-addressing content to your proposal.\n\n**Final step — Executive summary:**\n\nOnce your document is complete:\n```\nWrite a 200-word executive summary of this document.\nMake it self-contained — a reader should understand the whole document\nfrom the summary alone without reading further.\n```\n\nPaste it at the top. You now have a complete, professional document ready to send."
+    },
+    {
+      "type": "quiz",
+      "question": "Your business proposal draft is well-structured but you're worried the decision-maker will object to the cost. What is the best way to address this using AI?",
+      "options": [
+        "Remove the cost from the proposal so it's not mentioned until the meeting",
+        "Ask AI to read the proposal from the decision-maker's perspective and list their objections, then address each one in the document",
+        "Ask AI to make the document shorter so there's less for them to object to",
+        "Add more features and benefits to distract from the cost"
+      ],
+      "correct": 1,
+      "explanation": "Anticipating and addressing objections directly in the proposal is the most effective technique — it shows you've thought it through, builds credibility, and pre-empts the objection before the decision-maker raises it. Hiding the cost (A) destroys trust. Shortening the document (C) doesn't address the concern. Adding features (D) changes the proposal rather than addressing the cost concern directly."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-2.** You can now write executive summaries, business proposals, status reports, and policy documents using AI — with your specific context driving the content, AI shaping it into professional structure."
+    }
+  ],
+  "nextLesson": "16-3",
+  "prevLesson": "16-1"
+}

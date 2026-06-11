@@ -771,9 +771,9 @@ Branch: `feature/phase-1-scaffolding`
 - Security: `.claude/settings.json` (contains GitHub PAT + Context7 key) excluded via `.gitignore`. PAT `ghp_ttNml…` and Context7 key `ctx7sk-d0cd…` were briefly exposed and must be rotated.
 
 **Content status (updated 2026-06-10):**
-- **ALL 121 lesson JSON files written** — Parts 1–14 complete. No "Coming Soon" cards remain.
-- All 121 curriculum entries fully populated (id, title, estimatedMinutes, tags, prev/next). Zero chain errors.
-- All 121 lessons have a hands-on workshop section. All next/prev chains validated.
+- **ALL 141 lesson JSON files written** — Parts 1–17 complete. No "Coming Soon" cards remain.
+- All 141 curriculum entries fully populated (id, title, estimatedMinutes, tags, prev/next). Zero chain errors.
+- All 141 lessons have a hands-on workshop section. All next/prev chains validated.
 - JSON fixer script (`scripts/fix-json.js`) guards against literal control characters in JSON strings.
 
 **Office worker integrations added (2026-06-10):**
@@ -782,6 +782,12 @@ Branch: `feature/phase-1-scaffolding`
 - Lesson 8-20 ("The Unified Office") is the capstone: designing and saving repeatable multi-tool workflows as custom Claude Code slash commands
 
 **Lesson 1-6 rewritten (2026-06-10):** Changed from "Responsible & Ethical AI Use" (values/norms framing) to "AI & The Law: Legal Limits You Need to Know" (factual legal content only). New coverage: copyright law and AI output, defamation liability, GDPR/CCPA/Australian Privacy Act, platform ToS as contract, professional licensing rules (legal/medical/financial/academic), EU AI Act overview. Workshop changed from "write 3 personal commitments" to a legal self-audit document. Tags updated: `ethics` → `legal`.
+
+**Non-programmer track added (2026-06-10):** 3 new parts covering research, office work, and project management for users without coding background.
+- Part 15 (7 lessons): AI for Research — Perplexity + Claude research workflow, web crawling with Playwright MCP, document/PDF analysis with NotebookLM, research synthesis, report writing
+- Part 16 (7 lessons): AI for Office Work — writing workflow, reports/proposals, data analysis without coding, presentations (Gamma/PowerPoint Copilot), email templates, end-to-end meeting workflow, SOPs
+- Part 17 (6 lessons): AI for Project Management — project planning, problem decomposition, research+planning combined, decision capture, stakeholder communication, capstone sprint
+- Total curriculum: 112 → 121 → 141 lessons across 17 parts
 
 **Implementation complete — Phase 4 (Content Authoring) done.**
 

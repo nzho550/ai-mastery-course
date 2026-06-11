@@ -1,0 +1,59 @@
+{
+  "id": "15-3",
+  "title": "AI Web Search & Web Crawling",
+  "part": 15,
+  "estimatedMinutes": 20,
+  "tags": ["research", "intermediate", "web", "crawl", "playwright", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nSearching the web with AI goes beyond typing into a search box. This lesson covers three levels of AI-powered web research: smart searching with AI tools, extracting information from specific pages, and automated web crawling to gather data from multiple pages at once. By the end you'll know how to turn the open web into structured, analysed data without writing code."
+    },
+    {
+      "type": "text",
+      "content": "## Level 1 — AI-Assisted Searching\n\nThe simplest level: asking AI to search better than you would.\n\n**Perplexity with specific constraints:**\n```\nFind me studies published in the last 2 years on [topic].\nOnly include peer-reviewed sources.\nSummarise each one in 2 sentences.\n```\n\n```\nSearch for news about [company or topic] from the last 30 days.\nWhat are the main developments? What are analysts saying?\n```\n\n```\nFind the official government guidance on [regulation/policy] for [country].\nGive me the exact URL and quote the most relevant section.\n```\n\n**Claude with web browsing enabled (Claude.ai Pro):**\nClaude's Pro tier has a web browsing tool. Ask it to visit specific URLs and extract content:\n```\nGo to [URL] and summarise the key information on that page.\n```\n\n```\nSearch for [topic] and find the 3 most authoritative sources.\nFor each one, tell me: the source, the key claim, and the date published.\n```\n\n**ChatGPT with browsing:**\nSame capability. GPT-4o can browse the web on paid plans. Works best with specific URLs:\n```\nVisit [URL] and extract all the pricing information from the page into a table.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Level 2 — Extracting from Specific Pages\n\nSometimes you have a specific page or set of pages you need to read and extract information from. AI can read web pages far faster than you can.\n\n**Method 1 — Copy and paste (easiest, no tools needed):**\n1. Open the web page\n2. Select all text (Ctrl+A), copy (Ctrl+C)\n3. Paste into Claude.ai with your question:\n```\nHere is the content from [website]. Please:\n1. Extract all [prices/dates/names/statistics] into a table\n2. Summarise the main points in 5 bullets\n3. Flag any claims that seem questionable\n```\n\n**Method 2 — Browser AI extension (Sider, Edge Copilot):**\nWith a browser AI extension active (from lesson 2-11), you can ask questions about any page without copying:\n- Open the page → open sidebar → ask questions directly about the content\n- Works on most pages including PDFs opened in the browser\n\n**Method 3 — Share the URL directly with Claude Pro:**\nPaste a URL into Claude.ai Pro and ask Claude to read it:\n```\nRead this page: [URL]\nExtract: all the product names, their prices, and any availability notes.\nFormat as a table.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Level 3 — Automated Web Crawling with Playwright MCP\n\nFor research that requires gathering information from multiple pages systematically — competitor pricing, job listings, news monitoring, research paper abstracts — the Playwright MCP (covered in lesson 8-10) can automate this.\n\n**What Playwright MCP can do:**\n- Open any URL in a real browser\n- Read the page content\n- Click buttons and navigate between pages\n- Extract structured data (all prices on a page, all names in a list)\n- Fill in search forms and read results\n\n**Without needing to code**, you instruct Claude Code in natural language:\n```\nGo to [URL]. Find all the job listings on the page.\nFor each listing, extract: job title, company, location, and the direct URL.\nFormat as a CSV table.\n```\n\n```\nGo to [search results page]. Find the 10 results.\nFor each result, open the page and extract the date published and author.\nCompile everything into a research table.\n```\n\n**Realistic use cases for non-coders:**\n- *\"Scrape the speakers list from [conference website] and give me names, organisations, and talk titles.\"*\n- *\"Go to [competitor's pricing page] and extract all their plan names, features, and prices.\"*\n- *\"Search Google for [topic], open the first 5 results, and give me a summary of what each says.\"*\n- *\"Go to [academic journal search] and collect the abstracts of the 10 most recent papers on [topic].\"*\n\n**Important:** Respect robots.txt and terms of service. Most public pages can be read; login-required areas, rate-limiting, and explicit no-scraping clauses should be respected. Playwright is for reading publicly available information, not circumventing access controls."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**No Playwright MCP yet?** Playwright MCP setup is covered in lesson 8-10. If you haven't done Part 8 yet, focus on Levels 1 and 2 from this lesson — they cover the majority of real-world research needs without any additional setup. Playwright becomes valuable when you need to gather information from many pages at once."
+    },
+    {
+      "type": "text",
+      "content": "## Turning Web Data Into Documents\n\nOnce you've collected web content, the next step is structuring it. These prompts work whether you've gathered the content manually or via Playwright:\n\n**Competitive analysis:**\n```\nHere is pricing information I collected from 4 competitors: [paste].\nCreate a comparison table with columns for: company, plan name, price,\nkey features, and limitations. Then write a 3-sentence summary of\nhow our offering compares.\n```\n\n**News digest:**\n```\nHere are summaries from 10 news articles about [topic]: [paste].\nCreate a briefing note with: key developments, recurring themes,\ncontroversial claims, and what to watch next.\n```\n\n**Research compilation:**\n```\nHere are abstracts from 8 research papers: [paste].\nIdentify: main themes, areas of agreement, areas of contradiction,\nand gaps in the current research. Format as a structured literature review.\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Extract and Analyse a Web Page",
+      "content": "This workshop uses Level 2 (copy-paste or browser extension) — no extra tools needed.\n\n**Task: Extract structured information from a real web page**\n\nChoose one of these options based on what's relevant to your work:\n\n**Option A — Competitor or industry research:**\n1. Find a competitor's pricing page, a product comparison page, or an industry report online\n2. Copy the full page text (Ctrl+A → Ctrl+C) or use your browser AI extension\n3. Paste into Claude.ai and ask: *\"Extract all pricing tiers, features, and any limitations from this page. Format as a table. Flag anything that seems unclear or that might change frequently.\"*\n\n**Option B — News and current events:**\n1. Go to a news website and find an article on a topic relevant to your work\n2. Copy the full article text\n3. Ask Claude: *\"Summarise this article in 5 bullets. Identify any claims that are assertions rather than verified facts. What questions would I need to answer to form my own view on this topic?\"*\n\n**Option C — Job listings or people research:**\n1. Go to a LinkedIn company page, a team/staff directory, or a conference speakers page\n2. Copy the visible text\n3. Ask Claude: *\"Extract the names, titles/roles, and any other relevant information from this page into a structured table.\"*\n\n**After your extraction:**\nAsk Claude one more question about the extracted data:\n*\"Based on this information, what are the 3 most important things I should know? What's missing that I should look for?\"*\n\nNote how long the full extract-and-analyse cycle took. This is the time you'd have spent reading and note-taking manually."
+    },
+    {
+      "type": "quiz",
+      "question": "You need to monitor 20 competitor websites weekly for pricing changes. Which approach is most sustainable?",
+      "options": [
+        "Manually visit each site every Monday and take notes",
+        "Set up Playwright MCP to crawl all 20 sites on command and output a comparison table",
+        "Ask Perplexity once a month for a general competitor overview",
+        "Pay for a commercial price monitoring SaaS tool"
+      ],
+      "correct": 1,
+      "explanation": "Playwright MCP can visit all 20 sites, extract pricing, and output a comparison table in one command — making the weekly monitoring a 2-minute task instead of several hours. Manual visits (A) don't scale. Perplexity monthly (C) is too infrequent and may miss detail. Commercial tools (D) exist and are valid but cost money and require no-code configuration — Playwright MCP achieves the same with a natural language prompt once you have it set up."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 15-3.** You now know three levels of AI web research: smart searching, page extraction, and automated crawling. You can turn any public web page into structured, analysed data without writing code."
+    }
+  ],
+  "nextLesson": "15-4",
+  "prevLesson": "15-2"
+}

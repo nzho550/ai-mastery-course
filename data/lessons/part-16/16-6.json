@@ -1,0 +1,50 @@
+{
+  "id": "16-6",
+  "title": "The End-to-End Meeting Workflow",
+  "part": 16,
+  "estimatedMinutes": 20,
+  "tags": ["office", "beginner", "meetings", "workflow", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nMeetings consume a significant portion of most professionals' working hours. AI can improve every stage: before the meeting (preparation and agenda), during (transcription and live assistance), and after (notes, action items, follow-up communications). This lesson builds a complete meeting workflow from start to finish."
+    },
+    {
+      "type": "text",
+      "content": "## Before the Meeting — Preparation\n\n**Creating a clear agenda:**\n```\nI'm running a [duration] meeting with [attendees/roles] about [topic].\nPurpose: [what decision should be made or what should be accomplished?]\nContext: [relevant background]\n\nCreate a meeting agenda that:\n- Opens with the purpose and desired outcome\n- Has 3–5 agenda items with time allocations\n- Ends with action items capture and next steps\n- Total time adds up to [duration]\n```\n\n**Preparing for someone else's meeting:**\n```\nI have a meeting with [person/organisation] about [topic].\nI need to be prepared. Based on [context I have],\nwhat are the 5 most important questions I should be ready to answer?\nWhat 3 questions should I ask them?\nWhat outcome should I push for?\n```\n\n**Briefing yourself on a topic before a meeting:**\nIf you're heading into a meeting on a topic you're not fully up to speed on, use the research tools from Part 15. A 10-minute research session in Perplexity + Claude before a meeting is better preparation than any amount of hoping.\n\n**Pre-reading summary:**\nIf you've been sent pre-reading you haven't had time to process:\n1. Upload the documents to Claude.ai\n2. Ask: *\"I have 5 minutes before a meeting where this will be discussed. What are the 5 things I absolutely need to know?\"*"
+    },
+    {
+      "type": "text",
+      "content": "## During the Meeting — Capture and Assistance\n\n**AI transcription (Otter.ai, Zoom AI Companion, Teams Copilot):**\nSet up your meeting AI tool before the call starts (covered in detail in lesson 2-10). The key decision: who sets up the transcription?\n- For meetings you run: set up Otter.ai, Zoom AI Companion, or Teams Copilot yourself\n- For meetings you attend: request that the host enables transcription, or run Otter.ai in the background from your device\n\n**Real-time assistance in Teams/Zoom with Copilot:**\nWith AI active in a Teams or Zoom meeting:\n- Ask *\"What have we decided so far?\"* to get a running summary\n- Ask *\"What was said about [specific topic]?\"* to find a point\n- Ask *\"What are the open items?\"* near the end\n\n**Taking smart notes manually:**\nIf you're taking notes manually, ask AI to create a structured note-taking template before the meeting:\n```\nCreate a note-taking template for a [type] meeting with these agenda items: [list].\nThe template should capture: key points per agenda item, decisions made,\naction items with owners and due dates, and follow-up questions.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## After the Meeting — Notes, Actions, and Follow-Up\n\n**Turning raw notes or transcript into structured meeting notes:**\n```\nHere are my raw notes from a meeting: [paste]\n\nConvert them into structured meeting notes with these sections:\n- Meeting: [date, attendees, purpose]\n- Key decisions (with rationale where noted)\n- Action items (Owner | Task | Due date)\n- Discussion summary by topic\n- Open questions / items for next meeting\n```\n\n**Creating follow-up communications:**\n```\nBased on these meeting notes: [paste]\n\nWrite a follow-up email to all attendees that:\n- Thanks them for attending\n- Summarises the 2–3 main decisions made\n- Lists all action items with owners and due dates\n- Confirms the date/time of the next meeting if applicable\nTone: professional, concise, no more than 200 words\n```\n\n**Turning action items into calendar events or Notion tasks:**\nIf you have Notion MCP or Google Calendar MCP connected (from Part 8):\n```\nHere are the action items from today's meeting: [list]\nCreate a task in Notion for each action item I own, with today's date\nand the due date noted.\nCreate calendar reminders 24 hours before each due date.\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Design Your Meeting Workflow",
+      "content": "This workshop builds your personal meeting workflow system — a set of AI prompts and tools you'll use for every meeting.\n\n**Step 1 — Your most common meeting types (5 minutes)**\n\nList the 3 types of meetings you have most regularly. For each one, write:\n- Who is typically in it?\n- What decisions or outputs usually come from it?\n- What do you find hardest about it? (preparation / staying focused / capturing follow-ups)\n\n**Step 2 — Build a before-meeting template (5 minutes)**\n\nFor your most common meeting type, use Claude to create a preparation checklist:\n```\nCreate a preparation checklist for a [your meeting type].\nIt should take under 10 minutes to complete and ensure I am:\n- Informed on the key topics\n- Clear on what I want to achieve\n- Equipped with the right questions\n```\n\nSave this as a template you'll use before every such meeting.\n\n**Step 3 — Build an after-meeting template (5 minutes)**\n\nCreate a meeting notes template for the same meeting type:\n```\nCreate a structured notes template for a [your meeting type].\nInclude sections for: decisions, action items (with owner + date columns),\ndiscussion points, and follow-up questions.\nFormat it so I can fill it in during the meeting.\n```\n\n**Step 4 — Test it on a real meeting (homework)**\n\nIn your next meeting of this type:\n1. Spend 5 minutes on preparation using your checklist\n2. Use your notes template during the meeting\n3. After the meeting, paste your notes into Claude and generate: structured notes + follow-up email\n\nNote how long the full workflow took vs. your previous approach."
+    },
+    {
+      "type": "quiz",
+      "question": "You run a weekly team meeting and consistently find that action items from the meeting get forgotten by the following week. What AI-powered improvement would address this most directly?",
+      "options": [
+        "Use AI to write a more detailed meeting agenda",
+        "After each meeting, use AI to extract action items from the transcript or notes and automatically create tasks in your team's project management tool via MCP",
+        "Ask your team to take better notes during meetings",
+        "Record all meetings and store the recordings for reference"
+      ],
+      "correct": 1,
+      "explanation": "Forgotten action items happen because they exist only in meeting notes that no one re-reads. Using AI to extract action items and automatically create tasks in your project management tool (Notion, Jira, Asana, etc.) via MCP turns meeting outputs into trackable work items immediately after the meeting ends. This removes the manual step of converting notes to tasks, which is what gets skipped. Better agendas (A) and better notes (C) help with capture but not with follow-through. Recordings (D) only help if people watch them."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-6.** You now have AI tools for the full meeting lifecycle: preparation, live assistance, structured notes, follow-up emails, and action item capture. Meetings you run will produce clearer outputs; meetings you attend will require less recovery time."
+    }
+  ],
+  "nextLesson": "16-7",
+  "prevLesson": "16-5"
+}

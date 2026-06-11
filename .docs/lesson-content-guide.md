@@ -3177,3 +3177,185 @@ Before starting, write a one-page brief in `notes/my-project-brief.md`:
 - What will you have learned by building it?
 
 Use everything: Claude Code for building, task-master-ai for planning, n8n for automation if needed, MCP servers for external integrations. Document your process in a `CLAUDE.md` so future-you (or AI) can understand every decision.
+
+---
+
+## Part 15 — AI for Research (Non-Programmer Track)
+
+### 15.1 AI as Your Research Partner
+**Outcome:** Student understands the 5-stage research workflow and where AI fits in each stage.
+
+**Workshop: `REFLECT` — Research Workflow Map**
+Draw your current research process. Identify where AI could save the most time.
+
+---
+
+### 15.2 Deep Research with Perplexity & Claude
+**Outcome:** Student completes a 30-minute research sprint using Perplexity for cited sources and Claude for synthesis.
+
+**References:**
+- Perplexity AI — perplexity.ai
+- Claude.ai — claude.ai
+
+**Workshop: `BROWSER` — 30-Minute Research Sprint**
+Pick a topic relevant to your work. Use Perplexity for current factual questions, Claude for analysis and synthesis. Document 5 key findings.
+
+---
+
+### 15.3 AI Web Search & Web Crawling
+**Outcome:** Student can extract information from the web at 3 levels: AI search, page extraction, and automated multi-page crawling with Playwright MCP.
+
+**References:**
+- Playwright MCP — github.com/microsoft/playwright-mcp
+
+**Workshop: `BROWSER` — Web Research Collection**
+Use AI-assisted search to research a topic, extract data from 3 relevant pages, and consolidate into a single document.
+
+---
+
+### 15.4 Working with Documents & PDFs
+**Outcome:** Student can upload and analyse documents in Claude.ai, NotebookLM, and ChatGPT and choose the right tool for each document type.
+
+**References:**
+- Claude.ai file upload — claude.ai
+- NotebookLM — notebooklm.google.com
+
+**Workshop: `BROWSER` — Document Analysis**
+Upload a document relevant to your work. Ask 5 questions you'd normally spend time finding answers to manually.
+
+---
+
+### 15.5 Organising & Synthesising Research
+**Outcome:** Student uses Brain Dump Organiser, Comparison Framework, Knowledge Map, and Gap Finder techniques to structure collected research.
+
+**Workshop: `BROWSER` — Organise Your Research Sprint**
+Take the notes from lesson 15.2 and organise them using at least 2 of the 4 frameworks. Identify the gap — what's still missing?
+
+---
+
+### 15.6 Writing Research Reports with AI
+**Outcome:** Student writes a complete research report from their own notes using AI to structure and polish.
+
+**Workshop: `BROWSER` — Write Your Research Report**
+Using notes from previous lessons, produce a 600-word research report. Run the quality review prompt. Write the executive summary last.
+
+---
+
+### 15.7 Research Capstone — Complete Research Sprint
+**Outcome:** Student completes a full 60-minute research sprint: Map → Collect → Synthesise → Write → Review.
+
+**Workshop: `BUILD` — Full Research Sprint**
+End-to-end research sprint on a real topic. Produces: research brief, synthesis document, written report.
+
+---
+
+## Part 16 — AI for Office Work (Non-Programmer Track)
+
+### 16.1 The AI Writing Workflow
+**Outcome:** Student understands the 4-phase writing workflow and can apply it to any document type.
+
+**Workshop: `REFLECT` — Document Inventory**
+List 5 document types you write regularly. For each, identify which phase takes longest and how AI could help.
+
+---
+
+### 16.2 Reports, Proposals & Business Documents
+**Outcome:** Student can produce a complete business report, proposal, or policy document using AI — including executive summary.
+
+**Workshop: `BROWSER` — Write a Real Business Document**
+Produce a complete report or proposal for a real situation. Write the executive summary last using Claude.
+
+---
+
+### 16.3 Data Analysis Without Coding
+**Outcome:** Student can analyse spreadsheet data, generate charts, and produce written summaries using ChatGPT file upload, Claude, and Copilot in Excel.
+
+**Workshop: `BROWSER` — Analyse a Real Dataset**
+Upload a real spreadsheet to ChatGPT or Claude. Produce a chart, 5 key insights, and a 150-word summary.
+
+---
+
+### 16.4 AI-Powered Presentations
+**Outcome:** Student can produce a complete presentation using Gamma, PowerPoint Copilot, or Claude's outline workflow — from narrative arc to speaker notes.
+
+**References:**
+- Gamma — gamma.app
+
+**Workshop: `BROWSER` — Build a Presentation**
+Create a complete presentation on a real topic using either Gamma or Claude + PowerPoint.
+
+---
+
+### 16.5 Email & Communication Templates
+**Outcome:** Student builds a personal AI email template library for their 5 most common email situations.
+
+**Workshop: `BROWSER` — Build Your Email Template Library**
+Generate templates for 5 recurring email types. Refine tone until they sound like you. Save to a document.
+
+---
+
+### 16.6 The End-to-End Meeting Workflow
+**Outcome:** Student has AI tools for every stage of a meeting: preparation, live assistance, notes, action items, follow-up communications.
+
+**Workshop: `REFLECT` — Design Your Meeting Workflow**
+Build a before-meeting checklist and an after-meeting notes template for your most common meeting type. Test on the next real meeting.
+
+---
+
+### 16.7 Creating Process Documentation & SOPs
+**Outcome:** Student can convert rough notes into a professional SOP using the brain dump method.
+
+**Workshop: `REFLECT` — Document a Process You Own**
+Choose a process that exists only in your head. Brain dump, then generate a structured SOP. Save where your team can find it.
+
+---
+
+## Part 17 — AI for Project Management (Non-Programmer Track)
+
+### 17.1 Planning Any Project with AI
+**Outcome:** Student can use the project kickoff prompt to turn a vague goal into a phased plan with risks, assumptions, and a realistic timeline.
+
+**Workshop: `REFLECT` — Plan a Real Project**
+Run the kickoff prompt on a real project. Identify the most important risk. Generate a shareable project plan document.
+
+---
+
+### 17.2 Breaking Down Complex Problems
+**Outcome:** Student can decompose any complex problem into root causes, apply Five Whys, and prioritise which sub-problems to tackle first.
+
+**Workshop: `REFLECT` — Decompose a Problem You're Facing**
+Apply the decomposition prompt to a real current problem. Run Five Whys on the root cause. Identify one specific action.
+
+---
+
+### 17.3 Research + Planning Combined
+**Outcome:** Student can run an integrated research-into-planning workflow: planning questions → targeted research → plan incorporating findings.
+
+**Workshop: `BROWSER` — Combined Research & Planning Sprint**
+30-minute sprint: define questions (5 min) → research (15 min) → build the plan (8 min) → identify gaps (2 min).
+
+---
+
+### 17.4 Documentation & Decision Capture as You Work
+**Outcome:** Student writes decision records in real time and maintains weekly project logs — never losing the reasoning behind work.
+
+**Workshop: `REFLECT` — Capture a Decision You've Recently Made**
+Write a decision record for a real recent decision. Set up a Decision Log location. Commit to one entry per significant decision.
+
+---
+
+### 17.5 Review, Quality Check & Stakeholder Communication
+**Outcome:** Student can review documents before submission, communicate project status to different audiences, and handle difficult conversations (escalation, bad news).
+
+**Workshop: `REFLECT` — Review and Communicate a Real Piece of Work**
+Run the quality review prompt on a real document. Produce two stakeholder communications for different audiences. Prepare for the hardest objection.
+
+---
+
+### 17.6 Project Capstone — The AI-Augmented Work Sprint
+**Outcome:** Student completes a full project sprint producing: research brief, project plan, key document, and stakeholder communications.
+
+**Workshop: `BUILD` — Full Project Sprint**
+60-minute end-to-end sprint using a real project. Phase 1: Research (15 min) → Phase 2: Plan (15 min) → Phase 3: Key Document (20 min) → Phase 4: Communicate (10 min).
+
+---
