@@ -7,45 +7,55 @@
   "sections": [
     {
       "type": "text",
-      "content": "## What You'll Learn\n\nBy the end of this lesson, `claude --version` will return a version number and `claude` will launch Claude Code's interface in your terminal. You'll also understand *why* Node.js is a prerequisite — so that the requirement makes sense instead of feeling like an arbitrary hoop."
+      "content": "## What You'll Learn\n\nBy the end of this lesson `claude --version` will return a version number, `claude` will launch Claude Code in your terminal, and you'll understand your billing options. You'll also configure your first session settings."
     },
     {
       "type": "text",
-      "content": "## What is Node.js? (And Why Do You Need It?)\n\nNode.js is JavaScript running outside a browser. Normally JavaScript only runs inside Chrome, Firefox, or similar — it's the language that makes web pages interactive. Node.js takes JavaScript off the web and lets it run directly on your computer, like Python or any other language.\n\nNode.js also comes with **npm** — the Node Package Manager. Think of npm as the \"app store for JavaScript command-line tools.\" When a developer builds a tool like Claude Code and publishes it for everyone to use, they publish it to npm. When you run `npm install -g @anthropic-ai/claude-code`, npm downloads and installs it.\n\nYou don't need to write any Node.js code. You just need it installed so Claude Code has a runtime to live in — the same way you'd install Java to run a Java application, without ever learning Java.\n\nIf you've already installed Node.js in a previous lesson (for example, when setting up an MCP server), skip Step 1 below and start at Step 2."
+      "content": "## Prerequisites\n\n**Node.js (v18 or later):** Claude Code is a Node.js package, so Node.js must be installed. Check if you already have it:\n\n```powershell\nnode --version\n```\n\nIf this returns `v18.x.x` or higher — skip the Node.js install. If you see an error or a version below 18:\n\n1. Go to **nodejs.org**\n2. Click the **LTS** download button (stable version)\n3. Run the installer, keeping all defaults\n4. When finished, close and reopen PowerShell\n5. Run `node --version` again — should show v20.x.x or higher\n\n**npm** (comes with Node.js — no separate install needed):\n```powershell\nnpm --version\n```\nShould show a version number."
+    },
+    {
+      "type": "text",
+      "content": "## Installing Claude Code\n\nWith Node.js in place, Claude Code installs in one command:\n\n```powershell\nnpm install -g @anthropic-ai/claude-code\n```\n\nThe `-g` flag installs it globally — the `claude` command becomes available from any directory.\n\n**If you get a permissions error:** Open PowerShell as Administrator (search PowerShell → right-click → Run as Administrator), then re-run the command.\n\nInstallation takes 1-3 minutes. You'll see output ending with something like `added 847 packages`.\n\n**Verify the install:**\n```powershell\nclaude --version\n```\nYou should see a version number like `1.x.x`. If you see `command not recognized`, close PowerShell and reopen it — the PATH sometimes needs a fresh shell to update.\n\n**Update Claude Code when new versions release:**\n```powershell\nnpm update -g @anthropic-ai/claude-code\n```\nAnthropic releases updates frequently — run this every few weeks to stay current."
+    },
+    {
+      "type": "text",
+      "content": "## Authentication and Billing Options\n\nThe first time you launch Claude Code, it needs to authenticate. There are two ways:\n\n**Option 1 — Claude.ai subscription (Max plan):**\nIf you subscribe to Claude Max ($100/month), Claude Code is included with high usage limits. This is the recommended option if you plan to use Claude Code heavily — predictable cost, no token counting.\n\nAuthenticate:\n1. Run `claude` in the terminal\n2. Select the option to authenticate via Claude.ai\n3. A browser window opens — sign in to your Claude.ai account\n4. The browser redirects back to the terminal — you're authenticated\n\n**Option 2 — Anthropic API (pay per use):**\nGet an API key from console.anthropic.com (free account, add a payment method). This is pay-as-you-go — charged per token you use.\n\nAuthenticate:\n1. Go to console.anthropic.com\n2. Create an account (or sign in)\n3. Go to API Keys → Create Key\n4. Copy the key (starts with `sk-ant-`)\n5. In the terminal: `export ANTHROPIC_API_KEY='your-key-here'` (PowerShell: `$env:ANTHROPIC_API_KEY='your-key-here'`)\n6. Or run `claude` and it will prompt you to enter the key interactively\n\n**Cost for learning use:** Typical learning use (Part 7 exercises) runs $3-15 total on the API. Most individual coding sessions cost $0.10-0.50.\n\n**Option 3 — VS Code Extension (alternative to CLI):**\nInstall the Claude Code extension from the VS Code marketplace. It uses the same authentication as the CLI and provides a UI panel inside VS Code. For learning, still recommend the CLI first — you see exactly what's happening."
+    },
+    {
+      "type": "text",
+      "content": "## First Launch and Interface Overview\n\nOnce authenticated, launch Claude Code:\n\n```powershell\nclaude\n```\n\nYou'll see a welcome message and a prompt:\n```\n╭─────────────────────────────────╮\n│  Claude Code (v1.x.x)           │\n│  Type a message or /help        │\n╰─────────────────────────────────╯\n\n>\n```\n\n**The REPL (Read-Eval-Print Loop):** You're now in an interactive session where you type requests and Claude Code responds. Unlike chat, Claude Code has access to your filesystem from the current directory.\n\n**Key commands:**\n\n```\n/help          — show all available commands\n/status        — show current session info (tokens used, files read)\n/compact       — compress conversation history to save context\n/clear         — clear conversation and start fresh\n/exit          — exit Claude Code\n/model         — see or switch the model being used\n```\n\n**Slash commands for tasks:**\n```\n/read [file]   — tell Claude Code to read a specific file\n/memory        — show what Claude Code remembers about this project\n```\n\n**The permission system:** By default, Claude Code asks for permission before:\n- Writing or modifying files\n- Running terminal commands\n- Making network requests\n\nYou'll see prompts like: `[Y]es / [N]o / [A]lways allow`. Respond thoughtfully — don't set 'Always allow' for destructive operations without understanding what they do."
+    },
+    {
+      "type": "text",
+      "content": "## Running Claude Code Properly: Open in Your Project\n\nClaude Code reads files relative to the directory it's launched from. Always launch it from inside your project:\n\n```powershell\ncd C:\\Projects\\Learning\\my-project\nclaude\n```\n\nOr in File Explorer: Shift+right-click your project folder → Open in Terminal → then run `claude`.\n\n**Why this matters:** If you launch Claude Code from `C:\\`, it'll have the wrong context for your files. If you launch from inside your project directory, it automatically knows the folder structure and can find all your files.\n\n**The `--print` flag for quick one-off tasks:**\n```powershell\nclaude --print \"What does the main function in main.js do?\"\n```\nThis runs a single question and exits without entering the interactive REPL. Useful for quick checks."
     },
     {
       "type": "callout",
       "variant": "warning",
-      "content": "**Windows note:** Some global npm installs require elevated permissions. If `npm install -g` returns an `EACCES` or permission error, try opening PowerShell as Administrator: press `Win`, search for \"PowerShell\", right-click → **Run as administrator**, then run the install command again."
-    },
-    {
-      "type": "text",
-      "content": "## The Three-Step Install\n\n**Step 1 — Install Node.js**\n\nNode.js is a required prerequisite. If you already have it, skip ahead.\n\n1. Go to **nodejs.org** in your browser\n2. Click the **LTS** (Long Term Support) download button — this is the stable version\n3. Run the installer, keeping all defaults\n4. When it finishes, open PowerShell (`Win + X` → Windows PowerShell or Terminal)\n5. Type: `node --version` — you should see something like `v22.x.x`\n6. Type: `npm --version` — you should see a version number (npm installs alongside Node)\n\n**Step 2 — Install Claude Code**\n\nWith Node.js in place, installing Claude Code is one command:\n\nIn PowerShell, run:\n```\nnpm install -g @anthropic-ai/claude-code\n```\n\nThe `-g` flag means \"install globally\" — so `claude` becomes available as a command anywhere on your system, not just in one folder. The install takes 1–2 minutes.\n\n**Step 3 — Verify the install**\n\nType:\n```\nclaude --version\n```\n\nYou should see a version number. If you see `command not found`, close PowerShell and reopen it — the PATH sometimes needs a fresh shell to update."
-    },
-    {
-      "type": "code",
-      "language": "powershell",
-      "content": "# Step 1: Verify Node.js\nnode --version\nnpm --version\n\n# Step 2: Install Claude Code\nnpm install -g @anthropic-ai/claude-code\n\n# Step 3: Verify installation\nclaude --version"
-    },
-    {
-      "type": "text",
-      "content": "## Authentication\n\nThe first time you launch Claude Code, it needs to connect your installation to an Anthropic account. This is a one-time step.\n\n1. In PowerShell, type: `claude`\n2. Claude Code detects you're not authenticated and opens a browser window\n3. Sign in with your Anthropic account (the same account you use for Claude.ai)\n4. The browser redirects back and your terminal shows a success message\n5. You're now in the Claude Code REPL — a prompt where you can type requests\n\nType `/help` to see the available commands, then type `/exit` to quit.\n\nIf you don't have an Anthropic account, go to **console.anthropic.com** and create one. You'll need it for API access throughout Parts 7–13 of this course."
-    },
-    {
-      "type": "callout",
-      "variant": "info",
-      "content": "**How billing works:** Claude Code uses your Anthropic API credits. If you authenticated via Claude.ai (consumer), you may be redirected to set up an API account at console.anthropic.com. Anthropic offers free credits for new API accounts. Check the current pricing at anthropic.com/pricing — costs for typical learning use are very low."
+      "content": "**Never paste API keys into Claude Code conversations.** Your ANTHROPIC_API_KEY should live in an environment variable or in Claude Code's credential store — not in your project files or chat messages. The security habit from lesson 1-5 applies here: credentials in conversation text are credentials at risk."
     },
     {
       "type": "workshop",
       "tag": "TERMINAL",
-      "title": "Full Install Walkthrough",
-      "content": "Work through every step and don't move on until each one produces the expected output.\n\n**Step 1 — Node.js check or install:**\n```\nnode --version\n```\nExpected: `v20.x.x` or higher. If you see an error, install Node.js from nodejs.org first.\n\n**Step 2 — Install Claude Code:**\n```\nnpm install -g @anthropic-ai/claude-code\n```\nWait for it to finish. You'll see a lot of output ending with something like `added 847 packages`.\n\n**Step 3 — Verify:**\n```\nclaude --version\n```\nExpected: a version number like `1.x.x`.\n\n**Step 4 — Authenticate:**\n```\nclaude\n```\nFollow the browser prompt to log in. Once authenticated, you'll see Claude Code's welcome screen.\n\n**Step 5 — Explore:**\nInside the Claude Code prompt, type:\n```\n/help\n```\nRead through the available commands. Then type:\n```\n/exit\n```\n\n**You did it if:** `claude --version` returns a version number and `claude` launches the interface without an authentication error."
+      "title": "Full Install and First Session",
+      "content": "Work through every step. Don't move on until each produces the expected output.\n\n**Step 1 — Verify Node.js:**\n```powershell\nnode --version\n```\nExpected: `v18.x.x` or higher. If error, install from nodejs.org first.\n\n**Step 2 — Install Claude Code:**\n```powershell\nnpm install -g @anthropic-ai/claude-code\n```\nWait for completion. Expected: `added X packages` at the end.\n\n**Step 3 — Verify:**\n```powershell\nclaude --version\n```\nExpected: a version number.\n\n**Step 4 — Navigate to your course project folder:**\n```powershell\ncd C:\\Projects\\Learning\n```\n(Or wherever you created your course folder in lesson 4-2)\n\n**Step 5 — Launch Claude Code:**\n```powershell\nclaude\n```\nFollow the authentication prompts. Choose the option that matches how you want to pay (Claude.ai subscription or API key).\n\n**Step 6 — Explore the interface:**\nOnce authenticated, type these inside the Claude Code REPL:\n```\n/help\n```\nRead through the commands carefully — you'll use most of these in Part 7.\n\n```\n/status\n```\nSee your current session information.\n\nThen ask your first real question:\n```\nWhat files are in the current directory? Describe what this project is.\n```\nClaude Code will list the files it can see and describe what the project appears to be.\n\n**Step 7 — Exit:**\n```\n/exit\n```\n\n**You're done if:** `claude --version` returns a version number and `claude` launches without an authentication error.\n\n**Troubleshooting:**\n- `command not found`: close and reopen PowerShell (PATH update needed)\n- Permission error during install: run PowerShell as Administrator\n- Authentication fails: try `/logout` then `claude` again, or re-enter your API key"
+    },
+    {
+      "type": "quiz",
+      "question": "You've just installed Claude Code and are setting it up for the first time. You have a Claude.ai free tier account but haven't set up API billing. What are your options for authenticating?",
+      "options": [
+        "You can't use Claude Code without a paid plan — the CLI requires enterprise access",
+        "You can authenticate with your Claude.ai account (subscribing to Max covers the CLI) or get an API key from console.anthropic.com (pay-as-you-go)",
+        "You authenticate only with an API key — Claude.ai accounts don't work with the CLI",
+        "The free tier automatically provides Claude Code access with 50 messages per day"
+      ],
+      "correct": 1,
+      "explanation": "There are two authentication paths: (1) Claude Max subscription connects your Claude.ai account and includes Claude Code usage in the monthly plan — best for heavy use. (2) An Anthropic API key from console.anthropic.com allows pay-as-you-go billing — best for occasional use or learning. The free tier doesn't include Claude Code API access, but new API accounts often get free credits to start."
     },
     {
       "type": "callout",
       "variant": "success",
-      "content": "**You've completed lesson 7-2.** Claude Code is installed and authenticated. In the next lesson you'll open it inside a real project for the first time."
+      "content": "**You've completed lesson 7-2.** Claude Code is installed and authenticated. You understand the billing options and the interface basics. In the next lesson you'll use it on a real project for the first time."
     }
   ],
   "nextLesson": "7-3",
