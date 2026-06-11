@@ -1227,8 +1227,62 @@
           "title": "Project Capstone — The AI-Augmented Work Sprint",
           "estimatedMinutes": 90,
           "tags": ["project-management", "intermediate", "capstone", "hands-on"],
-          "nextLesson": null,
+          "nextLesson": "18-1",
           "prevLesson": "17-5"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Advanced AI Mastery",
+      "lessons": [
+        {
+          "id": "18-1",
+          "title": "Advanced Prompting: CoT, ToT, ReAct & Beyond",
+          "estimatedMinutes": 40,
+          "tags": ["advanced", "prompting", "chain-of-thought", "reasoning", "hands-on"],
+          "nextLesson": "18-2",
+          "prevLesson": "17-6"
+        },
+        {
+          "id": "18-2",
+          "title": "Model Selection Intelligence — The Right AI for Every Job",
+          "estimatedMinutes": 30,
+          "tags": ["advanced", "models", "strategy", "cost", "comparison"],
+          "nextLesson": "18-3",
+          "prevLesson": "18-1"
+        },
+        {
+          "id": "18-3",
+          "title": "Systematic AI Research — Perplexity, Elicit, Consensus & Scite",
+          "estimatedMinutes": 35,
+          "tags": ["advanced", "research", "perplexity", "elicit", "consensus", "hands-on"],
+          "nextLesson": "18-4",
+          "prevLesson": "18-2"
+        },
+        {
+          "id": "18-4",
+          "title": "RAG & Personal Knowledge Systems",
+          "estimatedMinutes": 30,
+          "tags": ["advanced", "rag", "knowledge-base", "notebooklm", "embeddings"],
+          "nextLesson": "18-5",
+          "prevLesson": "18-3"
+        },
+        {
+          "id": "18-5",
+          "title": "AI Agents in Practice",
+          "estimatedMinutes": 30,
+          "tags": ["advanced", "agents", "multi-agent", "automation", "hands-on"],
+          "nextLesson": "18-6",
+          "prevLesson": "18-4"
+        },
+        {
+          "id": "18-6",
+          "title": "Capstone — Build Your Personal AI Knowledge Engine",
+          "estimatedMinutes": 90,
+          "tags": ["advanced", "capstone", "build", "knowledge-engine", "hands-on"],
+          "nextLesson": null,
+          "prevLesson": "18-5"
         }
       ]
     }

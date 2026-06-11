@@ -2,12 +2,12 @@
   "id": "1-1",
   "title": "What is Artificial Intelligence?",
   "part": 1,
-  "estimatedMinutes": 15,
-  "tags": ["foundations", "beginner", "no-code"],
+  "estimatedMinutes": 20,
+  "tags": ["foundations", "beginner", "concepts", "no-code"],
   "sections": [
     {
       "type": "text",
-      "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to explain AI, machine learning, and large language models in plain English — to anyone, including someone who has never heard of them.\n\nNo math. No jargon. Just a clear mental model you'll use for the entire course."
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to explain AI, machine learning, large language models, and the transformer architecture in plain English — to anyone, including someone who has never heard of them. You'll also understand why AI has improved so dramatically in the last few years, and what that means for how you should use it.\n\nNo math. No jargon. Just a clear mental model you'll use for the entire course."
     },
     {
       "type": "text",
@@ -24,18 +24,43 @@
     },
     {
       "type": "text",
-      "content": "## What AI Is Not\n\nBefore going further, clear out some common misconceptions:\n\n- **AI is not magic.** It's software running on computers. It can fail, make mistakes, and be wrong.\n- **AI is not sentient.** It doesn't have feelings, intentions, or consciousness. It's very good at *simulating* these things in text.\n- **AI is not all-knowing.** Every model has a training cutoff date. It doesn't know what happened after that, and it doesn't have access to real-time information unless specifically connected to the internet.\n- **AI is not infallible.** LLMs can \"hallucinate\" — generate confident-sounding text that is factually wrong. You'll learn how to handle this in lesson 1-4."
+      "content": "## How Neural Networks Learn — Without the Math\n\nA neural network is the engine behind modern AI. Here's how it works in plain English:\n\nImagine you want to teach a system to identify whether an email is spam or not spam. You show it 1 million emails, labelled \"spam\" or \"not spam.\" The neural network is initially just a mass of connections with random settings — like a tangled web of dials, all turned to random positions.\n\nEach time it makes a prediction and gets it wrong, the error message travels backwards through the network and nudges the dials slightly. *This pattern (\"buy now, limited offer\") was spam — adjust.* Over millions of examples, the dials gradually settle into a configuration that reliably identifies spam.\n\n**Why this matters for understanding AI:**\n- Nobody programmed the system to know that \"FREE OFFER\" means spam. It discovered that pattern from data.\n- The patterns it learns are often more complex and subtle than any human would write as rules.\n- But it also learns from whatever is in the training data — including biases, errors, and gaps.\n\n**The transformer breakthrough (2017):** The architectural innovation that made modern AI possible is called the transformer. Before transformers, AI struggled with long sequences — the model \"forgot\" what was said earlier in a document. Transformers introduced a mechanism called **attention**: the ability to focus on any part of the input when processing any other part. This is why Claude can read a 100-page document and answer questions about details on page 7 while referencing context from page 94. The transformer made this kind of long-range reasoning possible."
+    },
+    {
+      "type": "text",
+      "content": "## Why AI Got So Good So Fast\n\nAI has existed as a research field since the 1950s. So why has it improved so dramatically in the last five years specifically? Three things converged:\n\n**1. Scale** — More parameters, more data, more compute. A language model's capability scales with the amount of data it trains on and the size of the network. GPT-3 (2020) had 175 billion parameters. Claude's models are in a similar range. At this scale, something interesting happens: **emergent capabilities** appear. Abilities that weren't present in smaller models — like multi-step reasoning, code generation, and analogy-making — emerge without being explicitly programmed. Nobody put \"understand metaphors\" in the training objective; it appeared as a consequence of scale.\n\n**2. Reinforcement Learning from Human Feedback (RLHF)** — Raw language models produce output that is technically sophisticated but often unhelpful, misleading, or unsafe. RLHF is the process that shapes raw model capability into a helpful assistant. Human raters evaluate model responses, and the model is trained to prefer the responses humans rate highly. This is why Claude is *helpful* and not just *capable* — the helpfulness is trained in.\n\n**3. Hardware** — Modern AI chips (GPUs and specialised AI accelerators) can perform the parallel computations neural networks need at a scale that was impossible even five years ago. Without the hardware, the algorithms and data wouldn't matter.\n\nUnderstanding this explains something important: **AI improvement is not slowing down.** More compute, more data, and better training techniques continue to push capabilities forward. What seems impressive today will be normal within 18 months."
+    },
+    {
+      "type": "text",
+      "content": "## What AI Is Not\n\nBefore going further, clear out some common misconceptions:\n\n- **AI is not magic.** It's software running on computers. It can fail, make mistakes, and be wrong.\n- **AI is not sentient.** It doesn't have feelings, intentions, or consciousness. It's very good at *simulating* these things in text. When Claude expresses something like curiosity or says it's uncertain, that's the output of training — not inner experience.\n- **AI is not all-knowing.** Every model has a training cutoff date. It doesn't know what happened after that, and it doesn't have access to real-time information unless specifically connected to the internet.\n- **AI is not infallible.** LLMs can \"hallucinate\" — generate confident-sounding text that is factually wrong. You'll learn how to handle this in lesson 1-4.\n- **AI does not understand the way humans do.** It processes patterns. When it says \"I understand your concern,\" it's generating the most probable next token — not empathising. This doesn't make it less useful, but it explains its failure modes.\n- **AI is not the same as automation.** Traditional automation follows fixed rules. AI adapts to new inputs using learned patterns. This is why AI can write an email — traditional automation can't."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The capability gap:** Between knowing AI exists and actually using it well, there's a gap most people never close. They use AI occasionally for simple tasks and get simple results. The point of this course is to close that gap — not by adding more information about AI, but by giving you the habits and workflows that actually change how you work."
     },
     {
       "type": "workshop",
       "tag": "BROWSER",
-      "title": "The Mirror Test",
-      "content": "Open [Claude.ai](https://claude.ai) and try these two prompts back to back.\n\n**Prompt 1:**\n```\nExplain artificial intelligence to me as if I'm a 10-year-old who loves cooking.\n```\n\n**Prompt 2:**\n```\nNow explain it to me as if I'm a retired accountant.\n```\n\nObserve how the same AI completely changes its explanation — the analogies, vocabulary, and framing — based on the audience you described.\n\n**Write one sentence** in your notes summarising what you witnessed. This single observation captures the most important property of modern LLMs: they're not rigid programs, they're flexible responders."
+      "title": "The Mirror Test — Audience Adaptation in Action",
+      "content": "This experiment reveals one of the most remarkable properties of modern LLMs: they don't just answer questions, they model *who is asking* and adapt accordingly. This is possible because of the transformer's attention mechanism — the model attends to clues in your prompt to infer audience, context, and purpose.\n\n**Step 1 — Open [Claude.ai](https://claude.ai) and run these three prompts back to back in the same conversation:**\n\n```\nExplain artificial intelligence to me as if I'm a 10-year-old who loves cooking.\n```\n\n```\nNow explain the same concept as if I'm a retired accountant with no technical background.\n```\n\n```\nNow explain it as if I'm a computer science professor who already knows about neural networks, but wants a fresh analogy for teaching beginners.\n```\n\n**Step 2 — Read all three responses carefully.** Notice:\n- How did the vocabulary change?\n- How did the analogies change?\n- How did the level of assumed knowledge change?\n- Did the *information* change, or just the *framing*?\n\n**Step 3 — Write two sentences** in your notes:\n1. What did you observe about how the model adapts its output?\n2. One practical implication: how could you use this adaptation ability in your own work?\n\n**Why this matters:** The ability to specify your audience in a prompt — and have the AI genuinely adapt — means you never have to write different versions of the same explanation again. One master document, multiple audience versions, all generated from one conversation."
+    },
+    {
+      "type": "quiz",
+      "question": "You're explaining AI to a colleague who asks: 'But does it actually *understand* what it's saying?' What is the most accurate answer?",
+      "options": [
+        "Yes — modern AI models have human-like understanding, just faster",
+        "No — it generates statistically likely text based on patterns, which can produce outputs that look like understanding but work fundamentally differently from human comprehension",
+        "We don't know — AI understanding is a philosophical question with no consensus",
+        "Only some models understand — Claude and GPT-4 do, but smaller models don't"
+      ],
+      "correct": 1,
+      "explanation": "LLMs don't understand in the way humans do. They predict the next token based on learned patterns. This produces outputs that can look remarkably like understanding — useful analogies, coherent reasoning, appropriate empathy — but the underlying mechanism is different. 'We don't know' (C) is a reasonable philosophical position, but from an engineering perspective, what the model *does* is well understood: pattern-based prediction. This distinction matters because it explains both the model's impressive capabilities and its failure modes (hallucination, brittleness on novel situations)."
     },
     {
       "type": "callout",
       "variant": "success",
-      "content": "**You've completed lesson 1-1.** You now have a clear, honest mental model of what AI is and what it isn't. Everything in this course builds on this foundation."
+      "content": "**You've completed lesson 1-1.** You now have a clear, honest mental model of what AI is, what it isn't, and why it got so capable so quickly. Everything in this course builds on this foundation — especially the understanding that AI is a pattern-completion system, not an all-knowing oracle."
     }
   ],
   "nextLesson": "1-2",

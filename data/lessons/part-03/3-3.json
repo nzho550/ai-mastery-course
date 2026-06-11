@@ -2,16 +2,16 @@
   "id": "3-3",
   "title": "Role & Persona Prompting",
   "part": 3,
-  "estimatedMinutes": 20,
+  "estimatedMinutes": 25,
   "tags": ["prompting", "beginner", "role-prompting"],
   "sections": [
     {
       "type": "text",
-      "content": "## What You'll Learn\n\nYou'll learn the \"Act as...\" technique — one of the most powerful single additions you can make to any prompt. You'll also learn what a system prompt is, how it differs from your user message, and why role prompting works at a technical level."
+      "content": "## What You'll Learn\n\nYou'll learn the \"Act as...\" technique — one of the most powerful single additions you can make to any prompt — and go well beyond it. You'll master how to construct rich expert personas, use adversarial personas for stress-testing, build multi-perspective expert panels, and understand exactly *why* role prompting works at a technical level. By the end, you'll have a toolkit of persona-based techniques that consistently produce more expert, specific, and useful outputs."
     },
     {
       "type": "text",
-      "content": "## Why Telling AI to Play a Role Works\n\nWhen you ask a language model to adopt a specific role, something meaningful happens. The model's training contains enormous amounts of text written from different perspectives: code review comments written by senior engineers, explanations written by teachers, analyses written by lawyers, advice columns written by coaches. By specifying a role, you're essentially tuning in to a specific frequency of that training data.\n\n*\"Act as a senior software engineer\"* shifts the model's output distribution toward responses that resemble how senior engineers talk, think, and structure their advice. It's not magic — it's pattern activation.\n\nWithout a role, the model defaults to a generalist register: helpful, polite, and often frustratingly non-committal. With a well-chosen role, the model becomes opinionated, specific, and calibrated to a domain.\n\nHere's the same question with and without a role:"
+      "content": "## Why Role Prompting Works — The Technical Reason\n\nWhen you ask a language model to adopt a specific role, something meaningful happens. The model's training contains enormous amounts of text written from different perspectives: code review comments written by senior engineers, explanations written by teachers, analyses written by lawyers, advice columns written by coaches.\n\nBy specifying a role, you're essentially tuning in to a specific frequency of that training data. \"Act as a senior software engineer\" shifts the model's output distribution toward responses that resemble how senior engineers talk, think, and structure advice. It's not magic — it's pattern activation.\n\nWithout a role, the model defaults to a generalist register: helpful, polite, and often frustratingly non-committal. With a well-chosen role, the model becomes opinionated, specific, and calibrated to a domain.\n\nHere's the same question with and without a role:"
     },
     {
       "type": "code",
@@ -20,72 +20,50 @@
     },
     {
       "type": "text",
-      "content": "The difference in output depth and specificity is substantial. The role instruction unlocks a mode of response that the model knows exists but doesn't default to."
+      "content": "The difference in output depth and specificity is substantial. The role instruction unlocks a mode of response that the model knows exists but doesn't default to.\n\n**Critical finding from Anthropic's research:** Misalignment (the model drifting from expected behaviour) increases when the AI is given a name or character that's far from \"Claude\" — but for task-specific roles (\"senior engineer\", \"experienced editor\"), this is not an issue. Role prompting for domain expertise is reliable and well-supported."
     },
     {
       "type": "text",
-      "content": "## The \"Act as...\" Technique in Practice\n\nThe structure is simple: start your prompt with a role definition, then give your actual request. The role frames everything that follows.\n\nHere are three role prompts for different situations:\n\n**For technical expertise:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Act as a senior software engineer who values clean, readable code over\nclever solutions. Review this function and suggest how to make it\nmore maintainable for a junior developer to understand:\n\n[paste your code]"
+      "content": "## The Three Levels of Role Prompting\n\n**Level 1 — Simple title:**\n```\nAct as a lawyer.\n```\nWeak. \"Lawyer\" is too broad — corporate, criminal, family, IP, employment?\n\n**Level 2 — Specific title + domain:**\n```\nAct as an intellectual property lawyer specialising in technology startups.\n```\nMuch better. This narrows to a specific slice of legal knowledge.\n\n**Level 3 — Full persona with background, perspective, and instructions:**\n```\nAct as a senior IP lawyer with 15 years of experience advising tech startups.\nYou have seen hundreds of founders make avoidable legal mistakes with their contracts,\nemployee IP agreements, and open-source licensing. You are direct and don't hedge\nyour advice unnecessarily — you respect that founders need actionable guidance,\nnot 'consult a lawyer for everything.' When you're unsure, you say so explicitly.\nYou tend to err on the side of caution for anything involving patent disputes or\nlitigation, but are practical about lower-stakes licensing questions.\n```\n\nLevel 3 produces significantly richer, more calibrated responses. The persona detail helps the model maintain consistency throughout a long conversation.\n\n**Specificity rule:** \"Act as an expert\" is weak — expert at what? \"Act as a UX researcher who specialises in mobile app usability for elderly users\" is specific and activates a much more targeted response profile."
     },
     {
       "type": "text",
-      "content": "**For explanation and teaching:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Act as a patient teacher explaining to a curious 10-year-old.\nUse everyday analogies, no jargon, and keep sentences short.\nExplain what a database is and why websites use them."
+      "content": "## Essential Role Templates for Professional Work\n\nHere are 8 powerful role templates for common professional situations:\n\n**For technical code review:**\n```\nAct as a senior software engineer doing a rigorous PR review.\nYou value: readability, correctness, edge case coverage, and performance.\nYou are not harsh, but you are honest. Point out anything that would\nneed to change before merging. Be specific — no vague suggestions.\n```\n\n**For business writing critique:**\n```\nAct as a brutally honest editor who has spent 20 years editing business documents.\nYou hate jargon, passive voice, and buried leds. You know the opening sentence\nof any document is the most important. Give me 5 specific changes to improve this writing.\n```\n\n**For strategic stress-testing:**\n```\nAct as a venture capital investor who is famous for asking the hardest questions.\nYou've seen hundreds of pitches fail for the same reasons: vague TAM, unclear\nunit economics, overstated competitive moats. Challenge every assumption in\nwhat I'm about to share. Be direct about what you'd push back on.\n```\n\n**For data interpretation:**\n```\nAct as a senior data analyst who is expert at identifying what the numbers actually\nsay vs. what people want them to say. When you see data, you ask: what's missing?\nwhat could explain this differently? what's the sample size? Analyse my data with that lens.\n```\n\n**For medical/health information:**\n```\nAct as a doctor with a specialty in [area] who is explaining a concept to\nan intelligent patient. Be clear and honest. Explain what's well-established\nvs. what's still debated in the literature. Note when I should definitely\nseek in-person medical advice vs. when this is general educational information.\n```\n\n**For negotiation preparation:**\n```\nAct as the other party in a negotiation I'm about to enter.\nTheir position: [describe their interests and constraints]\nYour goal is to argue their side as persuasively as possible,\nso I can prepare for every argument I'll face.\n```\n\n**For learning complex topics:**\n```\nAct as a brilliant teacher who can explain anything to anyone.\nI'm a [describe your background and level]. Explain [topic] in a way that:\n- Uses analogies to things I'd already understand\n- Checks my understanding with questions\n- Builds from simple to complex\n- Tells me explicitly when something is a simplification of a more complex reality\n```\n\n**For editing your own work:**\n```\nAct as [a specific author whose writing style you admire].\nRead my draft from their perspective. What would they say is weak?\nWhat would they praise? Rewrite my opening paragraph in their style.\n```"
     },
     {
       "type": "text",
-      "content": "**For critical feedback:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Act as a brutally honest editor who has published three books on\nbusiness writing. Do not soften your feedback. Tell me exactly what's\nweak about this introduction paragraph and how to fix it:\n\n[paste paragraph]"
+      "content": "## The Expert Panel Technique — Multiple Perspectives at Once\n\nInstead of one expert, ask for multiple. This is a form of Tree-of-Thought (covered in Part 18) combined with persona prompting.\n\n```\nI want you to analyse this decision from three distinct expert perspectives.\nFor each expert, adopt their mindset, use their vocabulary, and apply their\nspecific framework for thinking about this problem.\n\nDecision: [describe your decision]\n\nExpert 1: A conservative risk manager who has seen projects fail from overconfidence\nExpert 2: An entrepreneurial innovator who believes the cost of not acting is often\n          higher than the cost of acting imperfectly\nExpert 3: A pragmatic project manager focused on execution and deliverability\n\nAfter all three perspectives, give me a synthesis: which expert has the strongest\narguments for this specific situation, and what would a balanced decision look like?\n```\n\n**Why this works:** Each expert persona activates a different distribution of patterns in the model's training. Together, they surface tradeoffs that no single perspective would reveal. This is especially powerful for:\n- Major strategic decisions\n- Business plan review\n- Technical architecture choices\n- Career decisions with genuine tradeoffs"
     },
     {
       "type": "text",
-      "content": "Notice that the role defines not just *who* the AI is pretending to be, but *how* it should behave. \"Brutally honest\" and \"do not soften\" are behavioral instructions that get much stronger compliance when attached to a role that would naturally behave that way."
-    },
-    {
-      "type": "callout",
-      "variant": "tip",
-      "content": "**Specificity matters.** \"Act as an expert\" is weak — expert at what? \"Act as a UX researcher who specialises in mobile app usability\" is specific and activates a much more targeted response profile. The more specific the role, the more calibrated the output."
+      "content": "## The Adversarial Persona — Stress-Testing Your Ideas\n\nOne of the most valuable (and underused) role prompting applications is using AI as your harshest critic before you face real criticism.\n\n**Pre-pitch stress test:**\n```\nAct as the toughest investor in the room — the one who is famous for publicly\ntearing apart weak business models. You've just heard my pitch. You have 3 minutes\nto grill me on the weakest parts. Go.\n\n[paste your pitch]\n```\n\n**Pre-publication reality check:**\n```\nAct as a fact-checker at a major newspaper. Your job is to question every\nfactual claim in the piece below. For each claim: Is it verifiable? Is the\nsource credible? Is the statistic being used in its correct context?\nDo not be gentle — fact-checkers aren't.\n\n[paste your article/report]\n```\n\n**Pre-decision devil's advocate:**\n```\nI've decided to [describe your decision]. Act as the best possible devil's advocate.\nConstruct the strongest possible argument against this decision. Don't steelman\na weak argument — build the best case that this decision is wrong.\n```\n\nThe adversarial persona is uncomfortable but extraordinarily useful. The objections it surfaces are the same ones you'll face from real critics — better to hear them from AI and prepare."
     },
     {
       "type": "text",
-      "content": "## What Is a System Prompt?\n\nEvery AI conversation has three layers:\n\n1. **System prompt** — instructions set before the conversation starts, invisible to the user\n2. **User message** — what you type\n3. **Assistant response** — what the AI says\n\nWhen you use Claude.ai, Anthropic has already written a system prompt you never see. It establishes Claude's core behavior, safety guidelines, and personality. When businesses build products with Claude (a customer support bot, a coding assistant, a writing tool), they write their own system prompt that customises Claude's behavior for their specific product.\n\nHere's an example of how a system prompt shapes the entire conversation:"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "System prompt (set by the developer, invisible to the user):\n\"You are a customer support agent for Acme Software. You only answer\nquestions about Acme products. If asked about anything else, politely\nredirect to Acme topics. Always end your response by asking if the\ncustomer's issue was resolved.\"\n\nUser message: \"What's the best programming language to learn?\"\n\nAssistant response (shaped by the system prompt):\n\"That's an interesting question! For Acme Software specifically, our\ntools work best with Python and JavaScript. Would you like resources\non getting started with Acme's Python SDK? Did that answer your question?\""
-    },
-    {
-      "type": "callout",
-      "variant": "info",
-      "content": "**Role prompting in chat vs. the API:** When you put a role instruction at the start of your message in Claude.ai, you're approximating what a system prompt does — it frames the entire conversation. When you build with the API (covered in Part 11), you write a real system prompt in a dedicated field, which is cleaner and more reliable. For now, putting the role in your user message achieves the same practical effect."
-    },
-    {
-      "type": "text",
-      "content": "## When to Use Role Prompting\n\nRole prompting is highest-value in these situations:\n\n- **Domain expertise you don't have:** \"Act as a contract lawyer\" before asking about an agreement you need to understand\n- **Specific communication style:** \"Act as a Hemingway-style editor\" for a specific writing register\n- **Calibrated feedback:** \"Act as a skeptical investor\" before pitching an idea, to stress-test it\n- **Adjusted complexity:** \"Act as someone explaining this to a non-technical executive\" when you need layperson-friendly output\n\nFor straightforward tasks — summarising a document, answering a factual question, reformatting data — role prompting adds little value. Save it for situations where perspective and domain knowledge change the output meaningfully."
+      "content": "## System Prompts — The Invisible Foundation\n\nEvery AI conversation has three layers:\n1. **System prompt** — instructions set before the conversation starts, invisible to the user\n2. **User message** — what you type\n3. **Assistant response** — what the AI says\n\nWhen you use Claude.ai, Anthropic has already written a system prompt you never see — it establishes Claude's core behaviour, safety guidelines, and personality.\n\nWhen businesses build products with Claude (a customer support bot, a coding assistant, a writing tool), they write their own system prompt that customises Claude's behaviour for their specific product.\n\n**You can simulate a system prompt** in Claude.ai by putting role/instruction text at the very start of your first message in a conversation:\n```\n[System: You are a concise, direct technical writer. You write documentation\nfor developers. You use active voice and short sentences. You never use jargon\nwithout immediately defining it. Respond only to questions about documentation\nand technical writing.]\n\n[Now ask your actual question]\n```\n\nThis isn't as reliable as a real system prompt (which is locked in before the conversation), but it's effective for most purposes.\n\n**When you build with the Claude API** (Part 11 of this course), you'll write real system prompts in the dedicated field — more consistent and more powerful than simulating it in the user turn."
     },
     {
       "type": "workshop",
       "tag": "BROWSER",
-      "title": "The Expert Panel",
-      "content": "Ask the same question three times in [Claude.ai](https://claude.ai) — each with a different role. Use three separate conversations so they don't influence each other.\n\n**The question:** \"How should I approach learning a new technical skill?\"\n\n**Run 1 — no role:**\n```\nHow should I approach learning a new technical skill?\n```\n\n**Run 2 — learning scientist role:**\n```\nYou are an experienced learning scientist who specialises in adult education\nand skill acquisition research. How should I approach learning a new technical skill?\n```\n\n**Run 3 — self-taught engineer role:**\n```\nYou are a senior software engineer who is entirely self-taught — no university\ndegree, everything learned from tutorials, books, and building real projects.\nHow should I approach learning a new technical skill?\n```\n\nRead all three responses. Write in your notes:\n- What changed between Run 1 and Runs 2 and 3?\n- Which response was most useful to you personally, and why?\n- What role would you add to a prompt for a task you do regularly at work or in life?\n\n**Bonus:** Write 3 role prompts for tasks that matter to you — use the specificity tip above to make the roles precise, not generic."
+      "title": "The Expert Panel — 3 Perspectives, 1 Decision",
+      "content": "This workshop uses the Expert Panel technique on a real decision or idea you're working through.\n\n**Choose your topic** — a real decision, proposal, plan, or piece of writing you want stress-tested. This works best when the topic is something you genuinely care about and where external perspectives would help.\n\n**Round 1 — Expert Panel (15 minutes)**\n\nOpen [Claude.ai](https://claude.ai) and run the full Expert Panel prompt:\n```\nI want you to analyse the following from three distinct expert perspectives.\nAdopt each expert's mindset, vocabulary, and framework. Don't hedge — be specific.\n\nTopic: [your decision/plan/idea]\n\nExpert 1: [choose a relevant expert — investor, critic, technical expert, etc.]\nExpert 2: [a contrasting perspective — someone who would see different risks]\nExpert 3: [a pragmatic implementer — someone who asks 'but how does this actually work?']\n\nAfter each expert's analysis, identify the ONE most important thing they'd want\nchanged or clarified. Then give me a final synthesis: what's the overall verdict?\n```\n\nRead all three perspectives carefully. Note: what did each expert surface that you hadn't considered?\n\n**Round 2 — Adversarial (5 minutes)**\n\nIn a new conversation, run the adversarial devil's advocate prompt on the same topic. Ask for the *strongest possible* argument against your decision or plan.\n\n**Round 3 — Synthesis (5 minutes)**\n\nReturn to your original conversation and ask:\n```\nBased on the three expert perspectives you've given me, and the adversarial\nargument, what are the 3 most important changes I should make to [topic]\nbefore proceeding? Be specific.\n```\n\n**Write your answer:**\n- What did the Expert Panel reveal that you didn't already know?\n- Which of the three expert perspectives was most valuable for your specific topic?\n- How would you set up the Expert Panel for your most important recurring decision type at work?\n\n**Save 2 role prompts** from today that you'll use again in the next week."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to review your business proposal using only 'Act as a business expert.' The feedback is vague and generic. What is the most effective fix?",
+      "options": [
+        "Ask Claude to try harder",
+        "Use 'Act as an expert' with more emphasis — capitalise EXPERT",
+        "Build a Level 3 persona: specific role, years of experience, what they care about most, their communication style, and the lens through which they'll review the proposal",
+        "Ask without any persona — Claude's default mode gives better business advice"
+      ],
+      "correct": 2,
+      "explanation": "Generic roles produce generic outputs. 'Business expert' is too broad to activate any specific knowledge domain or analytical approach. A Level 3 persona — with specific background, stakes, biases, and communication style — gives the model a much richer distribution of relevant patterns to draw from. The difference in output depth between 'Act as a business expert' and 'Act as a CFO who has reviewed 200 startup business plans and is particularly focused on unit economics and cash flow assumptions' is dramatic."
     },
     {
       "type": "callout",
       "variant": "success",
-      "content": "**You've completed lesson 3-3.** You can now use the \"Act as...\" technique to unlock domain-specific responses and you understand the system prompt concept that underpins all production AI tools."
+      "content": "**You've completed lesson 3-3.** You now have three levels of persona construction, 8 professional role templates, the Expert Panel technique for multi-perspective analysis, and the adversarial persona for stress-testing. These techniques are the difference between AI that gives you generic advice and AI that gives you expert-calibrated, specific, actionable output."
     }
   ],
   "nextLesson": "3-4",

@@ -2,139 +2,63 @@
   "id": "3-2",
   "title": "The Anatomy of a Good Prompt",
   "part": 3,
-  "estimatedMinutes": 20,
+  "estimatedMinutes": 25,
   "tags": ["prompting", "beginner", "structure"],
   "sections": [
     {
       "type": "text",
-      "content": "## What You'll Learn\n\nYou'll learn a four-part framework for writing prompts that consistently produce useful output. By the end, you'll be able to apply this framework to any task — whether you're drafting an email, analysing a document, or writing code."
+      "content": "## What You'll Learn\n\nYou'll learn a four-part framework for writing prompts that consistently produce useful output, plus four additional advanced patterns that experienced AI users apply on top of this foundation. By the end, you'll have a repeatable prompt construction system and the diagnostic skill to identify exactly why any given prompt isn't producing what you want."
     },
     {
       "type": "text",
-      "content": "## The Four Elements of a Good Prompt\n\nEvery strong prompt contains some combination of four elements:\n\n1. **Context** — background information the AI needs to understand your situation\n2. **Task** — what you actually want the AI to do\n3. **Format** — how you want the output structured\n4. **Constraints** — what the AI should avoid or stay within\n\nNot every prompt needs all four. A simple question might only need the task. But when outputs are disappointing, the missing element is almost always context or format.\n\nLet's look at each one."
+      "content": "## The Four Elements of a Good Prompt\n\nEvery strong prompt contains some combination of four elements:\n\n1. **Context** — background information the AI needs to understand your situation\n2. **Task** — what you actually want the AI to do\n3. **Format** — how you want the output structured\n4. **Constraints** — what the AI should avoid or stay within\n\nNot every prompt needs all four. A simple question might only need the task. But when outputs are disappointing, the missing element is almost always context or format.\n\n**The diagnostic rule:** If you get a disappointing AI response, before rewriting the prompt, ask: *Which element is missing?* That question alone fixes most prompt problems."
     },
     {
       "type": "text",
-      "content": "## Element 1: Context\n\nContext is the background information that frames the task. It tells the AI who you are, what situation you're in, and what assumptions it should make.\n\nWithout context, the AI has to guess your situation. With context, it calibrates its response to your actual circumstances.\n\n**Without context:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Help me prepare for a difficult conversation."
+      "content": "## Element 1: Context — The Background That Changes Everything\n\nContext is the background information that frames the task. It tells the AI who you are, what situation you're in, and what assumptions it should make.\n\nWithout context, the AI has to guess your situation. With context, it calibrates its response to your actual circumstances.\n\n**Three types of context:**\n\n**Personal context** — who you are:\n```\nI'm a first-year medical student with no clinical experience yet.\nI'm a project manager at a 5-person startup with no dedicated engineering team.\nI'm a 58-year-old retiree learning to use technology for the first time.\n```\n\n**Situational context** — what's happening:\n```\nI need to tell a team member that their recent work hasn't met the standard we agreed on.\nWe have 3 weeks to launch but the product isn't quite ready.\nI've just received an email I need to respond to carefully.\n```\n\n**Objective context** — what the output is for:\n```\nThis will be read by my CEO who has 5 minutes for updates.\nThis email will be the first impression this client gets of our company.\nThis is a personal decision only I will see — I don't need professional polish.\n```\n\n**Without context:**\n```\nHelp me prepare for a difficult conversation.\n```\n\n**With all three types of context:**\n```\nI'm a team lead (personal context) and I need to tell a team member that their\nrecent work hasn't met the standard we agreed on (situational context). This person\nhas been on the team for 2 years and generally performs well. The outcome I need:\nan honest conversation that preserves the working relationship while setting\nclear expectations going forward (objective context).\n```\n\nSame task. Radically different context. The second version produces advice that's actually useful for that specific situation."
     },
     {
       "type": "text",
-      "content": "**With context:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "I'm a team lead and I need to tell a team member that their recent work\nhasn't met the standard we agreed on. This person has been on the team\nfor 2 years and generally performs well. I want to be honest but not\ndamage the working relationship."
+      "content": "## Element 2: Task — One Clear Action Verb\n\nThe task is the action you want the AI to take. Many prompts describe a situation and *hope* the AI figures out what to do. They don't specify a task at all.\n\nBe explicit. Use specific action verbs:\n- **Generate:** \"Generate 10 ideas for...\"\n- **Summarise:** \"Summarise this document in 3 bullet points\"\n- **Critique:** \"Critique this proposal — focus on logical gaps\"\n- **Compare:** \"Compare these two options: pros/cons format\"\n- **Rewrite:** \"Rewrite this in a more formal tone\"\n- **Classify:** \"Classify each of these items as: urgent/important/neither\"\n- **Extract:** \"Extract all action items from these meeting notes\"\n- **Explain:** \"Explain this concept as if I've never encountered it before\"\n\n**Multi-task prompts (use carefully):**\nYou can include multiple tasks, but be explicit about sequencing:\n```\nFirst, identify the three weakest assumptions in my business plan.\nThen, for each weak assumption, suggest what evidence would make it stronger.\nFinally, rate the overall strength of the plan 1-10, and justify the score.\n```\n\n**The common mistake:** Describing a situation and assuming the AI knows what to do:\n```\n❌  \"I have a meeting tomorrow about Q3 results.\"\n✅  \"Help me prepare 5 talking points for a meeting about Q3 results.\n    The results were below target by 12%. I'm presenting to my manager.\"\n```"
     },
     {
       "type": "text",
-      "content": "Same task. Radically different context. The second version produces advice that's actually useful for that specific situation — not a generic five-bullet list from a management textbook."
+      "content": "## Element 3: Format — Control the Output Shape\n\nFormat tells the AI how to structure its output. Without a format instruction, the AI chooses a default — and its default might not match how you want to use the output.\n\n**Format dimensions:**\n\n**Length:**\n- \"In one paragraph\" / \"In under 100 words\" / \"In exactly 5 bullets\"\n- \"Brief overview — no more than 200 words\" / \"Comprehensive — cover every angle\"\n\n**Structure:**\n- \"As a markdown table with columns: [col1] / [col2] / [col3]\"\n- \"In numbered steps\" / \"As a decision tree\" / \"In the format: Problem / Cause / Solution\"\n- \"Using headers for each section\"\n\n**Tone and register:**\n- \"Conversational\" / \"Formal\" / \"Direct and concise\" / \"Empathetic\"\n- \"Technical (for a developer audience)\" / \"Plain English (for non-experts)\"\n\n**Medium:**\n- \"As an email\" / \"As a tweet thread\" / \"As a Slack message\" / \"As slide bullet points\"\n- \"As a Python code comment\" / \"As JSON\"\n\n**Example of format dramatically improving output:**\n```\n❌  What are the benefits of exercise?\n    → Gets a vague paragraph or long list of everything\n\n✅  List exactly 5 benefits of regular exercise.\n    For each: [Benefit name (bold)]: One clear sentence of explanation.\n    Evidence type in brackets: [well-established / emerging research / generally accepted]\n    Total response under 200 words.\n    → Gets exactly what you can paste into a document\n```"
     },
     {
       "type": "text",
-      "content": "## Element 2: Task\n\nThe task is the action you want the AI to take. It sounds obvious, but many prompts are missing a clear, single task. They describe a situation and hope the AI figures out what to do about it.\n\nBe explicit: *write, summarise, list, compare, critique, explain, rewrite, translate, classify, answer.*\n\n**Unclear task:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "I have a meeting tomorrow about Q3 results."
+      "content": "## Element 4: Constraints — What Must Stay Within Bounds\n\nConstraints define the boundaries — what the AI should NOT do. They're especially important when you have specific requirements that conflict with the AI's defaults.\n\n**Common constraints:**\n- \"Do not use jargon — assume no technical background\"\n- \"Do not change the core message or any of the specific numbers\"\n- \"Keep it under 150 words\"\n- \"Do not suggest things that require a budget I don't have\"\n- \"Do not recommend consulting a professional — I need actionable guidance now\"\n- \"Only use examples from the healthcare industry\"\n- \"Do not mention competitors by name\"\n\n**The specificity rule:** Vague constraints are useless. \"Don't change too much\" means nothing to a model. Be exact:\n```\n❌  \"Rewrite this but don't change it too much\"\n✅  \"Rewrite this for clarity. Keep: all specific numbers, the overall structure,\n    and the first and last paragraphs unchanged.\n    Change: sentences longer than 25 words (break them up), passive voice → active.\"\n```\n\n**The anti-default constraint:** AI has defaults — it tends toward comprehensive, hedged, balanced responses. If you don't want that, you have to say so:\n- \"Do not give me a balanced view — I've already decided. Give me implementation advice.\"\n- \"Do not hedge or qualify your recommendation — just tell me what to do.\"\n- \"Do not add caveats about 'consulting a professional' — I understand this is not professional advice.\""
     },
     {
       "type": "text",
-      "content": "**Clear task:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Help me prepare 5 talking points for a meeting about Q3 results.\nThe results were below target by 12%. I'm presenting to my manager."
+      "content": "## Four Advanced Prompt Patterns\n\nOnce you have the four elements, these patterns take output quality to the next level:\n\n**Pattern 1 — The \"Bad Output\" Constraint:**\nTell the AI specifically what a bad response looks like:\n```\nA bad response would be a generic list of tips that applies to any situation.\nA good response is specific to my situation and tells me exactly what to say.\n```\n\n**Pattern 2 — The Example Standard:**\nProvide one example of the quality or style you want:\n```\nHere's an example of the kind of response I'm looking for:\n[paste your example]\nNow apply that same approach to: [your actual request]\n```\n\n**Pattern 3 — The Step-by-Step Instruction:**\nFor complex tasks, number the steps the AI should follow:\n```\n1. First, read the document I've pasted below\n2. Identify the 3 main arguments\n3. For each argument, write one sentence counter-argument\n4. Conclude with a paragraph that synthesises the strongest combined position\n```\n\n**Pattern 4 — The Output Preview:**\nTell the AI what the first line of its response should be:\n```\nStart your response with: 'The three main issues are:'\nThen address each one.\n```\n\nThis prevents the AI from opening with filler sentences (\"Certainly! I'd be happy to help with that...\") and forces it directly into the content."
     },
     {
       "type": "text",
-      "content": "The task verb — *help me prepare* — combined with the deliverable — *5 talking points* — leaves no room for misinterpretation."
-    },
-    {
-      "type": "text",
-      "content": "## Element 3: Format\n\nFormat tells the AI how to structure its output. Without a format instruction, the AI chooses — and its default might not match how you want to use the output.\n\nCommon format options:\n- **Length:** \"in one paragraph\", \"in under 100 words\", \"as a 5-bullet list\"\n- **Structure:** \"as a markdown table\", \"numbered steps\", \"in the format: Problem / Cause / Solution\"\n- **Tone:** \"conversational\", \"formal\", \"like you're talking to a 10-year-old\"\n- **Medium:** \"as an email\", \"as a tweet\", \"as a Python comment\"\n\n**Without format:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "What are the benefits of exercise?"
-    },
-    {
-      "type": "text",
-      "content": "**With format:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "List 5 benefits of regular exercise.\nFormat each as: [Benefit name]: [One sentence explanation].\nKeep the total response under 150 words."
-    },
-    {
-      "type": "text",
-      "content": "## Element 4: Constraints\n\nConstraints define the boundaries — what the AI should NOT do. They're especially important when you have specific requirements that conflict with the AI's defaults.\n\nConstraints prevent the AI from doing things you'll have to undo:\n\n**Without constraints:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Rewrite this email to sound more professional."
-    },
-    {
-      "type": "text",
-      "content": "**With constraints:**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Rewrite this email to sound more professional.\nDo NOT change the core message or any of the specific numbers.\nKeep it under 150 words.\nDo not add sign-off phrases like 'Best regards' — I'll add those myself."
-    },
-    {
-      "type": "callout",
-      "variant": "tip",
-      "content": "**The anti-pattern to avoid:** \"Don't change too much.\" This is not a useful constraint — \"too much\" means nothing to a model. Specify what must stay the same instead of using vague modifiers."
-    },
-    {
-      "type": "text",
-      "content": "## Putting It Together\n\nHere's how all four elements combine into a complete prompt. Let's build one from scratch for a common task: writing a performance review summary.\n\n**Task only (weak):**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Write a performance review for my employee."
-    },
-    {
-      "type": "text",
-      "content": "**All four elements (strong):**"
-    },
-    {
-      "type": "code",
-      "language": "plaintext",
-      "content": "Context: I'm a software engineering manager writing the annual performance\nreview for a mid-level developer. This person exceeded their project goals\nthis year but struggles with communication in cross-team meetings.\n\nTask: Write a performance review summary that honestly addresses both the\nstrengths and the communication area for improvement.\n\nFormat: Two paragraphs. First paragraph covers achievements and strengths.\nSecond paragraph covers the communication improvement area constructively.\nTotal length: 150–200 words.\n\nConstraints: Do not use clichés like 'team player' or 'goes above and beyond'.\nKeep the tone direct and supportive — not corporate-speak."
-    },
-    {
-      "type": "text",
-      "content": "That prompt takes 30 seconds to write and produces a first draft you can actually use. The alternative is spending 20 minutes writing it yourself, or spending 10 minutes cleaning up what a vague prompt produced.\n\nYou don't need to use this exact structure every time. For simple tasks, a clear task and a format instruction is enough. The four-element framework is a diagnostic: if an output disappoints you, ask which element was missing."
-    },
-    {
-      "type": "callout",
-      "variant": "info",
-      "content": "**Framework names:** You may see other frameworks with names like CRISPE, RISEN, or CLEAR. They're all variations on the same idea. The four elements here — context, task, format, constraints — are the irreducible core that all other frameworks expand on."
+      "content": "## Complete Prompt: All Elements in Action\n\nHere's a full prompt using all four elements plus two advanced patterns:\n\n```\nContext:\nI'm a software engineering manager writing the annual performance review for\na mid-level developer. They exceeded their project goals this year but\nstruggles with communication in cross-team meetings. They have been on the\nteam 2.5 years. This review will be seen by them and stored in HR records.\n\nTask:\nWrite a performance review summary that honestly addresses both the\nstrengths and the communication improvement area.\n\nFormat:\nTwo paragraphs. First: achievements and strengths. Second: communication\narea for growth (constructive framing). Total length: 150–200 words.\n\nConstraints:\nDo not use these phrases: 'team player', 'goes above and beyond', 'exceeds\nexpectations'. Keep the tone direct and supportive — not corporate-speak.\nDo not hedge the communication feedback — name the issue clearly.\n\nA bad response would be generic praise with a vague 'communication could be improved.'\nA good response names specific behaviours to change, not just the problem.\n\nStart your response with the first paragraph directly — no introduction.\n```\n\nThis prompt takes 60 seconds to write and produces a first draft you can use. The alternative is 20 minutes of blank-page struggling, or 10 minutes fixing a vague prompt's output."
     },
     {
       "type": "workshop",
       "tag": "BROWSER",
-      "title": "Rewrite 3 Prompts Using the 4-Element Framework",
-      "content": "Take these three weak prompts and rewrite each one using context + task + format + constraints. Then run your rewritten versions in [Claude.ai](https://claude.ai) and compare the output quality.\n\n**Weak prompt 1:**\n```\nExplain machine learning\n```\n\n**Weak prompt 2:**\n```\nHelp me write an email\n```\n\n**Weak prompt 3:**\n```\nWhat should I learn next?\n```\n\nFor each one, add context (who you are, what situation you're in), sharpen the task, specify a format, and add at least one constraint.\n\n**Bonus:** Write one more prompt from scratch — pick a real task you have this week. Apply all four elements before you run it.\n\nSave your three rewritten prompts to your notes — these are the beginning of your prompt library."
+      "title": "Rewrite 3 Prompts + Build Your First Prompt Template",
+      "content": "**Part 1 — Diagnose and rewrite (15 minutes)**\n\nFor each weak prompt below, first identify which elements are missing, then rewrite it with all four elements. Run both versions in [Claude.ai](https://claude.ai) and rate the output quality improvement.\n\n**Weak prompt 1:**\n```\nExplain machine learning\n```\nMissing elements: ___\n\n**Weak prompt 2:**\n```\nHelp me write an email to my boss\n```\nMissing elements: ___\n\n**Weak prompt 3:**\n```\nWhat should I learn next in my career?\n```\nMissing elements: ___\n\nFor each rewrite, use context that's true for you — your real role, your actual situation.\n\n**Part 2 — Build a reusable template (10 minutes)**\n\nChoose the single type of task you do most often with AI (or would most benefit from doing with AI). Using the four-element framework, write a master prompt template for that task:\n\n```\nContext: [your standard context for this task type]\nTask: [the action verb + deliverable]\nFormat: [exactly how you want the output]\nConstraints: [what must never appear in the output]\n\n[PLACEHOLDER: paste the specific content here each time]\n```\n\nTest it with real content. Refine until the output consistently meets your standard.\n\nSave this template — it's the beginning of your prompt library. Over the course, you'll build one for every regular task type, and each one saves you 5-15 minutes every time you use it."
+    },
+    {
+      "type": "quiz",
+      "question": "Your prompt asks Claude to 'rewrite this email more professionally' and you get back something that's technically more formal but completely changed the structure and removed a key piece of information. Which element was missing from your prompt?",
+      "options": [
+        "Context — Claude didn't know who the email was going to",
+        "Task — 'rewrite more professionally' is not a clear task",
+        "Constraints — you didn't specify what must stay unchanged and what the limits of the rewrite should be",
+        "Format — you didn't specify how long the rewritten email should be"
+      ],
+      "correct": 2,
+      "explanation": "The task was clear enough (rewrite professionally), and context/format would improve it but aren't the root cause. The problem was missing constraints: you didn't specify what must NOT change (the structure, the key information, the specific request). Without constraints, the AI is free to make any changes it thinks improve 'professionalism' — including restructuring and removing content it perceives as less formal. The fix: 'Keep the structure and all specific facts/requests unchanged. Only improve: sentence formality, grammar, and word choice.'"
     },
     {
       "type": "callout",
       "variant": "success",
-      "content": "**You've completed lesson 3-2.** You now have a four-element framework you can apply to any prompt. Lessons 3-3 through 3-8 build specific techniques on top of this foundation."
+      "content": "**You've completed lesson 3-2.** You now have a four-element framework (Context, Task, Format, Constraints), four advanced patterns (Bad Output Constraint, Example Standard, Step-by-Step, Output Preview), and a diagnostic skill for identifying exactly why any prompt underperforms. Everything in lessons 3-3 through 3-8 builds specific techniques on top of this foundation."
     }
   ],
   "nextLesson": "3-3",
