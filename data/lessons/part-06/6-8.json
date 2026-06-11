@@ -2,8 +2,15 @@
   "id": "6-8",
   "title": "Choosing Your AI Editor Setup",
   "part": 6,
-  "estimatedMinutes": 15,
-  "tags": ["vscode", "copilot", "cursor", "windsurf", "continue-dev", "decision"],
+  "estimatedMinutes": 50,
+  "tags": [
+    "vscode",
+    "copilot",
+    "cursor",
+    "windsurf",
+    "continue-dev",
+    "decision"
+  ],
   "sections": [
     {
       "type": "text",
@@ -32,6 +39,54 @@
       "tag": "REFLECT",
       "title": "Pick Your Setup and Document Your Choice",
       "content": "This workshop has two parts: a decision and a commitment.\n\n**Part 1 — Fill in the matrix**\nOpen `notes/prompt-experiments.md` (or create a new file `notes/editor-setup-decision.md`) and paste this table:\n\n```\n| Factor       | VS Code + Continue | VS Code + Copilot | Cursor | Windsurf |\n|--------------|--------------------|-------------------|--------|----------|\n| Cost         |                    |                   |        |          |\n| Setup effort |                    |                   |        |          |\n| My experience|                    |                   |        |          |\n| My score /5  |                    |                   |        |          |\n```\n\nFill in the \"My experience\" row based on what you actually felt using each tool in lessons 6-1 through 6-7. Score each one from 1–5 for how much you enjoyed using it.\n\n**Part 2 — Write your commitment**\nBelow the table, write one sentence in this format:\n\n```\nFor this course and beyond, I'm going to primarily use _____ \nbecause _____.\n```\n\nExamples:\n- *\"For this course and beyond, I'm going to primarily use VS Code + Copilot because I already have a GitHub account and the autocomplete just works.\"*\n- *\"For this course and beyond, I'm going to primarily use Cursor because I liked being able to generate multiple files at once.\"*\n- *\"For this course and beyond, I'm going to primarily use VS Code + Continue because I want to use Claude as my model and keep data off Microsoft's servers.\"*\n\nSave the file. This is your decision. You're committing to reduce tool-switching friction — not choosing forever."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Personal AI Editor Assessment",
+      "content": "Make a data-driven decision about your AI editor setup based on your actual experience.\n\n**Step 1 — List the editors you have tried** (even briefly): VS Code + Copilot, Continue.dev + Claude, Cursor, Windsurf, or others.\n\n**Step 2 — For each editor**, rate from 1-5 on:\n- Code quality produced\n- Understanding of my existing code\n- Speed (how fast it responds and implements)\n- Review experience (how easy to see and accept changes)\n- Setup effort\n- Cost\n\n**Step 3 — Ask Claude:** *\"Based on these ratings [paste your matrix] and my work profile [describe: language, task types, team size], what AI editor setup would you recommend? Explain the reasoning.\"*\n\n**Step 4 — Identify your \"must have\" vs \"nice to have\" features.** What would make you switch editors?\n\n**Step 5 — Write a one-paragraph decision.** Your AI editor setup, why you chose it, and when you'll revisit the decision."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Hybrid AI Editor Setup",
+      "content": "Many developers use more than one tool. This workshop designs a hybrid setup where each tool serves its best use case.\n\n**Step 1 — Identify your 4 most common AI coding tasks:**\n- Task type 1: [e.g., \"write new functions from spec\"]\n- Task type 2: [e.g., \"review AI-generated code\"]\n- Task type 3: [e.g., \"debug runtime errors\"]\n- Task type 4: [e.g., \"refactor existing code\"]\n\n**Step 2 — For each task**, decide: which AI tool would you use?\n\n**Step 3 — Ask Claude:** *\"I want a hybrid AI editor setup using [your chosen tools]. For each of my task types [list them], which tool should I use and why? Identify any tasks where my tool choice might be wrong.\"*\n\n**Step 4 — Document your hybrid workflow** as a short reference:\n```\n## My AI Editor Workflow\n- New features: [tool + how]\n- Code review: [tool + how]\n- Debugging: [tool + how]\n- Refactoring: [tool + how]\n```\n\n**Step 5 — Commit to this workflow for 4 weeks.** After 4 weeks, review: which parts worked? What would you change?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Cost vs Quality Analysis",
+      "content": "AI editor costs vary significantly. This workshop helps you maximise value for your specific situation.\n\n**Step 1 — Research current pricing** for each AI editor option:\n- GitHub Copilot Individual\n- Cursor Pro\n- Windsurf Pro\n- Claude API via Continue.dev (pay-per-use)\n- Free tiers of each\n\n**Step 2 — Estimate your monthly usage:** How many hours per week do you code? What percentage involves AI assistance?\n\n**Step 3 — Ask Claude:** *\"Help me compare the cost-effectiveness of these AI editor options for a developer who codes [X] hours/week with [Y% AI assistance]: [list your options with their pricing]. What's the most cost-effective setup?\"*\n\n**Step 4 — Factor in the value:** What is one hour of your time worth? If an AI editor saves you 30 minutes/day, how does that compare to its monthly cost?\n\n**Step 5 — Make a decision:** Is the cost of the tool you want justified? Write your conclusion."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build Your AI Coding Workflow Document",
+      "content": "A documented workflow is the foundation of consistent, high-quality AI-assisted coding.\n\n**Step 1 — Ask Claude to help you write your workflow document:**\n```\nHelp me create an \"AI Coding Workflow\" document for my personal reference. I use [your tools] for [your work type].\n\nThe document should cover:\n1. How I start a new coding task (planning, speccing before coding)\n2. How I write code with AI assistance (tools, prompts, review process)\n3. How I review AI-generated code (checklist, mandatory steps)\n4. How I debug with AI help (process, what info to provide)\n5. How I commit and document (commit messages, code documentation)\n6. Red lines — things I never let AI do without full understanding\n```\n\n**Step 2 — Personalise every section** with your specific tools, prompts, and practices.\n\n**Step 3 — Add your review checklist** at the end: the mandatory steps before accepting any AI-generated code.\n\n**Step 4 — Mandatory meta-review:** Ask Claude: *\"Review this workflow document. What important practices are missing? What common AI coding mistakes does this workflow not protect against?\"*\n\n**Step 5 — Save and use:** This document is your operating manual for AI-assisted development."
+    },
+    {
+      "type": "quiz",
+      "question": "You are comparing Cursor ($20/month) and using Claude API via Continue.dev (pay-per-use). What information do you need to make a cost-effective decision?",
+      "options": [
+        "Just compare the monthly subscription costs",
+        "Estimate how many API calls you make per month to calculate Continue.dev costs, then compare to Cursor's flat rate considering both price and which produces better output for your work",
+        "Always choose the cheaper option",
+        "Always choose the more expensive option — it will be higher quality"
+      ],
+      "correct": 1,
+      "explanation": "Cost-effectiveness requires knowing both the total cost of each option AND the value difference. Calculate: how many tokens you use per day × Claude API rates × days/month = monthly Continue.dev cost. Compare to Cursor's flat rate. If they're similar, quality and workflow fit become the deciding factor. Flat rates favor heavy users; pay-per-use favors occasional users. Neither is universally better."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague says \"I just use whichever AI coding tool is trending on social media.\" What is the problem with this approach?",
+      "options": [
+        "Trending tools are usually poorly tested",
+        "Tool choice should be based on which tool produces the best output for your specific language, task type, and workflow — not popularity",
+        "Popular tools are always the most expensive",
+        "Trending tools change too frequently to learn properly"
+      ],
+      "correct": 1,
+      "explanation": "The best AI coding tool for you depends on factors specific to your work: your programming language, your primary task types (building vs reviewing vs debugging), your team's tool chain, your budget, and how you naturally think about code. A tool that benchmarks well or trends on Twitter may be mediocre for your specific context. Use the data from your own experience — not others' preferences."
     },
     {
       "type": "callout",

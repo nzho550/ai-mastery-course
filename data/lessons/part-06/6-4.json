@@ -2,8 +2,14 @@
   "id": "6-4",
   "title": "Continue.dev — Free, Open-Source AI in VS Code",
   "part": 6,
-  "estimatedMinutes": 25,
-  "tags": ["continue-dev", "vscode", "ai-coding", "open-source", "claude"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "continue-dev",
+    "vscode",
+    "ai-coding",
+    "open-source",
+    "claude"
+  ],
   "sections": [
     {
       "type": "text",
@@ -32,6 +38,54 @@
       "tag": "VSCODE",
       "title": "Install Continue and Connect Claude",
       "content": "**Step 1 — Install the extension**\n1. Open the Extensions panel in VS Code (puzzle icon in Activity Bar)\n2. Search: `Continue`\n3. Install **Continue - Codestral, Claude, and more** (publisher: Continue)\n4. After installation, the Continue icon appears in the Activity Bar — a small triangle/play symbol\n5. Click it to open the Continue panel\n\n**Step 2 — Explore the UI (even without a model)**\n1. Click the Continue icon in the Activity Bar\n2. The panel shows a chat interface and a model selector at the top\n3. Click the model selector — it shows available providers and a link to the config file\n4. Click **Open config.json** to see where settings live\n\n**Step 3 — Connect Claude (requires Anthropic API key from lesson 11-3)**\n\n*If you have your API key already:*\n1. Open the config file (from the model selector, or navigate to `C:\\Users\\YourName\\.continue\\config.json`)\n2. Replace the contents with the Claude configuration from this lesson\n3. Replace `YOUR_ANTHROPIC_API_KEY` with your actual key\n4. Save the file — Continue reconnects automatically\n5. Type a message in the Continue panel to test: \"Hello — what model are you?\"\n\n*If you don't have an API key yet:*\n- Bookmark this lesson and return after completing lesson 11-3\n- The extension is installed and ready — it just needs credentials\n\n**Step 4 — Use it on real code**\n1. Open `exercises/practice.js`\n2. Select the sort function (or any function in the file)\n3. Press **Ctrl+L** — the selected code is added to the Continue chat context\n4. Type in the chat panel: \"Is there a more readable way to write this?\"\n5. Compare Continue's response to what Copilot Chat suggested for the same code in lesson 6-3"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Continue.dev Setup with Claude",
+      "content": "Continue.dev is an open-source AI assistant that lets you use Claude (or any model) in VS Code. This drill sets it up.\n\n**Step 1 — Install Continue** from the VS Code Extensions marketplace.\n\n**Step 2 — Configure Claude as your model:** Click the Continue icon in the Activity Bar → Settings → Add Model → Anthropic → Claude Sonnet 4.x. Enter your API key.\n\n**Step 3 — Test the chat:** Open Continue sidebar (Ctrl+Shift+I or click its icon). Ask: \"Explain what VS Code extensions do.\"\n\n**Step 4 — Test code-aware chat:** Open a code file. Select some code. Right-click → Continue → \"Ask about selection\". Does Continue include your selected code in the context?\n\n**Step 5 — Compare Continue to Copilot Chat** if you have both: Ask the same code question in both. Which gives a more useful response for your code?\n\n**Step 6 — Ask Claude:** *\"I'm using Continue.dev with Claude. What are the 5 most effective ways to use it that are different from just asking questions in a browser tab?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI Code Chat on a Real Problem",
+      "content": "Use Continue.dev (or any VS Code AI assistant) to solve a real coding problem — from question to working code.\n\n**Step 1 — Identify a real coding task** you need to complete: a function to write, a problem to solve, a feature to add.\n\n**Step 2 — Open the Continue sidebar** alongside your code file.\n\n**Step 3 — Have a conversation** to build the solution:\n- Start with your goal: \"I need to build a function that does [X]\"\n- Ask for an approach: \"What's the best approach for this?\"\n- Ask for the code: \"Write the implementation\"\n- Ask for explanation: \"Explain the key parts I might not understand\"\n\n**Step 4 — Insert the code** into your file.\n\n**Step 5 — Mandatory review:** Tell Continue: *\"Review the code you just wrote. What are 3 potential problems: edge cases not handled, performance issues, or error scenarios? Fix each one.\"*\n\n**Step 6 — Run and test** the code. If it fails, paste the error back into Continue."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Model Comparison in Continue.dev",
+      "content": "Continue.dev lets you use multiple AI models. This workshop compares them on a coding task.\n\n**Step 1 — In Continue.dev settings**, add at least two models: Claude Sonnet (for quality) and a free model like Llama via Ollama (if set up) or Gemini.\n\n**Step 2 — Choose a real coding task** — something where quality matters.\n\n**Step 3 — Ask the same question in each model** using Continue's model selector. Record:\n- Quality of explanation\n- Correctness of code\n- How well it handles your specific context\n\n**Step 4 — Identify the best model** for this type of task. Note: for professional work, Claude Sonnet is typically best for code quality. Smaller models are faster but less capable.\n\n**Step 5 — Ask Claude:** *\"When working with AI coding assistants in VS Code, what types of tasks should I use a high-quality large model (like Claude Sonnet) vs when is a smaller, faster model acceptable?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Custom Continue.dev Prompt Library",
+      "content": "Continue.dev supports custom slash commands — create a library of specialised coding prompts.\n\n**Step 1 — Identify your 5 most common coding tasks** where you ask AI for help.\n\n**Step 2 — In Continue.dev config** (open config.json from Continue settings), add custom slash commands:\n```json\n\"slashCommands\": [\n  {\n    \"name\": \"review\",\n    \"description\": \"Code review with security focus\",\n    \"prompt\": \"Review this code. Check for: (1) logic errors, (2) security vulnerabilities especially injection risks, (3) unhandled exceptions, (4) performance issues. For each issue found: state the line number, what's wrong, and the specific fix.\"\n  },\n  {\n    \"name\": \"test\",\n    \"description\": \"Generate comprehensive tests\",\n    \"prompt\": \"Generate unit tests for this code. Include: happy path, edge cases (empty input, null values, max values), and error cases. Use the same test framework as any existing tests in the project.\"\n  }\n]\n```\n\n**Step 3 — Test each custom command** on real code.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review my Continue.dev custom prompts. What's missing from each prompt that would make the AI output more reliable and actionable?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main advantage of Continue.dev over GitHub Copilot for Claude users?",
+      "options": [
+        "Continue.dev has better code completion",
+        "Continue.dev is open-source and lets you use Claude as your AI model, while Copilot only uses GitHub's OpenAI-based models",
+        "Continue.dev is faster",
+        "Continue.dev works without an internet connection"
+      ],
+      "correct": 1,
+      "explanation": "The key advantage: Continue.dev is model-agnostic — you can configure it to use Claude, GPT-4, Gemini, or local models. GitHub Copilot is locked to GitHub's model selection (OpenAI-based). For developers who prefer Claude's reasoning and writing quality for code, Continue.dev is the path to having Claude as your primary in-editor AI assistant."
+    },
+    {
+      "type": "quiz",
+      "question": "You use Continue.dev and notice it doesn't seem to understand the structure of your project — it gives generic answers that ignore your actual codebase. What should you do?",
+      "options": [
+        "Switch to GitHub Copilot",
+        "Use Continue's @codebase or @file context features to explicitly reference relevant files in your questions",
+        "Accept that AI can't understand project context",
+        "Ask very specific questions and provide all context manually in each message"
+      ],
+      "correct": 1,
+      "explanation": "Continue.dev supports context providers that give the AI visibility into your codebase. Using @codebase (searches your project), @file (references a specific file), or @folder (references a directory) explicitly brings relevant code into the conversation context. Without context references, the AI only sees what you paste — with them, it can reason about your actual project structure."
     },
     {
       "type": "callout",

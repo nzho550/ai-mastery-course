@@ -2,8 +2,13 @@
   "id": "5-3",
   "title": "The Interface: A Named Tour",
   "part": 5,
-  "estimatedMinutes": 20,
-  "tags": ["vscode", "beginner", "interface", "navigation"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "vscode",
+    "beginner",
+    "interface",
+    "navigation"
+  ],
   "sections": [
     {
       "type": "text",
@@ -38,6 +43,54 @@
       "tag": "VSCODE",
       "title": "Name Every Panel",
       "content": "Open VS Code and complete this checklist. The goal is to click or activate each zone at least once so the layout is physically familiar — not just something you read about.\n\n**Activity Bar:**\n- [ ] Click the **folder icon** (Explorer) — confirm the sidebar shows a file tree (or \"Open Folder\" if no folder is open yet)\n- [ ] Click the **magnifying glass** (Search) — confirm the sidebar becomes a search box\n- [ ] Click the **branch icon** (Source Control) — confirm the sidebar shows Git-related content\n- [ ] Click the **puzzle piece** (Extensions) — confirm the sidebar shows the Extensions panel\n- [ ] Click the **folder icon** again to return to Explorer\n\n**Panel:**\n- [ ] Press **Ctrl+`** (backtick) — the Panel opens showing a Terminal\n- [ ] Click the **Problems** tab in the Panel — note what it shows\n- [ ] Press **Ctrl+`** again to close the Panel\n\n**Status Bar:**\n- [ ] Open any file (if you have one) or create a new one: Ctrl+N\n- [ ] Click in the editor area and look at the bottom-right of the screen — find the `Ln X, Col Y` indicator\n- [ ] Find where the language mode is shown (bottom right, e.g., \"Plain Text\" or \"HTML\")\n\n**Keyboard shortcuts to remember:**\n- `Ctrl+B` — toggle the sidebar\n- `Ctrl+J` — toggle the panel\n- `Ctrl+`\\`` — toggle the terminal\n\nAfter completing this checklist, you'll never be lost in VS Code again."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Interface Navigation Drill",
+      "content": "This 8-minute drill builds interface fluency through timed challenges.\n\n**Step 1 — Close all open tabs and panels** in VS Code. Start fresh.\n\n**Step 2 — Time yourself on each challenge (aim for under 10 seconds):**\n\n- Open the Explorer panel without using the mouse\n- Open the Command Palette\n- Open the integrated terminal\n- Open the Extensions panel\n- Switch between two open files using the keyboard only\n- Go to line 50 in the current file\n- Find all occurrences of the word \"function\" in the current file\n- Open the Settings page\n\n**Step 3 — For any challenge that took more than 15 seconds**, look up the keyboard shortcut and practice it 3 times.\n\n**Step 4 — Ask Claude:** *\"Give me the 10 VS Code keyboard shortcuts that the most productive developers use every day. For each, explain when you'd use it and what it does. Format as a table: Shortcut | Action | When to use it.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Customise Your VS Code Layout",
+      "content": "A personalised layout reduces friction and makes you faster. This workshop sets yours up.\n\n**Step 1 — Configure the Activity Bar:** Right-click the Activity Bar (the leftmost icon column). Hide any panel you won't use regularly.\n\n**Step 2 — Configure the Status Bar:** The bar at the bottom shows useful info. Click on different elements to see what they control.\n\n**Step 3 — Set up Split Editor:** Open two files. Click View → Split Editor Right. Arrange them side-by-side — useful when reading reference code while writing.\n\n**Step 4 — Configure Minimap:** Open a long file. The minimap (right side) shows a bird's-eye view. Go to Settings and search \"minimap\" — enable or disable based on your preference.\n\n**Step 5 — Save your setup as a Profile:** File → Profiles → Create Profile. Name it for your use case. Profiles save your extensions and settings so you can restore them on a new machine.\n\n**Step 6 — Ask Claude:** *\"I use VS Code for [your work type]. What layout settings and workspace configuration would a power user in my position have? Give me 5 specific things to change from defaults.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Breadcrumbs, Outline and Navigation",
+      "content": "VS Code has powerful navigation features that most beginners never discover. This workshop covers them.\n\n**Step 1 — Open a code file** (any .py, .js, .html file — create one if needed).\n\n**Step 2 — Enable Breadcrumbs** (View → Breadcrumbs). Notice the path shown at the top of the editor. Click any part of the breadcrumb to navigate.\n\n**Step 3 — Open the Outline Panel:** Explorer → Outline. This shows the structure of your file: functions, classes, variables. Click any item to jump to it.\n\n**Step 4 — Use Go to Definition:** Hover over a function name. Press F12. VS Code jumps to where that function is defined — even in another file.\n\n**Step 5 — Use Find All References:** Right-click a variable name → Find All References. VS Code shows every place that variable is used.\n\n**Step 6 — Ask Claude:** *\"What are the most useful VS Code navigation features for working with AI-generated code? I often get code spread across multiple files and need to understand how pieces connect.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Multi-Cursor and Selection Power",
+      "content": "Multi-cursor editing is the feature that makes VS Code users dramatically faster than Notepad users.\n\n**Step 1 — Create a file** with these test lines:\n```\nfirst_name = \"Alice\"\nfirst_name = \"Bob\"\nfirst_name = \"Charlie\"\n```\n\n**Step 2 — Practice multi-cursor:** Click the first `first_name`. Hold Alt and click the other two. You now have 3 cursors. Type `user_name` — it replaces all 3 at once.\n\n**Step 3 — Practice Select All Occurrences:** Select the word `user_name`. Press Ctrl+Shift+L. Every occurrence is selected. Type a replacement.\n\n**Step 4 — Practice box selection:** Hold Shift+Alt and drag vertically. This selects a column of text.\n\n**Step 5 — Ask Claude to give you a practice file:**\n```\nGenerate a Python file with 20 lines that has deliberate inconsistencies — some variables named with camelCase and some with snake_case, some with wrong spacing. I want to practice multi-cursor editing to fix them all at once.\n```\n\n**Step 6 — Fix all the inconsistencies** using multi-cursor, Select All Occurrences, and Find/Replace. Aim to do it with fewer than 10 keystrokes."
+    },
+    {
+      "type": "quiz",
+      "question": "You are reading a function in VS Code and want to jump to where a variable was originally defined. What is the keyboard shortcut?",
+      "options": [
+        "Ctrl+G",
+        "F12 (Go to Definition)",
+        "Ctrl+F (Find)",
+        "Ctrl+Home"
+      ],
+      "correct": 1,
+      "explanation": "F12 (Go to Definition) jumps from where a symbol (variable, function, class) is used to where it's defined. This is essential when reading AI-generated code that spans multiple files. Ctrl+G goes to a specific line number. Ctrl+F opens Find. These navigation shortcuts are what separate fast VS Code users from slow ones."
+    },
+    {
+      "type": "quiz",
+      "question": "You need to rename a variable from `oldName` to `newName` everywhere it appears in your file. What is the correct VS Code approach?",
+      "options": [
+        "Find & Replace (Ctrl+H) — manually type each replacement",
+        "Select the variable name and press F2 (Rename Symbol) — VS Code renames it everywhere including definitions and references",
+        "Use multi-cursor to select each instance manually",
+        "Delete the file and ask AI to rewrite it with the correct name"
+      ],
+      "correct": 1,
+      "explanation": "F2 (Rename Symbol) is the correct approach — it's a semantic rename that understands code. It renames the definition and all references, even across multiple files, and doesn't accidentally rename different things that happen to share the same string. Find & Replace (A) would rename everything with that text, including in strings and comments where you might not want it."
     },
     {
       "type": "callout",

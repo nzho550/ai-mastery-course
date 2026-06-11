@@ -2,8 +2,13 @@
   "id": "1-5",
   "title": "Privacy & Safety — What NOT to Share with AI",
   "part": 1,
-  "estimatedMinutes": 20,
-  "tags": ["foundations", "beginner", "privacy", "safety"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "foundations",
+    "beginner",
+    "privacy",
+    "safety"
+  ],
   "sections": [
     {
       "type": "text",
@@ -55,6 +60,54 @@
       ],
       "correct": 2,
       "explanation": "De-identification is the correct technique. The fact that an email exists doesn't mean you're authorised to send the client's information to third-party AI servers — your employment contract or NDA likely covers that. You don't need the client's name, company, or exact contract value to get good advice on handling the communication. Replace those details with generic descriptions, paste only the relevant section, and AI can help effectively. Option 4 is too conservative — you can use AI for client communication with proper de-identification."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Privacy Audit of Your Own Prompts (Quick Drill)",
+      "content": "This 8-minute exercise reviews prompts you have already written for hidden privacy risks.\n\n**Step 1 — Look through your recent AI conversations** (Claude, ChatGPT, or whichever tool you use). Find 3-5 prompts you have sent.\n\n**Step 2 — For each prompt**, check whether it contains:\n- A real person's name and a sensitive detail about them\n- Your own location, address, or personal identifier\n- Confidential business information (client names, financial figures, internal processes)\n- Medical, legal, or financial details that should stay private\n- Login credentials, API keys, or system details\n\n**Step 3 — Rate each prompt:** Green (safe), Yellow (borderline — should I have shared this?), Red (I shouldn't have shared this).\n\n**Step 4 — Ask Claude:** *\"I will describe what I shared in an AI prompt. Tell me what the privacy risk is and whether I should be concerned: [describe your yellow or red prompts in general terms — don't paste the actual private content again].\"*\n\n**Step 5 — Note any patterns:** Are there types of information you routinely share with AI that you shouldn't?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Personal AI Privacy Policy",
+      "content": "You will create a short, practical document that defines what you will and won't share with AI tools — based on your actual work and life context. Use this before every AI session.\n\n**Step 1 — List your AI use cases:** What do you use AI for regularly or plan to use it for? Write 6-10 specific use cases.\n\n**Step 2 — For each use case**, ask: what private information might naturally come up?\n\n**Step 3 — Open Claude.ai** and paste your use case list. Ask: *\"For each of these AI use cases, what private or sensitive information is likely to be involved? For each, recommend: (1) what I should anonymise or remove before sharing, (2) whether to use a privacy-first AI tool instead (e.g., local model), (3) whether this use case should be avoided with cloud AI entirely.\"*\n\n**Step 4 — Draft your personal AI privacy policy:** A one-page document with three sections: (a) Fine to share with cloud AI, (b) Only share after anonymising, (c) Never share with cloud AI.\n\n**Step 5 — Mandatory AI review:** Share your policy (not the sensitive content itself) with Claude and say: *\"Review this AI privacy policy critically. Find 3 gaps — situations where following this policy would still expose private information I should protect.\"*\n\n**Step 6 — Update your policy** based on the gaps found.\n\n**Step 7 — Save your policy** somewhere you'll see it: a sticky note on your monitor, a pinned document, or as instructions in your Claude Project."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Anonymisation Practice",
+      "content": "Practice turning sensitive real content into safe AI input without losing usefulness.\n\n**Step 1 — Find a real work document** that contains private information: a client email, a report with names, meeting notes with sensitive content.\n\n**Step 2 — Anonymise it** before you would share it with AI:\n- Replace real names with \"Client A\", \"Colleague B\", \"Company X\"\n- Replace specific figures with approximate ranges (\"around £50,000\")\n- Remove location details unless relevant\n- Remove identifying context unless necessary\n\n**Step 3 — Check your anonymised version:** Could someone reading it identify who it refers to? If yes, anonymise further.\n\n**Step 4 — Use the anonymised version** to complete a real task with Claude (summarise it, draft a response, analyse it).\n\n**Step 5 — Evaluate:** Did anonymising hurt the quality of AI assistance? If yes — what would you need to restore (keeping it still safe)? If no — the anonymised version was enough.\n\n**Step 6 — Write a one-sentence rule** for yourself about when and how to anonymise content for this type of task."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Team or Family AI Safety Guidelines",
+      "content": "Apply what you've learned to create guidelines for others who share your AI tools.\n\n**Step 1 — Identify your audience:** Is this for your work team, your household, your students, or yourself?\n\n**Step 2 — Ask Claude:** *\"Help me write clear AI privacy guidelines for [audience]. They need to understand: (1) what information they should never type into AI tools, (2) what to do if they realise they've already shared something sensitive, (3) which AI tools are appropriate for different levels of sensitivity. Keep it to one page, plain language, no jargon.\"*\n\n**Step 3 — Review the guidelines.** Are they realistic for your audience? Too strict? Not strict enough?\n\n**Step 4 — Refine for your specific context:** Add any organisation-specific rules (regulatory requirements, contractual obligations, company policy).\n\n**Step 5 — Share or display:** Send the guidelines to your team or household, or post them somewhere visible near where you work."
+    },
+    {
+      "type": "quiz",
+      "question": "Your company's AI policy says \"don't share client information with AI.\" A client emails you a problem and you want AI help drafting a reply. What should you do?",
+      "options": [
+        "Skip using AI — the policy says no client information",
+        "Paste the full email — the AI company says they don't train on API inputs",
+        "Remove the client's name, company, and any identifying details from the email before asking AI to help you draft a response",
+        "Check whether the client gave consent to AI processing first"
+      ],
+      "correct": 2,
+      "explanation": "The right approach is anonymisation — you can still get AI assistance without violating the policy. Replace identifying details with placeholders before sharing. This lets you get useful help while respecting privacy commitments. Skipping AI entirely (A) is overly restrictive when anonymisation solves the problem. Relying on vendor policies (B) doesn't satisfy your company's own policy requirements."
+    },
+    {
+      "type": "quiz",
+      "question": "Which of these is safe to paste directly into a cloud AI tool without modification?",
+      "options": [
+        "Your salary slip to ask for help understanding deductions",
+        "A spreadsheet of customer names and purchase history for analysis",
+        "A project brief that describes internal strategy not yet announced publicly",
+        "An industry report you downloaded from a public website"
+      ],
+      "correct": 3,
+      "explanation": "Publicly available content (option D) is safe to share — it's already accessible to anyone. Your salary slip (A) contains personal financial data. Customer lists (B) contain personal data that may be regulated under GDPR or similar laws. Internal unpublished strategy (C) is confidential business information. When in doubt: would this content be acceptable if it leaked?"
     },
     {
       "type": "callout",

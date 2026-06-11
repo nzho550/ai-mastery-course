@@ -2,8 +2,14 @@
   "id": "5-9",
   "title": "Settings — UI Mode & JSON Mode",
   "part": 5,
-  "estimatedMinutes": 20,
-  "tags": ["vscode", "beginner", "settings", "configuration", "json"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "vscode",
+    "beginner",
+    "settings",
+    "configuration",
+    "json"
+  ],
   "sections": [
     {
       "type": "text",
@@ -39,6 +45,54 @@
       "tag": "VSCODE",
       "title": "Configure Your Environment",
       "content": "Configure VS Code through both the UI and JSON modes.\n\n**Part 1 — Settings UI (Ctrl+,):**\n\n1. Press **Ctrl+,** to open Settings\n2. Search `font size` → set **Editor: Font Size** to `15`\n3. Search `auto save` → set **Files: Auto Save** to `afterDelay`\n4. Search `word wrap` → set **Editor: Word Wrap** to `on`\n5. Search `format on save` → enable **Editor: Format On Save** (check the checkbox)\n6. Close the Settings tab (Ctrl+W)\n\n**Part 2 — settings.json (direct JSON editing):**\n\n1. Press **Ctrl+Shift+P** → type `Open User Settings JSON` → press Enter\n2. You should see the four settings you just added:\n```json\n{\n  \"editor.fontSize\": 15,\n  \"files.autoSave\": \"afterDelay\",\n  \"editor.wordWrap\": \"on\",\n  \"editor.formatOnSave\": true\n}\n```\n3. Add the font family line — place your cursor after the last setting (after `true`) and add a comma, then a new line:\n```json\n{\n  \"editor.fontSize\": 15,\n  \"files.autoSave\": \"afterDelay\",\n  \"editor.wordWrap\": \"on\",\n  \"editor.formatOnSave\": true,\n  \"editor.fontFamily\": \"JetBrains Mono, Consolas, monospace\"\n}\n```\n4. Press **Ctrl+S** to save\n5. The editor font updates immediately\n\n**Part 3 — Verify Prettier + Format on Save:**\n1. Open `hello.html`\n2. Deliberately break the indentation — add extra spaces at the start of a line\n3. Press Ctrl+S\n4. If Prettier is set as the default formatter, the indentation fixes itself on save\n\n**Check:**\n- [ ] Settings UI changes reflected in settings.json\n- [ ] Font family line added without JSON errors (no red underlines)\n- [ ] Prettier auto-formats hello.html on save"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Settings Exploration Drill",
+      "content": "This 8-minute drill explores VS Code settings so you know what you can customise.\n\n**Step 1 — Open Settings** (Ctrl+,).\n\n**Step 2 — Explore each major category** (left sidebar) and read 2-3 settings in each:\n- Text Editor: font, cursor, formatting\n- Workbench: appearance, sidebar layout\n- Extensions: each installed extension has settings here\n- Terminal: terminal appearance and behaviour\n\n**Step 3 — Find a setting you want to change** (font size, tab size, auto save). Change it and see the immediate effect.\n\n**Step 4 — Open Settings (JSON):** Ctrl+Shift+P → \"Open User Settings (JSON)\". This is the raw JSON behind the UI.\n\n**Step 5 — Add one JSON setting** that's not available in the UI (ask Claude: \"Give me 5 VS Code settings that are only configurable via JSON, not the UI\").\n\n**Step 6 — Note the difference:** UI settings = discoverable. JSON settings = more powerful and portable."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Ideal Settings.json",
+      "content": "Create a settings.json that configures VS Code exactly how you want it — for your work, your eyes, your workflow.\n\n**Step 1 — Ask Claude:**\n```\nCreate a VS Code settings.json for a developer who:\n- Works with [your language(s)]\n- Values [readability / performance / minimal distractions / etc.]\n- Uses [your AI extension]\n- Common pain points: [any settings you've disliked]\n\nExplain each setting in a comment above it. Make it production-ready.\n```\n\n**Step 2 — Review every setting** in the output. Remove anything you don't want.\n\n**Step 3 — Apply the settings:** Ctrl+Shift+P → \"Open User Settings (JSON)\" → replace with Claude's output (keeping any custom settings you already have).\n\n**Step 4 — Test by opening files** of each type you work with. Does everything look and behave correctly?\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this settings.json. What settings might conflict with each other? What settings might cause unexpected behaviour for [your use case]?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Sync Settings Across Machines",
+      "content": "VS Code Settings Sync lets your configuration follow you to any machine.\n\n**Step 1 — Enable Settings Sync:** Click the person icon (bottom-left) → Turn on Settings Sync.\n\n**Step 2 — Choose what to sync:**\n- Settings\n- Keyboard Shortcuts\n- Extensions\n- Snippets\n- UI State\n\n**Step 3 — Sign in** with a Microsoft or GitHub account.\n\n**Step 4 — Verify sync:** If you have access to a second machine (or can check via the VS Code web version), verify your settings appear there.\n\n**Step 5 — Alternative: Manual sync** using a dotfiles repository. Ask Claude: \"What is a dotfiles repository and how do developers use it to sync VS Code settings across machines without using the built-in sync feature?\"\n\n**Step 6 — Decide your sync strategy:** Built-in sync is easiest. Dotfiles gives more control and works across all tools, not just VS Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Configure Language-Specific Settings",
+      "content": "Different file types can have different settings in VS Code — for example, Python might use 4-space indentation while JavaScript uses 2.\n\n**Step 1 — Open your settings.json** (Ctrl+Shift+P → \"Open User Settings JSON\").\n\n**Step 2 — Add language-specific overrides:**\n```json\n{\n    \"[python]\": {\n        \"editor.tabSize\": 4,\n        \"editor.defaultFormatter\": \"ms-python.black-formatter\",\n        \"editor.formatOnSave\": true\n    },\n    \"[javascript]\": {\n        \"editor.tabSize\": 2,\n        \"editor.defaultFormatter\": \"esbenp.prettier-vscode\",\n        \"editor.formatOnSave\": true\n    },\n    \"[json]\": {\n        \"editor.tabSize\": 2,\n        \"editor.formatOnSave\": true\n    }\n}\n```\n\n**Step 3 — Test:** Open a .py file, add some messy indentation, save. Does it auto-format? Open a .js file — does it format differently?\n\n**Step 4 — Ask Claude:** *\"What language-specific settings should I configure for [your language]? Include formatter choice, linter settings, and any special behaviour that differs from VS Code defaults.\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You change a VS Code setting in the UI but nothing changes in your project. You suspect there is a workspace settings.json that is overriding your user settings. How do you check?",
+      "options": [
+        "Restart VS Code — settings sometimes require a restart",
+        "Open .vscode/settings.json in your project and check if the same setting is defined there — workspace settings override user settings",
+        "Reinstall VS Code with fresh settings",
+        "Disable all extensions and try again"
+      ],
+      "correct": 1,
+      "explanation": "VS Code settings have a hierarchy: user settings (global) < workspace settings (.vscode/settings.json) < folder settings. Workspace settings override user settings for that project. If you change a setting globally but it doesn't take effect in a project, check if .vscode/settings.json has the same setting overriding it."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to enable \"Format on Save\" for JavaScript files only, not for Python files. How do you configure this in settings.json?",
+      "options": [
+        "You cannot apply Format on Save to specific file types — it's an all-or-nothing setting",
+        "Use language-specific settings: \"[javascript]\": {\"editor.formatOnSave\": true} while leaving Python without that setting",
+        "Install a JavaScript-specific extension that adds Format on Save",
+        "Add formatOnSave to your .eslintrc file instead"
+      ],
+      "correct": 1,
+      "explanation": "VS Code supports language-specific settings using the `\"[languageid]\"` key in settings.json. This lets you have formatOnSave for JavaScript but not Python (or vice versa), different tab sizes per language, different formatters per language, and any other setting that varies by file type. This is essential for polyglot developers who work across multiple languages with different conventions."
     },
     {
       "type": "callout",

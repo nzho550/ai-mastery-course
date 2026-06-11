@@ -2,8 +2,13 @@
   "id": "4-5",
   "title": "What is Code? A Plain-English Introduction",
   "part": 4,
-  "estimatedMinutes": 20,
-  "tags": ["computer-basics", "beginner", "code", "programming"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "computer-basics",
+    "beginner",
+    "code",
+    "programming"
+  ],
   "sections": [
     {
       "type": "text",
@@ -56,6 +61,54 @@
       ],
       "correct": 2,
       "explanation": "When code runs without errors but produces wrong output, it's a logic error. The syntax is valid (no error thrown), nothing fails at runtime (program doesn't crash), but the underlying logic of the calculation is wrong — in this case, probably multiplying by 2 somewhere it shouldn't. Logic errors are the hardest to debug because the computer has no idea anything is wrong. You find them by tracing through the logic manually or adding debug output at key points to see what values variables contain mid-execution."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Code Reading Drill",
+      "content": "This 8-minute drill builds your ability to read code without running it — an essential skill for working with AI-generated code.\n\n**Step 1 — Ask Claude** to write a short program (15-20 lines) in Python or JavaScript that does something simple: calculate a tip, convert temperatures, count words in text.\n\n**Step 2 — Before running it**, read through it line by line and write:\n- What does line 1 do?\n- What does the function do overall?\n- What will the output be?\n\n**Step 3 — Ask Claude** to explain each line in plain English, as if you've never seen code before.\n\n**Step 4 — Compare your guesses** to Claude's explanations. What did you understand correctly? What surprised you?\n\n**Step 5 — Change one thing**: Ask Claude, \"If I change [specific line] to [something different], what will happen?\" Try to predict the answer before Claude responds.\n\n**Step 6 — Reflect:** Code reading is a skill that improves with practice. The goal isn't to write code — it's to understand it well enough to verify that AI-generated code does what you intended."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Ask AI to Build You Something Real",
+      "content": "Use AI to build a small, genuinely useful program — no coding knowledge required. You'll describe what you want and guide the AI through the build.\n\n**Step 1 — Choose a small automation idea** — something you do manually that a program could do: renaming a batch of files, converting a CSV to a different format, calculating something repeatedly, generating a formatted report from data.\n\n**Step 2 — Ask Claude:** *\"I want to build a Python script that does: [describe your task in plain English]. I am not a programmer. Please: (1) write the complete script, (2) explain what each section does, (3) tell me exactly how to run it, (4) tell me what to do if I get an error.\"*\n\n**Step 3 — Save the script** Claude gives you to a file: `my-tool.py`.\n\n**Step 4 — Run the script** following Claude's instructions.\n\n**Step 5 — If it fails**, paste the full error to Claude and ask for the fix.\n\n**Step 6 — Mandatory code review:** Ask Claude: *\"Review this code you just wrote. Find 3 potential problems: places where it could fail, produce wrong output, or could be improved. Then fix each one.\"*\n\n**Step 7 — Use the finished tool** for its intended purpose at least once."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Code Concepts in Plain English",
+      "content": "This workshop builds your mental model of how code works — essential for guiding AI code generation.\n\n**Step 1 — Ask Claude to explain each concept** in one paragraph, using an analogy from real life:\n- Variables\n- Functions\n- Loops\n- Conditions (if/else)\n- Lists/arrays\n\n**Step 2 — For each concept**, ask Claude to show a minimal example in Python (3-5 lines). Read each example and confirm you understand how the explanation maps to the code.\n\n**Step 3 — Ask Claude to show how these concepts combine** in a small 20-line program.\n\n**Step 4 — Test your understanding:** Cover up the explanations and try to describe what each line does in the combined example, in your own words.\n\n**Step 5 — Ask:** *\"A common problem people have when asking AI to write code is that they don't describe what they want precisely enough. What information should I always give AI when asking it to write a program? Give me a template.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Program Specification",
+      "content": "The most important skill for non-programmers working with AI code is writing a clear specification — a description of what you want the program to do. This workshop builds that skill.\n\n**Step 1 — Choose any small program idea** from your work or life.\n\n**Step 2 — Write a specification** using this template:\n```\nProgram name: [name]\nWhat it does: [one sentence]\n\nInputs (what the user provides):\n- [input 1, type, example value]\n- [input 2, type, example value]\n\nOutputs (what it produces):\n- [output 1, format, example]\n\nEdge cases (what should happen when):\n- If input is empty: [behaviour]\n- If input is wrong type: [behaviour]\n- If no results found: [behaviour]\n\nExample run:\nUser enters: [example input]\nProgram outputs: [example output]\n```\n\n**Step 3 — Ask Claude to review your spec:** *\"Review this program specification. What is ambiguous? What edge cases have I missed? What would cause a programmer to implement this incorrectly?\"*\n\n**Step 4 — Improve the spec** based on Claude's feedback.\n\n**Step 5 — Ask Claude to build the program** using your improved spec. Compare how much better the code is when given a precise specification vs a vague description."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude writes a 50-line Python script for you. Before running it, what is the most important check?",
+      "options": [
+        "Verify the code compiles without errors by running it",
+        "Read through the code and confirm it does what you intended — look for obvious logic errors or misunderstood requirements",
+        "Count the number of lines to make sure it's complete",
+        "Check that the variable names are clear"
+      ],
+      "correct": 1,
+      "explanation": "Before running any AI-generated code, read through it and verify it does what you intended. AI often makes subtle logical mistakes — handling edge cases incorrectly, misinterpreting requirements, or implementing the right idea in the wrong order. Catching these before running is faster than debugging after. Ask: \"Does this code actually solve my specific problem, or does it solve a slightly different problem?\""
+    },
+    {
+      "type": "quiz",
+      "question": "What does a programming variable do?",
+      "options": [
+        "It checks if a condition is true or false",
+        "It repeats a block of code multiple times",
+        "It stores a piece of information with a name so you can use it later",
+        "It defines the overall structure of a program"
+      ],
+      "correct": 2,
+      "explanation": "A variable is a named storage location for a value. Like a labelled box: `age = 25` puts the number 25 in a box labelled \"age\", and you can retrieve it later just by writing \"age\". Variables make code readable and flexible — instead of writing the number 25 everywhere, you write \"age\" and can change the value in one place. If/else checks conditions (A), loops repeat code (B), and functions define reusable procedures."
     },
     {
       "type": "callout",

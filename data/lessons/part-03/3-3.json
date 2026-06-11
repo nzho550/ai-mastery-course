@@ -2,8 +2,12 @@
   "id": "3-3",
   "title": "Role & Persona Prompting",
   "part": 3,
-  "estimatedMinutes": 25,
-  "tags": ["prompting", "beginner", "role-prompting"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "role-prompting"
+  ],
   "sections": [
     {
       "type": "text",
@@ -59,6 +63,54 @@
       ],
       "correct": 2,
       "explanation": "Generic roles produce generic outputs. 'Business expert' is too broad to activate any specific knowledge domain or analytical approach. A Level 3 persona — with specific background, stakes, biases, and communication style — gives the model a much richer distribution of relevant patterns to draw from. The difference in output depth between 'Act as a business expert' and 'Act as a CFO who has reviewed 200 startup business plans and is particularly focused on unit economics and cash flow assumptions' is dramatic."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Persona Switch Drill",
+      "content": "This 8-minute drill shows how dramatically a single persona instruction changes AI output.\n\n**Step 1 — Choose a topic you know something about** — a subject where you can judge the quality of different explanations.\n\n**Step 2 — Ask Claude the same question 4 times** with different persona instructions:\n1. No persona instruction — just ask the question\n2. \"Explain this as if you are a university professor lecturing first-year students\"\n3. \"Explain this as a practitioner with 10 years of hands-on experience — skip theory, focus on what actually matters\"\n4. \"Explain this as a sceptic who is going to challenge every assumption\"\n\n**Step 3 — Compare the 4 responses.** Note: tone, vocabulary level, what is included vs omitted, how confident the voice sounds.\n\n**Step 4 — Identify which version was most useful** for your specific purpose. For the same topic, the right persona depends on your audience and goal.\n\n**Step 5 — Save the most useful persona instruction** in your prompt library."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Role-Based Reviewer",
+      "content": "The most powerful use of persona prompting is building a panel of expert reviewers for your work. This workshop creates a reusable reviewer prompt.\n\n**Step 1 — Choose a real document you've written** (a report, plan, email, presentation, or analysis).\n\n**Step 2 — Ask Claude** to review it three times with three different expert personas:\n```\nFirst, review this document as a sharp senior executive who cares only about whether this is actionable and worth their time.\n\nThen, review it as a detail-oriented auditor looking for logical gaps, unsupported claims, and missing information.\n\nFinally, review it as a cynical devil's advocate whose job is to argue against every recommendation.\n```\n\n**Step 3 — Collect all three reviews.** What did each expert notice that the others missed?\n\n**Step 4 — Mandatory AI review:** Ask Claude: *\"Based on the three reviews above, what are the 3 most important changes I should make to this document? Don't just list the issues — prioritise and give me a specific fix for each.\"*\n\n**Step 5 — Make at least 2 of the changes** before saving the final document.\n\n**Step 6 — Save this 3-persona review prompt** in your prompt library. You will reuse it every time you write something important."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Persona for Audience Adaptation",
+      "content": "The same content often needs to reach very different audiences. This workshop builds an audience adapter.\n\n**Step 1 — Choose a piece of your work** that needs to be communicated to multiple audiences: a technical finding, a business update, a data analysis result, a policy change.\n\n**Step 2 — Ask Claude to adapt it** for three different audiences:\n- Your direct manager (strategic, 2-3 sentences, focus on implications)\n- The team doing the work (operational, focus on what changes for them)\n- An external stakeholder or client (no jargon, focus on what they need to know or decide)\n\n**Step 3 — Review each adaptation.** Does each version sound right for its audience? Is anything missing that this specific audience would need?\n\n**Step 4 — Ask Claude for an audit:** *\"Review all three versions. Which one most accurately represents the original content? Which one is most appropriate for its audience? Where did the adaptation introduce any distortion?\"*\n\n**Step 5 — Use the best version** for your real communication need."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Create Your Expert Panel Prompt",
+      "content": "Build a customised expert panel for your specific domain — a reusable prompt that simulates the reviewers you'd most want before sending something important.\n\n**Step 1 — Think about your work.** Who are the people whose opinions matter most when you produce something? List 3-4 real types of reviewers (your manager, a subject matter expert, a skeptical client, a compliance officer, a newcomer who might be confused).\n\n**Step 2 — For each reviewer**, write:\n- Their role and expertise\n- What they care about most\n- What they are most likely to challenge\n- The tone they would use\n\n**Step 3 — Ask Claude:** *\"Based on these reviewer profiles [paste them], create a role-prompting template I can use to get all four reviews at once whenever I write something important. Each role should feel distinct and challenge different aspects of the work.\"*\n\n**Step 4 — Test the template** on a real piece of your work.\n\n**Step 5 — Refine and save.** The expert panel prompt is one of the highest-value tools in any serious AI user's toolkit."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to \"respond as a harsh critic who finds problems.\" What is the main benefit of this persona instruction?",
+      "options": [
+        "It makes Claude generate longer responses",
+        "It overrides Claude's tendency to validate and agree, surfacing genuine problems in your work",
+        "It makes Claude use more formal language",
+        "It allows Claude to access information it would normally withhold"
+      ],
+      "correct": 1,
+      "explanation": "Without explicit instruction, AI tends toward validation and agreement — it finds what's good about your work rather than what's problematic. A critic persona directly counteracts this tendency, making Claude actively look for problems, gaps, and weaknesses rather than strengths. This is why adversarial personas are so valuable for reviewing your own work before it goes to a real audience."
+    },
+    {
+      "type": "quiz",
+      "question": "You write a prompt: \"You are an expert in marketing.\" What is the most effective improvement to this persona instruction?",
+      "options": [
+        "Adding \"Please\" to make it more polite",
+        "Specifying the expert's viewpoint, what they care about, and what problem you want them to solve",
+        "Making the persona sound more impressive (\"world-renowned expert\")",
+        "Adding \"be creative\" to the end"
+      ],
+      "correct": 1,
+      "explanation": "The key improvement is specificity: what type of marketing, what perspective, what they care about, and what you need from them. \"Expert in marketing\" gives Claude very little to work with. \"Marketing director at a B2B SaaS company who cares deeply about retention metrics and always challenges vanity metrics\" gives Claude a clear, actionable lens to apply. The more specific the persona context, the more useful and distinct the response."
     },
     {
       "type": "callout",

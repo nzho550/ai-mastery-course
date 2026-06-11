@@ -2,8 +2,14 @@
   "id": "5-11",
   "title": "Split Editor & Working With Multiple Files",
   "part": 5,
-  "estimatedMinutes": 15,
-  "tags": ["vscode", "beginner", "split-editor", "layout", "multitasking"],
+  "estimatedMinutes": 50,
+  "tags": [
+    "vscode",
+    "beginner",
+    "split-editor",
+    "layout",
+    "multitasking"
+  ],
   "sections": [
     {
       "type": "text",
@@ -39,6 +45,54 @@
       "type": "callout",
       "variant": "tip",
       "content": "**Course workflow tip:** For the rest of this course, keep the lesson you're following in the left column and your exercise file in the right column. This lets you read and work simultaneously without switching windows. Many learners find this significantly speeds up their progress."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Split Editor and File Comparison Drill",
+      "content": "This 8-minute drill builds fluency with VS Code's multi-file view.\n\n**Step 1 — Open two related files** (or create two text files with different content).\n\n**Step 2 — Split the editor:** Ctrl+\\ (backslash) splits the current file to the right. Now you see the same file in two panes.\n\n**Step 3 — Move a file to the other pane:** Drag a tab from one pane to the other.\n\n**Step 4 — Compare two files:** Ctrl+Shift+P → \"Compare Active File with...\" → select the second file. VS Code shows a diff view with changes highlighted.\n\n**Step 5 — Work in both panes:** Write code in one pane while referencing another file in the other. This is the real workflow: reference documentation on the left, write code on the right.\n\n**Step 6 — Ask Claude:** *\"I often need to look at documentation or example code while writing my own. What VS Code layout and workflow would you recommend for this pattern?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Reference-While-Building Workflow",
+      "content": "Build a real piece of code while referencing an example or documentation in a split view — the most common advanced VS Code workflow.\n\n**Step 1 — Identify a real task:** Something you're building where you'll reference example code, a tutorial, or a documentation file.\n\n**Step 2 — Set up your split view:**\n- Left pane: open the reference file (example code, docs, notes)\n- Right pane: open a new file where you'll write your code\n\n**Step 3 — Ask Claude to help you start:**\n```\nI want to build [describe what you're building]. I have these examples/docs as reference: [describe what's in your left pane]. \n\nGive me a skeleton structure for my implementation that I can fill in, looking at the reference as I go.\n```\n\n**Step 4 — Work with the split view:** Reference the left pane to understand patterns, write your implementation in the right pane.\n\n**Step 5 — Mandatory review:** Once your implementation is complete, ask Claude: *\"Compare my implementation to the reference code. Find 3 differences where I diverged from the pattern — are these intentional improvements or mistakes?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Tab Groups and Layouts",
+      "content": "VS Code supports complex multi-pane layouts that match your workflow.\n\n**Step 1 — Create a 3-pane layout:**\n- Main file: your code (centre)\n- Left: file explorer\n- Bottom: integrated terminal\n\n**Step 2 — Move the panel to the right:** Ctrl+Shift+P → \"View: Move Panel Right\". Now terminal is on the right instead of bottom.\n\n**Step 3 — Create Tab Groups:** Right-click a tab → \"New Tab Group to the Right\". You can have independent tab groups with different files open.\n\n**Step 4 — Use Ctrl+1, Ctrl+2** to switch focus between editor panes without the mouse.\n\n**Step 5 — Try the Zen Mode:** Ctrl+Shift+P → \"View: Toggle Zen Mode\". Full screen, no distractions. Useful for reading and understanding complex code.\n\n**Step 6 — Find your preferred layout** for your most common task and write it down. Recreate it at the start of each work session."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a VS Code Workflow for AI Code Review",
+      "content": "Set up a specific VS Code layout optimised for reviewing AI-generated code.\n\n**Step 1 — The AI code review layout:**\n- Left pane: the AI-generated code file\n- Right pane: a review notes file (create review.md)\n- Bottom: terminal for running/testing the code\n\n**Step 2 — Create review.md** as a template:\n```markdown\n# Code Review Notes\n\n## Correctness Issues\n- [ ] \n\n## Security Concerns  \n- [ ] \n\n## Performance Problems\n- [ ] \n\n## Missing Error Handling\n- [ ] \n\n## Questions for AI\n- [ ] \n```\n\n**Step 3 — Read the AI-generated code** line by line in the left pane. Write notes in the right pane.\n\n**Step 4 — Run the code** in the bottom terminal and note any runtime errors.\n\n**Step 5 — Ask Claude to review it too:** Paste the code and your notes and ask: *\"Here is AI-generated code [paste] and my initial review notes [paste]. What did I miss? What are the 3 most important issues I should address first?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You have 15 files open as tabs in VS Code and it's getting hard to navigate. What are two good strategies?",
+      "options": [
+        "Close VS Code and reopen with fewer files",
+        "Use Ctrl+P to jump to files by name, and organise related files into tab groups",
+        "Open a new VS Code window for each group of files",
+        "Switch to a simpler editor with fewer features"
+      ],
+      "correct": 1,
+      "explanation": "Two effective strategies: Ctrl+P (Go to File) lets you jump to any file by typing its name — faster than scanning many tabs. Tab groups let you organise related files (e.g., frontend files in one group, backend files in another) so each group shows a manageable number of tabs. VS Code also has \"pinned tabs\" to keep frequently used files accessible and \"preview mode\" (single-click opens a temporary preview tab)."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to compare yesterday's version of a file to today's to see what changed. What VS Code feature does this?",
+      "options": [
+        "File → History (not a real VS Code feature)",
+        "Use git: `git diff` in the terminal or VS Code's Source Control panel to see changes between commits",
+        "Extensions → Install a diff tool",
+        "The VS Code Timeline (View → Open View → Timeline) shows file history and git diff for each entry"
+      ],
+      "correct": 3,
+      "explanation": "VS Code's Timeline view shows the history of a file, including git commits. Click any commit to see a diff of what changed. The Source Control panel (Ctrl+Shift+G) also shows all changed files with inline diffs. For comparing two specific commits, use `git diff commit1 commit2 filename` in the terminal or the GitLens extension for a richer GUI experience."
     },
     {
       "type": "callout",

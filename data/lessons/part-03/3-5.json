@@ -2,8 +2,13 @@
   "id": "3-5",
   "title": "Few-Shot Examples",
   "part": 3,
-  "estimatedMinutes": 25,
-  "tags": ["prompting", "beginner", "few-shot", "examples"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "few-shot",
+    "examples"
+  ],
   "sections": [
     {
       "type": "text",
@@ -64,6 +69,54 @@
       ],
       "correct": 2,
       "explanation": "Inconsistent classification on edge cases is a clear signal that the category descriptions aren't giving the model enough information to disambiguate. Adding examples — especially examples of the specific types of messages that are being misclassified — directly demonstrates what belongs in each category. This works better than longer descriptions because real examples contain pattern information that's difficult to capture in written rules. Specifically targeting the edge cases that are being classified inconsistently (by showing which category they belong in) is the most efficient fix."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Few-Shot Format Drill",
+      "content": "This 8-minute drill shows how dramatically examples change the format and quality of AI output.\n\n**Step 1 — Choose a type of content you regularly produce**: a report section, a status update, a brief, a recommendation, an email template.\n\n**Step 2 — Without examples**, ask Claude to produce one instance of this content. Save the result.\n\n**Step 3 — Now provide 2 examples** of the output format you actually want (use real examples from your work or write 2 brief samples). Then ask Claude to produce another instance \"following the same style and format as these examples.\"\n\n**Step 4 — Compare the two outputs.** How different are they? Which better matches your actual style preferences?\n\n**Step 5 — Identify the specific formatting elements** that the few-shot version captured that the zero-shot version missed.\n\n**Step 6 — Note:** For any recurring content type where style consistency matters, few-shot examples are the fastest path to getting the format right."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Few-Shot Content Templates",
+      "content": "Create few-shot templates for your most common content types — so you never start from scratch on recurring formats.\n\n**Step 1 — Identify 3 types of content you produce regularly** where consistency and format matter: emails, reports, meeting notes, code comments, analysis sections, etc.\n\n**Step 2 — Find 2 real examples** of each that represent your ideal output. These can be things you've written that you're proud of.\n\n**Step 3 — Build a template for each content type:**\n```\nHere are examples of [content type] that represent the style and format I want:\n\nExample 1:\n[your example]\n\nExample 2:\n[your example]\n\nNow write [content type] for: [new input]\n\nFollow the exact same structure, tone, and level of detail as the examples.\n```\n\n**Step 4 — Test each template** with a real new instance of that content type.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Compare your output to my examples. Where did you deviate from the format or style? List specific differences.\"* Refine the template if needed.\n\n**Step 6 — Save all 3 templates** in your prompt library."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Examples for Classification Tasks",
+      "content": "Few-shot examples are especially powerful for classification and categorisation tasks. This workshop demonstrates why.\n\n**Step 1 — Choose something from your work that you categorise regularly**: customer feedback, support tickets, expense types, content topics, priority levels — any classification task.\n\n**Step 2 — Without examples**, ask Claude to classify 5 items from your actual data. Note how it categorises them.\n\n**Step 3 — Now provide 3 labelled examples** that show exactly how you would classify items in your specific system:\n```\nHere are examples of how I classify [item type]:\n\n[Item 1]: Category A — because [brief reason]\n[Item 2]: Category B — because [brief reason]\n[Item 3]: Category C — because [brief reason]\n\nNow classify these new items using the same approach: [your 5 items]\n```\n\n**Step 4 — Compare the two sets of classifications.** How much did the examples change the results? Which set is more aligned with how you would actually classify them?\n\n**Step 5 — Write a one-sentence rule:** When should you always provide examples before asking Claude to classify?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Style Guide Through Examples",
+      "content": "Instead of describing your writing style, show it. This workshop creates an example-based style guide.\n\n**Step 1 — Select 3-4 pieces of writing you've produced** that best represent your preferred style: emails, reports, documentation, social media posts, etc.\n\n**Step 2 — Ask Claude to analyse your style** based on the examples:\n```\nHere are 3 examples of content I've written. Analyse them and identify:\n1. My sentence length preference (short/medium/long/mixed)\n2. My tone (formal/professional/conversational/direct)\n3. My paragraph structure patterns\n4. What I never do (e.g., I never use buzzwords, I never write passive voice)\n5. Any distinctive stylistic choices\n\n[paste your examples]\n```\n\n**Step 3 — Review Claude's style analysis.** Is it accurate? Add anything it missed.\n\n**Step 4 — Create a style instruction block** you can paste into any prompt when you want Claude to write in your voice:\n```\nWrite in my voice, which is characterised by: [paste Claude's analysis, corrected]\n```\n\n**Step 5 — Test the style instruction** on a new piece of content. Does the output sound like you?"
+    },
+    {
+      "type": "quiz",
+      "question": "You want Claude to write status updates in the exact format your team uses. Which is the most effective approach?",
+      "options": [
+        "Describe the format in words: \"Write a status update with three sections: Progress, Blockers, and Next Steps\"",
+        "Paste two real examples of status updates your team has approved, then ask Claude to follow the same format",
+        "Ask Claude to write a status update and then ask it to revise the format",
+        "Tell Claude the format is \"professional and concise\""
+      ],
+      "correct": 1,
+      "explanation": "Showing examples is far more effective than describing format in words. When you paste 2 real examples, Claude can match the exact header style, sentence length, level of detail, and formatting conventions that your team actually uses — details that are hard to capture in a description. \"Professional and concise\" (D) gives Claude almost nothing to work with."
+    },
+    {
+      "type": "quiz",
+      "question": "You provide 3 few-shot examples of customer service emails in a warm, friendly tone. Claude's output is much more formal. What is the most likely cause?",
+      "options": [
+        "Claude cannot match tone from examples",
+        "The examples were too short for Claude to learn from",
+        "Your instructions elsewhere in the prompt contradict the examples (e.g., \"write professionally\")",
+        "You need at least 5 examples for tone to transfer"
+      ],
+      "correct": 2,
+      "explanation": "When examples and explicit instructions conflict, the result is unpredictable. If your prompt says \"write professionally\" (which Claude interprets as formal) but your examples are warm and friendly, Claude may follow the explicit instruction over the examples. Remove conflicting instructions, or make the style instruction consistent with the examples: \"Write in the warm, conversational tone shown in these examples.\""
     },
     {
       "type": "callout",

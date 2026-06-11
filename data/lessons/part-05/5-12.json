@@ -2,8 +2,14 @@
   "id": "5-12",
   "title": "VS Code Git Integration (Source Control)",
   "part": 5,
-  "estimatedMinutes": 25,
-  "tags": ["vscode", "beginner", "git", "source-control", "version-control"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "vscode",
+    "beginner",
+    "git",
+    "source-control",
+    "version-control"
+  ],
   "sections": [
     {
       "type": "text",
@@ -45,6 +51,54 @@
       "type": "callout",
       "variant": "tip",
       "content": "**GitLens is now active.** Now that you have a Git repo, the GitLens extension you installed in lesson 5-8 wakes up. Open any file and hover over a line — you'll see a subtle annotation showing who made that change and when. In a solo project it will just say your name and the commit time, but the pattern becomes invaluable in team projects."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — VS Code Git Workflow Drill",
+      "content": "This 8-minute drill gets you comfortable with VS Code's Source Control panel as your primary git interface.\n\n**Step 1 — Open a git repository** in VS Code (or initialise one: Ctrl+Shift+P → \"Git: Initialize Repository\").\n\n**Step 2 — Make a change** to any file — add a line, modify something.\n\n**Step 3 — Open Source Control** (Ctrl+Shift+G). Notice the changed file appears under \"Changes\".\n\n**Step 4 — Stage the change:** Click the + icon next to the file. It moves to \"Staged Changes\".\n\n**Step 5 — Write a commit message** in the message box at the top. Click the checkmark to commit.\n\n**Step 6 — View the git history:** Click the \"...\" menu → \"View Git History\" (or install GitLens for a richer history view).\n\n**Step 7 — Ask Claude:** *\"I'm learning to use VS Code's Source Control panel. What are the git operations I should know how to do from the VS Code GUI vs when should I use the terminal instead?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Branch Workflow for a Real Feature",
+      "content": "Practice the standard git branch workflow for a real feature you're building.\n\n**Step 1 — Create a new branch** for a feature you're working on:\n- Ctrl+Shift+P → \"Git: Create Branch\"\n- Name it: `feature/[what you're building]`\n\n**Step 2 — Make changes on the branch:** Build something small on this branch — add a file, write some code.\n\n**Step 3 — Commit the changes** to the feature branch (Source Control panel → stage → commit).\n\n**Step 4 — Switch back to main:** Click the branch name (bottom-left status bar) → select main.\n\n**Step 5 — Merge your feature:** Ctrl+Shift+P → \"Git: Merge Branch\" → select your feature branch.\n\n**Step 6 — Resolve conflicts** (if any): VS Code shows conflicts with merge markers. Choose \"Accept Current Change\", \"Accept Incoming Change\", or \"Accept Both\".\n\n**Step 7 — Ask Claude:** *\"Explain the git branch workflow I just practiced. Why do developers use feature branches instead of committing directly to main?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — GitLens Power Features",
+      "content": "GitLens is the most popular VS Code extension for git. This workshop explores its best features.\n\n**Step 1 — Install GitLens** (Ctrl+Shift+X → search \"GitLens\").\n\n**Step 2 — Explore Git Blame:** Open a code file. GitLens shows who last changed each line and when (inline, faded). Hover over any line to see the full commit details.\n\n**Step 3 — Explore Git History:** Right-click a file in Explorer → \"Open Changes with Previous Revision\". See exactly what changed.\n\n**Step 4 — Use the Repository View:** Ctrl+Shift+P → \"GitLens: Show Repository\" — see all branches, commits, stashes.\n\n**Step 5 — Use Interactive Rebase** (GitLens makes this visual): Ctrl+Shift+P → \"GitLens: Git Interactive Rebase\" — reorder or squash commits.\n\n**Step 6 — Ask Claude:** *\"I installed GitLens. What are the 5 most useful features for someone who uses AI to generate code and wants to track what changed, when, and why?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — AI-Assisted Git Commit Messages",
+      "content": "Commit messages matter — they're documentation of why code changed. Use AI to write better ones.\n\n**Step 1 — Open Source Control** (Ctrl+Shift+G).\n\n**Step 2 — Stage your changes.** Look at the diff panel to see exactly what changed.\n\n**Step 3 — Ask Claude to write the commit message:**\n```\nI made the following code changes:\n[describe or paste the diff]\n\nWrite a commit message following these conventions:\n- First line: imperative mood, max 72 characters (e.g., \"Add validation for empty input\")\n- Optional body: what changed and WHY (not just what)\n- Reference any issue numbers if applicable\n\nProvide 3 options from most to least descriptive.\n```\n\n**Step 4 — Choose the best message** and paste it into VS Code's commit message box.\n\n**Step 5 — Mandatory habit:** Before every commit, spend 30 seconds making the commit message answer \"why\" not just \"what\". A git log full of \"fix bug\" messages is useless; \"Fix validation that rejected valid email addresses with plus signs\" is documentation."
+    },
+    {
+      "type": "quiz",
+      "question": "You make changes to a file but accidentally make it much worse. You want to undo all changes and return the file to the last committed state. What is the safest approach in VS Code?",
+      "options": [
+        "Ctrl+Z repeatedly until the changes are gone",
+        "Right-click the file in Source Control → \"Discard Changes\" — this reverts the file to its last committed state",
+        "Delete the file and restore it from git",
+        "Close VS Code without saving"
+      ],
+      "correct": 1,
+      "explanation": "In VS Code's Source Control panel, right-clicking a changed file shows \"Discard Changes\" — this reverts the file to exactly what it looked like at the last commit. Ctrl+Z only undoes edits within the current session and may not go back far enough. Closing without saving works if you haven't saved, but if you have saved the bad version, Discard Changes (or `git checkout -- filename` in the terminal) is the correct approach."
+    },
+    {
+      "type": "quiz",
+      "question": "You have two commits you want to combine into one before pushing to the team repository. What git operation does this?",
+      "options": [
+        "git merge",
+        "git rebase -i (interactive rebase) — squash combines multiple commits into one",
+        "git reset --hard",
+        "git stash"
+      ],
+      "correct": 1,
+      "explanation": "Interactive rebase (`git rebase -i HEAD~2` to work on the last 2 commits) lets you squash commits, reorder them, or rewrite messages. Squashing combines multiple commits into one, keeping a clean history. Important: only squash commits that haven't been pushed to a shared remote — rewriting shared history causes problems for others. GitLens in VS Code provides a visual interface for interactive rebase if you prefer not to use the command line."
     },
     {
       "type": "callout",

@@ -2,8 +2,13 @@
   "id": "5-7",
   "title": "The Integrated Terminal",
   "part": 5,
-  "estimatedMinutes": 20,
-  "tags": ["vscode", "beginner", "terminal", "powershell"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "vscode",
+    "beginner",
+    "terminal",
+    "powershell"
+  ],
   "sections": [
     {
       "type": "text",
@@ -35,6 +40,54 @@
       "tag": "TERMINAL",
       "title": "Terminal Inside VS Code",
       "content": "Complete these steps using only the integrated terminal inside VS Code. Do not open a separate PowerShell window.\n\n**Step 1 — Open the terminal:**\n1. Press **Ctrl+`** (backtick)\n2. The terminal panel appears at the bottom of the window\n3. Type `pwd` and press Enter\n4. Confirm you see your `ai-course-projects` folder path\n\n**Step 2 — Explore your project:**\n1. Type `ls` and press Enter — you should see your folders: `exercises`, `notes`, `prompts`, and `README.md`\n2. Type `cd exercises` and press Enter\n3. Type `ls` — you should see `hello.html` and `part-05-notes.md`\n4. Type `cd ..` to go back up to the project root\n\n**Step 3 — Create a file from the terminal:**\n1. Make sure you're at the project root (`pwd` should show `ai-course-projects`)\n2. Type this command and press Enter:\n   `echo \"# My Notes\" > notes/terminal-test.md`\n3. In the Explorer panel, look inside the `notes` folder — `terminal-test.md` appeared!\n4. Click it in the Explorer — it opens in the Editor Area with the text \"# My Notes\"\n\n**Step 4 — Toggle and split the terminal:**\n1. Press Ctrl+` to hide the terminal\n2. Press Ctrl+` again to show it\n3. Click the split icon in the terminal toolbar (or press Ctrl+Shift+5)\n4. You now have two terminal panes side by side\n5. Click in the right pane and type `ls` — it also shows your project files\n6. Close the right pane by clicking its X\n\n**Check:**\n- [ ] Terminal opens and shows your project folder\n- [ ] `ls` shows your folder structure\n- [ ] `terminal-test.md` was created and appears in the Explorer\n- [ ] You successfully toggled and split the terminal"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Integrated Terminal Drill",
+      "content": "VS Code's integrated terminal is where you spend a lot of time. This drill builds fluency.\n\n**Step 1 — Open the integrated terminal** (Ctrl+`).\n\n**Step 2 — Practice these terminal operations:**\n- Open a second terminal: click the + icon in the terminal panel\n- Switch between terminals: click the terminal names in the dropdown\n- Split the terminal: click the split icon — two terminals side-by-side\n- Kill a terminal: click the trash icon\n\n**Step 3 — Configure your terminal:**\n- Click the dropdown arrow next to + → Select Default Profile → choose PowerShell or Git Bash\n- Right-click the terminal area → Font Size → increase to a comfortable size\n\n**Step 4 — Terminal useful shortcuts:**\n- Ctrl+C: stop a running process\n- Ctrl+L or `clear`: clear the terminal screen\n- Up arrow: recall previous commands\n- Tab: autocomplete file/command names\n\n**Step 5 — Ask Claude:** *\"What are the 5 most time-saving terminal techniques for someone using PowerShell in VS Code for [your work type]?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Run a Real Project in the Terminal",
+      "content": "Use the integrated terminal to run a complete project workflow from start to finish.\n\n**Step 1 — Open your project** in VS Code.\n\n**Step 2 — Run these project commands** from the integrated terminal (adapting to your project type):\n\nFor Python:\n```powershell\npython --version\npython main.py\n```\n\nFor Node.js:\n```powershell\nnode --version\nnpm install\nnode index.js\n```\n\nFor any project:\n```powershell\ngit status\ngit log --oneline\n```\n\n**Step 3 — If you encounter an error**, paste it directly to Claude from the terminal. Ask: \"I got this error while running [command] in VS Code's integrated terminal: [paste error]. What does it mean and how do I fix it?\"\n\n**Step 4 — Install a dependency** from the terminal (Python example):\n```powershell\npip install requests\n```\n\n**Step 5 — Verify the dependency works** by writing a 3-line Python script that imports it."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Terminal Profiles and Customisation",
+      "content": "Set up your terminal to be faster and more informative.\n\n**Step 1 — Check what shells are available:**\n```powershell\n# In PowerShell:\nGet-Command -Name pwsh, bash, zsh 2>$null\n```\n\n**Step 2 — Install Windows Terminal** (if on Windows): it's a better terminal than the default cmd. Install from Microsoft Store.\n\n**Step 3 — Configure VS Code terminal settings:**\nOpen Settings (Ctrl+,) → search \"terminal\" → configure:\n- `terminal.integrated.fontSize`: set to a comfortable size\n- `terminal.integrated.cursorBlinking`: enable\n- `terminal.integrated.defaultProfile.windows`: set to PowerShell\n\n**Step 4 — Install Oh My Posh** (optional but impactful): It adds a theme to your PowerShell prompt that shows git branch, Python environment, and other useful context. Ask Claude: \"How do I install Oh My Posh for PowerShell to improve my terminal experience?\"\n\n**Step 5 — Test your improved terminal** by navigating into a git repository and noticing the branch name shown in your prompt."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Terminal Automation Script",
+      "content": "Automate your project startup with a script that runs from the VS Code terminal.\n\n**Step 1 — Identify your project startup sequence** — the commands you run at the start of every work session: activating a virtual environment, starting a server, running initial checks.\n\n**Step 2 — Ask Claude:** *\"Create a PowerShell/bash script called `start.ps1` (or `start.sh`) that automates my project startup. The script should: [describe your startup sequence]. After each step, it should print a confirmation message so I know it succeeded.\"*\n\n**Step 3 — Create and test the script** from the VS Code terminal.\n\n**Step 4 — Add it to your VS Code Task:**\nIn .vscode/tasks.json, add a task that runs your startup script:\n```json\n{\n    \"label\": \"Start Project\",\n    \"type\": \"shell\",\n    \"command\": \".\\\\start.ps1\",\n    \"group\": \"build\"\n}\n```\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this startup script. What could cause it to fail on a different machine or after a system update? What should I add to make it more robust?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You're running a Python server in VS Code's terminal and it's stuck — it won't accept new commands. How do you stop it?",
+      "options": [
+        "Close VS Code and reopen it",
+        "Press Ctrl+C — this sends an interrupt signal to stop the running process",
+        "Close the terminal tab — this kills the process",
+        "Press Ctrl+Z"
+      ],
+      "correct": 1,
+      "explanation": "Ctrl+C sends an interrupt signal (SIGINT) to the running process, which is the standard way to stop servers, scripts, or any running terminal program gracefully. Most well-written programs handle this by cleaning up and shutting down. Ctrl+Z suspends the process (it continues running in the background). Closing the terminal tab (C) does also kill the process but is less clean."
+    },
+    {
+      "type": "quiz",
+      "question": "You have three terminals open in VS Code running different things: one running your server, one for git commands, and one for running tests. How do you switch between them?",
+      "options": [
+        "You can only have one terminal open at a time",
+        "Click the terminal names in the terminal dropdown panel",
+        "Press Ctrl+Tab",
+        "Type `switch` in any terminal"
+      ],
+      "correct": 1,
+      "explanation": "VS Code's integrated terminal panel shows multiple terminals as separate tabs or entries in a dropdown. Click the name/number of the terminal you want to switch to. You can also use the dropdown arrow next to the terminal panel header to see all active terminals. Keeping multiple terminals open (server, git, tests) is a standard professional workflow — you don't need to stop and restart between tasks."
     },
     {
       "type": "callout",

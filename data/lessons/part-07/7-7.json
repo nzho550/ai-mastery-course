@@ -2,8 +2,13 @@
   "id": "7-7",
   "title": "Custom Slash Commands",
   "part": 7,
-  "estimatedMinutes": 35,
-  "tags": ["claude-code", "slash-commands", "automation", "workflow"],
+  "estimatedMinutes": 70,
+  "tags": [
+    "claude-code",
+    "slash-commands",
+    "automation",
+    "workflow"
+  ],
   "sections": [
     {
       "type": "text",
@@ -52,6 +57,54 @@
       ],
       "correct": 1,
       "explanation": "User-level commands stored in ~/.claude/commands/ are loaded automatically in every Claude Code session regardless of which project you're in — exactly like your user-level CLAUDE.md. A /review command that represents your general code review standard belongs at the user level. Project-specific commands (like a custom /deploy that runs this project's specific deployment script) belong at the project level. Most developers maintain a small user-level library of 5–10 general commands, and project-specific libraries of 2–5 commands tailored to that codebase."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — First Custom Slash Command",
+      "content": "Build and test your first custom slash command — a reusable workflow trigger.\n\n**Step 1 — Check the slash commands directory:**\n```powershell\nmkdir -p .claude/commands\n```\n\n**Step 2 — Create a simple review command:**\n```powershell\nnew-item .claude/commands/review.md\n```\n\n**Step 3 — Add content to review.md:**\n```markdown\n# Code Review\n\nPerform a thorough code review of the specified files. For each file:\n1. Check for logic errors and edge cases not handled\n2. Identify security vulnerabilities\n3. Note missing error handling\n4. Flag performance concerns\n5. List specific line-numbered improvements\n\nEnd with: priority order for addressing the issues found.\n```\n\n**Step 4 — Test the command in Claude Code:**\n```\n/review [your filename]\n```\n\n**Step 5 — Evaluate the output.** Is it more thorough than your previous reviews? Adjust the command prompt until it's consistently useful."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Custom Command Library",
+      "content": "Create a library of custom commands for your most frequent Claude Code tasks.\n\n**Step 1 — Identify your top 5 Claude Code tasks** — things you ask Claude Code to do in almost every session.\n\n**Step 2 — For each task**, write a custom command file in `.claude/commands/`:\n\nExample commands to create:\n- `review.md` — structured code review (from Workshop A)\n- `document.md` — generate docstrings for all undocumented functions\n- `test.md` — generate tests for a module\n- `debug.md` — systematic debugging analysis\n- `refactor.md` — identify and execute safe refactoring\n\n**Step 3 — Include in each command:**\n- Clear objective\n- Specific steps or format you want\n- What to check or include\n- What NOT to do\n\n**Step 4 — Test each command** on real code in your project.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review these custom commands. For each, what important instruction is missing that would make the output more reliable and useful?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Parameterised Commands",
+      "content": "Make your custom commands more flexible with arguments.\n\n**Step 1 — Create a parameterised command** in `.claude/commands/analyse.md`:\n```markdown\n# Analyse Code\n\nAnalyse the code at $ARGUMENTS.\n\nProvide:\n1. What this code does (1 paragraph)\n2. How it interacts with the rest of the project\n3. The 3 most important things someone maintaining this code should know\n4. Anything that looks potentially fragile or confusing\n\nBe specific — reference actual function names and line numbers.\n```\n\n**Step 2 — Test with arguments:**\n```\n/analyse src/auth.py\n/analyse src/utils.py src/models.py\n```\n\n**Step 3 — Note how $ARGUMENTS is replaced** with what you type after the command.\n\n**Step 4 — Create a second parameterised command** for a task you do frequently.\n\n**Step 5 — Ask Claude:** *\"What other techniques can I use in custom Claude Code commands to make them more powerful or flexible?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Share Commands Across a Team",
+      "content": "Custom commands can be shared with your team so everyone benefits from your prompt engineering work.\n\n**Step 1 — Commit your .claude/commands/ directory** to your project repository:\n```powershell\ngit add .claude/commands/\ngit commit -m \"Add custom Claude Code commands for team use\"\n```\n\n**Step 2 — Add documentation** to your CLAUDE.md listing available commands and when to use each.\n\n**Step 3 — Ask Claude:** *\"I want to share these custom Claude Code commands with my team. What should I include in the documentation so teammates can effectively use and contribute to the command library?\"*\n\n**Step 4 — Write a brief guide** (add it to your CLAUDE.md or README) covering:\n- What custom commands exist\n- When to use each one\n- How to add new commands\n- How to report issues with a command\n\n**Step 5 — Test from a colleague's perspective:** Open the project in a fresh Claude Code session and try the commands. Are they discoverable? Do they work?"
+    },
+    {
+      "type": "quiz",
+      "question": "You create a custom command called `/deploy` that runs production deployment scripts. What is the most important safety measure to add?",
+      "options": [
+        "Add a comment saying \"use carefully\"",
+        "Add explicit confirmation steps in the command and a warning about the environment being targeted — production deployments should never run automatically without human confirmation",
+        "Password-protect the command file",
+        "Only include the command in branches, not main"
+      ],
+      "correct": 1,
+      "explanation": "High-stakes operations like production deployments need explicit human confirmation steps built into the command. For example: \"Before running any deployment command, list the exact commands you will run and ask for explicit confirmation. State clearly whether this is targeting staging or production.\" The goal is to ensure the human understands what will happen and can stop it. Never design an autonomous AI command to execute irreversible production operations without a checkpoint."
+    },
+    {
+      "type": "quiz",
+      "question": "A custom slash command you wrote works perfectly for Python files but produces poor output for JavaScript files. What is the most likely cause?",
+      "options": [
+        "Custom commands cannot work across file types",
+        "The command's instructions use Python-specific language or assumptions that don't translate to JavaScript",
+        "JavaScript files are not supported by Claude Code",
+        "The command file needs to be in a different directory for JavaScript"
+      ],
+      "correct": 1,
+      "explanation": "Command prompts often contain implicit assumptions about the language or framework. For example, \"check for proper use of Python docstrings\" doesn't apply to JavaScript. To make a command language-agnostic, use language-neutral language: \"check that all public functions are documented\" instead of \"check for docstrings\". Alternatively, create language-specific commands: review-python.md, review-js.md, each with appropriate language-specific checks."
     },
     {
       "type": "callout",

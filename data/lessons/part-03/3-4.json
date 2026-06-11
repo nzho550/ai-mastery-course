@@ -2,8 +2,13 @@
   "id": "3-4",
   "title": "Chain-of-Thought Prompting",
   "part": 3,
-  "estimatedMinutes": 25,
-  "tags": ["prompting", "beginner", "chain-of-thought", "reasoning"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "chain-of-thought",
+    "reasoning"
+  ],
   "sections": [
     {
       "type": "text",
@@ -64,6 +69,54 @@
       ],
       "correct": 2,
       "explanation": "The self-critique loop is specifically designed to reveal reasoning weaknesses by asking the model to examine its own output as input. This often correctly identifies over-confident claims, implicit assumptions, and alternative interpretations that the initial response glossed over. A shorter version (A) removes information without improving quality. A new conversation (B) often produces similar reasoning. Asking for a more decisive recommendation (D) makes the model more confident but not more accurate."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Chain-of-Thought Quick Comparison",
+      "content": "This 8-minute drill shows you exactly how much reasoning instructions improve AI output.\n\n**Step 1 — Choose a problem that requires analysis** — not a simple factual question, but something with trade-offs: a business decision, a technical choice, a recommendation with pros and cons.\n\n**Step 2 — Ask Claude the question twice:**\n\nVersion 1 (no CoT): just ask the question directly.\n\nVersion 2 (with CoT): add \"Think through this step by step. First, identify the key factors. Then analyse each factor. Then consider trade-offs. Finally, give your recommendation with reasoning.\"\n\n**Step 3 — Compare the responses.** In Version 2:\n- Did Claude consider factors it missed in Version 1?\n- Is the reasoning visible so you can check it?\n- Is the conclusion more defensible?\n\n**Step 4 — Identify the specific reasoning step** that produced the most insight you wouldn't have gotten from Version 1.\n\n**Step 5 — Note for yourself:** For what types of questions should you always use chain-of-thought instructions?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Solve a Real Problem with Chain-of-Thought",
+      "content": "Apply chain-of-thought prompting to a real, meaningful problem you're currently facing — and get better analysis than you would with a direct question.\n\n**Step 1 — Identify a real problem or decision** you are currently facing at work or in life. It should be complex enough that the answer isn't obvious.\n\n**Step 2 — Write a structured CoT prompt:**\n```\nI need help thinking through [problem].\n\nContext: [explain the situation, constraints, what matters]\n\nPlease reason through this in the following order:\n1. What are the key factors I need to consider?\n2. What do I know for certain vs what is uncertain?\n3. What are 2-3 realistic options?\n4. For each option, what are the main benefits and risks?\n5. What is your recommendation, and why?\n6. What would need to be true for a different option to be better?\n```\n\n**Step 3 — Run the prompt.** Read through Claude's reasoning step by step.\n\n**Step 4 — Challenge the reasoning:** At whichever step you disagree with, push back: \"In step 3, you said [X]. I think that's wrong because [Y]. Re-reason from that point.\"\n\n**Step 5 — Mandatory final review:** Ask Claude: *\"Review your own reasoning above. What assumptions are you making that I should check? Where could your reasoning be wrong?\"*\n\n**Step 6 — Make a decision** based on the full reasoning. Did the CoT process change what you would have decided?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Build a Reasoning Audit Prompt",
+      "content": "Use chain-of-thought in reverse: make AI explain the reasoning behind an existing decision or claim, not just generate a new one.\n\n**Step 1 — Find a piece of work with a recommendation or conclusion**: a report, a plan, a memo, a piece of analysis with a conclusion.\n\n**Step 2 — Ask Claude to reverse-engineer the reasoning:**\n```\nHere is a conclusion: [paste the conclusion or recommendation]\n\nWork backwards from this conclusion:\n1. What assumptions must be true for this conclusion to be correct?\n2. What data or evidence would support each assumption?\n3. What would invalidate this conclusion?\n4. Is this a strong or weak conclusion? What would make it stronger?\n```\n\n**Step 3 — Review the reverse-engineered reasoning.** Did the analysis surface any assumptions you hadn't explicitly considered?\n\n**Step 4 — Improve the original work:** Based on the reverse-engineering, what would make the conclusion stronger or better defended?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build Your CoT Prompt Templates",
+      "content": "Create a library of chain-of-thought templates for your most common analytical task types.\n\n**Step 1 — List the 3-4 types of analytical problems you face most often** at work: evaluating options, root-cause analysis, planning a project, writing a recommendation.\n\n**Step 2 — For each problem type**, design a specific CoT reasoning sequence — what steps should the AI reason through for this type of problem?\n\n**Step 3 — Ask Claude:** *\"I want to create chain-of-thought prompt templates for these problem types: [list]. For each, write a reasoning framework — the specific steps AI should work through to produce the best analysis. Make each framework match what a senior practitioner in [your field] would actually think through.\"*\n\n**Step 4 — Test each template** on a real problem from that category.\n\n**Step 5 — Refine the templates** based on what the test revealed. Add them to your prompt library."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to recommend a project management tool. Without chain-of-thought, it says \"Notion is the best choice.\" With chain-of-thought, it reasons through team size, integration needs, and budget before recommending Notion. What is the key advantage of the CoT version?",
+      "options": [
+        "The CoT version is more likely to be correct because it considered more factors",
+        "The CoT version is always faster to read",
+        "The CoT version lets you identify exactly where you disagree with the reasoning and correct it",
+        "The CoT version sounds more impressive to share with others"
+      ],
+      "correct": 2,
+      "explanation": "The key advantage of visible reasoning is debuggability — you can inspect each reasoning step and identify specifically where the logic diverges from your situation. If the CoT version says \"assuming team size of 5-10 people\" but your team is 50, you can correct that assumption and get a better recommendation. A direct answer gives you a conclusion with no visible reasoning to check or challenge."
+    },
+    {
+      "type": "quiz",
+      "question": "You are using chain-of-thought to analyse a business risk. After seeing Claude's Step 3 (risk assessment), you think one risk is significantly understated. What should you do?",
+      "options": [
+        "Accept Claude's assessment — it has processed more information than you have",
+        "Start a new conversation and ask the question again",
+        "Tell Claude specifically what you think is understated and why, and ask it to re-reason from that point",
+        "Ask Claude to \"try harder\" in its risk assessment"
+      ],
+      "correct": 2,
+      "explanation": "Chain-of-thought is designed to be interactive — you can intervene at any step. If you disagree with a specific step, say so explicitly with your reasoning, and ask Claude to revise from that point forward. This is far more effective than starting over or giving vague feedback like \"try harder.\" Your domain knowledge about specific risks is something Claude may not have; interactive correction is how you get it incorporated."
     },
     {
       "type": "callout",

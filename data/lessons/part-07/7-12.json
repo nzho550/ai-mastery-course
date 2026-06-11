@@ -2,8 +2,14 @@
   "id": "7-12",
   "title": "Claude Code Settings Deep Dive",
   "part": 7,
-  "estimatedMinutes": 30,
-  "tags": ["claude-code", "settings-json", "configuration", "model", "api-key"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "claude-code",
+    "settings-json",
+    "configuration",
+    "model",
+    "api-key"
+  ],
   "sections": [
     {
       "type": "text",
@@ -50,6 +56,54 @@
       "tag": "CLAUDECODE",
       "title": "Configure Your Full Settings",
       "content": "Build a complete `settings.json` that brings together everything from Part 7, then test it.\n\n**Step 1 — Open `.claude/settings.json` in VS Code:**\nThis file should already exist with your hooks and permissions from lessons 7-8 and 7-10.\n\n**Step 2 — Add the model preference:**\nAdd a `model` field at the top level of your JSON:\n```json\n{\n  \"model\": \"claude-sonnet-4-6\",\n  \"permissions\": { ... },\n  \"hooks\": { ... }\n}\n```\n\n**Step 3 — Add an env variable:**\nAdd a non-sensitive environment variable to verify the `env` block works:\n```json\n{\n  \"model\": \"claude-sonnet-4-6\",\n  \"env\": {\n    \"CLAUDE_PROJECT\": \"ai-course-projects\"\n  },\n  \"permissions\": { ... },\n  \"hooks\": { ... }\n}\n```\n\n**Step 4 — Validate the JSON:**\nJSON must be syntactically correct or Claude Code will fail to load the settings. In VS Code:\n- Look for red underlines in the file — those are JSON syntax errors\n- Check that every `{` has a matching `}`, every `[` has a `]`, and every property except the last one in an object has a trailing comma\n\n**Step 5 — Test the model setting:**\nLaunch Claude Code:\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\nType `/model` to see which model Claude Code is using. It should reflect the model you set in settings.json.\n\n**Step 6 — Create a user-level settings.json:**\nFor settings that should apply across all your projects, create `~/.claude/settings.json`:\n```json\n{\n  \"model\": \"claude-sonnet-4-6\",\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(rm -rf *)\",\n      \"Bash(del /s *)\"\n    ]\n  }\n}\n```\nThis gives you a global safety net — even if a project's `settings.json` doesn't deny destructive commands, your user-level settings do.\n\n**What you've built in Part 7:** A complete Claude Code setup with CLAUDE.md (project + user), custom slash commands, hooks, permissions, and model configuration. This is the foundation every professional Claude Code user works from."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Settings Exploration",
+      "content": "Explore Claude Code's configuration options systematically.\n\n**Step 1 — View all settings:**\n```powershell\nclaude config\n```\nor ask Claude Code: \"List all your configuration settings and their current values.\"\n\n**Step 2 — Explore each setting category:**\n- Model selection\n- Context window size\n- Permission mode\n- Output format\n- Hooks\n\n**Step 3 — Ask Claude Code:** \"What are the 5 most impactful settings for a developer who primarily does [your work type]? What should each be set to and why?\"\n\n**Step 4 — Change one setting** and test the difference.\n\n**Step 5 — Ask Claude Code:** \"What settings would you recommend I NOT change from their defaults? What defaults exist for important reasons?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Optimise Claude Code for Your Workflow",
+      "content": "Tune Claude Code settings to maximise value for your specific work.\n\n**Step 1 — Describe your workflow** to Claude.ai:\n```\nI use Claude Code for these tasks primarily: [list your top 3-4 uses].\nMy project type is: [language, framework, complexity].\nMy team size is: [solo / small / large].\nMy risk tolerance is: [high = personal project / low = production system].\n\nRecommend specific Claude Code settings for my situation. For each setting, tell me what to change it to and why.\n```\n\n**Step 2 — Apply the recommended settings.**\n\n**Step 3 — Run a typical work session** with the new settings. Do they feel better?\n\n**Step 4 — Mandatory settings review:** Ask Claude: *\"Are there any settings you recommended that could cause unexpected problems? What's the worst-case scenario of each setting you changed?\"*\n\n**Step 5 — Document your settings** in a `~/.claude-settings-notes.md` file for future reference."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Cost Optimisation",
+      "content": "Claude Code API usage costs money. This workshop optimises your usage without sacrificing quality.\n\n**Step 1 — Understand Claude Code cost drivers:**\n- Tokens sent (input): every file it reads costs tokens\n- Tokens received (output): every response costs tokens\n- Model choice: Opus costs ~5x more than Sonnet; Haiku costs ~20x less\n\n**Step 2 — Ask Claude:** *\"What strategies would reduce my Claude Code API costs without significantly reducing quality? For each strategy, estimate the cost reduction and quality impact.\"*\n\n**Step 3 — Identify your high-cost patterns:** When does Claude Code read many large files unnecessarily? When does it produce very long responses when shorter ones would do?\n\n**Step 4 — Apply cost-reduction strategies:**\n- Use Haiku model for simple tasks (file renaming, basic formatting)\n- Use Sonnet for most development tasks\n- Reserve Opus for complex architectural decisions\n- Use concise CLAUDE.md (not exhaustive — every line adds to context)\n\n**Step 5 — Estimate your monthly cost** based on typical usage. Is it justified by productivity gains?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Complete Claude Code Setup Review",
+      "content": "Perform a comprehensive review of your entire Claude Code setup and produce a \"best of\" configuration.\n\n**Step 1 — Inventory your current setup:**\n- CLAUDE.md: what's in it?\n- Custom commands: which ones do you have?\n- Hooks: which hooks are configured?\n- Memory: what has been stored?\n- Settings: what's configured?\n\n**Step 2 — Ask Claude to audit your setup:**\n```\nHere is my complete Claude Code setup: [describe everything in step 1]\n\nPerform a comprehensive audit:\n1. What is working well?\n2. What is missing that would significantly improve my workflow?\n3. What is redundant or unnecessary?\n4. What configuration conflict or problem might I not have noticed?\n5. What would you change first if you were setting this up fresh?\n```\n\n**Step 3 — Apply the top 3 improvements** from the audit.\n\n**Step 4 — Export your configuration** to a backup location (cloud storage, separate repo).\n\n**Step 5 — Set a calendar reminder** to review and update your Claude Code setup in 60 days."
+    },
+    {
+      "type": "quiz",
+      "question": "You notice Claude Code is reading all 50 files in your project before answering even simple questions. This is causing slow responses and high costs. How should you address this?",
+      "options": [
+        "Accept it — Claude Code needs full context to be reliable",
+        "Improve CLAUDE.md to tell Claude Code which files are important for which types of tasks, and use @file references to guide it to specific files instead of reading everything",
+        "Use a smaller model that reads fewer files",
+        "Reduce the number of files in your project"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code's context efficiency is heavily influenced by how you guide it. Add to CLAUDE.md: \"For authentication questions, read auth.py. For database questions, read models.py. Only read other files if those don't contain the answer.\" Also, in your requests, use specific references: \"Looking at auth.py only, what does the login function do?\" This reduces unnecessary file reading while maintaining accuracy where it matters."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to use Claude Haiku for quick tasks and Claude Sonnet for complex ones in your Claude Code workflow. How do you implement this?",
+      "options": [
+        "Claude Code automatically chooses the right model",
+        "Set Claude Sonnet as your default model and specify Haiku in your prompt for simple tasks: \"using the fastest available model, rename these files\"",
+        "You cannot use multiple models in the same Claude Code installation",
+        "Create two separate Claude Code installations with different model configs"
+      ],
+      "correct": 1,
+      "explanation": "You can configure Claude Code's default model and override it per-session or per-request. Set Sonnet as your default (good quality/cost balance). For tasks where speed matters more than deep reasoning (renaming, formatting, generating boilerplate), you can specify a lighter model in your instruction. Some tasks genuinely need Opus's deeper reasoning (complex architecture decisions, difficult debugging); most routine coding tasks are well-served by Sonnet."
     },
     {
       "type": "callout",

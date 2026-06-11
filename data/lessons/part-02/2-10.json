@@ -2,8 +2,14 @@
   "id": "2-10",
   "title": "AI Meeting Tools — Zoom, Otter.ai & Teams Summaries",
   "part": 2,
-  "estimatedMinutes": 20,
-  "tags": ["tools", "beginner", "meetings", "productivity", "hands-on"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "tools",
+    "beginner",
+    "meetings",
+    "productivity",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -51,6 +57,54 @@
       ],
       "correct": 1,
       "explanation": "One OtterPilot joining automatically is the lowest-friction approach — it requires no action from participants (beyond consent), produces a shareable link immediately after the call, and uses one free account for the whole team. Everyone installing their own Otter (A) creates duplicate transcripts and confusion. Manual paste into Claude (C) works but requires someone to do it every week — it won't happen consistently. Zoom Pro (D) costs money and only helps if everyone is already on Zoom."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Meeting Summary Quick Test",
+      "content": "Test an AI meeting tool on a real or recorded meeting in 8 minutes.\n\n**Step 1 — Access a meeting recording** you have available: a Teams/Zoom recording, an Otter.ai session, or a YouTube video of a talk or webinar you attended.\n\n**Step 2 — Run it through an AI summary tool:**\n- Otter.ai: upload or record directly\n- Teams: check the AI recap in the meeting chat\n- Zoom: use the AI summary in the recording\n- Alternative: paste a transcript into Claude and ask for a meeting summary\n\n**Step 3 — Evaluate the summary against these criteria:**\n- Does it correctly identify who said what?\n- Does it capture all action items and who owns them?\n- Does it correctly represent any decisions made?\n- Does it miss any important context?\n\n**Step 4 — Compare to your own recollection** of the meeting. What did the AI get wrong?\n\n**Step 5 — Write a 2-sentence verdict:** When is an AI meeting summary accurate enough to share, and when does it need heavy review?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — End-to-End Meeting AI Workflow",
+      "content": "Build a complete AI-assisted meeting workflow: before, during, and after.\n\n**Step 1 — Choose an upcoming real meeting** (or one you had recently). Use this meeting for the full workflow.\n\n**BEFORE the meeting:**\n**Step 2 —** Ask Claude.ai: *\"Help me prepare for a meeting about [topic] with [attendees/roles]. Generate: (a) 5 clarifying questions I should ask, (b) key information I should know beforehand, (c) my meeting objectives.\"*\n\n**DURING/AFTER the meeting:**\n**Step 3 —** Use Otter.ai, Teams recap, or Zoom AI to generate a meeting summary.\n\n**POST-MEETING:**\n**Step 4 —** Paste the AI summary into Claude.ai. Ask: *\"Based on this meeting summary, generate: (a) a clear list of action items with owners and deadlines, (b) a 3-sentence decision log, (c) a follow-up email I should send to attendees.\"*\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review what you just generated from this meeting summary. What action items might you have missed? What decisions are ambiguous? What follow-ups are missing?\"* Add anything identified.\n\n**Step 6 — Send the follow-up email** (after editing to add your personal voice).\n\n**Step 7 — Record:** How much time did the AI workflow save compared to your normal post-meeting process?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Test Meeting AI Accuracy",
+      "content": "Deliberately stress-test an AI meeting summary for common failure modes.\n\n**Step 1 — Take a meeting (real or recorded)** where you know what was discussed.\n\n**Step 2 — Generate an AI summary** using whichever tool you have access to.\n\n**Step 3 — Deliberately check for these common failures:**\n- Action items attributed to the wrong person\n- Decisions described as \"discussed\" when they were actually decided\n- Technical terms misheard or misspelled\n- Key context mentioned early in the meeting that changes meaning of later points\n- Informal commitments not captured as action items\n\n**Step 4 — Rate the summary:** On a scale of 1-10, how useful is the raw AI summary before you edit it?\n\n**Step 5 — Decide your editing protocol:** Based on this accuracy test, what level of review do you need before sharing an AI meeting summary? Write your personal rule."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Meeting Prompt Template Library",
+      "content": "Build a set of reusable prompts for every stage of your meeting workflow.\n\n**Step 1 — List the meeting types you regularly attend** (one-on-ones, team standups, client meetings, project reviews, all-hands, etc.).\n\n**Step 2 — For each meeting type**, identify: what preparation do you usually do, what follow-ups do you usually send?\n\n**Step 3 — Ask Claude:** *\"Create a prompt template library for someone who has these types of meetings: [list]. For each meeting type, provide: (1) a pre-meeting preparation prompt, (2) a post-meeting action item extraction prompt, (3) a follow-up email prompt. Make each template specific to the type of meeting.\"*\n\n**Step 4 — Review and adapt** the templates to your personal style and the specifics of your role.\n\n**Step 5 — Save your template library** in your prompt library document or Claude Project.\n\n**Step 6 — Test one template** on your next real meeting."
+    },
+    {
+      "type": "quiz",
+      "question": "You receive an AI-generated recap of a client meeting where an important commitment was made. Before forwarding it to the client, you should:",
+      "options": [
+        "Forward it immediately — AI transcription is accurate and will save time",
+        "Review the recap carefully, verify that all commitments and decisions are accurately captured, and edit before sending",
+        "Add a disclaimer that the recap was AI-generated",
+        "Re-listen to the entire recording to double-check everything"
+      ],
+      "correct": 1,
+      "explanation": "AI meeting recaps require review before sharing externally, especially with clients. Client-facing communications create legal and relationship implications — a miscaptured commitment or decision can cause serious problems. Review the key decisions and commitments specifically. Re-listening to everything (D) is usually excessive; targeted review of important moments is the right balance."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main limitation of Otter.ai for a meeting with 6 participants?",
+      "options": [
+        "It can only transcribe 4 speakers accurately",
+        "Speaker identification accuracy drops significantly with more speakers, especially if voices sound similar or people talk over each other",
+        "It cannot process audio files longer than 1 hour",
+        "It does not work with remote meetings, only in-person"
+      ],
+      "correct": 1,
+      "explanation": "Speaker diarization (identifying who is speaking) is one of the harder problems in meeting AI. With 6+ speakers, especially in real meetings where people talk over each other or have similar vocal qualities, attribution accuracy drops noticeably. This is why reviewing action item ownership in AI summaries is important — an action assigned to the wrong person based on a speaker mis-identification is a practical failure mode."
     },
     {
       "type": "callout",

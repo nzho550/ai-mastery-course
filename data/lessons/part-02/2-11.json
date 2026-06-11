@@ -2,8 +2,15 @@
   "id": "2-11",
   "title": "Browser AI Extensions — AI on Every Page",
   "part": 2,
-  "estimatedMinutes": 15,
-  "tags": ["tools", "beginner", "browser", "chrome", "extensions", "hands-on"],
+  "estimatedMinutes": 50,
+  "tags": [
+    "tools",
+    "beginner",
+    "browser",
+    "chrome",
+    "extensions",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -47,6 +54,54 @@
       ],
       "correct": 1,
       "explanation": "Browser AI extensions that support PDF can read the document and answer targeted questions — far faster than reading 30 pages or using keyword search. You ask in plain English what you're looking for, and the AI locates and summarizes the relevant clauses. Keyword search (C) misses paraphrased language. Emailing to legal (D) is appropriate for final review but not for a quick initial scan. Reading all 30 pages (A) is necessary for high-stakes review but not for an initial orientation."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Browser AI Extension Quick Test",
+      "content": "Install and test a browser AI extension on a real webpage in 8 minutes.\n\n**Step 1 — Install one browser AI extension** if you haven't already. Options:\n- Sider (sider.ai) — works in Chrome, Edge, Firefox\n- Monica — AI assistant in Chrome\n- Merlin — AI on any page\n- Or use the native Copilot sidebar in Edge\n\n**Step 2 — Navigate to a webpage you actually read** for work: an industry publication, a long article, a company's product page, documentation.\n\n**Step 3 — Open the AI extension sidebar** and test 3 things:\n- \"Summarise this page\" — how good is the summary?\n- Ask a specific question about the page content — does it answer correctly?\n- Ask something the page doesn't cover — does it acknowledge it doesn't know, or make something up?\n\n**Step 4 — Test it on a page you know deeply** — something in your area of expertise. Catch any errors in what it tells you.\n\n**Step 5 — Rate the extension:** Is it faster and more useful than copying text into Claude? When would you use each?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI Research Workflow for Industry Reading",
+      "content": "Build a browser AI workflow that makes your regular industry reading faster and more useful.\n\n**Step 1 — Identify 3 websites you read regularly** for work: news sites, industry blogs, competitor sites, documentation.\n\n**Step 2 — Open a real article** from one of these sites. Use your browser AI extension to:\n- Get a summary\n- Extract the 3 most important implications for your specific work\n- Identify any claims that seem questionable or that you should verify\n\n**Step 3 — Ask the AI:** *\"What questions should I research further based on this article? What context would change how I interpret the main claims?\"*\n\n**Step 4 — Mandatory review:** Ask the AI: *\"Review your own summary. What important nuance or context from the article did you omit? What might a reader of your summary misunderstand?\"* Compare to the original.\n\n**Step 5 — Create a \"reading workflow\" prompt** you will use every time you read industry content: a standard set of questions that extract the most value from any article for your specific role.\n\n**Step 6 — Save your reading workflow prompt** in your prompt library."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Accuracy Test: Browser AI vs Reality",
+      "content": "Browser AI extensions read and summarise pages — but how accurate are they?\n\n**Step 1 — Choose an article or page you have already read** and understand well.\n\n**Step 2 — Without telling the AI you know the content**, ask it to summarise the page and answer 3 specific questions about it.\n\n**Step 3 — Evaluate each answer:**\n- Is the summary accurate to what was actually said?\n- Did it correctly answer the specific questions?\n- Did it add anything not in the original (hallucination)?\n- Did it miss the most important point?\n\n**Step 4 — Ask the AI to identify the single most controversial or surprising claim in the article.** Was its identification accurate?\n\n**Step 5 — Write your finding:** For this type of content (technical/news/opinion/etc.), how much do you trust the browser AI's analysis without verification?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build Your Browser AI Toolkit",
+      "content": "Set up a consistent browser AI workflow you'll actually use every day.\n\n**Step 1 — Choose your browser AI tool.** If you use Edge: built-in Copilot sidebar. If Chrome/Firefox: install one extension (Sider is a solid choice).\n\n**Step 2 — Configure it** with any personalisation options available: preferred AI model, response language, default summarisation style.\n\n**Step 3 — Create a personal quick-prompt menu.** Most extensions let you save custom prompts. Save these:\n- \"Summarise for someone in [your role]\"\n- \"What are the key implications for [your industry]?\"\n- \"What should I verify before acting on this?\"\n- \"Extract all action items and deadlines mentioned\"\n\n**Step 4 — Test your saved prompts** on 3 different pages.\n\n**Step 5 — Set a 2-week commitment:** Use your browser AI extension every time you read a long article for work. After 2 weeks, decide if it's worth keeping."
+    },
+    {
+      "type": "quiz",
+      "question": "You use a browser AI extension to summarise a complex legal document. The summary looks clean and professional. What should you do before relying on it?",
+      "options": [
+        "Use it directly — browser AI extensions are specifically designed for document analysis",
+        "Read the key sections of the original document to verify the summary captured the critical points accurately",
+        "Ask the extension to verify its own summary",
+        "Use two different extensions and compare summaries"
+      ],
+      "correct": 1,
+      "explanation": "Browser AI summaries of complex documents (legal, medical, financial, technical) should always be verified against the original for critical decisions. AI excels at making content readable but can miss critical qualifications, conditions, exceptions, or nuances that are legally or practically important. For complex professional documents, the summary is a starting point for reading, not a replacement for it."
+    },
+    {
+      "type": "quiz",
+      "question": "Which browser AI use case provides the least value and should probably be done another way?",
+      "options": [
+        "Summarising a 5,000-word industry report before deciding whether to read it in full",
+        "Translating a webpage from another language",
+        "Asking a browser AI to fact-check information it found on the very page you are reading",
+        "Extracting a list of key statistics from a research paper"
+      ],
+      "correct": 2,
+      "explanation": "Asking a browser AI to fact-check using the source it just read is circular — it's verifying claims against the same document that contains those claims. This provides no independent verification. Fact-checking requires an independent source. The other options (summarising before deciding to read, translation, extraction) are all legitimate uses where AI adds genuine value."
     },
     {
       "type": "callout",

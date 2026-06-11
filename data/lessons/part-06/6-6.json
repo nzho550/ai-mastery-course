@@ -2,8 +2,12 @@
   "id": "6-6",
   "title": "Cursor IDE — The AI-Native Editor",
   "part": 6,
-  "estimatedMinutes": 25,
-  "tags": ["cursor", "ai-coding", "ide"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "cursor",
+    "ai-coding",
+    "ide"
+  ],
   "sections": [
     {
       "type": "text",
@@ -31,6 +35,54 @@
       "tag": "VSCODE",
       "title": "Install Cursor and Build a Multi-File Project",
       "content": "**Step 1 — Download and install Cursor**\n1. Open your browser and go to cursor.com\n2. Click **Download** — it detects your OS automatically\n3. Run the installer (same process as VS Code: Next → Accept → Install → Finish)\n4. On first launch, Cursor asks whether to import VS Code settings — click **Import from VS Code** to copy your extensions and settings\n5. Sign up for a free Cursor account when prompted (required for AI features)\n\n**Step 2 — Open your project**\n1. In Cursor: click **File → Open Folder**\n2. Navigate to and select your `ai-course-projects` folder\n3. The familiar VS Code layout appears — the main difference is the AI elements integrated throughout\n\n**Step 3 — Try Ctrl+K inline editing**\n1. Open `exercises/practice.js`\n2. Select the sort function\n3. Press **Ctrl+K**\n4. Type: \"Add a JSDoc comment above this function\"\n5. Cursor shows a diff — green for additions, red for removals\n6. Press **Accept** (or **Tab**) to apply it\n\n**Step 4 — Try the Composer for a two-file project**\n1. Press **Ctrl+Shift+I** to open Composer\n2. Type this prompt:\n```\nCreate two new files in the exercises folder:\n1. contact-form.html — a clean contact form with name, email, and message fields\n2. form-validator.js — a JavaScript file with a validateForm() function that checks all fields are filled and the email contains @ and .\nLink the JS file from the HTML file.\n```\n3. Watch Cursor propose both files simultaneously\n4. Review the generated code for each file, then click **Accept All** to create them\n5. Open `contact-form.html` and right-click → Open with Live Server (if installed) to see it in the browser\n\n**Step 5 — Compare the experience**\nIn your notes, write one sentence: what did Cursor do in this workshop that would have required more steps using VS Code + Copilot alone?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Cursor First Session",
+      "content": "Cursor is a VS Code fork with AI built into the editor at a deeper level. This drill explores its key differentiators.\n\n**Step 1 — Download and open Cursor** (cursor.sh). It imports all your VS Code extensions and settings automatically.\n\n**Step 2 — Test Cursor's AI chat:** Press Ctrl+L to open the AI chat sidebar. Ask about your current project.\n\n**Step 3 — Test Cmd+K (or Ctrl+K) inline editing:** Click inside a function, press Ctrl+K, and type \"add input validation\" — Cursor generates the code inline without switching to a sidebar.\n\n**Step 4 — Test Apply from chat:** In the chat, ask Cursor to refactor a function. Notice it shows a diff and you can Accept or Reject.\n\n**Step 5 — Test Cursor's codebase understanding:** Ask \"Where is [function name] defined?\" or \"What does this project do?\" — Cursor indexes your entire codebase.\n\n**Step 6 — Compare to Copilot Chat:** What can Cursor do that Copilot Chat cannot, or does better?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Feature with Cursor's AI",
+      "content": "Use Cursor's deeper AI integration to build a complete feature — from specification to working code.\n\n**Step 1 — Open a real project** in Cursor.\n\n**Step 2 — Describe the feature** you want to add in Cursor's chat (Ctrl+L):\n```\nI want to add [feature description] to this project. The feature should:\n- [requirement 1]\n- [requirement 2]\n- [requirement 3]\n\nBefore writing any code: describe your implementation plan. What files will you modify? What new functions/classes will you create? What are the risks?\n```\n\n**Step 3 — Review the plan.** If you agree, say \"implement it.\"\n\n**Step 4 — Watch Cursor write the changes.** It will show diffs for each file. Review each diff before accepting.\n\n**Step 5 — Mandatory review:** After accepting all changes, ask: *\"Review the changes you just made. Find 3 potential problems: error cases not handled, edge cases missed, or interactions with existing code that might break.\"*\n\n**Step 6 — Run and test** the new feature."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Cursor vs VS Code + Copilot Comparison",
+      "content": "Understand the real differences between Cursor and VS Code with Copilot — so you can make an informed choice.\n\n**Step 1 — Choose a real coding task** — ideally one that involves multiple files.\n\n**Step 2 — Complete the task in VS Code + Copilot Chat.** Note: how many steps it takes, how much context you have to provide, how the code quality looks.\n\n**Step 3 — Complete the same task in Cursor.** Note the same metrics.\n\n**Step 4 — Compare:**\n- Which required less manual context-providing?\n- Which understood your existing code better?\n- Which produced better first-attempt code?\n- Which was more transparent about what it was doing?\n\n**Step 5 — Ask Claude:** *\"I compared VS Code+Copilot and Cursor on [your task]. Here are my observations: [describe]. Which should I use as my primary editor for [your work type] and why?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Cursor Composer for Multi-File Tasks",
+      "content": "Cursor Composer (Ctrl+Shift+I or Ctrl+I in full) can make changes across multiple files simultaneously — a task that requires careful human oversight.\n\n**Step 1 — Open Composer** (Ctrl+Shift+I in Cursor).\n\n**Step 2 — Give it a multi-file task:**\n```\nI want to rename the function `calculate_total` to `compute_final_price` everywhere in this project. Make sure to update:\n- The function definition\n- All call sites\n- Any docstrings or comments that reference the function name\n- Any test files\n```\n\n**Step 3 — Review EVERY diff Composer shows** before accepting. This is critical — multi-file changes can break things if any individual change is wrong.\n\n**Step 4 — Run your tests** after accepting changes.\n\n**Step 5 — Mandatory safety check:** Ask Cursor: *\"What could go wrong with the changes you just made? What tests should I run to verify nothing is broken?\"*\n\n**Step 6 — Commit the changes** with a descriptive commit message."
+    },
+    {
+      "type": "quiz",
+      "question": "Cursor's AI can read your entire codebase. What is the key responsibility this creates for you as the developer?",
+      "options": [
+        "You must always accept Cursor's suggestions to get the full benefit",
+        "You must review every AI-generated change carefully — Cursor's codebase understanding makes it more capable but also more capable of making confident mistakes across many files",
+        "You should only use Cursor for small projects so the AI doesn't get confused",
+        "You must keep your codebase very small for Cursor to work effectively"
+      ],
+      "correct": 1,
+      "explanation": "Codebase-aware AI is more powerful but not infallible — it can make plausible-sounding but wrong architectural decisions because it sees your full codebase. The more capable the AI, the more important careful review becomes. When Cursor makes a multi-file change, review every individual diff, run your tests, and don't accept bulk changes you haven't read."
+    },
+    {
+      "type": "quiz",
+      "question": "What is Cursor's Ctrl+K (inline edit) most useful for compared to the chat sidebar?",
+      "options": [
+        "Ctrl+K is more powerful for complex features",
+        "Ctrl+K is faster for small, targeted edits to existing code without leaving your current context — the chat is better for planning and larger features",
+        "Ctrl+K only works on Python files",
+        "Ctrl+K is the only way to make AI changes without review"
+      ],
+      "correct": 1,
+      "explanation": "Ctrl+K is optimised for small, in-place edits: \"add a parameter\", \"rename this variable\", \"add error handling here\". It generates code directly in the editor without a conversation. The chat sidebar (Ctrl+L) is better for: understanding code, planning larger changes, multi-file operations, and when you want to discuss options before implementing. Using the right tool for the scope of the task is the key skill."
     },
     {
       "type": "callout",

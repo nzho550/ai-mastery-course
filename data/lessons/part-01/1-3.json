@@ -2,8 +2,13 @@
   "id": "1-3",
   "title": "The AI Tools Landscape (2026)",
   "part": 1,
-  "estimatedMinutes": 25,
-  "tags": ["foundations", "beginner", "tools", "overview"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "foundations",
+    "beginner",
+    "tools",
+    "overview"
+  ],
   "sections": [
     {
       "type": "text",
@@ -46,6 +51,54 @@
       ],
       "correct": 1,
       "explanation": "For statistics that need to be cited and verifiable, Perplexity is the right first step because every statistic comes with a clickable source citation — you can verify the number came from a real, reputable organisation. Claude's knowledge is from training data (potential cutoff issue) and doesn't cite sources by default. Gemini's search integration is good but Perplexity's citation display is cleaner for research purposes. ChatGPT Deep Research is also valid but slower for targeted fact-finding. The key workflow: use a citation-native tool for facts, then bring verified data to Claude for synthesis and writing."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Tool Landscape Map (Quick Drill)",
+      "content": "This 8-minute drill builds your mental map of the AI tool landscape — so you can instantly answer \"which AI tool should I use for this?\"\n\n**Step 1 — Open a blank document** (Google Docs, Word, or Notion) and draw four columns: \"Conversation AI\", \"Search/Research AI\", \"Creative AI\", \"Productivity AI\".\n\n**Step 2 — Without looking anything up**, list every AI tool you have heard of under the right column. Aim for 10+ tools total.\n\n**Step 3 — Open Claude.ai** and paste your list. Ask: *\"Review my AI tool landscape map. What important tools or categories have I missed? What have I misclassified? Be specific.\"*\n\n**Step 4 — Update your map** based on Claude's feedback. Add the tools you missed.\n\n**Step 5 — For each column**, identify which single tool you would use first if someone gave you a task in that category. Write the name next to the column header.\n\n**Step 6 — Save your map.** This is your personal AI tools reference — update it as you discover new tools throughout this course."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build an AI Tool Recommendation System",
+      "content": "You will build a reusable prompt that helps you (or anyone) choose the right AI tool for a given task. This is a genuinely useful tool — you will reference it every time you start a new AI-assisted task.\n\n**Step 1 — Open Claude.ai** and start a new conversation.\n\n**Step 2 — Describe 3 real tasks** from your work or life that you could imagine using AI for. Be specific: not \"writing\" but \"writing weekly status reports for my manager\" or not \"research\" but \"researching competitor pricing\".\n\n**Step 3 — Ask Claude:** *\"For each of these 3 tasks, recommend the best AI tool available in 2026 and explain: (1) why this tool is best for this specific task, (2) one alternative tool and when to use it instead, (3) one thing to watch out for with this tool. Be specific and practical.\"*\n\n**Step 4 — Review Claude's recommendations.** Do they match what you expected? What surprised you?\n\n**Step 5 — Mandatory AI review:** Paste Claude's recommendations back with this message: *\"Review your own tool recommendations above. Play devil's advocate — find 3 specific cases where your recommendation might be wrong or where a different tool would actually be better.\"*\n\n**Step 6 — Build your personal tool selection guide:** Based on the full exchange, write a short (1 page) guide: \"Which AI tool I use for which type of task.\" Keep this — it will save you time every week.\n\n**Step 7 — Test your guide:** Pick any task from your work today and use your guide to select a tool. Does the guide's recommendation make sense?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Head-to-Head Tool Comparison",
+      "content": "The best way to understand what makes each AI tool different is to ask them the same thing and compare. This workshop reveals the real differences — not the marketing.\n\n**Step 1 — Choose a real task** from your work that you need to do anyway this week. Something where the quality of the output matters.\n\n**Step 2 — Craft a specific prompt** for the task. Write it clearly with context.\n\n**Step 3 — Run the exact same prompt** in at least two of these: Claude.ai, ChatGPT, Gemini. Keep tabs open side-by-side.\n\n**Step 4 — Compare the outputs** across these dimensions:\n- Length and detail level\n- Tone and style\n- Accuracy of specific facts (if applicable)\n- Usefulness for your actual task\n- What each one got wrong or missed\n\n**Step 5 — Ask Claude** to compare the approaches: *\"I ran the same prompt in multiple AI tools. Here are the outputs: [paste them]. What are the meaningful differences in their approaches? Which is most useful for [your task] and why?\"*\n\n**Step 6 — Write a one-paragraph verdict:** For this type of task, which tool would you use in the future and why? Add this verdict to your tool guide from Workshop B."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Your Personal AI Tools Shortlist",
+      "content": "Most people end up using 2-3 AI tools regularly. This workshop helps you decide which ones those should be for you specifically.\n\n**Step 1 — Think about your work and life** over the last month. What were the most time-consuming or tedious tasks? List 5-8 of them.\n\n**Step 2 — For each task**, write: (a) which AI tool you have tried or would try, (b) whether you have actually used AI for this task.\n\n**Step 3 — Open Claude.ai** and paste your task list. Ask: *\"I want to build a minimal AI tools setup — ideally 2-3 tools that cover my main use cases. Based on this task list, which 2-3 AI tools would you recommend I start with? Explain why these cover my specific needs. What would I miss by not adding a fourth tool?\"*\n\n**Step 4 — Decide your shortlist.** Pick 2-3 tools you will actually use starting today.\n\n**Step 5 — Create accounts** (if you haven't already) for your chosen tools. Bookmark them or add them to your browser toolbar.\n\n**Step 6 — Commit to a 2-week experiment:** For the next 2 weeks, use only your shortlisted tools (no adding new ones). This forces you to learn them well before expanding."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague asks which AI tool to use for drafting a business proposal. Which answer is most helpful?",
+      "options": [
+        "Use ChatGPT — it's the most popular",
+        "It depends: Claude is strong for long documents and nuanced writing; ChatGPT is good if you need web search integrated",
+        "Use whichever you have a subscription to",
+        "AI tools are roughly equivalent for writing tasks"
+      ],
+      "correct": 1,
+      "explanation": "Different AI tools have genuine strengths for different tasks. Claude excels at long, nuanced documents and careful reasoning. ChatGPT has integrated web search and image generation. Recommending the right tool requires knowing the task, not just what's popular or available."
+    },
+    {
+      "type": "quiz",
+      "question": "Which AI tool category is specifically designed for research with cited sources?",
+      "options": [
+        "Conversation AI (Claude, ChatGPT)",
+        "Creative AI (Midjourney, DALL-E)",
+        "Search/Research AI (Perplexity, Consensus)",
+        "Productivity AI (Copilot for M365)"
+      ],
+      "correct": 2,
+      "explanation": "Perplexity, Consensus, Scite and similar tools are specifically built for research with citations — they retrieve current web sources and link every claim to its source. General conversation AI (Claude, ChatGPT) can discuss topics but doesn't automatically cite sources."
     },
     {
       "type": "callout",

@@ -2,8 +2,13 @@
   "id": "5-6",
   "title": "The Command Palette — VS Code's Superpower",
   "part": 5,
-  "estimatedMinutes": 15,
-  "tags": ["vscode", "beginner", "command-palette", "shortcuts"],
+  "estimatedMinutes": 50,
+  "tags": [
+    "vscode",
+    "beginner",
+    "command-palette",
+    "shortcuts"
+  ],
   "sections": [
     {
       "type": "text",
@@ -36,6 +41,54 @@
       "tag": "VSCODE",
       "title": "5-Task Command Palette Challenge",
       "content": "Complete each of these five tasks using ONLY the Command Palette (Ctrl+Shift+P) — no clicking through menus. The goal is to build the muscle memory of reaching for Ctrl+Shift+P first.\n\n**Task 1 — Change the colour theme:**\n1. Press Ctrl+Shift+P\n2. Type `theme`\n3. Select **Preferences: Color Theme**\n4. Browse the list — try a few with the arrow keys to see the live preview\n5. Press Enter to confirm the one you like (Dark+ is recommended)\n\n**Task 2 — Toggle Word Wrap:**\n1. Open `README.md` if it isn't already open (click it in Explorer)\n2. Make the line `# My AI Course Projects` longer by adding some extra text to it\n3. Press Ctrl+Shift+P → type `word wrap`\n4. Select **View: Toggle Word Wrap**\n5. Notice how long lines either wrap or don't wrap — toggle it back and forth once to feel the difference\n\n**Task 3 — Open Settings:**\n1. Press Ctrl+Shift+P → type `open settings`\n2. Select **Preferences: Open User Settings** (not the JSON version yet)\n3. You're now in the Settings UI — we'll explore this in lesson 5-9\n4. Close the Settings tab (Ctrl+W)\n\n**Task 4 — Open Settings JSON:**\n1. Press Ctrl+Shift+P → type `settings json`\n2. Select **Preferences: Open User Settings (JSON)**\n3. You see the raw JSON file where all settings are stored\n4. Close it (Ctrl+W)\n\n**Task 5 — Open a new terminal:**\n1. Press Ctrl+Shift+P → type `new terminal`\n2. Select **Terminal: New Terminal**\n3. The terminal panel opens — type `pwd` to confirm where it is\n4. Close the terminal panel (Ctrl+J or click the X in the terminal panel)\n\n**Check:**\n- [ ] You completed all 5 tasks without using the menu bar\n- [ ] The colour theme you want is now set\n- [ ] You noticed the keyboard shortcut hints on the right side of the Command Palette results"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Command Palette Exploration Drill",
+      "content": "The Command Palette is VS Code's most powerful feature. This drill explores it systematically.\n\n**Step 1 — Open the Command Palette** (Ctrl+Shift+P).\n\n**Step 2 — Try these searches** and note what each does:\n- \"format\" — find formatting commands\n- \"git\" — see all git commands available\n- \"theme\" — change colour theme\n- \"json\" — format JSON\n- \"terminal\" — terminal-related commands\n- \"fold\" — code folding commands\n- \"markdown\" — markdown preview and tools\n\n**Step 3 — Find the keyboard shortcut** for any command you use often: hover over it in the Command Palette — the shortcut shows on the right.\n\n**Step 4 — Use Ctrl+P** (not Ctrl+Shift+P). This is the \"Go to File\" palette — type any filename to jump to it instantly.\n\n**Step 5 — Use Ctrl+G** (Go to Line). Type a line number to jump there.\n\n**Step 6 — Ask Claude:** *\"What are the 10 most productive things I can do from the VS Code Command Palette that most people don't know about?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Personalised Task Runner",
+      "content": "VS Code Tasks let you run commands (like running tests, building, formatting) with a keyboard shortcut. This workshop sets yours up.\n\n**Step 1 — Ask Claude:** *\"I want to set up VS Code Tasks for a [Python / Node.js] project. I need tasks for: running the main script, running tests, and formatting code. Create the tasks.json file for my .vscode folder.\"*\n\n**Step 2 — Create `.vscode/tasks.json`** and paste Claude's content.\n\n**Step 3 — Run a task:** Ctrl+Shift+P → \"Tasks: Run Task\" → select your task.\n\n**Step 4 — Set a keyboard shortcut** for your most common task: Ctrl+Shift+P → \"Open Keyboard Shortcuts\" → search for \"Run Task\" → add your shortcut.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review the tasks.json you created. What could go wrong when I run these tasks? What environment assumptions are you making that might not be true on my machine?\"* Fix any identified issues."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Search and Replace Across Project",
+      "content": "The global search in VS Code (Ctrl+Shift+F) is one of the most powerful tools in the editor.\n\n**Step 1 — Open Find in Files** (Ctrl+Shift+F).\n\n**Step 2 — Practice these powerful search features:**\n\n**Basic search:** Search for a common word that appears in multiple files. Notice the results panel.\n\n**Regex search:** Click the .* button to enable regex. Search for `def \\w+\\(` to find all function definitions in Python.\n\n**Replace across files:** Find a function name, switch to Replace mode (expand the left panel), and replace it across all files at once.\n\n**Include/Exclude:** Use the \"Files to Include\" box to search only in `*.py` files or exclude `node_modules`.\n\n**Step 3 — Practical use:** Search your project for any hardcoded value (like a URL or configuration value) that should be in a config file.\n\n**Step 4 — Ask Claude:** *\"What are the most useful regex patterns for searching code? Give me 5 patterns with what they find and when they're useful.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Command Palette Power Workflows",
+      "content": "This workshop builds a set of Command Palette workflows for your most common tasks.\n\n**Step 1 — List your top 5 VS Code tasks** — things you do frequently in your coding sessions.\n\n**Step 2 — For each task**, find the Command Palette command and its keyboard shortcut.\n\n**Step 3 — Set up keyboard shortcuts** for any frequent tasks that don't have one: Ctrl+Shift+P → \"Open Keyboard Shortcuts (JSON)\" → add custom bindings.\n\n**Step 4 — Ask Claude:** *\"I use VS Code for [your workflow]. What keyboard shortcuts should I customise or add? Give me the exact JSON to add to keybindings.json for these shortcuts: [your top tasks].\"*\n\n**Step 5 — Create a \"keyboard shortcuts\" cheatsheet** — a text file in your project listing your custom shortcuts and what they do. Print it or keep it visible until the shortcuts become muscle memory."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to run a shell command from inside VS Code without leaving the editor. What is the fastest approach?",
+      "options": [
+        "Exit VS Code, run the command, and reopen VS Code",
+        "Open the Command Palette and type the shell command directly",
+        "Press Ctrl+` to open the integrated terminal, then run the command",
+        "Use File → Execute Command"
+      ],
+      "correct": 2,
+      "explanation": "Ctrl+` (backtick) opens VS Code's integrated terminal — a full terminal that runs inside VS Code. You can run any shell command here without leaving the editor, and it automatically opens in your project's root folder. This is the core workflow for running Python scripts, npm commands, git operations, and any other CLI task while keeping your code visible."
+    },
+    {
+      "type": "quiz",
+      "question": "You open the Command Palette and type \"format\". You see \"Format Document\" but no keyboard shortcut shown next to it. What does this mean?",
+      "options": [
+        "The command is not available for your file type",
+        "No keyboard shortcut is currently assigned to this command — you can assign one by clicking the gear icon",
+        "You need to install a formatting extension first",
+        "The shortcut is hidden — you need to hover to see it"
+      ],
+      "correct": 1,
+      "explanation": "When no keyboard shortcut appears next to a command in the Command Palette, it means none is currently assigned. You can assign one: hover over the command and click the gear icon that appears, or go to File → Preferences → Keyboard Shortcuts. Many useful commands have no default shortcut — assigning your own to the commands you use frequently is a significant productivity improvement."
     },
     {
       "type": "callout",

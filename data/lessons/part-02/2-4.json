@@ -2,8 +2,12 @@
   "id": "2-4",
   "title": "Google Gemini",
   "part": 2,
-  "estimatedMinutes": 25,
-  "tags": ["gemini", "beginner", "tools"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "gemini",
+    "beginner",
+    "tools"
+  ],
   "sections": [
     {
       "type": "text",
@@ -47,6 +51,54 @@
       ],
       "correct": 2,
       "explanation": "Gemini 2.5 Pro is the right tool because its 1-million-token context window is the only one large enough to hold 45 papers (roughly 700-1,000 pages) simultaneously. Holding all papers in context at once means Gemini can compare, contrast, and synthesise findings across all 45 without you breaking the task into pieces. Claude's 200K window might hold 10-12 papers at most. ChatGPT's 128K window even fewer. For this specific task — synthesising very large volumes of text you've already gathered — the context window is the decisive factor."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Gemini Multimodal Quick Test",
+      "content": "Gemini's biggest differentiator is deep Google integration and multimodal capability. This drill tests both in 8 minutes.\n\n**Step 1 — Open Gemini** (gemini.google.com) in a browser tab.\n\n**Step 2 — Test image analysis:** Upload a screenshot of a work document, a photo, or an image from your work. Ask: \"Analyse this image and tell me the 3 most important things you notice.\"\n\n**Step 3 — Test Google integration:** Ask Gemini to check your Google Calendar for tomorrow or find a recent email about a topic (requires Google account connection).\n\n**Step 4 — Test long-form content:** Paste a document you've been working on (1,000+ words) and ask for a structured summary. Gemini has very large context windows.\n\n**Step 5 — Compare to Claude:** Ask the same question in Claude.ai. Which answer is more useful?\n\n**Step 6 — Identify Gemini's best use case for you specifically.** Where does the Google ecosystem integration help your workflow?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Real Research Task with Gemini",
+      "content": "Use Gemini to complete a real research or analysis task — then review and improve the output.\n\n**Step 1 — Choose a real research task** from your work: a topic to investigate, a decision to inform, a background brief to prepare.\n\n**Step 2 — Run the research task** with Gemini. If you have the Google Workspace integration, use it to pull in relevant documents or data.\n\n**Step 3 — Evaluate Gemini's output:** Is the information current? Are sources cited? Is the analysis relevant to your actual question?\n\n**Step 4 — Mandatory AI review:** Paste the output back and say: *\"Review your own research above critically. What sources should I verify independently? Where is your confidence lowest? What important angles did you miss?\"*\n\n**Step 5 — Verify one specific claim** from Gemini's output against an independent source. Was it accurate?\n\n**Step 6 — Decide:** For this type of research task, is Gemini, Claude, or Perplexity the best fit? Add your decision to your AI tools guide."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Gemini vs Claude on Analysis",
+      "content": "A direct comparison on an analytical task reveals where each AI genuinely excels.\n\n**Step 1 — Choose an analytical task:** Analyse a piece of text, compare two options, evaluate a plan, identify risks in a document.\n\n**Step 2 — Run it in Gemini** first. Record the response.\n\n**Step 3 — Run the identical prompt in Claude.** Record the response.\n\n**Step 4 — Compare side-by-side:**\n- Which was more thorough?\n- Which understood the nuance better?\n- Which organised the response more usefully?\n- Which made any factual errors?\n\n**Step 5 — Ask Claude** to compare the two approaches: *\"Here are two AI responses to the same analytical prompt [paste both]. What are the meaningful differences? Which analytical approach is stronger and why?\"*\n\n**Step 6 — Write your finding:** For analytical tasks in your work, which tool do you prefer and why?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Google Workspace AI Integration Setup",
+      "content": "If you use Google Docs, Gmail, or Google Drive, Gemini can be integrated directly into your workflow.\n\n**Step 1 — Check your Gemini access:** In Google Workspace (if your organisation provides it) or Google One AI Premium, look for Gemini in the side panel of Google Docs or Gmail.\n\n**Step 2 — In Google Docs:** Open a document you are working on. Open the Gemini side panel. Ask it to: (a) summarise the document, (b) suggest improvements to a specific section, (c) draft a new section based on what exists.\n\n**Step 3 — In Gmail:** Find an email thread you need to reply to. Ask Gemini to: (a) summarise the thread, (b) draft a reply, (c) identify the action items you've been asked to do.\n\n**Step 4 — Evaluate the integration:** Is Gemini inside your Google apps faster or more convenient than switching to a separate AI tab? What does it do well or poorly in this context?\n\n**Step 5 — Decide on one specific workflow** where you'll use Gemini inside Google apps going forward."
+    },
+    {
+      "type": "quiz",
+      "question": "Which scenario is where Gemini has the clearest advantage over Claude?",
+      "options": [
+        "Writing a detailed legal analysis document",
+        "Summarising a complex research paper",
+        "Automatically pulling data from your Gmail and Google Calendar to help plan your week",
+        "Generating creative story concepts"
+      ],
+      "correct": 2,
+      "explanation": "Gemini's strongest differentiator is deep integration with Google Workspace — it can read your Gmail, Calendar, Drive documents, and other Google apps directly, without you needing to copy-paste. This makes it uniquely powerful for tasks that span your Google data. For pure writing, analysis, or creativity, the tools are more comparable."
+    },
+    {
+      "type": "quiz",
+      "question": "Gemini is described as having a very large \"context window.\" What does this mean practically?",
+      "options": [
+        "It can generate very long responses",
+        "It can remember conversations for longer than other AI tools",
+        "It can process and reason about very large amounts of input text in a single conversation",
+        "It requires more computing power than other AI tools"
+      ],
+      "correct": 2,
+      "explanation": "A large context window means you can provide very large amounts of input — entire books, large codebases, many documents — and the AI can reason across all of it in a single session. This is practically useful for tasks like \"summarise this 200-page report\" or \"analyse all our customer feedback from Q1\" where you need to process large volumes of text at once."
     },
     {
       "type": "callout",

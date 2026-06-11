@@ -2,8 +2,14 @@
   "id": "2-12",
   "title": "Slack AI & Notion AI — AI in Your Work Apps",
   "part": 2,
-  "estimatedMinutes": 15,
-  "tags": ["tools", "beginner", "slack", "notion", "productivity"],
+  "estimatedMinutes": 50,
+  "tags": [
+    "tools",
+    "beginner",
+    "slack",
+    "notion",
+    "productivity"
+  ],
   "sections": [
     {
       "type": "text",
@@ -43,6 +49,54 @@
       ],
       "correct": 2,
       "explanation": "Slack AI channel summaries are designed for exactly this situation. You get a structured view of what happened in each channel — decisions, discussions, open items — in seconds. From those summaries, you can identify the 5–10% of threads that actually need your attention and read those in full. Reading everything (A) is time-prohibitive and mostly unnecessary. Colleague summary (B) is unreliable and burdens someone else. Ignoring everything (D) means you miss things that needed your response."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Slack AI Quick Summary Test",
+      "content": "If you use Slack, this drill gets Slack AI summarising real channels — immediately reducing your backlog.\n\n**Step 1 — Open Slack** with Slack AI enabled (Pro, Business+, or Enterprise plan).\n\n**Step 2 — Find a channel** you've been away from for 1+ day with unread messages.\n\n**Step 3 — Ask Slack AI** to summarise what you missed: type \"Summarize this channel\" or use the channel summary button.\n\n**Step 4 — Read the summary**, then scroll through the actual messages to verify:\n- Did it capture the key decisions?\n- Are any action items attributed correctly?\n- Was anything marked as important that isn't, or missed that is?\n\n**Step 5 — Test thread summarisation:** Find a long thread. Ask Slack AI to summarise just that thread.\n\n**Step 6 — Rate the accuracy:** On a scale of 1-10, how accurate was the channel summary? What type of messages does it handle best vs worst?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Notion AI Document Improvement Sprint",
+      "content": "Use Notion AI to improve a real document — then review the improvement critically.\n\n**Step 1 — Open Notion** (create a free account if you don't have one).\n\n**Step 2 — Paste or write a real work document** in a Notion page: a report, a plan, meeting notes, a process document, a brief — anything you actually need to improve.\n\n**Step 3 — Use Notion AI to improve it.** Try each of these:\n- Select all text → Ask AI to \"Improve writing\"\n- Select a specific section → Ask AI to \"Make this more concise\"\n- Put your cursor at the end → Ask AI to \"Continue writing\" with a direction\n- Ask AI to \"Summarise this page\"\n\n**Step 4 — Compare the before and after.** Which improvements are genuinely better? Which did AI make worse?\n\n**Step 5 — Mandatory review:** Select the AI-improved text and ask AI: *\"Review what you just wrote. Find 3 places where your revision weakened the original or introduced inaccuracies.\"* Fix any genuine regressions.\n\n**Step 6 — Keep the improved document.** This is a real work deliverable."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — AI Across Your Communication Stack",
+      "content": "Map how AI currently exists (or could exist) across all your communication tools.\n\n**Step 1 — List every communication tool you use regularly:** Email client, chat (Slack/Teams), document platform (Notion/Confluence/Google Docs), video meetings, project management.\n\n**Step 2 — For each tool**, answer:\n- Does it have built-in AI? (Yes/No/Limited)\n- What does the AI do?\n- Have you actually used the AI feature?\n\n**Step 3 — Identify your biggest communication bottleneck:** Where do you spend the most time on communication tasks that feel repetitive or draining?\n\n**Step 4 — Ask Claude:** *\"I use these communication tools: [list]. My biggest bottleneck is [describe it]. What AI features or integrations would most reduce this bottleneck? Be specific about tool names and features, not just general advice.\"*\n\n**Step 5 — Take one action** from Claude's suggestions today."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Team Knowledge Base with Notion AI",
+      "content": "Notion AI can build and maintain a team knowledge base faster than writing it manually.\n\n**Step 1 — Identify a team knowledge need:** Is there something your team frequently explains to each other, to new members, or to clients that doesn't have a clear written reference?\n\n**Step 2 — Open Notion** and create a new page titled \"[Topic] — Team Reference\".\n\n**Step 3 — Dump rough notes.** Write bullet points with everything you know about the topic — don't worry about formatting or completeness.\n\n**Step 4 — Ask Notion AI** to: \"Turn these notes into a well-structured team reference document. Add clear headings, organise the content logically, and make it easy for someone new to understand.\"\n\n**Step 5 — Review and fill gaps:** What did the AI miss or get wrong? Add your expertise back in.\n\n**Step 6 — Ask Notion AI:** *\"Review this document. What questions would a new team member have that this page doesn't answer?\"* Add answers to those gaps.\n\n**Step 7 — Share with your team** and get one piece of real feedback."
+    },
+    {
+      "type": "quiz",
+      "question": "You use Slack AI to summarise a week of messages in a busy project channel. A colleague asks you what was decided about the project budget. You should:",
+      "options": [
+        "Quote the Slack AI summary directly",
+        "Search for the actual budget discussion in the channel and verify the decision before stating it",
+        "Ask Slack AI to search for budget-related messages specifically",
+        "Say you'll check and get back to them"
+      ],
+      "correct": 1,
+      "explanation": "For specific decisions — especially financial ones — always verify from the original source, not the AI summary. Slack AI summaries work well for general context but can mischaracterise specific decisions, numbers, or conditions. Find the actual message thread where the budget was discussed and confirm the exact decision before repeating it to a colleague."
+    },
+    {
+      "type": "quiz",
+      "question": "Notion AI offers to auto-categorise entries in a project database. What is the appropriate way to use this?",
+      "options": [
+        "Enable it and trust the auto-categorisation without review",
+        "Enable it as a time-saver but periodically review that the categories are being assigned correctly",
+        "Avoid it — manual categorisation is always more accurate",
+        "Only use it for low-stakes databases, never for project tracking"
+      ],
+      "correct": 1,
+      "explanation": "AI auto-categorisation is a useful time-saver but degrades in accuracy over time or when edge cases appear. The right pattern is: use it to eliminate manual work, but build in a periodic review (weekly or monthly) to catch miscategorisations before they cause problems."
     },
     {
       "type": "callout",

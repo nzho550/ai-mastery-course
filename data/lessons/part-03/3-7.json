@@ -2,8 +2,13 @@
   "id": "3-7",
   "title": "Iterative Refinement",
   "part": 3,
-  "estimatedMinutes": 25,
-  "tags": ["prompting", "beginner", "refinement", "iteration"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "refinement",
+    "iteration"
+  ],
   "sections": [
     {
       "type": "text",
@@ -59,6 +64,54 @@
       ],
       "correct": 2,
       "explanation": "When 4 rounds of refinement leave the structure unchanged, the structure is the problem — not the polish. Refinement patches surface issues; it doesn't redesign the scaffolding. The signal that you're polishing instead of improving is that each round makes the draft slightly better but you still feel it's wrong at a fundamental level. The solution is to start over with an explicit structure specification: 'Write a report structured as follows: [specific section order and emphasis].' The refinement process taught you what the structure should be — now apply that knowledge in a fresh prompt."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Iterative Refinement Speed Drill",
+      "content": "This drill demonstrates that the best AI outputs come from iteration, not from perfect first prompts.\n\n**Step 1 — Choose a real task** where you'd use AI: drafting an email, writing a section of a report, creating a plan.\n\n**Step 2 — Write the simplest possible prompt** — just a sentence or two. Run it. Save the output.\n\n**Step 3 — Refine it once.** Identify the single biggest problem with the output and address only that. Run it again.\n\n**Step 4 — Refine it twice.** Identify the next biggest problem. Address only that. Run it again.\n\n**Step 5 — Compare outputs from rounds 1, 2, and 3.** How much did each iteration improve the result?\n\n**Step 6 — Note:** At which iteration did the output become good enough to use? For most tasks, 2-3 iterations gets you 80-90% of the way there. Beyond that, you may be better off editing the output directly rather than continuing to iterate the prompt."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Full Iterative Refinement Cycle on Real Work",
+      "content": "Apply systematic iterative refinement to a real, important piece of work.\n\n**Step 1 — Identify a real deliverable** you need to produce: a report, a proposal, a plan, a document, an analysis.\n\n**Step 2 — Draft iteration 1.** Use a brief prompt — just describe what you need at a high level.\n\n**Step 3 — Structured feedback pass.** For Iteration 1's output, identify:\n- Content gaps: \"This is missing [specific thing]\"\n- Format problems: \"The structure should be [how]\"\n- Tone problems: \"This is too [formal/casual/long/short]\"\n- Accuracy problems: \"This is wrong: [specific issue]\"\n\n**Step 4 — Draft iteration 2.** Address all the feedback above in a single follow-up message.\n\n**Step 5 — Final polish pass.** Ask Claude: *\"Read your own output. Find 3 specific improvements — not just grammar, but substance. Where is the reasoning weakest? Where is the writing vaguest? Where does this not quite do what was asked?\"* Address at least 2.\n\n**Step 6 — Mandatory external review:** Show the final output to Claude one more time and ask: *\"If you were the intended reader [describe the audience], what question would you ask that this document doesn't answer?\"* Add the answer.\n\n**Step 7 — Save the final output.** This is a real deliverable you produced using structured iteration."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Prompting Debugging Technique",
+      "content": "When iteration isn't working, you need to debug why. This workshop teaches prompt debugging.\n\n**Step 1 — Take a prompt that isn't giving you good results** — something you've tried at least twice and the output keeps being wrong in the same way.\n\n**Step 2 — Ask Claude to diagnose the problem:**\n```\nI've been asking you to [describe what you've been asking for] but the output keeps [describe the problem]. Here is my prompt: [paste your prompt]\n\nDon't answer the original question. Instead, tell me: (1) What is ambiguous about my prompt? (2) What am I probably assuming that I haven't stated? (3) Rewrite my prompt to fix these issues.\n```\n\n**Step 3 — Run the rewritten prompt.** Is the output better?\n\n**Step 4 — Note the pattern:** What was the core issue with your original prompt? (Too vague? Missing context? Wrong format instruction? Conflicting requirements?)\n\n**Step 5 — Apply the fix type** to any similar prompts you've been struggling with."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build an Iteration Checklist for Your Work",
+      "content": "Create a standard refinement process you'll use every time for your most important AI outputs.\n\n**Step 1 — Identify your top 3 use cases** where you use AI for important outputs (something you'd be embarrassed to get wrong).\n\n**Step 2 — For each use case**, design a 3-5 step review checklist — the specific things to check at each refinement round.\n\n**Step 3 — Ask Claude:** *\"Help me create an iterative refinement workflow for [use case]. What should I check in iteration 1 vs iteration 2 vs final polish? What are the common failure modes for [use case] that I should specifically watch for?\"*\n\n**Step 4 — Test your checklist** on the next real instance of each use case.\n\n**Step 5 — Save the checklists** in your prompt library alongside the prompts they apply to."
+    },
+    {
+      "type": "quiz",
+      "question": "After 4 rounds of refinement, Claude's output is still not quite right. What is the most effective next step?",
+      "options": [
+        "Keep iterating until it's perfect — AI will eventually get there",
+        "Switch to a different AI tool",
+        "Stop iterating and manually edit the AI's output — at some point, direct editing is faster than further prompting",
+        "Start over with a completely new approach"
+      ],
+      "correct": 2,
+      "explanation": "There is a point of diminishing returns in prompt iteration where manual editing becomes faster and more precise than continued prompting. If after 3-4 iterations the output is 80-90% right, it's usually faster to edit the remaining 10-20% directly than to describe the remaining issues as a prompt and verify the new output. Recognising this threshold is a sign of prompt maturity."
+    },
+    {
+      "type": "quiz",
+      "question": "Which feedback is most useful when iterating on an AI output?",
+      "options": [
+        "\"This isn't quite right, try again\"",
+        "\"Make it better\"",
+        "\"The second paragraph is too long and the conclusion doesn't address the main question. The conclusion should answer: what should the reader do next?\"",
+        "\"I don't like the tone\""
+      ],
+      "correct": 2,
+      "explanation": "Effective iteration feedback is specific: it identifies the exact location of the problem, describes what is wrong, and states what you want instead. Vague feedback (\"try again\", \"make it better\", \"I don't like the tone\") gives Claude nothing specific to act on and tends to produce random changes rather than targeted improvements. Think of it like reviewing code: \"this function is wrong\" is useless; \"line 47: this condition should check > not >=\" is actionable."
     },
     {
       "type": "callout",

@@ -2,8 +2,13 @@
   "id": "4-6",
   "title": "Your First HTML File (Without VS Code)",
   "part": 4,
-  "estimatedMinutes": 30,
-  "tags": ["computer-basics", "beginner", "html", "hands-on"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "computer-basics",
+    "beginner",
+    "html",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -47,6 +52,54 @@
       ],
       "correct": 1,
       "explanation": "The browser always reads the file from disk when you press F5 — but it reads whatever is currently saved on disk. If you made changes in Notepad but didn't press Ctrl+S before pressing F5 in the browser, the browser refreshed the old saved version. The edit-save-refresh cycle requires saving first. This is the single most common mistake beginners make when editing HTML in Notepad. The solution: always save (Ctrl+S in Notepad) before refreshing (F5 in browser)."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Add a Page to Your HTML File",
+      "content": "This drill extends the HTML file you created in the lesson — turning it into a real two-page site.\n\n**Step 1 — Open your index.html** from the lesson in a text editor (Notepad or VS Code).\n\n**Step 2 — Add a new page.** Create a second file called `about.html` in the same folder with this structure:\n```html\n<!DOCTYPE html>\n<html>\n<head>\n    <title>About — My First Site</title>\n</head>\n<body>\n    <h1>About This Site</h1>\n    <p>Write a sentence about yourself or this project here.</p>\n    <a href=\"index.html\">Back to Home</a>\n</body>\n</html>\n```\n\n**Step 3 — Link the pages together.** In index.html, add a link to about.html:\n```html\n<a href=\"about.html\">About</a>\n```\n\n**Step 4 — Test it.** Open index.html in a browser. Click your new link. Does it navigate to about.html?\n\n**Step 5 — Ask Claude:** *\"I have an index.html and about.html that link to each other. What are the next 3 things I should add to make this look like a real website?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Built Web Page for a Real Use Case",
+      "content": "Use AI to build a real HTML page you will actually use — not a practice exercise.\n\n**Step 1 — Choose a real purpose** for a web page: a personal portfolio, a project landing page, a cheat sheet, an event invitation, a simple dashboard.\n\n**Step 2 — Describe it to Claude:**\n```\nI want to create a single HTML page (no frameworks, just plain HTML and inline CSS) for: [describe your use case]\n\nIt should include:\n- [list the sections you want]\n- [any specific content]\n- [any styling preferences — colours, fonts, layout]\n\nMake it look professional. Include all the HTML in one complete file I can save and open in a browser.\n```\n\n**Step 3 — Save the HTML** Claude gives you to a file and open it in a browser.\n\n**Step 4 — Request targeted improvements:**\n- \"The header looks too plain — make it have a coloured background\"\n- \"Add a contact section at the bottom\"\n- \"Make it work better on mobile\"\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this HTML you just wrote. Find 3 specific problems: accessibility issues, layout problems on small screens, or missing elements that a professional web developer would add.\"* Fix at least 2 issues.\n\n**Step 6 — This page is yours.** Keep it and show it to someone."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — HTML Debugging with AI",
+      "content": "When HTML breaks, knowing how to get AI to fix it is more valuable than knowing every HTML tag.\n\n**Step 1 — Intentionally break your HTML** by removing a closing tag (remove `</p>` or `</div>`) or by making a typo in a link (`href` → `hrf`).\n\n**Step 2 — Open the broken file in a browser.** How does it look? Does the browser show an error or just silently break the layout?\n\n**Step 3 — Paste the broken HTML to Claude** and ask: *\"This HTML isn't rendering correctly. Find all the errors and fix them. Explain what each error was and why it caused the problem it did.\"*\n\n**Step 4 — Compare** Claude's fixed version to your original. Did Claude find the error you introduced? Did it find any other issues?\n\n**Step 5 — Use browser DevTools:** Press F12 in your browser. Click the Elements tab. This shows you the actual HTML the browser is rendering — different from what you wrote if there are errors.\n\n**Step 6 — Learn the rule:** Right-click any element on any webpage → Inspect Element. You can see the HTML of any website. This is how web developers learn — by reading real HTML from real sites."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Add CSS Styling to Your Site",
+      "content": "Your HTML site works — now make it look good. CSS controls appearance: colours, fonts, layout, spacing.\n\n**Step 1 — Open index.html** in a text editor.\n\n**Step 2 — Ask Claude to add professional styling:**\n```\nI have this HTML file: [paste it]\n\nAdd CSS styling to make it look professional. Requirements:\n- A clean, modern font (use Google Fonts or system fonts)\n- A colour scheme with a primary and secondary colour\n- Proper spacing and margins\n- The links should look like buttons, not plain text\n- It should look good on both desktop and mobile\n\nAdd all CSS inside a <style> tag in the <head>. Give me the complete updated file.\n```\n\n**Step 3 — Save and open** the updated file. Does it look how you wanted?\n\n**Step 4 — Make one specific change** yourself: find the colour code in the CSS (like `#3498db`) and change it to a different colour. See the effect immediately by refreshing the browser.\n\n**Step 5 — Share your finished site** with someone — even just as a screenshot. You built a real webpage."
+    },
+    {
+      "type": "quiz",
+      "question": "You open your HTML file in a browser and the page looks completely blank. Claude suggests checking for unclosed tags. What does this mean?",
+      "options": [
+        "A file was not saved properly",
+        "A tag that was opened with <tag> was never closed with </tag>, causing the browser to not know where the element ends",
+        "The file extension is wrong",
+        "The browser doesn't support this HTML version"
+      ],
+      "correct": 1,
+      "explanation": "HTML uses paired tags: <p> opens and </p> closes. If you open a tag and never close it, the browser often treats everything that follows as being inside that element — which can make content invisible, unformatted, or displaced. For example, forgetting to close a <style> tag causes the browser to interpret all your page content as CSS. Always check that every opening tag has a matching closing tag."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the difference between HTML and CSS?",
+      "options": [
+        "HTML is for websites, CSS is for apps",
+        "HTML defines the content and structure (what is on the page); CSS defines the appearance (how it looks)",
+        "HTML is older and CSS replaced it",
+        "They are two names for the same technology"
+      ],
+      "correct": 1,
+      "explanation": "HTML (HyperText Markup Language) defines structure and content — headings, paragraphs, links, images, lists. CSS (Cascading Style Sheets) controls visual presentation — colours, fonts, spacing, layout, animations. They work together: HTML is the skeleton, CSS is the skin and clothing. You can change a page's entire visual design by changing only CSS, without touching the HTML content."
     },
     {
       "type": "callout",

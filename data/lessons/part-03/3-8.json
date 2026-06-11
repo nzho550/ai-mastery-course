@@ -2,8 +2,13 @@
   "id": "3-8",
   "title": "Prompt Templates & Reuse",
   "part": 3,
-  "estimatedMinutes": 25,
-  "tags": ["prompting", "beginner", "templates", "productivity"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "templates",
+    "productivity"
+  ],
   "sections": [
     {
       "type": "text",
@@ -50,6 +55,54 @@
       ],
       "correct": 1,
       "explanation": "Meta-prompting is the most efficient fix. You already have a working template — you just need one targeted addition for a specific edge case. Describe the failure mode ('when summarising legal documents, it misses [specific type of distinction]') and ask the AI to add the right instruction. This is faster than starting over and keeps your single template working across both cases. Testing with 3 different legal document examples verifies the fix actually works before you add it to your library."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Prompt Template Quick Build",
+      "content": "This 8-minute drill shows how a simple template with fill-in-the-blank placeholders eliminates repetitive prompting.\n\n**Step 1 — Identify a task you do with AI at least once a week.** Something where you always provide similar information but change specific details.\n\n**Step 2 — Write out the last 2-3 prompts you used** for this task. What stays the same? What changes?\n\n**Step 3 — Build a template** by converting the static parts to fixed text and the dynamic parts to placeholders:\n```\n[CONTEXT]: I work in [YOUR ROLE] at [COMPANY TYPE].\n[TASK]: Write a [DOCUMENT TYPE] for [AUDIENCE].\n[TOPIC]: The subject is: [TOPIC]\n[CONSTRAINTS]: [LENGTH / TONE / FORMAT requirements]\n[EXAMPLES]: [Optional: paste example if you have one]\n```\n\n**Step 4 — Test your template** on a real instance of the task. Fill in the brackets and run it.\n\n**Step 5 — Save the template.** Add it to your prompt library with a label."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Complete Prompt Library",
+      "content": "This workshop produces a real, usable prompt library you will open and reference starting today.\n\n**Step 1 — List every AI task you do regularly.** Write at least 8-10 specific tasks, grouped by type: Writing, Research, Analysis, Planning, Communication.\n\n**Step 2 — For your top 5 most important tasks**, build a template for each.\n\n**Step 3 — Ask Claude to help meta-prompt each template:**\n```\nHere is a task I do regularly: [describe it]\nHere is my current prompt: [paste it]\n\nImprove this prompt by:\n1. Making the context instruction more specific\n2. Adding a clear output format specification\n3. Adding instructions for how to handle edge cases\n4. Adding a self-check instruction at the end (ask Claude to review its own output)\n5. Making the placeholders clearer and labelled\n```\n\n**Step 4 — Compile all 5 templates** into a single document structured as:\n```\n# Prompt Library\n\n## [Task Name]\n**When to use:** [one sentence]\n**Template:**\n[full prompt]\n**Notes:** [tips]\n```\n\n**Step 5 — Test every template** on a real task.\n\n**Step 6 — Mandatory quality check:** For each template, ask Claude: *\"If you received this template filled in with a typical example, what would be ambiguous or unclear? What instructions are missing that would help you produce a better output?\"* Improve each template."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Organise and Share Your Prompt Library",
+      "content": "A prompt library is only valuable if you can find and use the right prompt when you need it.\n\n**Step 1 — Decide where to store your prompt library.** Options:\n- A Notion page (searchable, shareable)\n- A Google Doc (simple, accessible everywhere)\n- A Claude Project (prompts as instructions visible in every conversation)\n- A local Markdown file (fast to open, version-controllable)\n\n**Step 2 — Create your chosen storage location** and paste your library into it.\n\n**Step 3 — Add a quick-find header** at the top: a table of contents with jump links to each prompt category.\n\n**Step 4 — Test the retrieval:** Imagine you need a specific type of prompt in 30 seconds. Can you find it quickly?\n\n**Step 5 — Share one prompt** with a colleague who uses AI for similar work. Ask for their feedback — does the template work for them, or does it need adjustments?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Team Prompt Library",
+      "content": "Scale your prompt work by creating shared templates your team can use — reducing inconsistency and getting everyone to the quality level of your best AI users.\n\n**Step 1 — Identify the 3 AI tasks your team does most often.** Things everyone does, where quality and consistency matter.\n\n**Step 2 — For each task**, gather examples of good and bad AI outputs your team has produced.\n\n**Step 3 — Build one \"gold standard\" template** per task — the prompt that reliably produces the quality you want.\n\n**Step 4 — Ask Claude:** *\"I want to create a prompt template that will work for my whole team (not just me personally). Here is the task: [describe]. Here is my current template: [paste it]. What assumptions does this template make about the user that might not apply to others on my team? How should I modify it to be more universally usable?\"*\n\n**Step 5 — Create a team document** with 3 templates and brief usage notes.\n\n**Step 6 — Share it with at least 2 colleagues** and get their feedback on whether the templates work for their specific situation."
+    },
+    {
+      "type": "quiz",
+      "question": "You have a prompt template with the placeholder [AUDIENCE]. A colleague uses the template and writes \"my team\" in the placeholder. The output is not very good. What is the most likely issue?",
+      "options": [
+        "The placeholder name is confusing",
+        "The placeholder is too vague — \"my team\" doesn't tell the AI anything specific about the audience",
+        "The template needs more placeholders",
+        "The AI doesn't understand workplace contexts"
+      ],
+      "correct": 1,
+      "explanation": "\"My team\" provides no actionable information — it doesn't tell Claude the audience's role, expertise level, what they care about, or how they will use the output. Good placeholder guidance would prompt the user to provide specifics: [AUDIENCE: describe their role, expertise level, and what decision or action they need to take after reading this]. The more specific the placeholder instruction, the better the output."
+    },
+    {
+      "type": "quiz",
+      "question": "When is it NOT worth creating a prompt template?",
+      "options": [
+        "For tasks you do more than once a week",
+        "For tasks where you always provide different context and the prompt has no repeating structure",
+        "For tasks involving sensitive information",
+        "For tasks where the output needs to be high quality"
+      ],
+      "correct": 1,
+      "explanation": "Prompt templates deliver value when a task repeats with a consistent structure. If every instance of the task is completely different in context, audience, format, and constraints — nothing to templatise — a template adds overhead without benefit. Templates are best for tasks like \"write a [type] for [audience] about [topic]\" where the scaffold repeats but the content changes. For truly one-off tasks, write the prompt fresh."
     },
     {
       "type": "callout",

@@ -2,8 +2,12 @@
   "id": "2-6",
   "title": "Microsoft Copilot",
   "part": 2,
-  "estimatedMinutes": 20,
-  "tags": ["tools", "beginner", "microsoft"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "tools",
+    "beginner",
+    "microsoft"
+  ],
   "sections": [
     {
       "type": "text",
@@ -47,6 +51,54 @@
       ],
       "correct": 2,
       "explanation": "The decisive advantage is native integration with company data and existing workflow. Microsoft 365 Copilot can read your actual email threads in Outlook, your real documents in Word, and your meeting recordings in Teams — without employees having to copy and paste sensitive content into a third-party service. This data residency and workflow integration argument is the core enterprise case. Claude and ChatGPT can do equivalent tasks, but only when employees manually copy content to them — which is slower, creates data risk, and doesn't scale across an organisation."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Microsoft Copilot First Tasks",
+      "content": "Microsoft Copilot runs in Windows, Edge, and Bing. This drill tests it in your actual environment.\n\n**Step 1 — Open Microsoft Copilot** in the way most accessible to you: the Copilot button in Windows 11, the Copilot sidebar in Edge browser, or copilot.microsoft.com.\n\n**Step 2 — Test Copilot in Edge sidebar:** Navigate to a webpage relevant to your work. Open the Copilot sidebar and ask: \"Summarise this page in 5 bullet points\" and \"What questions does this page not answer that I would need to know?\"\n\n**Step 3 — Test web-connected answers:** Ask Copilot about something current in your industry. Does it cite sources? How current is the information?\n\n**Step 4 — Test image generation:** Ask Copilot to generate an image (it uses DALL-E 3). Request something work-related.\n\n**Step 5 — Compare to Claude:** Ask the same question you used in step 2 in Claude.ai. Which gave more useful analysis?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Complete a Real Work Task with Copilot",
+      "content": "Use Microsoft Copilot to complete a task you actually need done this week.\n\n**Step 1 — Choose a task** that suits Copilot: something that benefits from web-connected responses, involves browsing a web page, or is a Microsoft-ecosystem task.\n\n**Step 2 — Run the task** through Copilot. Work through the conversation until you have a usable output.\n\n**Step 3 — Evaluate the output:** Is it accurate? Is it formatted in a way you can use? Did it miss anything important?\n\n**Step 4 — Mandatory review:** Paste the output to Claude.ai and say: *\"Review this output. I'm using it for [describe your task]. Find 3 specific problems, gaps, or inaccuracies I should fix before using it.\"* Implement at least one fix.\n\n**Step 5 — Record your comparison:** Is Microsoft Copilot better than Claude or ChatGPT for this type of task? Under what conditions would you choose Copilot over the others?\n\n**Step 6 — Update your AI tools guide** with your Copilot findings."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Copilot vs Claude on a Business Writing Task",
+      "content": "Compare how Microsoft Copilot and Claude approach professional writing.\n\n**Step 1 — Choose a real business writing task:** Draft an email, write a summary, produce a report section, create a meeting agenda.\n\n**Step 2 — Run the task in Microsoft Copilot first.** Note the response quality, length, tone, and any formatting.\n\n**Step 3 — Run the same task in Claude.** Note differences in approach.\n\n**Step 4 — Evaluate both outputs against these criteria:**\n- Which is closer to your actual professional tone?\n- Which requires less editing before use?\n- Which misunderstood the task more?\n- Which would be more appropriate to share with your actual audience?\n\n**Step 5 — Ask Claude** to compare both outputs: *\"Here are two AI responses to a business writing task [paste both]. What are the key differences in approach and quality? For professional business writing in [your context], which approach is more appropriate and why?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Add Copilot to Your Daily Windows Workflow",
+      "content": "If you work on Windows 11, Copilot can be embedded in your daily routine without switching apps.\n\n**Step 1 — Set up Copilot access:** Enable it in your Windows taskbar (if not already visible). Pin the Edge Copilot sidebar to your browser.\n\n**Step 2 — Identify 2-3 daily tasks** that you could run through Copilot without switching apps: summarising a web page you're reading, drafting a quick email, searching for information while staying in your browser.\n\n**Step 3 — Test each task** using Copilot in the sidebar or Windows panel rather than opening a separate AI tab.\n\n**Step 4 — Rate the convenience:** Is in-context Copilot faster than switching to a dedicated AI tab? For which tasks?\n\n**Step 5 — Decide:** Will you use the embedded Copilot as your quick, in-context AI, with dedicated Claude or ChatGPT for heavier tasks? Write your personal workflow rule."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main advantage of Microsoft Copilot over Claude for many Microsoft 365 users?",
+      "options": [
+        "It produces higher quality writing than Claude",
+        "It is more accurate and less prone to hallucination",
+        "It integrates directly into Windows, Edge, and Microsoft 365 apps without switching applications",
+        "It is faster to respond than other AI tools"
+      ],
+      "correct": 2,
+      "explanation": "Copilot's main advantage is seamless integration into the Microsoft ecosystem — it works inside Windows, Edge browser, Outlook, Teams, Word, Excel, and other M365 apps. This reduces context switching. It's not necessarily better at writing or accuracy than Claude; the advantage is workflow integration for Microsoft-heavy users."
+    },
+    {
+      "type": "quiz",
+      "question": "You are reading an important 20-page report in your Edge browser and want a quick summary. What is the fastest approach?",
+      "options": [
+        "Copy the entire report and paste it into Claude.ai",
+        "Open the Copilot sidebar in Edge and ask it to summarise the current page",
+        "Download the PDF and upload it to ChatGPT",
+        "Read it manually — AI summaries may miss key details"
+      ],
+      "correct": 1,
+      "explanation": "The Edge Copilot sidebar can read and summarise the current page without copying or downloading anything — it's the fastest option for web-based documents. Claude is excellent for deep analysis once you have the content, but requires you to paste or upload the text. Copilot's in-browser integration is its biggest practical advantage for everyday page reading tasks."
     },
     {
       "type": "callout",

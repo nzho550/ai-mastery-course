@@ -2,8 +2,13 @@
   "id": "7-3",
   "title": "First Session — Reading a Project",
   "part": 7,
-  "estimatedMinutes": 35,
-  "tags": ["claude-code", "context", "codebase", "first-session"],
+  "estimatedMinutes": 70,
+  "tags": [
+    "claude-code",
+    "context",
+    "codebase",
+    "first-session"
+  ],
   "sections": [
     {
       "type": "text",
@@ -61,6 +66,54 @@
       ],
       "correct": 1,
       "explanation": "/compact is exactly what this situation calls for. It compresses the entire conversation history into a dense summary — keeping the important technical context (what files were read, what the project does, current task) while discarding irrelevant detail like abandoned feature discussions. This is more efficient than /clear (which loses everything) and more reliable than asking Claude to 'forget' something conversationally. Use /compact proactively when transitioning between subtasks, not just reactively when problems appear."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Project Reading Drill",
+      "content": "Claude Code's most powerful first move is reading and understanding your entire project. This drill practices it.\n\n**Step 1 — Open Claude Code in a real project:**\n```powershell\ncd your-project\nclaude\n```\n\n**Step 2 — Ask Claude Code to understand the project** (these are different questions with different answers):\n- \"What does this project do?\"\n- \"What are the main files and what does each one do?\"\n- \"What dependencies does this project have?\"\n- \"How would I run this project?\"\n- \"What tests exist, if any?\"\n\n**Step 3 — Verify each answer.** Open the files mentioned. Is Claude Code's description accurate?\n\n**Step 4 — Ask a specific question** that requires reading code: \"What happens when a user submits the login form?\" or \"What does the main() function do step by step?\"\n\n**Step 5 — Ask about problems:** \"What are potential issues or improvements you notice in this codebase?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Generate Project Documentation",
+      "content": "Use Claude Code to generate real documentation for a project — one of its most immediately valuable uses.\n\n**Step 1 — Open Claude Code in a project** that lacks documentation.\n\n**Step 2 — Ask for comprehensive documentation:**\n```\nGenerate documentation for this project:\n1. A README.md with: project description, installation instructions, usage examples, configuration options\n2. Inline comments for any functions that lack them\n3. A CONTRIBUTING.md with: how to set up the development environment, code style guidelines, how to run tests, how to submit changes\n\nBase everything on what you actually see in the code — don't make up features that don't exist.\n```\n\n**Step 3 — Review all generated documentation.** Check every claim against the actual code.\n\n**Step 4 — Mandatory review:** In Claude Code: *\"Review the documentation you just wrote. What did you assume or infer that might be wrong? What important information might you have missed?\"*\n\n**Step 5 — Commit the documentation** with message \"Add auto-generated documentation (reviewed)\"."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Code Quality Assessment",
+      "content": "Use Claude Code to assess the quality of a real codebase and produce an actionable improvement plan.\n\n**Step 1 — Open Claude Code in a project.**\n\n**Step 2 — Run a structured quality assessment:**\n```\nPerform a code quality assessment of this project. For each category, rate it Good/Fair/Poor and explain why:\n\n1. Code organisation: Are files and functions well-organised?\n2. Error handling: Are errors caught and handled appropriately?\n3. Documentation: Are functions and complex code documented?\n4. Test coverage: Are there tests? Do they cover important cases?\n5. Security: Any obvious security issues?\n6. Performance: Any obvious performance problems?\n7. Dependencies: Are dependencies up-to-date and minimal?\n\nEnd with: the top 3 improvements I should make first, in priority order.\n```\n\n**Step 3 — Review the assessment.** Do you agree? Are there categories where you know better than Claude Code?\n\n**Step 4 — Save the assessment** and plan to address the top priority this week."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Onboard Claude Code to a New Project",
+      "content": "Create a reusable onboarding process for bringing Claude Code up to speed on any project.\n\n**Step 1 — Develop a standard \"project onboarding\" prompt** for Claude Code:\n```\nI'm going to have you work on this project. Before we start:\n1. Read the README.md and CLAUDE.md (if they exist)\n2. List all the main source files and their purposes\n3. Identify the project's entry points\n4. Note any configuration files and what they control\n5. List the commands to: install dependencies, run the project, run tests\n6. Identify any patterns or conventions you notice in the code\n7. Tell me what you're unsure about — what would you need to know to work on this project effectively?\n```\n\n**Step 2 — Run this onboarding prompt** on a real project.\n\n**Step 3 — Answer Claude Code's questions.** Good questions mean it understood the project. Bad questions mean the documentation needs improvement.\n\n**Step 4 — Update CLAUDE.md** with the answers to questions Claude Code asked. This ensures the next session starts better."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code reads your project and says \"I see this is a Flask web application.\" But it's actually a Django application. What should you do?",
+      "options": [
+        "Trust Claude Code — it has better pattern recognition than you",
+        "Correct Claude Code immediately: \"This is Django, not Flask\" — never let it work with wrong assumptions",
+        "Restart the session and hope it gets it right this time",
+        "This doesn't matter — both frameworks work similarly"
+      ],
+      "correct": 1,
+      "explanation": "Correct wrong assumptions immediately. If Claude Code believes the wrong framework, every subsequent piece of code it writes will use Flask patterns instead of Django patterns — potentially incorrect imports, wrong conventions, wrong CLI commands. In Claude Code, you can say \"That's incorrect — this is a Django project, not Flask. Please re-read [key files] to confirm.\" Uncorrected wrong assumptions propagate through the entire session."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude Code \"what does this project do?\" and it gives a long, detailed answer. What is the most important follow-up check?",
+      "options": [
+        "Ask it to make the description shorter",
+        "Open the main source file and verify the description matches what the code actually does",
+        "Ask Claude Code to rate its own confidence",
+        "Share the description with a colleague to see if they agree"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code's project descriptions are based on what it reads in the code, documentation, and comments. If these are incomplete, misleading, or outdated, Claude Code's description will reflect those problems. Always verify by checking the actual code. A common failure mode: README.md describes what the project used to do, not what it currently does — and Claude Code describes the README, not reality."
     },
     {
       "type": "callout",

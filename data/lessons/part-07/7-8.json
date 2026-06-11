@@ -2,8 +2,13 @@
   "id": "7-8",
   "title": "Hooks — Automate Actions Around Claude's Work",
   "part": 7,
-  "estimatedMinutes": 30,
-  "tags": ["claude-code", "hooks", "automation", "settings-json"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "claude-code",
+    "hooks",
+    "automation",
+    "settings-json"
+  ],
   "sections": [
     {
       "type": "text",
@@ -46,6 +51,54 @@
       "tag": "CLAUDECODE",
       "title": "Set Up a File-Edit Hook",
       "content": "Add a PostToolUse hook that prints a message in the terminal every time Claude modifies a file. Verify it fires.\n\n**Step 1 — Create or open `.claude/settings.json`:**\nIn VS Code Explorer, look for `.claude/settings.json` in your project root. If it doesn't exist, create it. (The `.claude/` folder should already exist from lesson 7-7 when you created the `commands/` subfolder.)\n\n**Step 2 — Add the hook:**\nPaste this content into `.claude/settings.json`:\n```json\n{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude just edited a file\"\n          }\n        ]\n      }\n    ]\n  }\n}\n```\nSave the file.\n\n**Step 3 — Launch Claude Code:**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**Step 4 — Trigger the hook:**\nAsk Claude to make a small change to any file:\n```\nAdd an HTML comment at the top of exercises/about-me.html that says\n\"Last updated by Claude Code\"\n```\nReview the diff and accept it.\n\n**Step 5 — Observe the hook output:**\nAfter Claude applies the change, you should see:\n```\nClaude just edited a file\n```\nPrinted in your terminal. That's your hook firing.\n\n**Step 6 — Upgrade the hook (optional):**\nChange the hook to something more informative. On Windows (PowerShell), update the command to:\n```\necho File modified at %TIME%\n```\nThis prints the time of each edit, giving you a lightweight audit log.\n\n**Real-world extension:** If you have Prettier installed (`npm install -g prettier`), replace the echo command with:\n```\nprettier --write %CLAUDE_TOOL_INPUT_PATH%\n```\nThis auto-formats every file Claude touches. That single hook line eliminates an entire class of manual formatting work."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Your First Hook",
+      "content": "Hooks are shell commands that run automatically around Claude Code's actions. This drill creates your first one.\n\n**Step 1 — Open Claude Code settings:**\n```\n/settings\n```\nOr via the CLI: `claude config`\n\n**Step 2 — Understand the hook events** (ask Claude Code or check docs):\n- `PreToolUse` — runs before Claude Code uses a tool\n- `PostToolUse` — runs after Claude Code uses a tool\n- `Stop` — runs when Claude Code finishes\n\n**Step 3 — Create a simple notification hook** — plays a sound or shows a notification when Claude Code finishes:\n```json\n{\n    \"hooks\": {\n        \"Stop\": [\n            {\n                \"matcher\": \"\",\n                \"hooks\": [\n                    {\n                        \"type\": \"command\",\n                        \"command\": \"echo 'Claude Code task completed!' | powershell -command \\\"[System.Media.SystemSounds]::Beep.Play()\\\"\"\n                    }\n                ]\n            }\n        ]\n    }\n}\n```\n\n**Step 4 — Test the hook** by running a Claude Code task.\n\n**Step 5 — Adjust the notification** to something useful for your workflow."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Auto-Test Hook",
+      "content": "Build a hook that automatically runs your tests every time Claude Code modifies Python files.\n\n**Step 1 — Identify your test command:**\n```powershell\npython -m pytest tests/  # or whatever runs your tests\n```\n\n**Step 2 — Add a PostToolUse hook** that runs tests after file edits:\n```json\n{\n    \"hooks\": {\n        \"PostToolUse\": [\n            {\n                \"matcher\": \"Write|Edit\",\n                \"hooks\": [\n                    {\n                        \"type\": \"command\",\n                        \"command\": \"python -m pytest tests/ --tb=short -q\",\n                        \"timeout\": 60\n                    }\n                ]\n            }\n        ]\n    }\n}\n```\n\n**Step 3 — Test the hook:** Ask Claude Code to edit a Python file. Do tests run automatically?\n\n**Step 4 — Review the hook's output:** Does Claude Code adjust its behaviour when tests fail?\n\n**Step 5 — Ask Claude:** *\"Review this hook configuration. What edge cases might cause it to run at the wrong time or produce confusing output?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Logging Hook for AI Auditability",
+      "content": "Build a hook that logs every tool Claude Code uses — creating an audit trail of AI actions.\n\n**Step 1 — Create a log file:**\n```powershell\nnew-item claude-audit.log\n```\n\n**Step 2 — Add a logging hook** to record all tool usage:\n```json\n{\n    \"hooks\": {\n        \"PreToolUse\": [\n            {\n                \"matcher\": \"\",\n                \"hooks\": [\n                    {\n                        \"type\": \"command\",\n                        \"command\": \"echo [$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] CLAUDE TOOL: $CLAUDE_TOOL_NAME >> claude-audit.log\"\n                    }\n                ]\n            }\n        ]\n    }\n}\n```\n\n**Step 3 — Run a Claude Code session** with a real task. Examine the log file afterwards.\n\n**Step 4 — Add the log file to .gitignore** (it's runtime data, not code).\n\n**Step 5 — Ask Claude:** *\"Looking at this audit log from my Claude Code session [paste key lines], does the sequence of tool use match what I expected Claude Code to do for the task I gave it? What does it reveal?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Safety Hook for Dangerous Operations",
+      "content": "Build a hook that intercepts dangerous commands and requires confirmation before execution.\n\n**Step 1 — Identify dangerous commands** in your context: `rm -rf`, `DROP TABLE`, `git push --force`, `DELETE FROM`.\n\n**Step 2 — Build a blocking hook** that prompts before dangerous operations:\n```json\n{\n    \"hooks\": {\n        \"PreToolUse\": [\n            {\n                \"matcher\": \"Bash\",\n                \"hooks\": [\n                    {\n                        \"type\": \"command\",\n                        \"command\": \"if ($env:CLAUDE_TOOL_INPUT -match 'rm -rf|DROP TABLE|--force') { Write-Host '⚠️  DANGEROUS COMMAND DETECTED. Claude Code wants to run: ' + $env:CLAUDE_TOOL_INPUT; $confirm = Read-Host 'Allow? (yes/no)'; if ($confirm -ne 'yes') { exit 1 } }\"\n                    }\n                ]\n            }\n        ]\n    }\n}\n```\n\n**Step 3 — Test the hook** by asking Claude Code to do something that would trigger it.\n\n**Step 4 — Review the hook.** Are there dangerous patterns you haven't covered? Are there any false positives (safe commands that would incorrectly trigger it)?\n\n**Step 5 — Ask Claude:** *\"Review this safety hook. What dangerous commands does it miss? What safe commands might it incorrectly flag?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You add a PostToolUse hook that runs tests after every file edit. Claude Code edits 10 files in sequence. What is the potential problem?",
+      "options": [
+        "The hook will not run after multiple edits",
+        "Tests run after every single edit, even when the project is in a broken intermediate state — causing many test failures for temporarily incomplete code",
+        "The hook will slow down Claude Code permanently",
+        "Tests cannot be run from hooks"
+      ],
+      "correct": 1,
+      "explanation": "Running tests after every individual edit causes \"intermediate state\" failures — when implementing a feature that requires changes to multiple files, the project is broken between edits. A smarter approach: run tests only after Claude Code indicates it's done with a task, or add a delay. Use the `Stop` hook (runs when the session ends) instead of `PostToolUse`, or add a hook that only runs tests if the preceding edit was the last in a sequence."
+    },
+    {
+      "type": "quiz",
+      "question": "A blocking PreToolUse hook exits with code 1 when a dangerous command is detected. What happens to Claude Code?",
+      "options": [
+        "Claude Code ignores the hook and runs the command anyway",
+        "Claude Code receives the non-zero exit code as feedback and should not proceed with the tool use — the hook effectively blocks the action",
+        "Claude Code crashes and loses all progress",
+        "The hook must exit with a specific error code to block — exit 1 is not enough"
+      ],
+      "correct": 1,
+      "explanation": "When a hook exits with a non-zero exit code, Claude Code treats this as a signal to not proceed with the planned tool use. This is the designed blocking mechanism. The hook's stdout/stderr is available to Claude Code as context for why the action was blocked, allowing it to report the blocking reason to you and potentially request permission or adjust its plan."
     },
     {
       "type": "callout",

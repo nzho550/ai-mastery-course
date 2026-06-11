@@ -2,8 +2,14 @@
   "id": "7-11",
   "title": "Sub-Agents & Parallel Work",
   "part": 7,
-  "estimatedMinutes": 30,
-  "tags": ["claude-code", "sub-agents", "parallel", "agents", "automation"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "claude-code",
+    "sub-agents",
+    "parallel",
+    "agents",
+    "automation"
+  ],
   "sections": [
     {
       "type": "text",
@@ -36,6 +42,54 @@
       "tag": "CLAUDECODE",
       "title": "Spawn a Research Agent",
       "content": "Give Claude Code a batch file-analysis task and observe how it handles the subtasks.\n\n**Step 1 — Set up test files:**\nIf you don't have several files in `exercises/` yet, create 3–4 small ones first. In VS Code, create:\n- `exercises/page-one.html` — a minimal HTML page about topic 1\n- `exercises/page-two.html` — a minimal HTML page about topic 2\n- `exercises/page-three.html` — a minimal HTML page about topic 3\n\nOr just use the files you already have from lessons 7-4 through 7-10.\n\n**Step 2 — Launch Claude Code:**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**Step 3 — Give a multi-file batch task:**\n```\nRead every file in the exercises/ folder. For each file, write a summary\nto a new file in notes/summaries/ — one summary file per exercise file.\nName each summary file to match the original (e.g., about-me.md for about-me.html).\nEach summary should be 3–5 sentences describing what the file does and what it contains.\n```\n\n**Step 4 — Watch the execution:**\nObserve Claude's process in the terminal:\n- Does it describe a plan before acting?\n- Does it mention spawning sub-agents or working on files separately?\n- How does it handle the results?\n\n**Step 5 — Verify the output:**\nWhen Claude finishes, open VS Code and check `notes/summaries/`. You should see one `.md` file per exercise file, each containing an accurate summary.\n\n**Step 6 — Ask a meta question:**\nAsk Claude:\n```\nHow did you approach that task? Did you work on the files sequentially\nor in parallel? Explain your process.\n```\nClaude will describe its execution strategy — this gives you insight into when and how it uses parallel approaches.\n\n**What to notice:** The work was identical for each file (read → summarize → write), and the files were independent. That's the pattern that benefits most from sub-agent decomposition."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Sub-Agent Concept Exploration",
+      "content": "Understand sub-agents concretely before using them.\n\n**Step 1 — Ask Claude Code:** \"Explain what sub-agents are in Claude Code. How do they differ from a single-agent session? When does spawning a sub-agent make sense vs doing the work in the main session?\"\n\n**Step 2 — Ask for concrete examples:** \"Give me 3 concrete examples of tasks where spawning a sub-agent would complete the work faster or better than having the main agent do it alone.\"\n\n**Step 3 — Ask about the risks:** \"What can go wrong when Claude Code uses sub-agents? What should I watch for when reviewing the work of a sub-agent session?\"\n\n**Step 4 — Ask about context:** \"When a sub-agent is spawned, what context does it have? Does it read CLAUDE.md? Does it know what the main agent is working on?\"\n\n**Step 5 — Summarise your understanding** in 3 bullet points: what sub-agents are, when to use them, and what to watch out for."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Parallel Work with Sub-Agents",
+      "content": "Use sub-agents to complete parallel independent tasks simultaneously.\n\n**Step 1 — Identify a task that can be split into 2-3 independent parts.** For example:\n- Writing tests for 3 separate modules simultaneously\n- Generating documentation for 3 different components\n- Adding error handling to 3 independent utility files\n\n**Step 2 — Ask Claude Code to execute the task using parallel sub-agents:**\n```\nI need to add comprehensive error handling to these 3 files: utils.py, api.py, and database.py. These are independent — they don't call each other. Please use parallel sub-agents to work on all 3 simultaneously to finish faster.\n```\n\n**Step 3 — Monitor the parallel execution.** Does Claude Code actually parallelize?\n\n**Step 4 — Review each sub-agent's output** individually before accepting.\n\n**Step 5 — Ask Claude:** \"Did parallelizing this task produce any inconsistencies between the files? Are all 3 using the same error handling patterns?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Design a Sub-Agent Architecture",
+      "content": "Design a complex workflow that uses sub-agents effectively.\n\n**Step 1 — Choose a complex task** from your work that has multiple independent components.\n\n**Step 2 — Ask Claude.ai (browser):**\n```\nI have this complex task to complete with Claude Code: [describe your task]\n\nDesign a sub-agent architecture for this:\n1. Identify which parts can run in parallel (independent sub-agents)\n2. Identify which parts must run sequentially (dependencies)\n3. Define what each sub-agent's specific task would be\n4. Describe how results from sub-agents get integrated\n5. Identify the risks in this multi-agent approach\n```\n\n**Step 3 — Review the architecture.** Does the parallelization make sense? Are the dependencies correct?\n\n**Step 4 — Estimate the time savings:** If done sequentially, how long would it take? With parallel sub-agents?\n\n**Step 5 — Decide:** Is the complexity of multi-agent coordination worth the time savings for this task?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Sub-Agent Results Integration",
+      "content": "Practice the critical step of integrating and reviewing multiple sub-agent outputs.\n\n**Step 1 — Run a parallel sub-agent task** from Workshop B (or a similar one).\n\n**Step 2 — After all sub-agents complete**, before accepting anything, run an integration review:\n```\nYou've completed work across 3 files using parallel agents. Before I accept any changes:\n1. Are there any inconsistencies between the approaches taken in each file?\n2. Do the changes in each file work correctly when used together?\n3. Is there any code that was duplicated that should be shared?\n4. Are there any naming conventions that don't match between files?\n```\n\n**Step 3 — Ask Claude Code to resolve any inconsistencies** it identifies.\n\n**Step 4 — Run the full test suite** to verify everything works together.\n\n**Step 5 — Commit the changes** with a message documenting that parallel sub-agents were used."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude Code to use parallel sub-agents to refactor your entire codebase simultaneously. What is the most significant risk?",
+      "options": [
+        "Sub-agents are slower than a single agent",
+        "Parallel agents working independently may make incompatible changes — for example, both agents refactoring the same shared utility function differently",
+        "Sub-agents cannot read your CLAUDE.md",
+        "The cost of parallel agents is higher than sequential work"
+      ],
+      "correct": 1,
+      "explanation": "The main risk of parallel agents is coordination failures — when two agents independently modify code that interacts, they can make incompatible changes. For example, Agent A renames a function; Agent B adds new calls to the old name. The solution: ensure tasks are truly independent (different files that don't interact), or use a sequenced approach where the main agent reviews intermediate results before spawning the next batch."
+    },
+    {
+      "type": "quiz",
+      "question": "A sub-agent completes a task and returns results to the main agent. Without reviewing the sub-agent's work, the main agent incorporates the results. What could go wrong?",
+      "options": [
+        "The main agent will automatically catch and fix any errors",
+        "Sub-agents can make mistakes that the main agent accepts without verification — the main agent may not re-read and validate what the sub-agent produced",
+        "Sub-agents always produce verified results",
+        "The main agent will refuse to use unreviewed sub-agent output"
+      ],
+      "correct": 1,
+      "explanation": "Sub-agents can produce incorrect or incomplete results. The main agent incorporating sub-agent output without independent verification propagates any errors silently. Best practice: ask the main agent to explicitly verify sub-agent results before incorporating them: \"Review what the sub-agents produced before using their output.\" For critical changes, apply your own review before accepting."
     },
     {
       "type": "callout",

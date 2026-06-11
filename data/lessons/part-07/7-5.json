@@ -2,8 +2,14 @@
   "id": "7-5",
   "title": "Reviewing & Accepting Changes",
   "part": 7,
-  "estimatedMinutes": 20,
-  "tags": ["claude-code", "diff", "review", "git", "workflow"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "claude-code",
+    "diff",
+    "review",
+    "git",
+    "workflow"
+  ],
   "sections": [
     {
       "type": "text",
@@ -40,6 +46,54 @@
       "tag": "CLAUDECODE",
       "title": "The Review Habit",
       "content": "Practice the full review workflow — not just accepting, but reading, questioning, and refining.\n\n**Step 1 — Launch:**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**Step 2 — Ask for a modification:**\nAsk Claude to modify the `about-me.html` you created in lesson 7-4:\n```\nImprove the CSS in about-me.html to make it look more modern:\n- Add a gradient background (dark blue to purple)\n- Make the typography cleaner — increase line height and font size\n- Add a subtle box shadow to the main content area\n```\n\n**Step 3 — Read the diff carefully:**\nWhen Claude shows the diff, go through it line by line:\n- What CSS properties are being added? (green `+` lines)\n- Is anything being removed? (red `-` lines)\n- Do you understand what each change does?\n\n**Step 4 — Ask for an explanation:**\nBefore accepting, pick one change you're curious about and ask:\n```\nBefore I accept this, explain what the gradient syntax on the background-image line does.\n```\nRead the explanation.\n\n**Step 5 — Partially accept:**\nNow practice the refine path. Type:\n```\nAccept the typography and box shadow changes, but instead of the gradient I want\na solid dark blue background (#1a1a2e). Revise the diff.\n```\nClaude should show you an updated diff with only the gradient line changed.\n\n**Step 6 — Accept the revised version:**\nIf the revised diff looks right, type `yes`.\n\n**Step 7 — Open in browser:**\nRight-click in VS Code → Open with Live Server. Verify the changes look as expected.\n\n**What to notice:** You didn't have to take the whole change or nothing. You negotiated a specific modification. That negotiation skill is what separates good AI-assisted development from reckless acceptance."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Accept/Reject Workflow Drill",
+      "content": "Build fluency with the accept/reject workflow — your primary safety control over Claude Code.\n\n**Step 1 — Open Claude Code in a project:**\n```powershell\nclaude\n```\n\n**Step 2 — Ask for a change:** \"Add a type annotation to every function in [filename].\"\n\n**Step 3 — When Claude Code shows you the diff**, practice reviewing systematically:\n- Does every change look correct?\n- Did it miss any functions?\n- Did it add any unexpected changes?\n\n**Step 4 — Practice rejection:** If any change looks wrong, reject it and explain why: \"Don't apply the change to the `__init__` function — it's a special method that doesn't need type annotations in this project's style.\"\n\n**Step 5 — Accept the rest** and verify the final state of the file.\n\n**Step 6 — Ask Claude:** \"What is your general rule for when you will make a change without showing me the diff vs when you will show me?\" — understand its default behaviour."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Assisted Code Review Session",
+      "content": "Use Claude Code as a code reviewer — reviewing your own code or code from a colleague.\n\n**Step 1 — Identify code to review:** A pull request, a module you recently wrote, or code you're not confident about.\n\n**Step 2 — Ask Claude Code for a structured review:**\n```\nReview the code in [filename or directory]. I want:\n1. An overall assessment: is this code well-written?\n2. Specific issues found (with line numbers where applicable)\n3. Priority ranking: which issues should I fix first?\n4. Any patterns you notice across multiple issues\n\nBe critical — I'm trying to improve the code, not feel good about it.\n```\n\n**Step 3 — For each issue Claude Code identifies**, decide: fix now, fix later, or disagree and explain why.\n\n**Step 4 — Ask Claude Code to fix the highest-priority issues:** \"Fix items 1, 3, and 5 from your review.\"\n\n**Step 5 — Review each fix** before accepting. Did the fix address the issue without introducing new ones?\n\n**Step 6 — Commit with a review summary commit message.**"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Test Changes Before Accepting",
+      "content": "The gold standard of Claude Code review: test the changes before accepting them.\n\n**Step 1 — Ask Claude Code to implement a small feature.** For example: \"Add a caching layer to the `get_user_data` function so that it caches results for 60 seconds.\"\n\n**Step 2 — Review the diff** Claude Code shows.\n\n**Step 3 — Before accepting, ask Claude Code to test it:**\n\"Before I accept these changes, run the existing tests to confirm they still pass. Also write and run a test specifically for the caching behaviour.\"\n\n**Step 4 — Watch Claude Code run tests.** If tests fail, it should fix the issues before you accept.\n\n**Step 5 — Only accept after tests pass.** This is the ideal workflow: AI writes → tests confirm → you accept.\n\n**Step 6 — Ask Claude Code:** \"What edge cases in the caching behaviour are NOT covered by the tests you wrote?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Review Checklist for Claude Code Changes",
+      "content": "Create a systematic checklist you run through every time Claude Code makes changes.\n\n**Step 1 — Ask Claude:** *\"Create a code review checklist specifically for AI-generated code. What are the most common mistakes that AI makes when writing code that a human would catch? Organise by: logic errors, security issues, error handling gaps, and style/maintainability problems.\"*\n\n**Step 2 — Adapt the checklist** to your specific language and project type.\n\n**Step 3 — Apply the checklist** to a recent Claude Code change in your project. Did you find anything you would have missed without the checklist?\n\n**Step 4 — Mandatory meta-review:** Ask Claude: *\"Review this checklist. What important items are missing that a security expert or senior engineer would add?\"*\n\n**Step 5 — Save the checklist** and use it for every Claude Code review going forward."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code makes a change to 5 files. 4 look correct but 1 looks suspicious. What is the right course of action?",
+      "options": [
+        "Accept all 5 — the AI package is usually correct",
+        "Accept the 4 correct ones and ask Claude Code to explain and redo the suspicious one",
+        "Reject all 5 and start over with a more specific task",
+        "Accept all 5 and run tests to catch any errors"
+      ],
+      "correct": 1,
+      "explanation": "Accept what looks correct and address specific concerns individually. Rejecting all changes wastes the correct work; accepting suspicious changes passes your review responsibility to tests (which may not catch logic errors). Say: \"I'm accepting these 4 changes. For the change in [file], explain your reasoning and what it's supposed to accomplish — I want to verify before accepting it.\" This is precise, targeted review."
+    },
+    {
+      "type": "quiz",
+      "question": "After accepting Claude Code's changes, you realise one of them introduced a bug. How do you recover?",
+      "options": [
+        "Ask Claude Code to fix the bug in a new session",
+        "Use `git revert` to undo the commit, or `git checkout` to restore the specific file, then fix properly",
+        "Ask Claude Code to undo its previous changes",
+        "Manually fix the bug — this is too complex for git operations"
+      ],
+      "correct": 1,
+      "explanation": "This is exactly what version control is for. If you committed Claude Code's changes: `git revert HEAD` creates a new commit that undoes the last one (safe for shared repos). If you haven't committed: `git checkout -- filename` restores the file to the last committed state. If the changes span multiple commits: `git rebase` or cherry-pick individual reverts. Always commit Claude Code's changes immediately after review so you have a clean revert point."
     },
     {
       "type": "callout",

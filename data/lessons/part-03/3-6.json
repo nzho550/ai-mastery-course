@@ -2,8 +2,13 @@
   "id": "3-6",
   "title": "Structured Output — JSON, Tables, and Data Extraction",
   "part": 3,
-  "estimatedMinutes": 25,
-  "tags": ["prompting", "beginner", "structured-output", "json"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "structured-output",
+    "json"
+  ],
   "sections": [
     {
       "type": "text",
@@ -59,6 +64,54 @@
       ],
       "correct": 1,
       "explanation": "Inconsistent field names are a schema specification problem. When you don't specify field names, the model chooses names it considers reasonable — and 'phone', 'phone_number', and 'tel' are all reasonable for the same concept. The fix is specifying exact field names in your prompt: 'Each object must have exactly these fields: name, email, phone (string or null), company'. Explicitly using 'or null' (rather than omitting the field when empty) ensures the schema is complete and consistent across all outputs."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Structured Output Quick Drill",
+      "content": "This drill produces structured output from unstructured input — one of the most immediately useful AI workflows.\n\n**Step 1 — Find unstructured text** you have at hand: a set of notes, an email thread, a meeting transcript, a web article, a list of feedback.\n\n**Step 2 — Extract a table** from it:\n```\nExtract all [tasks / decisions / people mentioned / dates / key points] from the following text and format them as a markdown table with columns: [Column1] | [Column2] | [Column3]\n\n[paste your text]\n```\n\n**Step 3 — Extract JSON** from the same text:\n```\nExtract the same information as structured JSON. Use this schema:\n{\n  \"items\": [\n    {\n      \"field1\": \"\",\n      \"field2\": \"\",\n      \"field3\": \"\"\n    }\n  ]\n}\n```\n\n**Step 4 — Compare:** Which format (table or JSON) is more useful for your specific use case?\n\n**Step 5 — Note the use case:** When in your actual work would extracting structured data from unstructured text save you the most time?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Data Extraction Pipeline",
+      "content": "Create a reusable prompt that extracts structured data from a document type you work with regularly.\n\n**Step 1 — Identify a document type** you regularly receive and need to extract specific information from: invoices, reports, feedback surveys, meeting notes, job applications, contracts, emails.\n\n**Step 2 — Identify all the fields** you need to extract from this document type. Be specific.\n\n**Step 3 — Design your extraction schema.** For JSON:\n```\n{\n  \"document_type\": \"[type]\",\n  \"extracted_at\": \"[timestamp]\",\n  \"data\": {\n    \"field1\": \"\",\n    \"field2\": [],\n    \"field3\": {\n      \"subfield1\": \"\",\n      \"subfield2\": \"\"\n    }\n  },\n  \"missing_fields\": [],\n  \"extraction_confidence\": \"high/medium/low\"\n}\n```\n\n**Step 4 — Write your extraction prompt** using the schema above. Include: what to do if a field is missing (\"leave blank and add to missing_fields\") and what to do if information is ambiguous (\"extract literally, flag in notes\").\n\n**Step 5 — Test it on 3 real examples** of the document type.\n\n**Step 6 — Mandatory review:** Ask Claude: *\"Review your own extractions. In which extraction are you least confident? What might you have missed or misinterpreted?\"*\n\n**Step 7 — Save your extraction prompt** in your prompt library."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — From Raw Data to Report",
+      "content": "This workshop takes raw structured data and turns it into a human-readable report using a two-step process.\n\n**Step 1 — Gather raw data** you have: survey results, metrics from a dashboard, financial figures, performance data — any numbers or structured records.\n\n**Step 2 — Step A (extract/organise):** Ask Claude to:\n```\nHere is raw data: [paste data]\n\nOrganise this into a structured summary with:\n- Total count and key totals\n- Top 3 findings by [metric]\n- Notable patterns or anomalies\n- Any missing or inconsistent data\n```\n\n**Step 3 — Step B (narrate):** Take the structured summary and ask:\n```\nConvert this structured data summary into a 3-paragraph executive briefing for [audience]. Focus on implications and what decisions the data should inform — not just description of the numbers.\n```\n\n**Step 4 — Review the final briefing.** Is it accurate? Does it draw the right conclusions?\n\n**Step 5 — Ask Claude:** *\"What important insight from the data did you NOT include in the briefing? What might a data expert notice that a non-expert would miss?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Create a Structured Output Template Library",
+      "content": "Build a collection of structured output templates for your most common data needs.\n\n**Step 1 — List 4-5 types of structured output you produce regularly** or wish you could produce more easily: project status reports, meeting notes in standard format, risk registers, content calendars, issue trackers.\n\n**Step 2 — For each type**, design an ideal JSON schema or table structure that would capture everything you need.\n\n**Step 3 — Ask Claude:** *\"Help me design a complete JSON schema for a [type]. It should capture: [describe what you need]. Make it practical for someone who will paste raw text and get structured data out. Include a 'confidence' field and a 'notes' field for the model to flag uncertainty.\"*\n\n**Step 4 — Test each schema** with a real example of the raw input.\n\n**Step 5 — Save all schemas** in a \"Structured Output Templates\" section of your prompt library."
+    },
+    {
+      "type": "quiz",
+      "question": "You want Claude to extract all action items from a meeting transcript as JSON. Which instruction produces the most reliable structured output?",
+      "options": [
+        "Extract action items from this meeting transcript",
+        "Extract action items and return them as JSON",
+        "Extract action items as JSON using exactly this schema: {\"action_items\": [{\"task\": \"\", \"owner\": \"\", \"deadline\": \"\", \"priority\": \"high/medium/low\"}]}. If owner is not mentioned, use \"Unassigned\". If deadline is not mentioned, use null.",
+        "Extract action items, owners, and deadlines in a useful format"
+      ],
+      "correct": 2,
+      "explanation": "Providing the exact schema with explicit field names, types, and fallback instructions (what to do when a field is missing) is the gold standard for structured output. Without a schema, Claude will invent its own structure which may not match what your downstream process expects. The more specific the schema and the more clearly you handle edge cases (missing fields, ambiguous values), the more reliable and consistent the output."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude extracts a table from your document but includes one row where it invented a value not present in the source. What is the best mitigation?",
+      "options": [
+        "Always verify every cell manually",
+        "Add a \"source_quote\" field to your schema so Claude must cite the exact text it extracted each value from",
+        "Ask Claude to re-do the extraction",
+        "Accept that AI extraction will always have some errors"
+      ],
+      "correct": 1,
+      "explanation": "Adding a \"source_quote\" field forces Claude to cite the exact source text for each extracted value. This makes hallucinations immediately visible — if a cell has no valid source quote, you know it was invented. It also makes verification fast: you can spot-check source quotes rather than verifying every value independently. This is the professional approach to AI data extraction for anything that will be acted upon."
     },
     {
       "type": "callout",

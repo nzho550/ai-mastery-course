@@ -2,8 +2,14 @@
   "id": "7-9",
   "title": "The Memory System",
   "part": 7,
-  "estimatedMinutes": 25,
-  "tags": ["claude-code", "memory", "claude-md", "preferences", "user-level"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "claude-code",
+    "memory",
+    "claude-md",
+    "preferences",
+    "user-level"
+  ],
   "sections": [
     {
       "type": "text",
@@ -36,6 +42,54 @@
       "tag": "CLAUDECODE",
       "title": "Create Your User-Level Memory File",
       "content": "Create a `~/.claude/CLAUDE.md` with your personal preferences, then verify Claude reads it in a fresh session.\n\n**Step 1 — Navigate to your .claude folder:**\nIn PowerShell:\n```\ncd ~\nls .claude\n```\nIf the `.claude` folder doesn't exist, create it:\n```\nNew-Item -ItemType Directory -Path ~/.claude\n```\n\n**Step 2 — Create the CLAUDE.md:**\nIn VS Code, open the folder `C:\\Users\\YourName\\.claude\\` (replace YourName with your actual Windows username). Create a new file called `CLAUDE.md`.\n\nWrite 3–5 preferences that are genuinely true about you. Use the template above as a starting point but make it yours. Consider:\n- Your actual skill level and background\n- Languages you know vs. ones you're learning\n- Code style preferences you actually care about\n- Communication preferences (do you want more or less explanation?)\n- Any hard rules you want enforced across all projects\n\nSave the file.\n\n**Step 3 — Test in a fresh session:**\nOpen any project folder (or even just your home directory) and launch Claude Code:\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\nAsk:\n```\nWhat do you know about my personal coding preferences?\n```\n\nClaude should respond with the contents of your user-level CLAUDE.md.\n\n**Step 4 — Verify layering:**\nAsk:\n```\nWhat are your instructions for this specific project?\n```\n\nClaude should now describe *both* the user-level preferences (from `~/.claude/CLAUDE.md`) and the project-level instructions (from the project `CLAUDE.md` you created in lesson 7-6). Both layers should be active simultaneously.\n\n**Step 5 — Refine and save:**\nBased on what Claude reads back, adjust anything that wasn't phrased the way you intended. Your user CLAUDE.md is a living document — update it whenever you discover a preference worth encoding."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Memory System Exploration",
+      "content": "Understand Claude Code's memory system through hands-on exploration.\n\n**Step 1 — Open Claude Code in a project.**\n\n**Step 2 — Ask Claude Code about its memory:**\n\"What do you currently know about this project that you'll remember in future sessions?\"\n\n**Step 3 — Test adding to memory:**\n\"Please remember that in this project, we always add a 'last_modified' timestamp to any database record we create or update.\"\n\n**Step 4 — Start a new session** (close and reopen Claude Code in the same project).\n\n**Step 5 — Test retention:**\n\"What do you remember about conventions for database records in this project?\"\nDid it retain the instruction?\n\n**Step 6 — Ask Claude.ai (browser):** *\"How does Claude Code's memory system work? What persists between sessions and what doesn't? What's the difference between CLAUDE.md and the memory system?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Populate Memory for a Project",
+      "content": "Systematically populate Claude Code's memory with everything it needs to work effectively on your project.\n\n**Step 1 — Open Claude Code in a real project.**\n\n**Step 2 — Add 5-7 memory items** covering critical project knowledge:\n- A decision that isn't obvious from the code: \"We use token-based auth instead of session-based because [reason]\"\n- A convention that matters: \"All API endpoints return a standard envelope: {success, data, error}\"\n- A constraint to respect: \"Never use recursion in the file parser — it caused stack overflow with large files\"\n- A testing requirement: \"Integration tests require a running database — run `docker-compose up` first\"\n- A deployment detail: \"The staging server uses a different .env file at /etc/app/.env\"\n\n**Step 3 — Test each memory item** by starting a new session and asking questions that require the knowledge.\n\n**Step 4 — Document what you added to memory** in your CLAUDE.md as well, so it's not lost if memory is cleared."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Memory vs CLAUDE.md Strategy",
+      "content": "Understand when to use memory vs CLAUDE.md and build a coherent strategy.\n\n**Step 1 — Ask Claude:** *\"When should I use Claude Code's memory vs CLAUDE.md to store project information? What are the differences in: persistence, visibility to other developers, how it's used during sessions, and what each is best for?\"*\n\n**Step 2 — Create a decision framework:**\n| Information type | Memory or CLAUDE.md | Reason |\n|---|---|---|\n| Shared team conventions | | |\n| Personal preferences | | |\n| Temporary task notes | | |\n| Architecture decisions | | |\n| One-time debugging context | | |\n\n**Step 3 — Fill in the table** based on Claude's explanation.\n\n**Step 4 — Audit your current project:** What information lives in each place? What should be moved?\n\n**Step 5 — Apply your framework** to decide where to store 3 pieces of information from your actual project."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Memory Reset and Recovery Protocol",
+      "content": "Build a protocol for when memory is cleared or becomes stale.\n\n**Step 1 — Simulate a memory reset:** Ask Claude Code to forget or disregard its stored memory about the project.\n\n**Step 2 — Design a recovery prompt** — a single message you can run at the start of any fresh session:\n```\nProject onboarding: Read CLAUDE.md and the following key files: [list]. \nAfter reading, confirm:\n1. What is this project?\n2. What are the most important conventions I should follow?\n3. What should I avoid?\n4. How do I run the tests?\n```\n\n**Step 3 — Test the recovery prompt** after clearing memory. Does it get Claude Code back to a useful state quickly?\n\n**Step 4 — Add the recovery prompt** to CLAUDE.md as a \"New Session Startup\" section.\n\n**Step 5 — Ask Claude:** *\"Is there anything important about this project that can't be recovered from CLAUDE.md and source files alone — things that would be permanently lost if memory was cleared?\"* If yes, add those things to CLAUDE.md."
+    },
+    {
+      "type": "quiz",
+      "question": "You tell Claude Code \"Remember that we're migrating from PostgreSQL to MongoDB next month.\" You start a new Claude Code session a week later. Will it remember this?",
+      "options": [
+        "Yes — Claude Code's memory persists indefinitely across sessions",
+        "It depends on how Claude Code's memory is configured and whether the session is tied to the same project",
+        "No — Claude Code never retains anything between sessions",
+        "Yes — but only for 7 days, then it expires"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code's memory persistence depends on the implementation and configuration. Claude Code can store project-level memory that persists, but this behaviour varies. The safest practice: treat anything important as potentially lost and document it in CLAUDE.md or a persistent file in your project. For critical architectural context like \"migrating from X to Y\", don't rely on memory alone — put it in CLAUDE.md."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the difference between information in CLAUDE.md and information in Claude Code's memory system?",
+      "options": [
+        "They are identical — CLAUDE.md is just a human-readable version of the memory system",
+        "CLAUDE.md is a file in your git repository (visible to all, version-controlled, persistent); memory is session-specific storage that may or may not persist across sessions and is not tracked by git",
+        "Memory is more reliable than CLAUDE.md for important information",
+        "CLAUDE.md is read before the session; memory is consulted during the session"
+      ],
+      "correct": 1,
+      "explanation": "CLAUDE.md is a committed file — it's in git history, visible to all collaborators, survives any Claude Code reinstall, and is the primary source of truth for project context. Memory is AI-managed storage that is more ephemeral and may not persist across machines or after updates. For anything that must reliably be known in every session, CLAUDE.md is the authoritative source."
     },
     {
       "type": "callout",

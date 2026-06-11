@@ -2,8 +2,13 @@
   "id": "7-1",
   "title": "What is Claude Code?",
   "part": 7,
-  "estimatedMinutes": 20,
-  "tags": ["claude-code", "beginner", "cli", "agent"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "claude-code",
+    "beginner",
+    "cli",
+    "agent"
+  ],
   "sections": [
     {
       "type": "text",
@@ -52,6 +57,54 @@
       ],
       "correct": 1,
       "explanation": "The fundamental difference is scope. Copilot works at the line/function level — it sees the current file and suggests completions. Claude Code works at the project level — it reads all 20 files to understand the architecture, then makes coordinated changes across multiple files that are semantically consistent. For adding a new feature, fixing a cross-cutting concern, or refactoring across modules, this project-level context is the decisive advantage."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Claude Code Orientation Drill",
+      "content": "This 8-minute drill gives you a concrete picture of what Claude Code can do before you install it.\n\n**Step 1 — Ask Claude.ai:** *\"Describe 5 concrete examples of tasks that Claude Code can complete that a VS Code developer using only Copilot Chat cannot. For each, describe what Claude Code does and why it's different.\"*\n\n**Step 2 — Read the examples.** Note which ones are most relevant to your work.\n\n**Step 3 — Ask Claude:** *\"What is the main difference between Claude in the browser (claude.ai) and Claude Code in the terminal? When would I use each?\"*\n\n**Step 4 — Ask Claude:** *\"For a developer who builds [describe your project type], what would be the 3 most time-saving uses of Claude Code in a typical week?\"*\n\n**Step 5 — Write down** the 3 use cases that would deliver the most value for your specific situation. Return to this list after you install Claude Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Understand the Agent Loop",
+      "content": "Claude Code is an agent — it runs a loop of reasoning and tool use. Understanding this helps you work with it effectively.\n\n**Step 1 — Ask Claude.ai to explain the agent loop:**\n```\nExplain the Claude Code agent loop in plain English. Specifically:\n1. What happens when I give Claude Code a task?\n2. What \"tools\" does Claude Code have? (read files, run commands, etc.)\n3. How does Claude Code decide when the task is done?\n4. What can go wrong in the loop and how can I prevent it?\n5. When should I interrupt the loop vs let it run?\n```\n\n**Step 2 — Draw a simple diagram** (on paper) of the loop based on Claude's explanation.\n\n**Step 3 — Ask Claude:** *\"Give me 3 examples of poorly-specified tasks that would cause Claude Code to go in the wrong direction, and the corrected version of each task that would lead to better results.\"*\n\n**Step 4 — Save the corrected task examples** as a reference for when you start using Claude Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Compare Claude Code to Other AI Coding Tools",
+      "content": "Position Claude Code correctly in your toolset by understanding where it fits vs other tools.\n\n**Step 1 — Ask Claude:** *\"Create a comparison of these AI coding tools for a developer who uses VS Code: GitHub Copilot, Cursor, Claude Code (CLI). For each, describe: best use cases, limitations, and which specific type of developer it's designed for.\"*\n\n**Step 2 — Map to your workflow:** For each tool in the comparison, identify: would I use this for Task Type A (your most common task)? Task Type B? Task Type C?\n\n**Step 3 — Ask Claude:** *\"Given that I work on [your project type] in [your language], and my most common tasks are [list 3], which combination of these tools would make me most productive? Design a workflow that uses each tool for what it's best at.\"*\n\n**Step 4 — Note Claude Code's unique position:** It can run terminal commands, make changes across many files, write and run code, and work on long tasks autonomously. This is what separates it from in-editor AI."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Plan Your First Claude Code Projects",
+      "content": "Before you use Claude Code, identify the best first tasks — ones where it will demonstrate its value clearly.\n\n**Step 1 — List 5-10 real tasks** from your work that would take you more than 30 minutes manually.\n\n**Step 2 — For each task**, answer:\n- Does it require reading/modifying multiple files? (Good for Claude Code)\n- Does it require running terminal commands? (Good for Claude Code)\n- Could it be described clearly in a single paragraph? (Required for Claude Code)\n- Could a wrong implementation cause serious problems? (Requires careful setup)\n\n**Step 3 — Rank your tasks** from best to worst fit for Claude Code.\n\n**Step 4 — Ask Claude:** *\"I'm planning my first Claude Code tasks. Here are my top 3 candidates: [describe them]. Rank them from easiest to hardest for an AI agent to complete correctly. For each, describe what setup I should do before running it.\"*\n\n**Step 5 — Save your ranked task list.** You'll use this in the next few lessons."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the fundamental difference between GitHub Copilot Chat and Claude Code?",
+      "options": [
+        "Claude Code is smarter than Copilot Chat",
+        "Copilot Chat only answers questions and suggests code snippets; Claude Code is an autonomous agent that can read files, run commands, write code, and execute multi-step tasks",
+        "Claude Code only works with Python",
+        "Copilot Chat can run terminal commands but Claude Code cannot"
+      ],
+      "correct": 1,
+      "explanation": "The key distinction is agentic capability. Copilot Chat and similar in-editor AIs respond to single requests — they suggest, and you act. Claude Code is an agent: it can take a complex task, break it into steps, read files to understand context, write code, run the code, see the output, fix errors, and continue — all autonomously. This enables it to complete tasks that would require multiple rounds of manual follow-through in a chat interface."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude Code to \"make this codebase better.\" Why is this a poor task specification?",
+      "options": [
+        "Claude Code only works on single files",
+        "The task is too vague — Claude Code needs clear, specific objectives to work effectively and avoid making changes you didn't intend",
+        "Claude Code doesn't understand code quality",
+        "It would take too long"
+      ],
+      "correct": 1,
+      "explanation": "\"Make this codebase better\" is vague in every dimension — better how? Which files? What criteria? This forces Claude Code to make assumptions about what \"better\" means, which may not match your priorities. A good task is specific: \"Add input validation to the user registration function in auth.py to handle empty strings and invalid email formats.\" The more specific the task, the more predictable and reviewable the result."
     },
     {
       "type": "callout",

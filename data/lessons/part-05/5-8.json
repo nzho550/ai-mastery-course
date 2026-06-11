@@ -2,8 +2,15 @@
   "id": "5-8",
   "title": "Extensions — Installing & Managing",
   "part": 5,
-  "estimatedMinutes": 35,
-  "tags": ["vscode", "beginner", "extensions", "marketplace", "github-copilot", "ai"],
+  "estimatedMinutes": 70,
+  "tags": [
+    "vscode",
+    "beginner",
+    "extensions",
+    "marketplace",
+    "github-copilot",
+    "ai"
+  ],
   "sections": [
     {
       "type": "text",
@@ -72,6 +79,54 @@
       ],
       "correct": 1,
       "explanation": "Continue.dev is specifically designed to work with any AI model, including Claude via the Anthropic API. You install Continue, add your Anthropic API key in settings, select claude-sonnet-4-6 as your model, and you have Claude's reasoning and writing quality applied to your code — inline completions, chat, and edit mode — all inside VS Code. GitHub Copilot is exclusively powered by OpenAI's models (GPT-4o and Codex derivatives) — you can't change the underlying AI. The Claude Code VS Code extension is also an option, but it's an agent-mode tool rather than line-by-line autocomplete."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Extension Discovery Drill",
+      "content": "The Extensions marketplace has 50,000+ extensions. This drill teaches you to find the right ones.\n\n**Step 1 — Open the Extensions panel** (Ctrl+Shift+X).\n\n**Step 2 — Browse the categories:**\n- \"@popular\" in the search — most installed extensions\n- \"@trending\" — what's gaining popularity\n- \"@installed\" — what you have now\n\n**Step 3 — Search for your use case:**\n- Type \"Python\" — see all Python-related extensions. Note the install count and rating.\n- Type \"AI\" — see AI assistance extensions\n- Type your specific tool (Docker, AWS, etc.)\n\n**Step 4 — Read before installing:** Click on 2-3 extensions you're considering. Read the description page — does it solve your actual problem?\n\n**Step 5 — Check the extension's GitHub:** Most extensions link to their GitHub. Check: last updated (within 6 months is good), open issues, stars.\n\n**Step 6 — Ask Claude:** *\"What are the must-have VS Code extensions for [your specific development work]? For each, tell me why it's worth installing and what problem it solves.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI Extension Setup and Workflow",
+      "content": "Set up an AI coding assistant in VS Code — and learn how to use it effectively, not just as autocomplete.\n\n**Step 1 — Install an AI extension.** Options (in order of recommendation):\n- GitHub Copilot — best quality, free tier available\n- Continue (continue.dev) — open source, works with Claude API\n- Codeium — completely free tier\n\n**Step 2 — Configure the extension** with your API key or account login.\n\n**Step 3 — Learn the 5 most powerful uses** (ask Claude if your chosen extension doesn't document these well):\n- Inline completion: start typing and Tab to accept\n- Ask about selected code: select code → right-click → Ask AI\n- Generate a function from a comment describing it\n- Generate tests for an existing function\n- Explain what a file does\n\n**Step 4 — Mandatory review:** For any AI-generated code in VS Code, always run: *\"Review this code. Find 3 problems a code reviewer would catch.\"* This is the most important habit.\n\n**Step 5 — Measure the impact:** Time a coding task with AI assistance. How much faster was it?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Extension Conflicts and Management",
+      "content": "Too many extensions slow VS Code and can cause conflicts. This workshop teaches extension hygiene.\n\n**Step 1 — Check your current extensions:** Ctrl+Shift+X → @installed. List everything you have.\n\n**Step 2 — Identify and remove duplicates:** Common duplicates — two language servers for the same language, multiple formatters for the same file type.\n\n**Step 3 — Check extension impact on startup:**\nCtrl+Shift+P → \"Developer: Show Running Extensions\" — this shows which extensions are loaded and their activation time.\n\n**Step 4 — Disable slow extensions:** Extensions with > 500ms activation time are worth disabling if you don't use them constantly.\n\n**Step 5 — Use Extension Profiles:** Create a \"Minimal\" profile with only essential extensions. Use it when VS Code feels slow. Create a \"Full\" profile for intensive coding sessions.\n\n**Step 6 — Ask Claude:** *\"I have these VS Code extensions installed: [list]. Which ones might conflict with each other? Which ones are redundant? Which should I prioritise keeping?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build an Extensions Recommendations File",
+      "content": "Create a .vscode/extensions.json that recommends your essential extensions to anyone who opens your project.\n\n**Step 1 — Identify 5-7 extensions** that are essential for working on your project.\n\n**Step 2 — Find each extension's ID:** In the Extensions panel, click on each extension → copy the extension ID shown under the name.\n\n**Step 3 — Create `.vscode/extensions.json`:**\n```json\n{\n    \"recommendations\": [\n        \"ms-python.python\",\n        \"ms-python.vscode-pylance\",\n        \"esbenp.prettier-vscode\",\n        \"dbaeumer.vscode-eslint\"\n    ]\n}\n```\n\n**Step 4 — Test it:** Close and reopen VS Code on this folder. You should see a notification: \"This workspace has extension recommendations.\"\n\n**Step 5 — Add a comment in README.md** explaining that opening this project in VS Code will prompt to install recommended extensions.\n\n**Step 6 — Ask Claude:** *\"Should I also add any unwanted extensions to 'unwantedRecommendations'? When is that useful?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You install a VS Code extension and your editor slows down significantly. What should you do first?",
+      "options": [
+        "Reinstall VS Code completely",
+        "Disable the new extension and check if performance improves — if so, report the issue to the extension author or find an alternative",
+        "Increase your computer's RAM",
+        "Switch to a different code editor"
+      ],
+      "correct": 1,
+      "explanation": "Disable the suspected extension first (Extensions panel → click the gear on the extension → Disable) and check if VS Code returns to normal speed. If it does, the extension is the cause. You can then decide to: keep it disabled, look for an alternative, or report the performance issue on the extension's GitHub. Use \"Developer: Show Running Extensions\" to measure activation times before and after."
+    },
+    {
+      "type": "quiz",
+      "question": "Two VS Code extensions both claim to format Python code. What problem might this cause?",
+      "options": [
+        "They will each format the code twice, making it slower",
+        "They may format code differently and conflict — when you save, one formatter's changes may be immediately overwritten by the other",
+        "It's not a problem — they will merge their formatting changes",
+        "VS Code will ask you which formatter to use each time"
+      ],
+      "correct": 1,
+      "explanation": "Having two formatters for the same file type often causes a conflict where each formatter undoes the other's changes, resulting in unstable formatting or no formatting. The fix: keep one formatter, disable or uninstall the other, and set your preferred formatter explicitly in settings.json: `\"[python]\": {\"editor.defaultFormatter\": \"ms-python.black-formatter\"}`."
     },
     {
       "type": "callout",

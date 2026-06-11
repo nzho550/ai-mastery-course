@@ -2,8 +2,14 @@
   "id": "4-4",
   "title": "Essential Terminal Commands",
   "part": 4,
-  "estimatedMinutes": 30,
-  "tags": ["computer-basics", "beginner", "terminal", "powershell", "commands"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "computer-basics",
+    "beginner",
+    "terminal",
+    "powershell",
+    "commands"
+  ],
   "sections": [
     {
       "type": "text",
@@ -60,6 +66,54 @@
       ],
       "correct": 1,
       "explanation": "The -g flag tells npm to install the package globally — the command becomes available from any directory in any terminal session. Without -g, npm installs the package locally into the current project's node_modules folder, and it's only usable within that project. `npx` is different: it downloads and runs a package once without permanently installing it — useful for one-time tools but not for something you want available everywhere like Claude Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Essential Commands Speed Test",
+      "content": "This 8-minute drill verifies you can use the most important terminal commands fluently.\n\n**Step 1 — Open PowerShell.** Time yourself on each task below. Aim for under 30 seconds per task.\n\n**Task 1:** Find your current directory and list its contents.\n\n**Task 2:** Create a folder called `workshop-test` on your Desktop and navigate into it.\n\n**Task 3:** Create a file called `notes.txt` inside the folder:\n```powershell\nnew-item notes.txt\n```\n\n**Task 4:** Show the contents of the folder including hidden files:\n```powershell\nls -Force\n```\n\n**Task 5:** Check what version of Python (or Node.js) is installed:\n```powershell\npython --version\nnode --version\n```\n\n**Task 6:** Navigate back to your home directory in one command.\n\n**Task 7:** Delete the test folder:\n```powershell\nRemove-Item ~/Desktop/workshop-test -Recurse\n```\n\n**Step 2 — Which task took longest?** That's the command to practice more."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Assisted Setup Task",
+      "content": "Use AI to help you complete a real terminal setup task — installing or configuring something you actually need.\n\n**Step 1 — Choose a real setup task** you've been putting off: installing a development tool, setting up a project folder, configuring git, installing a package manager.\n\n**Step 2 — Ask Claude:** *\"Help me [describe your setup task] on Windows 11 using PowerShell. Give me the complete steps in order, the exact commands, what each command does, and how to verify it worked. Tell me what to do if I get an error.\"*\n\n**Step 3 — Follow Claude's steps one at a time.** Don't run everything at once — run each command, check the output, then move to the next.\n\n**Step 4 — When you hit an error** (you probably will), paste the exact error text back to Claude. Ask: \"I got this error: [paste error]. What caused it and how do I fix it?\"\n\n**Step 5 — Verify the installation worked** using the verification command Claude gave you.\n\n**Step 6 — Document what you did.** Write a short note: what you installed, the command that worked, and how to verify it. Future you will thank you."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Git Basics in the Terminal",
+      "content": "Git is the version control system used by nearly every software project. Even non-coders use it. This workshop gets you started.\n\n**Step 1 — Check if git is installed:**\n```powershell\ngit --version\n```\nIf not installed: visit git-scm.com and install.\n\n**Step 2 — Configure git** (one-time setup):\n```powershell\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"your.email@example.com\"\n```\n\n**Step 3 — Create a test repository:**\n```powershell\nmkdir git-test\ncd git-test\ngit init\n```\n\n**Step 4 — Make your first commit:**\n```powershell\nnew-item README.txt\n\"Hello from git\" | Out-File README.txt\ngit add README.txt\ngit commit -m \"My first commit\"\n```\n\n**Step 5 — View the history:**\n```powershell\ngit log\ngit status\n```\n\n**Step 6 — Ask Claude:** *\"I just made my first git commit. Explain what git status and git log show me. What are the 5 git commands I should learn next, and what does each do?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Shell Script for a Repeated Task",
+      "content": "A shell script is a file of commands that run automatically. This workshop creates your first one.\n\n**Step 1 — Identify a sequence of terminal commands** you run together repeatedly: setting up a project, starting a development server, doing a backup, running tests.\n\n**Step 2 — Ask Claude:** *\"I want to create a PowerShell script that does: [describe the sequence of commands]. Write the complete script, explain each line, and tell me how to run it.\"*\n\n**Step 3 — Review the script** Claude provides. Do you understand what each line does? If not, ask Claude to explain specific lines.\n\n**Step 4 — Save the script:**\n```powershell\nnew-item my-setup.ps1\n# paste Claude's script content into the file\n```\n\n**Step 5 — Run the script:**\n```powershell\n.\\my-setup.ps1\n```\n\n**Step 6 — If it fails**, paste the error to Claude. Ask for the fix.\n\n**Step 7 — Add the script to a folder in your PATH** so you can run it from anywhere."
+    },
+    {
+      "type": "quiz",
+      "question": "You run `git commit -m \"fixes\"` and then realise you made a typo in a file. What is the safest approach to fix it?",
+      "options": [
+        "Run git commit --amend to change the last commit",
+        "Fix the file, then run git add and git commit with a new message like \"fix typo from previous commit\"",
+        "Delete the git repository and start over",
+        "The commit is permanent — you cannot change it"
+      ],
+      "correct": 1,
+      "explanation": "The safest fix is to make a new commit: fix the file, stage the change with git add, and commit with a descriptive message. Git commit --amend (A) can work but rewrites history, which causes problems if others have already pulled the original commit. Never amend published commits. Creating a correction commit keeps history intact and is standard practice."
+    },
+    {
+      "type": "quiz",
+      "question": "What does `git status` tell you that `git log` does not?",
+      "options": [
+        "git status shows the full commit history; git log shows only the latest commit",
+        "git status shows the current state of files (staged, modified, untracked); git log shows the history of past commits",
+        "git status shows remote repository information; git log shows local changes",
+        "They show the same information in different formats"
+      ],
+      "correct": 1,
+      "explanation": "git status answers \"what is happening right now?\" — it shows which files have changed since the last commit, which changes are staged for the next commit, and which files are new/untracked. git log answers \"what happened in the past?\" — it shows the history of previous commits with messages and timestamps. Both are essential; use status constantly (before every add/commit) and log when you need to understand history."
     },
     {
       "type": "callout",

@@ -2,8 +2,13 @@
   "id": "1-4",
   "title": "AI Hallucinations & Limitations",
   "part": 1,
-  "estimatedMinutes": 20,
-  "tags": ["foundations", "beginner", "safety", "hallucinations"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "foundations",
+    "beginner",
+    "safety",
+    "hallucinations"
+  ],
   "sections": [
     {
       "type": "text",
@@ -51,6 +56,54 @@
       ],
       "correct": 2,
       "explanation": "Statistics, academic citations, and attributed quotes are all high-risk hallucination categories. For a client-facing report, verification is not optional. Statistics should be traced to their original source (not just trusted from AI output). Named studies should be confirmed in Google Scholar. Quotes should be verified as real statements — AI commonly attributes fabricated quotes to real people. Asking Claude to recheck its own output (D) is not reliable — the model can confidently confirm hallucinated content."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Hallucination Hunt (Quick Drill)",
+      "content": "This 8-minute drill trains your eye to spot AI hallucinations. You will catch an AI making things up — deliberately.\n\n**Step 1 — Pick a subject you know well** — your job, your industry, your city, a hobby, a historical period you studied. You need genuine expertise to catch errors.\n\n**Step 2 — Ask Claude or ChatGPT** 3-5 specific factual questions about this subject. Include at least one question about:\n- A specific person (someone niche, not a celebrity)\n- A specific date or statistic\n- A procedure or process specific to your field\n\n**Step 3 — Read each answer carefully.** Check every specific claim against what you know or can quickly verify.\n\n**Step 4 — For every error you find**, make a note of: what AI said, what is actually true, and how confident the AI sounded.\n\n**Step 5 — If you found no errors**, make the questions harder. Ask about very recent events, niche technical details, or specific people in your industry.\n\n**Step 6 — Reflect:** How confident-sounding were the wrong answers? This is the core danger — hallucinations rarely sound uncertain."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Hallucination Verification Protocol",
+      "content": "You will create a personal checklist for verifying AI output in your specific field or work context. This is one of the most practically valuable things you can build in this course.\n\n**Step 1 — Identify your high-stakes AI use cases:** Think about 3-5 situations where you would use AI and where a factual error would cause a real problem (embarrassment, bad decision, legal risk, financial loss).\n\n**Step 2 — For each use case**, write: what type of claim is AI most likely to get wrong? (Statistics? Dates? Names? Legal rules? Technical procedures?)\n\n**Step 3 — Open Claude.ai** and paste your use cases. Ask: *\"For each of these AI use cases, what types of hallucinations are most common and most dangerous? What specific verification steps should I take before using AI output in each situation?\"*\n\n**Step 4 — Build your verification checklist.** Format it as a simple table: Use case | Types of error to check | How to verify | Time required.\n\n**Step 5 — Mandatory AI review:** Paste your checklist back to Claude and ask: *\"Don't tell me this looks good. Find 3 gaps in this verification protocol — situations where following this checklist would still let an error through.\"*\n\n**Step 6 — Update your checklist** based on the gaps Claude identified.\n\n**Step 7 — Save and use it.** Next time you use AI for anything in your high-stakes list, run through your checklist before acting on the output."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Stress Test an AI Tool",
+      "content": "This workshop deliberately probes AI limitations — you are trying to make it fail, in controlled conditions.\n\n**Step 1 — Open Claude.ai or ChatGPT** in a fresh conversation.\n\n**Step 2 — Run these hallucination-prone prompts** (one at a time):\n- Ask for a bibliography of academic papers on a niche topic in your field\n- Ask for specific statistics with sources from the last 6 months\n- Ask about a local regulation or law specific to your country/region\n- Ask about a recent event from the last month\n- Ask it to quote a specific sentence from a document you know\n\n**Step 3 — For each response**, note: Did it give specific citations? Did it express uncertainty? Did it clearly state when it didn't know?\n\n**Step 4 — Compare behavior:** Ask the same prompts in a second AI tool. Does one handle uncertainty better than the other?\n\n**Step 5 — Discuss your findings with Claude:** *\"I just asked you [these questions] and noticed [what you observed]. What does this reveal about when I should and shouldn't trust AI factual claims? Give me a practical rule of thumb.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Real-World Fact-Check Sprint",
+      "content": "Apply hallucination awareness to a real task you need to do anyway.\n\n**Step 1 — Identify a real task** where you need factual information: writing a report, preparing for a meeting, researching a topic, making a decision.\n\n**Step 2 — Use AI to help with the task** — but flag every specific fact, statistic, name, date, or citation that AI provides.\n\n**Step 3 — Verify the top 5 most important facts** using a non-AI source (official website, published paper, news source, your own knowledge).\n\n**Step 4 — Record your findings:** How many of the 5 facts checked out? How many were wrong or unverifiable?\n\n**Step 5 — Adjust your workflow:** Based on your verification results, decide: for this type of task, do you need to verify (a) everything, (b) claims you'll share publicly, (c) statistics only, or (d) nothing because errors don't matter here?\n\n**Step 6 — Save this experience** as a note to yourself about AI reliability in your specific work context."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask an AI for three recent statistics about your industry. The AI provides three numbers with specific decimal places and confident language. What should you do?",
+      "options": [
+        "Use the statistics — specific numbers indicate the AI retrieved real data",
+        "Verify each statistic against its original source before using it in any document or presentation",
+        "Ask the AI to double-check its own figures",
+        "Use the statistics only if the AI also names a source"
+      ],
+      "correct": 1,
+      "explanation": "Specific, confident-sounding numbers are one of the most common forms of hallucination. AI models generate plausible-sounding statistics based on patterns in training data — they can produce precise-looking numbers that are fabricated. Always verify statistics against the original source before using them, especially in professional contexts."
+    },
+    {
+      "type": "quiz",
+      "question": "Which of these AI outputs requires the most verification before acting on it?",
+      "options": [
+        "A summary of a document you pasted into the conversation",
+        "A list of strategies for improving team communication",
+        "The name and contact details of a specific government official",
+        "An explanation of how compound interest works"
+      ],
+      "correct": 2,
+      "explanation": "Specific factual claims about named individuals (names, roles, contact details, affiliations) are high-hallucination-risk. AI may confuse people, invent details, or report outdated information. General knowledge (how compound interest works) and reasoning tasks (communication strategies) are lower risk. Document summaries are lowest risk as the source is right there."
     },
     {
       "type": "callout",
