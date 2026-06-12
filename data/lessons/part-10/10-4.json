@@ -2,8 +2,13 @@
   "id": "10-4",
   "title": "Make (Integromat) — Visual Automation",
   "part": 10,
-  "estimatedMinutes": 25,
-  "tags": ["automation", "make", "no-code", "ai-workflows"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "automation",
+    "make",
+    "no-code",
+    "ai-workflows"
+  ],
   "sections": [
     {
       "type": "text",
@@ -44,6 +49,54 @@
     {
       "type": "text",
       "content": "## Make vs n8n vs Zapier: The Honest Comparison\n\n| | Make | n8n | Zapier |\n|--|------|-----|--------|\n| Free tier AI | HTTP module only | Native AI nodes free | Paid plan required |\n| Visual style | Circular canvas | Flowchart canvas | Step-by-step form |\n| Best for | Visual thinkers, data transformation | Maximum power + free | Fastest setup |\n| Claude native | No (use HTTP) | Yes | No (use Webhook or paid) |\n| Complexity | Medium | Medium-high | Low |\n\nNone of these tools is objectively best — they're tradeoffs. Most people settle on one and learn it well."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Make Scenario Exploration",
+      "content": "Explore Make (formerly Integromat) and understand its visual approach.\n\n**Step 1 — Log into Make** (make.com — free plan available).\n\n**Step 2 — Explore the visual scenario builder.** How does it differ from Zapier's linear Zap model? Note that Make supports:\n- Loops (iterate over arrays)\n- Multiple branches/routes\n- Error handlers at the module level\n- Aggregators (combine multiple records)\n\n**Step 3 — Ask Claude:** *\"Compare Make's visual automation builder to Zapier for complex workflows. What specific capabilities does Make have that Zapier cannot do or does poorly? When would I choose Make over Zapier?\"*\n\n**Step 4 — Explore a template** from Make's template library for a workflow relevant to your work.\n\n**Step 5 — Identify a workflow** that would be complex on Zapier but simpler on Make (involving loops, multiple data transformations, or non-linear branching)."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Make Scenario with Data Transformation",
+      "content": "Build a Make scenario that involves real data transformation — Make's strength.\n\n**Step 1 — Choose a scenario** where you need to process multiple items:\n- Fetch all GitHub issues, classify each with AI, save classified results to a spreadsheet\n- Get a daily report CSV, transform each row, send personalised emails\n- Process a list of URLs, extract content from each, summarise all and send a digest\n\n**Step 2 — Ask Claude Code to design the Make scenario:**\n```\nI want to build this in Make (formerly Integromat):\n[describe your scenario]\n\nHelp me:\n1. Which modules should I use?\n2. How should I structure the iterator/aggregator?\n3. For the AI step, write the HTTP module configuration to call the Anthropic API\n4. What's the data transformation approach at each step?\n```\n\n**Step 3 — Build the scenario** following Claude's design.\n\n**Step 4 — Test with real data.** Verify the output for 3 input items.\n\n**Step 5 — Mandatory review:** Ask: *\"What failure modes exist in this scenario? What happens when the Anthropic API returns an unexpected format?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Make Error Handling and Monitoring",
+      "content": "Configure Make's error handling features.\n\n**Step 1 — Ask Claude:** *\"Explain Make's error handling approaches: error handlers, ignore, break, resume, rollback, commit. When should I use each?\"*\n\n**Step 2 — Add error handling to your scenario:**\n- Add a Break handler to the HTTP module (stops iteration on that item, continues with others)\n- Add a final error notification module\n\n**Step 3 — Test error handling** by sending a malformed input that will cause the HTTP module to fail. Does the scenario handle it gracefully?\n\n**Step 4 — Configure scenario monitoring:**\n- Set up email notifications for scenario failures\n- Configure Make's built-in scenario monitoring (if available on your plan)\n\n**Step 5 — Ask Claude:** \"Design a monitoring approach for a Make scenario that processes 500 records nightly. How would I know if 10% of records failed to process correctly?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Automation Consolidation Review",
+      "content": "Review all the automation tools you've tried and consolidate your approach.\n\n**Step 1 — List every automation you've built or tested** across Lessons 10-1 through 10-4: n8n, Zapier, Make.\n\n**Step 2 — For each automation**, rate it:\n- Does it work reliably? (1-5)\n- Does it deliver real value? (1-5)\n- Is it maintainable? (1-5)\n\n**Step 3 — Ask Claude:** *\"Based on these automations [describe them], which should I invest time in improving vs abandoning? What is the highest-value next automation I should build?\"*\n\n**Step 4 — Choose ONE tool** as your primary automation platform going forward (or define when you'd use each). Write a one-paragraph explanation of your choice.\n\n**Step 5 — Commit to running at least one automation in production** for 30 days before evaluating whether to continue."
+    },
+    {
+      "type": "quiz",
+      "question": "Make's iterator module processes 100 items and 5 fail. What happens by default, and what should you configure instead?",
+      "options": [
+        "The entire scenario fails if any item fails",
+        "By default, a failing item breaks the iterator; configure a Break error handler to skip failed items, continue with successful ones, and log failures separately",
+        "Make automatically retries failed items 3 times",
+        "Failed items are automatically added to a retry queue"
+      ],
+      "correct": 1,
+      "explanation": "Make's default iterator behaviour on error can halt the entire batch. For scenarios processing multiple items where partial failure is acceptable, configure error handlers appropriately: Break (skip the failed item and continue), or Resume (mark as failed but continue). Also add a post-processing step to collect and report on failures. A scenario that successfully processes 95/100 items with a clear failure report is much more useful than one that stops at the first failure."
+    },
+    {
+      "type": "quiz",
+      "question": "Make charges per operation (module run). A scenario with 5 modules runs on 200 items. How many operations does this use?",
+      "options": [
+        "200 operations — per run of the scenario",
+        "5 operations — per module in the scenario",
+        "1000 operations — 5 modules × 200 items",
+        "200 operations — the iterator counts as one"
+      ],
+      "correct": 2,
+      "explanation": "Make counts per module execution, not per scenario run. If an iterator processes 200 items through 5 modules each: 200 × 5 = 1000 operations. This is critical for cost planning: a scenario that seems simple (5 modules) but processes large datasets becomes expensive at scale. Design Make scenarios to minimise modules in the inner loop (inside iterators) and use aggregators or bulk operations where possible."
     },
     {
       "type": "callout",

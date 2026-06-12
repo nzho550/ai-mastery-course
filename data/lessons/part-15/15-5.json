@@ -2,8 +2,14 @@
   "id": "15-5",
   "title": "Organizing & Synthesizing Research",
   "part": 15,
-  "estimatedMinutes": 28,
-  "tags": ["research", "beginner", "synthesis", "organization", "hands-on"],
+  "estimatedMinutes": 63,
+  "tags": [
+    "research",
+    "beginner",
+    "synthesis",
+    "organization",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -54,6 +60,54 @@
       ],
       "correct": 2,
       "explanation": "Pasting all your notes into Claude to identify themes, contradictions, gaps, and produce an outline is the fastest path from scattered notes to a structured briefing. It takes seconds instead of the hour or more needed to manually re-read and reorganise. You'll then know exactly which sections need more research (from the gap finder) and have a ready-made outline to write from. Re-reading (A) is slow and gives you no structure. Starting blind (B) wastes time rewriting what your notes already contain. Fresh search (C) may be part of filling specific gaps, but not before you know what gaps exist — you might research what you already know."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Research Synthesis Drill",
+      "content": "Practice synthesising research from multiple sources into a coherent picture.\n\n**Step 1 — Gather raw research** on a topic you're studying: paste in 3-5 search results, article excerpts, or document extractions.\n\n**Step 2 — Ask Claude to synthesise:**\n```\nHere is my raw research on [topic]:\n[paste research]\n\nSynthesise this into:\n1. The 3 most important insights (well-supported by multiple sources)\n2. Areas of uncertainty or disagreement between sources\n3. The single most actionable takeaway\n4. What I still need to research to have a complete picture\n```\n\n**Step 3 — Review the synthesis.** Is anything wrong or missing?\n\n**Step 4 — Ask Claude:** \"Which of the 3 insights is most uncertain? What would it take to become more confident in it?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Personal Knowledge Management with AI",
+      "content": "Build a system for storing and retrieving research over time.\n\n**Step 1 — Ask Claude Code to design a knowledge management system:**\n```\nDesign a simple, file-based personal knowledge system:\n1. Store research notes as markdown files in organized folders\n2. Each note has: topic, date, sources, key insights, confidence level, tags\n3. Search across all notes using grep/ripgrep\n4. Generate a topic summary by combining all notes on a topic\n5. Weekly: Claude reads all new notes and identifies connections between topics\n\nKeep it simple — no database, no special software needed.\n```\n\n**Step 2 — Set up the system** and add 5 recent research topics.\n\n**Step 3 — Test the topic summary feature.** Is it useful?\n\n**Step 4 — Commit to maintaining it** for 30 days, then evaluate."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Contradiction Detection",
+      "content": "Use AI to identify contradictions in your research.\n\n**Step 1 — Compile research** on a topic where you suspect different sources might disagree.\n\n**Step 2 — Ask Claude to actively find contradictions:**\n```\nReview this research collection for contradictions:\n[paste research]\n\nIdentify:\n1. Direct contradictions: sources that make opposite claims\n2. Subtle contradictions: sources that use different definitions for the same term\n3. False agreements: sources that appear to agree but are actually measuring different things\n4. Missing context: claims that are true in some contexts but not in others\n```\n\n**Step 3 — Investigate each contradiction.** Which source is more credible? Are they measuring different things?\n\n**Step 4 — Update your synthesis** to accurately reflect the uncertainty."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Research to Action Plan",
+      "content": "Convert research findings into a concrete action plan.\n\n**Step 1 — Take a completed research brief** from your recent work.\n\n**Step 2 — Ask Claude:**\n```\nBased on this research [paste it], generate an action plan:\n\n1. Decision: What decision does this research inform?\n2. Recommendation: What does the evidence suggest I should do?\n3. Confidence level: How confident are you? (High/Medium/Low) and why?\n4. Key uncertainties: What could change this recommendation?\n5. Actions: Specific steps I can take this week\n6. Monitoring: How will I know if the recommended action is working?\n```\n\n**Step 3 — Evaluate the action plan.** Does it correctly reflect your research? Is the confidence calibration right?\n\n**Step 4 — Execute the first action.** Did having the research-backed action plan make you more decisive?"
+    },
+    {
+      "type": "quiz",
+      "question": "You have research from 10 sources that all agree on a conclusion. Should you trust this consensus?",
+      "options": [
+        "Yes — unanimous agreement across 10 sources is strong evidence",
+        "Check if the sources are truly independent — if they all cite the same study or share a common funding source, the apparent consensus may be manufactured rather than genuine",
+        "Only trust it if 7+ of the sources are peer-reviewed",
+        "Trust it for decisions but not for published claims"
+      ],
+      "correct": 1,
+      "explanation": "Apparent consensus can be misleading when sources aren't independent. Common patterns: all sources citing one landmark study (making it look like 10 studies agree when it's really 1 study cited 10 times), industry-funded research dominating a topic, or a narrative that became \"common knowledge\" based on weak original evidence. True consensus requires independent replication by groups with different methods and no shared funding."
+    },
+    {
+      "type": "quiz",
+      "question": "After research synthesis, Claude says \"the evidence strongly suggests X.\" What does this actually mean in practice?",
+      "options": [
+        "X is definitely true",
+        "Claude assessed the research it was given as pointing toward X — this is a statement about the evidence provided, not a guarantee of X being true",
+        "X is true with 95% probability",
+        "You should act on X without further verification"
+      ],
+      "correct": 1,
+      "explanation": "\"Strongly suggests\" reflects Claude's assessment of the evidence provided, not an objective truth claim. Limitations: the evidence Claude saw may be incomplete (not all research on the topic), Claude may have weighted sources incorrectly, and \"strongly suggests\" in AI language doesn't map to a precise probability. For decisions with significant consequences, treat \"strongly suggests\" as a starting point for further verification, not a conclusion."
     },
     {
       "type": "callout",

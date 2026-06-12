@@ -2,8 +2,14 @@
   "id": "18-2",
   "title": "Model Selection Intelligence — The Right AI for Every Job",
   "part": 18,
-  "estimatedMinutes": 30,
-  "tags": ["advanced", "models", "strategy", "cost", "comparison"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "advanced",
+    "models",
+    "strategy",
+    "cost",
+    "comparison"
+  ],
   "sections": [
     {
       "type": "text",
@@ -51,6 +57,54 @@
       ],
       "correct": 1,
       "explanation": "This is a perfect multi-model routing task. Gemini 2.5 Pro's 1M token context window can hold the full 200-page document (roughly 150,000 words = ~200,000 tokens) in a single context, making it ideal for the extraction step. Claude is then ideal for the comparison and synthesis step because of its superior instruction-following and analytical writing. Claude Opus alone (A) can't hold a 200-page document in one go (200K token limit). Chunking (C) loses cross-document context. Perplexity (D) researches the web, not your specific document."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Model Capability Mapping",
+      "content": "Map the capability differences between available AI models.\n\n**Step 1 — Ask Claude:** \"Compare Claude Haiku, Sonnet, and Opus on these dimensions: reasoning depth, code generation quality, creative writing, following complex instructions, knowledge breadth, and speed. For each model, describe its sweet spot.\"\n\n**Step 2 — Test the same prompt** on Haiku and Sonnet:\nPrompt: \"Design a system architecture for a real-time multiplayer game with 10,000 concurrent players. Include: technology stack, data flow, scaling strategy, and the 3 most important trade-offs.\"\n\n**Step 3 — Compare the responses.** Where does quality differ? Is the quality difference worth the cost difference for your use case?\n\n**Step 4 — Build a personal model selection matrix** for your most common tasks."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build an Intelligent Model Router",
+      "content": "Implement a model router that selects the right AI for each task.\n\n**Step 1 — Define your routing criteria:**\n- Task complexity (simple → Haiku, complex → Sonnet)\n- Privacy requirements (sensitive → local model)\n- Speed requirement (real-time → Haiku, async → Sonnet)\n- Cost budget (high volume → Haiku, important decisions → Sonnet)\n\n**Step 2 — Ask Claude Code** to implement the router:\n```\nBuild a model_router function that:\n1. Takes a task description and metadata (privacy_level, response_time, importance, budget_tier)\n2. Applies routing rules to select the optimal model\n3. Logs the routing decision and reasoning\n4. Falls back to Haiku if routing is uncertain\n5. Includes a cost estimator for the selected model\n```\n\n**Step 3 — Test with 10 diverse task descriptions.** Are the routing decisions correct?\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review the routing logic. What task types will be systematically misrouted?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Task-Specific Model Benchmarking",
+      "content": "Benchmark models on YOUR specific tasks, not generic benchmarks.\n\n**Step 1 — Create 5 test prompts** representative of your actual work.\n\n**Step 2 — Run each prompt** on both Haiku and Sonnet.\n\n**Step 3 — Evaluate each response** on: accuracy, completeness, usefulness for your specific context.\n\n**Step 4 — Calculate:** For each task type, what is the quality difference (0-100%) and the cost difference?\n\n**Step 5 — Find your \"good enough threshold\":** For which tasks is Haiku within 10% of Sonnet quality? Those tasks should use Haiku in production."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Dynamic Model Selection in Your Application",
+      "content": "Add dynamic model selection to your AI application.\n\n**Step 1 — Take an existing AI feature** in your project or one from earlier in this course.\n\n**Step 2 — Implement a A/B testing framework:**\n```\nAdd A/B testing that:\n- Routes 20% of requests to Sonnet, 80% to Haiku\n- Measures output quality via user feedback or automated metrics\n- Tracks cost per request for each model\n- Generates a weekly report: quality vs cost for each model\n```\n\n**Step 3 — Run the A/B test** for at least 50 requests.\n\n**Step 4 — Analyse results:** Is Sonnet significantly better for this specific task? Is the cost premium justified?\n\n**Step 5 — Make a data-driven model selection decision** for this feature."
+    },
+    {
+      "type": "quiz",
+      "question": "You're building a customer service bot that handles both simple FAQs and complex technical support. The most cost-efficient architecture is:",
+      "options": [
+        "Use only Haiku for all requests to minimise cost",
+        "Use only Sonnet for all requests to maximise quality",
+        "Route simple FAQ requests to Haiku and complex technical issues to Sonnet based on intent classification",
+        "Randomly assign 50% to each model and average the results"
+      ],
+      "correct": 2,
+      "explanation": "Tiered routing gives you cost efficiency where it's safe (FAQs have predictable, verifiable answers) and quality where it matters (complex technical support where wrong answers damage trust). Implementation: first classify the request type using a small, fast model or rule-based classifier; then route accordingly. Monitor: track when Haiku-handled requests escalate to human support (suggests misrouting or quality gap)."
+    },
+    {
+      "type": "quiz",
+      "question": "A new AI model is released claiming \"10× better performance\" on benchmarks. Should you immediately switch your production application to it?",
+      "options": [
+        "Yes — benchmarks indicate real-world performance",
+        "No — evaluate it on your specific tasks first. General benchmarks often don't reflect task-specific performance, and \"better\" on a benchmark may not mean better for your use case",
+        "Yes if it's from a reputable provider",
+        "No — always wait 6 months for new models to stabilise"
+      ],
+      "correct": 1,
+      "explanation": "Benchmark performance rarely translates directly to task-specific performance. Evaluate any new model by: (1) running your specific test prompts and comparing outputs, (2) checking whether the new model behaves differently on edge cases your application encounters, (3) testing performance and latency, (4) verifying cost. Only switch after you can confirm the new model outperforms the current one on your actual tasks, not just on published benchmarks."
     },
     {
       "type": "callout",

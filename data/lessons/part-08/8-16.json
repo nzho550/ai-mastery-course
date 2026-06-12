@@ -2,8 +2,15 @@
   "id": "8-16",
   "title": "Outlook MCP — Your Inbox Inside Claude Code",
   "part": 8,
-  "estimatedMinutes": 25,
-  "tags": ["mcp", "intermediate", "outlook", "email", "office", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "mcp",
+    "intermediate",
+    "outlook",
+    "email",
+    "office",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -39,6 +46,54 @@
       ],
       "correct": 1,
       "explanation": "The power of MCP is cross-tool composition. Copilot inside Outlook is excellent for single-app tasks but is siloed — it can't simultaneously access your calendar, Slack messages, and Notion notes. Claude Code with multiple MCPs active can perform workflows that span all your tools in one command. That is the fundamental difference: native Copilot is one app's AI, MCP is the integration layer across all your apps."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Outlook MCP First Operations",
+      "content": "Get hands-on with Outlook MCP's core capabilities.\n\n**Step 1 — Configure Outlook MCP** with Microsoft Graph API credentials.\n\n**Step 2 — Test core operations in Claude Code:**\n- \"List my 5 most recent unread emails with sender, subject, and date\"\n- \"Show me emails from [person] in the last 7 days\"\n- \"Search for emails with 'invoice' in the subject from the last month\"\n\n**Step 3 — Test draft creation:**\n\"Draft an email to [your own address] with subject 'MCP Test' and body 'This email was drafted by Claude Code via Outlook MCP.'\"\n\n**Step 4 — Verify the draft** exists in Outlook before sending anything.\n\n**Step 5 — Ask Claude:** \"What are the most valuable email operations I should use Outlook MCP for in my workflow? What should I NOT use it for?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI Email Triage Workflow",
+      "content": "Build an AI-powered email triage workflow using Outlook MCP.\n\n**Step 1 — Ask Claude Code to process your recent emails:**\n```\nCheck my recent emails (last 2 days). For each unread email:\n1. Categorise it: Action required / FYI / Newsletter / Other\n2. For \"Action required\": what specifically do I need to do?\n3. Priority: High (deadline today/tomorrow) / Medium / Low\n4. Suggested response time: Today / This week / Not urgent\n\nDon't take any action — just give me the triage summary.\n```\n\n**Step 2 — Review the triage.** Is the categorisation accurate?\n\n**Step 3 — For one \"Action required\" email**, ask Claude Code to draft a response. Read the draft carefully before approving.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review your triage analysis. What important context might you have missed? What emails might be more urgent than you categorised?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Email Templates via Claude Code",
+      "content": "Use Claude Code with Outlook MCP to build a template-based email system.\n\n**Step 1 — Identify your 3 most common email types** that follow a pattern: status updates, meeting requests, follow-ups, introductions.\n\n**Step 2 — Ask Claude Code to create email templates** for each:\n```\nCreate email templates for these recurring email types I send:\n1. [Email type 1]: [brief description of when you send it]\n2. [Email type 2]: [brief description]\n3. [Email type 3]: [brief description]\n\nFor each template:\n- Subject line with [PLACEHOLDERS]\n- Body with [PLACEHOLDERS] for variable parts\n- Tone: [your usual tone for this email type]\n```\n\n**Step 3 — Test each template** by having Claude Code draft a specific email using it.\n\n**Step 4 — Store the templates** in a Claude Code slash command or Claude Project for reuse."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Meeting Request Automation",
+      "content": "Automate meeting request emails using Outlook MCP and Claude Code.\n\n**Step 1 — Identify a real meeting you need to schedule** this week.\n\n**Step 2 — Ask Claude Code to draft the meeting request:**\n```\nDraft a meeting request email for:\n- Recipient: [name and email]\n- Meeting purpose: [describe it]\n- Proposed times: [list 3 options]\n- Duration: [time]\n- Location/call link: [details]\n\nUse a professional but friendly tone. Include a brief agenda.\n```\n\n**Step 3 — Review the draft.** Is the tone right? Is the agenda appropriate?\n\n**Step 4 — Save as draft** in Outlook via MCP (don't send until you've reviewed it in Outlook itself).\n\n**Step 5 — Open Outlook** and verify the draft looks correct. Send from Outlook — not from Claude Code."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code reads your emails using Outlook MCP to help you triage. What privacy consideration is most important?",
+      "options": [
+        "Making sure Claude Code doesn't reply to emails automatically",
+        "Your email contents are processed through Anthropic's API — ensure this is permitted by your organisation's data policies and that no regulated data (client PII, financial data) appears in emails you process",
+        "That Claude Code doesn't read emails older than 30 days",
+        "Ensuring two-factor authentication is enabled on your email"
+      ],
+      "correct": 1,
+      "explanation": "Email processing via Claude means email contents are sent to Anthropic's cloud. For many organisations, this raises compliance questions: client communication may be covered by attorney-client privilege, NDA obligations, financial regulations (GDPR, HIPAA, SEC rules), or confidentiality agreements. Check your organisation's AI usage policy before processing work emails through cloud AI. Personal email is generally fine; professional email requires more consideration."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code drafts an email reply using Outlook MCP. Before you send it, what is the minimum review required?",
+      "options": [
+        "Spell-check only",
+        "Read the entire email: verify the recipient is correct, the content is accurate and appropriate, the tone matches your intent, and you're comfortable with everything it says",
+        "Ask Claude Code if it's confident in the draft",
+        "Have a colleague review it"
+      ],
+      "correct": 1,
+      "explanation": "An email sent is permanent communication under your name. Minimum review: (1) correct recipient — the most important check (wrong recipient emails are a real and embarrassing incident), (2) accurate content — Claude Code may misunderstand context or include wrong information, (3) appropriate tone — especially important for sensitive topics or senior stakeholders, (4) nothing you're not comfortable with under your name. This review takes 60 seconds; skipping it can cause professional damage."
     },
     {
       "type": "callout",

@@ -2,8 +2,12 @@
   "id": "10-1",
   "title": "What is Workflow Automation?",
   "part": 10,
-  "estimatedMinutes": 20,
-  "tags": ["automation", "beginner", "no-code"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "automation",
+    "beginner",
+    "no-code"
+  ],
   "sections": [
     {
       "type": "text",
@@ -56,6 +60,54 @@
       ],
       "correct": 1,
       "explanation": "Rule-based filters (option A) break when customers don't use the expected keywords — they're brittle. An AI reasoning step handles the classification flexibly: it reads the full email, understands context and intent, and classifies correctly even when the phrasing varies. This is the core value-add of AI in workflow automation — replacing rigid rules with flexible reasoning for classification, routing, and decision-making tasks."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Workflow Audit Drill",
+      "content": "Map your most repetitive tasks to identify automation opportunities.\n\n**Step 1 — For the next 8 minutes, brainstorm your most repetitive tasks.** Think about:\n- Tasks you do the same way more than once a week\n- Tasks that involve copying data between apps\n- Tasks that follow a predictable trigger-action pattern\n- Tasks where you think \"I should automate this someday\"\n\n**Step 2 — List them** with: task name, frequency, estimated time per occurrence, tools involved.\n\n**Step 3 — Ask Claude:** *\"I have these repetitive tasks: [list them]. Which are best suited to workflow automation? Which would be hard to automate? Explain why for each.\"*\n\n**Step 4 — Score each task** on: automation potential (1-5) × time saved per week = automation priority score.\n\n**Step 5 — Identify your #1 automation target** — the highest-scoring task that you'll build in this part."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Manual Process Documentation",
+      "content": "Before automating anything, document the current manual process precisely.\n\n**Step 1 — Choose your #1 automation target** from Workshop A.\n\n**Step 2 — Write a step-by-step description** of how you currently do this task manually:\n- What triggers you to start it?\n- What data do you need?\n- What is each step in order?\n- What decisions do you make along the way?\n- What is the final output?\n- Where does the output go?\n\n**Step 3 — Ask Claude to review your description:** *\"Here is my manual process: [paste it]. Is this complete? What steps might I have forgotten? What edge cases does this process need to handle?\"*\n\n**Step 4 — Refine the documentation** based on Claude's questions.\n\n**Step 5 — Identify the automation building blocks:** Which steps are pure data transformation? Which require external service calls? Which require human judgement?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Automation ROI Calculator",
+      "content": "Calculate the actual return on investment for your automation.\n\n**Step 1 — For your top 3 automation candidates**, calculate:\n```\nTime saved per occurrence: [minutes]\nFrequency per week: [times]\nWeekly time saved: [minutes × times]\nAnnual time saved: [weekly × 52]\nAt [your hourly rate], annual value: [hours × rate]\n```\n\n**Step 2 — Estimate automation build time:**\n- Simple trigger → action: 1-2 hours\n- Multi-step with conditions: 3-8 hours\n- Complex with AI processing: 8-20 hours\n\n**Step 3 — Calculate break-even point:**\n`Build hours ÷ hours saved per week = weeks to break even`\n\n**Step 4 — Ask Claude:** *\"For a non-programmer, which of these 3 processes would be easiest to automate with tools like n8n or Zapier? Which would be most complex? What would each require?\"*\n\n**Step 5 — Prioritise based on ROI and feasibility** — not just time saved."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Design Your First Automation Blueprint",
+      "content": "Create a blueprint for your first automation before writing any code or using any tool.\n\n**Step 1 — Choose your automation target** (the highest ROI + feasibility combo).\n\n**Step 2 — Design the automation using this template:**\n```\n# Automation Blueprint: [Name]\n\n## Trigger\n[What starts this automation? Time, event, new data, webhook?]\n\n## Inputs\n[What data does it need?]\n\n## Steps\n1. [First action]\n2. [Second action]\n   If [condition]: [action A]\n   Otherwise: [action B]\n3. [Continue...]\n\n## Output\n[What does it produce? Where does it go?]\n\n## Error handling\n[What happens when something fails?]\n```\n\n**Step 3 — Ask Claude:** *\"Review this automation blueprint. What failure modes did I not plan for? What steps require AI processing vs simple data transformation? Which tool (n8n, Zapier, Make, or custom code) would handle this best?\"*\n\n**Step 4 — Refine the blueprint** based on feedback. You'll implement it in Lessons 10-2 through 10-4."
+    },
+    {
+      "type": "quiz",
+      "question": "Which of these tasks is the BEST candidate for workflow automation?",
+      "options": [
+        "Deciding which job applicants to interview",
+        "Sending a weekly report email compiled from data in a spreadsheet, formatted the same way every time",
+        "Providing customer support for complex technical issues",
+        "Strategic planning for next quarter"
+      ],
+      "correct": 1,
+      "explanation": "Automation works best for tasks that are: consistent (same process every time), rule-based (no subjective judgement), involve data movement between systems, and happen repeatedly. Sending a compiled weekly report matches all these criteria. The other options require human judgement, contextual understanding, or creative thinking — AI can assist with these but they shouldn't be fully automated without human oversight."
+    },
+    {
+      "type": "quiz",
+      "question": "You automate a process and it saves 30 minutes per week. It took you 20 hours to build. When does this automation break even?",
+      "options": [
+        "After 1 week",
+        "After about 40 weeks (roughly 10 months)",
+        "After 2 weeks",
+        "It never breaks even because it's too expensive to maintain"
+      ],
+      "correct": 1,
+      "explanation": "20 hours build time ÷ 0.5 hours saved per week = 40 weeks to break even. This is on the long side — a process saving only 30 min/week needs a faster build or a longer lifespan to justify the investment. This calculation helps prioritise: a process saving 2 hours/week and taking 10 hours to build breaks even in 5 weeks, which is much more compelling. Always calculate break-even before investing automation build time."
     },
     {
       "type": "callout",

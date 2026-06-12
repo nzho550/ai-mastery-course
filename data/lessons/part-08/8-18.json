@@ -2,8 +2,14 @@
   "id": "8-18",
   "title": "Slack MCP — Channels, Threads & Messages in Claude Code",
   "part": 8,
-  "estimatedMinutes": 25,
-  "tags": ["mcp", "intermediate", "slack", "messaging", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "mcp",
+    "intermediate",
+    "slack",
+    "messaging",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -39,6 +45,54 @@
       ],
       "correct": 1,
       "explanation": "Slack's API treats public channels and private channels (groups) as separate resources with separate permission scopes. channels:history covers public channels; groups:history covers private channels. Without the correct scope, the API returns a permissions error or empty results — Claude cannot work around this. The fix is to go back to your Slack app settings, add the groups:history scope, reinstall the app to your workspace, and get a new token."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Slack MCP First Operations",
+      "content": "Test Slack MCP's core capabilities on your real workspace.\n\n**Step 1 — Configure Slack MCP** with a Slack API token (OAuth, with appropriate scopes).\n\n**Step 2 — Test message reading:**\n- \"List channels I'm a member of\"\n- \"Show the last 20 messages in #general\"\n- \"Find messages mentioning me in the last 48 hours\"\n\n**Step 3 — Test search:**\n\"Search Slack for messages about 'deployment issue' from the last week.\"\n\n**Step 4 — Test file and thread operations:**\n\"Show me threads with more than 5 replies in #engineering from the last 3 days.\"\n\n**Step 5 — Evaluate:** Which operations work smoothly? Which feel awkward? How does the MCP compare to Slack's own search?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Slack Catchup and Triage",
+      "content": "Build an AI-powered Slack catchup routine.\n\n**Step 1 — Identify 3-5 Slack channels** you check daily.\n\n**Step 2 — Run a daily catchup:**\n```\nFor these Slack channels [list them], summarise what I missed in the last 24 hours:\n1. Key decisions or announcements\n2. Questions asked that no one has answered yet\n3. Issues reported or incidents flagged\n4. Anything that mentions me directly\n5. Threads I should participate in\n\nFor each finding: channel, brief summary, recommended action.\n```\n\n**Step 3 — Review the catchup summary.** Is it accurate? What important context was missed?\n\n**Step 4 — Take action on one item:** draft a Slack message response or a follow-up action.\n\n**Step 5 — Compare:** How long did this AI catchup take vs reading channels manually?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Slack Knowledge Mining",
+      "content": "Extract institutional knowledge from your Slack workspace.\n\n**Step 1 — Choose a technical topic** that gets discussed frequently in your Slack channels.\n\n**Step 2 — Ask Claude Code to mine Slack for knowledge about it:**\n```\nSearch across all channels for discussions about [topic] from the last 3 months. Extract:\n1. What approaches or solutions were tried?\n2. What worked and what didn't?\n3. Who are the subject matter experts who commented most?\n4. What is the current consensus or recommended approach?\n5. What questions are still unresolved?\n```\n\n**Step 3 — Review the knowledge extraction.** How accurate is it? Did the AI miss important context from the threads?\n\n**Step 4 — Write a brief knowledge article** based on the Slack mining. Save it somewhere searchable (Notion, Confluence, README).\n\n**Step 5 — This addresses a real pain point:** knowledge discussed in Slack often disappears from memory. Making it permanent adds long-term value."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Automated Slack Status Updates",
+      "content": "Use Slack MCP to automate status updates and keep your team informed.\n\n**Step 1 — Identify recurring updates** you send to Slack channels: daily standups, weekly summaries, project status updates.\n\n**Step 2 — Ask Claude Code to draft a status update template:**\n```\nCreate a Slack message template for my daily standup in [channel].\nFormat: concise, clear, uses Slack formatting (bold, lists)\nSections: Yesterday's progress / Today's plan / Blockers / Notes\nTone: professional but not stiff\n```\n\n**Step 3 — Fill in the template** for today's actual standup.\n\n**Step 4 — Review before posting:** Read the exact message Claude Code would post. Is it accurate? Is the tone right?\n\n**Step 5 — Post the standup** via Claude Code (or copy-paste into Slack — your choice based on comfort level).\n\n**Step 6 — Evaluate:** Did the AI-assisted standup save time? Did it accurately capture your work?"
+    },
+    {
+      "type": "quiz",
+      "question": "Slack MCP allows Claude Code to post messages on your behalf. Which of these is the safest way to use this capability?",
+      "options": [
+        "Enable Claude Code to post messages automatically when it has relevant updates",
+        "Review every message Claude Code proposes before it posts — never enable automatic posting without review",
+        "Only use it for DMs, not channel messages",
+        "Post only in private channels where fewer people see it"
+      ],
+      "correct": 1,
+      "explanation": "Automatic posting without review is the highest-risk configuration for any communication tool MCP. Slack messages in channels are permanent, visible to potentially many people, and attributed to you. The safest workflow: Claude Code drafts the message → you read it → you confirm → it posts. This review step takes 10 seconds and prevents posting incorrect information, wrong tone, or content you didn't intend under your name."
+    },
+    {
+      "type": "quiz",
+      "question": "You give Slack MCP access to your workspace. Which permission scope is the minimum needed to read channel messages and post replies?",
+      "options": [
+        "Full admin access — MCPs need complete permissions to function",
+        "Read: channels:history, im:history. Write: chat:write — the minimum scopes for reading channels and posting messages",
+        "User token — MCPs should use your full user token",
+        "Bot token with all scopes — easier to configure than minimal permissions"
+      ],
+      "correct": 1,
+      "explanation": "Least privilege principle applies to Slack OAuth scopes. You only need: channels:history (read messages), channels:read (list channels), im:history (read DMs if needed), chat:write (post messages). Avoid granting admin, users:read, files:write, or other scopes you don't need — each additional scope is a security surface. If the MCP server asks for more than this, question why."
     },
     {
       "type": "callout",

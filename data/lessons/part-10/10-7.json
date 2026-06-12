@@ -2,8 +2,13 @@
   "id": "10-7",
   "title": "Designing Your Personal AI Workflow",
   "part": 10,
-  "estimatedMinutes": 20,
-  "tags": ["automation", "workflow-design", "productivity", "reflect"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "automation",
+    "workflow-design",
+    "productivity",
+    "reflect"
+  ],
   "sections": [
     {
       "type": "text",
@@ -31,6 +36,54 @@
       "tag": "REFLECT",
       "title": "Design Your Personal AI Workflow",
       "content": "Create `notes/my-ai-workflow.md` in your VS Code project. Write your personal AI workflow playbook using this structure:\n\n```markdown\n# My AI Workflow\n\n## Tools I Use\n- Automation platform: [n8n / Zapier / Make — and why]\n- Git workflow: [which AI git patterns I've adopted]\n- CI/CD: [GitHub Actions — yes/no, what workflows are active]\n\n## Daily Routine\n- Morning: [which automation runs, what it delivers]\n- Before starting work: [any AI-assisted checks or briefs]\n- During development: [git patterns, Claude Code use]\n- End of day: [any wrap-up automations]\n\n## Active Automations\n[List each running workflow: what it does, when it runs, what tool it's on]\n\n## Next 3 Automations I'll Build\n1. [Automation]: [Tool]: [Why this one next]\n2. [Automation]: [Tool]: [Why]\n3. [Automation]: [Tool]: [Why]\n\n## Tool Routing\n- Research questions → [tool]\n- Writing help → [tool]\n- Code work → [tool]\n- Email management → [tool]\n- Automation → [tool]\n- [add your own rows]\n\n## What I Don't Automate (and why)\n[Be honest — some things should stay manual]\n```\n\nThis document is the most practical output of Part 10. It turns what you've learned into a living system you'll actually use. Update it whenever you add a new automation or change a tool."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Personal Workflow Inventory",
+      "content": "Map your complete personal AI-assisted workflow.\n\n**Step 1 — List every AI tool** you use regularly in your work:\n- In-editor assistance (Copilot, Continue.dev, Tabnine)\n- Terminal/CLI (Claude Code)\n- Chat (Claude.ai, ChatGPT)\n- Automation (n8n, Zapier, Make)\n- Specialty tools (Cursor, Windsurf, etc.)\n\n**Step 2 — For each tool**, estimate:\n- Hours per week saved\n- Most frequent use cases\n- Biggest friction points\n\n**Step 3 — Draw your workflow diagram:** For a typical work day, when do you reach for which tool? Where are the handoffs?\n\n**Step 4 — Ask Claude:** *\"Based on this AI tool stack [describe it], what important gaps exist? What workflows are inefficient because I'm using the wrong tool or switching between too many tools?\"*\n\n**Step 5 — Identify your single biggest workflow inefficiency** to address this week."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Design Your Ideal AI Workflow",
+      "content": "Design the AI-assisted workflow you want, then identify the gaps to close.\n\n**Step 1 — Choose a major type of work** you do regularly: software development, content creation, research, client work.\n\n**Step 2 — Design your IDEAL workflow** for this work type:\n- What AI tools are involved at each stage?\n- Where does AI assist vs where does it automate?\n- What human decisions remain?\n- What does the output look like?\n\n**Step 3 — Compare to your CURRENT workflow:** What's different between ideal and current?\n\n**Step 4 — Identify the 3 changes** that would most close the gap between ideal and current.\n\n**Step 5 — For the highest-priority change**, ask Claude Code to help implement it:\n\"I want to add [specific improvement] to my workflow. Design the implementation: what tools, configuration, or automation would I build?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Workflow Anti-Patterns",
+      "content": "Identify and eliminate common AI workflow anti-patterns.\n\n**Step 1 — Ask Claude:** *\"What are the most common anti-patterns in AI-assisted workflows — things people do that reduce productivity or quality? For each, describe: the pattern, why people fall into it, and the better alternative.\"*\n\n**Step 2 — Check yourself:** Which of these anti-patterns do YOU currently practice?\n\n**Step 3 — Common anti-patterns to specifically check:**\n- Copy-pasting AI output without review\n- Using chat AI for tasks that need agentic tools\n- Asking AI to do 5 things in one prompt instead of iterating\n- Not giving AI enough context on the first try\n- Switching tools mid-task instead of staying in one tool\n\n**Step 4 — For each anti-pattern you identified in yourself**, define the specific behaviour change you'll make.\n\n**Step 5 — Schedule a 30-day review** to check if you've actually changed those behaviours."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Document and Share Your Workflow",
+      "content": "Create a workflow document that could help a colleague adopt AI tools effectively.\n\n**Step 1 — Write a workflow guide** for your primary work type:\n```markdown\n# My AI-Assisted [Work Type] Workflow\n\n## Overview\n[2-3 sentence summary of your workflow]\n\n## Tools Used\n[List tools and their roles]\n\n## Daily Workflow\n### Morning\n- [Step 1: which tool, what for]\n- [Step 2: ...]\n\n### During work\n- [How AI assists the main work]\n\n### Review/output\n- [How you review AI-generated content]\n```\n\n**Step 2 — Ask Claude to review the guide:** *\"Review this workflow guide. What would confuse someone new to AI tools? What important context is missing?\"*\n\n**Step 3 — Refine the guide** based on feedback.\n\n**Step 4 — Share with one colleague** this week. What is their reaction? What questions do they have?\n\n**Step 5 — Update the guide** based on their feedback."
+    },
+    {
+      "type": "quiz",
+      "question": "You have 6 different AI tools in your workflow. Switching between them takes 2-3 minutes each time and breaks concentration. What is the most effective solution?",
+      "options": [
+        "Buy a faster computer to reduce switching time",
+        "Designate primary tool(s) for each task type and only switch when the primary tool truly cannot do the job — reduce tool sprawl",
+        "Use only one AI tool for everything",
+        "Accept that tool switching is inevitable in a complex workflow"
+      ],
+      "correct": 1,
+      "explanation": "Context switching is a real productivity cost — not just the mechanical time but the cognitive reset required. The solution isn't to use one tool for everything (different tools genuinely excel at different tasks) but to be deliberate about when you switch. Define: \"I use tool X for Y tasks, tool Z for W tasks\" and resist the temptation to switch \"just to try\" in the middle of a task. Reduce your active tool set to 2-3 that cover 90% of your needs."
+    },
+    {
+      "type": "quiz",
+      "question": "You've spent Part 10 learning workflow automation. What is the most important mindset for maintaining these automations long-term?",
+      "options": [
+        "Build as many automations as possible to maximise time savings",
+        "Treat automations like code: they need maintenance, testing, and occasional review — they will break as APIs change, and a broken automation can be worse than doing the task manually",
+        "Avoid complex automations — simple ones are more reliable",
+        "Automate everything and review failures quarterly"
+      ],
+      "correct": 1,
+      "explanation": "Automations are maintenance commitments, not one-time builds. APIs change, services update, data formats evolve — an automation built last year may silently produce wrong results today. Budget time for automation maintenance: monthly checks that outputs are still correct, quarterly reviews of whether the automation still matches the actual process, and immediate investigation when an automation's output changes unexpectedly. A well-maintained automation saves time; an unmaintained one creates hidden errors."
     },
     {
       "type": "callout",

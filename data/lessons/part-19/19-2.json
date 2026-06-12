@@ -2,8 +2,14 @@
   "id": "19-2",
   "title": "AI for Travel Planning",
   "part": 19,
-  "estimatedMinutes": 25,
-  "tags": ["personal-life", "beginner", "travel", "planning", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "travel",
+    "planning",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -51,6 +57,54 @@
       ],
       "correct": 2,
       "explanation": "Visa and entry requirements are exactly the type of information that changes without warning, has serious consequences if wrong, and where AI confidence doesn't equal accuracy. Claude's training data has a cutoff, and visa rules can change with political relationships, reciprocity agreements, or new policies. Always verify on your government's official foreign travel advice page (e.g., gov.uk/foreign-travel-advice, travel.state.gov, smartraveller.gov.au) and on the destination country's official immigration site. Perplexity (B) searches the web but may surface unofficial or outdated sources. Reddit (D) provides traveller experience but not authoritative rules. Only official sources are authoritative for entry requirements."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Travel Research Drill",
+      "content": "Plan a real trip using AI research tools.\n\n**Step 1 — Choose a real trip you're planning or want to plan.**\n\n**Step 2 — Ask Claude to help with the research framework:**\n```\nHelp me research a trip to [destination] for [duration] with these preferences:\n- Budget: [range]\n- Travel style: [adventure/relaxed/cultural/food-focused]\n- Time of year: [month]\n\nWhat are the most important things to research? Structure this as a research checklist.\n```\n\n**Step 3 — Work through the checklist** using Claude and Perplexity.\n\n**Step 4 — Verify time-sensitive information** (visa requirements, seasonal closures, prices) from official sources — not AI.\n\n**Step 5 — Ask Claude:** \"What did I forget to research? What commonly surprises first-time visitors to [destination]?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI Itinerary Builder",
+      "content": "Build a detailed AI-assisted itinerary.\n\n**Step 1 — Specify the trip parameters** you've researched.\n\n**Step 2 — Ask Claude to draft an itinerary:**\n```\nCreate a detailed [X-day] itinerary for [destination].\n\nConstraints:\n- Accommodation: [area/type]\n- Daily budget: [amount]\n- Must-see: [your list]\n- Avoid: [things you don't want]\n- Travel pace: [1-2 major things per day or packed]\n\nFor each day:\n- Morning, afternoon, evening activities\n- Estimated travel time between locations\n- Meal suggestions (price range, type)\n- Practical tips for each activity\n```\n\n**Step 3 — Evaluate the itinerary** for logistics — are the locations geographically sensible? Is the pace realistic?\n\n**Step 4 — Verify opening times and prices** for 3 specific activities from official sources."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Trip Risk Assessment",
+      "content": "Use AI to identify and prepare for travel risks.\n\n**Step 1 — Ask Claude:** \"For a trip to [destination] during [time period], what are the main risks: safety, health, weather, political, logistical? For each, what preparation is recommended?\"\n\n**Step 2 — Check official sources** for any high-risk items Claude identifies:\n- Travel advisories: your government's travel advisory for the destination\n- Health requirements: official public health guidance\n- Visa requirements: official embassy or government website\n\n**Step 3 — Create a pre-departure checklist** covering the identified risks.\n\n**Step 4 — Ask Claude:** \"What emergency contacts and information should I have saved before this trip? Create a reference card I can keep on my phone.\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Trip Document Pack",
+      "content": "Create a complete trip documentation package using AI assistance.\n\n**Step 1 — Ask Claude Code** to create a trip document template:\n```\nCreate a trip document package for [destination]:\n1. Trip overview (one-page summary)\n2. Day-by-day itinerary (detailed)\n3. Key contacts (accommodation, emergency, transportation)\n4. Budget tracker (planned vs actual)\n5. Packing list (customised for [destination and activities])\n6. Language reference (key phrases if non-English destination)\n7. Health and safety info\n```\n\n**Step 2 — Fill in each document** with your actual trip details.\n\n**Step 3 — Share the documents** with travel companions or emergency contacts.\n\n**Step 4 — After the trip**, update the documents with actual costs and experiences — this becomes a reference for future trips."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude says a particular restaurant \"is one of the best in [city].\" You plan your trip around eating there. What verification should you do?",
+      "options": [
+        "Nothing — Claude knows about restaurants",
+        "Verify independently: check recent reviews (AI knowledge may be outdated), confirm it's still open, check current reservation requirements — restaurant situations change and AI training data is not real-time",
+        "Call the restaurant to confirm",
+        "Only verify if the restaurant is expensive"
+      ],
+      "correct": 1,
+      "explanation": "Restaurant recommendations are time-sensitive: restaurants close, change chefs, decline in quality, or require reservations that didn't exist before. Claude's restaurant knowledge has a cutoff date. For any specific recommendation that affects your plans: check recent reviews (TripAdvisor, Google, Yelp from the last 6 months), verify it's still operating, and check current booking requirements. This takes 3 minutes and prevents a planned meal from being a disappointment."
+    },
+    {
+      "type": "quiz",
+      "question": "You use AI to research visa requirements for your destination and it says \"no visa required for your passport.\" Is it safe to rely on this?",
+      "options": [
+        "Yes — visa requirements rarely change",
+        "No — always verify visa requirements from your destination country's official embassy or immigration website; visa requirements change and AI knowledge may be outdated",
+        "Yes if you double-check with a second AI tool",
+        "Only verify if you've had visa issues before"
+      ],
+      "correct": 1,
+      "explanation": "Visa requirements are high-stakes and time-sensitive — incorrect information can result in being denied boarding or entry to a country. Always verify from official sources: (1) the destination country's official immigration or embassy website, (2) your own country's foreign affairs/state department travel guidance, (3) the airline's TIMATIC system for their boarding decision. AI may have outdated information, especially for countries with frequent policy changes."
     },
     {
       "type": "callout",

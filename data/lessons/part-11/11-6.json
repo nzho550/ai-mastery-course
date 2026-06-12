@@ -2,8 +2,13 @@
   "id": "11-6",
   "title": "Understanding Tokens & Cost",
   "part": 11,
-  "estimatedMinutes": 20,
-  "tags": ["api", "tokens", "cost", "anthropic"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "api",
+    "tokens",
+    "cost",
+    "anthropic"
+  ],
   "sections": [
     {
       "type": "text",
@@ -50,6 +55,54 @@
       "type": "callout",
       "variant": "info",
       "content": "**Why output tokens cost more:** Reading a prompt is O(n) — the model processes each token once. Generating output is O(n²) — each new token attends to all previous tokens. The compute cost scales differently, hence the 5x price difference between input and output."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Token Counting Drill",
+      "content": "Build intuition for how tokens work by counting them.\n\n**Step 1 — Use the Anthropic tokeniser** (or ask Claude Code to count tokens): ask Claude to estimate the token count of several texts:\n- A single word: \"Hello\"\n- A tweet-length text: \"Just finished my first Claude API integration!\"\n- A paragraph: [paste a paragraph from this lesson]\n- A code snippet: [paste 10 lines of Python]\n\n**Step 2 — Ask Claude:** *\"What are the general rules for how many tokens common things use? For example: characters per token, words per token, code vs prose, different languages.\"*\n\n**Step 3 — Estimate tokens BEFORE Claude tells you:**\n- A JSON object with 5 string fields\n- A complete URL\n- A 200-word essay\nThen verify your estimates.\n\n**Step 4 — Calculate the cost** of processing each text through claude-haiku-4-5-20251001 (at current pricing).\n\n**Step 5 — Develop a rule of thumb** for estimating your API costs before building."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Token-Aware Code",
+      "content": "Modify your API wrapper to be token-aware.\n\n**Step 1 — Ask Claude Code** to add token counting to your existing API wrapper:\n```\nAdd these token-aware features to the AnthropicClient class:\n1. Before each API call, estimate the token count and warn if it exceeds a configurable threshold\n2. After each API call, track running totals: input tokens, output tokens, estimated cost\n3. Implement a `token_budget` parameter — if the conversation history grows beyond this budget, automatically truncate oldest messages while keeping the system prompt\n4. Add a `get_usage_summary()` method that returns current session stats\n```\n\n**Step 2 — Test the token budget feature** with a very long conversation. Does it truncate correctly?\n\n**Step 3 — Verify the cost tracking** against the Anthropic console after your test session.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review the truncation logic. What conversations would this handle badly? What context might be inappropriately dropped?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Model Selection Strategy",
+      "content": "Build a strategy for choosing which Claude model to use.\n\n**Step 1 — Ask Claude:** *\"Compare Claude Haiku, Sonnet, and Opus for these use cases: (1) classifying customer support emails, (2) writing detailed technical documentation, (3) answering simple factual questions, (4) complex reasoning tasks. For each, recommend the model and explain the cost/quality trade-off.\"*\n\n**Step 2 — Build a decision matrix:**\n| Task Type | Recommended Model | Reason |\n|---|---|---|\n| Simple classification | | |\n| Short Q&A | | |\n| Complex analysis | | |\n| Creative generation | | |\n| Code review | | |\n\n**Step 3 — Fill in the matrix** based on Claude's guidance.\n\n**Step 4 — Calculate the cost difference** for your primary use case at Haiku vs Sonnet vs Opus. What is the monthly saving of choosing Haiku over Sonnet?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Cost Optimisation Experiment",
+      "content": "Reduce API costs for a real use case through optimisation.\n\n**Step 1 — Take a real prompt** you use regularly.\n\n**Step 2 — Establish baseline cost:** Run it and record token counts.\n\n**Step 3 — Apply these optimisations** and measure the token reduction:\n1. Remove redundant context (information the model doesn't need)\n2. Compress verbose instructions (be more concise)\n3. Use structured output format to reduce output tokens\n4. Test with a smaller model first\n\n**Step 4 — For each optimisation**, verify the output quality didn't degrade. Cost reduction is only valuable if quality is maintained.\n\n**Step 5 — Calculate the final optimisation:** What % cost reduction did you achieve? At what scale does this matter?"
+    },
+    {
+      "type": "quiz",
+      "question": "You're building an app that processes 1000 documents per day, averaging 2000 tokens each. Should you use Claude Haiku or Sonnet?",
+      "options": [
+        "Always use Sonnet for better quality",
+        "Test both models on your specific task first — if Haiku's quality is sufficient, it will cost significantly less at this volume",
+        "Always use Haiku to minimise cost",
+        "Use different models for different documents based on content complexity"
+      ],
+      "correct": 1,
+      "explanation": "Model selection should be empirical, not assumed. Test Haiku on your actual task with diverse examples and evaluate quality. If Haiku meets your quality bar, the cost savings at scale are substantial. If quality is insufficient, Sonnet's cost is justified. The wrong approach: automatically using the most capable model without testing whether a cheaper model suffices. At 1000 documents/day × 2000 tokens, even a 5× price difference translates to significant monthly savings."
+    },
+    {
+      "type": "quiz",
+      "question": "Your API cost is unexpectedly high. What is the most effective diagnostic step?",
+      "options": [
+        "Switch to a cheaper model immediately",
+        "Log the token counts of each API call for one day to identify which calls are consuming the most tokens — the highest spenders are the optimisation targets",
+        "Reduce max_tokens for all API calls",
+        "Check the Anthropic console for billing details"
+      ],
+      "correct": 1,
+      "explanation": "Unexpectedly high API costs have specific causes — usually a small number of expensive call patterns, not uniformly high usage. Without logs, you're guessing. Log: which endpoint/feature made the call, input tokens, output tokens, and model for each request. After one day of logging, sort by cost to identify the top 3 most expensive call patterns. Optimising those (shorter prompts, smaller model, caching) typically delivers 70%+ of possible savings."
     },
     {
       "type": "callout",

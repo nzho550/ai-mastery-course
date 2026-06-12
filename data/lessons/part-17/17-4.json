@@ -2,8 +2,15 @@
   "id": "17-4",
   "title": "Documentation & Decision Capture as You Work",
   "part": 17,
-  "estimatedMinutes": 25,
-  "tags": ["projects", "beginner", "documentation", "decisions", "workflow", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "projects",
+    "beginner",
+    "documentation",
+    "decisions",
+    "workflow",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -51,6 +58,54 @@
       ],
       "correct": 1,
       "explanation": "Decision records created at the time of each decision are exactly what the new colleague needs: structured documents that explain what was decided, why, and what alternatives were considered. This lets them get context independently without interrupting existing team members repeatedly. Better onboarding (A) helps new joiners but doesn't substitute for the actual decision documentation. A longer kickoff (C) only captures initial decisions, not the many decisions made during the project. A single memory keeper (D) creates a bottleneck, a single point of failure, and still requires that person to be available and remember the context correctly months later."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Decision Documentation Drill",
+      "content": "Build the habit of documenting decisions as you make them.\n\n**Step 1 — Ask Claude:** \"What is an Architecture Decision Record (ADR)? How do teams use them? What are the key elements of a good decision record?\"\n\n**Step 2 — Create a decision record template** for your context:\n```markdown\n# Decision: [Title]\n**Date:** [YYYY-MM-DD]\n**Status:** Proposed / Accepted / Superseded\n**Context:** [Why does this decision need to be made?]\n**Options considered:** [What alternatives were evaluated?]\n**Decision:** [What was decided and why]\n**Consequences:** [What will be easier/harder as a result?]\n**Revisit when:** [Under what conditions should we revisit this?]\n```\n\n**Step 3 — Document one recent decision** using this template.\n\n**Step 4 — Ask Claude to review the decision record:** \"Does this decision record clearly capture the reasoning? What context would a future reader need that isn't here?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Decision Journal",
+      "content": "Create a decision journal system for ongoing use.\n\n**Step 1 — Ask Claude Code** to set up a decision journal:\n```\nCreate a simple decision journal system:\n1. A folder ~/decisions/ with one markdown file per major decision\n2. A DECISIONS.md index file with: date, title, status, one-line summary\n3. A template file for new decisions\n4. A monthly review prompt: \"Review all decisions from last month — which turned out well? Which poorly? What can you learn?\"\n\nSet up the folder structure and initial files.\n```\n\n**Step 2 — Add your 3 most recent significant decisions** to the journal.\n\n**Step 3 — Schedule a monthly review** (calendar reminder) to revisit decisions and assess outcomes.\n\n**Step 4 — After 3 months**, do your first review. What patterns do you see in your decision-making?"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Real-Time Documentation During Work",
+      "content": "Practice capturing context and decisions as you work, not after.\n\n**Step 1 — Set up a quick capture system** — a simple text file, a note in your project, or a CLAUDE.md section:\n```\n## Today's Work Log\n\n### Decision: [what you decided]\nContext: [why this decision came up]\nOptions: [what you considered]\nChosen: [what you picked and why]\n\n### Discovery: [something you learned]\nImpact: [how this changes things]\n```\n\n**Step 2 — During your next 2-hour work session**, capture notes in real time:\n- Every decision (even small ones)\n- Every surprising discovery\n- Every blocked path and why\n\n**Step 3 — At the end of the session**, ask Claude to synthesise your log:\n\"Summarise this work log into: decisions made, key learnings, and open questions for next session.\"\n\n**Step 4 — Evaluate:** Did the real-time log capture anything important you would have forgotten?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Team Decision Capture",
+      "content": "Extend decision documentation to your team.\n\n**Step 1 — Identify 3 recent team decisions** that weren't documented.\n\n**Step 2 — Try to reconstruct them:** What was the context? What options were considered? Why was this choice made?\n\n**Step 3 — Notice what you can't reconstruct** after even a few weeks. This is the cost of not documenting.\n\n**Step 4 — Ask Claude to design a lightweight team decision capture process:**\n\"Design a team decision documentation process that: takes under 5 minutes per decision, is stored where the team can find it, and would actually be used consistently. Avoid heavy processes that will be abandoned.\"\n\n**Step 5 — Propose the process to your team** and pilot it for one month."
+    },
+    {
+      "type": "quiz",
+      "question": "Six months after making a technical decision, a new team member asks \"why do we do it this way?\" You can't remember the reasoning. What does this cost?",
+      "options": [
+        "Nothing — they should just trust the existing approach",
+        "Significant time lost: they may revisit the decision unnecessarily, implement a different approach that conflicts with the existing one, or lose confidence in the team's technical choices",
+        "A quick meeting to discuss it — low cost",
+        "Only a problem if the decision was wrong"
+      ],
+      "correct": 1,
+      "explanation": "Undocumented decisions get re-litigated constantly. Team members encounter the decision's consequences without understanding its context, leading to: time spent reconstructing the reasoning, risk of reversing a good decision without understanding why it was made, and erosion of confidence in the codebase/process. ADRs and decision journals pay for themselves within the first revisit they prevent — one avoided re-decision meeting pays back years of documentation time."
+    },
+    {
+      "type": "quiz",
+      "question": "A decision record says \"we chose PostgreSQL over MongoDB.\" What critical information is missing that would make this record genuinely useful?",
+      "options": [
+        "The date the decision was made",
+        "The context and reasoning: what were the specific requirements that made PostgreSQL a better fit? What limitations of MongoDB were relevant? Under what conditions should we revisit this choice?",
+        "Who made the decision",
+        "A link to the PostgreSQL documentation"
+      ],
+      "correct": 1,
+      "explanation": "A decision record without reasoning is just a record of what happened, not why. The most valuable part: the context that made this the right choice, the options considered and why they were rejected, and the conditions under which this choice should be reconsidered. Future readers need to know: \"Does this reasoning still apply to my situation?\" Without the reasoning, they can't make that assessment and will either blindly follow the old decision or wastefully re-examine it from scratch."
     },
     {
       "type": "callout",

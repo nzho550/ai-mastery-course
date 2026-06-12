@@ -2,8 +2,15 @@
   "id": "19-5",
   "title": "Learning Anything with AI",
   "part": 19,
-  "estimatedMinutes": 30,
-  "tags": ["personal-life", "beginner", "learning", "education", "skills", "hands-on"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "learning",
+    "education",
+    "skills",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -47,6 +54,54 @@
       ],
       "correct": 1,
       "explanation": "This is the passive learning trap: reading a clear explanation produces a feeling of understanding without the deeper encoding that makes knowledge stick. The fix is active recall — after reading any explanation, close it and try to reproduce it in your own words, answer a practice question, or teach it to someone else. With AI tutoring, the most effective pattern is: read → close → explain back → check with Claude → practice problem → explain again. Re-reading the explanation (C) compounds the problem — it continues passive processing. The issue isn't the explanation's complexity (A) or your capability (D) — it's the learning method."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Learning Acceleration Drill",
+      "content": "Use AI to learn a new skill 3× faster.\n\n**Step 1 — Choose something you want to learn:** a programming language, a musical concept, a historical period, a professional skill.\n\n**Step 2 — Ask Claude to create a personalised learning plan:**\n```\nCreate a learning plan for [topic].\n\nMy background: [what I already know that's related]\nGoal: [what specifically I want to be able to do]\nTime available: [hours per week]\nLearning style: [prefer examples/theory/practice/conversation]\n\nPlan:\n1. What to learn in what order (dependencies)\n2. Specific resources for each stage\n3. How to practice effectively\n4. Milestones to know you're progressing\n5. Common misconceptions to avoid\n```\n\n**Step 3 — Start with the first item** on the plan today."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI Tutoring Session",
+      "content": "Have a deep AI tutoring session on a topic you're struggling with.\n\n**Step 1 — Identify a concept** you've tried to learn but don't fully understand.\n\n**Step 2 — Use the Socratic tutoring approach with Claude:**\n```\nTutor me on [concept] using the Socratic method.\nDon't explain everything — ask me questions to discover what I understand and what I'm missing.\nStart with: what do I already know about [concept]?\n[Answer each question]\nAfter 10 exchanges, summarise my current understanding and the specific gaps.\n```\n\n**Step 3 — Work through the tutoring session** honestly — admit confusion, ask follow-up questions.\n\n**Step 4 — Test your understanding** by explaining the concept back to Claude in your own words.\n\n**Step 5 — Ask Claude:** \"Where is my explanation wrong or incomplete? What's the most important thing I still haven't grasped?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Spaced Repetition with AI",
+      "content": "Use AI to build a spaced repetition learning system.\n\n**Step 1 — Ask Claude:** \"Explain spaced repetition and how it accelerates memory retention. How do I apply this principle with AI assistance rather than flashcard software?\"\n\n**Step 2 — For something you're learning**, create 10 \"cards\" (questions and answers) using Claude:\n\"Create 10 questions and answers that cover the key concepts of [topic]. Format as Q: [question] / A: [answer]. Make the questions test understanding, not just recall.\"\n\n**Step 3 — Test yourself** on the 10 questions.\n\n**Step 4 — Mark which you got right** and ask Claude to schedule the next review: \"I knew: [list]. I didn't know: [list]. When should I review each, and what additional explanation do I need for the ones I missed?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Personal Learning System",
+      "content": "Create a systematic AI-assisted learning system for ongoing development.\n\n**Step 1 — Identify your learning goals** for the next 6 months across 2-3 areas.\n\n**Step 2 — Ask Claude to design a learning system:**\n```\nDesign a personal learning system for these goals:\n[list your goals]\n\nTime available: [hours per week total]\n\nDesign:\n1. How to allocate time across goals\n2. Learning activities for each goal (ratio of reading/practice/review)\n3. How to measure progress\n4. When to adjust the plan\n5. How to stay motivated when progress feels slow\n```\n\n**Step 3 — Implement the system** and run it for 2 weeks.\n\n**Step 4 — Evaluate:** Are you making progress? Is the system sustainable? What would you change?"
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to teach you machine learning and it gives you a comprehensive explanation of neural networks. You understand it immediately. What should you do next?",
+      "options": [
+        "Move on to the next topic — you understand it",
+        "Apply it immediately: true understanding comes from using a concept, not just reading about it. Build a simple neural network, work through an example, or explain it to someone else — this reveals gaps that reading doesn't",
+        "Read the explanation again for reinforcement",
+        "Ask Claude for an even more detailed explanation"
+      ],
+      "correct": 1,
+      "explanation": "The illusion of understanding from reading is one of the most common learning traps. You understand an explanation without necessarily being able to apply the concept to new problems. The only test of real understanding: solve novel problems without referring back to the explanation. For machine learning: implement a neural network from scratch, apply it to a dataset, and debug why it's not working. These exercises reveal whether you truly understand or just recognise the explanation."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude tutors you on a concept and you feel like you understand it completely. The next day you can barely remember it. What learning principle were you not applying?",
+      "options": [
+        "You need a more capable AI model",
+        "Spaced repetition and active recall: information is retained through repeated retrieval at increasing intervals. Feeling like you understand during the session is not the same as long-term retention — review the next day, then in 3 days, then in a week",
+        "The topic was too advanced for you",
+        "You were learning at the wrong time of day"
+      ],
+      "correct": 1,
+      "explanation": "The forgetting curve is steep — without deliberate review, most information is forgotten within 24 hours. Feeling of understanding during a learning session (recognition) is not the same as being able to recall it later (retrieval). Apply spaced repetition: after a session, test yourself immediately, then in 1 day, 3 days, 1 week, and 1 month. Each successful retrieval strengthens the memory. Claude can help by generating test questions you haven't seen before — this tests actual retrieval, not just recognition."
     },
     {
       "type": "callout",

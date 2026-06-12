@@ -2,8 +2,14 @@
   "id": "16-2",
   "title": "Reports, Proposals & Business Documents",
   "part": 16,
-  "estimatedMinutes": 25,
-  "tags": ["office", "beginner", "reports", "proposals", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "office",
+    "beginner",
+    "reports",
+    "proposals",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -47,6 +53,54 @@
       ],
       "correct": 1,
       "explanation": "Anticipating and addressing objections directly in the proposal is the most effective technique — it shows you've thought it through, builds credibility, and pre-empts the objection before the decision-maker raises it. Hiding the cost (A) destroys trust. Shortening the document (C) doesn't address the concern. Adding features (D) changes the proposal rather than addressing the cost concern directly."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Document Type Analysis",
+      "content": "Understand the distinctive requirements of each business document type.\n\n**Step 1 — Ask Claude:** \"Compare these document types for a business professional: report, proposal, briefing, white paper, case study. For each: purpose, typical audience, structure, and what makes an excellent vs mediocre example.\"\n\n**Step 2 — Match your upcoming documents** to the right type:\n| Upcoming document | Correct type | Why |\n|---|---|---|\n| [Your doc] | | |\n\n**Step 3 — For your highest-priority upcoming document**, ask Claude to describe the ideal structure and key success criteria.\n\n**Step 4 — Find one excellent example** of that document type (ask Claude for examples, or search your organisation's past documents). Analyse what makes it excellent."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Write a Real Business Proposal",
+      "content": "Write a real business proposal with AI assistance.\n\n**Step 1 — Identify a real proposal you need to write** (or a practice one if none is pending).\n\n**Step 2 — Gather your content inputs:** What problem are you solving? What is your solution? What is the cost/benefit? Who are the decision-makers?\n\n**Step 3 — Ask Claude to draft section by section:**\n```\nDraft the [Executive Summary] for a proposal:\n- Problem: [describe it]\n- Solution: [your proposal]\n- Business case: [cost, benefit, ROI]\n- Ask: [what you need approved]\n- Audience: [decision-maker roles]\n\nThis must be 1 page maximum. Lead with the business case, not the technical details.\n```\n\n**Step 4 — Review each section.** Is every claim true? Is the business case honest?\n\n**Step 5 — Mandatory review:** Ask a colleague to read the executive summary. What questions do they have after reading it? Fill those gaps."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Data Storytelling",
+      "content": "Learn to use AI to turn data into compelling business narratives.\n\n**Step 1 — Take a real dataset or set of metrics** from your work.\n\n**Step 2 — Ask Claude:** \"Here is my data: [paste data or key numbers]. What is the most important story this data tells? What narrative would resonate with [your audience]?\"\n\n**Step 3 — Review the story Claude identifies.** Is it the right one for your context? What nuance does it miss?\n\n**Step 4 — Ask Claude to write the data narrative** for your document:\n\"Write a 3-paragraph data narrative for a business report based on this analysis [paste Claude's story analysis]. Use specific numbers. Start with the bottom-line finding.\"\n\n**Step 5 — Check every number** in the narrative against your actual data."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Document Review Workflow",
+      "content": "Build a systematic review workflow for high-stakes business documents.\n\n**Step 1 — Ask Claude to design a review workflow** for business proposals:\n```\nDesign a review workflow for a business proposal before it goes to senior leadership. Include:\n1. Accuracy review: fact-checking all claims\n2. Logic review: checking that conclusions follow from evidence\n3. Audience review: is the language and detail level right for decision-makers?\n4. Risk review: what objections will they raise?\n5. Final check: is the ask clear and actionable?\n\nCreate a checklist for each stage.\n```\n\n**Step 2 — Apply the workflow** to a document you're preparing.\n\n**Step 3 — For each checklist item**, address any gaps found.\n\n**Step 4 — Have a colleague review** using the checklist — does it help them give more useful feedback?"
+    },
+    {
+      "type": "quiz",
+      "question": "An AI-drafted business report uses the phrase \"significant increase\" repeatedly. What is the problem and fix?",
+      "options": [
+        "No problem — \"significant\" is professional business language",
+        "Vague language: \"significant\" means different things to different readers. Replace with specific numbers: \"37% increase,\" \"£2.3M improvement,\" \"3× faster\" — quantify every claim you can",
+        "Replace with \"notable increase\" for more professional language",
+        "Define \"significant\" in the glossary"
+      ],
+      "correct": 1,
+      "explanation": "Vague qualifiers (\"significant,\" \"substantial,\" \"major,\" \"considerable\") are AI writing defaults that reduce credibility. Decision-makers need specific numbers to evaluate claims. \"Significant increase in customer retention\" tells a decision-maker nothing — they can't evaluate whether this is worth the investment. \"Customer retention improved from 71% to 84% (13 percentage points) in Q3\" tells them exactly what happened. Always replace vague qualifiers with specific measurements."
+    },
+    {
+      "type": "quiz",
+      "question": "You're writing a proposal to senior leadership who are skeptical about the proposed initiative. How should you structure the proposal?",
+      "options": [
+        "Lead with all the benefits to build enthusiasm before mentioning concerns",
+        "Acknowledge the main objections early and address them directly — skeptical readers who feel their concerns are not addressed will dismiss the rest of the proposal",
+        "Keep it short to avoid giving them time to object",
+        "Lead with technical details to demonstrate credibility first"
+      ],
+      "correct": 1,
+      "explanation": "Skeptical readers read defensively — they're looking for gaps and objections. If you don't address their main concerns early, they stop reading with the concern unresolved. Structure for skeptical audiences: (1) acknowledge the key concern upfront, (2) address it with evidence, (3) then make your case. \"We know cost is the primary concern. Here's the ROI case.\" This demonstrates you understand their perspective and builds trust before making your ask."
     },
     {
       "type": "callout",

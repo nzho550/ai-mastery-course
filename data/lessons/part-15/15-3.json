@@ -2,8 +2,15 @@
   "id": "15-3",
   "title": "AI Web Search & Web Crawling",
   "part": 15,
-  "estimatedMinutes": 28,
-  "tags": ["research", "intermediate", "web", "crawl", "playwright", "hands-on"],
+  "estimatedMinutes": 63,
+  "tags": [
+    "research",
+    "intermediate",
+    "web",
+    "crawl",
+    "playwright",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -55,6 +62,54 @@
       ],
       "correct": 1,
       "explanation": "Playwright MCP can visit all 20 sites, extract pricing, and output a comparison table in one command — making the weekly monitoring a 2-minute task instead of several hours. Manual visits (A) don't scale to 20 sites weekly. Perplexity monthly (C) is too infrequent and may miss detail — Perplexity's search doesn't guarantee it finds each specific pricing page. Commercial tools (D) exist and are valid but cost money and require setup; Playwright MCP achieves the same with a natural language prompt once configured in Part 8."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Web Search Tools Comparison",
+      "content": "Test 3 AI web search tools on the same query.\n\n**Step 1 — Choose a research question** with a factual answer that can be verified.\n\n**Step 2 — Run the same question** through:\n- Perplexity (perplexity.ai)\n- Claude with web search enabled (if available)\n- Bing Copilot or another AI search tool\n\n**Step 3 — Compare results:**\n- Which found the most relevant sources?\n- Which had the most accurate synthesis?\n- Which cited sources most reliably?\n- Which had the freshest information?\n\n**Step 4 — Identify the winner** for your use case and explain why.\n\n**Step 5 — Ask Claude:** \"For different types of web research tasks, which AI search tool performs best? Give specific examples.\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Web Crawling for Research",
+      "content": "Use AI to systematically crawl and extract information from multiple web pages.\n\n**Step 1 — Identify a research task** that requires information from 5-10 specific URLs: comparing product specs, collecting pricing, reviewing documentation.\n\n**Step 2 — Ask Claude Code** (with Browser MCP if available) to extract structured data:\n```\nVisit each of these URLs and extract [specific data]:\n[List 5-10 URLs]\n\nFor each page, extract:\n- [Field 1]: [where to find it]\n- [Field 2]: [where to find it]\n\nFormat as a comparison table.\n```\n\n**Step 3 — Verify a sample** of the extracted data against the actual pages.\n\n**Step 4 — Save the extracted data** in a structured format (CSV or JSON).\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review the extracted data. Which extractions are most likely to be inaccurate or missing important context?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Research Credibility Assessment",
+      "content": "Build a systematic approach to evaluating the credibility of AI-found web sources.\n\n**Step 1 — Ask Claude:** \"Create a 10-point credibility checklist for evaluating web sources found by AI search tools. Include: author credentials, publication date, site reputation, potential bias, and methodology.\"\n\n**Step 2 — Apply the checklist** to 5 sources from a recent Perplexity research session.\n\n**Step 3 — Score each source (0-10)** on the credibility checklist.\n\n**Step 4 — Identify the pattern:** Were low-credibility sources driving specific claims in the research? Would removing them change the conclusions?\n\n**Step 5 — Update your research workflow** to automatically flag low-credibility sources."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Research Dashboard",
+      "content": "Create a personal research tracking dashboard.\n\n**Step 1 — Ask Claude Code** to design a simple research tracking system:\n```\nCreate a Markdown-based research tracking system:\n1. research-index.md: list of all research topics with status and date\n2. Template for each research topic: question, sources found, key findings, verification status, confidence level\n3. A summary generator that reads all research files and produces a weekly digest\n\nKeep it simple — no database, just markdown files.\n```\n\n**Step 2 — Set up the system** and add your 3 most recent research topics.\n\n**Step 3 — Generate a weekly digest** of your research activity.\n\n**Step 4 — Ask Claude:** \"Is this research tracking system appropriate for my research volume and complexity? What would make it more useful?\""
+    },
+    {
+      "type": "quiz",
+      "question": "You use AI web search to research a competitor's product and find a very positive review on a reputable tech blog. Before including this in your analysis, what should you check?",
+      "options": [
+        "Nothing — reputable tech blogs are always reliable",
+        "Whether the review was sponsored or the blogger has a financial relationship with the company — even reputable outlets publish sponsored content that may not be disclosed prominently",
+        "Whether the blog has more than 100,000 readers",
+        "Whether the product is still available"
+      ],
+      "correct": 1,
+      "explanation": "Sponsored content on tech blogs is common and not always prominently disclosed. Check: look for \"sponsored,\" \"partner,\" or \"paid promotion\" labels, check the blog's disclosure policy, look for unusual positivity or absence of critical feedback, and search for independent reviews of the same product. AI search tools don't filter for sponsored content, so a positive review on a \"reputable\" site might still be a paid placement."
+    },
+    {
+      "type": "quiz",
+      "question": "AI web search returns results from 2022 about a rapidly evolving technology. How should you handle this research?",
+      "options": [
+        "Use the 2022 information — it's probably still accurate",
+        "Flag all 2022 findings as potentially outdated and search specifically for recent sources: add \"2025\" or \"2026\" to your queries, and look for version-specific documentation",
+        "Discard the search and use Claude's knowledge instead",
+        "Use the 2022 results only for background context, not current recommendations"
+      ],
+      "correct": 3,
+      "explanation": "For rapidly evolving technologies, older sources serve as context, not current guidance. A 2022 article about a JavaScript framework might describe an API that was completely changed in 2024. Workflow: use older sources to understand the history and foundational concepts, then explicitly search for recent sources (\"after:2025\" in search queries) for current best practices, APIs, and recommendations. Be explicit with Claude when passing research: \"This source is from 2022 — the current state may differ.\""
     },
     {
       "type": "callout",

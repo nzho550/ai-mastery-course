@@ -2,8 +2,14 @@
   "id": "11-8",
   "title": "Build a Simple AI Tool — Text Summarizer CLI",
   "part": 11,
-  "estimatedMinutes": 60,
-  "tags": ["build", "api", "cli", "javascript", "project"],
+  "estimatedMinutes": 90,
+  "tags": [
+    "build",
+    "api",
+    "cli",
+    "javascript",
+    "project"
+  ],
   "sections": [
     {
       "type": "text",
@@ -27,6 +33,54 @@
       "tag": "BUILD",
       "title": "Build the Text Summarizer",
       "content": "Follow each step in order. Each step produces working code.\n\n---\n\n**Step 1 — Project setup (2 min)**\n\nIn the VS Code terminal:\n```powershell\n# You should already be in ai-course-projects/exercises\n# Verify dependencies are installed\nnpm list @anthropic-ai/sdk dotenv\n```\nIf not installed: `npm install @anthropic-ai/sdk dotenv`\n\nConfirm `package.json` has `\"type\": \"module\"` (from lesson 11-5).\n\nConfirm `.env` exists with `ANTHROPIC_API_KEY=sk-ant-...`\n\n---\n\n**Step 2 — Read the file argument (5 min)**\n\nCreate `exercises/summarize.js` and start with just the argument parsing:\n```javascript\nimport { readFileSync } from 'fs';\nimport { resolve } from 'path';\n\nconst args = process.argv.slice(2);\nif (args.length === 0) {\n  console.error('Usage: node summarize.js <file>');\n  process.exit(1);\n}\n\nconst filePath = args[0];\nconst fileContent = readFileSync(resolve(filePath), 'utf-8');\nconsole.log(`File length: ${fileContent.length} characters`);\nconsole.log('First 200 chars:', fileContent.slice(0, 200));\n```\n\nTest it on your README:\n```powershell\nnode summarize.js ../README.md\n```\nYou should see the character count and the first 200 characters. File reading works.\n\n---\n\n**Step 3 — Add the API call (10 min)**\n\nAdd the Claude call to your file:\n```javascript\nimport Anthropic from '@anthropic-ai/sdk';\nimport { readFileSync } from 'fs';\nimport { resolve } from 'path';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\nconst args = process.argv.slice(2);\nif (args.length === 0) { console.error('Usage: node summarize.js <file>'); process.exit(1); }\n\nconst fileContent = readFileSync(resolve(args[0]), 'utf-8');\n\nconst message = await client.messages.create({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 300,\n  messages: [{\n    role: 'user',\n    content: `Summarize the following text in 2-3 sentences:\\n\\n${fileContent}`\n  }]\n});\n\nconsole.log(message.content[0].text);\n```\n\nTest: `node summarize.js ../README.md`\n\nYou should see a summary of your README. The core functionality works.\n\n---\n\n**Step 4 — Add streaming (5 min)**\n\nReplace the `messages.create` call with the streaming version:\n```javascript\nconst stream = client.messages.stream({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 300,\n  messages: [{\n    role: 'user',\n    content: `Summarize the following text in 2-3 sentences:\\n\\n${fileContent}`\n  }]\n});\n\nfor await (const event of stream) {\n  if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {\n    process.stdout.write(event.delta.text);\n  }\n}\nprocess.stdout.write('\\n');\n```\n\nTest again: `node summarize.js ../README.md`\n\nNow the summary streams in word by word.\n\n---\n\n**Step 5 — Add the --bullets flag (10 min)**\n\nAdd the flag check and conditional prompt:\n```javascript\nconst bulletsMode = process.argv.includes('--bullets');\n\nconst instruction = bulletsMode\n  ? 'Summarize the following text as exactly 5 concise bullet points. Start each with a dash (-).'\n  : 'Summarize the following text in 2-3 clear sentences.';\n\n// Use instruction in the messages array content\n```\n\nTest both modes:\n```powershell\nnode summarize.js ../README.md\nnode summarize.js ../README.md --bullets\n```\n\n---\n\n**Step 6 — Add error handling and polish (10 min)**\n\nReplace your file with the complete final code shown above in this lesson. It adds:\n- Try/catch for file read errors\n- Empty file check\n- A status line showing what was summarized\n- Token usage at the end\n\n---\n\n**Step 7 — Test on real files (10 min)**\n\nTest your tool on several real files:\n```powershell\n# Summarize your notes\nnode summarize.js ../notes/my-ai-workflow.md\nnode summarize.js ../notes/my-ai-workflow.md --bullets\n\n# Summarize your prompt library\nnode summarize.js ../prompts/my-prompt-library.md\n\n# Try a longer file if you have one\nnode summarize.js some-article.txt\n```\n\n**What to notice:**\n- The tool works on any plain text file\n- Bullet mode gives a different structure\n- Token usage shows how the cost scales with file length"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Build the Summarizer CLI",
+      "content": "Build the text summariser tool described in the lesson.\n\n**Step 1 — Ask Claude Code to scaffold the full project:**\n```\nBuild a production-ready CLI tool called summarise.py that:\n1. Accepts a file path or stdin as input\n2. Calls the Anthropic API to summarise the content\n3. Supports flags:\n   --length short/medium/long (controls summary detail)\n   --format bullet/prose/structured\n   --model haiku/sonnet (default: haiku for cost)\n4. Handles large files by chunking if needed (over 50k tokens)\n5. Shows a progress spinner during processing\n6. Outputs the summary cleanly, then shows token usage and cost\n\nWrite the complete implementation.\n```\n\n**Step 2 — Review the code** thoroughly before running it.\n\n**Step 3 — Test on real files:** a code file, a document, a long email."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop B — Add Features to Your CLI",
+      "content": "Extend your summariser based on real usage experience.\n\n**Step 1 — Use the summariser on 5 real documents** from your work.\n\n**Step 2 — Identify the most annoying limitation** in its current form.\n\n**Step 3 — Ask Claude Code to add the feature:**\n- Batch processing: `summarise.py *.txt > summaries.md`\n- Output to file: `--output summary.md`\n- Compare mode: summarise two files and highlight differences\n- Follow-up questions: after summarising, enter an interactive mode to ask questions about the document\n\n**Step 4 — Test the new feature** with real input.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review the implementation of [new feature]. What edge cases did I miss? What would break with unusual inputs?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop C — Test Your Tool End-to-End",
+      "content": "Write tests for your CLI tool.\n\n**Step 1 — Ask Claude Code to write a test suite:**\n```\nWrite a pytest test suite for summarise.py that:\n1. Tests each --length option produces different output lengths\n2. Tests --format produces correctly formatted output\n3. Tests that file-not-found is handled gracefully\n4. Tests that very short input (under 10 words) is handled gracefully\n5. Tests that the token count in output is a positive integer\n\nUse pytest-vcr or mock the Anthropic API calls so tests don't cost real money.\n```\n\n**Step 2 — Run the tests:** `pytest tests/ -v`\n\n**Step 3 — Fix any failures.** Are the failures real bugs or test issues?\n\n**Step 4 — Check coverage:** `pytest --cov=summarise`"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Deploy and Share Your Tool",
+      "content": "Package your CLI tool for distribution.\n\n**Step 1 — Ask Claude Code** to help package the tool:\n```\nHelp me package summarise.py for distribution:\n1. Create a pyproject.toml so it can be installed with pip install\n2. Create a requirements.txt\n3. Write a README.md with installation instructions and usage examples\n4. Add a --version flag\n5. Make it available as a global command: `summarise` after installation\n```\n\n**Step 2 — Install your own tool:** `pip install -e .`\n\n**Step 3 — Test that the global command works:** `summarise README.md`\n\n**Step 4 — Share with one colleague** and observe how they use it. What confused them? What did they want that was missing?"
+    },
+    {
+      "type": "quiz",
+      "question": "Your summariser CLI works great on 5-page documents but hangs on a 200-page PDF. What is happening and how do you fix it?",
+      "options": [
+        "PDFs are not supported by the API",
+        "The document exceeds the context window — you need to chunk the document into segments, summarise each, then summarise the summaries",
+        "The API has a 200-page limit",
+        "You need a more powerful computer"
+      ],
+      "correct": 1,
+      "explanation": "Every model has a context window limit. A 200-page document might be 100,000+ tokens — more than any single API call can handle. The solution is hierarchical summarisation: (1) split the document into chunks that fit within the context window (with overlap for context continuity), (2) summarise each chunk, (3) combine chunk summaries into a meta-summary. This is called the \"map-reduce\" summarisation pattern and is essential for handling documents of arbitrary length."
+    },
+    {
+      "type": "quiz",
+      "question": "You build a summariser that works well for English text but produces poor results for French documents. What is the most likely reason and fix?",
+      "options": [
+        "The API doesn't support French",
+        "Your system prompt doesn't specify the target language — add \"Respond in the same language as the document\" or explicitly \"Respond in French\" to the system prompt",
+        "French uses more tokens and you need higher max_tokens",
+        "You need a different model for non-English text"
+      ],
+      "correct": 1,
+      "explanation": "Claude supports many languages but defaults to responding in English when the language isn't specified. For multilingual applications, add explicit language instructions to the system prompt: \"Summarise the document in the same language it was written in.\" You can also dynamically detect the language of the input and add a specific instruction. Without this, Claude may respond in English even when the source document is in another language."
     },
     {
       "type": "callout",

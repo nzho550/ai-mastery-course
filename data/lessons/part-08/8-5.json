@@ -2,8 +2,13 @@
   "id": "8-5",
   "title": "sequential-thinking — Structured Reasoning",
   "part": 8,
-  "estimatedMinutes": 30,
-  "tags": ["mcp", "sequential-thinking", "reasoning", "claude-code"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "sequential-thinking",
+    "reasoning",
+    "claude-code"
+  ],
   "sections": [
     {
       "type": "text",
@@ -49,6 +54,54 @@
       "tag": "CLAUDECODE",
       "title": "Solve a Complex Decision With Structured Reasoning",
       "content": "**Setup:**\n1. Add sequential-thinking to your `settings.json` (shown above)\n2. Relaunch `claude`, type `/mcp` to confirm it's listed\n\n**Task 1 — Test it on a tech decision:**\nAsk: `\"Use sequential-thinking to help me decide whether I should learn Python or JavaScript as my first programming language. I want to work with AI tools and potentially build web projects.\"`\n\nWatch Claude work through each step. Notice:\n- How many distinct considerations does it identify?\n- Does it revise its thinking at any step?\n- Is the conclusion different from what you expected?\n\n**Task 2 — Bring a real decision:**\nThis is the more valuable exercise. Think of a real decision you are currently wrestling with. It could be:\n- A technology choice for a project\n- A career direction question\n- How to approach a difficult technical problem\n- A learning plan decision\n\nAsk: `\"Use sequential-thinking to help me decide [your real decision]. Here's the context: [relevant background].\"` \n\nRead through Claude's reasoning carefully. After it finishes:\n- Do you agree with each step?\n- Did it surface a consideration you hadn't thought of?\n- Do you want to challenge any of the steps?\n\n**Task 3 — Compare without sequential-thinking:**\nAsk the same question again without mentioning sequential-thinking (use `/clear` to start fresh). Compare the depth and structure of the two responses.\n\nSave both answers to `notes/sequential-thinking-comparison.md`."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Sequential Thinking Drill",
+      "content": "Test how sequential-thinking MCP changes Claude's reasoning on a complex problem.\n\n**Step 1 — Choose a genuinely complex problem** from your work — something that requires considering multiple factors and trade-offs.\n\n**Step 2 — Ask Claude WITHOUT sequential thinking** first. Record the response.\n\n**Step 3 — Ask Claude WITH sequential thinking** (or describe the problem and ask Claude to \"use sequential, step-by-step structured reasoning where each step explicitly builds on previous ones\").\n\n**Step 4 — Compare the responses:**\n- Did sequential thinking surface considerations that the direct response missed?\n- Was the reasoning more transparent and checkable?\n- Did the conclusion differ?\n\n**Step 5 — Identify the types of problems** where sequential structured thinking adds the most value vs when it's overkill."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Apply Sequential Thinking to a Real Decision",
+      "content": "Use sequential thinking to work through a real, complex decision you're facing.\n\n**Step 1 — Identify a real decision** you need to make: a technical architecture choice, a project prioritisation decision, a hiring or vendor selection.\n\n**Step 2 — Ask Claude (or Claude Code with sequential-thinking MCP):**\n```\nHelp me think through this decision using sequential, explicit reasoning steps.\n\nDecision: [describe your decision]\nContext: [relevant background]\n\nFor each reasoning step:\n1. State what the step is examining\n2. Present the analysis\n3. Draw an intermediate conclusion\n4. Note any uncertainties or assumptions\n\nEnd with: your recommendation and the one assumption that, if wrong, would change your recommendation.\n```\n\n**Step 3 — Challenge the reasoning** at specific steps where you disagree.\n\n**Step 4 — Mandatory adversarial review:** Ask: *\"Play devil's advocate on your recommendation. What's the strongest argument against it?\"*\n\n**Step 5 — Make the decision** based on the full sequential analysis."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Decompose a Complex Task",
+      "content": "Use sequential thinking to break a complex task into executable steps.\n\n**Step 1 — Choose a complex multi-part task** you need to do: implementing a feature, running a research process, coordinating a project.\n\n**Step 2 — Ask Claude to use sequential reasoning to decompose it:**\n```\nBreak down this complex task using sequential thinking:\n\nTask: [describe it]\n\nFor the decomposition:\n- Start with the highest-level goal\n- For each step, identify its dependencies (what must be done first)\n- Flag any steps where the approach depends on an outcome you won't know until earlier steps complete\n- Identify the critical path (the sequence that determines the minimum completion time)\n- Note where parallel work is possible\n```\n\n**Step 3 — Review the decomposition.** Is anything in the wrong order? Are dependencies correct?\n\n**Step 4 — Execute the first 2 steps** of the decomposition using Claude Code.\n\n**Step 5 — Reflect:** Did the upfront decomposition make the execution go more smoothly?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Sequential Thinking Prompt for Your Field",
+      "content": "Create a custom sequential thinking prompt framework tailored to the types of problems you solve.\n\n**Step 1 — Identify the 2-3 types of complex problems** you solve most often at work.\n\n**Step 2 — For each problem type**, ask Claude to design a sequential reasoning framework:\n```\nCreate a sequential thinking framework for this type of problem: [describe problem type].\n\nThe framework should:\n- Define the reasoning steps specific to this problem type\n- Specify what information to gather at each step\n- Define how each step's output feeds into the next\n- Include a final synthesis step\n\nFormat it as a reusable prompt template.\n```\n\n**Step 3 — Test each framework** on a real instance of that problem type.\n\n**Step 4 — Refine the frameworks** based on what worked and what missed.\n\n**Step 5 — Save to your prompt library** under \"Structured Reasoning Frameworks.\""
+    },
+    {
+      "type": "quiz",
+      "question": "Sequential thinking MCP has Claude reason through multiple steps before giving an answer. What is the main advantage of this over asking Claude to \"think carefully\"?",
+      "options": [
+        "Sequential thinking is always more accurate than direct answers",
+        "Sequential thinking makes reasoning explicit and inspectable — you can see each step, identify where it goes wrong, and correct at the specific step rather than rejecting the whole answer",
+        "Sequential thinking produces longer responses",
+        "\"Think carefully\" is not a valid prompt instruction"
+      ],
+      "correct": 1,
+      "explanation": "Making reasoning steps explicit transforms AI thinking from a black box into a transparent process. When reasoning is sequential and explicit: you can check each step independently, identify precisely where the reasoning diverges from your expectations, provide targeted correction at the specific wrong step, and build trust by understanding how the conclusion was reached. \"Think carefully\" asks for more effort but doesn't create inspectable steps."
+    },
+    {
+      "type": "quiz",
+      "question": "You use sequential thinking for a complex analysis. Claude's Step 4 conclusion contradicts what you know to be true. What should you do?",
+      "options": [
+        "Accept Step 4 and continue — Claude has access to more information",
+        "Interrupt at Step 4: explain what you know and why it contradicts Step 4, then ask Claude to re-reason from that point with the corrected information",
+        "Start the whole analysis over with a better prompt",
+        "Skip Step 4 and continue to Step 5"
+      ],
+      "correct": 1,
+      "explanation": "Sequential reasoning is designed to be interruptible. If Step 4 is wrong, correct it then: \"In Step 4, you concluded X, but I know Y is actually true because Z. Please revise Step 4 with this information and re-derive Steps 5 onwards from the corrected step.\" This is far more efficient than starting over and ensures your domain knowledge shapes the analysis at the right point."
     },
     {
       "type": "callout",

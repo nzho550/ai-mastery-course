@@ -2,8 +2,15 @@
   "id": "19-4",
   "title": "AI for Health & Wellbeing",
   "part": 19,
-  "estimatedMinutes": 25,
-  "tags": ["personal-life", "beginner", "health", "wellbeing", "research", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "health",
+    "wellbeing",
+    "research",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -52,6 +59,54 @@
       ],
       "correct": 1,
       "explanation": "When AI identifies a red flag symptom — one that indicates potential serious pathology requiring prompt evaluation — that flag overrides the 'most likely' framing. AI cannot examine you, doesn't know your full history, and the 'most likely' explanation is a statistical statement, not a guarantee. A symptom on the urgent care list means: seek urgent care, have a professional rule it out. The cost of an unnecessary urgent care visit is low; the cost of ignoring a true urgent symptom can be very high. Never use AI to argue yourself out of seeking care when a red flag is present."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Health Information Research",
+      "content": "Use AI for health research while maintaining appropriate skepticism.\n\n**Step 1 — Ask Claude:** \"What are the appropriate ways to use AI for health information? What are the situations where AI health information is dangerous? How should I validate AI health information?\"\n\n**Step 2 — Test AI health information quality:** Ask Claude a specific health question you have.\n\n**Step 3 — Evaluate the response:**\n- Did Claude recommend consulting a healthcare provider?\n- Were the uncertainty and limitations clear?\n- Is the information consistent with reputable health sources (Mayo Clinic, NHS, medical journals)?\n\n**Step 4 — Ask Claude:** \"For this health question, what are the authoritative sources I should check to verify this information?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Health and Wellness Habit Tracking",
+      "content": "Build an AI-assisted health habit tracking system.\n\n**Step 1 — Identify 3 health habits** you want to build or improve.\n\n**Step 2 — Ask Claude to design a tracking system:**\n```\nDesign a health habit tracking system for:\nHabits: [list them]\nMy current baseline: [where I am now]\nGoal: [where I want to be in 90 days]\n\nCreate:\n1. Daily tracking template (simple, under 2 minutes to complete)\n2. Weekly review questions\n3. How to identify if I'm making progress\n4. What to do when I break the habit chain\n```\n\n**Step 3 — Set up the tracking system** (simple text file, spreadsheet, or app).\n\n**Step 4 — After 2 weeks**, do the weekly review with Claude's help: \"Here's my 2-week tracking data [paste it]. What patterns do you see? What should I adjust?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Wellbeing Assessment",
+      "content": "Use AI to assess and improve your overall wellbeing.\n\n**Step 1 — Ask Claude to guide a wellbeing assessment:**\n\"Guide me through a comprehensive wellbeing check-in. Ask me about: physical health habits, mental wellbeing, social connections, work satisfaction, and life balance. For each area, assess my current state and suggest 1-2 improvements.\"\n\n**Step 2 — Answer each question honestly** — this is for your own use, not for anyone else.\n\n**Step 3 — Identify the one area** where a small improvement would have the biggest impact on your overall wellbeing.\n\n**Step 4 — Design one concrete habit** to address that area.\n\n**Step 5 — Important note:** If any wellbeing area raises serious concerns (mental health, medical symptoms), prioritise professional support over AI assistance."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — AI Health Information Workflow",
+      "content": "Build a responsible workflow for using AI in health decisions.\n\n**Step 1 — Create a Health AI Usage Policy for yourself:**\n```\n## My Health AI Policy\n\n### When AI is appropriate\n- General health education\n- Understanding medical terms\n- Research before a doctor's appointment\n- Habit and lifestyle planning\n\n### When to always consult a professional\n- Symptoms that could indicate serious conditions\n- Medication dosages or interactions\n- Mental health concerns\n- Any decision with significant health consequences\n\n### How I verify AI health information\n1. Check reputable health sources (NHS, Mayo Clinic, etc.)\n2. Bring questions to my next medical appointment\n3. Never self-diagnose based on AI information alone\n```\n\n**Step 2 — Review the policy with Claude:** \"Review this health AI usage policy. Am I being too restrictive? Too permissive? What important situations am I missing?\""
+    },
+    {
+      "type": "quiz",
+      "question": "You describe symptoms to Claude and it says \"this could be condition X.\" You are worried and want to confirm. What is the right next step?",
+      "options": [
+        "Ask Claude more detailed questions until you get a definitive diagnosis",
+        "See a healthcare provider: AI symptom analysis is explicitly not medical advice, cannot physically examine you, doesn't have your medical history, and should never replace professional medical diagnosis",
+        "Search online for more information about condition X",
+        "Wait and see if the symptoms worsen"
+      ],
+      "correct": 1,
+      "explanation": "AI cannot diagnose medical conditions. When Claude says \"this could be condition X,\" it means: based on the described symptoms, condition X is a possibility that should be evaluated by a professional who can: physically examine you, order appropriate tests, review your full medical history, and apply clinical judgement. Using AI symptom descriptions to self-diagnose and then either treat yourself or worry without seeking care are both poor outcomes. AI can help you understand symptoms and prepare questions for a doctor — not replace the doctor."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude recommends a specific supplement for a health goal. What should you do before purchasing it?",
+      "options": [
+        "Buy it — Claude has good health information",
+        "Research the supplement's evidence base independently (check systematic reviews, not just company claims) and discuss with a healthcare provider if you take any medications",
+        "Ask Claude to confirm the recommendation",
+        "Check the price and brand only"
+      ],
+      "correct": 1,
+      "explanation": "Supplement recommendations require independent verification because: (1) the evidence base varies enormously — some supplements have strong evidence, most have weak evidence, some are harmful; (2) supplements can interact with medications; (3) \"natural\" doesn't mean safe or effective; (4) the supplement industry has less regulatory oversight than medications. Check: a reputable health information source for the specific supplement, and discuss with your doctor if you take any medications or have health conditions."
     },
     {
       "type": "callout",

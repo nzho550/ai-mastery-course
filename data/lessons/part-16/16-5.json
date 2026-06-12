@@ -2,8 +2,14 @@
   "id": "16-5",
   "title": "Email & Communication Templates",
   "part": 16,
-  "estimatedMinutes": 20,
-  "tags": ["office", "beginner", "email", "communication", "hands-on"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "office",
+    "beginner",
+    "email",
+    "communication",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -43,6 +49,54 @@
       ],
       "correct": 1,
       "explanation": "AI produces the best difficult emails when given specific context: what the request was, the genuine reason for declining, and the desired relational outcome. Without context (A), AI writes generic polite declines that sound hollow. Writing it yourself (C) is valid but misses the opportunity to iterate quickly on tone and wording. A one-line reply (D) risks seeming dismissive and can damage relationships with senior colleagues."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Email Template Audit",
+      "content": "Audit your current email templates and identify improvement opportunities.\n\n**Step 1 — List the 5 types of emails** you write most frequently.\n\n**Step 2 — Find or recreate an example** of each type from your sent folder.\n\n**Step 3 — Ask Claude to review each:**\n\"Review this email [paste it] for: clarity, appropriate tone for the relationship, whether the ask is clear, length (is it too long?), and any phrases that could be misinterpreted.\"\n\n**Step 4 — For the weakest email type**, ask Claude to write an improved template:\n\"Rewrite this email to be more [clear/concise/direct/warm]. Keep [specific elements that work]. Fix [specific problems identified].\"\n\n**Step 5 — Compare the original and improved versions.** What changed and why?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Communication Template Library",
+      "content": "Create a personalised template library for your most frequent communications.\n\n**Step 1 — Design templates for your top 5 communication types:**\n- Status update to stakeholders\n- Meeting request (external)\n- Follow-up after no response\n- Delivering bad news\n- Requesting feedback or input\n\n**Step 2 — For each template**, ask Claude:\n```\nCreate a template for [email type]. The template should:\n- Have [PLACEHOLDERS] for variable content\n- Match this tone: [your typical tone]\n- Be [X] sentences maximum\n- Lead with [key information type]\n- Include a clear, specific call to action\n```\n\n**Step 3 — Test each template** by filling in real content for an email you need to send.\n\n**Step 4 — Save templates** where you can access them quickly (Notion, Claude Project, text snippets tool)."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Communication Tone Calibration",
+      "content": "Practice matching AI-generated communications to the right tone for different relationships.\n\n**Step 1 — Ask Claude to write the same message** in 4 different tones:\n- Formal (to a new external client)\n- Professional (to a colleague)\n- Warm-professional (to a long-term collaborator)\n- Direct (to your own team)\n\nMessage: \"The project deadline has moved from Friday to Wednesday and we need your review input by Tuesday EOD.\"\n\n**Step 2 — Read all 4 versions.** Can you feel the tone difference?\n\n**Step 3 — For your most important relationship type**, define the exact tone you want:\n- What words or phrases characterise it?\n- What does it avoid?\n- What is the typical opening and closing?\n\n**Step 4 — Add your tone definition** to your personal style guide from Lesson 16-1."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Sensitive Communication Drafts",
+      "content": "Use AI to help draft communications that require particular care.\n\n**Step 1 — Identify a sensitive communication** you need to write: delivering criticism, explaining a mistake, declining a request, communicating a delay.\n\n**Step 2 — Ask Claude to draft it:**\n```\nDraft a [email/message] that:\n- Delivers this message: [what you need to communicate]\n- To: [recipient and your relationship with them]\n- Maintaining: [the relationship/professional standing]\n- Tone: honest but [kind/professional/direct]\n- Length: [maximum sentences]\n\nAvoid: blame, vagueness about the problem, and false optimism.\n```\n\n**Step 3 — Review carefully.** Does it say what needs to be said? Does it do so in a way that preserves the relationship?\n\n**Step 4 — Edit for your voice** and specific relationship context.\n\n**Step 5 — Mandatory check:** Before sending, read it from the recipient's perspective. How might they interpret it?"
+    },
+    {
+      "type": "quiz",
+      "question": "You use AI to draft a message telling a team member their work needs significant revision. The AI draft is polite but vague. What is the problem?",
+      "options": [
+        "The tone is too harsh — soften it further",
+        "Vagueness is unkind: a person who receives vague criticism can't improve because they don't know what specifically to change — be specific about what needs to change and why",
+        "The message should be delivered in person, not in writing",
+        "The AI correctly softened the message"
+      ],
+      "correct": 1,
+      "explanation": "Vague feedback (\"the work needs improvement\") is unhelpful and unkind — the recipient is left guessing. Specific feedback (\"the executive summary needs to lead with the financial case rather than the technical background, and the timeline in Section 3 is inconsistent with the constraints we discussed\") allows the person to act. AI drafts often default to vagueness to avoid conflict. Your edit should add the specific detail: what exactly needs to change and why."
+    },
+    {
+      "type": "quiz",
+      "question": "You save 30 minutes per week using email templates. After 2 months, a colleague says your emails \"feel impersonal lately.\" What's happening?",
+      "options": [
+        "Templates always feel impersonal — stop using them",
+        "You've been using templates without personalising them — add specific personal context (reference their situation, their name in the body, something specific to them) to maintain warmth",
+        "Shorten the templates to reduce the \"template feel\"",
+        "Use a different tone in templates"
+      ],
+      "correct": 1,
+      "explanation": "Templates become a problem when used as-is rather than as starting points. A good template provides structure; a bad template provides the whole message. Personal emails reference the recipient's specific situation: \"I know you've been dealing with the Q3 audit...\" Templates should have clear [PLACEHOLDER] points for personalisation. If you're sending templates without filling in the personal parts, recipients will notice — personal references are what make communication feel human."
     },
     {
       "type": "callout",

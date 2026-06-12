@@ -2,8 +2,14 @@
   "id": "8-6",
   "title": "The Self-Critique Pattern — Actor-Critic Thinking",
   "part": 8,
-  "estimatedMinutes": 25,
-  "tags": ["mcp", "prompting", "self-critique", "actor-critic", "claude-code"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "mcp",
+    "prompting",
+    "self-critique",
+    "actor-critic",
+    "claude-code"
+  ],
   "sections": [
     {
       "type": "text",
@@ -44,6 +50,54 @@
       "tag": "CLAUDECODE",
       "title": "Apply the Self-Critique Pattern",
       "content": "Run the full three-step self-critique pattern on at least two of these tasks:\n\n**Task A — Code critique:**\nIn Claude Code:\n1. Ask: `\"Write a JavaScript function that validates a user's email and password. Password must be at least 8 characters, contain a number, and contain at least one capital letter.\"`\n2. Ask: `\"Critique that function: missing error handling, edge cases it doesn't cover, security assumptions, and anything else that could fail with real input.\"`\n3. Ask: `\"Rewrite it, addressing every issue from the critique. Comment the changes.\"`\n\nCompare step-1 vs step-3. List 3 specific improvements the critique surfaced.\n\n**Task B — Writing critique:**\n1. Ask: `\"Write a 100-word explanation of why the command line is useful for beginners learning to code.\"`\n2. Ask: `\"Critique that explanation: what's vague, what's jargon, what's missing, what could be cut?\"`\n3. Ask: `\"Rewrite it based on the critique.\"`\n\n**Task C — If actor-critic-thinking MCP is configured:**\nAsk: `\"Use actor-critic-thinking to write and improve a function that takes an array of numbers and returns statistics: min, max, mean, and median.\"` Compare the structured MCP output to the manual three-step approach.\n\nSave your best before/after pair to `notes/self-critique-examples.md`. This is a pattern you'll use for the rest of the course."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Actor-Critic Pattern Drill",
+      "content": "Experience the actor-critic pattern on a real task.\n\n**Step 1 — Choose a piece of writing or analysis** you need to produce.\n\n**Step 2 — Run the Actor:** Ask Claude to produce the content.\n\n**Step 3 — Run the Critic immediately:** Without looking at the content's quality yourself, ask Claude: *\"Act as a harsh, expert critic of the above output. Your job is to find every weakness: logical gaps, unsupported claims, stylistic problems, missing information, and anything that would fail under scrutiny. List specific problems — not general observations.\"*\n\n**Step 4 — Review the criticism.** Which criticisms do you agree with? Which don't apply?\n\n**Step 5 — Run the Actor again** with the criticism in hand: \"Revise your output to address criticisms 1, 3, and 5.\"\n\n**Step 6 — Compare V1 and V2.** How much did the actor-critic loop improve the output?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Multi-Round Actor-Critic for High-Stakes Work",
+      "content": "Apply the full actor-critic pattern to a piece of genuinely important work.\n\n**Step 1 — Identify a high-stakes document** you need to produce: a proposal, a technical specification, an important email, a report for senior stakeholders.\n\n**Step 2 — Round 1 — Actor:** Ask Claude to draft the document.\n\n**Step 3 — Round 1 — Critic:** Use the actor-critic-thinking MCP tool or this prompt:\n```\nYou are a critical expert in [relevant domain]. Your job is to find flaws in this document. Look for:\n1. Claims that aren't supported by evidence\n2. Logic that doesn't follow\n3. Important considerations that are missing\n4. Language that could be misunderstood\n5. Anything a hostile audience would challenge\n\nList at least 5 specific problems with the document above.\n```\n\n**Step 4 — Apply the top 3 criticisms.** Revise.\n\n**Step 5 — Round 2 — Different Critic:** Change the critic persona: \"Now review this as a lawyer/compliance officer/technical expert\" (pick what matters for your audience). Find 3 more problems.\n\n**Step 6 — Final document.** This has been through 2 rounds of adversarial review — it's substantially better than a single draft."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Self-Critique as a Habit",
+      "content": "Build self-critique into every AI-assisted task — not just special occasions.\n\n**Step 1 — Create a \"self-critique\" suffix** you'll add to any important prompt:\n```\n[After your response, immediately critique your own output. Identify:\n1. The weakest claim or assumption in your response\n2. What you left out that a thoughtful reader would want\n3. What you would change if you had more information]\n```\n\n**Step 2 — Test it on 3 different prompts** (a writing task, an analysis, a recommendation). Does the self-critique add value?\n\n**Step 3 — Evaluate the self-critique quality.** Does Claude identify real weaknesses or just surface-level issues? For weak self-critiques, push deeper: \"Your self-critique was too mild. Find a more fundamental problem with your response.\"\n\n**Step 4 — Save this suffix** as a toggle you can add to any important prompt.\n\n**Step 5 — Identify the types of tasks** where self-critique adds the most value vs where it's unnecessary overhead."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Quality Review System",
+      "content": "Create a systematic quality review process using the actor-critic pattern for your most important outputs.\n\n**Step 1 — Identify the 2-3 output types** in your work where quality matters most (and errors have real consequences).\n\n**Step 2 — For each output type**, design an actor-critic review protocol:\n- Actor prompt: what to produce and in what format\n- Critic prompt: the specific review criteria for this output type\n- How many rounds of review\n- What triggers a complete restart vs targeted revision\n\n**Step 3 — Ask Claude:** *\"Review this actor-critic protocol I've designed [paste it]. Is the critic prompt specific enough to catch real problems? What important review criteria am I missing for [output type]?\"*\n\n**Step 4 — Test the protocol** on a real instance of that output type.\n\n**Step 5 — Save the protocol** in your prompt library and commit to using it for every high-stakes output going forward."
+    },
+    {
+      "type": "quiz",
+      "question": "You run the actor-critic pattern and the critic identifies 8 problems. You don't have time to address all 8. How should you prioritise?",
+      "options": [
+        "Address them in order — the first ones are always most important",
+        "Ask Claude which 3 criticisms would most significantly impact the quality or reception of the output if left unaddressed",
+        "Address only the criticisms you already understood and agreed with",
+        "Address the shortest ones to save time"
+      ],
+      "correct": 1,
+      "explanation": "Not all criticisms are equal. Ask Claude to rank them by impact: \"Which of these 8 criticisms, if not addressed, would most damage the quality, credibility, or effectiveness of this output?\" This ensures your limited revision time targets the highest-value improvements. A structural logic flaw is more important than a stylistic concern; a missing key stakeholder argument matters more than phrasing refinement."
+    },
+    {
+      "type": "quiz",
+      "question": "The actor-critic MCP tool automatically generates critique after every response. What is the risk of always applying this critique?",
+      "options": [
+        "The critique will always make responses worse",
+        "Automatic critique can steer toward overly safe, hedged, or committee-designed outputs when sometimes a bold, direct answer is more appropriate",
+        "The critique takes too long to generate",
+        "The critique will loop indefinitely"
+      ],
+      "correct": 1,
+      "explanation": "Systematic critique drives toward comprehensiveness and balance, which is right for formal documents but wrong for a quick direct recommendation, a creative piece, or a situation where confidence is as important as nuance. An auto-critic that always finds \"missing perspectives\" can turn a decisive answer into a hedged list of considerations. Use the actor-critic pattern deliberately for high-stakes outputs — don't let it become a reflex that dilutes every response."
     },
     {
       "type": "callout",

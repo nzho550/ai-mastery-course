@@ -2,8 +2,15 @@
   "id": "18-3",
   "title": "Systematic AI Research — Perplexity, Elicit, Consensus & Scite",
   "part": 18,
-  "estimatedMinutes": 35,
-  "tags": ["advanced", "research", "perplexity", "elicit", "consensus", "hands-on"],
+  "estimatedMinutes": 70,
+  "tags": [
+    "advanced",
+    "research",
+    "perplexity",
+    "elicit",
+    "consensus",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -51,6 +58,54 @@
       ],
       "correct": 2,
       "explanation": "A policy recommendation requires systematic evidence review, not just a supporting citation. Using Elicit gives you the breadth (multiple studies), Consensus shows the overall evidence weight, and Scite verifies that key studies haven't been contradicted. Cherry-picking one supporting study (B) is a form of confirmation bias that will be exposed in peer review. Claude summarising (A) draws from training data without live citation verification. Perplexity articles (D) are better than nothing but don't give you the academic literature depth a policy document requires."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Research Tool Comparison",
+      "content": "Compare specialised research tools against general AI for academic research.\n\n**Step 1 — Ask Claude:** \"Explain the purpose and strengths of these research tools: Perplexity, Elicit, Consensus, and Scite. For each: what type of research question is it best suited for? What can it do that Claude cannot?\"\n\n**Step 2 — Test the same research question** across available tools:\nQuestion: \"What does the research say about [a topic in your field]?\"\n\n**Step 3 — Compare results:**\n- Source quality (peer-reviewed vs general web)\n- Citation accuracy\n- Ability to find contradictory evidence\n- Synthesis quality\n\n**Step 4 — Build a tool selection guide** for your specific research needs."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Systematic Literature Review with AI",
+      "content": "Conduct a systematic literature review using AI research tools.\n\n**Step 1 — Define a specific research question** from your field.\n\n**Step 2 — Use specialised tools** (Elicit, Consensus, or Semantic Scholar) to find relevant papers.\n\n**Step 3 — For each paper found**, extract key information using Claude:\n```\nExtract from this paper abstract:\n- Research question\n- Methodology\n- Key findings\n- Sample size/scope\n- Limitations acknowledged\n- Confidence level in findings: High/Medium/Low (based on methodology)\n```\n\n**Step 4 — Synthesise across papers:**\n\"Based on these paper extractions [paste them], synthesise the state of research on [question]. What is the consensus? What is disputed? What are the research gaps?\"\n\n**Step 5 — Mandatory review:** Ask Claude: *\"What important papers might this systematic review have missed? What should I search for to make this more complete?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Citation Verification",
+      "content": "Build rigorous citation verification habits for AI-assisted research.\n\n**Step 1 — Take a Perplexity or AI research output** with 5+ citations.\n\n**Step 2 — Verify each citation:**\n1. Does the source actually exist? (Search for the exact title)\n2. Does the source say what's attributed to it? (Read the relevant section)\n3. Is the source as authoritative as implied?\n4. Is the source recent enough?\n\n**Step 3 — Calculate your verification rate:** What % of citations checked out fully? What % had issues?\n\n**Step 4 — Ask Claude:** \"I found that [X%] of AI-sourced citations had problems of type [list them]. How should I adjust my research workflow to account for this citation reliability rate?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Research Database Building",
+      "content": "Build a personal research database using AI-assisted curation.\n\n**Step 1 — Ask Claude Code** to design a research database system:\n```\nDesign a personal research database using Obsidian/markdown or a simple SQLite database:\n1. Paper/source entries: title, authors, date, abstract, key findings, tags, credibility score\n2. Connection mapping: which papers cite each other? Which contradict each other?\n3. Question tracking: which research questions does each paper address?\n4. Review scheduling: flag papers for re-review if new contradictory evidence emerges\n```\n\n**Step 2 — Set up the database** and add 10 papers/sources relevant to your work.\n\n**Step 3 — Create a monthly maintenance routine:** new papers to add, outdated entries to update.\n\n**Step 4 — Test the database** by answering a research question using it instead of starting fresh."
+    },
+    {
+      "type": "quiz",
+      "question": "Scite shows that a paper you're citing has more \"contradicting\" citations than \"supporting\" citations. What should you do?",
+      "options": [
+        "Remove the paper from your research — it's discredited",
+        "Investigate the contradicting papers: understand the methodological differences, read the contradiction context, and either update your analysis to acknowledge the controversy or find stronger supporting evidence",
+        "Cite more supporting papers to balance the ratio",
+        "Ignore the scite data — it doesn't reflect paper quality"
+      ],
+      "correct": 1,
+      "explanation": "Contradicting citations are valuable information, not automatic disqualifiers. Many legitimate findings are contested in science. Investigate: what specifically are the contradicting papers challenging? Is it the methodology, the generalizability, or the interpretation? Some contradictions reveal real weaknesses in the research; others are methodological disagreements with no clear winner. Your job: acknowledge the controversy accurately in your own research, rather than either ignoring it or abandoning the source."
+    },
+    {
+      "type": "quiz",
+      "question": "Elicit finds 8 papers relevant to your research question but you only have time to read 2 thoroughly. Which 2 should you prioritise?",
+      "options": [
+        "The 2 most recent papers",
+        "The 2 with the most citations",
+        "The 2 most directly addressing your specific question with the strongest methodology — ask Claude to help select based on abstract analysis",
+        "The 2 that best support your hypothesis"
+      ],
+      "correct": 2,
+      "explanation": "Prioritise papers that: (1) directly address your specific question (not just related topics), (2) have strong methodology (large samples, controls, peer-reviewed), and (3) are either the foundational study in the area or the most recent comprehensive review. Citation count is a proxy for influence, not quality. Recency matters for fast-moving fields. Ask Claude: \"Based on these abstracts, which 2 papers would most advance my understanding of [specific question]?\""
     },
     {
       "type": "callout",

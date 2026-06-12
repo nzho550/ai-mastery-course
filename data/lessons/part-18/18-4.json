@@ -2,8 +2,14 @@
   "id": "18-4",
   "title": "RAG & Personal Knowledge Systems",
   "part": 18,
-  "estimatedMinutes": 30,
-  "tags": ["advanced", "rag", "knowledge-base", "notebooklm", "embeddings"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "advanced",
+    "rag",
+    "knowledge-base",
+    "notebooklm",
+    "embeddings"
+  ],
   "sections": [
     {
       "type": "text",
@@ -51,6 +57,54 @@
       ],
       "correct": 1,
       "explanation": "RAG systems retrieve whichever document chunks best match the query — they don't automatically prefer newer documents. If the 2022 policy is still in the notebook, it will be retrieved when relevant. The fix is to remove outdated source documents and re-upload current versions. This is a critical maintenance task for RAG knowledge bases: when source documents are updated, the knowledge base must be updated too. Option C doesn't work — RAG tools don't have a built-in date filter for retrieval."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — RAG Concept Deep Dive",
+      "content": "Understand Retrieval-Augmented Generation (RAG) at a practical level.\n\n**Step 1 — Ask Claude:** \"Explain RAG to someone who has never heard of it. What problem does it solve? How does it work at a high level? What are the most common use cases? What are its limitations?\"\n\n**Step 2 — Ask the follow-up:** \"Compare RAG to: (1) fine-tuning a model on your data, (2) prompt engineering with pasted context, (3) a vector database. When is each approach better?\"\n\n**Step 3 — Map RAG to your use case:** Do you have a knowledge management problem that RAG would solve? What data would you index?\n\n**Step 4 — Ask Claude:** \"For [your use case], would RAG be the right approach or would one of the alternatives be simpler and adequate?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Simple RAG System",
+      "content": "Build a basic RAG system over your own documents.\n\n**Step 1 — Ask Claude Code** to build a simple RAG system:\n```\nBuild a simple RAG system in Python:\n1. Document ingestion: read markdown/text files from a folder, split into chunks\n2. Embedding: use the Anthropic API (or sentence-transformers for free local embeddings) to create embeddings\n3. Storage: save embeddings in a simple FAISS index\n4. Query: embed the user's question, find the 3 most similar chunks, pass them as context to Claude for answer generation\n5. CLI interface: query the system from the command line\n```\n\n**Step 2 — Feed your own documents** (notes, documentation, reports) into the system.\n\n**Step 3 — Test with 5 questions** that should be answerable from your documents.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review this RAG implementation. What are the 3 most common failure modes in simple RAG systems that I should test for?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — RAG Quality Evaluation",
+      "content": "Evaluate and improve your RAG system's retrieval quality.\n\n**Step 1 — Ask Claude:** \"What are the most common ways RAG systems fail to retrieve the right context? For each failure mode, what improvement would fix it?\"\n\n**Step 2 — Test these failure modes** in your RAG system:\n- Semantic mismatch: question uses different vocabulary than the document\n- Chunking problems: answer spans two chunks\n- Irrelevant retrieval: similar-sounding but unrelated content retrieved\n\n**Step 3 — For each failure**, implement one improvement:\n- Semantic mismatch: try query expansion (have Claude rephrase the question before embedding)\n- Chunking: increase chunk overlap\n- Irrelevant retrieval: add metadata filtering\n\n**Step 4 — Measure improvement** — does the fix help?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Personal Knowledge Engine",
+      "content": "Build a personal knowledge engine over your accumulated notes and documents.\n\n**Step 1 — Identify all your knowledge sources:**\n- Personal notes (Obsidian, Notion, markdown files)\n- Saved articles or documents\n- Meeting notes\n- Research briefs\n\n**Step 2 — Build an ingestion pipeline** that indexes all of these sources:\n```\n1. Collect all documents from configured folders\n2. Convert non-markdown formats to text\n3. Chunk with appropriate sizes for each document type\n4. Embed and store in FAISS\n5. Update index when new documents are added\n```\n\n**Step 3 — Create a query interface** that feels natural to use.\n\n**Step 4 — Test the knowledge engine** by asking questions about topics you've researched in the past. Does it surface relevant material you'd forgotten?"
+    },
+    {
+      "type": "quiz",
+      "question": "Your RAG system retrieves 3 document chunks for a query but the actual answer is in a 4th chunk it missed. What is the most likely cause?",
+      "options": [
+        "The embedding model is broken",
+        "The relevant chunk may have low semantic similarity to the query vocabulary despite containing the answer — try hybrid search (semantic + keyword matching) or increase k (retrieve more chunks)",
+        "The chunk was too long to embed",
+        "The FAISS index is corrupted"
+      ],
+      "correct": 1,
+      "explanation": "Retrieval failure is often a vocabulary mismatch problem. \"What are the trade-offs of microservices?\" might miss a chunk that says \"disadvantages of service-oriented architecture\" because the embedding spaces are similar but not identical. Solutions: (1) retrieve more chunks (top-10 instead of top-3) and let the LLM filter; (2) hybrid search combining semantic similarity with BM25 keyword matching; (3) query expansion — have the LLM generate alternative phrasings of the question before retrieval."
+    },
+    {
+      "type": "quiz",
+      "question": "You build a RAG system over company documentation. An employee asks a question and gets an outdated answer from a document that was superseded. What went wrong and how do you prevent it?",
+      "options": [
+        "RAG cannot handle document updates",
+        "The outdated document was still in the index — implement document versioning: when a document is updated, remove the old embeddings and add the new ones; add document date metadata so the LLM can prefer recent sources",
+        "The user should check document dates manually",
+        "Use a smaller chunk size to avoid storing outdated content"
+      ],
+      "correct": 1,
+      "explanation": "RAG systems that index static snapshots of documentation quickly become stale. Prevention: (1) implement an update pipeline that detects changed files and refreshes their embeddings; (2) store document metadata (date, version, supersedes) and pass it to the LLM; (3) instruct the LLM to prefer more recent sources when dates differ; (4) add a \"last updated\" field to your document store and display it alongside answers so users can judge relevance."
     },
     {
       "type": "callout",

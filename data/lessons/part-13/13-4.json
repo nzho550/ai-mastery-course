@@ -2,8 +2,14 @@
   "id": "13-4",
   "title": "AI & Copyright — What You Need to Know",
   "part": 13,
-  "estimatedMinutes": 20,
-  "tags": ["safety", "copyright", "legal", "ethics", "disclosure"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "safety",
+    "copyright",
+    "legal",
+    "ethics",
+    "disclosure"
+  ],
   "sections": [
     {
       "type": "text",
@@ -35,6 +41,54 @@
       "tag": "REFLECT",
       "title": "Write Your Disclosure Policy",
       "content": "Copyright law is unresolved. Disclosure norms are emerging. The practical question isn't \"what am I legally required to do?\" — it's \"what kind of professional do I want to be when using AI?\"\n\nThis workshop asks you to make that decision explicitly rather than leaving it implicit.\n\n**Step 1 — Read the US Copyright Office's AI guidance (5 min):**\nGo to `copyright.gov/ai` and skim the 2024 guidance document. What's the key takeaway about authorship?\n\n**Step 2 — Answer these scenarios for yourself:**\n\n1. *You used Claude to write 70% of a blog post, then edited and rewrote sections.* Will you disclose AI use? If published on your personal blog? If submitted to a publication? If ghostwriting for a client?\n\n2. *You used Copilot to write a function you accepted without modification.* If you open-source this code, do you note that it was AI-generated? Does your answer change if a colleague asks?\n\n3. *You built a tool that generates marketing copy for a small business client.* Does the client know AI is generating the copy? Should they?\n\nWrite honest answers — these are personal choices, not exam questions with right answers.\n\n**Step 3 — Write your disclosure policy:**\nIn your `notes/` folder (or wherever you keep professional documents), create `my-ai-disclosure-policy.md`. Keep it simple — 5–10 bullet points covering the contexts you actually work in:\n\n```\n# My AI Disclosure Policy\n\n## For my personal blog/social media:\n- [your rule]\n\n## For client or employer work:\n- [your rule]\n\n## For code I contribute to open-source projects:\n- [your rule]\n\n## For academic or professional writing:\n- [your rule]\n\n## My general principle:\n- [one sentence that captures your overall stance]\n```\n\nSave this file. The decisions you write here will be tested when you're under deadline pressure. Having decided in advance makes the right choice easier."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Copyright Risk Assessment",
+      "content": "Assess the copyright risk in your current AI usage.\n\n**Step 1 — Ask Claude:** *\"Explain the current legal landscape around AI and copyright. Specifically: (1) Can AI-generated code be copyrighted? (2) Am I liable if AI-generated code contains copyrighted snippets? (3) What is the difference between training data copyright and output copyright?\"*\n\n**Step 2 — Audit your AI usage for copyright risk:**\n- Do you publish AI-generated code? (open source, published tools)\n- Do you sell products containing AI-generated content?\n- Do you generate content based on specific copyrighted sources?\n\n**Step 3 — Ask Claude:** \"If I ask Claude to write code similar to [specific library]'s core functionality, does this create copyright risk?\"\n\n**Step 4 — Identify your highest-risk practices** and note them for remediation."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Copyright-Safe Content Generation",
+      "content": "Build practices that minimise copyright risk in AI-generated content.\n\n**Step 1 — For any AI-generated code you publish**, establish these practices:\n- Review all output for potential copied snippets (especially distinctive algorithms)\n- Add copyright notices where appropriate\n- Keep records of what was AI-generated vs human-written\n\n**Step 2 — Ask Claude Code to help audit your published code:**\n\"Review [your GitHub repository]. Identify any code patterns that might represent common copyrighted implementations or that closely mirror specific well-known libraries.\"\n\n**Step 3 — For any flagged code**, ask: \"Rewrite this implementation using a different approach that achieves the same result but with different algorithmic choices.\"\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review the copyright considerations for a developer who builds commercial products using AI-generated code. What documentation or practices should they maintain?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Attribution and Disclosure",
+      "content": "Build disclosure practices for AI-generated content.\n\n**Step 1 — Ask Claude:** *\"What disclosure is required or recommended for AI-generated content? Consider: code in open source projects, articles and documentation, commercial products, academic work, and creative works.\"*\n\n**Step 2 — Review your current practices:**\n- Do you disclose when code is AI-generated in your commits?\n- Do you note AI assistance in documentation you publish?\n- What does your organisation's AI policy require?\n\n**Step 3 — Design your disclosure approach:**\n- For code commits: add \"Co-Authored-By: AI assistance\" in commit messages\n- For published articles: a standard footer \"Written with AI assistance\"\n- For academic work: follow your institution's policy exactly\n\n**Step 4 — Implement the disclosure practice** in your next AI-assisted output."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Content Policy for Your AI Application",
+      "content": "Write a content policy for any AI application you build.\n\n**Step 1 — Ask Claude:** \"If I build an application where users generate content using AI, what content policies do I need? Cover: copyright, defamation, harmful content, privacy, and terms of service compliance.\"\n\n**Step 2 — For your planned or existing AI application**, draft a content policy covering:\n- What users may/may not do\n- Who owns the generated content\n- How you handle copyright complaints\n- What content you will moderate/filter\n\n**Step 3 — Ask Claude to review:** *\"Review this content policy draft [paste it]. What important issues did I miss? What clauses are legally problematic?\"*\n\n**Step 4 — Note:** this is not legal advice — you should have actual legal counsel review policies before publishing them for a commercial product."
+    },
+    {
+      "type": "quiz",
+      "question": "You use Claude to write a Python function that implements a well-known sorting algorithm (like quicksort). Can you use this code commercially?",
+      "options": [
+        "No — algorithms are always copyrighted",
+        "Yes — algorithms themselves are not copyrightable, only specific implementations; a Claude-generated quicksort written freshly is not a copyright issue",
+        "Only if you pay a licensing fee",
+        "Only if Claude discloses it didn't copy the code"
+      ],
+      "correct": 1,
+      "explanation": "Algorithms and mathematical methods are not copyrightable (in most jurisdictions). Only a specific creative expression (source code) can be copyrighted. A Claude-generated implementation of quicksort is a new expression of the algorithm — it's not copying anyone's specific code. Copyright concerns with AI-generated code arise from: (1) the AI reproducing verbatim copyrighted code from training data (rare for algorithms), (2) outputs being so similar to copyrighted works they could be considered derivative. Fresh implementations of standard algorithms are generally safe."
+    },
+    {
+      "type": "quiz",
+      "question": "You find that AI-generated code in your project has a distinctive function that is very similar to a function in a popular open-source library. What should you do?",
+      "options": [
+        "Nothing — code similarity is common and not a legal issue",
+        "Investigate the similarity: if it's coincidental (same problem → same solution), document this; if it appears to be a copy, rewrite the function using your own approach",
+        "Delete the entire file and rewrite from scratch",
+        "File a copyright claim against the AI provider"
+      ],
+      "correct": 1,
+      "explanation": "Similar code can arise coincidentally — some problems have standard solutions that many implementations share. For example, a binary search implementation will always look similar regardless of author. However, if you find distinctive non-obvious code similarities (unusual variable names, specific algorithmic choices, comments matching), this warrants attention. The practical response: understand why the code is similar, and if you're uncertain, rewrite it independently to eliminate any doubt."
     },
     {
       "type": "callout",

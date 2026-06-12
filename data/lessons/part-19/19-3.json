@@ -2,8 +2,15 @@
   "id": "19-3",
   "title": "AI for Personal Finance",
   "part": 19,
-  "estimatedMinutes": 25,
-  "tags": ["personal-life", "beginner", "finance", "budgeting", "decisions", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "finance",
+    "budgeting",
+    "decisions",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -47,6 +54,54 @@
       ],
       "correct": 2,
       "explanation": "Specific investment advice — 'buy this stock, expect X% return' — requires a regulated financial adviser in most countries because it involves personal risk assessment and regulatory responsibility. Claude can help you understand what factors affect a stock's performance, what the risks of the sector are, and how to think about the decision framework — but it cannot be held accountable for wrong advice, doesn't know your personal risk tolerance and financial situation, and has a training cutoff that means it may lack current financial data. Use AI to understand and prepare; use regulated professionals (and verified current sources) for specific investment decisions. Perplexity (B) adds current web search but still doesn't provide regulated advice."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Personal Finance AI Audit",
+      "content": "Use AI to audit your personal financial situation.\n\n**Step 1 — Gather your key financial numbers** (approximate is fine):\n- Monthly income\n- Fixed monthly expenses (rent, subscriptions, etc.)\n- Variable monthly expenses (food, entertainment)\n- Savings rate (%)\n- Debt: type, amount, interest rate\n- Emergency fund (months of expenses)\n\n**Step 2 — Ask Claude:**\n\"Review my financial situation [paste numbers]. What are the most important improvements to make? Where am I doing well? What financial risks am I exposed to?\"\n\n**Step 3 — Evaluate Claude's assessment.** Does it identify the right priorities?\n\n**Step 4 — Ask:** \"What is the one change that would have the biggest impact on my financial position in the next 12 months?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Budget Building with AI",
+      "content": "Build a personal budget using AI assistance.\n\n**Step 1 — Ask Claude to help structure your budget:**\n```\nHelp me build a monthly budget for someone with:\n- Take-home income: [amount]\n- Fixed expenses: [list with amounts]\n- Financial goals: [save for X, pay off Y, invest in Z]\n\nCreate a zero-based budget that:\n1. Covers all fixed expenses\n2. Allocates to goals\n3. Leaves realistic amounts for variable spending\n4. Identifies 2-3 expenses to reduce\n```\n\n**Step 2 — Review the proposed budget** honestly. Is it realistic for how you actually live?\n\n**Step 3 — Ask Claude:** \"If I stick to this budget for 12 months, what will my financial position be? What will I have achieved?\"\n\n**Step 4 — Track actual spending** for one week and compare to the budget."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Financial Concept Explainer",
+      "content": "Use AI to understand financial concepts you've been avoiding.\n\n**Step 1 — Identify financial concepts** you've been meaning to understand: investment accounts (ISA/401k/IRA), compound interest, index funds, tax efficiency, insurance.\n\n**Step 2 — For each concept**, ask Claude to explain it at your level:\n\"Explain [concept] as if I know basic personal finance but haven't learned this specific topic. Use a concrete example with real numbers.\"\n\n**Step 3 — Ask the follow-up question:** \"How does understanding [concept] change what I should do with [my specific situation]?\"\n\n**Step 4 — Identify one financial action** you've been avoiding due to uncertainty. Does understanding the concept make you ready to take that action?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Financial Goal Planning",
+      "content": "Use AI to create a concrete plan for a specific financial goal.\n\n**Step 1 — Choose a specific financial goal:** buy a house, retire by X, pay off debt, build an emergency fund.\n\n**Step 2 — Ask Claude for a goal plan:**\n```\nCreate a specific plan to [your goal].\n\nMy situation:\n- Current savings: [amount]\n- Monthly surplus (after expenses): [amount]\n- Timeline: [years]\n- Risk tolerance: [conservative/moderate/aggressive]\n\nProvide:\n1. Monthly savings target\n2. Investment approach for this goal\n3. Milestones to track progress\n4. What would delay or derail this goal\n5. One-year action plan with specific steps\n```\n\n**Step 3 — Evaluate the plan.** Is the monthly savings target achievable? Are the milestones motivating?\n\n**Step 4 — Important disclaimer:** Verify all specific investment advice with a qualified financial advisor before acting."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude gives you specific investment advice: \"Put 60% in global index funds and 40% in bonds.\" Should you follow this advice?",
+      "options": [
+        "Yes — this is standard diversified portfolio advice",
+        "Use it as a starting point for research, not as a prescription. AI financial advice doesn't account for your tax situation, risk tolerance, existing investments, or local regulations — consult a financial advisor for personalised recommendations",
+        "No — all AI financial advice is wrong",
+        "Yes if you're under 50"
+      ],
+      "correct": 1,
+      "explanation": "AI financial advice is general information, not personalised financial advice. It cannot account for: your specific tax situation and tax-advantaged accounts available in your country, your existing investment portfolio and rebalancing needs, your actual risk tolerance (not stated preference), life events that affect your financial timeline, or jurisdiction-specific regulations. Use AI to understand concepts and prepare questions for a financial advisor, not to make specific investment decisions."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to calculate how long it will take to pay off your debt at various payment amounts. Claude provides calculations. What should you verify?",
+      "options": [
+        "The calculations are correct if Claude shows its work",
+        "Verify the math independently: AI can make arithmetic errors, especially with compound interest calculations. Use a debt payoff calculator from a bank or financial site to confirm the numbers",
+        "Only verify if the numbers seem surprising",
+        "The calculation methodology, not the specific numbers"
+      ],
+      "correct": 1,
+      "explanation": "Financial calculations with compound interest are complex enough that AI errors are meaningful. An error in the interest rate used, compound frequency assumed, or calculation formula could produce a result that's off by months or thousands of dollars. For any financial calculation that affects a real decision: (1) have Claude explain the formula it used, (2) verify with a dedicated financial calculator (most bank websites have them), (3) for large decisions, have an accountant or financial advisor verify."
     },
     {
       "type": "callout",

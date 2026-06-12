@@ -2,8 +2,13 @@
   "id": "12-4",
   "title": "LM Studio — GUI for Local Models",
   "part": 12,
-  "estimatedMinutes": 25,
-  "tags": ["local-ai", "lm-studio", "gui", "models"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "local-ai",
+    "lm-studio",
+    "gui",
+    "models"
+  ],
   "sections": [
     {
       "type": "text",
@@ -40,6 +45,54 @@
       "tag": "LOCAL",
       "title": "Install LM Studio and Run a Chat",
       "content": "**Step 1 — Install LM Studio:**\nDownload and install from `lmstudio.ai`. Follow the prompts.\n\n**Step 2 — Download a model:**\n1. Open LM Studio → click **Discover** in the sidebar\n2. Search for `phi-4` or `llama-3.2`\n3. Click on a result and choose a Q4_K_M version\n4. Click **Download** — this downloads the GGUF file\n\nNote: If you already downloaded models via Ollama, you can point LM Studio at the same folder to avoid re-downloading, but the simplest approach is to just download one directly in LM Studio.\n\n**Step 3 — Start a chat:**\n1. Click **Chat** in the sidebar\n2. At the top of the chat panel, click the model selector and choose your downloaded model\n3. LM Studio loads the model (first load takes 30–60 seconds)\n4. Type a message and observe the response\n5. Click the **System Prompt** section and add: `You are a concise assistant. Always reply in 2 sentences or fewer.`\n6. Ask the same question again — observe how the system prompt constrains the output\n\n**Step 4 — Start the local server:**\n1. Click **Developer** (or **Local Server**) in the sidebar\n2. Select your model in the server model dropdown\n3. Click **Start Server**\n4. Confirm it says \"Running\" on port 1234\n\n**Step 5 — Test the server:**\nIn PowerShell:\n```\n$body = @{\n    model = \"local-model\"\n    messages = @(@{role=\"user\"; content=\"Say hello in exactly 5 words.\"})\n} | ConvertTo-Json\n\nInvoke-RestMethod -Uri \"http://localhost:1234/v1/chat/completions\" `\n    -Method POST `\n    -ContentType \"application/json\" `\n    -Body $body\n```\nYou should get a JSON response with a `choices` array.\n\n**You're done when:** The chat works and the local server responds to your test request."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — LM Studio Interface Tour",
+      "content": "Get familiar with LM Studio's interface.\n\n**Step 1 — Download and install LM Studio** from lmstudio.ai.\n\n**Step 2 — Download a model** through the built-in model browser. Search for \"phi\" and download phi-3-mini.\n\n**Step 3 — Explore the interface sections:**\n- Chat interface: have a conversation\n- Model browser: find and download models\n- Local server: enable API endpoint\n- Model settings: adjust temperature, context, etc.\n\n**Step 4 — Compare to Ollama:** What does LM Studio add that Ollama's terminal interface doesn't have?\n\n**Step 5 — Ask Claude:** *\"For a non-developer who wants to use local AI models, what are the advantages of LM Studio over Ollama? For a developer, which is more useful and why?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — LM Studio as a Local API Server",
+      "content": "Use LM Studio's API server to power your code.\n\n**Step 1 — In LM Studio**, go to the Local Server tab and start the server on port 1234.\n\n**Step 2 — Test the API** (it's OpenAI-compatible):\n```powershell\ncurl http://localhost:1234/v1/chat/completions -d '{\n  \"model\": \"local-model\",\n  \"messages\": [{\"role\": \"user\", \"content\": \"Write a haiku about debugging code\"}]\n}'\n```\n\n**Step 3 — Use it with the OpenAI Python SDK** (LM Studio is OpenAI-compatible):\n```python\nfrom openai import OpenAI\n\nclient = OpenAI(base_url=\"http://localhost:1234/v1\", api_key=\"not-needed\")\nresponse = client.chat.completions.create(\n    model=\"local-model\",\n    messages=[{\"role\": \"user\", \"content\": \"Explain recursion briefly\"}]\n)\nprint(response.choices[0].message.content)\n```\n\n**Step 4 — Test with your existing API tools** that support custom endpoints.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"What are the security implications of running an API server on localhost? Could other applications on my machine access it?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Comparing Local Model Interfaces",
+      "content": "Evaluate LM Studio vs Ollama for your workflow.\n\n**Step 1 — Complete the same task in both interfaces:**\n\"Explain the SOLID principles of software design with a brief code example of each principle.\"\n\nRun this in: Ollama CLI, LM Studio chat, and LM Studio API\n\n**Step 2 — Rate each interface on:**\n| Criteria | Ollama CLI | LM Studio Chat | LM Studio API |\n|---|---|---|---|\n| Ease of use | | | |\n| Integration with my tools | | | |\n| Control over parameters | | | |\n| Response quality | | | |\n\n**Step 3 — Identify your primary use case** for local AI and match it to the right interface.\n\n**Step 4 — Ask Claude:** \"Are there other local AI interfaces (Jan.ai, Msty, Open WebUI, etc.) I should consider? What do they offer that LM Studio doesn't?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Local Model Quality Evaluation",
+      "content": "Systematically evaluate local model quality for your use cases.\n\n**Step 1 — Create a quality evaluation rubric** for your primary use case:\n- 5 test prompts that are representative of your actual work\n- For each, define what a good response looks like (criteria)\n\n**Step 2 — Run each test prompt** on 2 local models and Claude Haiku.\n\n**Step 3 — Score each response** on each criterion (1-5 scale).\n\n**Step 4 — Calculate quality scores:**\n| Model | Test 1 | Test 2 | Test 3 | Test 4 | Test 5 | Average |\n|---|---|---|---|---|---|---|\n| Local Model A | | | | | | |\n| Local Model B | | | | | | |\n| Claude Haiku | | | | | | |\n\n**Step 5 — Make a data-driven decision:** For your use case, is local quality good enough? What is the quality gap vs cloud AI?"
+    },
+    {
+      "type": "quiz",
+      "question": "LM Studio's local server uses an OpenAI-compatible API. What does \"OpenAI-compatible\" mean for developers?",
+      "options": [
+        "The models were trained by OpenAI",
+        "The API request/response format matches OpenAI's API specification — code written for OpenAI can be redirected to LM Studio by changing the base URL",
+        "The models perform the same as OpenAI's models",
+        "You need an OpenAI account to use LM Studio"
+      ],
+      "correct": 1,
+      "explanation": "OpenAI-compatible means the HTTP API format (endpoints, request body, response format) matches the OpenAI API specification. Developers can point any OpenAI SDK at LM Studio by setting `base_url=\"http://localhost:1234/v1\"` and `api_key=\"anything\"`. This lets you use existing code with local models without rewriting the API integration. Many local AI tools adopt this convention specifically to benefit from the OpenAI SDK ecosystem."
+    },
+    {
+      "type": "quiz",
+      "question": "You use LM Studio for local AI. Which of these is TRUE about model files you download through LM Studio?",
+      "options": [
+        "They are stored in a proprietary LM Studio format that only LM Studio can read",
+        "They are standard GGUF format files stored in a local directory — you can use them with Ollama, llama.cpp, or other tools",
+        "They are encrypted and tied to your LM Studio license",
+        "They are streamed from LM Studio's servers each time you use them"
+      ],
+      "correct": 1,
+      "explanation": "Models downloaded by LM Studio are stored as GGUF files in a local directory (typically ~/.cache/lm-studio/models/ or similar). GGUF is an open format supported by many tools: Ollama, llama.cpp, Jan.ai, and others. You're not locked into LM Studio — the model files you download can be used with any compatible inference tool. This is one of the advantages of local AI: you own the model weights and can use them with whatever tooling you prefer."
     },
     {
       "type": "callout",

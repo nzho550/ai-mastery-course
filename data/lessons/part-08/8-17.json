@@ -2,8 +2,15 @@
   "id": "8-17",
   "title": "Microsoft Teams MCP — Channels & Meetings in Claude Code",
   "part": 8,
-  "estimatedMinutes": 25,
-  "tags": ["mcp", "intermediate", "teams", "microsoft", "meetings", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "mcp",
+    "intermediate",
+    "teams",
+    "microsoft",
+    "meetings",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -39,6 +46,54 @@
       ],
       "correct": 1,
       "explanation": "With both Outlook and Teams MCPs active in one Claude Code session, a single natural language command can search both sources simultaneously and synthesize the results into a unified briefing. This is the key advantage of MCP over using each app's native Copilot: you get cross-tool synthesis in one query instead of bouncing between apps and merging results manually."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Teams MCP First Operations",
+      "content": "Test the key Teams MCP operations on your real Teams account.\n\n**Step 1 — Configure Teams MCP** with Microsoft Graph credentials.\n\n**Step 2 — Test channel operations:**\n- \"List my Teams channels\"\n- \"Show the last 10 messages in [channel name]\"\n- \"Find any messages mentioning me in the last 24 hours\"\n\n**Step 3 — Test message search:**\n\"Search for messages about 'project deadline' in [team name] from the last week.\"\n\n**Step 4 — Test meeting info:**\n\"What Teams meetings am I scheduled for this week?\"\n\n**Step 5 — Evaluate:** Which operations were most accurate? Which were slower than expected? How does this compare to the Teams search functionality directly?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Channel Catchup Workflow",
+      "content": "Use Teams MCP to catch up on channel activity you've missed.\n\n**Step 1 — Identify channels** you haven't checked in more than a day.\n\n**Step 2 — Ask Claude Code:**\n```\nI've been away from Teams for [time period]. For each of these channels [list them]:\n1. Summarise what was discussed\n2. Are there any decisions that were made?\n3. Any action items that involve me or my team?\n4. Any urgent items that need immediate attention?\n5. What conversations should I follow up on?\n```\n\n**Step 3 — Review the summaries.** Are they accurate? What did the AI miss?\n\n**Step 4 — For any action item identified**, draft a response or next step.\n\n**Step 5 — Compare to your normal catch-up process:** How long did AI-assisted catch-up take vs manually reading the channels?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Meeting Insights from Teams",
+      "content": "Extract meeting insights from your Teams meeting history.\n\n**Step 1 — Ask Claude Code to review recent Teams meetings:**\n```\nLook at my Teams meeting history for the last 2 weeks:\n1. Which meetings recurred that might be candidates for being fewer or shorter?\n2. Are there topics that appear across multiple meetings that might indicate a process problem?\n3. Which meetings had me as organiser vs attendee?\n4. What patterns do you notice in my meeting schedule?\n```\n\n**Step 2 — Review the meeting analysis.** What patterns did you already know about? What surprised you?\n\n**Step 3 — Identify one meeting** that could be eliminated, shortened, or made async.\n\n**Step 4 — Ask Claude Code** to draft a message to the relevant stakeholder proposing the change."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Teams Status and Notification Management",
+      "content": "Use Teams MCP to manage your Teams status and notifications more intelligently.\n\n**Step 1 — Ask Claude Code to analyse your Teams notification patterns:**\n\"Look at my Teams activity. What channels or people generate the most messages? Which of these are highest priority vs noise?\"\n\n**Step 2 — Based on the analysis**, ask Claude Code to help you configure better defaults:\n- Which channels should be muted?\n- Which should have notifications?\n- Which keywords should trigger alerts?\n\n**Step 3 — Draft a communication** to your team about your availability and response time expectations.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review your analysis of my Teams usage. What important context did you miss that would change your recommendations?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You use Teams MCP to have Claude Code post a message to a team channel on your behalf. What must you review before it posts?",
+      "options": [
+        "That the message is grammatically correct",
+        "The exact text that will be posted, and that it's appropriate for the channel's audience — messages posted by Claude are visible to all channel members as coming from you",
+        "That the channel has the right privacy settings",
+        "That you have the appropriate emoji reactions ready"
+      ],
+      "correct": 1,
+      "explanation": "Messages posted to Teams channels are permanent communications to your team, recorded in message history, and attributed to you. Review: exact wording (is this what you actually want to say?), appropriate tone for the channel audience, accuracy of any technical claims or data referenced, and whether the timing is right. Posting through an MCP server doesn't reduce your responsibility for the content — it's still your professional communication."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code summarises a Teams channel and says \"the team decided to delay the project deadline.\" Before acting on this information, what should you do?",
+      "options": [
+        "Act on it immediately — Claude Code's summaries are reliable",
+        "Verify the decision in the original messages — Claude Code may have misread a discussion (not a decision) or missed the final conclusion of a longer thread",
+        "Ask a team member to confirm via email",
+        "Only act if Claude Code also provides message timestamps"
+      ],
+      "correct": 1,
+      "explanation": "AI summaries of conversations can misrepresent nuance, especially around decisions. A conversation about \"whether to delay\" might be summarised as \"decided to delay.\" Important decisions should be verified in the original messages — read the specific thread where the decision was made, confirm who said it and in what context. Never act on an AI-summarised decision for something consequential without verification."
     },
     {
       "type": "callout",

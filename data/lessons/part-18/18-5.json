@@ -2,8 +2,14 @@
   "id": "18-5",
   "title": "AI Agents in Practice",
   "part": 18,
-  "estimatedMinutes": 30,
-  "tags": ["advanced", "agents", "multi-agent", "automation", "hands-on"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "advanced",
+    "agents",
+    "multi-agent",
+    "automation",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -46,6 +52,54 @@
       ],
       "correct": 1,
       "explanation": "The most important guardrail for any agent that takes external-facing actions (sending emails) is a human review step before execution. An agent that sends emails autonomously can send incorrect, poorly written, or inappropriate content to recipients before you can catch it. Having it draft for review means you maintain control over any irreversible action. Model quality (C) and timing (D) are secondary. Coverage breadth (A) is useful but doesn't address the risk of autonomous email sending."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Agent Anatomy",
+      "content": "Understand the components of a working AI agent.\n\n**Step 1 — Ask Claude:** \"Explain the architecture of an AI agent. What are the core components: perception, reasoning, planning, action, and memory? How do they interact? Give a concrete example of a simple agent executing a task.\"\n\n**Step 2 — Map a real AI agent** you've used (Claude Code, task-master-ai, etc.) to this architecture:\n- Perception: what inputs does it take?\n- Reasoning: how does it make decisions?\n- Planning: how does it break down tasks?\n- Action: what tools can it use?\n- Memory: what does it remember across steps?\n\n**Step 3 — Ask Claude:** \"What are the failure modes of each agent component? For each, how do you detect and recover from failures?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Design a Custom AI Agent",
+      "content": "Design a custom AI agent for a real task you need to automate.\n\n**Step 1 — Choose a complex multi-step task** you currently do manually.\n\n**Step 2 — Ask Claude to help design the agent:**\n```\nDesign an AI agent for this task: [describe the task]\n\nFor the design, specify:\n1. Input: what triggers the agent and what information it receives\n2. Tools needed: what capabilities does it need?\n3. Decision points: where does it need to choose between paths?\n4. Output: what does it produce?\n5. Failure modes: what can go wrong and how should it handle each?\n6. Human oversight: at which points should it check with a human?\n```\n\n**Step 3 — Review the design.** Is every tool listed actually available?\n\n**Step 4 — Implement a minimal version** of the agent using Claude Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Test Agent Reliability",
+      "content": "Systematically test an AI agent's reliability.\n\n**Step 1 — Take the agent you designed** in Workshop B.\n\n**Step 2 — Test these reliability scenarios:**\n- Happy path: everything works as expected\n- Tool failure: one tool returns an error mid-task\n- Ambiguous input: the input doesn't give enough information to complete the task\n- Very long task: the task requires more steps than typical\n- Edge case: unusual input that wasn't considered in the design\n\n**Step 3 — Document how the agent behaves** in each scenario.\n\n**Step 4 — Improve the agent** based on the failures found.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Given these test results [describe what happened], what are the remaining reliability risks before I use this agent in production?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Human-in-the-Loop Agent",
+      "content": "Build an agent with appropriate human oversight.\n\n**Step 1 — Identify the highest-risk actions** your agent can take.\n\n**Step 2 — Ask Claude Code** to implement human-in-the-loop checkpoints:\n```\nModify the agent to add human checkpoints:\n1. Before any irreversible action: pause and ask for confirmation\n2. When confidence is low: surface the uncertainty and ask for guidance\n3. After completing each major phase: summarise what was done and ask to continue\n4. If an error occurs: explain the error and ask how to proceed\n\nThe checkpoint should: describe what's about to happen, show relevant context, offer: proceed / modify / abort.\n```\n\n**Step 3 — Test the checkpoints** — do they trigger at the right moments?\n\n**Step 4 — Evaluate the balance:** Are there too many checkpoints (disrupting autonomous operation) or too few (allowing risky unchecked actions)?"
+    },
+    {
+      "type": "quiz",
+      "question": "An AI agent is tasked with \"reorganise my project files\" and begins moving and deleting files without confirmation. What is the critical design flaw?",
+      "options": [
+        "The agent is too slow at processing files",
+        "No human-in-the-loop for irreversible actions: file deletion is permanent, and file movement can be disruptive. The agent should always preview proposed changes and require confirmation before executing them",
+        "The agent should use a different file system API",
+        "File operations should be handled by a different tool"
+      ],
+      "correct": 1,
+      "explanation": "Irreversible actions require human confirmation by design, not as an afterthought. File deletion cannot be undone (without backup). File movement can break dependencies (code imports, scripts referencing paths). An agent that \"reorganises\" without confirmation is dangerous regardless of how intelligent its plan is. The pattern for any agent handling irreversible operations: plan → show the plan → wait for explicit approval → execute. This adds one interaction but prevents disasters."
+    },
+    {
+      "type": "quiz",
+      "question": "Your AI agent gets stuck in a loop, repeatedly trying the same failed action. What design element would have prevented this?",
+      "options": [
+        "A faster model",
+        "A retry limit with escalation: after N failed attempts at the same action, the agent should stop trying and either try an alternative approach or escalate to human review",
+        "More detailed instructions",
+        "A different tool for that action"
+      ],
+      "correct": 1,
+      "explanation": "Infinite loops and stuck states are a class of agent reliability problems. Prevention: (1) maximum retry count for any single action (e.g., 3 attempts), (2) step-level timeout (each action has a time limit), (3) loop detection (if the same action with the same parameters has been tried before, don't try again), (4) escalation path (when stuck, the agent should surface the problem to a human rather than continuing to fail silently)."
     },
     {
       "type": "callout",

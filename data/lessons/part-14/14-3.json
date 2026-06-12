@@ -2,7 +2,7 @@
   "id": "14-3",
   "title": "Capstone: Automated Email Workflow",
   "part": 14,
-  "estimatedMinutes": 60,
+  "estimatedMinutes": 85,
   "tags": [
     "capstone",
     "n8n",
@@ -30,6 +30,54 @@
       "tag": "BUILD",
       "title": "Automated Email Workflow",
       "content": "## Step 1 — Set Up Gmail in n8n (10 min)\n\n**Create the Gmail label:**\n1. Go to Gmail in your browser\n2. Create a new label called `Needs Reply` (Settings → Labels → Create new label)\n3. Apply it to one test email so you have something to test with\n\n**Connect Gmail to n8n:**\n1. In n8n, go to Settings → Credentials → Add Credential → Gmail OAuth2\n2. Follow the OAuth flow to connect your Gmail account\n3. Give it a name like \"My Gmail\" and save\n\nn8n will ask you to allow it access to Gmail. Review the permissions it requests — for this workflow, it needs read and compose access.\n\n---\n\n## Step 2 — Build the Core Workflow (20 min)\n\nIn n8n, create a new workflow. Add these nodes in sequence:\n\n**Node 1 — Gmail Trigger: Watch Label**\n- Node type: Gmail Trigger\n- Credential: your Gmail connection\n- Event: Message Received\n- Filter by label: `Needs Reply`\n- Poll every: 1 minute\n\nThis node fires whenever a new email arrives in your `Needs Reply` label.\n\n**Node 2 — Set: Extract Email Data**\n- Node type: Set\n- Create these variables from the Gmail trigger output:\n  - `emailFrom`: the sender's name and email\n  - `emailSubject`: the subject line\n  - `emailBody`: the email text content\n\nThis clean data structure makes the next node easier to configure.\n\n**Node 3 — Anthropic: Draft Reply**\n- Node type: HTTP Request (or Anthropic node if available in your n8n version)\n- Configure a POST to `https://api.anthropic.com/v1/messages`\n- Headers: `x-api-key`, `anthropic-version: 2023-06-01`, `content-type: application/json`\n- Body:\n```json\n{\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 300,\n  \"system\": \"You are a professional email assistant. Draft a brief, friendly reply to the email below. Be concise — 2-4 sentences unless more is needed. Sign off with just the first name placeholder [Your Name].\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"From: {{$node.Set.json.emailFrom}}\\nSubject: {{$node.Set.json.emailSubject}}\\n\\n{{$node.Set.json.emailBody}}\\n\\nDraft a reply:\"\n    }\n  ]\n}\n```\n\n**Node 4 — Gmail: Create Draft**\n- Node type: Gmail → Create Draft\n- To: `{{$node.Set.json.emailFrom}}`\n- Subject: `Re: {{$node.Set.json.emailSubject}}`\n- Message: the reply text extracted from the Anthropic response (`$node[\"HTTP Request\"].json.content[0].text`)\n\n**Node 5 — Gmail: Add Label**\n- Node type: Gmail → Modify Message\n- Apply label: `Draft Created` (create this label in Gmail first)\n- This marks the original email so you know a draft exists\n\n---\n\n## Step 3 — Test the Pipeline (15 min)\n\n**Manual test first:**\n1. Click the Gmail Trigger node and select **Fetch Test Event** — this pulls the most recent email from your `Needs Reply` label\n2. Click **Execute** on the workflow\n3. Watch each node's output in the canvas\n4. Check Gmail Drafts — your AI-drafted reply should be there\n5. Read the draft: Is it a reasonable reply? Is the tone right? Does it need improvement?\n\n**Refine the system prompt if needed:**\nIf the drafts are too formal, too casual, too long, or missing context — adjust the system prompt in the HTTP Request node. Try:\n- \"...Draft a brief, direct reply. The recipient already knows me.\"\n- \"...Keep the reply under 3 sentences unless a detailed response is clearly needed.\"\n- \"...Use a professional but warm tone.\"\n\nTest again with the same email. Repeat until the drafts are useful.\n\n---\n\n## Step 4 — Activate and Monitor (5 min)\n\nOnce the manual test produces drafts you're happy with:\n\n1. Click **Activate** in the top-right of the workflow canvas\n2. The workflow now runs every minute, checking for new emails with the `Needs Reply` label\n\n**Apply the label to a few real emails:**\n- Find 3–5 emails in your inbox that genuinely need a reply\n- Apply the `Needs Reply` label to each\n- Wait a couple of minutes\n- Check your Drafts folder — AI-drafted replies should appear\n\n**Review each draft before sending.** That's the workflow: AI drafts, you review, you send.\n\n---\n\n## Step 5 — Document the Workflow (5 min)\n\nCreate `notes/email-workflow.md`:\n\n```markdown\n# Automated Email Draft Workflow\n\n## What It Does\nWatches Gmail for emails labeled \"Needs Reply\".\nUses Claude Haiku to draft a reply.\nCreates the draft in Gmail and adds \"Draft Created\" label.\n\n## How to Use\n1. Apply \"Needs Reply\" label to any email needing a response\n2. Wait 1-2 minutes\n3. Find the AI draft in Gmail Drafts\n4. Edit if needed, then send\n\n## Configuration\n- n8n: [URL of your n8n instance]\n- Workflow name: Email Reply Drafting\n- Runs: every 1 minute when active\n- Model: claude-haiku-4-5-20251001\n\n## What I Changed From the Default\n[note any system prompt customizations you made]\n\n## How to Turn Off\nGo to n8n → Workflows → Email Reply Drafting → Deactivate\n```\n\nSave this file. You'll thank yourself when you come back to this in 3 months and can't remember how it works.\n\n---\n\n## What to Do If You Get Stuck\n\n**Problem: Gmail Trigger doesn't fire**\nMake sure the label name in the trigger matches exactly what's in Gmail (case-sensitive). Test by clicking \"Fetch Test Event\" manually — if that works, the live trigger should too.\n\n**Problem: Anthropic API returns an error**\nCheck: API key is correct and has credits; `anthropic-version` header is present; the JSON body is valid (no trailing commas). Use n8n's node output panel to see the exact error response.\n\n**Problem: Draft isn't created in Gmail**\nTest the Gmail Create Draft node in isolation — click \"Execute Node\" with test data. Check that the `To` field has a valid email address and the body field has content.\n\n**Problem: Drafts are being created but emails aren't labeled**\nThe Gmail Modify Message node needs the email's message ID. Confirm it's getting the right ID from the trigger node's output — look at the trigger's output data to find the correct field name."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Email Workflow Design",
+      "content": "Design your automated email workflow before building it.\n\n**Step 1 — Define the exact workflow** you will automate. Ask Claude Code:\n```\nHelp me design an email automation workflow.\n\nMy current manual process:\n[describe what you currently do manually with emails]\n\nI want to automate:\n[describe what you want automated]\n\nFor the design:\n1. What events trigger the automation?\n2. What decisions does it need to make?\n3. What can be fully automated vs what needs human approval?\n4. What are the failure modes that could cause problems?\n```\n\n**Step 2 — Define the \"human in the loop\" points.** Which decisions require your approval before action is taken?\n\n**Step 3 — Map the workflow diagram** with trigger → process → decision → action.\n\n**Step 4 — Ask Claude Code:** \"Review my workflow design. Where is the automation likely to make errors? What guardrails do I need?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Implement the Email Automation Core",
+      "content": "Build the core email automation logic with proper safety checks.\n\n**Step 1 — Ask Claude Code to implement the automation:**\n```\nBuild the core email automation with these safety requirements:\n1. Never send any email without explicit human approval (draft only)\n2. Log every decision with reasoning to decisions.log\n3. Flag any email that mentions money, legal issues, or sensitive topics for manual review\n4. If confidence in classification is below 80%, route to human review\n5. Rate limit: maximum 10 automated actions per hour\n\nBuild this in Python using the Anthropic SDK.\n```\n\n**Step 2 — Test with a sample of real emails** (use your own test emails, not live ones).\n\n**Step 3 — Review the decision log.** Are the AI's classification decisions correct?\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review this automation for safety. What actions could it take that would be harmful or embarrassing if it made a mistake?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Testing Automation Reliability",
+      "content": "Systematically test your email automation to ensure reliability.\n\n**Step 1 — Create a test suite** of email scenarios:\n- Standard case (should be automated)\n- Sensitive case (should route to human review)\n- Ambiguous case (classification is unclear)\n- Malformed input (incomplete or unusual email format)\n- Edge cases from your actual email patterns\n\n**Step 2 — Ask Claude Code** to write automated tests:\n\"Write pytest tests for my email automation. Test each scenario in my test suite and verify: correct classification, correct routing (automated vs human review), correct action taken.\"\n\n**Step 3 — Run the tests:** `pytest tests/ -v`\n\n**Step 4 — For any test that fails:** investigate why the automation made the wrong decision. Is it a prompt issue, a code logic issue, or an AI limitation?\n\n**Step 5 — Achieve at least 90% test pass rate** before connecting to live email."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Monitor and Iterate the Automation",
+      "content": "Set up monitoring and iterate on your automation based on real performance.\n\n**Step 1 — Define monitoring metrics** for your email automation:\n- Automation rate: % of emails handled automatically\n- Accuracy rate: % of automated decisions that are correct\n- Human review rate: % of emails routed to you\n- False positive/negative rates\n\n**Step 2 — Run the automation on your last month of emails** (using test mode — draft only, no sends).\n\n**Step 3 — Calculate the actual metrics** from the test run.\n\n**Step 4 — Identify the biggest improvement opportunity:**\n- If accuracy is low: improve the classification prompt\n- If human review rate is too high: adjust the confidence threshold\n- If automation rate is low: expand what the automation handles\n\n**Step 5 — Make one targeted improvement** and re-test."
+    },
+    {
+      "type": "quiz",
+      "question": "Your email automation incorrectly auto-replies to a client saying \"your invoice has been approved\" when it wasn't. How should you have prevented this?",
+      "options": [
+        "Use a more capable AI model",
+        "Never auto-send emails mentioning financial decisions — all financial action emails should require explicit human approval before sending",
+        "Add better email classification training",
+        "Use a rule-based filter instead of AI for financial emails"
+      ],
+      "correct": 1,
+      "explanation": "The core failure: the automation was allowed to send emails about irreversible financial decisions without human approval. Prevention: implement a strict \"never auto-send for [sensitive categories]\" rule as a code-level constraint, not just an AI instruction. AI instructions can be wrong; code constraints cannot be bypassed by misclassification. Categories requiring mandatory human approval: financial commitments, legal statements, client-facing commitments, anything with \"approved,\" \"confirmed,\" \"agreed,\" or \"will do.\""
+    },
+    {
+      "type": "quiz",
+      "question": "You notice your email automation's accuracy has degraded over 3 months — it's misclassifying more emails. What is the most likely cause?",
+      "options": [
+        "The AI model was updated and is now worse",
+        "Email patterns have changed — new senders, new topics, seasonal content that doesn't match the patterns the automation was tuned for",
+        "The automation's code has bugs that get worse over time",
+        "Email volume increased and overwhelmed the system"
+      ],
+      "correct": 1,
+      "explanation": "Automation accuracy degrades when real-world patterns drift from the patterns it was designed for. Email automation is particularly susceptible to: seasonal changes (holiday emails don't match normal patterns), new vendors or projects (new types of emails), and organisation changes (new communication patterns). Fix: regularly audit a sample of automated decisions, identify new patterns causing misclassification, and update your classification prompts or examples accordingly."
     },
     {
       "type": "callout",

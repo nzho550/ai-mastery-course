@@ -2,8 +2,16 @@
   "id": "19-8",
   "title": "Your Second Brain — AI-Powered Personal Organisation",
   "part": 19,
-  "estimatedMinutes": 30,
-  "tags": ["personal-life", "beginner", "organisation", "memory", "productivity", "pkm", "hands-on"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "organisation",
+    "memory",
+    "productivity",
+    "pkm",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -47,6 +55,54 @@
       ],
       "correct": 2,
       "explanation": "Memory is only useful when it's accurate. Stale memory (a previous job, old projects, outdated context) will cause Claude to make wrong assumptions about your situation — it might suggest approaches that don't fit your new industry, or reference projects you're no longer working on. The right approach is regular maintenance: review stored memories periodically (quarterly is a reasonable rhythm), delete anything outdated, and update with current context. Claude's memory interface shows all stored items and allows individual deletion — use it. Creating a new account (D) loses everything valuable. Waiting for Claude to figure it out (A) doesn't work — it assumes memory is accurate unless you change it."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Second Brain Concept and Design",
+      "content": "Design your personal second brain system.\n\n**Step 1 — Ask Claude:** \"Explain the 'second brain' concept for personal knowledge management. What are the leading methodologies (PARA, Zettelkasten, etc.)? What problems does a second brain solve?\"\n\n**Step 2 — Audit your current personal organisation system:**\n- Where do your notes live? (multiple apps, messy, or non-existent)\n- How do you find information you know you've captured?\n- How often does valuable information get lost?\n\n**Step 3 — Ask Claude to recommend a system** for your situation:\n\"Based on these facts about how I work [describe your work style, tools you already use, types of information you manage], what personal knowledge management approach would work best for me?\"\n\n**Step 4 — Choose your approach** and commit to trying it for 30 days."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Set Up Your Second Brain",
+      "content": "Set up your personal knowledge management system.\n\n**Step 1 — Choose your primary tool** based on your workshop A research: Obsidian, Notion, Roam Research, or simple markdown files.\n\n**Step 2 — Ask Claude Code** to help set up the structure:\n```\nHelp me set up a personal knowledge management system in [Obsidian/markdown files].\n\nCreate:\n1. Folder structure based on PARA (Projects, Areas, Resources, Archives)\n2. Template files for: meeting notes, book notes, project notes, daily journal\n3. A README explaining how to use the system\n4. An index page that links to all active projects\n```\n\n**Step 3 — Migrate your 10 most important current notes** into the new system.\n\n**Step 4 — Set up the AI integration:** How will you use Claude to query and synthesise your second brain?"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — AI-Powered Note Search and Synthesis",
+      "content": "Use AI to make your second brain queryable.\n\n**Step 1 — Build a simple query tool** for your markdown notes:\n```bash\n# Using the RAG system from Lesson 18-4, or a simpler approach:\n# Ask Claude Code to build a script that:\n# 1. Reads all markdown files in your notes folder\n# 2. Takes a query as input\n# 3. Uses grep + Claude to find and synthesise relevant notes\n# 4. Returns: relevant notes with quotes + a synthesis\n```\n\n**Step 2 — Test with 5 questions** that your notes should answer.\n\n**Step 3 — Evaluate retrieval quality.** Are the right notes surfacing?\n\n**Step 4 — Compare to manual search:** How much faster is AI-assisted search vs scrolling through folders?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Maintenance System and Habits",
+      "content": "Build sustainable habits for maintaining your second brain.\n\n**Step 1 — Design a capture habit:** How will information get into your second brain consistently?\n- Quick capture (mobile note, email-to-notes, etc.)\n- Processing time (when do rough captures get organised?)\n\n**Step 2 — Design a review habit:**\n- Daily: 5-minute review of new captures\n- Weekly: process captures, link notes, review projects\n- Monthly: archive completed projects, identify pattern in captures\n\n**Step 3 — Ask Claude to create a weekly review prompt:**\n\"Design a 20-minute weekly review prompt for a second brain system. The review should: process new captures, update active projects, identify connections between notes, and set intentions for next week.\"\n\n**Step 4 — Run the first weekly review** using the prompt. What needs adjusting?"
+    },
+    {
+      "type": "quiz",
+      "question": "After 3 months of using a second brain, you have 500 notes but can't find anything quickly. What is the most likely problem?",
+      "options": [
+        "You have too many notes — start deleting",
+        "The system lacks structure or your tagging/linking is inconsistent — review your organisation system, add a consistent tagging convention, and create index pages for key topics",
+        "You need a more powerful search tool",
+        "Notes are most useful when you have fewer, better-quality ones"
+      ],
+      "correct": 1,
+      "explanation": "500 unfindable notes indicates an organisational failure, not a volume problem. Common causes: (1) captures without organisation (the \"inbox\" filled up and was never processed); (2) inconsistent naming or tagging (same concept stored under different labels); (3) no index pages (no way to navigate to related notes); (4) flat structure (everything in one folder). Fix: a one-time \"notes review\" to organise existing notes, then enforce a weekly processing habit where new captures get organised before the pile grows again."
+    },
+    {
+      "type": "quiz",
+      "question": "You invest 10 hours setting up an elaborate second brain system. Six weeks later you've stopped using it. What went wrong?",
+      "options": [
+        "You chose the wrong tool",
+        "The system was too complex to maintain consistently — the best second brain is one you actually use, which means it must be simple enough to not feel like work",
+        "You needed more storage space",
+        "You should have used a different methodology"
+      ],
+      "correct": 1,
+      "explanation": "Second brain abandonment is extremely common. The key failure: building a system for an idealised future self who has unlimited time and discipline, not for your actual self who has limited energy. Warning signs of an unsustainable system: it requires more than 15 minutes per day to maintain, there are complex rules that feel bureaucratic, and you procrastinate on capturing because \"it's not worth setting up properly.\" Fix: start with the simplest possible system (one folder, one tag, one template), prove it works for a month, then add complexity only where there's a specific pain point."
     },
     {
       "type": "callout",

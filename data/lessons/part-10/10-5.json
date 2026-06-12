@@ -2,8 +2,13 @@
   "id": "10-5",
   "title": "AI-Assisted Git Workflows",
   "part": 10,
-  "estimatedMinutes": 25,
-  "tags": ["git", "automation", "claude-code", "developer-workflow"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "git",
+    "automation",
+    "claude-code",
+    "developer-workflow"
+  ],
   "sections": [
     {
       "type": "text",
@@ -36,6 +41,54 @@
       "type": "callout",
       "variant": "info",
       "content": "**Tools that automate this further:** Git hooks can run Claude automatically every time you commit. Lesson 7-8 covered hooks — you could add a `prepare-commit-msg` hook that runs Claude on your staged diff and pre-fills the message box. That's the full automation version of what you just did manually."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — AI Git Workflow Drill",
+      "content": "Use Claude Code to improve your git workflow in the next 8 minutes.\n\n**Step 1 — In a real git repository**, run:\n```bash\ngit log --oneline -20\n```\nAsk Claude Code: \"Review these 20 commit messages. Which are clear and descriptive? Which are too vague? What pattern should I follow for good commit messages?\"\n\n**Step 2 — Make a real code change** in the repository.\n\n**Step 3 — Ask Claude Code** to write the commit message:\n\"I just made these changes: [describe them]. Write a commit message following conventional commits format (type(scope): description). Make the description explain WHY, not just WHAT.\"\n\n**Step 4 — Review the message.** Is it accurate? Use it or improve it.\n\n**Step 5 — Ask Claude Code:** \"What other git workflow improvements would most reduce friction for a developer working on [describe your project type]?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Assisted PR Workflow",
+      "content": "Build a complete AI-assisted pull request workflow.\n\n**Step 1 — Implement a small feature or bug fix** in a real repository.\n\n**Step 2 — Ask Claude Code to review your changes before you commit:**\n\"Review my staged changes. Check: are there any obvious bugs, missing error handling, or code style issues? Does the implementation match what the tests would expect?\"\n\n**Step 3 — Fix any issues** Claude Code identifies. Stage the fixes.\n\n**Step 4 — Ask Claude Code to write the PR description:**\n```\nWrite a pull request description for these changes.\n\nBased on the diff, include:\n- What was the problem? (or what feature was requested?)\n- What did I change and why?\n- How can a reviewer test this change?\n- Are there any concerns or trade-offs in this implementation?\n```\n\n**Step 5 — Create the PR.** Did the AI-assisted description save time and improve quality vs your usual PR descriptions?\n\n**Step 6 — Mandatory review:** Read the PR description carefully before publishing — is every claim accurate?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Git Hooks with AI",
+      "content": "Set up git hooks that use AI for automated quality checks.\n\n**Step 1 — Ask Claude:** *\"What are the most useful git hooks for a developer using AI coding tools? For each hook (pre-commit, commit-msg, pre-push), what automated checks could I run?\"*\n\n**Step 2 — Create a commit-msg hook** that validates commit message format:\n```bash\n# .git/hooks/commit-msg\n#!/bin/bash\ncommit_msg=$(cat \"$1\")\nif [[ ${#commit_msg} -lt 10 ]]; then\n    echo \"Error: Commit message too short\"\n    exit 1\nfi\n```\n\n**Step 3 — Test the hook** by trying to commit with a short message.\n\n**Step 4 — Ask Claude Code** to design a more comprehensive pre-commit hook that checks for common issues (secrets in code, large files, broken syntax).\n\n**Step 5 — Implement one additional hook** based on your most common commit mistakes."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — AI Git Aliasing",
+      "content": "Create git aliases that use Claude Code for common AI-enhanced operations.\n\n**Step 1 — Ask Claude:** *\"Design git aliases that integrate Claude Code assistance. For example, an alias that: runs git diff, pipes it to Claude Code for review, and waits for approval before committing. What other git + Claude Code workflows would be useful?\"*\n\n**Step 2 — Create a shell function** (not a git alias, since these need multi-step logic) for \"smart commit\":\n```bash\n# Add to your .bashrc or .zshrc\nsmartcommit() {\n  git diff --staged | claude --print \"Write a conventional commits message for this diff. One line only.\" | xargs git commit -m\n}\n```\n\n**Step 3 — Test the function** on a real staged change.\n\n**Step 4 — Create one more function** for a workflow pain point (smart PR description, automated changelog entry, etc.).\n\n**Step 5 — Evaluate after one week:** Did these functions become part of your actual workflow or did you forget about them?"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code reviews your code changes and says \"this looks good.\" Before merging to main, what should still happen?",
+      "options": [
+        "Nothing — Claude Code's review is sufficient",
+        "A human code review — AI review catches many issues but misses business logic errors, architectural concerns, and issues requiring organisational context",
+        "Run automated tests only",
+        "Check that the code compiles"
+      ],
+      "correct": 1,
+      "explanation": "AI code review is a first pass, not a replacement for human review. AI finds: syntax errors, common antipatterns, obvious logic bugs, style issues. AI misses: whether this change aligns with the team's architectural direction, whether it correctly implements the business requirement (understanding business rules requires context the AI doesn't have), security issues requiring deep domain knowledge, and the impact on other team members' in-progress work."
+    },
+    {
+      "type": "quiz",
+      "question": "You use Claude Code to write all your commit messages. A colleague reviews your commit history and asks who wrote the thoughtful messages. Should you tell them?",
+      "options": [
+        "No — the messages are yours since you approved them",
+        "It depends on your team's norms, but transparency is generally better — say \"I use Claude Code to draft commit messages which I then review and edit\"",
+        "Yes — attribute every commit as AI-generated",
+        "Only tell them if they directly ask how you generate commit messages"
+      ],
+      "correct": 1,
+      "explanation": "Transparency about AI tool use in professional settings is generally the better policy. Most teams are fine with AI-assisted commit messages (they're a convenience tool, not a professional judgement), but hiding tool use can damage trust if discovered. The honest approach: \"I draft commit messages with Claude Code and review them\" — most colleagues will be curious about your workflow, not critical. Teams increasingly set explicit policies about AI tool disclosure; your disclosure helps normalise it."
     },
     {
       "type": "callout",

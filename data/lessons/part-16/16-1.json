@@ -2,8 +2,13 @@
   "id": "16-1",
   "title": "The AI Writing Workflow",
   "part": 16,
-  "estimatedMinutes": 20,
-  "tags": ["office", "beginner", "writing", "workflow"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "office",
+    "beginner",
+    "writing",
+    "workflow"
+  ],
   "sections": [
     {
       "type": "text",
@@ -30,6 +35,54 @@
       "tag": "BROWSER",
       "title": "Plan Before You Write",
       "content": "This workshop practices Phase 1 and Phase 2 — the planning stages that most people skip.\n\nChoose a document you genuinely need to write in the next week. It can be anything: a proposal, a report, an email pitch, a policy note, a cover letter, an internal update.\n\n**Step 1 — Start with the clarification prompt**\n\nIn Claude.ai:\n```\nI need to write a [document type] for [audience] about [topic].\nThe purpose is [what should they do or understand after reading?].\n\nBefore we start writing, ask me up to 5 questions that would help\nyou understand my situation and produce something genuinely useful.\n```\n\nAnswer Claude's questions honestly and in detail. This is not a test — the more context you give, the better the output.\n\n**Step 2 — Review the outline**\n\nOnce Claude has your answers, ask:\n```\nBased on my answers, suggest an outline for this document.\nFor each section, write one sentence explaining what it should accomplish.\n```\n\nRead the outline. Ask yourself:\n- Does this match how I would structure this?\n- Is anything missing?\n- Is anything there that I don't need?\n\nEdit the outline until it matches your thinking. Save it.\n\n**Step 3 — Stop here (for now)**\n\nYou've done the hardest part. A clear outline is 60% of the writing work done. Come back to this outline in lesson 16-2 (for reports and proposals) or use it to generate a draft in any lesson in Part 16.\n\nIn your notes: Did Claude's questions surface anything you hadn't thought to include?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Writing Workflow Audit",
+      "content": "Map your current writing workflow and identify AI improvement opportunities.\n\n**Step 1 — List every type of writing** you do regularly: emails, reports, documentation, proposals, presentations, social posts.\n\n**Step 2 — For each type**, estimate:\n- Time spent per instance\n- Time spent per week total\n- Your satisfaction with the quality (1-5)\n- How formulaic vs creative it is (1=completely formulaic, 5=highly creative)\n\n**Step 3 — Ask Claude:** \"For these writing types [list them], which benefit most from AI assistance? Which require mostly human judgement? For each, what specific AI help would be most valuable?\"\n\n**Step 4 — Calculate the highest-value AI writing target:** high time × formulaic × low satisfaction = best automation candidate.\n\n**Step 5 — Identify your #1 writing pain point** to address with AI this week."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Writing Voice Guide",
+      "content": "Create a writing style guide that helps AI match your voice.\n\n**Step 1 — Gather 5 examples** of your best writing (emails, reports, anything). These represent your voice.\n\n**Step 2 — Ask Claude to analyse your style:**\n\"Analyse these 5 writing samples. Describe my writing style: sentence length, vocabulary level, use of hedging language, formality level, how I structure arguments, distinctive phrases I use, and what I consistently avoid.\"\n\n**Step 3 — Review the analysis.** Does it capture your actual voice? What did Claude miss?\n\n**Step 4 — Create a \"Writing Voice Guide\"** based on the analysis:\n```\n# [Your Name] Writing Style Guide\n\n## Voice characteristics\n- Tone: [e.g., direct but friendly, formal but not stuffy]\n- Sentence length: [e.g., prefer short sentences, max 20 words]\n- Vocabulary: [e.g., avoid jargon, use plain language]\n\n## What I always do\n- [e.g., lead with the key point]\n\n## What I never do\n- [e.g., passive voice, filler phrases like \"in order to\"]\n```\n\n**Step 5 — Add this guide to your Claude Projects** so every writing session starts with your style."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — AI Writing Anti-Patterns",
+      "content": "Identify and eliminate common AI writing problems from your output.\n\n**Step 1 — Ask Claude:** \"List the most recognisable signs of AI-generated writing. What phrases, patterns, and structures make text sound like it was written by an AI? Why do these patterns emerge?\"\n\n**Step 2 — Check a sample of your recent AI-assisted writing** for these patterns.\n\n**Step 3 — Common AI writing anti-patterns to eliminate:**\n- \"In today's fast-paced world...\"\n- \"It's important to note that...\"\n- Excessive use of em dashes and colons\n- Lists for everything (even when prose would be better)\n- Hedging every statement\n- Generic examples instead of specific ones\n\n**Step 4 — For each anti-pattern found**, ask Claude to rewrite the passage without that pattern.\n\n**Step 5 — Build an editing checklist** specific to the AI patterns you personally overuse."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Develop a Full AI Writing Workflow",
+      "content": "Build an end-to-end writing workflow for your primary writing type.\n\n**Step 1 — Choose your most frequent document type.**\n\n**Step 2 — Design the workflow:**\n- **Pre-writing:** What context/outline do I give AI before drafting?\n- **Drafting:** What prompt generates the best first draft?\n- **Review:** What editing passes do I run? What do I check manually?\n- **Finalisation:** What final human review happens before sending?\n\n**Step 3 — Ask Claude to help design the prompts for each stage.**\n\n**Step 4 — Test the complete workflow** on a real document you need to write.\n\n**Step 5 — Evaluate:** Did this workflow save time while maintaining or improving quality? What would you change?"
+    },
+    {
+      "type": "quiz",
+      "question": "You use Claude to draft all your emails. A colleague comments that your recent emails \"don't sound like you anymore.\" What is the problem and fix?",
+      "options": [
+        "Your colleague is wrong — AI-assisted writing is still your writing",
+        "Your emails have lost your voice — you're accepting AI drafts without editing them to match your natural style; fix by developing a style guide and editing every draft before sending",
+        "You should write all emails manually going forward",
+        "Use a different AI model that matches your style better"
+      ],
+      "correct": 1,
+      "explanation": "When AI drafts replace rather than assist your writing, voice gets lost. The fix: (1) build a style guide (Workshop B), (2) treat every AI draft as a starting point, not a final product, (3) always edit for your actual voice and specific relationship with the reader, (4) add personal references or details the AI couldn't know. The goal: AI handles structure and first draft, you bring the voice and specific context."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to write a formal business proposal. It produces professional-sounding text but you're not sure the logic is sound. What is the critical review step?",
+      "options": [
+        "Check for grammar and spelling",
+        "Read for logical coherence: does each claim follow from evidence? Does the proposal make a compelling case? Would a skeptical reader be persuaded? The prose can be polished while the argument is weak",
+        "Have Claude check the logic itself",
+        "Submit it — if Claude made it formal, the logic is sound"
+      ],
+      "correct": 1,
+      "explanation": "AI excels at producing professional-sounding, well-structured text. It does not guarantee logical soundness. A proposal can be grammatically perfect with beautiful transitions while making logically weak arguments or missing key business considerations. Your review must focus on: Is the problem statement accurate? Are the claims supported? Is the proposed solution actually feasible? Would our client be persuaded? Run the content review separately from the prose review."
     },
     {
       "type": "callout",

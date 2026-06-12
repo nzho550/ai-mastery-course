@@ -2,8 +2,13 @@
   "id": "9-4",
   "title": "The Full AI Coding Tool Landscape",
   "part": 9,
-  "estimatedMinutes": 20,
-  "tags": ["comparison", "decision-making", "ai-coding", "synthesis"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "comparison",
+    "decision-making",
+    "ai-coding",
+    "synthesis"
+  ],
   "sections": [
     {
       "type": "text",
@@ -35,6 +40,54 @@
       "tag": "REFLECT",
       "title": "Build Your Personal AI Coding Reference Card",
       "content": "**Goal:** Write a personal reference card in `notes/ai-tools-guide.md` that answers the real scenarios you'll face. This is the document you'll actually consult when you're starting a new project or onboarding somewhere new.\n\n**Open VS Code and create the file:**\n```\nnotes/ai-tools-guide.md\n```\n\n**Fill in each section with your honest answer based on everything you've tried:**\n\n```markdown\n# My AI Coding Tool Guide\n\n## For everyday coding — quick completions while I write\nTool: ___\nWhy I chose it: ___\nBackup if it's unavailable: ___\n\n## For a big refactor across multiple files\nTool: ___\nWhy: ___\n\n## For understanding a large codebase I'm joining\nTool: ___\nWhy: ___\n\n## For an environment where code can't leave the machine\nTool: ___\nWhy: ___\n\n## For free with maximum model quality\nTool: ___\nWhy: ___\n\n## My daily setup right now\nPrimary: ___\nFor chat/planning: ___\nFor agentic tasks: ___\n\n## Tools I want to revisit in 6 months\n-\n-\n```\n\n**Do this properly.** Write real answers, not placeholders. This is the synthesis of four parts of the course.\n\nWhen you're done, commit the file to git:\n```bash\ngit add notes/ai-tools-guide.md\ngit commit -m \"Add personal AI coding tool reference card\"\n```\n\n**Accomplishment check:** You have a committed, personal reference document that reflects your actual experience with these tools — not a generic list, but *your* judgment. This is more valuable than any comparison article you'll find online."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Tool Landscape Mapping",
+      "content": "Map the complete AI coding tool landscape as it exists today.\n\n**Step 1 — Ask Claude:** *\"Create a comprehensive map of the AI coding tool landscape in 2026. Include: in-editor assistants, terminal/CLI agents, AI-native IDEs, local models, and code review tools. For each category, name the leading tools.\"*\n\n**Step 2 — Draw your personal landscape:** On paper or a diagram tool, place each tool you've encountered in this course in the right category.\n\n**Step 3 — For each tool**, mark:\n- ✓ Used (have hands-on experience)\n- ~ Tried (briefly tested)\n- ? Heard of (no experience)\n- ✗ Not relevant to my work\n\n**Step 4 — Identify your gaps:** Which tools are relevant to your work but marked ? — and what would it take to evaluate them?\n\n**Step 5 — Ask Claude:** \"Based on my current tool usage [describe it], what important AI coding tools am I missing that would significantly improve my workflow?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Optimal AI Coding Stack",
+      "content": "Design your personal AI coding stack — the combination of tools you will actually use.\n\n**Step 1 — List your current AI coding tools** (from Part 5-9 of this course).\n\n**Step 2 — For each of your top 5 coding task types**, identify which tool is best:\n| Task | Best Tool | Why |\n|---|---|---|\n| New feature implementation | | |\n| Code review | | |\n| Debugging | | |\n| Documentation | | |\n| Learning a new library | | |\n\n**Step 3 — Identify gaps:** Are there task types that no current tool covers well?\n\n**Step 4 — Ask Claude:** *\"Review my AI coding stack [paste your table]. What tools are redundant? What gaps exist? What would a senior developer in [your field] add or remove?\"*\n\n**Step 5 — Finalise your stack** and commit to using it consistently for 60 days before evaluating."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — AI Tool Evaluation Framework",
+      "content": "Build a framework for evaluating any new AI coding tool.\n\n**Step 1 — Ask Claude:** *\"Design an evaluation framework for AI coding tools. What criteria should I assess to decide whether to add a new tool to my workflow? Weight each criterion by importance.\"*\n\n**Step 2 — Review the framework.** Add any criteria specific to your context (privacy requirements, team standardisation, cost constraints).\n\n**Step 3 — Apply the framework** to a tool you haven't tried yet. Fill in each criterion with your best estimate.\n\n**Step 4 — Set a decision threshold:** \"I will add this tool to my stack if it scores above X across criteria Y, Z, and W.\"\n\n**Step 5 — Save the framework.** Use it every time you're considering a new AI coding tool."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — AI Coding Skills Inventory and Growth Plan",
+      "content": "Assess where you are in AI coding skills and plan your next development.\n\n**Step 1 — Rate yourself (1-5) on these AI coding skills:**\n- Using AI for code generation\n- Reviewing AI-generated code effectively\n- Prompting AI for debugging\n- Using Claude Code for autonomous tasks\n- Configuring MCP servers\n- Building CLAUDE.md for projects\n- Using custom slash commands\n- Understanding when NOT to use AI\n\n**Step 2 — Ask Claude:** *\"Based on these self-ratings [paste yours], what are my 3 most impactful development areas? What resources or practice would improve each one most efficiently?\"*\n\n**Step 3 — Create a 90-day growth plan:** Specific practice activities for your top 3 development areas.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review my growth plan. What are the most common mistakes people make when trying to improve in AI coding? What should I watch out for?\"*\n\n**Step 5 — Schedule monthly reviews** of your progress against the plan."
+    },
+    {
+      "type": "quiz",
+      "question": "You've evaluated 5 AI coding tools and they all perform similarly on your main tasks. What should be the tiebreaker?",
+      "options": [
+        "Choose the most popular one — community size means more support",
+        "Choose the one that integrates best with your existing workflow and requires the least context switching",
+        "Choose the most expensive one — higher price typically means higher quality",
+        "Choose the newest one — it will have the latest technology"
+      ],
+      "correct": 1,
+      "explanation": "When tools are functionally equivalent, workflow integration is the tiebreaker. The best tool is the one you'll actually use consistently — and consistency comes from low friction. A slightly less capable tool that's integrated into your existing workflow will deliver more value than a marginally better tool that requires significant context switching. Evaluate: does it fit where you already are, or does it require building new habits around it?"
+    },
+    {
+      "type": "quiz",
+      "question": "The AI coding tool landscape changes rapidly with new tools releasing monthly. What is the right approach to staying current?",
+      "options": [
+        "Constantly switch to the newest tool to stay at the cutting edge",
+        "Establish a stable core stack and evaluate new tools quarterly with your framework — don't switch unless a new tool offers meaningfully better value for your specific use cases",
+        "Ignore new tools until they've been out for at least 2 years",
+        "Follow social media recommendations and switch when a tool trends"
+      ],
+      "correct": 1,
+      "explanation": "Constant switching prevents you from developing deep proficiency with any single tool — you never learn the shortcuts, the edge cases, or the best practices. A quarterly evaluation cadence balances staying current with building expertise. When evaluating, use your criteria framework (from Workshop C) and compare new tools to your current stack on your actual tasks, not benchmark comparisons. Only switch if the improvement is meaningful and consistent."
     },
     {
       "type": "callout",

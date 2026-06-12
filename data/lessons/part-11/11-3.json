@@ -2,8 +2,13 @@
   "id": "11-3",
   "title": "Getting Your First API Key",
   "part": 11,
-  "estimatedMinutes": 20,
-  "tags": ["api", "anthropic", "setup", "security"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "api",
+    "anthropic",
+    "setup",
+    "security"
+  ],
   "sections": [
     {
       "type": "text",
@@ -53,6 +58,54 @@
     {
       "type": "text",
       "content": "## Free Credits for New Accounts\n\nNew Anthropic accounts receive trial credits — enough to run all the workshops in Part 11 comfortably. The exact amount changes, but expect $5-$10 of credit.\n\nYou can check your credit balance at `console.anthropic.com` → Settings → Billing.\n\nAt Haiku pricing ($0.80 per million input tokens), $5 of credit lets you make roughly 6 million input token calls. For the learning exercises in this part, you'll use a small fraction of that."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — API Key Security Drill",
+      "content": "Practice secure API key management from day one.\n\n**Step 1 — Go to console.anthropic.com** and create an API key (or use your existing one).\n\n**Step 2 — Immediately practice secure storage.** Do NOT paste the key anywhere — store it in your OS keychain or password manager:\n```powershell\n# Windows: Use environment variables\n[System.Environment]::SetEnvironmentVariable(\"ANTHROPIC_API_KEY\", \"your-key-here\", \"User\")\n\n# Then access it in your code:\nimport os\napi_key = os.environ.get(\"ANTHROPIC_API_KEY\")\n```\n\n**Step 3 — Create a .env file** for local development:\n```\nANTHROPIC_API_KEY=your-key-here\n```\nImmediately add `.env` to `.gitignore`.\n\n**Step 4 — Ask Claude:** *\"What are the most common ways API keys are accidentally exposed? For each, what is the prevention?\"*\n\n**Step 5 — Audit any existing projects** for hardcoded API keys or committed .env files."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Test Your API Key Setup",
+      "content": "Verify your API key works and is set up securely.\n\n**Step 1 — Write a minimal test script** that reads the API key from environment variables and makes a simple API call:\n```python\nimport anthropic\nimport os\n\nclient = anthropic.Anthropic(api_key=os.environ.get(\"ANTHROPIC_API_KEY\"))\n\nmessage = client.messages.create(\n    model=\"claude-haiku-4-5-20251001\",\n    max_tokens=100,\n    messages=[{\"role\": \"user\", \"content\": \"Respond with 'API key works' and nothing else\"}]\n)\nprint(message.content[0].text)\n```\n\n**Step 2 — Run with the key set** in your environment. Does it respond?\n\n**Step 3 — Test the failure case:** Unset the variable and run again. What error appears? Is the error message useful?\n\n**Step 4 — Add proper error handling** for the case where the environment variable isn't set.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this API key setup code. What security or reliability improvements would you make for production use?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Understanding API Pricing",
+      "content": "Understand how Anthropic API pricing works to avoid surprise bills.\n\n**Step 1 — Visit the Anthropic pricing page** and record current prices for:\n- claude-haiku-4-5 (input and output per million tokens)\n- claude-sonnet-4-6 (input and output per million tokens)\n- claude-opus-4-8 if relevant\n\n**Step 2 — Ask Claude:** *\"Help me estimate the monthly API cost for this use case: [describe your planned application — what it does, how many users, how many requests per user per day, approximate message length]. What is the monthly cost at each model tier?\"*\n\n**Step 3 — Build a simple cost model:**\n```\nRequests per day: X\nAverage input tokens: Y\nAverage output tokens: Z\nMonthly tokens: (Y + Z) × X × 30\nMonthly cost at Haiku: [calculate]\nMonthly cost at Sonnet: [calculate]\n```\n\n**Step 4 — Set a billing alert** in console.anthropic.com to notify you when spending reaches a threshold."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Spend Monitoring for Your API",
+      "content": "Build spend monitoring into your API usage from the start.\n\n**Step 1 — Ask Claude Code** to add token counting to your API wrapper:\n```\nModify the AnthropicClient class I built in Lesson 11-2 to:\n1. Count and log tokens used in each request\n2. Track cumulative tokens and estimated cost for the current session\n3. Warn when estimated cost for the session exceeds a configurable threshold\n4. After each request, print: \"Request: Xin/Yout tokens, ~$Z\"\n```\n\n**Step 2 — Test the monitoring** with several API calls. Is the cost estimate accurate?\n\n**Step 3 — Ask Claude:** \"How do I track per-user or per-feature API costs in a multi-user application? What data should I store?\"\n\n**Step 4 — Design a cost attribution system** for your planned application — how will you know which features are most expensive?"
+    },
+    {
+      "type": "quiz",
+      "question": "You accidentally committed your Anthropic API key to a public GitHub repository. What is the correct immediate response?",
+      "options": [
+        "Delete the commit from GitHub",
+        "Immediately go to console.anthropic.com, revoke the exposed key and generate a new one — assume the key was already accessed by automated scanners",
+        "Make the repository private",
+        "Change the key in your .env file"
+      ],
+      "correct": 1,
+      "explanation": "Automated scanners continuously watch GitHub for exposed API keys and typically find them within minutes. Once committed to a public repo, assume the key is compromised regardless of whether you can see it in the commit history. The only correct response: immediately revoke the key in Anthropic's console, generate a new key, and update your systems with the new key. Deleting commits or making repositories private does not undo the exposure — the key was already scraped."
+    },
+    {
+      "type": "quiz",
+      "question": "You're building a web app where each user makes Anthropic API calls. You give all users the same API key. What is the problem?",
+      "options": [
+        "There is no problem — shared keys are fine for web apps",
+        "All users share the same rate limits, any one user can exhaust the quota for everyone, and you cannot track or limit costs per user",
+        "The API key will expire faster with multiple users",
+        "Users can see each other's conversations"
+      ],
+      "correct": 1,
+      "explanation": "Shared API keys for multi-user applications cause several problems: (1) rate limits are shared — one heavy user throttles everyone else; (2) no per-user cost attribution — you can't identify which users are expensive; (3) no per-user limits — a single user can spend your entire budget; (4) key rotation requires updating all users simultaneously. Better: proxy all API calls through your backend, where you can implement per-user rate limiting and cost tracking."
     },
     {
       "type": "callout",

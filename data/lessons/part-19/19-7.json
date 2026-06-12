@@ -2,8 +2,14 @@
   "id": "19-7",
   "title": "Voice AI — Talking With Your AI",
   "part": 19,
-  "estimatedMinutes": 20,
-  "tags": ["personal-life", "beginner", "voice", "hands-on", "accessibility"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "voice",
+    "hands-on",
+    "accessibility"
+  ],
   "sections": [
     {
       "type": "text",
@@ -47,6 +53,54 @@
       ],
       "correct": 1,
       "explanation": "This is exactly the use case voice AI excels at: you have a specific question, your hands are occupied, and you need an immediate response without stopping your activity. Voice mode lets you ask and receive an answer without washing your hands or picking up your phone. Stopping to type (A) is inefficient and breaks your cooking flow. Skipping the question (C) may affect the dish. Voice AI is very capable for cooking questions (D is wrong) — ingredient substitutions, timing, technique questions are all well within current voice AI capabilities."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Voice AI Capabilities Tour",
+      "content": "Explore the capabilities of current voice AI tools.\n\n**Step 1 — Ask Claude (text):** \"What are the leading voice AI systems currently? What can each do beyond basic voice-to-text? What makes Advanced Voice Mode in Claude or similar systems different from older voice assistants?\"\n\n**Step 2 — Try voice interaction** with Claude (if available via the app) or another voice AI you have access to.\n\n**Step 3 — Test these scenarios:**\n- Complex multi-part question\n- Follow-up question that references your previous statement\n- Asking it to perform a task (set a reminder, draft a message)\n- Ambiguous request to see how it handles clarification\n\n**Step 4 — Compare to text interaction:** Where does voice AI add convenience? Where does text work better?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Voice AI for Hands-Free Tasks",
+      "content": "Find real use cases where voice AI saves significant time.\n\n**Step 1 — Identify situations** where you're hands-busy or eyes-busy:\n- Commuting or driving\n- Cooking\n- Exercise\n- Manual tasks\n\n**Step 2 — Design voice AI workflows** for each:\n- Commuting: dictate meeting notes, hear news summaries, language learning\n- Cooking: recipe assistance without touching your phone\n- Exercise: motivation, logging workouts, podcast-style explanations of topics\n\n**Step 3 — Test one workflow** in the actual hands-busy situation.\n\n**Step 4 — Evaluate:** Was voice AI genuinely better than waiting until you're free? What friction remained (ambient noise, accent recognition, imprecise voice commands)?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Voice Input for Text Output",
+      "content": "Use voice input to speed up your text-based AI workflow.\n\n**Step 1 — Set up voice dictation** on your device:\n- Windows: Windows + H\n- Mac: Fn + Fn or System Preferences → Keyboard → Dictation\n\n**Step 2 — Dictate prompts instead of typing** for your next 5 Claude interactions.\n\n**Step 3 — Compare typing vs dictation** for:\n- Speed (words per minute)\n- Accuracy\n- Comfort with complex technical prompts\n- Fatigue over time\n\n**Step 4 — Identify prompt types** where dictation is faster vs types where typing is better."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Voice AI Limitations and Mitigation",
+      "content": "Map voice AI limitations and build mitigation strategies.\n\n**Step 1 — Ask Claude:** \"What are the main limitations of current voice AI: accuracy, context, privacy, latency, complex instructions? For each, what are the workarounds or acceptance criteria?\"\n\n**Step 2 — Test each limitation** with your specific accent, environment, and typical use cases.\n\n**Step 3 — Build mitigation strategies:**\n- Accuracy issues: speak more slowly, use trigger phrases, verify complex outputs visually\n- Privacy: identify what you will and won't say to voice AI\n- Complex instructions: break into shorter commands\n\n**Step 4 — Define your voice AI usage policy:** What tasks will you routinely use voice AI for? What will you always do via text?"
+    },
+    {
+      "type": "quiz",
+      "question": "You dictate a voice message to an AI assistant and it mishears \"delete\" as \"delay.\" The resulting action was wrong. What safeguard prevents this?",
+      "options": [
+        "Use a higher quality microphone",
+        "Confirm before executing irreversible actions: any voice command that would modify, delete, or take irreversible action should be read back for confirmation before execution",
+        "Speak more slowly and clearly",
+        "Use text for important commands"
+      ],
+      "correct": 1,
+      "explanation": "Voice recognition errors are inevitable, especially for similar-sounding words. For irreversible or significant actions: the system should always read back what it heard and what action it will take before executing. \"You said 'delete all messages from John' — shall I proceed?\" This adds one confirmation step but prevents misheard commands from causing irreversible damage. Always use confirmation for: deletions, sends, purchases, and any action you can't easily undo."
+    },
+    {
+      "type": "quiz",
+      "question": "Voice AI in a smart speaker records your conversations to improve accuracy. What should you consider?",
+      "options": [
+        "Nothing — the recordings are encrypted",
+        "Privacy: what data is recorded, how long is it retained, who can access it, can it be used for training? Review the device's privacy policy and consider whether to use voice AI for sensitive conversations",
+        "Only a concern in public spaces",
+        "Only a concern if you discuss financial information"
+      ],
+      "correct": 1,
+      "explanation": "Voice AI devices that record for accuracy improvement may store audio clips that include: conversations you intended to be private, sensitive personal information, and data you didn't intend to share. Actions: (1) read the privacy policy to understand what's recorded and retained; (2) regularly review and delete voice history in the app settings; (3) decide which rooms/situations warrant a physical mute; (4) don't discuss passwords, medical information, or private conversations near always-on voice devices."
     },
     {
       "type": "callout",

@@ -2,8 +2,13 @@
   "id": "10-3",
   "title": "Zapier + AI Actions",
   "part": 10,
-  "estimatedMinutes": 25,
-  "tags": ["automation", "zapier", "no-code", "ai-workflows"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "automation",
+    "zapier",
+    "no-code",
+    "ai-workflows"
+  ],
   "sections": [
     {
       "type": "text",
@@ -36,6 +41,54 @@
       "type": "callout",
       "variant": "info",
       "content": "**Zapier's real strength** is breadth of integrations. If you need to connect an obscure CRM to Slack, Zapier almost certainly has both apps. n8n might not. The AI step being paywalled is a real limitation — but for pure app-to-app connections on the free tier, Zapier remains the easiest option."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Zapier AI Actions Exploration",
+      "content": "Explore what Zapier's AI Actions capabilities can do.\n\n**Step 1 — Log into Zapier** (or create a free account).\n\n**Step 2 — Explore the app integrations** relevant to your work. Search for apps you use daily.\n\n**Step 3 — Ask Claude:** *\"Compare Zapier and n8n for someone who: (1) doesn't want to run their own server, (2) needs to connect to common SaaS apps quickly, (3) wants AI processing within their automations. What are the trade-offs?\"*\n\n**Step 4 — Explore a pre-built Zap template** related to your work. What does it do? What would you need to customise?\n\n**Step 5 — Identify your best Zapier use case:** Which automation from your blueprint would be better on Zapier (managed hosting, easy app connections) vs n8n (self-hosted, more control, free)?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Zapier + AI Zap",
+      "content": "Build a Zapier workflow that uses AI processing.\n\n**Step 1 — Choose a simple but real automation** that can run on Zapier's free tier:\n- New Gmail → AI summary → save to Notion\n- New Typeform response → AI classification → add to Airtable\n- RSS feed item → AI rewrite → post to Slack\n\n**Step 2 — In Zapier**, create a new Zap:\n- Set your Trigger app and event\n- Add a Zapier AI step (using ChatGPT or Anthropic integration if available) or an HTTP Request step to call the Anthropic API\n- Add a final action to deliver the output\n\n**Step 3 — Write the AI prompt** for the processing step. Ask Claude to help: \"Write a prompt for this Zap step that [describe the AI task]. The input will be [describe the trigger data format].\"\n\n**Step 4 — Test the Zap** with real data.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this Zap I built [describe it]. What will break when [specific edge case]?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Zapier vs n8n Decision Framework",
+      "content": "Build a decision framework for choosing between automation tools.\n\n**Step 1 — Compare on these dimensions:**\n| Criteria | Zapier | n8n | Winner for my use case |\n|---|---|---|---|\n| Hosting/maintenance | Fully managed | Self-hosted | |\n| App integrations | 5000+ native | 400+ native + HTTP | |\n| Cost at scale | Expensive | Free (self-hosted) | |\n| AI capabilities | Built-in AI steps | HTTP + any API | |\n| Privacy/data | Cloud processed | Your infrastructure | |\n| Technical skill required | Low | Medium | |\n\n**Step 2 — Fill in the \"winner\" column** based on YOUR specific situation and priorities.\n\n**Step 3 — Ask Claude:** *\"A developer who values data privacy, plans to automate 10+ workflows, and has time to maintain infrastructure vs a non-technical marketer who needs 3 simple automations quickly — which tool fits each person?\"*\n\n**Step 4 — Make your personal recommendation** based on your context."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Automation Monitoring System",
+      "content": "Build monitoring for your automations so you know when they break.\n\n**Step 1 — Identify all automations you're running** (across Zapier, n8n, or other tools).\n\n**Step 2 — For each automation**, define:\n- What is the expected output or frequency?\n- How would you know if it's broken? (no emails sent, no records created, wrong data)\n- Who needs to be notified if it breaks?\n\n**Step 3 — Build a monitoring Zap or n8n workflow:**\n- A daily check that verifies automations ran\n- Alert if expected outputs haven't appeared\n\n**Step 4 — Ask Claude to design the monitoring logic:** *\"I have these automations [list them]. Design a monitoring system that would alert me within 24 hours if any of them stop working. I'd prefer to detect failures by [watching outputs, not by checking tool status].\"*\n\n**Step 5 — Implement at least one monitoring check** for your most important automation."
+    },
+    {
+      "type": "quiz",
+      "question": "You're on Zapier's free plan and your Zap runs 100 times per month. The free plan allows 100 tasks per month. What happens when you add a second step to the Zap?",
+      "options": [
+        "Nothing changes — task count is per Zap, not per step",
+        "Each step counts as one task per Zap run — a 2-step Zap uses 200 tasks for 100 runs, exceeding the free plan limit",
+        "The Zap runs at half speed to conserve tasks",
+        "Zapier automatically upgrades your plan"
+      ],
+      "correct": 1,
+      "explanation": "Zapier counts tasks per step per Zap run. A 3-step Zap running 100 times = 300 tasks. This is a critical pricing consideration when adding AI processing steps (which often use an additional step) — what worked on the free plan with one step may require a paid plan once you add AI processing. Always calculate: (steps in Zap) × (expected runs per month) = tasks needed, then compare to your plan limit."
+    },
+    {
+      "type": "quiz",
+      "question": "A Zapier automation fails silently — it runs but produces no output and no error. What is the most likely cause and how do you diagnose it?",
+      "options": [
+        "Zapier is down — check their status page",
+        "A filter or condition step evaluated to false and stopped the Zap — check the Zap's run history to see which step stopped processing",
+        "The Zap was paused by Zapier for inactivity",
+        "The trigger app stopped sending data to Zapier"
+      ],
+      "correct": 1,
+      "explanation": "Silent failures in Zapier are usually caused by Filter or Path steps that evaluate to false and halt execution without error — this is by design, but it can look like a failure when the condition is wrong. Check the Run History: click on a specific run to see each step's input/output and at which step execution stopped. If a Filter stopped it, check the filter condition against the actual input data."
     },
     {
       "type": "callout",

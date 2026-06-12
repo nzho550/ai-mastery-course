@@ -2,8 +2,14 @@
   "id": "18-1",
   "title": "Advanced Prompting: CoT, ToT, ReAct & Beyond",
   "part": 18,
-  "estimatedMinutes": 40,
-  "tags": ["advanced", "prompting", "chain-of-thought", "reasoning", "hands-on"],
+  "estimatedMinutes": 70,
+  "tags": [
+    "advanced",
+    "prompting",
+    "chain-of-thought",
+    "reasoning",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -64,6 +70,54 @@
       ],
       "correct": 1,
       "explanation": "Tree-of-Thought is the right technique here because the job decision has multiple genuinely competing considerations (career, money, culture, opportunity cost) that can each be analysed independently. Exploring 3 explicit perspectives and then synthesising forces the model to consider angles it would otherwise weight arbitrarily. CoT (A) helps with sequential reasoning but doesn't force multi-angle exploration. A shorter answer (C) reduces depth. Restarting (D) produces the same generic output."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Advanced Prompting Technique Drill",
+      "content": "Test CoT, ToT, and ReAct on the same problem.\n\n**Step 1 — Choose a complex reasoning problem:** a logic puzzle, a complex analysis, a multi-step calculation.\n\n**Step 2 — Test Chain of Thought (CoT):**\n\"Think step by step: [your problem]\"\n\n**Step 3 — Test Tree of Thought (ToT):**\n\"Explore multiple solution paths for [problem]. For each path: describe the approach, take 3 steps, then evaluate whether it's promising. After exploring 3 paths, synthesise the best solution.\"\n\n**Step 4 — Test ReAct (Reasoning + Acting):**\n\"For [problem], use the ReAct pattern: Thought → Action → Observation, repeating until you reach a conclusion. Be explicit about each thought and what information you're seeking.\"\n\n**Step 5 — Compare results.** Which technique produced the best outcome for this problem type?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Technique-Matched Prompt Library",
+      "content": "Create a prompt library organised by technique, matching techniques to problem types.\n\n**Step 1 — For each advanced technique**, create a reusable template:\n\n**CoT template:**\n\"[Problem]. Let's think through this step by step. First... Then... Finally...\"\n\n**ToT template:**\n\"Explore 3 different approaches to [problem]. For each: take 2 steps of reasoning, then rate its promise (1-5). After exploring all 3, select the best and continue to completion.\"\n\n**ReAct template:**\n\"Solve [problem] using the ReAct pattern. Format each cycle as: Thought: [reasoning], Action: [what to do], Observation: [result]. Continue until you reach a conclusion.\"\n\n**Step 2 — Test each template** on a problem type it's suited for.\n\n**Step 3 — Add to your prompt library** with notes on when to use each."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Technique Selection Framework",
+      "content": "Build a framework for choosing the right advanced prompting technique.\n\n**Step 1 — Ask Claude:** \"For these problem types, which advanced prompting technique works best and why? (1) Multi-step math, (2) Open-ended creative generation, (3) Complex decision-making with trade-offs, (4) Debugging code, (5) Research synthesis.\"\n\n**Step 2 — Build a decision guide:**\n| Problem type | Best technique | Why |\n|---|---|---|\n| Multi-step reasoning | CoT | |\n| Explore alternatives | ToT | |\n| Research and verify | ReAct | |\n\n**Step 3 — Apply the guide** to 3 prompts you commonly write. Which technique should you be using that you haven't been?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Implement a ReAct Reasoning Loop",
+      "content": "Build a code implementation of the ReAct pattern.\n\n**Step 1 — Ask Claude Code** to implement a ReAct loop:\n```\nImplement a Python function that uses the ReAct pattern with the Anthropic API:\n1. Takes a problem/question as input\n2. Runs a loop: get a Thought+Action from Claude, execute the action (use web search or calculation), feed back the Observation\n3. Continue until Claude says \"I have reached a conclusion\"\n4. Return the final answer and the full reasoning chain\n\nFor available actions: web_search(query), calculate(expression), retrieve_document(url)\n(You can mock the action implementations for now)\n```\n\n**Step 2 — Test the ReAct loop** on a multi-step research question.\n\n**Step 3 — Mandatory review:** Ask Claude: *\"Review this ReAct implementation. What failure modes exist? How do I prevent infinite loops?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You use Chain of Thought prompting and Claude shows its reasoning but reaches a wrong conclusion. What is the advantage of CoT even when the answer is wrong?",
+      "options": [
+        "There is no advantage — a wrong answer is a wrong answer",
+        "The reasoning chain shows WHERE the error occurred — you can identify the specific step that went wrong and correct it, rather than just knowing the output is wrong",
+        "CoT answers are always more accurate than direct answers",
+        "The chain of thought can be used to train a better model"
+      ],
+      "correct": 1,
+      "explanation": "CoT makes errors inspectable and correctable. Without CoT: \"The answer is 47\" — wrong, but you don't know why. With CoT: \"Step 1: [correct], Step 2: [correct], Step 3: [wrong assumption], therefore: 47\" — you can see exactly where the reasoning went wrong and correct at that specific step. This is the fundamental advantage of transparent reasoning over black-box outputs, even when the final answer is incorrect."
+    },
+    {
+      "type": "quiz",
+      "question": "Tree of Thought explores multiple reasoning paths before selecting the best one. When does this technique NOT add value?",
+      "options": [
+        "ToT never adds value over CoT",
+        "For problems with one clear correct approach where exploring alternatives wastes time — simple factual questions, standard calculations, or tasks where the path is obvious",
+        "For creative tasks only",
+        "For problems requiring more than 5 reasoning steps"
+      ],
+      "correct": 1,
+      "explanation": "ToT adds value when multiple valid approaches exist and exploring them might reveal a better path than the first intuitive approach. It doesn't add value for: clearly defined problems with one correct algorithm (use CoT instead), simple factual lookups (just ask), or time-sensitive tasks where exploration overhead exceeds the benefit. A useful heuristic: \"Would a human expert consider multiple approaches before committing?\" If yes, ToT; if no, CoT or direct prompting."
     },
     {
       "type": "callout",

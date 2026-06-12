@@ -2,8 +2,15 @@
   "id": "15-4",
   "title": "Working with Documents & PDFs",
   "part": 15,
-  "estimatedMinutes": 30,
-  "tags": ["research", "beginner", "pdf", "notebooklm", "documents", "hands-on"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "research",
+    "beginner",
+    "pdf",
+    "notebooklm",
+    "documents",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -56,6 +63,54 @@
       ],
       "correct": 1,
       "explanation": "NotebookLM is specifically designed for this use case: multiple documents, answers grounded exclusively in your uploaded sources, with citations back to exact passages. This matters for literature reviews because you need to be able to verify every claim traces to a specific paper. Claude.ai accepts multiple files but doesn't always cite precisely by paper and passage. Perplexity searches the web — it doesn't use your specific uploaded papers. ChatGPT's code interpreter excels at data and spreadsheets rather than multi-document literature analysis with passage-level citations. NotebookLM's grounding in your specific sources (not general training) also means it won't add information from papers you didn't include."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Document Extraction Drill",
+      "content": "Extract structured information from a complex document.\n\n**Step 1 — Find a dense document** relevant to your work: a research paper, a technical specification, a lengthy report.\n\n**Step 2 — Upload to Claude** and ask for structured extraction:\n```\nExtract the following from this document:\n1. Main thesis or conclusion (1-2 sentences)\n2. Key findings (bullet points, with page/section reference)\n3. Methodology (how was this research/analysis conducted?)\n4. Data sources used\n5. Limitations acknowledged by the authors\n6. Recommendations made\n7. What this document does NOT address that I might expect it to\n```\n\n**Step 3 — Verify 3 specific extractions** against the original document.\n\n**Step 4 — Ask Claude:** \"What did you struggle to extract from this document? What information was ambiguous or missing?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Multi-Document Synthesis",
+      "content": "Synthesise information across multiple documents.\n\n**Step 1 — Gather 3-5 documents** on the same topic (research papers, reports, articles).\n\n**Step 2 — Process each document** with Claude, extracting key points in a consistent format.\n\n**Step 3 — Ask Claude to synthesise across documents:**\n```\nI have extracted key points from [N] documents on [topic]:\n\nDocument 1: [paste extraction]\nDocument 2: [paste extraction]\n...\n\nSynthesise these sources:\n1. What do all documents agree on? (consensus findings)\n2. Where do they disagree? (conflicting findings)\n3. What does each source add that others don't cover?\n4. What is the overall weight of evidence for the key claims?\n5. What questions do these documents collectively fail to answer?\n```\n\n**Step 4 — Mandatory review:** Ask Claude: *\"In your synthesis, which conclusions are most supported by the evidence? Which are most speculative?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — PDF Limitation Awareness",
+      "content": "Understand when AI PDF processing fails and how to detect it.\n\n**Step 1 — Test AI PDF extraction** with a challenging document:\n- A scanned PDF (image-based, not text)\n- A document with complex tables or charts\n- A document with footnotes or endnotes\n- A multi-column academic paper\n\n**Step 2 — For each type**, evaluate:\n- Did the extraction get the tables correctly?\n- Were footnotes included or lost?\n- Did multi-column text get scrambled?\n- Were charts and figures described or ignored?\n\n**Step 3 — Ask Claude:** \"What types of PDF content are most likely to be misextracted? How do I verify extraction accuracy for these challenging types?\"\n\n**Step 4 — Develop your verification protocol** for each document type you commonly work with."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Document Analysis Pipeline",
+      "content": "Build a repeatable document analysis pipeline.\n\n**Step 1 — Ask Claude Code** to create a document analysis pipeline script:\n```\nWrite a Python script that creates a document analysis pipeline:\n1. Accepts a folder of PDFs as input\n2. For each PDF:\n   a. Extract text (using PyPDF2 or pdfplumber)\n   b. Send to Anthropic API for structured analysis\n   c. Save the structured output as a JSON file\n3. After all PDFs: generate a synthesis report combining key findings\n4. Create an index file listing all documents and their key themes\n\nHandle errors gracefully: skip unreadable PDFs, log failures.\n```\n\n**Step 2 — Test on a folder of documents** from a real research project.\n\n**Step 3 — Verify the output quality** against one document you've read manually.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"What types of content in these documents would the pipeline extract incorrectly? What manual review is still needed?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You upload a 50-page PDF to Claude and ask about a specific statistic. Claude gives you a number that seems wrong. What is the most likely cause?",
+      "options": [
+        "Claude made up the number",
+        "PDF extraction may have misread numbers (especially from tables or charts), or Claude confused similar statistics from different sections — verify directly in the document",
+        "The PDF is encrypted",
+        "Claude cannot process PDFs correctly"
+      ],
+      "correct": 1,
+      "explanation": "PDF number extraction errors are common: tables format numbers in ways that confuse parsers, footnote references get merged with numbers, and similar statistics in close proximity get confused. Always verify specific numbers from PDF extraction against the original document. For critical statistics, note the page number Claude references and check it directly. Never cite a number from AI document processing without verifying it in the source."
+    },
+    {
+      "type": "quiz",
+      "question": "You need to extract data from 100 research PDFs. What is the most important quality check to implement in your pipeline?",
+      "options": [
+        "Verify all 100 documents manually",
+        "Randomly sample 10% of outputs and verify them against the source PDFs — this gives statistical confidence without requiring 100% manual review",
+        "Only process documents under 10 pages",
+        "Run each document twice and compare outputs"
+      ],
+      "correct": 1,
+      "explanation": "Statistical sampling provides quality assurance at scale. Randomly check 10-15% of outputs against source documents. If your sample shows 95%+ accuracy, you can use the full batch with confidence. If you find systematic errors (e.g., all table data is wrong), you can fix the pipeline and reprocess before using the data. This is standard quality assurance practice for any automated data processing pipeline."
     },
     {
       "type": "callout",

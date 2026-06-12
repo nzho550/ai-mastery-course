@@ -2,8 +2,15 @@
   "id": "16-3",
   "title": "Data Analysis Without Coding",
   "part": 16,
-  "estimatedMinutes": 25,
-  "tags": ["office", "beginner", "excel", "data", "analysis", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "office",
+    "beginner",
+    "excel",
+    "data",
+    "analysis",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -47,6 +54,54 @@
       ],
       "correct": 2,
       "explanation": "ChatGPT's file analysis generates both the chart (as a downloadable image) and the written summary in a single conversation — typically in under 2 minutes. Manual chart building (A) is time-consuming and requires Excel skill. Hiring a data analyst (B) is overkill for a standard quarterly chart. Copying to Word (D) creates extra manual work and doesn't produce charts."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Data Analysis Without Code Drill",
+      "content": "Analyse a dataset without writing any code.\n\n**Step 1 — Take a spreadsheet or CSV** you actually need to analyse. If you don't have one, ask Claude to generate a sample dataset of 50 rows.\n\n**Step 2 — Paste a sample** (first 20 rows) into Claude and ask:\n```\nAnalyse this dataset:\n[paste data]\n\n1. Describe what this dataset contains and what each column represents\n2. What are the most interesting patterns or trends?\n3. Are there any anomalies or outliers I should investigate?\n4. What are the top 3 business questions this data can answer?\n5. What analysis would I need to do to answer each question?\n```\n\n**Step 3 — Pick the most important question** and ask Claude to answer it using the data.\n\n**Step 4 — Verify Claude's analysis** against the raw numbers."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Deep Data Analysis on a Real Dataset",
+      "content": "Conduct a thorough data analysis on a real business dataset.\n\n**Step 1 — Choose a real dataset** with at least 100 rows: sales data, customer data, operational metrics, survey results.\n\n**Step 2 — Paste representative samples** and ask Claude for comprehensive analysis:\n```\nConduct a thorough analysis of this business data:\n[paste sample]\n\nProvide:\n1. Summary statistics for key numeric columns\n2. Trend analysis: what is changing over time?\n3. Segmentation: what groups or patterns exist in the data?\n4. Correlation analysis: what variables seem related?\n5. Recommendations: what business decisions does this data support?\n\nBe specific — use the actual numbers from the data.\n```\n\n**Step 3 — Ask follow-up questions** on the most interesting finding.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"What analysis did you skip or approximate? What would a professional data analyst do differently with this dataset?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Chart and Visualisation Recommendations",
+      "content": "Use AI to decide how to visualise your data most effectively.\n\n**Step 1 — Take your analysis from Workshop B** and ask Claude:\n\"For each insight from the analysis, what is the most effective chart type? For each recommendation: chart type, what goes on each axis, what the chart should show, and what annotation would be most helpful.\"\n\n**Step 2 — Create the recommended charts** in Excel, Google Sheets, or another tool.\n\n**Step 3 — Ask Claude to review your charts:** \"Review these charts [describe them]. Are they the most effective way to communicate each insight? What would make each chart clearer?\"\n\n**Step 4 — Identify the one chart** that most clearly communicates the key finding. This is your \"hero chart\" for any presentations."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Data Analysis to Business Decision",
+      "content": "Convert your data analysis into a concrete business recommendation.\n\n**Step 1 — Take your completed analysis.**\n\n**Step 2 — Ask Claude:**\n```\nBased on this data analysis [paste it], write a business recommendation memo:\n\n- To: [decision-maker role]\n- From: [your role]\n- Subject: [what decision this informs]\n\nInclude:\n1. Bottom line up front: the recommended action\n2. Data evidence: 3 specific data points that support it\n3. Business impact: what happens if we act vs don't act\n4. Confidence level: how strong is the evidence?\n5. Next step: one concrete action to approve\n```\n\n**Step 3 — Review the memo.** Is every data point verifiable? Is the recommendation genuinely supported by the data?\n\n**Step 4 — Send the memo** (or prepare it for your next meeting)."
+    },
+    {
+      "type": "quiz",
+      "question": "You paste 500 rows of data to Claude and ask for analysis. Claude says \"based on this data, X.\" How confident should you be in this finding?",
+      "options": [
+        "Fully confident — Claude can analyse data perfectly",
+        "Verify the key findings: Claude may misread column headers, make arithmetic errors, or miss important context about what the data represents. Spot-check 3 claims against the raw data",
+        "Only confident if Claude also shows its calculations",
+        "Confident only if the finding seems intuitive to you"
+      ],
+      "correct": 1,
+      "explanation": "AI data analysis has real failure modes: misidentifying column relationships, making arithmetic errors on large numbers, missing context about what values mean (is 0 a missing value or a real zero?), and confusing units. For any analysis that informs a decision, verify: pick 3 specific claims Claude made, check them manually against the raw data. If they're right, your confidence in the rest increases. If any are wrong, review the full analysis more carefully."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude analyses your sales data and says \"customers in Region A have significantly higher lifetime value.\" What follow-up question is most important?",
+      "options": [
+        "How much higher is \"significantly\"?",
+        "All of: what is \"significantly\" in numbers, how many customers are in each region (sample size matters), are there confounding factors (product mix, demographics), and is the difference recent or historical?",
+        "What AI model was used for the analysis?",
+        "Whether this is consistent with last year's data"
+      ],
+      "correct": 1,
+      "explanation": "A meaningful finding requires several validations: (1) quantify it — \"Region A customers are worth £4,200 vs £2,800 average, a 50% difference\" is meaningful; (2) check sample size — 5 customers in Region A is not a reliable finding; (3) check for confounders — maybe Region A only sells premium products; (4) check trend — is this a new pattern or consistent? Without these, \"significantly higher lifetime value\" could be a statistical artifact rather than a business insight."
     },
     {
       "type": "callout",

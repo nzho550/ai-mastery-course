@@ -2,8 +2,15 @@
   "id": "17-3",
   "title": "Research + Planning Combined",
   "part": 17,
-  "estimatedMinutes": 30,
-  "tags": ["projects", "beginner", "research", "planning", "workflow", "hands-on"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "projects",
+    "beginner",
+    "research",
+    "planning",
+    "workflow",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -51,6 +58,54 @@
       ],
       "correct": 1,
       "explanation": "Two days of research with a still-vague plan is the symptom of undirected research — collecting information without being specific about what the plan needs. The fix is to switch from open-ended research to question-driven research: identify exactly what your plan still needs to know, research only that, then build. Continuing open-endedly (A) produces more information but doesn't resolve the vagueness — you're still lacking a structure that tells you what's relevant. Building first and validating after (C) can work for low-stakes projects but risks building on false assumptions when the stakes are higher. Summarising first (D) delays planning further without resolving the vagueness — a summary of undirected research is still undirected. The pattern of 'lots of research, vague plan' almost always means the planning questions weren't defined first."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Research-Informed Planning",
+      "content": "Combine research and planning in one integrated workflow.\n\n**Step 1 — Choose a planning task** that requires research first: a technology choice, a market entry decision, a process change.\n\n**Step 2 — Run rapid research** (15 minutes max) using Perplexity and Claude.\n\n**Step 3 — Feed research directly into planning:**\n\"Based on this research [paste results], create a plan for [planning task]. The plan should reflect the current state of [technology/market/field] and avoid approaches that the research suggests are outdated or problematic.\"\n\n**Step 4 — Identify where the plan would be different** without the research. What assumptions would you have made?\n\n**Step 5 — Ask Claude:** \"What remaining research gaps would most improve this plan if filled?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Evidence-Based Decision Making",
+      "content": "Make a significant decision using evidence gathered through AI research.\n\n**Step 1 — Identify a real decision** you need to make that deserves research.\n\n**Step 2 — Design the research:** what evidence would help you decide?\n\n**Step 3 — Gather the evidence** using AI research tools.\n\n**Step 4 — Ask Claude to structure the decision:**\n```\nHelp me make this decision: [describe it]\n\nBased on this evidence: [paste research]\n\nStructure as:\n1. Decision criteria: what factors matter most?\n2. Options: what are the realistic choices?\n3. Evidence for each option: what does the research support?\n4. Recommendation: which option does the evidence most support?\n5. Key uncertainty: what would change this recommendation?\n```\n\n**Step 5 — Make the decision.** Document your reasoning for future reference."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Research Quality for Planning",
+      "content": "Ensure your planning research is sufficient quality to act on.\n\n**Step 1 — For a plan you've created**, list every assumption the plan makes.\n\n**Step 2 — For each assumption**, ask: Is this based on research? On experience? On assumption?\n\n**Step 3 — Identify the highest-risk assumptions** (ones where if you're wrong, the plan fails).\n\n**Step 4 — Ask Claude to challenge your highest-risk assumption:**\n\"I'm planning based on this assumption: [describe it]. What evidence would contradict this assumption? What scenarios would make this assumption wrong?\"\n\n**Step 5 — Either find evidence to support the assumption** or adjust the plan to be more robust if the assumption is wrong."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Plan Stress-Testing",
+      "content": "Systematically stress-test a plan against realistic failure scenarios.\n\n**Step 1 — Take a completed project or decision plan.**\n\n**Step 2 — Ask Claude to generate failure scenarios:**\n```\nStress-test this plan [describe it] against realistic failure scenarios.\n\nFor each scenario:\n1. Describe what happens\n2. At what point in the plan does it cause problems?\n3. What is the impact?\n4. How would I detect it early?\n5. What is the contingency response?\n\nGenerate: 3 likely scenarios, 2 unlikely but plausible scenarios, 1 worst-case scenario.\n```\n\n**Step 3 — For each failure scenario**, decide: Does the plan need to change? Or is the contingency response adequate?\n\n**Step 4 — Update the plan** based on the stress test findings."
+    },
+    {
+      "type": "quiz",
+      "question": "You plan a product launch based on AI-researched market data showing strong demand. Before committing budget, what additional validation is most important?",
+      "options": [
+        "Get more AI research to confirm the findings",
+        "Talk to potential customers directly: AI research aggregates existing information, but customer interviews reveal what people actually want vs what they say in surveys",
+        "Hire a market research firm",
+        "Check competitor products for similar features"
+      ],
+      "correct": 1,
+      "explanation": "AI research tells you what has been written about a market — articles, surveys, reports. Customer interviews tell you what specific people in your target market actually think and would pay for. These often diverge significantly. The highest-value validation before committing budget: 5-10 interviews with people who match your target customer profile. Ask about their actual behaviour and spending, not hypothetical interest. \"Would you use a product that does X?\" produces unreliable answers; \"How do you currently solve this problem and what do you pay for it?\" produces actionable data."
+    },
+    {
+      "type": "quiz",
+      "question": "Your research says one approach is best, but your experience suggests another approach works better. Which should you trust?",
+      "options": [
+        "Always trust research over experience",
+        "Always trust experience over research",
+        "Investigate the discrepancy: determine whether the research applies to your specific context, whether your experience is representative, and what would help resolve the conflict",
+        "Use both approaches in parallel and see which works"
+      ],
+      "correct": 2,
+      "explanation": "Discrepancy between research and experience is valuable signal, not a problem to dismiss. Investigate: (1) Does the research apply to your specific context (company size, industry, geography)? (2) Is your experience based on enough cases to be generalizable, or is it a sample of 1-2? (3) Are you measuring the same thing? (4) Has something changed since the research was conducted? Understanding why they conflict often produces better insights than either source alone."
     },
     {
       "type": "callout",

@@ -2,8 +2,14 @@
   "id": "17-6",
   "title": "Project Capstone — The AI-Augmented Work Sprint",
   "part": 17,
-  "estimatedMinutes": 60,
-  "tags": ["projects", "beginner", "capstone", "hands-on", "workflow"],
+  "estimatedMinutes": 85,
+  "tags": [
+    "projects",
+    "beginner",
+    "capstone",
+    "hands-on",
+    "workflow"
+  ],
   "sections": [
     {
       "type": "text",
@@ -55,6 +61,54 @@
       ],
       "correct": 2,
       "explanation": "When a quality review surfaces a significant gap and time is short, the best move is transparency: acknowledge the gap directly in the document and state how you'll address it. This is more credible than pretending the gap doesn't exist (A), which decision-makers usually notice and that damages trust. Delaying sharing (B) is sometimes right for truly critical gaps, but for most business documents, 'acknowledge and plan to address' keeps momentum while demonstrating professional awareness. Removing the related section (D) often makes the gap less visible but doesn't resolve the underlying problem. The general principle: decision-makers prefer 'here's what I know, here's what I'm still working on' over a polished document that turns out to have hidden gaps when questions are asked."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Sprint Planning",
+      "content": "Plan a real work sprint using AI tools.\n\n**Step 1 — Define your sprint:**\n- Duration: [1-2 weeks recommended for first sprint]\n- Goal: [one clear outcome]\n- Available time: [total hours available]\n\n**Step 2 — Ask Claude to help you plan the sprint:**\n```\nHelp me plan a [X-day] work sprint.\n\nSprint goal: [describe it]\nAvailable hours: [total]\nContext: [current state, constraints]\n\nCreate:\n1. Task breakdown with time estimates\n2. Priority order (considering dependencies)\n3. Buffer allocation (20% of time for unexpected issues)\n4. Definition of Done for the sprint goal\n5. Daily check-in questions to assess progress\n```\n\n**Step 3 — Review and adjust the plan** based on your actual knowledge of the work.\n\n**Step 4 — Start the sprint.** Use the daily check-in questions."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Mid-Sprint AI Check-in",
+      "content": "Use AI to course-correct during an active work sprint.\n\n**Step 1 — Halfway through your sprint**, conduct an AI-assisted check-in:\n```\nI'm halfway through a sprint. Help me assess progress.\n\nSprint goal: [original goal]\nPlanned tasks: [list them with original estimates]\nCompleted so far: [what's done]\nActual time spent: [hours]\nRemaining time: [hours]\n\nAnalyse:\n1. Am I on track to hit the sprint goal?\n2. Which tasks are over/under estimate?\n3. Should any tasks be deprioritised to protect the sprint goal?\n4. What's at risk in the second half?\n```\n\n**Step 2 — Make the recommended adjustments** — don't let sunk cost keep you on track for a failing sprint.\n\n**Step 3 — Ask Claude:** \"What is the minimum viable version of this sprint goal I can hit if I have only 60% of the remaining time?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Sprint Delivery and Documentation",
+      "content": "Complete your sprint and document the outputs.\n\n**Step 1 — At sprint end**, compile your outputs.\n\n**Step 2 — Ask Claude to generate sprint documentation:**\n```\nDocument this completed work sprint:\n\nGoal: [original goal]\nCompleted: [what was actually done]\nNot completed: [what was left out and why]\nKey decisions made: [important choices during the sprint]\nLessons learned: [what would you do differently]\n\nGenerate:\n1. Sprint summary (one page max)\n2. Decision log (decisions made and reasoning)\n3. Lessons learned (2-3 actionable insights)\n4. Next sprint recommendations\n```\n\n**Step 3 — Review the documentation.** Is it accurate?\n\n**Step 4 — Share the sprint summary** with relevant stakeholders."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Continuous Improvement System",
+      "content": "Build a system for continuously improving your AI-augmented work.\n\n**Step 1 — Create a \"Work Improvement Log\"** — a simple file tracking:\n- What AI workflows saved the most time\n- What AI tools failed or produced poor results\n- New AI techniques tried and their outcomes\n- Prompts that worked exceptionally well\n\n**Step 2 — After each sprint**, spend 10 minutes updating the log.\n\n**Step 3 — Monthly review:** Ask Claude to analyse your improvement log:\n\"Based on this improvement log [paste it], what patterns do you see? What should I invest in learning next? What techniques am I not using that would be valuable?\"\n\n**Step 4 — Set one concrete improvement goal** for next month based on the analysis."
+    },
+    {
+      "type": "quiz",
+      "question": "Your sprint plan assumed 6 hours for a task that actually took 12 hours. What should you do for future planning?",
+      "options": [
+        "Plan more conservatively — double all estimates",
+        "Investigate why: was the task complexity underestimated, were there interruptions, was research needed? Understanding the cause guides the right correction — don't just inflate estimates without understanding why",
+        "Keep the same estimates — one data point doesn't change the model",
+        "Subtract the overrun from other sprint tasks' estimates"
+      ],
+      "correct": 1,
+      "explanation": "Estimation errors need diagnosis before correction. A 12-hour task estimated at 6 hours could be caused by: poor requirements clarity (the task was bigger than understood), unexpected technical complexity, interruptions (the 6 hours of actual work were stretched over 12 hours of calendar time), or systematic optimism bias. Each root cause has a different fix. Without diagnosis, you might just inflate estimates by 2×, which creates false safety and a self-fulfilling prophecy where work expands to fill inflated time budgets."
+    },
+    {
+      "type": "quiz",
+      "question": "At the end of your work sprint, you completed 70% of the planned tasks. Was the sprint successful?",
+      "options": [
+        "No — you should complete 100% of planned tasks",
+        "Depends on whether the sprint goal was achieved. If the 70% you completed included all the highest-priority tasks and the sprint goal is met, this is success. If the 30% you skipped included critical items, it's not",
+        "Yes — 70% completion is a standard industry benchmark",
+        "No — you need to work overtime to complete the remaining 30%"
+      ],
+      "correct": 1,
+      "explanation": "Sprint success is measured against the sprint goal, not task completion rate. If you completed the most important 70% including all goal-critical tasks, this may be a successful sprint that also revealed your planning had lower-priority tasks. If the 30% you skipped were goal-critical, the sprint failed regardless of how many total tasks were done. This is why defining a clear sprint goal (single outcome) matters more than planning many tasks."
     },
     {
       "type": "callout",

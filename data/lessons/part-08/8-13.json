@@ -2,8 +2,14 @@
   "id": "8-13",
   "title": "Database MCP — SQLite",
   "part": 8,
-  "estimatedMinutes": 30,
-  "tags": ["mcp", "sqlite", "database", "claude-code", "sql"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "sqlite",
+    "database",
+    "claude-code",
+    "sql"
+  ],
   "sections": [
     {
       "type": "text",
@@ -58,6 +64,54 @@
       "tag": "CLAUDECODE",
       "title": "Build a Personal Book Log Database",
       "content": "**Setup:**\n1. Run `npm install -g @modelcontextprotocol/server-sqlite` in PowerShell\n2. Add the sqlite entry to your `settings.json` (shown above)\n3. Relaunch `claude`, type `/mcp` — confirm `sqlite` is listed\n\n**Task 1 — Create the database:**\nAsk: `\"Using the SQLite MCP, create a table called 'books' with these columns:\n- id (integer, primary key, auto-increment)\n- title (text, required)\n- author (text, required)\n- genre (text)\n- date_read (text, format: YYYY-MM-DD)\n- rating (integer, 1–5)\n- notes (text)\"\n`\nConfirm it was created by asking: `\"List all tables in the database and describe the books table schema.\"`\n\n**Task 2 — Add real data:**\nAsk: `\"Add these 5 books to the database:\n1. 'Deep Work' by Cal Newport, Non-Fiction, read 2026-01-15, rating 5\n2. 'The Pragmatic Programmer' by Dave Thomas, Technology, read 2026-02-10, rating 4\n3. 'Atomic Habits' by James Clear, Self-Help, read 2026-03-01, rating 5\n4. 'The Phoenix Project' by Gene Kim, Technology, read 2026-04-20, rating 4\n5. 'Thinking Fast and Slow' by Daniel Kahneman, Psychology, read 2026-05-05, rating 3\"\n`\n\n**Task 3 — Query with natural language:**\nAsk these questions one at a time and let Claude write and run the SQL:\n- `\"Show me all my books sorted by rating, highest first.\"`\n- `\"How many books have I read in each genre?\"`\n- `\"What's my average rating across all books?\"`\n- `\"Which books did I rate 5 stars?\"`\n\n**Task 4 — Add your own books:**\nAsk: `\"Add 3 books I've actually read recently.\"` and give Claude real titles and authors from books you've actually read. Add ratings you'd genuinely give them.\n\n**Task 5 — Explore the schema:**\nAsk: `\"What's the SQL schema for the books table? Show me the CREATE TABLE statement.\"`\n\nNote what it looks like — this is what Claude generated and executed on your behalf.\n\nThe database file `exercises/practice.db` now exists on your hard drive. You can open it with any SQLite browser (like DB Browser for SQLite, available free at sqlitebrowser.org) to see it visually."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — SQLite MCP First Queries",
+      "content": "This drill gets you running real SQL queries via Claude Code.\n\n**Step 1 — Set up a SQLite database** for testing:\n```powershell\n# Create a test database using Python\npython -c \"import sqlite3; conn = sqlite3.connect('test.db'); c = conn.cursor(); c.execute('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, email TEXT, created_at TEXT)'); c.executemany('INSERT INTO users VALUES (?,?,?,?)', [(1,'Alice','alice@example.com','2024-01-15'),(2,'Bob','bob@example.com','2024-02-20'),(3,'Carol','carol@example.com','2024-03-10')]); conn.commit()\"\n```\n\n**Step 2 — Configure SQLite MCP** to point to test.db.\n\n**Step 3 — In Claude Code**, run these queries:\n- \"List all tables in the database\"\n- \"Show the schema for the users table\"\n- \"Count how many users were created each month\"\n- \"Find any users with duplicate email addresses\"\n\n**Step 4 — Ask Claude to write a query you don't know how to write:** \"Find the users who were created most recently in each month.\"\n\n**Step 5 — Verify all queries** return correct results."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Real Database Analysis",
+      "content": "Use SQLite MCP to analyse a real database from your work.\n\n**Step 1 — Identify a real SQLite database** from your work (or create a small one from CSV data you have).\n\n**Step 2 — Run a comprehensive database analysis:**\n```\nAnalyse this database:\n1. List all tables with their row counts\n2. For each table, describe what it likely contains based on the schema\n3. Identify foreign key relationships (even if not formally declared)\n4. Find any tables that seem to have data quality issues (nulls, duplicates, anomalies)\n5. What are the 3 most important business questions this database could answer?\n```\n\n**Step 3 — Ask the most important question** from Claude's analysis.\n\n**Step 4 — Mandatory review:** Ask: *\"Review your analysis. What assumptions did you make about the data that might be wrong? What would you need to verify to be confident in these findings?\"*\n\n**Step 5 — Create a one-page database documentation** based on Claude's analysis."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Safe Database Operations",
+      "content": "Practice running database operations with appropriate safety measures.\n\n**Step 1 — Understand the risk tiers:**\n- **Safe**: SELECT queries — read-only, no risk\n- **Careful**: INSERT, UPDATE — adds or changes data\n- **Dangerous**: DELETE, DROP — removes data permanently\n\n**Step 2 — For any write operation**, always use this workflow:\n1. Run a SELECT to see what you're about to change\n2. Verify the WHERE clause would target exactly the right rows\n3. Then run the write operation\n\n**Step 3 — Practice the pattern:**\n```\n-- First: see what you're about to update\nSELECT * FROM users WHERE created_at < '2024-01-01';\n-- Review the rows, then:\nUPDATE users SET status = 'archived' WHERE created_at < '2024-01-01';\n```\n\n**Step 4 — Ask Claude Code** to run an UPDATE on your test database using this workflow.\n\n**Step 5 — Ask Claude:** \"What database safety practices should I configure in CLAUDE.md to prevent Claude Code from running destructive database operations without confirmation?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — AI-Generated SQL Reporting",
+      "content": "Use Claude Code with SQLite MCP to generate automated data reports.\n\n**Step 1 — Choose a reporting question** you regularly need answered from your data.\n\n**Step 2 — Ask Claude Code to write and run the report:**\n```\nGenerate a report answering: [your question]\n\nFor the report:\n1. Write the SQL query\n2. Explain what the query does before running it\n3. Run the query\n4. Interpret the results: what do the numbers mean?\n5. What follow-up questions do the results raise?\n```\n\n**Step 3 — Review the SQL** before Claude Code runs it.\n\n**Step 4 — Validate the results** against what you expect or can manually verify.\n\n**Step 5 — Save the query** in a queries library for reuse. Ask Claude to format it with comments explaining each part."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code generates this SQL: `DELETE FROM users WHERE last_login < '2023-01-01'`. Before executing it, what must you do?",
+      "options": [
+        "Check if the database is backed up",
+        "Run `SELECT * FROM users WHERE last_login < '2023-01-01'` first to see exactly which rows will be deleted and verify this is your intent",
+        "Verify the SQL syntax is correct",
+        "Ask Claude Code if it's sure about the query"
+      ],
+      "correct": 1,
+      "explanation": "Before any DELETE: always SELECT first with the same WHERE clause to see exactly what will be affected. This is the professional safety protocol. Even if Claude Code correctly understood your request, verify: are there really that many rows? Are any of these IDs in use in other tables? Is the date threshold right? A DELETE with no backup and no prior SELECT check is one of the most common paths to irreversible data loss."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code writes an SQL query with a JOIN between tables and tells you it represents \"all active users who made a purchase in 2024.\" Why might this still need verification?",
+      "options": [
+        "Claude Code SQL is always correct",
+        "The JOIN logic might not match your database's actual foreign key structure, or \"active\" might be defined differently in your schema than Claude Code assumed",
+        "SQL JOINs are automatically validated by the database",
+        "The query will error if it's wrong, so errors will catch any issues"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code makes assumptions about schema relationships that may not match your actual data model. \"Active users\" might mean different things in different schemas (status = 'active', is_deleted = false, last_login within 30 days). The JOIN might use wrong column names or miss a required condition. Always check: does the WHERE clause match your actual definition? Does the row count make sense? Run with a LIMIT first on large tables."
     },
     {
       "type": "callout",

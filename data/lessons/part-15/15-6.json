@@ -2,8 +2,14 @@
   "id": "15-6",
   "title": "Writing Research Reports with AI",
   "part": 15,
-  "estimatedMinutes": 35,
-  "tags": ["research", "beginner", "writing", "reports", "hands-on"],
+  "estimatedMinutes": 70,
+  "tags": [
+    "research",
+    "beginner",
+    "writing",
+    "reports",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -55,6 +61,54 @@
       ],
       "correct": 1,
       "explanation": "AI writes the best research reports when it has your actual research notes (so the output is grounded in your specific sources, not AI's general knowledge), a target outline (so it follows your structure rather than guessing), the intended audience (so it calibrates vocabulary and depth), and desired length (so it doesn't over- or under-write). Providing just the topic (A) produces a generic output that may be factually inaccurate and contains none of your research. Section titles alone (C) without research content produces the same generic problem — AI fills in with general knowledge, not your verified findings. Example reports (D) help with style but don't solve the core problem: grounding the output in your research. The instruction 'use [NEEDS MORE RESEARCH] for gaps' is also important — without it, AI fills gaps invisibly."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Report Structure Design",
+      "content": "Design the structure of a research report before writing it.\n\n**Step 1 — Ask Claude:** \"I need to write a research report on [your topic] for [your audience: executives, technical peers, general readers]. What is the optimal structure? How long should each section be? What should the executive summary contain?\"\n\n**Step 2 — Review the proposed structure.** Does it match how your audience thinks about this topic?\n\n**Step 3 — Ask Claude to design the data visualisation plan:**\n\"For each section of this report, what data should be visualised? What type of chart or table would communicate each finding most effectively?\"\n\n**Step 4 — Compare your planned structure to a strong example:** Ask Claude to describe the structure of a well-regarded report in your field.\n\n**Step 5 — Finalise your structure** and start with the executive summary."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Draft a Full Research Report",
+      "content": "Write a complete research report with AI assistance.\n\n**Step 1 — Choose a real research topic** you need to report on.\n\n**Step 2 — Feed your research** to Claude and ask it to draft section by section:\n```\nWrite the [Executive Summary / Introduction / Findings / Conclusion] of a research report on [topic].\n\nAudience: [who will read this]\nKey findings to cover: [list them from your research]\nTone: [formal/professional/accessible]\nLength: [target word count for this section]\n\nBase the content on this research: [paste your research notes]\n```\n\n**Step 3 — Review each section carefully** before accepting it — you are the researcher, not the AI.\n\n**Step 4 — Edit for accuracy:** Any fact that came from your research should be verifiable. Any claim you can't source should be either sourced or removed.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this draft report. What claims are not well-supported? What important nuance did the draft miss?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Report Editing with AI",
+      "content": "Use AI to improve the quality of your draft report.\n\n**Step 1 — Take the draft from Workshop B.**\n\n**Step 2 — Run three separate editing passes with Claude:**\n\n**Pass 1 — Clarity:** \"Edit this report section for clarity. Identify any sentences that are unnecessarily complex, use jargon without definition, or could be misunderstood by a non-expert reader.\"\n\n**Pass 2 — Logic:** \"Review the logical flow of this report. Does each paragraph follow from the previous? Are the conclusions supported by the evidence presented? Flag any logical leaps.\"\n\n**Pass 3 — Completeness:** \"Review this report for completeness. What important questions would a reader have that this report doesn't answer? What's missing?\"\n\n**Step 3 — Apply the improvements** from all three passes.\n\n**Step 4 — Ask a human reader** to review one section. What do they find unclear or missing that the AI didn't catch?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Report Template Library",
+      "content": "Build a library of report templates for your most common report types.\n\n**Step 1 — Identify your 3 most common report types:** executive briefings, technical specifications, project status reports, competitive analyses.\n\n**Step 2 — For each type**, ask Claude to create a template:\n```\nCreate a template for a [report type] that I can reuse. Include:\n- Document structure with section headings\n- Guidance on what to include in each section\n- Word count targets for each section\n- Formatting standards (headers, tables, bullet points)\n- A cover page template\n- Example executive summary for this report type\n```\n\n**Step 3 — Test each template** by filling in one section with real content.\n\n**Step 4 — Save to your Claude Projects** or a shared folder so the templates are always available.\n\n**Step 5 — Share with colleagues** who write similar reports — standardised templates improve team communication."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude drafts an executive summary that is factually accurate but buries the most important finding in the third paragraph. What should you do?",
+      "options": [
+        "Accept it — the finding is there even if not prominent",
+        "Restructure the executive summary: lead with the most critical finding, use the \"inverted pyramid\" approach — most important information first",
+        "Ask Claude to make it longer so the finding appears more times",
+        "Add bold formatting to the buried finding"
+      ],
+      "correct": 1,
+      "explanation": "AI drafts often produce well-structured, logically ordered content that buries the lead. Executives and busy readers form opinions based on the first two sentences. The inverted pyramid rule: start with the most important finding/recommendation, then provide supporting evidence, then background context. Ask Claude: \"Restructure this executive summary so the most important finding is in the first two sentences.\" Then verify the restructuring hasn't lost accuracy."
+    },
+    {
+      "type": "quiz",
+      "question": "You write a research report with AI assistance. A colleague points out that one of your main conclusions is contradicted by a recent paper they know about. What is the best response?",
+      "options": [
+        "Defend your conclusion — your research supported it",
+        "Thank them, obtain the paper, evaluate it honestly, and update your report if the new evidence changes your conclusion — this is how good research works",
+        "Note the disagreement in a footnote without changing your conclusion",
+        "Ask Claude to refute the colleague's paper"
+      ],
+      "correct": 1,
+      "explanation": "Good research is self-correcting. When a colleague identifies a contradictory source: obtain it, evaluate its quality and relevance, and honestly assess whether it changes your conclusion. If it does, update your report — that's intellectual integrity. If it doesn't (the study is lower quality, measures something different, etc.), document why in your report: \"One study (Author, 2024) suggests X, but we assessed this study as [reason it doesn't change the conclusion].\" The worst response is to suppress or ignore contradictory evidence."
     },
     {
       "type": "callout",

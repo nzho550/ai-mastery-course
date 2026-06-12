@@ -2,8 +2,14 @@
   "id": "8-12",
   "title": "Google Drive & Calendar MCP — Real Workspace Organisation",
   "part": 8,
-  "estimatedMinutes": 30,
-  "tags": ["mcp", "google-drive", "google-calendar", "claude-code", "productivity"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "google-drive",
+    "google-calendar",
+    "claude-code",
+    "productivity"
+  ],
   "sections": [
     {
       "type": "text",
@@ -40,6 +46,54 @@
       "tag": "CLAUDECODE",
       "title": "Organise Your Calendar and Drive for the Course",
       "content": "**Pre-check:** Type `/mcp` to confirm Google Drive and Google Calendar MCPs are listed and authenticated. If they show as unauthenticated, authenticate them now.\n\n---\n\n**Calendar — Phase 1: Audit your schedule**\n```\nAsk: \"Show me everything I have scheduled in the next 14 days.\nIdentify:\n1. Days that look completely free\n2. Recurring events (meetings, commitments)\n3. Any scheduling conflicts or double-bookings\"\n```\nRead the output. Get a clear picture of where your time currently goes.\n\n**Calendar — Phase 2: Find study slots**\n```\nAsk: \"Based on my schedule, find 3 recurring weekly time slots\nwhere I consistently have nothing scheduled — ideally morning\nor early afternoon, at least 1 hour each. Suggest specific\ndays and times.\"\n```\nReview the suggestions. Pick the slots that feel realistic for you.\n\n**Calendar — Phase 3: Block out study sessions**\n```\nAsk: \"Create a recurring weekly calendar event for each of the\nslots we identified:\nTitle: 'AI Course — Study Session'\nDuration: 1 hour\nRecurrence: weekly for 8 weeks\nDescription: 'Dedicated time for the AI Mastery Course.'\"\n```\nOpen Google Calendar in your browser and confirm the events are there.\n\n**Calendar — Phase 4: Add course milestones**\n```\nAsk: \"Create calendar events for these course milestones,\nspacing them 1 week apart starting from next Monday:\n1. Complete Parts 1-3 (AI Foundations + Prompting)\n2. Complete Parts 4-5 (VS Code mastery)\n3. Complete Parts 6-7 (Claude Code)\n4. Complete Part 8 (MCP servers)\n5. Complete Parts 9-11 (Tools + APIs)\n6. Complete Parts 12-13 (Local AI + Safety)\n7. Complete all Capstone Projects\"\n```\n\n---\n\n**Drive — Phase 1: Audit your current Drive**\n```\nAsk: \"List the 20 most recently modified files in my Google Drive.\nGroup them by likely category: work, personal, learning, other.\"\n```\nGet a sense of what's in your Drive.\n\n**Drive — Phase 2: Create course folder structure**\n```\nAsk: \"Create a folder in my Google Drive called 'AI Mastery Course'\nwith these subfolders:\n- Resources\n- Notes\n- Projects\n- References\"\n```\nConfirm in Google Drive that the folders exist.\n\n**Drive — Phase 3: Find relevant existing documents**\n```\nAsk: \"Search my Drive for any documents related to learning,\ntechnology, programming, or AI. List them so I can decide\nwhich to move into the AI Mastery Course folder.\"\n```\nFor any relevant documents, ask Claude to move them.\n\n**Drive — Phase 4: Create your course master notes document**\n```\nAsk: \"Create a new Google Doc in the 'AI Mastery Course/Notes'\nfolder with this structure:\nTitle: 'AI Course Master Notes'\n\n- Table of Contents with all 14 parts listed\n- Under each part: a section header with space for notes\n- A 'Key Prompts I Use Daily' section at the end\n- A 'My AI Tool Stack' section at the end\"\n```\nOpen the document in Google Drive and verify it's there.\n\n---\n\n**Final verification:**\n- Open Google Calendar — your 8 weeks of study sessions should be blocked out\n- Open Google Drive — your AI Mastery Course folder structure should exist\n- Your master notes document should be in Drive/AI Mastery Course/Notes\n\nSave a summary of what you set up to `notes/workspace-setup.md`."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Google Drive MCP Operations",
+      "content": "Hands-on with Google Drive MCP in 8 minutes.\n\n**Step 1 — Configure Google Drive MCP** with appropriate OAuth credentials.\n\n**Step 2 — Test these operations:**\n- \"List the 10 most recently modified files in my Google Drive\"\n- \"Search for files with 'budget' in the name\"\n- \"Read the contents of [specific document name]\"\n\n**Step 3 — Test search with context:** \"Find all Google Docs that mention [a specific topic related to your work] and list their titles and last modified dates.\"\n\n**Step 4 — Test Calendar:** \"What meetings do I have tomorrow? For each, show the title and time.\"\n\n**Step 5 — Evaluate:** What is the most immediately useful operation for your workflow? What is harder than expected?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI Meeting Prep from Calendar",
+      "content": "Use Google Calendar MCP to automatically prepare for upcoming meetings.\n\n**Step 1 — Open Claude Code** with Google Calendar MCP.\n\n**Step 2 — Run a meeting preparation workflow:**\n```\nCheck my Google Calendar for today and tomorrow. For each meeting:\n1. Identify the topic/purpose from the event title\n2. Note who the attendees are\n3. Suggest 3 preparation questions I should be able to answer\n4. If there's a document or email about this topic in my Drive, find it\n```\n\n**Step 3 — Review the preparation brief.** Is it useful? What context is missing?\n\n**Step 4 — For your next real meeting**, actually use this preparation brief before attending. Did it help?\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review the meeting prep brief. What important preparation is missing? What questions should I ask myself that you didn't generate?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Drive Document Analysis",
+      "content": "Use Google Drive MCP to analyse documents across your Drive.\n\n**Step 1 — Ask Claude Code** to identify documents that need attention:\n```\nSearch my Google Drive for:\n1. Documents that haven't been modified in over 6 months but have \"current\" or \"active\" in their name\n2. Duplicate or similar document names that might represent redundant files\n3. Large folders that might be disorganised\n```\n\n**Step 2 — Review the findings.** Do they surface real organisational problems?\n\n**Step 3 — Choose one finding** and take action: archive a stale document, rename a misleading one, or reorganise a folder.\n\n**Step 4 — Ask Claude:** *\"Based on what you found in my Drive, what organisational principles would you recommend I adopt for naming and organising documents going forward?\"*\n\n**Step 5 — Write a one-page Drive organisation guide** for yourself."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Weekly Review Workflow",
+      "content": "Build an automated weekly review using Calendar and Drive MCP.\n\n**Step 1 — Design your weekly review:**\n- What did I accomplish this week? (from calendar and Drive activity)\n- What meetings do I have next week? (from calendar)\n- What documents need attention? (from Drive search)\n- What are my priorities for next week?\n\n**Step 2 — Create a custom slash command** `review-week.md` in your `.claude/commands/` folder that executes this workflow.\n\n**Step 3 — Test the command** at the end of your current workweek.\n\n**Step 4 — Evaluate:** How much time does the AI-assisted weekly review save vs doing it manually? What does the AI miss that requires your personal knowledge?\n\n**Step 5 — Refine the command** based on what you found most and least useful."
+    },
+    {
+      "type": "quiz",
+      "question": "Google Drive MCP can read your Google Docs. You ask Claude Code to summarise all documents in your \"Projects\" folder. What is an important risk?",
+      "options": [
+        "Claude Code may not handle Google Docs format correctly",
+        "The summary will include all document contents in Claude Code's context — if any documents contain sensitive information, it will be processed by Anthropic's systems",
+        "The summarisation will delete the original documents",
+        "Claude Code cannot access shared documents"
+      ],
+      "correct": 1,
+      "explanation": "When Claude Code reads your Google Drive documents, the content is processed through Anthropic's API. If your documents contain sensitive business information, client data, personal information, or confidential content, this is sent to Anthropic's cloud. Review your organisation's data policies and Claude's data retention policies before using Drive MCP on sensitive documents. Consider configuring it with access only to specific, non-sensitive folders."
+    },
+    {
+      "type": "quiz",
+      "question": "You use Calendar MCP and Claude Code creates a new calendar event on your behalf. Who is responsible for verifying the event details are correct?",
+      "options": [
+        "The MCP server, which validates all calendar entries",
+        "You — Claude Code may create events with incorrect times, wrong attendees, or inaccurate descriptions; always verify before the event",
+        "Google Calendar, which auto-corrects AI-created events",
+        "Claude Code confirms with you before creating any event"
+      ],
+      "correct": 1,
+      "explanation": "Any AI-created calendar event requires your verification. Common failure modes: wrong time zone (especially for remote participants), including wrong attendees (common names, similar email addresses), inaccurate meeting description, setting the wrong meeting duration. After any calendar creation via MCP, open Google Calendar and verify the event details before other attendees receive invitations. Incorrect meeting invitations are a real professional embarrassment."
     },
     {
       "type": "callout",

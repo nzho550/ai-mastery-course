@@ -2,8 +2,15 @@
   "id": "17-5",
   "title": "Review, Quality Check & Stakeholder Communication",
   "part": 17,
-  "estimatedMinutes": 28,
-  "tags": ["projects", "beginner", "review", "quality", "communication", "hands-on"],
+  "estimatedMinutes": 63,
+  "tags": [
+    "projects",
+    "beginner",
+    "review",
+    "quality",
+    "communication",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -51,6 +58,54 @@
       ],
       "correct": 2,
       "explanation": "Honest, direct communication about project issues — with a focus on the path forward — builds trust. The sponsor's role is to help remove blockers and make decisions, which requires accurate information. Waiting (A) delays the sponsor's ability to help and makes the eventual conversation worse — sponsors are most angry when they find out late, not when they find out early with a plan. Minimising the extent (B) destroys credibility when the full picture emerges and is a common career mistake. Aligning the team first (D) can delay communication needlessly and may look like coordinated spin if the sponsor later learns the timeline."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Quality Review Framework",
+      "content": "Build a quality review framework for your work outputs.\n\n**Step 1 — Ask Claude:** \"What are the key dimensions of quality for [your primary output type — code, documents, analysis, designs]? For each dimension, what does excellent vs mediocre look like?\"\n\n**Step 2 — Create a quality rubric** specific to your work:\n| Dimension | 1 (Poor) | 3 (Acceptable) | 5 (Excellent) |\n|---|---|---|---|\n| [Dimension 1] | | | |\n| [Dimension 2] | | | |\n\n**Step 3 — Apply the rubric** to a recent work output. Where are you strong? Where is there room to improve?\n\n**Step 4 — Identify the one quality dimension** where AI assistance would add the most value."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Assisted Quality Review",
+      "content": "Use AI to conduct quality reviews systematically.\n\n**Step 1 — Take a work output** you're about to finalise.\n\n**Step 2 — Ask Claude to review it using your quality rubric:**\n```\nReview this [output type] using this quality rubric:\n[paste the rubric]\n\nFor each dimension:\n1. Score: 1-5\n2. What specifically earned that score\n3. What would be needed to score one point higher\n\nBe specific — use examples from the document.\n```\n\n**Step 3 — Review Claude's assessment.** Do you agree with each score?\n\n**Step 4 — Address the 2 lowest-scoring dimensions** before finalising.\n\n**Step 5 — Mandatory self-review:** After the AI review, do your own review. What did the AI miss?**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Stakeholder Communication for Quality",
+      "content": "Use AI to craft quality-focused stakeholder communications.\n\n**Step 1 — Identify a completed project** or work output ready for stakeholder communication.\n\n**Step 2 — Ask Claude to draft a stakeholder update:**\n```\nWrite a stakeholder update for [project/output]:\n\nAudience: [who they are and what they care about]\nKey messages:\n- What was accomplished\n- Quality indicators (metrics, tests passed, review outcomes)\n- Any known limitations or open items\n- Next steps\n\nTone: [professional/direct/detailed]\nLength: [maximum]\n```\n\n**Step 3 — Review for accuracy and appropriate level of detail** for the audience.\n\n**Step 4 — Add any context** Claude couldn't know about the stakeholder relationship or specific concerns."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Retrospective Analysis",
+      "content": "Conduct a rigorous retrospective using AI assistance.\n\n**Step 1 — Choose a completed project** or sprint.\n\n**Step 2 — Ask Claude to facilitate a retrospective:**\n```\nFacilitate a retrospective for this project/sprint:\n[describe what happened — timeline, goals, outcomes, team]\n\nCover these retrospective dimensions:\n1. What went well? (be specific, not generic)\n2. What didn't go well? (root causes, not just symptoms)\n3. What surprised us? (things we didn't expect)\n4. What should we do differently next time? (specific, actionable)\n5. What should we definitely do again? (specific practices to repeat)\n\nFor each item: identify whether it's a process issue, communication issue, technical issue, or people issue.\n```\n\n**Step 3 — Select 2-3 actionable improvements** to implement next sprint/project.\n\n**Step 4 — Document the retro** and schedule a check-in to see if the improvements were made."
+    },
+    {
+      "type": "quiz",
+      "question": "You use AI to review your work and it gives everything a score of 4/5 or 5/5. Should you trust this assessment?",
+      "options": [
+        "Yes — if the AI is satisfied, the work is good",
+        "Be skeptical: AI review can be sycophantic, especially if you've framed the review request in a way that implies the work is good. Ask specifically for problems and weaknesses",
+        "AI is always accurate in quality assessments",
+        "Adjust down by 1 point as a standard correction"
+      ],
+      "correct": 1,
+      "explanation": "AI quality reviews can be overly positive, especially when the work is framed positively or when the review criteria aren't specific enough. Countermeasures: (1) explicitly ask for problems rather than balanced feedback: \"Find the 3 weakest parts of this document\"; (2) use specific, measurable criteria rather than vague dimensions; (3) ask adversarially: \"Imagine you're a skeptical editor/reviewer — what would you reject this for?\"; (4) compare to an explicitly high standard: \"Compare this to an excellent example of this document type.\""
+    },
+    {
+      "type": "quiz",
+      "question": "Your retrospective identifies \"better communication\" as a needed improvement. Why is this not a useful retrospective output?",
+      "options": [
+        "It is useful — communication is always important",
+        "\"Better communication\" is too vague to act on. Useful retrospective outputs are specific and behavioural: \"Send project status updates every Friday by 3pm\" or \"Raise blockers in daily standup instead of waiting until they're critical\"",
+        "It should say \"more communication\" instead",
+        "Communication improvements should be handled by HR, not in retrospectives"
+      ],
+      "correct": 1,
+      "explanation": "\"Better communication\" fails the specificity test — it could mean anything. A good retrospective action is specific enough that you can check whether it happened: \"Every PR will have a description explaining the why, not just the what\" or \"Before escalating to a client, discuss with the team first.\" Vague improvements get agreed to and then forgotten because there's no clear behaviour change to implement. Ask for every retrospective output: \"What would 'doing this better' look like in a specific situation?\""
     },
     {
       "type": "callout",

@@ -2,8 +2,14 @@
   "id": "8-20",
   "title": "The Unified Office — Chaining MCPs Across All Your Tools",
   "part": 8,
-  "estimatedMinutes": 30,
-  "tags": ["mcp", "intermediate", "workflow", "integration", "hands-on"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "intermediate",
+    "workflow",
+    "integration",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -43,6 +49,54 @@
       ],
       "correct": 1,
       "explanation": "Notion requires explicit page-level access grants for each page or database. Having a valid Notion integration token is not enough — the token only accesses pages you've specifically shared with the integration via the 'Add connections' menu. Email and Slack MCP working fine confirms the Claude Code config is correct; the issue is specifically that the Notion task database was not shared with the claude-mcp integration. Open the database in Notion → ... → Add connections → select your integration."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Chain 3 MCPs on One Task",
+      "content": "This drill chains multiple MCP servers together on a single task.\n\n**Step 1 — Ensure you have at least 3 MCP servers configured:** GitHub, Slack/Teams, and Notion or a filesystem server.\n\n**Step 2 — Give Claude Code a task that genuinely requires all 3:**\n```\n\"For the highest-priority open GitHub issue in [repo], do the following:\n1. Read the issue details\n2. Search Slack for any related discussions about this issue\n3. Create a Notion page summarising: the issue, what Slack said about it, and a proposed approach\"\n```\n\n**Step 3 — Watch Claude Code** move between MCP servers. Note: how does it transition between them? Does it correctly carry context from one to the next?\n\n**Step 4 — Review all 3 outputs.** Are they consistent with each other? Does the Notion page accurately represent both the GitHub issue and the Slack discussion?\n\n**Step 5 — Identify the weakest link** in this chain. Where did coordination between MCP servers work least well?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Unified Office Workflow",
+      "content": "Design and execute a multi-MCP workflow that represents your actual work.\n\n**Step 1 — Map a real work process** that touches multiple tools: a project update workflow, a client communication workflow, a code review and deployment workflow.\n\n**Step 2 — For each step in the process**, identify: which MCP server handles it?\n\n**Step 3 — Ask Claude Code to execute the entire workflow:**\n```\nExecute this workflow using the available MCP tools:\n[describe each step and which tool it involves]\n\nFor each step: tell me what you're doing before doing it.\n```\n\n**Step 4 — Review each output** before Claude Code moves to the next step. Intervene if any output is wrong.\n\n**Step 5 — Mandatory end-to-end review:** At the end, ask Claude Code: *\"Review the complete workflow you just executed. What could have gone wrong? What information was lost or distorted as you moved between tools?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — MCP Orchestration Design",
+      "content": "Design a more complex multi-MCP orchestration for future implementation.\n\n**Step 1 — Identify your highest-value cross-tool process** — a workflow where you currently manually copy information between 4+ tools.\n\n**Step 2 — Map the ideal automated workflow:**\n- Input trigger: what starts the process?\n- Step 1: which tool, what operation, what output?\n- Step 2: which tool, what operation, what output?\n- Continue through all steps\n- Final output: what does the human see?\n\n**Step 3 — Identify the MCP servers needed** for each step.\n\n**Step 4 — Ask Claude:** *\"Review this multi-MCP workflow design. What coordination challenges will arise? Where will context be lost between tools? What failure modes exist?\"*\n\n**Step 5 — Decide:** Is this workflow feasible with current MCP capabilities? What would need to change to make it work?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Document Your MCP Ecosystem",
+      "content": "Create a comprehensive map of your MCP setup and its capabilities.\n\n**Step 1 — Document your installed MCP servers:**\n```markdown\n# My MCP Ecosystem\n\n## Installed Servers\n\n### [Server Name]\n- Purpose: [what it does]\n- Tools available: [list the tools]\n- Best for: [use cases where it excels]\n- Limitations: [what it can't do well]\n- Access: [what credentials/permissions it uses]\n\n## Multi-Server Workflows\n### [Workflow Name]\n- Trigger: [what starts it]\n- Steps: [which servers, in what order]\n- Output: [what it produces]\n```\n\n**Step 2 — Ask Claude Code** to help complete the documentation by reading your MCP configuration.\n\n**Step 3 — Identify 3 workflows** you haven't automated yet but could with your current MCP setup.\n\n**Step 4 — Prioritise one** and execute it this week."
+    },
+    {
+      "type": "quiz",
+      "question": "You chain GitHub MCP → Slack MCP → Notion MCP in a single Claude Code task. Claude Code reads a GitHub issue, searches Slack, and creates a Notion page. Where is coordination most likely to break down?",
+      "options": [
+        "At the first step — GitHub MCP is always the least reliable",
+        "Between steps — context must be correctly transferred from one tool's output to the next tool's input, and misinterpretation accumulates across steps",
+        "At the last step — Notion MCP is the newest and least stable",
+        "There are no coordination challenges in multi-MCP workflows"
+      ],
+      "correct": 1,
+      "explanation": "The weakest points in multi-step AI workflows are the handoffs between steps. When Claude Code reads a GitHub issue and then uses that context to search Slack, the search query must correctly capture the issue's intent. When Slack search results feed into Notion page creation, the summarisation must preserve important context. Errors accumulate: a subtly wrong understanding at step 1 produces a meaningfully wrong output at step 3. Review each step's output before allowing the workflow to continue."
+    },
+    {
+      "type": "quiz",
+      "question": "Your multi-MCP workflow successfully ran but some outputs look slightly wrong. You're not sure which step introduced the error. What is the debugging approach?",
+      "options": [
+        "Re-run the entire workflow and hope it's different",
+        "Add explicit review checkpoints between each step — run step 1, review output, then run step 2 with that reviewed output, then step 3",
+        "Only use single-MCP workflows to avoid this problem",
+        "Accept the slight errors — multi-MCP workflows will never be perfect"
+      ],
+      "correct": 1,
+      "explanation": "Multi-step workflow debugging requires bisecting the problem: run step 1 alone and verify its output is correct. Then run step 2 with the verified step 1 output and check. Continue until you find where correctness breaks. Once identified, you know exactly which MCP server or transition needs fixing. Alternatively, add explicit review prompts between steps: \"Here's what step 1 found: [output]. Does this accurately represent the situation before we proceed to step 2?\""
     },
     {
       "type": "callout",

@@ -2,8 +2,14 @@
   "id": "17-2",
   "title": "Breaking Down Complex Problems",
   "part": 17,
-  "estimatedMinutes": 25,
-  "tags": ["projects", "beginner", "problem-solving", "thinking", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "projects",
+    "beginner",
+    "problem-solving",
+    "thinking",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -54,6 +60,54 @@
       ],
       "correct": 2,
       "explanation": "When you don't know the root cause, the right first step is using a framework (MECE, fishbone, Five Whys) to generate a structured list of possible causes and the diagnostic questions that would distinguish between them. This guides your data collection so you're investigating the right things. AI can't tell you the reason (A) because it doesn't have your internal data. More aggressive deadlines (B) would worsen the problem if the root cause is capacity or process — you'd be adding pressure without addressing the cause. A process improvement plan (D) is only valid once you know what's causing the problem — improving the wrong process can make things worse."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Problem Decomposition Drill",
+      "content": "Practice breaking complex problems into solvable pieces.\n\n**Step 1 — Choose a genuinely complex problem** you're facing: a technical challenge, a strategic decision, an operational problem.\n\n**Step 2 — Ask Claude to decompose it:**\n```\nHelp me break down this complex problem:\n[describe the problem]\n\nDecompose it into:\n1. Sub-problems (what are the distinct components?)\n2. Dependencies (which sub-problems depend on solving others first?)\n3. Knowns vs unknowns (what do we know? what do we need to discover?)\n4. Quick wins (what can be solved immediately with high confidence?)\n5. Long-pole items (what will take the most time/resources?)\n```\n\n**Step 3 — Review the decomposition.** Does it match your understanding?\n\n**Step 4 — Identify the first sub-problem to tackle** and start working on it."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Root Cause Analysis",
+      "content": "Use AI to conduct a rigorous root cause analysis.\n\n**Step 1 — Choose a problem or failure** that occurred recently.\n\n**Step 2 — Apply the 5 Whys with AI:**\n```\nConduct a root cause analysis using the 5 Whys method.\n\nProblem: [describe what happened]\n\nFor each \"why,\" don't accept the first answer — dig one level deeper:\nWhy 1: Why did [problem] happen?\nWhy 2: Why did [answer to why 1] happen?\n...continue 5 levels deep.\n\nAt the end, identify: what is the true root cause? Is it a system problem or a people problem?\n```\n\n**Step 3 — Validate the root cause.** Does it explain all instances of the problem?\n\n**Step 4 — Design a fix for the root cause** (not a band-aid for the symptom).\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Is the root cause you identified actually addressable? Or does it lead to another problem that can't be solved?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Decision Tree Construction",
+      "content": "Build a decision tree for a complex multi-step decision.\n\n**Step 1 — Identify a decision** with multiple branches and conditional paths.\n\n**Step 2 — Ask Claude to build a decision tree:**\n```\nCreate a decision tree for this situation:\n[describe the decision context]\n\nFor each decision point:\n- What question determines the branch?\n- What are the possible answers?\n- What action does each answer lead to?\n- What are the terminal states (final outcomes)?\n\nFormat as a text-based decision tree I can follow.\n```\n\n**Step 3 — Test the decision tree** on 3 different scenarios. Does it lead to the right decisions?\n\n**Step 4 — Identify any missing branches** — scenarios the tree doesn't handle.\n\n**Step 5 — Share with colleagues** as a shared decision framework."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Complexity Reduction",
+      "content": "Use AI to identify which complexity in a problem can be eliminated.\n\n**Step 1 — Describe a complex problem** you're working on.\n\n**Step 2 — Ask Claude:**\n```\nI'm dealing with this complex problem: [describe it]\n\nHelp me reduce unnecessary complexity:\n1. What aspects of this problem are complex because they need to be vs complex because of how we've approached them?\n2. What constraints are real vs assumed?\n3. What would a simple, direct solution look like? (Even if it seems too simple)\n4. What is the minimum viable solution that addresses the core problem?\n5. What am I overcomplicating?\n```\n\n**Step 3 — Evaluate the \"simple solution.\"** Is it actually too simple, or is it workable?\n\n**Step 4 — Try the simplest approach first** before adding complexity back in."
+    },
+    {
+      "type": "quiz",
+      "question": "You're solving a complex technical problem and Claude gives you a very detailed decomposition with 15 sub-problems. What should you do?",
+      "options": [
+        "Solve all 15 sub-problems simultaneously for maximum efficiency",
+        "Prioritise: identify the 2-3 sub-problems that are blocking everything else or that have the highest impact if unsolved — solve those first",
+        "Delegate each sub-problem to a different team member",
+        "Ask Claude to reduce it to 5 sub-problems maximum"
+      ],
+      "correct": 1,
+      "explanation": "Not all sub-problems are equal. The critical path principle: some sub-problems block everything else (must be solved first), some have high impact, and some are edge cases that matter only if the core solution works. Identify your blocking dependencies first, then your highest-impact items. Solving 15 sub-problems in parallel is usually impossible and often inefficient — dependencies mean you'll be blocked waiting for prerequisite sub-problems anyway."
+    },
+    {
+      "type": "quiz",
+      "question": "The 5 Whys root cause analysis leads to \"the culture doesn't value quality.\" How useful is this root cause, and what should you do?",
+      "options": [
+        "Very useful — culture is the most important factor",
+        "Not very actionable: \"culture\" is too large to address directly. Ask: what specific behaviours or incentives create this culture? What is the one behaviour change or process change that would most improve quality?",
+        "This means the problem is unsolvable",
+        "Escalate immediately to senior leadership"
+      ],
+      "correct": 1,
+      "explanation": "\"Culture\" as a root cause is almost always an intermediate cause, not the true root cause. Culture is a result of specific behaviours, incentives, and systems. Push one level deeper: \"Why doesn't the culture value quality? Is it because quality isn't measured? Because speed is rewarded and quality isn't? Because there's no feedback loop when quality fails?\" Each of these has a more specific, actionable fix than \"change the culture.\""
     },
     {
       "type": "callout",

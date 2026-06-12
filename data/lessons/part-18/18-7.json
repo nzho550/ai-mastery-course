@@ -2,8 +2,16 @@
   "id": "18-7",
   "title": "Building an AI Research Tool — The Full Lifecycle",
   "part": 18,
-  "estimatedMinutes": 120,
-  "tags": ["advanced", "agents", "architecture", "hands-on", "capstone", "research", "engineering"],
+  "estimatedMinutes": 145,
+  "tags": [
+    "advanced",
+    "agents",
+    "architecture",
+    "hands-on",
+    "capstone",
+    "research",
+    "engineering"
+  ],
   "sections": [
     {
       "type": "text",
@@ -80,6 +88,54 @@
       ],
       "correct": 1,
       "explanation": "An AI asked 'does this look good?' will almost always say yes — you've primed it to validate. One validation pass finds surface issues at best. The techniques that find real problems are: adversarial prompting ('how would this fail?'), persona-based review ('as a security architect, what are the STRIDE threats?'), and pre-mortem ('assume this failed — why?'). Run at least 3 of these before trusting the architecture. A second model's review (C) can help but isn't a substitute for adversarial framing. Adding components (D) doesn't address the review quality problem."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Tool Architecture and Planning",
+      "content": "Plan your AI research tool before writing any code.\n\n**Step 1 — Define the exact problem** your research tool solves. Spend 10 minutes on this — the clearer the problem, the simpler the tool.\n\n**Step 2 — Ask Claude** to help you choose the right architecture:\n```\nHelp me choose the right architecture for this AI research tool:\n[describe your tool]\n\nCompare these approaches:\n1. Simple LLM wrapper (just call Claude with a system prompt)\n2. RAG over a document corpus\n3. Agentic loop with web search tools\n4. Hybrid (which combination?)\n\nFor my use case, which approach delivers the most value with the least complexity?\n```\n\n**Step 3 — Choose the simplest architecture** that meets your requirements.\n\n**Step 4 — Write a one-page technical spec** before starting development."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build, Test, and Iterate",
+      "content": "Execute the full development lifecycle for your research tool.\n\n**Step 1 — Build the MVP** using Claude Code.\n\n**Step 2 — Define your test corpus:** 20 research questions the tool should be able to answer.\n\n**Step 3 — Run all 20 questions.** Score each answer: Correct (2), Partially correct (1), Wrong (0).\n\n**Step 4 — Analyse failures:** For wrong answers, is the problem retrieval (right information wasn't found), generation (right information was found but answer was wrong), or scope (question was outside the tool's design)?\n\n**Step 5 — Fix the top failure mode** and re-test the affected questions."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Performance and Cost Optimization",
+      "content": "Optimise your research tool for production use.\n\n**Step 1 — Measure baseline performance:**\n- Average response time (seconds)\n- Average cost per query (tokens × price)\n- P95 response time (95th percentile)\n\n**Step 2 — Profile where time and cost are spent:** Is most time in retrieval, embedding, or generation?\n\n**Step 3 — Apply the top optimisations based on the profile:**\n- Expensive generation → switch to a cheaper model or shorter prompts\n- Slow retrieval → optimise FAISS configuration or add a cache\n- Slow embedding → use a local embedding model instead of API calls\n\n**Step 4 — Re-measure after each optimisation.** Did it improve the bottleneck without degrading quality?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Documentation and Handoff",
+      "content": "Document your research tool for long-term maintainability.\n\n**Step 1 — Ask Claude Code** to generate documentation:\n```\nCreate documentation for this research tool:\n1. README.md: what it does, how to install, how to use (with examples)\n2. ARCHITECTURE.md: how it works technically, component diagram, data flow\n3. OPERATIONS.md: how to update the knowledge base, troubleshoot common issues, monitor performance\n4. DEVELOPMENT.md: how to run tests, add new features, contribute changes\n```\n\n**Step 2 — Review each document** for accuracy — AI-generated docs often need factual corrections.\n\n**Step 3 — Publish the tool** (GitHub, or internal deployment).\n\n**Step 4 — Onboard one user:** Have a colleague use the tool and document their questions. These questions become FAQ additions to the docs."
+    },
+    {
+      "type": "quiz",
+      "question": "You build a research tool that consistently returns high-quality answers during testing but produces poor answers in production. What is the most likely cause?",
+      "options": [
+        "Production servers are slower and reduce AI quality",
+        "Distribution shift: production queries differ from your test corpus — real users ask different types of questions, use different vocabulary, or explore edge cases you didn't anticipate",
+        "The AI model behaviour changed",
+        "You need to increase the server capacity"
+      ],
+      "correct": 1,
+      "explanation": "Test data rarely represents production query distribution perfectly. Your test corpus was designed by you, reflecting how you think about the problem. Real users bring unexpected question formulations, unusual topics, adversarial inputs, and use cases you didn't anticipate. Fix: (1) collect production queries and add them to your test corpus; (2) monitor production answer quality metrics; (3) regularly review a sample of production queries for quality; (4) add a user feedback mechanism."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague says \"just use Perplexity\" instead of building a custom research tool. When is building your own tool genuinely worth it?",
+      "options": [
+        "Always — custom tools are always better",
+        "When Perplexity cannot do what you need: private data (Perplexity accesses only public web), domain-specific retrieval quality, integration with internal systems, or cost efficiency at high volume",
+        "When you want to learn how to build it",
+        "Never — use existing tools always"
+      ],
+      "correct": 1,
+      "explanation": "Build vs buy has a clear framework: build when existing tools fundamentally cannot meet your requirements. Perplexity is excellent for public web research. Building your own tool adds value when: the data is private (internal documents, proprietary databases), you need integration with internal systems, the domain requires specialised retrieval (medical literature, legal documents, code), or you're running at a volume where per-query costs make a custom system cheaper. If Perplexity meets your needs, use it — your engineering time is valuable."
     },
     {
       "type": "callout",

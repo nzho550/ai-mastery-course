@@ -2,8 +2,15 @@
   "id": "19-6",
   "title": "AI Journaling & The Thinking Partner",
   "part": 19,
-  "estimatedMinutes": 25,
-  "tags": ["personal-life", "beginner", "journaling", "decision-making", "reflection", "hands-on"],
+  "estimatedMinutes": 60,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "journaling",
+    "decision-making",
+    "reflection",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -42,6 +49,54 @@
       ],
       "correct": 1,
       "explanation": "Identifying a repeating cognitive pattern is only useful if you do something with it. The pattern 'I catastrophise but outcomes are usually better than feared' becomes a cognitive calibration tool: when the catastrophic thinking starts, you now have evidence that it's likely distorted. You can explicitly ask: 'Is this one of those situations where my fear is much larger than the likely reality?' This is how therapeutic pattern recognition works — awareness + calibration + deliberate questioning of the pattern. Asking Claude if you should stop worrying (A) outsources the insight. Ignoring it (C) wastes the value. Switching tools (D) loses the accumulated pattern data."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI as Thinking Partner",
+      "content": "Experience using Claude as a genuine thinking partner, not just an answer machine.\n\n**Step 1 — Choose a complex personal or professional challenge** you're working through.\n\n**Step 2 — Ask Claude to be a thinking partner, not an advisor:**\n```\nI want to think through [your challenge] out loud. Act as a thinking partner: help me explore the problem rather than immediately giving me solutions.\n\nAsk me questions that:\n- Help me clarify what I actually want\n- Surface assumptions I'm making\n- Explore angles I haven't considered\n- Challenge my reasoning without dismissing it\n\nStart by asking me: what makes this situation feel difficult?\n```\n\n**Step 3 — Engage genuinely** — answer Claude's questions honestly.\n\n**Step 4 — After 10 exchanges**, ask: \"Based on our conversation, what have I clarified? What am I still avoiding?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Regular Journaling Practice",
+      "content": "Establish an AI-assisted journaling practice.\n\n**Step 1 — Ask Claude** to create a journaling system for you:\n```\nDesign a journaling practice that:\n- Takes 10-15 minutes daily\n- Uses AI for reflection (not just writing prompts, but actual back-and-forth)\n- Tracks: emotional state, progress toward goals, gratitude, one learning from today\n- Includes a weekly synthesis\n\nCreate the prompt structure for the daily journal and the weekly review.\n```\n\n**Step 2 — Do the daily journal** with Claude's prompts for 5 consecutive days.\n\n**Step 3 — After 5 days**, run the weekly synthesis: ask Claude to analyse your journal entries and identify: patterns, progress, concerns, and one question to sit with this week.\n\n**Step 4 — Evaluate:** Is AI-assisted journaling more valuable than journaling alone? What does the back-and-forth add?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Decision Journaling",
+      "content": "Use AI to journal about decisions and track outcomes.\n\n**Step 1 — Identify a significant decision** you're in the process of making.\n\n**Step 2 — Ask Claude to help you journal through the decision:**\n```\nGuide me through decision journaling for this choice: [describe it]\n\nStructure:\n1. What is the exact decision? (Force me to be precise)\n2. What are my real options? (Not just the obvious ones)\n3. What does each option give me vs cost me?\n4. What am I most afraid of? (In making each choice)\n5. If a trusted mentor were watching this decision, what would they say?\n6. In 10 years, which choice would I regret not making?\n7. My current inclination: [what is it?] and the doubts I still have.\n```\n\n**Step 3 — Return to this journal entry** after making the decision.\n\n**Step 4 — In 3 months**, revisit the entry and evaluate: was my reasoning sound? What did I miss?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Insight Mining from Past Conversations",
+      "content": "Extract insights from your history of AI conversations.\n\n**Step 1 — Identify a challenging period** in your life or work from the last year.\n\n**Step 2 — Write a narrative** of that period (10-15 minutes of stream-of-consciousness writing about what happened).\n\n**Step 3 — Ask Claude to help mine insights:**\n```\nAnalyse this narrative from a difficult period in my life/work:\n[paste your writing]\n\nHelp me extract:\n1. What strengths did I demonstrate that I should remember?\n2. What patterns of thinking or behaviour created difficulty?\n3. What did I learn about myself?\n4. What would I advise to my past self in that situation?\n5. How is this experience relevant to challenges I'm facing now?\n```\n\n**Step 4 — Evaluate the insights.** Do they ring true? Are there patterns you're still repeating?"
+    },
+    {
+      "type": "quiz",
+      "question": "You use AI for daily journaling and find you're increasingly relying on Claude's reflections rather than developing your own. Is this a problem?",
+      "options": [
+        "No — Claude's reflections are good quality",
+        "Yes — the goal of journaling is to develop your own self-understanding. Use AI to prompt reflection and challenge thinking, but ensure you're forming your own interpretations and conclusions",
+        "No — AI reflections are more objective than self-reflection",
+        "Only if you share the journal with others"
+      ],
+      "correct": 1,
+      "explanation": "AI-assisted journaling works best when AI amplifies your self-reflection rather than replaces it. If you're accepting Claude's interpretations without forming your own, you're building a model of yourself as Claude sees you, not as you actually are. Healthy pattern: Claude asks questions → you reflect and answer → Claude challenges or extends → you refine. Unhealthy pattern: Claude interprets → you accept → you use Claude's interpretation as your self-understanding."
+    },
+    {
+      "type": "quiz",
+      "question": "You tell Claude about a difficult situation at work and it responds empathetically and suggests several coping strategies. What important limitation should you keep in mind?",
+      "options": [
+        "Claude's strategies are always evidence-based",
+        "Claude cannot verify your account, knows only what you tell it, and cannot observe context that might change the picture. For significant emotional or interpersonal challenges, professional support (therapist, counselor, mentor) provides something AI cannot",
+        "Claude's empathy is genuine",
+        "Coping strategies from AI are as effective as from human therapists"
+      ],
+      "correct": 1,
+      "explanation": "AI emotional support has real limitations: (1) Claude only has your account of a situation — a therapist or coach can observe patterns across many sessions and challenge your narrative when appropriate; (2) Claude doesn't have clinical training in recognising when professional intervention is needed; (3) the relationship quality of human therapeutic support is meaningfully different from AI interaction. Use AI for everyday reflection and thinking-through; for significant mental health challenges, professional human support is essential."
     },
     {
       "type": "callout",

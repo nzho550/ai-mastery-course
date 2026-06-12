@@ -2,8 +2,14 @@
   "id": "8-15",
   "title": "Build a Simple Custom MCP Server",
   "part": 8,
-  "estimatedMinutes": 60,
-  "tags": ["mcp", "python", "custom-server", "claude-code", "build"],
+  "estimatedMinutes": 100,
+  "tags": [
+    "mcp",
+    "python",
+    "custom-server",
+    "claude-code",
+    "build"
+  ],
   "sections": [
     {
       "type": "text",
@@ -94,6 +100,54 @@
       "tag": "CLAUDECODE",
       "title": "Build, Configure, and Extend Your MCP Server",
       "content": "**Step 1 — Install and create:**\n1. Run `pip install mcp` in PowerShell\n2. In VS Code, create `exercises/my-mcp-server.py` with the complete code shown above\n3. Test it: `python exercises/my-mcp-server.py` — confirm it starts, press Ctrl+C to stop\n\n**Step 2 — Connect to Claude Code:**\n1. Add the `my-motivation-server` entry to your `settings.json`\n2. Relaunch `claude`\n3. Type `/mcp` — confirm `my-motivation-server` is listed\n4. Ask: `\"Get me some motivation\"` — confirm a quote comes back from your server\n\n**Step 3 — Add a date tool:**\nAdd the `get_todays_date` function (shown above) to your server.\nRestart Claude Code (the server reloads when you restart).\nAsk: `\"What day is it today?\"`\nConfirm it returns today's actual date.\n\n**Step 4 — Add your own tool:**\nThis is the creative part. Add one more tool that does something you'd actually find useful. Ideas:\n\n- `get_word_of_the_day()` — returns a word and definition from a hardcoded list\n- `flip_coin()` — returns 'Heads' or 'Tails' randomly\n- `get_pomodoro_reminder()` — returns a reminder message about taking breaks\n- `get_project_checklist()` — returns a checklist of things to do before committing code\n\nWrite the function, add the `@mcp.tool()` decorator, write a clear docstring, restart Claude Code, and test it.\n\n**Step 5 — Reflect:**\nAsk Claude Code: `\"What tools does my-motivation-server expose? Describe each one based on its documentation.\"`\n\nClaude reads your docstrings and describes your tools accurately. This is why docstrings matter — they're the interface Claude uses to understand what each tool does.\n\nSave the final version of your server and document it in `notes/my-mcp-stack.md`.\n\n---\n\n**You just built an MCP server.** Everything in Part 8 was about using other people's servers. Now you've made one. The gap between user and builder is smaller than it looks."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Plan Your Custom MCP Server",
+      "content": "Design your custom MCP server before writing any code.\n\n**Step 1 — Review your server specification** from Lesson 8-14 Workshop D.\n\n**Step 2 — Ask Claude to refine the design:**\n```\nI want to build an MCP server. Here is my specification: [paste it]\n\nHelp me finalize the design:\n1. Review each tool for correct input/output format\n2. Identify any tools that should be split or merged\n3. Design the error handling strategy\n4. Recommend the implementation language (Python or TypeScript) for my use case\n5. Identify the external library/API I'll need\n```\n\n**Step 3 — Choose your implementation language** based on Claude's recommendation and your experience.\n\n**Step 4 — Create the project structure:**\n```\nmcp-server-[name]/\n  src/\n    server.py (or index.ts)\n  tests/\n  README.md\n  requirements.txt (or package.json)\n```\n\n**Step 5 — Write a README first** — describe what the server does before any code exists."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build the Core MCP Server",
+      "content": "Implement your MCP server with Claude Code's assistance.\n\n**Step 1 — Ask Claude Code to scaffold the server:**\n```\nBuild an MCP server in Python using the mcp package. The server should:\n- Expose these tools: [list your tools with descriptions]\n- Authenticate with: [your API/service]\n- Handle errors by: [your error strategy]\n\nStart with the basic structure and the first tool implemented. I'll review each tool before we add the next.\n```\n\n**Step 2 — Review the scaffolded structure** before adding tools.\n\n**Step 3 — Implement tools one at a time.** For each tool:\n- Ask Claude Code to implement it\n- Review the code\n- Test it manually\n- Fix any issues before moving to the next\n\n**Step 4 — Mandatory code review after each tool:** *\"Review the [tool name] implementation. Find 3 potential failure modes: edge cases, API errors, or unexpected inputs that would break this tool.\"* Fix the issues found."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Test Your MCP Server",
+      "content": "Write and run tests for your custom MCP server.\n\n**Step 1 — Ask Claude Code to write tests:**\n```\nWrite a test file for this MCP server. For each tool:\n1. A happy path test (valid input, expected output)\n2. An error case test (invalid input or API failure)\n3. An edge case test (boundary values, empty input)\n\nUse pytest and mock the external API calls.\n```\n\n**Step 2 — Run the tests:**\n```powershell\npython -m pytest tests/ -v\n```\n\n**Step 3 — Fix any test failures** with Claude Code's help.\n\n**Step 4 — Add error handling tests** for cases Claude Code might have missed:\n- What happens if the external service is down?\n- What happens with a malformed response?\n- What happens with a very large input?\n\n**Step 5 — Mandatory review:** Ask: *\"Review the test coverage. What important scenarios are NOT tested that a code reviewer would flag?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Integrate and Use Your MCP Server",
+      "content": "Complete the full cycle: build → test → integrate → use.\n\n**Step 1 — Configure your server** in Claude Code's MCP settings.\n\n**Step 2 — Restart Claude Code** to load your new server.\n\n**Step 3 — Verify discovery:** Ask Claude Code: \"What MCP tools do you have available?\" — your custom tools should appear.\n\n**Step 4 — Run a real task** using your new server: \"Use [your tool name] to [actual task your server enables].\"\n\n**Step 5 — Mandatory real-world review:** Run the task and verify the output is correct and useful. Is the server doing what you designed it to do?\n\n**Step 6 — Document the lessons learned:** What did you have to change from your original design? What would you do differently?\n\n**Step 7 — Share your server** with colleagues if it solves a shared problem."
+    },
+    {
+      "type": "quiz",
+      "question": "Your custom MCP server successfully connects but returns wrong data for one tool. What is the debugging approach?",
+      "options": [
+        "Rewrite the entire server",
+        "Add logging to the specific tool's implementation to trace what API call is made and what response is received, then identify where the transformation goes wrong",
+        "Ask Claude Code to fix it without adding any logging",
+        "Mark that tool as broken and don't use it"
+      ],
+      "correct": 1,
+      "explanation": "Debugging a single failing tool requires tracing the data flow: what input did Claude Code send → what API call was made → what did the API return → how was it transformed into the output. Add log statements at each step (or use Python's logging module). Once you can see the actual API response vs what you expected, the bug location becomes obvious. This is the same debugging approach for any integration code."
+    },
+    {
+      "type": "quiz",
+      "question": "You build an MCP server that stores credentials in a plain text config file. What is the security problem and fix?",
+      "options": [
+        "Plain text is fine if the file has restricted permissions",
+        "Plain text credentials can be accidentally committed to git, logged, or read by malicious software — use environment variables or a secrets manager instead",
+        "Credentials should be in the server code itself, not a config file",
+        "MCP servers don't need credentials"
+      ],
+      "correct": 1,
+      "explanation": "Plain text credentials in files are a major security risk: they may be accidentally committed to version control (a very common incident), included in backup files, or read by other processes. The correct approach: use environment variables (the credentials are never stored in files at all), or use a secrets manager (AWS Secrets Manager, 1Password, etc.) that requires authentication to access credentials. Add the config file with credentials to .gitignore immediately."
     },
     {
       "type": "callout",

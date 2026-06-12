@@ -2,8 +2,14 @@
   "id": "9-3",
   "title": "Tabnine — Privacy-First Completion",
   "part": 9,
-  "estimatedMinutes": 20,
-  "tags": ["tabnine", "privacy", "ai-coding", "vscode", "local-ai"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "tabnine",
+    "privacy",
+    "ai-coding",
+    "vscode",
+    "local-ai"
+  ],
   "sections": [
     {
       "type": "text",
@@ -44,6 +50,54 @@
       "tag": "VSCODE",
       "title": "Install Tabnine and Explore Its Privacy Settings",
       "content": "**Goal:** Install Tabnine, activate it, compare its completions to Copilot, and find its privacy configuration options.\n\n**Step 1 — Install:**\n1. Open VS Code Extensions (`Ctrl+Shift+X`)\n2. Search `Tabnine` → install the extension\n3. Sign up for a free account when prompted\n\n**Step 2 — Test completions:**\n1. Open `exercises/practice.js`\n2. Go to the bottom of the file and start typing a new function:\n```\n// Function to check if a string is a valid email address\nfunction isValidEmail(\n```\n3. Pause after the opening parenthesis — wait for Tabnine's greyed-out suggestion to appear\n4. Press `Tab` to accept it\n5. Now compare: how does this feel vs Copilot? More conservative? Different style?\n\n**Step 3 — Explore the privacy settings:**\n1. Click the Tabnine icon in the VS Code Status Bar (bottom, usually shows a small T icon)\n2. Select **Settings** or open the Tabnine extension settings via `Ctrl+,` and search `Tabnine`\n3. Look for the privacy-related settings — note options like `Keep my code private` and telemetry controls\n4. You don't need to change anything — just understand what's configurable\n\n**Step 4 — Reflect:**\nWrite 3 sentences answering: in what situation would you choose Tabnine over Copilot for a real project?\n\nGuide for your answer: think about regulated industries, client work with strict IP clauses, or any scenario where \"no code leaves the machine\" is a requirement rather than a nice-to-have.\n\n**What to observe:** Tabnine works, and works well. Its suggestions are competent. The privacy settings exist and are accessible. For the specific use cases it's designed for, it's not a compromise — it's the right tool."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Privacy-First AI Coding Assessment",
+      "content": "Understand the real privacy implications of different AI coding tools.\n\n**Step 1 — Ask Claude:** *\"Compare the data privacy approaches of these AI coding tools: GitHub Copilot, Claude Code (Anthropic API), Tabnine, and local models (e.g., Ollama). For each: what data is sent to their servers, what is their retention policy, and when would an organisation require this option over others?\"*\n\n**Step 2 — Identify your privacy requirements:** Do you work with code that contains:\n- Proprietary algorithms that cannot leave your infrastructure\n- Client data or PII in code or comments\n- Security vulnerabilities that shouldn't be sent to external services\n- Regulated data (healthcare, financial)\n\n**Step 3 — Map your requirements to the right tool:** For each type of code you write, which AI tool is appropriate?\n\n**Step 4 — Write a personal AI privacy policy** for your coding workflow."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Test Tabnine for Your Real Codebase",
+      "content": "Evaluate Tabnine's practical value for your specific coding context.\n\n**Step 1 — Install Tabnine** in VS Code (Extensions marketplace).\n\n**Step 2 — Complete at least 30 minutes of real coding** with Tabnine active. Use it on code from your actual project, not toy examples.\n\n**Step 3 — Track these metrics:**\n- How often do you accept a Tabnine suggestion? (count)\n- How often is the suggestion exactly right? (0-10 per hour)\n- How often is it close but wrong? (needs editing)\n- How often is it completely wrong? (you ignore it)\n\n**Step 4 — Compare to another AI tool** on the same task (Claude Code or Copilot). Are the completions better or worse?\n\n**Step 5 — For privacy-sensitive code**, run a task that would normally be too sensitive for Copilot. Does Tabnine's local-first approach address your concern?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Local AI Models for Privacy",
+      "content": "Explore the option of running AI coding assistance entirely locally with no data leaving your machine.\n\n**Step 1 — Ask Claude:** *\"Explain how local AI coding models work (e.g., running Ollama with CodeLlama or Mistral). What are the trade-offs vs cloud AI coding tools in terms of: code quality, speed, privacy, cost, and setup complexity?\"*\n\n**Step 2 — Assess if local models are right for you:**\n- Do you have a GPU? (significant performance difference)\n- How sensitive is your code?\n- Is occasional slower/lower quality assistance acceptable?\n\n**Step 3 — If appropriate, try Ollama:**\nInstall Ollama (ollama.ai) and run: `ollama pull codellama:7b`\nConnect it to Continue.dev as a local model.\n\n**Step 4 — Compare local vs cloud** on a coding task. How much does quality differ? Is the privacy gain worth it for your use case?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build Your Tiered AI Tool Policy",
+      "content": "Create a tiered policy matching code sensitivity to the right AI tool.\n\n**Step 1 — Categorise your code by sensitivity:**\n- Tier 1 (Public/open source): Can use any cloud AI tool\n- Tier 2 (Internal business logic): Cloud AI acceptable with standard terms\n- Tier 3 (Proprietary algorithms/client data): Require privacy-first tool (Tabnine local, local model)\n- Tier 4 (Regulated/classified): No AI assistance without explicit approval\n\n**Step 2 — Assign each tier to a tool:**\n| Tier | AI Tool | Reason |\n|---|---|---|\n| 1 | Claude Code / Copilot | No privacy concern |\n| 2 | Claude Code | API terms acceptable |\n| 3 | Tabnine local / Ollama | Data stays local |\n| 4 | Manual / approved tool | Too sensitive |\n\n**Step 3 — Adapt the tiers** to your specific work context.\n\n**Step 4 — Share with your team** as a starting point for a team-wide AI coding policy."
+    },
+    {
+      "type": "quiz",
+      "question": "Tabnine's main privacy claim is that it can run entirely locally. What does this mean for your code?",
+      "options": [
+        "Your code is never analysed or used for any purpose",
+        "Your code (for completions) is processed only on your machine — it is not sent to Tabnine's servers, so it cannot be used to train models or be seen by Tabnine's staff",
+        "Your code is encrypted before being sent to Tabnine",
+        "Tabnine's local model is as accurate as cloud models"
+      ],
+      "correct": 1,
+      "explanation": "Local processing means the code used for generating completions never leaves your machine. This addresses the primary concern with cloud AI tools: that your proprietary code becomes training data or is accessible to the vendor's staff. The trade-off: local models are typically less capable than the large cloud models. For sensitive codebases where privacy is the primary concern, this trade-off is often worthwhile."
+    },
+    {
+      "type": "quiz",
+      "question": "Your company has a policy that \"no proprietary code may be sent to third-party AI services.\" Which coding AI tool can you use without violating this policy?",
+      "options": [
+        "GitHub Copilot — it has strong privacy guarantees",
+        "Any tool where completions are processed entirely locally without sending code to external servers",
+        "Claude Code — Anthropic has strong data protection",
+        "Any tool that signs a data processing agreement"
+      ],
+      "correct": 1,
+      "explanation": "The policy requirement is that code cannot be sent to third-party services, regardless of their privacy guarantees or contractual protections. The only tools that definitively satisfy this are those that process code entirely locally: local models (Ollama + CodeLlama), Tabnine with local mode enabled, or any self-hosted AI model. Cloud tools like Copilot, Claude Code, and Codeium — even with strong privacy guarantees — technically send code to external servers."
     },
     {
       "type": "callout",

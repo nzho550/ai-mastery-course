@@ -2,8 +2,14 @@
   "id": "18-6",
   "title": "Capstone — Build Your Personal AI Knowledge Engine",
   "part": 18,
-  "estimatedMinutes": 90,
-  "tags": ["advanced", "capstone", "build", "knowledge-engine", "hands-on"],
+  "estimatedMinutes": 115,
+  "tags": [
+    "advanced",
+    "capstone",
+    "build",
+    "knowledge-engine",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -39,6 +45,54 @@
       "tag": "BUILD",
       "title": "The Full Build — 90-Minute Knowledge Engine",
       "content": "This is your build session. Execute all 5 phases. Check off each item as you complete it.\n\n**PHASE 1 — Prompt Library** (target: 20 minutes)\n- [ ] Listed 10 specific AI use cases for my work\n- [ ] Used meta-prompting to generate tuned prompts for all 10\n- [ ] Tested and refined the 3 most important prompts\n- [ ] Created `prompt-library.md` with all prompts organised by category\n- [ ] Added at least one prompt with the XML structure from lesson 18-1\n\n**PHASE 2 — Claude Project** (target: 15 minutes)\n- [ ] Created a new Claude Project named for my primary work context\n- [ ] Wrote a comprehensive Project Instruction using the template\n- [ ] Uploaded 3-7 relevant documents\n- [ ] Tested that Claude accurately references the uploaded documents\n- [ ] Claude can answer at least 3 real work questions using the project context\n\n**PHASE 3 — NotebookLM Corpus** (target: 20 minutes)\n- [ ] Chose my single most important professional topic\n- [ ] Collected 6-10 high-quality sources\n- [ ] Created and populated a NotebookLM notebook\n- [ ] Ran 5 real queries and verified citation accuracy\n- [ ] Generated the Audio Overview (downloaded for offline listening)\n\n**PHASE 4 — Daily Workflow** (target: 15 minutes)\n- [ ] Mapped AI touchpoints throughout my workday\n- [ ] Identified the one highest-leverage habit to commit to\n- [ ] Created a \"My AI Workflow\" document with Claude's help\n- [ ] Scheduled a 30-day review in my calendar\n\n**PHASE 5 — Agent Brief** (target: 10 minutes)\n- [ ] Identified my best candidate task for agent delegation\n- [ ] Filled in the Agent Delegation Brief template for that task\n- [ ] Saved the template somewhere I'll find it\n\n---\n\n**After completing all phases, answer these reflection questions:**\n\n1. **What changed?** Compare how you'll work with AI next week vs. how you worked before this course. What's the single biggest difference?\n\n2. **What surprised you?** Was there a technique, tool, or approach that worked better than you expected?\n\n3. **What's your next learning priority?** After 18 parts, what AI capability do you most want to develop further?\n\n4. **Who would benefit from this?** Which colleague, friend, or team would get the most value from learning what you learned in this course? Consider sharing your prompt library with them as a starting point.\n\n---\n\n**Your deliverables from this capstone:**\n- `prompt-library.md` — 10+ tuned prompts for your work\n- Claude Project — a persistent AI assistant that knows your context\n- NotebookLM notebook — a queryable knowledge base on your professional topic\n- `my-ai-workflow.md` — your documented daily AI workflow\n- `agent-brief-template.md` — reusable delegation template\n\nThese five artifacts are your personal AI operating system. They compound over time: every prompt you refine makes the library better, every document you add makes the knowledge base richer, every agent brief you write makes delegation faster.\n\nThe goal was never to teach you about AI. The goal was to make AI something you actually use, every day, better than almost anyone you know."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Knowledge Engine Architecture",
+      "content": "Design your personal knowledge engine before building it.\n\n**Step 1 — Inventory your knowledge sources:**\n- How many documents/notes do you have? (rough count)\n- What formats? (markdown, PDF, web pages, emails)\n- How are they currently organised? (folder structure, tags)\n- How do you currently search them?\n\n**Step 2 — Define your use case precisely:** What questions do you want your knowledge engine to answer? \"Search my notes\" is too vague. \"Answer questions about technical decisions I've made in the last year\" is specific.\n\n**Step 3 — Ask Claude to design the architecture:**\n\"Design a personal knowledge engine for [your use case]. What indexing strategy, chunking approach, and query interface would best serve this specific use case?\"\n\n**Step 4 — Validate feasibility:** Can you build this in [your time budget] with your current skills? What's the MVP version?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build and Index",
+      "content": "Build and populate your personal knowledge engine.\n\n**Step 1 — Ask Claude Code** to implement the ingestion pipeline based on your architecture design.\n\n**Step 2 — Start with a subset** of your documents (50-100) for initial testing.\n\n**Step 3 — Run the ingestion.** Does it complete without errors? How long does it take?\n\n**Step 4 — Query the engine** with 10 test questions that your documents should be able to answer.\n\n**Step 5 — Measure retrieval quality:** For each question, rate 1-5 whether the retrieved chunks were relevant.\n\n**Step 6 — Improve the configuration** (chunk size, overlap, number of results retrieved) based on the quality assessment."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Query Interface Design",
+      "content": "Design a query interface that makes your knowledge engine actually usable.\n\n**Step 1 — Ask Claude:** \"What makes a knowledge engine interface actually useful vs technically correct but frustrating to use? What interface elements are most important?\"\n\n**Step 2 — Design your interface:**\n- Query input (how do you enter questions?)\n- Result display (how are answers shown?)\n- Source display (which documents were used?)\n- Confidence indicator (how certain is the answer?)\n- Navigation (can you open the source documents?)\n\n**Step 3 — Ask Claude Code** to implement the interface based on your design.\n\n**Step 4 — Use the engine for one week** for real work. What friction points emerge?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Expand and Maintain",
+      "content": "Scale your knowledge engine and establish maintenance routines.\n\n**Step 1 — Expand the index** to include all your relevant documents.\n\n**Step 2 — Set up automatic updates:** When new documents are added to your knowledge sources, they should automatically be indexed.\n\n**Step 3 — Establish a maintenance routine:**\n- Monthly: check that the index is current\n- Quarterly: review query logs for common questions that produce poor results\n- Annually: evaluate whether the architecture still fits your needs\n\n**Step 4 — Measure actual usage impact:** After one month, has the knowledge engine changed how you work? What would you do differently?"
+    },
+    {
+      "type": "quiz",
+      "question": "Your knowledge engine returns an answer that confidently cites a specific document, but when you check the document, the cited information isn't there. What is happening?",
+      "options": [
+        "The document was deleted from the index",
+        "Hallucination: the LLM may have generated a plausible-sounding citation that doesn't match actual retrieved content. Always display the exact retrieved chunks alongside the answer",
+        "The retrieval system has a bug",
+        "The document format wasn't parsed correctly"
+      ],
+      "correct": 1,
+      "explanation": "RAG systems can still hallucinate citations and content even when documents are retrieved. The LLM might: reference a document by name but make up the specific detail, generate a plausible quote that isn't in the source, or misattribute content from one document to another. Mitigation: always display the actual retrieved text chunks alongside the answer so users can verify. Ideally, the interface shows: \"Based on this passage from [document]: [exact quote]\" rather than just an answer."
+    },
+    {
+      "type": "quiz",
+      "question": "Your knowledge engine works well on recent documents but poorly on documents from 3 years ago. What is the most likely cause?",
+      "options": [
+        "Older documents use outdated language that models can't understand",
+        "Old documents may use different terminology or writing styles — the embedding model creates different representations for older vocabulary, reducing semantic match with modern query language",
+        "The embedding model was trained after those documents were written",
+        "Older documents are too long to be indexed correctly"
+      ],
+      "correct": 1,
+      "explanation": "Vocabulary drift affects retrieval quality. Concepts described with older terminology may not match the embedding space for modern query language, even if the concepts are the same. For example, \"machine learning\" queries might not retrieve documents about \"artificial intelligence\" from the early 2010s. Mitigation: (1) query expansion — have the LLM generate older synonyms before retrieval, (2) add a date-aware search layer, (3) tag old documents with modern synonym annotations during ingestion."
     },
     {
       "type": "callout",

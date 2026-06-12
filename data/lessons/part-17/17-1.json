@@ -2,8 +2,14 @@
   "id": "17-1",
   "title": "Planning Any Project with AI",
   "part": 17,
-  "estimatedMinutes": 30,
-  "tags": ["projects", "beginner", "planning", "workflow", "hands-on"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "projects",
+    "beginner",
+    "planning",
+    "workflow",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -55,6 +61,54 @@
       ],
       "correct": 1,
       "explanation": "Running the kickoff prompt with what you currently know is valuable precisely because you're not sure what's involved. AI will surface the assumptions, risks, missing stakeholders, and unknown unknowns — turning 'I'm not sure what's involved' into a concrete list of things to find out. Creating a Gantt chart (A) before you understand scope is premature — you'll revise it when scope becomes clearer. Waiting for complete information (C) is a trap: in most projects, you never have complete information at the start. Providing no context (D) results in generic output with no relevance to your situation."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Project Planning Framework Drill",
+      "content": "Learn the key elements of AI-assisted project planning.\n\n**Step 1 — Ask Claude:** \"What are the elements of a good project plan that AI can help with, and which require human judgement? For each element, what AI assistance is most valuable?\"\n\n**Step 2 — Apply the framework** to a real project you're starting or currently running.\n\n**Step 3 — Ask Claude to create a project plan outline:**\n```\nCreate a project plan outline for:\nProject: [describe it]\nGoal: [specific outcome]\nTimeline: [available time]\nTeam: [who's involved]\nConstraints: [budget, technical, resource]\n\nInclude: milestones, dependencies, risk areas, and success criteria.\n```\n\n**Step 4 — Review the outline.** What did Claude miss that you know about this project?\n\n**Step 5 — Add the missing context** and ask Claude to refine the plan."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Real Project Plan",
+      "content": "Create a complete project plan with AI assistance.\n\n**Step 1 — Choose a real project** starting in the next 30 days.\n\n**Step 2 — Ask Claude to generate a detailed plan:**\n```\nCreate a detailed project plan:\nProject: [name and description]\nDeadline: [date]\nKey deliverables: [list them]\nTeam members and roles: [list]\nKnown risks: [list]\n\nProvide:\n1. Work breakdown structure (WBS)\n2. Timeline with milestones\n3. Dependencies (what must be done before what)\n4. Risk register with mitigation strategies\n5. Communication plan (who needs to know what, when)\n```\n\n**Step 3 — Review each section** for accuracy — Claude can't know your team's actual capacity or organisational dynamics.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"What critical risks have I not identified? What project failure modes are common for this type of project?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Risk Assessment Deep Dive",
+      "content": "Use AI to identify and mitigate project risks.\n\n**Step 1 — Take your project plan** from Workshop B.\n\n**Step 2 — Ask Claude to conduct a risk analysis:**\n```\nConduct a thorough risk analysis for this project [describe it].\n\nFor each risk identify:\n- Probability: High/Medium/Low\n- Impact if it occurs: High/Medium/Low\n- Risk score: Probability × Impact\n- Mitigation strategy\n- Contingency plan (if mitigation fails)\n\nInclude both technical risks and people/process risks.\n```\n\n**Step 3 — Sort risks by score** (High/High = most critical).\n\n**Step 4 — For the top 3 risks**, ask Claude to design detailed mitigation plans.\n\n**Step 5 — Add early warning signals** for each risk: \"How will I know this risk is materialising before it becomes a crisis?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Stakeholder Communication Plan",
+      "content": "Create a communication plan for your project stakeholders.\n\n**Step 1 — List all stakeholders** for your project: everyone who is affected by or interested in the project outcome.\n\n**Step 2 — Ask Claude to create a stakeholder communication plan:**\n```\nCreate a stakeholder communication plan for [project].\n\nStakeholders:\n- [Name/Role]: [what they care about, how much detail they want]\n\nFor each stakeholder, specify:\n- Communication frequency\n- Format (email, meeting, dashboard, report)\n- Content (what they need to know)\n- Who sends it\n```\n\n**Step 3 — Review the plan.** Does it match your stakeholders' actual preferences?\n\n**Step 4 — Create the first communication** from the plan — a project kickoff message to all stakeholders."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude creates a project timeline with 5 parallel workstreams finishing exactly on the same date. What critical planning element is likely missing?",
+      "options": [
+        "The timeline is well-designed — parallel work is efficient",
+        "Buffer time and integration risk: when parallel workstreams must merge, integration issues almost always emerge. Add integration time and buffer between the merge date and the final deadline",
+        "A Gantt chart visualization",
+        "Resource allocation across the workstreams"
+      ],
+      "correct": 1,
+      "explanation": "Parallel workstreams that merge simultaneously are a classic scheduling risk. Integration problems (dependencies don't match, interfaces between workstreams have bugs, outputs are in incompatible formats) are the rule, not the exception. Best practice: plan for parallel streams to finish 20-30% before the integration deadline, add an explicit integration and testing phase, and add buffer between the integration merge and the final deadline."
+    },
+    {
+      "type": "quiz",
+      "question": "A project risk is \"key team member might leave during the project.\" Claude rates it Low/Low. Do you agree?",
+      "options": [
+        "Yes — key person risk is usually overstated",
+        "Not necessarily — rate risks based on YOUR context. If the person is truly irreplaceable and no knowledge transfer exists, this could be Medium/High. Re-rate risks based on your actual situation, not generic assessments",
+        "Yes — companies should plan for 0% turnover",
+        "Only rate it higher if you have specific reason to think they'll leave"
+      ],
+      "correct": 1,
+      "explanation": "AI rates risks based on typical cases, not your specific situation. Generic risk assessments need calibration to your context. Key person dependency is \"Low/Low\" if there's good documentation and cross-training. It's \"High/High\" if one person holds critical undocumented knowledge, has been talking to recruiters, or is the only person who can make a critical system work. Review every AI risk rating against your actual situation."
     },
     {
       "type": "callout",

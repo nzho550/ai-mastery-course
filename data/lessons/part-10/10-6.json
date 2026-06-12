@@ -2,8 +2,13 @@
   "id": "10-6",
   "title": "GitHub Actions + AI",
   "part": 10,
-  "estimatedMinutes": 30,
-  "tags": ["github-actions", "ci-cd", "automation", "developer-workflow"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "github-actions",
+    "ci-cd",
+    "automation",
+    "developer-workflow"
+  ],
   "sections": [
     {
       "type": "text",
@@ -50,6 +55,54 @@
       "tag": "CLAUDECODE",
       "title": "Generate a GitHub Actions Workflow",
       "content": "You'll use Claude Code to generate a custom GitHub Actions workflow for your project, then push it to your GitHub repository.\n\n**Step 1 — Describe what you want**\n1. Launch `claude` in your `ai-course-projects` folder\n2. Ask: `Generate a GitHub Actions workflow YAML file for my project. The workflow should:\n- Run on every push to main and on every pull request\n- Check out the code\n- Set up Node.js 20\n- Run 'npm install'\n- Run any .js files in the exercises/ folder with node to check they don't crash\n- Post a comment on pull requests summarizing what ran`\n3. Review what Claude proposes\n\n**Step 2 — Understand the output**\nBefore accepting, ask Claude: `Explain each section of this workflow file. What does 'runs-on: ubuntu-latest' mean? What is GITHUB_TOKEN and where does it come from?`\n\nMake sure you understand:\n- What event triggers it\n- What the VM does\n- What secrets are needed (if any)\n- What the expected output is\n\n**Step 3 — Create the file**\n1. Ask Claude to create the file: `Create .github/workflows/ci.yml with this workflow`\n2. Claude will create the directory and file\n3. Open the file in VS Code and read every line\n\n**Step 4 — Push and test**\n1. Stage and commit: `git add .github/` then commit with a message like `ci: add GitHub Actions workflow`\n2. Push to your GitHub repository\n3. Go to github.com → your repo → the **Actions** tab\n4. Watch your workflow run (first run appears within 30-60 seconds)\n5. Click the workflow run to see the step-by-step output\n\n**What to observe:** Every future push to this repo will automatically run this workflow. The green checkmark or red X on each commit and PR is the CI system giving you instant feedback."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — First GitHub Actions Workflow",
+      "content": "Create a GitHub Actions workflow that uses Claude for code review.\n\n**Step 1 — Create a GitHub repository** (or use an existing one).\n\n**Step 2 — Create `.github/workflows/ai-review.yml`:**\n```yaml\nname: AI Code Quality Check\non:\n  pull_request:\n    types: [opened, synchronize]\njobs:\n  lint:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Run linter\n        run: |\n          npm install --save-dev eslint\n          npx eslint . --ext .js,.ts || true\n```\n\n**Step 3 — Commit and push.** Create a PR to trigger the workflow.\n\n**Step 4 — View the workflow run** in GitHub Actions. What does it report?\n\n**Step 5 — Ask Claude Code** to improve the workflow: \"Make this workflow also run tests and report results as a PR comment.\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Powered CI Pipeline",
+      "content": "Build a CI pipeline that includes AI quality gates.\n\n**Step 1 — Ask Claude Code** to design a complete CI pipeline for your project type:\n```\nDesign a GitHub Actions CI pipeline for a [Python/Node.js/etc] project that:\n1. Runs on every PR\n2. Checks: linting, tests, security scan\n3. Posts a summary comment on the PR\n4. Blocks merge if tests fail\n5. Is fast (target: under 3 minutes)\n\nWrite the complete workflow YAML file.\n```\n\n**Step 2 — Review the generated YAML** carefully before using it — understand every step.\n\n**Step 3 — Implement the workflow** in a real repository.\n\n**Step 4 — Create a PR to trigger it.** Did all checks pass?\n\n**Step 5 — Mandatory review:** Ask: *\"Review this GitHub Actions workflow. What security risks exist? What steps could be made faster? What important checks are missing?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — GitHub Actions Security",
+      "content": "Learn to write secure GitHub Actions workflows.\n\n**Step 1 — Ask Claude:** *\"What are the most common security vulnerabilities in GitHub Actions workflows? For each, show an example of the vulnerable pattern and the secure alternative.\"*\n\n**Step 2 — Audit your workflow from Workshop B:**\n- Are you pinning action versions by hash? (not @v3 but @sha256:...)\n- Are secrets passed via environment variables, not command args?\n- Is the GITHUB_TOKEN permission scoped to minimum needed?\n- Are you running code from fork PRs safely?\n\n**Step 3 — Fix at least one security issue** in your workflow.\n\n**Step 4 — Ask Claude Code** to write a more secure version of the workflow with all security best practices applied.\n\n**Step 5 — Compare the two workflows.** What changed? Are the secure practices meaningfully more complex?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Automated Deployment Pipeline",
+      "content": "Build a deployment pipeline that uses AI for deployment safety checks.\n\n**Step 1 — Ask Claude Code** to design a deployment workflow:\n```\nDesign a GitHub Actions deployment workflow for [describe your project and hosting]:\n1. Triggered on merge to main\n2. Runs full test suite\n3. Builds the production artifact\n4. Deploys to [staging/production]\n5. Runs a smoke test after deployment\n6. Rolls back if smoke test fails\n7. Notifies [Slack/email] on success or failure\n```\n\n**Step 2 — Implement the staging deployment step** (even if you don't have a real staging environment, create the YAML structure).\n\n**Step 3 — Add a smoke test job** that checks the deployed application is responding correctly.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review this deployment pipeline. What could go wrong in the rollback step? What if deployment partially succeeds before the failure? How do we handle a failed deployment state?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "A GitHub Actions workflow runs `npm install && npm test` on every PR. A malicious contributor submits a PR that adds code to package.json's postinstall script. What is the risk?",
+      "options": [
+        "No risk — GitHub Actions is sandboxed",
+        "The postinstall script runs during npm install and could execute malicious code in your CI environment, potentially exfiltrating secrets",
+        "The PR would be automatically rejected",
+        "npm install never runs custom scripts in CI"
+      ],
+      "correct": 1,
+      "explanation": "Running untrusted code (from external PRs) in CI is a real attack vector. The postinstall hook runs during npm install — if a malicious PR modifies package scripts, those scripts execute in your CI environment, which has access to repository secrets and deployment credentials. Mitigation: never run workflows triggered by pull_request_target with write permissions or access to secrets for untrusted PRs; review workflow triggers carefully."
+    },
+    {
+      "type": "quiz",
+      "question": "Your CI workflow takes 15 minutes to run. Every PR triggers the full pipeline. What is the highest-impact change to make it faster?",
+      "options": [
+        "Buy more expensive GitHub Actions runners",
+        "Parallelise independent jobs (linting, testing, building) and add caching for dependencies (node_modules, pip packages)",
+        "Skip tests on small PRs",
+        "Run only the tests related to changed files"
+      ],
+      "correct": 1,
+      "explanation": "The two highest-ROI CI optimisations: (1) parallelisation — run lint, test, and build as separate jobs that run simultaneously instead of sequentially; and (2) caching — use actions/cache for node_modules, pip packages, Go modules, etc., so dependencies aren't reinstalled on every run. Together these can reduce a 15-minute pipeline to 4-5 minutes without skipping any checks."
     },
     {
       "type": "callout",

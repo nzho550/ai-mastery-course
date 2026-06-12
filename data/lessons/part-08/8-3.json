@@ -2,8 +2,13 @@
   "id": "8-3",
   "title": "Installing Your First MCP Server",
   "part": 8,
-  "estimatedMinutes": 30,
-  "tags": ["mcp", "filesystem", "claude-code", "setup"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "filesystem",
+    "claude-code",
+    "setup"
+  ],
   "sections": [
     {
       "type": "text",
@@ -58,6 +63,54 @@
       "tag": "TERMINAL",
       "title": "Install, Configure, and Verify the Filesystem MCP",
       "content": "Complete these steps in order:\n\n**Step 1 — Verify Node.js is installed:**\nOpen PowerShell and run:\n```\nnode --version\nnpm --version\n```\nBoth should print version numbers. If not, install Node.js from nodejs.org (covered in lesson 7.2).\n\n**Step 2 — Edit your global settings:**\nOpen `C:\\Users\\YourName\\.claude\\settings.json` in VS Code.\nAdd the filesystem server entry shown above, replacing `YourName` with your actual username.\nSave the file.\n\n**Step 3 — Relaunch and verify:**\nIn PowerShell:\n```\nclaude\n```\nOnce Claude Code starts:\n```\n/mcp\n```\nConfirm `filesystem` appears in the list.\n\n**Step 4 — Run a real task:**\nAsk: `\"List every file in my ai-course-projects folder, including subfolders, and tell me what each one does based on its name and content.\"`\n\nClaude should produce a complete inventory of your project. If it does, the filesystem MCP is working correctly.\n\nSave the output to `notes/project-inventory.md` — it's a useful reference as your project grows."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Install Your First MCP Server",
+      "content": "This drill gets an MCP server installed and verified in under 8 minutes.\n\n**Step 1 — Choose an MCP server to install.** Recommended for first install:\n- Filesystem MCP (read/write files from Claude Code)\n- GitHub MCP (if you use GitHub)\n- SQLite MCP (if you work with databases)\n\n**Step 2 — Follow the installation steps** for your chosen server:\n\nFor the Filesystem MCP:\n```powershell\nnpm install -g @modelcontextprotocol/server-filesystem\n```\n\n**Step 3 — Configure it in Claude Code's settings** (claude_desktop_config.json or Claude Code config file):\n```json\n{\n    \"mcpServers\": {\n        \"filesystem\": {\n            \"command\": \"npx\",\n            \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\", \"/path/to/your/project\"]\n        }\n    }\n}\n```\n\n**Step 4 — Restart Claude Code** to load the new server.\n\n**Step 5 — Verify:** Ask Claude Code: \"What MCP tools do you have available?\" — your new server's tools should appear."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Use Your MCP Server for Real Work",
+      "content": "Complete a real task using your newly installed MCP server.\n\n**Step 1 — Open Claude Code** with your MCP server active.\n\n**Step 2 — Give Claude Code a task that requires the MCP server's tools:**\n\nFor Filesystem MCP:\n\"Search all Python files in my project for any function that takes more than 4 arguments. List each function name, file path, and the number of arguments.\"\n\nFor GitHub MCP:\n\"List all open issues in [your repository] assigned to me. For each, summarise what needs to be done.\"\n\nFor SQLite MCP:\n\"What are the 5 largest tables in my database? Show row counts and column names.\"\n\n**Step 3 — Watch Claude Code use the MCP tools.** Note which tools it calls and with what arguments.\n\n**Step 4 — Evaluate the result.** Is it accurate? Would this task have been harder without MCP?\n\n**Step 5 — Mandatory review:** Ask Claude Code: *\"What could have gone wrong with the MCP tool calls you just made? What data might be wrong or missing?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — MCP Server Troubleshooting",
+      "content": "MCP servers often fail in predictable ways. This workshop teaches diagnosis.\n\n**Step 1 — Ask Claude:** *\"What are the most common reasons an MCP server fails to connect or provides wrong results? For each, describe: (1) the symptom, (2) the likely cause, (3) how to diagnose it, (4) how to fix it.\"*\n\n**Step 2 — Identify symptoms you've seen** (or might see) in your own MCP setup.\n\n**Step 3 — Practice diagnosis:** If your MCP server is working: ask Claude Code to use a tool in a way that might fail (wrong path, non-existent file, invalid query). What error does it return?\n\n**Step 4 — Ask Claude Code:** \"How do I check the logs for MCP server connections? Where do errors appear?\"\n\n**Step 5 — Create a troubleshooting reference:** A short list of the 3 most likely failure modes and their fixes for the specific MCP server you installed."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — MCP Server for Your Most-Needed Integration",
+      "content": "Install and configure the MCP server that would deliver the most value for your specific workflow.\n\n**Step 1 — From your MCP landscape document** (Workshop D of 8-2), pick the highest-priority server.\n\n**Step 2 — Install it** following the official documentation.\n\n**Step 3 — Configure access controls.** Most MCP servers need access credentials (API keys, OAuth tokens, file paths). Configure the minimum access needed — don't give more permissions than required.\n\n**Step 4 — Test with a real task** from your actual work.\n\n**Step 5 — Mandatory security review:** Ask Claude: *\"I just configured this MCP server with these access credentials: [describe what you granted]. What are the security risks? What is the minimum access I actually need?\"*\n\n**Step 6 — Document the setup** in your project or personal notes — how to reconfigure if needed."
+    },
+    {
+      "type": "quiz",
+      "question": "You install an MCP server and Claude Code says \"I don't have access to any MCP tools.\" What is the most likely cause?",
+      "options": [
+        "MCP is not supported in your version of Claude Code",
+        "The MCP server configuration was not saved to the correct config file or Claude Code was not restarted after adding the configuration",
+        "You need a paid subscription to use MCP",
+        "The MCP server needs to be running separately before Claude Code starts"
+      ],
+      "correct": 1,
+      "explanation": "The most common MCP setup failure: configuration added to the wrong file, or Claude Code not restarted after config changes. Claude Code reads MCP server configurations at startup. Check: (1) the config file path is correct for your OS, (2) the JSON syntax is valid (use a JSON validator), (3) Claude Code was fully restarted (not just a new session, but the actual process). Also verify the command in the config can be run independently in the terminal."
+    },
+    {
+      "type": "quiz",
+      "question": "An MCP filesystem server has access to your entire home directory. What is the principle you should apply when configuring it?",
+      "options": [
+        "Give it full access — Claude Code won't access files it doesn't need",
+        "Apply least privilege: restrict the MCP server to only the directories Claude Code actually needs to access for your tasks",
+        "Give it read-only access to everything and write access only to your project folder",
+        "Use separate MCP servers for different access levels"
+      ],
+      "correct": 1,
+      "explanation": "Least privilege principle: grant only the minimum access required. For an MCP filesystem server, instead of `/home/user/` (everything), configure it with the specific project paths needed: `/home/user/my-project/`. This limits the blast radius if Claude Code misunderstands a task or a bug causes unexpected file operations. Most MCP servers accept path restrictions in their configuration."
     },
     {
       "type": "callout",

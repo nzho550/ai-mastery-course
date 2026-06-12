@@ -2,8 +2,13 @@
   "id": "8-4",
   "title": "context7 — Live Documentation for Any Library",
   "part": 8,
-  "estimatedMinutes": 30,
-  "tags": ["mcp", "context7", "documentation", "claude-code"],
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "context7",
+    "documentation",
+    "claude-code"
+  ],
   "sections": [
     {
       "type": "text",
@@ -49,6 +54,54 @@
       "tag": "CLAUDECODE",
       "title": "Query Live Docs While Coding",
       "content": "**Setup:**\n1. Add the context7 config block to your `settings.json` (shown above)\n2. Save the file, relaunch `claude`\n3. Type `/mcp` — confirm `context7` appears\n\n**Task 1 — Fetch live docs:**\nAsk: `\"Using context7, get me the current documentation for the HTML5 dialog element — specifically how to open and close it with JavaScript.\"`\n\nRead what Claude returns. Notice it's citing the actual current spec, not a vague recollection.\n\n**Task 2 — Apply the docs to your project:**\nAsk: `\"Using those docs, add a modal dialog to exercises/about-me.html. The dialog should open when a 'Contact Me' button is clicked and close when the user clicks 'Close'.\"`\n\nOpen the file with Live Server — the dialog should work correctly.\n\n**Task 3 — Compare with and without context7:**\nStart a new Claude Code session (type `/clear` to clear the conversation).\nAsk the same dialog question WITHOUT mentioning context7.\nCompare the two answers:\n- Did Claude use the same API?\n- Was one more confident or more current-sounding?\n- Did either have outdated patterns?\n\nNote your observations in `notes/context7-experiment.md`.\n\n**Bonus — query a library you actually use:**\nIf you're learning or using any specific library (Python, Vue, Svelte, Express, anything), ask context7 for its current docs on one topic you're curious about."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — context7 Documentation Drill",
+      "content": "context7 gives Claude Code live documentation for any library. This drill shows why it matters.\n\n**Step 1 — First, test WITHOUT context7.** Ask Claude Code: \"Show me how to use the async_timeout context manager in Python's asyncio library. Show current syntax with a working example.\"\n\n**Step 2 — Note the response.** Is the syntax current? Does it reflect the latest Python version's recommendations?\n\n**Step 3 — Now enable context7** and ask the same question. Ask Claude Code to use context7 to fetch the current asyncio documentation.\n\n**Step 4 — Compare the two responses.** Did context7 provide more accurate or more current information?\n\n**Step 5 — Test with a library you know well:** Ask Claude Code (with context7) about a specific function in a library where you know the exact correct usage. Does context7 get it right?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build with context7 Active Documentation",
+      "content": "Use context7 to build something with a library you're less familiar with — and get it right the first time.\n\n**Step 1 — Choose a library you haven't used much** but want to use: requests, FastAPI, SQLAlchemy, pandas, OpenAI SDK — something with a specific API.\n\n**Step 2 — Ask Claude Code to build a small program** using that library. Instruct it to use context7 to get current documentation:\n```\nBuild a Python script that [describe your goal] using [library]. Before writing code, use context7 to check the current API for the specific functions you'll need.\n```\n\n**Step 3 — Watch Claude Code** fetch documentation through context7. Does it reference the documentation in its response?\n\n**Step 4 — Run the generated code.** Does it work without requiring debugging?\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review the code you just wrote. Which parts are most likely to become outdated as the library releases new versions? What should I check in the docs before using this in production?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Verify AI Code with Documentation",
+      "content": "context7 lets you verify that code Claude generates matches current documentation.\n\n**Step 1 — Take any AI-generated code** that uses an external library.\n\n**Step 2 — Ask Claude Code** (with context7): \"Verify that this code uses the current API for [library]. Flag any usage that doesn't match current documentation.\"\n\n**Step 3 — Review what context7 finds.** Did the original AI-generated code use deprecated methods or incorrect parameters?\n\n**Step 4 — Update the code** based on the documentation verification.\n\n**Step 5 — Ask Claude:** *\"Besides the issues you found, what other common API mistakes do developers make with [library] that I should check for in my code?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Documentation-Driven Development",
+      "content": "Build a feature using a documentation-first approach with context7.\n\n**Step 1 — Choose a feature to implement** that requires a library.\n\n**Step 2 — Start with documentation, not code:**\n```\nBefore writing any code, use context7 to fetch the documentation for [library] and answer:\n1. Which classes/functions will I need for [feature]?\n2. What are the required and optional parameters?\n3. What does the return value look like?\n4. Are there any common gotchas or deprecated patterns to avoid?\n5. Show me the recommended usage pattern from the docs.\n```\n\n**Step 3 — Review the documentation summary.** Do you understand what to build?\n\n**Step 4 — Now write the code** based on the documented patterns. The code should match documentation exactly.\n\n**Step 5 — Compare to the \"code first\" approach:** Would you have gotten the same result by asking Claude to write the code directly (without documentation lookup first)? Test it and compare."
+    },
+    {
+      "type": "quiz",
+      "question": "Why is context7 useful when Claude Code already has knowledge about popular libraries built into its training?",
+      "options": [
+        "Claude Code has no knowledge of any libraries",
+        "Training knowledge has a cutoff date — context7 provides current documentation, catching API changes, deprecations, and new features released after training",
+        "context7 makes responses faster",
+        "Training knowledge is unreliable for all library information"
+      ],
+      "correct": 1,
+      "explanation": "Even for well-known libraries, AI training data has a cutoff date. Libraries release new versions that change APIs, deprecate methods, and add better patterns. For example, if a library was at version 2.x during training but is now at version 3.x with different APIs, Claude Code will write version 2.x code unless given current documentation. context7 solves this by fetching live, current documentation at the time of the request."
+    },
+    {
+      "type": "quiz",
+      "question": "context7 fetches documentation for a library and Claude Code uses it to generate code. What should you still check before using the code in production?",
+      "options": [
+        "Nothing — if it's based on current documentation, it's correct",
+        "That the generated code actually follows the documentation correctly — Claude Code can misread or misapply documentation, especially for complex APIs",
+        "Only check the code if the library is less than 1 year old",
+        "Whether the library's authors are reputable"
+      ],
+      "correct": 1,
+      "explanation": "Documentation fetching reduces but doesn't eliminate errors. Claude Code can still misinterpret documentation, apply patterns from the wrong section, or miss important qualifications in the docs. Verify that: (1) the code uses the methods context7 described, (2) parameters match the documented signatures, (3) any error handling matches what the docs say the library throws. Also run the code against your actual use case — documentation examples often show the happy path only."
     },
     {
       "type": "callout",

@@ -2,8 +2,14 @@
   "id": "8-19",
   "title": "Notion MCP — Your Knowledge Base in Claude Code",
   "part": 8,
-  "estimatedMinutes": 20,
-  "tags": ["mcp", "intermediate", "notion", "knowledge", "hands-on"],
+  "estimatedMinutes": 55,
+  "tags": [
+    "mcp",
+    "intermediate",
+    "notion",
+    "knowledge",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -39,6 +45,54 @@
       ],
       "correct": 1,
       "explanation": "Notion integrations require explicit page-level access grants — the integration token alone is not enough. You must open each page or database in Notion and add the integration via the 'Add connections' menu. This is a deliberate security design by Notion: integrations only see what you explicitly share with them. The fix is straightforward: go to your database in Notion, click the ... menu, Add connections, and select your claude-mcp integration."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Notion MCP First Operations",
+      "content": "Get Notion MCP working with your real workspace.\n\n**Step 1 — Configure Notion MCP** with your Notion integration token.\n\n**Step 2 — Test basic operations:**\n- \"List all databases in my Notion workspace\"\n- \"Show the pages in my [specific database] database\"\n- \"Read the content of my [page name] page\"\n\n**Step 3 — Test search:**\n\"Search my Notion for pages about [topic you work on]\"\n\n**Step 4 — Test write operations** on a test page:\n\"Create a new page in my [database] database with title 'MCP Test' and content 'Created by Claude Code'\"\n\n**Step 5 — Verify the created page** in Notion directly.\n\n**Step 6 — Ask Claude:** \"For a knowledge worker who uses Notion as their primary note-taking and project management tool, what are the 5 most valuable Notion MCP operations?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Powered Notion Knowledge Base",
+      "content": "Use Notion MCP to build and maintain a knowledge base with AI assistance.\n\n**Step 1 — Identify a knowledge area** you manage in Notion (or would like to start managing there): documentation, research notes, project decisions.\n\n**Step 2 — Ask Claude Code to analyse and improve existing Notion content:**\n```\nReview the pages in my [Notion database]. For each page:\n1. Does it have a clear, searchable title?\n2. Is the content structured with headings?\n3. Does it have any tags/properties filled in?\n4. Is there any content that appears duplicated in other pages?\n\nRecommend a prioritised list of improvements.\n```\n\n**Step 3 — Apply improvements** to 3 pages.\n\n**Step 4 — Create a new knowledge article** via Claude Code: \"Create a Notion page in [database] about [topic]. Structure it with: Overview, Key Concepts, How To, Examples, Related Pages.\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Meeting Notes to Notion",
+      "content": "Build a workflow that automatically turns meeting notes into structured Notion pages.\n\n**Step 1 — Take a meeting transcript or notes** (real or simulated).\n\n**Step 2 — Ask Claude Code to process them into a Notion page:**\n```\nConvert these meeting notes into a structured Notion page:\n[paste your notes]\n\nStructure:\n- Date and attendees\n- Background/context\n- Discussion points (with key perspectives)\n- Decisions made\n- Action items (with owner and deadline)\n- Next meeting date\n\nCreate this as a page in my [Meeting Notes database] in Notion.\n```\n\n**Step 3 — Review the created page** in Notion. Is the structure right? Is the content accurate?\n\n**Step 4 — Compare to your current meeting notes process.** Is this faster? What did the AI miss or misrepresent?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Notion Project Dashboard",
+      "content": "Use Notion MCP to build and maintain a project dashboard in Notion.\n\n**Step 1 — Ask Claude Code to create a project structure in Notion:**\n```\nCreate a project tracking setup in my Notion workspace for [project name]:\n1. A main project page with: overview, status, key dates, team\n2. A tasks database linked to the project\n3. A decisions log page\n4. A meeting notes database\n\nFor each, create the right properties and initial structure.\n```\n\n**Step 2 — Review each created element** in Notion.\n\n**Step 3 — Populate the first entries:** \"Create the first 5 tasks in the project database based on this project description: [your description]\"\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review the Notion project structure you created. What important elements are missing that a project manager would include? What database relations or views would make this more useful?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "Notion MCP can create and modify Notion pages. What is the key difference between using Notion MCP vs Notion AI (built into Notion)?",
+      "options": [
+        "There is no difference — they use the same AI",
+        "Notion MCP is controlled by Claude Code in your terminal and can be part of automated workflows; Notion AI is an in-app feature triggered manually inside the Notion interface",
+        "Notion AI is more accurate than Notion MCP",
+        "Notion MCP requires a paid Notion plan; Notion AI is free"
+      ],
+      "correct": 1,
+      "explanation": "The key difference is integration and automation potential. Notion MCP makes Notion a tool Claude Code can use in multi-step workflows — for example, read a GitHub issue → create a Notion task → add meeting notes to the right page. Notion AI is triggered from within the Notion interface and is better for in-context writing assistance. They serve different use cases and are complementary."
+    },
+    {
+      "type": "quiz",
+      "question": "You use Notion MCP to have Claude Code create project pages with tasks, timelines, and stakeholder lists. Before sharing the workspace with your team, what should you verify?",
+      "options": [
+        "That all pages have the correct formatting",
+        "That all content is accurate — AI may have invented details like realistic-sounding but wrong timelines, invented stakeholders, or estimated costs without basis",
+        "That the Notion workspace is set to team mode",
+        "That the pages have the right emoji icons"
+      ],
+      "correct": 1,
+      "explanation": "AI-generated project content often looks professional and complete while containing invented specifics. Review: do the timeline dates reflect real constraints or did the AI make them up? Are the listed stakeholders actually involved in this project? Are cost or resource estimates based on actual data or AI assumptions? Content that goes to your whole team becomes shared assumptions — wrong AI-generated content can mislead an entire team."
     },
     {
       "type": "callout",
