@@ -1,0 +1,101 @@
+{
+  "id": "7-4",
+  "title": "Asking Claude to Write a File",
+  "part": 7,
+  "estimatedMinutes": 65,
+  "tags": [
+    "claude-code",
+    "file-creation",
+    "diff",
+    "workflow"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have used Claude Code to create a real file from a natural language description, reviewed the proposed content before accepting it, and seen the file appear on disk."
+    },
+    {
+      "type": "text",
+      "content": "## Natural Language File Creation\n\nOne of Claude Code's most immediately useful capabilities is creating files from a plain English description. You don't need to know the syntax — you describe what you want, and Claude writes it.\n\nExamples of how this looks in practice:\n\n- *\"Create a file called `calculator.py` that takes two numbers and supports add, subtract, multiply, and divide\"*\n- *\"Create `styles/main.css` with a clean, modern dark theme — dark background, white text, a readable sans-serif font\"*\n- *\"Create `utils/date-helpers.js` with three functions: one that formats a date as YYYY-MM-DD, one that calculates days between two dates, and one that checks if a date is in the past\"*\n\nThe more specific your description, the better the output. Mention the filename, the format, what it should contain, and any constraints (no external libraries, add comments, use ES6 syntax, etc.)."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Specificity is a skill:** Vague request: *\"make a webpage.\"* Specific request: *\"Create `exercises/about-me.html` — a single-page about-me site with a header, a bio paragraph with a [Name] placeholder, and a skills list. Use inline CSS for a clean look. No frameworks, no external files.\"* The second request produces a usable result on the first try."
+    },
+    {
+      "type": "text",
+      "content": "## The Review-Then-Accept Workflow\n\nClaude Code never writes a file silently. Before making any change to your filesystem, it shows you exactly what it plans to do and waits for your approval.\n\nFor new files, you'll see the complete proposed content displayed in the terminal. For changes to existing files, you'll see a diff (covered in lesson 7-5).\n\nAt the approval prompt you have three options:\n\n1. **Type `yes` (or press Enter)** — Claude creates the file exactly as shown\n2. **Type `no`** — Claude abandons the change and waits for a new instruction\n3. **Type feedback** — Instead of yes/no, describe what to change: *\"Make the CSS simpler — remove the animations\"*. Claude revises and shows you the updated version before asking again.\n\nThis loop — propose → review → accept/revise — is the core workflow for all of Part 7. Never skip the review step."
+    },
+    {
+      "type": "text",
+      "content": "## Asking for Multiple Files at Once\n\nYou can request several files in a single message. Claude will propose and ask for approval on each one in sequence:\n\n*\"Create three files: `index.html` (a homepage), `about.html` (an about page), and `styles.css` (shared styles for both). Use a consistent blue and white color scheme.\"*\n\nClaude will show you each file before creating it. Review each one before accepting — it's easy to approve the first file carefully and then rush through the others.\n\nFor complex multi-file requests, consider using Plan Mode (lesson 7-10) which shows you the complete plan before any files are written."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Always read before you accept.** Claude is good at generating plausible-looking code, but it can make subtle mistakes — wrong variable names, logic errors, missing edge cases. The review step is not a formality. Read the proposed file the same way you'd read code before merging a pull request."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Generate Your First File",
+      "content": "Create a real file from scratch using Claude Code, review it carefully, and verify it works.\n\n**Step 1 — Launch:**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**Step 2 — Make a specific request:**\nType this in the prompt (feel free to customize the details):\n```\nCreate a new file called exercises/about-me.html.\nIt should be a clean, styled about-me page with:\n- A header with [Your Name] as a placeholder\n- A short bio paragraph mentioning that I'm learning AI tools\n- A list of 3 things I'm currently learning\n- Simple, readable CSS inline in the file (no external stylesheets)\n- No JavaScript, no frameworks\n```\n\n**Step 3 — Review the proposed file:**\nClaude displays the full file content before creating it. Read it top to bottom:\n- Does the HTML structure make sense?\n- Does the CSS look reasonable?\n- Are there any placeholders you'd want to fill in?\n\n**Step 4 — Accept or refine:**\n- If it looks good: type `yes` and press Enter\n- If something's off: type your feedback — for example, *\"Make the font larger and use a blue color scheme instead\"* — Claude will revise\n\n**Step 5 — Open the file in VS Code:**\nAfter accepting, switch to VS Code. The file should appear in the Explorer panel under `exercises/`.\n\n**Step 6 — View it in the browser:**\nRight-click `about-me.html` in VS Code → **Open with Live Server**. You should see your page in the browser.\n\n**Step 7 — Ask for a second file:**\nBack in Claude Code, try:\n```\nNow create exercises/contact.html — a simple contact page\nwith a form containing Name, Email, and Message fields.\nMatch the style of about-me.html.\n```\nReview this one carefully too before accepting.\n\n**What to notice:** You described what you wanted in plain English and got working HTML. The review step gave you control over the output before anything was written to disk."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — File Writing Drill",
+      "content": "Practice asking Claude Code to write different types of files — the most fundamental Claude Code workflow.\n\n**Step 1 — Open Claude Code in a project:**\n```powershell\nclaude\n```\n\n**Step 2 — Ask Claude Code to write 3 different file types:**\n\nType 1 — Python utility:\n\"Write a Python utility file called `utils.py` that contains: a function to validate email addresses, a function to format dates as YYYY-MM-DD, and a function to clean text (remove extra whitespace, strip HTML tags). Include docstrings and basic error handling.\"\n\nType 2 — Configuration file:\n\"Write a `config.yaml` file for a web application with sections for: database settings, API keys (use placeholder values), logging level, and feature flags.\"\n\nType 3 — Test file:\n\"Write a test file `test_utils.py` for the utils.py you just created. Include tests for valid and invalid inputs for each function.\"\n\n**Step 3 — Read each file.** Does each one do what you asked?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Complete Feature with Claude Code",
+      "content": "Use Claude Code to implement a complete feature — from specification to working, tested code.\n\n**Step 1 — Write a feature specification** (1-2 paragraphs describing what you want to build and how it should work).\n\n**Step 2 — Start Claude Code and provide the specification:**\n```\nI want to implement the following feature: [your specification]\n\nBefore writing any code:\n1. Describe your implementation plan\n2. List the files you will create or modify\n3. Identify any risks or questions\n\nOnly start coding after I approve the plan.\n```\n\n**Step 3 — Review the plan.** Is the approach correct? Are there files it missed? Approve or redirect before implementation.\n\n**Step 4 — Let Claude Code implement.** Watch which files it creates/modifies.\n\n**Step 5 — Test the implementation:** \"Run the tests for this feature. If they fail, fix them.\"\n\n**Step 6 — Mandatory code review:** \"Review the code you just wrote. Find 3 potential issues a code reviewer would raise.\""
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Review and Compare AI-Written Files",
+      "content": "Build the habit of careful file review after Claude Code writes or modifies code.\n\n**Step 1 — Ask Claude Code to write a function:**\n\"Write a Python function that reads a CSV file, filters rows where a specified column value exceeds a threshold, and writes the filtered results to a new CSV file. Include error handling for file not found and invalid column names.\"\n\n**Step 2 — Read the generated file** character by character (at least the first 30 lines).\n\n**Step 3 — Answer these questions:**\n- Does it import everything it uses?\n- Does it handle the file-not-found case?\n- Does it handle the invalid column name case?\n- What happens if the CSV is empty?\n- What happens if the threshold is not a number?\n- Is the output file properly closed even if an error occurs?\n\n**Step 4 — Paste your findings back to Claude Code:** \"I reviewed the code and found these issues: [list]. Fix each one.\"\n\n**Step 5 — Re-read the fixed version.** Did all issues get addressed?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Versioned File Writing with git",
+      "content": "Pair Claude Code file writing with immediate git commits — creating a clear history of what AI wrote vs what you wrote.\n\n**Step 1 — Start with a clean git state:**\n```powershell\ngit status   # should show \"nothing to commit\"\n```\n\n**Step 2 — Ask Claude Code to write a file:**\n\"Write a logging configuration module `logger.py` that sets up structured logging with different handlers for development (console) and production (file) environments.\"\n\n**Step 3 — Review the file** carefully.\n\n**Step 4 — Commit immediately:**\n```powershell\ngit add logger.py\ngit commit -m \"Add logging module (AI-generated, reviewed 2026-06-11)\"\n```\n\n**Step 5 — Make improvements** based on your review. Commit again:\n```powershell\ngit commit -m \"Improve logging module: add rotation, fix missing handlers\"\n```\n\n**Step 6 — This creates a clear history:** which code was AI-generated vs human-reviewed. This is professional practice for AI-assisted development."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code writes a 100-line Python file. You run it and it works correctly. Is this sufficient review?",
+      "options": [
+        "Yes — if it runs without errors, the code is correct",
+        "No — a program can run without errors while having logic errors, security issues, or missing edge case handling",
+        "Yes — but only run it in production if the output looks right",
+        "It depends on how critical the code is"
+      ],
+      "correct": 1,
+      "explanation": "Code that runs without errors can still be wrong in important ways: it might produce incorrect results for edge cases (empty input, unexpected formats), have security vulnerabilities (SQL injection, path traversal), have performance problems at scale, or miss error handling that would cause failures in production. \"It ran\" is a necessary but not sufficient condition for correct code. Always read AI-generated code."
+    },
+    {
+      "type": "quiz",
+      "question": "What should you do when Claude Code says \"I'll create a new file called database.py\"?",
+      "options": [
+        "Let it create the file and review it afterwards",
+        "Ask Claude Code to first show you the code it plans to write before creating the file, so you can review it before it's written",
+        "Accept all file creation requests automatically",
+        "Only allow Claude Code to modify existing files, never create new ones"
+      ],
+      "correct": 1,
+      "explanation": "You can ask Claude Code to show you a plan or a draft before writing files. This is especially valuable for important files like database modules, authentication code, or anything touching production data. Say \"Before creating the file, show me what you plan to write\" or \"Give me a summary of the file's design before implementing it.\" This puts you in the review loop before the code is written, not just after."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-4.** You've generated real files from natural language descriptions and practiced the review-then-accept workflow. Next lesson: making changes to existing files and reading diffs."
+    }
+  ],
+  "nextLesson": "7-5",
+  "prevLesson": "7-3"
+}

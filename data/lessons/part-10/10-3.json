@@ -1,0 +1,101 @@
+{
+  "id": "10-3",
+  "title": "Zapier + AI Actions",
+  "part": 10,
+  "estimatedMinutes": 60,
+  "tags": [
+    "automation",
+    "zapier",
+    "no-code",
+    "ai-workflows"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand how Zapier works, how it compares to n8n, and how to build an automation that uses an AI step to process data between two apps."
+    },
+    {
+      "type": "text",
+      "content": "## What is Zapier?\n\nZapier is the most widely used no-code automation platform. It connects 6,000+ apps and requires zero technical setup — you work entirely in a browser interface with no canvas to arrange, just a step-by-step form.\n\nThe core concept:\n- A **Zap** = one automation (trigger + one or more actions)\n- **Trigger**: something that happens in App A\n- **Action**: something that happens in App B (and C, and D...)\n- **AI by Zapier**: a special action that runs a prompt on your data in the middle of a Zap\n\nZapier is built around ease of use. If you've never automated anything before, Zapier is the fastest path from idea to running workflow."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Pricing note:** The \"AI by Zapier\" action that processes data with an LLM requires a Zapier **paid plan** (Starter, $19.99/month or higher). The free tier does not include AI steps.\n\nIf you don't want to pay, you already built three real AI automations in lesson 10-2 using n8n Cloud's free tier — that's the better free option. This lesson teaches the Zapier concept, which is useful to understand even if you use n8n in practice."
+    },
+    {
+      "type": "text",
+      "content": "## How Zapier Compares to n8n\n\n| Feature | Zapier | n8n |\n|---------|--------|-----|\n| Setup | Zero install, browser only | Browser (cloud) or self-host |\n| App integrations | 6,000+ | 400+ |\n| AI step | AI by Zapier (paid) | Native AI Agent node (free) |\n| Free tier | Limited zaps, no AI | Generous free tier, AI included |\n| Flexibility | Lower | Higher |\n| Best for | Quick setup, mainstream apps | Free, powerful, code-optional |\n\nThe choice is usually: **Zapier if you want the most app integrations and don't mind paying; n8n if you want free and more control.**\n\nMany teams use both — Zapier for simple app-to-app connections, n8n for anything with AI processing or custom logic."
+    },
+    {
+      "type": "text",
+      "content": "## The AI by Zapier Action\n\nWhen AI by Zapier is added as a step in a Zap, it:\n1. Takes text from the previous step (email body, form response, spreadsheet cell, etc.)\n2. Runs a prompt you write on that text\n3. Returns the processed result as data you can use in the next step\n\nExample prompt: `Extract the action item from this email: {{email_body}}. Return only the action item as one sentence.`\n\nThe output — a cleaned-up, processed string — becomes the input for the next action (add to task list, send to Notion, post to Slack, etc.).\n\nThis is exactly the trigger → AI processes → action pattern from lesson 10-1, just implemented in Zapier's interface."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Email-to-Task Automation",
+      "content": "This workshop builds a Zap that watches for emails tagged \"Action Required\" in Gmail, extracts the task using AI, and creates a task in Google Tasks.\n\n**Setup:**\n1. Go to zapier.com and sign up or log in\n2. If you have a paid plan, follow all steps. If on the free tier, follow steps 1-5 to understand the flow, then skip the AI step and connect trigger directly to action — you'll still get the non-AI version working.\n\n**Build the Zap:**\n\n**Step 1 — Trigger: Gmail — New Email Matching Search**\n1. Click **Create Zap**\n2. Search for **Gmail** as your trigger app\n3. Choose trigger event: **New Email Matching Search**\n4. Connect your Gmail account (OAuth — Zapier never sees your password)\n5. Search string: `label:Action-Required` (matches emails you've labeled \"Action Required\" in Gmail)\n6. Test the trigger — Zapier will pull a recent matching email\n\n**Step 2 — Action: AI by Zapier** *(paid plan required)*\n1. Add action app: **AI by Zapier**\n2. Action event: **Understand & Transform Text**\n3. Instructions: `Read the email below and extract only the single most important action item I need to complete. Write it as one clear sentence starting with a verb. Email: {{body_plain}}`\n4. Test the action — you'll see the extracted task in the output\n\n**Step 3 — Action: Google Tasks — Create Task**\n1. Add action app: **Google Tasks**\n2. Action event: **Create Task**\n3. Connect your Google account\n4. Task title: map to the AI output from Step 2\n5. Notes: `From email: {{subject}} — {{sender_name}}`\n6. Test the action\n\n**Activate the Zap:**\n1. Click **Publish** to turn the Zap on\n2. In Gmail, label any email \"Action Required\"\n3. Within ~2 minutes, check Google Tasks — the extracted action item should appear\n\n**What to observe:** The AI step transforms unstructured email text into a clean, actionable task title. Without the AI step you'd have to write a complex filter or accept messy task titles. The AI makes the automation intelligent."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Zapier's real strength** is breadth of integrations. If you need to connect an obscure CRM to Slack, Zapier almost certainly has both apps. n8n might not. The AI step being paywalled is a real limitation — but for pure app-to-app connections on the free tier, Zapier remains the easiest option."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Zapier AI Actions Exploration",
+      "content": "Explore what Zapier's AI Actions capabilities can do.\n\n**Step 1 — Log into Zapier** (or create a free account).\n\n**Step 2 — Explore the app integrations** relevant to your work. Search for apps you use daily.\n\n**Step 3 — Ask Claude:** *\"Compare Zapier and n8n for someone who: (1) doesn't want to run their own server, (2) needs to connect to common SaaS apps quickly, (3) wants AI processing within their automations. What are the trade-offs?\"*\n\n**Step 4 — Explore a pre-built Zap template** related to your work. What does it do? What would you need to customise?\n\n**Step 5 — Identify your best Zapier use case:** Which automation from your blueprint would be better on Zapier (managed hosting, easy app connections) vs n8n (self-hosted, more control, free)?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Zapier + AI Zap",
+      "content": "Build a Zapier workflow that uses AI processing.\n\n**Step 1 — Choose a simple but real automation** that can run on Zapier's free tier:\n- New Gmail → AI summary → save to Notion\n- New Typeform response → AI classification → add to Airtable\n- RSS feed item → AI rewrite → post to Slack\n\n**Step 2 — In Zapier**, create a new Zap:\n- Set your Trigger app and event\n- Add a Zapier AI step (using ChatGPT or Anthropic integration if available) or an HTTP Request step to call the Anthropic API\n- Add a final action to deliver the output\n\n**Step 3 — Write the AI prompt** for the processing step. Ask Claude to help: \"Write a prompt for this Zap step that [describe the AI task]. The input will be [describe the trigger data format].\"\n\n**Step 4 — Test the Zap** with real data.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this Zap I built [describe it]. What will break when [specific edge case]?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Zapier vs n8n Decision Framework",
+      "content": "Build a decision framework for choosing between automation tools.\n\n**Step 1 — Compare on these dimensions:**\n| Criteria | Zapier | n8n | Winner for my use case |\n|---|---|---|---|\n| Hosting/maintenance | Fully managed | Self-hosted | |\n| App integrations | 5000+ native | 400+ native + HTTP | |\n| Cost at scale | Expensive | Free (self-hosted) | |\n| AI capabilities | Built-in AI steps | HTTP + any API | |\n| Privacy/data | Cloud processed | Your infrastructure | |\n| Technical skill required | Low | Medium | |\n\n**Step 2 — Fill in the \"winner\" column** based on YOUR specific situation and priorities.\n\n**Step 3 — Ask Claude:** *\"A developer who values data privacy, plans to automate 10+ workflows, and has time to maintain infrastructure vs a non-technical marketer who needs 3 simple automations quickly — which tool fits each person?\"*\n\n**Step 4 — Make your personal recommendation** based on your context."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Automation Monitoring System",
+      "content": "Build monitoring for your automations so you know when they break.\n\n**Step 1 — Identify all automations you're running** (across Zapier, n8n, or other tools).\n\n**Step 2 — For each automation**, define:\n- What is the expected output or frequency?\n- How would you know if it's broken? (no emails sent, no records created, wrong data)\n- Who needs to be notified if it breaks?\n\n**Step 3 — Build a monitoring Zap or n8n workflow:**\n- A daily check that verifies automations ran\n- Alert if expected outputs haven't appeared\n\n**Step 4 — Ask Claude to design the monitoring logic:** *\"I have these automations [list them]. Design a monitoring system that would alert me within 24 hours if any of them stop working. I'd prefer to detect failures by [watching outputs, not by checking tool status].\"*\n\n**Step 5 — Implement at least one monitoring check** for your most important automation."
+    },
+    {
+      "type": "quiz",
+      "question": "You're on Zapier's free plan and your Zap runs 100 times per month. The free plan allows 100 tasks per month. What happens when you add a second step to the Zap?",
+      "options": [
+        "Nothing changes — task count is per Zap, not per step",
+        "Each step counts as one task per Zap run — a 2-step Zap uses 200 tasks for 100 runs, exceeding the free plan limit",
+        "The Zap runs at half speed to conserve tasks",
+        "Zapier automatically upgrades your plan"
+      ],
+      "correct": 1,
+      "explanation": "Zapier counts tasks per step per Zap run. A 3-step Zap running 100 times = 300 tasks. This is a critical pricing consideration when adding AI processing steps (which often use an additional step) — what worked on the free plan with one step may require a paid plan once you add AI processing. Always calculate: (steps in Zap) × (expected runs per month) = tasks needed, then compare to your plan limit."
+    },
+    {
+      "type": "quiz",
+      "question": "A Zapier automation fails silently — it runs but produces no output and no error. What is the most likely cause and how do you diagnose it?",
+      "options": [
+        "Zapier is down — check their status page",
+        "A filter or condition step evaluated to false and stopped the Zap — check the Zap's run history to see which step stopped processing",
+        "The Zap was paused by Zapier for inactivity",
+        "The trigger app stopped sending data to Zapier"
+      ],
+      "correct": 1,
+      "explanation": "Silent failures in Zapier are usually caused by Filter or Path steps that evaluate to false and halt execution without error — this is by design, but it can look like a failure when the condition is wrong. Check the Run History: click on a specific run to see each step's input/output and at which step execution stopped. If a Filter stopped it, check the filter condition against the actual input data."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 10-3.** You understand Zapier's model, how AI fits as a processing step, and when to choose Zapier vs n8n. Next: Make's visual approach to the same problem."
+    }
+  ],
+  "nextLesson": "10-4",
+  "prevLesson": "10-2"
+}

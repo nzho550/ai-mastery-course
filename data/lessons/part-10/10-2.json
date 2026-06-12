@@ -1,0 +1,96 @@
+{
+  "id": "10-2",
+  "title": "n8n — Open-Source AI Automation",
+  "part": 10,
+  "estimatedMinutes": 65,
+  "tags": [
+    "automation",
+    "n8n",
+    "no-code",
+    "ai-workflows"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have three real, working n8n automations running in the cloud — doing actual work for you every day, completely free."
+    },
+    {
+      "type": "text",
+      "content": "## What is n8n?\n\nn8n (pronounced \"n-eight-n\") is an open-source workflow automation tool. It lets you connect apps and add AI processing steps using a visual drag-and-drop canvas — no code required for most workflows.\n\nWhat makes n8n special:\n- **Free and open-source** — the core product costs nothing\n- **Self-hostable** — you can run it on your own server for total control and privacy\n- **Cloud option** — n8n.io offers a managed cloud version with a free tier\n- **Native AI nodes** — first-class support for Claude, OpenAI, and other LLMs\n- **Code when needed** — for advanced logic, you can drop in a JavaScript Code node\n\nFor this lesson you'll use **n8n Cloud** (app.n8n.cloud) — no installation needed. The free tier gives you enough workflows and executions to build everything here."
+    },
+    {
+      "type": "text",
+      "content": "## The Visual Canvas\n\nEvery n8n workflow lives on a canvas. The canvas is made up of **nodes** connected by **arrows** (called edges).\n\nEach node is a step:\n- **Trigger nodes** start the workflow (Schedule Trigger, Webhook, Gmail trigger, etc.)\n- **Action nodes** do something in an app (send an email, add a spreadsheet row, post to Slack)\n- **AI nodes** process text with an LLM (AI Agent, LLM Chain, Summarize, etc.)\n- **Code nodes** let you write JavaScript for custom logic\n- **HTTP Request nodes** call any API that doesn't have a dedicated node\n\nTo connect nodes: hover over the output dot on one node, drag to the input dot on the next node. The arrow you draw is the data flowing between them."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The AI Agent node** is the one you'll use most. It takes text input, sends it to a model (Claude, OpenAI, etc.) with a system prompt you write, and outputs the model's response. One node handles the entire AI step."
+    },
+    {
+      "type": "text",
+      "content": "## The Accomplishment Standard\n\nBy the end of this workshop you'll have three automations running in production — not demos, but real workflows doing real work in the background while you're doing other things.\n\nAll three use n8n Cloud's free tier. All three run on a schedule. All three use an AI step to process data before delivering a result."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Build 3 Real n8n Automations",
+      "content": "**Setup: Sign up for n8n Cloud**\n1. Go to app.n8n.cloud/register\n2. Create a free account\n3. Your workspace loads with an empty canvas\n\n---\n\n**Automation 1 — Daily AI News Digest (15 min)**\n\nThis workflow fetches tech news every morning, has Claude summarize the top stories, and emails the digest to you.\n\nPipeline: `Schedule Trigger (8am daily)` → `HTTP Request (fetch RSS feed)` → `AI Agent (summarize top 5 stories)` → `Gmail (send digest to yourself)`\n\nBuild it:\n1. Click **New workflow** on the canvas\n2. Add a **Schedule Trigger** node — set it to run daily at 8:00 AM\n3. Add an **HTTP Request** node:\n   - URL: `https://feeds.feedburner.com/TechCrunch` (or `https://hnrss.org/frontpage` for Hacker News)\n   - Method: GET\n   - Response format: String\n4. Add an **AI Agent** node:\n   - Connect your Claude or OpenAI credentials (the node will prompt you to add them)\n   - System prompt: `You are a tech news editor. Given an RSS feed, extract the top 5 most interesting stories. For each story: title, one-sentence summary, and why it matters. Flag anything AI-related with a star.`\n   - Connect the HTTP Request output to the AI Agent input\n5. Add a **Gmail** node:\n   - Operation: Send email\n   - To: your email address\n   - Subject: `Your Daily Tech Digest — {{$now.format('MMMM D')}}`\n   - Body: connect to the AI Agent output\n6. Click **Test workflow** — run it manually once to verify it works\n7. Click **Activate** — the workflow now runs every morning at 8am\n\n**Verify:** Check your inbox within a minute of activating — the manual test should have delivered an email.\n\n---\n\n**Automation 2 — GitHub Stars Tracker (20 min)**\n\nThis workflow checks your GitHub stars weekly, finds repos you starred in the last 7 days, has Claude explain each one, and emails you a digest.\n\nPipeline: `Schedule Trigger (weekly Monday 9am)` → `HTTP Request (GitHub starred repos)` → `Code node (filter by date)` → `AI Agent (explain each repo)` → `Gmail (weekly digest)`\n\n> **API note:** GitHub's starred repos endpoint returns ALL your stars, not just recent ones. The Code node filters by date.\n\nBuild it:\n1. New workflow → **Schedule Trigger**: every Monday at 9:00 AM\n2. **HTTP Request** node:\n   - URL: `https://api.github.com/users/YOUR_GITHUB_USERNAME/starred`\n   - Method: GET\n   - Add header: `Accept: application/vnd.github.star+json` (this includes the `starred_at` timestamp)\n3. **Code** node (JavaScript):\n```javascript\nconst sevenDaysAgo = new Date();\nsevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);\n\nconst recentStars = $input.all()\n  .flatMap(item => item.json)\n  .filter(repo => {\n    const starredAt = new Date(repo.starred_at);\n    return starredAt >= sevenDaysAgo;\n  });\n\nreturn recentStars.map(repo => ({ json: repo }));\n```\n4. **AI Agent** node:\n   - Prompt: `Here is a GitHub repository a developer just starred. Explain in 2-3 sentences: what it does, who it's for, and one reason it might be interesting. Repository data: {{$json}}`\n5. **Gmail** node: send a weekly digest of all the AI explanations\n6. Activate\n\n---\n\n**Automation 3 — Meeting Prep Brief (25 min)**\n\nThis workflow runs every weekday at 7:30am, checks your Google Calendar for today's meetings, and emails you a prep brief.\n\nPipeline: `Schedule Trigger (weekdays 7:30am)` → `Google Calendar (get today's events)` → `AI Agent (generate prep questions for each meeting)` → `Gmail (send brief by 8am)`\n\nBuild it:\n1. New workflow → **Schedule Trigger**: weekdays at 7:30 AM\n2. **Google Calendar** node:\n   - Operation: Get many events\n   - Calendar: your primary calendar\n   - Time min: today at 00:00\n   - Time max: today at 23:59\n3. **AI Agent** node:\n   - Prompt: `I have the following meeting today: {{$json.summary}} at {{$json.start.dateTime}}. Description: {{$json.description}}. Generate: 3 preparation questions I should think about before this meeting, and any likely action items I should be ready to discuss.`\n4. **Gmail** node: send the brief to yourself with subject `Meeting Prep — {{$now.format('dddd MMMM D')}}`\n5. Activate\n\n---\n\n**After all 3 are active:**\nDocument your workflows in your notes file: what each does, when it runs, and how to modify it if needed. You now have a personal AI assistant running 24/7 on the free tier."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — n8n Installation and First Workflow",
+      "content": "Get n8n running and execute your first workflow.\n\n**Step 1 — Install n8n:**\n```powershell\nnpx n8n\n```\nOr via Docker: `docker run -it --rm --name n8n -p 5678:5678 n8nio/n8n`\n\n**Step 2 — Open n8n** at http://localhost:5678 and create an account.\n\n**Step 3 — Create your first workflow:**\n- Add a **Schedule Trigger** node (runs every minute for testing)\n- Add a **Set** node that creates a variable `message = \"Hello from n8n at {{$now}}\"`\n- Add a **No Operation** node to see the output\n- Connect them in order\n\n**Step 4 — Execute the workflow** manually and verify the output in the execution log.\n\n**Step 5 — Ask Claude:** *\"I'm learning n8n. What are the 5 most important node types to understand first? For each, describe what it does and a common use case.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Real n8n Workflow with AI",
+      "content": "Build a genuinely useful n8n workflow using AI assistance.\n\n**Step 1 — Choose your automation blueprint** from Lesson 10-1 Workshop D.\n\n**Step 2 — Ask Claude Code** to help you design the n8n workflow:\n```\nI want to build this workflow in n8n: [describe your automation].\n\nHelp me:\n1. Which n8n nodes should I use for each step?\n2. What should the workflow look like structurally?\n3. For any step involving AI processing, how do I use the OpenAI or HTTP Request node to call the Anthropic API?\n4. What are the common pitfalls for this type of workflow?\n```\n\n**Step 3 — Build the workflow** in n8n following Claude's guidance.\n\n**Step 4 — Test with real data.** Does it work as expected?\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this n8n workflow I built [describe it]. What failure modes haven't I handled? What happens when [specific API] is down or returns an error?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — n8n Error Handling",
+      "content": "Add robust error handling to your n8n workflows.\n\n**Step 1 — Ask Claude:** *\"What are the most common ways n8n workflows fail in production? For each failure mode, what is the n8n error handling approach?\"*\n\n**Step 2 — Identify the failure points** in your workflow from Workshop B.\n\n**Step 3 — Add error handling** to each critical node:\n- Add an **Error Trigger** workflow that runs when any workflow fails\n- Add retry logic to HTTP Request nodes\n- Add condition nodes to handle empty/null responses\n- Add a notification step (email or Slack) on failure\n\n**Step 4 — Test error handling** by intentionally breaking part of the workflow (use a wrong API key or URL) and verify the error notification fires.\n\n**Step 5 — Ask Claude:** *\"For a production n8n workflow, what monitoring and alerting should I set up beyond just error notifications?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — n8n + AI Processing Pipeline",
+      "content": "Build an n8n workflow that includes AI text processing via the Anthropic API.\n\n**Step 1 — Choose a use case** where AI processing adds value in the middle of a workflow:\n- Classify incoming emails by topic\n- Summarise long documents before saving to Notion\n- Extract structured data from unstructured text\n- Generate personalised content based on input data\n\n**Step 2 — Ask Claude Code to generate the Anthropic API call configuration:**\n```\nGenerate an n8n HTTP Request node configuration to call the Anthropic API.\nEndpoint: https://api.anthropic.com/v1/messages\nModel: claude-haiku-4-5-20251001\nTask: [describe what you want the AI to do with each input]\nThe input comes from: [previous node output]\n```\n\n**Step 3 — Build the workflow** with the AI processing step.\n\n**Step 4 — Test with diverse inputs.** Does the AI consistently produce the right output format?\n\n**Step 5 — Add output validation:** If the AI output doesn't match the expected format, route to a fallback branch."
+    },
+    {
+      "type": "quiz",
+      "question": "You build an n8n workflow that processes incoming emails with AI. It works in testing but occasionally fails in production. What is the most likely cause?",
+      "options": [
+        "n8n is not production-ready software",
+        "Real-world inputs are more varied than test inputs — the workflow hits edge cases (empty fields, unusual characters, unexpected email formats) that weren't represented in tests",
+        "The AI model changes its behaviour over time",
+        "n8n workflows expire after 30 days"
+      ],
+      "correct": 1,
+      "explanation": "The most common cause of automation failures moving from test to production: real data is messier than test data. Your test emails were well-formed; production emails might have empty subjects, unusual character encodings, very long bodies, attachment-only messages, or formats your workflow didn't anticipate. Fix: test with a diverse sample of real data before going live, and build defensive handling for every field your workflow reads."
+    },
+    {
+      "type": "quiz",
+      "question": "An n8n workflow sends an automatic response email based on AI classification of incoming messages. What safety mechanism is most important to implement?",
+      "options": [
+        "Rate limiting to prevent too many emails",
+        "A human review queue for any message the AI classifies with less than 90% confidence, or for any response that includes personal commitments or sensitive content",
+        "Only process emails during business hours",
+        "Log all AI classifications for later review"
+      ],
+      "correct": 1,
+      "explanation": "Automated responses sent under your name or your organisation's name carry real consequences. The critical safety mechanism: identify cases where the automation might respond incorrectly and route those to human review. Low-confidence classifications are one signal; response content is another — any automated response that makes a commitment (scheduling a meeting, approving a request, providing pricing) should require human approval first."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 10-2.** Three real automations are running in the background. Every day your inbox gets smarter — and you did it for free with zero code (except one JavaScript filter). Next: Zapier's approach to the same problem."
+    }
+  ],
+  "nextLesson": "10-3",
+  "prevLesson": "10-1"
+}

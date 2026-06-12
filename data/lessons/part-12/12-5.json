@@ -1,0 +1,106 @@
+{
+  "id": "12-5",
+  "title": "Connecting Local Models to Continue.dev in VS Code",
+  "part": 12,
+  "estimatedMinutes": 65,
+  "tags": [
+    "local-ai",
+    "continue-dev",
+    "vscode",
+    "ollama",
+    "lm-studio"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nContinue.dev (installed in lesson 6-4) supports local models out of the box. By the end of this lesson, you'll have AI code assistance in VS Code that runs entirely on your machine — no API key, no cost, no data leaving your computer."
+    },
+    {
+      "type": "text",
+      "content": "## How Continue.dev Connects to Local Models\n\nContinue.dev stores its configuration in a file at:\n- **Windows:** `C:\\Users\\YourName\\.continue\\config.json`\n- **macOS:** `~/.continue/config.json`\n\nYou can edit this file directly, or open it from VS Code with `Ctrl+Shift+P` → `Continue: Open Config`.\n\nThe config is a JSON file with a `models` array. Each entry in the array is a model provider — you can have multiple, and switch between them from the Continue sidebar.\n\nFor local models, you're pointing Continue at either Ollama's API (port 11434) or LM Studio's API (port 1234). Both use the same JSON format with slightly different values."
+    },
+    {
+      "type": "text",
+      "content": "## Configuration: Ollama Provider\n\nIf you're using Ollama, add this to the `models` array in your `config.json`:\n\n```json\n{\n  \"title\": \"Local Phi-4 (Ollama)\",\n  \"provider\": \"ollama\",\n  \"model\": \"phi4\"\n}\n```\n\nContinue.dev knows Ollama's default port (11434) — you don't need to specify the URL. Just make sure Ollama is running (check your system tray).\n\nIf you want to use a different model, change `\"model\": \"phi4\"` to whatever model name you've pulled (e.g., `\"llama3.2:3b\"`, `\"mistral\"`).\n\nTo use a custom port or a remote Ollama instance, add `\"apiBase\"`:\n```json\n{\n  \"title\": \"Local Phi-4 (Ollama)\",\n  \"provider\": \"ollama\",\n  \"model\": \"phi4\",\n  \"apiBase\": \"http://localhost:11434\"\n}\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Configuration: LM Studio Provider\n\nLM Studio exposes an OpenAI-compatible API. Because it's not Ollama, you use the `\"openai\"` provider and point it at localhost:1234:\n\n```json\n{\n  \"title\": \"Local Phi-4 (LM Studio)\",\n  \"provider\": \"openai\",\n  \"model\": \"phi4\",\n  \"apiBase\": \"http://localhost:1234/v1\",\n  \"apiKey\": \"local\"\n}\n```\n\nThe `\"apiKey\": \"local\"` is required by the OpenAI provider format, but LM Studio ignores the value — you can put anything there. The important parts are the `apiBase` URL and the model name matching what you have loaded in LM Studio's server.\n\n**Important:** LM Studio must have its local server running and a model loaded for this to work. Check the Developer tab in LM Studio before testing."
+    },
+    {
+      "type": "text",
+      "content": "## A Complete config.json Example\n\nHere's what a config.json looks like with both a cloud model and a local model configured:\n\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Claude Sonnet (Cloud)\",\n      \"provider\": \"anthropic\",\n      \"model\": \"claude-sonnet-4-6\",\n      \"apiKey\": \"sk-ant-your-key\"\n    },\n    {\n      \"title\": \"Local Phi-4 (Ollama)\",\n      \"provider\": \"ollama\",\n      \"model\": \"phi4\"\n    }\n  ],\n  \"tabAutocompleteModel\": {\n    \"title\": \"Tab Autocomplete (Ollama)\",\n    \"provider\": \"ollama\",\n    \"model\": \"phi4\"\n  }\n}\n```\n\nWith this config, you can switch between Claude and your local model using the model picker at the top of the Continue sidebar. You might use Claude for complex refactors and the local model for quick questions about private code."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Tab autocomplete with local models:** Continue.dev also supports AI-powered tab autocomplete (like Copilot's inline suggestions). You can configure a local model specifically for autocomplete using the `tabAutocompleteModel` key. Smaller, faster models work better for autocomplete since they need to respond in under 200ms. `llama3.2:3b` is a good choice for this."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Troubleshooting: model not responding?** Check these in order:\n1. Is Ollama running? Look for the system tray icon. If not, open PowerShell and type `ollama serve`.\n2. Is the model downloaded? Run `ollama list` to confirm.\n3. Is the model name in config.json spelled exactly as it appears in `ollama list`?\n4. For LM Studio: is the server started in the Developer tab? Is a model loaded?\n\nIn VS Code, open the Output panel (`Ctrl+Shift+U`) and select \"Continue\" from the dropdown to see error messages."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Connect Continue.dev to Your Local Model",
+      "content": "**Prerequisites:** Ollama installed with at least one model (lesson 12-2), or LM Studio running with a model loaded (lesson 12-4).\n\n**Step 1 — Open Continue settings:**\n1. Press `Ctrl+Shift+P` in VS Code\n2. Type `Continue: Open Config` → press Enter\n3. The `config.json` file opens in the editor\n\n**Step 2 — Add your local model:**\nLocate the `\"models\"` array. Add the appropriate entry:\n\n**If using Ollama:**\n```json\n{\n  \"title\": \"Local Model (Ollama)\",\n  \"provider\": \"ollama\",\n  \"model\": \"phi4\"\n}\n```\nChange `\"phi4\"` to whatever you have installed (check with `ollama list`).\n\n**If using LM Studio (with server running):**\n```json\n{\n  \"title\": \"Local Model (LM Studio)\",\n  \"provider\": \"openai\",\n  \"model\": \"phi4\",\n  \"apiBase\": \"http://localhost:1234/v1\",\n  \"apiKey\": \"local\"\n}\n```\n\nMake sure there's a comma between entries if you have existing models in the array. Save the file (`Ctrl+S`).\n\n**Step 3 — Select your local model:**\n1. Open the Continue sidebar (click the Continue icon in the Activity Bar)\n2. At the top of the chat panel, click the model name dropdown\n3. Select your local model from the list\n\n**Step 4 — Test it:**\n1. Open any code file from your `ai-course-projects` folder\n2. Select a function or a few lines of code\n3. Press `Ctrl+L` to send the selection to Continue\n4. Ask: \"What does this code do?\"\n5. Watch the response come from your local machine\n\n**Step 5 — The offline test:**\nDisconnect from WiFi (or turn on airplane mode). Ask Continue a question. If it still responds, your local model is working correctly — no internet required.\n\n**Reconnect WiFi when done.**\n\nNote in your `notes/my-ai-workflow.md` which local model you configured and when you'll use it vs cloud models."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Continue.dev + Ollama Setup",
+      "content": "Connect Continue.dev to your local Ollama models.\n\n**Step 1 — Ensure Ollama is running** with at least one model:\n```powershell\nollama list\n```\n\n**Step 2 — Configure Continue.dev** (`.continue/config.json`):\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Local Code Model\",\n      \"provider\": \"ollama\",\n      \"model\": \"qwen2.5-coder:7b\"\n    },\n    {\n      \"title\": \"Claude Sonnet (Cloud)\",\n      \"provider\": \"anthropic\",\n      \"model\": \"claude-sonnet-4-6\",\n      \"apiKey\": \"your-key-here\"\n    }\n  ]\n}\n```\n\n**Step 3 — Open VS Code** and switch between models in Continue.dev.\n\n**Step 4 — Test the local model** for code completion on a real task.\n\n**Step 5 — Ask Claude:** \"How can I configure Continue.dev to automatically choose between local and cloud models based on file type or task type?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Local + Cloud Hybrid Workflow",
+      "content": "Build a hybrid workflow using local AI for routine tasks and cloud AI for complex ones.\n\n**Step 1 — Define your task tiers:**\n- **Local model tasks:** quick completions, boilerplate generation, simple explanations, private/sensitive code\n- **Cloud model tasks:** complex architecture questions, large refactors, reasoning about business logic, anything requiring broad knowledge\n\n**Step 2 — Spend 30 minutes coding** deliberately using the hybrid approach:\n- For simple tasks: use the local model\n- For complex tasks: switch to Claude Sonnet in Continue.dev\n\n**Step 3 — Track the usage:**\n- How many times did you use local vs cloud?\n- For which tasks did you choose each?\n\n**Step 4 — Ask Claude:** *\"Based on my hybrid usage pattern [describe it], where am I over-using or under-using the local model? What is the cost saving of my local usage vs if I had used cloud AI for everything?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Autocomplete with Local Models",
+      "content": "Configure code autocomplete using a local model.\n\n**Step 1 — Configure Continue.dev autocomplete** to use a local model:\n```json\n{\n  \"tabAutocompleteModel\": {\n    \"title\": \"Local Autocomplete\",\n    \"provider\": \"ollama\",\n    \"model\": \"qwen2.5-coder:1.5b\"\n  }\n}\n```\n\nNote: use the smallest model for autocomplete — it runs on every keystroke.\n\n**Step 2 — Enable autocomplete** in VS Code settings: search for \"Continue autocomplete\" and enable.\n\n**Step 3 — Write real code** for 15 minutes with local autocomplete active. Measure:\n- How often are suggestions useful? (accept rate)\n- Does the latency feel acceptable?\n- What types of completions are best?\n\n**Step 4 — Compare to not having autocomplete** — estimate time saved per hour of coding.\n\n**Step 5 — Tune the configuration** based on your experience. A smaller model may be better if latency is an issue."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Privacy-Preserving Development Environment",
+      "content": "Configure your development environment for maximum privacy on sensitive projects.\n\n**Step 1 — Define a \"privacy-first\" VS Code workspace** for sensitive projects:\n- Local AI only (no cloud connections)\n- No telemetry to any vendor\n- Local model tuned for the project domain\n\n**Step 2 — Ask Claude Code to help configure:**\n```\nCreate a VS Code workspace settings file (.vscode/settings.json) that:\n1. Disables all telemetry\n2. Disables GitHub Copilot if installed\n3. Configures Continue.dev to use only local models\n4. Disables any extension that makes external network requests\n\nAlso create a .continue/config.json that uses only Ollama models.\n```\n\n**Step 3 — Test the configuration:** Verify no network requests leave your machine during a coding session (use a network monitor like Wireshark or Windows Resource Monitor).\n\n**Step 4 — Document the privacy-first workspace** for use on your most sensitive projects."
+    },
+    {
+      "type": "quiz",
+      "question": "You configure Continue.dev with a local Ollama model and a cloud Claude model. When you ask a question in VS Code, how does Continue.dev decide which model to use?",
+      "options": [
+        "It automatically selects the best model for each task",
+        "You select the model manually from the model picker in the Continue.dev sidebar — it does not auto-select",
+        "It always uses the local model first and falls back to cloud if local fails",
+        "It uses whichever model is fastest to respond"
+      ],
+      "correct": 1,
+      "explanation": "Continue.dev does not automatically route between models — you select the active model manually from the model picker. This is intentional: auto-routing could accidentally send sensitive data to a cloud model when you intended to use local. The deliberate model selection ensures you know where your data is going. For automated routing based on task type, you would need to build custom logic or use a tool that explicitly supports intelligent routing."
+    },
+    {
+      "type": "quiz",
+      "question": "Your local model produces code completions that frequently include your variable names and coding patterns. Should you be concerned about data privacy?",
+      "options": [
+        "Yes — the model has learned from your code and may share it",
+        "No — the model is adapting to your in-context code within the current session; it is not training on your code or sharing it",
+        "Yes — you should reset the model after every session",
+        "No concern — but you should encrypt your model files"
+      ],
+      "correct": 1,
+      "explanation": "What you're seeing is in-context learning — the model reads the code currently in your editor (which is in the prompt/context) and uses it to make relevant suggestions. This is not training; the model weights are not updated. No data is sent anywhere with a local model. The model forgets your code between sessions (unless you explicitly include it in the prompt). This in-context adaptation is exactly why local models produce relevant completions for your specific codebase."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 12-5.** Continue.dev is now connected to your local model. You have a fully private, offline-capable AI coding assistant in VS Code. Next: doing the same for Claude Code."
+    }
+  ],
+  "nextLesson": "12-6",
+  "prevLesson": "12-4"
+}

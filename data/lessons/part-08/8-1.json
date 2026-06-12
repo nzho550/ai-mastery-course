@@ -1,0 +1,125 @@
+{
+  "id": "8-1",
+  "title": "What is MCP and Why It's a Big Deal",
+  "part": 8,
+  "estimatedMinutes": 60,
+  "tags": ["mcp", "claude-code", "integrations"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to explain what MCP is, why the open standard matters, how the architecture works at a high level, and what kinds of tools it unlocks — in plain English, to anyone. You'll also understand the 2026 ecosystem and which MCP servers are most widely used.\n\nNo code yet. Just the mental model."
+    },
+    {
+      "type": "text",
+      "content": "## Before MCP: Claude in a Box\n\nBefore MCP, Claude only knew what was inside the conversation window. You had to paste in every piece of context manually — file contents, search results, calendar data, database records.\n\nClaude was powerful, but isolated. Like a brilliant consultant locked in a room with no phone, no laptop, and no window to the outside world.\n\nWith MCP, that changes completely. Claude can now:\n- Read and write files on your computer\n- Query your email inbox\n- Search GitHub repositories\n- Run queries against a database\n- Control a real web browser\n- Check your calendar\n- Search documentation for any library\n\nThe information flows to Claude automatically, on demand, without you copying and pasting anything."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The one-sentence version:** MCP is the standard plug that lets Claude connect to any external tool — the same way USB lets a computer connect to any device."
+    },
+    {
+      "type": "text",
+      "content": "## The USB Analogy\n\nBefore USB existed, every peripheral — mouse, keyboard, printer, camera — needed its own special port. Hardware manufacturers had to build a different connector for every device and every computer.\n\nUSB changed that. One standard port. Any device. Plug in, it works.\n\nMCP does the same thing for AI and tools.\n\n**Before MCP:**\n- Every tool needed its own custom integration with every AI model\n- OpenAI built its own plugins system, Google built its own, Anthropic built its own\n- Developers had to write different code for every combination of AI + tool\n- An integration built for ChatGPT didn't work with Claude\n\n**With MCP:**\n- One standard protocol that any AI client and any tool can implement\n- Build one MCP server for your database → it works with Claude, Cursor, Zed, and any other MCP-compatible client\n- Build one MCP client (like Claude Code) → it connects to any MCP server anyone builds\n- Integrations are reusable across the entire ecosystem\n\nThis is why it's a big deal. It's not a feature — it's a standard."
+    },
+    {
+      "type": "text",
+      "content": "## How MCP Architecture Works\n\nMCP uses a client-server architecture. Understanding this helps you debug issues and understand what's possible:\n\n**MCP Hosts (clients):** Applications that want AI + tool integration. Examples: Claude Code, Claude.ai Desktop App, Cursor, Zed, VS Code extensions. Each host can connect to multiple MCP servers simultaneously.\n\n**MCP Servers:** Programs that expose tools, resources, or prompts to any compatible host. Examples: a GitHub server that exposes issue/PR operations, a filesystem server that exposes file read/write, a PostgreSQL server that exposes database queries.\n\n**How they communicate:** MCP servers communicate with hosts over one of two transports:\n- **stdio** (Standard Input/Output): The host launches the server as a child process and communicates over stdin/stdout. Used for local servers.\n- **HTTP/SSE** (Server-Sent Events): The server runs as a web service. Used for remote servers or servers shared across multiple users.\n\n**The request flow:**\n1. You type: `\"List my open GitHub issues\"`\n2. Claude Code identifies this needs the GitHub tool `list_issues`\n3. Claude Code sends the tool call to the GitHub MCP server\n4. The GitHub MCP server calls the GitHub API and gets the response\n5. The response comes back to Claude Code and Claude incorporates it into its answer\n\nFrom your perspective: you asked a question in plain English and got an answer. Behind the scenes: two programs (Claude Code and the GitHub server) communicated via the MCP protocol.\n\n**Security model:** MCP servers run on your machine (for local servers) or on trusted infrastructure (for remote). They use your existing credentials — your GitHub token, your Google OAuth session, your database connection string. Claude never sees your credentials directly; the MCP server does, and returns data to Claude."
+    },
+    {
+      "type": "text",
+      "content": "## Why the Open Standard Matters\n\nMCP is open. Anyone can read the specification at modelcontextprotocol.io. Anyone can build an MCP server. Anyone can build an MCP client.\n\nThis means:\n- A developer can build an MCP server for their company's internal tool, and it just works with Claude Code\n- A startup can ship an MCP server alongside their product and get AI integration for free\n- A hobbyist can build an MCP server for their home automation system\n- A tool you use at work can add MCP support and become instantly usable by Claude\n\nThe open standard creates a compounding ecosystem effect. As of mid-2026, hundreds of MCP servers already exist:\n\n| Category | Popular servers |\n|----------|----------------|\n| **Development** | GitHub, GitLab, Jira, Linear, Sentry |\n| **Productivity** | Gmail, Google Calendar, Slack, Notion, Todoist |\n| **Databases** | PostgreSQL, MySQL, SQLite, Redis, MongoDB |\n| **Files & Storage** | Filesystem, Google Drive, Dropbox, OneDrive |\n| **Browser** | Playwright, Puppeteer (web scraping + automation) |\n| **Documentation** | Context7 (library docs), AWS docs, Azure docs |\n| **Communication** | Discord, Microsoft Teams, Twilio |\n| **APIs** | Stripe, Shopify, Salesforce, HubSpot |\n\nAnd the list grows every week. Because the protocol is open, the ecosystem compounds — each new server adds value for all MCP clients."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**MCP was created by Anthropic** and released as an open standard in November 2024. It has since been adopted by Cursor, Zed, VS Code extensions, JetBrains, Windsurf, and other AI coding tools. The official specification lives at modelcontextprotocol.io. The GitHub repository at github.com/modelcontextprotocol/servers contains official reference servers maintained by Anthropic."
+    },
+    {
+      "type": "text",
+      "content": "## The Three Things MCP Servers Can Expose\n\nEvery MCP server exposes one or more of three things:\n\n**1. Tools — Actions Claude can take:**\nThe most common type. Each tool has a name, description, and input schema.\nExamples: `send_email`, `create_github_issue`, `run_sql_query`, `click_button_in_browser`.\nTools have inputs (what you pass in) and outputs (what they return).\n\nClaude decides when to call a tool based on your request. If you ask \"create a GitHub issue for this bug,\" Claude recognises it needs the `create_issue` tool and calls it automatically.\n\n**2. Resources — Data Claude can read:**\nRead-only windows into external data. Think of them like files or API endpoints.\nExamples: `file://path/to/file`, `github://repo/issues`, `postgres://table/users`.\nResources are used when Claude needs context rather than to take an action.\n\n**3. Prompts — Pre-written prompt templates:**\nLess commonly used. Let MCP servers package useful interaction patterns that users can invoke. More relevant to building custom products than to day-to-day use.\n\n**In practice:** 90% of what you'll do with MCP in this course is tool use. When you ask Claude to \"list my emails\" or \"search my codebase,\" it's calling tools that MCP servers expose."
+    },
+    {
+      "type": "text",
+      "content": "## What This Part of the Course Covers\n\nPart 8 is a hands-on tour through the most useful MCP servers available today:\n\n- **8-2:** Installing your first MCP server — the filesystem server\n- **8-3:** MCP configuration — `settings.json` structure for MCP servers\n- **8-4:** GitHub MCP — issues, PRs, code search\n- **8-5:** Gmail + Google Calendar\n- **8-6:** Playwright browser automation\n- **8-7:** Database MCP (SQLite)\n- **8-8:** Notion and productivity tools\n- **8-9:** Context7 — live documentation for any library\n- **8-10:** Slack and team communication\n- **8-11:** Building your own MCP server from scratch\n\nBy the end of Part 8, Claude will have access to your files, your GitHub, your email, your calendar, your browser, and a database — and you'll know how to add any other tool that has an MCP server."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Security first with MCP:** Each MCP server has access to something valuable — your email, your GitHub, your database. Before installing any MCP server:\n1. Only install from trusted sources (official Anthropic servers, well-known open source projects)\n2. Review what permissions the server requests\n3. Never connect MCP servers to production databases or sensitive data stores during learning\n4. Remember: Claude can use MCP tools autonomously — if you give it access to email, it can send email. Permission prompts protect you; don't disable them."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Your MCP Wishlist",
+      "content": "Before we install anything, spend 5 minutes thinking about what you'd actually want Claude to have access to. This shapes which MCP servers you prioritise.\n\nOpen `notes/mcp-wishlist.md` in VS Code (create it if needed) and answer:\n\n**1. Which 3 tools do you use every single day** where AI assistance would save you the most time?\n\nExamples to spark thinking:\n- Email: drafting replies, summarising threads, finding information buried in conversations\n- Calendar: scheduling, finding free time, understanding your week at a glance\n- GitHub/GitLab: understanding what's changed, what's open, what needs attention\n- Your company's project tracker (Jira, Linear, Notion)\n- A database you regularly query\n- A codebase you need to understand\n\n**2. What's the most repetitive task you do** that follows a clear pattern — the kind of thing where you think 'this could probably be automated'?\n\n**3. What data does Claude currently lack access to** that would make its answers dramatically more accurate or relevant?\n\nExamples: your actual email history, your team's actual codebase, your real project status, your company's actual documentation.\n\n**4. From the MCP server table above**, which 3 servers would you prioritise installing first?\n\nWrite your answers in `notes/mcp-wishlist.md` and save it. These answers will guide your priorities through the lessons ahead — the servers that matter to your actual work are worth doing thoroughly. The others you can skim.\n\n**Format:**\n```markdown\n# My MCP Priorities\n\n## Top 3 tools I use daily\n1. \n2. \n3. \n\n## Most repetitive task\n\n## Data Claude lacks that would help most\n\n## Top 3 MCP servers to install\n1. \n2. \n3. \n```"
+    },
+    {
+      "type": "quiz",
+      "question": "A team is building an internal tool that queries their company database and presents results in a chat interface. They want it to work with Claude, Cursor, and any future AI tools their team adopts. What architecture choice gives them the most flexibility?",
+      "options": [
+        "Build a direct API integration with each AI tool separately — customised for each one's specific format",
+        "Build an MCP server that exposes the database queries as tools — any MCP-compatible AI client can then use it without changes",
+        "Build a webhook integration with each AI tool — webhooks are more widely supported than MCP",
+        "Use a proprietary integration platform (like Zapier) rather than building their own server"
+      ],
+      "correct": 1,
+      "explanation": "Building an MCP server is the right answer for future-proofing. Because MCP is an open standard adopted by Claude Code, Cursor, Zed, VS Code extensions, and more, you build once and it works with every compliant client. Building separate integrations for each AI tool (option A) means n-times the work and ongoing maintenance as new tools emerge. The key insight from the USB analogy: the value of a standard multiplies as adoption grows. An MCP server built today works with every MCP client released in the future."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Quick MCP Concept Drill",
+      "content": "Solidify the core MCP mental model with a short terminal exercise. No MCP server is installed yet — this drill uses Claude Code's `/mcp` command and conversation to map the architecture.\n\n**Step 1 — Launch Claude Code and check current MCP state:**\n```\nclaude\n```\nThen inside the session:\n```\n/mcp\n```\nNote whatever servers are listed (or confirm none are present yet). This is your baseline.\n\n**Step 2 — Ask Claude to explain the flow for a specific tool call:**\nAsk: `\"Walk me through exactly what happens at the protocol level when I ask you to 'list my open GitHub issues' — step by step from my keypress to your answer. Name each MCP component involved.\"`\n\nCompare Claude's answer to the request flow described in this lesson. Are the steps consistent?\n\n**Step 3 — Identify tool types:**\nAsk: `\"For each of these operations, tell me whether it would be a Tool, Resource, or Prompt in MCP — and why: (1) reading a file, (2) sending an email, (3) a pre-written template for code review.\"`\n\n**Step 4 — Review your answers with Claude:**\nAfter the exercise, ask: `\"Review my understanding of MCP architecture. I believe: [paste your summary of how client/server/transport work]. What did I get right, and what should I correct?\"`\n\nAct on at least one correction Claude suggests before moving on."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Map the MCP Ecosystem for Your Tech Stack",
+      "content": "Use Claude Code in a long-form research session to build a personalised MCP server map for your actual development environment. This produces a real reference document you will use throughout Part 8.\n\n**Step 1 — Identify your current toolchain:**\nMake a quick list of every tool you use regularly: code editor, version control host, project tracker, communication tools, databases you work with, cloud providers, documentation sites you visit often.\n\n**Step 2 — Research available MCP servers for each tool:**\nAsk Claude: `\"For each tool in this list, tell me if there is a known MCP server for it, what package name to install, and what capabilities it exposes. Tools: [paste your list]. Check github.com/modelcontextprotocol/servers and any other known community registries.\"`\n\n**Step 3 — Evaluate each server:**\nFor the top 5 servers most relevant to your work, ask Claude: `\"For [server name], what are the most powerful use cases? What tasks that take me 10+ minutes today could this server reduce to a single Claude prompt? Give concrete examples based on a developer's daily workflow.\"`\n\n**Step 4 — Prioritise by ROI:**\nAsk Claude: `\"Based on the servers we've researched, rank them by likely time savings for a developer who [describe your role and main tasks]. Which 3 should I install first and why?\"`\n\n**Step 5 — Create your MCP roadmap document:**\nAsk Claude: `\"Create a markdown document called mcp-server-roadmap.md. It should have a table with columns: Server Name, Package, Status (to-install/installed/skipped), Use Cases, Priority (1-5). Populate it with everything we've researched.\"`\n\nSave the output to `notes/mcp-server-roadmap.md`.\n\n**Step 6 — AI REVIEW:**\nAsk Claude: `\"Review the research session we just completed. What gaps are there in our MCP ecosystem map? What important servers might we have missed? What assumptions did we make that could be wrong? What should we double-check?\"`\n\nAct on at least one finding — add a missing server to the roadmap or flag an assumption to verify.\n\n**Keep the result:** `notes/mcp-server-roadmap.md` will guide which servers you install in lessons 8-3 through 8-10."
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop C — MCP Chain: Research + Structure",
+      "content": "Chain Claude's conversational reasoning with the concept of MCP tools to design a multi-server workflow that neither approach achieves alone. (No servers are installed yet — this is a design exercise that previews the chains you will build in later lessons.)\n\n**Step 1 — Design a multi-MCP workflow for a realistic task:**\nChoose one of these real developer workflows:\n- A: 'When a GitHub issue is created, research the topic with context7, write a solution plan using sequential-thinking, and save it as a comment on the issue'\n- B: 'Analyse the files in my project folder, look up the current docs for each library used, and produce an upgrade report'\n- C: 'Search GitHub for open issues tagged as bugs, triage them using sequential-thinking, and write prioritised task entries in task-master'\n\n**Step 2 — Map the chain step by step:**\nAsk Claude: `\"For workflow [A/B/C], map out every MCP tool call that would be needed. Show: which server handles each step, what input each tool receives, what output it produces, and how that output becomes input for the next step.\"`\n\n**Step 3 — Identify the dependency graph:**\nAsk Claude: `\"Draw a dependency graph for this workflow as text — show which steps can run in parallel and which must be sequential.\"`\n\n**Step 4 — Write the prompt chain:**\nAsk Claude: `\"Write the sequence of Claude Code prompts a user would type to execute this full workflow. One prompt per step, with each prompt referencing the previous output.\"`\n\nSave the workflow design to `notes/mcp-chain-design.md`. You will implement this chain in a later lesson when the servers are installed."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Apply MCP Thinking to a Real Project",
+      "content": "Take a task you have been doing manually in your real work and redesign it as an MCP-powered workflow.\n\n**Step 1 — Choose a real repetitive task:**\nPick something you do at least weekly that involves multiple tools. Examples:\n- Reviewing what changed in a codebase since last week\n- Summarising open issues and deciding what to work on\n- Researching a new library before adding it to a project\n- Writing a status update about project progress\n\n**Step 2 — Document the current manual workflow:**\nAsk Claude: `\"I currently [describe the task] manually by doing: [list your steps]. Help me document this as a workflow diagram — what tools do I touch, what data moves between them, and where do I spend the most time?\"`\n\n**Step 3 — Redesign with MCP servers:**\nAsk Claude: `\"Now redesign this workflow assuming I have these MCP servers installed: filesystem, GitHub, context7, sequential-thinking. Which manual steps disappear? What does the new workflow look like?\"`\n\n**Step 4 — Estimate the time savings:**\nAsk Claude: `\"Estimate how much time per week this MCP-powered version would save compared to my current manual process. What are the assumptions in that estimate?\"`\n\n**Step 5 — Write the implementation plan:**\nAsk Claude: `\"Write a concrete implementation plan for this workflow: which MCP servers to install first, what Claude Code prompts to run, and how to verify it worked correctly.\"`\n\nSave this to `notes/mcp-real-task-redesign.md`. This document gives you a concrete goal for the rest of Part 8 — by lesson 8-10, you should be able to execute this workflow."
+    },
+    {
+      "type": "quiz",
+      "question": "An MCP server is running locally via stdio transport. What happens to Claude Code if the MCP server process crashes mid-session?",
+      "options": [
+        "Claude Code also crashes, because it depends on the server process being alive",
+        "Claude Code continues running but loses access to that server's tools until the server is restarted",
+        "Claude Code automatically restarts the server and the tool call is retried transparently",
+        "Claude Code switches to HTTP transport as a fallback"
+      ],
+      "correct": 1,
+      "explanation": "MCP servers are separate processes from Claude Code. If a server crashes, Claude Code keeps running — it just can no longer call tools from that server. The tool calls will fail with an error until you restart the server (which means restarting Claude Code, since servers are launched as subprocesses on startup). There is no automatic retry or fallback — these are separate processes with no shared state."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to give Claude access to your work email and your personal files, but not your company's production database. How should you structure your MCP configuration?",
+      "options": [
+        "Add all three to your global settings.json — you can limit what Claude does via careful prompting",
+        "Add email and filesystem MCP servers to your global settings.json, and explicitly omit any database server until you are ready to use it safely",
+        "Put all three in a project-level settings.json so they are only available when you open that specific project",
+        "MCP servers cannot be selectively configured — it is all or nothing"
+      ],
+      "correct": 1,
+      "explanation": "The right approach is to configure only the servers you actually need right now. Adding a server to settings.json makes it active in every session, so omitting the database server is the correct boundary. You can always add a server later. Relying on careful prompting alone (option A) is risky — Claude can use any available tool if the conversation leads there. The global vs. project-level distinction is real and useful, but putting everything in a project file doesn't solve the 'don't add the database' problem."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-1.** You understand what MCP is (open standard for AI-tool integration), why it matters (ecosystem compounds with adoption), how the architecture works (client-server with stdio or HTTP), and what the three server primitives are (tools, resources, prompts). Next: installing your first MCP server."
+    }
+  ],
+  "nextLesson": "8-2",
+  "prevLesson": "7-12"
+}

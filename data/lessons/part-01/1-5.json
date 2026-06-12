@@ -1,0 +1,120 @@
+{
+  "id": "1-5",
+  "title": "Privacy & Safety — What NOT to Share with AI",
+  "part": 1,
+  "estimatedMinutes": 60,
+  "tags": [
+    "foundations",
+    "beginner",
+    "privacy",
+    "safety"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nAI tools are enormously useful — and they involve sending your text to third-party servers where it may be stored, reviewed, and used to improve models. Before you build a habit of reaching for AI for every task, you need a clear personal policy for what you will and won't share. By the end of this lesson you'll know exactly which data categories to keep off cloud AI platforms, understand the privacy difference between consumer and enterprise AI tiers, know how local AI models solve the privacy problem entirely, and have a written policy document you can actually refer to."
+    },
+    {
+      "type": "text",
+      "content": "## How Your Data Actually Gets Used\n\nWhen you type a message into Claude.ai, ChatGPT, or most cloud AI tools, that message travels to a server, gets processed, and a response is sent back. What happens after that is governed by each provider's privacy policy — and those policies have meaningful differences.\n\n**Claude.ai (consumer tier) — Anthropic's current policy:**\n- Conversations may be reviewed by Anthropic to ensure safety and improve models\n- You can opt out of data collection in Settings → Privacy\n- Paid plans (Claude Pro) have the same terms unless you use the API\n\n**ChatGPT (consumer tier) — OpenAI's policy:**\n- Conversations can be used to train models by default\n- Turn off training in Settings → Data Controls → \"Improve the model for everyone\"\n- ChatGPT memory feature also stores information between conversations — review and delete in Settings → Personalization → Memory\n\n**Gemini (consumer tier) — Google's policy:**\n- Conversations may be reviewed by human reviewers for safety purposes\n- Gemini can connect to your Google account data (Gmail, Drive) if you enable those integrations\n\n**The practical rule:** Treat consumer-tier cloud AI conversations as semi-public by default, not private. Not because your data is being actively read right now, but because it may be retained, it may be reviewed for safety purposes, and policies can change.\n\n**Enterprise tiers (Teams, Business, Pro API) are meaningfully different:**\n- Anthropic API: data is NOT used to train models by default\n- ChatGPT Teams plan: conversations not used for training\n- Google Workspace with Gemini: enterprise data protection policies apply\n\nIf you're using AI for sensitive professional work, enterprise tiers or the API provide much stronger privacy guarantees. You'll learn about the API in Part 11."
+    },
+    {
+      "type": "text",
+      "content": "## The 6 Categories to Keep Off Consumer AI\n\nThese are the data types with the clearest risk profile. A practical policy keeps all six off consumer cloud AI tools by default:\n\n**1. Credentials — passwords, API keys, secret tokens**\nThis is the most important category. Never paste a password, private API key, OAuth token, or any secret into a chat AI. API keys in particular can cause catastrophic financial damage if compromised — a leaked AWS key can rack up thousands of dollars in charges within hours. This rule applies everywhere, not just AI: never type credentials into any text field that isn't a dedicated password manager or the specific service it's for.\n\n**2. Personally Identifiable Information (PII) combinations**\nYour name alone is fine. Your name + address + date of birth + ID number is identity-theft material. Before pasting anything about a real person, ask: could this combination be used to identify and locate this person? If yes, strip identifying details and describe the situation generically.\n\n**3. Client and employer confidential data**\nContracts, internal strategy documents, customer lists, financial forecasts — these aren't yours to share even when convenient. Many companies now have explicit AI use policies for exactly this reason (employees were pasting confidential materials into ChatGPT). If you're not sure whether your workplace has a policy, assume the conservative position.\n\n**4. Medical records with identifying information**\nUsing AI to understand medical concepts or interpret results is genuinely valuable. But upload a de-identified description (\"patient with type 2 diabetes, prescribed metformin\") rather than a scan of a medical record showing name, date of birth, and NHS or insurance numbers. De-identification is almost always possible without losing the useful information.\n\n**5. Unreleased or proprietary code**\nCode is a common trap. Pasting code for debugging help is generally fine — but code often contains hardcoded API keys, internal endpoints, business logic that constitutes a trade secret, or references to internal systems. Scan code before pasting: search for strings like `key`, `secret`, `password`, `token`, `internal`, `prod`. Remove or replace any that appear.\n\n**6. Financial account data**\nFull bank account numbers, credit card details, tax ID numbers. Using AI to help understand a financial document is fine — but copy the relevant text, not a scan of the whole statement with your account number visible."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**What IS safe to share:** General questions, publicly available information, your own creative writing, anonymised descriptions of real problems (\"a colleague who...\" not their name and employer), code with any secrets removed, draft documents that don't contain sensitive details, and hypothetical scenarios that capture the structure of a real problem without identifying specifics. The goal isn't to avoid using AI — it's to use it with the same judgement you'd apply to any online service."
+    },
+    {
+      "type": "text",
+      "content": "## The De-Identification Technique\n\nMany situations involve genuinely sensitive data where you still need AI help. The solution is de-identification: removing or replacing the identifying details while preserving the structure and meaning of the problem.\n\n**De-identification in practice:**\n\n| Real (don't paste) | De-identified (safe to paste) |\n|---|---|\n| \"John Smith, Regional Director at Acme Corp...\" | \"A senior manager at a mid-size company...\" |\n| \"Our Q3 revenue was $4.2M vs. $3.8M target\" | \"Revenue was 10% above target this quarter\" |\n| \"Patient DOB 1952-04-15, Dx: Stage 2 breast cancer\" | \"Female patient in her 70s, Stage 2 cancer diagnosis\" |\n| Actual contract with client names | \"A service agreement clause stating: [paste clause only]\" |\n| AWS access key: AKIAIOSFODNN7EXAMPLE | [replaced with: YOUR_AWS_KEY] |\n\nDe-identification lets you use AI for 95% of situations where you'd otherwise have to avoid it entirely. The remaining 5% — where the identifying details are essential to the question — is where enterprise-tier tools or local AI models are the right solution."
+    },
+    {
+      "type": "text",
+      "content": "## The Privacy Solution: Local AI Models\n\nFor genuinely sensitive work, the best privacy solution is running AI locally on your own machine. Local models process your data entirely on your hardware — nothing is sent to a third-party server, nothing is stored externally, nothing is used for training.\n\n**Tools for local AI:**\n- **Ollama** — free, runs on most modern laptops, easy setup. You'll use this in Part 12 of the course.\n- **LM Studio** — GUI-based, beginner-friendly. Download a model, run it locally.\n- **AnythingLLM** — local RAG tool: chat with your own documents with full privacy.\n\n**What local models can do:**\n- Answer questions about sensitive documents you paste in\n- Help with confidential code (no network traffic)\n- Process medical, financial, or legal text privately\n- Run experiments with sensitive datasets\n\n**What local models currently can't match:**\nThe largest cloud models (Claude Opus, GPT-4o) are still meaningfully more capable than most local models on complex reasoning. Local models are excellent for structured tasks, summarisation, and many professional writing tasks — but for the most complex analysis, you may need to de-identify first and use a cloud model.\n\n**Hardware requirements (2026):** A laptop with 16GB RAM can run 7-8 billion parameter models (equivalent to GPT-3 era capability). 32GB RAM enables 13-70B parameter models that cover most professional tasks well. A gaming GPU (NVIDIA with 8GB+ VRAM) makes local models much faster."
+    },
+    {
+      "type": "text",
+      "content": "## Workplace AI Policies — What You Need to Know\n\nMany organisations are still developing their AI use policies, and the landscape is changing fast. Here's how to navigate this professionally:\n\n**Before using AI at work:**\n1. Check if your organisation has an AI use policy (often in the employee handbook or intranet)\n2. If you're unsure, ask your manager or IT/security team\n3. When in doubt, use the de-identification technique or avoid cloud AI for that specific data\n\n**GDPR and data protection implications (EU/UK):**\nIf you work with personal data about EU or UK residents, using consumer AI tools to process that data may violate GDPR. The key question is whether the AI provider is a \"data processor\" and whether you have a Data Processing Agreement (DPA) in place. Enterprise tiers typically provide DPAs; consumer tiers typically don't.\n\n**NDA and confidentiality agreement implications:**\nIf you've signed an NDA covering your employer's data, using consumer AI tools to process that data may be a breach. Not all NDAs mention AI explicitly, but \"not disclosing to third parties\" typically covers cloud AI services.\n\n**The safe professional default:** Use AI for publicly available information, general knowledge, your own creative work, and de-identified problems. Use enterprise tiers, local models, or your company's approved AI tools for anything confidential."
+    },
+    {
+      "type": "text",
+      "content": "## Memory Features and Persistent Data\n\nA newer privacy concern is AI memory features — tools that remember information across conversations.\n\n**ChatGPT Memory:** By default, ChatGPT remembers information you share and uses it in future conversations. \"I work at Acme Corp as a software engineer\" becomes a persistent fact. Go to Settings → Personalization → Memory to see what it knows and delete specific memories.\n\n**Claude Projects:** Claude doesn't have automatic memory, but when you set up a Project with instructions and uploaded documents, that information persists across all conversations in the project. Be intentional about what you add to Projects — only information you're comfortable with Anthropic retaining.\n\n**Browser AI extensions:** Many browser extensions now offer AI features. These can access your browsing history, page content, and sometimes form data. Review what permissions any AI browser extension requests before installing.\n\n**The principle:** Every AI feature that adds convenience by remembering or accessing more about you also means more of your data is stored and processed by that provider. Make these tradeoffs consciously."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Write Your AI Privacy Policy",
+      "content": "By the end of this workshop you'll have a written personal policy — a file you can refer back to and update as your AI usage grows.\n\n**Note on tools:** This workshop uses VS Code, which you'll install fully in Part 5. If you haven't reached Part 5 yet, **Notepad works perfectly fine** — open it from the Start menu (search \"Notepad\"), complete the steps, and save the file. You can open it in VS Code later.\n\n**Step 1 — Create the file:**\n- In VS Code: `File` → `New File`, name it `my-ai-rules.md`\n- In Notepad: `File` → `Save As` → name it `my-ai-rules.md`, choose \"All Files\" as the type\n\n**Step 2 — Write your policy.**\nUse this as a starting template and personalise each section:\n\n```markdown\n# My AI Privacy Policy\nLast updated: [today's date]\n\n## What I will NEVER share with consumer cloud AI\n1. Passwords, API keys, tokens, and any credentials\n2. My full name combined with address, ID number, or date of birth\n3. Employer or client confidential documents\n4. Medical records with identifying information\n5. Source code containing credentials or trade secrets\n6. Financial account numbers\n\n## De-identification rule\nBefore pasting anything sensitive, ask: could this identify a specific\nperson or reveal my employer's confidential information? If yes, either:\n- Replace names/numbers with generic descriptions\n- Use a local AI model instead (Ollama — Part 12)\n- Skip AI for this specific task\n\n## Tools I'm using and their privacy tier\n- Claude.ai — consumer plan; sensitive work: use Projects or de-identify\n- [Add others as you start using them]\n\n## Work-specific rules\n- [What your organisation's policy says, or your conservative default]\n- [Any specific data types your role regularly handles]\n\n## What IS safe to share\n- General questions and research\n- My own creative writing and drafts\n- De-identified versions of real problems\n- Code with any credentials removed\n- Publicly available information\n\n## Review schedule\n- Update this when I start using a new AI tool\n- Review every 3 months as policies and tools change\n```\n\n**Step 3 — Personalise at least three rules.**\nThink about your actual job and life. What kind of data do you regularly handle? What are the realistic situations where you'd be tempted to paste something you shouldn't? Edit the template to reflect your real situation.\n\n**Step 4 — Review two AI tools' actual privacy settings.**\nGo to:\n- Claude.ai → Settings → Privacy → check the data collection setting\n- ChatGPT → Settings → Data Controls → turn off model training if you have an account\n\nNote what you found in your policy file.\n\n**Step 5 — Save the file** with `Ctrl+S`.\n\nIn lesson 2-1, you'll upload this file to a Claude Project so it's part of your working context. In Part 12, you'll set up Ollama for the sensitive cases this policy currently blocks."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague asks you to help draft a response to a difficult client complaint. They paste the full email chain including the client's full name, company, contract value, and details of their specific project issues. What is the safest approach?",
+      "options": [
+        "Use the full email chain — client data is fine to share because it's already been emailed",
+        "Ask Claude to sign an NDA first",
+        "Replace identifying details (client name → 'the client', company → 'a retail company', contract value → 'a significant contract') and paste only the relevant portion about the specific complaint",
+        "Refuse to use AI for any client-related communication"
+      ],
+      "correct": 2,
+      "explanation": "De-identification is the correct technique. The fact that an email exists doesn't mean you're authorised to send the client's information to third-party AI servers — your employment contract or NDA likely covers that. You don't need the client's name, company, or exact contract value to get good advice on handling the communication. Replace those details with generic descriptions, paste only the relevant section, and AI can help effectively. Option 4 is too conservative — you can use AI for client communication with proper de-identification."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Privacy Audit of Your Own Prompts (Quick Drill)",
+      "content": "This 8-minute exercise reviews prompts you have already written for hidden privacy risks.\n\n**Step 1 — Look through your recent AI conversations** (Claude, ChatGPT, or whichever tool you use). Find 3-5 prompts you have sent.\n\n**Step 2 — For each prompt**, check whether it contains:\n- A real person's name and a sensitive detail about them\n- Your own location, address, or personal identifier\n- Confidential business information (client names, financial figures, internal processes)\n- Medical, legal, or financial details that should stay private\n- Login credentials, API keys, or system details\n\n**Step 3 — Rate each prompt:** Green (safe), Yellow (borderline — should I have shared this?), Red (I shouldn't have shared this).\n\n**Step 4 — Ask Claude:** *\"I will describe what I shared in an AI prompt. Tell me what the privacy risk is and whether I should be concerned: [describe your yellow or red prompts in general terms — don't paste the actual private content again].\"*\n\n**Step 5 — Note any patterns:** Are there types of information you routinely share with AI that you shouldn't?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Personal AI Privacy Policy",
+      "content": "You will create a short, practical document that defines what you will and won't share with AI tools — based on your actual work and life context. Use this before every AI session.\n\n**Step 1 — List your AI use cases:** What do you use AI for regularly or plan to use it for? Write 6-10 specific use cases.\n\n**Step 2 — For each use case**, ask: what private information might naturally come up?\n\n**Step 3 — Open Claude.ai** and paste your use case list. Ask: *\"For each of these AI use cases, what private or sensitive information is likely to be involved? For each, recommend: (1) what I should anonymise or remove before sharing, (2) whether to use a privacy-first AI tool instead (e.g., local model), (3) whether this use case should be avoided with cloud AI entirely.\"*\n\n**Step 4 — Draft your personal AI privacy policy:** A one-page document with three sections: (a) Fine to share with cloud AI, (b) Only share after anonymising, (c) Never share with cloud AI.\n\n**Step 5 — Mandatory AI review:** Share your policy (not the sensitive content itself) with Claude and say: *\"Review this AI privacy policy critically. Find 3 gaps — situations where following this policy would still expose private information I should protect.\"*\n\n**Step 6 — Update your policy** based on the gaps found.\n\n**Step 7 — Save your policy** somewhere you'll see it: a sticky note on your monitor, a pinned document, or as instructions in your Claude Project."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Anonymisation Practice",
+      "content": "Practice turning sensitive real content into safe AI input without losing usefulness.\n\n**Step 1 — Find a real work document** that contains private information: a client email, a report with names, meeting notes with sensitive content.\n\n**Step 2 — Anonymise it** before you would share it with AI:\n- Replace real names with \"Client A\", \"Colleague B\", \"Company X\"\n- Replace specific figures with approximate ranges (\"around £50,000\")\n- Remove location details unless relevant\n- Remove identifying context unless necessary\n\n**Step 3 — Check your anonymised version:** Could someone reading it identify who it refers to? If yes, anonymise further.\n\n**Step 4 — Use the anonymised version** to complete a real task with Claude (summarise it, draft a response, analyse it).\n\n**Step 5 — Evaluate:** Did anonymising hurt the quality of AI assistance? If yes — what would you need to restore (keeping it still safe)? If no — the anonymised version was enough.\n\n**Step 6 — Write a one-sentence rule** for yourself about when and how to anonymise content for this type of task."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Team or Family AI Safety Guidelines",
+      "content": "Apply what you've learned to create guidelines for others who share your AI tools.\n\n**Step 1 — Identify your audience:** Is this for your work team, your household, your students, or yourself?\n\n**Step 2 — Ask Claude:** *\"Help me write clear AI privacy guidelines for [audience]. They need to understand: (1) what information they should never type into AI tools, (2) what to do if they realise they've already shared something sensitive, (3) which AI tools are appropriate for different levels of sensitivity. Keep it to one page, plain language, no jargon.\"*\n\n**Step 3 — Review the guidelines.** Are they realistic for your audience? Too strict? Not strict enough?\n\n**Step 4 — Refine for your specific context:** Add any organisation-specific rules (regulatory requirements, contractual obligations, company policy).\n\n**Step 5 — Share or display:** Send the guidelines to your team or household, or post them somewhere visible near where you work."
+    },
+    {
+      "type": "quiz",
+      "question": "Your company's AI policy says \"don't share client information with AI.\" A client emails you a problem and you want AI help drafting a reply. What should you do?",
+      "options": [
+        "Skip using AI — the policy says no client information",
+        "Paste the full email — the AI company says they don't train on API inputs",
+        "Remove the client's name, company, and any identifying details from the email before asking AI to help you draft a response",
+        "Check whether the client gave consent to AI processing first"
+      ],
+      "correct": 2,
+      "explanation": "The right approach is anonymisation — you can still get AI assistance without violating the policy. Replace identifying details with placeholders before sharing. This lets you get useful help while respecting privacy commitments. Skipping AI entirely (A) is overly restrictive when anonymisation solves the problem. Relying on vendor policies (B) doesn't satisfy your company's own policy requirements."
+    },
+    {
+      "type": "quiz",
+      "question": "Which of these is safe to paste directly into a cloud AI tool without modification?",
+      "options": [
+        "Your salary slip to ask for help understanding deductions",
+        "A spreadsheet of customer names and purchase history for analysis",
+        "A project brief that describes internal strategy not yet announced publicly",
+        "An industry report you downloaded from a public website"
+      ],
+      "correct": 3,
+      "explanation": "Publicly available content (option D) is safe to share — it's already accessible to anyone. Your salary slip (A) contains personal financial data. Customer lists (B) contain personal data that may be regulated under GDPR or similar laws. Internal unpublished strategy (C) is confidential business information. When in doubt: would this content be acceptable if it leaked?"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 1-5.** You now have a framework for safe AI use: the six categories to keep off consumer AI, the de-identification technique for working around most restrictions, knowledge of when local AI models are the right solution, and a written privacy policy. Privacy isn't a reason to avoid AI — it's a reason to use it thoughtfully."
+    }
+  ],
+  "nextLesson": "1-6",
+  "prevLesson": "1-4"
+}

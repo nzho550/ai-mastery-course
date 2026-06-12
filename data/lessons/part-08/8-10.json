@@ -1,0 +1,123 @@
+{
+  "id": "8-10",
+  "title": "Browser / Playwright MCP — AI Controls a Real Browser",
+  "part": 8,
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "playwright",
+    "browser-automation",
+    "claude-code"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have the Playwright MCP installed and working — and you'll have used Claude to open websites, take screenshots, and extract information from real pages."
+    },
+    {
+      "type": "text",
+      "content": "## What Playwright MCP Does\n\nPlaywright is a browser automation framework — it can control Chrome, Firefox, and Safari programmatically. The Playwright MCP server exposes this capability to Claude.\n\nWith Playwright MCP, Claude can:\n- Navigate to any URL\n- Take screenshots of any page\n- Click buttons and links\n- Fill in forms\n- Scroll, hover, and interact with page elements\n- Extract text content from pages\n- Run JavaScript in the browser context\n- Wait for elements to appear before interacting\n\nThis is a real browser running on your computer. When Claude navigates to a website using Playwright, a real browser window opens (or runs headlessly in the background). It's not a simulation."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Real actions on real sites.** Because Playwright controls an actual browser, Claude can interact with real websites — including sites where you're logged in. It can fill forms, click submit buttons, and trigger real actions. Always review what Claude is planning to do before confirming, especially on sites with your account credentials."
+    },
+    {
+      "type": "text",
+      "content": "## Installation\n\nThe Playwright MCP server is maintained by Microsoft. Install it and add it to your config:"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "npm install -g @playwright/mcp@latest"
+    },
+    {
+      "type": "text",
+      "content": "Then add it to your global `settings.json`:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"playwright\": {\n      \"command\": \"npx\",\n      \"args\": [\"@playwright/mcp\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**First-run browser download:** The first time Playwright runs, it may need to download browser binaries. This can take a minute or two. If prompted, allow it to complete. This only happens once."
+    },
+    {
+      "type": "text",
+      "content": "## Practical Use Cases\n\n**Web scraping and monitoring:**\n`\"Go to news.ycombinator.com and list the top 10 story titles and their URLs.\"`\n\n**Documentation lookup:**\n`\"Navigate to docs.anthropic.com and find the page about rate limits. Summarize what it says.\"`\n\n**Screenshot capture:**\n`\"Take a screenshot of code.visualstudio.com and describe what's featured on the homepage today.\"`\n\n**Form filling:**\n`\"Go to [form URL] and fill in the fields with [values]. Show me the filled form before submitting.\"`\n\n**Comparison research:**\n`\"Visit the pricing pages for Vercel, Netlify, and Cloudflare Pages. Compare their free tier limits.\"`\n\n**Website testing:**\n`\"Open my about-me.html file in the browser. Check that all links work and take a screenshot of how it looks.\"`"
+    },
+    {
+      "type": "text",
+      "content": "## Headless vs. Headed Mode\n\nBy default, Playwright MCP runs in headed mode — you'll see a browser window open when Claude navigates. This is useful while learning because you can watch exactly what's happening.\n\nFor background automation, you can configure it to run headlessly (no visible window):\n\nAdd `\"--headless\"` to the args if you want silent background execution. But for this lesson, keep it headed — watching Claude navigate is the best way to understand what it's doing."
+    },
+    {
+      "type": "text",
+      "content": "## What Playwright Can't Do\n\nPlaywright is not omnipotent:\n\n- **CAPTCHAs** — Most modern CAPTCHA systems detect automation and block it\n- **Sites with aggressive bot detection** — Some sites detect Playwright's fingerprint and block it\n- **Actions requiring 2FA** — If a site requires two-factor authentication, Playwright can't handle the auth step\n- **Flash or legacy plugins** — Modern Playwright doesn't support old plugin technologies\n\nFor regular websites, documentation sites, news sites, and public web apps, Playwright works reliably."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Web Automation and Information Extraction",
+      "content": "**Setup:**\n1. Run `npm install -g @playwright/mcp@latest` in PowerShell\n2. Add the playwright entry to your `settings.json`\n3. Relaunch `claude`, type `/mcp` to confirm `playwright` is listed\n\n**Task 1 — Screenshot and describe:**\nAsk: `\"Using Playwright, navigate to code.visualstudio.com and take a screenshot. Describe what's on the homepage — what are they currently featuring?\"`\n\nWatch the browser window open, navigate, and capture the page.\n\n**Task 2 — Extract live information:**\nAsk: `\"Go to news.ycombinator.com and list the top 5 story titles, their URLs, and how many points each has.\"`\n\n**Task 3 — Documentation scraping:**\nAsk: `\"Navigate to modelcontextprotocol.io and tell me what MCP servers are listed on the homepage or documentation page.\"`\n\n**Task 4 — Multi-site comparison:**\nAsk: `\"Visit the free tier pages for both Vercel (vercel.com/pricing) and Netlify (netlify.com/pricing) and compare: bandwidth limits, build minutes, and number of sites allowed on the free tier.\"`\n\nWatch Claude visit both pages and extract the comparison data.\n\n**Task 5 — Test your own work:**\nAsk: `\"Use Playwright to open my exercises/about-me.html file in the browser. Take a screenshot, then tell me what it looks like and suggest one visual improvement.\"`\n\nNote: to open a local file, give the full path: `file:///C:/Users/YourName/Documents/ai-course-projects/exercises/about-me.html`\n\nSave a summary of what Playwright can do to `notes/playwright-capabilities.md`."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Browser MCP Capabilities Tour",
+      "content": "Explore what the Playwright/Browser MCP can do in 8 minutes.\n\n**Step 1 — Configure Browser MCP** (Playwright MCP) in your Claude Code settings.\n\n**Step 2 — Test basic navigation:**\n- \"Open a browser and navigate to example.com\"\n- \"Take a screenshot of the current page\"\n- \"What links are on this page?\"\n\n**Step 3 — Test form interaction:**\n- \"Navigate to a simple form page and fill in the name field with 'Test User'\"\n\n**Step 4 — Test content extraction:**\n- \"Navigate to [a public webpage relevant to your work] and extract all the key data points from the main content\"\n\n**Step 5 — Ask Claude:** \"What types of web automation tasks are best suited to Browser MCP? What should I use a different approach for (e.g., direct API calls vs browser automation)?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Automate a Real Web Task",
+      "content": "Use Browser MCP to automate a real, recurring web task you currently do manually.\n\n**Step 1 — Identify a web task you do manually at least weekly:** Checking a dashboard, filling out a form, copying data from a web table, monitoring a webpage for changes.\n\n**Step 2 — Describe the task** to Claude Code in detail: URL, what you look for, what you do with the information.\n\n**Step 3 — Ask Claude Code to automate it using Browser MCP:**\n```\nAutomate this web task using browser control:\nTask: [describe it]\nStart at: [URL]\nFor each step, describe what you're doing so I can follow along.\n```\n\n**Step 4 — Watch the automation execute.** Note: which steps does it handle correctly, and which require human judgement?\n\n**Step 5 — Evaluate:** How much time does this automation save per occurrence? Is it reliable enough to run without supervision?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Web Scraping with Browser MCP",
+      "content": "Use Browser MCP for ethical data collection from websites.\n\n**Step 1 — Choose a public website** with data you regularly need: job listings, news headlines, competitor pricing (public), event calendars.\n\n**Step 2 — Check the legal and ethical considerations** first: Ask Claude: \"Is scraping [website] for [purpose] legal and ethical? What should I check before proceeding?\"\n\n**Step 3 — If appropriate, design the extraction:**\n```\nNavigate to [URL] and extract:\n- [Data field 1]: [where it appears on the page]\n- [Data field 2]: [where it appears]\nFormat the output as a CSV table.\n```\n\n**Step 4 — Run the extraction.** Is the data accurate? Is the format useful?\n\n**Step 5 — Consider alternatives:** For sites with public APIs, direct API calls are more reliable and more polite than browser scraping. Ask Claude: \"Does [website] have a public API that would be better than browser scraping for this data?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build an Automated Testing Script",
+      "content": "Use Browser MCP to automate testing of a web application.\n\n**Step 1 — Choose a web application** you're building or maintaining.\n\n**Step 2 — Identify the 3 most important user flows** to test: login, key feature, checkout, etc.\n\n**Step 3 — Ask Claude Code to create test scenarios:**\n```\nCreate browser automation test scenarios for these user flows in [application name]:\n1. [Flow 1]: [describe expected behaviour]\n2. [Flow 2]: [describe expected behaviour]\n3. [Flow 3]: [describe expected behaviour]\n\nFor each test: describe the steps, what to verify, and what failure looks like.\n```\n\n**Step 4 — Execute one test scenario** using Browser MCP.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review the test scenario you executed. What important user behaviour did you not test? What edge cases might break this flow that the test didn't cover?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "Browser MCP gives Claude Code control of a real browser. What is the most important safety consideration before using it on websites requiring login?",
+      "options": [
+        "Browser speed — logged-in sessions are slower to automate",
+        "That Claude Code will be operating as you — any action it takes (posting, purchasing, deleting) happens under your account with real consequences",
+        "Browser MCP does not support login flows",
+        "You must use incognito mode for all Browser MCP sessions"
+      ],
+      "correct": 1,
+      "explanation": "When Claude Code controls a logged-in browser session, it acts as you — with your permissions, your account, your data. Mistakes are real: if it accidentally posts publicly, purchases something, or deletes data, those consequences are real. For any browser automation on authenticated sessions: review exactly what Claude Code will do before it does it, and avoid browser automation for any irreversible actions (purchases, posts, deletions) without explicit step-by-step confirmation."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude Code to use Browser MCP to fill out and submit a form on a third-party website. Before submitting, what must you verify?",
+      "options": [
+        "That the form field names match what Claude Code is using",
+        "That the data being submitted is exactly what you intend — review each field value before submission, as form submission is typically irreversible",
+        "That the website uses HTTPS",
+        "That the form doesn't have CAPTCHA protection"
+      ],
+      "correct": 1,
+      "explanation": "Form submission is often irreversible — you can't un-submit a job application, un-register for an event, or un-send a contact form. Before submitting, ask Claude Code to: \"List all the form field values you're about to submit.\" Read every value, verify it's correct, and only then confirm submission. Treat browser form submission the same way you'd treat a financial transaction — verify before confirming."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-10.** Claude can now browse the web on your behalf. Lesson 8-11 is the flagship MCP lesson — a real inbox cleanup session with the Gmail MCP."
+    }
+  ],
+  "nextLesson": "8-11",
+  "prevLesson": "8-9"
+}

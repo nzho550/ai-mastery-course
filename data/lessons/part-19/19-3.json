@@ -1,0 +1,114 @@
+{
+  "id": "19-3",
+  "title": "AI for Personal Finance",
+  "part": 19,
+  "estimatedMinutes": 60,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "finance",
+    "budgeting",
+    "decisions",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nPersonal finance is an area where AI adds genuine value — not as a financial advisor, but as a tool for understanding your finances, analysing your spending, preparing for major decisions, and interpreting financial documents that most people find intimidating. By the end you'll have specific prompts for budgeting analysis, major purchase decisions, understanding financial paperwork, and building a financial plan — with a clear understanding of when to bring in a professional."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**AI is not a regulated financial advisor.** AI can help you understand concepts, analyse your own data, and prepare for professional advice. It cannot know your full financial picture, is not authorised to give specific investment advice, and cannot replace a qualified financial adviser for major decisions. Use AI to understand and prepare, then verify with a professional where the stakes are high."
+    },
+    {
+      "type": "text",
+      "content": "## Budgeting — Understanding Where Your Money Goes\n\nAI's biggest contribution to personal budgeting is analysis and pattern-finding. Export your transactions from your bank, credit card, or budgeting app, and let AI do the categorisation and analysis you'd otherwise have to do manually.\n\n**Spending analysis prompt:**\n```\nHere is my transaction history for [month/quarter]: [paste or describe transactions]\n\nPlease:\n1. Categorise these transactions (food, transport, entertainment, utilities, subscriptions, etc.)\n2. Show me total spend per category\n3. Identify subscriptions or recurring charges I might have forgotten about\n4. Flag any unusual spikes compared to what seems typical\n5. Identify the top 3 categories where I could most easily reduce spending\n6. Calculate what percentage of my income (roughly £X/month) each category represents\n```\n\n**Building a realistic budget:**\n```\nI want to create a monthly budget. My net monthly income is £[amount].\n\nMy fixed costs are:\n- [list: rent, loan payments, insurance, etc.]\n\nMy variable spending last month was roughly:\n- [categories and estimates]\n\nMy goals:\n- Save £X/month toward [goal: emergency fund / house deposit / holiday]\n- Pay off [debt] within [timeframe]\n\nCreate a realistic monthly budget that achieves these goals.\nTell me where the trade-offs are and what I'd have to give up to hit the savings target.\n```\n\n**Subscription audit:**\n```\nHere are my bank statement entries for recurring charges: [paste list]\n\nIdentify each subscription, its approximate annual cost, and whether I've used it in\nthe context you can infer. Which ones look like they might be worth cancelling?\nGroup by: definitely using / uncertain / likely forgotten.\n```\n\n**Research tools:** Apps like YNAB (You Need A Budget), Emma, and Monzo's spending analysis features do some of this automatically. Use Claude for deeper analysis or if your bank doesn't have built-in categorisation."
+    },
+    {
+      "type": "text",
+      "content": "## Major Purchase Decisions — Buying vs. Leasing, Rent vs. Buy\n\nAI is particularly good at helping structure complex financial decisions where multiple variables interact.\n\n**Rent vs. buy analysis:**\n```\nHelp me think through rent vs. buy for my situation.\n\nRenting: I currently pay £[X]/month for a property worth approximately £[Y]\nBuying: I'm looking at properties around £[Z]. I have £[deposit] as a deposit.\nInterest rate I'd likely get: approximately [X]% (I'll verify this with a lender)\nMy situation: I plan to stay in this city for approximately [X] years\n\nPlease:\n1. Calculate the approximate monthly cost of buying vs. renting (mortgage payment, stamp duty annualised, maintenance estimate)\n2. What is the break-even point — at what price appreciation would buying make more financial sense?\n3. What does this analysis not capture that I should be thinking about?\n4. What are the non-financial factors I should weigh?\n```\n\n**Car: buy vs. lease vs. PCP:**\n```\nI'm considering getting a new car. Help me compare:\n\nOption 1 — Buy outright: £[price] for [car details]\nOption 2 — PCP: £[deposit] + £[monthly] for [term] + £[balloon]\nOption 3 — Lease: £[monthly] for [term, mileage]\n\nI drive approximately [annual mileage].\nI typically keep cars for [years] before changing.\nI care most about: [monthly cash flow / total cost over 5 years / flexibility]\n\nWhich makes more sense financially for my situation? What am I missing?\n```\n\n**The total cost of ownership question:**\n```\nI'm buying [item: e.g., a new laptop, a car, a boiler].\nThe purchase price is £[X].\n\nWhat is the realistic total cost of ownership over [Y] years, including:\n- Maintenance, repairs, and service costs\n- Consumables and supplies\n- Insurance if relevant\n- Energy/running costs\n- Depreciation (resale value impact)\n- Any hidden costs commonly associated with this type of purchase\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Understanding Financial Documents\n\nMost financial documents are written for lawyers, not people. AI is very good at translating them into plain language.\n\n**Mortgage or loan offer:**\n```\nI've received a [mortgage / loan / finance agreement] offer. Here are the key terms:\n[paste the key figures and terms — avoid including personal identification details]\n\nExplain in plain language:\n1. What I'm actually agreeing to (total amount, total repayable, monthly payments)\n2. What the APR means in practice — what will I pay over [X] years?\n3. Are there any terms I should be especially careful about (early repayment charges, rate change clauses, conditions)?\n4. What questions should I ask the lender before signing?\n```\n\n**Pension statement:**\n```\nHere is my pension statement summary: [paste key figures]\n\nExplain:\n1. What my current projected retirement income would be at [target retirement age]\n2. Whether this seems on track for a reasonable retirement (I earn approximately £[X]/year now)\n3. What the most important lever is if I want to increase this\n4. What fees I'm paying and whether that's typical\n5. What I should ask my pension provider\n```\n\n**Insurance policy:**\n```\nI have a [type] insurance policy. Here are the key terms: [paste]\n\nWhat does this actually cover and what does it exclude?\nAre there any gaps in cover I should know about?\nIs there anything surprising or non-standard about this policy?\n```\n\n**Investment performance:**\n```\nHere is my investment portfolio summary: [describe or paste performance data — no account numbers]\n\nExplain:\n1. What these returns mean in real terms (after inflation)\n2. How this compares to typical market benchmarks\n3. What the fees are costing me in real money terms over time\n4. What questions I should ask my adviser or investment platform\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Building a Financial Plan — The Conversation Approach\n\nFor longer-term financial planning, AI works best as a thinking partner and educator rather than as a planner. It can help you understand the concepts, model scenarios, and prepare for conversations with a professional.\n\n**Retirement planning basics:**\n```\nHelp me understand whether I'm on track for retirement.\n\nCurrent age: [X]\nTarget retirement age: [X]\nCurrent pension pot: £[X]\nCurrent contributions: £[X/month] from me + £[X] employer\nEstimated state pension: [I don't know / approximately £X/year based on my NI record]\n\nBased on rough industry estimates:\n1. What might my pot be worth at retirement, assuming 5% average growth?\n2. What would that generate as annual income?\n3. How does that compare to my current lifestyle (I spend approximately £[X]/year)\n4. What are the key things I could do to improve this trajectory?\n```\n\n**Preparing to talk to a financial adviser:**\n```\nI'm meeting with a financial adviser about [topic: retirement planning / investment strategy / mortgage advice].\n\nHelp me prepare:\n1. What questions should I definitely ask?\n2. What information should I bring to the meeting?\n3. What jargon will they likely use? Explain the key terms.\n4. What are the common mistakes people make in this type of meeting?\n5. How do I evaluate whether this adviser's advice is sound?\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Your Personal Finance AI Session",
+      "content": "This workshop has three independent tasks — do whichever is most relevant to you right now.\n\n**Task A — Spending analysis (15 minutes)**\n\nExport or collect 1 month of transaction data from your bank app (just descriptions and amounts — no account numbers needed). Paste it into Claude and run the spending analysis prompt. After reviewing:\n- What surprised you?\n- What's the one category you could most realistically reduce?\n- Are there subscriptions you forgot about?\n\n**Task B — Understand a financial document (10 minutes)**\n\nFind a financial document you haven't fully understood — a pension statement, an insurance policy, a mortgage offer, a loan agreement. Paste or describe the key terms (without personal identifiers) and ask Claude to explain it in plain language. After reviewing:\n- What did you understand better?\n- What questions did it raise that you'll ask the provider?\n\n**Task C — Major decision framing (15 minutes)**\n\nThink of a financial decision you're facing or approaching (rent vs. buy, lease vs. buy, whether to increase pension contributions, etc.). Build the prompt with your real numbers and run it. Note:\n- What did Claude surface that you hadn't thought about?\n- What does it explicitly NOT know about your situation that would affect the analysis?\n- Who should you talk to before making the final decision?\n\n**After any task:** Note what AI helped you understand that you previously found confusing. That's the lasting value — AI as a financial educator, not a decision-maker."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to advise whether you should invest in a specific stock. Claude provides a detailed analysis with specific percentage return projections. What should you do with this information?",
+      "options": [
+        "Use it as your primary basis for the investment decision — the analysis was detailed",
+        "Cross-check with Perplexity for a second opinion, then decide",
+        "Use it to understand the factors relevant to the decision, then consult a regulated financial adviser or do further due diligence before investing",
+        "Ignore it — AI cannot understand financial markets"
+      ],
+      "correct": 2,
+      "explanation": "Specific investment advice — 'buy this stock, expect X% return' — requires a regulated financial adviser in most countries because it involves personal risk assessment and regulatory responsibility. Claude can help you understand what factors affect a stock's performance, what the risks of the sector are, and how to think about the decision framework — but it cannot be held accountable for wrong advice, doesn't know your personal risk tolerance and financial situation, and has a training cutoff that means it may lack current financial data. Use AI to understand and prepare; use regulated professionals (and verified current sources) for specific investment decisions. Perplexity (B) adds current web search but still doesn't provide regulated advice."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Personal Finance AI Audit",
+      "content": "Use AI to audit your personal financial situation.\n\n**Step 1 — Gather your key financial numbers** (approximate is fine):\n- Monthly income\n- Fixed monthly expenses (rent, subscriptions, etc.)\n- Variable monthly expenses (food, entertainment)\n- Savings rate (%)\n- Debt: type, amount, interest rate\n- Emergency fund (months of expenses)\n\n**Step 2 — Ask Claude:**\n\"Review my financial situation [paste numbers]. What are the most important improvements to make? Where am I doing well? What financial risks am I exposed to?\"\n\n**Step 3 — Evaluate Claude's assessment.** Does it identify the right priorities?\n\n**Step 4 — Ask:** \"What is the one change that would have the biggest impact on my financial position in the next 12 months?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Budget Building with AI",
+      "content": "Build a personal budget using AI assistance.\n\n**Step 1 — Ask Claude to help structure your budget:**\n```\nHelp me build a monthly budget for someone with:\n- Take-home income: [amount]\n- Fixed expenses: [list with amounts]\n- Financial goals: [save for X, pay off Y, invest in Z]\n\nCreate a zero-based budget that:\n1. Covers all fixed expenses\n2. Allocates to goals\n3. Leaves realistic amounts for variable spending\n4. Identifies 2-3 expenses to reduce\n```\n\n**Step 2 — Review the proposed budget** honestly. Is it realistic for how you actually live?\n\n**Step 3 — Ask Claude:** \"If I stick to this budget for 12 months, what will my financial position be? What will I have achieved?\"\n\n**Step 4 — Track actual spending** for one week and compare to the budget."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Financial Concept Explainer",
+      "content": "Use AI to understand financial concepts you've been avoiding.\n\n**Step 1 — Identify financial concepts** you've been meaning to understand: investment accounts (ISA/401k/IRA), compound interest, index funds, tax efficiency, insurance.\n\n**Step 2 — For each concept**, ask Claude to explain it at your level:\n\"Explain [concept] as if I know basic personal finance but haven't learned this specific topic. Use a concrete example with real numbers.\"\n\n**Step 3 — Ask the follow-up question:** \"How does understanding [concept] change what I should do with [my specific situation]?\"\n\n**Step 4 — Identify one financial action** you've been avoiding due to uncertainty. Does understanding the concept make you ready to take that action?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Financial Goal Planning",
+      "content": "Use AI to create a concrete plan for a specific financial goal.\n\n**Step 1 — Choose a specific financial goal:** buy a house, retire by X, pay off debt, build an emergency fund.\n\n**Step 2 — Ask Claude for a goal plan:**\n```\nCreate a specific plan to [your goal].\n\nMy situation:\n- Current savings: [amount]\n- Monthly surplus (after expenses): [amount]\n- Timeline: [years]\n- Risk tolerance: [conservative/moderate/aggressive]\n\nProvide:\n1. Monthly savings target\n2. Investment approach for this goal\n3. Milestones to track progress\n4. What would delay or derail this goal\n5. One-year action plan with specific steps\n```\n\n**Step 3 — Evaluate the plan.** Is the monthly savings target achievable? Are the milestones motivating?\n\n**Step 4 — Important disclaimer:** Verify all specific investment advice with a qualified financial advisor before acting."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude gives you specific investment advice: \"Put 60% in global index funds and 40% in bonds.\" Should you follow this advice?",
+      "options": [
+        "Yes — this is standard diversified portfolio advice",
+        "Use it as a starting point for research, not as a prescription. AI financial advice doesn't account for your tax situation, risk tolerance, existing investments, or local regulations — consult a financial advisor for personalised recommendations",
+        "No — all AI financial advice is wrong",
+        "Yes if you're under 50"
+      ],
+      "correct": 1,
+      "explanation": "AI financial advice is general information, not personalised financial advice. It cannot account for: your specific tax situation and tax-advantaged accounts available in your country, your existing investment portfolio and rebalancing needs, your actual risk tolerance (not stated preference), life events that affect your financial timeline, or jurisdiction-specific regulations. Use AI to understand concepts and prepare questions for a financial advisor, not to make specific investment decisions."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to calculate how long it will take to pay off your debt at various payment amounts. Claude provides calculations. What should you verify?",
+      "options": [
+        "The calculations are correct if Claude shows its work",
+        "Verify the math independently: AI can make arithmetic errors, especially with compound interest calculations. Use a debt payoff calculator from a bank or financial site to confirm the numbers",
+        "Only verify if the numbers seem surprising",
+        "The calculation methodology, not the specific numbers"
+      ],
+      "correct": 1,
+      "explanation": "Financial calculations with compound interest are complex enough that AI errors are meaningful. An error in the interest rate used, compound frequency assumed, or calculation formula could produce a result that's off by months or thousands of dollars. For any financial calculation that affects a real decision: (1) have Claude explain the formula it used, (2) verify with a dedicated financial calculator (most bank websites have them), (3) for large decisions, have an accountant or financial advisor verify."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-3.** You can now use AI to analyse your spending, structure major financial decisions, translate confusing financial documents into plain language, and prepare for professional financial conversations. AI accelerates financial understanding — the decisions remain yours, ideally with professional guidance for high-stakes choices."
+    }
+  ],
+  "nextLesson": "19-4",
+  "prevLesson": "19-2"
+}

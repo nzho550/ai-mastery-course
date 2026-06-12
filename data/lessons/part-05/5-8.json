@@ -1,0 +1,139 @@
+{
+  "id": "5-8",
+  "title": "Extensions — Installing & Managing",
+  "part": 5,
+  "estimatedMinutes": 70,
+  "tags": [
+    "vscode",
+    "beginner",
+    "extensions",
+    "marketplace",
+    "github-copilot",
+    "ai"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have installed three essential productivity extensions (Live Server, Prettier, GitLens) and understand the rapidly growing category of AI coding extensions — including GitHub Copilot, Continue.dev, and the Claude Code VS Code extension. Extensions are what transform VS Code from a capable editor into a complete professional environment, and AI extensions are the fastest-growing category in the marketplace."
+    },
+    {
+      "type": "text",
+      "content": "## The Extensions Marketplace\n\nExtensions are add-ons that give VS Code new abilities. They're built by Microsoft, companies, and individual developers — and there are over 30,000 available, most of them free.\n\nThink of it as an app store for your editor. Some examples of what extensions can do:\n- **Automatically format your code** so it always looks neat (Prettier)\n- **Show your HTML file live in a browser** that updates as you type (Live Server)\n- **Add powerful Git information** to every line of code (GitLens)\n- **Add AI autocomplete and chat** to your editor (GitHub Copilot, Continue.dev)\n- **Highlight syntax for any language** — Python, Rust, SQL, and more\n- **Change the colour theme** of the entire editor\n\n**How to open the Extensions panel:**\n- Click the **puzzle piece icon** in the Activity Bar on the left\n- Or: press **Ctrl+Shift+X**\n- Or: use the Command Palette (Ctrl+Shift+P) → type `Extensions: Install Extensions`\n\nThe panel opens in the Primary Sidebar. At the top is a search box — type any keyword to find extensions."
+    },
+    {
+      "type": "text",
+      "content": "## How to Install an Extension\n\nInstalling an extension is simple:\n1. Open the Extensions panel (Ctrl+Shift+X)\n2. Type the name of the extension in the search box\n3. Find the right result — check the author name and install count to confirm it's the official version\n4. Click the **Install** button\n5. Wait a few seconds — VS Code downloads and installs it\n\nSome extensions activate immediately. Others require a **Reload** — a button appears saying \"Reload Required.\" Click it to restart VS Code's window (your files stay open).\n\n**The Extensions panel has three sections:**\n- **Installed** — extensions you have installed (active or disabled)\n- **Enabled** — currently active extensions\n- **Disabled** — installed but turned off\n\nRight-click an extension → Disable to turn it off temporarily without uninstalling. Useful for diagnosing conflicts."
+    },
+    {
+      "type": "text",
+      "content": "## Extension 1: Live Server\n\n**Author:** Ritwick Dey\n**What it does:** Opens your HTML files in a browser with live reload — the browser updates automatically every time you save a file. No more manually refreshing.\n\n**How to use it after installing:**\n1. Open your project folder in VS Code\n2. Click any `.html` file in the Explorer panel\n3. Right-click the file → **Open with Live Server**\n4. Your browser opens showing the page\n5. Go back to VS Code, make any change, press Ctrl+S — the browser updates instantly\n\nYou'll also see a **\"Go Live\"** button in the Status Bar at the bottom once installed.\n\n**Search for:** `Live Server` (by Ritwick Dey, 40M+ installs)"
+    },
+    {
+      "type": "text",
+      "content": "## Extension 2: Prettier — Code Formatter\n\n**Author:** Prettier\n**What it does:** Automatically reformats your code so it always looks clean — correct indentation, consistent quote style, proper spacing. Save the file and Prettier fixes it instantly.\n\n**After installing, set it as the default formatter:**\n1. Press Ctrl+Shift+P → type `Format Document`\n2. VS Code may ask to choose a default formatter — choose **Prettier - Code formatter**\n3. Or go to Settings (Ctrl+,) → search `default formatter` → select Prettier\n\nOnce configured, press Ctrl+Shift+P → `Format Document` to format manually, or enable Format on Save in Settings (covered in lesson 5-9) so it happens automatically.\n\n**Search for:** `Prettier - Code formatter` (by Prettier, 35M+ installs)"
+    },
+    {
+      "type": "text",
+      "content": "## Extension 3: GitLens\n\n**Author:** GitKraken\n**What it does:** Supercharges VS Code's built-in Git integration. Shows you for every single line of code — who wrote it and when. Adds inline \"blame\" annotations, a timeline view, history comparisons, and much more.\n\nAfter you initialise a Git repo in lesson 5-12, hovering over any line of code shows a subtle annotation: \"You, 2 minutes ago — Initial commit.\" Invaluable when returning to code written weeks ago or collaborating with others.\n\n**Note:** GitLens won't show much until after you initialise a Git repo in lesson 5-12. Installing it now is correct — it activates automatically once Git is set up.\n\n**Search for:** `GitLens — Git supercharged` (by GitKraken, 20M+ installs)"
+    },
+    {
+      "type": "text",
+      "content": "## AI Coding Extensions — The Category That Changes Everything\n\nThe productivity extensions above are useful tools. AI coding extensions are something different — they change how you write code fundamentally, providing real-time suggestions, chat assistance, multi-file understanding, and autonomous code generation directly inside your editor.\n\nAs of 2026, there are four main options:\n\n| Extension | Who builds it | How it works | Cost | Best for |\n|-----------|--------------|-------------|------|----------|\n| **GitHub Copilot** | Microsoft/OpenAI | GPT-4o powers inline completions + Copilot Chat | $10/month (free trial available) | Developers who want deep GitHub/Microsoft integration |\n| **Continue.dev** | Continue | Open source, connects to Claude API or local models | Free + API costs | Developers who want Claude for coding, full control |\n| **Claude Code extension** | Anthropic | Full Claude Code agent inside VS Code panel | Requires Claude Max or API | Claude Code users who prefer GUI over terminal |\n| **Cursor** | Cursor | VS Code fork with AI built-in from the ground up | $20/month | Developers who want AI-first from day one |\n\nThese are not extensions in the sense of adding one feature. They're AI collaborators that live inside your editor."
+    },
+    {
+      "type": "text",
+      "content": "## GitHub Copilot — The Most Widely Used AI Coding Tool\n\nGitHub Copilot is installed by over 1.8 million developers as of 2026. It operates at two levels:\n\n**Level 1 — Inline completions (autocomplete on steroids):**\nAs you type, Copilot predicts what you want to write next — not just the next word, but entire functions, blocks, and files. Suggestions appear as grey \"ghost text\" in your editor. Press Tab to accept, or keep typing to reject.\n\n```javascript\n// You type:\nfunction calculateTax(price, rate) {\n\n// Copilot suggests (grey ghost text):\n  return price * (rate / 100);\n}\n```\n\nCopilot reads the current file, your function name, parameters, any comments, and similar functions in your codebase to predict what you intend. This is genuinely useful — it handles the repetitive structural code so you can focus on logic.\n\n**Level 2 — Copilot Chat:**\nA chat panel inside VS Code where you ask questions about your code. Unlike Claude.ai, Copilot Chat has context from the currently open file:\n\n```\n\"Explain what this function does\"\n\"Why is this returning undefined?\"\n\"Write a unit test for this function\"\n\"Refactor this to use async/await\"\n```\n\n**Workspace Agent Mode:**\nIn 2025-2026 Copilot added \"agent mode\" where it can read your entire workspace and make multi-file changes — similar to Claude Code but inside the VS Code chat panel. Activated with `@workspace` in Copilot Chat.\n\n**Keyboard shortcuts:**\n- Accept suggestion: `Tab`\n- Next suggestion: `Alt+]` (or `Alt+[` for previous)\n- Open Copilot Chat: `Ctrl+Alt+I`\n- Inline chat on selection: `Ctrl+I`\n\n**How to install:**\n1. Search `GitHub Copilot` in the Extensions marketplace\n2. Install both `GitHub Copilot` and `GitHub Copilot Chat`\n3. Sign in to GitHub when prompted\n4. A free 30-day trial starts automatically — no credit card required initially\n5. After trial: $10/month individual or $19/month Business\n\n**Free tier note (2026):** GitHub now offers a limited Copilot free tier — approximately 2,000 completions and 50 chat messages per month. Enough to genuinely try it before committing."
+    },
+    {
+      "type": "text",
+      "content": "## Continue.dev — AI Coding With Claude\n\nContinue.dev is an open-source VS Code extension that works with any AI model — including Claude, GPT-4o, local models via Ollama, and others. This makes it the best choice if you want **Claude's capabilities** (from lessons 2-1 and 2-2) applied to your code.\n\n**How it differs from GitHub Copilot:**\n- You choose the AI model — Claude Sonnet, Opus, local models, or others\n- Open source — you can see exactly what's sent to the AI\n- No vendor lock-in to GitHub/Microsoft/OpenAI\n- Supports Ollama for fully private, local AI coding (no data leaves your machine)\n\n**Key features:**\n- **Inline autocomplete:** Similar to Copilot — ghost text completions as you type\n- **Chat sidebar:** Ask questions about your code with file context\n- **`@file` and `@codebase` context:** Reference specific files or search the whole codebase in chat\n- **Edit mode:** Select code, describe the change, Continue edits it in place\n\n**Setting up Continue with Claude:**\n1. Install `Continue` from the VS Code marketplace\n2. Click the Continue icon in the Activity Bar\n3. Open Settings and add an Anthropic API key (from console.anthropic.com)\n4. Select `claude-sonnet-4-6` as your model\n5. Start chatting about your code\n\n**Cost:** Continue itself is free. You pay only for the API calls to whichever model you choose — Claude API pricing is per token (~$0.003/1K tokens for Sonnet).\n\n**Best for:** Developers who want to use Claude for code assistance, developers who want to use local models for privacy, and developers who prefer open-source tools."
+    },
+    {
+      "type": "text",
+      "content": "## Claude Code VS Code Extension\n\nAnthropic builds an official VS Code extension for Claude Code — the full coding agent from Part 7, accessible as a panel inside VS Code rather than a terminal window.\n\n**What you get:**\n- A Claude Code panel alongside your editor\n- The same agent capabilities as the CLI (read files, write files, run commands)\n- Tight integration: click on Claude's file references to jump directly to the code\n- No context-switching between terminal and editor\n\n**When to use the extension vs. CLI:**\n- Extension: better for code review, explanation, and targeted edits where staying in VS Code matters\n- CLI: better for long autonomous tasks, running tests, or when you want the terminal feedback loop\n\nYou'll set this up properly in Part 7 (lessons 7-1 and 7-2). For now, install it so it's ready:\n\n**Search for:** `Claude Code` (by Anthropic) in the VS Code marketplace.\n\n**Authentication:** The extension uses the same Anthropic API key or Claude Max account as the CLI — you only need to authenticate once."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Which AI extension should you start with?**\n\nFor this course:\n- Install **GitHub Copilot** (free trial, most documentation, widest community)\n- Also install **Continue.dev** if you want Claude as your coding AI\n- Skip Cursor for now — it's a separate app, not an extension, and learning VS Code first makes Cursor easier to understand later\n\nAll three are worth experiencing. The professional habit is running comparisons on your real tasks rather than committing to one permanently. AI coding assistance is evolving fast — what's best in 6 months may be different."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Optional bonus: Peacock**\nIf you ever work with multiple VS Code windows open at once (common when working on multiple projects), the **Peacock** extension (by John Papa) lets you give each window a different colour border. Red for one project, blue for another — so you always know which window you're typing in at a glance."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Install Essential Extensions + Try Copilot",
+      "content": "Install all three essential extensions and explore at least one AI coding extension.\n\n**Part 1 — Essential extensions**\n\n**Step 1 — Open the Extensions panel:**\nPress Ctrl+Shift+X.\n\n**Step 2 — Install Live Server:**\n1. Search `Live Server` — find the result by **Ritwick Dey** (40M+ installs)\n2. Click Install\n3. Open `hello.html` from your exercises folder\n4. Right-click the file in Explorer → **Open with Live Server**\n5. Edit a word in the `<h1>` tag, press Ctrl+S — the browser updates\n6. Stop Live Server: click \"Port: 5500\" in the Status Bar → Stop Server\n\n**Step 3 — Install Prettier:**\n1. Search `Prettier - Code formatter` — find the result by **Prettier** (35M+ installs)\n2. Click Install\n3. Press Ctrl+Shift+P → `Format Document` → if prompted, select Prettier as default formatter\n4. Open `hello.html` — notice Prettier has reformatted the indentation\n\n**Step 4 — Install GitLens:**\n1. Search `GitLens — Git supercharged` by GitKraken\n2. Click Install\n3. GitLens won't show much until lesson 5-12 — that's expected\n\n**Part 2 — AI extension: GitHub Copilot free trial**\n\n**Step 5 — Install GitHub Copilot:**\n1. Search `GitHub Copilot` in the Extensions panel\n2. Install both:\n   - `GitHub Copilot` (completions)\n   - `GitHub Copilot Chat` (chat panel)\n3. When prompted, click **Sign in to GitHub** and authenticate\n4. Your free trial starts automatically\n\n**Step 6 — Try inline completions:**\nCreate a new file: `exercises/copilot-test.js`\n\nType this comment and then start typing the function:\n```javascript\n// Function that takes an array of numbers and returns only the even ones\nfunction filterEven(\n```\n\nPause for 1-2 seconds. Copilot should suggest the function body as grey ghost text. Press Tab to accept.\n\nTry a few more:\n```javascript\n// Function that calculates the average of an array of numbers\nfunction average(\n```\n\n```javascript\n// Function that checks if a string is a valid email address\nfunction isValidEmail(\n```\n\n**Step 7 — Try Copilot Chat:**\n1. Press Ctrl+Alt+I to open the Copilot Chat panel\n2. Ask: `Explain what the functions in copilot-test.js do`\n3. Ask: `Write a unit test for the filterEven function`\n4. Observe: Copilot has context from the current file — you didn't paste anything\n\n**Step 8 — Reflect:**\nWrite 2-3 sentences in `notes/ai-extension-impressions.md`:\n- What surprised you about the inline completions?\n- Is this different from what you expected AI coding assistance to feel like?\n- Would you find this useful in real projects?\n\n**Verify your installed extensions:**\nIn the Extensions panel, you should see these in the Installed section:\n- [ ] Live Server\n- [ ] Prettier - Code formatter\n- [ ] GitLens\n- [ ] GitHub Copilot\n- [ ] GitHub Copilot Chat"
+    },
+    {
+      "type": "quiz",
+      "question": "You're a developer who primarily uses Claude for AI assistance (lessons 2-1 and 2-2) and wants Claude's quality of output for code suggestions inside VS Code — not GitHub Copilot's GPT-4o-based output. Which VS Code extension gives you that?",
+      "options": [
+        "GitHub Copilot — it can be configured to use Claude as its underlying model",
+        "Continue.dev — it's open source and can be configured to use Claude API for both completions and chat",
+        "GitLens — it adds Git history but also supports AI model configuration",
+        "There's no way to use Claude for coding inside VS Code — only the terminal CLI"
+      ],
+      "correct": 1,
+      "explanation": "Continue.dev is specifically designed to work with any AI model, including Claude via the Anthropic API. You install Continue, add your Anthropic API key in settings, select claude-sonnet-4-6 as your model, and you have Claude's reasoning and writing quality applied to your code — inline completions, chat, and edit mode — all inside VS Code. GitHub Copilot is exclusively powered by OpenAI's models (GPT-4o and Codex derivatives) — you can't change the underlying AI. The Claude Code VS Code extension is also an option, but it's an agent-mode tool rather than line-by-line autocomplete."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Extension Discovery Drill",
+      "content": "The Extensions marketplace has 50,000+ extensions. This drill teaches you to find the right ones.\n\n**Step 1 — Open the Extensions panel** (Ctrl+Shift+X).\n\n**Step 2 — Browse the categories:**\n- \"@popular\" in the search — most installed extensions\n- \"@trending\" — what's gaining popularity\n- \"@installed\" — what you have now\n\n**Step 3 — Search for your use case:**\n- Type \"Python\" — see all Python-related extensions. Note the install count and rating.\n- Type \"AI\" — see AI assistance extensions\n- Type your specific tool (Docker, AWS, etc.)\n\n**Step 4 — Read before installing:** Click on 2-3 extensions you're considering. Read the description page — does it solve your actual problem?\n\n**Step 5 — Check the extension's GitHub:** Most extensions link to their GitHub. Check: last updated (within 6 months is good), open issues, stars.\n\n**Step 6 — Ask Claude:** *\"What are the must-have VS Code extensions for [your specific development work]? For each, tell me why it's worth installing and what problem it solves.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI Extension Setup and Workflow",
+      "content": "Set up an AI coding assistant in VS Code — and learn how to use it effectively, not just as autocomplete.\n\n**Step 1 — Install an AI extension.** Options (in order of recommendation):\n- GitHub Copilot — best quality, free tier available\n- Continue (continue.dev) — open source, works with Claude API\n- Codeium — completely free tier\n\n**Step 2 — Configure the extension** with your API key or account login.\n\n**Step 3 — Learn the 5 most powerful uses** (ask Claude if your chosen extension doesn't document these well):\n- Inline completion: start typing and Tab to accept\n- Ask about selected code: select code → right-click → Ask AI\n- Generate a function from a comment describing it\n- Generate tests for an existing function\n- Explain what a file does\n\n**Step 4 — Mandatory review:** For any AI-generated code in VS Code, always run: *\"Review this code. Find 3 problems a code reviewer would catch.\"* This is the most important habit.\n\n**Step 5 — Measure the impact:** Time a coding task with AI assistance. How much faster was it?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Extension Conflicts and Management",
+      "content": "Too many extensions slow VS Code and can cause conflicts. This workshop teaches extension hygiene.\n\n**Step 1 — Check your current extensions:** Ctrl+Shift+X → @installed. List everything you have.\n\n**Step 2 — Identify and remove duplicates:** Common duplicates — two language servers for the same language, multiple formatters for the same file type.\n\n**Step 3 — Check extension impact on startup:**\nCtrl+Shift+P → \"Developer: Show Running Extensions\" — this shows which extensions are loaded and their activation time.\n\n**Step 4 — Disable slow extensions:** Extensions with > 500ms activation time are worth disabling if you don't use them constantly.\n\n**Step 5 — Use Extension Profiles:** Create a \"Minimal\" profile with only essential extensions. Use it when VS Code feels slow. Create a \"Full\" profile for intensive coding sessions.\n\n**Step 6 — Ask Claude:** *\"I have these VS Code extensions installed: [list]. Which ones might conflict with each other? Which ones are redundant? Which should I prioritise keeping?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build an Extensions Recommendations File",
+      "content": "Create a .vscode/extensions.json that recommends your essential extensions to anyone who opens your project.\n\n**Step 1 — Identify 5-7 extensions** that are essential for working on your project.\n\n**Step 2 — Find each extension's ID:** In the Extensions panel, click on each extension → copy the extension ID shown under the name.\n\n**Step 3 — Create `.vscode/extensions.json`:**\n```json\n{\n    \"recommendations\": [\n        \"ms-python.python\",\n        \"ms-python.vscode-pylance\",\n        \"esbenp.prettier-vscode\",\n        \"dbaeumer.vscode-eslint\"\n    ]\n}\n```\n\n**Step 4 — Test it:** Close and reopen VS Code on this folder. You should see a notification: \"This workspace has extension recommendations.\"\n\n**Step 5 — Add a comment in README.md** explaining that opening this project in VS Code will prompt to install recommended extensions.\n\n**Step 6 — Ask Claude:** *\"Should I also add any unwanted extensions to 'unwantedRecommendations'? When is that useful?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You install a VS Code extension and your editor slows down significantly. What should you do first?",
+      "options": [
+        "Reinstall VS Code completely",
+        "Disable the new extension and check if performance improves — if so, report the issue to the extension author or find an alternative",
+        "Increase your computer's RAM",
+        "Switch to a different code editor"
+      ],
+      "correct": 1,
+      "explanation": "Disable the suspected extension first (Extensions panel → click the gear on the extension → Disable) and check if VS Code returns to normal speed. If it does, the extension is the cause. You can then decide to: keep it disabled, look for an alternative, or report the performance issue on the extension's GitHub. Use \"Developer: Show Running Extensions\" to measure activation times before and after."
+    },
+    {
+      "type": "quiz",
+      "question": "Two VS Code extensions both claim to format Python code. What problem might this cause?",
+      "options": [
+        "They will each format the code twice, making it slower",
+        "They may format code differently and conflict — when you save, one formatter's changes may be immediately overwritten by the other",
+        "It's not a problem — they will merge their formatting changes",
+        "VS Code will ask you which formatter to use each time"
+      ],
+      "correct": 1,
+      "explanation": "Having two formatters for the same file type often causes a conflict where each formatter undoes the other's changes, resulting in unstable formatting or no formatting. The fix: keep one formatter, disable or uninstall the other, and set your preferred formatter explicitly in settings.json: `\"[python]\": {\"editor.defaultFormatter\": \"ms-python.black-formatter\"}`."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-8.** You've installed the three essential VS Code extensions and experienced AI coding assistance first-hand through GitHub Copilot. You understand the four main AI coding extension categories and when to use each. Next: customising VS Code's settings for your workflow."
+    }
+  ],
+  "nextLesson": "5-9",
+  "prevLesson": "5-7"
+}

@@ -1,0 +1,121 @@
+{
+  "id": "4-5",
+  "title": "What is Code? A Plain-English Introduction",
+  "part": 4,
+  "estimatedMinutes": 55,
+  "tags": [
+    "computer-basics",
+    "beginner",
+    "code",
+    "programming"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBefore writing any code yourself, it helps to understand what code actually *is* — not technically, but conceptually. This lesson gives you a clear mental model of what code does, the different types of errors and how to think about them, and how AI fundamentally changes the relationship between beginners and code. You won't write code in this lesson — that comes in 4-6."
+    },
+    {
+      "type": "text",
+      "content": "## Code Is Instructions\n\nAt the most basic level, **code is a set of instructions written in a language a computer can understand**.\n\nYour computer's processor can only do a handful of primitive operations: add numbers, compare values, move data from one place to another, check a condition. But it can do these at billions of operations per second. A programming language is a way of describing complex tasks using those primitives, written in a form that humans can read and reason about.\n\nWhen you write code, you're writing a recipe. Just as a recipe tells a chef *exactly* what to do in *exactly* what order — with no room for improvisation or interpretation — code tells a computer *exactly* what to do. Computers don't guess, infer, or use common sense. If your instruction is wrong, they execute it wrong — perfectly, efficiently, and repeatedly.\n\nThis precision is both the power and the challenge of code. It also explains why even experienced programmers make mistakes: any ambiguity or error in the instruction becomes a bug."
+    },
+    {
+      "type": "text",
+      "content": "## Three Types of Errors (And How to Think About Each)\n\nEvery programmer encounters three types of errors. Understanding which type you're dealing with determines how you approach fixing it.\n\n**1. Syntax errors — \"You wrote something the language doesn't understand\"**\n\nThe programming language has rules about how instructions must be formatted (syntax). A syntax error means you broke one of those rules — a missing bracket, misspelled keyword, wrong punctuation. The program can't run at all until syntax errors are fixed.\n\nExamples:\n- Forgetting a closing bracket: `function add(a, b { return a + b; }` — missing `)` before `{`\n- Missing quotes: `<p class=important>` — should be `class=\"important\"`\n- Wrong colon placement: `if x > 5;` — Python uses `:` not `;` after conditions\n\nSyntax errors are usually the easiest to fix — the error message often tells you exactly which line the problem is on.\n\n**2. Runtime errors — \"The code was correct, but something went wrong while running\"**\n\nRuntime errors occur during execution. The syntax was fine, but the program tried to do something impossible at that moment — divide by zero, access a file that doesn't exist, call a method on a value that turned out to be null.\n\nExamples:\n- `TypeError: Cannot read property 'length' of undefined` — tried to use a variable that was never set\n- `FileNotFoundError: No such file or directory` — tried to open a file that doesn't exist\n- `ZeroDivisionError: division by zero` — a calculation divided by zero\n\nRuntime errors tell you what went wrong and usually point to the specific line.\n\n**3. Logic errors — \"The code runs fine, but does the wrong thing\"**\n\nThe most subtle type. The syntax is correct, no errors are thrown, but the output is wrong. The code does exactly what you told it to do — you just told it to do the wrong thing.\n\nExamples:\n- A price calculator that multiplies when it should divide\n- A sorting function that sorts in ascending order when you wanted descending\n- A form that accepts empty submissions because the validation check has a typo in the field name\n\nLogic errors require careful reading and testing — the computer won't tell you anything is wrong because, from its perspective, nothing is.\n\n**The rule of thumb:** When something isn't working, first check if there's an error message. If yes, read it literally — it usually tells you exactly what went wrong. If no error message but wrong results — it's a logic error, requiring closer inspection of the code's intent vs. its actual behaviour."
+    },
+    {
+      "type": "text",
+      "content": "## Compiled vs Interpreted: How Code Runs\n\nDifferent programming languages are executed in different ways. You don't need to memorise this, but it demystifies a lot of confusing terminology.\n\n**Compiled languages** translate your entire code file into machine instructions *before* running it. Think of it like translating a whole book before you read it. Languages like C, C++, and Rust are compiled. The translation step (compilation) takes a moment, but the result runs very fast. Error: you get a compile error list before the program runs at all.\n\n**Interpreted languages** translate and run code *one line at a time* as it executes. Think of it like having a live interpreter who translates each sentence as it's spoken. Python and JavaScript are interpreted (roughly). No separate compilation step — you just run the file directly. Error: the program runs until it hits the bad line, then stops.\n\nFor this course, you'll mostly work with interpreted languages — HTML, CSS, JavaScript — where you write code, open a browser, and see the result immediately. No compilation step, immediate feedback."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Why text files?** Everything in software development is text files. Your HTML is a text file. Your Python script is a text file. Even complex applications are collections of text files. This is deliberate: text is universal, readable by humans and machines, storable in any system, searchable, and *diffable* — you can compare two versions and see exactly what changed. This last property is what makes Git (version control) possible. A `.py` file opened in Notepad is just text — no special software required to read it."
+    },
+    {
+      "type": "text",
+      "content": "## The Main Languages and What They're For\n\nThere are hundreds of programming languages, but a small set covers the majority of what you'll encounter in this course and in the real world:\n\n**HTML** — HyperText Markup Language. The *structure* of a webpage. HTML defines what's on the page: headings, paragraphs, images, links, buttons. Not technically a programming language (it can't perform logic or calculations), but the foundation of every website. You'll write HTML in lesson 4-6.\n\n**CSS** — Cascading Style Sheets. The *appearance* of a webpage. CSS controls colours, fonts, spacing, layout, and animations. HTML and CSS work together: HTML says \"here is a heading,\" CSS says \"make that heading blue and 24px.\"\n\n**JavaScript** — The *behaviour* of a webpage. Makes things happen: buttons that respond, forms that validate, content that updates without reloading. The only language that runs natively in every web browser. Also runs outside browsers via Node.js — which is what Claude Code, many AI tools, and countless backend services are built on.\n\n**Python** — A general-purpose language known for readability and versatility. Used for data analysis, automation, machine learning, web servers, and scripting. The most widely taught first language because the syntax is close to plain English.\n\n**PowerShell** — The Windows automation language. The commands you ran in lessons 4-3 and 4-4 are PowerShell. Used for system administration, automating repetitive computer tasks, and building Windows tools.\n\n**SQL** — Structured Query Language. Used to query databases. Not a general programming language, but essential for anyone working with data. `SELECT * FROM users WHERE email = 'alice@example.com'` is SQL — it reads as English and retrieves exactly that record."
+    },
+    {
+      "type": "text",
+      "content": "## How AI Changes Your Relationship With Code\n\nThis course is built on a specific premise: you don't need to be able to *write* code fluently to get enormous value from it. You need to:\n\n1. **Know which language to ask for** — \"Write this in Python\" vs \"Write this in JavaScript\"\n2. **Give precise instructions** — Claude writes code based on your description; vague descriptions produce vague code (Part 3 principle)\n3. **Read and understand the output** — not line-by-line expertise, but enough to tell if it's doing what you intended\n4. **Spot when something's wrong** — recognise the three error types and copy them to Claude for diagnosis\n5. **Modify within guardrails** — make small changes and test them, rather than rewriting from scratch\n\nThis is genuinely a different skill than traditional programming. A developer writes code from first principles. You write plain-English descriptions and review code written by an AI. The leverage is enormous — a beginner who can describe what they want precisely can build things that previously required months of learning.\n\nThe limitation: you're dependent on the accuracy of what Claude generates. If you can't read the code at all, you can't catch subtle logic errors. This is why understanding the fundamentals — what these languages do, what the three error types look like — matters even if you're using AI to write the actual code."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Asking Claude about error messages:** When you encounter any error, this prompt template works for almost every case:\n```\nI'm writing [language] and got this error:\n[paste the full error message]\n\nHere's the relevant code:\n[paste the code that caused it]\n\nI'm trying to [what you were trying to do]. What's wrong and how do I fix it?\n```\nThis is a more efficient path than Googling the error for most beginners."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Map Languages to Your Real Use Cases",
+      "content": "Open your notes (or `ai-course-projects/notes/code-uses.md`).\n\nFor each of the six languages below, write **one sentence** describing a specific real thing you could use it for — based on your own life, work, or interests. Don't use the examples from this lesson; make them personal.\n\n- **HTML** — I would use this to...\n- **CSS** — I would use this to...\n- **JavaScript** — I would use this to...\n- **Python** — I would use this to...\n- **PowerShell** — I would use this to...\n- **SQL** — I would use this to...\n\nThen answer these two reflection questions:\n\n**1.** What's one task you currently do manually at work or in your life that is repetitive and rule-based — the kind of thing where if you wrote down the exact steps, a computer could follow them? (This is a candidate for automation with code.)\n\n**2.** If you described that task to Claude and asked it to write a script, which language would you ask for?\n\nSave your answers. You'll refer back to this when working on automation tasks in Part 11."
+    },
+    {
+      "type": "quiz",
+      "question": "Your JavaScript code runs without any error messages, but the total price displayed in the UI is always double what it should be. What type of error is this?",
+      "options": [
+        "Syntax error — the code has invalid JavaScript",
+        "Runtime error — something fails during execution",
+        "Logic error — the code runs correctly but produces wrong results because the logic is wrong",
+        "Type error — a variable has the wrong data type"
+      ],
+      "correct": 2,
+      "explanation": "When code runs without errors but produces wrong output, it's a logic error. The syntax is valid (no error thrown), nothing fails at runtime (program doesn't crash), but the underlying logic of the calculation is wrong — in this case, probably multiplying by 2 somewhere it shouldn't. Logic errors are the hardest to debug because the computer has no idea anything is wrong. You find them by tracing through the logic manually or adding debug output at key points to see what values variables contain mid-execution."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Code Reading Drill",
+      "content": "This 8-minute drill builds your ability to read code without running it — an essential skill for working with AI-generated code.\n\n**Step 1 — Ask Claude** to write a short program (15-20 lines) in Python or JavaScript that does something simple: calculate a tip, convert temperatures, count words in text.\n\n**Step 2 — Before running it**, read through it line by line and write:\n- What does line 1 do?\n- What does the function do overall?\n- What will the output be?\n\n**Step 3 — Ask Claude** to explain each line in plain English, as if you've never seen code before.\n\n**Step 4 — Compare your guesses** to Claude's explanations. What did you understand correctly? What surprised you?\n\n**Step 5 — Change one thing**: Ask Claude, \"If I change [specific line] to [something different], what will happen?\" Try to predict the answer before Claude responds.\n\n**Step 6 — Reflect:** Code reading is a skill that improves with practice. The goal isn't to write code — it's to understand it well enough to verify that AI-generated code does what you intended."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Ask AI to Build You Something Real",
+      "content": "Use AI to build a small, genuinely useful program — no coding knowledge required. You'll describe what you want and guide the AI through the build.\n\n**Step 1 — Choose a small automation idea** — something you do manually that a program could do: renaming a batch of files, converting a CSV to a different format, calculating something repeatedly, generating a formatted report from data.\n\n**Step 2 — Ask Claude:** *\"I want to build a Python script that does: [describe your task in plain English]. I am not a programmer. Please: (1) write the complete script, (2) explain what each section does, (3) tell me exactly how to run it, (4) tell me what to do if I get an error.\"*\n\n**Step 3 — Save the script** Claude gives you to a file: `my-tool.py`.\n\n**Step 4 — Run the script** following Claude's instructions.\n\n**Step 5 — If it fails**, paste the full error to Claude and ask for the fix.\n\n**Step 6 — Mandatory code review:** Ask Claude: *\"Review this code you just wrote. Find 3 potential problems: places where it could fail, produce wrong output, or could be improved. Then fix each one.\"*\n\n**Step 7 — Use the finished tool** for its intended purpose at least once."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Code Concepts in Plain English",
+      "content": "This workshop builds your mental model of how code works — essential for guiding AI code generation.\n\n**Step 1 — Ask Claude to explain each concept** in one paragraph, using an analogy from real life:\n- Variables\n- Functions\n- Loops\n- Conditions (if/else)\n- Lists/arrays\n\n**Step 2 — For each concept**, ask Claude to show a minimal example in Python (3-5 lines). Read each example and confirm you understand how the explanation maps to the code.\n\n**Step 3 — Ask Claude to show how these concepts combine** in a small 20-line program.\n\n**Step 4 — Test your understanding:** Cover up the explanations and try to describe what each line does in the combined example, in your own words.\n\n**Step 5 — Ask:** *\"A common problem people have when asking AI to write code is that they don't describe what they want precisely enough. What information should I always give AI when asking it to write a program? Give me a template.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Program Specification",
+      "content": "The most important skill for non-programmers working with AI code is writing a clear specification — a description of what you want the program to do. This workshop builds that skill.\n\n**Step 1 — Choose any small program idea** from your work or life.\n\n**Step 2 — Write a specification** using this template:\n```\nProgram name: [name]\nWhat it does: [one sentence]\n\nInputs (what the user provides):\n- [input 1, type, example value]\n- [input 2, type, example value]\n\nOutputs (what it produces):\n- [output 1, format, example]\n\nEdge cases (what should happen when):\n- If input is empty: [behaviour]\n- If input is wrong type: [behaviour]\n- If no results found: [behaviour]\n\nExample run:\nUser enters: [example input]\nProgram outputs: [example output]\n```\n\n**Step 3 — Ask Claude to review your spec:** *\"Review this program specification. What is ambiguous? What edge cases have I missed? What would cause a programmer to implement this incorrectly?\"*\n\n**Step 4 — Improve the spec** based on Claude's feedback.\n\n**Step 5 — Ask Claude to build the program** using your improved spec. Compare how much better the code is when given a precise specification vs a vague description."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude writes a 50-line Python script for you. Before running it, what is the most important check?",
+      "options": [
+        "Verify the code compiles without errors by running it",
+        "Read through the code and confirm it does what you intended — look for obvious logic errors or misunderstood requirements",
+        "Count the number of lines to make sure it's complete",
+        "Check that the variable names are clear"
+      ],
+      "correct": 1,
+      "explanation": "Before running any AI-generated code, read through it and verify it does what you intended. AI often makes subtle logical mistakes — handling edge cases incorrectly, misinterpreting requirements, or implementing the right idea in the wrong order. Catching these before running is faster than debugging after. Ask: \"Does this code actually solve my specific problem, or does it solve a slightly different problem?\""
+    },
+    {
+      "type": "quiz",
+      "question": "What does a programming variable do?",
+      "options": [
+        "It checks if a condition is true or false",
+        "It repeats a block of code multiple times",
+        "It stores a piece of information with a name so you can use it later",
+        "It defines the overall structure of a program"
+      ],
+      "correct": 2,
+      "explanation": "A variable is a named storage location for a value. Like a labelled box: `age = 25` puts the number 25 in a box labelled \"age\", and you can retrieve it later just by writing \"age\". Variables make code readable and flexible — instead of writing the number 25 everywhere, you write \"age\" and can change the value in one place. If/else checks conditions (A), loops repeat code (B), and functions define reusable procedures."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 4-5.** You understand what code is, the three types of errors, how compiled and interpreted languages differ, what the main languages are for, and how AI changes the skill you need to build with code. In the next lesson you'll write your first real HTML file."
+    }
+  ],
+  "nextLesson": "4-6",
+  "prevLesson": "4-4"
+}

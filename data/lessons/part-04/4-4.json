@@ -1,0 +1,126 @@
+{
+  "id": "4-4",
+  "title": "Essential Terminal Commands",
+  "part": 4,
+  "estimatedMinutes": 65,
+  "tags": [
+    "computer-basics",
+    "beginner",
+    "terminal",
+    "powershell",
+    "commands"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 4-3 covered opening PowerShell and basic navigation. This lesson goes deeper: I/O redirection, working with environment variables, running programs from the terminal, using package managers, and the PowerShell pipeline. By the end you'll have the full toolkit for everything you'll do with Claude Code, Git, Node.js, and Python throughout this course."
+    },
+    {
+      "type": "text",
+      "content": "## I/O Redirection — Writing and Appending to Files\n\nIn the terminal, `>` and `>>` redirect the output of a command into a file instead of printing it to the screen.\n\n**`>` — Write (overwrites the file if it exists):**\n```powershell\necho \"First line\" > notes.txt\necho \"Replaced content\" > notes.txt   # overwrites the previous content!\n```\n\n**`>>` — Append (adds to the file without deleting existing content):**\n```powershell\necho \"First line\" > notes.txt\necho \"Second line\" >> notes.txt\necho \"Third line\" >> notes.txt\ncat notes.txt   # shows all three lines\n```\n\n**Capturing command output:**\nYou can redirect the output of any command, not just echo:\n```powershell\nls > file-list.txt              # saves a directory listing to a file\ngit log --oneline > commits.txt  # saves git history to a file\nnpm install > install-log.txt    # saves package install output\n```\n\nThis is useful for saving logs, capturing tool output for review, or passing command results to Claude for analysis."
+    },
+    {
+      "type": "text",
+      "content": "## The Pipeline — Passing Output Between Commands\n\nThe pipe character `|` takes the output of one command and sends it as input to the next. This is how you chain commands together to do more complex things.\n\n```powershell\nls | Select-String \"html\"        # list files, filter to only those with 'html' in the name\ncat notes.txt | Measure-Object -Line    # count the lines in a file\nGet-Process | Sort-Object CPU -Descending | Select-Object -First 5  # top 5 CPU processes\n```\n\n**A practical example:** Find all `.json` files in a project:\n```powershell\nGet-ChildItem -Recurse -Filter \"*.json\" | Select-Object FullName\n```\n\n**Another practical example:** Count how many JavaScript files exist:\n```powershell\nGet-ChildItem -Recurse -Filter \"*.js\" | Measure-Object | Select-Object Count\n```\n\nYou won't use advanced pipelines every day, but `|` combined with `Select-String` (grep equivalent) is extremely useful for finding things in your project."
+    },
+    {
+      "type": "text",
+      "content": "## Environment Variables\n\nEnvironment variables are named values that live in your terminal session and are accessible by programs running in that session. They're used to pass configuration, API keys, and settings to tools without hardcoding them.\n\n**Reading an environment variable:**\n```powershell\n$env:USERNAME          # your Windows username\n$env:USERPROFILE       # your home directory path\n$env:PATH              # all directories where terminal looks for commands\n```\n\n**Setting an environment variable (for the current session):**\n```powershell\n$env:MY_PROJECT = \"ai-course\"\necho $env:MY_PROJECT   # prints: ai-course\n```\nThis disappears when you close PowerShell — it's session-scoped.\n\n**Setting an API key (most common use case):**\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\n```\nThen run `claude` — it finds the key automatically without you needing to paste it.\n\n**Checking if a tool is installed:**\n```powershell\n$env:PATH\n```\nThe `PATH` variable is a semicolon-separated list of directories. When you type a command like `claude` or `git`, Windows searches each directory in PATH in order. If the executable isn't found in any directory, you get \"command not recognized.\"\n\n**Making environment variables permanent (System Properties):**\n1. Search \"Environment Variables\" in the Start menu\n2. Click \"Edit the system environment variables\"\n3. Click \"Environment Variables\" button\n4. Add/edit under User variables (for your account) or System variables (for all users)\n5. Open a new terminal — the change takes effect"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Never paste API keys into code files or commit them to git.** Environment variables are the correct place to store secrets — they live in your terminal session (or system settings), not in any file that could end up in version control. If you accidentally commit an API key, rotate it immediately — even in a private repository, it's considered compromised."
+    },
+    {
+      "type": "text",
+      "content": "## Running Programs From the Terminal\n\nEvery tool you install in this course is run from the terminal. The pattern is always: type the command name, add any flags or arguments, press Enter.\n\n**Checking what's installed:**\n```powershell\nnode --version     # Node.js (needed for Claude Code)\nnpm --version      # Node Package Manager\ngit --version      # Git\npython --version   # Python\nclaude --version   # Claude Code\ncode --version     # VS Code\n```\n\nIf a command returns a version number, it's installed and in PATH. If it returns \"not recognized\", it either isn't installed or isn't in PATH.\n\n**Starting programs:**\n```powershell\nclaude             # Start Claude Code in current directory\ncode .             # Open current folder in VS Code\nnode script.js     # Run a JavaScript file with Node.js\npython script.py   # Run a Python file\n```\n\n**Running npm scripts:**\nMost Node.js projects define shortcut commands in `package.json`. You run them with:\n```powershell\nnpm run start      # start the development server\nnpm run test       # run tests\nnpm run build      # build for production\nnpm install        # install all dependencies\n```\n\n**Running one-time tools with npx:**\n`npx` runs an npm package without permanently installing it:\n```powershell\nnpx create-react-app my-app    # scaffold a React project\nnpx prettier --write *.js      # format JS files (no global install needed)\n```\nThis is how Claude Code's MCP servers are launched — they use `npx` to run servers without requiring you to install them globally."
+    },
+    {
+      "type": "text",
+      "content": "## Package Managers\n\nPackage managers install and manage libraries and tools. You'll use two in this course:\n\n**npm (Node Package Manager):**\nComes with Node.js. Manages JavaScript packages.\n```powershell\nnpm install -g @anthropic-ai/claude-code   # install Claude Code globally\nnpm install express                         # install express (local to project)\nnpm uninstall package-name                 # remove a package\nnpm list -g --depth=0                      # list globally installed packages\nnpm update -g @anthropic-ai/claude-code    # update Claude Code\n```\n\n**pip (Python Package Installer):**\nComes with Python. Manages Python packages.\n```powershell\npip install requests                        # install the requests library\npip install -r requirements.txt            # install all packages from a requirements file\npip list                                   # list installed packages\npip uninstall package-name                 # remove a package\n```\n\n**Chocolatey (Windows package manager):**\nOptional but useful — installs Windows tools from the terminal:\n```powershell\nchoco install git         # install Git\nchoco install nodejs      # install Node.js\nchoco install vscode      # install VS Code\n```\nInstall Chocolatey at chocolatey.org if you want it. Not required for this course."
+    },
+    {
+      "type": "text",
+      "content": "## Understanding and Fixing Common Errors\n\nTerminal errors are almost always one of four types:\n\n**\"not recognized as the name of a cmdlet\":**\nThe command doesn't exist or isn't in PATH. Either the tool isn't installed, or the installer didn't add it to PATH. Fix: re-run the installer, or manually add the tool's folder to the PATH environment variable.\n\n**\"Access is denied\" / \"permission denied\":**\nYou don't have the required permissions. Fix: close PowerShell and reopen as Administrator (right-click → Run as administrator).\n\n**\"Cannot find path\":**\nThe file or folder in your command doesn't exist, or you used the wrong path. Fix: run `pwd` to check where you are, `ls` to see what's there, and correct the path.\n\n**\"The process cannot access the file because it is being used by another process\":**\nAnother program has the file locked. Fix: find and close the other program, or use Task Manager to end its process.\n\n**When in doubt:**\nCopy the full error message and ask Claude:\n```\nI ran [command] in PowerShell and got this error: [paste error]\nI'm trying to [what you wanted to do]. What went wrong and how do I fix it?\n```\nThis is genuinely the fastest path to a fix."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The `--help` flag:** Almost every command-line tool supports `--help` or `-h` to show usage information. When you're unsure what arguments a command takes, try `command --help` first. For example: `claude --help`, `git --help`, `npm --help`."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Terminal Power Tools",
+      "content": "Work through each exercise completely. These cover the patterns you'll use throughout the course.\n\n**Part 1 — I/O redirection**\n\n**Step 1 — Navigate to your course folder:**\n```powershell\ncd ~\\Documents\\ai-course-projects\n```\n\n**Step 2 — Create a file using redirection:**\n```powershell\necho \"Line 1: PowerShell is a text interface\" > terminal-notes.txt\necho \"Line 2: > overwrites, >> appends\" >> terminal-notes.txt\necho \"Line 3: | sends output to another command\" >> terminal-notes.txt\ncat terminal-notes.txt\n```\nYou should see all three lines.\n\n**Step 3 — Capture a directory listing:**\n```powershell\nls > my-files.txt\ncat my-files.txt\n```\nYou've captured the directory listing to a file.\n\n**Part 2 — Finding things with pipelines**\n\n**Step 4 — Find specific files:**\n```powershell\nGet-ChildItem -Recurse | Select-String \"html\"\n```\nThis searches all files recursively for ones with 'html' in the name.\n\n**Step 5 — Count files:**\n```powershell\nGet-ChildItem | Measure-Object | Select-Object Count\n```\n\n**Part 3 — Environment variables**\n\n**Step 6 — Read environment variables:**\n```powershell\n$env:USERNAME\n$env:USERPROFILE\n```\n\n**Step 7 — Set a temporary variable:**\n```powershell\n$env:COURSE = \"AI Mastery\"\necho $env:COURSE\n```\nClose and reopen PowerShell — the variable is gone. Session-scoped.\n\n**Part 4 — Check your tool versions**\n\n**Step 8 — Verify what's installed:**\n```powershell\nnode --version\nnpm --version\ngit --version\ncode --version\nclaude --version\n```\n\nFor any command that returns an error, write it in your notes — you'll need to install that tool before lessons that use it.\n\n**Step 9 — List globally installed npm packages:**\n```powershell\nnpm list -g --depth=0\n```\nYou should see `@anthropic-ai/claude-code` if you've installed it, plus any other global tools.\n\n**Final exercise:**\nSave your tool versions to a file for reference:\n```powershell\nnode --version > versions.txt\nnpm --version >> versions.txt\ngit --version >> versions.txt\nclaude --version >> versions.txt\ncat versions.txt\n```"
+    },
+    {
+      "type": "quiz",
+      "question": "You want to install a new npm package globally so the command is available everywhere in your terminal. Which command does this?",
+      "options": [
+        "npm install package-name (without any flag)",
+        "npm install -g package-name (the -g flag means global)",
+        "npm global-install package-name",
+        "npx package-name (npx installs and runs in one step)"
+      ],
+      "correct": 1,
+      "explanation": "The -g flag tells npm to install the package globally — the command becomes available from any directory in any terminal session. Without -g, npm installs the package locally into the current project's node_modules folder, and it's only usable within that project. `npx` is different: it downloads and runs a package once without permanently installing it — useful for one-time tools but not for something you want available everywhere like Claude Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Essential Commands Speed Test",
+      "content": "This 8-minute drill verifies you can use the most important terminal commands fluently.\n\n**Step 1 — Open PowerShell.** Time yourself on each task below. Aim for under 30 seconds per task.\n\n**Task 1:** Find your current directory and list its contents.\n\n**Task 2:** Create a folder called `workshop-test` on your Desktop and navigate into it.\n\n**Task 3:** Create a file called `notes.txt` inside the folder:\n```powershell\nnew-item notes.txt\n```\n\n**Task 4:** Show the contents of the folder including hidden files:\n```powershell\nls -Force\n```\n\n**Task 5:** Check what version of Python (or Node.js) is installed:\n```powershell\npython --version\nnode --version\n```\n\n**Task 6:** Navigate back to your home directory in one command.\n\n**Task 7:** Delete the test folder:\n```powershell\nRemove-Item ~/Desktop/workshop-test -Recurse\n```\n\n**Step 2 — Which task took longest?** That's the command to practice more."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Assisted Setup Task",
+      "content": "Use AI to help you complete a real terminal setup task — installing or configuring something you actually need.\n\n**Step 1 — Choose a real setup task** you've been putting off: installing a development tool, setting up a project folder, configuring git, installing a package manager.\n\n**Step 2 — Ask Claude:** *\"Help me [describe your setup task] on Windows 11 using PowerShell. Give me the complete steps in order, the exact commands, what each command does, and how to verify it worked. Tell me what to do if I get an error.\"*\n\n**Step 3 — Follow Claude's steps one at a time.** Don't run everything at once — run each command, check the output, then move to the next.\n\n**Step 4 — When you hit an error** (you probably will), paste the exact error text back to Claude. Ask: \"I got this error: [paste error]. What caused it and how do I fix it?\"\n\n**Step 5 — Verify the installation worked** using the verification command Claude gave you.\n\n**Step 6 — Document what you did.** Write a short note: what you installed, the command that worked, and how to verify it. Future you will thank you."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Git Basics in the Terminal",
+      "content": "Git is the version control system used by nearly every software project. Even non-coders use it. This workshop gets you started.\n\n**Step 1 — Check if git is installed:**\n```powershell\ngit --version\n```\nIf not installed: visit git-scm.com and install.\n\n**Step 2 — Configure git** (one-time setup):\n```powershell\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"your.email@example.com\"\n```\n\n**Step 3 — Create a test repository:**\n```powershell\nmkdir git-test\ncd git-test\ngit init\n```\n\n**Step 4 — Make your first commit:**\n```powershell\nnew-item README.txt\n\"Hello from git\" | Out-File README.txt\ngit add README.txt\ngit commit -m \"My first commit\"\n```\n\n**Step 5 — View the history:**\n```powershell\ngit log\ngit status\n```\n\n**Step 6 — Ask Claude:** *\"I just made my first git commit. Explain what git status and git log show me. What are the 5 git commands I should learn next, and what does each do?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Shell Script for a Repeated Task",
+      "content": "A shell script is a file of commands that run automatically. This workshop creates your first one.\n\n**Step 1 — Identify a sequence of terminal commands** you run together repeatedly: setting up a project, starting a development server, doing a backup, running tests.\n\n**Step 2 — Ask Claude:** *\"I want to create a PowerShell script that does: [describe the sequence of commands]. Write the complete script, explain each line, and tell me how to run it.\"*\n\n**Step 3 — Review the script** Claude provides. Do you understand what each line does? If not, ask Claude to explain specific lines.\n\n**Step 4 — Save the script:**\n```powershell\nnew-item my-setup.ps1\n# paste Claude's script content into the file\n```\n\n**Step 5 — Run the script:**\n```powershell\n.\\my-setup.ps1\n```\n\n**Step 6 — If it fails**, paste the error to Claude. Ask for the fix.\n\n**Step 7 — Add the script to a folder in your PATH** so you can run it from anywhere."
+    },
+    {
+      "type": "quiz",
+      "question": "You run `git commit -m \"fixes\"` and then realise you made a typo in a file. What is the safest approach to fix it?",
+      "options": [
+        "Run git commit --amend to change the last commit",
+        "Fix the file, then run git add and git commit with a new message like \"fix typo from previous commit\"",
+        "Delete the git repository and start over",
+        "The commit is permanent — you cannot change it"
+      ],
+      "correct": 1,
+      "explanation": "The safest fix is to make a new commit: fix the file, stage the change with git add, and commit with a descriptive message. Git commit --amend (A) can work but rewrites history, which causes problems if others have already pulled the original commit. Never amend published commits. Creating a correction commit keeps history intact and is standard practice."
+    },
+    {
+      "type": "quiz",
+      "question": "What does `git status` tell you that `git log` does not?",
+      "options": [
+        "git status shows the full commit history; git log shows only the latest commit",
+        "git status shows the current state of files (staged, modified, untracked); git log shows the history of past commits",
+        "git status shows remote repository information; git log shows local changes",
+        "They show the same information in different formats"
+      ],
+      "correct": 1,
+      "explanation": "git status answers \"what is happening right now?\" — it shows which files have changed since the last commit, which changes are staged for the next commit, and which files are new/untracked. git log answers \"what happened in the past?\" — it shows the history of previous commits with messages and timestamps. Both are essential; use status constantly (before every add/commit) and log when you need to understand history."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 4-4.** You can redirect output, use pipelines, manage environment variables, run installed programs, and use npm and pip package managers. You also know how to read and fix the four most common terminal errors. This is the complete terminal toolkit for the rest of the course."
+    }
+  ],
+  "nextLesson": "4-5",
+  "prevLesson": "4-3"
+}

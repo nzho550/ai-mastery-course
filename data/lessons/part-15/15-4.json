@@ -1,0 +1,123 @@
+{
+  "id": "15-4",
+  "title": "Working with Documents & PDFs",
+  "part": 15,
+  "estimatedMinutes": 65,
+  "tags": [
+    "research",
+    "beginner",
+    "pdf",
+    "notebooklm",
+    "documents",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nDocuments are where knowledge lives in the real world — PDFs, Word files, reports, contracts, research papers, manuals. This lesson covers how to use AI to read, question, summarise, and extract from documents of any length — without reading them word by word yourself. You'll learn which tool suits each document task, how to handle scanned or low-quality PDFs, how to work across multiple documents simultaneously using NotebookLM, and how to verify that AI summaries accurately reflect what the document actually says."
+    },
+    {
+      "type": "text",
+      "content": "## Claude.ai — Upload and Question Any Document\n\nClaude.ai supports file uploads directly in the chat interface. You can upload PDFs, Word documents, text files, spreadsheets, and images.\n\n**How to upload:**\n1. In Claude.ai, click the paperclip icon (or drag a file into the chat)\n2. Select your document\n3. Ask your question\n\n**Useful document prompts:**\n\n*Get oriented quickly:*\n```\nI've uploaded a [report/contract/paper]. I have 5 minutes.\nGive me: the main purpose of this document, the 3–5 key claims or decisions,\nthe most important number or statistic, and anything I'd want to read in full.\n```\n\n*Extract specific information:*\n```\nExtract every date, deadline, and obligation from this contract.\nFormat as a table: Party | Obligation | Deadline | Consequence if missed.\n```\n\n*Find answers:*\n```\nDoes this document say anything about [specific topic]?\nQuote the relevant passage and note the section or page number if visible.\n```\n\n*Critical review:*\n```\nRead this report. What assumptions does it make?\nWhat evidence is provided vs. asserted without evidence?\nWhat would a sceptical reader immediately question?\nWhat does this document NOT say that would be important to know?\n```\n\n*Compare two documents:*\nUpload both files in the same conversation, then:\n```\nI've uploaded two versions of this policy document.\nWhat has changed between them? List additions, removals, and modifications.\nHighlight any changes that affect obligations, deadlines, or rights.\n```\n\n**Length limits:** Claude can handle very long documents (up to ~200,000 tokens — roughly 150,000 words or several hundred pages). For most business documents, there is no practical limit."
+    },
+    {
+      "type": "text",
+      "content": "## Verifying AI Document Summaries\n\nAI document summaries are fast, but they can miss nuance, misrepresent hedged statements as firm conclusions, or overlook critical caveats buried in footnotes.\n\n**Always verify the summary for high-stakes documents:**\n\n```\nYou summarised this document as saying [paste the summary].\nIs that an accurate representation of what the document says?\nIn particular:\n1. Are there any important caveats or qualifications I should know about?\n2. Did you miss anything significant?\n3. Are there any sections you weren't able to read clearly?\n```\n\n**The spot-check method:** For each key claim in the summary, ask:\n```\nYou stated that [specific claim]. Please quote the exact passage from the\ndocument that supports this. If you can't find an exact quote, tell me.\n```\n\nIf Claude struggles to produce an exact quote for a specific claim, that's a signal it may have inferred or summarised beyond what the document actually says.\n\n**Watch for:** Scanned documents with poor text quality (Claude reads text, not images — if the PDF is a low-quality scan, it may miss content or misread words), and documents with complex tables or charts (tabular data and visual elements are harder for AI to accurately represent in plain text)."
+    },
+    {
+      "type": "text",
+      "content": "## NotebookLM — AI Research Across Multiple Documents\n\nNotebookLM (from Google, free at notebooklm.google.com) is purpose-built for research across a collection of documents. You upload all your sources and it creates an AI that answers questions using only those sources — with citations back to the exact passage.\n\n**Why NotebookLM is different from Claude with files:**\n- **Multiple documents:** Create a \"notebook\" with up to 50 sources (PDFs, Google Docs, web URLs, YouTube videos, audio files)\n- **Always cited:** Every answer links to the exact source passage — essential for research integrity\n- **Audio overview:** NotebookLM can generate a podcast-style audio conversation summarising your sources — useful for getting oriented in a new field while commuting\n- **Grounded in your sources only:** It answers only from what you've uploaded — no hallucination from general training knowledge\n\n**How to use NotebookLM effectively:**\n1. Go to notebooklm.google.com (free with a Google account)\n2. Create a new notebook and name it by research topic\n3. Add sources: upload PDFs, paste URLs, or connect Google Docs\n4. Ask broad orientation questions first: *\"What are the main themes across all these sources?\"*\n5. Then ask specific questions: *\"What do these sources say about [specific claim]?\"*\n6. For each answer, click the citation to read the exact passage — verify before using\n7. Use the Notebook Guide (auto-generated) for a structural overview of all your sources\n\n**Prompts that work well in NotebookLM:**\n```\nDo any of these sources contradict each other on [topic]?\nIf so, quote both sides.\n```\n\n```\nWhat is the most important finding from [specific source]?\nHow does it compare to what [other source] says on the same point?\n```\n\n```\nBased only on these sources, what would a researcher conclude about [your question]?\nWhat questions remain unanswered?\n```\n\n**Best for:** Research across multiple academic papers, understanding a set of policy documents, due diligence on a company (upload all relevant documents), studying for an exam or certification, analysing a set of meeting notes or project documents."
+    },
+    {
+      "type": "text",
+      "content": "## ChatGPT and Gemini — File Analysis and Data Extraction\n\nFor spreadsheets and data-heavy documents, ChatGPT and Gemini have strong advantages over Claude.\n\n**ChatGPT (GPT-4o, paid tier):**\n- **Excel and CSV files:** ChatGPT can execute Python code internally to analyse spreadsheet data, run calculations, and generate charts — without you writing any code\n- **Image-heavy PDFs:** GPT-4o reads images within PDFs well (diagrams, charts, tables as images)\n\n*Example: analyse a spreadsheet*\n1. Upload a CSV or Excel file\n2. Ask: *\"What are the trends in this data? Create a chart showing [column] over time. Flag any anomalies or outliers.\"*\nChatGPT will run code, generate a chart, and return it as an image you can download.\n\n**Google Gemini (free/paid):**\n- Strong at reading Google Docs and Sheets natively (they're in the same ecosystem)\n- Gemini Advanced can analyse files and produce structured extractions\n- Better integration with Google Workspace documents than Claude or ChatGPT\n\n*Example: extract tables from a scanned PDF*\n1. Upload a scanned document (image-based PDF) to ChatGPT\n2. Ask: *\"Extract all the tables from this document into text format. Note any cells that were unclear.\"*"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Privacy and confidentiality:** Before uploading a document to any AI tool, consider whether it contains sensitive information — personal data, financial details, confidential business strategy, legal advice, or anything your organisation would not want shared externally. Most AI tools send your documents to their servers for processing. Check your organisation's AI usage policy before uploading confidential documents. For highly sensitive documents, use locally-run AI options or redact sensitive details before uploading."
+    },
+    {
+      "type": "text",
+      "content": "## Handling Poor Quality Documents\n\nNot all documents are created equal. Scanned PDFs, handwritten notes, and image-only documents present challenges for AI.\n\n**Scanned PDFs (image-based, no selectable text):**\nClaude and most AI tools can still read these, but quality varies with scan clarity. If the summary seems incomplete:\n```\nThis is a scanned document. Some text may have been unclear.\nPlease note any sections where you were uncertain about the content,\nand flag any words or numbers that may be misread.\n```\n\n**Poor quality scans:**\nFor very low-quality scans, use Adobe Acrobat (free tier) or Google Drive to run OCR (optical character recognition) before uploading — this converts the image to searchable text, which AI can then read accurately.\n\n**Handwritten notes:**\nUpload an image of handwritten notes to Claude.ai or GPT-4o and ask it to transcribe. Quality depends on handwriting clarity — print is read better than cursive.\n\n**Tables in PDFs:**\nTables in PDFs often lose their structure when converted to text. If a table extract looks garbled:\n```\nThe table in this document didn't extract cleanly. Based on what you can read,\nreconstruct the table as best you can and flag any cells you're uncertain about.\n```\nFor clean table extraction from PDFs, ChatGPT or Adobe Acrobat's extract feature often works better."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Which tool for which document task:**\n- Single document, deep analysis or complex questions → **Claude.ai**\n- Multiple documents, cited answers from your specific sources → **NotebookLM**\n- Spreadsheet, data file, or chart generation → **ChatGPT** (with file analysis)\n- Google Docs or Sheets → **Gemini**\n- Quick summary while browsing a web page → **Browser AI extension** (Sider, Edge Copilot)\n- Scanned or handwritten documents → **Claude.ai or GPT-4o** (check quality; run OCR first if poor quality)"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Question a Real Document",
+      "content": "Choose a real document from your work or personal life — something you've been meaning to read but haven't had time for, or something you need to extract specific information from.\n\nGood candidates:\n- A long report or whitepaper\n- A contract or agreement (non-confidential)\n- A research paper\n- A policy document or set of guidelines\n- Meeting notes from a long meeting\n- A user manual or technical specification\n\n**If you have one document — use Claude.ai (15 minutes):**\n\n1. Go to Claude.ai → upload your document\n2. First ask the orientation prompt: *\"Give me a 5-bullet summary of this document. What is its purpose, main conclusions, and key action items?\"*\n3. Then ask 2–3 specific questions that matter to you about the document — things you actually want to know\n4. Ask: *\"Is there anything in this document I should be concerned about, follow up on, or verify before relying on?\"*\n5. **Spot check:** Take one specific claim from Claude's summary and ask: *\"Please quote the exact passage that supports [claim].\"* Does the quote match the claim?\n\n**If you have multiple documents on the same topic — use NotebookLM (15 minutes):**\n\n1. Go to notebooklm.google.com → New notebook\n2. Upload 2–5 related documents (PDFs, Docs, or URLs)\n3. Ask: *\"What is the main theme or conclusion across all these documents?\"*\n4. Ask: *\"Do any of these documents contradict each other on any point?\"*\n5. Click on at least one cited source to verify the answer came from the right passage\n6. Ask: *\"What questions do these documents raise that they don't fully answer?\"*\n\n**Record in your notes:**\n- How long would it have taken to read and extract this information manually?\n- Was the AI summary accurate? Did your spot-check reveal any errors or oversimplifications?\n- What would you use this capability for regularly in your work?"
+    },
+    {
+      "type": "quiz",
+      "question": "You have 12 research papers to review for a literature review. You need answers that always cite the exact paper and passage they come from. Which tool is best suited?",
+      "options": [
+        "Claude.ai — upload all 12 papers and ask questions",
+        "NotebookLM — upload all sources and get cited answers from your specific documents",
+        "Perplexity — it searches the web for research papers automatically",
+        "ChatGPT — its file analysis is strongest for large volumes"
+      ],
+      "correct": 1,
+      "explanation": "NotebookLM is specifically designed for this use case: multiple documents, answers grounded exclusively in your uploaded sources, with citations back to exact passages. This matters for literature reviews because you need to be able to verify every claim traces to a specific paper. Claude.ai accepts multiple files but doesn't always cite precisely by paper and passage. Perplexity searches the web — it doesn't use your specific uploaded papers. ChatGPT's code interpreter excels at data and spreadsheets rather than multi-document literature analysis with passage-level citations. NotebookLM's grounding in your specific sources (not general training) also means it won't add information from papers you didn't include."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Document Extraction Drill",
+      "content": "Extract structured information from a complex document.\n\n**Step 1 — Find a dense document** relevant to your work: a research paper, a technical specification, a lengthy report.\n\n**Step 2 — Upload to Claude** and ask for structured extraction:\n```\nExtract the following from this document:\n1. Main thesis or conclusion (1-2 sentences)\n2. Key findings (bullet points, with page/section reference)\n3. Methodology (how was this research/analysis conducted?)\n4. Data sources used\n5. Limitations acknowledged by the authors\n6. Recommendations made\n7. What this document does NOT address that I might expect it to\n```\n\n**Step 3 — Verify 3 specific extractions** against the original document.\n\n**Step 4 — Ask Claude:** \"What did you struggle to extract from this document? What information was ambiguous or missing?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Multi-Document Synthesis",
+      "content": "Synthesise information across multiple documents.\n\n**Step 1 — Gather 3-5 documents** on the same topic (research papers, reports, articles).\n\n**Step 2 — Process each document** with Claude, extracting key points in a consistent format.\n\n**Step 3 — Ask Claude to synthesise across documents:**\n```\nI have extracted key points from [N] documents on [topic]:\n\nDocument 1: [paste extraction]\nDocument 2: [paste extraction]\n...\n\nSynthesise these sources:\n1. What do all documents agree on? (consensus findings)\n2. Where do they disagree? (conflicting findings)\n3. What does each source add that others don't cover?\n4. What is the overall weight of evidence for the key claims?\n5. What questions do these documents collectively fail to answer?\n```\n\n**Step 4 — Mandatory review:** Ask Claude: *\"In your synthesis, which conclusions are most supported by the evidence? Which are most speculative?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — PDF Limitation Awareness",
+      "content": "Understand when AI PDF processing fails and how to detect it.\n\n**Step 1 — Test AI PDF extraction** with a challenging document:\n- A scanned PDF (image-based, not text)\n- A document with complex tables or charts\n- A document with footnotes or endnotes\n- A multi-column academic paper\n\n**Step 2 — For each type**, evaluate:\n- Did the extraction get the tables correctly?\n- Were footnotes included or lost?\n- Did multi-column text get scrambled?\n- Were charts and figures described or ignored?\n\n**Step 3 — Ask Claude:** \"What types of PDF content are most likely to be misextracted? How do I verify extraction accuracy for these challenging types?\"\n\n**Step 4 — Develop your verification protocol** for each document type you commonly work with."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Document Analysis Pipeline",
+      "content": "Build a repeatable document analysis pipeline.\n\n**Step 1 — Ask Claude Code** to create a document analysis pipeline script:\n```\nWrite a Python script that creates a document analysis pipeline:\n1. Accepts a folder of PDFs as input\n2. For each PDF:\n   a. Extract text (using PyPDF2 or pdfplumber)\n   b. Send to Anthropic API for structured analysis\n   c. Save the structured output as a JSON file\n3. After all PDFs: generate a synthesis report combining key findings\n4. Create an index file listing all documents and their key themes\n\nHandle errors gracefully: skip unreadable PDFs, log failures.\n```\n\n**Step 2 — Test on a folder of documents** from a real research project.\n\n**Step 3 — Verify the output quality** against one document you've read manually.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"What types of content in these documents would the pipeline extract incorrectly? What manual review is still needed?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You upload a 50-page PDF to Claude and ask about a specific statistic. Claude gives you a number that seems wrong. What is the most likely cause?",
+      "options": [
+        "Claude made up the number",
+        "PDF extraction may have misread numbers (especially from tables or charts), or Claude confused similar statistics from different sections — verify directly in the document",
+        "The PDF is encrypted",
+        "Claude cannot process PDFs correctly"
+      ],
+      "correct": 1,
+      "explanation": "PDF number extraction errors are common: tables format numbers in ways that confuse parsers, footnote references get merged with numbers, and similar statistics in close proximity get confused. Always verify specific numbers from PDF extraction against the original document. For critical statistics, note the page number Claude references and check it directly. Never cite a number from AI document processing without verifying it in the source."
+    },
+    {
+      "type": "quiz",
+      "question": "You need to extract data from 100 research PDFs. What is the most important quality check to implement in your pipeline?",
+      "options": [
+        "Verify all 100 documents manually",
+        "Randomly sample 10% of outputs and verify them against the source PDFs — this gives statistical confidence without requiring 100% manual review",
+        "Only process documents under 10 pages",
+        "Run each document twice and compare outputs"
+      ],
+      "correct": 1,
+      "explanation": "Statistical sampling provides quality assurance at scale. Randomly check 10-15% of outputs against source documents. If your sample shows 95%+ accuracy, you can use the full batch with confidence. If you find systematic errors (e.g., all table data is wrong), you can fix the pipeline and reprocess before using the data. This is standard quality assurance practice for any automated data processing pipeline."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 15-4.** You can now use Claude.ai for single-document deep analysis, NotebookLM for multi-document cited research, ChatGPT for spreadsheets and data files, and you know how to handle scanned or low-quality documents. Documents you previously didn't have time to read are now accessible in minutes — and you have a verification method to check that AI summaries are accurate."
+    }
+  ],
+  "nextLesson": "15-5",
+  "prevLesson": "15-3"
+}

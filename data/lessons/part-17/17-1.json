@@ -1,0 +1,121 @@
+{
+  "id": "17-1",
+  "title": "Planning Any Project with AI",
+  "part": 17,
+  "estimatedMinutes": 65,
+  "tags": [
+    "projects",
+    "beginner",
+    "planning",
+    "workflow",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nAI is one of the most effective project planning tools available — not because it knows your project, but because it asks the right questions, surfaces assumptions, and converts vague goals into concrete plans faster than any planning template. This lesson covers how to use AI to plan projects of any size: from a small departmental initiative to a complex multi-team effort. You'll learn the project kickoff prompt, how to structure a project plan document, realistic time estimation, choosing the right methodology, and how to map stakeholders."
+    },
+    {
+      "type": "text",
+      "content": "## Why Projects Fail (And How AI Helps)\n\nMost project failures stem from problems that exist at the start — not during execution:\n- **Unclear scope** — nobody agrees on what 'done' means\n- **Hidden dependencies** — steps no one noticed relied on other steps\n- **Missing stakeholders** — someone key wasn't consulted early\n- **Optimistic timelines** — best-case estimates with no buffer for reality\n- **Unspoken assumptions** — everyone assumed someone else was handling it\n\n**Research finding from PMI (Project Management Institute):** The top causes of project failure are unclear requirements (37%), scope creep (35%), and inadequate risk management (31%). AI systematically attacks all three — not because it knows your project, but because it can ask every question a seasoned project manager would ask, before you start.\n\nThe investment: 30–60 minutes of AI-assisted planning typically prevents weeks of mid-project confusion."
+    },
+    {
+      "type": "text",
+      "content": "## Choosing Your Project Methodology\n\nBefore planning the work, decide *how* you'll organise it. The methodology affects your planning structure, team expectations, and how you handle change.\n\n**Waterfall (sequential phases):**\nBest for: projects with fixed requirements and known scope — compliance initiatives, regulatory work, event planning, document production.\nHow it works: Define → Design → Build → Test → Launch. Each phase completes before the next begins.\nRisk: If requirements change mid-project, the sequential structure makes changes expensive.\n\n**Agile/Scrum (iterative sprints):**\nBest for: software, products, research, anything where requirements evolve as you learn.\nHow it works: Work in 2-week sprints, review and adjust after each sprint, continuously reprioritise.\nRisk: Scope can grow uncontrollably without a strong product owner managing priorities.\n\n**Hybrid:**\nBest for: most real-world non-technical projects. Waterfall for the overall phase structure (discovery → delivery → launch), flexible within each phase.\n\n**AI prompt to help you choose:**\n```\nI'm planning [project]. Here are the characteristics:\n- Requirements are [fixed/known / partially known / unclear and expected to evolve]\n- Team size: [number of people]\n- Timeline: [fixed deadline / flexible]\n- Stakeholders want: [frequent updates / defined deliverables at milestones]\n\nRecommend whether Waterfall, Agile, or a Hybrid approach fits best, and explain why.\nThen describe what the planning process should look like for that methodology.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## The Project Kickoff Prompt\n\nThis is the most useful planning prompt you'll use. Fill it in for your project and let Claude help you structure it:\n\n```\nI'm planning a project. Help me think through it thoroughly.\n\nProject name: [name]\nWhat we're trying to achieve: [goal — what does success look like?]\nWhy this matters: [business or personal value — the 'so what']\nDeadline (if any): [date or timeframe]\nTeam / people involved: [list who's involved and their roles]\nBudget / resources available: [if relevant]\nMain constraints: [what can't change? fixed deadline, fixed budget, fixed scope?]\nMethodology preference: [Waterfall / Agile / Hybrid / unsure]\n\nPlease:\n1. Clarify the goal — restate it as a clear, measurable outcome sentence\n2. Break the project into 4–8 phases or major workstreams\n3. For each phase, list the key tasks\n4. Identify the 5 biggest risks — rate each High/Medium/Low for both likelihood and impact\n5. List the assumptions we're making that should be verified before work starts\n6. Suggest who should be involved or consulted that might not be on the list above\n7. Suggest a realistic milestone timeline\n8. Identify the critical path — which tasks must not slip if the overall deadline is to be met?\n```\n\nThis one prompt typically surfaces at least two things you hadn't considered. The **critical path** question is particularly valuable — it forces you to identify which tasks are the true constraints on your timeline, not just the ones that look most urgent."
+    },
+    {
+      "type": "text",
+      "content": "## Creating a Project Plan Document\n\nOnce you have Claude's output, convert it into a shareable project plan:\n\n```\nBased on the analysis above, create a project plan document with:\n\n1. Project overview (name, owner, goal, deadline, budget if relevant)\n2. Success criteria — specifically, how will we know the project succeeded?\n   (State measurable outcomes, not activities)\n3. Scope — what is IN scope and what is explicitly OUT of scope\n4. Phases and key tasks (table: Phase | Tasks | Owner | Target date | Status)\n5. Dependencies — what must happen before what\n   (Flag items with external dependencies — other teams, vendors, approvals)\n6. Risk register (table: Risk | Likelihood | Impact | Mitigation | Owner)\n7. Stakeholders (table: Name/Role | Interest | Required involvement | Communication frequency)\n8. Open decisions — things still to be confirmed before work can begin\n```\n\n**The scope section is the most important part.** The 'out of scope' list is what prevents scope creep. Don't write vague exclusions — write specific ones: not 'this project does not include marketing' but 'this project does not include writing or placing any external marketing materials — that will be a separate initiative after launch.'\n\n**Success criteria must be measurable.** 'Improve customer satisfaction' is not a success criterion — '75% of surveyed customers rate the new process as better than the old one by Q3' is. AI will push you to make these concrete."
+    },
+    {
+      "type": "text",
+      "content": "## Stakeholder Mapping with the RACI Framework\n\nEvery project has people who need to be involved — but in different ways. Mis-mapping stakeholders is a leading cause of approval delays, surprise objections, and rework late in the project.\n\nThe **RACI matrix** is the standard tool:\n- **R (Responsible)** — Does the work. The people actually completing each task.\n- **A (Accountable)** — Owns the outcome. One person per task — the buck stops with them.\n- **C (Consulted)** — Provides input before decisions are made. Their opinion is sought and considered.\n- **I (Informed)** — Told of decisions and progress. Doesn't provide input, but needs to know.\n\n**AI prompt for stakeholder mapping:**\n```\nFor this project: [describe project]\n\nThe people potentially involved are: [list everyone you can think of]\n\nFor each of the following key deliverables, suggest RACI assignments:\n[List your 4–6 main deliverables or major decisions]\n\nAlso identify:\n- Anyone who should be consulted that I haven't listed\n- Anyone whose objection could block the project if they aren't involved early\n- What stakeholders care about most (outcomes vs. cost vs. risk vs. compliance)\n```\n\n**The 'potential blocker' question is critical.** One unconsidered stakeholder can delay a project for weeks if they raise an objection after work has started. AI will often surface legal, finance, IT security, or external partners you hadn't considered — based on the project description alone."
+    },
+    {
+      "type": "text",
+      "content": "## Estimating Time Realistically\n\nOne of AI's most useful project planning contributions is realistic time estimation — because it has no emotional investment in telling you what you want to hear.\n\n```\nHere are the tasks for our project: [list]\nI initially estimated this would take [your estimate].\n\nFor each task:\n- Suggest a realistic time estimate based on typical project experience\n- Flag any tasks that are often underestimated and explain why\n- Identify dependencies (task B can't start until task A finishes)\n- Suggest where buffer time should be added and why\n- Give me a realistic overall project duration\n\nAssume 20% of tasks take longer than expected due to typical interruptions,\nwaiting for approvals, or unexpected complications.\nWhat's the realistic completion date under this assumption?\n```\n\n**Why the 20% buffer:** Research consistently finds that most projects take 20–40% longer than initially estimated. This is called the **planning fallacy** — humans systematically underestimate how long things will take. AI avoids this bias by drawing on patterns across many projects rather than optimism about this specific one.\n\n**Where projects most often slip:** Not in core execution, but in stakeholder review and approval cycles, IT or legal sign-off, integration testing, and waiting for external dependencies. AI will flag these specifically when you ask for time estimates."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Aligning your project goal to organisational objectives:** Before finalising the plan, frame the goal as an OKR (Objective and Key Results):\n```\nConvert this project goal into an OKR:\nProject goal: [paste your goal]\n\nObjective: [inspiring, qualitative — what we're trying to achieve]\nKey Results: [3 measurable outcomes that define success]\n```\nThis format is useful when presenting to senior stakeholders who work with OKRs — it connects your project to the language they use to measure success."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Plan a Real Project",
+      "content": "Use a real project you're currently planning or about to start — even a small one. A process improvement, a team event, a tool evaluation, a business case — any real initiative works.\n\n**Step 1 — Choose your methodology (5 minutes)**\n\nRun the methodology prompt with your project. Get Claude's recommendation. Do you agree? If not, note why — sometimes you'll know something Claude doesn't (a fixed regulatory deadline, an existing team standard).\n\n**Step 2 — Run the kickoff prompt (10 minutes)**\n\nFill in the project kickoff prompt with your actual project details. Don't simplify — the value comes from honest inputs.\n\nAfter Claude responds, review each section:\n- **Risks:** For each identified risk: is this real? Would you have thought of it? What's your mitigation?\n- **Assumptions:** For each assumption: is this confirmed or just assumed? Who needs to verify it?\n- **Critical path:** Do you agree with Claude's critical path? If not — what did it miss?\n\n**Step 3 — Map stakeholders (5 minutes)**\n\nRun the stakeholder mapping prompt. Pay special attention to the 'potential blockers' question. Is there anyone Claude surfaced that you hadn't planned to involve?\n\nFor the person most likely to block the project: write one paragraph — when will you consult them, what input do you need, and how will you incorporate their feedback?\n\n**Step 4 — Create the project plan document**\n\nRun the project plan document prompt. Save the output to Notion, Word, or wherever your team tracks projects.\n\n**Step 5 — Share with one other person**\n\nShare the draft plan with the person most likely to spot gaps. Ask: *\"What's missing? What would you add?\"*\n\nThe combination of AI-assisted planning + human review catches most gaps before work starts."
+    },
+    {
+      "type": "quiz",
+      "question": "You've just been assigned to plan a project that needs to launch in 3 months. You're not sure exactly what's involved. What's the best first step using AI?",
+      "options": [
+        "Create a Gantt chart and assign tasks to team members immediately",
+        "Run the project kickoff prompt with everything you currently know — even if it's incomplete — to surface what you don't know yet",
+        "Wait until you have all the information before using AI to plan",
+        "Ask AI to generate a project plan for you without providing any context"
+      ],
+      "correct": 1,
+      "explanation": "Running the kickoff prompt with what you currently know is valuable precisely because you're not sure what's involved. AI will surface the assumptions, risks, missing stakeholders, and unknown unknowns — turning 'I'm not sure what's involved' into a concrete list of things to find out. Creating a Gantt chart (A) before you understand scope is premature — you'll revise it when scope becomes clearer. Waiting for complete information (C) is a trap: in most projects, you never have complete information at the start. Providing no context (D) results in generic output with no relevance to your situation."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Project Planning Framework Drill",
+      "content": "Learn the key elements of AI-assisted project planning.\n\n**Step 1 — Ask Claude:** \"What are the elements of a good project plan that AI can help with, and which require human judgement? For each element, what AI assistance is most valuable?\"\n\n**Step 2 — Apply the framework** to a real project you're starting or currently running.\n\n**Step 3 — Ask Claude to create a project plan outline:**\n```\nCreate a project plan outline for:\nProject: [describe it]\nGoal: [specific outcome]\nTimeline: [available time]\nTeam: [who's involved]\nConstraints: [budget, technical, resource]\n\nInclude: milestones, dependencies, risk areas, and success criteria.\n```\n\n**Step 4 — Review the outline.** What did Claude miss that you know about this project?\n\n**Step 5 — Add the missing context** and ask Claude to refine the plan."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Real Project Plan",
+      "content": "Create a complete project plan with AI assistance.\n\n**Step 1 — Choose a real project** starting in the next 30 days.\n\n**Step 2 — Ask Claude to generate a detailed plan:**\n```\nCreate a detailed project plan:\nProject: [name and description]\nDeadline: [date]\nKey deliverables: [list them]\nTeam members and roles: [list]\nKnown risks: [list]\n\nProvide:\n1. Work breakdown structure (WBS)\n2. Timeline with milestones\n3. Dependencies (what must be done before what)\n4. Risk register with mitigation strategies\n5. Communication plan (who needs to know what, when)\n```\n\n**Step 3 — Review each section** for accuracy — Claude can't know your team's actual capacity or organisational dynamics.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"What critical risks have I not identified? What project failure modes are common for this type of project?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Risk Assessment Deep Dive",
+      "content": "Use AI to identify and mitigate project risks.\n\n**Step 1 — Take your project plan** from Workshop B.\n\n**Step 2 — Ask Claude to conduct a risk analysis:**\n```\nConduct a thorough risk analysis for this project [describe it].\n\nFor each risk identify:\n- Probability: High/Medium/Low\n- Impact if it occurs: High/Medium/Low\n- Risk score: Probability × Impact\n- Mitigation strategy\n- Contingency plan (if mitigation fails)\n\nInclude both technical risks and people/process risks.\n```\n\n**Step 3 — Sort risks by score** (High/High = most critical).\n\n**Step 4 — For the top 3 risks**, ask Claude to design detailed mitigation plans.\n\n**Step 5 — Add early warning signals** for each risk: \"How will I know this risk is materialising before it becomes a crisis?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Stakeholder Communication Plan",
+      "content": "Create a communication plan for your project stakeholders.\n\n**Step 1 — List all stakeholders** for your project: everyone who is affected by or interested in the project outcome.\n\n**Step 2 — Ask Claude to create a stakeholder communication plan:**\n```\nCreate a stakeholder communication plan for [project].\n\nStakeholders:\n- [Name/Role]: [what they care about, how much detail they want]\n\nFor each stakeholder, specify:\n- Communication frequency\n- Format (email, meeting, dashboard, report)\n- Content (what they need to know)\n- Who sends it\n```\n\n**Step 3 — Review the plan.** Does it match your stakeholders' actual preferences?\n\n**Step 4 — Create the first communication** from the plan — a project kickoff message to all stakeholders."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude creates a project timeline with 5 parallel workstreams finishing exactly on the same date. What critical planning element is likely missing?",
+      "options": [
+        "The timeline is well-designed — parallel work is efficient",
+        "Buffer time and integration risk: when parallel workstreams must merge, integration issues almost always emerge. Add integration time and buffer between the merge date and the final deadline",
+        "A Gantt chart visualization",
+        "Resource allocation across the workstreams"
+      ],
+      "correct": 1,
+      "explanation": "Parallel workstreams that merge simultaneously are a classic scheduling risk. Integration problems (dependencies don't match, interfaces between workstreams have bugs, outputs are in incompatible formats) are the rule, not the exception. Best practice: plan for parallel streams to finish 20-30% before the integration deadline, add an explicit integration and testing phase, and add buffer between the integration merge and the final deadline."
+    },
+    {
+      "type": "quiz",
+      "question": "A project risk is \"key team member might leave during the project.\" Claude rates it Low/Low. Do you agree?",
+      "options": [
+        "Yes — key person risk is usually overstated",
+        "Not necessarily — rate risks based on YOUR context. If the person is truly irreplaceable and no knowledge transfer exists, this could be Medium/High. Re-rate risks based on your actual situation, not generic assessments",
+        "Yes — companies should plan for 0% turnover",
+        "Only rate it higher if you have specific reason to think they'll leave"
+      ],
+      "correct": 1,
+      "explanation": "AI rates risks based on typical cases, not your specific situation. Generic risk assessments need calibration to your context. Key person dependency is \"Low/Low\" if there's good documentation and cross-training. It's \"High/High\" if one person holds critical undocumented knowledge, has been talking to recruiters, or is the only person who can make a critical system work. Review every AI risk rating against your actual situation."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 17-1.** You can now use AI to structure any project: choose the right methodology, run a thorough kickoff that surfaces risks and assumptions, build a project plan with clear scope and measurable success criteria, map stakeholders with RACI, and estimate time realistically. The next lesson covers breaking down complex problems that arise during projects."
+    }
+  ],
+  "nextLesson": "17-2",
+  "prevLesson": "16-7"
+}

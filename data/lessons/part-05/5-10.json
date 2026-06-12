@@ -1,0 +1,101 @@
+{
+  "id": "5-10",
+  "title": "Essential Keyboard Shortcuts",
+  "part": 5,
+  "estimatedMinutes": 55,
+  "tags": [
+    "vscode",
+    "beginner",
+    "shortcuts",
+    "keyboard",
+    "productivity"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have practised the 10 keyboard shortcuts that eliminate the most common friction points in VS Code. You won't memorise them by reading a list — you'll build muscle memory by using them on real content."
+    },
+    {
+      "type": "text",
+      "content": "## Why Keyboard Shortcuts Matter\n\nEvery time you reach for the mouse to do something — save a file, undo a change, toggle a comment — you break your flow. Not catastrophically, but multiply that by 50 times per hour and it adds up.\n\nKeyboard shortcuts remove the friction. After a few weeks of deliberate practice, your hands do the right thing automatically. You stop thinking about how to do things and start thinking about what to do.\n\nThe good news: you don't need to learn 100 shortcuts. You need to learn the 10 that come up constantly. Everything else you can look up."
+    },
+    {
+      "type": "text",
+      "content": "## The 10 Essential Shortcuts\n\n| Shortcut | Action | When to use it |\n|----------|--------|----------------|\n| `Ctrl+Shift+P` | Command Palette | When you want any VS Code feature by name |\n| `Ctrl+P` | Quick open file | Jump to any file in your project by typing its name |\n| `Ctrl+S` | Save file | After every meaningful change |\n| `Ctrl+Z` | Undo | Reverse the last change |\n| `Ctrl+Shift+Z` | Redo | Reapply what you just undid |\n| `Ctrl+/` | Toggle line comment | Comment or uncomment the current line |\n| `Alt+Up` / `Alt+Down` | Move line | Physically move a line up or down without cut/paste |\n| `Ctrl+D` | Select next occurrence | Select the word under cursor, then next occurrence, then next... |\n| `Ctrl+Shift+K` | Delete current line | Delete the entire line without selecting it first |\n| `Ctrl+` \\`` | Toggle integrated terminal | Show or hide the terminal |\n\nThese apply to VS Code on Windows. Mac users replace Ctrl with Cmd (and Alt with Option for Alt+Up/Down)."
+    },
+    {
+      "type": "text",
+      "content": "## Three Shortcuts Worth Extra Explanation\n\n**Ctrl+/ — Toggle line comment**\n\nThis is one of the most satisfying shortcuts in VS Code. Place your cursor anywhere on a line and press Ctrl+/. VS Code wraps the line in a comment for the current language:\n- HTML: `<!-- your code -->`\n- JavaScript: `// your code`\n- CSS: `/* your code */`\n- Python: `# your code`\n\nPress it again to uncomment. Select multiple lines first to comment them all at once. You'll use this constantly when you want to temporarily disable a line of code without deleting it.\n\n**Ctrl+D — Select next occurrence**\n\nPlace your cursor on a word (or double-click to select it). Press Ctrl+D and VS Code selects the next occurrence of that exact word. Press it again to add the one after that. All selections stay active — anything you type now replaces all of them simultaneously.\n\nUse case: you have a variable called `userName` and want to rename it to `userEmail`. Click on `userName`, press Ctrl+D repeatedly until all occurrences are selected, then type `userEmail`. They all change at once.\n\n**Alt+Up / Alt+Down — Move line**\n\nPlace your cursor anywhere on a line and hold Alt, then press Up or Down. The line physically moves up or down, pushing the lines around it out of the way. VS Code handles any required indentation adjustments automatically. No need to cut, move, paste. This is the fastest way to reorder lines."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**See all shortcuts:** Press Ctrl+K then Ctrl+S (or go to File → Preferences → Keyboard Shortcuts). This shows a searchable list of every VS Code action with its assigned shortcut. You can also change any shortcut by double-clicking it. For a printable reference, use Help → Keyboard Shortcut Reference (PDF)."
+    },
+    {
+      "type": "text",
+      "content": "## A Few More Worth Knowing\n\nThese didn't make the top 10 but are close:\n\n- **Ctrl+F** — Find text in the current file. Press Enter to jump to the next match.\n- **Ctrl+H** — Find and replace. Like Ctrl+F but with a replacement box.\n- **Ctrl+G** — Go to a specific line number. Type a number and press Enter.\n- **Ctrl+B** — Toggle the Primary Sidebar (more screen space when you need it).\n- **Ctrl+W** — Close the current tab.\n- **Ctrl+Tab** — Cycle through your open tabs.\n- **Ctrl+`** — We already covered this: toggle the terminal.\n- **Shift+Alt+Down** — Duplicate the current line below it (very useful for repeating code patterns)."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Shortcut Muscle Memory",
+      "content": "Open `part-05-notes.md` from your exercises folder and practise each shortcut at least 3 times. The goal is not speed — it's forming the physical habit.\n\n**First, add some content to work with.** Click in `part-05-notes.md` and type:\n```\n# VS Code Notes\n\nThe Command Palette is Ctrl+Shift+P.\nThe terminal shortcut is Ctrl+backtick.\nI can save files with Ctrl+S.\nI can undo mistakes with Ctrl+Z.\nI can toggle a comment with Ctrl+slash.\nThis line should be moved.\nThis line should stay.\nI can select multiple words with Ctrl+D.\nthis line should be deleted entirely.\n```\n\n**Now practice each shortcut:**\n\n**Ctrl+S — Save:**\nPress Ctrl+S right now. The dot in the tab title disappears. (If auto-save is on, the dot may already be gone — that's fine.)\n\n**Ctrl+Z — Undo / Ctrl+Shift+Z — Redo:**\nDelete a word, then press Ctrl+Z — it comes back. Press Ctrl+Shift+Z — it's deleted again. Practice 3 times.\n\n**Ctrl+/ — Toggle comment:**\nClick on the line `The Command Palette is Ctrl+Shift+P.` and press Ctrl+/. It becomes a Markdown comment. Press Ctrl+/ again to uncomment. Practice on 3 different lines.\n\n**Alt+Up / Alt+Down — Move line:**\nClick on `This line should be moved.` and hold Alt, press Up twice, then Down three times. Notice the line physically moves.\n\n**Ctrl+D — Select next occurrence:**\nDouble-click the word `Ctrl` anywhere in the file. Press Ctrl+D — the next `Ctrl` is selected. Press Ctrl+D again — another. Now type anything — all selected instances change. Press Ctrl+Z a few times to undo.\n\n**Ctrl+Shift+K — Delete line:**\nClick anywhere on `this line should be deleted entirely.` and press Ctrl+Shift+K. The entire line is gone.\n\n**Ctrl+P — Quick open file:**\nPress Ctrl+P and type `hello` — VS Code finds `hello.html`. Press Enter to open it. Press Ctrl+P again, type `readme` — finds `README.md`. Press Esc to cancel.\n\n**Ctrl+` — Toggle terminal:**\nPress Ctrl+` to open the terminal. Press it again to close. Open it again. Practice 3 times.\n\n**Check:**\n- [ ] Practised all 8 shortcuts listed above\n- [ ] Ctrl+/ correctly toggled comments\n- [ ] Ctrl+D selected multiple occurrences\n- [ ] Alt+Up/Down moved a line\n- [ ] Ctrl+Shift+K deleted a full line"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Keyboard Shortcuts Speed Test",
+      "content": "Keyboard shortcuts compound over time — each one you learn saves seconds, hundreds of times a day.\n\n**Step 1 — Open a code or text file** in VS Code.\n\n**Step 2 — Time yourself on each task using only keyboard (no mouse):**\n\n| Task | Shortcut | Your time |\n|---|---|---|\n| Go to line 20 | Ctrl+G → 20 → Enter | |\n| Find the word \"function\" | Ctrl+F → type | |\n| Select the current line | Ctrl+L | |\n| Duplicate current line | Shift+Alt+Down | |\n| Delete current line | Ctrl+Shift+K | |\n| Move line up | Alt+Up | |\n| Comment out current line | Ctrl+/ | |\n| Open terminal | Ctrl+` | |\n| Format the document | Shift+Alt+F | |\n| Save file | Ctrl+S | |\n\n**Step 3 — For any shortcut taking > 5 seconds**, practice it 10 times until it's automatic.\n\n**Step 4 — Print the VS Code keyboard shortcut reference card** (Ctrl+Shift+P → \"Open Default Keyboard Shortcuts\" → PDF). Pick 3 new shortcuts to learn this week."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Custom Keyboard Shortcut Setup",
+      "content": "Assign shortcuts to commands you use constantly but have no default binding.\n\n**Step 1 — Identify your top 5 actions** that require mouse clicks (and you do them > 5 times per session).\n\n**Step 2 — Open Keyboard Shortcuts:** Ctrl+Shift+P → \"Open Keyboard Shortcuts\" (the searchable UI).\n\n**Step 3 — For each action**, search for the command name, click the pencil icon, and press your desired shortcut combination.\n\n**Step 4 — Ask Claude for suggestions:**\n```\nI use VS Code for [your work]. I want custom keyboard shortcuts for:\n[list your top actions]\n\nSuggest shortcut combinations that:\n- Don't conflict with built-in VS Code shortcuts\n- Are ergonomic (easy to press)\n- Follow conventions developers use (Ctrl+Shift+letter for major actions)\n```\n\n**Step 5 — Export your shortcuts:** Ctrl+Shift+P → \"Open Keyboard Shortcuts (JSON)\" → copy and save somewhere safe (cloud, dotfiles repo).\n\n**Step 6 — Commit to 2 weeks:** Only use the keyboard, no mouse, for the shortcuts you just set up. Muscle memory takes about 2 weeks of consistent use."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Refactoring Shortcuts",
+      "content": "These shortcuts are specifically for editing and refactoring code efficiently — the keystrokes that separate fast coders from slow ones.\n\n**Step 1 — Create a Python file** with some test code:\n```python\ndef calculate_total(price, quantity, tax_rate):\n    subtotal = price * quantity\n    tax = subtotal * tax_rate\n    total = subtotal + tax\n    return total\n\nresult = calculate_total(10.99, 3, 0.08)\nprint(result)\n```\n\n**Step 2 — Practice these refactoring shortcuts:**\n- Rename symbol: click `calculate_total`, press F2, type new name → rename propagates everywhere\n- Extract selection: select `subtotal * tax_rate`, Ctrl+Shift+P → \"Extract Variable\"\n- Format document: Shift+Alt+F\n- Go to definition: click `calculate_total` in the last line, press F12\n- Peek definition: Alt+F12 (shows definition without leaving current file)\n\n**Step 3 — Use multi-cursor editing:** Hold Alt and click to add cursors. Add cursors at the beginning of lines 2-4 simultaneously.\n\n**Step 4 — Ask Claude:** *\"What are the most powerful VS Code refactoring shortcuts for Python development? Give me 5 I should add to my muscle memory.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Shortcuts Cheat Sheet for Your Use Case",
+      "content": "Create a personalised keyboard shortcuts reference for your specific workflow.\n\n**Step 1 — Ask Claude:**\n```\nCreate a keyboard shortcuts cheat sheet for a VS Code user who:\n- Works primarily in [your language]\n- Uses [your extensions, e.g., GitHub Copilot]\n- Main tasks: [writing code / reviewing AI code / editing documents]\n\nFormat as a table: Action | Shortcut | Notes\nGroup by: Navigation, Editing, Git, Terminal, Extensions\nInclude only shortcuts I should learn in my first month.\n```\n\n**Step 2 — Review and personalise** the cheat sheet. Add your custom shortcuts. Remove any that don't apply.\n\n**Step 3 — Test every shortcut** on the list — confirm they all work on your VS Code install.\n\n**Step 4 — Save the cheat sheet** as a Markdown file in your project or in your notes app.\n\n**Step 5 — Share with a colleague** who also uses VS Code. Getting them to use the same shortcuts means you can help each other."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to comment out 10 lines of code at once. What is the fastest VS Code approach?",
+      "options": [
+        "Type // at the beginning of each line manually",
+        "Select all 10 lines with Shift+Click, then press Ctrl+/ to toggle comments on all selected lines",
+        "Use Find & Replace to add // to each line",
+        "Ask the AI assistant to comment the code for you"
+      ],
+      "correct": 1,
+      "explanation": "Ctrl+/ toggles comments on the current line or all selected lines. Select the 10 lines (click the start, Shift+click the end), then Ctrl+/ — all 10 lines are commented simultaneously. The same shortcut with the lines still selected will uncomment them. This works for line comments in any language VS Code knows (// for JS/Python/C#, # for Python, -- for SQL, etc.)."
+    },
+    {
+      "type": "quiz",
+      "question": "What does pressing Alt+Up/Down do in VS Code?",
+      "options": [
+        "Scrolls the editor viewport up or down",
+        "Moves the currently selected line(s) up or down in the file",
+        "Navigates between files in the editor tabs",
+        "Increases or decreases text size"
+      ],
+      "correct": 1,
+      "explanation": "Alt+Up/Down moves the current line (or selected lines) up or down in the file — it's a physical line reorder. This is much faster than cut-paste when you want to reorder code. It works on single lines or multi-line selections. An equivalent operation with Shift+Alt+Down duplicates the current line below — useful for creating similar code structures quickly."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-10.** These shortcuts will feel awkward at first and automatic within a week of regular use. The investment pays off for the entire rest of the course — and your career. Next: viewing two files side by side with the Split Editor."
+    }
+  ],
+  "nextLesson": "5-11",
+  "prevLesson": "5-9"
+}

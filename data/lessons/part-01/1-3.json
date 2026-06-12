@@ -1,0 +1,111 @@
+{
+  "id": "1-3",
+  "title": "The AI Tools Landscape (2026)",
+  "part": 1,
+  "estimatedMinutes": 65,
+  "tags": [
+    "foundations",
+    "beginner",
+    "tools",
+    "overview"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThe AI ecosystem has exploded. There are tools for chat, search, images, audio, video, writing, coding, research, and dozens of other categories — and new ones launch every week. By the end of this lesson you'll be able to name the major categories, understand why different tools exist for different jobs, and know which ones to try first.\n\nYou won't need to learn every tool. You need to know the landscape well enough to reach for the right one — and to recognise when a new tool you haven't heard of is genuinely novel vs. a slight variation on something you already know."
+    },
+    {
+      "type": "text",
+      "content": "## The Landscape at a Glance (2026)\n\nAI tools aren't competing for the same job — they're built for fundamentally different tasks. Here's the current map:\n\n| Category | What it does | Leading tools |\n|----------|--------------|---------------|\n| **Chat / general assistant** | Conversation, writing, analysis, reasoning | Claude, ChatGPT, Gemini |\n| **AI search** | Web search with cited sources | Perplexity, Bing Copilot |\n| **Deep research** | Systematic multi-source research | Perplexity Deep Research, ChatGPT Deep Research |\n| **Academic research** | Scientific literature search | Elicit, Consensus, Scite |\n| **Image generation** | Create images from text | DALL-E, Midjourney, Stable Diffusion |\n| **Audio & music** | Generate speech, music, transcription | ElevenLabs, Suno, Whisper |\n| **Video generation** | Create short video from text/images | Sora, Runway, Kling |\n| **Knowledge base / RAG** | Chat with your own documents | NotebookLM, Claude Projects |\n| **Presentations** | Slides from a prompt or document | Gamma, Canva AI, PowerPoint Copilot |\n| **Writing assistant** | Improve drafts, grammar, tone | Grammarly AI, Notion AI, Jasper |\n| **Coding assistant** | Write and explain code | Claude Code, GitHub Copilot, Cursor |\n| **Automation** | Connect apps, build no-code workflows | Zapier, n8n, Make |\n| **AI agents** | Autonomous multi-step task completion | Claude Research, Perplexity Deep Research |\n| **Local AI** | Run models on your own machine | Ollama, LM Studio |\n| **Meeting AI** | Transcribe, summarise meetings | Otter.ai, Fireflies, Teams Copilot |\n\nThis table will mean more to you as you work through the course — you'll use tools from most of these categories. For now, treat it as a reference map."
+    },
+    {
+      "type": "text",
+      "content": "## The Big Three — Claude, ChatGPT, and Gemini\n\nThe three dominant general-purpose AI assistants each have different strengths. Understanding these differences helps you choose the right one for each task.\n\n**Claude (Anthropic)**\n- Strongest: instruction-following, long-form writing, complex analysis, coding (SWE-Bench leader as of 2026), following specific formatting instructions\n- Context window: 200,000 tokens — can handle very long documents\n- Notable: Claude Code (CLI tool) for developers; Projects feature for persistent context\n- Best for: writing, coding, analysis, anything where you need precise instruction-following\n\n**ChatGPT / GPT-4o (OpenAI)**\n- Strongest: multimodal (image + voice input/output), broadest third-party ecosystem, structured output/JSON\n- Context window: 128,000 tokens\n- Notable: GPT Store has thousands of custom AI tools built by others; Deep Research mode for comprehensive reports\n- Best for: image analysis, voice interaction, connecting to third-party tools, accessing specialised GPTs\n\n**Gemini (Google)**\n- Strongest: live web search built-in (always current), massive context window (~1M tokens), Google Workspace integration (Gmail, Docs, Sheets)\n- Context window: up to 1,000,000 tokens — the only model that can hold an entire book in context\n- Notable: Native integration into Google apps; can read your actual Gmail and Docs\n- Best for: processing enormous documents, real-time factual questions, Google Workspace users\n\n**The practical takeaway:** If you only use one: start with Claude for quality of reasoning and writing. Add Gemini if you're in Google Workspace. Add ChatGPT for image analysis or third-party tool access."
+    },
+    {
+      "type": "text",
+      "content": "## Why Different Tools for Different Jobs\n\nYou might wonder: if Claude can write text, why does Perplexity exist? If ChatGPT can answer questions, why use Elicit? The answer is that these tools are optimised for different constraints.\n\n**General chat AI** (Claude, ChatGPT, Gemini) is optimised for flexible, open-ended conversation. It can do almost anything with text — but it doesn't cite sources by default, and its knowledge has a training cutoff.\n\n**AI search** (Perplexity) is optimised for factual research with citations. Every answer links back to the source — you can click through and verify. For anything where currency and verifiability matter, Perplexity is the right tool, not Claude.\n\n**Academic research tools** (Elicit, Consensus, Scite) search specifically over peer-reviewed literature. They don't search the general web — they search databases of scientific papers. Elicit extracts structured data from papers (sample size, methodology, findings). Consensus shows what percentage of studies support a claim. These are qualitatively different from general AI search.\n\n**NotebookLM** (Google) is in a category of its own. You upload your own documents — PDFs, YouTube videos, web links, Google Docs — and it builds an interactive knowledge base around *your sources*. It won't make up facts because it only answers from what you gave it.\n\n**Image generation tools** (Midjourney, DALL-E, Stable Diffusion) are entirely separate neural networks trained on images. You can ask a text AI to describe a picture, but you can't ask it to *generate* one — those are different models with different architectures.\n\n**The principle:** Always use the tool built for your actual job. Using a general chat AI for everything is like using a Swiss Army knife when you have a full kitchen — it works, but it's not optimal."
+    },
+    {
+      "type": "text",
+      "content": "## The Reasoning Models — A New Category\n\nIn 2025-2026, a new category emerged: reasoning models (also called \"thinking models\"). These are models specifically designed to spend more computation on reasoning before responding.\n\n**How they differ:** Standard models generate responses as fast as possible — each token predicted quickly. Reasoning models have an internal \"thinking\" phase where they work through the problem before writing the response you see.\n\n**Available reasoning models (2026):**\n- Claude 3.7+ / Claude 4.x with extended thinking: activate in Claude.ai\n- OpenAI o4 and o4-mini: available in ChatGPT Pro\n- Google Gemini 2.0 Flash Thinking\n\n**When they're worth using:**\n- Complex mathematical or logical problems\n- Multi-step analysis where errors compound\n- Strategic planning with many constraints\n- Any task where you find standard models making logical leaps that fail\n\n**When standard models are better:**\n- Straightforward questions\n- Writing tasks (speed matters, not reasoning depth)\n- High-volume tasks (reasoning models are slower and more expensive)\n\nYou'll use reasoning mode in Part 7 of this course for complex coding tasks."
+    },
+    {
+      "type": "text",
+      "content": "## The Tools You'll Actually Use in This Course\n\nYou don't need accounts for everything today. Here's what you'll use, and when:\n\n**Starting now (Part 2):**\n- **Claude.ai** — Primary tool. Start here.\n- **Perplexity.ai** — Part 2. AI research with citations.\n- **ChatGPT** — Part 2. Direct comparison.\n\n**During the course:**\n- **NotebookLM** — Today's workshop + any time you have documents to learn from\n- **Elicit / Consensus** — Part 15 (research track)\n- **Gemini** — Part 2 + whenever you use Google Workspace\n- **Bing Image Creator** — Part 2. Free image generation, no account needed in Edge\n- **Gamma** — Part 16 (presentations)\n\n**Developer track only:**\n- **VS Code + GitHub Copilot / Cursor** — Parts 5–6\n- **Claude Code** — Part 7. The most powerful tool in the course for technical work\n- **Ollama** — Part 9. Local AI models\n\n**Note on accounts:** Sign up for Claude.ai today. You can create the others when you reach their lesson — the course is structured so you always have the tool ready before you need it."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Tool Safari — First Contact with 4 Tools",
+      "content": "Visit each of these four tools and spend 3-4 minutes with each. The goal is *first contact* — you're not learning them deeply, just building a feel for what each one is and how it's different.\n\n**Stop 1 — Claude.ai** (if you haven't used it yet)\nGo to [claude.ai](https://claude.ai). Type:\n```\nWhat are three things you can do that a regular Google search can't?\nBe specific — give me real examples, not marketing language.\n```\nNotice: it gives a thoughtful, conversational answer with no links or ads.\n\n**Stop 2 — Perplexity.ai**\nGo to [perplexity.ai](https://perplexity.ai). Search for something you genuinely want to know — a current event, a factual question, a topic in your field. Notice:\n- Every answer has numbered citations in brackets\n- Click one citation — it goes to the original source\n- The \"Pro Search\" option runs more searches for complex questions\n\nThis is the fundamental difference from Claude: Perplexity shows its sources in real time.\n\n**Stop 3 — Bing Image Creator** (free, no account needed in Edge browser)\nGo to [bing.com/images/create](https://bing.com/images/create). Type:\n```\nA friendly robot reading a book in a cosy library, warm afternoon light,\ndigital art, detailed illustration\n```\nGenerate it. This is not text — it's an entirely different kind of AI model producing a visual from your words.\n\n**Stop 4 — NotebookLM**\nGo to [notebooklm.google.com](https://notebooklm.google.com) (Google account required). Create a new notebook. Click \"Add source\" and paste a link to any Wikipedia article you find interesting. Once it processes (30-60 seconds), ask a specific question about a detail in the article. Notice:\n- It cites the exact passage it used\n- It won't make things up — if the article doesn't cover it, it says so\n- Generate an \"Audio Overview\" to hear a podcast-style summary of your source\n\n**Write one sentence per tool** describing what it does that the others don't. Four sentences total. This is your first draft of a personal AI toolkit.\n\n**Bonus — Elicit.com** (for those interested in academic research):\nGo to [elicit.com](https://elicit.com). Type a research question: \"Does remote work increase productivity?\" or \"What interventions reduce employee burnout?\" Notice how it searches actual scientific papers and extracts structured findings — not just web articles."
+    },
+    {
+      "type": "quiz",
+      "question": "You're writing a report that needs to cite current statistics on renewable energy adoption rates. Which tool combination gives you the most reliable, verifiable results?",
+      "options": [
+        "Ask Claude for the statistics — it has comprehensive knowledge",
+        "Use Perplexity for the statistics (gives you cited sources you can click and verify) then bring the verified numbers to Claude for analysis and writing",
+        "Use Gemini because it's integrated with Google Search",
+        "Use ChatGPT Deep Research — it produces the most comprehensive reports"
+      ],
+      "correct": 1,
+      "explanation": "For statistics that need to be cited and verifiable, Perplexity is the right first step because every statistic comes with a clickable source citation — you can verify the number came from a real, reputable organisation. Claude's knowledge is from training data (potential cutoff issue) and doesn't cite sources by default. Gemini's search integration is good but Perplexity's citation display is cleaner for research purposes. ChatGPT Deep Research is also valid but slower for targeted fact-finding. The key workflow: use a citation-native tool for facts, then bring verified data to Claude for synthesis and writing."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Tool Landscape Map (Quick Drill)",
+      "content": "This 8-minute drill builds your mental map of the AI tool landscape — so you can instantly answer \"which AI tool should I use for this?\"\n\n**Step 1 — Open a blank document** (Google Docs, Word, or Notion) and draw four columns: \"Conversation AI\", \"Search/Research AI\", \"Creative AI\", \"Productivity AI\".\n\n**Step 2 — Without looking anything up**, list every AI tool you have heard of under the right column. Aim for 10+ tools total.\n\n**Step 3 — Open Claude.ai** and paste your list. Ask: *\"Review my AI tool landscape map. What important tools or categories have I missed? What have I misclassified? Be specific.\"*\n\n**Step 4 — Update your map** based on Claude's feedback. Add the tools you missed.\n\n**Step 5 — For each column**, identify which single tool you would use first if someone gave you a task in that category. Write the name next to the column header.\n\n**Step 6 — Save your map.** This is your personal AI tools reference — update it as you discover new tools throughout this course."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build an AI Tool Recommendation System",
+      "content": "You will build a reusable prompt that helps you (or anyone) choose the right AI tool for a given task. This is a genuinely useful tool — you will reference it every time you start a new AI-assisted task.\n\n**Step 1 — Open Claude.ai** and start a new conversation.\n\n**Step 2 — Describe 3 real tasks** from your work or life that you could imagine using AI for. Be specific: not \"writing\" but \"writing weekly status reports for my manager\" or not \"research\" but \"researching competitor pricing\".\n\n**Step 3 — Ask Claude:** *\"For each of these 3 tasks, recommend the best AI tool available in 2026 and explain: (1) why this tool is best for this specific task, (2) one alternative tool and when to use it instead, (3) one thing to watch out for with this tool. Be specific and practical.\"*\n\n**Step 4 — Review Claude's recommendations.** Do they match what you expected? What surprised you?\n\n**Step 5 — Mandatory AI review:** Paste Claude's recommendations back with this message: *\"Review your own tool recommendations above. Play devil's advocate — find 3 specific cases where your recommendation might be wrong or where a different tool would actually be better.\"*\n\n**Step 6 — Build your personal tool selection guide:** Based on the full exchange, write a short (1 page) guide: \"Which AI tool I use for which type of task.\" Keep this — it will save you time every week.\n\n**Step 7 — Test your guide:** Pick any task from your work today and use your guide to select a tool. Does the guide's recommendation make sense?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Head-to-Head Tool Comparison",
+      "content": "The best way to understand what makes each AI tool different is to ask them the same thing and compare. This workshop reveals the real differences — not the marketing.\n\n**Step 1 — Choose a real task** from your work that you need to do anyway this week. Something where the quality of the output matters.\n\n**Step 2 — Craft a specific prompt** for the task. Write it clearly with context.\n\n**Step 3 — Run the exact same prompt** in at least two of these: Claude.ai, ChatGPT, Gemini. Keep tabs open side-by-side.\n\n**Step 4 — Compare the outputs** across these dimensions:\n- Length and detail level\n- Tone and style\n- Accuracy of specific facts (if applicable)\n- Usefulness for your actual task\n- What each one got wrong or missed\n\n**Step 5 — Ask Claude** to compare the approaches: *\"I ran the same prompt in multiple AI tools. Here are the outputs: [paste them]. What are the meaningful differences in their approaches? Which is most useful for [your task] and why?\"*\n\n**Step 6 — Write a one-paragraph verdict:** For this type of task, which tool would you use in the future and why? Add this verdict to your tool guide from Workshop B."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Your Personal AI Tools Shortlist",
+      "content": "Most people end up using 2-3 AI tools regularly. This workshop helps you decide which ones those should be for you specifically.\n\n**Step 1 — Think about your work and life** over the last month. What were the most time-consuming or tedious tasks? List 5-8 of them.\n\n**Step 2 — For each task**, write: (a) which AI tool you have tried or would try, (b) whether you have actually used AI for this task.\n\n**Step 3 — Open Claude.ai** and paste your task list. Ask: *\"I want to build a minimal AI tools setup — ideally 2-3 tools that cover my main use cases. Based on this task list, which 2-3 AI tools would you recommend I start with? Explain why these cover my specific needs. What would I miss by not adding a fourth tool?\"*\n\n**Step 4 — Decide your shortlist.** Pick 2-3 tools you will actually use starting today.\n\n**Step 5 — Create accounts** (if you haven't already) for your chosen tools. Bookmark them or add them to your browser toolbar.\n\n**Step 6 — Commit to a 2-week experiment:** For the next 2 weeks, use only your shortlisted tools (no adding new ones). This forces you to learn them well before expanding."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague asks which AI tool to use for drafting a business proposal. Which answer is most helpful?",
+      "options": [
+        "Use ChatGPT — it's the most popular",
+        "It depends: Claude is strong for long documents and nuanced writing; ChatGPT is good if you need web search integrated",
+        "Use whichever you have a subscription to",
+        "AI tools are roughly equivalent for writing tasks"
+      ],
+      "correct": 1,
+      "explanation": "Different AI tools have genuine strengths for different tasks. Claude excels at long, nuanced documents and careful reasoning. ChatGPT has integrated web search and image generation. Recommending the right tool requires knowing the task, not just what's popular or available."
+    },
+    {
+      "type": "quiz",
+      "question": "Which AI tool category is specifically designed for research with cited sources?",
+      "options": [
+        "Conversation AI (Claude, ChatGPT)",
+        "Creative AI (Midjourney, DALL-E)",
+        "Search/Research AI (Perplexity, Consensus)",
+        "Productivity AI (Copilot for M365)"
+      ],
+      "correct": 2,
+      "explanation": "Perplexity, Consensus, Scite and similar tools are specifically built for research with citations — they retrieve current web sources and link every claim to its source. General conversation AI (Claude, ChatGPT) can discuss topics but doesn't automatically cite sources."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 1-3.** You now have a map of the 2026 AI tools landscape: the big three general assistants (Claude, ChatGPT, Gemini), specialised research tools (Perplexity, Elicit, Consensus), knowledge base tools (NotebookLM, Claude Projects), reasoning models, and the developer tools you'll use later. Everything in this course uses at least one of these tools."
+    }
+  ],
+  "nextLesson": "1-4",
+  "prevLesson": "1-2"
+}

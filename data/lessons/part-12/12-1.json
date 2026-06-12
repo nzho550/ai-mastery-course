@@ -1,0 +1,105 @@
+{
+  "id": "12-1",
+  "title": "Why Run AI Locally?",
+  "part": 12,
+  "estimatedMinutes": 50,
+  "tags": [
+    "local-ai",
+    "privacy",
+    "ollama",
+    "offline"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand why someone would run AI on their own machine instead of using a cloud service — and when it's the right choice versus when it isn't.\n\nWe've spent most of this course using cloud AI: Claude.ai, the Anthropic API, Copilot. All of those services send your data to someone else's servers. That's usually fine. But not always."
+    },
+    {
+      "type": "text",
+      "content": "## The Case for Local AI\n\nLocal AI runs entirely on your machine. The model weights are downloaded to your computer, inference happens on your CPU or GPU, and nothing leaves your device. There are four reasons this matters:\n\n**Privacy.** Every prompt you send to a cloud AI goes to a company's servers. Most providers have privacy policies that allow using your data to improve their models (though Anthropic's API does not train on your data by default). For sensitive documents — client contracts, medical records, personal journals, proprietary code — local AI keeps your data where it belongs: with you.\n\n**Offline capability.** A local model works on a plane, in a basement with no WiFi, or during an internet outage. If you've ever been in the middle of a flow state and lost your internet connection, you'll appreciate this.\n\n**Zero ongoing cost.** After the one-time setup, every conversation is free. No tokens, no subscription, no API bill. For high-volume tasks like processing hundreds of documents, this matters enormously.\n\n**Lower latency for small tasks.** A locally cached 3B model can respond to a simple request in under a second on modern hardware — faster than a round-trip to a cloud API."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**What does \"local\" actually mean?** When you run a local AI, you download the model weights — a file between 2GB and 70GB+ depending on the model — to your computer. The model runs as a process on your machine, using your RAM and (ideally) your GPU. No internet connection is required after the initial download."
+    },
+    {
+      "type": "text",
+      "content": "## The Tradeoffs\n\nLocal AI is not free lunch. Here's what you give up:\n\n**Quality gap.** The best local models available today (Phi-4, Llama 3.3, Mistral) are impressive — but they're not as capable as Claude Sonnet or GPT-4o for complex reasoning, long-context tasks, or nuanced writing. For many tasks this doesn't matter. For some tasks it does.\n\n**Hardware requirements.** Model size determines RAM needed. A 3B model needs about 3–4GB of RAM. A 7B model needs 6–8GB. A 70B model needs 64GB+ (usually a dedicated GPU). If your machine is older or has limited RAM, your options narrow to the smaller, less capable models.\n\n**Setup complexity.** Installing Ollama is easy (covered in the next lesson). But troubleshooting GPU acceleration, understanding quantization formats, or wiring a local model into your development tools takes more effort than signing up for Claude.ai.\n\n**No latest models.** Frontier models like Claude Opus and GPT-4 are not available locally. The open-source models released for local use typically lag behind the frontier by 6–12 months in capability."
+    },
+    {
+      "type": "text",
+      "content": "## When to Use Local vs Cloud\n\nThis isn't an either/or choice. The practical approach is routing tasks to the right tool:\n\n**Use local AI when:**\n- The document contains PII, client data, or anything under NDA\n- You're processing high volumes of documents where API cost adds up\n- You need to work offline\n- The task is simple enough that a smaller model handles it fine (summarizing, rewriting, short Q&A)\n- You're experimenting and don't want to burn API credits\n\n**Use cloud AI when:**\n- The task requires complex reasoning across a large context\n- You need the very best output quality — for client work, presentations, critical decisions\n- You're using the latest features (extended thinking, tool use, vision)\n- You're in a hurry and need a reliable, fast response\n\nMost working developers end up with a hybrid setup: local models for day-to-day coding assistance and private tasks, cloud APIs for anything that demands frontier-level quality."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The sweet spot for local AI in 2025:** Code completion and explanation, summarizing your own documents, drafting emails about private matters, and running experiments without paying per token. For anything that requires genuine reasoning quality — architecture decisions, complex debugging, creative writing — cloud models still win."
+    },
+    {
+      "type": "text",
+      "content": "## The Tools: Ollama and LM Studio\n\nTwo tools dominate local AI for developers:\n\n**Ollama** is a command-line first tool that makes running local models as simple as `ollama run llama3.2`. It manages model downloads, runs a local API server, and works perfectly from the terminal. This is what most developers reach for.\n\n**LM Studio** is a desktop GUI application that lets you browse a model catalog, download models with a click, and chat with them in a polished interface. It also exposes an OpenAI-compatible API server, which means any tool that works with OpenAI can use your local model.\n\nWe'll install and use both in the next few lessons."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Your Local AI Use Cases",
+      "content": "Think back through the last two weeks of your life. Consider the things you've asked AI tools — or wanted to ask but didn't because of privacy concerns.\n\nIn your notes, write answers to these three questions:\n\n1. **What are 3 tasks or questions where you'd prefer the data never left your machine?**\n   (Examples: reviewing a client's contract, processing your medical insurance documents, working with your employer's proprietary code)\n\n2. **What tasks do you do frequently enough that API costs could add up?**\n   (Examples: summarizing meeting notes daily, processing a backlog of PDFs, generating first drafts of repeated document types)\n\n3. **Is your machine likely capable of running local models?**\n   - Check your RAM: Settings → System → About (Windows) or Apple menu → About This Mac\n   - 8GB RAM → 3B–7B models work well\n   - 16GB+ RAM → 7B–13B models work well\n   - 32GB+ RAM → 13B+ models are accessible\n\nSave these notes — they'll help you choose the right models in lesson 12-7."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Local vs Cloud AI Decision Drill",
+      "content": "Build your decision framework for local vs cloud AI.\n\n**Step 1 — Ask Claude:** *\"What are the situations where running AI locally is genuinely better than using cloud AI? And where is cloud AI clearly superior? Be specific — give real examples of each.\"*\n\n**Step 2 — Map your own use cases:**\n| Task | Privacy sensitivity | Offline need | Volume/cost | Local or Cloud? |\n|---|---|---|---|---|\n| Reviewing personal code | | | | |\n| Summarising work documents | | | | |\n| Quick code completions | | | | |\n| Complex analysis | | | | |\n\n**Step 3 — Check your hardware:** Can you run local models?\n```powershell\n# Check RAM\n(Get-ComputerInfo).CsMachineDescription\n[math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 1)\n# Check GPU\nGet-WmiObject Win32_VideoController | Select-Object Name, AdapterRAM\n```\n\n**Step 4 — Ask Claude:** \"Given 16GB RAM and no dedicated GPU, which local models would run acceptably, and which would be too slow to be practical?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Local AI Privacy Threat Model",
+      "content": "Build a threat model that clarifies exactly what privacy local AI protects.\n\n**Step 1 — Ask Claude:** *\"Explain what data actually leaves my machine when I use: (1) Claude.ai in a browser, (2) Claude Code (CLI), (3) Copilot in VS Code, (4) a local model via Ollama. For each, what specific data is transmitted and to whom?\"*\n\n**Step 2 — Build a threat model for your situation:**\n- What types of sensitive data do you handle in code? (credentials, PII, proprietary algorithms, client data)\n- What is your organisation's policy on AI tool use?\n- What are the real consequences if that data were seen by an AI provider?\n\n**Step 3 — Match threats to solutions:**\n- No real sensitivity → cloud AI, full capabilities\n- Some sensitivity → cloud AI with data protection agreements\n- High sensitivity → local AI or no AI\n\n**Step 4 — Document your personal AI data policy** — a one-page reference for yourself."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Hardware Requirements Deep Dive",
+      "content": "Understand hardware requirements for local AI models.\n\n**Step 1 — Ask Claude:** *\"Explain the hardware requirements for running large language models locally. What determines: whether a model can run at all, what speed (tokens per second) to expect, and the trade-off between model quality and hardware requirements?\"*\n\n**Step 2 — Learn the key metrics:**\n- Model size: parameters × precision (bits) = memory needed\n- 7B model at 4-bit: ~4GB VRAM (runs on most modern GPUs)\n- 13B model at 4-bit: ~8GB VRAM\n- 70B model at 4-bit: ~40GB VRAM (high-end)\n\n**Step 3 — Calculate what you can run:**\n- Your RAM: [X GB] — can run models up to [Y] billion parameters on CPU\n- Your GPU VRAM: [X GB] — can run models up to [Y] billion parameters on GPU\n\n**Step 4 — Ask Claude:** \"What token-per-second speed would be practical for: code completion (needs to feel fast), chat (conversational), and batch processing (can be slow)?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Plan Your Local AI Setup",
+      "content": "Create a concrete plan for your local AI setup based on your actual hardware.\n\n**Step 1 — Inventory your hardware:** RAM, GPU VRAM, available disk space.\n\n**Step 2 — Ask Claude to recommend a local model stack** for your hardware:\n```\nI have: [X GB RAM], [GPU model or no GPU], [Y GB free disk space].\nMy primary use cases are: [list them].\n\nRecommend:\n1. The best model for each use case given my hardware\n2. Which tool to use (Ollama, LM Studio)\n3. Expected tokens/second for each model on my hardware\n4. Total disk space needed\n```\n\n**Step 3 — Create an installation plan:**\n- Tool to install first\n- Models to download (in priority order)\n- Total setup time estimate\n\n**Step 4 — You'll execute this plan** in Lessons 12-2 through 12-5."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to run a 7B parameter model locally. The model card says it requires \"4GB VRAM.\" You have 16GB RAM but no dedicated GPU. Can you run it?",
+      "options": [
+        "No — VRAM and RAM are the same; 4GB is needed",
+        "Yes — you can run it on CPU using system RAM, but it will be significantly slower than GPU inference",
+        "No — models with VRAM requirements cannot run on CPU",
+        "Yes — the model will automatically use your 16GB RAM as VRAM"
+      ],
+      "correct": 1,
+      "explanation": "VRAM requirements refer to GPU memory, but most local inference tools (Ollama, LM Studio) can also run models on CPU using system RAM. The trade-off: CPU inference on a 7B model might produce 3-8 tokens/second, while GPU inference might produce 30-80 tokens/second. For interactive use, CPU-only inference can feel slow; for batch processing, it's acceptable. 16GB RAM is sufficient to run a 7B model at 4-bit quantisation on CPU."
+    },
+    {
+      "type": "quiz",
+      "question": "What is quantisation and why does it matter for running local models?",
+      "options": [
+        "Quantisation converts models from English to other languages",
+        "Quantisation reduces model weight precision (e.g., from 16-bit floats to 4-bit integers), shrinking the model size and memory requirements at some cost to output quality",
+        "Quantisation improves model accuracy by filtering low-quality training data",
+        "Quantisation is a technique for making models faster without changing size"
+      ],
+      "correct": 1,
+      "explanation": "Quantisation compresses model weights to lower numerical precision. A 7B model at full precision (16-bit) needs ~14GB memory; the same model at 4-bit quantisation needs ~4GB. Quality impact: 4-bit models retain most capability (often 95%+) of the full-precision version for everyday tasks. For local deployment, 4-bit quantised models (Q4_K_M format in GGUF files) are the practical standard — they fit in consumer hardware while maintaining acceptable quality."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 12-1.** You now have a clear mental model of when local AI earns its place in a workflow. The next lesson covers installing Ollama — your gateway to running models locally."
+    }
+  ],
+  "nextLesson": "12-2",
+  "prevLesson": "11-9"
+}

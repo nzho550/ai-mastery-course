@@ -1,0 +1,114 @@
+{
+  "id": "11-4",
+  "title": "First API Call with curl",
+  "part": 11,
+  "estimatedMinutes": 60,
+  "tags": [
+    "api",
+    "anthropic",
+    "terminal",
+    "curl"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll make a real API call from the terminal, see a live Claude response as raw JSON, and understand what each part of the request does."
+    },
+    {
+      "type": "text",
+      "content": "## Why Start With the Terminal?\n\nBefore using an SDK, it's valuable to see the raw request once. The SDK is an abstraction — it hides the HTTP details. Making one raw call first means you understand exactly what the SDK is doing for you later. When something breaks, you can strip back to the raw request to diagnose it.\n\nIn this lesson you'll use PowerShell's `Invoke-RestMethod` command, which is the PowerShell equivalent of `curl` on Mac/Linux. It sends HTTP requests and parses JSON responses automatically."
+    },
+    {
+      "type": "text",
+      "content": "## The Request, Piece by Piece\n\nHere is the full PowerShell command to call the Anthropic API:"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "$response = Invoke-RestMethod `\n  -Uri \"https://api.anthropic.com/v1/messages\" `\n  -Method POST `\n  -Headers @{\n    \"x-api-key\"         = $env:ANTHROPIC_API_KEY\n    \"anthropic-version\" = \"2023-06-01\"\n    \"content-type\"      = \"application/json\"\n  } `\n  -Body '{\n    \"model\": \"claude-haiku-4-5-20251001\",\n    \"max_tokens\": 100,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Say hello in exactly 10 words.\"}\n    ]\n  }'\n\n$response.content[0].text"
+    },
+    {
+      "type": "text",
+      "content": "Breaking down each part:\n\n**`-Uri`** — the endpoint URL. This is the one URL for all messages calls.\n\n**`-Method POST`** — we're sending data to the server, so we use POST (not GET).\n\n**`-Headers`** — three required headers:\n- `x-api-key`: your API key (read from the environment variable, never hardcoded)\n- `anthropic-version`: always `2023-06-01` — this pins the API version so your code doesn't break if Anthropic changes the response format\n- `content-type`: tells the server the body is JSON\n\n**`-Body`** — the JSON request body with model, max_tokens, and messages.\n\n**`$response.content[0].text`** — extracts Claude's reply from the nested response object."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The backtick (`) at the end of each line** is PowerShell's line continuation character — it means \"the command continues on the next line.\" This is just for readability. You could write the entire command on one line."
+    },
+    {
+      "type": "text",
+      "content": "## What the Full Response Looks Like\n\nIf you print `$response` instead of `$response.content[0].text`, you'll see the full response object:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"id\": \"msg_01XFDUDYJgAACzvnptvVoYEL\",\n  \"type\": \"message\",\n  \"role\": \"assistant\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"Hello there! Greetings to you on this fine day.\"\n    }\n  ],\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"stop_reason\": \"end_turn\",\n  \"stop_sequence\": null,\n  \"usage\": {\n    \"input_tokens\": 17,\n    \"output_tokens\": 10\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "## Common Errors and What They Mean\n\n**401 Unauthorized:**\n```\nInvoke-RestMethod: Response status code does not indicate success: 401 (Unauthorized).\n```\nYour API key is wrong, missing, or expired. Check: is `$env:ANTHROPIC_API_KEY` set? Run `echo $env:ANTHROPIC_API_KEY` to verify.\n\n**429 Too Many Requests:**\n```\nInvoke-RestMethod: Response status code does not indicate success: 429 (Too Many Requests).\n```\nYou hit the rate limit. Wait 30-60 seconds and try again. New API keys have lower rate limits that increase with usage.\n\n**400 Bad Request:**\n```\nInvoke-RestMethod: Response status code does not indicate success: 400 (Bad Request).\n```\nThe JSON body is malformed. Check for missing quotes, extra commas, or invalid model name. Use a JSON validator if needed.\n\n**Model not found:**\nIf you get a 404 or model error, the model ID may have changed. Check `docs.anthropic.com/en/docs/about-claude/models` for the current Haiku model ID."
+    },
+    {
+      "type": "workshop",
+      "tag": "API",
+      "title": "Make a Real API Call",
+      "content": "You'll run the command above and get a live response from Claude.\n\n**Step 1 — Set your API key**\nIn the VS Code integrated terminal:\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-api03-your-key-here\"\n```\nVerify: `echo $env:ANTHROPIC_API_KEY`\n\n**Step 2 — Run the API call**\nCopy and run this command:\n```powershell\n$response = Invoke-RestMethod `\n  -Uri \"https://api.anthropic.com/v1/messages\" `\n  -Method POST `\n  -Headers @{\n    \"x-api-key\"         = $env:ANTHROPIC_API_KEY\n    \"anthropic-version\" = \"2023-06-01\"\n    \"content-type\"      = \"application/json\"\n  } `\n  -Body '{\"model\":\"claude-haiku-4-5-20251001\",\"max_tokens\":100,\"messages\":[{\"role\":\"user\",\"content\":\"Say hello in exactly 10 words.\"}]}'\n\n$response.content[0].text\n```\n\n**Step 3 — Look at the full response**\nNow print the whole response to see all the fields:\n```powershell\n$response | ConvertTo-Json -Depth 10\n```\nFind and read:\n- `content[0].text` — Claude's reply\n- `usage.input_tokens` — tokens in your request\n- `usage.output_tokens` — tokens in Claude's reply\n- `stop_reason` — why Claude stopped\n\n**Step 4 — Modify the prompt**\nChange the prompt and re-run:\n```powershell\n$body = '{\"model\":\"claude-haiku-4-5-20251001\",\"max_tokens\":200,\"messages\":[{\"role\":\"user\",\"content\":\"List 3 benefits of learning to code. Use bullet points.\"}]}'\n\n$r = Invoke-RestMethod `\n  -Uri \"https://api.anthropic.com/v1/messages\" `\n  -Method POST `\n  -Headers @{\"x-api-key\"=$env:ANTHROPIC_API_KEY;\"anthropic-version\"=\"2023-06-01\";\"content-type\"=\"application/json\"} `\n  -Body $body\n\n$r.content[0].text\n```\n\n**What to notice:** The response arrives as a structured object. You navigate to the text with `.content[0].text`. The `usage` field is always there — you'll use it to calculate costs in lesson 11-6."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — First API Call Drill",
+      "content": "Make your first Anthropic API call via curl and understand the request/response.\n\n**Step 1 — Make a minimal curl request:**\n```bash\ncurl https://api.anthropic.com/v1/messages \\\n  --header \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"content-type: application/json\" \\\n  --data '{\n    \"model\": \"claude-haiku-4-5-20251001\",\n    \"max_tokens\": 50,\n    \"messages\": [{\"role\": \"user\", \"content\": \"What is 2 + 2? Answer in one word.\"}]\n  }'\n```\n\n**Step 2 — Read the response JSON.** Identify:\n- `content[0].text` — the response\n- `usage.input_tokens` and `usage.output_tokens`\n- `model` — which model responded\n- `stop_reason` — why it stopped\n\n**Step 3 — Modify the request:** Change `max_tokens` to 10 and re-run. What changes?\n\n**Step 4 — Add a system prompt:** Add `\"system\": \"You are a pirate. Respond in pirate dialect.\"` to the JSON.\n\n**Step 5 — Ask Claude:** *\"Explain each field in the Anthropic API request and response JSON. What is the role of anthropic-version header?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a curl-Based API Tool",
+      "content": "Build a shell script that uses curl to interact with the Anthropic API.\n\n**Step 1 — Ask Claude Code** to write a shell script:\n```\nWrite a bash script called `ask-claude.sh` that:\n1. Takes a question as a command line argument: ./ask-claude.sh \"What is the capital of France?\"\n2. Calls the Anthropic API via curl with that question\n3. Extracts only the text response from the JSON (using jq)\n4. Prints the response cleanly\n5. Handles the case where the API key is not set\n6. Shows the token usage after each response\n```\n\n**Step 2 — Test the script** with several different questions.\n\n**Step 3 — Extend the script:** Add a `-s` flag to set a custom system prompt: `./ask-claude.sh -s \"You are a coding expert\" \"How does recursion work?\"`\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review this shell script. What could fail in edge cases? What security risks exist?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Multi-Turn Conversation via curl",
+      "content": "Build a multi-turn conversation using curl.\n\n**Step 1 — Ask Claude** to explain how to build multi-turn context with the messages API.\n\n**Step 2 — Write a script** that maintains conversation history:\n```bash\n# Start with an empty history\nhistory='[]'\n\n# Function to add to conversation and get response\nask() {\n  local question=\"$1\"\n  # Add user message to history, call API, extract response\n  # Append assistant response to history for next turn\n}\n\n# Interactive loop\nwhile read -p \"You: \" input; do\n  ask \"$input\"\ndone\n```\n\n**Step 3 — Ask Claude Code** to complete this implementation.\n\n**Step 4 — Test a multi-turn conversation.** Does the assistant remember earlier context?\n\n**Step 5 — Identify the limitation:** What happens as the conversation gets very long? How do tokens accumulate?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — API Testing Framework",
+      "content": "Build a simple framework for testing your API prompts.\n\n**Step 1 — Ask Claude Code** to write a prompt testing script:\n```\nWrite a Python script that:\n1. Takes a YAML file with test cases:\n   ```yaml\n   tests:\n     - name: \"factual question\"\n       prompt: \"What year was the Eiffel Tower built?\"\n       expected_contains: \"1889\"\n     - name: \"math\"\n       prompt: \"What is 15% of 200?\"\n       expected_contains: \"30\"\n   ```\n2. Runs each test case against the Anthropic API\n3. Checks if the response contains the expected string\n4. Reports PASS/FAIL for each test\n5. Shows total pass rate and token cost\n```\n\n**Step 2 — Create 5 test cases** relevant to your intended use case.\n\n**Step 3 — Run the tests** and review the results.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review these test cases. What important failure modes am I not testing?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "A curl request to the Anthropic API returns HTTP 401. What does this mean and how do you fix it?",
+      "options": [
+        "The API is down — wait and retry",
+        "Authentication failed — the API key is missing, wrong, or expired; check that the x-api-key header contains the correct key",
+        "Your request was too large",
+        "You've exceeded your rate limit"
+      ],
+      "correct": 1,
+      "explanation": "HTTP 401 Unauthorized means authentication failed. Diagnose: (1) is the x-api-key header present? (2) is the key value correct (no extra spaces, no quotes in the value)? (3) has the key been revoked in console.anthropic.com? (4) are you using the right API URL? In shell scripts, verify the environment variable is set: `echo $ANTHROPIC_API_KEY` should show the key value (redact it after checking). A 403 Forbidden would mean the key exists but lacks permission; 401 means the key isn't authenticating at all."
+    },
+    {
+      "type": "quiz",
+      "question": "Your curl request to the Anthropic API is successful but the response text contains garbled output. What is the most likely cause?",
+      "options": [
+        "The API is returning corrupted data",
+        "The JSON parsing is incorrect — you're extracting the wrong field or not unescaping the JSON string properly",
+        "The model is not working correctly",
+        "Your terminal encoding is wrong"
+      ],
+      "correct": 1,
+      "explanation": "Garbled API response text usually comes from incorrect JSON parsing. The response is valid JSON, but extracting text from it requires navigating the structure correctly: `response.content[0].text` in JavaScript, or `jq '.content[0].text'` in bash. Common mistakes: extracting the whole content array instead of the first item's text, or not handling the text as a JSON string (which may need unescaping for special characters). Always verify the full raw response first, then work on parsing."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 11-4.** You've talked to Claude at the raw API level — no SDK, no library, just an HTTP request. Every AI tool you'll ever build is doing exactly this under the hood. Next: using the SDK so you don't have to write raw HTTP every time."
+    }
+  ],
+  "nextLesson": "11-5",
+  "prevLesson": "11-3"
+}

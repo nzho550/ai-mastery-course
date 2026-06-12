@@ -1,0 +1,140 @@
+{
+  "id": "11-2",
+  "title": "The Anthropic API — Overview",
+  "part": 11,
+  "estimatedMinutes": 55,
+  "tags": [
+    "api",
+    "anthropic",
+    "foundations",
+    "claude"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what the Anthropic API provides, how the Messages endpoint works, what a request and response look like, and the key differences between using Claude.ai and the API."
+    },
+    {
+      "type": "text",
+      "content": "## What the API Gives You\n\nClaude.ai is a consumer product — a clean interface where you have conversations, use projects, upload files.\n\nThe Anthropic API is the programmatic layer underneath. With the API you get:\n\n- **Any model, any system prompt** — you control every parameter\n- **Integration into your own tools** — scripts, apps, automations\n- **Batch processing** — send 10,000 documents at once\n- **Structured output** — get JSON back instead of text\n- **Multiple models** — choose the right model for cost/quality tradeoffs\n- **Streaming** — display tokens as they arrive, like Claude.ai does\n\nThe tradeoff: the API has no memory between calls by default (each request is stateless), no built-in project history, and you pay per token."
+    },
+    {
+      "type": "text",
+      "content": "## The Messages Endpoint\n\nThe Anthropic API has one primary endpoint you'll use for everything:\n\n```\nPOST https://api.anthropic.com/v1/messages\n```\n\nThis endpoint accepts a JSON body and returns a JSON response. Everything — single turns, multi-turn conversations, streaming, vision, tool use — goes through this one endpoint."
+    },
+    {
+      "type": "text",
+      "content": "## Request Structure\n\nA minimal request body looks like this:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 1024,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Hello, Claude. What is 2 + 2?\"\n    }\n  ]\n}"
+    },
+    {
+      "type": "text",
+      "content": "The three required fields:\n\n- **`model`** — which Claude model to use. Check `docs.anthropic.com/en/docs/about-claude/models` for current IDs — model names change as new versions release.\n- **`max_tokens`** — the maximum number of tokens in the response. This is a hard cap — set it appropriately. For a short answer: 100-200. For a full essay: 1000-4000.\n- **`messages`** — an array of message objects. Each has a `role` (`user` or `assistant`) and `content` (the text).\n\nOptional but commonly used:\n- **`system`** — a system-level instruction that shapes Claude's behavior across the whole conversation\n- **`temperature`** — controls randomness (0 = deterministic, 1 = more creative)\n- **`stream`** — set to `true` for streaming responses"
+    },
+    {
+      "type": "text",
+      "content": "## Response Structure\n\nA successful response looks like this:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"id\": \"msg_01XFDUDYJgAACzvnptvVoYEL\",\n  \"type\": \"message\",\n  \"role\": \"assistant\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"2 + 2 equals 4.\"\n    }\n  ],\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"stop_reason\": \"end_turn\",\n  \"usage\": {\n    \"input_tokens\": 14,\n    \"output_tokens\": 9\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "Key fields in the response:\n\n- **`content[0].text`** — this is where Claude's reply lives. Always at `content[0].text` for text responses.\n- **`usage.input_tokens`** — how many tokens were in your request (what you pay for on the input side)\n- **`usage.output_tokens`** — how many tokens Claude generated (what you pay for on the output side)\n- **`stop_reason`** — why the response ended. `end_turn` means Claude finished naturally. `max_tokens` means you hit the token cap."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The field you'll access most:** `response.content[0].text` — that's Claude's reply. Everything else in the response is metadata. In code: `print(response.content[0].text)` or `console.log(response.content[0].text)`."
+    },
+    {
+      "type": "text",
+      "content": "## Multi-Turn Conversations\n\nThe API is stateless — it has no memory of previous requests. To have a multi-turn conversation, you pass the full conversation history in the `messages` array:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 1024,\n  \"messages\": [\n    {\"role\": \"user\", \"content\": \"My name is Alex.\"},\n    {\"role\": \"assistant\", \"content\": \"Nice to meet you, Alex! How can I help?\"},\n    {\"role\": \"user\", \"content\": \"What's my name?\"}\n  ]\n}"
+    },
+    {
+      "type": "text",
+      "content": "Each API call receives the entire conversation up to that point. This is how Claude.ai works — it re-sends the full conversation history on every message. Prompt caching (lesson 11-9) makes repeated context much cheaper."
+    },
+    {
+      "type": "text",
+      "content": "## Models — Check Docs for Current IDs\n\nAvailable Claude models span a performance/cost spectrum:\n\n- **Haiku** — fastest, cheapest, best for classification, extraction, simple tasks\n- **Sonnet** — balanced, best for most tasks including coding and writing\n- **Opus** — most capable, most expensive, for complex reasoning\n\nWithin each family there are specific versioned model IDs like `claude-haiku-4-5-20251001`. These IDs change as Anthropic releases new versions. Always check `docs.anthropic.com/en/docs/about-claude/models` for the current IDs before building anything — the page shows active models and flags deprecated ones."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Model name currency:** Model IDs used in this course were current at time of writing. Anthropic releases new models regularly. Before building anything long-term, verify current IDs at `docs.anthropic.com/en/docs/about-claude/models`."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Read the API Docs",
+      "content": "Spend 15 minutes exploring the Anthropic API documentation. The goal is familiarity — you don't need to memorize anything, just know where things live.\n\n**Go to docs.anthropic.com and explore:**\n\n1. **Messages API reference** — find the full list of request parameters. Note which ones are required vs optional.\n2. **Models page** — find the current model IDs. What are the latest Haiku and Sonnet versions?\n3. **Pricing page** (anthropic.com/pricing) — note the per-million-token prices for Haiku and Sonnet. How many times cheaper is input than output?\n\n**After reading, ask Claude.ai:**\n*\"I just read the Anthropic API docs. What are the 3 most important things a beginner should understand before making their first API call?\"*\n\nSave the answer in your notes — you'll revisit it after you've made your first call in lesson 11-4 to see if your understanding matches."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Anthropic API Overview Drill",
+      "content": "Build a mental model of the Anthropic API structure.\n\n**Step 1 — Ask Claude:** *\"Explain the Anthropic API structure. What are the main endpoints? What is the messages API and how does it differ from a completions API? What are the key parameters for each request?\"*\n\n**Step 2 — Read the official API docs** (console.anthropic.com/docs or docs.anthropic.com). Compare to what Claude described.\n\n**Step 3 — Map the API to what you know:** How is the Anthropic API different from or similar to REST APIs you've used before?\n\n**Step 4 — Ask Claude:** *\"What are the key differences between the Anthropic API's messages format and OpenAI's chat completions format? If I'm switching from OpenAI, what do I need to change?\"*\n\n**Step 5 — Sketch the request/response structure** on paper: what a minimal API call looks like."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Explore API Capabilities via Code",
+      "content": "Write a small program to explore Anthropic API capabilities.\n\n**Step 1 — Ask Claude Code to write a Python or JavaScript script** that demonstrates multiple API features:\n```\nWrite a Python script that calls the Anthropic API and demonstrates:\n1. Basic single-turn conversation\n2. Multi-turn conversation (maintaining context)\n3. System prompt customisation\n4. Different max_tokens settings and their effect\n\nFor each demo, print the request and response clearly labelled.\n```\n\n**Step 2 — Review the code** before running it.\n\n**Step 3 — Run the script.** Does each demo work as expected?\n\n**Step 4 — Modify one parameter** and observe the effect.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review the code you wrote. What best practices are missing? What would make this production-quality rather than exploratory?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — API Rate Limits and Error Handling",
+      "content": "Understand Anthropic API limits and how to handle them.\n\n**Step 1 — Ask Claude:** *\"What are the Anthropic API rate limits? How do they work (requests per minute, tokens per minute, tokens per day)? How do they change between plans?\"*\n\n**Step 2 — Ask about error responses:** \"What are the most common Anthropic API errors (rate limit, overload, invalid request, auth error)? For each, what is the HTTP status code and how should my code handle it?\"\n\n**Step 3 — Ask Claude Code to write error handling code:**\n\"Write a Python function that calls the Anthropic API with proper error handling: exponential backoff for rate limits, retry logic for transient errors, and clear error messages for user-caused errors.\"\n\n**Step 4 — Review and test the error handling** by simulating errors (wrong API key, very long input).\n\n**Step 5 — Ask:** \"What monitoring should I add to detect when my application is approaching rate limits before it starts getting 429 errors?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build an API Wrapper Class",
+      "content": "Build a reusable wrapper class around the Anthropic API.\n\n**Step 1 — Ask Claude Code** to design an Anthropic API wrapper:\n```\nDesign and implement a Python class AnthropicClient that wraps the Anthropic API with:\n- Retry logic with exponential backoff\n- Token counting before requests\n- Response caching for identical requests\n- Conversation history management\n- Configurable model and default parameters\n- Logging of all requests and responses\n\nMake it production-quality with proper error handling.\n```\n\n**Step 2 — Review the design** before implementation. Does it meet your needs?\n\n**Step 3 — Implement and test the class** with real API calls.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review this wrapper class. Find 3 bugs or design problems that would cause issues in production.\"*\n\n**Step 5 — Fix the issues** and add tests for the retry logic."
+    },
+    {
+      "type": "quiz",
+      "question": "The Anthropic API uses a messages format with alternating user/assistant turns. What happens if you send two consecutive user messages?",
+      "options": [
+        "The API processes them as a single combined message",
+        "The API returns an error — messages must strictly alternate between user and assistant roles (with optional system message first)",
+        "The API ignores the first user message",
+        "The API automatically inserts a placeholder assistant message"
+      ],
+      "correct": 1,
+      "explanation": "The Anthropic messages API requires alternating user/assistant roles in the conversation history. Sending two consecutive user messages will return a validation error. To send multiple pieces of context from the user side, combine them into a single user message before sending. For multi-turn conversations, always maintain the correct alternating pattern: system (optional), user, assistant, user, assistant..."
+    },
+    {
+      "type": "quiz",
+      "question": "You're building an application using the Anthropic API. Your API key is in a .env file. What is the critical security step before deployment?",
+      "options": [
+        "Encrypt the .env file",
+        "Ensure .env is in .gitignore and never committed to version control — use environment variables or a secrets manager in production",
+        "Use a read-only API key",
+        "Rotate the API key weekly"
+      ],
+      "correct": 1,
+      "explanation": "The most common API key exposure: accidental git commit. API keys in committed .env files can be found by automated scanners within minutes of a push — even to a private repository. Steps: (1) add .env to .gitignore immediately, (2) verify it's not tracked with `git check-ignore -v .env`, (3) if already committed, assume the key is compromised and rotate it immediately. In production, use environment variables set in your hosting platform, not .env files."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 11-2.** You understand the Messages endpoint, what goes in the request, what comes back in the response, and where to find Claude's reply. Next: getting your API key set up safely."
+    }
+  ],
+  "nextLesson": "11-3",
+  "prevLesson": "11-1"
+}

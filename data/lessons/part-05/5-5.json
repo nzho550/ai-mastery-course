@@ -1,0 +1,104 @@
+{
+  "id": "5-5",
+  "title": "Creating, Renaming & Deleting Files",
+  "part": 5,
+  "estimatedMinutes": 50,
+  "tags": [
+    "vscode",
+    "beginner",
+    "files",
+    "explorer"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to create new files, rename them, move them, and delete them — all from inside VS Code, without ever switching to File Explorer.\n\nOnce this becomes habit, your hands never leave your editor."
+    },
+    {
+      "type": "text",
+      "content": "## The Explorer Panel is Your File Manager\n\nWith your project folder open, the Explorer panel in the Primary Sidebar shows your complete file and folder tree. You don't need Windows File Explorer for day-to-day file operations — you can do everything from here.\n\n**How to reveal the icons:** Hover your mouse over any folder or file name in the Explorer panel. A row of small icons appears to the right of the name:\n- **New File** (page with a + sign) — creates a new file inside that folder\n- **New Folder** (folder with a + sign) — creates a new subfolder\n- **Refresh** (circular arrow) — refreshes the file tree if changes were made outside VS Code\n- **Collapse All** (chevrons) — collapses all expanded folders at once\n\nThese same options also appear when you right-click any file or folder."
+    },
+    {
+      "type": "text",
+      "content": "## Creating a New File\n\n**Method 1 — Using the Explorer panel icons:**\n1. In the Explorer panel, hover over the folder where you want the new file\n2. Click the **New File** icon (page with + sign) that appears\n3. A text field appears where you can type the file name\n4. Type the name including the extension (e.g., `notes.md`, `index.html`, `config.json`)\n5. Press Enter — the file is created and opened in the Editor Area\n\n**Method 2 — Right-click context menu:**\n1. Right-click any folder in the Explorer panel\n2. Click **New File**\n3. Type the name → press Enter\n\n**Method 3 — Keyboard shortcut:**\nPress **Ctrl+N** — this creates a new unsaved file (called \"Untitled-1\"). When you press Ctrl+S to save it, VS Code asks where you want to save it and what to name it.\n\n**Tip:** Always include the file extension when naming files. VS Code uses the extension to know which language to apply — `.md` triggers Markdown highlighting, `.html` triggers HTML, `.json` triggers JSON, etc."
+    },
+    {
+      "type": "text",
+      "content": "## Renaming Files and Folders\n\n**Method 1 — Right-click:**\n1. Right-click the file or folder in the Explorer panel\n2. Click **Rename**\n3. The name becomes editable — type the new name\n4. Press Enter to confirm, or Esc to cancel\n\n**Method 2 — Keyboard shortcut:**\n1. Click the file or folder once to select it\n2. Press **F2**\n3. Type the new name → press Enter\n\nRenaming a file in VS Code automatically keeps any open tabs up to date — if the renamed file was already open in the editor, the tab title updates immediately."
+    },
+    {
+      "type": "text",
+      "content": "## Deleting Files and Folders\n\n**To delete a file or folder:**\n1. Right-click it in the Explorer panel\n2. Click **Delete**\n3. VS Code asks: \"Are you sure you want to delete [filename]?\"\n4. Click **Move to Trash** (or **Delete** on some systems)\n\n**Important:** Deleting in VS Code sends the file to the **Recycle Bin** — it is NOT permanently deleted immediately. You can go to the Recycle Bin on your Desktop to restore it if you deleted the wrong thing."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Before you delete a folder:** Make sure you're deleting the right one. VS Code will delete the folder and everything inside it. If the folder contained important files, you have one safety net: the Recycle Bin. But it's better to double-check first. Right-click → delete → the confirmation prompt will show you the name — read it carefully."
+    },
+    {
+      "type": "text",
+      "content": "## Saving Files\n\nCreating a file and saving it are two separate things.\n\n- **Ctrl+S** — save the current file. If the file has unsaved changes, the tab title shows a dot (•) next to the name. After saving, the dot disappears.\n- **Ctrl+Shift+S** — \"Save As\" — saves the file with a new name or location.\n- **Auto Save** — VS Code can save automatically. We'll configure this in lesson 5-9 (Settings). You can enable it now via File → Auto Save.\n\nA file with a dot in its tab name has unsaved changes. Don't close VS Code or turn off your computer without saving important files.\n\n**Other useful keyboard shortcuts for files:**\n- **Ctrl+W** — close the current tab\n- **Ctrl+Tab** — switch between open tabs\n- **Ctrl+P** — quick-open any file by typing its name (much faster than clicking through the Explorer)"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Build the Course File Structure",
+      "content": "You'll create the file structure you'll use for the rest of this course. All work is done in the Explorer panel — no File Explorer windows.\n\n**Step 1 — Create a README.md at the project root:**\n1. In the Explorer panel, hover over the top-level `ai-course-projects` folder (the root)\n2. Click the **New File** icon\n3. Name it `README.md` and press Enter\n4. The file opens in the Editor Area — type: `# My AI Course Projects`\n5. Press Ctrl+S to save\n\n**Step 2 — Create files in the notes folder:**\n1. Hover over the `notes` folder → click **New File**\n2. Name it `prompt-experiments.md` → press Enter\n3. Hover over the `notes` folder again → click **New File**\n4. Name it `lesson-notes.md` → press Enter\n\n**Step 3 — Create files in the exercises folder:**\n1. Hover over the `exercises` folder → click **New File**\n2. Name it `part-01-notes.md` → press Enter\n\n**Step 4 — Rename a file using F2:**\n1. Click `part-01-notes.md` once in the Explorer to select it\n2. Press **F2**\n3. Change the name to `part-05-notes.md` → press Enter\n\n**Step 5 — Confirm your structure:**\nYour Explorer panel should now show:\n```\nai-course-projects/\n  exercises/\n    hello.html\n    part-05-notes.md\n  notes/\n    lesson-notes.md\n    prompt-experiments.md\n  prompts/\n  README.md\n```\n\n- [ ] README.md exists at the root level\n- [ ] `lesson-notes.md` and `prompt-experiments.md` are in the `notes` folder\n- [ ] `part-05-notes.md` is in the `exercises` folder\n- [ ] All files are saved (no dots in their tab names)"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — File Operations Speed Drill",
+      "content": "Fluency with file operations in VS Code saves time every session. This drill builds that speed.\n\n**Step 1 — Open a project folder** in VS Code.\n\n**Step 2 — Practice each operation using only keyboard shortcuts:**\n- Create a new file: Ctrl+N (then save with Ctrl+S and name it)\n- Rename a file: Click it in Explorer, press F2\n- Duplicate a file: Right-click in Explorer → Copy, then Paste\n- Delete a file: Select it in Explorer, press Delete\n- Open a file by name: Ctrl+P → start typing the filename\n\n**Step 3 — Create this file structure** using VS Code Explorer (no terminal):\n```\nproject/\n  src/\n    main.py\n    utils.py\n  tests/\n    test_main.py\n  docs/\n    notes.md\n  README.md\n```\n\n**Step 4 — Time yourself:** How long did the full structure creation take?\n\n**Step 5 — Ask Claude:** *\"What VS Code keyboard shortcuts for file operations should I memorise in my first week? Give me a ranked list from most to least important.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Organised Project File Setup",
+      "content": "Use AI to design and create the right file structure for a real project you're working on.\n\n**Step 1 — Describe your project** to Claude: what you're building, what language or tools you're using, what the main components are.\n\n**Step 2 — Ask Claude:** *\"Design the complete file structure for my project: [description]. Include: all folders and files with their purposes, which files to create first, and what basic content each key file should have to start.\"*\n\n**Step 3 — Create the structure** in VS Code exactly as Claude describes.\n\n**Step 4 — Ask Claude to populate the starter files:** For each key file (README, main entry point, config), ask Claude to write the initial content.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this project structure you just designed. What's missing? What would a senior developer say is wrong with this organisation? What would you add after seeing similar projects?\"*\n\n**Step 6 — Commit the structure** to git as the \"Initial structure\" commit."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — .gitignore — What Not to Track",
+      "content": "The .gitignore file tells git which files to ignore. This is a critical skill for keeping your repository clean.\n\n**Step 1 — Ask Claude:** *\"I'm working on a [Python / Node.js / HTML] project. Create a comprehensive .gitignore file for my project type. For each section, explain what you're ignoring and why.\"*\n\n**Step 2 — Create `.gitignore`** in your project root and paste Claude's content.\n\n**Step 3 — Understand the key categories** Claude included:\n- Dependencies (node_modules/, venv/) — huge, recreatable\n- Build artifacts (.pyc, dist/) — generated from source\n- Environment files (.env) — contain secrets\n- IDE files (.vscode/*, .idea/) — personal settings\n- OS files (.DS_Store, Thumbs.db) — system junk\n\n**Step 4 — Test it:** Run `git status`. Files matching .gitignore patterns should not appear as untracked.\n\n**Step 5 — Add a critical rule:** Never commit .env files. Ask Claude why this matters and what happens if you accidentally do."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — File Templates and Snippets",
+      "content": "VS Code snippets let you type a short keyword and expand it into a full code template — saving repetitive typing.\n\n**Step 1 — Open Snippets:** Ctrl+Shift+P → \"Configure User Snippets\" → select your language (Python, JavaScript, etc.).\n\n**Step 2 — Ask Claude to write snippets for you:**\n```\nCreate VS Code user snippets for Python that give me:\n1. A function with a docstring template (trigger: func)\n2. A class template with __init__ (trigger: cls)\n3. A try/except block (trigger: try)\n4. A main guard (trigger: main)\n\nFormat them as valid VS Code snippet JSON.\n```\n\n**Step 3 — Paste the snippets** into your snippets file.\n\n**Step 4 — Test each snippet:** Open a Python file, type the trigger word, press Tab. The full template should expand.\n\n**Step 5 — Create one custom snippet** for something specific to your work: a standard file header, a common pattern you write, a template for a recurring task."
+    },
+    {
+      "type": "quiz",
+      "question": "You accidentally delete a file in VS Code Explorer. How do you recover it?",
+      "options": [
+        "The file is permanently gone — always use a backup",
+        "Press Ctrl+Z (Undo) in VS Code — deleting a file from Explorer can be undone",
+        "Check the Recycle Bin — deleted files go there",
+        "Both B and C are valid recovery approaches"
+      ],
+      "correct": 3,
+      "explanation": "Both approaches can work. VS Code Explorer deletion sends files to the Recycle Bin (on Windows) — so you can recover from there. Ctrl+Z in VS Code may also undo the deletion for recently deleted files. The safest habit is to use git — if you've committed the file, it's always recoverable from git history regardless of what you do in the file system."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the purpose of a .gitignore file?",
+      "options": [
+        "It lists files that git will automatically commit",
+        "It specifies files and folders that git should not track, such as dependencies, build output, and secrets",
+        "It controls which branch git defaults to",
+        "It lists team members who are allowed to push to the repository"
+      ],
+      "correct": 1,
+      "explanation": ".gitignore tells git \"do not track these files.\" Without it, git would want to commit your entire node_modules directory (potentially gigabytes), compiled output that changes on every build, and secret files like .env that contain API keys. A good .gitignore keeps your repository small, clean, and secure."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-5.** You can now create, rename, and delete files without leaving VS Code. Your course project has a solid file structure to build on. Next: the Command Palette — VS Code's most powerful feature."
+    }
+  ],
+  "nextLesson": "5-6",
+  "prevLesson": "5-4"
+}

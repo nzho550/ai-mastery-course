@@ -1,0 +1,117 @@
+{
+  "id": "2-10",
+  "title": "AI Meeting Tools — Zoom, Otter.ai & Teams Summaries",
+  "part": 2,
+  "estimatedMinutes": 55,
+  "tags": [
+    "tools",
+    "beginner",
+    "meetings",
+    "productivity",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nMeetings produce decisions, action items, and context — but almost all of it evaporates within 24 hours unless someone captures it. AI meeting tools solve this: they transcribe, summarize, and extract action items automatically. This lesson covers the main tools, how to set them up, and how to run the full pipeline from recording to action items."
+    },
+    {
+      "type": "text",
+      "content": "## The Meeting AI Pipeline\n\nEvery AI meeting tool runs the same basic pipeline:\n\n1. **Record** — audio and video captured (cloud or local)\n2. **Transcribe** — speech converted to searchable text, usually speaker-labelled\n3. **Summarize** — key discussion points, decisions, and action items extracted\n4. **Distribute** — summary sent to participants or saved to a shared location\n\nThe difference between tools is where they run (inside Zoom/Teams vs. standalone), what's included in the free tier, and how accurately they transcribe different accents and technical vocabulary."
+    },
+    {
+      "type": "text",
+      "content": "## Zoom AI Companion\n\nZoom AI Companion is built into paid Zoom accounts (Pro and above) at no extra cost since late 2023.\n\n**What it does:**\n- During the meeting: generates a live summary you can check without reading the full transcript; you can ask *\"What did we just decide?\"* at any point\n- After the meeting: produces a Meeting Summary in the Zoom web portal — structured by topics, with decisions and action items listed\n- Smart recording: chapters the recording by topic so you can jump to relevant sections\n\n**How to enable:**\n1. Log into zoom.us → Account Settings → AI Companion\n2. Enable **Meeting Summary**, **Smart Recording**, and **In-Meeting Questions**\n3. In your next meeting, click **AI Companion** in the toolbar → **Start Summary**\n4. After the meeting ends, find the summary at zoom.us → Recordings → AI Summary tab\n\n**Participant notice:** Zoom notifies all participants when AI Companion is active. You cannot run it silently — this is by design and required in most jurisdictions."
+    },
+    {
+      "type": "text",
+      "content": "## Otter.ai — Free Tier, Works Everywhere\n\nOtter.ai is the most accessible meeting AI tool because it has a generous free tier and works with any audio source — Zoom, Teams, Google Meet, in-person conversations, or audio files you upload.\n\n**Free tier includes:**\n- 300 minutes of transcription per month\n- Automated summary after each meeting\n- Speaker identification\n- Search across all transcripts\n\n**How to use it:**\n\n*Option 1 — Browser bot (automated):*\n1. Go to otter.ai and create a free account\n2. Connect your Google Calendar or paste a meeting link\n3. Otter sends a bot (called OtterPilot) to join your Zoom/Teams/Meet call\n4. The bot records, transcribes in real time, and emails you a summary when the call ends\n\n*Option 2 — Upload an audio file:*\n1. Record any meeting or conversation to an audio file (MP3, M4A, WAV)\n2. In otter.ai, click **Import** → upload the file\n3. Otter transcribes and summarizes it, usually within a few minutes\n\n*Option 3 — Live capture on your device:*\n1. In the Otter mobile app, tap the record button to capture any conversation\n2. Real-time transcript appears as people speak\n\n**Best for:** Teams that don't all have Zoom Pro or M365 Copilot — one person with Otter can capture and share summaries for the whole team."
+    },
+    {
+      "type": "text",
+      "content": "## Microsoft Teams — Recording & Copilot Summaries\n\nIf your organisation uses Microsoft Teams and has Microsoft 365 Copilot licenses:\n\n**Start a recording:**\n1. In a meeting, click **More actions (...)** → **Record and transcribe** → **Start recording**\n2. All participants are notified that recording has started\n\n**Get the AI summary:**\n- During the meeting: click **Copilot** in the meeting toolbar → ask questions about what's been discussed so far\n- After the meeting: go to the meeting in your Teams calendar → **Recap** tab → view the AI-generated summary, transcript, and action items\n\n**Without Copilot (free Teams):** Recordings are saved to OneDrive/SharePoint and you get a basic transcript. You can paste the transcript into Claude.ai for a summary — it works well.\n\n**Action items:** Teams Copilot extracts tasks with assignees when people use language like *\"I'll handle that\"*, *\"Can you take that?\"*, or *\"Action item for...\"* — coach your team to use clear ownership language in meetings for better extraction."
+    },
+    {
+      "type": "text",
+      "content": "## Other Tools Worth Knowing\n\n**Fireflies.ai** — Similar to Otter, bot joins calls and produces transcripts + summaries. Integrates with Salesforce, HubSpot, and Slack. Better for sales teams tracking customer conversations.\n\n**Fathom** — Free for Zoom, Teams, and Meet. No minutes cap on the free tier (as of 2025). Focuses on highlight clips and CRM integration. Good alternative if Otter's free limit is too low.\n\n**Grain** — Focused on video highlight clipping — useful if you need to share specific moments from a meeting rather than a full transcript.\n\n**Google Meet + Gemini:** If your organisation uses Google Workspace with Gemini AI, Meet has built-in transcription and Gemini can summarize meet recordings stored in Google Drive."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Always tell participants when AI is recording.** In most countries (Australia, UK, EU, many US states) recording a conversation without the consent of all parties is illegal. Every tool listed here notifies participants — do not use workarounds to bypass this. If someone objects to being recorded, stop the recording immediately."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Your First AI Meeting Summary",
+      "content": "You will run the full pipeline — record, transcribe, summarize — using free tools. No subscription required.\n\n**Option A — Set up Otter.ai (recommended, fully free):**\n\n1. Go to otter.ai → **Sign up free** (use Google or email)\n2. On the dashboard, click **Record** → allow microphone access\n3. Speak for 3–5 minutes. You can summarise a recent meeting from memory, describe a project you're working on, or read a short document aloud — the content doesn't matter\n4. Click **Stop** when done\n5. Otter will transcribe in about 60 seconds\n6. Click **AI Summary** — review the key topics, action items, and outline it extracted\n7. Test the search: type a word you said into the search bar and click the result to jump to that moment in the transcript\n\n**Option B — Test with an existing recording:**\n\n1. If you have any audio or video recording of a meeting (even a phone voice memo), go to otter.ai → **Import**\n2. Upload the file\n3. Wait for transcription, then review the summary\n\n**After either option, answer these in your notes:**\n- How accurate was the transcript? Did it mishandle any technical terms or names?\n- Were the action items it extracted actually the right ones?\n- Would you trust this output to share with a team without reviewing it first?\n\nThe last question matters — AI summaries are 80% of the way there. The 20% you review and fix is where your judgment adds value."
+    },
+    {
+      "type": "quiz",
+      "question": "Your team has a 1-hour weekly meeting. Three people take turns writing notes but the notes are always incomplete and action items get lost. Which AI meeting tool approach best solves this with the least disruption?",
+      "options": [
+        "Have everyone install Otter.ai — each person runs their own transcription",
+        "Use one person's Otter.ai account with OtterPilot joining automatically, then share the summary link with the team after each meeting",
+        "Manually paste the meeting transcript into Claude.ai after each meeting",
+        "Upgrade to Zoom Pro so Zoom AI Companion can summarize the meeting"
+      ],
+      "correct": 1,
+      "explanation": "One OtterPilot joining automatically is the lowest-friction approach — it requires no action from participants (beyond consent), produces a shareable link immediately after the call, and uses one free account for the whole team. Everyone installing their own Otter (A) creates duplicate transcripts and confusion. Manual paste into Claude (C) works but requires someone to do it every week — it won't happen consistently. Zoom Pro (D) costs money and only helps if everyone is already on Zoom."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Meeting Summary Quick Test",
+      "content": "Test an AI meeting tool on a real or recorded meeting in 8 minutes.\n\n**Step 1 — Access a meeting recording** you have available: a Teams/Zoom recording, an Otter.ai session, or a YouTube video of a talk or webinar you attended.\n\n**Step 2 — Run it through an AI summary tool:**\n- Otter.ai: upload or record directly\n- Teams: check the AI recap in the meeting chat\n- Zoom: use the AI summary in the recording\n- Alternative: paste a transcript into Claude and ask for a meeting summary\n\n**Step 3 — Evaluate the summary against these criteria:**\n- Does it correctly identify who said what?\n- Does it capture all action items and who owns them?\n- Does it correctly represent any decisions made?\n- Does it miss any important context?\n\n**Step 4 — Compare to your own recollection** of the meeting. What did the AI get wrong?\n\n**Step 5 — Write a 2-sentence verdict:** When is an AI meeting summary accurate enough to share, and when does it need heavy review?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — End-to-End Meeting AI Workflow",
+      "content": "Build a complete AI-assisted meeting workflow: before, during, and after.\n\n**Step 1 — Choose an upcoming real meeting** (or one you had recently). Use this meeting for the full workflow.\n\n**BEFORE the meeting:**\n**Step 2 —** Ask Claude.ai: *\"Help me prepare for a meeting about [topic] with [attendees/roles]. Generate: (a) 5 clarifying questions I should ask, (b) key information I should know beforehand, (c) my meeting objectives.\"*\n\n**DURING/AFTER the meeting:**\n**Step 3 —** Use Otter.ai, Teams recap, or Zoom AI to generate a meeting summary.\n\n**POST-MEETING:**\n**Step 4 —** Paste the AI summary into Claude.ai. Ask: *\"Based on this meeting summary, generate: (a) a clear list of action items with owners and deadlines, (b) a 3-sentence decision log, (c) a follow-up email I should send to attendees.\"*\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review what you just generated from this meeting summary. What action items might you have missed? What decisions are ambiguous? What follow-ups are missing?\"* Add anything identified.\n\n**Step 6 — Send the follow-up email** (after editing to add your personal voice).\n\n**Step 7 — Record:** How much time did the AI workflow save compared to your normal post-meeting process?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Test Meeting AI Accuracy",
+      "content": "Deliberately stress-test an AI meeting summary for common failure modes.\n\n**Step 1 — Take a meeting (real or recorded)** where you know what was discussed.\n\n**Step 2 — Generate an AI summary** using whichever tool you have access to.\n\n**Step 3 — Deliberately check for these common failures:**\n- Action items attributed to the wrong person\n- Decisions described as \"discussed\" when they were actually decided\n- Technical terms misheard or misspelled\n- Key context mentioned early in the meeting that changes meaning of later points\n- Informal commitments not captured as action items\n\n**Step 4 — Rate the summary:** On a scale of 1-10, how useful is the raw AI summary before you edit it?\n\n**Step 5 — Decide your editing protocol:** Based on this accuracy test, what level of review do you need before sharing an AI meeting summary? Write your personal rule."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Meeting Prompt Template Library",
+      "content": "Build a set of reusable prompts for every stage of your meeting workflow.\n\n**Step 1 — List the meeting types you regularly attend** (one-on-ones, team standups, client meetings, project reviews, all-hands, etc.).\n\n**Step 2 — For each meeting type**, identify: what preparation do you usually do, what follow-ups do you usually send?\n\n**Step 3 — Ask Claude:** *\"Create a prompt template library for someone who has these types of meetings: [list]. For each meeting type, provide: (1) a pre-meeting preparation prompt, (2) a post-meeting action item extraction prompt, (3) a follow-up email prompt. Make each template specific to the type of meeting.\"*\n\n**Step 4 — Review and adapt** the templates to your personal style and the specifics of your role.\n\n**Step 5 — Save your template library** in your prompt library document or Claude Project.\n\n**Step 6 — Test one template** on your next real meeting."
+    },
+    {
+      "type": "quiz",
+      "question": "You receive an AI-generated recap of a client meeting where an important commitment was made. Before forwarding it to the client, you should:",
+      "options": [
+        "Forward it immediately — AI transcription is accurate and will save time",
+        "Review the recap carefully, verify that all commitments and decisions are accurately captured, and edit before sending",
+        "Add a disclaimer that the recap was AI-generated",
+        "Re-listen to the entire recording to double-check everything"
+      ],
+      "correct": 1,
+      "explanation": "AI meeting recaps require review before sharing externally, especially with clients. Client-facing communications create legal and relationship implications — a miscaptured commitment or decision can cause serious problems. Review the key decisions and commitments specifically. Re-listening to everything (D) is usually excessive; targeted review of important moments is the right balance."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main limitation of Otter.ai for a meeting with 6 participants?",
+      "options": [
+        "It can only transcribe 4 speakers accurately",
+        "Speaker identification accuracy drops significantly with more speakers, especially if voices sound similar or people talk over each other",
+        "It cannot process audio files longer than 1 hour",
+        "It does not work with remote meetings, only in-person"
+      ],
+      "correct": 1,
+      "explanation": "Speaker diarization (identifying who is speaking) is one of the harder problems in meeting AI. With 6+ speakers, especially in real meetings where people talk over each other or have similar vocal qualities, attribution accuracy drops noticeably. This is why reviewing action item ownership in AI summaries is important — an action assigned to the wrong person based on a speaker mis-identification is a practical failure mode."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-10.** You now know the AI meeting pipeline (record → transcribe → summarize → distribute) and the main tools: Zoom AI Companion, Otter.ai, Teams Copilot, Fathom, and Fireflies. You've run the pipeline yourself on real audio."
+    }
+  ],
+  "nextLesson": "2-11",
+  "prevLesson": "2-9"
+}

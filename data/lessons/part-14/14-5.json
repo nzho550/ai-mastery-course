@@ -1,0 +1,79 @@
+{
+  "id": "14-5",
+  "title": "Capstone: Your Own Project",
+  "part": 14,
+  "estimatedMinutes": 85,
+  "tags": [
+    "capstone",
+    "build",
+    "open-project",
+    "graduation"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Build\n\nThis is the open capstone. You choose the project. You define what \"done\" means. You use whatever tools from the course fit the job.\n\nThe constraint: it has to solve a real problem for you. Not a tutorial. Not a demo. Something that, once built, you will actually use."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Define, Plan, and Build Your Project",
+      "content": "## Before You Start: The Project Brief\n\nThe biggest mistake in projects like this is starting to build before you've thought it through. Spend the first 15 minutes writing a one-page brief. This brief becomes your CLAUDE.md and your planning document.\n\nOpen VS Code and create `notes/my-project-brief.md`. Answer these questions in writing:\n\n**1. What problem does this solve?**\nBe specific. \"I want to be more productive\" is not a problem. \"I spend 30 minutes every morning manually reading through 5 news sources and summarizing what matters to me\" is a problem.\n\n**2. Who is it for?**\nJust you? A specific person in your life? Your team at work? The answer changes what \"good enough\" means.\n\n**3. What does the minimum working version do?**\nNot the dream version — the version that solves the core problem with minimal features. The minimum version of an email reply tool is: it drafts one reply when you click a button. Not a full workflow with labels and scheduling.\n\n**4. Which tools from the course will you use and why?**\nBe specific: \"Claude Code to build it, Python + Anthropic SDK to call the API, n8n for the automation trigger, Gmail MCP to interact with my inbox.\"\n\n**5. What will you have learned by building it?**\nThis isn't required for the project to be worthwhile, but naming it helps you stay motivated when things are frustrating.\n\n---\n\n> **TIP:** **If you're not sure what to build:** That's normal. Here are some project ideas that use course tools and produce something genuinely useful:\n\n- **Daily briefing tool:** Pulls from a few RSS feeds or web pages and sends you a morning summary via email\n- **Meeting notes processor:** Takes a transcript (from Otter.ai or similar) and extracts action items, decisions, and summaries\n- **Personal changelog:** Automatically creates a weekly summary of your git commits across all repos\n- **Idea capture and organization:** A CLI tool that lets you type an idea, Claude categorizes and stores it, and you can search/browse your ideas later\n- **Job application tracker:** A spreadsheet + automation that tracks status, drafts follow-up emails, and reminds you when to follow up\n- **Website feature for your portfolio:** Add a contact form, a blog section, a projects gallery\n\nPick one that makes you say \"I would actually use that.\" If none of these resonate, think about the most annoying recurring task in your life and ask: \"Could AI help with this?\"\n\n---\n\n## The AI-Assisted Planning Workflow\n\nOnce your brief is written, use AI to plan the build — don't start coding immediately.\n\n**Step 1 — Ask Claude to break it into tasks:**\nLaunch Claude Code in your project folder and say:\n\n```\nI want to build [your project]. I've written a brief — let me share it with you:\n\n[paste your brief from my-project-brief.md]\n\nPlease:\n1. Ask me any clarifying questions before we start\n2. Break this into a concrete task list, ordered by dependencies\n3. Identify the 2-3 highest-risk parts (things most likely to be harder than expected)\n4. Tell me what we should build first to get a working proof of concept as fast as possible\n```\n\n**Step 2 — Review the plan:**\nRead Claude's breakdown. Push back on anything that seems wrong. The conversation at this stage is cheap — the changes are in text, not code.\n\n**Step 3 — Optionally set up task-master-ai:**\nIf you have task-master-ai configured (lesson 8-7), ask Claude Code to create a task list from your brief. This gives you a tracking system you can update as you work.\n\n**Step 4 — Build the proof of concept first:**\nStart with the smallest version that proves the approach works. Don't add features until the core works.\n\n---\n\n## Building and Iterating\n\nAs you build, apply the habits from the course:\n\n**Use Plan Mode for multi-file changes** (`Shift+Tab` in Claude Code). Don't let the agent make sweeping changes without seeing the plan first.\n\n**Write a CLAUDE.md for your project.** Even a simple one helps:\n```markdown\n# [Project Name]\n\n## What This Is\n[one sentence]\n\n## Tech Stack\n[language, libraries, services]\n\n## How to Run\n[command to run the project]\n\n## Current Status\n[what works, what doesn't yet]\n```\n\n**Commit frequently.** After each working milestone: `git add . && git commit -m \"[what just started working]\"`. If something breaks, you have a restore point.\n\n**When stuck, describe the problem to Claude Code precisely:**\n- What you expected to happen\n- What actually happened\n- The exact error message (if there is one)\n- What you've already tried\n\nVague \"it's not working\" questions get vague answers. Specific descriptions of the failure get specific solutions.\n\n---\n\n## Defining Done\n\nA project can always be improved. \"Done\" for this capstone means:\n\n- The minimum working version you defined in your brief is complete\n- You've run it at least once on real input (not test data)\n- The result is something you will actually use\n- The code is committed to a repository\n\nPerfect is the enemy of shipped. A working first version you use is better than a polished one you never finish.\n\n---\n\n## When You Finish\n\nAdd your project to `notes/my-ai-dev-environment.md` under **Live Projects**:\n- Project name\n- What it does\n- URL or path to the code\n- What you'd build next if you had more time\n\nThen share it somewhere — a GitHub repository, a message to someone who might find it useful, a post on LinkedIn or wherever you're active. Sharing your work is how you consolidate the learning and get feedback."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Your Project Scope and Design",
+      "content": "Design your own capstone project with rigorous scoping.\n\n**Step 1 — Define your project.** Ask Claude Code to help you scope it:\n```\nI want to build [describe your project idea].\n\nHelp me scope this properly:\n1. What is the smallest useful version (MVP) I can build in [your time budget]?\n2. What features are \"nice to have\" vs truly required for the MVP?\n3. What technical challenges am I likely to face?\n4. What AI tools and techniques from this course would best serve this project?\n5. What does success look like? How will I know the project is done?\n```\n\n**Step 2 — Write a one-page project brief:**\n- Problem it solves\n- Target user\n- MVP feature list (maximum 5 features)\n- Tech stack\n- Definition of \"done\"\n\n**Step 3 — Get Claude Code to validate the scope:** \"Review this project scope. Is the MVP achievable in [time]? What am I underestimating?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build with AI from Start to Finish",
+      "content": "Execute your project using AI-assisted development throughout.\n\n**Step 1 — Start a CLAUDE.md** for your project before writing code.\n\n**Step 2 — Use Claude Code for every development task:**\n- Architecture decisions → ask Claude Code to review your options\n- Implementation → write with Claude Code assistance\n- Testing → generate tests with Claude Code\n- Debugging → describe the bug, let Claude Code diagnose\n\n**Step 3 — Track which AI tools you use** and for what tasks. At the end, calculate: what % of the code was human-written, AI-assisted, or AI-generated with human review?\n\n**Step 4 — Mandatory review after each major feature:** Ask Claude Code: *\"Review the [feature name] implementation. Find 3 things that would fail in production that I haven't addressed.\"*\n\n**Step 5 — Fix each issue** before moving to the next feature."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Test and Harden Your Project",
+      "content": "Make your project production-ready with AI-assisted testing.\n\n**Step 1 — Ask Claude Code** to write a comprehensive test suite:\n```\nWrite tests for my project. I need:\n1. Unit tests for each core function\n2. Integration tests for the main user flows\n3. Edge case tests for boundary conditions\n4. Performance tests to verify response time under load\n\nPrioritise: what's most important to test given the project type?\n```\n\n**Step 2 — Run all tests.** Achieve a minimum 80% pass rate before moving on.\n\n**Step 3 — Run a security review:** \"Review this project for the most critical security issues for a [web app/CLI/API]. Flag anything that could be exploited in the first week of production use.\"\n\n**Step 4 — Fix the security issues** found. Run tests again after fixes.\n\n**Step 5 — Document known limitations** — what does the project not handle well yet?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Launch, Document, and Reflect",
+      "content": "Complete your project: deploy, document, and reflect on what you built.\n\n**Step 1 — Deploy your project.** Even if it's a CLI tool, create a GitHub repository with a good README.\n\n**Step 2 — Ask Claude Code to write your README:**\n```\nWrite a comprehensive README.md for my project:\n- Project name and one-line description\n- What problem it solves and for whom\n- Screenshots or terminal recordings if applicable\n- Installation instructions\n- Usage examples\n- Configuration options\n- Known limitations\n- Contributing guidelines\n- License\n```\n\n**Step 3 — Write a reflection** on your capstone project:\n- What went well?\n- What took longer than expected and why?\n- How did AI tools change your development process?\n- What would you do differently?\n\n**Step 4 — Add this project to your portfolio** from Capstone 14-1.\n\n**Step 5 — Share publicly** — GitHub, LinkedIn, or a blog post about what you built and learned."
+    },
+    {
+      "type": "quiz",
+      "question": "You've been using AI assistance for your capstone project and the code is working. But you realise you don't understand how 30% of it works. What should you do before calling it complete?",
+      "options": [
+        "Leave it — working code is the goal",
+        "Ask Claude Code to explain the code you don't understand — you should be able to maintain and extend your own project; understanding beats speed",
+        "Delete the parts you don't understand and rewrite them",
+        "Add comments explaining what the code does (even if you don't understand why)"
+      ],
+      "correct": 1,
+      "explanation": "A codebase you don't understand is a liability: you can't debug it effectively, can't extend it confidently, and can't explain it to others. Before marking a project complete, ask Claude Code to explain any section you're fuzzy on: \"Explain this function in detail — what does each part do and why was it implemented this way?\" Aim to understand your own codebase well enough to make changes without AI assistance for each part."
+    },
+    {
+      "type": "quiz",
+      "question": "Your capstone project is done. What is the most valuable next step to continue growing as an AI-augmented developer?",
+      "options": [
+        "Immediately start the next, more complex project",
+        "Teach someone else what you built and how you built it — teaching forces you to articulate your understanding and reveals gaps; it also helps the ecosystem grow",
+        "Wait for better AI tools before starting anything new",
+        "Add more features until the project is \"perfect\""
+      ],
+      "correct": 1,
+      "explanation": "Teaching is one of the most powerful learning tools: explaining what you built and how forces you to structure your knowledge, reveals gaps where you can't explain something clearly, and helps others who are earlier in the learning journey. Options for sharing: write a blog post, give a talk, teach a colleague, or create documentation for your project. The AI developer community grows stronger when people share what they've learned. You've now completed a significant course — you have knowledge that's valuable to others."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed the AI Mastery Course.**\n\nFourteen parts. Eighty-two lessons. You went from \"what is AI\" to building real tools, automating real workflows, and setting up a professional AI development environment.\n\nYou know how to use AI tools, how to build with AI APIs, how to connect systems with MCP, how to automate with n8n, how to run AI locally for privacy, and how to do all of it safely.\n\nThe tools will keep changing. New models will release. New capabilities will emerge. But the fundamentals you've built — how to learn a new tool quickly, how to evaluate AI output critically, how to build instead of just consume — those don't expire.\n\n**What to do next:**\n- Keep your `notes/my-ai-workflow.md` up to date as your setup evolves\n- Return to capstone projects when you want to extend them\n- Follow Anthropic's changelog, Simon Willison's blog, and Hacker News to stay current\n- Build something for someone else\n\nThe best way to deepen what you've learned is to teach it or apply it. You're ready for both."
+    }
+  ],
+  "nextLesson": null,
+  "prevLesson": "14-4"
+}

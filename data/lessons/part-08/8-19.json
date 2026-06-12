@@ -1,0 +1,105 @@
+{
+  "id": "8-19",
+  "title": "Notion MCP — Your Knowledge Base in Claude Code",
+  "part": 8,
+  "estimatedMinutes": 55,
+  "tags": [
+    "mcp",
+    "intermediate",
+    "notion",
+    "knowledge",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 2-12 covered Notion AI — the native AI built into the Notion app. This lesson connects Notion to Claude Code via MCP, so your pages, databases, and workspace knowledge become part of any Claude Code conversation. You can read project notes, create entries, query databases, and combine Notion data with email, calendar, and Slack context."
+    },
+    {
+      "type": "text",
+      "content": "## What Notion MCP Can Do\n\nNotion has a well-documented public API and an official (or near-official) MCP server.\n\n**Reading:**\n- Search your entire Notion workspace by keyword or concept\n- Read any page you have access to\n- Query databases (project trackers, task lists, CRMs, content calendars)\n- List child pages of any parent page\n- Retrieve page properties and metadata\n\n**Writing:**\n- Create new pages in any location\n- Append content to existing pages\n- Create new database entries\n- Update database properties (status, assignee, date, etc.)\n\n**Typical use cases for office workers:**\n- *\"Read my project notes for the Henderson account and write a one-page briefing I can send to the new team member.\"*\n- *\"Check my task database for anything due this week that is still marked as 'In Progress'.\"*\n- *\"Add a new meeting note to the [Project Name] page with today's date and these action items.\"*\n- *\"Search my Notion workspace for anything about our pricing model and summarize what we've decided.\"*"
+    },
+    {
+      "type": "text",
+      "content": "## Setup — Notion MCP\n\n**Step 1 — Create a Notion integration**\n\n1. Go to notion.com/my-integrations → **New integration**\n2. Name: `claude-mcp` → select your workspace → Type: **Internal** → Submit\n3. Copy the **Internal Integration Token** (starts with `secret_`) — save it\n4. **Grant page access:** Notion integrations only access pages you explicitly share with them. For each page or database you want Claude to access:\n   - Open the page in Notion\n   - Click **...** (menu) → **Add connections** → select `claude-mcp`\n   - Or share your top-level workspace page to give access to everything\n\n**Step 2 — Install the MCP server**\n\nNotion maintains an official MCP server:\n```\nnpm install -g @modelcontextprotocol/server-notion\n```\nIf that exact name has changed, check github.com/modelcontextprotocol/servers or search npm for `notion-mcp`.\n\n**Step 3 — Configure Claude Code**\n\nIn `%APPDATA%\\Claude\\claude_desktop_config.json`:\n```json\n\"notion\": {\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"@modelcontextprotocol/server-notion\"],\n  \"env\": {\n    \"NOTION_API_KEY\": \"secret_your-token-here\"\n  }\n}\n```\nSave and relaunch Claude Code.\n\n**Step 4 — Verify**\n```\nlaunch claude → /mcp → confirm notion is listed\nAsk: \"Search my Notion workspace for any page about [topic you know exists].\"\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Grant access strategically.** If you share only specific databases (your task list, your meeting notes database, your project tracker), Claude can access exactly those and nothing else. This is more secure than sharing your entire workspace, and produces more focused answers — Claude won't get confused by irrelevant pages."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Query and Extend Your Notion Workspace",
+      "content": "With Notion MCP connected, run these tasks.\n\n**Task 1 — Workspace search**\n```\nAsk: \"Search my Notion workspace for pages about [your current main project].\nList what you find and give me a one-line summary of each page.\"\n```\n\n**Task 2 — Database query**\nIf you have a task database or project tracker in Notion:\n```\nAsk: \"Query my [Tasks / Projects / whatever your database is called] database.\nShow me everything with a status of 'In Progress' or 'Blocked'.\nList each item with its assignee and due date if those properties exist.\"\n```\n\n**Task 3 — Read and synthesize a page**\nPick a long meeting notes page or project doc:\n```\nAsk: \"Read the Notion page called [page title]. Summarize it in 5 bullet points\nfocused on: decisions made, open questions, and next actions.\"\n```\n\n**Task 4 — Create a meeting note**\nAfter any meeting (even an informal one):\n```\nAsk: \"Create a new page in Notion as a child of [your meeting notes page].\nTitle: 'Meeting — [date] — [topic]'\nContent: Add these sections with the information I'll give you:\n- Attendees: [list names]\n- Decisions made: [list]\n- Action items: [list with owners]\n- Next meeting: [date if known]\"\n```\nThis replaces the manual effort of opening Notion, navigating to the right page, creating a new child page, and typing the structure from scratch.\n\n**Task 5 — Cross-tool synthesis (if you have email or Slack MCP active)**\n```\nAsk: \"I'm preparing for a client review meeting about [project].\nSearch my Notion workspace for project notes, check my email for recent\nclient messages, and check Slack for any recent discussion in #[project-channel].\nCombine everything into a one-page briefing I can review before the meeting.\"\n```\nThis is the unified office workflow — one command, multiple sources, one synthesized output."
+    },
+    {
+      "type": "quiz",
+      "question": "You connect Notion MCP but when you ask Claude to read your main project database, it says it cannot find any pages. What is the most likely cause?",
+      "options": [
+        "The Notion MCP server has a bug and cannot read databases",
+        "You forgot to grant your claude-mcp integration access to that specific database in Notion",
+        "Notion databases require a special scope that you did not configure",
+        "Claude Code can only read Notion pages, not databases"
+      ],
+      "correct": 1,
+      "explanation": "Notion integrations require explicit page-level access grants — the integration token alone is not enough. You must open each page or database in Notion and add the integration via the 'Add connections' menu. This is a deliberate security design by Notion: integrations only see what you explicitly share with them. The fix is straightforward: go to your database in Notion, click the ... menu, Add connections, and select your claude-mcp integration."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Notion MCP First Operations",
+      "content": "Get Notion MCP working with your real workspace.\n\n**Step 1 — Configure Notion MCP** with your Notion integration token.\n\n**Step 2 — Test basic operations:**\n- \"List all databases in my Notion workspace\"\n- \"Show the pages in my [specific database] database\"\n- \"Read the content of my [page name] page\"\n\n**Step 3 — Test search:**\n\"Search my Notion for pages about [topic you work on]\"\n\n**Step 4 — Test write operations** on a test page:\n\"Create a new page in my [database] database with title 'MCP Test' and content 'Created by Claude Code'\"\n\n**Step 5 — Verify the created page** in Notion directly.\n\n**Step 6 — Ask Claude:** \"For a knowledge worker who uses Notion as their primary note-taking and project management tool, what are the 5 most valuable Notion MCP operations?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Powered Notion Knowledge Base",
+      "content": "Use Notion MCP to build and maintain a knowledge base with AI assistance.\n\n**Step 1 — Identify a knowledge area** you manage in Notion (or would like to start managing there): documentation, research notes, project decisions.\n\n**Step 2 — Ask Claude Code to analyse and improve existing Notion content:**\n```\nReview the pages in my [Notion database]. For each page:\n1. Does it have a clear, searchable title?\n2. Is the content structured with headings?\n3. Does it have any tags/properties filled in?\n4. Is there any content that appears duplicated in other pages?\n\nRecommend a prioritised list of improvements.\n```\n\n**Step 3 — Apply improvements** to 3 pages.\n\n**Step 4 — Create a new knowledge article** via Claude Code: \"Create a Notion page in [database] about [topic]. Structure it with: Overview, Key Concepts, How To, Examples, Related Pages.\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Meeting Notes to Notion",
+      "content": "Build a workflow that automatically turns meeting notes into structured Notion pages.\n\n**Step 1 — Take a meeting transcript or notes** (real or simulated).\n\n**Step 2 — Ask Claude Code to process them into a Notion page:**\n```\nConvert these meeting notes into a structured Notion page:\n[paste your notes]\n\nStructure:\n- Date and attendees\n- Background/context\n- Discussion points (with key perspectives)\n- Decisions made\n- Action items (with owner and deadline)\n- Next meeting date\n\nCreate this as a page in my [Meeting Notes database] in Notion.\n```\n\n**Step 3 — Review the created page** in Notion. Is the structure right? Is the content accurate?\n\n**Step 4 — Compare to your current meeting notes process.** Is this faster? What did the AI miss or misrepresent?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Notion Project Dashboard",
+      "content": "Use Notion MCP to build and maintain a project dashboard in Notion.\n\n**Step 1 — Ask Claude Code to create a project structure in Notion:**\n```\nCreate a project tracking setup in my Notion workspace for [project name]:\n1. A main project page with: overview, status, key dates, team\n2. A tasks database linked to the project\n3. A decisions log page\n4. A meeting notes database\n\nFor each, create the right properties and initial structure.\n```\n\n**Step 2 — Review each created element** in Notion.\n\n**Step 3 — Populate the first entries:** \"Create the first 5 tasks in the project database based on this project description: [your description]\"\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review the Notion project structure you created. What important elements are missing that a project manager would include? What database relations or views would make this more useful?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "Notion MCP can create and modify Notion pages. What is the key difference between using Notion MCP vs Notion AI (built into Notion)?",
+      "options": [
+        "There is no difference — they use the same AI",
+        "Notion MCP is controlled by Claude Code in your terminal and can be part of automated workflows; Notion AI is an in-app feature triggered manually inside the Notion interface",
+        "Notion AI is more accurate than Notion MCP",
+        "Notion MCP requires a paid Notion plan; Notion AI is free"
+      ],
+      "correct": 1,
+      "explanation": "The key difference is integration and automation potential. Notion MCP makes Notion a tool Claude Code can use in multi-step workflows — for example, read a GitHub issue → create a Notion task → add meeting notes to the right page. Notion AI is triggered from within the Notion interface and is better for in-context writing assistance. They serve different use cases and are complementary."
+    },
+    {
+      "type": "quiz",
+      "question": "You use Notion MCP to have Claude Code create project pages with tasks, timelines, and stakeholder lists. Before sharing the workspace with your team, what should you verify?",
+      "options": [
+        "That all pages have the correct formatting",
+        "That all content is accurate — AI may have invented details like realistic-sounding but wrong timelines, invented stakeholders, or estimated costs without basis",
+        "That the Notion workspace is set to team mode",
+        "That the pages have the right emoji icons"
+      ],
+      "correct": 1,
+      "explanation": "AI-generated project content often looks professional and complete while containing invented specifics. Review: do the timeline dates reflect real constraints or did the AI make them up? Are the listed stakeholders actually involved in this project? Are cost or resource estimates based on actual data or AI assumptions? Content that goes to your whole team becomes shared assumptions — wrong AI-generated content can mislead an entire team."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-19.** Your Notion workspace is now accessible from Claude Code. You can search pages, query databases, create notes, and combine Notion knowledge with your email, calendar, and Slack data."
+    }
+  ],
+  "nextLesson": "8-20",
+  "prevLesson": "8-18"
+}

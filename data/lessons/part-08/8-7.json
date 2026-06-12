@@ -1,0 +1,115 @@
+{
+  "id": "8-7",
+  "title": "task-master-ai — AI Project Management",
+  "part": 8,
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "task-master",
+    "project-management",
+    "claude-code"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have task-master-ai installed and working — and you'll have turned a real project brief into a structured, dependency-aware task list that Claude Code tracks as you work through it."
+    },
+    {
+      "type": "text",
+      "content": "## The Problem task-master-ai Solves\n\nAI is excellent at individual tasks: write this function, fix this bug, explain this concept. But it has no memory of what you've already done or what comes next.\n\nEvery time you start a Claude Code session, Claude starts fresh. It doesn't know:\n- Which features are done and which aren't\n- What the overall project is trying to achieve\n- What the next logical step should be\n- Whether the task you're asking it to help with is blocked by something incomplete\n\ntask-master-ai gives Claude a persistent project context. You write a brief description of your project (a PRD — Product Requirements Document), task-master converts it into structured tasks with dependencies, and Claude Code knows exactly where the project stands at any moment."
+    },
+    {
+      "type": "text",
+      "content": "## Installation\n\nAdd task-master-ai to your global `settings.json`:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"context7\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@upstash/context7-mcp\"]\n    },\n    \"sequential-thinking\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-sequential-thinking\"]\n    },\n    \"task-master-ai\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"--package=task-master-ai\", \"task-master-ai\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Package name changes:** The task-master-ai package is actively maintained and the install command may change between versions. If the above doesn't work, check github.com/eyaltoledano/claude-task-master for the current installation instructions."
+    },
+    {
+      "type": "text",
+      "content": "## The PRD-to-Tasks Workflow\n\nHere is the full workflow once task-master is configured:\n\n**Step 1 — Write a PRD**\nA PRD (Product Requirements Document) doesn't have to be formal. It's just a description of what you want to build: the goal, the features, any constraints.\n\nEven 5 sentences is enough. task-master will ask clarifying questions if it needs more.\n\n**Step 2 — Parse it into tasks**\nAsk Claude: `\"Use task-master to parse this PRD into a structured task list with dependencies.\"`\n\ntask-master creates numbered tasks, identifies which tasks depend on which, and estimates complexity.\n\n**Step 3 — Work through tasks one at a time**\nAsk: `\"What's the next task I should work on?\"`\n\ntask-master returns the highest-priority task that has no incomplete dependencies.\n\n**Step 4 — Mark tasks complete**\nAfter finishing a task: `\"Mark task 3 as complete.\"`\n\ntask-master updates the task list and knows which tasks are now unblocked.\n\n**Step 5 — Claude stays in context**\nAt the start of any session: `\"Summarize the current project status using task-master.\"`\n\nClaude reads the task file and immediately knows where the project stands — no manual re-explaining required."
+    },
+    {
+      "type": "text",
+      "content": "## What a Task List Looks Like\n\ntask-master creates a structured file (usually `tasks/tasks.json` or a similar path) with entries like:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"tasks\": [\n    {\n      \"id\": 1,\n      \"title\": \"Set up project folder structure\",\n      \"description\": \"Create HTML, CSS, and JS files. Initialize Git repo.\",\n      \"status\": \"done\",\n      \"dependencies\": [],\n      \"priority\": \"high\"\n    },\n    {\n      \"id\": 2,\n      \"title\": \"Build the navigation bar\",\n      \"description\": \"Sticky nav with logo, links, and mobile hamburger menu.\",\n      \"status\": \"in-progress\",\n      \"dependencies\": [1],\n      \"priority\": \"high\"\n    },\n    {\n      \"id\": 3,\n      \"title\": \"Build the hero section\",\n      \"description\": \"Full-width banner with headline, subheading, and CTA button.\",\n      \"status\": \"pending\",\n      \"dependencies\": [1],\n      \"priority\": \"medium\"\n    }\n  ]\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**task-master is most valuable on projects that take more than one session.** For a quick one-hour task, it's overkill. For anything you'll work on over multiple days — building a website, a script, an app — it eliminates the 'where was I?' problem completely."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Plan a Mini-Project With task-master-ai",
+      "content": "**Setup:**\n1. Add the task-master-ai config to your `settings.json`\n2. Save and relaunch `claude`\n3. Type `/mcp` to confirm `task-master-ai` appears\n\n**Step 1 — Write your PRD:**\nThink of something small and real you want to build. It could be:\n- A personal portfolio page\n- A simple quiz or game in HTML/JS\n- A script that organizes files in a folder\n- A webpage that displays data from an API\n\nWrite 5 sentences describing what it does, who it's for, and what features it needs.\n\n**Step 2 — Parse it into tasks:**\nAsk: `\"Use task-master to create a task list for this project. Break it into specific, actionable subtasks with dependencies identified.\"`\nPaste in your 5-sentence description.\n\nReview the output:\n- Do the tasks make sense?\n- Are any tasks missing?\n- Are the dependencies correct?\n\nAsk Claude to adjust anything that's wrong.\n\n**Step 3 — Work the first task:**\nAsk: `\"What's the next task I should start on?\"`\nLet Claude identify the first task, then actually do it — write the code, create the file, do whatever the task requires.\n\n**Step 4 — Mark it done and advance:**\nAfter completing the first task:\nAsk: `\"Mark task 1 as complete. What's next?\"`\n\nRepeat until you've completed at least 2 tasks.\n\n**Step 5 — Test the project memory:**\nType `/clear` to reset the conversation, then ask: `\"Using task-master, what's the current status of my project?\"`\nClaude should read the task file and give you an accurate status report without you re-explaining anything."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — task-master Setup and First Task",
+      "content": "Get task-master-ai running and create your first AI-managed task list.\n\n**Step 1 — Install task-master-ai** (check current installation instructions at the task-master GitHub repo — the package name may have changed).\n\n**Step 2 — Configure it** in your Claude Code MCP settings.\n\n**Step 3 — In Claude Code**, use task-master to create a task list for a real project:\n```\nUsing task-master, create a task list for [your project]. Break it into: tasks I need to do this week, tasks for next week, and backlog. For each task, set a priority (high/medium/low) and estimated time.\n```\n\n**Step 4 — View the created tasks.** Does the structure make sense?\n\n**Step 5 — Mark one task as in-progress.** Ask Claude Code to show you only the in-progress tasks.\n\n**Step 6 — Ask Claude:** *\"Compare task-master to using a notes file or Notion for managing tasks. What does task-master add that those can't provide?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Driven Project Planning",
+      "content": "Use task-master to break down a real project into manageable tasks with AI guidance.\n\n**Step 1 — Choose a real project** you're planning: building a feature, running a research project, completing a work deliverable.\n\n**Step 2 — Ask Claude Code to parse a project description into tasks:**\n```\nUsing task-master, parse this project into tasks:\n\nProject: [describe your project in 2-3 paragraphs]\n\nFor each task:\n- Write a clear, actionable title (starts with a verb)\n- Assign a priority\n- Estimate hours\n- List dependencies (which other tasks must be done first)\n- Assign to a category (Frontend/Backend/Research/Documentation/Testing)\n```\n\n**Step 3 — Review the generated tasks.** What did AI get right? What did it miss or overestimate?\n\n**Step 4 — Mandatory review:** Ask: *\"Review the task breakdown. What important tasks did you miss? What tasks are over/underestimated? What dependencies did you not capture?\"*\n\n**Step 5 — Update and finalise** the task list. Use it for your actual project."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Task-Driven Development Session",
+      "content": "Run a complete development session where every action is driven by task-master.\n\n**Step 1 — Open Claude Code** with task-master configured.\n\n**Step 2 — Ask Claude Code which task to work on next:**\n```\nUsing task-master, show me my highest-priority incomplete tasks. Recommend which one I should work on now based on: priority, dependencies (which are already done), and estimated time.\n```\n\n**Step 3 — Accept the recommendation** and work on that task.\n\n**Step 4 — As you work**, ask Claude Code to: update the task status to in-progress, add notes about what you're doing, and create subtasks as needed.\n\n**Step 5 — When done**, mark the task complete and ask Claude Code: \"What task should I work on next?\"\n\n**Step 6 — Reflect:** Did having AI-managed tasks improve your focus vs your normal workflow?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Integrate task-master with Your Existing Tools",
+      "content": "Connect task-master to your existing project management workflow.\n\n**Step 1 — Identify how you currently track tasks:** Notion, Jira, GitHub Issues, a spreadsheet, a text file.\n\n**Step 2 — Ask Claude:** *\"I use [your tool] for task tracking. How can I use task-master alongside it without creating duplication? What should live in task-master vs [your tool]?\"*\n\n**Step 3 — Design your integration:**\n- Which tasks go in task-master (AI-assisted, in Claude Code sessions)\n- Which tasks go in your existing tool (team visibility, formal tracking)\n- How will you sync between them?\n\n**Step 4 — Test the workflow** on your current project for one week.\n\n**Step 5 — Evaluate:** After a week, did using task-master improve your AI-assisted development sessions? What would you keep and what would you change?"
+    },
+    {
+      "type": "quiz",
+      "question": "task-master-ai manages your project tasks within Claude Code. What is its primary advantage over managing tasks in a separate tool like Jira?",
+      "options": [
+        "task-master is always more accurate than Jira",
+        "Claude Code can read task context and use it to inform its actions — it knows what task you're working on and can make decisions accordingly",
+        "task-master is free and Jira is expensive",
+        "task-master syncs with all productivity tools automatically"
+      ],
+      "correct": 1,
+      "explanation": "The key advantage of task-master inside Claude Code is context integration — Claude Code knows what task you're working on, can read task descriptions and dependencies, and can use this information to make better decisions. When you say \"work on the next highest-priority task,\" Claude Code knows what that is, reads its description, and starts executing it. External tools (Jira, Notion) don't have this tight integration with the AI agent's decision-making."
+    },
+    {
+      "type": "quiz",
+      "question": "You use task-master to create 25 tasks for a project. Claude Code always recommends working on the highest-priority task. Is this always the right approach?",
+      "options": [
+        "Yes — highest priority should always be done first",
+        "Not always — sometimes a lower-priority task is the right choice: it unblocks others, it can be done in available time, or the high-priority task requires information you don't have yet",
+        "Claude Code should choose randomly to avoid bias",
+        "Always work in the order tasks were created"
+      ],
+      "correct": 1,
+      "explanation": "Priority is one input, not the only input. Good task selection also considers: dependencies (can I actually start this now?), context (am I in the right state to work on this?), time available (do I have 5 minutes or 2 hours?), and momentum (finishing a related task creates flow). Claude Code can help with this nuanced selection if you tell it the full context: \"I have 45 minutes and my focus level is low — which task fits?\""
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-7.** task-master-ai transforms Claude Code from a session-based assistant into a persistent project collaborator. Lesson 8-8 adds the GitHub MCP — so Claude can interact with real repositories."
+    }
+  ],
+  "nextLesson": "8-8",
+  "prevLesson": "8-6"
+}

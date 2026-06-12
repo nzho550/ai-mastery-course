@@ -1,0 +1,117 @@
+{
+  "id": "7-7",
+  "title": "Custom Slash Commands",
+  "part": 7,
+  "estimatedMinutes": 70,
+  "tags": [
+    "claude-code",
+    "slash-commands",
+    "automation",
+    "workflow"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have created at least two custom slash commands, understand the file structure for storing commands, know how to make commands flexible with `$ARGUMENTS`, and have a library of reusable prompts that encapsulate your best work. You'll understand the difference between project-level and user-level commands, and when to use each."
+    },
+    {
+      "type": "text",
+      "content": "## What Are Custom Slash Commands?\n\nClaude Code comes with built-in slash commands like `/help`, `/clear`, and `/exit`. But you can create your own — reusable prompt templates that you invoke with a `/commandname` shortcut.\n\nCustom commands live in the `.claude/commands/` folder in your project root. Each command is a plain Markdown file. The filename (without `.md`) becomes the command name.\n\nFor example:\n- `.claude/commands/review.md` → available as `/review`\n- `.claude/commands/summarize.md` → available as `/summarize`\n- `.claude/commands/test.md` → available as `/test`\n- `.claude/commands/security.md` → available as `/security`\n\nWhen you type `/review` in Claude Code, it reads the content of `review.md` and uses it as the prompt for that session turn. Claude executes it as if you had typed the full prompt manually.\n\n**Why this matters:** The best prompt for a code review isn't something you want to type out every time. It's carefully structured, covers exactly the right things in the right order, and took you 15 minutes to craft. Slash commands let you invoke that perfect prompt with 7 characters."
+    },
+    {
+      "type": "text",
+      "content": "## The `$ARGUMENTS` Placeholder\n\nStatic commands are useful. Dynamic commands are more powerful. The `$ARGUMENTS` placeholder lets you pass text into a command at runtime.\n\nExample: if your `summarize.md` contains:\n```\nSummarize the file $ARGUMENTS in exactly 3 bullet points.\nFocus on what the file does, not how it does it.\n```\n\nThen typing `/summarize src/auth.js` replaces `$ARGUMENTS` with `src/auth.js` before Claude receives the prompt.\n\n**Multi-word arguments:** Everything after the command name becomes `$ARGUMENTS`. So `/review src/api.js -- focus on security` passes `src/api.js -- focus on security` as the arguments string.\n\n**Making arguments optional:** Include a fallback in your command text:\n```\nReview the file $ARGUMENTS (or the most recently discussed file if no file is specified).\n```\n\n**Using `$ARGUMENTS` multiple times:**\n```\nCompare $ARGUMENTS to the patterns established elsewhere in the codebase.\nWhat does $ARGUMENTS do differently, and is that intentional?\n```\nBoth `$ARGUMENTS` references get replaced with the same argument."
+    },
+    {
+      "type": "text",
+      "content": "## Project-Level vs. User-Level Commands\n\nCommands can live at two levels:\n\n**Project-level: `.claude/commands/` inside your project**\nAvailable only when working in this specific project. Good for project-specific workflows:\n- `/deploy` — project-specific deployment checklist\n- `/migrate` — run and verify this project's database migrations\n- `/test-feature` — the specific test command for this codebase\n\n**User-level: `~/.claude/commands/` in your home directory**\nAvailable in *every* project, in every session. Good for general coding practices you always apply:\n- `/review` — your personal code review standard\n- `/explain` — how you like code explained\n- `/document` — your preferred documentation format\n- `/security` — a security audit you run everywhere\n\nCreate the user-level folder:\n```powershell\nNew-Item -ItemType Directory -Path ~/.claude/commands\n```\n\nBoth levels load simultaneously — you can have a project-level `/test` alongside a user-level `/review` and both work in the same session."
+    },
+    {
+      "type": "text",
+      "content": "## Eight Commands Worth Building\n\n**`/review` — Code review on demand**\n```markdown\nReview $ARGUMENTS (or the most recently discussed code if no file is specified).\n\nCheck for:\n1. Bugs, errors, and logic problems\n2. Missing edge cases (empty input, null values, unexpected types)\n3. Security issues (injection, auth, data exposure)\n4. Readability — would a junior developer understand this in 6 months?\n5. Missing things that should be there (error handling, validation, comments)\n\nFormat: numbered list. For each issue: problem + relevant line + suggested fix.\nEnd with one sentence summarising the overall quality (1–10 with brief reason).\n```\n\n**`/explain` — Explain unfamiliar code**\n```markdown\nExplain $ARGUMENTS in plain English.\n\nStructure your response:\n1. One sentence: what is this file/function FOR?\n2. How it works: step-by-step walkthrough\n3. Key design decisions: why was it written this way?\n4. What would break if I changed it?\n5. Anything a new developer should know before touching this\n\nAssume the reader is competent but hasn't seen this code before.\n```\n\n**`/test` — Generate unit tests**\n```markdown\nWrite comprehensive unit tests for $ARGUMENTS.\n\nRequirements:\n- Test every function in the file\n- Cover: happy path, edge cases, error cases, empty/null inputs\n- Tests should be independent (no shared mutable state between tests)\n- Use descriptive test names that explain what the test verifies\n- Don't mock things unnecessarily — test behaviour, not implementation\n\nUse the testing framework already in the project (check package.json).\nIf no framework is set up, use Node's built-in test runner.\n```\n\n**`/security` — Security audit**\n```markdown\nConduct a security audit of $ARGUMENTS.\n\nCheck specifically for:\n1. Injection vulnerabilities (SQL, command, XSS)\n2. Authentication and authorisation issues\n3. Sensitive data exposure (keys in code, logging PII)\n4. Input validation gaps\n5. Dependencies with known vulnerabilities (flag if relevant)\n\nFor each issue found: severity (Critical/High/Medium/Low), description,\nwhere it is, and how to fix it. If nothing serious found, say so explicitly.\n```\n\n**`/document` — Generate documentation**\n```markdown\nWrite documentation for $ARGUMENTS.\n\nInclude:\n1. What this file/module does (2–3 sentences)\n2. JSDoc or docstring comments for every function (parameters, return type, purpose)\n3. Usage examples for the 2–3 most important functions\n4. Any gotchas or non-obvious behaviour\n\nWrite documentation a new team member would actually read, not boilerplate filler.\n```\n\n**`/refactor` — Suggest improvements**\n```markdown\nSuggest refactoring improvements for $ARGUMENTS.\n\nFocus on:\n1. Reducing complexity (long functions, deep nesting, confusing logic)\n2. Removing duplication (code that appears in multiple places)\n3. Improving naming (variables, functions, files that are poorly named)\n4. Better structure (is the code in the right place?)\n\nPrioritise by impact. For each suggestion: what to change, why, and the risk of changing it.\nDo NOT make changes yet — just the suggestions.\n```\n\n**`/pr` — Pull request description generator**\n```markdown\nGenerate a pull request description based on the recent git changes.\n\nRun `git diff main --stat` and `git log main..HEAD --oneline` to understand what changed.\n\nWrite a PR description with:\n- Summary: what this PR does (2–3 sentences)\n- Why: what problem this solves or what value it adds\n- Changes: bullet list of meaningful changes (not every file, just the key ones)\n- Testing: what was tested or how to test it\n- Notes: anything reviewers should pay particular attention to\n\nUse plain language. No filler phrases like 'This commit introduces...'.\n```\n\n**`/standup` — Daily standup summary**\n```markdown\nGenerate a concise daily standup update based on today's git activity.\n\nRun `git log --since='yesterday' --oneline` to see what was committed.\n\nWrite three bullets:\n- Yesterday: what was completed\n- Today: what I plan to work on (infer from incomplete work and recent activity)\n- Blockers: any issues, failing tests, or unclear requirements visible in the code\n\nKeep each bullet to 1–2 sentences. Plain language — no jargon.\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Command files are Markdown.** You can use headers, lists, code blocks, and emphasis inside them. Claude reads the formatting and uses it to structure its response. A well-formatted command prompt produces a more organised response — numbered lists in the prompt produce numbered lists in the response."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Iteration principle:** Your first version of a command will be decent. Your fifth version — after running it on real code 20 times and adjusting based on what was missing — will be excellent. Don't over-engineer commands before you've used them. Write a v1, use it repeatedly, notice what's always missing from the output, update the command. Slash commands improve through use."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build Your Command Library",
+      "content": "Create a command library with both project-level and user-level commands, then test them on real files.\n\n**Step 1 — Create the project commands folder:**\nIn VS Code Explorer, create this folder structure inside your project root:\n```\n.claude/\n  commands/\n```\n\n**Step 2 — Create a /review command:**\nCreate `.claude/commands/review.md` with this content:\n```markdown\nReview $ARGUMENTS (or the most recently discussed file if no argument is given).\n\nCheck for:\n1. Any bugs, errors, or logic problems\n2. Missing edge cases (empty input, null values, unexpected types)\n3. Readability — would a junior developer understand this in 6 months?\n4. Anything that should be there but isn't (error handling, comments)\n\nFormat: numbered list. For each issue: describe the problem,\nquote the relevant line, and suggest a fix.\nEnd with one sentence summarising the overall quality.\n```\n\n**Step 3 — Create a /summarize command:**\nCreate `.claude/commands/summarize.md`:\n```markdown\nSummarize the file $ARGUMENTS in exactly 3 bullet points.\n\nRules:\n- Each bullet must be one sentence\n- Focus on WHAT the file does, not HOW it does it\n- Use plain English that a non-developer could understand\n- If functions are present, name the most important one\n```\n\n**Step 4 — Test your commands:**\nLaunch Claude Code:\n```powershell\ncd Documents\\ai-course-projects\nclaude\n```\n\nTest each command:\n```\n/summarize exercises/about-me.html\n```\n```\n/review exercises/about-me.html\n```\n\nObserve: you're invoking 30-word prompts with a short command. The output is structured because the prompt is structured.\n\n**Step 5 — Create a user-level command:**\nCreate `~/.claude/commands/explain.md` (your home directory .claude folder):\n\nIn PowerShell:\n```powershell\nNew-Item -ItemType Directory -Force -Path ~/.claude/commands\n```\n\nThen create `~/.claude/commands/explain.md`:\n```markdown\nExplain $ARGUMENTS in plain English.\n\n1. One sentence: what is this FOR?\n2. Step-by-step: how it works\n3. Key design decisions: why was it written this way?\n4. What breaks if I change it?\n\nAssume the reader is competent but hasn't seen this code before.\n```\n\n**Step 6 — Verify user-level command works:**\nWithout restarting Claude Code, test:\n```\n/explain exercises/about-me.html\n```\nThis should work — user-level commands are available immediately.\n\n**Step 7 — Build the PR command (optional, requires git):**\nCreate `.claude/commands/pr.md` using the PR description template from this lesson.\n\nThen ask Claude Code:\n```\n/pr\n```\nIt should run git commands and generate a PR description based on your recent commits.\n\n**What you've built:** A personal command library that encapsulates your best prompts. As you continue through the course, add commands whenever you write a prompt that produces a result you'd want to reproduce."
+    },
+    {
+      "type": "quiz",
+      "question": "You have a `/review` command that works well for all your projects. You create a new project and want the same review command available there. What's the most efficient approach?",
+      "options": [
+        "Copy the review.md file into the new project's .claude/commands/ folder manually each time",
+        "Put the review command in ~/.claude/commands/ (user-level) so it's automatically available in every project without copying",
+        "Rebuild the review command from scratch in each new project to customise it for that codebase",
+        "Slash commands don't support cross-project sharing — you have to retype the prompt each time"
+      ],
+      "correct": 1,
+      "explanation": "User-level commands stored in ~/.claude/commands/ are loaded automatically in every Claude Code session regardless of which project you're in — exactly like your user-level CLAUDE.md. A /review command that represents your general code review standard belongs at the user level. Project-specific commands (like a custom /deploy that runs this project's specific deployment script) belong at the project level. Most developers maintain a small user-level library of 5–10 general commands, and project-specific libraries of 2–5 commands tailored to that codebase."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — First Custom Slash Command",
+      "content": "Build and test your first custom slash command — a reusable workflow trigger.\n\n**Step 1 — Check the slash commands directory:**\n```powershell\nmkdir -p .claude/commands\n```\n\n**Step 2 — Create a simple review command:**\n```powershell\nnew-item .claude/commands/review.md\n```\n\n**Step 3 — Add content to review.md:**\n```markdown\n# Code Review\n\nPerform a thorough code review of the specified files. For each file:\n1. Check for logic errors and edge cases not handled\n2. Identify security vulnerabilities\n3. Note missing error handling\n4. Flag performance concerns\n5. List specific line-numbered improvements\n\nEnd with: priority order for addressing the issues found.\n```\n\n**Step 4 — Test the command in Claude Code:**\n```\n/review [your filename]\n```\n\n**Step 5 — Evaluate the output.** Is it more thorough than your previous reviews? Adjust the command prompt until it's consistently useful."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Custom Command Library",
+      "content": "Create a library of custom commands for your most frequent Claude Code tasks.\n\n**Step 1 — Identify your top 5 Claude Code tasks** — things you ask Claude Code to do in almost every session.\n\n**Step 2 — For each task**, write a custom command file in `.claude/commands/`:\n\nExample commands to create:\n- `review.md` — structured code review (from Workshop A)\n- `document.md` — generate docstrings for all undocumented functions\n- `test.md` — generate tests for a module\n- `debug.md` — systematic debugging analysis\n- `refactor.md` — identify and execute safe refactoring\n\n**Step 3 — Include in each command:**\n- Clear objective\n- Specific steps or format you want\n- What to check or include\n- What NOT to do\n\n**Step 4 — Test each command** on real code in your project.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review these custom commands. For each, what important instruction is missing that would make the output more reliable and useful?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Parameterised Commands",
+      "content": "Make your custom commands more flexible with arguments.\n\n**Step 1 — Create a parameterised command** in `.claude/commands/analyse.md`:\n```markdown\n# Analyse Code\n\nAnalyse the code at $ARGUMENTS.\n\nProvide:\n1. What this code does (1 paragraph)\n2. How it interacts with the rest of the project\n3. The 3 most important things someone maintaining this code should know\n4. Anything that looks potentially fragile or confusing\n\nBe specific — reference actual function names and line numbers.\n```\n\n**Step 2 — Test with arguments:**\n```\n/analyse src/auth.py\n/analyse src/utils.py src/models.py\n```\n\n**Step 3 — Note how $ARGUMENTS is replaced** with what you type after the command.\n\n**Step 4 — Create a second parameterised command** for a task you do frequently.\n\n**Step 5 — Ask Claude:** *\"What other techniques can I use in custom Claude Code commands to make them more powerful or flexible?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Share Commands Across a Team",
+      "content": "Custom commands can be shared with your team so everyone benefits from your prompt engineering work.\n\n**Step 1 — Commit your .claude/commands/ directory** to your project repository:\n```powershell\ngit add .claude/commands/\ngit commit -m \"Add custom Claude Code commands for team use\"\n```\n\n**Step 2 — Add documentation** to your CLAUDE.md listing available commands and when to use each.\n\n**Step 3 — Ask Claude:** *\"I want to share these custom Claude Code commands with my team. What should I include in the documentation so teammates can effectively use and contribute to the command library?\"*\n\n**Step 4 — Write a brief guide** (add it to your CLAUDE.md or README) covering:\n- What custom commands exist\n- When to use each one\n- How to add new commands\n- How to report issues with a command\n\n**Step 5 — Test from a colleague's perspective:** Open the project in a fresh Claude Code session and try the commands. Are they discoverable? Do they work?"
+    },
+    {
+      "type": "quiz",
+      "question": "You create a custom command called `/deploy` that runs production deployment scripts. What is the most important safety measure to add?",
+      "options": [
+        "Add a comment saying \"use carefully\"",
+        "Add explicit confirmation steps in the command and a warning about the environment being targeted — production deployments should never run automatically without human confirmation",
+        "Password-protect the command file",
+        "Only include the command in branches, not main"
+      ],
+      "correct": 1,
+      "explanation": "High-stakes operations like production deployments need explicit human confirmation steps built into the command. For example: \"Before running any deployment command, list the exact commands you will run and ask for explicit confirmation. State clearly whether this is targeting staging or production.\" The goal is to ensure the human understands what will happen and can stop it. Never design an autonomous AI command to execute irreversible production operations without a checkpoint."
+    },
+    {
+      "type": "quiz",
+      "question": "A custom slash command you wrote works perfectly for Python files but produces poor output for JavaScript files. What is the most likely cause?",
+      "options": [
+        "Custom commands cannot work across file types",
+        "The command's instructions use Python-specific language or assumptions that don't translate to JavaScript",
+        "JavaScript files are not supported by Claude Code",
+        "The command file needs to be in a different directory for JavaScript"
+      ],
+      "correct": 1,
+      "explanation": "Command prompts often contain implicit assumptions about the language or framework. For example, \"check for proper use of Python docstrings\" doesn't apply to JavaScript. To make a command language-agnostic, use language-neutral language: \"check that all public functions are documented\" instead of \"check for docstrings\". Alternatively, create language-specific commands: review-python.md, review-js.md, each with appropriate language-specific checks."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-7.** You've created a command library at both project and user level, tested the $ARGUMENTS placeholder, and have templates for code review, explanation, testing, security, documentation, refactoring, PR descriptions, and standup updates. Next: hooks — automating actions that run around Claude's work automatically."
+    }
+  ],
+  "nextLesson": "7-8",
+  "prevLesson": "7-6"
+}

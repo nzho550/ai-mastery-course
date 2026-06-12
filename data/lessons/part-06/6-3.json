@@ -1,0 +1,97 @@
+{
+  "id": "6-3",
+  "title": "Copilot Chat — Explain, Refactor, Debug",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": [
+    "copilot",
+    "vscode",
+    "copilot-chat",
+    "debugging",
+    "refactoring"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nCopilot's autocomplete is powerful for writing new code. But what about code that already exists — code you didn't write, code you wrote last month and forgot, or code with a bug you can't track down? That's where **Copilot Chat** comes in. It's a full conversational AI interface, embedded directly in VS Code, that understands your entire workspace."
+    },
+    {
+      "type": "text",
+      "content": "## Opening Copilot Chat\n\nThere are two ways to access Copilot Chat in VS Code:\n\n**1. The sidebar panel (full chat)**\nPress **Ctrl+Alt+I** to open the Copilot Chat sidebar. This gives you a persistent chat window — like Claude.ai but inside VS Code with access to your files.\n\n> **Note:** Don't confuse this with **Ctrl+Shift+I** — that opens the browser developer tools if you have a browser window focused. The Copilot shortcut is `Ctrl+Alt+I` (Alt, not Shift).\n\n**2. Inline chat (on selected code)**\nSelect any block of code in the editor, then press **Ctrl+I**. A small chat input appears inline — above or below your selection. This is the fastest way to ask about specific code without breaking your flow.\n\nBoth interfaces connect to the same AI. The sidebar is better for longer conversations; inline chat is better for quick, targeted questions."
+    },
+    {
+      "type": "text",
+      "content": "## Built-In Slash Commands\n\nCopilot Chat has several slash commands — keywords that trigger specific behaviors:\n\n| Command | What it does |\n|---------|-------------|\n| `/explain` | Explains what selected code does, in plain English |\n| `/fix` | Analyzes selected code (or an error) and suggests a fix |\n| `/doc` | Generates a documentation comment for a function or class |\n| `/tests` | Generates unit tests for selected code |\n| `/simplify` | Suggests a more concise version of the selected code |\n\nYou can also prefix messages with `@workspace` to tell Copilot to search your entire project (not just the currently open file) when answering a question."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Context matters in Chat.** When you type in Copilot Chat, it doesn't automatically know which file or function you mean. Make it explicit: select the code first (so it's highlighted), then open inline chat with `Ctrl+I`. Or in the sidebar, attach the file using the paperclip icon. The more context you give, the more accurate the response."
+    },
+    {
+      "type": "text",
+      "content": "## Apply in Editor\n\nWhen Copilot Chat suggests a code change in the sidebar, it shows the code in a block with an **Apply in Editor** button. Clicking it opens a diff view — the changes highlighted in your actual file. You see exactly what will change before it changes. Accept or reject individual chunks, just like reviewing a Git diff.\n\nThis is significantly safer than copy-pasting from a chat window. You can see the before and after side by side, and reject specific changes while accepting others."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Conversation About Code",
+      "content": "Open `exercises/practice.js` — the file you built in lessons 6-1 and 6-2.\n\n**Task 1 — Explain existing code**\n1. Select the sort function you wrote in lesson 6-2 (click and drag to highlight it)\n2. Press **Ctrl+I** to open inline chat\n3. Type: `/explain`\n4. Read Copilot's explanation — does it match what you thought the function did?\n5. If there's anything you didn't understand, ask a follow-up: \"What does `.localeCompare` do and why is it used here?\"\n\n**Task 2 — Refactor with a specific requirement**\n1. Press **Ctrl+Alt+I** to open the full Copilot Chat sidebar\n2. In the chat, reference the sort function and type: \"Can you refactor this to also handle numbers, not just strings? Keep the same function signature.\"\n3. Review the suggested change in the response\n4. Click **Apply in Editor** — VS Code shows you a diff\n5. Accept the change, then look at the new code: do you understand what changed and why?\n\n**Task 3 — Introduce and fix a bug**\n1. In `practice.js`, write this intentionally broken function:\n```javascript\nfunction getFirstItem(arr) {\n  return arr[1];\n}\n```\n2. Select the function\n3. In Copilot Chat sidebar, type: `/fix`\n4. Copilot identifies the bug (arrays are zero-indexed — `arr[1]` returns the second item, not the first)\n5. Apply the fix: `return arr[0];`\n6. Type one follow-up message: \"Why does JavaScript use zero-based indexing?\"\nThis is the AI debugging loop you'll use constantly from here forward."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Copilot Chat Quick Commands Drill",
+      "content": "This 8-minute drill tests GitHub Copilot Chat's most useful inline commands.\n\n**Step 1 — Open VS Code** with GitHub Copilot installed and active.\n\n**Step 2 — Open or create a Python or JavaScript file** with 20-30 lines of code (ask Copilot to generate a sample if needed).\n\n**Step 3 — Test these Copilot Chat slash commands** on the code:\n- Select a function → Copilot Chat → `/explain` — does it accurately describe what the function does?\n- Select a function → `/doc` — does it generate a useful docstring?\n- Select a function → `/tests` — does it generate sensible test cases?\n- Introduce a bug manually → `/fix` — does Copilot catch and fix it?\n\n**Step 4 — Rate each command:** Which is most useful for your work? Which produced the weakest output?\n\n**Step 5 — Test inline chat:** Click anywhere in the code, press Ctrl+I, and ask \"Add error handling to this function.\" How good is the result?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Real Code Review with Copilot Chat",
+      "content": "Use Copilot Chat to perform a structured review of real code — code you wrote or AI generated.\n\n**Step 1 — Open a real file** from a project you're working on. Pick something meaningful — not a toy example.\n\n**Step 2 — Run a structured review** using Copilot Chat (or Claude if you don't have Copilot):\n```\nReview this code as a senior engineer. Check for:\n1. Logic errors or edge cases that aren't handled\n2. Performance issues\n3. Security vulnerabilities\n4. Missing error handling\n5. Code that could be simplified without losing clarity\n\nFor each issue found: state the line, what's wrong, and the specific fix.\n```\n\n**Step 3 — Fix at least 3 issues** the review identifies.\n\n**Step 4 — Mandatory adversarial review:** Ask again: *\"You just reviewed this code and found issues. Now find 3 MORE problems you didn't mention in your first pass. Be specific.\"*\n\n**Step 5 — Commit the improved code** with a message describing what the review found and fixed."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Refactor a Real Function",
+      "content": "Use Copilot Chat's refactoring to improve real code while keeping it working.\n\n**Step 1 — Find a function in your code** that is:\n- Longer than 20 lines, OR\n- Has nested if statements 3+ levels deep, OR\n- Has duplicate code in multiple places\n\n**Step 2 — Ask Copilot Chat to refactor it:**\n```\nRefactor this function to be more readable and maintainable. Specifically:\n- Extract any duplicated logic into helper functions\n- Simplify nested conditionals where possible\n- Reduce the function length if it's doing too many things\n\nDo not change the external behaviour — the function should produce the same outputs for the same inputs.\n```\n\n**Step 3 — Compare the before and after.** Is the refactored version actually more readable? Did it change any behaviour?\n\n**Step 4 — Run your tests** (or manually verify) that the refactored version produces the same results as the original.\n\n**Step 5 — Ask Claude:** *\"Review both versions of this function [paste both]. Was the refactoring an improvement? What trade-offs did it make?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build an AI-Assisted Debugging Workflow",
+      "content": "Create a repeatable debugging process that uses AI as the first-response tool for any error.\n\n**Step 1 — Identify a real bug** in your code — or deliberately introduce one to practice.\n\n**Step 2 — Follow this debugging workflow:**\n\n**Step A — Read the error message completely.** Copy the full error including the stack trace.\n\n**Step B — Form a hypothesis:** Before asking AI, write one sentence: \"I think the bug is caused by [your guess].\"\n\n**Step C — Ask Copilot Chat:**\n```\nI got this error: [paste full error and stack trace]\nCode context: [paste the relevant code]\nMy hypothesis: [your guess]\n\nIs my hypothesis correct? If not, what is the actual cause? Give me the specific fix.\n```\n\n**Step D — Apply the fix.** Run the code again.\n\n**Step E — Write a test** that would have caught this bug before it reached you.\n\n**Step 3 — Mandatory review:** Ask: *\"Now that this bug is fixed, are there other places in the codebase where the same pattern might cause the same bug?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You use Copilot Chat's /fix command on a bug. It suggests a fix that looks reasonable. What should you do before accepting it?",
+      "options": [
+        "Accept it — Copilot's fixes are tested and safe",
+        "Read the fix carefully to understand what changed and why, then test it to verify it fixes the bug without introducing new ones",
+        "Run it only in a test environment first",
+        "Ask Copilot to explain the fix in detail before accepting"
+      ],
+      "correct": 1,
+      "explanation": "Always understand a fix before applying it. Copilot's /fix suggestions are plausible but not guaranteed correct — they can fix the visible symptom while missing the root cause, or introduce subtle new bugs. Read what changed, understand why, and test the fix. This also builds your understanding of the bug so you don't make the same mistake again."
+    },
+    {
+      "type": "quiz",
+      "question": "Copilot Chat's /tests command generates unit tests for your function. What is the most important check before using these tests?",
+      "options": [
+        "That the tests pass",
+        "That the tests actually test meaningful behaviour, not just that the function runs without error",
+        "That there are at least 10 tests",
+        "That the test file follows your team's naming conventions"
+      ],
+      "correct": 1,
+      "explanation": "AI-generated tests often pass trivially without testing anything meaningful — for example, just checking that the function returns something, not that it returns the right thing for edge cases. The most important check is: do these tests actually verify behaviour that matters? Add tests for edge cases (empty input, null values, maximum values, invalid types) that AI often misses."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-3 complete.** You can now use Copilot Chat for three critical tasks: understanding unfamiliar code with `/explain`, improving it with targeted requests, and diagnosing bugs with `/fix`. In lesson 6-4, you'll explore Continue.dev — a free, open-source alternative that lets you use any AI model (including Claude) inside VS Code."
+    }
+  ],
+  "nextLesson": "6-4",
+  "prevLesson": "6-2"
+}

@@ -1,0 +1,104 @@
+{
+  "id": "8-14",
+  "title": "Finding Community MCP Servers",
+  "part": 8,
+  "estimatedMinutes": 55,
+  "tags": [
+    "mcp",
+    "community",
+    "ecosystem",
+    "claude-code"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll know where to find new MCP servers, how to evaluate whether a server is worth installing, and you'll have added at least one community server that solves a real problem you have."
+    },
+    {
+      "type": "text",
+      "content": "## The MCP Ecosystem\n\nThe official Anthropic-maintained MCP servers (filesystem, GitHub, SQLite, etc.) are just the starting point. The broader MCP community has built hundreds more.\n\nThe ecosystem is organized into a few main registries:\n\n**Official Anthropic servers:**\ngithub.com/modelcontextprotocol/servers\nThis is the official repository. Servers here are maintained by Anthropic or closely reviewed. They include filesystem, GitHub, SQLite, sequential-thinking, and others. Trust level: high.\n\n**Awesome MCP Servers list:**\ngithub.com/punkpeye/awesome-mcp-servers\nA community-curated list organized by category. Hundreds of servers with descriptions. Good for browsing by category to find what you need. Trust level: varies — evaluate each server individually.\n\n**mcp.so directory:**\nmcp.so\nA searchable web directory of MCP servers with ratings and install counts. Good for finding popular servers quickly.\n\n**Glama MCP directory:**\nglama.ai/mcp/servers\nAnother searchable directory with additional metadata and security information."
+    },
+    {
+      "type": "text",
+      "content": "## Categories of Community Servers\n\nThe community has built MCP servers across every major category:\n\n**Development tools:**\nJira, Linear, Sentry, Datadog, CircleCI, Docker, Kubernetes, AWS, Azure, GCP\n\n**Communication and productivity:**\nSlack, Discord, Telegram, Notion, Todoist, Obsidian, Joplin\n\n**Search and research:**\nBrave Search, Exa, Tavily, Arxiv, Wikipedia, YouTube\n\n**Data and analytics:**\nPostgreSQL, MySQL, MongoDB, Redis, Supabase, Airtable\n\n**Media and content:**\nSpotify, Apple Music, YouTube, RSS feeds, Twitter/X\n\n**Location and mapping:**\nGoogle Maps, OpenStreetMap, weather APIs\n\n**Finance:**\nStripe, PayPal, stock market data APIs\n\n**Consumer services:**\nAmazon, various e-commerce, calendar integrations beyond Google"
+    },
+    {
+      "type": "text",
+      "content": "## How to Evaluate a Community MCP Server\n\nBefore installing any community server, check these signals:\n\n**Maintenance status:**\n- When was the last commit? Servers unmaintained for over a year may have broken dependencies.\n- Are there open issues? Are they being addressed?\n- Does it have a clear version history?\n\n**Popularity:**\n- GitHub stars are a rough quality signal (more = more people vetted it)\n- npm download counts (for npm packages)\n- Check if it appears in multiple reputable lists\n\n**Required access:**\n- What accounts or API keys does it need?\n- What permissions does the OAuth flow request?\n- Is the permission scope appropriate for what the server does? (A note-taking MCP asking for camera access is a red flag.)\n\n**Security model:**\n- Is the code open source and auditable?\n- Does it send data to third-party servers unnecessarily?\n- Is authentication handled securely (OAuth vs. plaintext tokens)?\n\n**Documentation:**\n- Is there a README with clear setup instructions?\n- Are the tools and their parameters documented?\n- Are there known issues or limitations listed?"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**MCP servers run code on your machine.** An MCP server is a program that executes with your user account's permissions. Always check the source code (or at minimum the README) of any community server before installing. For servers requiring OAuth, verify the authorization screen lists only the permissions that make sense for that tool."
+    },
+    {
+      "type": "text",
+      "content": "## The Install Pattern Is Always the Same\n\nRegardless of which community server you're adding, the process is always:\n\n1. Find the server in a registry\n2. Read its README for the install command and config format\n3. Add the entry to your `settings.json`\n4. Restart Claude Code\n5. Verify with `/mcp`\n6. Test with a real task\n\nThe specific `command` and `args` values vary, but the JSON structure in `settings.json` is always the same pattern from lesson 8-2."
+    },
+    {
+      "type": "text",
+      "content": "## Keeping Your MCP Stack Manageable\n\nIt's tempting to install every interesting server you find. Resist this.\n\nEach running MCP server:\n- Consumes memory\n- Can produce tool call errors that confuse Claude\n- Adds startup time when Claude Code launches\n- Requires periodic updates and maintenance\n\nA good rule: only keep servers you actively use. If you installed a server for a specific task and haven't used it in a month, remove it from your config.\n\nThe MCP servers that will stay in your config permanently are the ones that connect to tools you use every day — your email, your calendar, your code repositories, your current project's database."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Find and Install One Community Server",
+      "content": "**Task 1 — Browse the registry:**\nOpen github.com/punkpeye/awesome-mcp-servers in your browser.\n\nScroll through the categories and read the descriptions. Look for a server that:\n- Connects to a tool you actually use\n- Has recent commits and reasonable stars\n- Has documentation that makes sense\n\nSpend at least 10 minutes browsing. Don't install the first thing you see — explore the options.\n\n**Task 2 — Evaluate your candidate:**\nOnce you've found a server you want, answer these questions:\n- When was the last commit?\n- What does it need to authenticate (API key, OAuth, nothing)?\n- What specific tools does it expose? What can you actually do with it?\n- Are there any concerning permission requirements?\n- Is there a clear install command in the README?\n\n**Task 3 — Install and configure it:**\nFollow the server's README instructions to:\n1. Get any required API key or token\n2. Add the config block to your `settings.json`\n3. Restart Claude Code\n4. Run `/mcp` to confirm it's connected\n\n**Task 4 — Use it for a real task:**\nAsk Claude to do something genuine with the new server. Not a 'hello world' test — an actual task you care about.\n\n**Task 5 — Document it:**\nCreate or update `notes/my-mcp-stack.md` with:\n- The name of the server you added\n- What it connects to\n- Why you chose it\n- One example of something useful you did with it\n\nThis file will become a useful reference as your MCP stack grows."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — MCP Registry Exploration",
+      "content": "Explore the MCP ecosystem to find servers for your specific needs.\n\n**Step 1 — Visit the main MCP directories:**\n- modelcontextprotocol.io (official)\n- GitHub: search \"mcp-server\" and filter by recent activity\n- Awesome MCP list (search GitHub for \"awesome-mcp\")\n\n**Step 2 — For your top 3 daily tools** (Slack, Notion, Jira, Salesforce, etc.), search for MCP servers.\n\n**Step 3 — For each server found**, evaluate:\n- Stars (popularity proxy)\n- Last commit (is it maintained?)\n- Issues open/closed ratio (actively supported?)\n- License (can you use it in your context?)\n\n**Step 4 — Ask Claude:** *\"How do I evaluate the quality and safety of a community MCP server before installing it? What red flags should make me avoid a server?\"*\n\n**Step 5 — Shortlist 2 servers** to try next."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Evaluate and Install a Community MCP Server",
+      "content": "Apply a rigorous evaluation process before installing a community MCP server.\n\n**Step 1 — Choose a community MCP server** from your shortlist.\n\n**Step 2 — Security evaluation before installation:**\n- Read the source code (if open source) — what data does it access? What does it send where?\n- Check the npm/pip package for known vulnerabilities\n- Verify the publisher is reputable\n- Read all permissions it requests\n\n**Step 3 — Ask Claude:** *\"I found this MCP server: [describe it, paste its README]. What security risks should I evaluate before installing? What questions should I ask the maintainer?\"*\n\n**Step 4 — Install in a test environment first** (not your production setup).\n\n**Step 5 — Test with minimal permissions** initially — don't grant full access on the first run. Verify it works, then grant additional permissions if needed."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Build a Personal MCP Server Catalogue",
+      "content": "Maintain a curated catalogue of MCP servers that are vetted and useful for your work.\n\n**Step 1 — Create a document** called `mcp-catalogue.md` in your project or personal notes.\n\n**Step 2 — Document each MCP server you use or evaluate:**\n```\n## [Server Name]\n**Package**: [npm/pip name]\n**Purpose**: [what it does]\n**Tools**: [list of exposed tools]\n**Access required**: [what credentials/permissions it needs]\n**Risk level**: [low/medium/high] and why\n**Status**: [installed/evaluating/rejected] and why\n**Last verified**: [date]\n```\n\n**Step 3 — Add 5 entries** for servers you've used or evaluated in this course.\n\n**Step 4 — Ask Claude:** *\"Review my MCP catalogue entries. What important information am I missing that would help me or a colleague make installation decisions?\"*\n\n**Step 5 — Share the catalogue** with any colleagues who also use Claude Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Design a Custom MCP Server Specification",
+      "content": "Specify a custom MCP server you would build for your own needs.\n\n**Step 1 — Identify your highest-value unsupported integration** — a tool or data source you use that has no good existing MCP server.\n\n**Step 2 — Design the server specification:**\n```\nServer name: [name]-mcp\nPurpose: [what problem it solves]\n\nTools (each with name, description, parameters, return format):\n1. [tool_name]: [what it does]\n   Parameters: [param: type, description]\n   Returns: [format]\n\n2. [tool_name]: ...\n\nAuthentication: [how it authenticates with the backing service]\nSecurity considerations: [what access it needs, what risks exist]\n```\n\n**Step 3 — Ask Claude to review the specification:** *\"Review this MCP server specification. What tools are missing? What parameter designs are incorrect or could be improved? What security issues haven't I addressed?\"*\n\n**Step 4 — Refine the specification** based on Claude's feedback.\n\n**Step 5 — Save the specification** — you'll build a version of this in Lesson 8-15."
+    },
+    {
+      "type": "quiz",
+      "question": "You find an MCP server on GitHub with 5 stars, last commit 2 years ago, and 15 open issues. Should you install it?",
+      "options": [
+        "Yes — any MCP server that works is worth using",
+        "Proceed with caution: low activity and unresolved issues suggest it may be unmaintained, potentially broken with current Claude Code versions, or missing security fixes",
+        "No — you should only use official MCP servers",
+        "Yes — old code is more stable than new code"
+      ],
+      "correct": 1,
+      "explanation": "Low stars, old commits, and unresolved issues are yellow flags, not automatic disqualifiers. Investigate: do any open issues report security vulnerabilities or broken functionality? Is the 2-year-old code still compatible with current Claude Code? Sometimes a small, stable server is maintained exactly as-is intentionally. But these signals warrant careful evaluation before installation, especially if the server requires sensitive credentials."
+    },
+    {
+      "type": "quiz",
+      "question": "A community MCP server requests access to your GitHub token, Slack workspace, and email credentials simultaneously. What is the appropriate response?",
+      "options": [
+        "Grant all access — this is how MCP servers work",
+        "Grant only the minimum permissions actually needed for your use case, evaluate why it needs all three, and consider whether a server combining this much access is a higher risk than individual servers",
+        "Refuse and only use official MCP servers",
+        "Grant access temporarily and revoke it after each session"
+      ],
+      "correct": 1,
+      "explanation": "A single MCP server with broad cross-service access is a higher-risk configuration — if it's compromised or has a bug, it could affect multiple services. Evaluate: does your use case actually require all three services together in a single server? Could you use separate, more focused servers for each? If you do grant access, use minimal-permission tokens (read-only where possible), and monitor the server's behaviour carefully during the first few sessions."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-14.** You can now independently find, evaluate, and install new MCP servers. Lesson 8-15 is the capstone for Part 8: building your own custom MCP server from scratch."
+    }
+  ],
+  "nextLesson": "8-15",
+  "prevLesson": "8-13"
+}

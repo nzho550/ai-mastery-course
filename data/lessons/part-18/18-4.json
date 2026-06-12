@@ -1,0 +1,117 @@
+{
+  "id": "18-4",
+  "title": "RAG & Personal Knowledge Systems",
+  "part": 18,
+  "estimatedMinutes": 65,
+  "tags": [
+    "advanced",
+    "rag",
+    "knowledge-base",
+    "notebooklm",
+    "embeddings"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nRAG — Retrieval-Augmented Generation — is one of the most important AI architecture concepts of the 2020s. It's the technology that lets AI answer questions about *your* documents, not just the internet. This lesson explains how it works (without code), why it matters, and how to build a personal knowledge system using RAG-powered tools that anyone can use."
+    },
+    {
+      "type": "text",
+      "content": "## What is RAG?\n\nRAG solves a fundamental problem: AI models have a knowledge cutoff and don't know your private documents. They can hallucinate facts. They can't answer questions about your company's policies, your research notes, or the 47 papers you've saved.\n\n**The analogy:** Imagine hiring a brilliant consultant. Without RAG, they can only work from what they remember from university and their general experience. With RAG, before they answer your question, they walk to a library of *your* documents, find the relevant pages, read them, and then answer — grounded in your actual materials.\n\n**How RAG works (plain English):**\n\n1. **Ingest:** Your documents are processed and broken into chunks (paragraphs or sections)\n2. **Embed:** Each chunk is converted into a mathematical representation (an \"embedding\") that captures its meaning\n3. **Store:** These embeddings are saved in a vector database — a database designed for similarity search\n4. **Query:** When you ask a question, your question is also converted to an embedding\n5. **Retrieve:** The system finds the document chunks whose embeddings are most similar to your question — the most relevant passages\n6. **Generate:** The AI reads those retrieved chunks and answers your question, grounded in your actual documents\n\n**Why this matters:**\n- The AI answers from your documents, not hallucinated memory\n- Every answer can be traced to a source\n- It scales: you can have thousands of documents in the knowledge base"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Industry fact:** In 2026, 73% of RAG failures happen at the retrieval stage, not the generation stage. The AI can't answer well if the wrong chunks are retrieved. This is why the quality of how you organise and format your documents matters — better structured documents produce better RAG results."
+    },
+    {
+      "type": "text",
+      "content": "## RAG Tools You Can Use Without Code\n\nYou don't need to build a RAG system — several powerful tools implement it for you:\n\n**NotebookLM (Google, free)**\n- Upload up to 50 sources per notebook: PDFs, Google Docs, YouTube videos, websites, audio files\n- NotebookLM indexes everything and lets you chat with your entire collection\n- Every answer is cited back to the exact source passage\n- Key feature: \"Audio Overview\" generates a podcast-style conversation about your sources\n- Best for: research projects, literature review, studying large document sets\n\n**Claude Projects (Claude Pro, $20/month)**\n- Upload documents to a Project; Claude remembers them across all conversations in that project\n- The entire project context is available in every new chat — you never have to re-paste documents\n- Each project has a custom instruction that sets context for every conversation\n- Best for: ongoing work with a consistent set of documents (company policies, research corpus, client materials)\n\n**ChatGPT with Files (GPT-4o)**\n- Upload files directly in a conversation; GPT-4o reads and analyses them\n- MyGPTs: create a custom GPT with a knowledge base of your documents\n- Best for: one-off document analysis, creating a custom assistant for a specific domain\n\n**Notion AI**\n- Notion AI can search and synthesise across all your Notion pages\n- Ask \"What have I written about X?\" and it finds relevant notes\n- Best for: people who already store knowledge in Notion\n\n**Private/secure RAG (for sensitive documents):**\n- **LM Studio + local embedding model** — everything stays on your machine\n- **AnythingLLM** — open-source desktop app for building local RAG knowledge bases\n- No data leaves your device; suitable for confidential business materials"
+    },
+    {
+      "type": "text",
+      "content": "## Building a NotebookLM Knowledge Base — Step by Step\n\nNotebookLM is the most accessible RAG tool for non-coders. Here's how to build a real knowledge base:\n\n**Step 1 — Create a Notebook**\n1. Go to notebooklm.google.com\n2. Click \"New Notebook\" → Name it clearly (e.g., \"Q3 Market Research\" or \"AI Course Notes\")\n3. You'll see the Sources panel on the left, Chat in the middle, and Notes on the right\n\n**Step 2 — Add Sources**\nClick \"+\" to add sources:\n- Upload PDFs directly\n- Paste a website URL (NotebookLM reads the page)\n- Link a Google Doc or Google Slide\n- Paste text directly\n- Add a YouTube URL (NotebookLM reads the transcript)\n\nBest practices for sources:\n- More structure = better retrieval (use PDFs with clear headings)\n- Name your sources clearly before uploading (the filename appears in citations)\n- Keep each notebook focused on one topic — don't mix unrelated documents\n\n**Step 3 — Chat With Your Sources**\nOnce sources are added, ask questions:\n```\nWhat are the main themes across all these documents?\n```\n```\nWhat do these sources say about [specific topic]?\n```\n```\nAre there any contradictions between what Source A and Source B say about [topic]?\n```\n```\nCreate a structured outline of all the key concepts covered across these sources\n```\n\nEvery answer includes citations — click them to jump to the exact passage.\n\n**Step 4 — Generate Notes**\nNotebookLM can auto-generate:\n- A summary of all sources\n- A FAQ document\n- A study guide\n- A briefing document\n- An Audio Overview (2-person podcast)\n\nClick \"Generate\" in the top bar to access these.\n\n**Step 5 — Save Insights**\nUse the Notes panel to save important insights during your session. Notes are saved with the notebook and searchable later."
+    },
+    {
+      "type": "text",
+      "content": "## Building a Claude Projects Knowledge System\n\nFor ongoing professional work, Claude Projects is more practical than NotebookLM because it's integrated into your regular Claude workflow.\n\n**Setting up a Project:**\n1. In Claude.ai, click \"Projects\" in the sidebar → \"New Project\"\n2. Name it for a specific domain: \"Client — ACME Corp\", \"Regulatory Research\", \"Product Knowledge\"\n3. Upload your documents: company policies, research papers, client briefs, style guides\n4. Write a Project Instruction (the custom context Claude reads in every conversation)\n\n**Powerful Project Instructions:**\n\nWeak instruction:\n```\nYou are a helpful assistant.\n```\n\nStrong instruction:\n```\nYou are an AI assistant helping me with [specific domain].\n\nContext about me: [your role, company, key responsibilities]\nDocuments in this project: [list what's uploaded and what each contains]\nHow I work: [your preferences — tone, format, level of detail]\nAlways: [key rules — e.g., \"always cite the specific policy document when referencing company policy\"]\nNever: [things to avoid — e.g., \"never recommend actions outside our compliance framework\"]\n```\n\n**Effective questions for Claude Projects:**\n```\nBased on our policy documents, what is the correct process for [situation]?\n```\n```\nA client is asking about [topic]. Based on the documents in this project, what should I tell them?\n```\n```\nCompare what the documents say about [topic] — are there any inconsistencies?\n```\n```\nCreate a FAQ for a new team member based on the documents in this project\n```"
+    },
+    {
+      "type": "text",
+      "content": "## RAG Best Practices — Getting the Most From Your Knowledge Base\n\n**Document quality matters enormously:**\n- PDFs with clear headings → much better retrieval than scanned images or poorly formatted PDFs\n- Consistent naming conventions → \"Market_Research_2026_Q2.pdf\" not \"scan001.pdf\"\n- One topic per document → mixing topics confuses retrieval\n- Summaries at the top of documents → these often get retrieved even when a specific section is queried\n\n**Query strategies for better retrieval:**\n- Be specific: \"What does our refund policy say about digital products purchased outside Australia?\" not just \"refund policy\"\n- Reference specific documents: \"According to the compliance handbook, what...?\"\n- Ask for citations: \"Give me the exact passage that addresses this — don't paraphrase\"\n- Explore contradictions: \"Do any documents disagree on this point?\"\n\n**What RAG tools get wrong (and how to catch it):**\n- **Retrieval misses:** The tool returns plausible but wrong passages — always check citations\n- **Out-of-date documents:** If you update a source document, re-upload it — the old version is cached\n- **Cross-document synthesis:** RAG is better at finding information than reasoning across documents — for complex synthesis, take the retrieved passages and do a separate Claude analysis step\n- **Ambiguous chunks:** If a passage makes no sense without surrounding context, the retrieval system may return it confusingly — ensure your documents have good context within each paragraph"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Build a NotebookLM Knowledge Base on a Real Topic",
+      "content": "This workshop produces a working, queryable knowledge base on a topic you actually care about — using NotebookLM's RAG capabilities.\n\n**Choose your topic (2 minutes)**\n\nPick a topic where you have, or can gather, 4-8 documents. Good options:\n- Your industry or field (industry reports, key papers, reference guides)\n- A project you're currently working on (related research, meeting notes, background docs)\n- A topic you're learning (textbook chapters, online articles, tutorials)\n- Your company's policies and procedures (if non-confidential)\n\n**Part A — Source collection (10 minutes)**\n\nGather 4-8 sources:\n- Find 3-4 PDF reports or articles on your topic (search Google for site:*.pdf [your topic])\n- Save 1-2 relevant website URLs\n- Write a 200-300 word summary of your own context (paste it as a source)\n\n**Part B — Build the notebook (10 minutes)**\n\n1. Create a new notebook at notebooklm.google.com\n2. Upload all your sources\n3. Wait for indexing to complete (usually 30-60 seconds)\n4. Verify sources loaded: click each source and check it shows content\n\n**Part C — Explore and query (15 minutes)**\n\nRun these queries in sequence:\n\n1. *Overview:* \"Give me a structured summary of the key themes across all my sources\"\n2. *Specific question:* Ask one specific question you'd normally Google — but now ask it against your actual sources\n3. *Comparison:* \"Do any of my sources disagree on [specific point]?\"\n4. *Gap finding:* \"Based on these sources, what important questions are NOT answered here?\"\n5. *Synthesis:* \"Write a 300-word briefing document on [topic] based on these sources\"\n\nFor each answer, click at least one citation to verify it correctly maps to the source passage.\n\n**Part D — Generate an overview (5 minutes)**\n\nClick \"Generate\" in NotebookLM and create an \"Audio Overview.\" Listen to the 5-10 minute AI-generated podcast discussing your sources. This is one of the most remarkable features in any AI tool currently available.\n\n**Reflect:**\n- What was the most surprising thing NotebookLM found across your sources?\n- What would have taken you the longest to find manually?\n- How would you use this notebook going forward for this topic?\n\nSave the notebook — it remains queryable indefinitely."
+    },
+    {
+      "type": "quiz",
+      "question": "You've uploaded 40 policy documents to NotebookLM for your team. A colleague asks a question and NotebookLM gives an answer that cites a policy from 2022 — but you know the policy was updated in 2024. What happened and how do you fix it?",
+      "options": [
+        "NotebookLM is broken — it should always use the newest documents",
+        "The 2022 document is still in the notebook and NotebookLM retrieved it because the query matched it; re-upload the 2024 version and delete the 2022 document from the notebook",
+        "Ask NotebookLM to only use documents from 2024 onwards",
+        "The answer is probably still correct — policies don't change much"
+      ],
+      "correct": 1,
+      "explanation": "RAG systems retrieve whichever document chunks best match the query — they don't automatically prefer newer documents. If the 2022 policy is still in the notebook, it will be retrieved when relevant. The fix is to remove outdated source documents and re-upload current versions. This is a critical maintenance task for RAG knowledge bases: when source documents are updated, the knowledge base must be updated too. Option C doesn't work — RAG tools don't have a built-in date filter for retrieval."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — RAG Concept Deep Dive",
+      "content": "Understand Retrieval-Augmented Generation (RAG) at a practical level.\n\n**Step 1 — Ask Claude:** \"Explain RAG to someone who has never heard of it. What problem does it solve? How does it work at a high level? What are the most common use cases? What are its limitations?\"\n\n**Step 2 — Ask the follow-up:** \"Compare RAG to: (1) fine-tuning a model on your data, (2) prompt engineering with pasted context, (3) a vector database. When is each approach better?\"\n\n**Step 3 — Map RAG to your use case:** Do you have a knowledge management problem that RAG would solve? What data would you index?\n\n**Step 4 — Ask Claude:** \"For [your use case], would RAG be the right approach or would one of the alternatives be simpler and adequate?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Simple RAG System",
+      "content": "Build a basic RAG system over your own documents.\n\n**Step 1 — Ask Claude Code** to build a simple RAG system:\n```\nBuild a simple RAG system in Python:\n1. Document ingestion: read markdown/text files from a folder, split into chunks\n2. Embedding: use the Anthropic API (or sentence-transformers for free local embeddings) to create embeddings\n3. Storage: save embeddings in a simple FAISS index\n4. Query: embed the user's question, find the 3 most similar chunks, pass them as context to Claude for answer generation\n5. CLI interface: query the system from the command line\n```\n\n**Step 2 — Feed your own documents** (notes, documentation, reports) into the system.\n\n**Step 3 — Test with 5 questions** that should be answerable from your documents.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review this RAG implementation. What are the 3 most common failure modes in simple RAG systems that I should test for?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — RAG Quality Evaluation",
+      "content": "Evaluate and improve your RAG system's retrieval quality.\n\n**Step 1 — Ask Claude:** \"What are the most common ways RAG systems fail to retrieve the right context? For each failure mode, what improvement would fix it?\"\n\n**Step 2 — Test these failure modes** in your RAG system:\n- Semantic mismatch: question uses different vocabulary than the document\n- Chunking problems: answer spans two chunks\n- Irrelevant retrieval: similar-sounding but unrelated content retrieved\n\n**Step 3 — For each failure**, implement one improvement:\n- Semantic mismatch: try query expansion (have Claude rephrase the question before embedding)\n- Chunking: increase chunk overlap\n- Irrelevant retrieval: add metadata filtering\n\n**Step 4 — Measure improvement** — does the fix help?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Personal Knowledge Engine",
+      "content": "Build a personal knowledge engine over your accumulated notes and documents.\n\n**Step 1 — Identify all your knowledge sources:**\n- Personal notes (Obsidian, Notion, markdown files)\n- Saved articles or documents\n- Meeting notes\n- Research briefs\n\n**Step 2 — Build an ingestion pipeline** that indexes all of these sources:\n```\n1. Collect all documents from configured folders\n2. Convert non-markdown formats to text\n3. Chunk with appropriate sizes for each document type\n4. Embed and store in FAISS\n5. Update index when new documents are added\n```\n\n**Step 3 — Create a query interface** that feels natural to use.\n\n**Step 4 — Test the knowledge engine** by asking questions about topics you've researched in the past. Does it surface relevant material you'd forgotten?"
+    },
+    {
+      "type": "quiz",
+      "question": "Your RAG system retrieves 3 document chunks for a query but the actual answer is in a 4th chunk it missed. What is the most likely cause?",
+      "options": [
+        "The embedding model is broken",
+        "The relevant chunk may have low semantic similarity to the query vocabulary despite containing the answer — try hybrid search (semantic + keyword matching) or increase k (retrieve more chunks)",
+        "The chunk was too long to embed",
+        "The FAISS index is corrupted"
+      ],
+      "correct": 1,
+      "explanation": "Retrieval failure is often a vocabulary mismatch problem. \"What are the trade-offs of microservices?\" might miss a chunk that says \"disadvantages of service-oriented architecture\" because the embedding spaces are similar but not identical. Solutions: (1) retrieve more chunks (top-10 instead of top-3) and let the LLM filter; (2) hybrid search combining semantic similarity with BM25 keyword matching; (3) query expansion — have the LLM generate alternative phrasings of the question before retrieval."
+    },
+    {
+      "type": "quiz",
+      "question": "You build a RAG system over company documentation. An employee asks a question and gets an outdated answer from a document that was superseded. What went wrong and how do you prevent it?",
+      "options": [
+        "RAG cannot handle document updates",
+        "The outdated document was still in the index — implement document versioning: when a document is updated, remove the old embeddings and add the new ones; add document date metadata so the LLM can prefer recent sources",
+        "The user should check document dates manually",
+        "Use a smaller chunk size to avoid storing outdated content"
+      ],
+      "correct": 1,
+      "explanation": "RAG systems that index static snapshots of documentation quickly become stale. Prevention: (1) implement an update pipeline that detects changed files and refreshes their embeddings; (2) store document metadata (date, version, supersedes) and pass it to the LLM; (3) instruct the LLM to prefer more recent sources when dates differ; (4) add a \"last updated\" field to your document store and display it alongside answers so users can judge relevance."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 18-4.** You understand how RAG works, can build a NotebookLM knowledge base, and know how to structure Claude Projects for ongoing professional work. You also know the failure modes to watch for. RAG-powered knowledge systems are the difference between AI that knows about the world and AI that knows about *your* world."
+    }
+  ],
+  "nextLesson": "18-5",
+  "prevLesson": "18-3"
+}

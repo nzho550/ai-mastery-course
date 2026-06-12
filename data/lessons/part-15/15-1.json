@@ -1,0 +1,116 @@
+{
+  "id": "15-1",
+  "title": "AI as Your Research Partner",
+  "part": 15,
+  "estimatedMinutes": 60,
+  "tags": ["research", "beginner", "workflow", "knowledge-work"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThis lesson is for anyone who needs to research, understand, or make sense of complex topics — without necessarily knowing how to code. By the end you'll have a clear five-stage research workflow, specific prompt templates for each stage, a framework for choosing the right AI tool for each research task, and techniques for verifying AI-generated information. Parts 15–17 require no code, no command line, and no technical setup."
+    },
+    {
+      "type": "text",
+      "content": "## Research Before AI vs. Research With AI\n\n**Before AI**, researching an unfamiliar topic looked like this:\n1. Search Google for introductory articles\n2. Read 10–15 pages to build basic understanding\n3. Save links in a bookmarks folder or document\n4. Manually take notes from each source\n5. Struggle to connect ideas across different sources\n6. Write a summary from memory and fragmentary notes\n\nThis works — but it's slow, and the synthesis step (combining insights from multiple sources) is where most people get stuck.\n\n**With AI**, the same process compresses dramatically:\n1. Ask AI to map the topic, identify key sub-questions, and reveal what you don't know yet\n2. Use AI search tools (Perplexity) for cited, current information from real sources\n3. Upload documents and PDFs for AI to read and summarise — 50 pages in 60 seconds\n4. Ask AI to compare, contrast, and synthesise across sources you've gathered\n5. Generate a structured output (report, briefing, presentation) from your findings\n\nThe parts AI handles best: speed-reading, pattern recognition across sources, generating structure, and first drafts. The parts only you can do: deciding what questions matter, judging source credibility, applying domain expertise, and taking accountability for the conclusions."
+    },
+    {
+      "type": "text",
+      "content": "## Choosing the Right Tool for Your Research Type\n\nDifferent research tasks call for different tools. Using the wrong tool is the most common research productivity mistake.\n\n| Research task | Best tool | Why |\n|---------------|-----------|-----|\n| Current events, recent facts, statistics | **Perplexity AI** | Searches the live web, cites sources, updated daily |\n| Understanding a concept, theory, or domain | **Claude** | Strong conceptual reasoning, can explain at any depth |\n| Long documents, PDFs, reports | **Claude.ai** (with file upload) | Can read entire documents and answer questions about them |\n| Academic papers and literature | **Consensus, Semantic Scholar, or Perplexity** | Indexed academic databases with citation data |\n| Code-related research | **Claude Code or GitHub Copilot Chat** | Context-aware, can search repositories |\n| Quick factual lookups | **ChatGPT with web search or Perplexity** | Fast, conversational, real-time |\n| Competitive and market intelligence | **Perplexity + Claude synthesis** | Perplexity for current data, Claude for analysis |\n\n**The practical shortcut:** When in doubt, use Perplexity for anything that might have changed in the last year, and Claude for everything conceptual or analytical. These two tools cover 90% of research tasks.\n\n**A note on hallucination:** Claude's training cutoff is mid-2025. For anything after that, or for specific current statistics, always use a tool that searches live sources. Claude is excellent for synthesising and analysing — not for real-time facts."
+    },
+    {
+      "type": "text",
+      "content": "## The Five-Stage Research Workflow\n\nEvery research task — whether it's a 30-minute background check or a 3-week deep dive — follows this pattern. Each stage has a specific AI role.\n\n---\n\n**Stage 1 — Map:** Understand the landscape.\n\nBefore researching, you need to know what you don't know. This prompt generates a research map:\n\n```\nI need to research [topic] for [purpose/context].\n\nI'm currently at [beginner / intermediate / experienced] level on this topic.\n\nPlease:\n1. Give me a 200-word overview of the topic\n2. Identify the 5–7 most important sub-questions I should investigate\n3. List key terminology I should understand\n4. Name the most important debates, competing views, or open questions\n5. Tell me what I should be sceptical about — what's commonly misunderstood?\n```\n\nThis gives you a research brief before you've read a single source.\n\n---\n\n**Stage 2 — Collect:** Gather sources.\n\nWith your map in hand, search for sources that answer your specific sub-questions. Prompt for Perplexity:\n\n```\n[Your specific sub-question from Stage 1]\n\nI need recent, credible information. Please:\n- Give me the current consensus view\n- Cite specific sources I can verify\n- Note any significant recent changes or updates (2024–2026)\n- Flag anything where sources significantly disagree\n```\n\nFor each sub-question, run a targeted search. Collect the key findings (not the full text) in a running document.\n\n---\n\n**Stage 3 — Read:** Extract what matters.\n\nFor documents, reports, or PDFs, upload to Claude.ai and ask:\n\n```\nI've uploaded [document name]. Please:\n1. Summarise the main argument or findings in 200 words\n2. List the 5 most important facts, statistics, or claims\n3. Identify any methodology limitations or caveats I should know\n4. What does this document *not* cover that's relevant to [your research question]?\n```\n\nFor web articles you've saved, paste the text into Claude and use the same prompt.\n\n---\n\n**Stage 4 — Synthesise:** Find the patterns.\n\nOnce you have findings from multiple sources, synthesis is where AI adds its greatest value:\n\n```\nHere are my research findings on [topic]: [paste your notes/findings]\n\nPlease synthesise these into:\n1. The core consensus — what most sources agree on\n2. Key disagreements — where sources diverge and why\n3. Gaps — important questions that none of my sources fully answered\n4. Implications — what these findings mean for [my specific context/decision]\n5. What I should research further before drawing conclusions\n```\n\n---\n\n**Stage 5 — Write:** Produce the output.\n\nWith your synthesis, generate a structured draft:\n\n```\nBased on this research synthesis: [paste synthesis]\n\nWrite a [type of document: briefing note / report / recommendation / summary] for\n[audience: my manager / the team / a non-specialist reader].\n\nFormat: [structure you want]\nLength: [target word count]\nTone: [professional / accessible / technical]\n\nInclude: key findings, evidence for each, implications, and recommended next steps.\n```\n\nPart 16 covers the document writing stage in much more depth."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The verification rule:** Never use an AI-generated fact in a formal document without checking the source. AI can generate plausible-sounding statistics, names, studies, and quotes that don't exist. This is called hallucination — and it's most dangerous in research contexts where the output will be trusted and acted upon. The rule of thumb: if it's specific (a number, a name, a date, a quote), verify it before you cite it."
+    },
+    {
+      "type": "text",
+      "content": "## What AI Is Good At (and What It Isn't)\n\n**AI is excellent at:**\n- Explaining unfamiliar concepts in plain language at any level of detail\n- Speed-reading and summarising long documents (50-page report in 60 seconds)\n- Finding connections and patterns across multiple sources simultaneously\n- Generating structured outlines, frameworks, and comparison tables\n- Asking useful follow-up questions you hadn't considered\n- Translating between technical and non-technical language\n- Generating first drafts that you refine, rather than writing from scratch\n\n**AI still needs your judgment for:**\n- Deciding which questions are worth asking\n- Evaluating source credibility and detecting hallucination\n- Applying domain expertise and local context that AI doesn't have\n- Making decisions that require accountability — AI can inform, not decide\n- Anything where being wrong has significant consequences — verify first\n\n**The experienced researcher mindset:** Treat AI as a highly capable research assistant who is fast, reads everything, never gets tired — but occasionally makes things up with complete confidence. Your job is to point it at the right questions, evaluate its outputs critically, and verify specific claims before you rely on them."
+    },
+    {
+      "type": "text",
+      "content": "## Source Evaluation and Verification\n\nWith AI making it easy to generate apparently authoritative information, verifying sources is more important than ever.\n\n**The SIFT method** (adapted for AI research):\n- **Stop** — Before sharing or acting on an AI finding, pause. Is this the kind of claim that needs verification?\n- **Investigate the source** — For Perplexity results, click the cited sources. Do they actually say what the summary claims?\n- **Find better coverage** — Is there a more authoritative source? A primary source (the original study, the official government page) is stronger than a summary of it.\n- **Trace claims** — If AI cites a statistic, trace it to the original source. Often you'll find the statistic was misquoted, taken out of context, or is older than the AI implied.\n\n**Quick verification checklist:**\n- [ ] Is the claim specific (a number, name, date, quote)? If so, verify it directly.\n- [ ] Does the source exist? (Search for it yourself, don't trust the AI's citation.)\n- [ ] Is the information current? (When was the source published?)\n- [ ] Does the source actually support the claim made? (Read the passage, not just the headline.)\n- [ ] Are multiple independent sources saying the same thing?\n\n**The 20-second test:** For any important fact, paste it into a search engine. If it's real and widely accepted, you'll find it in multiple credible sources within 20 seconds. If you can't verify it quickly, treat it as unverified."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Managing research with a running document:** Don't try to hold research in memory or browser tabs. Create a research document with three sections: **Questions** (what you need to find out), **Findings** (what each source says), and **Synthesis** (the patterns across sources). Update it as you go. This becomes your context for Stage 4 synthesis prompts — paste the entire Findings section and ask Claude to synthesise it. The structure makes the AI output significantly better."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Map a Topic You Need to Research",
+      "content": "Apply the five-stage workflow to a real research topic you need to work on.\n\n**Step 1 — Define your research topic (3 minutes)**\n\nChoose something you genuinely need to investigate — not a hypothetical. Good candidates:\n- A topic you've been meaning to get up to speed on\n- A question your manager or team keeps asking you\n- Background for a decision you need to make\n- A domain you're entering for the first time\n\n**Step 2 — Run the Stage 1 mapping prompt (5 minutes)**\n\nUse the mapping prompt from Stage 1 with your chosen topic. Be specific about your context — why you need this information changes what sub-questions matter.\n\nAfter Claude responds, review the list of sub-questions. Add:\n- Any obvious question it missed that you already know you need\n- Any sub-question that isn't relevant to your specific context (remove it)\n\n**Step 3 — Research one sub-question on Perplexity (5 minutes)**\n\nTake the most important sub-question from your mapping. Go to perplexity.ai and search for it. After getting results:\n- Click at least one of the cited sources to verify it says what the summary claims\n- Note one thing that surprised you or that you didn't already know\n- Note one thing you'd want to verify further before using it professionally\n\n**Step 4 — Build your research document**\n\nCreate a document (Word, Notion, Google Docs) with three sections:\n- Questions: paste your sub-questions list from Step 2\n- Findings: paste your Perplexity results from Step 3\n- Synthesis: empty for now — you'll fill this in across Part 15 lessons\n\nSave this. You'll add to it across the next six lessons as you practice each stage.\n\n**Reflection:**\n- Which stage of the five-stage workflow do you currently spend the most time on?\n- Which stage do you think AI will help you the most?"
+    },
+    {
+      "type": "quiz",
+      "question": "You're researching what competitors announced at a major industry conference last week. Which tool is most appropriate for this research, and why?",
+      "options": [
+        "Claude — it has comprehensive knowledge of industry events",
+        "Perplexity AI — it searches the live web and cites current sources, so it can find last week's announcements",
+        "ChatGPT without web search — its training data is comprehensive enough",
+        "A traditional Google search is better than AI for current events"
+      ],
+      "correct": 1,
+      "explanation": "For anything recent (last week, last month, the past year), Perplexity AI is the right tool because it searches the live web and cites sources, meaning it can find information published after any AI's training cutoff. Claude's training data ends mid-2025 and doesn't include last week's announcements. ChatGPT without web search has the same limitation. Traditional Google search (D) can work but requires more manual synthesis — Perplexity gives you cited results plus a synthesis in one step, making it more efficient for research tasks."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Quick Drill: Research Map in 8 Minutes",
+      "content": "Practice the Stage 1 mapping prompt on a topic from your real work.\n\n1. Open Claude.ai (free tier is fine).\n2. Pick a topic you genuinely need to understand better — something your manager has mentioned, a skill gap you want to close, or background for an upcoming decision.\n3. Paste this prompt with your topic filled in:\n\n'I need to research [YOUR TOPIC] for [your purpose/context]. I'm currently at [beginner/intermediate/experienced] level. Please: (1) give me a 150-word overview, (2) identify the 5 most important sub-questions I should investigate, (3) list key terminology I need to understand, (4) name the main debates or competing views, (5) tell me what's commonly misunderstood.'\n\n4. Read Claude's response. Add one sub-question it missed that you know you'll need. Remove any sub-question irrelevant to your context.\n5. Copy your refined sub-question list.\n6. Now paste your sub-question list back to Claude and say: 'Review this research plan. Are these the right questions for someone in [your role] trying to [your purpose]? What would a more experienced researcher add or change?'\n7. Apply at least one suggestion Claude makes.\n\nYou now have a research brief you can act on — not a vague topic to explore. Notice how the review step sharpened the questions."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build It With AI: Complete Research Brief",
+      "content": "Use this workshop to produce a real research brief you'll actually use at work. Budget 30 minutes.\n\n1. Choose a topic that matters to your job right now — a new regulation, a competitor move, an emerging technology, a process improvement area. Pick something your manager or team would value knowing more about.\n2. Open Claude.ai. Run the Stage 1 mapping prompt with full detail about your context.\n3. Open Perplexity.ai in a second browser tab. For each of the top 3 sub-questions Claude identified, run a Perplexity search. Copy the summary and at least one cited URL per question into a new document.\n4. Back in Claude, paste all your Perplexity findings and say: 'These are my research findings. Synthesise them into: (1) the core consensus, (2) key disagreements between sources, (3) gaps not yet answered, (4) implications for [your specific role/context], (5) 3 things to research further.'\n5. Ask Claude to write a 400-word research brief from the synthesis: audience is [your manager or team], tone is professional, structure is: Background / Key Findings / Implications / Recommended Next Steps.\n6. Save this draft.\n\n**AI REVIEW STEP:** Paste your complete research brief to Claude and say: 'Review this professionally. Do not validate it — identify 3 specific weaknesses: unclear sections, unsupported claims, missing content, or logical gaps. Then suggest specific fixes.'\n\n7. Read the three weaknesses Claude identifies. Implement at least 2 of the suggested fixes.\n8. Save the reviewed, improved brief. This is a real work deliverable."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Stakeholder Review Simulation",
+      "content": "Simulate how your manager would react to your research brief before you share it.\n\n1. Take the research brief you produced in Workshop B.\n2. Open Claude.ai and paste this prompt:\n\n'You are a busy senior manager who is results-focused and sceptical of anything speculative. Read this research brief and respond as that manager: What questions do you have? What concerns you? What feels unsupported? What is missing that you'd need before acting on this? [PASTE YOUR BRIEF]'\n\n3. Read Claude's simulated response. Identify the one concern that feels most legitimate.\n4. Now address that concern: either revise the brief to answer it, or draft a one-paragraph response you would give verbally if asked.\n5. Optional: repeat with a different stakeholder. Change the persona to: 'You are a colleague who is very detail-oriented and will fact-check every statistic.' What does this person push back on?\n\nThe goal: go into any real conversation about your research with the most obvious objections already addressed."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Real Work Sprint: Research Your Next Project",
+      "content": "Apply the five-stage workflow to a real upcoming project or decision in your work. This is not a practice exercise — the output is something you keep and use.\n\n1. Identify a project, initiative, or significant decision you're working on in the next 2–4 weeks.\n2. Run Stage 1 (Map) with Claude — get the research landscape.\n3. Run Stage 2 (Collect) with Perplexity — answer at least 3 of the most important sub-questions with cited sources.\n4. Run Stage 4 (Synthesise) with Claude — paste your findings and get patterns, gaps, and implications.\n5. Create a running research document with three sections: Questions / Findings (with source URLs) / Synthesis. You'll update this as the project progresses.\n6. Identify the one gap in your research that would most change your plan if you filled it. Add it to your to-do list.\n\nAt the end: in one sentence, what do you now know about this project that you didn't know before starting?"
+    },
+    {
+      "type": "quiz",
+      "question": "You paste scattered notes from three different sources into Claude and ask it to synthesise them. Claude produces a synthesis that includes a specific statistic you don't recognise from your notes. What should you do?",
+      "options": [
+        "Trust it — Claude wouldn't add information without a reason",
+        "Ask Claude to identify exactly which of your notes contains that statistic; if it can't, remove the statistic or verify it independently before using it",
+        "Include it in your document but add a footnote saying the source is uncertain",
+        "Delete the entire synthesis and start over"
+      ],
+      "correct": 1,
+      "explanation": "When AI adds specific facts (especially statistics) that don't come from your provided notes, you should immediately ask Claude to cite where in your notes it found that information. If it can't produce the passage, the statistic was likely hallucinated or drawn from Claude's general training — not your verified research. Remove it or verify it independently before including it in any professional document. Including it with an uncertainty footnote (C) is better than nothing but still risks spreading unverified information. Starting over (D) is wasteful — the synthesis is likely otherwise good; you just need to handle this one claim."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague says: 'I just ask Claude everything — I don't bother with Perplexity.' What is the main risk with this approach for professional research?",
+      "options": [
+        "Claude gives worse answers than Perplexity for all topics",
+        "Claude's training has a cutoff date, so recent statistics, regulations, and events may be outdated or missing — and Claude won't always flag when its information is stale",
+        "Claude doesn't understand professional topics",
+        "Perplexity is always more accurate than Claude"
+      ],
+      "correct": 1,
+      "explanation": "Claude is excellent for conceptual understanding, synthesis, and analysis — but its training data has a cutoff date (mid-2025). For anything that may have changed recently — regulations, market data, competitor moves, recent research findings — Claude may give confidently stated but outdated information, and it doesn't always flag uncertainty. Perplexity searches the live web and cites current sources. Using both tools for their respective strengths (Claude for concepts, Perplexity for current facts) gives you the best of both. Neither tool is universally superior — they're complementary."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 15-1.** You now have the five-stage research workflow, specific prompt templates for each stage, a framework for choosing the right research tool, and a verification approach for AI-generated information. The next six lessons cover each research tool and technique in depth."
+    }
+  ],
+  "nextLesson": "15-2",
+  "prevLesson": "14-5"
+}

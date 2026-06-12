@@ -1,0 +1,121 @@
+{
+  "id": "17-6",
+  "title": "Project Capstone — The AI-Augmented Work Sprint",
+  "part": 17,
+  "estimatedMinutes": 85,
+  "tags": [
+    "projects",
+    "beginner",
+    "capstone",
+    "hands-on",
+    "workflow"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThis capstone lesson brings together everything from Parts 15, 16, and 17 into a single, realistic work sprint. You'll plan, research, document, and communicate a real project or initiative from start to finish — using AI as your partner throughout. Unlike previous workshops, this one runs as an end-to-end simulation of how professional AI-augmented work actually looks: iterative, messy at first, progressively more structured, and ending with deliverables you'd actually use."
+    },
+    {
+      "type": "text",
+      "content": "## What You're Going to Build\n\nYou'll run a complete work sprint on a real project, initiative, or significant task from your professional life. The sprint produces seven deliverables:\n\n1. **Research brief** — The 3–5 most important findings that should inform your project plan\n2. **Project plan** — Phases, tasks, timeline, risks, stakeholders\n3. **One decision record** — Capturing the most important choice the plan reflects\n4. **Key document** — A report, proposal, SOP, or presentation relevant to the project\n5. **Two stakeholder communications** — One for the decision-maker, one for the people doing the work\n6. **A quality review** — A structured assessment of the document you produced\n7. **Prepared answer to the hardest objection** — What will the decision-maker push back on?\n\nThis is not a simulation on a made-up topic. Use something real. The value comes from producing work you'll actually use — and discovering which parts of the process AI accelerates most."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Choosing your project:** Pick something at the right scale — real enough to be meaningful, scoped enough to be completable in a sprint. Good examples: launching a new team process, writing a business case for a tool or resource, planning a department event, creating onboarding documentation, proposing a change to how your team works. Avoid: multi-year programmes, anything requiring extensive external data you don't have, or anything confidential you can't paste into an AI tool."
+    },
+    {
+      "type": "text",
+      "content": "## Phase 1: Research (15 minutes)\n\n**Define your planning questions (5 minutes):**\n```\nI'm planning [project]. To plan it properly, I need answers to:\n[list 3–5 questions your plan needs to answer]\n\nBased on this goal and context, what additional questions should I be able to answer?\nI'm especially interested in:\n- Regulatory or compliance requirements\n- What similar projects have done and what worked\n- Common failure modes — what goes wrong in projects like this\n- Costs, resources, or time estimates\n```\n\n**Research the top 3 questions (7 minutes):**\nUse Perplexity for current factual questions (regulations, costs, recent examples). Use Claude for analysis and synthesis.\n\nFor each question, record: finding + source + impact on plan.\n\n**Synthesise into a research brief (3 minutes):**\n```\nHere are my research notes: [paste]\nSummarise the 5 most important findings that should inform my project plan.\nFor each, state: what I found, why it matters, and how it changes what I'd plan.\n```\n\nSave as **Deliverable 1: Research Brief**."
+    },
+    {
+      "type": "text",
+      "content": "## Phase 2: Plan (15 minutes)\n\n**Run the kickoff prompt (8 minutes):**\n```\nI'm planning [project]. Here is what I know and what my research has found:\n[paste your goal, context, and research brief]\n\nPlease:\n1. Break the project into phases and key tasks\n2. Identify the 5 biggest risks — rate each High/Medium/Low for likelihood and impact\n3. List assumptions that need to be verified before work starts\n4. Suggest a realistic timeline (with a 20% buffer built in)\n5. Identify who should be involved and in what role (use RACI: Responsible, Accountable, Consulted, Informed)\n6. Identify the critical path — which tasks must not slip?\n```\n\n**Create the project plan document (5 minutes):**\n```\nConvert this into a shareable project plan with:\n- Project overview (name, owner, goal, deadline)\n- Success criteria (measurable outcomes, not activities)\n- Scope: what is IN scope and explicitly OUT of scope\n- Phases and tasks table (Phase | Tasks | Owner | Target date | Status)\n- Risk register (Risk | Likelihood | Impact | Mitigation | Owner)\n- Stakeholder map (Name/Role | RACI | Communication frequency)\n- Open decisions — things to be confirmed before work begins\n```\n\n**Add one decision record (2 minutes):**\nFor the most important decision your plan reflects (e.g., which approach to take, which tool to use), write a decision record:\n```\nDecision: [what was decided]\nContext: [why this decision was needed]\nOptions considered: [what alternatives were evaluated]\nRationale: [why this option was chosen]\nConsequences: [what this decision enables and what it rules out]\n```\n\nSave as **Deliverables 2 and 3: Project Plan + Decision Record**."
+    },
+    {
+      "type": "text",
+      "content": "## Phase 3: Create a Key Document (20 minutes)\n\nChoose the document type most relevant to your project:\n\n**Option A — Business proposal or report** (use lesson 16-2 workflow)\n**Option B — Presentation** (use lesson 16-4 workflow with Gamma or Claude)\n**Option C — SOP or process document** (use lesson 16-7 workflow)\n**Option D — Data analysis writeup** (use lesson 16-3 if you have data)\n\nFor whichever you choose:\n1. Provide Claude with your research brief and project plan as context: *\"Here is my research brief and project plan. Write [document type] using this as background.\"*\n2. Generate a full draft\n3. Run a targeted refinement: identify the weakest section and improve it specifically\n4. Write the executive summary last — after the body is finalised\n\nSave as **Deliverable 4: Key Document**."
+    },
+    {
+      "type": "text",
+      "content": "## Phase 4: Quality Review (5 minutes)\n\nBefore communicating, run a structured quality review on your key document:\n\n```\nReview this [document type] critically:\n\n1. Accuracy: Are there any claims that seem unsupported or that I should verify before sharing?\n2. Completeness: What important question does this document NOT answer that a reader would ask?\n3. Clarity: Is there any section that a non-expert reader would find confusing or ambiguous?\n4. Audience fit: Is this calibrated correctly for [describe your intended reader]?\n5. Action clarity: After reading this, does the reader know exactly what to do or decide?\n\nFor each issue you identify, suggest a specific fix.\n```\n\nFix at least two issues the review surfaces. This step is often skipped when time is short — don't skip it. A single inaccuracy or gap in a document that goes to a decision-maker can undermine the whole project.\n\nSave as **Deliverable 5: Quality-Reviewed Document**."
+    },
+    {
+      "type": "text",
+      "content": "## Phase 5: Communicate (10 minutes)\n\n**Write two stakeholder communications:**\n\n*For the decision-maker or approver:*\n```\nWrite a 150-word communication to [decision-maker role] about this project.\nThey need to: [approve / be informed / provide input].\nFocus on: goal, approach, timeline, and what I specifically need from them.\nTone: professional, concise — they're busy and senior.\n```\n\n*For the team or people doing the work:*\n```\nWrite a brief team communication announcing this project.\nCover: what we're doing, why, what's expected of them, timeline, and who to contact with questions.\nTone: clear, direct, and motivating — not corporate.\n```\n\nSave as **Deliverable 6: Stakeholder Communications**.\n\n**Prepare for the hardest objection:**\n```\nWhat is the single most likely objection or concern [decision-maker] will raise about this project?\nHow should I respond to it — what's the most compelling answer, and what evidence do I have?\n```\n\nSave as **Deliverable 7: Prepared Objection Response**."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Run the Full Sprint",
+      "content": "This is the capstone workshop. Run all five phases with a real project.\n\n**Your deliverables checklist (keep all of these):**\n- [ ] Research brief (3–5 key findings with impact on plan)\n- [ ] Project plan document (phases, tasks, risks, timeline, stakeholder map)\n- [ ] One decision record (most important choice in the plan)\n- [ ] Key document (proposal / report / SOP / presentation)\n- [ ] Quality review (documented issues and fixes)\n- [ ] Two stakeholder communications\n- [ ] Prepared answer to the hardest objection\n\n**Time allocation:**\n- Phase 1 (Research): 15 minutes\n- Phase 2 (Plan): 15 minutes\n- Phase 3 (Document): 20 minutes\n- Phase 4 (Quality Review): 5 minutes\n- Phase 5 (Communicate): 10 minutes\n\n**If you need to break it across sessions:** Phases 1 and 2 form a natural first session (planning). Phase 3 is independent once you have the plan. Phases 4 and 5 are quick and should stay together.\n\n**After completing the sprint, write a 5-minute reflection:**\n\n1. Which phase produced the most useful output relative to the time invested?\n2. What would you have done differently if you hadn't used AI?\n3. Where did AI improve the quality of your work? Where did it mainly just speed it up?\n4. What was the most valuable prompt or technique from this course for your specific role?\n5. What would you want to learn next?\n\nThis reflection is the most personally valuable thing you'll produce today — it distils what the course means for your specific work context. Write it while it's fresh."
+    },
+    {
+      "type": "quiz",
+      "question": "You're halfway through the work sprint and the quality review (Phase 4) reveals a significant gap in your document — a key question your decision-maker will ask that your document doesn't answer. You're running short on time. What should you do?",
+      "options": [
+        "Skip the fix and send the document — the decision-maker may not notice",
+        "Delay sharing the document and go back to research to fill the gap properly",
+        "Add a brief note in the document acknowledging the gap and your plan to address it",
+        "Remove the section that leads to the gap question"
+      ],
+      "correct": 2,
+      "explanation": "When a quality review surfaces a significant gap and time is short, the best move is transparency: acknowledge the gap directly in the document and state how you'll address it. This is more credible than pretending the gap doesn't exist (A), which decision-makers usually notice and that damages trust. Delaying sharing (B) is sometimes right for truly critical gaps, but for most business documents, 'acknowledge and plan to address' keeps momentum while demonstrating professional awareness. Removing the related section (D) often makes the gap less visible but doesn't resolve the underlying problem. The general principle: decision-makers prefer 'here's what I know, here's what I'm still working on' over a polished document that turns out to have hidden gaps when questions are asked."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Sprint Planning",
+      "content": "Plan a real work sprint using AI tools.\n\n**Step 1 — Define your sprint:**\n- Duration: [1-2 weeks recommended for first sprint]\n- Goal: [one clear outcome]\n- Available time: [total hours available]\n\n**Step 2 — Ask Claude to help you plan the sprint:**\n```\nHelp me plan a [X-day] work sprint.\n\nSprint goal: [describe it]\nAvailable hours: [total]\nContext: [current state, constraints]\n\nCreate:\n1. Task breakdown with time estimates\n2. Priority order (considering dependencies)\n3. Buffer allocation (20% of time for unexpected issues)\n4. Definition of Done for the sprint goal\n5. Daily check-in questions to assess progress\n```\n\n**Step 3 — Review and adjust the plan** based on your actual knowledge of the work.\n\n**Step 4 — Start the sprint.** Use the daily check-in questions."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Mid-Sprint AI Check-in",
+      "content": "Use AI to course-correct during an active work sprint.\n\n**Step 1 — Halfway through your sprint**, conduct an AI-assisted check-in:\n```\nI'm halfway through a sprint. Help me assess progress.\n\nSprint goal: [original goal]\nPlanned tasks: [list them with original estimates]\nCompleted so far: [what's done]\nActual time spent: [hours]\nRemaining time: [hours]\n\nAnalyse:\n1. Am I on track to hit the sprint goal?\n2. Which tasks are over/under estimate?\n3. Should any tasks be deprioritised to protect the sprint goal?\n4. What's at risk in the second half?\n```\n\n**Step 2 — Make the recommended adjustments** — don't let sunk cost keep you on track for a failing sprint.\n\n**Step 3 — Ask Claude:** \"What is the minimum viable version of this sprint goal I can hit if I have only 60% of the remaining time?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Sprint Delivery and Documentation",
+      "content": "Complete your sprint and document the outputs.\n\n**Step 1 — At sprint end**, compile your outputs.\n\n**Step 2 — Ask Claude to generate sprint documentation:**\n```\nDocument this completed work sprint:\n\nGoal: [original goal]\nCompleted: [what was actually done]\nNot completed: [what was left out and why]\nKey decisions made: [important choices during the sprint]\nLessons learned: [what would you do differently]\n\nGenerate:\n1. Sprint summary (one page max)\n2. Decision log (decisions made and reasoning)\n3. Lessons learned (2-3 actionable insights)\n4. Next sprint recommendations\n```\n\n**Step 3 — Review the documentation.** Is it accurate?\n\n**Step 4 — Share the sprint summary** with relevant stakeholders."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Continuous Improvement System",
+      "content": "Build a system for continuously improving your AI-augmented work.\n\n**Step 1 — Create a \"Work Improvement Log\"** — a simple file tracking:\n- What AI workflows saved the most time\n- What AI tools failed or produced poor results\n- New AI techniques tried and their outcomes\n- Prompts that worked exceptionally well\n\n**Step 2 — After each sprint**, spend 10 minutes updating the log.\n\n**Step 3 — Monthly review:** Ask Claude to analyse your improvement log:\n\"Based on this improvement log [paste it], what patterns do you see? What should I invest in learning next? What techniques am I not using that would be valuable?\"\n\n**Step 4 — Set one concrete improvement goal** for next month based on the analysis."
+    },
+    {
+      "type": "quiz",
+      "question": "Your sprint plan assumed 6 hours for a task that actually took 12 hours. What should you do for future planning?",
+      "options": [
+        "Plan more conservatively — double all estimates",
+        "Investigate why: was the task complexity underestimated, were there interruptions, was research needed? Understanding the cause guides the right correction — don't just inflate estimates without understanding why",
+        "Keep the same estimates — one data point doesn't change the model",
+        "Subtract the overrun from other sprint tasks' estimates"
+      ],
+      "correct": 1,
+      "explanation": "Estimation errors need diagnosis before correction. A 12-hour task estimated at 6 hours could be caused by: poor requirements clarity (the task was bigger than understood), unexpected technical complexity, interruptions (the 6 hours of actual work were stretched over 12 hours of calendar time), or systematic optimism bias. Each root cause has a different fix. Without diagnosis, you might just inflate estimates by 2×, which creates false safety and a self-fulfilling prophecy where work expands to fill inflated time budgets."
+    },
+    {
+      "type": "quiz",
+      "question": "At the end of your work sprint, you completed 70% of the planned tasks. Was the sprint successful?",
+      "options": [
+        "No — you should complete 100% of planned tasks",
+        "Depends on whether the sprint goal was achieved. If the 70% you completed included all the highest-priority tasks and the sprint goal is met, this is success. If the 30% you skipped included critical items, it's not",
+        "Yes — 70% completion is a standard industry benchmark",
+        "No — you need to work overtime to complete the remaining 30%"
+      ],
+      "correct": 1,
+      "explanation": "Sprint success is measured against the sprint goal, not task completion rate. If you completed the most important 70% including all goal-critical tasks, this may be a successful sprint that also revealed your planning had lower-priority tasks. If the 30% you skipped were goal-critical, the sprint failed regardless of how many total tasks were done. This is why defining a clear sprint goal (single outcome) matters more than planning many tasks."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 17 and the non-programmer track of this course.**\n\nYou've built a complete AI-augmented professional workflow covering:\n- **Part 15:** Research — finding, collecting, synthesising, and writing from information\n- **Part 16:** Documents — writing, analysis, presentations, emails, meetings, SOPs\n- **Part 17:** Projects — planning, problem-solving, documentation, quality review, stakeholder communication\n\nThese skills compound. Every week you use them, you build pattern recognition for when and how AI is most valuable in your specific role. The workflows from this course are starting points — adapt them to your context, your tools, and your way of working. The most effective AI users aren't those who use the most tools; they're those who've built reliable workflows for the work they do every day."
+    }
+  ],
+  "nextLesson": "19-1",
+  "prevLesson": "17-5"
+}

@@ -1,0 +1,115 @@
+{
+  "id": "3-8",
+  "title": "Prompt Templates & Reuse",
+  "part": 3,
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "templates",
+    "productivity"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll learn how to turn one-off prompts into reusable templates, how to build a personal prompt library that compounds over time, and how to use meta-prompting — asking AI to help you improve your own prompts. By the end you'll have a prompt library with at least 6 working templates for your most common tasks, and a system for adding to it as you work through the rest of the course."
+    },
+    {
+      "type": "text",
+      "content": "## The Compounding Value of Prompt Templates\n\nEvery time you write a prompt from scratch for a recurring task, you're spending time on something you already solved before. Worse, you're probably getting slightly different results each time — because slightly different wording produces slightly different output.\n\nA prompt library solves both problems:\n- **Time:** Fill in the variables and run. 10 seconds instead of 3 minutes.\n- **Consistency:** The same template, carefully refined, produces reliably high-quality output every time.\n- **Onboarding:** When your team uses your templates, they get the same quality you get — without needing to learn prompt engineering themselves.\n\n**The math:** If you have 10 prompt templates you use twice a week each, and each saves you 5 minutes compared to starting from scratch, that's 100 minutes saved per week — 87 hours per year. The investment to build each template: 20-30 minutes of initial prompting and refinement.\n\n**The shift in mindset:** Stop thinking of prompts as throwaway text you type once. Start thinking of them as tools you build once and reach for repeatedly. The best prompt you ever write is one you use a hundred times."
+    },
+    {
+      "type": "text",
+      "content": "## Template Syntax: The [VARIABLE] Convention\n\nThe simplest way to make a prompt reusable is to replace the parts that change with bracketed placeholders. Use `[VARIABLE_NAME]` in uppercase — it stands out visually and is easy to find-and-replace.\n\n**A one-off prompt:**\n```\nWrite a polite follow-up email to Marcus at Acme Corp about the proposal\nI sent on May 5th, reminding him the deadline is May 20th.\n```\n\n**Turned into a reusable template:**\n```\nWrite a polite follow-up email to [RECIPIENT_NAME] at [COMPANY] about\n[TOPIC]. I sent my initial message on [DATE_SENT]. The deadline or\nnext step is [DEADLINE_OR_NEXT_STEP].\n\nKeep the tone friendly but direct. Three paragraphs maximum.\nDo not open with 'I hope this email finds you well.'\n```\n\n**What you've baked in permanently:**\n- The length constraint (three paragraphs maximum)\n- The cliché to avoid (you already know you hate that opener)\n- The tone calibration (friendly but direct)\n\nThese constraints don't change between uses — so they live in the template. Only the variables change."
+    },
+    {
+      "type": "text",
+      "content": "## Meta-Prompting: Using AI to Improve Your Prompts\n\nMeta-prompting means using AI as a prompt engineer — asking it to analyse, critique, and improve the prompts you write. This is one of the most powerful techniques for building a high-quality prompt library fast.\n\n**The basic meta-prompt:**\n```\nI have a prompt that isn't producing the output quality I want.\nHere's the prompt:\n\n[paste your prompt]\n\nHere's what I actually want it to produce:\n[describe the ideal output, or paste an example]\n\nHere's what I'm getting instead:\n[describe the actual output, or paste an example]\n\nPlease:\n1. Diagnose what's wrong with my prompt\n2. Rewrite it to produce better results\n3. Explain what you changed and why\n```\n\n**The prompt quality audit:**\n```\nAnalyse this prompt and tell me:\n1. What elements are doing useful work?\n2. What's missing that would improve the output?\n3. What could be made more specific?\n4. Rate this prompt 1-10 and explain the score\n\nPrompt to analyse:\n[paste your prompt]\n```\n\n**The template generator:**\n```\nI need a reusable prompt template for this task:\n[describe the task in detail, including:\n- who will be using the output\n- what the output must contain\n- what format you want\n- what the output must NOT contain]\n\nGenerate a template with [VARIABLE] placeholders for the parts\nthat change between uses. Make it as good as possible first time.\n```\n\nMeta-prompting is how you build a library of high-quality templates without spending hours refining each one manually. You describe what you want, and the model generates a template that you test and adjust."
+    },
+    {
+      "type": "text",
+      "content": "## Professional Template Library: 8 Essential Templates\n\nThese are immediately usable — replace the examples with your own context for maximum effectiveness.\n\n**Template 1 — Meeting to Action Items:**\n```\nExtract action items from these meeting notes in this exact format:\n\n**Date:** [DATE]\n**Meeting:** [MEETING_NAME]\n\n**Decisions made:**\n- [Decision: who decided what and why]\n\n**Action items:**\n| Owner | Task | Due | Priority |\n|-------|------|-----|----------|\n\n**Open questions:**\n- [Questions that need follow-up]\n\nMeeting notes:\n[PASTE_NOTES_HERE]\n```\n\n**Template 2 — Code Review:**\n```\nAct as a senior [LANGUAGE] developer doing a rigorous PR review.\n\nReview for:\n1. Correctness — does this do what it's supposed to do?\n2. Edge cases — what inputs could break it?\n3. Readability — would a junior developer understand this?\n4. Performance — any obvious inefficiencies?\n5. Anything that would be rejected in a professional PR review\n\nBe specific — reference the exact code section. Don't be diplomatic.\n\nCode:\n[PASTE_CODE_HERE]\n```\n\n**Template 3 — Weekly Status Update:**\n```\nWrite a concise weekly status update for [ROLE] at [COMPANY].\nAudience: my manager and team. Tone: professional, no fluff.\n\n**This week:**\n- [3 accomplishments with specific outcomes]\n\n**Next week:**\n- [3 priorities]\n\n**Blockers:**\n- [Issue needing support, or 'None']\n\n**Metric of the week:**\n- [One number that shows progress]\n\nRaw notes to turn into this:\n[PASTE_YOUR_NOTES_HERE]\n```\n\n**Template 4 — Learning a New Topic:**\n```\nTeach me [TOPIC] as a smart adult with no prior knowledge.\n\nStructure:\n1. Core idea in one sentence\n2. Why this matters — real consequence of not understanding it\n3. How it works — use an analogy from [ANALOGY_DOMAIN]\n4. One concrete example I can verify\n5. The most common misconception about this topic\n6. What to learn next\n\nNo jargon. Define any technical term immediately after using it.\n```\n\n**Template 5 — Email Rewrite:**\n```\nRewrite this email for [AUDIENCE] audience.\n\nTone: [formal / conversational / direct / warm]\nLength: [shorter / same / expand to cover X]\n\nKeep unchanged:\n- All specific facts, numbers, and dates\n- The core request or message\n\nChange:\n- [specific things to change]\n- Replace: [phrases to replace → with what]\n\nDo NOT use: [list of phrases/clichés to avoid]\n\nOriginal email:\n[PASTE_EMAIL_HERE]\n```\n\n**Template 6 — Document Analysis:**\n```\nAnalyse this [DOCUMENT_TYPE] using this structure:\n\n1. Main claim or purpose (1 sentence)\n2. Key supporting points (3-5 bullets)\n3. Assumptions the author is making\n4. What evidence would strengthen the argument\n5. What's missing or glossed over\n6. Verdict: how strong is this document and why?\n\nDocument:\n[PASTE_DOCUMENT_HERE]\n```\n\n**Template 7 — Decision Analysis:**\n```\nHelp me think through this decision.\n\nDecision: [DECISION]\nContext: [SITUATION_CONTEXT]\nConstraints: [TIME / BUDGET / RESOURCES / OTHER_CONSTRAINTS]\n\nAnalyse using this framework:\n1. What are my actual options? (include non-obvious ones)\n2. For the top 3 options: best case / worst case / most likely outcome\n3. What information would change the decision?\n4. What am I probably overweighting or underweighting emotionally?\n5. Recommendation: what would you do and why?\n```\n\n**Template 8 — Research Summary:**\n```\nI'm going to paste in [NUMBER] sources on [TOPIC].\nRead all of them and then produce:\n\n1. Consensus view: what do all sources agree on?\n2. Disagreements: where do sources conflict and why?\n3. Key evidence: the 3 strongest facts or findings\n4. Gaps: what important questions aren't answered?\n5. My takeaway for [MY_SPECIFIC_CONTEXT]: given that I am [role/goal],\n   what's the most actionable insight from this research?\n\nSources:\n[PASTE_SOURCES_HERE]\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Maintaining and Versioning Your Library\n\nA prompt library that isn't maintained becomes stale and stops getting used. These habits keep yours valuable:\n\n**Version your best prompts:** When you significantly improve a template, keep the old version with a date. Sometimes older versions work better for specific cases. Use comments:\n```\n## Email Follow-Up (v2 — June 2026)\n[new version]\n\n<!-- v1 backup:\n[old version]\n-->\n```\n\n**Tag templates by context:**\n- `#writing` `#email` `#analysis` `#code` `#research` — makes search faster when you have 50+ templates\n\n**Test templates with edge cases:** Before saving, run each template with 2-3 different inputs, including an unusual one. If a template breaks on edge cases, fix it before it's in your library.\n\n**Review and prune:** Once per month, look at the templates you haven't used. Either update them to your current needs or remove them. A curated library of 20 great prompts beats a disorganised collection of 100.\n\n**Share with your team:** When a template produces consistently good output, share it. A shared team prompt library is a multiplier — everyone benefits from each person's refinement work."
+    },
+    {
+      "type": "text",
+      "content": "## Where to Store Your Prompt Library\n\nChoose the option that fits your workflow:\n\n**Markdown file in your working directory** (best for developers):\n- `prompts/my-prompt-library.md`\n- Searchable with VS Code's `Ctrl+F`\n- Can commit to Git so it's tracked and backed up\n\n**Claude Project Instructions** (best for frequent Claude users):\n- Paste your most-used 2-3 templates into the system instructions of a Claude Project\n- They're pre-loaded every time you open that project\n- Best for the prompts you use daily\n\n**Notion or Confluence page** (best for teams):\n- Create a table: Template Name | Category | Template | Last Updated | Owner\n- Share with teammates who can add their own\n- Tag and filter by category\n\n**Text expander** — Espanso (free, Windows/Mac/Linux), AutoHotkey (Windows):\n- Type `;;meeting` → expands to your full meeting summary template\n- The fastest possible retrieval\n- Best for prompts you use 10+ times per week\n\n**The format matters less than the habit.** The habit is: every time a prompt produces output you're proud of, save it before closing the tab."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Build Your Prompt Library — Start Now",
+      "content": "This workshop is documentation work, not browser work. You're building a foundation that will save you hours per month for years.\n\n**Step 1 — Create the library file (2 minutes)**\n\nOpen VS Code or Notepad and create `prompts/my-prompt-library.md`.\n\nAdd this header:\n```markdown\n# My Prompt Library\nLast updated: [today's date]\n\n## Quick index\n- [Meeting → Action Items](#meeting--action-items)\n- [Email Rewrite](#email-rewrite)\n- [Weekly Status](#weekly-status)\n- [Add your categories here]\n```\n\n**Step 2 — Add prompts from this course (15 minutes)**\n\nGo back through Part 3 lessons 3-1 through 3-7. Find every prompt you wrote or tested that produced an output you liked. Add it with this format:\n\n```markdown\n## [Name]\n\n**When to use:** [one sentence description]\n**Category:** [writing / analysis / code / research / other]\n\n\\`\\`\\`\n[prompt text with [VARIABLE] placeholders]\n\\`\\`\\`\n\n**Example:** [one filled-in example]\n\n**Notes:** [any gotchas, when this works best, variations]\n```\n\nAim for at least 5 prompts from course material.\n\n**Step 3 — Use meta-prompting to create 2 new templates (15 minutes)**\n\nOpen Claude.ai. For each of the two tasks you do most frequently:\n\n```\nI need a reusable prompt template for this task:\n[describe the task, the ideal output, the audience, and what must\nnever appear in the output]\n\nGenerate a template with [VARIABLE] placeholders. Make it production-ready.\nThen explain what you optimised for in the design.\n```\n\nTest each generated template with a real input. Refine if needed. Add to your library.\n\n**Step 4 — Audit one existing prompt with meta-prompting**\n\nTake a prompt from Steps 2-3 and run:\n```\nAnalyse this prompt. What's missing? What could be more specific?\nRewrite it to be 20% better. Explain every change.\n\nPrompt: [paste your prompt]\n```\n\nUpdate your library with the improved version.\n\n**Step 5 — Set a growth habit**\n\nWrite this reminder in your library file:\n```\n## Growth rule\nEvery time I run a prompt that produces output I'm proud of,\nI add it here before closing the tab. Takes 2 minutes.\n```\n\nSave the file. If you have Git installed, run: `git add prompts/ && git commit -m \"Add initial prompt library\"`"
+    },
+    {
+      "type": "quiz",
+      "question": "You've built a prompt template for summarising research that works well for most documents. But when you run it on legal documents, the summaries are consistently wrong — they miss important distinctions that a non-lawyer would gloss over. What is the most efficient fix?",
+      "options": [
+        "Build a completely separate template from scratch for legal documents",
+        "Use meta-prompting: describe the problem to the AI and ask it to add one targeted instruction to the template that handles legal documents correctly, then test with 3 examples",
+        "Accept that one template can't work for all document types",
+        "Add a very long disclaimer at the top warning users this template isn't for legal documents"
+      ],
+      "correct": 1,
+      "explanation": "Meta-prompting is the most efficient fix. You already have a working template — you just need one targeted addition for a specific edge case. Describe the failure mode ('when summarising legal documents, it misses [specific type of distinction]') and ask the AI to add the right instruction. This is faster than starting over and keeps your single template working across both cases. Testing with 3 different legal document examples verifies the fix actually works before you add it to your library."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Prompt Template Quick Build",
+      "content": "This 8-minute drill shows how a simple template with fill-in-the-blank placeholders eliminates repetitive prompting.\n\n**Step 1 — Identify a task you do with AI at least once a week.** Something where you always provide similar information but change specific details.\n\n**Step 2 — Write out the last 2-3 prompts you used** for this task. What stays the same? What changes?\n\n**Step 3 — Build a template** by converting the static parts to fixed text and the dynamic parts to placeholders:\n```\n[CONTEXT]: I work in [YOUR ROLE] at [COMPANY TYPE].\n[TASK]: Write a [DOCUMENT TYPE] for [AUDIENCE].\n[TOPIC]: The subject is: [TOPIC]\n[CONSTRAINTS]: [LENGTH / TONE / FORMAT requirements]\n[EXAMPLES]: [Optional: paste example if you have one]\n```\n\n**Step 4 — Test your template** on a real instance of the task. Fill in the brackets and run it.\n\n**Step 5 — Save the template.** Add it to your prompt library with a label."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Complete Prompt Library",
+      "content": "This workshop produces a real, usable prompt library you will open and reference starting today.\n\n**Step 1 — List every AI task you do regularly.** Write at least 8-10 specific tasks, grouped by type: Writing, Research, Analysis, Planning, Communication.\n\n**Step 2 — For your top 5 most important tasks**, build a template for each.\n\n**Step 3 — Ask Claude to help meta-prompt each template:**\n```\nHere is a task I do regularly: [describe it]\nHere is my current prompt: [paste it]\n\nImprove this prompt by:\n1. Making the context instruction more specific\n2. Adding a clear output format specification\n3. Adding instructions for how to handle edge cases\n4. Adding a self-check instruction at the end (ask Claude to review its own output)\n5. Making the placeholders clearer and labelled\n```\n\n**Step 4 — Compile all 5 templates** into a single document structured as:\n```\n# Prompt Library\n\n## [Task Name]\n**When to use:** [one sentence]\n**Template:**\n[full prompt]\n**Notes:** [tips]\n```\n\n**Step 5 — Test every template** on a real task.\n\n**Step 6 — Mandatory quality check:** For each template, ask Claude: *\"If you received this template filled in with a typical example, what would be ambiguous or unclear? What instructions are missing that would help you produce a better output?\"* Improve each template."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Organise and Share Your Prompt Library",
+      "content": "A prompt library is only valuable if you can find and use the right prompt when you need it.\n\n**Step 1 — Decide where to store your prompt library.** Options:\n- A Notion page (searchable, shareable)\n- A Google Doc (simple, accessible everywhere)\n- A Claude Project (prompts as instructions visible in every conversation)\n- A local Markdown file (fast to open, version-controllable)\n\n**Step 2 — Create your chosen storage location** and paste your library into it.\n\n**Step 3 — Add a quick-find header** at the top: a table of contents with jump links to each prompt category.\n\n**Step 4 — Test the retrieval:** Imagine you need a specific type of prompt in 30 seconds. Can you find it quickly?\n\n**Step 5 — Share one prompt** with a colleague who uses AI for similar work. Ask for their feedback — does the template work for them, or does it need adjustments?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Team Prompt Library",
+      "content": "Scale your prompt work by creating shared templates your team can use — reducing inconsistency and getting everyone to the quality level of your best AI users.\n\n**Step 1 — Identify the 3 AI tasks your team does most often.** Things everyone does, where quality and consistency matter.\n\n**Step 2 — For each task**, gather examples of good and bad AI outputs your team has produced.\n\n**Step 3 — Build one \"gold standard\" template** per task — the prompt that reliably produces the quality you want.\n\n**Step 4 — Ask Claude:** *\"I want to create a prompt template that will work for my whole team (not just me personally). Here is the task: [describe]. Here is my current template: [paste it]. What assumptions does this template make about the user that might not apply to others on my team? How should I modify it to be more universally usable?\"*\n\n**Step 5 — Create a team document** with 3 templates and brief usage notes.\n\n**Step 6 — Share it with at least 2 colleagues** and get their feedback on whether the templates work for their specific situation."
+    },
+    {
+      "type": "quiz",
+      "question": "You have a prompt template with the placeholder [AUDIENCE]. A colleague uses the template and writes \"my team\" in the placeholder. The output is not very good. What is the most likely issue?",
+      "options": [
+        "The placeholder name is confusing",
+        "The placeholder is too vague — \"my team\" doesn't tell the AI anything specific about the audience",
+        "The template needs more placeholders",
+        "The AI doesn't understand workplace contexts"
+      ],
+      "correct": 1,
+      "explanation": "\"My team\" provides no actionable information — it doesn't tell Claude the audience's role, expertise level, what they care about, or how they will use the output. Good placeholder guidance would prompt the user to provide specifics: [AUDIENCE: describe their role, expertise level, and what decision or action they need to take after reading this]. The more specific the placeholder instruction, the better the output."
+    },
+    {
+      "type": "quiz",
+      "question": "When is it NOT worth creating a prompt template?",
+      "options": [
+        "For tasks you do more than once a week",
+        "For tasks where you always provide different context and the prompt has no repeating structure",
+        "For tasks involving sensitive information",
+        "For tasks where the output needs to be high quality"
+      ],
+      "correct": 1,
+      "explanation": "Prompt templates deliver value when a task repeats with a consistent structure. If every instance of the task is completely different in context, audience, format, and constraints — nothing to templatise — a template adds overhead without benefit. Templates are best for tasks like \"write a [type] for [audience] about [topic]\" where the scaffold repeats but the content changes. For truly one-off tasks, write the prompt fresh."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 3 — Prompt Engineering.** You now have a complete and professional toolkit: the four-element framework, role and persona prompting, chain-of-thought reasoning, few-shot examples, structured output, iterative refinement, and a personal prompt library with meta-prompting skills to grow it. These are the techniques that separate people who get mediocre AI output from people who get excellent AI output — consistently, at scale."
+    }
+  ],
+  "nextLesson": "4-1",
+  "prevLesson": "3-7"
+}

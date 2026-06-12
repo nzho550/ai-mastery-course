@@ -1,0 +1,107 @@
+{
+  "id": "7-10",
+  "title": "Plan Mode & Permissions",
+  "part": 7,
+  "estimatedMinutes": 60,
+  "tags": [
+    "claude-code",
+    "plan-mode",
+    "permissions",
+    "settings-json",
+    "safety"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll know how to use Plan Mode to see Claude's intended actions before it executes them, and how to configure permissions in `settings.json` to control exactly what Claude is allowed to do in your project."
+    },
+    {
+      "type": "text",
+      "content": "## Plan Mode: Propose Before You Act\n\nIn normal mode, when you give Claude a task, it starts executing immediately — reading files, writing changes, running commands. For simple, low-risk tasks, that's fine. For larger or riskier changes, you may want to see the *plan* before anything happens.\n\n**Plan Mode** (sometimes called \"think first\" mode) changes this behavior: Claude analyses your request and produces a detailed plan of what it intends to do — all the files it will touch, all the steps it will take — and then *pauses and waits*. Nothing changes on disk until you approve the plan.\n\nTo activate Plan Mode: press **Shift+Tab** at the Claude Code prompt. The prompt indicator changes to show you're in plan mode. Ask your question. Claude responds with a plan. You review and either approve (Claude executes) or reject (Claude tries a different approach).\n\nYou can also ask for a plan in prose without switching modes: *\"Before making any changes, tell me exactly what you plan to do to refactor this file.\"* Claude will describe its intentions first."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**When to use Plan Mode:**\n- Any request that touches more than 2–3 files\n- Refactoring tasks (reorganizing code, renaming things)\n- Changes to an unfamiliar codebase\n- Any time your gut says \"this could go wrong in interesting ways\"\n- Before running database migrations, build scripts, or deployment steps"
+    },
+    {
+      "type": "text",
+      "content": "## Permissions: Allow and Deny\n\nClaude Code can read files, write files, run bash commands, and use MCP tools. That's a lot of power. The permissions system lets you define exactly which operations Claude is allowed to perform — and which ones require a prompt, are silently blocked, or require an explicit override.\n\nPermissions are configured in `.claude/settings.json` under the `permissions` key. The `allow` list specifies what Claude can do without asking. The `deny` list specifies what Claude can never do — even if you ask it to.\n\nPermission strings use a `Tool(pattern)` syntax:\n- `Read(**)` — read any file anywhere\n- `Write(exercises/**)` — write files only inside the `exercises/` folder\n- `Bash(echo *)` — run bash commands that start with `echo`\n- `Bash(rm *)` — run `rm` commands (put this in `deny` to prevent accidental deletions)"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"permissions\": {\n    \"allow\": [\n      \"Read(**)\",\n      \"Write(exercises/**)\",\n      \"Write(notes/**)\",\n      \"Bash(echo *)\",\n      \"Bash(ls *)\",\n      \"Bash(node *)\",\n      \"Bash(npm run *)\"\n    ],\n    \"deny\": [\n      \"Bash(rm *)\",\n      \"Bash(del *)\",\n      \"Bash(rmdir *)\",\n      \"Write(.env)\",\n      \"Write(**/*.env)\"\n    ]\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The `--dangerously-skip-permissions` flag:** This flag disables all permission checks and approval prompts. It's designed for automated CI/CD pipelines where a human reviewer is not part of the loop. Do not use it during normal development sessions. If you find yourself tempted to use it because the permission prompts are annoying, the right answer is to update your `allow` list — not to disable safety checks entirely."
+    },
+    {
+      "type": "text",
+      "content": "## The Principle of Least Privilege\n\nThe permissions model follows a security principle called **least privilege**: give Claude exactly the permissions it needs for the current task, and no more.\n\nFor a project where you're only working on HTML/CSS files:\n- Allow reads everywhere (so Claude can understand context)\n- Allow writes only to `exercises/` and `notes/`\n- Deny all destructive bash commands\n- Deny writes to configuration files and secrets\n\nThis protects you from two failure modes:\n1. **Your mistake:** You accidentally ask Claude to delete something important\n2. **Claude's mistake:** Claude misunderstands a task and tries to make a change you didn't intend\n\nThe permission system catches both."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Plan Before You Act",
+      "content": "Practice Plan Mode with a multi-file change, then configure permissions in your settings.json.\n\n**Part 1 — Plan Mode**\n\n**Step 1 — Launch Claude Code:**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**Step 2 — Enter Plan Mode:**\nPress **Shift+Tab** at the prompt. You should see the prompt indicator change to show plan mode is active.\n\n**Step 3 — Request a multi-file change:**\n```\nRefactor the exercises folder: create a shared styles.css file with the CSS\nthat is common across all HTML files. Update each HTML file to link to\nstyles.css instead of having duplicate inline styles.\n```\n\n**Step 4 — Review the plan:**\nClaude will list every file it intends to touch and what it plans to do to each one. Ask yourself:\n- Does this plan match what I asked for?\n- Are there any files listed that I'm surprised to see?\n- Is the order of operations sensible?\n- Any step I want Claude to skip or do differently?\n\n**Step 5 — Approve or modify:**\nIf the plan looks good, approve it and watch Claude execute step by step.\nIf something looks off, type your concern — Claude will revise the plan.\n\n**Part 2 — Configure Permissions**\n\n**Step 6 — Open settings.json:**\nIn VS Code, open `.claude/settings.json`. You should already have a `hooks` section from lesson 7-8. Add a `permissions` section:\n\n```json\n{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude just edited a file\"\n          }\n        ]\n      }\n    ]\n  },\n  \"permissions\": {\n    \"allow\": [\n      \"Read(**)\",\n      \"Write(exercises/**)\",\n      \"Write(notes/**)\",\n      \"Bash(echo *)\",\n      \"Bash(ls *)\"\n    ],\n    \"deny\": [\n      \"Bash(rm *)\",\n      \"Bash(del *)\"\n    ]\n  }\n}\n```\n\n**Step 7 — Test the deny rule:**\nRelaunch Claude Code (`/exit` then `claude`) and ask:\n```\nDelete the file exercises/test-card.html\n```\nClaude should refuse because `Bash(rm *)` and `Bash(del *)` are in the deny list.\n\n**Step 8 — Test the allow rule:**\nNow ask:\n```\nCreate a new file in exercises/ called sandbox.html with a minimal HTML boilerplate\n```\nThis should work because `Write(exercises/**)` is in the allow list."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Plan Mode Drill",
+      "content": "This drill practices using Plan Mode to review Claude Code's approach before it executes.\n\n**Step 1 — Start Claude Code with Plan Mode:**\n```powershell\nclaude --plan-mode\n```\nOr in a session, ask Claude Code to \"describe your plan before taking any action.\"\n\n**Step 2 — Give a complex task** that will require multiple steps:\n\"Add user authentication to this Flask application. It should support registration, login, and password reset via email.\"\n\n**Step 3 — Read the plan carefully.** Ask yourself:\n- Does the sequence of steps make sense?\n- Are there steps that will change things I don't want changed?\n- Are there important steps missing?\n- What risks does the plan create?\n\n**Step 4 — Provide feedback on the plan** before approving:\n\"Before implementing, I want to change step 3 — use JWT instead of session cookies. Also add a step to update the tests before the implementation.\"\n\n**Step 5 — Approve the modified plan** and watch Claude Code execute it."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Permissions Configuration for Real Work",
+      "content": "Configure Claude Code's permissions appropriately for your specific work context.\n\n**Step 1 — Understand the permission levels** (ask Claude Code: \"Explain each permission level and what it allows\").\n\n**Step 2 — Assess your risk tolerance:**\n- High-trust environment (personal project, throwaway code): more autonomy\n- Medium-trust (team project, staging): moderate autonomy with file write confirmation\n- Low-trust (production systems, sensitive data): minimal autonomy, confirm everything\n\n**Step 3 — Configure permissions** for your most common use case. Check the Claude Code documentation or settings for current permission configuration options.\n\n**Step 4 — Test your configuration:** Ask Claude Code to do something that would previously have run automatically. Does it now ask for confirmation?\n\n**Step 5 — Document your permission strategy** in CLAUDE.md: \"When working in this project, always operate in [mode] — we require confirmation before [types of operations].\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — When to Use Plan Mode vs Direct Execution",
+      "content": "Build judgment about when to require a plan vs when to let Claude Code work directly.\n\n**Step 1 — Ask Claude:** *\"Describe 5 situations where Plan Mode is essential before letting Claude Code execute, and 5 situations where going directly to execution is fine and Plan Mode would just add unnecessary friction.\"*\n\n**Step 2 — Create your personal decision rule:**\n\nRequire Plan Mode when:\n- [ ] (your criteria)\n- [ ] (your criteria)\n\nDirect execution is fine when:\n- [ ] (your criteria)\n- [ ] (your criteria)\n\n**Step 3 — Apply the rule** to 3 recent Claude Code tasks you've done. Would Plan Mode have been appropriate for any?\n\n**Step 4 — Ask Claude:** *\"Given that I work on [describe your project and its criticality], what is the right balance between planning and execution for my specific context?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Permissions Policy Document",
+      "content": "Create a formal policy for Claude Code usage on your project — what it can do autonomously and what requires human approval.\n\n**Step 1 — Ask Claude to help you design the policy:**\n```\nHelp me write a Claude Code permissions policy for a [type of project]. The policy should specify:\n1. Operations Claude Code can do automatically (no confirmation needed)\n2. Operations requiring my explicit approval before execution\n3. Operations that are completely off-limits for Claude Code\n4. Situations requiring Plan Mode review before any action\n```\n\n**Step 2 — Review and adapt the policy** for your specific project risk level.\n\n**Step 3 — Add the policy to CLAUDE.md** in a \"Permissions and Autonomy\" section.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review this permissions policy. What gaps exist? What dangerous operations are implicitly allowed that should be explicitly restricted?\"*\n\n**Step 5 — Share with your team** if you have collaborators."
+    },
+    {
+      "type": "quiz",
+      "question": "You use Plan Mode and Claude Code's plan says \"Step 4: Delete the old authentication module.\" You don't want to delete it — you want to keep it for rollback purposes. What do you do?",
+      "options": [
+        "Accept the plan and manually undo step 4 after it runs",
+        "In the plan review, tell Claude Code to change step 4 from \"delete\" to \"move to archive/ directory\" before approving the plan",
+        "Accept the plan — you can always recover from git",
+        "Reject the entire plan and start over"
+      ],
+      "correct": 1,
+      "explanation": "Plan Mode exists specifically for this scenario: you can modify the plan before execution. Tell Claude Code precisely what to change: \"Change step 4 — instead of deleting the old module, move it to archive/auth-old.py. This preserves it for rollback.\" This is far better than accepting the plan and hoping to recover from git, which is possible but adds unnecessary risk and recovery effort."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code runs in default permission mode. It attempts to run `pip install flask` to add a dependency. Should this require confirmation?",
+      "options": [
+        "No — installing dependencies is a routine task",
+        "Yes — Claude Code should always confirm before installing packages, as they can introduce security vulnerabilities or version conflicts",
+        "Only if the project has a virtual environment",
+        "Depends on whether the package is well-known"
+      ],
+      "correct": 1,
+      "explanation": "Package installation has genuine risks: packages can contain malicious code, introduce version conflicts, and in some environments require elevated privileges. Even well-known packages should be confirmed — you want to review what's being installed and why. For automated environments like CI, pre-approved packages are fine, but for interactive development sessions, confirming package installations is a reasonable safety gate."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-10.** You can use Plan Mode for complex changes and configure fine-grained permissions. These two features together give you full control over what Claude does and when. Next: sub-agents and parallel work."
+    }
+  ],
+  "nextLesson": "7-11",
+  "prevLesson": "7-9"
+}

@@ -1,0 +1,115 @@
+{
+  "id": "1-6",
+  "title": "AI & The Law: Legal Limits You Need to Know",
+  "part": 1,
+  "estimatedMinutes": 60,
+  "tags": [
+    "foundations",
+    "beginner",
+    "legal"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThis lesson covers the actual legal constraints on how you can use AI tools — not suggestions or norms, but laws and regulations with real consequences. By the end you'll know what copyright law currently says about AI output, when you can be held liable for what AI generates, which privacy laws govern what you feed into AI systems, and how platform terms of service create binding contractual obligations."
+    },
+    {
+      "type": "text",
+      "content": "## Copyright Law and AI-Generated Content\n\nThe US Copyright Office's current position (confirmed in multiple rulings through 2024) is clear: **AI-generated content without meaningful human authorship cannot be copyrighted.** It falls into the public domain.\n\nThis matters in two directions.\n\n**What you generate:** If you ask an AI to produce complete text, images, or code and publish it unchanged, you may hold no copyright on that output. Anyone can legally copy it. If copyright ownership matters for your work — commercial publishing, software licensing, creative projects — you need to add substantial human authorship. The editorial choices, structural decisions, and genuine creative input you layer on top of AI output is where your copyright lies.\n\n**What the AI was trained on:** Multiple major lawsuits were filed between 2023–2025: The New York Times v. Microsoft and OpenAI, Getty Images v. Stability AI, and class actions from authors and visual artists. The law is unsettled. The practical risk: using AI to reproduce large verbatim excerpts from copyrighted works — books, articles, song lyrics, film scripts — exposes you to infringement claims. The AI doing the generating doesn't transfer that liability to the AI company if you are the one publishing.\n\n**Code specifically:** AI coding tools are trained on open-source code. Some of that code carries licenses (GPL, MIT, Apache) that impose conditions on reuse. If you're building commercial software, be aware that AI-generated code could incorporate licensed snippets. The risk of any given snippet being a verbatim reproduction is low, but it's not zero, and the legal landscape is still forming."
+    },
+    {
+      "type": "text",
+      "content": "## Defamation: You're Responsible for What You Publish\n\nAI models hallucinate — they generate confident, plausible-sounding false statements about real people, real companies, and real events. When you publish that content, you are the publisher under defamation law, not the AI company.\n\n**What defamation requires** (in most common-law jurisdictions):\n- A false statement of fact about an identifiable person\n- Published to a third party\n- That causes harm to that person's reputation\n\nUS law (Section 230) protects platforms from liability for user-generated content — it does not protect users who generate and publish defamatory content themselves.\n\n**A documented example:** In 2023, lawyer Steven Schwartz submitted a legal brief citing cases that didn't exist — an AI tool had fabricated them. He faced court sanctions and disciplinary proceedings. The AI company faced no legal consequence; the lawyer who used and filed the content did.\n\n**The practical rule:** Before publishing any AI-generated factual claim about a named individual, company, or institution, verify it independently. A single unverified hallucination about a real person, published at scale, creates real legal exposure for you."
+    },
+    {
+      "type": "text",
+      "content": "## Privacy Law: What You Can't Feed Into AI\n\nEvery time you type personal information about other people into a cloud-based AI system, you are transferring that data to a third party's servers for processing. This has legal implications.\n\n**GDPR (General Data Protection Regulation — EU):** If you process personal data about EU citizens, GDPR applies to you regardless of where you are located. Feeding a customer's name, email address, health information, or any identifying details into an AI system counts as data processing. You need a legal basis to do this (consent, legitimate interest, or contract necessity), and you are obligated to respect data minimization — don't send more data than necessary.\n\n**CCPA (California Consumer Privacy Act — US):** Similar obligations apply for data about California residents. Businesses handling significant volumes of California resident data have disclosure, deletion, and data rights obligations.\n\n**Australian Privacy Act:** The 12 Australian Privacy Principles apply to organizations with over AUD $3 million turnover and some smaller entities. Processing employee or customer personal information through overseas cloud AI systems requires care, particularly around cross-border disclosure requirements.\n\n**The enforcement track record:** Italy's data protection authority temporarily banned ChatGPT in March 2023 over GDPR compliance concerns. EU supervisory authorities have since issued guidance specifically on AI data processing. Regulators are actively watching this space.\n\n**Practical rules:**\n- Never input patient records, financial records, or legal client files into a public cloud AI without explicit organizational policy permitting it\n- Never identify specific individuals by name plus sensitive detail (health, finances, legal situation) in AI prompts unless you have a legal basis to do so\n- Check whether your employer or institution has an internal AI policy — most large organizations now do"
+    },
+    {
+      "type": "text",
+      "content": "## Terms of Service: The Contract You Agreed To\n\nWhen you signed up for an AI platform, you agreed to its Terms of Service and Acceptable Use Policy. These are legally binding contracts. Violating them creates at minimum an account termination risk; in some cases it creates breach of contract liability.\n\nAnthropic's Acceptable Use Policy (anthropic.com/legal/aup) prohibits:\n- Generating content designed to deceive (fraud, impersonation, synthetic media used to mislead)\n- Creating cyberweapons or malware\n- Generating child sexual abuse material\n- Undermining oversight mechanisms for AI systems\n- Facilitating illegal discrimination based on protected characteristics\n\nThese aren't guidelines — they're contractual terms. Violating them can result in immediate account suspension and, for commercial API users, termination of access with potential financial consequences.\n\nSome violations also carry their own independent legal liability beyond the ToS. Generating child sexual abuse material is a criminal offense in most jurisdictions regardless of which tool was used to create it."
+    },
+    {
+      "type": "text",
+      "content": "## Professional and Industry-Specific Rules\n\nMany industries have licensing regimes that restrict who can give certain types of advice. AI makes it easy to accidentally cross those lines.\n\n**Legal advice:** Providing legal advice without being a licensed attorney constitutes the unauthorized practice of law — a criminal offense in many jurisdictions. Using AI to draft legal documents for others, interpret statutes, or advise on legal strategy could constitute UPL depending on how the activity is framed and whether compensation is involved.\n\n**Medical advice:** Diagnosis, treatment recommendations, and prescription guidance are restricted to licensed medical practitioners. AI-generated medical content you distribute to patients or clients may expose you to liability for unlicensed medical practice.\n\n**Financial advice:** In Australia, providing financial product advice requires an Australian Financial Services License. In the US, investment advice is regulated by the SEC and FINRA. Using AI to generate personalized investment recommendations for paying clients without appropriate licensing is illegal.\n\n**Academic integrity:** Most educational institutions now have explicit AI policies governing student use. Submitting AI-generated work without disclosure where the institution requires it can constitute academic fraud — with consequences ranging from grade penalties to expulsion.\n\nThe AI doing the work doesn't change your licensing status. The legal question is what activity you are engaged in, not what tool you used to do it."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**EU AI Act (in force from August 2024, phasing in through 2027):** The EU AI Act is the world's first comprehensive AI regulation. It categorizes AI systems by risk level. Prohibited uses include AI-based social scoring systems, real-time biometric surveillance in public spaces, and systems that manipulate vulnerable groups. High-risk applications (in education, employment, credit decisions, and law enforcement) face mandatory conformity assessment requirements before deployment. General-purpose AI models above a compute threshold face transparency and safety obligations. If you are developing AI-based applications for the EU market, the Act applies to you — penalties reach 3–7% of global annual revenue for violations."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Your Legal Self-Audit",
+      "content": "This workshop takes about 20 minutes and produces a document you can reference throughout the course.\n\n**Step 1 — Identify your jurisdiction (5 minutes)**\n\nOpen a new file called `my-ai-legal-context.md`. Answer these four questions:\n\n1. What country and state/province are you in?\n2. What industry do you work in or study?\n3. Do you handle other people's personal data in your work? (Yes / No / Sometimes)\n4. Does your employer or institution have an AI use policy? (Yes / No / I don't know — and if you don't know, note that you should find out)\n\n**Step 2 — Read the AUP for the tools you use (10 minutes)**\n\nNavigate to at least one of these:\n- Anthropic's AUP: anthropic.com/legal/aup\n- OpenAI's usage policies: openai.com/policies/usage-policies\n\nRead it as a legal document, not marketing. In your notes, write down the 3 prohibitions most relevant to your planned use of AI. These are contractual terms you have already agreed to.\n\n**Step 3 — Identify your top legal risk (5 minutes)**\n\nBased on what you've read and your own situation, complete this sentence in your notes:\n\n*\"The main legal constraint I need to watch in my AI use is _______ because _______.\"\n\nExamples of what this might look like:\n- \"...GDPR data processing rules because I work with customer records from EU clients.\"\n- \"...my institution's academic integrity policy because my university has an explicit AI disclosure requirement.\"\n- \"...copyright exposure because I want to publish AI-assisted content commercially.\"\n- \"...the medical advice licensing rules because I work in healthcare.\"\n\nSave this document. You now have a personal legal framework — not generic advice, but the specific rules that apply to your situation."
+    },
+    {
+      "type": "quiz",
+      "question": "A lawyer uses an AI chatbot to research case precedents and drafts a brief citing five cases. Three of those cases don't exist — the AI fabricated them. The lawyer submits the brief to court without verifying the citations. Who bears legal liability for the false citations?",
+      "options": [
+        "The AI company, because the AI generated the fabricated citations",
+        "The lawyer, because the lawyer submitted and signed the brief",
+        "Neither — hallucination is a known limitation and courts account for this",
+        "The law firm's IT department for approving AI tool use"
+      ],
+      "correct": 1,
+      "explanation": "The lawyer is liable. This is based on the real 2023 case Mata v. Avianca, where attorney Steven Schwartz was sanctioned by a federal court for submitting fabricated case citations generated by ChatGPT. The AI company had no duty to the court and was not party to the filing. The lawyer signed the brief and carries an independent professional obligation to verify what is submitted. The fact that hallucination is a known limitation makes it worse for the lawyer, not better — it means the failure to verify was not excusable ignorance but a foreseeable risk that was ignored."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Copyright Scenario Drill",
+      "content": "This 8-minute drill tests your instincts on AI and copyright — the legal area that trips up most content creators and business users.\n\n**Step 1 — Open Claude.ai** and paste this request: *\"I will describe 5 content scenarios. For each, tell me: (1) what copyright risk exists, (2) what I should do to stay safe. Be specific and practical, not theoretical.\"*\n\n**Step 2 — Then describe these 5 scenarios** (adapting to your work):\n- You ask AI to write marketing copy \"in the style of\" a famous copywriter\n- You paste a news article into AI and ask it to summarise it for your newsletter\n- You use AI to create an image for a client's website\n- You ask AI to rewrite a competitor's product description to use on your own site\n- You publish an AI-written blog post under your own name\n\n**Step 3 — Read Claude's analysis** carefully. Which answers surprised you?\n\n**Step 4 — Identify your highest-risk current behaviour:** Is there something you already do with AI that carries legal risk you hadn't considered?\n\n**Step 5 — Write a one-sentence rule** you will apply to your own AI use going forward."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Write an AI Disclosure Policy for Your Content",
+      "content": "If you publish anything — articles, social posts, reports, designs — you need a clear position on AI disclosure. This workshop builds that policy.\n\n**Step 1 — List your content outputs:** What do you publish or produce that others will read or use? (Blog posts, reports, emails to clients, designs, social media, documentation, etc.)\n\n**Step 2 — Ask Claude:** *\"Help me write an AI content disclosure policy for someone who produces [list your content types]. The policy should cover: (1) when to disclose AI involvement, (2) how to disclose it, (3) what counts as 'AI-assisted' vs 'AI-generated', (4) what my readers/clients/employer would expect. Make it practical, not just legally defensive.\"*\n\n**Step 3 — Draft your disclosure policy.** Tailor it to your specific context.\n\n**Step 4 — Mandatory AI review:** Share your draft with Claude and ask: *\"Review this disclosure policy critically. Find 3 situations where following this policy would still mislead someone about how much AI was involved.\"* Update the policy based on what Claude finds.\n\n**Step 5 — Decide on your disclosure language.** Write 2-3 ready-to-use disclosure statements you can add to content when needed. For example: \"This report was drafted with AI assistance and reviewed and edited by [name].\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Legal Risk Assessment for Your AI Workflow",
+      "content": "Identify the specific legal risks in how you actually use AI — not theoretical risks, but real ones.\n\n**Step 1 — Describe your real AI workflow** to Claude in detail: what tools you use, for what tasks, what inputs you give them, what outputs you use and how.\n\n**Step 2 — Ask Claude:** *\"Based on this workflow, identify the top 3 legal risks. For each risk: (1) what law or regulation is relevant, (2) how likely is this to be a problem for someone in my situation, (3) what one change to my workflow would eliminate or reduce this risk.\"*\n\n**Step 3 — Research the top risk further:** Ask Claude to explain the relevant law in plain English for your country. Then ask: \"Who should I consult if I want professional advice on this?\"\n\n**Step 4 — Make one concrete change** to your workflow to reduce your top legal risk.\n\n**Step 5 — Note the limits:** Claude's legal analysis is for general awareness, not legal advice. If your legal risk is significant, identify who you would consult for proper legal advice."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — AI Compliance Checklist for Your Role",
+      "content": "Build a practical compliance checklist tailored to your specific role and jurisdiction.\n\n**Step 1 — Identify your role and industry:** What regulations apply to your work? (Healthcare — HIPAA/GDPR. Finance — FCA/SEC rules. Legal — privilege and confidentiality. Education — FERPA. Marketing — GDPR/CAN-SPAM. General business — employment law, data protection.)\n\n**Step 2 — Ask Claude:** *\"I work in [role] in [industry] in [country]. What AI-specific legal and regulatory considerations apply to my work? Create a practical compliance checklist I can run through before starting any AI project.\"*\n\n**Step 3 — Review and adapt the checklist** for your specific organisation (add any company policies, contractual obligations, client requirements).\n\n**Step 4 — Test the checklist** against your current most-used AI workflow. Does your workflow pass? If not, what needs to change?\n\n**Step 5 — Save the checklist** and share it with one colleague who also uses AI."
+    },
+    {
+      "type": "quiz",
+      "question": "You use AI to write an article that you publish on your company blog with your name on it. Legally and ethically, which statement is most accurate?",
+      "options": [
+        "This is fully legal and no disclosure is needed since you own what AI generates for you",
+        "The article may not be copyright-protected in some jurisdictions since AI generated the content, and readers may expect disclosure of AI involvement",
+        "AI-generated content automatically transfers copyright to whoever runs the AI service",
+        "As long as you edited the AI output, full copyright belongs to you in all jurisdictions"
+      ],
+      "correct": 1,
+      "explanation": "Copyright law for AI-generated content is unsettled and varies by jurisdiction — some courts and jurisdictions have ruled that purely AI-generated content cannot be copyright-protected (it requires human authorship). Additionally, many professional contexts have disclosure expectations. The legally and ethically safest approach is to disclose AI involvement and ensure substantial human editing and creative contribution."
+    },
+    {
+      "type": "quiz",
+      "question": "A client asks you to use AI to generate images for their marketing campaign. What should you check before delivering the images?",
+      "options": [
+        "Whether the images look professional enough",
+        "Whether the AI image tool's terms of service grant commercial use rights and whether you must disclose AI generation to the end client",
+        "Whether the images were generated quickly enough to meet the deadline",
+        "Whether the client will be able to tell the images were AI-generated"
+      ],
+      "correct": 1,
+      "explanation": "Before delivering AI-generated images commercially, you must check: (1) whether the tool's terms grant commercial use — some AI image tools restrict commercial use on free plans, (2) whether you need to disclose AI generation to your client — many clients have policies or may have legal requirements to know, (3) whether the generated images resemble recognisable real people or existing copyrighted works. These are legal and contractual issues, not just aesthetic ones."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 1-6.** You now know the main legal frameworks governing AI use — copyright, defamation, privacy law, platform terms, professional licensing rules, and the EU AI Act — and you've documented which ones apply specifically to your situation."
+    }
+  ],
+  "nextLesson": "2-1",
+  "prevLesson": "1-5"
+}

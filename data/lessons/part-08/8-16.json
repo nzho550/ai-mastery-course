@@ -1,0 +1,106 @@
+{
+  "id": "8-16",
+  "title": "Outlook MCP — Your Inbox Inside Claude Code",
+  "part": 8,
+  "estimatedMinutes": 60,
+  "tags": [
+    "mcp",
+    "intermediate",
+    "outlook",
+    "email",
+    "office",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nIn lesson 2-9 you used Copilot inside Outlook to summarize threads and draft replies. This lesson goes further: you'll connect your Outlook inbox to Claude Code via MCP so you can ask complex, multi-step email questions, chain email tasks with other tools (calendar, documents, Slack), and run email workflows from the terminal — all without opening Outlook."
+    },
+    {
+      "type": "text",
+      "content": "## Why Outlook MCP Instead of Just Copilot?\n\nCopilot inside Outlook is excellent for single tasks: summarize this thread, draft this reply. MCP is better for:\n\n- **Multi-step chains:** *\"Find all emails about the Henderson project from the last month, summarize the open issues, and create a follow-up task in my calendar.\"* This crosses email + calendar in one command — impossible in the Outlook Copilot UI.\n- **Bulk operations:** *\"Find all unread newsletters older than 30 days and list them so I can decide which to unsubscribe from.\"* Tedious in a GUI, easy in natural language.\n- **Cross-tool workflows:** Combine email data with your Notion notes, Slack messages, or code files in a single Claude Code session.\n- **Scripting:** Ask Claude to write a script that runs a recurring email triage every Monday morning.\n\nThe MCP layer turns your inbox from a place you visit into a data source you can query."
+    },
+    {
+      "type": "text",
+      "content": "## Available Outlook MCP Servers\n\nThe Outlook MCP ecosystem is community-built and evolving. As of mid-2025, the most reliable options are:\n\n**Option 1 — `@modelcontextprotocol/server-outlook` (via Microsoft Graph API)**\n\nThis is the most capable option. It uses Microsoft Graph API — the same API that powers Copilot — so it works with any Microsoft 365 or Outlook.com account.\n\nCapabilities: read emails, search inbox, create/read calendar events, list contacts.\n\nSetup requires: a free Azure app registration to get OAuth credentials (a 10-minute one-time setup).\n\n**Option 2 — `outlook-mcp` community servers (npm)**\n\nSearch npm for `outlook-mcp` — several community servers exist with varying capabilities. These typically use simpler authentication (app password) but have fewer features. Good as a quick start if the Graph API setup feels complex.\n\n**Option 3 — Microsoft Graph MCP (official preview, 2025)**\n\nMicrosoft has been developing official MCP support for Graph API. Check github.com/microsoft for the latest official server — this may be available by the time you read this."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**If you use Gmail instead of Outlook:** You already have the Gmail MCP from lesson 8.11. Skip the setup below and proceed to lesson 8-17 or jump directly to lesson 8-20 (The Unified Office). All the workflow concepts in this lesson apply equally to Gmail — substitute `gmail` for `outlook` in every example."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Connect Outlook to Claude Code",
+      "content": "This workshop uses the Microsoft Graph API approach. You will need a Microsoft account (personal or work).\n\n**Step 1 — Register an Azure app (10 minutes, one-time)**\n\n1. Go to portal.azure.com and sign in with your Microsoft account\n2. Search for **App registrations** → click **New registration**\n3. Name: `claude-outlook-mcp` → Account type: **Accounts in any organizational directory and personal Microsoft accounts** → click **Register**\n4. Copy the **Application (client) ID** — save it in your notes\n5. Go to **Certificates & secrets** → **New client secret** → description: `claude-mcp` → Expires: 24 months → **Add**\n6. Copy the **Value** immediately — it only shows once. Save it in your notes.\n7. Go to **API permissions** → **Add a permission** → **Microsoft Graph** → **Delegated permissions** → add: `Mail.Read`, `Mail.ReadWrite`, `Calendars.Read`, `Calendars.ReadWrite`\n8. Click **Grant admin consent** (you may need to be an admin, or request this from your IT team)\n\n**Step 2 — Install the MCP server**\n\nOpen PowerShell in your project folder:\n```\nnpm install -g @modelcontextprotocol/server-outlook\n```\n(If that package name has changed, search npm for `outlook mcp` and use the most recently updated package)\n\n**Step 3 — Add to Claude Code config**\n\nOpen `%APPDATA%\\Claude\\claude_desktop_config.json` and add:\n```json\n\"outlook\": {\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"@modelcontextprotocol/server-outlook\"],\n  \"env\": {\n    \"AZURE_CLIENT_ID\": \"your-application-client-id\",\n    \"AZURE_CLIENT_SECRET\": \"your-client-secret-value\",\n    \"AZURE_TENANT_ID\": \"common\"\n  }\n}\n```\nReplace the placeholder values with your actual credentials. Save the file.\n\n**Step 4 — Test the connection**\n\nLaunch `claude` → type `/mcp` → confirm `outlook` is listed as connected.\n\nThen try:\n```\nAsk: \"How many unread emails do I have? Who sent the most recent one and what is the subject?\"\n```\n\n**Step 5 — Real triage task**\n\n```\nAsk: \"Look at my inbox. Find any emails from the last 7 days where someone is\nwaiting for a reply from me — look for phrases like 'let me know', 'your thoughts',\n'please advise', or direct questions. List them with sender, subject, and a one-line\nsummary of what they're waiting for.\"\n```\n\nThis is a task that takes 20+ minutes manually in Outlook. In Claude Code with MCP, it takes seconds.\n\n**Security reminder:** Your Azure credentials give Claude Code access to your real email. Keep them in environment variables, not hardcoded in any file you commit to git. Your `.gitignore` already excludes `.claude/settings.json` — keep credentials there or in a `.env` file that is also excluded."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the key advantage of using Outlook MCP in Claude Code over the Copilot feature built into the Outlook application?",
+      "options": [
+        "MCP is faster at reading individual emails",
+        "MCP allows you to chain email tasks with other tools (calendar, Slack, Notion) in a single natural language command",
+        "MCP works offline while Copilot requires an internet connection",
+        "MCP is free while Copilot requires a paid Microsoft 365 subscription"
+      ],
+      "correct": 1,
+      "explanation": "The power of MCP is cross-tool composition. Copilot inside Outlook is excellent for single-app tasks but is siloed — it can't simultaneously access your calendar, Slack messages, and Notion notes. Claude Code with multiple MCPs active can perform workflows that span all your tools in one command. That is the fundamental difference: native Copilot is one app's AI, MCP is the integration layer across all your apps."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Outlook MCP First Operations",
+      "content": "Get hands-on with Outlook MCP's core capabilities.\n\n**Step 1 — Configure Outlook MCP** with Microsoft Graph API credentials.\n\n**Step 2 — Test core operations in Claude Code:**\n- \"List my 5 most recent unread emails with sender, subject, and date\"\n- \"Show me emails from [person] in the last 7 days\"\n- \"Search for emails with 'invoice' in the subject from the last month\"\n\n**Step 3 — Test draft creation:**\n\"Draft an email to [your own address] with subject 'MCP Test' and body 'This email was drafted by Claude Code via Outlook MCP.'\"\n\n**Step 4 — Verify the draft** exists in Outlook before sending anything.\n\n**Step 5 — Ask Claude:** \"What are the most valuable email operations I should use Outlook MCP for in my workflow? What should I NOT use it for?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI Email Triage Workflow",
+      "content": "Build an AI-powered email triage workflow using Outlook MCP.\n\n**Step 1 — Ask Claude Code to process your recent emails:**\n```\nCheck my recent emails (last 2 days). For each unread email:\n1. Categorise it: Action required / FYI / Newsletter / Other\n2. For \"Action required\": what specifically do I need to do?\n3. Priority: High (deadline today/tomorrow) / Medium / Low\n4. Suggested response time: Today / This week / Not urgent\n\nDon't take any action — just give me the triage summary.\n```\n\n**Step 2 — Review the triage.** Is the categorisation accurate?\n\n**Step 3 — For one \"Action required\" email**, ask Claude Code to draft a response. Read the draft carefully before approving.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review your triage analysis. What important context might you have missed? What emails might be more urgent than you categorised?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Email Templates via Claude Code",
+      "content": "Use Claude Code with Outlook MCP to build a template-based email system.\n\n**Step 1 — Identify your 3 most common email types** that follow a pattern: status updates, meeting requests, follow-ups, introductions.\n\n**Step 2 — Ask Claude Code to create email templates** for each:\n```\nCreate email templates for these recurring email types I send:\n1. [Email type 1]: [brief description of when you send it]\n2. [Email type 2]: [brief description]\n3. [Email type 3]: [brief description]\n\nFor each template:\n- Subject line with [PLACEHOLDERS]\n- Body with [PLACEHOLDERS] for variable parts\n- Tone: [your usual tone for this email type]\n```\n\n**Step 3 — Test each template** by having Claude Code draft a specific email using it.\n\n**Step 4 — Store the templates** in a Claude Code slash command or Claude Project for reuse."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Meeting Request Automation",
+      "content": "Automate meeting request emails using Outlook MCP and Claude Code.\n\n**Step 1 — Identify a real meeting you need to schedule** this week.\n\n**Step 2 — Ask Claude Code to draft the meeting request:**\n```\nDraft a meeting request email for:\n- Recipient: [name and email]\n- Meeting purpose: [describe it]\n- Proposed times: [list 3 options]\n- Duration: [time]\n- Location/call link: [details]\n\nUse a professional but friendly tone. Include a brief agenda.\n```\n\n**Step 3 — Review the draft.** Is the tone right? Is the agenda appropriate?\n\n**Step 4 — Save as draft** in Outlook via MCP (don't send until you've reviewed it in Outlook itself).\n\n**Step 5 — Open Outlook** and verify the draft looks correct. Send from Outlook — not from Claude Code."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code reads your emails using Outlook MCP to help you triage. What privacy consideration is most important?",
+      "options": [
+        "Making sure Claude Code doesn't reply to emails automatically",
+        "Your email contents are processed through Anthropic's API — ensure this is permitted by your organisation's data policies and that no regulated data (client PII, financial data) appears in emails you process",
+        "That Claude Code doesn't read emails older than 30 days",
+        "Ensuring two-factor authentication is enabled on your email"
+      ],
+      "correct": 1,
+      "explanation": "Email processing via Claude means email contents are sent to Anthropic's cloud. For many organisations, this raises compliance questions: client communication may be covered by attorney-client privilege, NDA obligations, financial regulations (GDPR, HIPAA, SEC rules), or confidentiality agreements. Check your organisation's AI usage policy before processing work emails through cloud AI. Personal email is generally fine; professional email requires more consideration."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code drafts an email reply using Outlook MCP. Before you send it, what is the minimum review required?",
+      "options": [
+        "Spell-check only",
+        "Read the entire email: verify the recipient is correct, the content is accurate and appropriate, the tone matches your intent, and you're comfortable with everything it says",
+        "Ask Claude Code if it's confident in the draft",
+        "Have a colleague review it"
+      ],
+      "correct": 1,
+      "explanation": "An email sent is permanent communication under your name. Minimum review: (1) correct recipient — the most important check (wrong recipient emails are a real and embarrassing incident), (2) accurate content — Claude Code may misunderstand context or include wrong information, (3) appropriate tone — especially important for sensitive topics or senior stakeholders, (4) nothing you're not comfortable with under your name. This review takes 60 seconds; skipping it can cause professional damage."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-16.** Your Outlook inbox is now accessible from Claude Code. You can read, search, and triage email from the terminal — and in lesson 8-20, you'll chain this with your calendar, Slack, and Notion in a single workflow."
+    }
+  ],
+  "nextLesson": "8-17",
+  "prevLesson": "8-15"
+}

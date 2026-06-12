@@ -1,0 +1,92 @@
+{
+  "id": "6-5",
+  "title": "AI-Assisted Debugging in VS Code",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": [
+    "debugging",
+    "vscode",
+    "copilot",
+    "ai-coding"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nDebugging — finding and fixing errors in code — is traditionally the most frustrating part of programming. AI changes this dramatically. In this lesson you'll build a systematic workflow: error appears → AI diagnoses → you understand the fix → apply it. The goal isn't just to fix the bug; it's to understand *why* the fix works so the same class of error never trips you up twice."
+    },
+    {
+      "type": "text",
+      "content": "## Three Categories of Bugs (and How AI Handles Each)\n\n**Syntax errors** — code that violates the rules of the language (`consol.log` instead of `console.log`, a missing closing bracket). VS Code highlights these in red before you even run the code. AI is nearly perfect at fixing these — they have deterministic right answers.\n\n**Logic errors** — code that runs without crashing but produces the wrong result. A loop that runs one iteration too many, a function that returns `undefined` instead of a value. These are harder. AI can often spot them, but you need to tell it what the *expected* behavior is, not just what the *actual* behavior is.\n\n**Environment errors** — problems with missing packages, wrong Node.js versions, permission issues, path problems. AI can help with common ones (it has seen millions of error messages), but sometimes it can't help because the problem is specific to your machine setup. When AI is stuck on environment errors, paste the full error message into Perplexity — the web search context often finds the exact solution.\n\nKnowing which category you're dealing with sets your expectations before you ask the AI."
+    },
+    {
+      "type": "text",
+      "content": "## The Debugging Workflow\n\nHere's the repeatable process:\n\n**1. Read the error message.** Don't just paste it into AI immediately. The error message usually tells you the file name and line number. Navigate there first.\n\n**2. Check the Problems panel.** In VS Code, open **View → Problems** (or the red/yellow indicators in the Status Bar). This shows all linting errors and TypeScript issues in one list, before you even run the code.\n\n**3. Use Copilot Chat's `/fix` command.** Select the broken code (or the error-highlighted line), open Copilot Chat with `Ctrl+Alt+I`, and type `/fix`. Copilot reads the code and the error context and proposes a fix.\n\n**4. Paste stack traces for runtime errors.** If the error appears when you *run* the code (not just when you open it), copy the full stack trace from the terminal and paste it into Copilot Chat or Claude. Include the surrounding code too.\n\n**5. Ask for an explanation alongside the fix.** Don't just ask \"fix this.\" Ask \"fix this and explain what was wrong and why your fix works.\" This is the difference between solving today's bug and learning to avoid tomorrow's."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Rubber duck debugging with AI.** Classic rubber duck debugging: explain your code to an inanimate object (traditionally, a rubber duck). The act of explaining forces you to see the problem clearly. With AI, the \"duck\" talks back. Tell Copilot Chat: \"I'm trying to do X. Here's my code. I expect it to return Y but it's returning Z. Walk me through what's actually happening.\" Often, writing out the problem this clearly reveals the bug before the AI even responds."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Debug a Broken File",
+      "content": "**Step 1 — Create the broken file**\n1. In VS Code Explorer, right-click `exercises/` → **New File** → name it `broken.js`\n2. Paste in this intentionally broken code (it has two bugs):\n\n```javascript\nfunction greetUser(name) {\n  console.log(\"Hello, \" + nme + \"!\");\n}\n\nfunction calculateTotal(items) {\n  let total = 0;\n  for (let i = 0; i <= items.length; i++) {\n    total += items[i].price;\n  }\n  return total;\n}\n```\n\n**Step 2 — Let VS Code find the first bug**\n1. Open **View → Problems** from the top menu bar\n2. The Problems panel appears at the bottom — it should show at least one error\n3. Click the error entry — VS Code jumps to the exact line\n4. Can you spot the bug before asking AI? (Hint: look at the variable name inside `console.log`)\n\n**Step 3 — Use Copilot Chat's /fix**\n1. Select the entire `greetUser` function (lines 1–3)\n2. Press `Ctrl+Alt+I` to open Copilot Chat\n3. Type: `/fix`\n4. Read Copilot's diagnosis — it should identify the typo: `nme` instead of `name`\n5. Apply the fix\n\n**Step 4 — Find the logic bug**\nThe second bug is in `calculateTotal`. The code runs without a syntax error, but crashes at runtime when `i` reaches `items.length`.\n1. Select the `calculateTotal` function\n2. In Copilot Chat, type: \"Find the logic bug in this function. Explain what goes wrong when the loop runs and how to fix it.\"\n3. Copilot should explain: `i <= items.length` causes the loop to access `items[items.length]`, which is `undefined`. Fix: change `<=` to `<`.\n4. Apply the fix and understand why: arrays in JavaScript are zero-indexed, so the last valid index is `items.length - 1`.\n\n**Step 5 — Verify your understanding**\nIn your notes, write two sentences:\n- What was bug #1 and why did it occur?\n- What was bug #2 and what type of error was it (syntax, logic, or environment)?\n\nIf you can explain both bugs in plain English, you've genuinely learned from this — not just applied a fix."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Debug a Real Error with AI",
+      "content": "This drill practices the complete AI-assisted debugging cycle on a real error.\n\n**Step 1 — Find or create a bug.** Either find a real bug in your code, or create one: take a working 20-line Python script and deliberately introduce a bug (wrong variable name, off-by-one error, missing return statement).\n\n**Step 2 — Run the code** and copy the complete error message and stack trace.\n\n**Step 3 — Before asking AI** — read the error message yourself and form a hypothesis. Write: \"I think the error is at line X because Y.\"\n\n**Step 4 — Paste to Claude.ai or your VS Code AI:**\n```\nI have this error:\n[paste full error and stack trace]\n\nHere is the relevant code:\n[paste the function/class where the error occurs]\n\nMy hypothesis: [your guess]\n\nIs my hypothesis right? What is the actual cause? Give me the specific line to fix and the fix.\n```\n\n**Step 5 — Apply the fix.** Run again.\n\n**Step 6 — Write a note:** What type of error was this? How would you recognise the same pattern next time?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Use VS Code Debugger with AI Guidance",
+      "content": "The VS Code debugger (breakpoints, step-through) is more powerful than print statements. This workshop uses AI to guide you through it.\n\n**Step 1 — Ask Claude:** *\"I want to use the VS Code debugger for Python. Explain: (1) what a breakpoint is and how to set one, (2) what step over vs step into means, (3) how to inspect variable values during debugging, (4) when the debugger is more useful than print statements.\"*\n\n**Step 2 — Set a breakpoint** in your code: click in the gutter (left of line numbers) to set a red circle.\n\n**Step 3 — Start debugging:** Press F5 (Run and Debug). The program pauses at your breakpoint.\n\n**Step 4 — Inspect variables** in the Variables panel (left side). Hover over variables to see their current values.\n\n**Step 5 — Step through:** Press F10 (Step Over) to advance one line at a time. Watch variables change.\n\n**Step 6 — Ask Claude to help you interpret what you see:** *\"The debugger shows variable X has value Y at this line. I expected Z. What does this tell me about where the bug is?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Debugging Patterns and Anti-patterns",
+      "content": "Learn the debugging patterns that separate skilled developers from beginners — and how AI accelerates each.\n\n**Step 1 — Ask Claude:** *\"Describe the 5 most common debugging strategies used by experienced developers. For each, explain: when to use it, the basic steps, and how AI assistance improves it.\"*\n\n**Step 2 — Read about these strategies:**\n- Binary search debugging (bisect the problem)\n- Rubber duck debugging (explain to AI)\n- Reproduce minimum (find the smallest code that causes the bug)\n- Check assumptions (are your variables actually what you think they are?)\n- Read the error message (the full message, not just the last line)\n\n**Step 3 — Apply one strategy** to a real bug you're working on.\n\n**Step 4 — Ask Claude:** *\"I'm using [strategy] to debug [describe your bug]. Here's what I've found so far: [describe]. What should I check next?\"*\n\n**Step 5 — Write a 3-sentence debugging checklist** you'll use for the next bug you encounter."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Write a Bug Report with AI Help",
+      "content": "If you work in a team, writing a clear bug report is essential. AI can help you write better bug reports faster.\n\n**Step 1 — Find a real bug** in your code or use a hypothetical one.\n\n**Step 2 — Ask Claude to help structure the bug report:**\n```\nI found a bug and need to write a clear bug report. Here are my notes:\n[describe what happened, what you did, what you expected, what occurred instead]\n\nWrite a structured bug report with:\n- Summary (one sentence)\n- Environment (OS, language version, relevant package versions)\n- Steps to reproduce (numbered, specific)\n- Expected behaviour\n- Actual behaviour\n- Error output\n- Possible cause (if known)\n- Severity assessment\n```\n\n**Step 3 — Review the bug report.** Is it complete? Could someone else reproduce it from these steps alone?\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review this bug report. What information is missing that would make it harder to diagnose and fix? What would a senior developer want to know that isn't here?\"*\n\n**Step 5 — Save this bug report template** in your prompt library."
+    },
+    {
+      "type": "quiz",
+      "question": "Your Python script crashes with an IndexError. The error points to line 43. Before asking AI for help, what should you do?",
+      "options": [
+        "Ask AI immediately — it will diagnose faster than you can",
+        "Look at line 43, identify the list or array being indexed, and check what value the index variable has at the time of the crash",
+        "Add print statements at every line before 43",
+        "Restart Python and try again"
+      ],
+      "correct": 1,
+      "explanation": "IndexError means you're trying to access an index that doesn't exist in a list. Before asking AI, read the error: what variable is being accessed, and what is its value? Often a quick look at line 43 reveals the issue — you're using index 10 on a list with only 5 elements. This understanding makes your AI question much more specific: \"I have a list of 5 items and I'm accessing index X because [reason] — how do I fix the boundary condition?\""
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main advantage of using the VS Code debugger's breakpoints over adding print() statements to debug code?",
+      "options": [
+        "Breakpoints are faster to set than typing print statements",
+        "Breakpoints pause execution and let you inspect ALL variables at once without modifying the code — you can explore state interactively",
+        "Breakpoints only work for Python",
+        "Breakpoints automatically fix the bug"
+      ],
+      "correct": 1,
+      "explanation": "Breakpoints let you pause execution and inspect the full program state — all variables, the call stack, the values in memory — without modifying your source code. Print statements only show what you anticipated you'd need to see, require code modification, and leave debugging artifacts if you forget to remove them. For complex bugs, the debugger reveals unexpected state that you never would have thought to print."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-5 complete.** You have a repeatable debugging workflow: read the error, check the Problems panel, use /fix for syntax errors, explain the problem for logic errors, and always understand the fix before moving on. In lesson 6-6, you'll step outside VS Code entirely and try Cursor — an AI-native editor that approaches AI-assisted coding from a different angle."
+    }
+  ],
+  "nextLesson": "6-6",
+  "prevLesson": "6-4"
+}

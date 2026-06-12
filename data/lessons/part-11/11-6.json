@@ -1,0 +1,115 @@
+{
+  "id": "11-6",
+  "title": "Understanding Tokens & Cost",
+  "part": 11,
+  "estimatedMinutes": 55,
+  "tags": [
+    "api",
+    "tokens",
+    "cost",
+    "anthropic"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what tokens are, how to count them before sending a request, and how to calculate the exact cost of any API call."
+    },
+    {
+      "type": "text",
+      "content": "## What Are Tokens?\n\nLLMs don't read text letter by letter or word by word — they read in **tokens**, which are chunks of text roughly corresponding to syllables or short words.\n\nA useful rule of thumb:\n- **1 token ≈ 0.75 words** (so 100 words ≈ 133 tokens)\n- **1,000 tokens ≈ 750 words** (a bit more than one standard page)\n\nSome examples:\n- `hello` → 1 token\n- `Hello, world!` → 4 tokens\n- `antidisestablishmentarianism` → 6 tokens\n- A typical paragraph → 50-100 tokens\n- A standard webpage → 1,000-3,000 tokens\n- A full novel → 100,000-200,000 tokens\n\nTokenization is not perfectly predictable — code, unusual words, and non-English text can tokenize differently. The only accurate way to know is to count."
+    },
+    {
+      "type": "text",
+      "content": "## Pricing Structure\n\nAnthropic charges separately for input tokens (what you send) and output tokens (what Claude generates). Output tokens always cost more than input tokens — generating text is computationally more expensive than reading it.\n\nApproximate current prices per 1 million tokens:\n\n| Model | Input ($/1M) | Output ($/1M) |\n|-------|------------|---------------|\n| Haiku 4.5 | $0.80 | $4.00 |\n| Sonnet 4.6 | $3.00 | $15.00 |\n| Opus 4.8 | $15.00 | $75.00 |\n\nCheck `anthropic.com/pricing` for current rates — these change as models update.\n\n**Cost formula:**\n```\ncost = (input_tokens / 1,000,000 × input_price)\n     + (output_tokens / 1,000,000 × output_price)\n```\n\nFor a typical call with Haiku (500 input + 200 output tokens):\n```\ncost = (500 / 1,000,000 × $0.80) + (200 / 1,000,000 × $4.00)\n     = $0.0004 + $0.0008\n     = $0.0012 per call\n```\n\nThat's $0.12 per 100 calls. Very cheap for experimentation."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The usage field is always there.** Every API response includes `usage.input_tokens` and `usage.output_tokens`. You never have to guess — you can always check exactly what you used after the call."
+    },
+    {
+      "type": "text",
+      "content": "## Counting Tokens Before You Call\n\nThe SDK provides a `count_tokens` method that tells you how many input tokens a request will use — before you actually send it. This is useful for:\n- Estimating costs before a big batch job\n- Checking if a document fits in the context window\n- Comparing prompt lengths\n\n**Node.js token counting:**"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\nconst prompt = 'Explain the difference between machine learning and deep learning.';\n\nconst countResult = await client.messages.countTokens({\n  model: 'claude-haiku-4-5-20251001',\n  messages: [{ role: 'user', content: prompt }]\n});\n\nconsole.log(`Input tokens: ${countResult.input_tokens}`);\n\n// Estimate cost\nconst inputPrice = 0.80 / 1_000_000;  // $0.80 per million\nconst estimatedCost = countResult.input_tokens * inputPrice;\nconsole.log(`Estimated input cost: $${estimatedCost.toFixed(6)}`);"
+    },
+    {
+      "type": "text",
+      "content": "**Python token counting:**"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import anthropic\nfrom dotenv import load_dotenv\n\nload_dotenv()\nclient = anthropic.Anthropic()\n\nprompt = \"Explain the difference between machine learning and deep learning.\"\n\ncount = client.messages.count_tokens(\n    model=\"claude-haiku-4-5-20251001\",\n    messages=[{\"role\": \"user\", \"content\": prompt}]\n)\n\nprint(f\"Input tokens: {count.input_tokens}\")\n\ninput_price = 0.80 / 1_000_000\nestimated_cost = count.input_tokens * input_price\nprint(f\"Estimated input cost: ${estimated_cost:.6f}\")"
+    },
+    {
+      "type": "workshop",
+      "tag": "API",
+      "title": "Token Counting and Cost Calculator",
+      "content": "You'll write a script that counts tokens for three different prompts, makes real API calls, and calculates the actual cost from the response's usage field.\n\nCreate `exercises/token-demo.js` (or `.py`) and run the following:\n\n**Node.js version:**\n```javascript\nimport Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\n// Haiku pricing\nconst INPUT_PRICE  = 0.80 / 1_000_000;\nconst OUTPUT_PRICE = 4.00 / 1_000_000;\n\nconst prompts = [\n  'What is 2 + 2?',\n  'Explain the concept of recursion in programming.',\n  'Write a detailed comparison of Python and JavaScript for a beginner who wants to learn their first programming language, covering syntax, use cases, learning resources, and career prospects.'\n];\n\nfor (const prompt of prompts) {\n  // Count tokens first\n  const count = await client.messages.countTokens({\n    model: 'claude-haiku-4-5-20251001',\n    messages: [{ role: 'user', content: prompt }]\n  });\n\n  // Make the real call\n  const response = await client.messages.create({\n    model: 'claude-haiku-4-5-20251001',\n    max_tokens: 500,\n    messages: [{ role: 'user', content: prompt }]\n  });\n\n  const inputTokens  = response.usage.input_tokens;\n  const outputTokens = response.usage.output_tokens;\n  const cost = (inputTokens * INPUT_PRICE) + (outputTokens * OUTPUT_PRICE);\n\n  console.log(`\\nPrompt: \"${prompt.slice(0, 60)}...\"`);\n  console.log(`  Pre-call estimate: ${count.input_tokens} input tokens`);\n  console.log(`  Actual input: ${inputTokens} tokens, output: ${outputTokens} tokens`);\n  console.log(`  Cost: $${cost.toFixed(6)}`);\n}\n```\n\nRun it: `node token-demo.js`\n\n**What to observe:**\n- The short question uses dramatically fewer tokens than the long essay request\n- Output tokens vary with response complexity\n- Even the longest, most detailed response costs less than a penny on Haiku\n- The pre-call estimate matches the actual input_tokens closely"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Why output tokens cost more:** Reading a prompt is O(n) — the model processes each token once. Generating output is O(n²) — each new token attends to all previous tokens. The compute cost scales differently, hence the 5x price difference between input and output."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Token Counting Drill",
+      "content": "Build intuition for how tokens work by counting them.\n\n**Step 1 — Use the Anthropic tokeniser** (or ask Claude Code to count tokens): ask Claude to estimate the token count of several texts:\n- A single word: \"Hello\"\n- A tweet-length text: \"Just finished my first Claude API integration!\"\n- A paragraph: [paste a paragraph from this lesson]\n- A code snippet: [paste 10 lines of Python]\n\n**Step 2 — Ask Claude:** *\"What are the general rules for how many tokens common things use? For example: characters per token, words per token, code vs prose, different languages.\"*\n\n**Step 3 — Estimate tokens BEFORE Claude tells you:**\n- A JSON object with 5 string fields\n- A complete URL\n- A 200-word essay\nThen verify your estimates.\n\n**Step 4 — Calculate the cost** of processing each text through claude-haiku-4-5-20251001 (at current pricing).\n\n**Step 5 — Develop a rule of thumb** for estimating your API costs before building."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Token-Aware Code",
+      "content": "Modify your API wrapper to be token-aware.\n\n**Step 1 — Ask Claude Code** to add token counting to your existing API wrapper:\n```\nAdd these token-aware features to the AnthropicClient class:\n1. Before each API call, estimate the token count and warn if it exceeds a configurable threshold\n2. After each API call, track running totals: input tokens, output tokens, estimated cost\n3. Implement a `token_budget` parameter — if the conversation history grows beyond this budget, automatically truncate oldest messages while keeping the system prompt\n4. Add a `get_usage_summary()` method that returns current session stats\n```\n\n**Step 2 — Test the token budget feature** with a very long conversation. Does it truncate correctly?\n\n**Step 3 — Verify the cost tracking** against the Anthropic console after your test session.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review the truncation logic. What conversations would this handle badly? What context might be inappropriately dropped?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Model Selection Strategy",
+      "content": "Build a strategy for choosing which Claude model to use.\n\n**Step 1 — Ask Claude:** *\"Compare Claude Haiku, Sonnet, and Opus for these use cases: (1) classifying customer support emails, (2) writing detailed technical documentation, (3) answering simple factual questions, (4) complex reasoning tasks. For each, recommend the model and explain the cost/quality trade-off.\"*\n\n**Step 2 — Build a decision matrix:**\n| Task Type | Recommended Model | Reason |\n|---|---|---|\n| Simple classification | | |\n| Short Q&A | | |\n| Complex analysis | | |\n| Creative generation | | |\n| Code review | | |\n\n**Step 3 — Fill in the matrix** based on Claude's guidance.\n\n**Step 4 — Calculate the cost difference** for your primary use case at Haiku vs Sonnet vs Opus. What is the monthly saving of choosing Haiku over Sonnet?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Cost Optimisation Experiment",
+      "content": "Reduce API costs for a real use case through optimisation.\n\n**Step 1 — Take a real prompt** you use regularly.\n\n**Step 2 — Establish baseline cost:** Run it and record token counts.\n\n**Step 3 — Apply these optimisations** and measure the token reduction:\n1. Remove redundant context (information the model doesn't need)\n2. Compress verbose instructions (be more concise)\n3. Use structured output format to reduce output tokens\n4. Test with a smaller model first\n\n**Step 4 — For each optimisation**, verify the output quality didn't degrade. Cost reduction is only valuable if quality is maintained.\n\n**Step 5 — Calculate the final optimisation:** What % cost reduction did you achieve? At what scale does this matter?"
+    },
+    {
+      "type": "quiz",
+      "question": "You're building an app that processes 1000 documents per day, averaging 2000 tokens each. Should you use Claude Haiku or Sonnet?",
+      "options": [
+        "Always use Sonnet for better quality",
+        "Test both models on your specific task first — if Haiku's quality is sufficient, it will cost significantly less at this volume",
+        "Always use Haiku to minimise cost",
+        "Use different models for different documents based on content complexity"
+      ],
+      "correct": 1,
+      "explanation": "Model selection should be empirical, not assumed. Test Haiku on your actual task with diverse examples and evaluate quality. If Haiku meets your quality bar, the cost savings at scale are substantial. If quality is insufficient, Sonnet's cost is justified. The wrong approach: automatically using the most capable model without testing whether a cheaper model suffices. At 1000 documents/day × 2000 tokens, even a 5× price difference translates to significant monthly savings."
+    },
+    {
+      "type": "quiz",
+      "question": "Your API cost is unexpectedly high. What is the most effective diagnostic step?",
+      "options": [
+        "Switch to a cheaper model immediately",
+        "Log the token counts of each API call for one day to identify which calls are consuming the most tokens — the highest spenders are the optimisation targets",
+        "Reduce max_tokens for all API calls",
+        "Check the Anthropic console for billing details"
+      ],
+      "correct": 1,
+      "explanation": "Unexpectedly high API costs have specific causes — usually a small number of expensive call patterns, not uniformly high usage. Without logs, you're guessing. Log: which endpoint/feature made the call, input tokens, output tokens, and model for each request. After one day of logging, sort by cost to identify the top 3 most expensive call patterns. Optimising those (shorter prompts, smaller model, caching) typically delivers 70%+ of possible savings."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 11-6.** You can now estimate the cost of any API call before running it and calculate exact costs from responses. This knowledge becomes critical in lesson 11-9 when you optimize real workloads. Next: making responses feel instant with streaming."
+    }
+  ],
+  "nextLesson": "11-7",
+  "prevLesson": "11-5"
+}

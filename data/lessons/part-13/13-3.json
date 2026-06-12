@@ -1,0 +1,106 @@
+{
+  "id": "13-3",
+  "title": "API Cost Management — Budgets, Monitoring & Architecture",
+  "part": 13,
+  "estimatedMinutes": 60,
+  "tags": [
+    "safety",
+    "cost",
+    "api",
+    "anthropic-console",
+    "architecture"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nAPI costs compound in ways that surprise beginners. This lesson shows you how to set hard limits before you accidentally run something expensive, how to read your actual usage data, and how to apply the cost-engineering techniques from lesson 11-9 to real tools you've already built."
+    },
+    {
+      "type": "text",
+      "content": "## Why Costs Sneak Up on You\n\nDuring a normal lesson, you make a few API calls. Each one costs fractions of a cent. The total for the entire course should be under $5 if you've been using Haiku for small tasks.\n\nBut API costs scale non-linearly when you start building real things:\n\n- A loop that processes 1,000 documents costs 1,000× a single call\n- Forgetting to set `max_tokens` means the model can output 4,096 tokens when you only needed 50\n- Using Sonnet for tasks that Haiku can handle costs 3.75× more per call\n- An n8n workflow that runs every hour on 50 emails is 43,800 API calls per month\n\nNone of these are disasters if you catch them. They're all preventable with a few configuration choices."
+    },
+    {
+      "type": "text",
+      "content": "## Setting Spending Limits in the Anthropic Console\n\nThe Anthropic Console at `console.anthropic.com` lets you set hard limits that prevent your API key from being used beyond a threshold.\n\n**How to set a limit:**\n1. Go to `console.anthropic.com` → Settings → Billing\n2. Look for **Monthly spending limit** or **Usage limits**\n3. Set a conservative limit while you're learning: $10/month is generous for experimentation\n4. When building real tools: $25/month gives you headroom without risk\n5. Enable email notifications — set alerts at 50% and 80% of your limit\n\nWhen the limit is hit, API calls return an error rather than continuing to charge you. This is a safety net, not a substitute for good architecture — a well-built system shouldn't hit the limit in normal operation."
+    },
+    {
+      "type": "text",
+      "content": "## Reading Your Usage Dashboard\n\nGo to `console.anthropic.com` → Usage.\n\nWhat to look for:\n\n**Model breakdown:** Are calls going to Sonnet or Opus for tasks that Haiku could handle? Even a few Opus calls in a testing session add up quickly — Opus costs 18.75× more than Haiku per input token.\n\n**Daily usage spikes:** Did a particular day have unusually high usage? That's usually a loop that ran more than expected, a test with a large document, or an automation that processed more items than intended.\n\n**Input vs output token ratio:** Output tokens cost 4–5× more than input tokens. If your output tokens are unexpectedly high, you probably forgot to set a `max_tokens` limit.\n\n**Total spend by API key:** If you have multiple keys (personal, work, different projects), you can see which is driving costs.\n\nFor most learners who've followed this course, the total spend should be under $1. If it's significantly more, the dashboard will tell you which calls were expensive."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Anthropic prepaid credits vs monthly billing:** Anthropic uses a prepaid credit model. You load credits ($5, $10, etc.) and they deplete as you make API calls. The spending limit caps how much you can load in a month. If your credits run out, calls fail gracefully — they don't go into debt. This is the safest billing model for learners."
+    },
+    {
+      "type": "text",
+      "content": "## The Four Architectural Patterns That Control Cost\n\nLesson 11-9 taught these techniques in detail. Here's the reference summary:\n\n**1. Always set `max_tokens`**\nIf you need a yes/no answer, set `max_tokens=5`. If you need a paragraph, set it to 200. The default (4096) is enormous for most tasks. This single habit can cut output costs by 80%.\n\n**2. Route to the cheapest model that works**\nHaiku costs $0.80/1M input tokens. Sonnet costs $3.00/1M. Opus costs $15.00/1M. Ask: \"Does this task require Sonnet-level reasoning, or would Haiku handle it fine?\" For classification, short extraction, yes/no decisions, and simple rewrites, Haiku is more than sufficient.\n\n**3. Use prompt caching for repeated system prompts**\nIf you're sending the same long system prompt with every request (e.g., a customer support agent with a large product knowledge base), add `cache_control` to that block. Cache reads cost 10% of normal — this technique alone can cut 90% of a large system prompt's cost.\n\n**4. Use the Batch API for non-real-time work**\nAny task that doesn't need an instant response qualifies. Batch API costs 50% less. Processing a backlog of 1,000 documents overnight via batch instead of real-time cuts the cost in half."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The fastest single win:** Open any script you've written that calls the API. Find the `max_tokens` parameter. If it's missing, add it. If it's set to 1024 or 4096 for a task that only needs 50–100 tokens, lower it. This takes 2 minutes and can cut output costs significantly."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Set Your Budget and Audit Your Spend",
+      "content": "This workshop has three steps. Do them in order — the audit informs the budget decision.\n\n**Step 1 — Audit your current usage (10 min):**\n1. Go to `console.anthropic.com` → Usage\n2. Look at the last 30 days of usage\n3. Answer these questions in your notes:\n   - What is your total spend so far in the course?\n   - Which model(s) were used?\n   - Were there any unexpectedly large days?\n   - What's your input/output token ratio?\n\nIf you haven't made many API calls yet, the numbers will be small — that's fine. The point is establishing the baseline.\n\n**Step 2 — Set spending limits (5 min):**\n1. Go to `console.anthropic.com` → Settings → Billing\n2. Set a monthly spending limit appropriate for your situation:\n   - Still learning: $10/month\n   - Building tools actively: $25/month\n   - Running automations: $50/month\n3. Enable email alerts at 50% and 80% of the limit\n4. Screenshot or note the confirmation — this is a real safety net\n\n**Step 3 — Apply one cost optimization to your summarizer (15 min):**\nOpen `exercises/summarize.py` from lesson 11-8. Apply one of these techniques:\n\n**Option A — Trim the system prompt:**\nOpen `summarize.py`. Find the system prompt. Use `count_tokens()` to measure it before and after trimming. Can you remove any verbose wording while keeping the same quality?\n\n**Option B — Add model routing:**\nAdd logic to use Haiku for short inputs and Sonnet for long ones:\n```python\nword_count = len(text.split())\nmodel = \"claude-haiku-4-5-20251001\" if word_count < 500 else \"claude-sonnet-4-6\"\n```\n\n**Option C — Add explicit max_tokens:**\nIf your summarizer doesn't have `max_tokens` set, add it. For a 3-bullet summary, 200 tokens is plenty.\n\nAfter applying the technique, run the summarizer on a test file and confirm it still works correctly.\n\n**Add to your workflow doc:**\nOpen `notes/my-ai-workflow.md` and add or update the API Cost Model section (from lesson 13-3 in the content guide). Mark off the controls you've now set up."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — API Cost Audit",
+      "content": "Audit your current API spending and identify optimisation opportunities.\n\n**Step 1 — Go to console.anthropic.com** and view your usage dashboard.\n\n**Step 2 — Identify:**\n- Total spending this month\n- Which calls are most frequent\n- Any unexpected spikes in usage\n\n**Step 3 — If you don't have real usage yet**, simulate the audit with hypothetical numbers:\n- 1000 requests/day at 500 tokens each\n- Cost at Haiku, Sonnet, and Opus\n\n**Step 4 — Ask Claude:** *\"If I'm spending $X/month on the Anthropic API with this usage pattern [describe it], what are the top 3 optimisations that would reduce cost by the most?\"*\n\n**Step 5 — Set a monthly budget** and configure a billing alert in the Anthropic console."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Implement Cost Controls",
+      "content": "Add hard cost controls to your API usage.\n\n**Step 1 — Ask Claude Code** to implement a cost control system:\n```\nWrite a Python module api_budget.py that:\n1. Reads the current month's API spend from a local log file\n2. Checks if spend exceeds a configurable daily budget\n3. Raises BudgetExceededError if the budget is exhausted\n4. Logs every API call with: timestamp, tokens, cost, function_name\n5. Provides a summary() function that shows today's spend and remaining budget\n\nThis should wrap the Anthropic client transparently.\n```\n\n**Step 2 — Integrate the budget module** into your existing API wrapper.\n\n**Step 3 — Test the budget limit** by setting a very low budget and verifying the error is raised.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review this budget control system. What scenarios would it fail to catch or incorrectly report?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Architecture for Cost Efficiency",
+      "content": "Design your AI application architecture for cost efficiency.\n\n**Step 1 — Ask Claude:** *\"What architectural patterns reduce AI API costs in production applications? Cover: caching identical requests, request batching, async processing, and model cascading (try cheap model first, escalate if needed).\"*\n\n**Step 2 — For your primary AI application**, evaluate each pattern:\n- Can you cache responses? What % of requests are repeated?\n- Can you batch requests? Or do users expect real-time responses?\n- Is async processing possible, or do users wait?\n- What % of requests really need a top-tier model?\n\n**Step 3 — Calculate potential savings** for the applicable patterns.\n\n**Step 4 — Design a cost-efficient architecture** diagram for your application.\n\n**Step 5 — Ask Claude:** \"Review this architecture for AI API cost efficiency. What did I miss? What's the highest-impact optimisation?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Cost Dashboard",
+      "content": "Build a simple dashboard to monitor your AI API costs.\n\n**Step 1 — Ask Claude Code to build a cost monitoring script:**\n```\nWrite a Python script that generates a daily cost report:\n1. Reads the API call log from api_budget.py\n2. Calculates: calls per model, tokens per model, cost per model, total\n3. Identifies the 5 most expensive features/endpoints\n4. Shows a 7-day trend (cost per day)\n5. Outputs a formatted markdown report\n6. Optionally emails the report if daily spend exceeds $X\n```\n\n**Step 2 — Run the report** with real or simulated data.\n\n**Step 3 — Set up a daily scheduled run** (Windows Task Scheduler or similar).\n\n**Step 4 — After one week of real usage**, review the report. What surprised you about your usage patterns?"
+    },
+    {
+      "type": "quiz",
+      "question": "Your AI application has a feature that calls the API 50 times per user per day. Most of these calls are for the same 10 common questions. What optimisation gives the highest ROI?",
+      "options": [
+        "Switch to a cheaper model",
+        "Cache the responses to the 10 common questions — if 80% of your API calls can be served from cache, you reduce API costs by 80% regardless of model choice",
+        "Reduce max_tokens to limit response length",
+        "Batch all 50 calls into one request"
+      ],
+      "correct": 1,
+      "explanation": "Response caching delivers the highest ROI when a significant fraction of requests are repeated. If 80% of calls are for the same 10 questions, caching those questions eliminates 80% of API costs (store the response and return it directly for identical questions). This works especially well for: FAQ-style applications, classification tasks with common inputs, and any system where users ask the same questions repeatedly. Implement with a simple cache keyed on the prompt hash."
+    },
+    {
+      "type": "quiz",
+      "question": "Your AI application budget for March is $100. On March 15th, you've spent $97. How should your cost control system respond?",
+      "options": [
+        "Immediately disable all AI features for the rest of March",
+        "Alert you immediately and let you decide: disable non-essential features, switch to a cheaper model, or approve additional budget",
+        "Continue running normally and bill the overage at month end",
+        "Automatically switch to a local model for the rest of the month"
+      ],
+      "correct": 1,
+      "explanation": "Hard cutoffs at 100% budget can create poor user experience (suddenly broken features). Better approach: alert at 80% of budget, allow non-critical features to degrade (use cheaper model, enable caching), preserve critical features, and alert the operator who can decide whether to approve additional budget. For your application at $97/$100: auto-switch non-critical calls to Haiku, disable optional features, and notify you to either approve more budget or implement stricter controls."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 13-3.** Spending limits are set, usage is understood, and at least one optimization is applied. Cost management isn't glamorous, but it's what separates people who build sustainable AI tools from people who get a surprise bill and shut everything down."
+    }
+  ],
+  "nextLesson": "13-4",
+  "prevLesson": "13-2"
+}

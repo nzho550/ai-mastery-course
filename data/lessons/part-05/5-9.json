@@ -1,0 +1,105 @@
+{
+  "id": "5-9",
+  "title": "Settings — UI Mode & JSON Mode",
+  "part": 5,
+  "estimatedMinutes": 55,
+  "tags": [
+    "vscode",
+    "beginner",
+    "settings",
+    "configuration",
+    "json"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll know how to change VS Code settings using both the graphical Settings UI and the underlying JSON file. You'll set up four practical improvements to your environment that you'll use from now on.\n\nUnderstanding settings.json is also your first exposure to a pattern that repeats throughout this course: Claude Code, MCP servers, and other tools are all configured through JSON files."
+    },
+    {
+      "type": "text",
+      "content": "## Two Ways to Change Settings\n\nVS Code settings work in layers. Everything is ultimately stored in a JSON file — but VS Code also provides a graphical interface (the Settings UI) that lets you change settings without editing JSON directly.\n\n**Method 1 — Settings UI (the graphical way):**\n- Press **Ctrl+,** (comma)\n- Or: File → Preferences → Settings\n- Or: Command Palette → `Open User Settings`\n\nThe Settings UI shows all available settings with descriptions, search boxes, and dropdown menus. It's the friendliest way to explore and change settings. Changes you make here are automatically saved to the JSON file behind the scenes.\n\n**Method 2 — settings.json (the direct way):**\n- Press **Ctrl+Shift+P** → type `Open User Settings JSON` → press Enter\n- Or: in the Settings UI, click the file icon with curly braces at the top right of the Settings tab\n\nThis opens the raw JSON configuration file. You can type settings directly here. It's faster once you know what setting names look like, and it lets you copy/paste settings from documentation or tutorials.\n\nBoth methods edit the same underlying file. They're just two views of the same data."
+    },
+    {
+      "type": "text",
+      "content": "## User Settings vs Workspace Settings\n\nVS Code has settings at two levels:\n\n**User Settings** — apply to every project you open in VS Code on this computer. This is what we'll configure.\n\n**Workspace Settings** — apply only to the currently open folder. Stored in a `.vscode/settings.json` file inside your project. Useful when different projects need different settings (e.g., different tab sizes for different codebases).\n\nFor this course, we're working with User Settings — the global defaults that apply everywhere."
+    },
+    {
+      "type": "text",
+      "content": "## Four Settings to Configure Now\n\nHere are four settings worth configuring immediately. We'll set them in the UI first, then look at what they look like in JSON.\n\n**1. Font Size**\nDefault is 14. Many people find 15 or 16 easier to read.\nUI path: Settings → search `font size` → **Editor: Font Size**\n\n**2. Auto Save**\nInstead of always needing Ctrl+S, VS Code can save automatically.\nUI path: Settings → search `auto save` → **Files: Auto Save** → set to `afterDelay`\nThis saves 1 second after you stop typing.\n\n**3. Word Wrap**\nWhen a line of code is longer than the window, VS Code either wraps it or lets you scroll right. Wrapping is usually easier to read.\nUI path: Settings → search `word wrap` → **Editor: Word Wrap** → set to `on`\n\n**4. Format on Save**\nWith Prettier installed (lesson 5-8), enabling this makes VS Code auto-format your code every time you save.\nUI path: Settings → search `format on save` → enable **Editor: Format On Save** (check the checkbox)"
+    },
+    {
+      "type": "text",
+      "content": "## What It Looks Like in settings.json\n\nAfter setting the four options above through the UI, open settings.json (Ctrl+Shift+P → `Open User Settings JSON`) and you'll see something like this:\n\n```json\n{\n  \"editor.fontSize\": 15,\n  \"files.autoSave\": \"afterDelay\",\n  \"editor.wordWrap\": \"on\",\n  \"editor.formatOnSave\": true\n}\n```\n\nEach setting is a key-value pair. The key is the setting name (in dot notation), and the value is what you set it to. Numbers are written without quotes, strings (like `\"afterDelay\"`) use double quotes, and true/false values are written without quotes.\n\nYou can add settings directly to this file by typing them inside the `{}`. Every setting you add must be separated from the previous one by a comma."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**JSON syntax is strict.** Every key and string value must be in double quotes. Items must be separated by commas. The last item in the list does NOT have a trailing comma. If you get a syntax error, VS Code will show a red underline — hover over it to see the problem. Common mistakes: using single quotes instead of double quotes, a missing comma between items, or an extra comma after the last item."
+    },
+    {
+      "type": "text",
+      "content": "## Adding a Font Family Setting\n\nLet's add one more setting directly in the JSON to practice editing it:\n\n```json\n{\n  \"editor.fontSize\": 15,\n  \"files.autoSave\": \"afterDelay\",\n  \"editor.wordWrap\": \"on\",\n  \"editor.formatOnSave\": true,\n  \"editor.fontFamily\": \"JetBrains Mono, Consolas, monospace\"\n}\n```\n\nThe `\"editor.fontFamily\"` line tells VS Code to try JetBrains Mono first (if installed), then fall back to Consolas (built into Windows), then any system monospace font. This is how fallback font stacks work.\n\nAfter saving (Ctrl+S), the editor font changes immediately — you'll see it right away in the JSON file itself."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Configure Your Environment",
+      "content": "Configure VS Code through both the UI and JSON modes.\n\n**Part 1 — Settings UI (Ctrl+,):**\n\n1. Press **Ctrl+,** to open Settings\n2. Search `font size` → set **Editor: Font Size** to `15`\n3. Search `auto save` → set **Files: Auto Save** to `afterDelay`\n4. Search `word wrap` → set **Editor: Word Wrap** to `on`\n5. Search `format on save` → enable **Editor: Format On Save** (check the checkbox)\n6. Close the Settings tab (Ctrl+W)\n\n**Part 2 — settings.json (direct JSON editing):**\n\n1. Press **Ctrl+Shift+P** → type `Open User Settings JSON` → press Enter\n2. You should see the four settings you just added:\n```json\n{\n  \"editor.fontSize\": 15,\n  \"files.autoSave\": \"afterDelay\",\n  \"editor.wordWrap\": \"on\",\n  \"editor.formatOnSave\": true\n}\n```\n3. Add the font family line — place your cursor after the last setting (after `true`) and add a comma, then a new line:\n```json\n{\n  \"editor.fontSize\": 15,\n  \"files.autoSave\": \"afterDelay\",\n  \"editor.wordWrap\": \"on\",\n  \"editor.formatOnSave\": true,\n  \"editor.fontFamily\": \"JetBrains Mono, Consolas, monospace\"\n}\n```\n4. Press **Ctrl+S** to save\n5. The editor font updates immediately\n\n**Part 3 — Verify Prettier + Format on Save:**\n1. Open `hello.html`\n2. Deliberately break the indentation — add extra spaces at the start of a line\n3. Press Ctrl+S\n4. If Prettier is set as the default formatter, the indentation fixes itself on save\n\n**Check:**\n- [ ] Settings UI changes reflected in settings.json\n- [ ] Font family line added without JSON errors (no red underlines)\n- [ ] Prettier auto-formats hello.html on save"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Settings Exploration Drill",
+      "content": "This 8-minute drill explores VS Code settings so you know what you can customise.\n\n**Step 1 — Open Settings** (Ctrl+,).\n\n**Step 2 — Explore each major category** (left sidebar) and read 2-3 settings in each:\n- Text Editor: font, cursor, formatting\n- Workbench: appearance, sidebar layout\n- Extensions: each installed extension has settings here\n- Terminal: terminal appearance and behaviour\n\n**Step 3 — Find a setting you want to change** (font size, tab size, auto save). Change it and see the immediate effect.\n\n**Step 4 — Open Settings (JSON):** Ctrl+Shift+P → \"Open User Settings (JSON)\". This is the raw JSON behind the UI.\n\n**Step 5 — Add one JSON setting** that's not available in the UI (ask Claude: \"Give me 5 VS Code settings that are only configurable via JSON, not the UI\").\n\n**Step 6 — Note the difference:** UI settings = discoverable. JSON settings = more powerful and portable."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Ideal Settings.json",
+      "content": "Create a settings.json that configures VS Code exactly how you want it — for your work, your eyes, your workflow.\n\n**Step 1 — Ask Claude:**\n```\nCreate a VS Code settings.json for a developer who:\n- Works with [your language(s)]\n- Values [readability / performance / minimal distractions / etc.]\n- Uses [your AI extension]\n- Common pain points: [any settings you've disliked]\n\nExplain each setting in a comment above it. Make it production-ready.\n```\n\n**Step 2 — Review every setting** in the output. Remove anything you don't want.\n\n**Step 3 — Apply the settings:** Ctrl+Shift+P → \"Open User Settings (JSON)\" → replace with Claude's output (keeping any custom settings you already have).\n\n**Step 4 — Test by opening files** of each type you work with. Does everything look and behave correctly?\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this settings.json. What settings might conflict with each other? What settings might cause unexpected behaviour for [your use case]?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Sync Settings Across Machines",
+      "content": "VS Code Settings Sync lets your configuration follow you to any machine.\n\n**Step 1 — Enable Settings Sync:** Click the person icon (bottom-left) → Turn on Settings Sync.\n\n**Step 2 — Choose what to sync:**\n- Settings\n- Keyboard Shortcuts\n- Extensions\n- Snippets\n- UI State\n\n**Step 3 — Sign in** with a Microsoft or GitHub account.\n\n**Step 4 — Verify sync:** If you have access to a second machine (or can check via the VS Code web version), verify your settings appear there.\n\n**Step 5 — Alternative: Manual sync** using a dotfiles repository. Ask Claude: \"What is a dotfiles repository and how do developers use it to sync VS Code settings across machines without using the built-in sync feature?\"\n\n**Step 6 — Decide your sync strategy:** Built-in sync is easiest. Dotfiles gives more control and works across all tools, not just VS Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Configure Language-Specific Settings",
+      "content": "Different file types can have different settings in VS Code — for example, Python might use 4-space indentation while JavaScript uses 2.\n\n**Step 1 — Open your settings.json** (Ctrl+Shift+P → \"Open User Settings JSON\").\n\n**Step 2 — Add language-specific overrides:**\n```json\n{\n    \"[python]\": {\n        \"editor.tabSize\": 4,\n        \"editor.defaultFormatter\": \"ms-python.black-formatter\",\n        \"editor.formatOnSave\": true\n    },\n    \"[javascript]\": {\n        \"editor.tabSize\": 2,\n        \"editor.defaultFormatter\": \"esbenp.prettier-vscode\",\n        \"editor.formatOnSave\": true\n    },\n    \"[json]\": {\n        \"editor.tabSize\": 2,\n        \"editor.formatOnSave\": true\n    }\n}\n```\n\n**Step 3 — Test:** Open a .py file, add some messy indentation, save. Does it auto-format? Open a .js file — does it format differently?\n\n**Step 4 — Ask Claude:** *\"What language-specific settings should I configure for [your language]? Include formatter choice, linter settings, and any special behaviour that differs from VS Code defaults.\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You change a VS Code setting in the UI but nothing changes in your project. You suspect there is a workspace settings.json that is overriding your user settings. How do you check?",
+      "options": [
+        "Restart VS Code — settings sometimes require a restart",
+        "Open .vscode/settings.json in your project and check if the same setting is defined there — workspace settings override user settings",
+        "Reinstall VS Code with fresh settings",
+        "Disable all extensions and try again"
+      ],
+      "correct": 1,
+      "explanation": "VS Code settings have a hierarchy: user settings (global) < workspace settings (.vscode/settings.json) < folder settings. Workspace settings override user settings for that project. If you change a setting globally but it doesn't take effect in a project, check if .vscode/settings.json has the same setting overriding it."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to enable \"Format on Save\" for JavaScript files only, not for Python files. How do you configure this in settings.json?",
+      "options": [
+        "You cannot apply Format on Save to specific file types — it's an all-or-nothing setting",
+        "Use language-specific settings: \"[javascript]\": {\"editor.formatOnSave\": true} while leaving Python without that setting",
+        "Install a JavaScript-specific extension that adds Format on Save",
+        "Add formatOnSave to your .eslintrc file instead"
+      ],
+      "correct": 1,
+      "explanation": "VS Code supports language-specific settings using the `\"[languageid]\"` key in settings.json. This lets you have formatOnSave for JavaScript but not Python (or vice versa), different tab sizes per language, different formatters per language, and any other setting that varies by file type. This is essential for polyglot developers who work across multiple languages with different conventions."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-9.** VS Code is now configured to your preferences — auto-save, formatted code, word wrap, and a comfortable font. The JSON settings pattern you just learned is the same pattern used for Claude Code, MCP servers, and every other tool in this course that requires configuration. Next: keyboard shortcuts."
+    }
+  ],
+  "nextLesson": "5-10",
+  "prevLesson": "5-8"
+}

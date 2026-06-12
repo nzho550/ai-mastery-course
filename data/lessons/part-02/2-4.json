@@ -1,0 +1,111 @@
+{
+  "id": "2-4",
+  "title": "Google Gemini",
+  "part": 2,
+  "estimatedMinutes": 60,
+  "tags": [
+    "gemini",
+    "beginner",
+    "tools"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll understand what Google Gemini is and how it's differentiated from Claude and ChatGPT, why its 1-million-token context window is genuinely important, how Google Workspace integration makes it uniquely useful in daily work, and how to use Gemini's live search and multimodal capabilities. You'll also understand NotebookLM — Google's related tool that solves a completely different but equally valuable problem."
+    },
+    {
+      "type": "text",
+      "content": "## What is Google Gemini? (2026 State)\n\nGemini is Google's family of large language models, developed by Google DeepMind. It's available at **gemini.google.com** and requires only a Google account — no separate signup.\n\n**The model lineup (2026):**\n- **Gemini 2.5 Flash** — free tier; fast, capable, good for everyday tasks\n- **Gemini 2.5 Pro** — Google One AI Premium subscription; the most capable model in the family with the full 1M token context window\n- **Gemini Nano** — on-device model in Pixel phones and select Android devices; runs locally without internet\n\n**Historical context:** Google researchers wrote the \"Attention Is All You Need\" paper (2017) that invented the transformer architecture underlying all modern LLMs. Despite this fundamental contribution, Google was caught off guard by ChatGPT's 2022 launch and rushed to release Bard in early 2023. After a rocky initial reception, Google reorganised its AI efforts under Google DeepMind and released the Gemini family — which is now genuinely competitive on most benchmarks with Claude and ChatGPT."
+    },
+    {
+      "type": "text",
+      "content": "## Gemini's Unique Strengths\n\n**1. The 1-Million Token Context Window**\n\nThis is Gemini 2.5 Pro's most distinctive capability — and it's a genuine differentiator.\n\nTo understand what 1 million tokens means:\n- Average novel: ~100,000 tokens (1M = 10 novels)\n- Full codebase of a medium-sized app: ~200-400K tokens\n- Complete HR handbook + all policies + all procedures: often fits in 1M\n- Several hours of transcript: fits in 1M\n\n**Why this matters for real work:**\n```\n\"Here's the complete source code for our app (350,000 tokens).\nAudit it for security vulnerabilities.\"\n\n\"Here are all 47 research papers on this topic (uploaded as PDFs).\nSynthesise the findings across all of them.\"\n\n\"Here's the complete transcript from our 6-month customer feedback programme.\nWhat are the recurring themes and the most important insights?\"\n```\n\nNo other generally available model can process these inputs at all. Claude's context window is 200K tokens (large, but not 1M). ChatGPT's is 128K.\n\n**2. Live Search Integration**\n\nGemini has native Google Search access in every conversation — it's not an add-on. When you ask about recent events, current prices, or anything time-sensitive, Gemini runs a live search and incorporates current results.\n\n```\n\"What are the current interest rates from the Bank of England?\"\n\"What happened in the news this morning?\"\n\"What's the current pricing for AWS Lambda?\"\n```\n\nClaude and ChatGPT have training cutoffs and don't search the live web in standard mode. Perplexity is purpose-built for cited search. Gemini gives you both live search and AI reasoning in the same tool.\n\n**3. Google Workspace Integration**\n\nGemini is embedded directly inside Google's productivity suite — you don't leave your tools to use it:\n\n| Tool | What Gemini does inside it |\n|------|----------------------------|\n| **Gmail** | Summarise threads, draft replies, identify action items, flag what needs response |\n| **Google Docs** | Write first drafts, edit and improve text, summarise documents, create structured outlines |\n| **Google Sheets** | Explain data, generate formulas, create summaries from spreadsheet content, analyse trends |\n| **Google Slides** | Generate presentation outlines, write speaker notes, suggest slide structures |\n| **Google Meet** | Take notes, generate meeting summaries, suggest follow-up actions |\n| **Google Drive** | Search and summarise documents across your Drive |\n\nIf your work life happens inside Google Workspace, this is transformative. You're not copying email content to a separate tab — Gemini reads your actual Gmail thread and drafts your reply in context.\n\n**4. Multimodal: Video and Audio**\n\nGemini 2.5 Pro can process video and audio natively — not just images:\n- Upload a YouTube URL → Gemini can summarise, answer questions about, or extract key moments from the video\n- Upload an audio recording → transcribed and analysed\n- Upload an image → described and reasoned about"
+    },
+    {
+      "type": "text",
+      "content": "## NotebookLM — Google's Companion Tool You Should Know\n\nNotebookLM (notebooklm.google.com) is a separate Google tool that does something different from Gemini and deserves its own attention.\n\n**What NotebookLM is:** A private knowledge base you build from your own sources. You upload documents, paste URLs, add YouTube videos — and NotebookLM creates an AI assistant that only knows what you gave it, cites every answer with the exact source passage, and refuses to make up information not in your sources.\n\n**What makes it unique:**\n1. **Source-grounded answers** — Every response cites the exact passage it came from. You can click the citation and see the original text.\n2. **No hallucination about your sources** — It won't make up a fact not in your documents. If you ask something not covered, it says so.\n3. **Audio Overview feature** — A genuinely remarkable feature: NotebookLM generates a 10-15 minute podcast-style dialogue between two AI hosts discussing your source material. Natural, conversational, cites the documents. Excellent for learning from complex material.\n4. **Up to 50 sources** per notebook — PDFs, Google Docs, YouTube links, web pages, text files\n\n**When to use NotebookLM vs. Gemini:**\n\n| Use NotebookLM when... | Use Gemini when... |\n|---|---|\n| You need answers verified against specific documents | You need general knowledge or live web search |\n| Source attribution is important (research, studying) | You're working inside Google apps |\n| You're building a private knowledge base from your own files | You need the large context window for your own files |\n| You want to generate Audio Overviews of your material | You need real-time current information |\n\n**Typical NotebookLM workflows:**\n- Upload all your study notes + textbook PDFs → ask exam-style questions with source citations\n- Upload your company's product documentation → Q&A tool that only answers from official docs\n- Upload 10 research papers → synthesise and compare findings with citations to the original papers\n- Upload a book + your highlights → generate summaries, quizzes, audio overviews"
+    },
+    {
+      "type": "text",
+      "content": "## Where Gemini Fits in Your Toolkit\n\nGemini's value depends heavily on your existing workflow:\n\n**Highest value if you:**\n- Live in Gmail and Google Docs — Gemini reduces friction enormously\n- Need to process very long documents (1M context is unmatched)\n- Ask questions that require current information\n- Regularly consume video or audio content you want summarised\n\n**Lower added value if you:**\n- Work primarily in Microsoft Office (use Copilot instead)\n- Don't use Google Workspace\n- Don't need live search (Claude or ChatGPT suffice for most non-time-sensitive tasks)\n\n**For the 3-tool stack (practical AI setup for most people):**\n- Claude: primary writing, analysis, coding, complex prompting\n- ChatGPT: data analysis with Code Interpreter, image generation\n- Gemini: live search, Google Workspace integration, very long documents\n- Free tools: Perplexity (cited research), NotebookLM (knowledge base)\n\nNone of these costs more than $20/month for the paid tier. Using all three — plus the free tools — is a professional AI toolkit for ~$40/month total."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Gemini vs. Google Search:** Gemini is not a replacement for Google Search for quick fact lookup. Google Search is optimised for finding specific pages; Gemini is optimised for synthesising and reasoning. For \"what is the capital of France?\" — use Google. For \"compare the economic policies of the three leading political parties and their likely effect on mortgage rates\" — Gemini adds real value."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Gemini + NotebookLM Exploration",
+      "content": "This workshop has two parts: exploring Gemini's live search capabilities and setting up your first NotebookLM notebook.\n\n**Part 1 — Gemini live search (10 minutes)**\n\nOpen [gemini.google.com](https://gemini.google.com) (sign in with your Google account).\n\nRun these prompts and observe the \"Search results used\" section that appears with each response:\n\n```\nWhat's the current state of interest rates in [your country]?\n```\nNotice: Gemini runs a live search and shows which sources it found.\n\n```\nWhat happened in AI news in the last week?\n```\nCompare the freshness of this response to what Claude or ChatGPT would produce from training data.\n\n```\nSummarise this YouTube video: [paste any YouTube URL of a topic you're interested in]\n```\nNotice: Gemini processes the video directly — not just the title or description.\n\n**Part 2 — Your first NotebookLM knowledge base (15 minutes)**\n\nGo to [notebooklm.google.com](https://notebooklm.google.com) (requires Google account).\n\n1. Click **New Notebook**. Name it something meaningful: \"AI Course Notes\" or \"[Your Topic] Research\".\n\n2. Click **+ Add source**. Add 2-3 sources relevant to something you're learning or working on:\n   - A PDF you have (study notes, work document, research paper)\n   - A Wikipedia article URL on a relevant topic\n   - A YouTube video URL on the topic\n\n3. Wait 30-60 seconds for processing. Then ask 3 questions:\n   - A specific factual question that should be in your sources\n   - A synthesis question (\"What do these sources have in common?\")\n   - A question about something NOT in your sources\n   \n   Observe: how does NotebookLM handle the third question?\n\n4. Click **Generate** in the Audio Overview section (bottom right panel). Wait 2-3 minutes for generation. Listen to the first minute — you'll hear two AI voices having a natural conversation about your sources.\n\n**Write down:**\n- What was most surprising about NotebookLM compared to a general AI chat?\n- For what type of task would you use NotebookLM vs. Gemini vs. Claude?\n- What's one real project or study area where you'd set up a permanent notebook?"
+    },
+    {
+      "type": "quiz",
+      "question": "A researcher needs to synthesise findings from 45 academic papers, each 15-25 pages. They've gathered all 45 papers as PDFs. Which tool is most appropriate for this task?",
+      "options": [
+        "ChatGPT with Code Interpreter — it can run statistical analysis on text",
+        "Claude — it has the best reasoning quality",
+        "Gemini 2.5 Pro — its 1M token context window can hold all 45 papers simultaneously, and it can synthesise across them",
+        "Perplexity — it searches academic databases automatically"
+      ],
+      "correct": 2,
+      "explanation": "Gemini 2.5 Pro is the right tool because its 1-million-token context window is the only one large enough to hold 45 papers (roughly 700-1,000 pages) simultaneously. Holding all papers in context at once means Gemini can compare, contrast, and synthesise findings across all 45 without you breaking the task into pieces. Claude's 200K window might hold 10-12 papers at most. ChatGPT's 128K window even fewer. For this specific task — synthesising very large volumes of text you've already gathered — the context window is the decisive factor."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Gemini Multimodal Quick Test",
+      "content": "Gemini's biggest differentiator is deep Google integration and multimodal capability. This drill tests both in 8 minutes.\n\n**Step 1 — Open Gemini** (gemini.google.com) in a browser tab.\n\n**Step 2 — Test image analysis:** Upload a screenshot of a work document, a photo, or an image from your work. Ask: \"Analyse this image and tell me the 3 most important things you notice.\"\n\n**Step 3 — Test Google integration:** Ask Gemini to check your Google Calendar for tomorrow or find a recent email about a topic (requires Google account connection).\n\n**Step 4 — Test long-form content:** Paste a document you've been working on (1,000+ words) and ask for a structured summary. Gemini has very large context windows.\n\n**Step 5 — Compare to Claude:** Ask the same question in Claude.ai. Which answer is more useful?\n\n**Step 6 — Identify Gemini's best use case for you specifically.** Where does the Google ecosystem integration help your workflow?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Real Research Task with Gemini",
+      "content": "Use Gemini to complete a real research or analysis task — then review and improve the output.\n\n**Step 1 — Choose a real research task** from your work: a topic to investigate, a decision to inform, a background brief to prepare.\n\n**Step 2 — Run the research task** with Gemini. If you have the Google Workspace integration, use it to pull in relevant documents or data.\n\n**Step 3 — Evaluate Gemini's output:** Is the information current? Are sources cited? Is the analysis relevant to your actual question?\n\n**Step 4 — Mandatory AI review:** Paste the output back and say: *\"Review your own research above critically. What sources should I verify independently? Where is your confidence lowest? What important angles did you miss?\"*\n\n**Step 5 — Verify one specific claim** from Gemini's output against an independent source. Was it accurate?\n\n**Step 6 — Decide:** For this type of research task, is Gemini, Claude, or Perplexity the best fit? Add your decision to your AI tools guide."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Gemini vs Claude on Analysis",
+      "content": "A direct comparison on an analytical task reveals where each AI genuinely excels.\n\n**Step 1 — Choose an analytical task:** Analyse a piece of text, compare two options, evaluate a plan, identify risks in a document.\n\n**Step 2 — Run it in Gemini** first. Record the response.\n\n**Step 3 — Run the identical prompt in Claude.** Record the response.\n\n**Step 4 — Compare side-by-side:**\n- Which was more thorough?\n- Which understood the nuance better?\n- Which organised the response more usefully?\n- Which made any factual errors?\n\n**Step 5 — Ask Claude** to compare the two approaches: *\"Here are two AI responses to the same analytical prompt [paste both]. What are the meaningful differences? Which analytical approach is stronger and why?\"*\n\n**Step 6 — Write your finding:** For analytical tasks in your work, which tool do you prefer and why?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Google Workspace AI Integration Setup",
+      "content": "If you use Google Docs, Gmail, or Google Drive, Gemini can be integrated directly into your workflow.\n\n**Step 1 — Check your Gemini access:** In Google Workspace (if your organisation provides it) or Google One AI Premium, look for Gemini in the side panel of Google Docs or Gmail.\n\n**Step 2 — In Google Docs:** Open a document you are working on. Open the Gemini side panel. Ask it to: (a) summarise the document, (b) suggest improvements to a specific section, (c) draft a new section based on what exists.\n\n**Step 3 — In Gmail:** Find an email thread you need to reply to. Ask Gemini to: (a) summarise the thread, (b) draft a reply, (c) identify the action items you've been asked to do.\n\n**Step 4 — Evaluate the integration:** Is Gemini inside your Google apps faster or more convenient than switching to a separate AI tab? What does it do well or poorly in this context?\n\n**Step 5 — Decide on one specific workflow** where you'll use Gemini inside Google apps going forward."
+    },
+    {
+      "type": "quiz",
+      "question": "Which scenario is where Gemini has the clearest advantage over Claude?",
+      "options": [
+        "Writing a detailed legal analysis document",
+        "Summarising a complex research paper",
+        "Automatically pulling data from your Gmail and Google Calendar to help plan your week",
+        "Generating creative story concepts"
+      ],
+      "correct": 2,
+      "explanation": "Gemini's strongest differentiator is deep integration with Google Workspace — it can read your Gmail, Calendar, Drive documents, and other Google apps directly, without you needing to copy-paste. This makes it uniquely powerful for tasks that span your Google data. For pure writing, analysis, or creativity, the tools are more comparable."
+    },
+    {
+      "type": "quiz",
+      "question": "Gemini is described as having a very large \"context window.\" What does this mean practically?",
+      "options": [
+        "It can generate very long responses",
+        "It can remember conversations for longer than other AI tools",
+        "It can process and reason about very large amounts of input text in a single conversation",
+        "It requires more computing power than other AI tools"
+      ],
+      "correct": 2,
+      "explanation": "A large context window means you can provide very large amounts of input — entire books, large codebases, many documents — and the AI can reason across all of it in a single session. This is practically useful for tasks like \"summarise this 200-page report\" or \"analyse all our customer feedback from Q1\" where you need to process large volumes of text at once."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-4.** You now understand Gemini's key differentiators — the 1M context window, live search, Google Workspace integration, and multimodal capabilities — and why NotebookLM solves a different but important problem: building a private, source-grounded knowledge base with citation. These fill genuine gaps in the Claude + ChatGPT foundation."
+    }
+  ],
+  "nextLesson": "2-5",
+  "prevLesson": "2-3"
+}

@@ -1,0 +1,96 @@
+{
+  "id": "5-4",
+  "title": "Opening a Folder / Workspace",
+  "part": 5,
+  "estimatedMinutes": 50,
+  "tags": [
+    "vscode",
+    "beginner",
+    "workspace",
+    "folders"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand the difference between opening a file and opening a folder in VS Code — and why opening a folder is almost always what you want to do.\n\nYou'll also open your actual course project folder so VS Code knows the context of your work."
+    },
+    {
+      "type": "text",
+      "content": "## Files vs Folders: Why It Matters\n\nMost text editors work with one file at a time. You open a file, edit it, save it, done. VS Code *can* work this way — but that's not how it's designed.\n\nVS Code is designed to work with **folders** (also called workspaces). When you open a folder, VS Code can:\n- Show you all files and subfolders in the Explorer panel\n- Search text across every file in the folder at once\n- Run Git commands on the entire project\n- Let AI tools like GitHub Copilot understand the full context of your project\n- Run the integrated terminal starting at the right location\n\nHere's the key distinction:\n\n- **File > Open File** — opens a single file. VS Code has no awareness of any other files around it. The Explorer panel stays empty.\n- **File > Open Folder** — opens an entire folder. VS Code treats that folder as your project. The Explorer panel fills with your files. This is almost always what you want.\n\nThink of it this way: opening a file is like handing someone a single page from a book. Opening a folder is like handing them the whole book — they can understand the full context."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Quick shortcut: `code .`**\nIf you have a terminal open and you're in the folder you want to work in, you can type `code .` and press Enter. VS Code opens that folder instantly. The `.` means \"current directory.\" This only works if you checked \"Add to PATH\" during installation (lesson 5-2)."
+    },
+    {
+      "type": "text",
+      "content": "## What is a Workspace?\n\nYou'll hear the word \"workspace\" used in two slightly different ways:\n\n1. **Informally** — just the folder you currently have open in VS Code. Most of the time this is what people mean.\n\n2. **VS Code Multi-root Workspace** — a special `.code-workspace` file that lets you add multiple separate folders to VS Code at the same time. For example, you might have a front-end folder and a back-end folder open simultaneously, each showing in the Explorer sidebar.\n\nFor this course, we're only using the simple version: one folder open at a time. You don't need multi-root workspaces right now.\n\n**Trust prompt:** The first time you open a folder, VS Code may ask: *\"Do you trust the authors of the files in this folder?\"* Click **Yes, I trust the authors**. VS Code asks this as a safety measure — on a folder full of your own files, always click Yes."
+    },
+    {
+      "type": "text",
+      "content": "## How to Open a Folder\n\n**Method 1 — From the menu:**\n1. Click **File** in the menu bar\n2. Click **Open Folder...**\n3. A file browser window opens\n4. Navigate to the folder you want to open\n5. Click **Select Folder** (Windows) or **Open** (Mac)\n\n**Method 2 — Drag and drop:**\nDrag a folder from File Explorer directly onto the VS Code window. VS Code opens it.\n\n**Method 3 — From the terminal:**\n1. Open any terminal (PowerShell, Command Prompt, or VS Code's integrated terminal)\n2. Navigate to the folder using `cd`\n3. Type `code .` and press Enter\n\n**Method 4 — Recent folders:**\nFile > Open Recent shows folders you've opened before. Click any of them to reopen quickly.\n\nAll four methods do the same thing."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Open Your Course Project",
+      "content": "You created the `ai-course-projects` folder in lesson 4.2. Now open it as a workspace in VS Code.\n\n**Step 1 — Open the folder:**\n1. In VS Code, click **File** in the menu bar\n2. Click **Open Folder...**\n3. In the file browser, navigate to: `C:\\Users\\[YourName]\\Documents\\ai-course-projects`\n   (Replace `[YourName]` with your actual Windows username — the name you see in File Explorer under C:\\Users)\n4. Click **Select Folder**\n5. If VS Code asks about trusting the folder → click **Yes, I trust the authors**\n\n**Step 2 — Confirm it worked:**\n- [ ] The Explorer panel on the left shows your folder structure\n- [ ] You can see the `exercises`, `notes`, and `prompts` subfolders\n- [ ] Click `exercises` to expand it — `hello.html` from lesson 4.6 should be there\n- [ ] Click `hello.html` — it opens in the Editor Area\n- [ ] Look at the Status Bar at the bottom — confirm it shows `HTML` as the language mode\n\n**Step 3 — Try `code .` (optional, confirms PATH is set up):**\n1. Press Ctrl+` to open the integrated terminal inside VS Code\n2. The terminal should already be pointing at your `ai-course-projects` folder\n3. Type `pwd` to confirm your location\n4. Type `ls` to see the folder contents listed\n\nIf the terminal shows the right folder, your PATH setup from the installer is working correctly.\n\nThis folder — `ai-course-projects` — is your workspace for the rest of Part 5 and beyond."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Open and Explore a Real Project",
+      "content": "This drill practices the most common VS Code opening workflow.\n\n**Step 1 — Choose an existing folder** from your machine — your Documents folder, a code project, or create a new one with some files in it.\n\n**Step 2 — Open it in VS Code** three different ways:\n- Drag the folder onto the VS Code icon\n- File → Open Folder\n- Terminal: `cd [your folder path]` then `code .`\n\n**Step 3 — In Explorer**, expand the folder tree. Notice the different file icons for different file types.\n\n**Step 4 — Open multiple files** and navigate between them using Ctrl+Tab.\n\n**Step 5 — Explore the Find in Files feature:** Ctrl+Shift+F. Search for any word that appears in your files. Notice how VS Code searches across all files in the folder.\n\n**Step 6 — Ask Claude:** *\"I just opened a folder in VS Code. What are the first things I should do to orient myself in an unfamiliar project? Give me a 5-step exploration process.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Set Up a VS Code Project from Scratch",
+      "content": "Most real projects require a standard folder structure. This workshop creates one using VS Code and Claude.\n\n**Step 1 — Decide on a project** you'll actually work on: a Python script collection, a simple website, a data analysis project, a writing project.\n\n**Step 2 — Ask Claude:** *\"I'm starting a [describe your project] project. What folder structure should I create? Give me the exact folder and file names, and tell me what each is for.\"*\n\n**Step 3 — Create the structure** using VS Code's Explorer panel (right-click → New Folder, New File).\n\n**Step 4 — Add a README file:** Create `README.md` in the root. Ask Claude: *\"Write a brief README for a [your project] project. Include: what it does, how to set it up, and how to use it.\"*\n\n**Step 5 — Save as a Workspace** (File → Save Workspace As) so you can return to this exact setup.\n\n**Step 6 — Commit to git:**\n```powershell\ngit init\ngit add .\ngit commit -m \"Initial project structure\"\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Workspace Settings and .vscode Folder",
+      "content": "VS Code allows per-project settings that override global settings — useful when different projects need different configurations.\n\n**Step 1 — Open a project folder** in VS Code.\n\n**Step 2 — Open workspace settings:** Ctrl+Shift+P → \"Open Workspace Settings (JSON)\". This creates a `.vscode/settings.json` file.\n\n**Step 3 — Add a project-specific setting:**\n```json\n{\n    \"editor.tabSize\": 4,\n    \"python.defaultInterpreterPath\": \"./venv/bin/python\",\n    \"files.exclude\": {\n        \"**/__pycache__\": true,\n        \"**/.pytest_cache\": true\n    }\n}\n```\n\n**Step 4 — Ask Claude:** *\"I'm working on a [type of project]. What should go in my .vscode/settings.json to make VS Code work best for this project? Also, what should go in a .vscode/extensions.json to recommend extensions to teammates?\"*\n\n**Step 5 — Create a .vscode/extensions.json** with Claude's recommendations. This means teammates who open the project get prompted to install the same extensions."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Multi-Root Workspace",
+      "content": "A Multi-Root Workspace lets you work on multiple related folders simultaneously — common when building a project with separate frontend and backend codebases.\n\n**Step 1 — Create two related folders:**\n```powershell\nmkdir my-project\ncd my-project\nmkdir frontend\nmkdir backend\n```\n\n**Step 2 — In VS Code**, open the `my-project` folder. Then add the subfolders: File → Add Folder to Workspace → select `frontend`, then add `backend`.\n\n**Step 3 — Save as Multi-Root Workspace:** File → Save Workspace As. Name it `my-project.code-workspace`.\n\n**Step 4 — Notice** that Explorer now shows both folders. You can navigate between them seamlessly.\n\n**Step 5 — Add workspace-specific settings** to the .code-workspace file:\n```json\n{\n    \"folders\": [\n        { \"path\": \"frontend\" },\n        { \"path\": \"backend\" }\n    ],\n    \"settings\": {\n        \"editor.fontSize\": 14\n    }\n}\n```\n\n**Step 6 — Ask Claude:** *\"I have a multi-root VS Code workspace with frontend and backend folders. What tasks, launch configurations, and settings should I add to make development easier?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "What is the fastest way to open a folder in VS Code when you are already in that folder in your terminal?",
+      "options": [
+        "Type `vscode .` in the terminal",
+        "Type `code .` in the terminal",
+        "Use File → Open Folder in VS Code",
+        "Drag the folder onto the VS Code taskbar icon"
+      ],
+      "correct": 1,
+      "explanation": "`code .` is the standard CLI shortcut to open the current directory in VS Code. The dot means \"current directory\". This requires VS Code to have been added to PATH during installation. It's the fastest workflow: navigate to your project folder in the terminal, then `code .` to open it in VS Code without leaving the terminal."
+    },
+    {
+      "type": "quiz",
+      "question": "You have a .vscode/settings.json in your project that sets `\"editor.tabSize\": 2`. Your global VS Code settings have `\"editor.tabSize\": 4`. Which setting applies when you work in this project?",
+      "options": [
+        "The global setting — it overrides workspace settings",
+        "The workspace setting — workspace settings override global settings for that project",
+        "Both apply — the larger number wins",
+        "VS Code asks you to choose each time you open the project"
+      ],
+      "correct": 1,
+      "explanation": "VS Code uses a settings hierarchy: workspace settings override global (user) settings for that specific project. This is intentional — different projects have different conventions (Python typically uses 4-space indentation; JavaScript/JSON often use 2 spaces). You can maintain consistent global defaults while allowing project-specific overrides without breaking other projects."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-4.** VS Code is now open with your course project folder. The Explorer panel shows your files, and VS Code understands the full context of your project. Next: creating and managing files without ever leaving VS Code."
+    }
+  ],
+  "nextLesson": "5-5",
+  "prevLesson": "5-3"
+}

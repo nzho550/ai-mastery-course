@@ -1,0 +1,102 @@
+{
+  "id": "7-9",
+  "title": "The Memory System",
+  "part": 7,
+  "estimatedMinutes": 60,
+  "tags": [
+    "claude-code",
+    "memory",
+    "claude-md",
+    "preferences",
+    "user-level"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have a user-level CLAUDE.md with your personal coding preferences, understand how the full CLAUDE.md hierarchy works, and know where to put different kinds of instructions."
+    },
+    {
+      "type": "text",
+      "content": "## Claude Code Has No Persistent Memory\n\nBy design, each Claude Code session starts completely fresh. Claude doesn't remember what you said yesterday, what code you wrote last week, or what preferences you expressed in a previous session. This is intentional — it prevents context from one project bleeding into another — but it creates a practical problem: you have to re-establish your preferences every time.\n\nThe CLAUDE.md system is the solution. Instead of relying on conversational memory (which resets), you write your preferences to files that Claude reads on every session start. The files are permanent. Claude's memory is not."
+    },
+    {
+      "type": "text",
+      "content": "## The CLAUDE.md Hierarchy\n\nClaude Code loads CLAUDE.md files from multiple locations, layering them from broad to specific:\n\n**1. User-level: `~/.claude/CLAUDE.md`**\nLoaded in every Claude Code session, regardless of which project you're in. This is where you put things that are true about *you* — your name, your preferred languages, your coding philosophy, things Claude should always or never do.\n\n**2. Parent-folder CLAUDE.md files**\nIf your project is inside a folder that has a CLAUDE.md (for example, a monorepo root), Claude loads that too. Useful for shared conventions across multiple related projects.\n\n**3. Project-level: `./CLAUDE.md`**\nLoaded for this specific project. You created this in lesson 7-6. Overrides or extends the user-level instructions for this project's specific context.\n\n**4. Subdirectory CLAUDE.md files**\nIf you have a `src/CLAUDE.md` or `backend/CLAUDE.md`, Claude loads those when it's actively working in that directory. Useful for microservices, monorepos, or projects where different subsystems have different rules.\n\nThink of it as concentric circles: user-level settings apply everywhere, project-level settings narrow it down, subdirectory settings narrow it further."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Rule of thumb for what goes where:**\n- User-level `~/.claude/CLAUDE.md`: your name, preferred coding style, languages you know, things you always want/never want\n- Project `CLAUDE.md`: tech stack, file structure, project-specific conventions, build commands\n- Subdirectory `CLAUDE.md`: rules for that specific subsystem (e.g., \"this folder is legacy code — don't refactor without asking\")"
+    },
+    {
+      "type": "text",
+      "content": "## What to Put in Your User-Level CLAUDE.md\n\nYour user-level file travels with you to every project. Good candidates for this file:\n\n- **Your background:** *\"I am a beginner learning to code. Please explain concepts I may not know.\"*\n- **Your name:** *\"My name is [Name].\"* Useful so Claude can address code comments and filenames appropriately.\n- **Preferred languages:** *\"I prefer JavaScript and Python. Avoid suggesting Rust or Go unless specifically asked.\"*\n- **Code style preferences:** *\"Use 2-space indentation. Prefer const over let. Add JSDoc comments to functions.\"*\n- **Communication style:** *\"Explain the why behind suggestions, not just the what. Keep explanations beginner-friendly.\"*\n- **Hard rules:** *\"Never delete files without asking. Never push to git without confirmation. Always show a diff before making changes.\"*\n\nUpdate this file as your preferences evolve. It's a living document."
+    },
+    {
+      "type": "code",
+      "language": "markdown",
+      "content": "# My Developer Preferences\n\n## About Me\nI am learning to code and working through an AI skills course.\nI have limited prior coding experience.\nPlease explain concepts I may not know — don't assume background knowledge.\n\n## My Name\nMy name is [Your Name].\n\n## Preferred Languages & Tools\n- JavaScript (vanilla) and Python for new projects\n- HTML5 + CSS3 for web work\n- Avoid TypeScript, Rust, or Go unless I specifically ask\n- Avoid build tools (Webpack, Vite) for simple projects\n\n## Code Style\n- 2-space indentation\n- Add a comment explaining every function\n- Prefer const over let; never use var\n- Meaningful variable names — no single-letter names except loop counters\n\n## How I Want Claude to Communicate\n- Explain the why behind every significant suggestion\n- When you introduce a pattern I might not know, briefly explain it\n- Keep language plain and beginner-friendly\n- If I'm about to do something risky, tell me before doing it\n\n## Hard Rules\n- Never delete files without asking me first\n- Never push to git without my confirmation\n- Always show what you're going to change before changing it"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Create Your User-Level Memory File",
+      "content": "Create a `~/.claude/CLAUDE.md` with your personal preferences, then verify Claude reads it in a fresh session.\n\n**Step 1 — Navigate to your .claude folder:**\nIn PowerShell:\n```\ncd ~\nls .claude\n```\nIf the `.claude` folder doesn't exist, create it:\n```\nNew-Item -ItemType Directory -Path ~/.claude\n```\n\n**Step 2 — Create the CLAUDE.md:**\nIn VS Code, open the folder `C:\\Users\\YourName\\.claude\\` (replace YourName with your actual Windows username). Create a new file called `CLAUDE.md`.\n\nWrite 3–5 preferences that are genuinely true about you. Use the template above as a starting point but make it yours. Consider:\n- Your actual skill level and background\n- Languages you know vs. ones you're learning\n- Code style preferences you actually care about\n- Communication preferences (do you want more or less explanation?)\n- Any hard rules you want enforced across all projects\n\nSave the file.\n\n**Step 3 — Test in a fresh session:**\nOpen any project folder (or even just your home directory) and launch Claude Code:\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\nAsk:\n```\nWhat do you know about my personal coding preferences?\n```\n\nClaude should respond with the contents of your user-level CLAUDE.md.\n\n**Step 4 — Verify layering:**\nAsk:\n```\nWhat are your instructions for this specific project?\n```\n\nClaude should now describe *both* the user-level preferences (from `~/.claude/CLAUDE.md`) and the project-level instructions (from the project `CLAUDE.md` you created in lesson 7-6). Both layers should be active simultaneously.\n\n**Step 5 — Refine and save:**\nBased on what Claude reads back, adjust anything that wasn't phrased the way you intended. Your user CLAUDE.md is a living document — update it whenever you discover a preference worth encoding."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Memory System Exploration",
+      "content": "Understand Claude Code's memory system through hands-on exploration.\n\n**Step 1 — Open Claude Code in a project.**\n\n**Step 2 — Ask Claude Code about its memory:**\n\"What do you currently know about this project that you'll remember in future sessions?\"\n\n**Step 3 — Test adding to memory:**\n\"Please remember that in this project, we always add a 'last_modified' timestamp to any database record we create or update.\"\n\n**Step 4 — Start a new session** (close and reopen Claude Code in the same project).\n\n**Step 5 — Test retention:**\n\"What do you remember about conventions for database records in this project?\"\nDid it retain the instruction?\n\n**Step 6 — Ask Claude.ai (browser):** *\"How does Claude Code's memory system work? What persists between sessions and what doesn't? What's the difference between CLAUDE.md and the memory system?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Populate Memory for a Project",
+      "content": "Systematically populate Claude Code's memory with everything it needs to work effectively on your project.\n\n**Step 1 — Open Claude Code in a real project.**\n\n**Step 2 — Add 5-7 memory items** covering critical project knowledge:\n- A decision that isn't obvious from the code: \"We use token-based auth instead of session-based because [reason]\"\n- A convention that matters: \"All API endpoints return a standard envelope: {success, data, error}\"\n- A constraint to respect: \"Never use recursion in the file parser — it caused stack overflow with large files\"\n- A testing requirement: \"Integration tests require a running database — run `docker-compose up` first\"\n- A deployment detail: \"The staging server uses a different .env file at /etc/app/.env\"\n\n**Step 3 — Test each memory item** by starting a new session and asking questions that require the knowledge.\n\n**Step 4 — Document what you added to memory** in your CLAUDE.md as well, so it's not lost if memory is cleared."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Memory vs CLAUDE.md Strategy",
+      "content": "Understand when to use memory vs CLAUDE.md and build a coherent strategy.\n\n**Step 1 — Ask Claude:** *\"When should I use Claude Code's memory vs CLAUDE.md to store project information? What are the differences in: persistence, visibility to other developers, how it's used during sessions, and what each is best for?\"*\n\n**Step 2 — Create a decision framework:**\n| Information type | Memory or CLAUDE.md | Reason |\n|---|---|---|\n| Shared team conventions | | |\n| Personal preferences | | |\n| Temporary task notes | | |\n| Architecture decisions | | |\n| One-time debugging context | | |\n\n**Step 3 — Fill in the table** based on Claude's explanation.\n\n**Step 4 — Audit your current project:** What information lives in each place? What should be moved?\n\n**Step 5 — Apply your framework** to decide where to store 3 pieces of information from your actual project."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Memory Reset and Recovery Protocol",
+      "content": "Build a protocol for when memory is cleared or becomes stale.\n\n**Step 1 — Simulate a memory reset:** Ask Claude Code to forget or disregard its stored memory about the project.\n\n**Step 2 — Design a recovery prompt** — a single message you can run at the start of any fresh session:\n```\nProject onboarding: Read CLAUDE.md and the following key files: [list]. \nAfter reading, confirm:\n1. What is this project?\n2. What are the most important conventions I should follow?\n3. What should I avoid?\n4. How do I run the tests?\n```\n\n**Step 3 — Test the recovery prompt** after clearing memory. Does it get Claude Code back to a useful state quickly?\n\n**Step 4 — Add the recovery prompt** to CLAUDE.md as a \"New Session Startup\" section.\n\n**Step 5 — Ask Claude:** *\"Is there anything important about this project that can't be recovered from CLAUDE.md and source files alone — things that would be permanently lost if memory was cleared?\"* If yes, add those things to CLAUDE.md."
+    },
+    {
+      "type": "quiz",
+      "question": "You tell Claude Code \"Remember that we're migrating from PostgreSQL to MongoDB next month.\" You start a new Claude Code session a week later. Will it remember this?",
+      "options": [
+        "Yes — Claude Code's memory persists indefinitely across sessions",
+        "It depends on how Claude Code's memory is configured and whether the session is tied to the same project",
+        "No — Claude Code never retains anything between sessions",
+        "Yes — but only for 7 days, then it expires"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code's memory persistence depends on the implementation and configuration. Claude Code can store project-level memory that persists, but this behaviour varies. The safest practice: treat anything important as potentially lost and document it in CLAUDE.md or a persistent file in your project. For critical architectural context like \"migrating from X to Y\", don't rely on memory alone — put it in CLAUDE.md."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the difference between information in CLAUDE.md and information in Claude Code's memory system?",
+      "options": [
+        "They are identical — CLAUDE.md is just a human-readable version of the memory system",
+        "CLAUDE.md is a file in your git repository (visible to all, version-controlled, persistent); memory is session-specific storage that may or may not persist across sessions and is not tracked by git",
+        "Memory is more reliable than CLAUDE.md for important information",
+        "CLAUDE.md is read before the session; memory is consulted during the session"
+      ],
+      "correct": 1,
+      "explanation": "CLAUDE.md is a committed file — it's in git history, visible to all collaborators, survives any Claude Code reinstall, and is the primary source of truth for project context. Memory is AI-managed storage that is more ephemeral and may not persist across machines or after updates. For anything that must reliably be known in every session, CLAUDE.md is the authoritative source."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-9.** You have a user-level memory file that travels with you to every project, and you understand the full CLAUDE.md hierarchy. Next: Plan Mode and permissions — controlling what Claude can and can't do before it acts."
+    }
+  ],
+  "nextLesson": "7-10",
+  "prevLesson": "7-8"
+}

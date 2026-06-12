@@ -1,0 +1,96 @@
+{
+  "id": "6-7",
+  "title": "Windsurf — Another AI-First Editor",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": [
+    "windsurf",
+    "ai-coding",
+    "ide",
+    "codeium"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nCursor isn't the only AI-native editor on the market. **Windsurf**, built by Codeium, takes a similar approach — VS Code foundations, AI deeply integrated — but with a different philosophy around how the AI agent works. This lesson gives you enough experience to make an informed choice between Cursor and Windsurf in lesson 6-8."
+    },
+    {
+      "type": "text",
+      "content": "## What Windsurf Is\n\nWindsurf is a code editor by Codeium — a company that has been building AI coding tools since before Cursor existed. Their free VS Code extension (also called Codeium) is used by millions of developers, and Windsurf is their editor product that takes those capabilities further.\n\n**Download:** codeium.com/windsurf — free tier available.\n\nLike Cursor, Windsurf is a VS Code fork. It looks nearly identical to VS Code, imports your settings on first launch, and supports the same extensions. The differences are in how the AI integrates with the editing workflow."
+    },
+    {
+      "type": "text",
+      "content": "## Cascade — Windsurf's AI Agent\n\nWindsurf's headline feature is **Cascade** — its AI agent system. Cascade is designed around a concept Codeium calls \"agentic awareness\": the AI doesn't just respond to individual requests, it tracks what you've changed, what errors appeared, and what the current state of the file is — updating its understanding continuously as you work.\n\n**How to use Cascade:**\n1. Press **Ctrl+L** to open the Cascade panel on the right side of the editor\n2. Choose between **Write** mode (Cascade makes changes to your files) or **Chat** mode (it explains and advises without editing)\n3. In Write mode, describe what you want: \"Add input validation to the form\" — Cascade edits the relevant files and shows you what it changed\n4. You can watch it work in real-time: Windsurf shows the edits applying as a live animation\n\nThe real-time visual feedback is one of the most distinctive parts of the Windsurf experience. It feels less like submitting a request and more like watching a colleague type."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The AI editor landscape is moving fast.** Cursor, Windsurf, and the other tools in this category are updated every few weeks. Features that were unique to one editor often appear in the other within months. The goal of lessons 6-6 and 6-7 is not to crown a winner — it's to give you hands-on experience with both approaches so you understand the fundamental design differences and can adapt as the tools evolve."
+    },
+    {
+      "type": "text",
+      "content": "## Cursor vs. Windsurf — A Quick Comparison\n\n| | Cursor | Windsurf |\n|--|--------|----------|\n| AI agent name | Composer | Cascade |\n| Codebase awareness | Strong — @-file references | Strong — continuous context tracking |\n| Free tier | Generous (monthly fast request budget) | Generous (credit-based) |\n| AI model | Claude + GPT-4 (your choice) | Codeium's own + Claude |\n| Visual feedback | Diff view before applying | Live animation as it edits |\n| Privacy mode | Yes (settings) | Yes (settings) |\n\nNeither is clearly superior. Developer communities are split. The right choice depends on which *feels* better to you — which is why you need to try both."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Explore Windsurf and Use Cascade",
+      "content": "**Step 1 — Download and install Windsurf**\n1. Open your browser and go to codeium.com/windsurf\n2. Click **Download Windsurf** — select the Windows installer\n3. Run the installer, keeping all defaults\n4. On first launch, create a free Codeium account (or sign in if you have one)\n5. When offered to import from VS Code, accept — your extensions and settings transfer\n\n**Step 2 — Open your project**\n1. Click **File → Open Folder** and open `ai-course-projects`\n2. Take 2 minutes to orient yourself: the layout is nearly identical to VS Code. Find the Cascade icon in the Activity Bar (it may be labeled with a wave symbol or \"Windsurf\")\n\n**Step 3 — Use Cascade to modify an existing file**\n1. Press **Ctrl+L** to open the Cascade panel\n2. Make sure you're in **Write** mode (not Chat)\n3. Type this request:\n```\nOpen contact-form.html (created in lesson 6-6). Add a character counter below the message textarea that shows how many characters have been typed out of a 500-character limit. Use plain JavaScript — no libraries.\n```\n4. Watch Cascade work — observe the live edits appearing in the file\n5. When it finishes, open the file in Live Server and test the counter\n\n**Step 4 — Compare the experience to Cursor**\nSpend 5 minutes with this checklist:\n- [ ] Did Cascade show changes before or after applying them?\n- [ ] Was the Cascade panel easier or harder to use than Cursor's Composer?\n- [ ] Did Windsurf feel faster, slower, or about the same as Cursor for this task?\n- [ ] Did the output code quality seem similar?\n\n**Step 5 — Write your comparison**\nIn your notes, write 3 sentences comparing Windsurf to Cursor from your personal experience in lessons 6-6 and 6-7. There's no right answer — you're building your own informed opinion."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Windsurf First Session",
+      "content": "Windsurf (from Codeium) is an AI-first editor with a \"flow\" approach to human-AI collaboration. This drill explores what makes it different.\n\n**Step 1 — Download and open Windsurf** (codeium.com/windsurf).\n\n**Step 2 — Open Cascade** (Windsurf's AI panel) — Ctrl+L or click the AI icon.\n\n**Step 3 — Open a real project.** Ask Cascade: \"What does this project do?\" — Windsurf's AI indexes your codebase.\n\n**Step 4 — Test Cascade's flow mode:** Ask it to add a feature. Notice how it: asks clarifying questions, shows its plan, makes changes, and explains each step.\n\n**Step 5 — Test the context window:** Ask about a specific function. Does Windsurf correctly reference your actual code?\n\n**Step 6 — Compare first impressions:** vs Cursor and VS Code — which feels most natural for your workflow?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Use Windsurf to Improve a Real Codebase",
+      "content": "Use Windsurf's Cascade to make meaningful improvements to real code.\n\n**Step 1 — Open a real project** in Windsurf.\n\n**Step 2 — Ask Cascade to do a code health assessment:**\n```\nReview this codebase and identify the top 3 improvements I should make. For each improvement:\n- Describe the current problem\n- Show which files/functions are affected\n- Describe the proposed solution\n- Estimate the risk of making the change\n```\n\n**Step 3 — Choose the improvement** with the best risk/benefit ratio and ask Cascade to implement it.\n\n**Step 4 — Watch the implementation.** Review every file Cascade changes.\n\n**Step 5 — Mandatory review:** Ask Cascade: *\"Review the changes you just made. What edge cases might be broken? What tests should I run? What did you not do that you considered doing?\"*\n\n**Step 6 — Run tests and commit** if the implementation looks correct."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Windsurf vs Cursor Comparison",
+      "content": "Both Windsurf and Cursor are AI-first editors. This workshop identifies which is better for your specific workflow.\n\n**Step 1 — Choose a medium-complexity coding task** — something that involves 2-3 files and requires understanding existing code.\n\n**Step 2 — Complete the task in Cursor.** Record:\n- Time taken\n- Number of exchanges\n- Quality of first output\n- How much context you had to explain\n\n**Step 3 — Complete the same task in Windsurf.** Record the same metrics.\n\n**Step 4 — Compare the user experience:**\n- Which felt more natural?\n- Which produced more accurate code?\n- Which was more transparent about what it was doing?\n- Which handled uncertainty better?\n\n**Step 5 — Ask Claude:** *\"Based on these comparison notes [describe your findings], which editor would you recommend for someone who [describe your work profile]? What factors should matter most in the choice?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — AI Editor Decision Matrix",
+      "content": "Build a personalised decision matrix to choose the right AI editor for different situations.\n\n**Step 1 — List your top 5 coding task types.** Be specific: \"writing new Python functions from scratch\", \"reviewing AI-generated code\", \"debugging runtime errors\", etc.\n\n**Step 2 — For each task**, rate these editors on a 1-5 scale based on your experience: VS Code + Copilot, Cursor, Windsurf.\n\n**Step 3 — Ask Claude:** *\"Based on these ratings [paste your matrix], what does this suggest about my workflow preferences? Are there patterns I should pay attention to?\"*\n\n**Step 4 — Add two more rows to your matrix:** \"Cost\" and \"Learning curve\" — estimate these for each editor.\n\n**Step 5 — Make a decision:** Which 1-2 editors will you use going forward, and for what?\n\n**Step 6 — Set a 30-day trial:** Commit to your chosen setup for 30 days before evaluating again."
+    },
+    {
+      "type": "quiz",
+      "question": "Windsurf's Cascade AI makes changes to 4 files simultaneously. You review the changes and one file looks correct, two look plausible, and one looks suspicious. What should you do?",
+      "options": [
+        "Accept all changes — the AI knows the codebase better than you do",
+        "Accept the correct one, review the plausible ones more carefully, and ask Cascade to explain the suspicious one before accepting or rejecting it",
+        "Reject all changes and start over",
+        "Accept all and run tests — tests will catch any errors"
+      ],
+      "correct": 1,
+      "explanation": "Review each change on its own merits — don't accept all because some look right. For the suspicious change: ask the AI to explain its reasoning, compare it to the existing code it's changing, and consider whether the change makes sense in the context of the original request. \"Looks plausible\" is not enough for code you'll ship. The most dangerous AI changes are the confident ones that are subtly wrong."
+    },
+    {
+      "type": "quiz",
+      "question": "You are choosing between Cursor and Windsurf for your daily development. Both are AI-first editors. What is the most important factor in choosing between them?",
+      "options": [
+        "Which one has more GitHub stars",
+        "Which one's AI model is technically the strongest",
+        "Which one's workflow fits how you naturally think and work — the best editor is the one you use effectively",
+        "Which one has been around longer"
+      ],
+      "correct": 2,
+      "explanation": "Technical capability matters but workflow fit matters more for daily productivity. If Cursor's model is marginally stronger but Windsurf's flow approach matches how you think, Windsurf will make you more productive. Try both on real tasks (not toy examples) and pay attention to which one feels less like fighting the tool. The best AI editor is the one you're actually using well, not the one with the best benchmark scores."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-7 complete.** You've now tried both major AI-native editors. You have hands-on experience with Cursor's Composer, Windsurf's Cascade, Copilot Chat, and Continue.dev. In lesson 6-8, you'll synthesize everything from this part into a personal decision about which setup you'll use for the rest of the course."
+    }
+  ],
+  "nextLesson": "6-8",
+  "prevLesson": "6-6"
+}

@@ -1,0 +1,118 @@
+{
+  "id": "17-4",
+  "title": "Documentation & Decision Capture as You Work",
+  "part": 17,
+  "estimatedMinutes": 60,
+  "tags": [
+    "projects",
+    "beginner",
+    "documentation",
+    "decisions",
+    "workflow",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThe biggest documentation problem in projects isn't the final write-up — it's the decisions, context, and rationale that get lost in real time. Why was this approach chosen? What alternatives were considered? What changed and why? This lesson covers how to use AI to capture documentation and decisions as you work, so you never lose the thinking behind the work. You'll learn decision records, weekly project logs, capturing decisions from conversations, and how to structure retrospectives."
+    },
+    {
+      "type": "text",
+      "content": "## Why Decisions Get Lost\n\nAt the start of a project, everyone involved knows the context. By the time someone new joins — or by the time you need to explain a decision six months later — the reasoning has usually disappeared:\n- The person who made the decision has moved on\n- The Slack thread is buried or deleted\n- The meeting notes say *'agreed to proceed with Option A'* but not why\n- Everyone remembers a different version of the decision\n- The vendor who was rejected three months ago is now being reconsidered — by someone who doesn't know why they were rejected\n\nThe cost is concrete: relitigating settled decisions, re-explaining context to every new team member, repeating mistakes from the last project, and new hires operating without the institutional knowledge that experienced members have accumulated.\n\n**The fix:** Capture decisions when they're made, not retrospectively. AI makes this fast enough to actually do it."
+    },
+    {
+      "type": "text",
+      "content": "## Decision Records — The Most Useful Document You're Not Writing\n\nA decision record is a short document that captures a single significant decision: what was decided, why, what alternatives were considered, and who was involved. The concept comes from software engineering (where they're called Architecture Decision Records, or ADRs), but the pattern is universally valuable.\n\n**Decision record prompt:**\n```\nHelp me write a decision record for the following decision:\n\nDecision made: [what was decided]\nDate: [date]\nDecision maker(s): [who decided — name and role]\nContext: [what situation or problem prompted this decision?]\nOptions considered:\n- Option A: [description] — Pros: [list] / Cons: [list] / Why not chosen: [reason]\n- Option B: [description] — Pros: [list] / Cons: [list] / Why not chosen: [reason]\nChosen option: [which one]\nWhy this option was chosen: [the reasoning]\nConstraints that influenced the decision: [budget, time, skills, existing systems, compliance]\nRisks of this decision: [what could go wrong?]\nHow to revisit: [what would change your mind? Under what conditions should this be reconsidered?]\n\nWrite this as a structured, 300-word decision record I can save for future reference.\n```\n\n**What makes a good decision record:**\nThe most important part is 'Why the other options were not chosen.' Without this, the next person to encounter the same options will repeat the same evaluation. The elimination reasoning is the institutional knowledge.\n\n**Where to save decision records:**\nLink them from the project plan. In Notion: create a 'Decisions' database linked to each project. In SharePoint: a 'Decision Log' document in the project folder. In Confluence: a decision log page. The format matters less than the habit of creating them."
+    },
+    {
+      "type": "text",
+      "content": "## A Decision Matrix for Harder Decisions\n\nWhen a decision involves multiple options being evaluated against multiple criteria, a decision matrix makes the trade-offs explicit and defensible.\n\n```\nHelp me evaluate these options using a decision matrix:\n\nOptions to compare: [list options]\nCriteria to evaluate against (with relative importance):\n- [Criterion 1]: importance [high/medium/low] — [why it matters]\n- [Criterion 2]: importance [high/medium/low] — [why it matters]\n- [Criterion 3]: importance [high/medium/low] — [why it matters]\n\nFor each option:\n1. Score it against each criterion (1–5 scale)\n2. Apply the weighting\n3. Calculate a total score\n4. Note which criteria each option performs strongly or weakly on\n\nPresent this as a table, then recommend which option the matrix suggests\nand whether you agree with that conclusion based on context.\n```\n\n**The value of explicit scoring:** Even if the final decision differs from the matrix recommendation (because of factors that are hard to quantify), having the scored matrix means the decision maker can say: 'The matrix pointed to Option B, but we chose Option A because of [qualitative factor not captured in the scoring].' This is a much stronger decision record than 'we chose Option A.'"
+    },
+    {
+      "type": "text",
+      "content": "## Capturing Project Context in Real Time\n\nBeyond formal decisions, there's the ongoing context of a project — status, blockers, pivots, what worked and what didn't.\n\n**Weekly project log — 5 minutes every Friday:**\n```\nCreate a brief project log entry for this week.\n\nProject: [name]\nWeek of: [date]\n\nWhat was accomplished this week: [list]\nWhat was blocked or delayed — and why: [list]\nDecisions made this week: [brief description of each]\nWhat changed from the original plan this week: [describe any pivots or adjustments]\nKey insights or lessons learned: [anything worth remembering for future projects]\nPriorities for next week: [list]\nAny escalation needed: [issues requiring management attention]\n\nFormat this as a 200-word project log entry.\n```\n\nFive minutes a week for 10 weeks is a complete project journal — far more valuable than a retrospective write-up after everything has faded from memory. It also gives you the raw material for status reports and retrospectives.\n\n**Capturing informal decisions from Slack or email:**\nDecisions often happen in conversations rather than formal meetings:\n```\nHere is a Slack thread / email chain where a decision was made: [paste]\n\nExtract:\n- What was decided (one sentence)\n- The reasoning that led to it\n- Any alternatives that were discussed\n- Who was involved\n- What follow-up was agreed\n\nFormat as a one-paragraph decision summary I can save.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## AI-Assisted Project Retrospectives\n\nA retrospective captures what the team learned. It's one of the most valuable project documents — if it's ever actually written. AI makes it fast enough to do every time.\n\n**Project retrospective prompt:**\n```\nHelp me structure a retrospective for [project].\nHere are my rough notes and observations: [paste notes — bullet points are fine]\n\nCreate a structured retrospective covering:\n1. What went well — and *why* it went well (so we can repeat it intentionally)\n2. What went poorly — root causes, not blame, framed as process/system issues\n3. What we would do differently next time — specific, actionable changes\n4. What surprised us — things we didn't anticipate that changed our approach\n5. Specific recommendations for future similar projects\n6. Metrics (if available): planned timeline vs. actual, planned budget vs. actual\n```\n\n**After the AI draft:** Send to the team for additions before finalising. AI gives you a structure that would take 30 minutes to create from scratch — the team fills it with accuracy and the nuance AI doesn't have.\n\n**Retrospective cadence:**\n- **Sprint retrospective (Agile):** After every 2-week sprint — 30 minutes, informal, team-led\n- **Milestone retrospective:** After each major phase — 60 minutes, more structured\n- **Project retrospective:** After project completion — comprehensive, archived for future teams\n\nThe most valuable retrospectives happen when they're short enough to actually do. A 15-minute AI-assisted retrospective after each milestone is worth more than a 3-hour retrospective you never get around to scheduling."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The 'future person' test:** When writing any decision record or project log, ask: 'Would someone who joined this project six months from now understand what was decided and why, from this document alone?' If the answer is no, add the missing context. The person who benefits most from good decision capture is often you, six months from now, when you've forgotten why you made a choice."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Capture a Decision You've Recently Made",
+      "content": "Build the decision capture habit by practising on a real recent decision.\n\n**Step 1 — Choose a decision (2 minutes)**\n\nThink of a significant decision you've made in the last month — work or personal. It should be one where:\n- Multiple options were considered (even informally in your head)\n- You might need to explain your reasoning later\n- Someone else might question or revisit it\n\nExamples: choosing a vendor, picking a project approach, deciding not to do something, recommending one tool over another.\n\n**Step 2 — Write the decision record (10 minutes)**\n\nUse the decision record prompt. Fill in what you remember. If you can't recall all the alternatives, note what you do remember — partial records are better than none.\n\nAfter Claude formats it, review it:\n- Is this accurate?\n- Is the reasoning clear enough for someone unfamiliar with the project to understand why this decision was made?\n- Is there a risk you didn't note?\n- What would make you reconsider this decision in future?\n\n**Step 3 — Test with the decision matrix (5 minutes)**\n\nFor the same decision, run the decision matrix prompt. Does the matrix support the same choice you made? If not, that's interesting — either the matrix missed something important, or the decision was made on an unexamined assumption.\n\n**Step 4 — Set up a decision log (5 minutes)**\n\nCreate a simple location for future decision records:\n- A Notion page called 'Decision Log'\n- A Word doc in your project folder\n- A note in your project management tool\n\nAdd today's decision record as the first entry. Write one sentence describing what threshold a decision needs to meet to deserve a record (e.g., 'any decision that took more than 30 minutes to make, or that a team member could reasonably question later').\n\nIn six months, when someone asks 'why did we do it this way?', you'll have an accurate answer ready — not a reconstructed one."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague joins a project that started 3 months ago. They keep asking questions about decisions that were made before they joined, and the project is slowing down as people explain context repeatedly. What practice would have prevented this?",
+      "options": [
+        "Better onboarding for new team members",
+        "Decision records created at the time each significant decision was made — now available for the new colleague to read without interrupting the team",
+        "A longer project kickoff meeting at the start",
+        "Assigning one person to be the project memory keeper"
+      ],
+      "correct": 1,
+      "explanation": "Decision records created at the time of each decision are exactly what the new colleague needs: structured documents that explain what was decided, why, and what alternatives were considered. This lets them get context independently without interrupting existing team members repeatedly. Better onboarding (A) helps new joiners but doesn't substitute for the actual decision documentation. A longer kickoff (C) only captures initial decisions, not the many decisions made during the project. A single memory keeper (D) creates a bottleneck, a single point of failure, and still requires that person to be available and remember the context correctly months later."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Decision Documentation Drill",
+      "content": "Build the habit of documenting decisions as you make them.\n\n**Step 1 — Ask Claude:** \"What is an Architecture Decision Record (ADR)? How do teams use them? What are the key elements of a good decision record?\"\n\n**Step 2 — Create a decision record template** for your context:\n```markdown\n# Decision: [Title]\n**Date:** [YYYY-MM-DD]\n**Status:** Proposed / Accepted / Superseded\n**Context:** [Why does this decision need to be made?]\n**Options considered:** [What alternatives were evaluated?]\n**Decision:** [What was decided and why]\n**Consequences:** [What will be easier/harder as a result?]\n**Revisit when:** [Under what conditions should we revisit this?]\n```\n\n**Step 3 — Document one recent decision** using this template.\n\n**Step 4 — Ask Claude to review the decision record:** \"Does this decision record clearly capture the reasoning? What context would a future reader need that isn't here?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Decision Journal",
+      "content": "Create a decision journal system for ongoing use.\n\n**Step 1 — Ask Claude Code** to set up a decision journal:\n```\nCreate a simple decision journal system:\n1. A folder ~/decisions/ with one markdown file per major decision\n2. A DECISIONS.md index file with: date, title, status, one-line summary\n3. A template file for new decisions\n4. A monthly review prompt: \"Review all decisions from last month — which turned out well? Which poorly? What can you learn?\"\n\nSet up the folder structure and initial files.\n```\n\n**Step 2 — Add your 3 most recent significant decisions** to the journal.\n\n**Step 3 — Schedule a monthly review** (calendar reminder) to revisit decisions and assess outcomes.\n\n**Step 4 — After 3 months**, do your first review. What patterns do you see in your decision-making?"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Real-Time Documentation During Work",
+      "content": "Practice capturing context and decisions as you work, not after.\n\n**Step 1 — Set up a quick capture system** — a simple text file, a note in your project, or a CLAUDE.md section:\n```\n## Today's Work Log\n\n### Decision: [what you decided]\nContext: [why this decision came up]\nOptions: [what you considered]\nChosen: [what you picked and why]\n\n### Discovery: [something you learned]\nImpact: [how this changes things]\n```\n\n**Step 2 — During your next 2-hour work session**, capture notes in real time:\n- Every decision (even small ones)\n- Every surprising discovery\n- Every blocked path and why\n\n**Step 3 — At the end of the session**, ask Claude to synthesise your log:\n\"Summarise this work log into: decisions made, key learnings, and open questions for next session.\"\n\n**Step 4 — Evaluate:** Did the real-time log capture anything important you would have forgotten?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Team Decision Capture",
+      "content": "Extend decision documentation to your team.\n\n**Step 1 — Identify 3 recent team decisions** that weren't documented.\n\n**Step 2 — Try to reconstruct them:** What was the context? What options were considered? Why was this choice made?\n\n**Step 3 — Notice what you can't reconstruct** after even a few weeks. This is the cost of not documenting.\n\n**Step 4 — Ask Claude to design a lightweight team decision capture process:**\n\"Design a team decision documentation process that: takes under 5 minutes per decision, is stored where the team can find it, and would actually be used consistently. Avoid heavy processes that will be abandoned.\"\n\n**Step 5 — Propose the process to your team** and pilot it for one month."
+    },
+    {
+      "type": "quiz",
+      "question": "Six months after making a technical decision, a new team member asks \"why do we do it this way?\" You can't remember the reasoning. What does this cost?",
+      "options": [
+        "Nothing — they should just trust the existing approach",
+        "Significant time lost: they may revisit the decision unnecessarily, implement a different approach that conflicts with the existing one, or lose confidence in the team's technical choices",
+        "A quick meeting to discuss it — low cost",
+        "Only a problem if the decision was wrong"
+      ],
+      "correct": 1,
+      "explanation": "Undocumented decisions get re-litigated constantly. Team members encounter the decision's consequences without understanding its context, leading to: time spent reconstructing the reasoning, risk of reversing a good decision without understanding why it was made, and erosion of confidence in the codebase/process. ADRs and decision journals pay for themselves within the first revisit they prevent — one avoided re-decision meeting pays back years of documentation time."
+    },
+    {
+      "type": "quiz",
+      "question": "A decision record says \"we chose PostgreSQL over MongoDB.\" What critical information is missing that would make this record genuinely useful?",
+      "options": [
+        "The date the decision was made",
+        "The context and reasoning: what were the specific requirements that made PostgreSQL a better fit? What limitations of MongoDB were relevant? Under what conditions should we revisit this choice?",
+        "Who made the decision",
+        "A link to the PostgreSQL documentation"
+      ],
+      "correct": 1,
+      "explanation": "A decision record without reasoning is just a record of what happened, not why. The most valuable part: the context that made this the right choice, the options considered and why they were rejected, and the conditions under which this choice should be reconsidered. Future readers need to know: \"Does this reasoning still apply to my situation?\" Without the reasoning, they can't make that assessment and will either blindly follow the old decision or wastefully re-examine it from scratch."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 17-4.** You now have a complete system for capturing decisions (decision records and decision matrices), project context (weekly logs), informal conversation decisions (extraction prompts), and project learning (retrospectives). The value compounds over time: documentation written now is usable forever; documentation written retrospectively is rarely written at all."
+    }
+  ],
+  "nextLesson": "17-5",
+  "prevLesson": "17-3"
+}

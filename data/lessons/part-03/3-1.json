@@ -1,0 +1,120 @@
+{
+  "id": "3-1",
+  "title": "Why Prompting Matters",
+  "part": 3,
+  "estimatedMinutes": 55,
+  "tags": ["prompting", "beginner", "foundations"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand exactly why prompt quality is the single biggest lever on AI output quality — not as a vague principle, but with a precise mental model for why it's true. You'll also have the anatomy of a well-structured prompt so you can apply it immediately."
+    },
+    {
+      "type": "text",
+      "content": "## How Language Models Actually Work (The 2-Minute Version)\n\nUnderstanding why prompting matters requires a basic model of what's happening inside the AI. You don't need to understand the mathematics — just the mechanism.\n\nA language model is trained by processing hundreds of billions of words of text — books, articles, conversations, code. Through this process, it learns to predict: *given this sequence of words, what word comes next?* It does this with extraordinary accuracy, across all the patterns it has seen.\n\nWhen you type a prompt, the model treats everything you've typed as the beginning of a sequence, and predicts the most likely continuation. Your words shape the probability distribution of every word in its response.\n\n**What this means for prompting:**\n- Vague prompts match many possible continuations equally — so the model picks an average\n- Specific prompts narrow the space dramatically — the model converges on what you actually wanted\n- More context = fewer valid interpretations = more accurate output\n\nThis isn't about being clever. It's about giving the model enough signal to distinguish your specific intent from the millions of similar-but-different requests it has learned to handle.\n\n**The key insight:** You are not programming the model. You are providing context that shapes its predictions. The better your context, the better your result — not because the model got smarter, but because you gave it a clearer signal."
+    },
+    {
+      "type": "text",
+      "content": "## Garbage In, Garbage Out\n\nThere's an old computing saying: *garbage in, garbage out*. Feed a system bad input and it produces bad output — not because the system is broken, but because you didn't give it enough to work with.\n\nThis applies directly to AI. A language model is extraordinarily capable but also extraordinarily literal. It responds to what you actually said, not what you meant to say. When your prompt is vague, the model has to fill in the blanks — and it fills them in with statistically plausible assumptions that may have nothing to do with what you wanted.\n\n**Prompting is briefing.** The quality of your brief determines the quality of the work. A skilled contractor doesn't guess what you want — they work from a spec. If your brief says \"build something in the garden,\" don't be surprised when they show up with a pergola instead of a raised vegetable bed."
+    },
+    {
+      "type": "text",
+      "content": "## The Same Task, Two Prompts\n\nNothing makes this clearer than a side-by-side comparison.\n\n**Prompt A — vague:**\n```\nWrite about Python\n```\n\nWhat does the model do with \"Write about Python\"? It has no idea:\n- Is Python the programming language or the snake?\n- Who is the audience — a 10-year-old, a data scientist, a hiring manager?\n- How long? One sentence or ten pages?\n- What's the purpose — education, marketing, documentation, a joke?\n\nThe model guesses. It writes a statistically average response to that phrase — which is almost certainly not what you had in mind.\n\n**Prompt B — specific:**\n```\nWrite a 200-word beginner-friendly explanation of Python as a programming language.\nUse a cooking analogy to explain what code is.\nEnd with one specific thing a complete beginner could build with Python in their first week.\n```\n\nLet's count what changed:\n- **Length specified:** 200 words — no guessing whether you want a sentence or an essay\n- **Audience specified:** beginner-friendly — the model calibrates vocabulary and depth\n- **Format specified:** cooking analogy — constrains the framing to a specific approach\n- **Goal specified:** end with a practical suggestion — the output must be actionable\n\nThe difference in output quality isn't because Prompt B was magic. It's because Prompt B gave the model a complete brief. You didn't add intelligence — you removed ambiguity."
+    },
+    {
+      "type": "text",
+      "content": "## The Five Elements of a Well-Structured Prompt\n\nMost excellent prompts contain some combination of these five elements:\n\n**1. Role or context** — who is answering or what situation this is\n```\nYou are a senior financial analyst reviewing...\nI'm a first-time manager trying to...\nIn the context of a B2B SaaS startup...\n```\n\n**2. Task** — what you actually want (be specific about verb: write, analyse, compare, summarise, explain, list)\n```\nWrite a cold email subject line...\nAnalyse these three options and recommend...\nSummarise the key risks in...\n```\n\n**3. Context/input** — the information the model needs to do the task\n```\n[paste the document, code, data, or description it needs]\n```\n\n**4. Format/constraints** — how the output should be structured\n```\nRespond in bullet points, maximum 5...\nUse plain language, no jargon...\n200 words maximum...\n```\n\n**5. Goal/purpose** — what the output is for (optional but powerful)\n```\nThe goal is to get the reader to book a call...\nThis is for a non-technical audience...\nThe reader needs to make a decision by end of day...\n```\n\nYou don't need all five every time. A simple task needs fewer elements. A complex task benefits from all five. The habit is to ask yourself: *what's missing from my prompt that the model needs to do this well?*"
+    },
+    {
+      "type": "text",
+      "content": "## Vague vs. Specific — Six More Examples\n\n| Task | Vague | Specific |\n|------|-------|----------|\n| Email draft | \"Write an email to my client\" | \"Write a 3-paragraph follow-up email to a client who missed our demo call. Tone: professional but warm. Goal: reschedule for next week. Don't mention the missed call directly.\" |\n| Code help | \"Fix this\" | \"This JavaScript function returns undefined when the input is an empty array. Fix it and explain what caused the bug.\" |\n| Summarisation | \"Summarise this\" | \"Summarise this 10-page report in 5 bullet points for a C-suite audience who won't read the full document. Focus on financial implications.\" |\n| Analysis | \"What do you think?\" | \"Analyse the three options I've described and recommend one. Consider: cost, implementation time, and long-term maintenance burden. State your assumptions.\" |\n| Learning | \"Explain recursion\" | \"Explain recursion to someone who understands loops and functions but has never seen it before. Use a real-world analogy, then show a simple code example.\" |\n| Creative | \"Write a tagline\" | \"Write 5 tagline options for a productivity app targeting remote workers. Tone: energetic but not hype-y. Max 8 words each. Focus on saving time.\" |\n\nIn every case, the specific version takes longer to write by 15-30 seconds. In every case, it produces dramatically better output — and usually doesn't require revision. The extra 30 seconds is the best time investment in AI use."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The 10-word rule:** Before sending any prompt, ask yourself: can I add 10 words that would make this significantly more specific? Almost always the answer is yes — and those 10 words are the highest-leverage thing you can do. The time to write a precise prompt is always less than the time to iterate on a vague one."
+    },
+    {
+      "type": "text",
+      "content": "## Three Failure Modes of Vague Prompts\n\nVague prompts fail in three predictable ways:\n\n**1. The hallucination trap:** When you don't specify what you want, the model fills the gap with plausible-sounding content that may not be accurate. \"Tell me about the history of X\" without constraints produces a confident-sounding summary that blends real facts with invented ones. Specific prompts narrow the scope and reduce the opportunity for fabrication.\n\n**2. The audience mismatch:** \"Explain neural networks\" gives you a response calibrated to some average reader — usually someone with more background than a beginner and less than an expert. Neither audience is well-served. Specify your background and the model calibrates correctly.\n\n**3. The format failure:** \"Write a summary\" can mean one sentence, five bullet points, or three paragraphs. The model picks one — usually something in between that satisfies no particular need. Specify format and you get what you can actually use.\n\nAll three failure modes come from the same root cause: the model has no way to know what you omitted. It doesn't know what it doesn't know about your specific intent. You do. Putting that information in the prompt is entirely your job."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**What prompt engineering is not:** It's not a mystical art, it's not about memorising magic phrases, and it doesn't require a computer science degree. It's applied clarity — the same thinking that makes a great email subject line or a well-scoped work ticket makes a great prompt. If you can write a clear Jira ticket or a detailed Slack request, you can write a good prompt."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "From Vague to Specific — Live Comparison",
+      "content": "Open [Claude.ai](https://claude.ai) and run the following experiments. Read both outputs before moving on.\n\n**Experiment 1 — The Python example:**\n\nFirst send:\n```\nWrite about Python\n```\nRead the output. Note what assumptions Claude made about audience, format, and length.\n\nThen send:\n```\nWrite a 200-word beginner-friendly explanation of Python as a programming language.\nUse a cooking analogy to explain what code is.\nEnd with one specific thing a complete beginner could build with Python in their first week.\n```\n\nWrite one sentence: *What changed and why?*\n\n**Experiment 2 — Your own task:**\n\nThink of something you'd actually want AI help with — a work email, explaining something to someone, a decision you're weighing, or a piece of writing.\n\nFirst send a vague version (5 words or fewer).\n\nThen apply the five-element framework:\n1. Add a role or context: \"As someone who...\"\n2. Specify the task precisely\n3. Include any input/context the model needs\n4. Specify format and constraints\n5. State the goal/purpose\n\nSend the specific version.\n\nCompare the outputs. Write 2-3 sentences: *what specifically in the improved prompt produced better output?*\n\n**This is the most important exercise in Part 3.** The habit of crafting specific prompts — rather than sending the first thing that comes to mind — is what separates AI practitioners who get consistent value from those who remain frustrated."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague says \"I tried AI for writing help but it always gives me generic results that I have to completely rewrite.\" Based on this lesson, what is most likely the root cause?",
+      "options": [
+        "They're using the wrong AI tool — some tools produce better writing than others",
+        "Their prompts are probably too vague — the model is filling in too many assumptions about audience, format, tone, and purpose",
+        "AI tools are not actually good at writing — this is a known limitation",
+        "They need to use more technical language in their prompts to get better results"
+      ],
+      "correct": 1,
+      "explanation": "Generic results are almost always the symptom of a vague prompt. When a prompt lacks specificity about audience, tone, format, length, and purpose, the model produces a statistically average response — which is correct for some hypothetical average request, but wrong for the specific actual need. The fix is not a different tool or technical jargon — it's specifying the five elements: who this is for, what exactly to write, what context they need, what format to use, and what the output is trying to accomplish. Almost every 'AI doesn't work for me' complaint traces back to underbriefing the model."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Quick Prompt Drill — Three Variations, One Task",
+      "content": "Open [Claude.ai](https://claude.ai). Pick ONE real task you need to do this week (a report section, a summary for your manager, a response to a difficult message, a how-to explanation for a colleague).\n\n**Write and send three prompt variations for that task:**\n\n**Variation 1 — Minimal (under 10 words):** Send the most stripped-down version of your request. Note what assumptions the AI made.\n\n**Variation 2 — Standard (add audience + format):** Add who this is for and what shape the output should take. Send it.\n\n**Variation 3 — Full brief (all five elements):** Add role/context, specific task verb, any input the AI needs, format constraints, and the purpose the output serves.\n\n**After all three outputs, answer these questions:**\n- Which output could you use directly without editing?\n- What single addition between Variation 1 and 2 made the biggest difference?\n- Which of the five elements were you most often forgetting before this lesson?\n\n**Save Variation 3** — this is the beginning of a prompt template for this task type. Keep it somewhere accessible."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build a Real Output Using the Five-Element Framework",
+      "content": "You'll use the five-element framework to create a genuinely useful work document — something you'll actually keep and use.\n\n**Step 1 — Choose your output (2 min)**\nPick one of these targets or substitute your own:\n- A briefing document on a topic you need to explain to a colleague or manager\n- A set of talking points for an upcoming meeting or presentation\n- A template email for a recurring communication (project updates, client check-ins, requests for input)\n- A one-page explainer of a process or concept you're responsible for\n- A structured self-review of your work for the past month\n\n**Step 2 — Draft your five-element prompt (5 min)**\nWrite it out longhand before pasting:\n1. Role/context: who you are and what situation this is for\n2. Task: the exact verb + deliverable\n3. Input context: any information the AI needs to do this well (paste it in)\n4. Format/constraints: structure, length, what to avoid\n5. Purpose: who will read this and what they need to do with it\n\n**Step 3 — Run the prompt and review (5 min)**\nSend it to Claude. Read the output critically — what's missing, what's wrong, what's excellent?\n\n**Step 4 — AI REVIEW (10 min)**\nPaste your prompt and the output back to Claude and say:\n\n> \"Critique my prompt technique — what's weak about how I briefed you? What's missing that would have produced a better result? Don't say it looks good. Be specific about what a more experienced prompt writer would have done differently.\"\n\nRead the critique carefully. Implement at least two of the suggested improvements in a revised prompt.\n\n**Step 5 — Revised run (5 min)**\nSend your improved prompt. Compare the two outputs.\n\n**Step 6 — Save the winner**\nKeep the improved prompt with [VARIABLE] placeholders replacing the specific details. This is your first templated prompt for this task type.\n\n**Deliverable:** You should have (a) a useful real output you'll keep, and (b) a reusable prompt template with the five-element structure baked in."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Adversarial Prompt Review — What Would a Better Prompter Write?",
+      "content": "This exercise trains your eye for prompt quality by having AI critique your prompts the way a skilled prompt engineer would.\n\n**Step 1 — Write a prompt for a real task (3 min)**\nChoose something you genuinely need help with. Write the prompt you'd normally send — don't over-think it, just write what comes naturally.\n\n**Step 2 — Run the adversarial review (5 min)**\nOpen a NEW conversation in [Claude.ai](https://claude.ai) and paste:\n\n```\nHere is a prompt someone wrote:\n\n[paste your prompt]\n\nActing as an expert prompt engineer who trains professionals to get better results from AI:\n1. What are the three biggest weaknesses in this prompt?\n2. What assumptions is the AI forced to make that the prompter should have specified?\n3. How would a skilled prompter rewrite this to get dramatically better output?\n\nBe direct and specific — not encouraging. The goal is to identify every gap.\n```\n\n**Step 3 — Apply the feedback (5 min)**\nTake the rewritten prompt the AI suggests. Make any further adjustments. Send it to Claude and compare the output to your original.\n\n**Step 4 — Document your pattern (2 min)**\nWrite one sentence about your most common prompting gap — the thing the adversarial review consistently found missing. This is your personal baseline to improve."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Prompt Library Entry — Your First Recurring-Task Template",
+      "content": "Every time you write a good prompt, you should capture it before closing the tab. This workshop formalises that habit by creating your first prompt library entry.\n\n**Step 1 — Identify your most frequent AI task (2 min)**\nWhat's one thing you'd use AI for every week if you had a reliable prompt for it? Examples:\n- Summarising documents for busy readers\n- Writing project status updates\n- Explaining technical concepts to non-technical colleagues\n- Drafting responses to difficult emails\n- Creating agendas from rough notes\n\n**Step 2 — Build the template prompt (10 min)**\nOpen [Claude.ai](https://claude.ai) and use this meta-prompt to generate your template:\n\n```\nI need a reusable prompt template for the following task:\n\nTask: [describe the recurring task]\nWho uses the output: [audience description]\nWhat the output must always contain: [required elements]\nWhat format works best: [structure, length, tone]\nWhat the output must never contain: [exclusions, clichés, things that would make it unusable]\n\nGenerate a template using [VARIABLE] placeholders for the parts that change each time.\nMake it production-ready — something I can use immediately without editing.\nAfter generating it, explain what you optimised for.\n```\n\n**Step 3 — Test with a real input (5 min)**\nFill in the variables with a real example from your work. Run it. Evaluate the output.\n\n**Step 4 — Refine once (3 min)**\nIdentify one thing to improve. Ask Claude to adjust the template accordingly.\n\n**Step 5 — Save it**\nCreate a file called `prompt-library.md` in a folder you'll remember. Add this entry:\n\n```markdown\n## [Task Name]\n**When to use:** [one sentence]\n**Template:**\n[paste your final template]\n**Example output:** [paste one good output]\n```\n\nThis file is your prompt library. Every lesson in Part 3 adds at least one entry."
+    },
+    {
+      "type": "quiz",
+      "question": "Which of the following best describes why adding 'This is for a non-technical audience who will make a budget decision by end of day' to a prompt improves the output?",
+      "options": [
+        "It makes the AI work harder because the stakes are higher",
+        "It narrows the probability space — the AI can now eliminate responses calibrated for technical readers or for low-urgency situations",
+        "It triggers a special mode in the AI designed for executive communication",
+        "Longer prompts always produce better outputs regardless of what is added"
+      ],
+      "correct": 1,
+      "explanation": "Every piece of context in a prompt narrows the space of valid responses. Specifying a non-technical audience eliminates any response that uses jargon without explanation. Specifying a budget decision tells the AI the output must be actionable in that domain. Specifying end-of-day urgency tells it the output must be concise and skimmable. None of this is magic — it's elimination of irrelevant response patterns, leaving only those that fit all specified constraints."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask AI to 'help you prepare for a presentation' and get a generic list of presentation tips. Which single addition to the prompt would produce the most targeted improvement?",
+      "options": [
+        "Adding 'please' to make the request more polite",
+        "Repeating the request in bold text to emphasise it",
+        "Specifying the audience, topic, goal of the presentation, and your specific concern — for example, 'I tend to over-explain technical detail to non-technical stakeholders'",
+        "Asking it to 'try harder' and 'be more specific'"
+      ],
+      "correct": 2,
+      "explanation": "The original prompt omits every contextual element: who the presentation is for, what it's about, what outcome you're trying to achieve, and what your actual challenge is. Any one of these additions would help. All four together transform the output from generic presentation advice to targeted coaching for your specific situation. Politeness, emphasis, and exhortations to 'try harder' do not add information and therefore do not improve the output."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 3-1.** You understand why prompting matters (model mechanics + context narrowing), the anatomy of a well-structured prompt (5 elements), the three failure modes of vague prompts, and you have six comparison examples you can return to. The next seven lessons give you the systematic toolkit — but this foundational model explains why each technique works."
+    }
+  ],
+  "nextLesson": "3-2",
+  "prevLesson": "2-8"
+}

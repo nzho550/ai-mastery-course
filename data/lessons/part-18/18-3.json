@@ -1,0 +1,118 @@
+{
+  "id": "18-3",
+  "title": "Systematic AI Research — Perplexity, Elicit, Consensus & Scite",
+  "part": 18,
+  "estimatedMinutes": 70,
+  "tags": [
+    "advanced",
+    "research",
+    "perplexity",
+    "elicit",
+    "consensus",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nMost people use AI research tools the same way they use Google: type a query, read the top result, done. Systematic AI research is fundamentally different. It treats research as a structured process with verification stages, multiple specialised tools, and deliberate synthesis. This lesson teaches you to research like a professional analyst — not just faster, but better."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Why specialised research tools matter:** General-purpose AI like Claude or ChatGPT synthesises from training data (knowledge cutoff) and can hallucinate citations. Specialised research tools search live databases of real papers and sources. For anything where factual accuracy and citation quality matter, using the right research tool is non-negotiable."
+    },
+    {
+      "type": "text",
+      "content": "## The 4-Tool Research Stack\n\nEach tool in this stack does something specific that the others can't:\n\n**1. Perplexity AI — Real-time cited web research**\n- Best for: current events, market data, recent developments, any topic where recency matters\n- How it works: runs multiple web searches, reads the actual pages, synthesises with citations\n- Key feature: every claim links to a specific source — you can verify immediately\n- Deep Research mode (Pro): runs 10-20+ searches, produces a structured multi-page report\n- Free tier: 5 deep research reports/day; Pro ($20/month): unlimited\n\n**2. Elicit — Systematic academic literature review**\n- Best for: \"What does the research say about X?\" — healthcare, social sciences, business strategy, science\n- How it works: searches over 200M academic papers, extracts structured data (sample size, outcome, methodology)\n- Key feature: creates comparison tables of multiple papers' findings automatically\n- When to use: when you need to know the state of evidence, not just one opinion\n- Free tier: generous; paid tier for bulk extraction\n\n**3. Consensus — Scientific consensus validation**\n- Best for: yes/no questions backed by evidence (\"Does X cause Y?\", \"Is Z effective?\")\n- How it works: searches scientific literature and shows a \"Consensus Meter\" — what % of studies support the claim\n- Key feature: tells you the weight of evidence, not just one paper's finding\n- Use case: before making a claim in a document, validate it with Consensus to avoid citing outlier studies\n\n**4. Scite.ai — Citation quality and retraction checking**\n- Best for: verifying that a study you want to cite hasn't been retracted or contradicted\n- How it works: tracks how every paper has been cited — whether subsequent papers supported, contrasted, or just mentioned it\n- Key feature: \"Smart Citations\" — see if a paper's finding has held up over time\n- Use case: before including any study in formal work, check it in Scite to see if the finding has been replicated or challenged"
+    },
+    {
+      "type": "text",
+      "content": "## Perplexity Deep Research — The Complete Workflow\n\nPerplexity's Deep Research mode is the most practically useful advanced research tool for most professionals. Here's how to get maximum value from it.\n\n**What Deep Research does:**\nInstead of one search, it runs 15-30 targeted sub-searches, reads the actual pages (not just snippets), and synthesises everything into a structured report with citations for every claim. A single Deep Research query does what would take 45-90 minutes of manual web research.\n\n**How to structure a Deep Research query:**\n\nWeak query (gets generic results):\n```\nWhat is the market for electric vehicles?\n```\n\nStrong query (gets targeted, actionable results):\n```\nProvide a deep research report on the electric vehicle market focusing on:\n1. Current market size and 3-year growth projections for Australia specifically\n2. The top 5 barriers to EV adoption among Australian consumers (with data)\n3. Government incentive programs in Australia active in 2026\n4. The 3 fastest-growing EV models by sales volume in 2025-2026\n\nI'm preparing a market entry analysis for a company considering launching EV charging infrastructure in major Australian cities. Prioritise recent data (2024-2026) and cite all statistics.\n```\n\n**The 5 follow-up questions technique:**\nAfter any Deep Research report, don't just take the output. Ask 5 follow-up questions to drill into the most important areas:\n```\n1. What is the most surprising or counterintuitive finding in this research?\n2. Where is the evidence weakest or most contested?\n3. What important angle did this research NOT cover that I should investigate separately?\n4. Give me the strongest argument against the main conclusions\n5. What would the leading expert in this field say was missing from this analysis?\n```\n\n**Saving and organising Deep Research outputs:**\n1. Click the export button in Perplexity to get a formatted document\n2. Save to your research folder with the date and query\n3. In Notion or your notes app, create a \"Research Log\" and add a summary + link to each report\n4. When writing a document later, paste the research report into Claude and ask it to extract the 5 most relevant points for your specific purpose"
+    },
+    {
+      "type": "text",
+      "content": "## Using Elicit for Systematic Literature Review\n\nElicit is designed for the question: \"What does the scientific evidence actually say?\"\n\n**When to use Elicit instead of Perplexity:**\n- When you need academic-grade evidence, not just web content\n- When you want to compare what multiple studies found\n- When you're writing something that will be scrutinised (business case, academic work, policy recommendation)\n- When the topic is empirical — health, economics, psychology, education, science\n\n**Elicit workflow:**\n\n**Step 1 — Find papers:**\nGo to elicit.com → Search for your topic in question form:\n- \"Does remote work increase employee productivity?\"\n- \"What interventions reduce employee burnout?\"\n- \"How effective is mindfulness training for stress reduction?\"\n\nElicit searches 200M+ papers and returns the most relevant.\n\n**Step 2 — Extract structured data:**\nFor each paper, Elicit can automatically extract:\n- Sample size\n- Study type (RCT, meta-analysis, observational)\n- Key findings\n- Location and context\n- Effect size (if available)\n\nThis lets you create an evidence table without reading each paper in full.\n\n**Step 3 — Synthesise with Claude:**\nExport your Elicit evidence table, then bring it to Claude:\n```\nHere is a table of research findings on [topic]: [paste table]\n\nPlease synthesise this evidence:\n1. What is the overall direction of the evidence?\n2. How consistent are the findings across studies?\n3. What is the strength of the evidence (study types, sample sizes)?\n4. What are the key caveats or limitations?\n5. Write a 2-paragraph evidence summary I could include in a formal document\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Using Consensus for Evidence Validation\n\nConsensus answers yes/no questions with evidence weight — not just one paper's finding, but what the majority of research shows.\n\n**Best use cases:**\n- \"Is [supplement/intervention/practice] actually effective?\"\n- \"Does [X] cause [Y]?\"\n- \"Is there scientific consensus on [claim]?\"\n\n**Consensus workflow:**\n1. Go to consensus.app\n2. Type your question in natural language: \"Does cognitive behavioural therapy reduce anxiety?\"\n3. Read the Consensus Meter (shows % of studies that agree)\n4. Scroll through individual study findings to see the nuance\n5. Note studies that disagree — this is where the real insight is\n\n**Using Consensus to validate claims:**\nBefore including any empirical claim in formal writing, run it through Consensus:\n```\nClaim to validate: \"Regular exercise reduces symptoms of depression\"\nConsensus result: [what you found]\nStudy count: [how many papers]\nMajority finding: [what most studies show]\nKey caveats: [where evidence is weaker or contested]\n```\n\nThis protects you from confidently citing an outlier study that the broader literature has contradicted."
+    },
+    {
+      "type": "text",
+      "content": "## The Complete Systematic Research Workflow\n\nFor any research task that will be used in professional or formal contexts, use this full workflow:\n\n**Phase 1 — Map (15 minutes)**\n```\nAsk Claude:\n\"I'm researching [topic] for [purpose]. Generate:\n1. The 5 most important sub-questions I need to answer\n2. The 3 most likely sources of bias or missing information\n3. The 3 best academic databases or research areas to search\n4. 5 specific search queries I should run in Elicit or Perplexity\"\n```\n\n**Phase 2 — Collect (30-60 minutes)**\n- Run your top 2-3 queries in Perplexity Deep Research\n- Run your empirical questions in Elicit\n- Validate key claims in Consensus\n- Check any specific studies you plan to cite in Scite\n\n**Phase 3 — Verify (15 minutes)**\nFor every specific statistic or claim in your research notes:\n- Can you see the original source (not just AI's paraphrase)?\n- Is the source credible (peer-reviewed? reputable organisation? recent enough)?\n- Has Scite confirmed it hasn't been retracted?\n\n**Phase 4 — Synthesise (20 minutes)**\nBring all verified findings to Claude:\n```\nHere are my verified research findings on [topic]: [paste findings]\n\nSynthesize them into:\n1. A clear statement of what the evidence shows\n2. Where there is strong consensus vs. genuine uncertainty\n3. The 3 most important implications for [your purpose]\n4. What a sceptic would say is missing from this analysis\n```\n\n**Phase 5 — Write**\nWrite from your notes and synthesis, not from the AI's output. The AI processed the sources; you write the argument. Every specific claim gets a citation you can verify."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Run a Complete Systematic Research Sprint",
+      "content": "This workshop produces a verified, cited research brief on a topic that matters to you — using the full 4-tool stack.\n\n**Choose your topic (2 minutes)**\n\nPick something professionally or personally relevant where you want reliable information. Good options:\n- A business or industry question you've wondered about\n- A health or lifestyle topic you want evidence on\n- A technology trend you need to understand better\n- A policy or strategy question relevant to your work\n\n**Part A — Map with Claude (5 minutes)**\n\nAsk Claude to generate your research plan:\n```\nI'm researching [your topic]. Create a research plan:\n1. The 5 most important questions I need to answer\n2. Which of these questions need academic evidence vs. current data?\n3. Write 3 specific queries for Perplexity Deep Research\n4. Write 2 specific questions for Elicit\n```\n\n**Part B — Perplexity Deep Research (15 minutes)**\n\nRun your best query in Perplexity Deep Research (use the full structured query format — not just a topic word). Read the full output. Use the 5 follow-up questions technique on the most important finding.\n\nNote 5 specific, sourced claims from the output.\n\n**Part C — Elicit (10 minutes)**\n\nIf your topic has an empirical angle (health, behaviour, business outcomes, education), run your Elicit queries. Extract the study type, sample sizes, and key findings for the top 5 papers.\n\n**Part D — Consensus check (5 minutes)**\n\nIf there's a specific empirical claim you want to validate, run it in Consensus. Note the consensus score and any major dissenting evidence.\n\n**Part E — Synthesise with Claude (10 minutes)**\n\nBring your findings to Claude:\n```\nHere are my research findings on [topic], from Perplexity, Elicit, and Consensus:\n\n[paste your notes]\n\nWrite a research brief with:\n- Executive summary (3 sentences)\n- Key findings (5 bullets with evidence strength noted)\n- Areas of uncertainty or debate\n- 3 implications for [your purpose]\n- Questions that would require additional research to answer\n```\n\n**Output:** A research brief you could actually use — with sources you've verified, claims backed by evidence, and uncertainty clearly noted. This is what systematic AI research looks like."
+    },
+    {
+      "type": "quiz",
+      "question": "You're writing a policy recommendation and want to cite research showing that 4-day work weeks increase productivity. What is the responsible research process?",
+      "options": [
+        "Ask Claude to summarise what research shows about 4-day work weeks",
+        "Find one study supporting 4-day work weeks and cite it",
+        "Search Elicit for 'does a 4-day work week increase productivity', review the evidence table, check Consensus for the overall evidence weight, verify key studies in Scite, then synthesise a balanced summary of what the evidence actually shows",
+        "Use Perplexity to find recent articles and cite the top 3 results"
+      ],
+      "correct": 2,
+      "explanation": "A policy recommendation requires systematic evidence review, not just a supporting citation. Using Elicit gives you the breadth (multiple studies), Consensus shows the overall evidence weight, and Scite verifies that key studies haven't been contradicted. Cherry-picking one supporting study (B) is a form of confirmation bias that will be exposed in peer review. Claude summarising (A) draws from training data without live citation verification. Perplexity articles (D) are better than nothing but don't give you the academic literature depth a policy document requires."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Research Tool Comparison",
+      "content": "Compare specialised research tools against general AI for academic research.\n\n**Step 1 — Ask Claude:** \"Explain the purpose and strengths of these research tools: Perplexity, Elicit, Consensus, and Scite. For each: what type of research question is it best suited for? What can it do that Claude cannot?\"\n\n**Step 2 — Test the same research question** across available tools:\nQuestion: \"What does the research say about [a topic in your field]?\"\n\n**Step 3 — Compare results:**\n- Source quality (peer-reviewed vs general web)\n- Citation accuracy\n- Ability to find contradictory evidence\n- Synthesis quality\n\n**Step 4 — Build a tool selection guide** for your specific research needs."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Systematic Literature Review with AI",
+      "content": "Conduct a systematic literature review using AI research tools.\n\n**Step 1 — Define a specific research question** from your field.\n\n**Step 2 — Use specialised tools** (Elicit, Consensus, or Semantic Scholar) to find relevant papers.\n\n**Step 3 — For each paper found**, extract key information using Claude:\n```\nExtract from this paper abstract:\n- Research question\n- Methodology\n- Key findings\n- Sample size/scope\n- Limitations acknowledged\n- Confidence level in findings: High/Medium/Low (based on methodology)\n```\n\n**Step 4 — Synthesise across papers:**\n\"Based on these paper extractions [paste them], synthesise the state of research on [question]. What is the consensus? What is disputed? What are the research gaps?\"\n\n**Step 5 — Mandatory review:** Ask Claude: *\"What important papers might this systematic review have missed? What should I search for to make this more complete?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Citation Verification",
+      "content": "Build rigorous citation verification habits for AI-assisted research.\n\n**Step 1 — Take a Perplexity or AI research output** with 5+ citations.\n\n**Step 2 — Verify each citation:**\n1. Does the source actually exist? (Search for the exact title)\n2. Does the source say what's attributed to it? (Read the relevant section)\n3. Is the source as authoritative as implied?\n4. Is the source recent enough?\n\n**Step 3 — Calculate your verification rate:** What % of citations checked out fully? What % had issues?\n\n**Step 4 — Ask Claude:** \"I found that [X%] of AI-sourced citations had problems of type [list them]. How should I adjust my research workflow to account for this citation reliability rate?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Research Database Building",
+      "content": "Build a personal research database using AI-assisted curation.\n\n**Step 1 — Ask Claude Code** to design a research database system:\n```\nDesign a personal research database using Obsidian/markdown or a simple SQLite database:\n1. Paper/source entries: title, authors, date, abstract, key findings, tags, credibility score\n2. Connection mapping: which papers cite each other? Which contradict each other?\n3. Question tracking: which research questions does each paper address?\n4. Review scheduling: flag papers for re-review if new contradictory evidence emerges\n```\n\n**Step 2 — Set up the database** and add 10 papers/sources relevant to your work.\n\n**Step 3 — Create a monthly maintenance routine:** new papers to add, outdated entries to update.\n\n**Step 4 — Test the database** by answering a research question using it instead of starting fresh."
+    },
+    {
+      "type": "quiz",
+      "question": "Scite shows that a paper you're citing has more \"contradicting\" citations than \"supporting\" citations. What should you do?",
+      "options": [
+        "Remove the paper from your research — it's discredited",
+        "Investigate the contradicting papers: understand the methodological differences, read the contradiction context, and either update your analysis to acknowledge the controversy or find stronger supporting evidence",
+        "Cite more supporting papers to balance the ratio",
+        "Ignore the scite data — it doesn't reflect paper quality"
+      ],
+      "correct": 1,
+      "explanation": "Contradicting citations are valuable information, not automatic disqualifiers. Many legitimate findings are contested in science. Investigate: what specifically are the contradicting papers challenging? Is it the methodology, the generalizability, or the interpretation? Some contradictions reveal real weaknesses in the research; others are methodological disagreements with no clear winner. Your job: acknowledge the controversy accurately in your own research, rather than either ignoring it or abandoning the source."
+    },
+    {
+      "type": "quiz",
+      "question": "Elicit finds 8 papers relevant to your research question but you only have time to read 2 thoroughly. Which 2 should you prioritise?",
+      "options": [
+        "The 2 most recent papers",
+        "The 2 with the most citations",
+        "The 2 most directly addressing your specific question with the strongest methodology — ask Claude to help select based on abstract analysis",
+        "The 2 that best support your hypothesis"
+      ],
+      "correct": 2,
+      "explanation": "Prioritise papers that: (1) directly address your specific question (not just related topics), (2) have strong methodology (large samples, controls, peer-reviewed), and (3) are either the foundational study in the area or the most recent comprehensive review. Citation count is a proxy for influence, not quality. Recency matters for fast-moving fields. Ask Claude: \"Based on these abstracts, which 2 papers would most advance my understanding of [specific question]?\""
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 18-3.** You now have a 4-tool systematic research stack and a complete workflow: map with Claude → collect with Perplexity + Elicit → validate with Consensus + Scite → synthesise with Claude. This is how professional analysts and researchers use AI — not as a replacement for rigour, but as an accelerant for it."
+    }
+  ],
+  "nextLesson": "18-4",
+  "prevLesson": "18-2"
+}

@@ -1,0 +1,124 @@
+{
+  "id": "3-7",
+  "title": "Iterative Refinement",
+  "part": 3,
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "refinement",
+    "iteration"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll learn to treat AI output as a first draft and build a refinement system that consistently transforms mediocre initial output into something excellent. Beyond just \"give feedback,\" you'll master specific refinement techniques: the self-critique loop, the sandwich critique, surgical partial rewrites, and when to start over vs. when to keep refining. You'll also learn how to chain refinements to build complex documents from small pieces — a technique professional AI users use to produce work of a calibre that surprises people who've only used AI for simple tasks."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The core mental model shift:** Professional writers don't expect their first draft to be good — they expect it to be something they can work with. AI output is no different. The first response is raw material. Your value-add is knowing exactly what needs to change and how to ask for it. This is a craft skill, and it improves with every refinement cycle you run."
+    },
+    {
+      "type": "text",
+      "content": "## Why Specificity in Feedback Is Everything\n\nThe quality of your refinement request determines the quality of the improvement. Vague feedback produces vague improvements. Specific feedback produces targeted, effective changes.\n\n**The specificity ladder:**\n\n| Vague (weak) | Specific (effective) |\n|---|---|\n| \"Make it better\" | \"The second paragraph is too abstract — add a concrete example\" |\n| \"I don't like this\" | \"The tone is too corporate. Replace phrases like 'leveraged synergies' with plain English\" |\n| \"It's too long\" | \"Cut this from 400 to 200 words. Remove the redundant points in paragraphs 1 and 3 first\" |\n| \"Try again\" | \"Start over. The structure is wrong: the conclusion should come first, then evidence\" |\n| \"Make it more professional\" | \"Change from first person to third person. Remove the rhetorical questions. Formal register throughout.\" |\n\n**Reference the actual text.** Say \"paragraph 2\" or \"the third bullet point\" rather than describing your feeling abstractly. The model knows exactly where paragraph 2 is — it has the text. Saying \"the part that felt weak\" is ambiguous; saying \"your third sentence in paragraph 2 — the generalisation about customers\" is not."
+    },
+    {
+      "type": "text",
+      "content": "## The Self-Critique Loop — Your Most Powerful Refinement Move\n\nBefore you critique the output yourself, ask the model to critique it. This technique often surfaces problems you wouldn't have caught — and frames the next improvement automatically.\n\n**The three-part self-critique:**\n```\nNow read what you just wrote. Tell me:\n1. The weakest section (and why it's weak)\n2. One assumption you made that might not be correct for my situation\n3. What's missing that would make this significantly better\n\nThen rewrite the weakest section only, addressing those issues.\n```\n\n**Why this works:**\nThe model, having produced the output, can now \"read\" it as input. When prompted to look for weaknesses, it often correctly identifies genuine problems — overconfident claims, glossed-over nuance, structural gaps — that it wouldn't have flagged without this explicit instruction. The self-critique doesn't just identify the problem: it frames exactly what the rewrite should fix.\n\n**Advanced version — the interrogation:**\n```\nI'm going to ask you questions about your response. Answer honestly.\n1. Is every factual claim in your response something you're confident about?\n   If not, which ones should I verify?\n2. Did your response account for [specific aspect of my situation I care about]?\n3. If someone who disagreed with your conclusion read your response,\n   what would their strongest objection be?\n```\n\nThis interrogation technique is especially valuable for strategic analyses, recommendations, and any content you're going to publish or act on."
+    },
+    {
+      "type": "text",
+      "content": "## The Sandwich Critique — Structured Feedback That Produces Better Rewrites\n\nInstead of just saying what's wrong, use a three-part structure: what's working, what specifically needs to change, and what the rewrite should achieve.\n\n```\nFeedback on your draft:\n\nWhat's working: [the parts you want to keep]\nWhat needs to change: [specific problems with specific locations]\nWhat the rewrite should achieve: [the outcome goal, not just the fix]\n\nPlease rewrite the full piece incorporating this feedback.\n```\n\n**Example:**\n```\nFeedback on your draft:\n\nWhat's working: The opening paragraph is strong — it's clear and engaging.\nThe data in paragraph 3 is exactly what I need.\n\nWhat needs to change:\n- Paragraph 2 is too long and buries the main point in the middle. Lead with\n  the key finding, then support it.\n- The conclusion repeats the introduction instead of driving to a clear\n  recommendation. Replace it with a single clear call to action.\n- \"Significant improvement\" appears three times. Vary the language.\n\nWhat the rewrite should achieve: A reader should be able to skim the headers\nand opening sentences and know exactly what action to take.\n\nPlease rewrite incorporating this feedback.\n```\n\nThe \"what's working\" element isn't just politeness — it signals to the model which parts should remain unchanged. Without it, a rewrite request can inadvertently change things you liked."
+    },
+    {
+      "type": "text",
+      "content": "## Surgical Partial Rewrites — Don't Redo What's Working\n\nOne of the most common refinement mistakes is asking for a complete rewrite when only one part is wrong. If 80% of a draft is good, a full rewrite risks losing that 80%.\n\nBe surgical:\n\n```\nKeep paragraphs 1, 3, and 4 exactly as written.\nRewrite paragraph 2 only. The issue: it's passive and abstract where it should be\nactive and concrete. Show what actually happens rather than describing it abstractly.\n```\n\n```\nThe body of this email is good. Change only:\n1. The subject line — it needs to convey urgency without being alarmist\n2. The last paragraph — end with a specific ask, not a vague 'let me know'\n```\n\n```\nThis code function is correct but unreadable. Refactor it for clarity:\n- Don't change the logic or the interface\n- Add descriptive variable names\n- Break the complex conditional on line 14 into named intermediate variables\n- Add one comment explaining the non-obvious part at line 21\n```\n\n**The partial rewrite mindset:** Identify the smallest change that would fix the biggest problem. Apply that change. Evaluate again. Repeat. This produces cleaner, more controlled improvements than broad rewrites that change too many things at once."
+    },
+    {
+      "type": "text",
+      "content": "## When to Refine vs. When to Start Over\n\nRefinement has limits. After 3 rounds of feedback on a fundamentally wrong draft, you're often better off starting fresh with a clearer prompt.\n\n**Signs you should keep refining:**\n- The structure and core content are right, only surface elements need work\n- The problems are specific and locatable (\"paragraph 2 is too vague\")\n- Each round of feedback is producing a better result\n\n**Signs you should start over:**\n- The response answered a different question than you asked\n- The structure is wrong at the top level (wrong order, wrong emphasis, wrong perspective)\n- The core assumption is wrong (e.g., you asked for advice on X, and the advice is for Y)\n- Three rounds of refinement later, you're still not happy with the fundamentals\n\n**Starting over productively:** Don't just rephrase the original prompt. Add the information you've learned from the refinement rounds:\n```\nLet me start this over with a better initial prompt.\n\n[Paste your improved prompt with specific details that the refinement process\nrevealed were missing]\n```\n\nSometimes the most efficient path is 3 rounds of refinement that teach you what a good prompt for this task actually needs — and then one clean prompt that produces the right result first time."
+    },
+    {
+      "type": "text",
+      "content": "## Chaining Refinements: Building Complex Outputs in Pieces\n\nFor long, complex documents, the most effective technique isn't one big prompt — it's building in pieces, refining each piece, then assembling and connecting them.\n\n**Example: A strategic proposal**\n\nInstead of:\n```\nWrite a 10-page strategic proposal for [X].\n→ Gets a generic, structurally weak long document\n```\n\nBuild it in chains:\n\n**Chain step 1:** \"List the 5 most compelling arguments for [X]. Each as a one-sentence thesis.\"\n→ Refine until the 5 theses are genuinely strong.\n\n**Chain step 2:** \"Develop argument 1: [thesis you liked most]. Two paragraphs — evidence first, implication second.\"\n→ Refine until this section is excellent.\n\n**Chain step 3:** Repeat for each argument section.\n\n**Chain step 4:** \"Write an executive summary for a proposal containing these sections: [paste the sections]. Lead with the recommendation, follow with the key supporting points.\"\n\n**Chain step 5:** \"Write a conclusion that calls to action based on these five arguments: [paste thesis list]. One paragraph, ends with a specific next step.\"\n\n**Chain step 6:** \"Assemble these pieces into a coherent proposal. Ensure transitions between sections flow naturally. Identify any gaps.\"\n\nThis produces a 10-page document of consistently high quality — because each piece was refined independently before assembly. The alternative (one prompt for 10 pages) produces one 10-page piece of average quality that's very hard to fix without rewriting the whole thing."
+    },
+    {
+      "type": "text",
+      "content": "## A Refinement Toolkit: Quick Reference\n\n**Tone fixes:**\n```\nToo formal → \"Make this conversational — how a smart colleague talks, not a legal document.\"\nToo casual → \"Raise the register for a senior stakeholder audience.\"\nToo hedged → \"Remove the qualifiers. Be direct.\"\nToo blunt → \"Same content but more diplomatic — acknowledge the difficulty before the critique.\"\n```\n\n**Length fixes:**\n```\nToo long → \"Cut to [target length]. Remove the least essential information first.\"\nToo brief → \"Expand [specific section] with a concrete example.\"\nUneven → \"Sections 1 and 3 are the right length. Section 2 is too long. Cut it by half.\"\n```\n\n**Structure fixes:**\n```\nWrong order → \"Put the conclusion first. Then the evidence. Readers need the\n               answer before the argument.\"\nBuried point → \"Your most important insight is in the third paragraph. Move it to the top.\"\nWall of text → \"Break into shorter paragraphs. Maximum 4 sentences per paragraph.\"\n```\n\n**Content fixes:**\n```\nToo abstract → \"Add a specific example after the general claim in paragraph 2.\"\nWrong scope → \"You covered [X]. I actually need [Y]. Rewrite with that focus.\"\nMissing nuance → \"You're treating this as settled. Acknowledge the counterargument before your conclusion.\"\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "The Full Refinement Stack",
+      "content": "This workshop builds one piece of writing through the full refinement toolkit in one conversation. Choose something real: a professional bio, an email, a summary of your work, or any short professional document you need.\n\n**Round 1 — Deliberate starting imperfection**\n\nAsk for the output with minimal instruction:\n```\nWrite a short professional bio for a website. I work in [your field/role].\n```\n(Don't over-specify — a generic first draft is useful here.)\n\n**Round 2 — Apply the self-critique loop**\n```\nNow critique what you just wrote. What's the weakest part? What assumption\ndid you make about me that might be wrong? What's missing that would make\nthis more distinctive?\n\nThen rewrite the weakest part only.\n```\n\n**Round 3 — Sandwich critique with your real information**\n```\nHere's my feedback:\n\nWhat's working: [identify what genuinely worked]\n\nWhat needs to change: [add your real background, specific details,\nthings that are wrong, things that are too generic]\n\nGoal: After reading this bio, someone should know [what you want\nthem to know about you]. Rewrite the full bio.\n```\n\n**Round 4 — Surgical partial rewrite**\n```\nKeep paragraphs [X]. Rewrite [the specific paragraph that's weakest].\nThe issue: [specific problem]. The fix: [what you want instead].\n```\n\n**Round 5 — Final pass**\n```\nThis is almost there. Two final changes:\n1. [Specific small fix]\n2. [Specific small fix]\nMake only these two changes, nothing else.\n```\n\n**After the workshop:**\n- Compare your Round 1 and Round 5 outputs side by side\n- Rate each round's improvement on a 1-5 scale\n- Note which refinement technique produced the biggest jump\n- Save Round 5 — you now have a professional bio you can actually use\n\n**Bonus challenge:** Take a piece of writing from your real work (email, report, proposal) and run it through at least Rounds 2-4. Use the self-critique loop and the sandwich critique. What does the model identify that you missed?"
+    },
+    {
+      "type": "quiz",
+      "question": "You've run 4 rounds of refinement on a report draft but it still feels wrong. The structure is the same as your first draft, just polished. What is the most likely problem and what should you do?",
+      "options": [
+        "The AI tool isn't capable enough — try a different model",
+        "Use more emphatic language in your feedback — say VERY STRONGLY that it needs improvement",
+        "The structure is fundamentally wrong and refinement can't fix that — start over with a better initial prompt that specifies the right structure from the beginning",
+        "Run 2-3 more rounds — refinement needs more iterations to work"
+      ],
+      "correct": 2,
+      "explanation": "When 4 rounds of refinement leave the structure unchanged, the structure is the problem — not the polish. Refinement patches surface issues; it doesn't redesign the scaffolding. The signal that you're polishing instead of improving is that each round makes the draft slightly better but you still feel it's wrong at a fundamental level. The solution is to start over with an explicit structure specification: 'Write a report structured as follows: [specific section order and emphasis].' The refinement process taught you what the structure should be — now apply that knowledge in a fresh prompt."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Iterative Refinement Speed Drill",
+      "content": "This drill demonstrates that the best AI outputs come from iteration, not from perfect first prompts.\n\n**Step 1 — Choose a real task** where you'd use AI: drafting an email, writing a section of a report, creating a plan.\n\n**Step 2 — Write the simplest possible prompt** — just a sentence or two. Run it. Save the output.\n\n**Step 3 — Refine it once.** Identify the single biggest problem with the output and address only that. Run it again.\n\n**Step 4 — Refine it twice.** Identify the next biggest problem. Address only that. Run it again.\n\n**Step 5 — Compare outputs from rounds 1, 2, and 3.** How much did each iteration improve the result?\n\n**Step 6 — Note:** At which iteration did the output become good enough to use? For most tasks, 2-3 iterations gets you 80-90% of the way there. Beyond that, you may be better off editing the output directly rather than continuing to iterate the prompt."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Full Iterative Refinement Cycle on Real Work",
+      "content": "Apply systematic iterative refinement to a real, important piece of work.\n\n**Step 1 — Identify a real deliverable** you need to produce: a report, a proposal, a plan, a document, an analysis.\n\n**Step 2 — Draft iteration 1.** Use a brief prompt — just describe what you need at a high level.\n\n**Step 3 — Structured feedback pass.** For Iteration 1's output, identify:\n- Content gaps: \"This is missing [specific thing]\"\n- Format problems: \"The structure should be [how]\"\n- Tone problems: \"This is too [formal/casual/long/short]\"\n- Accuracy problems: \"This is wrong: [specific issue]\"\n\n**Step 4 — Draft iteration 2.** Address all the feedback above in a single follow-up message.\n\n**Step 5 — Final polish pass.** Ask Claude: *\"Read your own output. Find 3 specific improvements — not just grammar, but substance. Where is the reasoning weakest? Where is the writing vaguest? Where does this not quite do what was asked?\"* Address at least 2.\n\n**Step 6 — Mandatory external review:** Show the final output to Claude one more time and ask: *\"If you were the intended reader [describe the audience], what question would you ask that this document doesn't answer?\"* Add the answer.\n\n**Step 7 — Save the final output.** This is a real deliverable you produced using structured iteration."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Prompting Debugging Technique",
+      "content": "When iteration isn't working, you need to debug why. This workshop teaches prompt debugging.\n\n**Step 1 — Take a prompt that isn't giving you good results** — something you've tried at least twice and the output keeps being wrong in the same way.\n\n**Step 2 — Ask Claude to diagnose the problem:**\n```\nI've been asking you to [describe what you've been asking for] but the output keeps [describe the problem]. Here is my prompt: [paste your prompt]\n\nDon't answer the original question. Instead, tell me: (1) What is ambiguous about my prompt? (2) What am I probably assuming that I haven't stated? (3) Rewrite my prompt to fix these issues.\n```\n\n**Step 3 — Run the rewritten prompt.** Is the output better?\n\n**Step 4 — Note the pattern:** What was the core issue with your original prompt? (Too vague? Missing context? Wrong format instruction? Conflicting requirements?)\n\n**Step 5 — Apply the fix type** to any similar prompts you've been struggling with."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build an Iteration Checklist for Your Work",
+      "content": "Create a standard refinement process you'll use every time for your most important AI outputs.\n\n**Step 1 — Identify your top 3 use cases** where you use AI for important outputs (something you'd be embarrassed to get wrong).\n\n**Step 2 — For each use case**, design a 3-5 step review checklist — the specific things to check at each refinement round.\n\n**Step 3 — Ask Claude:** *\"Help me create an iterative refinement workflow for [use case]. What should I check in iteration 1 vs iteration 2 vs final polish? What are the common failure modes for [use case] that I should specifically watch for?\"*\n\n**Step 4 — Test your checklist** on the next real instance of each use case.\n\n**Step 5 — Save the checklists** in your prompt library alongside the prompts they apply to."
+    },
+    {
+      "type": "quiz",
+      "question": "After 4 rounds of refinement, Claude's output is still not quite right. What is the most effective next step?",
+      "options": [
+        "Keep iterating until it's perfect — AI will eventually get there",
+        "Switch to a different AI tool",
+        "Stop iterating and manually edit the AI's output — at some point, direct editing is faster than further prompting",
+        "Start over with a completely new approach"
+      ],
+      "correct": 2,
+      "explanation": "There is a point of diminishing returns in prompt iteration where manual editing becomes faster and more precise than continued prompting. If after 3-4 iterations the output is 80-90% right, it's usually faster to edit the remaining 10-20% directly than to describe the remaining issues as a prompt and verify the new output. Recognising this threshold is a sign of prompt maturity."
+    },
+    {
+      "type": "quiz",
+      "question": "Which feedback is most useful when iterating on an AI output?",
+      "options": [
+        "\"This isn't quite right, try again\"",
+        "\"Make it better\"",
+        "\"The second paragraph is too long and the conclusion doesn't address the main question. The conclusion should answer: what should the reader do next?\"",
+        "\"I don't like the tone\""
+      ],
+      "correct": 2,
+      "explanation": "Effective iteration feedback is specific: it identifies the exact location of the problem, describes what is wrong, and states what you want instead. Vague feedback (\"try again\", \"make it better\", \"I don't like the tone\") gives Claude nothing specific to act on and tends to produce random changes rather than targeted improvements. Think of it like reviewing code: \"this function is wrong\" is useless; \"line 47: this condition should check > not >=\" is actionable."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 3-7.** You now have a complete refinement toolkit: the self-critique loop, the sandwich critique, surgical partial rewrites, the chain-building technique for complex documents, and the diagnostic skill to know when to refine vs. when to start over. These techniques are what separates AI output that's impressive from AI output that's actually excellent."
+    }
+  ],
+  "nextLesson": "3-8",
+  "prevLesson": "3-6"
+}

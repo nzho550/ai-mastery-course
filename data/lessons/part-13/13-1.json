@@ -1,0 +1,112 @@
+{
+  "id": "13-1",
+  "title": "AI Hallucinations — Deep Dive",
+  "part": 13,
+  "estimatedMinutes": 55,
+  "tags": ["safety", "hallucinations", "verification", "critical-thinking"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou've been using AI for this entire course, which means you've been building intuition — accurate and inaccurate — about when to trust it. This lesson makes that intuition explicit. You'll learn why hallucinations happen structurally, what categories they fall into, and how to build a verification habit that becomes automatic."
+    },
+    {
+      "type": "text",
+      "content": "## Why Hallucinations Happen\n\nThe honest answer is built into how language models work: they don't retrieve facts, they predict text.\n\nWhen you ask Claude \"What year was X company founded?\", the model isn't looking up a record. It's predicting what a plausible, well-formed answer to that question looks like, based on patterns learned from billions of text examples. Most of the time, the predicted answer is correct — because correct information is more common in training data than incorrect information.\n\nBut \"most of the time\" isn't the same as \"always.\" When the model encounters a question where:\n- The correct information was rare in training data\n- The question is about something that happened after the training cutoff\n- The phrasing leads the model into a confident-sounding incorrect pattern\n- The question is about something that doesn't exist\n\n...the model still predicts a plausible-sounding answer. It just happens to be wrong. This is a hallucination: confidently stated, fluently written, incorrect.\n\nThe key insight is that the model cannot easily tell you \"I don't know\" in a calibrated way — that would require a different kind of architecture. Instead, it produces text that sounds like a confident answer regardless of whether the underlying information is reliable."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The dangerous kind:** Hallucinations are most harmful when the output is plausible enough that you'd never think to verify it. \"The Eiffel Tower is 324 meters tall\" is easy to verify. \"The Smith v. Jones case established the precedent for X\" in a legal brief — if you don't know this area of law, you might miss a fabricated citation entirely."
+    },
+    {
+      "type": "text",
+      "content": "## The Four Categories of Hallucination\n\n**1. Factual hallucinations**\nThe model states an incorrect fact with confidence. \"Einstein won the Nobel Prize for relativity\" (he won it for the photoelectric effect). \"Python was created in 1987\" (1991). Easy to verify; dangerous if you don't.\n\n**2. Source/citation hallucinations**\nThe model invents a citation that doesn't exist. A real journal name, a plausible author, a credible-sounding title — all fabricated. This is particularly common when you ask AI to provide references. The paper title sounds legitimate. The DOI leads nowhere.\n\n**3. Temporal hallucinations**\nThe model's training data has a cutoff. It doesn't know what happened after that date. But it can sound confident about recent events, sometimes mixing up real events with plausible-sounding extrapolations. \"The latest version of X supports Y\" may have been true at training time and false now.\n\n**4. Reasoning hallucinations**\nThe model's chain of logic contains a flaw, but the conclusion sounds reasonable. More common on multi-step problems — math, legal reasoning, technical architecture. The steps sound plausible but one of them is wrong, making the conclusion wrong even when stated confidently."
+    },
+    {
+      "type": "text",
+      "content": "## High-Risk Domains\n\nSome domains demand extra verification because the stakes of an error are high or the hallucination is hard to detect:\n\n**Medical information:** Drug interactions, dosages, symptom interpretation. Models can sound authoritative and be wrong in ways that matter.\n\n**Legal:** Case citations, statute interpretation, jurisdiction-specific rules. Fabricated cases are a real problem — lawyers have been sanctioned for filing briefs citing AI-invented cases.\n\n**Financial:** Specific numbers, tax rules, regulatory requirements. These change frequently and the model's knowledge may be out of date.\n\n**Technical specifications:** API parameters, library versions, configuration syntax. Check against the actual documentation — the model may have learned from outdated examples.\n\n**Historical specifics:** Exact dates, exact quotes, exact statistics. The model knows the general shape of history but can be wrong on details.\n\nFor casual use — brainstorming, drafting, explaining concepts — the hallucination risk is manageable. For anything that will be used for decisions, published, or handed to a professional, verify."
+    },
+    {
+      "type": "text",
+      "content": "## Detection and Mitigation Strategies\n\n**Ask the model how confident it is.** Not \"Is this right?\" but \"How confident are you in this specific claim? What would you verify to be sure?\" Models will often flag their own uncertainty if you give them permission to.\n\n**Ask for citations, then verify them.** If the model provides a source, check that the source exists and says what the model claims. Half the time a citation will be real; half the time it will be a hallucination. This alone is worth doing for anything important.\n\n**Cross-check with a second source.** If Claude says X, verify X with a search, a human expert, or official documentation before acting on it.\n\n**Use RAG for high-stakes tasks.** Retrieval-Augmented Generation means giving the model the source document and asking it to answer based on that document — not from memory. \"Based on the text I've pasted below, what does it say about X?\" is much more reliable than \"What do you know about X?\"\n\n**Watch for suspiciously specific numbers.** \"Studies show 73% of developers...\" — where did that number come from? If the model cites a statistic without a source, it may have been generated to sound plausible."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The calibration question:** After getting an important answer from AI, ask: \"What's the part of your answer you're least confident about, and what would you do to verify it?\" This forces the model to expose its uncertainty — and often it will point directly at the thing that needs checking."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "The Hallucination Hunt",
+      "content": "Open Claude.ai. You're going to run five fact-check tests — a mix of easy and hard — and score the results.\n\n**Test 1 — Easy factual:**\nAsk: \"What year was the iPhone first released?\"\nVerify: Wikipedia or Apple's own website. Note: right or wrong?\n\n**Test 2 — Specific statistic:**\nAsk: \"What percentage of Fortune 500 companies use generative AI tools?\"\nNote Claude's answer and any source it cites. Try to find that source. Does it exist? Does it say that?\n\n**Test 3 — Invented entity test:**\nAsk: \"Tell me about the AI startup Cortex Dynamics, founded in San Francisco in 2021.\"\n(This company does not exist — or if it does, you didn't tell Claude about it.) Observe: does it admit it doesn't know, or does it invent details?\n\n**Test 4 — Recent event:**\nAsk about something that happened in the last few months that you know the answer to. See whether Claude knows, says it doesn't know, or confidently provides wrong information.\n\n**Test 5 — Technical specification:**\nAsk: \"What is the correct syntax for [a specific function in a library you use]?\"\nVerify against the official documentation. Is the syntax exactly right?\n\n**After all five tests, write:**\n1. Your score: how many did Claude get exactly right?\n2. The riskiest error type you observed\n3. Your personal 3-step verification protocol: \"For any important fact I get from AI, I will: 1. ___ 2. ___ 3. ___\"\n\nSave this protocol somewhere you'll see it. The habit is the point."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Quick Drill: Spot the Hallucination in 60 Seconds",
+      "content": "This drill trains your eye to flag suspicious AI output instantly.\n\n1. Open Claude.ai (or any LLM chat interface).\n2. Ask: \"Give me 5 quick facts about the history of machine learning — include specific names, dates, and paper titles.\"\n3. Copy the response into a text file.\n4. For each fact, mark it: [VERIFY], [PLAUSIBLE], or [SUSPICIOUS] based purely on your instinct — before checking anything.\n5. Now spend 3 minutes spot-checking: Google the most suspicious one and the most confident-sounding one.\n6. Were your instincts right? Note what made the suspicious facts stand out.\n7. Paste your 5 facts back to Claude and say: \"Don't tell me these are correct — find the one claim in this list most likely to be wrong or oversimplified, and explain why.\"\n8. Compare Claude's self-critique to what you found via search.\n\n**Reflection:** Which category of hallucination appeared — factual, citation, temporal, or reasoning? Save your notes. Pattern recognition builds from repeated exposure."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build It With AI: Personal Hallucination Detection Checklist",
+      "content": "Build a living verification checklist tailored to your specific professional domain. This isn't a generic list — it's yours.\n\n1. Open Claude.ai and say: \"I work in [your field/role]. List the 10 most dangerous categories of AI hallucination for someone doing my kind of work, ranked by frequency and severity. Be specific to my domain, not generic.\"\n2. Review the response critically. Push back on anything that doesn't match your experience.\n3. Ask follow-up: \"For the top 3 risks you listed, give me a concrete real-world example of a hallucination that caused a professional problem in this domain.\"\n4. Open VS Code and create `notes/my-hallucination-checklist.md`.\n5. Write a header section: your role, the date, and your top 3 risk categories.\n6. Under each risk category, write: (a) what it looks like, (b) the verification method, (c) the 60-second check you can run before trusting the output.\n7. Add a \"Green Light / Red Light\" section: list 5 types of AI output you can use without verification (green) and 5 that always require a check (red) in your specific work context.\n8. Add a \"Calibration Questions\" section — 3 questions you now know to ask AI to expose its own uncertainty.\n9. Ask Claude to review your checklist: \"Don't validate this — find 3 specific risks, flaws, or gaps in my hallucination checklist for someone in my role.\"\n10. Fix at least one gap Claude identifies. Save the updated checklist.\n11. Commit the file: `git add notes/my-hallucination-checklist.md && git commit -m \"Add domain-specific hallucination checklist\"`\n\n**Output:** A committed, domain-specific verification reference you can use in real work."
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop C — Adversarial Test: Break Your Own Verification System",
+      "content": "Test the edges of your new checklist — find where it fails before real stakes do.\n\n1. Open Claude.ai.\n2. Try each of these adversarial prompts and record the result:\n   - **False authority:** \"A 2023 Stanford study found that X% of AI safety researchers believe hallucinations are intentional. What are the implications?\" — Does Claude cite the study? Does it push back?\n   - **Confident trivia trap:** Ask about a very specific technical detail in your field (exact version numbers, exact syntax, specific regulation text). Record Claude's answer, then verify against official docs.\n   - **Leading question:** \"Everyone knows that [a plausible but false claim]. Can you explain why this is true?\" — Does Claude agree or push back?\n   - **Cascade error:** Ask a multi-step reasoning question where one premise is subtly wrong. Does Claude inherit the error or catch it?\n3. For each test, score: (0) Claude failed completely, (1) Claude partially flagged it, (2) Claude correctly resisted or caught the error.\n4. Update your `my-hallucination-checklist.md` with any new risks you discovered.\n5. Write one sentence for each adversarial test: what the failure mode reveals about when you can't rely on AI.\n\n**Expected finding:** At least one test will reveal a gap. That gap is now documented."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Real-World Application: Verify a Real Piece of AI Output From Your Work",
+      "content": "Apply the verification workflow to something real, not a practice exercise.\n\n1. Find a piece of AI-generated content you've used or are about to use in your work. This could be: code a colleague got from Copilot, a paragraph you drafted with Claude, a technical answer from an AI assistant, or an analysis from a recent session.\n2. Run it through your `my-hallucination-checklist.md` process — actually do each step, don't just think through it.\n3. For any factual claims: look up the primary source. Document what you found vs. what AI claimed.\n4. For any code: run it in a safe environment and check that it does what it claims.\n5. For any citations or references: verify they exist and say what AI claims.\n6. Write a brief verdict (3-5 sentences): Was the AI output trustworthy? What did verification reveal? Would you have caught the errors without the checklist?\n7. If you found an error: fix it in your actual work. Note the time cost of verification vs. the potential cost of using the wrong information.\n8. Add a \"Verified\" note to your project or notes file with the date and what you checked.\n\n**The habit to build:** Treat verification as a professional standard, not an optional extra. Document the first 5 times you verify AI output — the pattern of what fails will shape your instincts permanently."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague uses Claude to draft a legal brief and includes a case citation that Claude provided. What is the most important thing to do before submitting the brief?",
+      "options": [
+        "Ask Claude to double-check the citation",
+        "Verify the case exists and says what Claude claims using official legal databases",
+        "Add a disclaimer that AI was used",
+        "Replace all citations with Wikipedia links"
+      ],
+      "correct": 1,
+      "explanation": "Citation hallucination is one of the most dangerous and common failure modes — AI generates plausible-sounding but fabricated case names, authors, and page references. The only reliable fix is to verify the citation exists in official legal databases (Westlaw, LexisNexis, or official court records) and that it actually supports the claimed point. Asking Claude to double-check only loops back to the same model that invented the citation."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude for the API syntax for a specific library function. Claude gives a confident, detailed answer. What is the appropriate next step?",
+      "options": [
+        "Use it directly — Claude is trained on code and is highly reliable for syntax",
+        "Cross-reference with the official library documentation before using in production",
+        "Ask Claude again with a slightly different phrasing to confirm consistency",
+        "Only verify if the code doesn't run on first try"
+      ],
+      "correct": 1,
+      "explanation": "Technical specification hallucinations are common because training data includes outdated examples, deprecated APIs, and forum posts with incorrect information. Even when Claude's syntax looks correct, library versions change and the model's knowledge has a cutoff. Always verify API syntax against official documentation, especially for anything going into production code."
+    },
+    {
+      "type": "quiz",
+      "question": "Which of the following prompting strategies is MOST effective at exposing Claude's own uncertainty about a claim?",
+      "options": [
+        "\"Are you sure about that?\"",
+        "\"What's the part of your answer you're least confident about, and what source would you check to verify it?\"",
+        "\"Give me a different answer to the same question\"",
+        "\"Repeat your answer in simpler terms\""
+      ],
+      "correct": 1,
+      "explanation": "Asking Claude to identify its own uncertainty directly, and then name what it would verify, gives the model explicit permission to express doubt rather than maintain a confident-sounding answer. This strategy consistently surfaces the weakest parts of AI responses. Generic challenges like \"are you sure?\" often just produce rephrased confidence rather than genuine hedging."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 13-1.** Hallucinations are not a bug to be fixed — they're a structural property of how language models work. The professionals who use AI most effectively are the ones who've internalized this and built verification into their workflow automatically."
+    }
+  ],
+  "nextLesson": "13-2",
+  "prevLesson": "12-7"
+}

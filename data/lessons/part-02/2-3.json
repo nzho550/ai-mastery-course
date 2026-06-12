@@ -1,0 +1,110 @@
+{
+  "id": "2-3",
+  "title": "ChatGPT & GPT-4o",
+  "part": 2,
+  "estimatedMinutes": 60,
+  "tags": [
+    "chatgpt",
+    "beginner",
+    "tools"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll understand ChatGPT's history, what GPT-4o and the o4 reasoning model can do in 2026, how ChatGPT's unique capabilities (Deep Research, Code Interpreter, DALL-E, memory, and voice) compare to Claude's strengths, and when each tool is the right choice. By the end you'll have used both tools firsthand and formed an opinion based on direct comparison."
+    },
+    {
+      "type": "text",
+      "content": "## ChatGPT's Timeline — How We Got Here\n\nChatGPT launched in November 2022 and reached one million users in five days — faster than any product in history at the time. It introduced most of the world to the idea of conversational AI.\n\n**Key milestones:**\n- **2022 — ChatGPT with GPT-3.5:** The launch that changed everything. Fast, fluent, and shockingly capable at writing. Made AI mainstream overnight.\n- **2023 — GPT-4:** Dramatically more capable reasoning, longer context, and the first ability to understand images. Paid tier only (ChatGPT Plus, $20/month).\n- **2024 — GPT-4o (\"omni\"):** Unified text/image/audio model, faster and cheaper. Brought the best model to the free tier with usage limits.\n- **2024-2025 — o1, o3, o3-mini:** New \"reasoning model\" family that thinks before answering. Dramatically better at maths, coding, and complex logic.\n- **2026 — o4 and o4-mini:** Current reasoning flagship. o4 is the most capable OpenAI model. o4-mini is cheaper/faster and appropriate for most technical tasks.\n\n**OpenAI's structure:** Founded in 2015, transitioned to a \"capped-profit\" company with major Microsoft investment. Microsoft integrated OpenAI models throughout its product line: Bing search, Microsoft 365 Copilot, GitHub Copilot, and Azure AI services are all powered by GPT models."
+    },
+    {
+      "type": "text",
+      "content": "## What GPT-4o Can Do (2026 Capabilities)\n\n**Vision — image input:**\nUpload any image and ask questions about it. \"What's wrong with this code in the screenshot?\" \"Summarise this chart.\" \"What does this UI mockup need to improve?\" GPT-4o understands images natively — not just OCR text extraction.\n\n**Document upload:**\nUpload PDFs, Word files, Excel spreadsheets. GPT-4o reads and reasons about them. Especially powerful for spreadsheet analysis and long document Q&A.\n\n**Code Interpreter (Advanced Data Analysis):**\nA live Python environment built into ChatGPT. You can upload a CSV or spreadsheet and ask GPT-4o to: run statistical analysis, create charts, clean data, calculate correlations, generate pivot tables. It executes real code and shows you the output — no Python installation needed. This is ChatGPT's most powerful unique capability.\n\n**DALL-E 3 image generation:**\nGenerate images inside the same conversation. Describe what you want and DALL-E 3 creates it. You can then refine in the same chat: \"Make the background lighter. Add a person in the foreground.\"\n\n**Voice Mode:**\nReal-time voice conversation on the ChatGPT mobile app. It understands speech with context, responds conversationally, and handles interruption naturally. Not text-to-speech — genuinely conversational.\n\n**Memory:**\nChatGPT can remember facts across conversations. \"My name is Sarah and I'm a project manager\" → it recalls this in future chats. You can view and edit what it remembers in Settings → Personalization → Memory. This is ChatGPT's version of persistent context (Claude's equivalent is Projects).\n\n**GPT Store:**\nThousands of customised AI assistants built by other users and companies — specialised for coding, legal research, language learning, creative writing, customer service scripts, and hundreds of niches. Access via the Explore GPTs section."
+    },
+    {
+      "type": "text",
+      "content": "## The Reasoning Models: o4 and o4-mini\n\nThe o-series models represent a different approach to AI: instead of answering quickly, they spend more time \"thinking\" before responding. This internal reasoning produces dramatically better results on complex tasks.\n\n**When o4 is meaningfully better than GPT-4o:**\n- Complex mathematics (calculus, statistics, combinatorics)\n- Multi-step coding problems where errors compound\n- Logic puzzles and deductive reasoning\n- Scientific problem-solving\n- Tasks where the obvious first answer is usually wrong\n\n**The tradeoff:**\n- o4 is slower — it may take 15-60 seconds for complex problems\n- o4 is more expensive (API pricing) or counts against usage limits faster\n- For simple tasks, o4 doesn't offer meaningful improvement over GPT-4o\n\n**How to use it:** In ChatGPT Plus, select the model from the dropdown before starting a conversation. \"o4\" for most complex tasks, \"o4-mini\" for a faster/cheaper version that still outperforms GPT-4o on reasoning.\n\n**Claude's equivalent:** Claude's Extended Thinking mode (activate by clicking the extended thinking icon in Claude.ai) uses a similar approach — giving Claude time to reason before responding."
+    },
+    {
+      "type": "text",
+      "content": "## Deep Research — ChatGPT's Most Powerful Research Mode\n\nDeep Research is ChatGPT's autonomous research capability. When activated, it:\n1. Takes your research question\n2. Automatically runs 15-30+ web searches\n3. Reads and synthesises the found pages\n4. Produces a comprehensive, structured research report\n\nThis is different from a regular ChatGPT response — Deep Research actually searches the web, reads full articles, and synthesises across many sources. It takes 5-15 minutes to complete.\n\n**When to use it:**\n- Comprehensive competitive analysis (\"analyse the competitive landscape for [industry]\")\n- Technical due diligence (\"research the security track record of [software]\")\n- Topic overviews where you need to learn something from scratch\n- Market research questions\n\n**How to activate:** In ChatGPT Plus, click the \"Deep Research\" option before submitting your message.\n\n**Important caveats:** Deep Research synthesises web content but doesn't search academic databases (Elicit and Consensus are better for scientific literature). It can still hallucinate citations in its summaries, so verify important claims. For quick factual lookup, Perplexity is faster and better cited."
+    },
+    {
+      "type": "text",
+      "content": "## Claude vs. ChatGPT — Honest Comparison (2026)\n\n| Task | Claude | ChatGPT |\n|------|--------|----------|\n| Long-form writing and editing | Better instruction-following, more precise | Good but less consistent on format constraints |\n| Complex coding | Both excellent; Claude SWE-Bench leader | o4 best for reasoning-heavy code problems |\n| Data analysis from spreadsheets | Can describe analysis | Code Interpreter executes real Python — much better |\n| Image generation | Not available | DALL-E 3 built in |\n| Deep research reports | Not built in | Deep Research mode available |\n| Image analysis | Available | Available, similar quality |\n| Persistent memory | Claude Projects (manual, deliberate) | ChatGPT memory (automatic, less control) |\n| Voice conversation | Not available in standard interface | Mobile app, genuinely conversational |\n| Microsoft tool integration | Limited | Native (Copilot throughout M365) |\n| Instruction precision | Industry-leading | Good but more variable |\n| Available on mobile | Claude.ai app | ChatGPT app, stronger voice features |\n\n**The bottom line:** Claude is the better tool for writing, analysis, and precise instruction-following. ChatGPT is better when you need to execute code on data, generate images in the same workflow, use voice, or access the Microsoft ecosystem. Most advanced users use both — Claude as their primary tool, ChatGPT when they need Code Interpreter or DALL-E."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Direct Head-to-Head Comparison",
+      "content": "The best way to understand these tools is to run the same tasks in both and observe firsthand. Open both tools and run the following four tests.\n\n**Test 1 — Explanation quality**\n\nIn both Claude.ai and ChatGPT, run:\n```\nExplain how compound interest works using a specific numerical example\nwith someone who has £1,000 to invest over 10 years at 5% annual interest.\nShow me year-by-year how the balance grows.\n```\n\nCompare: Which was more accurate? Which was easier to read? Did either make a calculation error?\n\n**Test 2 — Instruction precision**\n\nIn both tools, run:\n```\nWrite a 3-sentence summary of compound interest.\nRule: each sentence must be exactly one clause — no compound sentences.\nRule: no numbers or percentages.\nRule: written for a 12-year-old.\n```\n\nCompare: Which tool followed all three rules correctly? This tests instruction-following precision — one of the most important practical differences.\n\n**Test 3 — Code Interpreter (ChatGPT only)**\n\nIn ChatGPT, find a CSV file on your computer (any spreadsheet exported to CSV) or create a small one with some numbers. Upload it and ask:\n```\nAnalyse this data. Show me: the average, the range, and a simple bar chart.\n```\n\nNotice: ChatGPT actually runs Python code and generates a real chart. This capability doesn't exist in standard Claude.\n\n**Test 4 — Audience adaptation**\n\nIn both tools, after your compound interest explanation, follow up:\n```\nNow explain the same concept but for a retired investor in their 70s\nwho is thinking about drawing down savings rather than growing them.\nSame depth, completely different angle.\n```\n\nCompare: Which tool made the most meaningful pivot in perspective?\n\n**Write down:**\n- One thing ChatGPT does better than Claude\n- One thing Claude does better than ChatGPT\n- Which tool would you reach for first for your most common AI task, and why?"
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague needs to analyse a 5,000-row Excel spreadsheet to find correlations between sales data and marketing spend. They want charts and statistical summaries. Which tool and feature is most appropriate?",
+      "options": [
+        "Claude — it can read Excel files and calculate correlations",
+        "ChatGPT with Code Interpreter — it executes real Python code on your data, performs statistical analysis, and generates actual charts",
+        "Gemini — it integrates natively with Google Sheets",
+        "Perplexity — it can search for the data patterns online"
+      ],
+      "correct": 1,
+      "explanation": "ChatGPT's Code Interpreter (Advanced Data Analysis) is the right tool for this specific task. It uploads the file, writes and executes real Python code using libraries like pandas and matplotlib, and returns actual charts and statistical output. Claude can describe analysis approaches and write code, but doesn't execute it — so the colleague would still need to run it themselves. Gemini's Sheets integration is designed for working within Sheets, not importing and analysing arbitrary data files."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — ChatGPT Quick Feature Tour",
+      "content": "This 8-minute drill gets you hands-on with ChatGPT's distinctive capabilities that Claude doesn't have.\n\n**Step 1 — Open ChatGPT** (chat.openai.com) in a browser tab.\n\n**Step 2 — Test GPT-4o vision:** Click the image icon and upload a photo from your phone or desktop — a product, a document, a whiteboard. Ask: \"What do you see? What would be useful to know about this?\"\n\n**Step 3 — Test web search:** Ask ChatGPT about something that happened in the last 48 hours. Does it use a search tool? Does it cite sources?\n\n**Step 4 — Test DALL-E image generation:** Ask it to generate an image relevant to your work (a diagram concept, a marketing visual, an illustration).\n\n**Step 5 — Test the voice mode** (if on mobile): Hold the microphone button and have a 1-minute verbal conversation about a topic from your work.\n\n**Step 6 — Rate each feature:** Which one is most immediately useful for your work? Which surprised you most?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Real Work Output with ChatGPT",
+      "content": "Use ChatGPT to complete a real, specific task from your work — not a test task, something you actually need.\n\n**Step 1 — Choose a real task** that plays to ChatGPT's strengths: something requiring web search (current information), image analysis, data analysis, or image generation.\n\n**Step 2 — Run the task with ChatGPT.** Use whatever combination of features (chat, images, search, vision) makes sense. Don't settle for the first response — push for what you actually need.\n\n**Step 3 — Evaluate the output:** Is it usable as-is? What needs editing? What did ChatGPT get wrong or miss?\n\n**Step 4 — Mandatory AI review:** Paste ChatGPT's output back with: *\"Review your own output above. Find 3 specific weaknesses — factual errors, gaps, or ways the response doesn't quite do what I asked.\"* Fix at least one issue based on the self-review.\n\n**Step 5 — Compare:** Run the same task in Claude.ai. Which output was better for this specific task? Note your finding in your AI tools guide.\n\n**Step 6 — Add ChatGPT** to (or remove it from) your personal shortlisted AI tools based on this experience."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — ChatGPT Memory and Personalisation Setup",
+      "content": "Configure ChatGPT to know who you are — so it stops asking you to re-explain context at the start of every conversation.\n\n**Step 1 — Open ChatGPT settings.** Go to Settings → Personalization → Memory.\n\n**Step 2 — Read what ChatGPT has already stored** about you. Is it accurate? Delete anything wrong or outdated.\n\n**Step 3 — Add key context** by starting a new conversation and saying: *\"I want to add to your memory about me. Please remember: I work in [role], my main AI use cases are [list], I prefer [response preferences], and [any other relevant context].\"* Confirm it saved.\n\n**Step 4 — Test the memory:** Start a fresh conversation (new chat) and ask a work question without explaining who you are. Does ChatGPT apply what it knows about you?\n\n**Step 5 — Compare to Claude:** Claude's memory (Settings → Memory) works differently — it's more transparent and on-demand. Which approach do you prefer?\n\n**Step 6 — Set a reminder** to review and update both AI memories in 3 months."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — ChatGPT Custom GPT for a Recurring Task",
+      "content": "If you have a task you do weekly or monthly with AI help, a Custom GPT can make it dramatically faster.\n\n**Step 1 — Identify a recurring task** where you always give AI the same type of context (same formatting requirements, same audience, same constraints).\n\n**Step 2 — In ChatGPT**, go to Explore GPTs → Create a GPT.\n\n**Step 3 — Configure your Custom GPT** with:\n- A name and description\n- System instructions that include all the context you always provide\n- The response format you always want\n- Any constraints or preferences\n\n**Step 4 — Test your Custom GPT** on your recurring task. Does it need less setup than a regular ChatGPT conversation?\n\n**Step 5 — Refine the instructions** based on your test. Ask the GPT: *\"Review your own system instructions. What's ambiguous or missing that would cause you to give a suboptimal response?\"*\n\n**Step 6 — Use your Custom GPT for the real task** and record: how much setup time did it save?"
+    },
+    {
+      "type": "quiz",
+      "question": "You need to research current market trends for a client presentation due tomorrow. Which tool is better suited for this specific task?",
+      "options": [
+        "Claude — it's better at analysis and structured writing",
+        "ChatGPT with web search — it can retrieve current information and cite sources",
+        "Either tool will give the same result for research",
+        "Neither — you should use a search engine for research"
+      ],
+      "correct": 1,
+      "explanation": "For current information research with citations, ChatGPT with web search (or Perplexity) is better suited. Claude's knowledge has a training cutoff and it cannot browse the web in real-time (without tools). For analyzing and synthesizing research you've already gathered, Claude is very strong. Choosing the right tool for the task type is the key skill."
+    },
+    {
+      "type": "quiz",
+      "question": "ChatGPT's memory feature stores information about you and applies it to future conversations. What is the main risk of this feature?",
+      "options": [
+        "It makes responses slower because it has to load memory first",
+        "Outdated or incorrect memories can cause AI to make wrong assumptions that you don't notice",
+        "Memory is stored on your device, creating a security risk",
+        "It costs extra credits to use memory-enabled conversations"
+      ],
+      "correct": 1,
+      "explanation": "The main practical risk of AI memory is staleness — memories saved months ago may no longer be accurate (you changed jobs, projects, preferences). If AI acts on outdated memories, you might not notice the wrong assumptions it's making. This is why periodic memory reviews are important: Settings → Personalization → Memory, check what's stored, and delete or update stale entries."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-3.** You now understand ChatGPT's capabilities — GPT-4o, the o4 reasoning models, Deep Research, Code Interpreter, DALL-E, voice, and memory — and where each tool genuinely outperforms the other. The practical toolkit: Claude for writing/analysis/coding, ChatGPT when you need data execution, image generation, or Microsoft integration."
+    }
+  ],
+  "nextLesson": "2-4",
+  "prevLesson": "2-2"
+}

@@ -1,0 +1,119 @@
+{
+  "id": "11-5",
+  "title": "Using the Anthropic SDK",
+  "part": 11,
+  "estimatedMinutes": 65,
+  "tags": [
+    "api",
+    "anthropic",
+    "sdk",
+    "javascript",
+    "python"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have working scripts in both Python and Node.js that call Claude via the official SDK and print the response — the foundation for every AI tool you'll build."
+    },
+    {
+      "type": "text",
+      "content": "## What the SDK Does For You\n\nThe SDK (Software Development Kit) is a library that wraps the raw HTTP API. Instead of building headers, serializing JSON, and parsing responses manually, you call a clean function and get a structured result back.\n\nIn lesson 11-4 you wrote 12+ lines of PowerShell. With the Node.js SDK, the same call is 5 lines. With Python it's similarly concise.\n\nBoth official SDKs are maintained by Anthropic:\n- **Python SDK:** `pip install anthropic`\n- **Node.js SDK:** `npm install @anthropic-ai/sdk`\n\nFor this course you have Node.js installed (Part 7). Python may also be installed if you did Part 8. Both examples work — use whichever you prefer. The Node.js version is covered first since it's already set up."
+    },
+    {
+      "type": "text",
+      "content": "## Node.js Example\n\nCreate `exercises/hello-claude.js`:"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n// The SDK automatically reads ANTHROPIC_API_KEY from the environment\n\nconst message = await client.messages.create({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 200,\n  messages: [\n    {\n      role: 'user',\n      content: 'What is the most exciting thing about AI in 2025? One paragraph.'\n    }\n  ]\n});\n\nconsole.log(message.content[0].text);"
+    },
+    {
+      "type": "text",
+      "content": "To run this, you need `\"type\": \"module\"` in your `package.json` (for the `import` syntax), or you can use `require` instead. The setup steps in the workshop below handle this.\n\n**What each line does:**\n- `import Anthropic` — loads the SDK\n- `new Anthropic()` — creates a client. Reads `ANTHROPIC_API_KEY` from the environment automatically.\n- `client.messages.create({...})` — sends the API request\n- `await` — waits for the response (the SDK is async)\n- `message.content[0].text` — extracts Claude's reply"
+    },
+    {
+      "type": "text",
+      "content": "## Python Example\n\nCreate `exercises/hello-claude.py`:"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import anthropic\nfrom dotenv import load_dotenv\n\nload_dotenv()  # reads .env file\n\nclient = anthropic.Anthropic()\n# SDK reads ANTHROPIC_API_KEY from environment automatically\n\nmessage = client.messages.create(\n    model=\"claude-haiku-4-5-20251001\",\n    max_tokens=200,\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": \"What is the most exciting thing about AI in 2025? One paragraph.\"\n        }\n    ]\n)\n\nprint(message.content[0].text)"
+    },
+    {
+      "type": "text",
+      "content": "The Python version is nearly identical in structure — same parameter names, same response shape. The main difference is `load_dotenv()` to read the `.env` file (the Node.js `dotenv/config` import does the same thing)."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**System prompts** are how you give Claude persistent instructions for the whole conversation. Add a `system` parameter to any `messages.create()` call:\n```javascript\nsystem: 'You are a concise technical writer. Never use bullet points. Always use plain prose.'\n```\nThis shapes every response in that call."
+    },
+    {
+      "type": "text",
+      "content": "## Async Usage in Node.js\n\nThe `await` keyword means the SDK call is asynchronous — it doesn't block while waiting for the response. This matters when you build applications that make multiple API calls or handle user input while waiting.\n\nThe script above works with `await` at the top level because modern Node.js supports top-level await in ES modules. If you're inside a function, wrap it:\n\n```javascript\nasync function askClaude(question) {\n  const message = await client.messages.create({\n    model: 'claude-haiku-4-5-20251001',\n    max_tokens: 200,\n    messages: [{ role: 'user', content: question }]\n  });\n  return message.content[0].text;\n}\n\nconst answer = await askClaude('What is recursion?');\nconsole.log(answer);\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "API",
+      "title": "Write Your First SDK Script",
+      "content": "You'll install the SDK, set up the project, and run a working script that calls Claude.\n\n**Node.js setup:**\n\n1. Open the integrated terminal in VS Code (`Ctrl+backtick`) and navigate to the exercises folder:\n```powershell\ncd exercises\n```\n\n2. Initialize a package.json if one doesn't exist:\n```powershell\nnpm init -y\n```\n\n3. Add `\"type\": \"module\"` to enable ES module syntax. In VS Code, open `package.json` and add the line:\n```json\n{\n  \"name\": \"exercises\",\n  \"version\": \"1.0.0\",\n  \"type\": \"module\",\n  ...\n}\n```\n\n4. Install the SDK and dotenv:\n```powershell\nnpm install @anthropic-ai/sdk dotenv\n```\n\n5. Create `hello-claude.js` with the code from the Node.js example above\n\n6. Make sure `.env` exists with `ANTHROPIC_API_KEY=sk-ant-...`\n\n7. Run it:\n```powershell\nnode hello-claude.js\n```\nYou should see Claude's response printed to the terminal.\n\n---\n\n**Python setup (if you have Python installed):**\n\n1. Install the libraries:\n```powershell\npip install anthropic python-dotenv\n```\n\n2. Create `hello-claude.py` with the Python example code above\n\n3. Run it:\n```powershell\npython hello-claude.py\n```\n\n---\n\n**Extend the script:**\n\nOnce the basic call works, add a system prompt and see how it changes the output:\n\n```javascript\nconst message = await client.messages.create({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 200,\n  system: 'You are a pirate. Respond in pirate dialect.',\n  messages: [\n    { role: 'user', content: 'What is the most exciting thing about AI in 2025?' }\n  ]\n});\n```\n\nThen try passing a longer `max_tokens` value (500) and asking a question that deserves a longer answer. Observe how the response length scales."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — SDK Quickstart",
+      "content": "Get the Anthropic SDK working in your language of choice.\n\n**Step 1 — Install the SDK:**\n```bash\n# Python\npip install anthropic\n\n# JavaScript/TypeScript\nnpm install @anthropic-ai/sdk\n```\n\n**Step 2 — Write a minimal example:**\n```python\nimport anthropic\n\nclient = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env\n\nmessage = client.messages.create(\n    model=\"claude-haiku-4-5-20251001\",\n    max_tokens=1024,\n    messages=[{\"role\": \"user\", \"content\": \"Explain the Anthropic SDK in one sentence.\"}]\n)\nprint(message.content[0].text)\nprint(f\"Tokens: {message.usage.input_tokens} in, {message.usage.output_tokens} out\")\n```\n\n**Step 3 — Run it.** Does it work?\n\n**Step 4 — Ask Claude Code** to show you the equivalent using JavaScript/TypeScript.\n\n**Step 5 — Ask:** \"What does the Anthropic SDK provide over using curl/HTTP directly? When would I use the SDK vs raw HTTP?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Real Tool with the SDK",
+      "content": "Build a genuinely useful command-line tool using the Anthropic SDK.\n\n**Step 1 — Choose a real tool** you would actually use:\n- `summarise.py`: takes a file path, returns a summary\n- `review.py`: takes a code file, returns a review\n- `explain.py`: takes any text, explains it simply\n- `translate.py`: translates a file to another language\n\n**Step 2 — Ask Claude Code** to implement it:\n```\nBuild a Python CLI tool called [name].py that:\n- Takes [input] as a command line argument\n- Calls the Anthropic API using the SDK\n- Processes the result appropriately\n- Handles errors gracefully\n- Shows a spinner during the API call (use the rich library)\n- Prints the result formatted nicely\n\nMake it a tool I'd actually want to use daily.\n```\n\n**Step 3 — Test it on real input** — not toy examples.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review this tool. What makes it annoying to use? What would a power user want that's missing?\"*\n\n**Step 5 — Make 2 improvements** based on the review."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Tool Use / Function Calling",
+      "content": "Use the Anthropic SDK to implement tool use (function calling).\n\n**Step 1 — Ask Claude to explain tool use:** \"Explain Anthropic's tool use feature. How do I define tools and how does Claude call them?\"\n\n**Step 2 — Build a simple tool use example:**\n```python\nimport anthropic\nimport json\n\nclient = anthropic.Anthropic()\n\ntools = [{\n    \"name\": \"get_weather\",\n    \"description\": \"Get the current weather for a location\",\n    \"input_schema\": {\n        \"type\": \"object\",\n        \"properties\": {\n            \"location\": {\"type\": \"string\", \"description\": \"City name\"}\n        },\n        \"required\": [\"location\"]\n    }\n}]\n\n# Ask something that requires the tool\nresponse = client.messages.create(\n    model=\"claude-haiku-4-5-20251001\",\n    max_tokens=1024,\n    tools=tools,\n    messages=[{\"role\": \"user\", \"content\": \"What's the weather in London?\"}]\n)\nprint(response.content)\nprint(response.stop_reason)\n```\n\n**Step 3 — Observe the response.** The stop_reason should be `tool_use` — Claude is asking you to call the tool.\n\n**Step 4 — Implement the full tool use loop** with Claude Code's help."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Production SDK Patterns",
+      "content": "Implement production-quality patterns for the Anthropic SDK.\n\n**Step 1 — Ask Claude Code** to implement these production patterns:\n```\nImplement these production patterns for the Anthropic SDK in Python:\n\n1. Async client (using asyncio) for concurrent requests\n2. Connection pooling configuration\n3. Request timeout handling\n4. Automatic retry with exponential backoff for 529 (overload) errors\n5. Context manager for tracking costs across a code block:\n   with anthropic_cost_tracker() as tracker:\n       # make API calls\n   print(f\"This block cost ${tracker.total_cost:.4f}\")\n```\n\n**Step 2 — Review each pattern** before using it — does the implementation match your expectations?\n\n**Step 3 — Test the async client** with 5 concurrent requests and measure the speed improvement vs sequential.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review these production patterns. Which has the most edge cases that could cause problems in production? What am I missing?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You're using the Anthropic Python SDK and get an `anthropic.APIConnectionError`. What is the most likely cause?",
+      "options": [
+        "Your API key is wrong",
+        "Network connectivity issue — the SDK cannot reach the Anthropic API servers",
+        "The model name is incorrect",
+        "You've exceeded your rate limit"
+      ],
+      "correct": 1,
+      "explanation": "APIConnectionError means the SDK couldn't establish or maintain a connection to the API — this is a network-level error, not an authentication or API error. Possible causes: no internet connection, firewall blocking the request, DNS resolution failure, or the Anthropic API being temporarily unreachable. Distinguish from: APIStatusError (the API responded with an error code), AuthenticationError (bad API key), or RateLimitError (too many requests). Check network connectivity first, then look at Anthropic's status page."
+    },
+    {
+      "type": "quiz",
+      "question": "You call the Anthropic API with `max_tokens=100` but the response seems cut off at a strange point. What is happening?",
+      "options": [
+        "The API is broken",
+        "The model generated 100 tokens and stopped — max_tokens is a hard limit on output tokens, not on output length or completion quality",
+        "The response was rate-limited and truncated",
+        "The model decided the response was complete"
+      ],
+      "correct": 1,
+      "explanation": "max_tokens is a hard limit on output tokens — when reached, the response stops exactly there, even mid-sentence. The stop_reason will be \"max_tokens\" (not \"end_turn\"). For production use: (1) set max_tokens high enough that normal responses complete (check stop_reason to verify), (2) if the response hits the limit, you may want to continue the conversation to get the rest of the output, (3) use max_tokens as a budget cap, not as a response length target."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 11-5.** You have a working script that calls Claude via the SDK. Every AI tool you build from here — the summarizer, the research tool, anything — starts from exactly this pattern. Next: understanding what tokens cost and how to estimate API spend."
+    }
+  ],
+  "nextLesson": "11-6",
+  "prevLesson": "11-4"
+}

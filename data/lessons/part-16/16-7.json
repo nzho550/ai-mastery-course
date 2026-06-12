@@ -1,0 +1,110 @@
+{
+  "id": "16-7",
+  "title": "Creating Process Documentation & SOPs",
+  "part": 16,
+  "estimatedMinutes": 55,
+  "tags": [
+    "office",
+    "beginner",
+    "documentation",
+    "sops",
+    "process",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nProcess documentation — standard operating procedures (SOPs), how-to guides, onboarding documents, and procedure manuals — is one of the most high-value things a team can create and one of the most consistently neglected. The reason: it takes time and writing skill that people don't feel they have. AI removes both obstacles."
+    },
+    {
+      "type": "text",
+      "content": "## Why Process Documentation Gets Ignored\n\nMost teams have processes that exist only in individuals' heads. When those people are unavailable, sick, or leave, the process breaks. Documentation solves this — but people avoid writing it because:\n\n- *\"I don't have time.\"* — A Claude-assisted SOP takes 15–20 minutes, not hours\n- *\"I don't know how to structure it.\"* — AI provides a professional structure instantly\n- *\"My notes aren't polished enough.\"* — You don't need polished notes; you need rough steps\n\nThe most effective approach: **talk through the process, then let AI write it**."
+    },
+    {
+      "type": "text",
+      "content": "## The Brain Dump Method — Fastest SOP Creation\n\nYou don't need to write a perfect document. You need to describe what you do in rough steps, then let AI convert it.\n\n**Step 1 — Brain dump:**\n```\nI need to document a process for [process name].\nHere are my rough notes — this is not polished:\n\n[Paste or type your rough steps, even messy bullet points]\n\nConvert this into a proper SOP with:\n- Title\n- Purpose (one sentence: what this process achieves)\n- When to use it (what triggers this process)\n- What you need before starting (tools, access, information)\n- Step-by-step procedure (numbered, with action verbs)\n- What to do if something goes wrong\n- Related processes or documents\n```\n\n**Step 2 — Review:**\nRead through the output. Ask: *\"Is there any step a new person would get stuck on?\"*\nFor any step that's unclear:\n```\nStep [X] won't be clear to someone doing this for the first time.\nAdd more detail: [explain what's missing]\n```\n\n**Step 3 — Test:**\nHave someone unfamiliar with the process follow your SOP. Every point they get confused is a gap to fill."
+    },
+    {
+      "type": "text",
+      "content": "## Creating Different Types of Process Documents\n\n**Onboarding checklist:**\n```\nCreate an onboarding checklist for a new [role] joining [team/org].\nThey need to learn: [list of systems, processes, people]\nIn their first week they should be able to: [outcomes]\nFormat: checklist with tick boxes, grouped by day/week\n```\n\n**Decision flowchart in text:**\n```\nDocument our decision process for [situation].\nThe decision points are:\n- If [condition A] → do [X]\n- If [condition B] → do [Y]\n- If [condition C] → escalate to [person]\n\nConvert this into a clearly formatted decision flowchart (text-based,\nusing indentation and arrows).\n```\n\n**Troubleshooting guide:**\n```\nCreate a troubleshooting guide for [system/process].\nThe most common problems are:\n1. [Problem]: [what causes it] → [how to fix it]\n2. [Problem]: [what causes it] → [how to fix it]\n\nFormat it as a troubleshooting table: Problem | Likely Cause | Solution\n```\n\n**Handover document:**\n```\nI'm handing over [project/role] to [person].\nKey information they need: [list]\nCurrent status: [where things stand]\nOpen items: [what's in progress]\nPending decisions: [what hasn't been decided yet]\nWho to contact for what: [key contacts]\n\nCreate a comprehensive handover document I can share with them.\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Record, then transcribe.** If you find it easier to talk than type: record yourself explaining the process (voice memo on your phone, or Otter.ai). Then paste the transcript into Claude and ask it to convert your spoken explanation into a structured SOP. This is often the fastest method."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Document a Process You Own",
+      "content": "This workshop produces a real SOP for a process you own — something that will save your team time and protect against knowledge loss.\n\n**Step 1 — Choose your process (2 minutes)**\n\nIdentify a process you do regularly that isn't written down anywhere. Good candidates:\n- Something you had to teach a colleague recently\n- Something that breaks when you're away\n- Something you had to figure out the first time and don't want others to repeat\n- Something that has several steps people regularly skip or get wrong\n\n**Step 2 — Rough notes (5 minutes)**\n\nDon't write it properly. Just bullet point the steps from memory:\n- What triggers this process?\n- What do you need before you start?\n- What are the steps, in order?\n- What are the common mistakes?\n- What does done look like?\n\n**Step 3 — Generate the SOP (5 minutes)**\n\nPaste your rough notes into Claude using the brain dump prompt:\n```\nConvert these rough notes into a professional SOP that a new person\ncould follow without help. Use: Title, Purpose, Trigger, Prerequisites,\nStep-by-step procedure (numbered), Common problems and how to fix them.\n\n[paste your notes]\n```\n\n**Step 4 — Review and save**\n\nRead through the output. Identify any step that would confuse a first-timer and ask Claude to expand it. Then save the SOP somewhere your team can find it — a shared folder, a Notion page, or a Teams wiki.\n\n**Bonus:** Use the Notion MCP (lesson 8-19) to create the SOP directly in Notion from Claude without copy-pasting."
+    },
+    {
+      "type": "quiz",
+      "question": "A long-serving team member is leaving in two weeks. They're the only person who knows how 3 critical processes work. What is the fastest way to capture that knowledge before they go?",
+      "options": [
+        "Ask them to write detailed SOPs during their notice period",
+        "Shadow them for two weeks and take notes manually",
+        "Have them talk through each process in 15 minutes while you record it, then use Claude to convert the transcript into structured SOPs — review together before they leave",
+        "Accept the knowledge loss and rebuild the process after they've gone"
+      ],
+      "correct": 2,
+      "explanation": "Recording a spoken explanation and converting it to a structured SOP is the fastest path because it captures the expert's knowledge in their natural form (speaking) rather than demanding writing — which is slow and often avoided. The SOP can then be reviewed together to fill gaps before they leave. Asking them to write SOPs (A) is the traditional approach but competes with handover and other exit tasks. Shadowing (B) is time-consuming and requires your availability to follow them. Accepting knowledge loss (D) creates future risk and cost."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — SOP Quality Assessment",
+      "content": "Assess the quality of your current process documentation.\n\n**Step 1 — Find an existing SOP or process document** from your work (or a process that exists in people's heads but not on paper).\n\n**Step 2 — Ask Claude to evaluate it:**\n\"Review this process documentation [paste it] and assess: (1) Could someone new follow this without asking questions? (2) What steps are missing or unclear? (3) What decision points exist but aren't documented? (4) What is assumed knowledge that isn't stated?\"\n\n**Step 3 — Score the SOP** on a 1-10 usability scale. What would it take to get to 10?\n\n**Step 4 — Ask Claude:** \"What makes an excellent SOP vs a mediocre one? Give me specific examples of what good documentation looks like.\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Document a Process with AI",
+      "content": "Create a complete SOP for a process you know well.\n\n**Step 1 — Choose a process you perform** that should be documented: an onboarding step, a recurring operational task, a technical procedure.\n\n**Step 2 — Describe the process to Claude** in rough terms:\n\"Help me document this process as an SOP: [describe it roughly]. Ask me any clarifying questions you need before writing the documentation.\"\n\n**Step 3 — Answer Claude's questions** — they reveal gaps in your description.\n\n**Step 4 — Have Claude draft the SOP:**\n```\nWrite an SOP for [process name]:\n- Purpose: why this process exists\n- When to use this SOP\n- Prerequisites: what must be true before starting\n- Steps: numbered, actionable (start each with a verb)\n- Decision points: what to do if [condition]\n- Common mistakes: what goes wrong and how to avoid it\n- Output: what the finished state looks like\n```\n\n**Step 5 — Test the SOP** by following it yourself as if you'd never done this before. What's missing?"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — SOP Testing and Validation",
+      "content": "Validate your SOP by having someone else follow it.\n\n**Step 1 — Give your SOP** to a colleague who has NOT done this process before.\n\n**Step 2 — Ask them to follow the SOP exactly** without asking you for help (unless they're completely stuck). Observe silently or have them flag where they're confused.\n\n**Step 3 — Note every point of confusion** or question they have.\n\n**Step 4 — Ask Claude** to help fix each identified gap:\n\"The SOP tester got stuck at this step: [describe the step and what confused them]. How should I clarify this step?\"\n\n**Step 5 — Revise the SOP** with all the identified fixes.\n\n**Step 6 — Consider:** This testing process applies to any documentation. An SOP that one person can follow without questions is good; one that two people can follow without questions is excellent."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Process Documentation Library",
+      "content": "Create a systematic approach to documenting all your key processes.\n\n**Step 1 — Identify your knowledge bus factor:** Which processes exist only in your head? What would happen if you were unavailable for 2 weeks?\n\n**Step 2 — Prioritise processes to document:**\n| Process | Risk if undocumented | Time to document | Priority |\n|---|---|---|---|\n| [Process] | [impact] | [hours] | |\n\n**Step 3 — Create a documentation roadmap:** Commit to documenting 2 processes per week using the SOP template from Workshop B.\n\n**Step 4 — Ask Claude Code** to create a process documentation system:\n\"Create a simple markdown-based process documentation system with: templates, an index file, and a review schedule. Processes should be findable by category and by when they were last reviewed.\"\n\n**Step 5 — Start with the highest-risk process** today."
+    },
+    {
+      "type": "quiz",
+      "question": "Your SOP has 20 steps and a colleague who follows it makes an error at step 15 every time. What does this pattern reveal?",
+      "options": [
+        "The colleague needs better training",
+        "Step 15 has a documentation problem — it's unclear, missing a decision point, or assumes knowledge the follower doesn't have. Fix the step, not the person",
+        "The process is too complex to document",
+        "The colleague is not carefully reading the SOP"
+      ],
+      "correct": 1,
+      "explanation": "Repeated errors at the same step are a documentation signal, not a people signal. A step that consistently causes errors is a step that needs clarification. Ask: What decision does the follower need to make at step 15 that isn't documented? What prerequisite knowledge does the step assume? What does the correct output of step 15 look like? Fix the documentation, test with another follower. If the error stops, the documentation was the root cause."
+    },
+    {
+      "type": "quiz",
+      "question": "You document a process using AI assistance. Six months later, the process has changed but the SOP hasn't been updated. What is the risk?",
+      "options": [
+        "Documentation is only aspirational — outdated SOPs are fine",
+        "New team members following the outdated SOP will perform the process incorrectly, potentially causing errors or rework; stale documentation is often worse than no documentation",
+        "The risk is low if the process changed only slightly",
+        "Only a risk if auditors review your documentation"
+      ],
+      "correct": 1,
+      "explanation": "Outdated documentation is a real operational risk. New team members treat SOPs as authoritative — if an SOP says \"submit to system A\" but the process now uses system B, they'll submit to the wrong system confidently. Outdated documentation can be worse than no documentation (no documentation: people ask; outdated documentation: people follow the wrong instructions). Fix: establish a documentation review schedule (quarterly for frequently-used processes) and update SOPs whenever the underlying process changes."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 16.** You now have a complete AI-powered document workflow: writing, reports, proposals, data analysis, presentations, emails, meeting management, and process documentation. These tools work for any office role — no coding or technical background required."
+    }
+  ],
+  "nextLesson": "17-1",
+  "prevLesson": "16-6"
+}

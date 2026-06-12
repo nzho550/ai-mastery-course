@@ -1,0 +1,112 @@
+{
+  "id": "18-5",
+  "title": "AI Agents in Practice",
+  "part": 18,
+  "estimatedMinutes": 65,
+  "tags": [
+    "advanced",
+    "agents",
+    "multi-agent",
+    "automation",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nAI agents are the most significant shift in how AI is used in 2026. They're not chatbots you talk to — they're autonomous workers you delegate to. This lesson explains what agents actually are (with no hype), how to use existing agentic features in tools you already have, and how to design effective agent workflows for your own work."
+    },
+    {
+      "type": "text",
+      "content": "## What an AI Agent Actually Is\n\nA chatbot answers questions. An agent *does things*.\n\n**The core difference:**\n- Chatbot: you ask → it responds → done. One exchange.\n- Agent: you set a goal → it plans → executes multiple steps → uses tools → checks its work → reports back. Potentially hours of autonomous work.\n\n**The agent loop:**\n```\nGoal received\n↓\nPlan: What steps will accomplish this goal?\n↓\nAct: Execute step 1 (search web, write file, call API, send email...)\n↓\nObserve: What happened? Did it work?\n↓\nPlan next step (or adjust if step failed)\n↓\nRepeat until goal complete or confidence threshold reached\n↓\nReport results\n```\n\nThe key property: the agent decides what to do next based on what it observed. It's not just executing a fixed script.\n\n**Core components of an agent:**\n- **LLM** — the \"brain\" that reasons and decides\n- **Tools** — what the agent can do (search web, read/write files, call APIs, run code, send emails)\n- **Memory** — what the agent remembers between steps (short-term: conversation context; long-term: retrieved from a knowledge base)\n- **Planning** — how the agent breaks a goal into steps\n- **Stop condition** — when does it know it's done?"
+    },
+    {
+      "type": "text",
+      "content": "## Agents You're Already Using (Without Knowing It)\n\nYou don't need to build an agent to use agents. Several tools you've seen in this course are already agentic:\n\n**Claude's Research feature** (claude.ai Pro)\nClaude Research is a multi-agent system. When you click the \"Research\" button:\n1. An orchestrator agent plans what to search\n2. Multiple sub-agents run parallel searches on different aspects\n3. Sub-agents report back their findings\n4. Orchestrator synthesises everything\n5. Claude writes the final research report\n\nYou see the output; the multi-agent coordination happens invisibly.\n\n**Claude Code** (when given a complex task)\nWhen you say \"Build a web scraper that extracts product prices from these 10 sites, formats them as CSV, and emails me when a price drops\", Claude Code runs as an agent:\n- Reads existing code (tool: file system)\n- Writes new code\n- Runs it and observes the output\n- Fixes errors it encounters\n- Repeats until working\n\n**Perplexity Deep Research**\nPerplexity's Deep Research is an agent: it plans searches, runs them, reads pages, decides whether it has enough information, runs more searches if not, then synthesises.\n\n**Computer-use agents (new in 2026)**\nClaude can now control a computer directly — clicking, typing, navigating — via computer use APIs. This enables agents that can use any desktop application, not just tools with APIs."
+    },
+    {
+      "type": "text",
+      "content": "## The Orchestrator-Subagent Pattern\n\nThe dominant architecture for production AI agents in 2026 is **orchestrator + subagents**. Understanding this pattern helps you design effective delegation.\n\n**How it works:**\n- One orchestrator holds the overall goal and context\n- Orchestrator breaks the goal into discrete subtasks\n- Each subtask is assigned to a subagent with a fresh context\n- Subagents execute their task and return a summary\n- Orchestrator synthesises all summaries into the final output\n\n**Why this is better than one big agent:**\n- Each subagent has a clean context → better focus, fewer distractions\n- Subagents can run in parallel → faster completion\n- Easier to debug (identify which subagent failed)\n- Each subagent can be a different model (cheap Haiku for simple tasks, expensive Opus for complex ones)\n\n**When to use this pattern yourself:**\nYou can replicate this pattern in Claude.ai without code:\n```\nI need you to act as an orchestrator for this research task: [goal]\n\nBreak this into 4 parallel research workstreams. For each workstream:\n1. Define exactly what should be researched\n2. List the specific questions to answer\n3. Note which sources would be most useful\n\nThen execute each workstream one by one, keeping track of what you've found.\nAfter all 4 are complete, synthesise everything into a final report.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Claude Managed Agents (Launched April 2026)\n\nIn April 2026, Anthropic launched **Claude Managed Agents** — a service where you define what an agent should do, what tools it has access to, and what guardrails it must follow, and Anthropic handles the infrastructure.\n\n**What this means practically:**\n- Create an agent that monitors your inbox and drafts replies for approval\n- Create an agent that tracks competitor websites and summarises changes weekly\n- Create an agent that processes incoming support requests and routes them\n- Create an agent that conducts regular research and updates a knowledge base\n\n**Pricing:** $0.08 per runtime hour + standard Claude model costs.\n\n**Current enterprise examples (public, from Anthropic):**\n- **Notion:** Claude agents handle coding, slide creation, and spreadsheet work inside Notion\n- **Asana:** AI Teammates that pick up tasks assigned in projects\n- **Sentry:** Agent that goes from a flagged bug to an open GitHub PR, autonomously\n\n**Key guardrails for any agent:**\n- Define what tools it can use (and explicitly what it cannot do)\n- Set a review step before any action that's hard to reverse (sending emails, deleting files)\n- Log what the agent did so you can audit it\n- Set confidence thresholds: if the agent is uncertain, it should stop and ask"
+    },
+    {
+      "type": "text",
+      "content": "## Designing Effective Agent Tasks\n\nNot every task is suitable for an agent. The best agent tasks are:\n\n**Good for agents:**\n- Multi-step processes with clear completion criteria (\"research X, write Y, save to Z\")\n- Repetitive tasks that follow the same structure each time\n- Tasks where the steps are well-defined but the content varies\n- Long tasks that would require multiple conversation turns to complete\n- Tasks where you need parallelism (multiple things at once)\n\n**Bad for agents:**\n- Tasks requiring frequent human judgment at each step\n- Creative work where you want to be in the loop\n- Tasks with ill-defined success criteria\n- Anything involving irreversible actions without human review\n- Tasks where context accumulates in complex ways\n\n**The delegation brief — how to instruct an agent well:**\n\nWeak agent instruction:\n```\nResearch AI trends and write me a report\n```\n\nStrong agent instruction:\n```\nTask: Research AI agent developments in 2026 and write a briefing report.\n\nScope:\n- Focus on: business applications of AI agents (not technical papers)\n- Time period: January 2026 — June 2026\n- Exclude: academic research, robotics, AGI speculation\n\nSources to use:\n- Perplexity web search (3-4 searches on different angles)\n- Company blogs from Anthropic, OpenAI, Google DeepMind\n\nOutput format:\n- 600-800 words\n- Structure: Executive Summary → Key Developments → Business Impact → What To Watch\n- Every statistic must cite a source\n\nWhen you're done: Tell me what you searched for and what you couldn't find.\n```\n\nThe better your brief, the more autonomously the agent can work."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Deploy Your First Real Agent Task",
+      "content": "This workshop gives you experience directing an agentic workflow using tools you already have. You'll set a goal, let the agent plan and execute, and evaluate the output.\n\n**Option A — Claude Research Agent (claude.ai Pro)**\n\nIn Claude.ai, click the \"Research\" button (not the regular chat).\n\nWrite a research delegation brief on a real topic:\n```\nResearch task: [your specific topic]\n\nI need this for: [purpose — briefing my manager / understanding a market / preparing for a meeting]\n\nSpecifically cover:\n- [sub-question 1]\n- [sub-question 2]\n- [sub-question 3]\n\nExclude: [things you don't need]\n\nOutput: A structured briefing document with cited sources, 600-800 words.\nNote anything you couldn't find information on.\n```\n\nWhile it runs, watch the process — you can see Claude's search steps.\n\nAfter it completes:\n1. Verify 3 specific citations by clicking them\n2. Note: did it cover everything in your brief?\n3. What did it miss or get wrong?\n4. Would you trust this for a professional audience as-is, or does it need editing?\n\n**Option B — Claude Code as Agent (for those with Claude Code)**\n\nGive Claude Code a multi-step task with clear success criteria:\n```\nI want you to:\n1. Create a folder called 'research-[today's date]'\n2. Search the web for the 5 most recent significant AI model releases from major labs\n3. For each, create a file named [model-name].md with: release date, company, key capabilities, pricing if known, and your assessment of its most important use case\n4. Create an index.md that summarises all 5 and compares them\n\nIf you can't find information for any field, write 'Not publicly available' rather than guessing.\n```\n\nLet Claude Code run. Watch what it does. After it finishes, review the files and evaluate: accuracy, completeness, quality of assessment.\n\n**Reflect on both options:**\n- How much would this have taken you to do manually?\n- Where did the agent succeed? Where did it fall short?\n- What would you add to the brief to get a better result next time?\n- What task in your actual work could you delegate to an agent this week?\n\nWrite your answers — this reflection is as valuable as the output."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to build an agent that monitors your company's competitor websites every Monday morning and emails you a summary of any significant changes. What is the most important guardrail to put in place?",
+      "options": [
+        "Make the agent check 10 websites instead of 5 for better coverage",
+        "Have the agent draft the summary for your review before it sends the email — don't let it send automatically",
+        "Use the most expensive model (Claude Opus) to ensure quality",
+        "Tell the agent to run at 4am when servers are less busy"
+      ],
+      "correct": 1,
+      "explanation": "The most important guardrail for any agent that takes external-facing actions (sending emails) is a human review step before execution. An agent that sends emails autonomously can send incorrect, poorly written, or inappropriate content to recipients before you can catch it. Having it draft for review means you maintain control over any irreversible action. Model quality (C) and timing (D) are secondary. Coverage breadth (A) is useful but doesn't address the risk of autonomous email sending."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Agent Anatomy",
+      "content": "Understand the components of a working AI agent.\n\n**Step 1 — Ask Claude:** \"Explain the architecture of an AI agent. What are the core components: perception, reasoning, planning, action, and memory? How do they interact? Give a concrete example of a simple agent executing a task.\"\n\n**Step 2 — Map a real AI agent** you've used (Claude Code, task-master-ai, etc.) to this architecture:\n- Perception: what inputs does it take?\n- Reasoning: how does it make decisions?\n- Planning: how does it break down tasks?\n- Action: what tools can it use?\n- Memory: what does it remember across steps?\n\n**Step 3 — Ask Claude:** \"What are the failure modes of each agent component? For each, how do you detect and recover from failures?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Design a Custom AI Agent",
+      "content": "Design a custom AI agent for a real task you need to automate.\n\n**Step 1 — Choose a complex multi-step task** you currently do manually.\n\n**Step 2 — Ask Claude to help design the agent:**\n```\nDesign an AI agent for this task: [describe the task]\n\nFor the design, specify:\n1. Input: what triggers the agent and what information it receives\n2. Tools needed: what capabilities does it need?\n3. Decision points: where does it need to choose between paths?\n4. Output: what does it produce?\n5. Failure modes: what can go wrong and how should it handle each?\n6. Human oversight: at which points should it check with a human?\n```\n\n**Step 3 — Review the design.** Is every tool listed actually available?\n\n**Step 4 — Implement a minimal version** of the agent using Claude Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Test Agent Reliability",
+      "content": "Systematically test an AI agent's reliability.\n\n**Step 1 — Take the agent you designed** in Workshop B.\n\n**Step 2 — Test these reliability scenarios:**\n- Happy path: everything works as expected\n- Tool failure: one tool returns an error mid-task\n- Ambiguous input: the input doesn't give enough information to complete the task\n- Very long task: the task requires more steps than typical\n- Edge case: unusual input that wasn't considered in the design\n\n**Step 3 — Document how the agent behaves** in each scenario.\n\n**Step 4 — Improve the agent** based on the failures found.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Given these test results [describe what happened], what are the remaining reliability risks before I use this agent in production?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Human-in-the-Loop Agent",
+      "content": "Build an agent with appropriate human oversight.\n\n**Step 1 — Identify the highest-risk actions** your agent can take.\n\n**Step 2 — Ask Claude Code** to implement human-in-the-loop checkpoints:\n```\nModify the agent to add human checkpoints:\n1. Before any irreversible action: pause and ask for confirmation\n2. When confidence is low: surface the uncertainty and ask for guidance\n3. After completing each major phase: summarise what was done and ask to continue\n4. If an error occurs: explain the error and ask how to proceed\n\nThe checkpoint should: describe what's about to happen, show relevant context, offer: proceed / modify / abort.\n```\n\n**Step 3 — Test the checkpoints** — do they trigger at the right moments?\n\n**Step 4 — Evaluate the balance:** Are there too many checkpoints (disrupting autonomous operation) or too few (allowing risky unchecked actions)?"
+    },
+    {
+      "type": "quiz",
+      "question": "An AI agent is tasked with \"reorganise my project files\" and begins moving and deleting files without confirmation. What is the critical design flaw?",
+      "options": [
+        "The agent is too slow at processing files",
+        "No human-in-the-loop for irreversible actions: file deletion is permanent, and file movement can be disruptive. The agent should always preview proposed changes and require confirmation before executing them",
+        "The agent should use a different file system API",
+        "File operations should be handled by a different tool"
+      ],
+      "correct": 1,
+      "explanation": "Irreversible actions require human confirmation by design, not as an afterthought. File deletion cannot be undone (without backup). File movement can break dependencies (code imports, scripts referencing paths). An agent that \"reorganises\" without confirmation is dangerous regardless of how intelligent its plan is. The pattern for any agent handling irreversible operations: plan → show the plan → wait for explicit approval → execute. This adds one interaction but prevents disasters."
+    },
+    {
+      "type": "quiz",
+      "question": "Your AI agent gets stuck in a loop, repeatedly trying the same failed action. What design element would have prevented this?",
+      "options": [
+        "A faster model",
+        "A retry limit with escalation: after N failed attempts at the same action, the agent should stop trying and either try an alternative approach or escalate to human review",
+        "More detailed instructions",
+        "A different tool for that action"
+      ],
+      "correct": 1,
+      "explanation": "Infinite loops and stuck states are a class of agent reliability problems. Prevention: (1) maximum retry count for any single action (e.g., 3 attempts), (2) step-level timeout (each action has a time limit), (3) loop detection (if the same action with the same parameters has been tried before, don't try again), (4) escalation path (when stuck, the agent should surface the problem to a human rather than continuing to fail silently)."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 18-5.** You understand what AI agents actually are, recognise the agentic tools you're already using, know the orchestrator-subagent architecture, and can design effective agent delegation briefs. The final lesson builds a complete, real-world agent-powered knowledge system from scratch."
+    }
+  ],
+  "nextLesson": "18-6",
+  "prevLesson": "18-4"
+}

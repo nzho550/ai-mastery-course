@@ -1,0 +1,129 @@
+{
+  "id": "8-2",
+  "title": "MCP Architecture — Client, Server, Transport",
+  "part": 8,
+  "estimatedMinutes": 55,
+  "tags": [
+    "mcp",
+    "architecture",
+    "claude-code"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand the three components of the MCP architecture, what each one does, and how they fit together. You'll also see what an MCP configuration actually looks like in your settings file."
+    },
+    {
+      "type": "text",
+      "content": "## The Three Components\n\nEvery MCP setup has three parts that work together:\n\n**1. The Client**\nThe AI application that wants to use tools. In this course, Claude Code is the client. Cursor and Zed are also MCP clients. The client is responsible for:\n- Discovering which MCP servers are configured\n- Sending requests to servers on Claude's behalf\n- Receiving results and passing them back to Claude\n\n**2. The Server**\nA small program that exposes tools, resources, or prompts. It could be an npm package, a Python script, or a binary. The server is responsible for:\n- Receiving requests from the client\n- Executing the actual work (querying a database, calling a Gmail API, reading a file)\n- Returning results in the MCP format\n\n**3. The Transport**\nThe communication channel between client and server. There are two options:\n- **stdio** — the server runs as a local subprocess, communicating via standard input/output. This is the most common and simplest method — it's what all the servers in this course use.\n- **HTTP/SSE** — the server runs as a network service, which enables remote servers. Less common for local setups."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**For this course, always use stdio transport.** All the MCP server configurations shown in lessons 8-3 through 8-15 use `npx` or `python` to launch a local subprocess. You do not need to understand HTTP/SSE transport to use MCP effectively."
+    },
+    {
+      "type": "text",
+      "content": "## The Flow of a Tool Call\n\nHere is exactly what happens when you ask Claude to 'list my open GitHub issues':\n\n1. Claude Code (the **client**) receives your request\n2. Claude recognizes it needs the `list_issues` tool from the GitHub MCP server\n3. The client sends a JSON-formatted tool call to the GitHub MCP **server** via **stdio**\n4. The server authenticates with the GitHub API using your token\n5. The server fetches the issues from GitHub\n6. The server returns the results as JSON to the client\n7. The client passes the results to Claude\n8. Claude reads the results and writes its response to you\n\nAll of steps 2–7 happen invisibly, in milliseconds. From your perspective, you just asked a question and Claude answered it — but underneath, a complete network round-trip occurred."
+    },
+    {
+      "type": "text",
+      "content": "## Where Configuration Lives\n\nAll MCP servers are configured in a single JSON file:\n\n**Global (works in every project):**\n`C:\\Users\\YourName\\.claude\\settings.json`\n\n**Project-level (only active in one project):**\n`.claude/settings.json` inside your project folder\n\nThe global file is where you want most of your MCP servers — Gmail, GitHub, calendar. The project-level file is for servers that are only relevant to a specific codebase, like a database server pointed at that project's database.\n\nClaude Code merges both files, so servers from both locations are available simultaneously."
+    },
+    {
+      "type": "text",
+      "content": "## The mcpServers Configuration Block\n\nEvery MCP server entry follows the same pattern inside `settings.json`:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"server-name\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@package/server-name\", \"optional-argument\"],\n      \"env\": {\n        \"API_TOKEN\": \"your-token-here\"\n      }\n    },\n    \"another-server\": {\n      \"command\": \"python\",\n      \"args\": [\"/absolute/path/to/server.py\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "The fields:\n\n- **`command`** — the executable that starts the server. Usually `npx` for npm packages or `python` for Python scripts.\n- **`args`** — an array of arguments passed to the command. For npx servers, this almost always starts with `[\"-y\", \"@package/name\"]`.\n- **`env`** — optional environment variables to pass to the server process. This is where you put API tokens and secrets — not directly in the args.\n\nThe `server-name` key is just a label you choose. It appears in Claude Code's `/mcp` output and in error messages. Use something readable."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Never commit tokens into a public repository.** If your `settings.json` lives inside a git repo, add it to `.gitignore` or use environment variables instead of hardcoding tokens in the `env` block. Lesson 8-8 (GitHub MCP) covers this in detail."
+    },
+    {
+      "type": "text",
+      "content": "## MCP Servers Are Just Programs\n\nThis is worth emphasizing: an MCP server is just a regular program that implements the MCP protocol. There is nothing magical about it.\n\nWhen Claude Code starts, it reads your `settings.json` and launches each configured MCP server as a subprocess. Claude Code and each server are completely separate processes on your computer. If a server crashes, Claude Code keeps running — it just loses access to that server's tools.\n\nYou can verify this: open Task Manager while Claude Code is running with several MCP servers configured. You'll see multiple `node` or `python` processes — one for each active server."
+    },
+    {
+      "type": "quiz",
+      "question": "Which component of the MCP architecture is responsible for actually executing the tool — for example, calling the GitHub API to fetch issues?",
+      "options": [
+        "The client (Claude Code)",
+        "The transport layer (stdio)",
+        "The server (the MCP server program)",
+        "Claude's language model"
+      ],
+      "correct": 2,
+      "explanation": "The MCP server is the component that executes the tool. It receives a request from the client, calls the external service (like GitHub's API), and returns the result. The client (Claude Code) coordinates the call and passes results to Claude, but it doesn't do the actual work of querying external systems."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Inspect Your Active MCP Servers",
+      "content": "Let's see exactly what MCP servers are currently configured in your Claude Code setup.\n\n1. Launch `claude` in your terminal\n2. Type `/mcp` and press Enter\n3. Claude Code lists every connected MCP server and its status\n\nFor each server that appears:\n- Note its name\n- Ask: `\"What tools does the [server-name] MCP server expose? List each tool and what it does.\"`\n\nIf no servers appear, that's expected — you'll add your first one in lesson 8-3.\n\nIn your notes, write one sentence per server describing what it does. This is your starting MCP inventory. You'll add to it through the rest of Part 8."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — MCP Architecture Mapping Drill",
+      "content": "Build a concrete mental model of MCP's client-server architecture in 8 minutes.\n\n**Step 1 — Draw the architecture** (on paper or in a drawing tool):\n- A box labeled \"Claude Code\" (the client)\n- Multiple boxes for MCP servers (GitHub, filesystem, database)\n- Arrows showing: Claude sends requests → servers execute → servers return results\n\n**Step 2 — Ask Claude.ai** to validate your diagram: \"I drew this diagram of MCP architecture: [describe it]. Is this accurate? What did I get wrong or miss?\"\n\n**Step 3 — Ask these specific questions** to test your understanding:\n- \"What is the transport layer and what options does MCP support?\"\n- \"When Claude Code sends a request to an MCP server, what format does the message use?\"\n- \"Can an MCP server connect to multiple clients simultaneously?\"\n\n**Step 4 — Update your diagram** based on what you learned.\n\n**Step 5 — Compare MCP to a REST API:** Ask Claude: \"What are the key differences between MCP and a REST API? Why was a new protocol needed?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Design an MCP Server for Your Workflow",
+      "content": "Before building anything, design an MCP server that would genuinely help your work.\n\n**Step 1 — List your most time-consuming manual tasks** that require switching between Claude and other tools: looking up documentation, checking databases, reading files in specific formats.\n\n**Step 2 — For your top pain point**, design an MCP server concept:\n- What data source does it connect to?\n- What 3-5 tools would it expose to Claude?\n- What would each tool accept as input and return as output?\n\n**Step 3 — Ask Claude:** *\"I'm designing an MCP server for [your pain point]. Here's my concept: [describe it]. Is this a valid use case for MCP? What tools should I expose? What are the security considerations?\"*\n\n**Step 4 — Refine your design** based on Claude's feedback.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this MCP server design. Find 3 potential problems: security risks, tools that would be hard to implement, or capabilities that already exist in standard MCP servers I could use instead.\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — MCP vs Direct API Integration",
+      "content": "Understand when MCP is the right choice vs direct API integration.\n\n**Step 1 — Ask Claude:** *\"Compare these approaches for giving Claude Code access to GitHub: (1) MCP GitHub server, (2) having Claude Code use the GitHub CLI (gh command), (3) having Claude Code use curl to call GitHub API directly. What are the pros and cons of each?\"*\n\n**Step 2 — Read the comparison.** When would each approach be better?\n\n**Step 3 — Ask about the tradeoffs:** \"What is the overhead cost of using MCP compared to direct tool use? Are there situations where MCP adds complexity without value?\"\n\n**Step 4 — Build your decision framework:**\n| Situation | Use MCP | Use direct tool/CLI | Use API directly |\n|---|---|---|---|\n| Persistent, reusable integration | | | |\n| One-time task | | | |\n| Complex multi-step operations | | | |\n| Simple data retrieval | | | |\n\n**Step 5 — Fill in the table** based on Claude's analysis."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Document the MCP Ecosystem for Your Use Case",
+      "content": "Create a reference document of MCP servers relevant to your specific work.\n\n**Step 1 — Identify your tool ecosystem:** List all the external tools and services you use in your work (GitHub, Slack, Notion, databases, APIs, etc.).\n\n**Step 2 — Ask Claude:** *\"For each of these tools, does an official or community MCP server exist? [List your tools]. For each that has one: what tools does it expose, and what would I be able to do with Claude Code that I can't do currently?\"*\n\n**Step 3 — Research the MCP server registry** (modelcontextprotocol.io or GitHub search for \"mcp-server\") for any tools Claude didn't find.\n\n**Step 4 — Create a reference document:**\n```\n# My MCP Server Landscape\n\n## High Priority (install next)\n- [Tool]: [MCP server name] — enables [capability]\n\n## Medium Priority (useful, not urgent)\n- [Tool]: [MCP server name] — enables [capability]\n\n## No MCP server available\n- [Tool]: use [alternative approach]\n```\n\n**Step 5 — Prioritise and pick one** to install in the next lesson."
+    },
+    {
+      "type": "quiz",
+      "question": "In the MCP architecture, what role does Claude Code play?",
+      "options": [
+        "Claude Code is the MCP server that provides tools",
+        "Claude Code is the MCP client that connects to and uses MCP servers",
+        "Claude Code is the transport layer between servers",
+        "Claude Code acts as both client and server simultaneously"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code is the MCP client — it connects to MCP servers and uses the tools those servers expose. The MCP servers are separate processes (local or remote) that provide specific capabilities: filesystem access, GitHub operations, database queries, etc. Claude Code decides when to call which server based on the task at hand, orchestrating multiple servers in a single conversation."
+    },
+    {
+      "type": "quiz",
+      "question": "An MCP server exposes a tool called `search_documents(query, limit)`. What does exposing this tool mean?",
+      "options": [
+        "The tool is automatically called every time Claude Code processes a message",
+        "Claude Code can discover this tool and call it with arguments when relevant to the task — it returns results that Claude Code uses in its response",
+        "The tool runs in Claude Code's process memory",
+        "Only the user can call this tool, not Claude Code automatically"
+      ],
+      "correct": 1,
+      "explanation": "Exposing a tool makes it available in Claude Code's tool-use system. Claude Code discovers available tools at the start of a session, decides when a tool is relevant to the current task, calls it with appropriate arguments, receives the result, and incorporates it into its response or next action. It's similar to how a person with a calculator uses it selectively — the calculator is available but is called only when calculation is needed."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-2.** You understand the client-server-transport architecture, where config lives, and what the `mcpServers` JSON block looks like. Lesson 8-3 puts this into practice by installing your first server."
+    }
+  ],
+  "nextLesson": "8-3",
+  "prevLesson": "8-1"
+}

@@ -1,0 +1,118 @@
+{
+  "id": "8-8",
+  "title": "GitHub MCP — Issues, PRs, and Code via Chat",
+  "part": 8,
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "github",
+    "claude-code",
+    "version-control"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have the GitHub MCP configured with a Personal Access Token, and you'll have used Claude Code to interact with a real GitHub repository — listing issues, reading code, and creating a new issue — entirely through conversation."
+    },
+    {
+      "type": "text",
+      "content": "## What the GitHub MCP Enables\n\nWith the GitHub MCP, Claude Code can:\n\n- List and read issues and pull requests\n- Create new issues with full descriptions\n- Search code across one or more repositories\n- Read file contents directly from GitHub\n- Create and manage branches\n- Post comments on issues and PRs\n- Get commit history\n\nThis means your workflow can shift from:\n1. Open browser\n2. Navigate to GitHub\n3. Find the repo\n4. Find the issue\n5. Copy the text\n6. Paste into Claude\n\nTo:\n1. Ask Claude 'what are my open issues?'\n\nThe round-trip through GitHub happens invisibly."
+    },
+    {
+      "type": "text",
+      "content": "## Step 1 — Create a GitHub Repository\n\nIf you don't already have a repo to connect to, create one:\n\n1. Go to github.com and sign in\n2. Click the `+` icon in the top-right → **New repository**\n3. Name it `ai-course-exercises`\n4. Set it to Private (recommended for learning projects)\n5. Check **Add a README file**\n6. Click **Create repository**\n\nYou now have a repo. The GitHub MCP will work with this repo and any others in your account."
+    },
+    {
+      "type": "text",
+      "content": "## Step 2 — Generate a Personal Access Token\n\nThe GitHub MCP needs a token to authenticate on your behalf.\n\n1. In GitHub, click your profile photo → **Settings**\n2. Scroll down the left sidebar → **Developer settings**\n3. Click **Personal access tokens** → **Tokens (classic)**\n4. Click **Generate new token (classic)**\n5. Give it a name: `claude-code-mcp`\n6. Set expiration to 90 days (or however long you want)\n7. Under **Select scopes**, check: `repo` (this gives full repo access)\n8. Click **Generate token**\n9. **Copy the token immediately** — GitHub only shows it once\n\nStore the token somewhere safe (a password manager) before closing the page."
+    },
+    {
+      "type": "text",
+      "content": "## Step 3 — Add the GitHub MCP to Your Configuration\n\nAdd the GitHub server to your global `settings.json`:"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"ghp_your-token-here\"\n      }\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Security: Keep your token out of git.** Your `settings.json` at `C:\\Users\\YourName\\.claude\\settings.json` is in your home directory, not inside a git repository — so this location is safe. But if you ever copy this config into a project folder that IS a git repo, add `settings.json` to `.gitignore` immediately. A committed token gives anyone who finds it full access to your GitHub account."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Environment variable alternative:** If you'd prefer not to put the token directly in the file, set it as a Windows environment variable instead:\n```powershell\n[System.Environment]::SetEnvironmentVariable('GITHUB_PERSONAL_ACCESS_TOKEN', 'ghp_your-token', 'User')\n```\nThen in your config, omit the `env` block entirely — the server will find the variable automatically."
+    },
+    {
+      "type": "text",
+      "content": "## Step 4 — Restart and Test\n\n1. Save `settings.json` and relaunch `claude`\n2. Type `/mcp` — confirm `github` appears\n3. Try: `\"List all repositories in my GitHub account\"`\n4. Try: `\"List open issues in my ai-course-exercises repo\"`\n5. Try: `\"What's in the README of my ai-course-exercises repo?\"`"
+    },
+    {
+      "type": "text",
+      "content": "## GitHub MCP Capabilities in Practice\n\nHere are the most useful things to do with the GitHub MCP:\n\n**Issue management:**\n- `\"Create an issue titled 'Add contact form to about-me page' in ai-course-exercises\"`\n- `\"Show me all open issues and summarize what needs attention\"`\n- `\"Which issues have been open more than a week?\"`\n\n**Code search:**\n- `\"Search my repos for any file that contains a TODO comment\"`\n- `\"Find all JavaScript files in ai-course-exercises\"`\n\n**PR review:**\n- `\"List open pull requests in [repo]\"`\n- `\"Summarize what changed in PR #5\"`\n\n**Cross-repo work:**\n- `\"Which of my repos hasn't had a commit in the last month?\"` (good for identifying abandoned projects)"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Manage GitHub Through Conversation",
+      "content": "**Setup:**\n1. Complete steps 1–4 above: create a repo, get a token, update settings.json, restart\n2. Type `/mcp` to confirm `github` is listed\n\n**Task 1 — Get a repo overview:**\nAsk: `\"List all my GitHub repositories with their descriptions and when they were last updated.\"`\n\n**Task 2 — Create a real issue:**\nThink of one genuine improvement or task for any of your repos (or for `ai-course-exercises`).\nAsk: `\"Create an issue in ai-course-exercises titled '[your title]' with a description of [what you want to track].\"`\nGo to github.com and confirm the issue is there.\n\n**Task 3 — Search across your code:**\nAsk: `\"Search all my repositories for any file containing a TODO comment. List the file paths and the TODO text.\"`\n\n**Task 4 — Read a file from GitHub:**\nAsk: `\"Read the README from my ai-course-exercises repository and tell me what it currently says.\"`\n\n**Bonus — issue triage:**\nIf you have repos with open issues:\nAsk: `\"Look at all open issues across my repos and group them by type: bugs, features, questions, and other. Suggest which one I should tackle first.\"`\n\nDocument what you accomplished in `notes/github-mcp-session.md`."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — GitHub MCP First Operations",
+      "content": "Get hands-on with GitHub MCP's most useful operations.\n\n**Step 1 — Install and configure GitHub MCP** (if not already done from 8-3). You'll need a GitHub personal access token.\n\n**Step 2 — In Claude Code**, test these operations on a real GitHub repository you own:\n- \"List the 5 most recent open issues in [your repo]\"\n- \"Show me all pull requests awaiting review\"\n- \"What was the last commit message and who wrote it?\"\n\n**Step 3 — Create an issue via Claude Code:**\n\"Create a new GitHub issue in [your repo] titled '[title]' with this description: [description]. Label it as a bug.\"\n\n**Step 4 — Verify the issue was created** by visiting GitHub in your browser.\n\n**Step 5 — Ask Claude Code** to add a comment to the issue you just created: \"Add a comment to the issue I just created saying 'Being investigated.'\"\n\n**Step 6 — Rate the experience:** Is this faster than using the GitHub web UI? What operations work best via MCP?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — AI-Assisted PR Review Workflow",
+      "content": "Use GitHub MCP to review pull requests with AI assistance.\n\n**Step 1 — Find an open pull request** in a GitHub repository (your own or one you contribute to).\n\n**Step 2 — Ask Claude Code to review it:**\n```\nReview the open pull request #[number] in [owner/repo]. I want:\n1. Summary of what this PR changes\n2. Any obvious bugs or logic errors in the diff\n3. Missing tests that should be there\n4. Anything that doesn't match the project's conventions (check CLAUDE.md or README for guidance)\n5. A suggested review comment to post on the most important issue found\n```\n\n**Step 3 — Read Claude Code's analysis.** Do you agree? Is anything missing?\n\n**Step 4 — Post a review comment** via Claude Code: \"Add a review comment to [PR number] saying: [your comment].\"\n\n**Step 5 — Mandatory review of the review:** Ask Claude: *\"Review your own PR analysis. What important aspects of a code review did you not check that a senior engineer would look at?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — GitHub Issue to Implementation Workflow",
+      "content": "Build the workflow from GitHub issue → implementation → PR using Claude Code and GitHub MCP.\n\n**Step 1 — Find or create a GitHub issue** describing a small feature or bug fix.\n\n**Step 2 — Ask Claude Code to read the issue:**\n\"Read issue #[number] from [repo]. Summarise the requirement and ask me any clarifying questions before we implement it.\"\n\n**Step 3 — Answer Claude Code's questions** (or say there are none).\n\n**Step 4 — Ask Claude Code to implement the fix:**\n\"Implement the fix for issue #[number]. Create a new git branch for this work. After implementation, run the tests.\"\n\n**Step 5 — Review the implementation.** If it looks right: \"Create a draft PR for this implementation. Use the issue description to write the PR body. Link the issue.\"\n\n**Step 6 — Verify the PR** was created correctly on GitHub."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — GitHub Project Management via Claude Code",
+      "content": "Use GitHub MCP to manage your repository's issues and project board without leaving Claude Code.\n\n**Step 1 — Ask Claude Code to audit your GitHub issues:**\n```\nAudit the open issues in [repo]:\n1. List issues that have been open for more than 30 days\n2. List issues with no labels\n3. List issues that are blocking other issues\n4. Which issues should I prioritise this week? (Consider: impact, effort, dependencies)\n```\n\n**Step 2 — Take action on the recommendations:**\n- Add labels to unlabeled issues\n- Close any issues that are no longer valid\n- Add a priority comment to the recommended issues\n\n**Step 3 — Create a sprint plan:** \"Create 5 issues for the next sprint based on our backlog, prioritising [your focus area].\"\n\n**Step 4 — Evaluate the workflow:** Compare this to using the GitHub web UI. What was faster? What was harder?"
+    },
+    {
+      "type": "quiz",
+      "question": "You use GitHub MCP to have Claude Code create a GitHub issue, add labels, and assign it to a milestone — all in one Claude Code session. What is the key risk to verify?",
+      "options": [
+        "That Claude Code used the correct API version",
+        "That all the actions were correctly applied — Claude Code can confirm operations but GitHub is the authoritative source; verify in the GitHub UI",
+        "That the issue was created in the right timezone",
+        "That the MCP server is still connected"
+      ],
+      "correct": 1,
+      "explanation": "When AI systems make changes to external services via APIs, always verify in the authoritative source. GitHub MCP may report success but the actions could have partially failed, applied to the wrong repository, or set wrong values (e.g., wrong milestone ID). After any batch of GitHub operations, open GitHub in your browser and verify the changes are what you expected. This takes 30 seconds and catches silent failures."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code uses GitHub MCP to comment on a colleague's pull request with review feedback. What should you always do before allowing this?",
+      "options": [
+        "Ensure Claude Code has write access to the repository",
+        "Read and approve the exact text of the comment before Claude Code posts it — comments on others' work are visible and represent you professionally",
+        "Ask the colleague for permission first",
+        "Post it as a draft comment that can be deleted"
+      ],
+      "correct": 1,
+      "explanation": "Any action that creates publicly visible content under your name requires human review before posting. Code review comments are professional communications — a tone-deaf, inaccurate, or unclear comment reflects on you, not on the AI. Always read exactly what Claude Code will post before it posts it. For GitHub comments specifically: ask Claude Code to draft the comment, review the draft, approve or revise, then post."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-8.** Claude Code now has access to your GitHub account. Lesson 8-9 goes deeper on the filesystem MCP — exploring its full capabilities and security model."
+    }
+  ],
+  "nextLesson": "8-9",
+  "prevLesson": "8-7"
+}

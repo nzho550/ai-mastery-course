@@ -1,0 +1,92 @@
+{
+  "id": "14-4",
+  "title": "Capstone: Your Full AI-Powered Dev Environment",
+  "part": 14,
+  "estimatedMinutes": 85,
+  "tags": [
+    "capstone",
+    "setup",
+    "claude-code",
+    "mcp",
+    "vscode",
+    "documentation",
+    "build"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Build\n\nA complete, documented description of your personal AI development environment — everything working, everything verified, everything written down so that you (or someone else) could rebuild it from scratch.\n\nThis isn't just documentation. The act of walking through every component and confirming it works will likely reveal a few things that got half-configured along the way. Fix them now, while you have the focus."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The output of this capstone is `notes/my-ai-dev-environment.md`** — a setup document that represents the cumulative result of 14 parts. If you had to start over on a new machine, this file tells you exactly what to install and how to configure it."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Audit and Document Your Full AI Setup",
+      "content": "## The Checklist\n\nWork through each component. For each one: test that it works, then document it.\n\n---\n\n**Component 1 — VS Code Setup**\n\nOpen VS Code. Verify:\n- [ ] VS Code is installed and up to date (Help → Check for Updates)\n- [ ] These extensions are installed and working: Live Server, Prettier, GitLens, GitHub Copilot (or Continue.dev), at least one AI coding assistant\n- [ ] Your settings.json has your preferred font size, auto-save, word wrap, format on save\n- [ ] You know how to open the Command Palette (`Ctrl+Shift+P`)\n\nFor each installed extension, write one sentence in your document: what it does and why you use it.\n\n---\n\n**Component 2 — Claude Code Configuration**\n\nOpen a terminal and type `claude --version` to confirm Claude Code is installed.\n\nThen verify:\n- [ ] `claude` launches successfully\n- [ ] `/mcp` shows at least 3 connected MCP servers\n- [ ] Your CLAUDE.md file exists in `ai-course-projects/` and contains useful instructions\n- [ ] At least 2 custom slash commands exist in `.claude/commands/`\n- [ ] Your memory file at `~/.claude/memory/` contains your preferences\n- [ ] Your user-level settings at `~/.claude/settings.json` are configured correctly\n\nFor each MCP server listed by `/mcp`, write one sentence: what it does and when you use it.\n\n---\n\n**Component 3 — Local AI**\n\nVerify:\n- [ ] Ollama is installed: `ollama --version`\n- [ ] At least one model is downloaded: `ollama list`\n- [ ] The Ollama API is responsive: open browser to `http://localhost:11434`\n- [ ] Continue.dev in VS Code is configured to use the local model\n- [ ] OR: LM Studio is installed with a model loaded\n\nNote which model(s) you have and what you use each one for.\n\n---\n\n**Component 4 — Git and GitHub**\n\nVerify:\n- [ ] `git --version` works\n- [ ] `git config --global user.name` returns your name\n- [ ] `git config --global user.email` returns your email\n- [ ] Your `ai-course-projects` folder has at least one commit in its history\n- [ ] The GitHub MCP server in Claude Code can list repos from your account\n\n---\n\n**Component 5 — Automations Running**\n\nVerify:\n- [ ] At least one n8n workflow is active (the email drafting workflow from 14-3, or automations from 10-2)\n- [ ] You know where to find your n8n instance and how to deactivate workflows if needed\n\nList each active automation: what it does and when it runs.\n\n---\n\n**Component 6 — API Access**\n\nVerify:\n- [ ] Anthropic API key is in `exercises/.env`\n- [ ] `.env` is in `.gitignore`\n- [ ] `python exercises/hello-claude.py` still works\n- [ ] Spending limits are set in the Anthropic Console\n\nList every service where you have API access (just the service name, not the keys).\n\n---\n\n## Writing the Environment Document\n\nCreate `notes/my-ai-dev-environment.md`. Use this structure:\n\n```markdown\n# My AI Development Environment\n\nLast updated: [today's date]\n\n## VS Code\n\n### Version\n[VS Code version number]\n\n### Extensions\n| Extension | Purpose |\n|-----------|----------|\n| Live Server | Preview HTML with auto-reload |\n| Prettier | Auto-format code on save |\n| GitLens | Git blame and history inline |\n| [your AI extension] | [what it does for you] |\n| [continue the list] | |\n\n### Key Settings\nSettings.json lives at: [path]\nKey customizations: [describe what you changed from defaults]\n\n---\n\n## Claude Code\n\n### Version\n[claude --version output]\n\n### Active MCP Servers\n| Server | What It Does | When I Use It |\n|--------|-------------|---------------|\n| filesystem | Read/write project files | All coding sessions |\n| github | Issues, PRs, repo navigation | When working with GitHub |\n| [your others] | | |\n\n### Custom Slash Commands\n| Command | What It Does |\n|---------|-------------|\n| /review | Reviews file for bugs and readability |\n| [others] | |\n\n### CLAUDE.md Approach\n[Describe what you put in your project CLAUDE.md files]\n\n### Memory File Location\n[Path to your preferences file]\n\n---\n\n## Local AI\n\n### Ollama\nInstalled: yes/no\nModels: [list with what you use each for]\nConnected to: Continue.dev / Claude Code / both\n\n### LM Studio\nInstalled: yes/no\nPrimary use: [when you open it]\n\n---\n\n## Automations\n\n### Active n8n Workflows\n| Workflow | What It Does | Schedule |\n|----------|-------------|----------|\n| Email Reply Drafting | Drafts replies to labeled emails | Every 1 min |\n| [others from lesson 10-2] | | |\n\n---\n\n## APIs and Credentials\n\n### Services with API Access\n- Anthropic (Claude API)\n- GitHub\n- [others]\n\nKeys are stored in: [.env files / environment variables / etc.]\nSpending limit set: yes/no\n\n---\n\n## My Daily AI Workflow\n\n[Paste your workflow from notes/my-ai-workflow.md — or write it fresh]\n\n---\n\n## Prompt Library\n\nLocation: [path to your prompt library from lesson 3-8]\n\n---\n\n## Live Projects\n\n- Portfolio: https://[yourusername].github.io\n- [Other things you built]\n\n---\n\n## What I'd Set Up First on a New Machine\n\n1. Install VS Code with these extensions: [list]\n2. Install Node.js, then Claude Code\n3. Install Git and configure user.name/email\n4. Install Ollama and pull [model]\n5. Copy .claude/settings.json with MCP configs\n6. Set up .env with API keys\n7. Activate n8n workflows\n```\n\n---\n\n## Fixing What's Broken\n\nAs you work through the checklist, you'll probably find at least one thing that isn't configured correctly — an MCP server that stopped connecting, a workflow that was deactivated, an extension that needs updating.\n\nFix those things now. Use Claude Code to help:\n\n```\nclaude\n```\n\nThen: \"I'm auditing my setup. When I run `/mcp`, the [server name] server isn't connecting. Here's the error: [paste error]. What's wrong?\"\n\nThis is exactly what Claude Code is good at. It can read your settings.json, suggest fixes, and test them."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Share this document.** If you ever join a team, collaborate with a developer, or want to show an employer what your setup looks like — this document says more about your capabilities than a resume line that says \"familiar with AI tools.\" It's specific, verifiable, and shows you built things."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Dev Environment Audit",
+      "content": "Audit your current development environment and identify the gaps.\n\n**Step 1 — List every tool** in your current development workflow:\n- Editor/IDE\n- Terminal and shell\n- Git workflow tools\n- AI assistants\n- Testing tools\n- Build/deployment\n\n**Step 2 — Ask Claude:** *\"I have this development environment [list it]. What important AI-powered tools am I missing that would significantly improve my productivity? For each, explain specifically what it does and what pain point it addresses.\"*\n\n**Step 3 — Score your current setup:**\n| Category | Current tool | Gap | Priority to fill |\n|---|---|---|---|\n| Code generation | | | |\n| Code review | | | |\n| Testing | | | |\n| Documentation | | | |\n| Deployment | | | |\n\n**Step 4 — Prioritise the highest-value gap** — you'll fill it in this capstone."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Custom Dev Assistant",
+      "content": "Build a custom assistant tailored to your development environment.\n\n**Step 1 — Design a CLAUDE.md** that makes Claude Code a perfect fit for your workflow:\n- Your tech stack and versions\n- Your coding standards and conventions\n- Your project structure\n- Your common tasks and how you want them handled\n- Things you always do after certain operations\n\n**Step 2 — Create custom slash commands** for your 3 most common workflows:\n```markdown\n# .claude/commands/daily-review.md\nRun through this checklist for my daily code review:\n1. Check for any TODO comments that should be tickets\n2. Run linting and fix auto-fixable issues\n3. Review the last 3 commits for quality\n4. Check test coverage hasn't dropped\n5. Summarise what was done and what needs attention\n```\n\n**Step 3 — Test each command** in a real session.\n\n**Step 4 — Mandatory review:** Ask Claude Code: *\"Use the commands I've created and evaluate them: what works well, what's unclear, and what would make each command more useful?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Automate Your Development Workflows",
+      "content": "Create automation for your most repetitive development tasks.\n\n**Step 1 — List 5 tasks** you do multiple times per week that follow a predictable pattern.\n\n**Step 2 — For the top 2**, ask Claude Code to create shell scripts or Claude Code commands:\n```\nCreate a shell function called dev-start that:\n1. Pulls latest changes from main\n2. Installs any new dependencies\n3. Runs migrations if any schema files changed\n4. Starts the development server\n5. Opens the browser to localhost:3000\n\nMake it work on Windows/PowerShell.\n```\n\n**Step 3 — Test each automation** in a real development session.\n\n**Step 4 — Install them** in your shell profile so they're always available.\n\n**Step 5 — Commit to using them** for 2 weeks, then evaluate: did they actually help, or did you forget they existed?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Document and Share Your AI Dev Environment",
+      "content": "Document your complete AI-powered development environment so you can recreate or share it.\n\n**Step 1 — Create a dotfiles or setup repository** on GitHub (public or private).\n\n**Step 2 — Ask Claude Code to help you write setup documentation:**\n\"Document my complete development environment setup. Include: all tools with installation commands, configuration files that need to be set up, environment variables required, and the order of installation steps. Format as a step-by-step setup guide that a new developer could follow.\"\n\n**Step 3 — Test the documentation** by following it from scratch (or have someone else test it).\n\n**Step 4 — Add this documentation** to your portfolio — \"My AI-Powered Dev Environment\" is a compelling portfolio piece.\n\n**Step 5 — Share with your team** or community. Others will benefit and might contribute improvements."
+    },
+    {
+      "type": "quiz",
+      "question": "You've built a comprehensive AI development environment with many custom commands and automations. A new colleague joins your team. How should you share your setup?",
+      "options": [
+        "Give them your whole dotfiles repo and tell them to copy everything",
+        "Share selectively: explain the tools and why you use them, let them try each one, and help them adapt your setup to their workflow — not everyone works the same way",
+        "Keep it to yourself — it's your competitive advantage",
+        "Only share after they've been at the company for 3 months"
+      ],
+      "correct": 1,
+      "explanation": "Development environment setups are deeply personal — your automation for your workflow may not match how your colleague thinks and works. Forced adoption of someone else's full environment often leads to confusion and abandonment. Better approach: share the philosophy (why AI tools, which categories are valuable), let them experience specific tools with your guidance, and help them build their own setup that fits their workflow. Document the \"what and why\" of your setup so they can adopt the parts that fit them."
+    },
+    {
+      "type": "quiz",
+      "question": "You have 8 different AI tools installed in your development environment. What is the risk of having too many tools?",
+      "options": [
+        "No risk — more tools means more capability",
+        "Tool overload: cognitive overhead of choosing between similar tools, maintenance burden of keeping all configured and updated, and decision fatigue leading to underusing all of them",
+        "Only a risk if the tools conflict with each other",
+        "Only a risk for beginners"
+      ],
+      "correct": 1,
+      "explanation": "Tool proliferation is a real productivity problem: every additional tool has a decision cost (when do I use this vs that?), a maintenance cost (keeping it updated, configured, working), and a learning cost (developing proficiency). Developers with 3 tools they use fluently often outperform those with 10 tools they use occasionally. The goal is a small, well-integrated set of tools you use reflexively and understand deeply — not maximum coverage of every available capability."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Capstone 14-4 complete.** Your AI development environment is fully documented. One capstone remains — the open one, where you build something of your own choosing."
+    }
+  ],
+  "nextLesson": "14-5",
+  "prevLesson": "14-3"
+}

@@ -1,0 +1,116 @@
+{
+  "id": "7-2",
+  "title": "Installing Claude Code",
+  "part": 7,
+  "estimatedMinutes": 60,
+  "tags": [
+    "claude-code",
+    "install",
+    "terminal",
+    "node"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson `claude --version` will return a version number, `claude` will launch Claude Code in your terminal, and you'll understand your billing options. You'll also configure your first session settings."
+    },
+    {
+      "type": "text",
+      "content": "## Prerequisites\n\n**Node.js (v18 or later):** Claude Code is a Node.js package, so Node.js must be installed. Check if you already have it:\n\n```powershell\nnode --version\n```\n\nIf this returns `v18.x.x` or higher — skip the Node.js install. If you see an error or a version below 18:\n\n1. Go to **nodejs.org**\n2. Click the **LTS** download button (stable version)\n3. Run the installer, keeping all defaults\n4. When finished, close and reopen PowerShell\n5. Run `node --version` again — should show v20.x.x or higher\n\n**npm** (comes with Node.js — no separate install needed):\n```powershell\nnpm --version\n```\nShould show a version number."
+    },
+    {
+      "type": "text",
+      "content": "## Installing Claude Code\n\nWith Node.js in place, Claude Code installs in one command:\n\n```powershell\nnpm install -g @anthropic-ai/claude-code\n```\n\nThe `-g` flag installs it globally — the `claude` command becomes available from any directory.\n\n**If you get a permissions error:** Open PowerShell as Administrator (search PowerShell → right-click → Run as Administrator), then re-run the command.\n\nInstallation takes 1-3 minutes. You'll see output ending with something like `added 847 packages`.\n\n**Verify the install:**\n```powershell\nclaude --version\n```\nYou should see a version number like `1.x.x`. If you see `command not recognized`, close PowerShell and reopen it — the PATH sometimes needs a fresh shell to update.\n\n**Update Claude Code when new versions release:**\n```powershell\nnpm update -g @anthropic-ai/claude-code\n```\nAnthropic releases updates frequently — run this every few weeks to stay current."
+    },
+    {
+      "type": "text",
+      "content": "## Authentication and Billing Options\n\nThe first time you launch Claude Code, it needs to authenticate. There are two ways:\n\n**Option 1 — Claude.ai subscription (Max plan):**\nIf you subscribe to Claude Max ($100/month), Claude Code is included with high usage limits. This is the recommended option if you plan to use Claude Code heavily — predictable cost, no token counting.\n\nAuthenticate:\n1. Run `claude` in the terminal\n2. Select the option to authenticate via Claude.ai\n3. A browser window opens — sign in to your Claude.ai account\n4. The browser redirects back to the terminal — you're authenticated\n\n**Option 2 — Anthropic API (pay per use):**\nGet an API key from console.anthropic.com (free account, add a payment method). This is pay-as-you-go — charged per token you use.\n\nAuthenticate:\n1. Go to console.anthropic.com\n2. Create an account (or sign in)\n3. Go to API Keys → Create Key\n4. Copy the key (starts with `sk-ant-`)\n5. In the terminal: `export ANTHROPIC_API_KEY='your-key-here'` (PowerShell: `$env:ANTHROPIC_API_KEY='your-key-here'`)\n6. Or run `claude` and it will prompt you to enter the key interactively\n\n**Cost for learning use:** Typical learning use (Part 7 exercises) runs $3-15 total on the API. Most individual coding sessions cost $0.10-0.50.\n\n**Option 3 — VS Code Extension (alternative to CLI):**\nInstall the Claude Code extension from the VS Code marketplace. It uses the same authentication as the CLI and provides a UI panel inside VS Code. For learning, still recommend the CLI first — you see exactly what's happening."
+    },
+    {
+      "type": "text",
+      "content": "## First Launch and Interface Overview\n\nOnce authenticated, launch Claude Code:\n\n```powershell\nclaude\n```\n\nYou'll see a welcome message and a prompt:\n```\n╭─────────────────────────────────╮\n│  Claude Code (v1.x.x)           │\n│  Type a message or /help        │\n╰─────────────────────────────────╯\n\n>\n```\n\n**The REPL (Read-Eval-Print Loop):** You're now in an interactive session where you type requests and Claude Code responds. Unlike chat, Claude Code has access to your filesystem from the current directory.\n\n**Key commands:**\n\n```\n/help          — show all available commands\n/status        — show current session info (tokens used, files read)\n/compact       — compress conversation history to save context\n/clear         — clear conversation and start fresh\n/exit          — exit Claude Code\n/model         — see or switch the model being used\n```\n\n**Slash commands for tasks:**\n```\n/read [file]   — tell Claude Code to read a specific file\n/memory        — show what Claude Code remembers about this project\n```\n\n**The permission system:** By default, Claude Code asks for permission before:\n- Writing or modifying files\n- Running terminal commands\n- Making network requests\n\nYou'll see prompts like: `[Y]es / [N]o / [A]lways allow`. Respond thoughtfully — don't set 'Always allow' for destructive operations without understanding what they do."
+    },
+    {
+      "type": "text",
+      "content": "## Running Claude Code Properly: Open in Your Project\n\nClaude Code reads files relative to the directory it's launched from. Always launch it from inside your project:\n\n```powershell\ncd C:\\Projects\\Learning\\my-project\nclaude\n```\n\nOr in File Explorer: Shift+right-click your project folder → Open in Terminal → then run `claude`.\n\n**Why this matters:** If you launch Claude Code from `C:\\`, it'll have the wrong context for your files. If you launch from inside your project directory, it automatically knows the folder structure and can find all your files.\n\n**The `--print` flag for quick one-off tasks:**\n```powershell\nclaude --print \"What does the main function in main.js do?\"\n```\nThis runs a single question and exits without entering the interactive REPL. Useful for quick checks."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Never paste API keys into Claude Code conversations.** Your ANTHROPIC_API_KEY should live in an environment variable or in Claude Code's credential store — not in your project files or chat messages. The security habit from lesson 1-5 applies here: credentials in conversation text are credentials at risk."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Full Install and First Session",
+      "content": "Work through every step. Don't move on until each produces the expected output.\n\n**Step 1 — Verify Node.js:**\n```powershell\nnode --version\n```\nExpected: `v18.x.x` or higher. If error, install from nodejs.org first.\n\n**Step 2 — Install Claude Code:**\n```powershell\nnpm install -g @anthropic-ai/claude-code\n```\nWait for completion. Expected: `added X packages` at the end.\n\n**Step 3 — Verify:**\n```powershell\nclaude --version\n```\nExpected: a version number.\n\n**Step 4 — Navigate to your course project folder:**\n```powershell\ncd C:\\Projects\\Learning\n```\n(Or wherever you created your course folder in lesson 4-2)\n\n**Step 5 — Launch Claude Code:**\n```powershell\nclaude\n```\nFollow the authentication prompts. Choose the option that matches how you want to pay (Claude.ai subscription or API key).\n\n**Step 6 — Explore the interface:**\nOnce authenticated, type these inside the Claude Code REPL:\n```\n/help\n```\nRead through the commands carefully — you'll use most of these in Part 7.\n\n```\n/status\n```\nSee your current session information.\n\nThen ask your first real question:\n```\nWhat files are in the current directory? Describe what this project is.\n```\nClaude Code will list the files it can see and describe what the project appears to be.\n\n**Step 7 — Exit:**\n```\n/exit\n```\n\n**You're done if:** `claude --version` returns a version number and `claude` launches without an authentication error.\n\n**Troubleshooting:**\n- `command not found`: close and reopen PowerShell (PATH update needed)\n- Permission error during install: run PowerShell as Administrator\n- Authentication fails: try `/logout` then `claude` again, or re-enter your API key"
+    },
+    {
+      "type": "quiz",
+      "question": "You've just installed Claude Code and are setting it up for the first time. You have a Claude.ai free tier account but haven't set up API billing. What are your options for authenticating?",
+      "options": [
+        "You can't use Claude Code without a paid plan — the CLI requires enterprise access",
+        "You can authenticate with your Claude.ai account (subscribing to Max covers the CLI) or get an API key from console.anthropic.com (pay-as-you-go)",
+        "You authenticate only with an API key — Claude.ai accounts don't work with the CLI",
+        "The free tier automatically provides Claude Code access with 50 messages per day"
+      ],
+      "correct": 1,
+      "explanation": "There are two authentication paths: (1) Claude Max subscription connects your Claude.ai account and includes Claude Code usage in the monthly plan — best for heavy use. (2) An Anthropic API key from console.anthropic.com allows pay-as-you-go billing — best for occasional use or learning. The free tier doesn't include Claude Code API access, but new API accounts often get free credits to start."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Install and Verify Claude Code",
+      "content": "This drill gets Claude Code installed and running your first command.\n\n**Step 1 — Install Claude Code:**\n```powershell\nnpm install -g @anthropic-ai/claude-code\n```\n(Requires Node.js 18+. Run `node --version` first.)\n\n**Step 2 — Verify installation:**\n```powershell\nclaude --version\n```\n\n**Step 3 — Authenticate:**\n```powershell\nclaude\n```\nFollow the authentication flow (browser-based OAuth to your Claude account).\n\n**Step 4 — Run your first command in a project folder:**\n```powershell\ncd your-project-folder\nclaude\n```\nIn the Claude Code interface, type: \"What files are in this project?\"\n\n**Step 5 — Verify it can read your project:** Ask: \"Summarise what this project does based on the files you can see.\"\n\n**Step 6 — Exit Claude Code:** Type /exit or press Ctrl+C."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — First Real Claude Code Task",
+      "content": "Complete your first real Claude Code task — something genuinely useful.\n\n**Step 1 — Open Claude Code in a real project:**\n```powershell\ncd your-real-project\nclaude\n```\n\n**Step 2 — Give Claude Code a real, specific task** from your project (use your ranked list from Lesson 7-1 Workshop D). Keep it to something that should take under 10 minutes:\n- \"Add a README.md to this project based on what you see in the files\"\n- \"Add docstrings to all functions in [filename]\"\n- \"Find any TODO comments in the codebase and list them\"\n\n**Step 3 — Watch Claude Code work.** Notice: which tools does it use? Which files does it read? What commands does it run?\n\n**Step 4 — Review the output.** Is what Claude Code produced correct and useful?\n\n**Step 5 — Mandatory review:** In the Claude Code session, type: *\"Review what you just did. What might be wrong or incomplete? What didn't you do that I might have expected?\"*\n\n**Step 6 — Commit the result** with a descriptive message."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Claude Code Permission Modes",
+      "content": "Claude Code's permission system controls what it can do autonomously. Understanding it prevents surprises.\n\n**Step 1 — Read the permission documentation:**\n```powershell\nclaude --help\n```\nOr ask Claude.ai: \"What are Claude Code's permission modes? What does each mode allow and prevent?\"\n\n**Step 2 — Start Claude Code in conservative mode** (does not execute commands without approval):\n```powershell\nclaude --permission-mode=default\n```\n\n**Step 3 — Give it a task that requires running code.** Notice that it asks for permission before executing.\n\n**Step 4 — Compare:** Start a new session without permission restrictions. Give the same task. How does the behaviour differ?\n\n**Step 5 — Ask Claude:** *\"For a developer working on a production codebase, what permission mode should they use for Claude Code? What are the risks of using fully autonomous mode?\"*\n\n**Step 6 — Set your default:** Based on what you learned, what permission mode will you use by default?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Configure Claude Code for Your Environment",
+      "content": "Configure Claude Code to work best in your specific development environment.\n\n**Step 1 — Check your Claude Code version and settings:**\n```powershell\nclaude --version\nclaude config\n```\n\n**Step 2 — Configure your model preference:**\n```powershell\nclaude config set model claude-sonnet-4-6\n```\n\n**Step 3 — Set up a CLAUDE.md** in your main project (we'll cover this in depth in Lesson 7-6, but start now):\n- Create `CLAUDE.md` in your project root\n- Add 3 basic things: what the project is, the main language/framework, and one thing Claude Code should always do (e.g., \"Always run tests after making changes\")\n\n**Step 4 — Test the configuration:** Start a Claude Code session and ask it to do a task. Does it follow your CLAUDE.md instruction?\n\n**Step 5 — Mandatory setup review:** Ask Claude: *\"Review my Claude Code setup. What configuration or CLAUDE.md instructions should I add to make Claude Code more reliable for [your project type]?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "You install Claude Code but the `claude` command is not found in your terminal. What is the most likely cause?",
+      "options": [
+        "Claude Code requires a paid API subscription",
+        "npm did not add the global package location to your system PATH — you need to fix your PATH or use npx claude",
+        "Claude Code is only for Mac/Linux",
+        "You need to restart your computer"
+      ],
+      "correct": 1,
+      "explanation": "When npm installs a global package (`npm install -g`), it places the executable in a global npm bin directory. If this directory isn't in your system PATH, the command won't be found. The fix on Windows: run `npm config get prefix` to find where npm installs globals, then add that path + \\node_modules\\.bin to your system PATH. Alternatively, use `npx @anthropic-ai/claude-code` to run without global installation."
+    },
+    {
+      "type": "quiz",
+      "question": "Why is it important to create a CLAUDE.md file in your project before running Claude Code on it?",
+      "options": [
+        "Claude Code won't work without a CLAUDE.md file",
+        "CLAUDE.md provides persistent project context — without it, Claude Code has to re-discover your project structure and conventions every session, leading to less consistent results",
+        "CLAUDE.md is required for authentication",
+        "CLAUDE.md sets the permission mode for the session"
+      ],
+      "correct": 1,
+      "explanation": "CLAUDE.md is a persistent instruction file that Claude Code reads at the start of every session. It gives Claude Code: project purpose and architecture, conventions and style rules, what to avoid, commands to run for testing/building. Without it, you spend time re-establishing context each session and risk Claude Code making decisions that don't fit your project's conventions. It's project memory for the agent."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 7-2.** Claude Code is installed and authenticated. You understand the billing options and the interface basics. In the next lesson you'll use it on a real project for the first time."
+    }
+  ],
+  "nextLesson": "7-3",
+  "prevLesson": "7-1"
+}

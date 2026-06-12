@@ -1,0 +1,122 @@
+{
+  "id": "15-2",
+  "title": "Deep Research with Perplexity & Claude",
+  "part": 15,
+  "estimatedMinutes": 65,
+  "tags": [
+    "research",
+    "beginner",
+    "perplexity",
+    "search",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThis lesson covers the two most powerful tools for researching any topic: Perplexity AI for web-sourced research with citations, and Claude for conceptual depth and analysis. By the end you'll know how to use Perplexity's Focus modes for targeted searches, when to use each tool, how to use them together in a two-tool research workflow, and how to get structurally better results from both through prompt design."
+    },
+    {
+      "type": "text",
+      "content": "## Perplexity AI — Research with Citations\n\nPerplexity is an AI search engine that searches the web in real time, reads the results, and synthesises an answer — with citations you can verify. Unlike ChatGPT or Claude (which have training data cutoffs), Perplexity always searches current sources.\n\n**What makes it different from Google:**\n- Google returns links. Perplexity returns answers, synthesised from multiple sources, with citations.\n- You can ask follow-up questions and it maintains context across the session\n- You can ask for specific formats: tables, timelines, comparisons, bullet summaries\n- The free tier is powerful enough for most research tasks\n\n**The research workflow with Perplexity:**\n\n**Step 1 — Ask the overview question:**\nStart broad: *\"What are the main approaches to [your topic]?\"* or *\"Explain [topic] and the key debates around it.\"*\nRead the summary and the cited sources. Check 2–3 of the sources to verify the summary is accurate — this habit catches hallucinated or misrepresented citations before they become problems.\n\n**Step 2 — Drill into what matters:**\nAsk follow-ups: *\"Tell me more about [specific aspect].\"*, *\"What do critics of this approach argue?\"*, *\"What happened with [specific event] and what was the outcome?\"*\n\n**Step 3 — Ask for structure:**\n*\"Give me a comparison table of the three main approaches.\"*, *\"Summarise the 5 most important things to know about this topic.\"*, *\"What are the open questions researchers are still debating?\"*\n\n**Step 4 — Save what matters:**\nCopy the key summaries and source links into your research notes. Perplexity's citations are clickable — verify any claim you plan to act on or include in a document."
+    },
+    {
+      "type": "text",
+      "content": "## Perplexity Focus Modes — Targeted Research\n\nPerplexity's Focus modes let you constrain where it searches. This dramatically improves result quality when you know what type of source you need.\n\n| Focus mode | Searches | Best for |\n|------------|----------|----------|\n| **All** | The entire web | General research, current events, broad topics |\n| **Academic** | Scholarly papers and journals | Research, science, evidence-based topics |\n| **Writing** | Blogs, articles, editorial content | Style references, opinions, cultural topics |\n| **YouTube** | Video transcripts | Tutorials, talks, how-to content |\n| **Reddit** | Reddit communities | Real user experiences, product reviews, niche topics |\n| **Social** | Twitter/X, social media | Real-time sentiment, breaking news, trends |\n\n**When Focus mode matters most:**\n- Researching medical, legal, or scientific claims → use **Academic** for peer-reviewed evidence\n- Getting unfiltered user opinions on a product or service → **Reddit** gives real experience, not marketing\n- Finding recent breaking news before mainstream coverage → **Social** for real-time\n\n**Pro tip:** Run the same question in two different focus modes. Academic gives you the research consensus; Reddit gives you what practitioners actually experience — they often diverge, and that divergence is itself informative."
+    },
+    {
+      "type": "text",
+      "content": "## Perplexity Pro Features Worth Knowing\n\n**Deep Research mode (Pro plan):** Perplexity's Deep Research runs a multi-step research process — it breaks your question into sub-questions, searches each one, then synthesises a comprehensive report. For complex topics, this can produce a structured 2,000-word research brief in 3–5 minutes. Comparable to paying a research assistant for several hours of work.\n\n**Spaces:** Create a persistent research space for an ongoing project. Add sources, notes, and ongoing questions. Perplexity maintains context across sessions within a Space — useful for research you return to over days or weeks.\n\n**File upload:** Upload PDFs or documents and ask questions about them alongside web research. Perplexity will synthesise your uploaded document with current web results.\n\n**The free tier** covers most everyday research needs. Pro (around $20/month) is worth it if you do significant research regularly or need Deep Research for complex topics."
+    },
+    {
+      "type": "text",
+      "content": "## Claude for Conceptual Depth\n\nPerplexity is best for: factual, current, web-sourced research with citations.\n\nClaude is best for: conceptual exploration, analysis, structured thinking, and working with content you provide.\n\n**The key difference:** Claude works primarily from its training knowledge (with some browsing capability in the paid tier). It won't hallucinate a citation, but its knowledge has a cutoff date. For current events or fast-moving fields, use Perplexity first, then bring the findings to Claude for deeper analysis.\n\n**Where Claude excels in research:**\n\n*Map the conceptual space:*\n```\nI need to research [topic]. I know nothing about it.\nAsk me 5 clarifying questions to understand what I actually need,\nthen tell me:\n1. What are the key concepts I need to understand first?\n2. What are the main perspectives or schools of thought?\n3. What are the 3 most important things an informed person would know?\n4. What are the common misconceptions I should watch out for?\n```\n\n*Analyse and critique:*\n```\nHere is a summary of [topic] that I found through research: [paste]\nWhat's missing? What counterarguments exist?\nWhat questions would a sceptical expert ask?\nWhat assumptions does this summary make that might not hold?\n```\n\n*Challenge your existing view:*\n```\nI currently believe [your view on the topic].\nSteel-man the opposing view — give me the strongest possible\narguments against my position, using the best available evidence.\n```\n\n*Connect to your context:*\n```\nGiven that I work in [industry/role] and am trying to [your goal],\nwhich aspects of this topic are most relevant to me?\nWhat should I prioritise understanding first?\nWhat can I safely ignore for my purposes?\n```\n\n*Generate deeper questions:*\n```\nBased on this overview, what are the 10 most important questions\nI should try to answer to understand this topic thoroughly?\nFor each question, tell me whether Perplexity or Claude would be\nbetter suited to answer it and why.\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Claude's knowledge has a cutoff date.** For anything that may have changed in the last year or two — regulations, market conditions, research findings, product capabilities, pricing — verify with Perplexity or another live-search tool before relying on it. Claude will answer confidently even when the information it has is outdated. This isn't dishonesty — it simply doesn't know what it doesn't know about recent events. The rule: use Claude for concepts and analysis; use Perplexity for anything that might have changed recently."
+    },
+    {
+      "type": "text",
+      "content": "## Keeping Context Across a Research Session\n\nOne of the most powerful but underused features of both tools is maintaining a persistent research thread within a single conversation.\n\n**In Perplexity:** Each follow-up question builds on the previous ones. Rather than starting new searches for each sub-question, ask follow-ups in the same thread — Perplexity tracks what you've established and narrows accordingly.\n\n**In Claude:** Claude's context window holds the entire conversation. As you paste in findings and ask questions, Claude accumulates understanding of your research topic. By the end of a long research session, Claude has read more about your topic than most humans could process in a day.\n\n**The research thread technique:**\n1. Start with the mapping prompt to establish the topic territory\n2. Paste each Perplexity finding into the same Claude conversation as you collect it\n3. Periodically ask Claude: *\"Based on everything we've discussed, what's the current state of my understanding? What's still unclear?\"*\n4. At the end, ask Claude to synthesise the entire thread: *\"Summarise the key findings from this research session in 5 bullets. What did we establish? What remains uncertain?\"*\n\nThis turns a research session into a structured knowledge product rather than a collection of browser tabs."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The two-tool pattern:** Use Perplexity to collect current, cited facts. Use Claude to think deeply about those facts. Neither tool alone is as powerful as both together. A typical workflow: 20 minutes in Perplexity collecting an overview + key sources → paste the key findings into Claude → ask Claude to analyse, critique, and identify what's missing. The Perplexity output gives Claude grounding in recent, verified data; Claude gives the Perplexity data analytical depth."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Research a Real Topic in 30 Minutes",
+      "content": "Pick a topic you actually need to know more about — for work, study, or a decision you're facing. Something where you currently feel underinformed. Don't pick something you already know well; you won't be able to evaluate the quality of the AI research.\n\n**Phase 1 — Perplexity overview (10 minutes)**\n\n1. Go to perplexity.ai (free, no account needed to start)\n2. Ask: *\"Give me an overview of [your topic]. What are the key concepts, main perspectives, and most important recent developments?\"*\n3. Read the response. Click 2–3 of the cited sources to verify the claims match the summary.\n4. Note one claim that surprised you or that you'd want to verify further\n5. Ask one follow-up in the same thread: *\"What are the main arguments against [the dominant view in the overview]?\"*\n6. Try one Focus mode — if your topic is professional or scientific, switch to Academic and run the same overview question. Does the result differ? How?\n7. Copy the key summary into a new document: `research-[topic].md`\n\n**Phase 2 — Claude deep dive (10 minutes)**\n\n1. Open Claude.ai\n2. Paste your Perplexity summary with this framing:\n   *\"I've been researching [topic]. Here's what I found: [paste summary]. Based on this and your knowledge, what are the 5 most important questions I should investigate next? What am I probably missing? Which of these questions would you recommend using Perplexity to answer vs. staying in Claude?\"*\n3. Pick one of the questions Claude generates and ask it back in Perplexity for a cited answer\n4. Add Claude's analysis to your research document\n\n**Phase 3 — Synthesis (10 minutes)**\n\nBack in Claude, paste everything you've collected:\n*\"I've been researching [topic]. Here are my notes: [paste]. Write a 5-bullet executive summary of the most important things I've learned. Then flag any claims I should verify before relying on them professionally.\"*\n\nAt the end, ask: *\"What's the single most important thing I should do next to develop my understanding of this topic?\"*\n\n**What you now have:** A research document, cited sources, a critical analysis, a verified-flagged summary — and a clear next step — in 30 minutes."
+    },
+    {
+      "type": "quiz",
+      "question": "You need current statistics on global AI adoption in businesses, published in the last 6 months. Which tool is best suited for this task?",
+      "options": [
+        "Claude — it has deep knowledge and can analyse the topic thoroughly",
+        "Perplexity — it searches current web sources and provides citations you can verify",
+        "ChatGPT — its training data is more recent than Claude's",
+        "Google Search — AI tools make up statistics so search engines are safer"
+      ],
+      "correct": 1,
+      "explanation": "Perplexity searches the live web and returns cited, current results — ideal for statistics and recent data. Claude's training has a cutoff date and it cannot reliably provide current statistics published in the last 6 months. ChatGPT (without web browsing enabled) has similar limitations for very recent data. Google Search returns links but requires you to click through and read each source manually. Perplexity synthesises current web results into a cited answer with source links you can verify — exactly what this task needs. The right pattern is Perplexity for the current statistics, then Claude to interpret and analyse what those statistics mean."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Perplexity vs Claude Research Drill",
+      "content": "Run the same research question through both tools and compare.\n\n**Step 1 — Choose a research question** you actually need answered: a technical comparison, a current events question, or a market research question.\n\n**Step 2 — Run in Perplexity first.** Note: sources cited, confidence level, recency of information.\n\n**Step 3 — Run the same question in Claude.** Note: depth of analysis, knowledge cutoff limitations, no source citations.\n\n**Step 4 — Compare the outputs:**\n| Dimension | Perplexity | Claude |\n|---|---|---|\n| Source quality | | |\n| Recency | | |\n| Depth of analysis | | |\n| Accuracy (verifiable claims) | | |\n\n**Step 5 — Ask Claude:** \"For research tasks like [your question], when should I use Perplexity vs Claude vs both together?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Multi-Source Research on a Real Topic",
+      "content": "Conduct thorough research on a topic you actually need to know about.\n\n**Step 1 — Choose a real research topic** from your work: a technology decision, a competitor analysis, a policy question.\n\n**Step 2 — Layer the research tools:**\n- Start with Perplexity for current, sourced information\n- Then Claude for deep analysis and synthesis\n- Then ask Claude to identify gaps: \"What important aspects of this topic did neither of us cover adequately?\"\n\n**Step 3 — Build a research brief** as you go:\n```\n## [Topic]\n### Key Facts (with sources)\n### Analysis & Implications\n### Gaps & Uncertainties\n### Recommended Actions\n```\n\n**Step 4 — Verify 3 specific claims** from your research by checking primary sources.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this research brief. What claims should I be most skeptical of? What would a domain expert challenge?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Source Verification Workflow",
+      "content": "Build rigorous source verification habits into your AI research.\n\n**Step 1 — Take any Perplexity research result** with 5+ sources.\n\n**Step 2 — Verify each source:**\n- Does the source actually say what Perplexity claims it says?\n- Is the source authoritative (academic journal, official report, expert)?  \n- Is it recent enough to be relevant?\n- Does it have a potential bias or conflict of interest?\n\n**Step 3 — Rate each source (1-5)** for credibility and relevance.\n\n**Step 4 — Ask Claude:** \"I found that [source X] doesn't actually support the claim Perplexity attributed to it. What does this tell me about AI research tools? How should I use them differently?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Research Template Library",
+      "content": "Build a library of research prompt templates for your most common research types.\n\n**Step 1 — Identify your 3 most common research types:** technology evaluation, competitive analysis, policy/regulatory research, market research, academic literature review.\n\n**Step 2 — For each type**, create a research template:\n```\n# Technology Evaluation Template\n\n## Perplexity queries:\n1. \"[Technology] current adoption and use cases 2025\"\n2. \"[Technology] limitations and failure cases\"\n3. \"[Technology] vs [alternative] comparison\"\n\n## Claude synthesis prompt:\n\"Based on this research about [technology]: [paste Perplexity results]\nProvide: executive summary, key trade-offs, recommendation for [your context], top 3 risks.\"\n\n## Verification checklist:\n- [ ] Cross-check vendor claims with independent sources\n- [ ] Check recency (is this still current?)\n- [ ] Identify who benefits from this narrative\n```\n\n**Step 3 — Test each template** on a real research question.\n\n**Step 4 — Save to your prompt library** and share with your team."
+    },
+    {
+      "type": "quiz",
+      "question": "Perplexity cites 8 sources for a claim about market size. You check 3 of them and find they all cite the same original report. What is the problem?",
+      "options": [
+        "No problem — multiple citations increase credibility",
+        "Citation laundering: 8 sources appear to corroborate the claim but they all trace to a single original source — the actual evidence base is just one study, not eight",
+        "The market size is wrong",
+        "Perplexity is duplicating sources incorrectly"
+      ],
+      "correct": 1,
+      "explanation": "When multiple sources all reference the same original study, this creates false confidence. Eight citations that all say \"as reported by Market Research Firm X\" is really one data point. Evaluate the original source: how was the study conducted, who funded it, what is the sample size and methodology? A single market research report (especially one funded by industry) is much weaker evidence than eight independent studies reaching the same conclusion."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude's training data has a cutoff in mid-2025 and it's now June 2026. You ask Claude about the latest AI models. What is the risk and how do you mitigate it?",
+      "options": [
+        "No risk — Claude knows it should be humble about recent events",
+        "Claude may confidently describe models from before its cutoff as \"the latest\" without knowing about more recent releases — use Perplexity for current AI news, then Claude for analysis",
+        "Claude automatically updates its knowledge via the internet",
+        "Ask Claude to only discuss models it is certain about"
+      ],
+      "correct": 1,
+      "explanation": "Knowledge cutoff is a real limitation. Claude doesn't always know what it doesn't know — it may describe a 2024 model as \"state of the art\" without realising newer models were released in 2025-2026. For rapidly evolving fields (AI models, software frameworks, regulations), always supplement Claude's analysis with Perplexity or direct source research for anything requiring current information."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 15-2.** You now know how to use Perplexity for cited current research (including Focus modes for targeted searches) and Claude for conceptual depth and analysis — and how to combine them in a two-tool research workflow. Lesson 15-3 covers how to extract and analyse information from specific web pages and documents."
+    }
+  ],
+  "nextLesson": "15-3",
+  "prevLesson": "15-1"
+}

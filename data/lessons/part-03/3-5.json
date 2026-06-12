@@ -1,0 +1,129 @@
+{
+  "id": "3-5",
+  "title": "Few-Shot Examples",
+  "part": 3,
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "few-shot",
+    "examples"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll learn how to teach an AI a custom format, style, or pattern by showing it examples — without any training, configuration, or technical setup. This technique is called few-shot prompting, and it consistently outperforms written instructions for tasks where the output has a precise pattern. You'll also learn when to combine few-shot with chain-of-thought reasoning, how to write examples that teach (not confuse), and 8 high-value applications across different professional tasks."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Why few-shot works technically:** Language models are trained on patterns in data. When you provide examples in your prompt, you're activating a form of \"in-context learning\" — the model adjusts its output distribution to match the pattern your examples demonstrate. This happens without any model parameter changes or fine-tuning. The model is temporarily learning from your examples within the context window."
+    },
+    {
+      "type": "text",
+      "content": "## The Spectrum: Zero-Shot → Few-Shot\n\nThe word \"shot\" in this context means \"example.\" So:\n\n- **Zero-shot** — no examples given; the model works from description alone\n- **One-shot** — one example; the model learns the pattern from that single case\n- **Few-shot** — two to five examples; the model learns a more reliable, consistent pattern\n- **Many-shot** — more than five; rarely necessary, can sometimes confuse with conflicting signals\n\nYou've been using zero-shot prompting in every lesson so far. You describe what you want, and the model does its best. Zero-shot works for most tasks.\n\nFew-shot becomes essential when:\n- You have a **specific format** the model doesn't naturally produce\n- You need a **consistent style** that's hard to describe in words\n- You're doing classification, extraction, or transformation where **correctness matters**\n- The \"right\" output is defined by **pattern**, not by instruction\n- You need the **same output quality across 50 items**, not just one\n\n**The core insight:** Showing is more precise than telling. A paragraph describing your email style tells the model roughly what you want. Three actual emails in your style show it exactly."
+    },
+    {
+      "type": "text",
+      "content": "## Few-Shot for Format: Teaching a Precise Output Structure\n\nThe most common use of few-shot is establishing a precise output format. Here's how dramatically it changes results:\n\n**Zero-shot (describe the format):**\n```\nWrite a subject line for an email telling a client their project is delayed two weeks.\nThe subject should be short, honest, and professional — no clickbait.\n```\nTypical output: \"Project Update: Timeline Adjustment\" — generic, forgettable.\n\n**Few-shot (show the format):**\n```\nWrite subject lines in this style. Examples:\n\nEmail: Telling a client their invoice is ready\nSubject: Invoice #2847 ready — please review by Friday\n\nEmail: Following up on a proposal sent 2 weeks ago\nSubject: Proposal follow-up — next steps for your consideration\n\nEmail: Informing a client a feature they requested won't be in this release\nSubject: Feature update — scope decision for Q3 release\n\nNow write a subject line for:\nEmail: Telling a client their project will be delayed by two weeks due to\na technical issue we discovered during testing.\n```\n\nThe three examples teach a format that would be hard to describe: topic-dash-honest-specific-descriptor. The model produces something like:\n```\nProject timeline — two-week delay due to testing findings\n```\n\nNotice: no amount of instructions would precisely capture that pattern as cleanly as three demonstrations."
+    },
+    {
+      "type": "text",
+      "content": "## Few-Shot for Classification: Consistent Categorisation\n\nClassification tasks are among the highest-value uses for few-shot prompting. Without examples, different descriptions of the same classification criteria produce inconsistent results. Examples lock in what each category actually means.\n\n**Customer message triage:**\n```\nClassify these customer messages by urgency and type. Examples:\n\nMessage: \"My order hasn't arrived and it was due 3 days ago.\"\nUrgency: HIGH | Type: LOGISTICS | Action: Escalate to fulfilment team immediately\n\nMessage: \"Do you have this product in blue?\"\nUrgency: LOW | Type: PRODUCT_QUERY | Action: Reply with product page link\n\nMessage: \"I was charged twice for my last order.\"\nUrgency: HIGH | Type: BILLING_ERROR | Action: Process refund, apologise\n\nMessage: \"Your packaging was really beautiful — thank you!\"\nUrgency: LOW | Type: POSITIVE_FEEDBACK | Action: Thank, log as testimonial potential\n\nNow classify:\nMessage: \"Can I change the delivery address on my current order — it ships tomorrow?\"\n```\n\nThe examples establish not just the categories, but what *specific language* moves something to HIGH urgency (time pressure, financial error), and they establish a three-field output format (Urgency, Type, Action) that consistent classification requires.\n\n**Sentiment analysis with custom categories:**\n```\nAnalyse employee feedback sentiment. Use these categories with examples:\n\nFeedback: \"I finally understand what's expected of me since our 1:1 last week.\"\nCategory: POSITIVE_MANAGEMENT | Key theme: Clarity\n\nFeedback: \"I feel like my suggestions never go anywhere.\"\nCategory: NEGATIVE_VOICE | Key theme: Agency\n\nFeedback: \"The office move was disruptive but I'm settling in.\"\nCategory: NEUTRAL_TRANSITION | Key theme: Change adaptation\n\nNow categorise:\nFeedback: \"My manager is great but I have no idea what the promotion criteria are.\"\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Few-Shot for Extraction: Pulling Structured Data from Prose\n\nData extraction is where few-shot produces the most dramatic ROI. Without examples, extracting data from 50 inconsistently formatted documents produces 50 inconsistently formatted outputs. With examples, every extraction follows the same schema.\n\n**Job posting extraction:**\n```\nExtract the key information from job postings in this format. Examples:\n\nPosting: \"We're looking for a Python developer with 3+ years experience\nin Django. Remote-friendly, competitive salary, must be based in Europe.\"\nOutput:\n  Role: Python Developer\n  Experience: 3+ years\n  Stack: [Python, Django]\n  Location: Europe (remote-friendly)\n  Salary: Not stated\n\nPosting: \"Junior React developer wanted. No experience required — we'll\ntrain you. London office, £30k starting salary.\"\nOutput:\n  Role: Junior React Developer\n  Experience: None required (training provided)\n  Stack: [React]\n  Location: London (on-site)\n  Salary: £30k\n\nNow extract from:\nPosting: \"Full-stack engineer (5+ years) for fast-growing SaaS startup.\nMust know Node.js and PostgreSQL. San Francisco or fully remote. $140-170k.\"\n```\n\n**Contract clause extraction:**\n```\nExtract key information from contract clauses in this format. Examples:\n\nClause: \"Either party may terminate this agreement with 30 days written notice.\"\nType: TERMINATION | Notice period: 30 days | Method: Written | Restrictions: None\n\nClause: \"This agreement shall automatically renew for successive one-year terms\nunless written notice is provided at least 60 days before renewal.\"\nType: RENEWAL | Auto-renews: Yes | Period: 1 year | Opt-out notice: 60 days\n\nNow extract from:\nClause: \"Vendor may not subcontract any portion of the services without prior\nwritten approval from Client, which shall not be unreasonably withheld.\"\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Few-Shot for Style Transfer: Teaching Your Voice\n\nThis is one of the most powerful and underused applications. If you have examples of writing in the style you want — your own past writing, a brand voice, a specific author — you can teach that style through examples far more effectively than through description.\n\n**Teaching your personal writing style:**\n```\nWrite in my style. Here are three examples of how I actually write:\n\n\"Spent 3 hours on a bug that turned out to be a missing semicolon.\nDebugging is mostly archaeology.\"\n\n\"Your first version will be embarrassing. Ship it anyway.\nThe embarrassment fades. The learning doesn't.\"\n\n\"Every 'simple feature' has a graveyard of edge cases behind it.\nRest in peace, assumptions.\"\n\nNow write something in this style about:\nThe experience of using AI tools for the first time.\n```\n\nThe examples capture rhythm, punchline placement, use of metaphor, sentence length, and a specific world-weary-but-hopeful tone. None of that could be precisely described — it has to be shown.\n\n**Matching a brand voice:**\n```\nWrite product descriptions in our brand voice. Examples from our existing products:\n\nProduct: Canvas tote bag\nDescription: Carries your groceries. And your dignity. Built to last as long\nyou remember to bring it.\n\nProduct: Stainless steel water bottle  \nDescription: Your coffee shop cup, but you own it. Keeps things hot until you\nremember it's in your bag. Keeps things cold for exactly as long as you need.\n\nNow write a description for: Reusable beeswax food wrap\n```\n\nThe examples teach voice attributes that would take a paragraph to describe: dry humour, second-person address, the rhythm of short declarative sentences followed by a wry observation."
+    },
+    {
+      "type": "text",
+      "content": "## Few-Shot + Chain-of-Thought: The Power Combination\n\nFor complex classification or reasoning tasks, combine few-shot examples with chain-of-thought reasoning. Show examples that include reasoning steps, not just input-output pairs.\n\n**Few-Shot CoT for contract risk assessment:**\n```\nAssess contract risk using this reasoning pattern. Examples:\n\nClause: \"Client may terminate with 7 days notice for any reason.\"\nReasoning:\n- Duration asymmetry: only Client can terminate quickly, not Vendor\n- Consequence: Vendor could lose project with no financial recovery time\n- Standard comparison: industry standard is 30 days mutual termination\nRisk level: HIGH | Recommended change: Mutual 30-day notice for any reason\n\nClause: \"All work product created under this agreement is the exclusive\nproperty of the Client.\"\nReasoning:\n- Work for hire doctrine: standard for client projects\n- IP reversion: all created IP transfers to client\n- Risk: if Vendor used existing code/frameworks, there may be licensing conflict\n- Standard comparison: this is normal and expected in service agreements\nRisk level: LOW — standard clause | Note: Ensure no prior IP was used in deliverables\n\nNow assess:\nClause: \"Vendor warrants that the software will be free of defects for a period\nof 24 months following delivery, and will provide unlimited corrections at no charge.\"\n```\n\nThis combines the benefit of examples (showing the analytical structure) with chain-of-thought (requiring visible reasoning before the conclusion). The output is far more reliable and auditable than either technique alone."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Example quality determines output quality.** The model learns the pattern in your examples — including their flaws. If your examples are inconsistent in format, the model learns inconsistency. If your examples are actually wrong, the model learns the wrong pattern. Before using few-shot prompting at scale, verify your examples represent exactly the quality and format you want in every output."
+    },
+    {
+      "type": "text",
+      "content": "## Practical Few-Shot Template Library\n\nHere are 4 ready-to-use few-shot templates for common professional tasks. Each is a starting structure — replace the examples with ones from your own work for maximum effectiveness.\n\n**Template 1 — Meeting action items:**\n```\nExtract action items from meeting notes in this format. Examples:\n\nNotes: \"Sarah said she'd handle the client report by end of week.\"\nAction: [Sarah] Deliver client report | Due: Friday | Priority: HIGH\n\nNotes: \"Team agreed to review the new onboarding flow — no timeline set.\"\nAction: [Team] Review new onboarding flow | Due: TBD | Priority: MEDIUM\n\nExtract from these notes:\n[paste your meeting notes]\n```\n\n**Template 2 — Email tone calibration:**\n```\nRewrite these emails in a direct but warm professional tone. Examples:\n\nOriginal: \"FYI the thing we talked about is done now.\"\nRewritten: \"Quick update: the [project/task] we discussed is now complete.\n            Happy to walk you through it if helpful.\"\n\nOriginal: \"Not sure if you saw my last message but just checking.\"\nRewritten: \"Following up on my message from [date] — still on your radar?\n            Let me know if you need any information from me.\"\n\nNow rewrite:\nOriginal: [paste your email]\n```\n\n**Template 3 — Report section analysis:**\n```\nAnalyse these data points in this format. Examples:\n\nData: Monthly revenue dropped 12% in March vs. February.\nAnalysis: Trend: NEGATIVE | Magnitude: SIGNIFICANT | Context needed:\n          Is this seasonal? Compare to March last year.\n          \nData: Customer satisfaction scores rose from 7.2 to 8.1 this quarter.\nAnalysis: Trend: POSITIVE | Magnitude: NOTABLE | Context needed:\n          What changed? Survey methodology consistent?\n\nNow analyse:\nData: [paste your data point]\n```\n\n**Template 4 — Content creation at scale:**\n```\nGenerate LinkedIn posts in this style. Examples:\n\nTopic: A mistake I made early in my career\nPost: \"Three years into my career, I thought being the hardest worker in the\nroom was the strategy. I was burning out and my impact was average at best.\nIt took a mentor pointing out that 80% of results come from 20% of effort.\nIdentify the 20%. Protect it ruthlessly. The rest: delegate, automate, or drop.\"\n\nTopic: An insight about team communication\nPost: \"The most expensive meeting you'll ever hold isn't the one you planned.\nIt's the one that spawns three more. Before any meeting: one line — what will\nbe decided or changed? If you can't answer, you might not need the meeting.\"\n\nNow generate a post about:\nTopic: [your topic]\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Build a Few-Shot Prompt Template for a Real Task",
+      "content": "You'll build a working few-shot prompt template for a real, recurring task in your work or life — and test it at scale.\n\n**Step 1 — Choose your task (2 minutes)**\nPick one of these or substitute your own:\n- Email subject lines in your style\n- Meeting notes formatted as a consistent action item list\n- Social media posts in your brand/personal voice\n- Customer messages classified by priority/type\n- Status update messages for your team\n- Something domain-specific to your work\n\n**Step 2 — Collect 3 examples (5 minutes)**\nWrite three real examples of the output you want — not invented approximations, actual examples from your work at the quality level you want. If you don't have real examples, construct three that you'd be happy to use as outputs.\n\nMake sure your three examples are:\n- Consistent in format\n- Genuinely at the quality level you want\n- Representative of the range of inputs you'll have\n\n**Step 3 — Build the few-shot prompt (5 minutes)**\nUsing this structure:\n```\n[Brief instruction about the task]\n\nExamples:\n\nInput: [example 1 input]\nOutput: [example 1 output]\n\nInput: [example 2 input]\nOutput: [example 2 output]\n\nInput: [example 3 input]\nOutput: [example 3 output]\n\nNow produce:\nInput: [your real input]\n```\n\n**Step 4 — Test and compare (10 minutes)**\n- Open [Claude.ai](https://claude.ai) and run your zero-shot version (describe the task, no examples)\n- Then run your few-shot version\n- Run the few-shot version 2-3 more times with different inputs\n\n**Write down:**\n1. How does the few-shot output compare to the zero-shot?\n2. Is the format consistent across all 3 inputs, or do you need to adjust an example?\n3. What one change to your examples would make the output even more consistent?\n\n**Step 5 — Save to your prompt library**\nThis template is now reusable. Every time you need this task done, paste your new input at the bottom of your template. Add it to the `prompt-library.md` you started in lesson 3-2's workshop.\n\n**Challenge: Few-Shot CoT**\nRewrite your template so that each example includes a brief reasoning step before the output. Run it and compare: does showing reasoning in the examples make the new outputs more reliable?"
+    },
+    {
+      "type": "quiz",
+      "question": "You need to classify 200 customer support tickets into 6 categories. You try a zero-shot prompt with descriptions of all 6 categories, but the classifications are inconsistent — edge cases get categorised differently each time. What is the most effective fix?",
+      "options": [
+        "Write longer, more detailed descriptions of each category",
+        "Ask Claude to try harder and be more consistent",
+        "Add 2-3 real examples for each category to show exactly what belongs in it, especially the edge cases that are being classified inconsistently",
+        "Switch to a different AI tool that handles classification better"
+      ],
+      "correct": 2,
+      "explanation": "Inconsistent classification on edge cases is a clear signal that the category descriptions aren't giving the model enough information to disambiguate. Adding examples — especially examples of the specific types of messages that are being misclassified — directly demonstrates what belongs in each category. This works better than longer descriptions because real examples contain pattern information that's difficult to capture in written rules. Specifically targeting the edge cases that are being classified inconsistently (by showing which category they belong in) is the most efficient fix."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Few-Shot Format Drill",
+      "content": "This 8-minute drill shows how dramatically examples change the format and quality of AI output.\n\n**Step 1 — Choose a type of content you regularly produce**: a report section, a status update, a brief, a recommendation, an email template.\n\n**Step 2 — Without examples**, ask Claude to produce one instance of this content. Save the result.\n\n**Step 3 — Now provide 2 examples** of the output format you actually want (use real examples from your work or write 2 brief samples). Then ask Claude to produce another instance \"following the same style and format as these examples.\"\n\n**Step 4 — Compare the two outputs.** How different are they? Which better matches your actual style preferences?\n\n**Step 5 — Identify the specific formatting elements** that the few-shot version captured that the zero-shot version missed.\n\n**Step 6 — Note:** For any recurring content type where style consistency matters, few-shot examples are the fastest path to getting the format right."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Your Few-Shot Content Templates",
+      "content": "Create few-shot templates for your most common content types — so you never start from scratch on recurring formats.\n\n**Step 1 — Identify 3 types of content you produce regularly** where consistency and format matter: emails, reports, meeting notes, code comments, analysis sections, etc.\n\n**Step 2 — Find 2 real examples** of each that represent your ideal output. These can be things you've written that you're proud of.\n\n**Step 3 — Build a template for each content type:**\n```\nHere are examples of [content type] that represent the style and format I want:\n\nExample 1:\n[your example]\n\nExample 2:\n[your example]\n\nNow write [content type] for: [new input]\n\nFollow the exact same structure, tone, and level of detail as the examples.\n```\n\n**Step 4 — Test each template** with a real new instance of that content type.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Compare your output to my examples. Where did you deviate from the format or style? List specific differences.\"* Refine the template if needed.\n\n**Step 6 — Save all 3 templates** in your prompt library."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Examples for Classification Tasks",
+      "content": "Few-shot examples are especially powerful for classification and categorisation tasks. This workshop demonstrates why.\n\n**Step 1 — Choose something from your work that you categorise regularly**: customer feedback, support tickets, expense types, content topics, priority levels — any classification task.\n\n**Step 2 — Without examples**, ask Claude to classify 5 items from your actual data. Note how it categorises them.\n\n**Step 3 — Now provide 3 labelled examples** that show exactly how you would classify items in your specific system:\n```\nHere are examples of how I classify [item type]:\n\n[Item 1]: Category A — because [brief reason]\n[Item 2]: Category B — because [brief reason]\n[Item 3]: Category C — because [brief reason]\n\nNow classify these new items using the same approach: [your 5 items]\n```\n\n**Step 4 — Compare the two sets of classifications.** How much did the examples change the results? Which set is more aligned with how you would actually classify them?\n\n**Step 5 — Write a one-sentence rule:** When should you always provide examples before asking Claude to classify?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Style Guide Through Examples",
+      "content": "Instead of describing your writing style, show it. This workshop creates an example-based style guide.\n\n**Step 1 — Select 3-4 pieces of writing you've produced** that best represent your preferred style: emails, reports, documentation, social media posts, etc.\n\n**Step 2 — Ask Claude to analyse your style** based on the examples:\n```\nHere are 3 examples of content I've written. Analyse them and identify:\n1. My sentence length preference (short/medium/long/mixed)\n2. My tone (formal/professional/conversational/direct)\n3. My paragraph structure patterns\n4. What I never do (e.g., I never use buzzwords, I never write passive voice)\n5. Any distinctive stylistic choices\n\n[paste your examples]\n```\n\n**Step 3 — Review Claude's style analysis.** Is it accurate? Add anything it missed.\n\n**Step 4 — Create a style instruction block** you can paste into any prompt when you want Claude to write in your voice:\n```\nWrite in my voice, which is characterised by: [paste Claude's analysis, corrected]\n```\n\n**Step 5 — Test the style instruction** on a new piece of content. Does the output sound like you?"
+    },
+    {
+      "type": "quiz",
+      "question": "You want Claude to write status updates in the exact format your team uses. Which is the most effective approach?",
+      "options": [
+        "Describe the format in words: \"Write a status update with three sections: Progress, Blockers, and Next Steps\"",
+        "Paste two real examples of status updates your team has approved, then ask Claude to follow the same format",
+        "Ask Claude to write a status update and then ask it to revise the format",
+        "Tell Claude the format is \"professional and concise\""
+      ],
+      "correct": 1,
+      "explanation": "Showing examples is far more effective than describing format in words. When you paste 2 real examples, Claude can match the exact header style, sentence length, level of detail, and formatting conventions that your team actually uses — details that are hard to capture in a description. \"Professional and concise\" (D) gives Claude almost nothing to work with."
+    },
+    {
+      "type": "quiz",
+      "question": "You provide 3 few-shot examples of customer service emails in a warm, friendly tone. Claude's output is much more formal. What is the most likely cause?",
+      "options": [
+        "Claude cannot match tone from examples",
+        "The examples were too short for Claude to learn from",
+        "Your instructions elsewhere in the prompt contradict the examples (e.g., \"write professionally\")",
+        "You need at least 5 examples for tone to transfer"
+      ],
+      "correct": 2,
+      "explanation": "When examples and explicit instructions conflict, the result is unpredictable. If your prompt says \"write professionally\" (which Claude interprets as formal) but your examples are warm and friendly, Claude may follow the explicit instruction over the examples. Remove conflicting instructions, or make the style instruction consistent with the examples: \"Write in the warm, conversational tone shown in these examples.\""
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 3-5.** You can now use few-shot prompting for classification, extraction, style transfer, and format enforcement — and combine it with chain-of-thought for complex reasoning tasks. Few-shot prompting is one of the most powerful techniques in your toolkit for tasks that require precision and consistency."
+    }
+  ],
+  "nextLesson": "3-6",
+  "prevLesson": "3-4"
+}

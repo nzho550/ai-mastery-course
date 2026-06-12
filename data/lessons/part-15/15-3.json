@@ -1,0 +1,122 @@
+{
+  "id": "15-3",
+  "title": "AI Web Search & Web Crawling",
+  "part": 15,
+  "estimatedMinutes": 63,
+  "tags": [
+    "research",
+    "intermediate",
+    "web",
+    "crawl",
+    "playwright",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nSearching the web with AI goes beyond typing into a search box. This lesson covers three levels of AI-powered web research: smart searching with AI tools, extracting information from specific pages, and automated web crawling to gather data from multiple pages at once. You'll also learn how to evaluate web sources, structure systematic research, and handle conflicting information from different sources. By the end you'll know how to turn the open web into structured, analysed data without writing code."
+    },
+    {
+      "type": "text",
+      "content": "## Level 1 — AI-Assisted Searching\n\nThe simplest level: asking AI to search better than you would.\n\n**Perplexity with specific constraints:**\n```\nFind me studies published in the last 2 years on [topic].\nOnly include peer-reviewed sources or government/institutional reports.\nSummarise each one in 2 sentences.\n```\n\n```\nSearch for news about [company or topic] from the last 30 days.\nWhat are the main developments? What are analysts saying?\nSeparate confirmed news from speculation.\n```\n\n```\nFind the official government guidance on [regulation/policy] for [country].\nGive me the exact URL and quote the most relevant section.\nNote when this was last updated.\n```\n\n**Claude with web browsing enabled (Claude.ai Pro):**\nClaude's Pro tier has a web browsing tool. Ask it to visit specific URLs and extract content:\n```\nGo to [URL] and summarise the key information on that page.\nNote any dates or 'last updated' timestamps you find.\n```\n\n**ChatGPT with browsing (paid tier):**\n```\nVisit [URL] and extract all the pricing information from the page into a table.\nNote the date you accessed this, as pricing changes frequently.\n```\n\n**Getting better search results — techniques that work:**\n\nPerplexity and AI search tools respond to these instruction patterns:\n- **Constraint the date:** *\"published after January 2024\"* or *\"from the last 6 months\"*\n- **Constrain the source type:** *\"only from peer-reviewed journals\"* or *\"from official government sources only\"*\n- **Request primary sources:** *\"I want primary sources, not blog posts summarising other sources\"*\n- **Ask for disagreement:** *\"What do critics or sceptics say about this? Find the strongest counterarguments.\"*\n- **Ask for specific evidence:** *\"What is the specific evidence for this claim, not just the claim itself?\"*\n- **Request uncertainty acknowledgment:** *\"Where is there genuine expert disagreement? What is still unknown?\"*"
+    },
+    {
+      "type": "text",
+      "content": "## Evaluating What You Find — The Source Quality Check\n\nAI makes it easy to find information fast — but quantity is not quality. Before using any source in your research, apply the CRAAP test (widely used in academia and journalism):\n\n| Factor | What to check |\n|--------|---------------|\n| **Currency** | When was this published or updated? Is recent publication important for this topic? |\n| **Relevance** | Does it actually answer your question, or just touch the topic? |\n| **Authority** | Who wrote this and what are their credentials? Is this an official or institutional source? |\n| **Accuracy** | Are claims supported by evidence? Are sources cited? Can you verify key claims independently? |\n| **Purpose** | Why was this written? Is the author trying to inform, persuade, or sell something? |\n\n**AI prompt for source evaluation:**\n```\nI found this source for my research: [paste URL or content]\n\nEvaluate it using these criteria:\n1. Currency: when was it published? Is that recent enough for this topic?\n2. Authority: who is the author/organisation? Are they credible for this topic?\n3. Purpose: is this informing or advocating? Any clear bias?\n4. Accuracy: what specific evidence is given? Any unsupported claims?\n5. How much should I trust this source, and for what specifically?\n```\n\n**Red flags in web sources:**\n- No author, no date, no organisation\n- Claims specific statistics without linking to original data\n- Consistently only presents one side of a complex issue\n- The same 'fact' appears across many sites but always traces back to one original source\n- Headlines that contradict what the article actually says"
+    },
+    {
+      "type": "text",
+      "content": "## Handling Conflicting Information\n\nA common research problem: you find two sources that say different things. AI can help you navigate this systematically.\n\n**When sources contradict each other:**\n```\nI've found conflicting information on [topic]:\n\nSource 1 says: [paste summary or quote]\nSource 2 says: [paste summary or quote]\n\nHelp me understand:\n1. Is this a factual contradiction or a difference in perspective/framing?\n2. Which source is more authoritative for this specific claim? Why?\n3. Is there a way to reconcile these two claims, or are they genuinely in conflict?\n4. What additional evidence would resolve the disagreement?\n5. How should I represent this in my research — should I note the disagreement?\n```\n\n**The hierarchy of evidence (from most to least reliable):**\n1. Systematic reviews and meta-analyses (synthesise many studies)\n2. Randomised controlled trials or rigorous empirical studies\n3. Observational studies with large samples\n4. Expert consensus statements from professional bodies\n5. Individual expert opinion\n6. Anecdotal reports or case studies\n7. Blog posts, news articles, social media\n\n**For non-academic research:** replace 1–3 with: official government/regulatory sources > peer-reviewed reports > reputable journalism with citations > industry analysis > general commentary."
+    },
+    {
+      "type": "text",
+      "content": "## Level 2 — Extracting from Specific Pages\n\nSometimes you have a specific page or set of pages you need to read and extract information from. AI can read web pages far faster than you can.\n\n**Method 1 — Copy and paste (easiest, no tools needed):**\n1. Open the web page\n2. Select all text (Ctrl+A), copy (Ctrl+C)\n3. Paste into Claude.ai with your question:\n```\nHere is the content from [website]. Please:\n1. Extract all [prices/dates/names/statistics] into a table\n2. Summarise the main points in 5 bullets\n3. Flag any claims that seem like assertions rather than supported facts\n4. Note when this page was last updated, if visible\n```\n\n**Method 2 — Browser AI extension (Sider, Edge Copilot):**\nWith a browser AI extension active, you can ask questions about any page without copying:\n- Open the page → open the sidebar → ask questions directly about the content\n- Works on most pages including PDFs opened in the browser\n\n**Method 3 — Share the URL directly with Claude Pro:**\nPaste a URL into Claude.ai Pro and ask Claude to read it:\n```\nRead this page: [URL]\nExtract: all the product names, their prices, and any availability notes.\nFormat as a table.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Level 3 — Automated Web Crawling with Playwright MCP\n\nFor research that requires gathering information from multiple pages systematically — competitor pricing, job listings, news monitoring, research paper abstracts — the Playwright MCP (covered in lesson 8-10) can automate this.\n\n**What Playwright MCP can do:**\n- Open any URL in a real browser and read the page content\n- Click buttons and navigate between pages\n- Extract structured data (all prices on a page, all names in a list)\n- Fill in search forms and read results\n- Visit multiple pages and compile results\n\n**Without needing to code**, you instruct Claude Code in natural language:\n```\nGo to [URL]. Find all the job listings on the page.\nFor each listing, extract: job title, company, location, and the direct URL.\nFormat as a CSV table.\n```\n\n```\nGo to [search results page]. For each of the first 10 results:\n- Open the page\n- Extract the date published, author, and main headline\n- Record the URL\nCompile everything into a research table.\n```\n\n**Realistic use cases for non-coders:**\n- *\"Scrape the speakers list from [conference website] and give me names, organisations, and talk titles.\"*\n- *\"Go to [competitor's pricing page] and extract all their plan names, features, and prices.\"*\n- *\"Search Google for [topic], open the first 5 results, and give me a 2-sentence summary of each.\"*\n- *\"Go to [academic journal search] and collect the titles, authors, and abstracts of the 10 most cited papers on [topic].\"*\n\n**Important:** Respect robots.txt and terms of service. Most public pages can be read; login-required areas, rate-limiting, and explicit no-scraping clauses should be respected. Playwright is for reading publicly available information, not circumventing access controls."
+    },
+    {
+      "type": "text",
+      "content": "## Turning Web Data Into Structured Outputs\n\nOnce you've collected web content, the next step is structuring it for use. These prompts work whether you gathered content manually or via Playwright:\n\n**Competitive analysis:**\n```\nHere is pricing information I collected from 4 competitors: [paste]\n\nCreate:\n1. A comparison table: company | plan name | price | key features | limitations\n2. A 3-sentence summary of how each competitor positions itself\n3. The main gaps — what does none of them offer?\n4. Where we appear stronger or weaker based on this data\n```\n\n**News digest:**\n```\nHere are summaries from 10 news articles about [topic]: [paste]\n\nCreate a briefing note with:\n1. Key developments (what actually happened)\n2. Recurring themes across multiple sources\n3. Claims made by only one source (treat with caution)\n4. What to watch next — what are the open questions?\n```\n\n**Research compilation:**\n```\nHere are abstracts from 8 research papers: [paste]\n\nIdentify:\n1. Main themes across the papers\n2. Areas of clear consensus\n3. Areas of active disagreement or debate\n4. Methodological patterns — how was this research conducted?\n5. Gaps in the current research — what hasn't been studied?\nFormat as a structured literature review summary.\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**No Playwright MCP yet?** Playwright MCP setup is covered in lesson 8-10. If you haven't done Part 8 yet, focus on Levels 1 and 2 from this lesson — they cover the majority of real-world research needs without any additional setup. Playwright becomes valuable when you need to gather information from 10+ pages at once."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Extract and Analyse a Web Page",
+      "content": "This workshop uses Level 2 (copy-paste or browser extension) — no extra tools needed.\n\n**Task: Extract structured information from a real web page**\n\nChoose one of these options based on what's relevant to your work:\n\n**Option A — Competitor or industry research:**\n1. Find a competitor's pricing page, a product comparison page, or an industry report online\n2. Copy the full page text (Ctrl+A → Ctrl+C) or use your browser AI extension\n3. Paste into Claude.ai and ask:\n   - *\"Extract all pricing tiers, features, and any limitations from this page into a table.\"*\n   - *\"Flag anything that seems unclear, missing, or likely to have changed recently.\"*\n4. Then run the source evaluation prompt: Is this source current and authoritative for this purpose?\n\n**Option B — News and current events:**\n1. Go to a news website and find an article on a topic relevant to your work\n2. Copy the full article text\n3. Ask Claude:\n   - *\"Summarise this article in 5 bullets.\"*\n   - *\"Identify any claims that are assertions rather than verified facts.\"*\n   - *\"What questions would I need to answer to form my own view on this topic?\"*\n   - *\"What are the strongest counterarguments to the main claim here?\"*\n\n**Option C — Research or technical documentation:**\n1. Find a report, whitepaper, or technical specification relevant to your work\n2. Copy the text or upload the PDF to Claude.ai\n3. Ask: *\"What are the 5 most important findings or recommendations? What caveats or limitations does the source itself acknowledge?\"*\n\n**Evaluate one source:**\nFor whichever option you chose, run the CRAAP evaluation prompt on that source. How credible is it for your research purpose?\n\n**Note:** How long did the extract-and-analyse cycle take? Compare that to how long you'd have spent reading and note-taking manually."
+    },
+    {
+      "type": "quiz",
+      "question": "You need to monitor 20 competitor websites weekly for pricing changes. Which approach is most sustainable?",
+      "options": [
+        "Manually visit each site every Monday and take notes",
+        "Set up Playwright MCP to crawl all 20 sites on command and output a comparison table",
+        "Ask Perplexity once a month for a general competitor overview",
+        "Pay for a commercial price monitoring SaaS tool"
+      ],
+      "correct": 1,
+      "explanation": "Playwright MCP can visit all 20 sites, extract pricing, and output a comparison table in one command — making the weekly monitoring a 2-minute task instead of several hours. Manual visits (A) don't scale to 20 sites weekly. Perplexity monthly (C) is too infrequent and may miss detail — Perplexity's search doesn't guarantee it finds each specific pricing page. Commercial tools (D) exist and are valid but cost money and require setup; Playwright MCP achieves the same with a natural language prompt once configured in Part 8."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — AI Web Search Tools Comparison",
+      "content": "Test 3 AI web search tools on the same query.\n\n**Step 1 — Choose a research question** with a factual answer that can be verified.\n\n**Step 2 — Run the same question** through:\n- Perplexity (perplexity.ai)\n- Claude with web search enabled (if available)\n- Bing Copilot or another AI search tool\n\n**Step 3 — Compare results:**\n- Which found the most relevant sources?\n- Which had the most accurate synthesis?\n- Which cited sources most reliably?\n- Which had the freshest information?\n\n**Step 4 — Identify the winner** for your use case and explain why.\n\n**Step 5 — Ask Claude:** \"For different types of web research tasks, which AI search tool performs best? Give specific examples.\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Web Crawling for Research",
+      "content": "Use AI to systematically crawl and extract information from multiple web pages.\n\n**Step 1 — Identify a research task** that requires information from 5-10 specific URLs: comparing product specs, collecting pricing, reviewing documentation.\n\n**Step 2 — Ask Claude Code** (with Browser MCP if available) to extract structured data:\n```\nVisit each of these URLs and extract [specific data]:\n[List 5-10 URLs]\n\nFor each page, extract:\n- [Field 1]: [where to find it]\n- [Field 2]: [where to find it]\n\nFormat as a comparison table.\n```\n\n**Step 3 — Verify a sample** of the extracted data against the actual pages.\n\n**Step 4 — Save the extracted data** in a structured format (CSV or JSON).\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review the extracted data. Which extractions are most likely to be inaccurate or missing important context?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Research Credibility Assessment",
+      "content": "Build a systematic approach to evaluating the credibility of AI-found web sources.\n\n**Step 1 — Ask Claude:** \"Create a 10-point credibility checklist for evaluating web sources found by AI search tools. Include: author credentials, publication date, site reputation, potential bias, and methodology.\"\n\n**Step 2 — Apply the checklist** to 5 sources from a recent Perplexity research session.\n\n**Step 3 — Score each source (0-10)** on the credibility checklist.\n\n**Step 4 — Identify the pattern:** Were low-credibility sources driving specific claims in the research? Would removing them change the conclusions?\n\n**Step 5 — Update your research workflow** to automatically flag low-credibility sources."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Research Dashboard",
+      "content": "Create a personal research tracking dashboard.\n\n**Step 1 — Ask Claude Code** to design a simple research tracking system:\n```\nCreate a Markdown-based research tracking system:\n1. research-index.md: list of all research topics with status and date\n2. Template for each research topic: question, sources found, key findings, verification status, confidence level\n3. A summary generator that reads all research files and produces a weekly digest\n\nKeep it simple — no database, just markdown files.\n```\n\n**Step 2 — Set up the system** and add your 3 most recent research topics.\n\n**Step 3 — Generate a weekly digest** of your research activity.\n\n**Step 4 — Ask Claude:** \"Is this research tracking system appropriate for my research volume and complexity? What would make it more useful?\""
+    },
+    {
+      "type": "quiz",
+      "question": "You use AI web search to research a competitor's product and find a very positive review on a reputable tech blog. Before including this in your analysis, what should you check?",
+      "options": [
+        "Nothing — reputable tech blogs are always reliable",
+        "Whether the review was sponsored or the blogger has a financial relationship with the company — even reputable outlets publish sponsored content that may not be disclosed prominently",
+        "Whether the blog has more than 100,000 readers",
+        "Whether the product is still available"
+      ],
+      "correct": 1,
+      "explanation": "Sponsored content on tech blogs is common and not always prominently disclosed. Check: look for \"sponsored,\" \"partner,\" or \"paid promotion\" labels, check the blog's disclosure policy, look for unusual positivity or absence of critical feedback, and search for independent reviews of the same product. AI search tools don't filter for sponsored content, so a positive review on a \"reputable\" site might still be a paid placement."
+    },
+    {
+      "type": "quiz",
+      "question": "AI web search returns results from 2022 about a rapidly evolving technology. How should you handle this research?",
+      "options": [
+        "Use the 2022 information — it's probably still accurate",
+        "Flag all 2022 findings as potentially outdated and search specifically for recent sources: add \"2025\" or \"2026\" to your queries, and look for version-specific documentation",
+        "Discard the search and use Claude's knowledge instead",
+        "Use the 2022 results only for background context, not current recommendations"
+      ],
+      "correct": 3,
+      "explanation": "For rapidly evolving technologies, older sources serve as context, not current guidance. A 2022 article about a JavaScript framework might describe an API that was completely changed in 2024. Workflow: use older sources to understand the history and foundational concepts, then explicitly search for recent sources (\"after:2025\" in search queries) for current best practices, APIs, and recommendations. Be explicit with Claude when passing research: \"This source is from 2022 — the current state may differ.\""
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 15-3.** You now know three levels of AI web research: smart searching, page extraction, and automated crawling. You can evaluate sources using the CRAAP criteria, handle conflicting information systematically, and turn any public web page into structured, analysed data without writing code."
+    }
+  ],
+  "nextLesson": "15-4",
+  "prevLesson": "15-2"
+}

@@ -1,0 +1,109 @@
+{
+  "id": "12-2",
+  "title": "Installing Ollama",
+  "part": 12,
+  "estimatedMinutes": 60,
+  "tags": [
+    "local-ai",
+    "ollama",
+    "install",
+    "terminal"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson, Ollama will be installed and running on your machine. You'll understand what the Ollama service does in the background, and you'll have confirmed it works by listing your available models."
+    },
+    {
+      "type": "text",
+      "content": "## What Is Ollama?\n\nOllama is a tool that handles the hard parts of running local AI:\n\n- **Model management:** Downloads model weights from the Ollama library and stores them on your disk.\n- **Runtime:** Runs the model as a local process, handling memory management and GPU acceleration automatically.\n- **API server:** Exposes the model at `http://localhost:11434` using an API compatible with OpenAI's format — so any tool built for OpenAI can use your local model with a URL change.\n\nYou interact with Ollama two ways: through the terminal (the `ollama` command) and through that API (other tools connect to it automatically).\n\nOllama is free, open source, and available for Windows, macOS, and Linux."
+    },
+    {
+      "type": "text",
+      "content": "## Installing on Windows\n\n**Step 1 — Download the installer:**\n1. Open your browser and go to `ollama.com/download`\n2. Click **Download for Windows**\n3. The installer file (`OllamaSetup.exe`) downloads to your Downloads folder\n\n**Step 2 — Run the installer:**\n1. Open your Downloads folder and double-click `OllamaSetup.exe`\n2. Click through the installer — all defaults are fine\n3. When it completes, Ollama starts automatically and a small icon appears in your system tray (bottom-right of the taskbar)\n\n**Step 3 — Verify the installation:**\n1. Open PowerShell (press `Win + X` → Windows PowerShell, or search \"PowerShell\" in the Start menu)\n2. Type:\n```\nollama --version\n```\nYou should see something like `ollama version 0.x.x`."
+    },
+    {
+      "type": "text",
+      "content": "## Installing on macOS\n\n1. Go to `ollama.com/download` → click **Download for Mac**\n2. Open the downloaded `.zip` file — a folder appears\n3. Drag the Ollama app to your Applications folder\n4. Open it from Applications (first launch: right-click → Open to bypass Gatekeeper)\n5. Ollama starts and appears as a llama icon in your menu bar\n6. Open Terminal and type: `ollama --version` to verify"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**How Ollama runs in the background:** After installation, Ollama runs as a background service. On Windows it appears in the system tray. On macOS it's in the menu bar. You don't need to start it manually — it starts automatically when your computer boots. The API server at `localhost:11434` is always available as long as Ollama is running."
+    },
+    {
+      "type": "text",
+      "content": "## Understanding the Ollama API\n\nWhen Ollama is running, it serves a local HTTP API at:\n\n```\nhttp://localhost:11434\n```\n\nThis API follows the OpenAI format, which matters because it means any tool that was built to use OpenAI — VS Code extensions, automation tools, scripts — can be redirected to your local model by just changing the URL.\n\nThe main endpoints you'll encounter:\n\n- `POST /api/generate` — send a prompt, get a response\n- `POST /api/chat` — multi-turn conversation (the format Continue.dev and Claude Code use)\n- `GET /api/tags` — list your installed models\n\nYou usually don't interact with these directly. Tools like Continue.dev and LM Studio do it for you. But knowing the API exists explains why \"connecting\" these tools is just a matter of pointing them at the right URL."
+    },
+    {
+      "type": "text",
+      "content": "## Key Ollama Commands\n\nHere are the commands you'll use most:\n\n```\nollama pull <model>       # Download a model\nollama run <model>        # Start an interactive chat session\nollama list               # Show all downloaded models\nollama rm <model>         # Delete a model to free disk space\nollama show <model>       # Show model details (size, parameters)\nollama serve              # Manually start the API server (usually automatic)\n```\n\nModels are identified by name and optional tag: `llama3.2`, `phi4`, `mistral`, `llama3.2:3b`. If you omit the tag, Ollama uses the default (usually the 7B or standard version)."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Disk space note:** Models range from about 2GB (small 3B parameter models) to 70GB+ (large models). Make sure you have at least 10GB of free disk space before pulling your first model. If disk space is tight, stick to the smaller models: `llama3.2:3b` is only ~2GB and surprisingly capable for many tasks."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Install Ollama and Pull Your First Model",
+      "content": "Complete these steps in order. The model download will take several minutes — that's normal.\n\n**Step 1 — Install Ollama:**\nFollow the installation steps for your OS above. Come back here when you see the Ollama icon in your system tray (Windows) or menu bar (macOS).\n\n**Step 2 — Verify the install:**\nOpen PowerShell (Windows) or Terminal (macOS) and run:\n```\nollama --version\n```\nYou should see a version number. If you get \"command not found\", restart your terminal and try again — the PATH needs to refresh after installation.\n\n**Step 3 — Pull a model:**\nStart with `phi4` from Microsoft — a high-quality model for its size:\n```\nollama pull phi4\n```\nThis downloads about 9GB. While it's downloading, read the next lesson (12-3) to learn what to do with it.\n\n**If you have limited disk space**, use the smaller Llama model instead:\n```\nollama pull llama3.2:3b\n```\nThis is only ~2GB and still useful for many tasks.\n\n**Step 4 — Verify the model downloaded:**\n```\nollama list\n```\nYou should see your model listed with its size.\n\n**Step 5 — Confirm the API is running:**\nIn PowerShell:\n```\nInvoke-RestMethod http://localhost:11434/api/tags\n```\nOr just open your browser and go to `http://localhost:11434` — you should see `Ollama is running`.\n\n**You're done when:** `ollama list` shows at least one model and the API is responding."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Ollama Install and First Run",
+      "content": "Install Ollama and run your first local model.\n\n**Step 1 — Install Ollama:**\nDownload from ollama.com for your OS. On Windows, run the installer.\n\n**Step 2 — Verify installation:**\n```powershell\nollama --version\n```\n\n**Step 3 — Download and run your first model:**\n```powershell\n# Start with a small model that fits any hardware\nollama run phi3:mini\n```\nThis downloads ~2.3GB. Wait for it to complete.\n\n**Step 4 — Have a conversation:**\nIn the Ollama prompt, ask: \"What is your name and what model are you?\"\nThen ask: \"Write a Python function that reverses a string\"\n\n**Step 5 — Exit and check what's installed:**\n```powershell\n# Ctrl+D to exit the model\nollama list\n```\n\n**Step 6 — Ask Claude:** \"What is the difference between phi3:mini, phi3:medium, and phi3? Which should I use for code tasks?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Ollama API Integration",
+      "content": "Use Ollama's API to integrate local AI into your code.\n\n**Step 1 — Start Ollama as a server** (it runs automatically on install, but verify):\n```powershell\ncurl http://localhost:11434/api/tags\n```\nYou should see a list of your installed models.\n\n**Step 2 — Make an API call using curl:**\n```powershell\ncurl http://localhost:11434/api/generate -d '{\n  \"model\": \"phi3:mini\",\n  \"prompt\": \"Write a Python function to check if a string is a palindrome\",\n  \"stream\": false\n}'\n```\n\n**Step 3 — Ask Claude Code** to write a Python wrapper for the Ollama API:\n\"Write a Python class OllamaClient that mirrors the Anthropic client interface but calls the local Ollama API. This lets me switch between cloud and local AI by changing one line of code.\"\n\n**Step 4 — Test the wrapper** and verify it generates reasonable code.\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review this OllamaClient wrapper. What important differences between the Ollama and Anthropic APIs might cause bugs when switching between them?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Model Management with Ollama",
+      "content": "Learn to manage multiple models with Ollama.\n\n**Step 1 — Explore the Ollama model library** at ollama.com/library. Browse models relevant to your use cases:\n- Code: codellama, deepseek-coder, qwen2.5-coder\n- General: llama3.2, mistral, gemma2\n- Small/fast: phi3:mini, gemma2:2b\n\n**Step 2 — Download a code-specialised model:**\n```powershell\nollama pull qwen2.5-coder:7b\n```\n\n**Step 3 — Compare models on the same prompt:**\nAsk both phi3:mini and qwen2.5-coder:7b to \"Write a Python decorator that times function execution.\"\nCompare: code quality, speed, instruction-following.\n\n**Step 4 — Check disk usage and manage:**\n```powershell\nollama list\n# To remove a model:\n# ollama rm modelname\n```\n\n**Step 5 — Build a model comparison table** for your use cases."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Local AI Coding Assistant Setup",
+      "content": "Configure Ollama as a full coding assistant in your development environment.\n\n**Step 1 — Install Continue.dev** in VS Code (if not from Part 6).\n\n**Step 2 — Configure Continue.dev to use your Ollama model:**\nIn `.continue/config.json`:\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Local Coding Assistant\",\n      \"provider\": \"ollama\",\n      \"model\": \"qwen2.5-coder:7b\"\n    }\n  ]\n}\n```\n\n**Step 3 — Use it for real coding tasks:** Open a code file and use Continue.dev with the local model for:\n- Code completion\n- Explaining a function\n- Suggesting a refactoring\n\n**Step 4 — Compare quality and speed** vs Claude Code (cloud). For what tasks is the local model good enough?\n\n**Step 5 — Define your switching rule:** When will you use local (privacy/offline) vs cloud (quality/complex tasks)?"
+    },
+    {
+      "type": "quiz",
+      "question": "You run `ollama run llama3.2` and it starts downloading. The download stops at 40% due to a network interruption. What happens when you run the command again?",
+      "options": [
+        "It restarts the download from 0%",
+        "It resumes from where it left off — Ollama supports resumable downloads",
+        "It uses the partial download and produces corrupted output",
+        "You must manually delete the partial file first"
+      ],
+      "correct": 1,
+      "explanation": "Ollama supports resumable downloads — if interrupted, re-running the command continues from the last completed chunk, not from zero. This is important for large models (7B models are 4-8GB, 70B models are 40-80GB) where network interruptions are common. If a download seems stuck or corrupted (the model produces nonsense output), you can force a fresh download with `ollama rm modelname` followed by `ollama pull modelname`."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask a local Ollama model the same question 5 times and get 5 different answers. Is this a problem?",
+      "options": [
+        "Yes — local models should always give deterministic answers",
+        "No — this is normal; the temperature parameter controls randomness; set temperature=0 for deterministic output when needed",
+        "Yes — this indicates the model is corrupted",
+        "No — different answers means the model is creative"
+      ],
+      "correct": 1,
+      "explanation": "LLM outputs are probabilistic by nature — the same prompt can produce different outputs each run due to temperature (randomness) in the generation process. For applications requiring deterministic output (classification, extraction), set temperature=0. For creative or conversational tasks, some variation is desirable. In Ollama: `{\"model\": \"...\", \"prompt\": \"...\", \"options\": {\"temperature\": 0}}`. Note: even at temperature=0, very minor variations can occur in some implementations."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 12-2.** Ollama is installed and your first model is downloaded. The next lesson walks through running it interactively and comparing its output to Claude."
+    }
+  ],
+  "nextLesson": "12-3",
+  "prevLesson": "12-1"
+}

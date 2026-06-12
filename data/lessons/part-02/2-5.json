@@ -1,0 +1,116 @@
+{
+  "id": "2-5",
+  "title": "Perplexity — AI-Powered Research",
+  "part": 2,
+  "estimatedMinutes": 55,
+  "tags": [
+    "search",
+    "beginner",
+    "research",
+    "tools"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll understand what makes Perplexity fundamentally different from Claude and ChatGPT — and from Google Search — and exactly when each is the right tool. You'll master the specific query structures that get the best research results, learn to use Perplexity's Deep Research mode for comprehensive reports, and develop the verification habit that makes AI-assisted research reliable."
+    },
+    {
+      "type": "text",
+      "content": "## The Fundamental Difference: Live, Cited Research\n\nClaude and ChatGPT are language models — they generate text based on patterns learned during training. Their knowledge has a cutoff date and they don't access the live web in standard mode. Perplexity is built on a completely different premise: it's an **AI-native search engine** that retrieves live web pages in real time, reads them, synthesises an answer, and — critically — shows you every source it used.\n\n**Why citations change everything:**\nWhen Claude says \"aspirin can interact with blood thinners,\" you have no way to know if that's from a reliable medical source or a blog post. When Perplexity says the same thing, you see numbered citations: [1] Mayo Clinic, [2] NHS.uk, [3] American Heart Association. You can click each one and verify that the source actually says what Perplexity claims. This is the fundamental difference.\n\n**What a Perplexity response contains:**\n- Synthesised answer in prose\n- Numbered citation markers in the text (like academic papers)\n- Source panel showing the actual sites used\n- Follow-up question suggestions\n- Option to dig deeper into any cited source\n\n**When citations are essential:**\n- Health, medical, or medication questions (source authority matters enormously)\n- Legal or regulatory questions (jurisdiction and date matter)\n- Financial questions (current rates, recent changes)\n- Anything time-sensitive (current events, recent news)\n- Academic or professional research you'll cite or act on\n- Fact-checking a specific claim\n- Anything where \"this came from the WHO\" is different from \"this came from a random blog\""
+    },
+    {
+      "type": "text",
+      "content": "## Writing Queries That Get Great Results\n\nPerplexity handles natural language queries well — but specific query structures consistently outperform vague ones.\n\n**The anatomy of a strong research query:**\n\n```\n[Specific topic] + [Specific question] + [Context that limits scope]\n```\n\n**Weak query:**\n```\nWhat is the best diet?\n```\n→ Returns generic, broad health content\n\n**Strong query:**\n```\nWhat does the research from the last 3 years show about intermittent fasting\nfor people over 50 with type 2 diabetes? Focus on randomised controlled trials.\n```\n→ Returns specific, recent, targeted results with academic source attribution\n\n**Scope modifiers that improve results:**\n- \"as of [year]\" — restricts to recent information\n- \"according to peer-reviewed research\" — prioritises academic sources\n- \"in [country]\" — localises regulatory or pricing questions\n- \"for [specific type of person/company/situation]\" — narrows applicability\n- \"compare [A] vs [B]\" — triggers comparison format\n- \"pros and cons of\" — triggers balanced structured output\n\n**Domain-specific query patterns:**\n\n| Task type | Query structure |\n|-----------|----------------|\n| Current pricing | \"What is the current pricing for [product/service] in [year]?\" |\n| Recent news | \"What has happened with [topic] in the last [timeframe]?\" |\n| Research consensus | \"What does the research say about [health/scientific claim]?\" |\n| Legal/regulatory | \"What are the current [regulations/laws] around [topic] in [jurisdiction]?\" |\n| Comparison | \"Compare [A] and [B] across [criteria] for [use case]\" |\n| How-to with sources | \"Step-by-step guide to [task] with sources\" |"
+    },
+    {
+      "type": "text",
+      "content": "## Deep Research Mode — Perplexity's Most Powerful Feature\n\nDeep Research is Perplexity's autonomous multi-step research mode. Instead of one round of searches, it:\n1. Analyses your question and plans a research strategy\n2. Runs 15-30+ targeted web searches\n3. Reads and evaluates each source found\n4. Identifies gaps and runs follow-up searches\n5. Synthesises everything into a structured, comprehensive report\n\nDeep Research takes 5-15 minutes to complete and produces output closer to a research brief than a chat response.\n\n**When to use Deep Research:**\n- \"Give me a comprehensive overview of [industry/topic] to prepare for a meeting\"\n- \"Research all the competitors in [market segment] with pricing and positioning\"\n- \"What's the current state of evidence on [health claim/scientific question]?\"\n- \"Help me understand [complex topic] from multiple angles\"\n\n**How to activate:** On the Perplexity search bar, look for \"Deep Research\" (often a dropdown or button option before you submit). The feature is available on the free tier with daily limits; Pro subscribers get unlimited Deep Research.\n\n**Structuring your Deep Research query:**\n\n```\n[Topic]: [specific domain or question]\n\nI need to understand:\n- [Key question 1]\n- [Key question 2]\n- [Key question 3]\n\nFocus particularly on: [your most important concern]\nContext: I'm [your role/situation] and will use this to [purpose]\n```\n\n**Example Deep Research query:**\n```\nTopic: Solar panel installation for residential homes in the UK\n\nI need to understand:\n- Current average costs and what affects the price\n- UK government incentive schemes available in 2026\n- How to evaluate installer quality and avoid scams\n- Realistic timeline from decision to installation\n\nFocus particularly on: Government grants and the payback period.\nContext: I'm a homeowner considering this in the next 6 months.\n```\n\nThis query structure gives Perplexity's research engine enough context to prioritise correctly across 20+ searches."
+    },
+    {
+      "type": "text",
+      "content": "## The 5 Follow-Up Questions Technique\n\nOne of the most underused Perplexity techniques is aggressive follow-up questioning. After your initial result:\n\n1. **Clarify a specific claim:** \"You mentioned [X]. What's the evidence quality for that — are the studies robust?\"\n2. **Go deeper on one source:** \"Can you tell me more about the [specific study/source] you cited for [claim]?\"\n3. **Challenge the consensus:** \"What do critics of this view argue?\"\n4. **Update the scope:** \"Now focus just on [narrower aspect of your topic]\"\n5. **Get practical:** \"Given all this, what would be the top 3 actionable implications for [your situation]?\"\n\nThe conversation thread in Perplexity maintains context across follow-ups — each question builds on the research from previous queries in the same session.\n\n**The result:** A research session that starts with a broad question can drill down to specific, verified, practical conclusions in 15-20 minutes. This replaces hours of manual tab-opening, reading, and note-taking."
+    },
+    {
+      "type": "text",
+      "content": "## Perplexity vs. Google vs. Claude: When to Use Each\n\n| Task | Best tool | Why |\n|------|-----------|-----|\n| \"What is compound interest?\" | Claude | Explanation task, no citation needed |\n| \"What are current UK savings rates?\" | Perplexity | Time-sensitive, source matters |\n| \"Latest AI news this week\" | Perplexity | Real-time current events |\n| \"Write me a 500-word essay on...\" | Claude | Generation task, not research |\n| \"Find the specific page about X on the NHS website\" | Google | Index lookup for a known site |\n| \"What does the research say about [health topic]?\" | Perplexity | Research with source credibility |\n| \"Analyse this document and summarise key points\" | Claude | Document processing, no web search |\n| \"Comprehensive research report on [industry]\" | Perplexity Deep Research | Multi-source synthesis |\n| \"Is this statistic real?\" | Perplexity | Fact verification with source |\n\n**The rule:** Use Perplexity when the source matters and when you need current information. Use Claude when you're generating, analysing, writing, or reasoning. Use Google when you need to find a specific site or page."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Verify before you use.** Perplexity still occasionally misattributes information to a cited source — the source is real but may not say exactly what Perplexity claims. For anything important (medical decisions, professional advice, published facts), click through to the primary source and verify. The citations make verification easy — use that feature, don't just trust the synthesis. This is what separates reliable AI-assisted research from careless AI-assisted research."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Systematic Research Sprint",
+      "content": "Run a full research session on something you genuinely want to know more about. This is a real research task, not a demo.\n\n**Step 1 — Choose a real topic (2 minutes)**\nPick a topic relevant to your work, health, finances, or learning — something where you'd benefit from reliable, current information with sources. Not invented examples.\n\n**Step 2 — Write a strong initial query (3 minutes)**\nUsing the query structure from this lesson:\n```\n[Specific topic] — [specific question] — [context that limits scope]\n```\nDon't submit yet. Review your query: Is it specific enough? Does it include a context modifier (time, location, use case)?\n\n**Step 3 — Run your query and evaluate (5 minutes)**\nGo to [perplexity.ai](https://perplexity.ai) and run your query.\n\nFor each numbered citation:\n- Is this source authoritative for this type of question?\n- Click at least TWO citations and verify the pages actually say what Perplexity claimed\n\n**Step 4 — Apply the 5 follow-up questions (10 minutes)**\nIn the same Perplexity conversation, ask at least 3 follow-up questions that drill deeper:\n1. Clarify a specific claim from the initial response\n2. Challenge the consensus (what do critics argue?)\n3. Get practical (what are the implications for your specific situation?)\n\n**Step 5 — Bring results to Claude (5 minutes)**\nOpen Claude.ai. Paste the key verified findings from your Perplexity research and ask:\n```\nBased on these research findings:\n[paste your verified findings]\n\nHelp me think through the implications for [your specific situation].\nWhat questions should I still be asking?\n```\n\nThis is the proper research workflow: Perplexity for sourced facts, Claude for synthesis and analysis.\n\n**Write down:**\n- What did you verify from the citations vs. what you just trusted?\n- How did the 5 follow-up questions change or deepen what you learned?\n- How is this different from how you'd normally research this topic?"
+    },
+    {
+      "type": "quiz",
+      "question": "You use Perplexity to research medication interactions and it gives you an answer with 3 citations. What is the single most important thing to do before acting on the information?",
+      "options": [
+        "Run the same query again to see if the answer is consistent",
+        "Ask Claude for a second opinion on the same question",
+        "Click through to at least the most important citation and verify the source actually supports what Perplexity claims",
+        "Trust the citations because Perplexity only uses authoritative medical sources"
+      ],
+      "correct": 2,
+      "explanation": "Perplexity can misattribute information — the source is real but may not say exactly what the synthesis claims, or it may be a less authoritative page that ranks highly. For medical decisions especially, clicking through to verify that the primary source (ideally NHS, Mayo Clinic, or similar) actually says what the citation claims is essential. Perplexity makes verification easy — use it. Running the same query again (A) or asking Claude (B) doesn't fix a misattribution problem. Trusting citations blindly (D) defeats the purpose of having citations."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Perplexity Research Drill with Citation Checking",
+      "content": "Perplexity's value is cited, current answers. This drill trains you to use AND verify its output.\n\n**Step 1 — Open Perplexity** (perplexity.ai).\n\n**Step 2 — Research a real topic** you need to know about for work: an industry trend, a competitor, a regulatory update, a technology. Write a clear question.\n\n**Step 3 — Read the answer** and identify: (a) which claims are cited with source links, (b) which claims have no citation.\n\n**Step 4 — Click through to 3 of the cited sources.** Does the actual source say what Perplexity claims it says?\n\n**Step 5 — Test a Focus Mode:** Click the Focus dropdown and switch from \"All\" to \"Academic\" (for scholarly sources) or \"Reddit\" (for community opinions). How does the answer change?\n\n**Step 6 — Rate your research:** How useful was Perplexity for this specific question compared to a Google search?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Research Sprint: From Question to Cited Brief",
+      "content": "Use Perplexity to produce a fully cited research brief on a topic that matters to your work — then review it rigorously.\n\n**Step 1 — Identify a real research question** from your work: something you've been meaning to look into, a topic for an upcoming meeting, background for a decision.\n\n**Step 2 — Run your research in Perplexity.** Start broad, then follow up with specific sub-questions. Aim for 3-5 exchanges that progressively deepen your understanding.\n\n**Step 3 — Save or copy the research output** and its key citations.\n\n**Step 4 — Bring the research into Claude.ai.** Paste the Perplexity output and ask: *\"Based on this research, what are the 3 most important implications for someone in [your role]? What questions does this research NOT answer that I should investigate further?\"*\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Critically review this research brief. What claims seem most uncertain? What important perspectives might be missing? What should I verify before acting on this?\"*\n\n**Step 6 — Produce your final brief:** A one-page summary of the topic with 3-5 key findings, each with a source citation. Keep it — this is a real work deliverable."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Perplexity Focus Modes Comparison",
+      "content": "Perplexity's Focus Modes give very different results for the same question. Understanding them helps you choose the right one.\n\n**Step 1 — Choose a question that has multiple valid perspectives:** A business decision, a technology choice, a policy debate, a health topic.\n\n**Step 2 — Ask the same question in 3 different Focus Modes:**\n- \"All\" — general web sources\n- \"Academic\" — scholarly papers\n- \"Reddit\" — community discussion\n\n**Step 3 — Compare the 3 answers:** How are they different? Which is most useful for your specific question?\n\n**Step 4 — Identify when to use each:**\n- Academic: When you need peer-reviewed evidence\n- Reddit/Social: When you need real-user experience\n- All: When you want a balanced general picture\n\n**Step 5 — Apply this to your workflow:** For your most common research tasks, which Focus Mode should you default to?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Set Up Perplexity for Your Work Domain",
+      "content": "Configure Perplexity to work better for your specific field.\n\n**Step 1 — Identify your most frequent research topics** at work: the subjects you search for regularly.\n\n**Step 2 — In Perplexity**, test how it handles your domain-specific questions. Are the sources it uses appropriate for your field?\n\n**Step 3 — Create a research prompt template** for your domain. A standard prompt that includes your context and always gets better results:\n\n```\nContext: I work in [role] in [industry]. [Key context about what I need.]\nQuestion: [Your specific question]\nPlease focus on [academic sources / practitioner sources / recent news] and include publication dates for all sources.\n```\n\n**Step 4 — Test your template** on 3 different questions in your field. Refine it until the results are consistently useful.\n\n**Step 5 — Save your template** in your prompt library."
+    },
+    {
+      "type": "quiz",
+      "question": "You find a Perplexity answer with 8 numbered citations. Before using this information in a client report, what should you do?",
+      "options": [
+        "Trust the citations — Perplexity is specifically designed for cited research",
+        "Click through to at least 3-5 of the most important citations to verify the original source actually says what Perplexity claims",
+        "Ask Perplexity to double-check its own citations",
+        "Only use citations from .gov or .edu domains"
+      ],
+      "correct": 1,
+      "explanation": "Perplexity citations link to real sources but the excerpt attribution can be inaccurate — the source may exist but may not actually support the specific claim. For anything that will appear in a client report, click through to the original source and verify it says what was attributed. This takes 5 minutes and prevents professional embarrassment."
+    },
+    {
+      "type": "quiz",
+      "question": "You need to understand what customers actually experience when using a competitor's product. Which Perplexity Focus Mode is best?",
+      "options": [
+        "Academic — for objective, peer-reviewed analysis",
+        "All — for the broadest range of sources",
+        "Reddit or Social — for authentic user experiences and community discussion",
+        "Writing — for a well-structured analytical summary"
+      ],
+      "correct": 2,
+      "explanation": "For genuine user experience and community opinion, Reddit/Social focus mode surfaces discussions, reviews, and community posts that reflect what real users actually think and experience — not marketing claims or formal reviews. Academic mode finds scholarly papers (overkill for consumer experience). The skill is matching the focus mode to what type of source would best answer your specific question."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-5.** You now know when and how to use Perplexity: strong query construction, Deep Research for comprehensive reports, the 5 follow-up question technique, and the verification habit. The workflow is: Perplexity for sourced research facts → Claude for synthesis and writing."
+    }
+  ],
+  "nextLesson": "2-6",
+  "prevLesson": "2-4"
+}

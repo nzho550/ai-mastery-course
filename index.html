@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Mastery Course</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/dark.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/lesson.css">
+  <link id="hljs-theme" rel="stylesheet" href="vendor/highlight/github-dark.min.css">
+</head>
+<body>
+  <div id="app">
+
+    <header id="header">
+      <button id="sidebar-toggle" aria-label="Toggle sidebar"></button>
+
+      <a class="logo" href="#/">
+        <span class="logo-icon"></span>
+        <span class="logo-text">AI Mastery</span>
+      </a>
+
+      <div id="search-wrap">
+        <span class="search-icon"></span>
+        <input id="search-input" type="search" placeholder="Search lessons… (press /)" autocomplete="off" spellcheck="false">
+        <div id="search-results"></div>
+      </div>
+
+      <div class="header-spacer"></div>
+
+      <button id="theme-toggle" class="btn btn-ghost" style="padding:var(--sp-2);width:36px;height:36px;justify-content:center" aria-label="Toggle theme"></button>
+    </header>
+
+    <div id="body">
+      <nav id="sidebar"></nav>
+      <main id="main"></main>
+    </div>
+
+  </div>
+
+  <script src="vendor/marked.min.js"></script>
+  <script src="vendor/purify.min.js"></script>
+  <script src="vendor/fuse.min.js"></script>
+  <script src="vendor/highlight/highlight.min.js"></script>
+  <script src="vendor/highlight/languages/powershell.min.js"></script>
+  <script>
+    // Apply theme before first paint to prevent flash
+    (function() {
+      try {
+        const d = JSON.parse(localStorage.getItem('ai-mastery-progress') || '{}');
+        const t = d.__theme || 'auto';
+        if (t === 'dark')  document.body.classList.add('theme-dark');
+        if (t === 'light') document.body.classList.add('theme-light');
+        // Swap highlight.js theme for light mode
+        if (t === 'light' || (t === 'auto' && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.getElementById('hljs-theme').href = 'vendor/highlight/github.min.css';
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

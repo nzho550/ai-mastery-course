@@ -1,0 +1,112 @@
+{
+  "id": "13-2",
+  "title": "What NOT to Share With Cloud AI",
+  "part": 13,
+  "estimatedMinutes": 50,
+  "tags": ["safety", "privacy", "data-protection", "policy"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nIn lesson 1-5, you wrote your first AI privacy policy — a starting point built on general principles. That was before you had a real API key, connected to MCP servers, ran code through Claude Code, or set up Gmail automation. Now you have context. This lesson is about updating your rules to match your actual usage."
+    },
+    {
+      "type": "text",
+      "content": "## What You've Actually Been Doing With AI\n\nLook back at what this course has had you do:\n\n- Sent prompts to Claude.ai about your background, projects, and goals\n- Set up an API key that can call Claude programmatically\n- Configured Claude Code with access to your entire project folder\n- Connected MCP servers to your Gmail, Google Drive, and Google Calendar\n- Built automation workflows that read and process your real emails\n\nEach of these is a choice about data access. Most were fine — the data involved was low-sensitivity. But now you're building more sophisticated tools, and some of those tools will touch more sensitive data. This is the moment to get specific about your rules."
+    },
+    {
+      "type": "text",
+      "content": "## The Five Categories You Should Never Send to Cloud AI\n\n**1. Credentials and secrets**\nPasswords, API keys, OAuth tokens, SSH keys, database connection strings. These belong in `.env` files (you set this up in lesson 11-3) and should never appear in prompts. If you accidentally paste an API key into a conversation, rotate it immediately.\n\n**2. Personal Identifiable Information (PII)**\nFull names combined with addresses, government ID numbers, passport details, social security/national insurance numbers, phone numbers linked to names. Anonymize examples before sharing them. \"My client John Smith at 123 Main Street...\" should become \"My client [Name] at [Address]...\"\n\n**3. Client and employer data**\nAnything that belongs to someone who trusted you with it: client contracts, employee records, customer databases, internal pricing, unreleased products, business strategies. Your company's data is not yours to share with a third party.\n\n**4. Medical and financial records**\nHealth conditions, prescriptions, diagnoses, insurance details, bank account numbers, credit card numbers, tax returns. Even anonymized, medical data carries re-identification risks.\n\n**5. Proprietary code with sensitive logic**\nCode that contains business logic, algorithms with competitive value, security implementations, or encryption keys hardcoded into it. Open-source code and generic examples are fine. \"Here's my company's fraud detection algorithm\" is not."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**How cloud AI providers use your data:** Anthropic's API does not use your API conversations to train models by default. Claude.ai (the website) has separate terms — check the privacy policy if you use it for sensitive work. Either way, your data goes to their servers, and your organization may have its own policies about what can leave your network. When in doubt, use local AI (Part 12)."
+    },
+    {
+      "type": "text",
+      "content": "## Safe Anonymization Techniques\n\nYou often want AI's help on something real but sensitive. Anonymization lets you get the help without exposing the sensitive details.\n\n**Replace names with roles:** \"My client Sarah\" → \"My client (let's call them Client A)\"\n\n**Abstract specifics:** \"Our internal system that processes 50,000 transactions a day\" → \"A high-volume transaction processing system\"\n\n**Use placeholders:** `SELECT * FROM users WHERE email = 'real@email.com'` → `SELECT * FROM users WHERE email = '[USER_EMAIL]'`\n\n**Describe the pattern, not the instance:** \"I have code that connects to our production database. The logic I need help with is...\" and then paste only the logic, not the connection string.\n\nMost AI tasks can be done with anonymized examples. The model helps you with the structure, the logic, the approach — it doesn't need the actual data to do that."
+    },
+    {
+      "type": "text",
+      "content": "## Personal Use vs Workplace Use\n\nFor personal use, you set your own policy. For workplace use, there are often additional constraints:\n\n- Many employers have policies about using external AI tools for work tasks\n- Regulated industries (finance, healthcare, law) have legal requirements about data handling\n- Contractors and consultants are often bound by client NDAs that prohibit sharing data with third parties\n- Some enterprise AI subscriptions (Microsoft 365 Copilot, Google Workspace AI) have different data terms than consumer versions\n\nIf you work in a regulated industry or handle client data, the safest default is: if in doubt, use local AI or don't use AI for that specific task. The productivity gain isn't worth the compliance risk."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The quick check:** Before pasting something into a cloud AI prompt, ask yourself: \"Would I be comfortable if a junior employee at this AI company could read this?\" If the answer is no, anonymize it or use a local model."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Harden Your AI Privacy Policy",
+      "content": "This workshop updates the `my-ai-rules.md` file you created in lesson 1-5. Don't create a new file — extend the existing one.\n\n**Step 1 — Find the file:**\nIn VS Code Explorer, look for `my-ai-rules.md` in your `ai-course-projects` folder. If you created it on a different path in lesson 1-5, find it there.\n\n**Step 2 — Open and review your original rules:**\nRead what you wrote in lesson 1-5. How has your understanding changed? Which rules were right? Which were vague?\n\n**Step 3 — Add these concrete sections** (keep your original rules, add these below them):\n\n```\n## Updated as of: [today's date]\n\n## NEVER send to cloud AI:\n- Passwords, API keys, tokens (use .env files)\n- Full names + home addresses together\n- Client data or customer PII\n- Employer proprietary information or code\n- Medical records or health information\n- Any code containing hardcoded secrets\n\n## OK to send to cloud AI:\n- Public code and open-source projects\n- General questions without personal context\n- Anonymized examples with placeholders\n- My own creative work with no third-party data\n\n## Use local AI (Ollama/LM Studio) instead for:\n- Internal company code\n- Anything under NDA\n- Personal documents I wouldn't share with strangers\n- High-volume processing where cost matters\n\n## MCP-specific rules:\n- Gmail MCP: review every proposed action before confirming\n- Never store API tokens directly in settings.json inside a git repo\n- GitHub token lives in environment variable, not config file\n```\n\n**Step 4 — Add 2–3 rules specific to YOUR situation:**\nThink about your actual life: your job, the tools you use, the people whose data you handle. Add rules that are specific to your context, not generic advice.\n\n**Step 5 — Commit the file:**\nSave it, stage it in VS Code's Source Control, and commit with message: `Update AI privacy policy after completing course`\n\nThis file should travel with you. Copy it to wherever you keep your personal notes."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Quick Drill: Data Classification Audit",
+      "content": "Train your instinct to classify data sensitivity before it reaches an AI prompt.\n\n1. Open a text editor and write down 10 types of information you handled at work or school in the last week. Examples: a colleague's name, a client email, code you wrote, a meeting transcript, a document you edited.\n2. For each item, classify it: (A) Safe for cloud AI, (B) Needs anonymization first, (C) Never send to cloud AI.\n3. For every item you marked B or C, write the anonymization substitution — what would you replace it with to make it safe?\n4. Open Claude.ai and say: \"I'll describe 5 categories of workplace data. For each one, tell me whether it's safe to send to a commercial cloud AI, should be anonymized first, or should never be sent. Then explain your reasoning.\" Paste your 10 items.\n5. Compare Claude's classification to yours. Note where you disagreed.\n6. Wherever Claude was more conservative than you: update your mental model.\n\n**Takeaway:** The classification instinct is a muscle. This drill is a rep."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build It With AI: Team AI Privacy Policy Document",
+      "content": "Build a real, shareable AI privacy policy — the kind you'd give to a team, a client, or post on a company wiki.\n\n1. Open Claude.ai and say: \"I'm writing an AI privacy policy for [describe your context: a freelance developer, a small team, a specific industry]. Draft a professional, one-page policy that covers: what data can be sent to cloud AI, what must be anonymized, what requires local AI only, and how to handle accidental exposure. Use a tone appropriate for internal team documentation.\"\n2. Read the draft critically. Is it specific enough for your actual context, or generic?\n3. Ask Claude to revise: \"Make this more specific to [your role/industry]. Add examples for each rule that would actually happen in our work.\"\n4. Open VS Code and create `notes/team-ai-privacy-policy.md`.\n5. Paste the best version of the policy.\n6. Add a section: \"How to anonymize common data types\" with a table — left column: data type, right column: anonymization method.\n7. Add a section: \"What to do if you accidentally share sensitive data\" — step-by-step response protocol.\n8. Add a section: \"Approved tools\" — list every AI tool you use with a one-line description of its data terms.\n9. Ask Claude to review the final doc: \"Don't validate this — find 3 specific risks, flaws, or gaps in this AI privacy policy for someone in my context.\"\n10. Fix at least one gap. Commit the file with message: `Add team AI privacy policy`\n\n**Output:** A shareable, professional privacy policy you can actually distribute."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Adversarial Test: Try to Leak Sensitive Data Past Your Own Rules",
+      "content": "Test your anonymization by trying to re-identify anonymized data.\n\n1. Take a real piece of sensitive information from your work — a client name and project, an internal system name, a specific business process.\n2. Anonymize it using your standard method (names → roles, specifics → generics).\n3. Paste the anonymized version into Claude.ai and ask: \"Based on this description, can you infer anything specific about the company, industry, or individuals involved?\"\n4. If Claude can partially re-identify: your anonymization isn't strong enough. Note what gave it away.\n5. Now try the reverse: take your anonymization template and deliberately put in information that sounds generic but has an uncommon combination of details (niche industry + specific city + unusual job title). Ask Claude to guess what company it is.\n6. Try an edge case: what if the content you're asking about is rare enough that even sanitized details narrow it down to one organization?\n7. Document the attack vectors you discovered in `notes/my-hallucination-checklist.md` under a new section: \"Re-identification risks.\"\n8. Update your anonymization method to close the gaps you found.\n\n**Expected finding:** At least one anonymization will be weaker than you thought. Real privacy requires thinking like an attacker."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Real-World Application: Audit One Real Workflow for Data Exposure",
+      "content": "Pick one AI workflow you currently use and run a full privacy audit on it.\n\n1. Choose a workflow: your Gmail MCP setup, a script that calls the API, an n8n automation, or a regular Claude.ai habit.\n2. Write down every piece of data that flows through the workflow: what goes in as input, what gets processed, what comes back as output, and what gets stored or logged.\n3. For each data element, classify it using the five categories from this lesson (credentials, PII, client data, medical/financial, proprietary code).\n4. Identify the riskiest point in the workflow — where the most sensitive data touches the AI or a third-party service.\n5. Design one concrete mitigation: Could you anonymize input before it reaches the AI? Could you use a local model for that step? Could you add a confirmation step before sensitive data is transmitted?\n6. Implement the mitigation. It doesn't have to be perfect — one real improvement is the goal.\n7. Open `notes/my-ai-rules.md` and add a workflow-specific entry: \"For [workflow name]: [specific rules that govern how it handles data].\"\n8. Commit the update.\n\n**The standard:** After this audit, you should be able to describe exactly what data each of your AI workflows touches and why each data type is appropriate (or has been mitigated)."
+    },
+    {
+      "type": "quiz",
+      "question": "A developer is debugging a customer data import bug and wants Claude's help. The dataset contains customer names, emails, and purchase history. What is the correct approach?",
+      "options": [
+        "Paste the real data — Claude's API doesn't use it for training",
+        "Anonymize names and emails, replace real purchase items with generic placeholders, then share the data structure and a few anonymized rows",
+        "Only share the code, never any data",
+        "Use a local AI model instead, so the data never leaves the machine"
+      ],
+      "correct": 1,
+      "explanation": "Anonymizing the data allows Claude to help with the actual debugging problem (data structure, import logic) without exposing real customer PII. Using only the code may be insufficient if the bug is data-specific. A local model (option D) is also correct in principle but not always practical — anonymization is a faster solution when local AI isn't set up. Option A is incorrect: even if Anthropic doesn't train on API data, real customer data sent to any third-party server creates compliance risks under GDPR, CCPA, and typical data agreements."
+    },
+    {
+      "type": "quiz",
+      "question": "You discover that your Claude Code settings.json file contains a hardcoded GitHub personal access token. What should you do immediately?",
+      "options": [
+        "Move the file to a private directory so it isn't easily found",
+        "Delete the token from the file and regenerate the token in GitHub settings",
+        "Encrypt the settings.json file",
+        "Add settings.json to .gitignore and leave the token in place"
+      ],
+      "correct": 1,
+      "explanation": "The correct response to any credential exposure is to revoke and rotate the credential immediately — the old token is compromised regardless of where you move the file. After regenerating the GitHub token, store it as an environment variable rather than in the settings file. Adding .gitignore prevents future commits of the file but doesn't address the exposed token, and encryption is unnecessary when environment variables are the right solution."
+    },
+    {
+      "type": "quiz",
+      "question": "Which statement best describes how Anthropic handles data sent via the Claude API versus Claude.ai?",
+      "options": [
+        "Both the API and Claude.ai use your conversations to train models by default",
+        "Neither the API nor Claude.ai uses your conversations for training",
+        "The API does not use conversations for training by default; Claude.ai's consumer terms differ and should be reviewed separately",
+        "API conversations are encrypted end-to-end so Anthropic cannot access them"
+      ],
+      "correct": 2,
+      "explanation": "Anthropic's API terms specify that API conversations are not used to train models by default. Claude.ai (the consumer web product) has separate terms of service with different defaults around data use. For any sensitive work, use the API rather than the consumer interface, and always check the current privacy policy since terms can change. Data is not encrypted end-to-end — Anthropic's servers process it — but it may not be used for training."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 13-2.** Your AI privacy policy is now grounded in real experience, not just principles. The next lesson covers cost management — how to control your API spending and not get surprised by a bill."
+    }
+  ],
+  "nextLesson": "13-3",
+  "prevLesson": "13-1"
+}

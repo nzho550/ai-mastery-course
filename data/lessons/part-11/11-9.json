@@ -1,0 +1,132 @@
+{
+  "id": "11-9",
+  "title": "Cost Engineering — Token Minimization, Model Routing & Prompt Caching",
+  "part": 11,
+  "estimatedMinutes": 65,
+  "tags": [
+    "api",
+    "cost",
+    "optimization",
+    "prompt-caching",
+    "model-routing"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll know four techniques to reduce API costs without losing output quality — and you'll have applied them in working code."
+    },
+    {
+      "type": "text",
+      "content": "## Why Cost Engineering Matters\n\nAPI costs compound fast. A script you run 10 times as a learning exercise is free. The same script running 10,000 times per day as a production tool generates a real bill.\n\nThe good news: most of that bill is avoidable with the right techniques. The four you'll learn here can reduce costs by 10–50× without changing the quality of output on appropriate tasks.\n\n**The reference numbers — 10,000 calls × 1,000 input tokens each:**\n\n| Approach | Cost |\n|----------|------|\n| Always Opus | $150.00 |\n| Switched to Sonnet | $30.00 |\n| Model routing (80% simple → Haiku) | $8.64 |\n| Added prompt caching on large system prompt | $3.46 |\n| Non-real-time tasks moved to Batch API | $1.73 |\n\nSame 10,000 responses. 87× cheaper. No quality loss on the simple tasks."
+    },
+    {
+      "type": "text",
+      "content": "## Technique 1 — Token Minimization\n\nEvery token in your prompt costs money — including tokens that add no value. The most common waste: verbose system prompts full of pleasantries and redundant instructions.\n\nCompare these two system prompts:\n\n**Bloated (~60 tokens):**\n```\nHello! You are an extremely helpful, polite, and thorough assistant.\nI would greatly appreciate your assistance with whatever I ask you today.\nPlease always be detailed and friendly in your responses. Thank you so much!\n```\n\n**Lean (~8 tokens):**\n```\nYou are a helpful assistant.\n```\n\nFor 10,000 calls, you're paying for 50+ tokens of \"thank you so much\" every single time. That's real money at scale.\n\n**Rules for lean prompts:**\n- No greetings, thank-yous, or pleasantries — the model ignores them but you pay for them\n- State the task and output format; nothing else\n- Set `max_tokens` to the smallest value that still works (a yes/no answer needs 5, not 1024)\n- Preprocess long documents: summarize them before sending instead of dumping raw text"
+    },
+    {
+      "type": "text",
+      "content": "## Technique 2 — Model Routing\n\nMost real workloads are a mix of simple and complex tasks. Use a cheap, fast model to classify each request, then route it to the appropriate model.\n\nThis is the **boss/worker pattern**: Haiku (nearly free) decides which worker to use — itself for simple tasks, Sonnet for complex ones."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\nasync function routeAndAnswer(question) {\n  // Haiku classifies complexity — costs ~$0.000001 per call\n  const classification = await client.messages.create({\n    model: 'claude-haiku-4-5-20251001',\n    max_tokens: 5,\n    system: \"Reply 'simple' or 'complex'. Simple = factual, single-step. Complex = analysis, judgment, or multi-step reasoning.\",\n    messages: [{ role: 'user', content: question }]\n  });\n\n  const complexity = classification.content[0].text.trim().toLowerCase();\n  const model = complexity.includes('simple')\n    ? 'claude-haiku-4-5-20251001'\n    : 'claude-sonnet-4-6';\n\n  const response = await client.messages.create({\n    model,\n    max_tokens: 300,\n    messages: [{ role: 'user', content: question }]\n  });\n\n  console.log(`  → routed to: ${model}`);\n  return response.content[0].text;\n}\n\nconst testQuestions = [\n  'What does HTTP stand for?',\n  'Analyse the security tradeoffs between JWT and session-based auth for a 10M-user fintech app',\n  'What year was Python created?',\n  'Design a database schema for multi-tenant SaaS with usage-based billing',\n];\n\nfor (const q of testQuestions) {\n  console.log(`\\nQ: ${q.slice(0, 70)}`);\n  const answer = await routeAndAnswer(q);\n  console.log(`A: ${answer.slice(0, 100)}...`);\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Rule of thumb:** If you cannot explain why a specific call needs Sonnet instead of Haiku, it probably doesn't. Haiku handles classification, extraction, yes/no decisions, and short factual questions extremely well at 4× lower cost."
+    },
+    {
+      "type": "text",
+      "content": "## Technique 3 — Prompt Caching\n\nWhen the same system prompt, large document, or set of examples appears in many calls, you pay for those tokens every single time. Prompt caching lets you pay once and read at ~10% of the normal input price on cache hits.\n\n**How it works:**\n- Add `\"cache_control\": {\"type\": \"ephemeral\"}` to any content block you want cached\n- Minimum cacheable size: 1,024 tokens\n- Cache lasts 5 minutes, refreshed on each hit\n- Cache write: 1.25× normal price\n- Cache read: 0.1× normal price (90% savings per cached-token read)\n\nThis is the biggest lever for applications with large, repeated system prompts — customer support bots, document Q&A tools, RAG systems."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\n// Simulate a large company knowledge base (repeated 6x to exceed 1,024 token minimum)\nconst COMPANY_DOCS = `\nYou are a customer support agent for TechCorp.\n\nProduct overview: TechCorp sells cloud data tools. Our three products are:\nDataPipe (ETL automation), DataStore (managed PostgreSQL), and DataViz (dashboards).\nPricing: DataPipe $99/mo, DataStore $149/mo, DataViz $49/mo. Bundle: $249/mo.\nSupport SLA: free tier 48h response, paid tier 4h response, enterprise 1h response.\nRefund policy: 30-day money-back guarantee, no questions asked.\n`.repeat(6);  // repeat to exceed 1,024 token minimum for this demo\n\nasync function answerWithCache(question) {\n  const response = await client.messages.create({\n    model: 'claude-haiku-4-5-20251001',\n    max_tokens: 150,\n    system: [\n      {\n        type: 'text',\n        text: COMPANY_DOCS,\n        cache_control: { type: 'ephemeral' }  // mark this block for caching\n      }\n    ],\n    messages: [{ role: 'user', content: question }]\n  });\n\n  const u = response.usage;\n  const created = u.cache_creation_input_tokens || 0;\n  const read    = u.cache_read_input_tokens || 0;\n  const status  = created > 0 ? 'CACHE MISS (full price)' : 'CACHE HIT  (~10% price)';\n  console.log(`  ${status} | created=${created} read=${read} regular=${u.input_tokens}`);\n  return response.content[0].text;\n}\n\nconsole.log('=== Call 1 (writes the cache) ===');\nawait answerWithCache('What is your refund policy?');\n\nconsole.log('\\n=== Call 2 (reads from cache) ===');\nawait answerWithCache('How much does the bundle cost?');\n\nconsole.log('\\n=== Call 3 (reads from cache) ===');\nawait answerWithCache('What is the support SLA for paid tier?');"
+    },
+    {
+      "type": "text",
+      "content": "On calls 2 and 3, `cache_read_input_tokens` carries the bulk of the system prompt at 10% cost. For a customer support bot handling 100 questions per hour with a 5,000-token knowledge base, caching cuts that system-prompt cost by 90%."
+    },
+    {
+      "type": "text",
+      "content": "## Technique 4 — Batch API\n\nTasks that don't need instant results can be submitted as a batch for a 50% discount on all token costs. The tradeoff: batches are asynchronous — results may take minutes to hours depending on size.\n\nIdeal use cases: bulk classification, overnight report generation, processing large datasets, any workload where you don't need real-time responses."
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\nconst emails = [\n  \"You've won $1,000,000! Click here now\",\n  \"Your AWS invoice for $23.50 is ready\",\n  \"URGENT: Your account will be suspended\",\n  \"Team standup moved to 3pm tomorrow\",\n  \"Exclusive offer — claim your free gift card\",\n];\n\nconst batch = await client.messages.batches.create({\n  requests: emails.map((email, i) => ({\n    custom_id: `email-${i}`,\n    params: {\n      model: 'claude-haiku-4-5-20251001',\n      max_tokens: 5,\n      system: \"Reply 'spam' or 'not_spam' only.\",\n      messages: [{ role: 'user', content: email }]\n    }\n  }))\n});\n\nconsole.log(`Batch submitted: ${batch.id}`);\nconsole.log(`Status: ${batch.processing_status}`);\nconsole.log('Poll status:  await client.messages.batches.retrieve(batchId)');\nconsole.log('Get results:  await client.messages.batches.results(batchId)');\nconsole.log('(results available when processing_status === \"ended\")');"
+    },
+    {
+      "type": "text",
+      "content": "For small batches like this demo, results arrive in seconds. For thousands of items, allow up to 24 hours."
+    },
+    {
+      "type": "workshop",
+      "tag": "API",
+      "title": "Refactor the Summarizer with Model Routing",
+      "content": "Apply model routing to the `summarize.js` tool from lesson 11-8. You'll add a `--quality` flag: without it, use Haiku (fast and cheap); with it, use Sonnet (higher quality for important summaries).\n\n**Step 1 — Create `exercises/summarize-v2.js`**\n\nStart from your existing `summarize.js`. Add:\n```javascript\n// At the top, after the argument parsing:\nconst highQuality = process.argv.includes('--quality');\nconst model = highQuality ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001';\n\nconsole.log(`Model: ${model} ${highQuality ? '(high quality mode)' : '(fast mode)'}`);\n```\n\nThen update the `client.messages.stream()` call to use `model` instead of the hardcoded string.\n\n**Step 2 — Test both modes**\n```powershell\n# Fast mode (default — Haiku)\nnode summarize-v2.js ../notes/my-ai-workflow.md\n\n# High quality mode (Sonnet)\nnode summarize-v2.js ../notes/my-ai-workflow.md --quality\n\n# Bullet points in high quality mode\nnode summarize-v2.js ../notes/my-ai-workflow.md --bullets --quality\n```\n\n**Step 3 — Compare outputs**\nFor a medium-length document, run both modes and compare:\n- Is the Sonnet output noticeably better?\n- Is the cost difference worth it for this particular document?\n- For short files (under 500 words), is there a practical difference?\n\n**Step 4 — Add a smarter auto-router (optional challenge)**\n\nInstead of `--quality`, auto-detect which model to use based on file size:\n```javascript\nconst wordCount = fileContent.split(/\\s+/).length;\nconst model = wordCount > 2000 ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001';\nconsole.log(`${wordCount} words → using ${model}`);\n```\n\nLong documents benefit more from Sonnet's reasoning. Short documents are well-handled by Haiku.\n\n**What to document:**\nAfter running the tests, write 2-3 sentences in your notes file about when you'd use `--quality` vs the default. This is your personal model routing policy."
+    },
+    {
+      "type": "text",
+      "content": "## The Full Cost Picture\n\nApplied together, these techniques compound:\n\n| Approach | Cost per 10K calls |\n|----------|-------------------|\n| Always Opus, no optimization | $150.00 |\n| Switched to Sonnet | $30.00 |\n| Model routing (80% simple → Haiku) | $8.64 |\n| Added prompt caching on 5,000-token system prompt | $3.46 |\n| Non-real-time tasks moved to Batch API | $1.73 |\n\nSave your `cost-demo.py` or `summarize-v2.js` — they're reference implementations you'll return to every time you build something that calls the API at any real scale."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Token Cost Mapping",
+      "content": "Map the cost landscape for different token optimisation strategies.\n\n**Step 1 — Ask Claude:** *\"Explain Anthropic's prompt caching feature. How does it work, what is the price difference for cached vs non-cached tokens, and what types of content benefit most from caching?\"*\n\n**Step 2 — Calculate the savings** for your use case:\n```\nMy system prompt: ~500 tokens\nRequests per day: 100\nWithout caching: 500 tokens × 100 × input price = X\nWith caching: 500 tokens × 0.10 × input price (first request) + (cached price × 100 × 500) = Y\nMonthly savings: (X - Y) × 30\n```\n\n**Step 3 — Ask Claude:** \"Explain model routing — using cheaper models for simpler requests and expensive models only for complex ones. Design a routing strategy for [describe your application's request types].\"\n\n**Step 4 — Calculate the model routing savings** for your use case."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Implement Prompt Caching",
+      "content": "Add prompt caching to your API wrapper to save on repeated system prompts.\n\n**Step 1 — Read the Anthropic prompt caching documentation** to understand the cache_control parameter.\n\n**Step 2 — Ask Claude Code** to modify your API wrapper to use prompt caching:\n```\nModify the AnthropicClient class to support prompt caching:\n1. Add a cache_system_prompt parameter (default True)\n2. When enabled, add cache_control: {type: \"ephemeral\"} to the system message\n3. Track cache_creation_input_tokens and cache_read_input_tokens separately\n4. Update the cost calculator to use correct prices for cached tokens\n5. Show cache hit rate in usage summaries\n```\n\n**Step 3 — Test caching by making the same system prompt call multiple times.** Do the cached token counts appear in the response?\n\n**Step 4 — Verify the cost reduction** in the usage statistics."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Model Router Implementation",
+      "content": "Build a model router that selects the cheapest model adequate for each request.\n\n**Step 1 — Ask Claude Code** to design and implement a model router:\n```\nBuild a model_router function that:\n1. Classifies the request as simple/medium/complex based on:\n   - Input length (short/medium/long)\n   - Presence of reasoning keywords (\"analyse\", \"explain why\", \"compare\")\n   - Whether it asks for creative generation\n2. Routes simple requests to claude-haiku-4-5-20251001\n3. Routes medium requests to claude-haiku-4-5-20251001 (with higher max_tokens)\n4. Routes complex/creative requests to claude-sonnet-4-6\n5. Logs which model was selected for each request\n```\n\n**Step 2 — Test the router** with 10 diverse requests. Does it classify correctly?\n\n**Step 3 — Compare the output quality** of routed vs always-Sonnet responses on the same requests.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review the routing logic. What request types will be misclassified? What are the failure modes?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Full Cost Engineering Implementation",
+      "content": "Combine all cost engineering techniques into a production-ready setup.\n\n**Step 1 — For your most expensive API use case**, apply all three strategies:\n1. **Prompt caching:** cache the system prompt\n2. **Token minimisation:** review and trim the system prompt and few-shot examples\n3. **Model routing:** use the cheapest model that maintains quality\n\n**Step 2 — Measure before and after** — track tokens and estimated cost for 10 identical requests before and after optimisation.\n\n**Step 3 — Calculate the annual savings** if this call is made at your expected production volume.\n\n**Step 4 — Mandatory review:** Ask Claude: *\"Review my cost optimisation. What am I missing? What additional techniques could further reduce cost without impacting quality?\"*\n\n**Step 5 — Document the final optimisation strategy** as a reference for your next API project."
+    },
+    {
+      "type": "quiz",
+      "question": "Prompt caching saves money when the same system prompt is reused across many requests. What is the condition that must be met for caching to work?",
+      "options": [
+        "The system prompt must be under 1000 tokens",
+        "The cached content must be identical across requests and meet the minimum token threshold (typically 1024 tokens for the system message)",
+        "Caching only works for the same user",
+        "You must pre-register prompts to be cached"
+      ],
+      "correct": 1,
+      "explanation": "Anthropic's prompt caching requires: (1) the content must be exactly identical across requests (any character difference means a cache miss), (2) the content must meet the minimum token threshold (typically 1024 tokens), and (3) the cache_control parameter must be set in the API request. Caching is particularly effective for long system prompts that are reused across many requests — a 2000-token system prompt reused 100 times saves significantly."
+    },
+    {
+      "type": "quiz",
+      "question": "Your model router incorrectly classifies a complex analysis request as \"simple\" and routes it to Claude Haiku. The user receives a lower-quality response. How do you improve the router?",
+      "options": [
+        "Always use Claude Sonnet — routing is too risky",
+        "Collect examples of misclassified requests, analyse the pattern, and improve the routing logic — then add a feedback mechanism where users can flag poor responses for manual review",
+        "Lower the threshold so more requests go to Sonnet",
+        "Ask users to manually select the model tier"
+      ],
+      "correct": 1,
+      "explanation": "Model routing is an empirical problem — the right approach is to build feedback loops. Collect cases where routing produced poor results, analyse what features of those requests caused misclassification, and update the routing logic. Also add a quality signal: track user feedback or proxy metrics (did the user ask a follow-up question indicating the response was insufficient?). Use these signals to continuously improve routing accuracy over time."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 11-9 and all of Part 11.** You've gone from zero API knowledge to building real tools, understanding token economics, and optimizing for cost. The summarizer you built is a template for any AI CLI tool. Part 12 takes a different direction: running AI entirely on your own machine with Ollama."
+    }
+  ],
+  "nextLesson": "12-1",
+  "prevLesson": "11-8"
+}

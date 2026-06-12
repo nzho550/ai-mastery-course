@@ -1,0 +1,129 @@
+{
+  "id": "3-4",
+  "title": "Chain-of-Thought Prompting",
+  "part": 3,
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "chain-of-thought",
+    "reasoning"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou'll learn why asking an AI to \"think step by step\" measurably improves accuracy on reasoning tasks — and why this works mechanically, not just as a trick. You'll also learn four distinct chain-of-thought variants, how to use structured reasoning templates for complex analysis, and when NOT to use CoT. By the end, you'll be able to get auditable, verifiable reasoning from any AI on complex problems."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The research finding:** Chain-of-thought prompting has been shown to improve accuracy on mathematical and logical reasoning from 17.7% to 78.7% on standardised benchmarks. This isn't a small effect — it's the difference between an AI that's unreliable on hard problems and one that's genuinely useful."
+    },
+    {
+      "type": "text",
+      "content": "## Why AI Gets Reasoning Wrong (And CoT Fixes It)\n\nLanguage models are very good at pattern matching and unreliable on multi-step reasoning — unless you force them to slow down.\n\nHere's why: when you ask for a direct answer, the model generates the most statistically likely response token by token. On multi-step reasoning — maths problems, logical deductions, decision trees — the model often shortcuts to a plausible-sounding answer that skips the actual reasoning chain. This is how you get confidently wrong answers.\n\nChain-of-thought prompting breaks this pattern. By instructing the model to reason through each step before answering, you force it to build the logical structure in its output. And here's the key technical insight: **reasoning is in the context window.** When the model writes out Step 1, that text becomes part of the context for Step 2. The intermediate reasoning is literally part of what gets processed next — which is why showing the work produces more accurate results than jumping to a conclusion.\n\nThis isn't a prompt trick — it's a structural fix for a known model limitation."
+    },
+    {
+      "type": "text",
+      "content": "## Variant 1: Zero-Shot CoT — The Single-Phrase Trigger\n\nThe simplest activation: add one phrase to any prompt.\n\n**Trigger phrases (all produce similar results):**\n```\nThink through this step by step before answering.\n```\n```\nLet's think about this carefully. Walk me through your reasoning before concluding.\n```\n```\nReason through this out loud, then give me your final answer.\n```\n```\nShow your work. I want to see each step.\n```\n\n**Example — without CoT:**\n```\nIf a train leaves Station A at 2pm travelling at 60 mph, and another train leaves\nStation B at 3pm travelling at 90 mph toward Station A, and the stations are 300\nmiles apart, at what time do they meet?\n```\n→ Model jumps to an answer. Might be right, might have a calculation error you can't see.\n\n**Example — with CoT:**\n```\n[same question]\n\nThink through this step by step, showing each calculation.\n```\n→ Model shows: how far Train A travels before Train B departs, remaining distance, combined closing speed, time to meet. Every step is checkable. If there's an error, you can find it and correct it.\n\n**The auditability benefit:** This is as important as the accuracy benefit. You're not just getting a better answer — you're getting an answer you can verify. That changes your relationship from \"trusting an oracle\" to \"working with a visible reasoning process.\""
+    },
+    {
+      "type": "text",
+      "content": "## Variant 2: Structured CoT — Named Steps\n\nInstead of just \"step by step,\" provide named steps that map to the specific type of analysis you need. This produces even more consistent and useful reasoning.\n\n**For decision-making:**\n```\nBefore concluding, work through this structured analysis:\n1. What are the key facts we know for certain?\n2. What are we assuming (that might be wrong)?\n3. What are the main options?\n4. For each option: what's the best case, worst case, and most likely outcome?\n5. Which option has the best risk-adjusted outcome?\n6. My recommendation: [with your reasoning]\n```\n\n**For analysing a document or argument:**\n```\nAnalyse this piece using the following structure:\n1. Main claim: what is the author asserting?\n2. Evidence: what does the author use to support this?\n3. Hidden assumptions: what must be true for this argument to hold?\n4. Counter-evidence: what would challenge or disprove this claim?\n5. Verdict: how strong is the argument and what would make it stronger?\n```\n\n**For debugging or problem diagnosis:**\n```\nDiagnose this problem using systematic reasoning:\n1. Symptoms: what exactly is happening?\n2. Possible causes: list every plausible explanation\n3. Eliminate: which causes can we rule out based on the evidence?\n4. Most likely cause: which remaining cause best explains all symptoms?\n5. Verification: how would we confirm this is the cause?\n6. Fix: what's the specific solution?\n```\n\nThese structured templates work because they force the model to address each dimension explicitly, rather than picking whichever feels most relevant."
+    },
+    {
+      "type": "text",
+      "content": "## Variant 3: Few-Shot CoT — Providing Worked Examples\n\nFor specialised reasoning tasks, showing worked examples of the reasoning process is more reliable than describing it. This combines chain-of-thought with few-shot prompting (next lesson).\n\n**Example — legal reasoning:**\n```\nUse the same reasoning pattern as these examples to analyse the new scenario:\n\nScenario: A shop owner leaves a wet floor unmarked and a customer slips.\nReasoning:\n- Duty of care: shop owners owe a duty of care to customers on their premises\n- Breach: failing to mark a hazardous condition (wet floor) = breach of that duty\n- Causation: the unmarked wet floor directly caused the slip\n- Harm: customer suffered injury\nConclusion: Likely negligence — shop owner is liable for damages\n\nNew scenario: A software company ships an update without testing\nthat causes data loss for all users.\nReasoning: [let the model fill in each step]\n```\n\nFew-shot CoT is especially powerful for:\n- Legal or regulatory reasoning\n- Medical differential diagnosis style thinking\n- Financial risk analysis\n- Any domain where there's a professional reasoning framework to follow"
+    },
+    {
+      "type": "text",
+      "content": "## Variant 4: Self-Critique CoT — Reasoning About Your Reasoning\n\nAfter getting an initial response, ask the model to critique its own reasoning. This \"meta-reasoning\" catches errors that the initial response missed.\n\n**The self-critique loop:**\n```\n[After getting Claude's first response]\n\nNow read the reasoning you just provided. Identify:\n1. The step in your reasoning that you're least confident about\n2. Any assumption you made that might not hold in this specific case\n3. An alternative conclusion that someone with different starting assumptions might reach\n\nThen tell me: given those caveats, does your conclusion still hold?\n```\n\n**Why this works:** The model, having written out the reasoning, can now \"read\" it as input and evaluate it. It often correctly identifies its own weaknesses when prompted to look for them — weaknesses it wouldn't have flagged without this explicit prompt.\n\n**When to use self-critique:**\n- Before making a significant decision based on AI reasoning\n- Any time the AI's reasoning seemed too smooth or confident\n- When you want to identify which parts of an analysis to independently verify"
+    },
+    {
+      "type": "text",
+      "content": "## CoT Beyond Maths: Real-World Applications\n\n**Career decisions:**\n```\nI'm deciding whether to accept a job offer that pays 20% more but requires\n2 hours of daily commuting. I have two young children and currently work from home.\n\nThink through this using this framework:\n1. Financial: calculate the real gain after commuting costs (transport, time value)\n2. Time: calculate hours per year lost to commuting vs. years of children's childhood remaining\n3. Career trajectory: what does this role offer beyond salary?\n4. Reversibility: can I return to remote work easily if this doesn't work?\n5. Personal priorities: rank the factors by what I've told you matters most\n6. Recommendation: your honest assessment\n```\n\n**Strategy analysis:**\n```\nAnalyse this competitive situation step by step:\n[describe the situation]\n\n1. What does our competitor do better than us, and why?\n2. Where are we stronger, and is that strength sustainable?\n3. What would happen to our market position if we did nothing for 12 months?\n4. What's one bold move that would change the competitive dynamic?\n5. What's one safe move that would compound our existing advantage?\n6. Which of these two paths is more likely to succeed given our constraints?\n```\n\n**Document review:**\n```\nReview this contract clause using a structured legal reasoning process:\n[paste clause]\n\n1. What does this clause permit?\n2. What does it prohibit?\n3. What's ambiguous or could be interpreted multiple ways?\n4. Which interpretation is more favourable to each party?\n5. What risk does this clause create and for whom?\n6. Suggested change to make this fairer/clearer: [specific edit]\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**CoT doesn't fix hallucination.** It improves logical consistency but won't prevent the model from reasoning correctly from a false premise. If the model's starting facts are wrong, it will reason correctly from wrong information. CoT makes errors more *visible* — which is valuable — but always verify factual claims independently."
+    },
+    {
+      "type": "text",
+      "content": "## When NOT to Use CoT\n\nChain-of-thought adds length and latency. It's unnecessary — and sometimes counterproductive — for:\n\n- **Simple factual questions:** \"What year did the French Revolution start?\" — CoT just adds padding\n- **Direct summarisation:** \"Summarise this in 3 bullets\" — CoT delays the summary\n- **Conversational exchanges:** Using CoT for casual conversation makes Claude feel robotic\n- **High-volume automation:** If you're processing thousands of items, CoT triples the token count and cost\n\n**The rule:** Use CoT when the task involves multi-step reasoning, decision-making, or analysis where you'd benefit from seeing the logic. Skip it for tasks where the output is the point, not the reasoning."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Four CoT Variants — One Real Problem",
+      "content": "This workshop applies all four CoT variants to the same real problem. Pick a genuine complex question or decision you're currently facing.\n\n**Run 1 — No CoT (baseline)**\nAsk your question directly. Rate the response 1-10 for usefulness.\n\n**Run 2 — Zero-shot CoT**\nAdd: \"Think through this step by step before answering.\" Same question.\nRate 1-10. What changed?\n\n**Run 3 — Structured CoT**\nProvide 4-6 named steps for the model to work through:\n```\nBefore answering, work through this:\n1. [step relevant to your question]\n2. [step]\n3. [step]\n4. [step]\nThen give your conclusion.\n```\nRate 1-10. What did the structure surface that the previous runs missed?\n\n**Run 4 — Self-Critique**\nAfter Run 3's response, apply the self-critique loop:\n```\nNow review the reasoning you just gave. What's the weakest step?\nWhat assumption might not hold? Does your conclusion still stand?\n```\nRate 1-10. Did self-critique reveal a flaw or confirm the reasoning?\n\n**Write down:**\n- Your 4 ratings and what changed between each run\n- Which variant produced the most useful output for your specific question\n- One decision or analysis type you'll use structured CoT for in the future"
+    },
+    {
+      "type": "quiz",
+      "question": "You use Claude to analyse whether to proceed with a major business initiative. Claude gives a confident recommendation. Which follow-up is most likely to reveal weaknesses in its reasoning?",
+      "options": [
+        "Ask Claude to give a shorter version of the same answer",
+        "Start a new conversation and ask the same question again",
+        "Apply the self-critique loop: ask Claude to identify the step in its own reasoning it's least confident about, any assumption that might not hold, and an alternative conclusion someone with different assumptions might reach",
+        "Ask Claude to make its recommendation stronger and more decisive"
+      ],
+      "correct": 2,
+      "explanation": "The self-critique loop is specifically designed to reveal reasoning weaknesses by asking the model to examine its own output as input. This often correctly identifies over-confident claims, implicit assumptions, and alternative interpretations that the initial response glossed over. A shorter version (A) removes information without improving quality. A new conversation (B) often produces similar reasoning. Asking for a more decisive recommendation (D) makes the model more confident but not more accurate."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Chain-of-Thought Quick Comparison",
+      "content": "This 8-minute drill shows you exactly how much reasoning instructions improve AI output.\n\n**Step 1 — Choose a problem that requires analysis** — not a simple factual question, but something with trade-offs: a business decision, a technical choice, a recommendation with pros and cons.\n\n**Step 2 — Ask Claude the question twice:**\n\nVersion 1 (no CoT): just ask the question directly.\n\nVersion 2 (with CoT): add \"Think through this step by step. First, identify the key factors. Then analyse each factor. Then consider trade-offs. Finally, give your recommendation with reasoning.\"\n\n**Step 3 — Compare the responses.** In Version 2:\n- Did Claude consider factors it missed in Version 1?\n- Is the reasoning visible so you can check it?\n- Is the conclusion more defensible?\n\n**Step 4 — Identify the specific reasoning step** that produced the most insight you wouldn't have gotten from Version 1.\n\n**Step 5 — Note for yourself:** For what types of questions should you always use chain-of-thought instructions?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Solve a Real Problem with Chain-of-Thought",
+      "content": "Apply chain-of-thought prompting to a real, meaningful problem you're currently facing — and get better analysis than you would with a direct question.\n\n**Step 1 — Identify a real problem or decision** you are currently facing at work or in life. It should be complex enough that the answer isn't obvious.\n\n**Step 2 — Write a structured CoT prompt:**\n```\nI need help thinking through [problem].\n\nContext: [explain the situation, constraints, what matters]\n\nPlease reason through this in the following order:\n1. What are the key factors I need to consider?\n2. What do I know for certain vs what is uncertain?\n3. What are 2-3 realistic options?\n4. For each option, what are the main benefits and risks?\n5. What is your recommendation, and why?\n6. What would need to be true for a different option to be better?\n```\n\n**Step 3 — Run the prompt.** Read through Claude's reasoning step by step.\n\n**Step 4 — Challenge the reasoning:** At whichever step you disagree with, push back: \"In step 3, you said [X]. I think that's wrong because [Y]. Re-reason from that point.\"\n\n**Step 5 — Mandatory final review:** Ask Claude: *\"Review your own reasoning above. What assumptions are you making that I should check? Where could your reasoning be wrong?\"*\n\n**Step 6 — Make a decision** based on the full reasoning. Did the CoT process change what you would have decided?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Build a Reasoning Audit Prompt",
+      "content": "Use chain-of-thought in reverse: make AI explain the reasoning behind an existing decision or claim, not just generate a new one.\n\n**Step 1 — Find a piece of work with a recommendation or conclusion**: a report, a plan, a memo, a piece of analysis with a conclusion.\n\n**Step 2 — Ask Claude to reverse-engineer the reasoning:**\n```\nHere is a conclusion: [paste the conclusion or recommendation]\n\nWork backwards from this conclusion:\n1. What assumptions must be true for this conclusion to be correct?\n2. What data or evidence would support each assumption?\n3. What would invalidate this conclusion?\n4. Is this a strong or weak conclusion? What would make it stronger?\n```\n\n**Step 3 — Review the reverse-engineered reasoning.** Did the analysis surface any assumptions you hadn't explicitly considered?\n\n**Step 4 — Improve the original work:** Based on the reverse-engineering, what would make the conclusion stronger or better defended?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build Your CoT Prompt Templates",
+      "content": "Create a library of chain-of-thought templates for your most common analytical task types.\n\n**Step 1 — List the 3-4 types of analytical problems you face most often** at work: evaluating options, root-cause analysis, planning a project, writing a recommendation.\n\n**Step 2 — For each problem type**, design a specific CoT reasoning sequence — what steps should the AI reason through for this type of problem?\n\n**Step 3 — Ask Claude:** *\"I want to create chain-of-thought prompt templates for these problem types: [list]. For each, write a reasoning framework — the specific steps AI should work through to produce the best analysis. Make each framework match what a senior practitioner in [your field] would actually think through.\"*\n\n**Step 4 — Test each template** on a real problem from that category.\n\n**Step 5 — Refine the templates** based on what the test revealed. Add them to your prompt library."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to recommend a project management tool. Without chain-of-thought, it says \"Notion is the best choice.\" With chain-of-thought, it reasons through team size, integration needs, and budget before recommending Notion. What is the key advantage of the CoT version?",
+      "options": [
+        "The CoT version is more likely to be correct because it considered more factors",
+        "The CoT version is always faster to read",
+        "The CoT version lets you identify exactly where you disagree with the reasoning and correct it",
+        "The CoT version sounds more impressive to share with others"
+      ],
+      "correct": 2,
+      "explanation": "The key advantage of visible reasoning is debuggability — you can inspect each reasoning step and identify specifically where the logic diverges from your situation. If the CoT version says \"assuming team size of 5-10 people\" but your team is 50, you can correct that assumption and get a better recommendation. A direct answer gives you a conclusion with no visible reasoning to check or challenge."
+    },
+    {
+      "type": "quiz",
+      "question": "You are using chain-of-thought to analyse a business risk. After seeing Claude's Step 3 (risk assessment), you think one risk is significantly understated. What should you do?",
+      "options": [
+        "Accept Claude's assessment — it has processed more information than you have",
+        "Start a new conversation and ask the question again",
+        "Tell Claude specifically what you think is understated and why, and ask it to re-reason from that point",
+        "Ask Claude to \"try harder\" in its risk assessment"
+      ],
+      "correct": 2,
+      "explanation": "Chain-of-thought is designed to be interactive — you can intervene at any step. If you disagree with a specific step, say so explicitly with your reasoning, and ask Claude to revise from that point forward. This is far more effective than starting over or giving vague feedback like \"try harder.\" Your domain knowledge about specific risks is something Claude may not have; interactive correction is how you get it incorporated."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 3-4.** You now have four distinct chain-of-thought variants: zero-shot trigger, structured named steps, few-shot worked examples, and self-critique. These techniques can improve reasoning accuracy by 20-60% on complex tasks — and more importantly, they give you reasoning you can audit and challenge."
+    }
+  ],
+  "nextLesson": "3-5",
+  "prevLesson": "3-3"
+}

@@ -1,0 +1,113 @@
+{
+  "id": "16-2",
+  "title": "Reports, Proposals & Business Documents",
+  "part": 16,
+  "estimatedMinutes": 60,
+  "tags": [
+    "office",
+    "beginner",
+    "reports",
+    "proposals",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nReports and proposals are the most common high-stakes written documents in professional life. This lesson covers how to use AI to produce well-structured, persuasive business documents — from a one-page briefing note to a full proposal — faster and to a higher standard than writing from scratch."
+    },
+    {
+      "type": "text",
+      "content": "## The Executive Summary — Write This Last, Present It First\n\nEvery professional report should begin with an executive summary: a 150–250 word standalone section that tells the reader everything they need to know before they decide whether to read further.\n\nWrite it last — after the full document is complete — so it accurately reflects the content.\n\n**Executive summary prompt:**\n```\nHere is the full report I've written: [paste document]\n\nWrite an executive summary of 200 words that:\n- States the purpose of the report in one sentence\n- Lists the 3–4 key findings\n- States the main recommendation or conclusion\n- Is self-contained (readable without reading the rest)\n```\n\nThe executive summary is what your reader will likely share with others. It must stand alone."
+    },
+    {
+      "type": "text",
+      "content": "## Writing a Business Proposal\n\nA business proposal makes a case for something: a new project, a budget, a change in approach, a partnership. It must convince a specific reader to approve or fund something.\n\n**Proposal structure prompt:**\n```\nI need to write a business proposal. Here is my context:\n\nWhat I'm proposing: [describe]\nWho will read it: [decision-maker + their priorities]\nBudget or resource required: [amount / team / time]\nProblem being solved: [current situation]\nProposed solution: [your approach]\nExpected outcomes: [measurable results]\nAlternatives considered: [what else you looked at]\nRisks: [what could go wrong]\n\nWrite a business proposal using this structure:\n1. Executive summary (one page max)\n2. Problem statement (why this matters)\n3. Proposed solution and approach\n4. Expected outcomes and success metrics\n5. Resource requirements and timeline\n6. Risk considerations\n7. Recommendation / call to action\n```\n\n**Making it persuasive:**\nOnce you have a draft, ask:\n```\nRead this proposal from the perspective of [the decision-maker's name/role].\nWhat objections would they have?\nWhich sections are weakest?\nWhat evidence or data would make the case stronger?\n```\nThen address each objection in the proposal."
+    },
+    {
+      "type": "text",
+      "content": "## Writing Status Reports and Updates\n\nStatus reports are short, frequent, and often the most-read documents a manager produces. The key: be honest, be specific, be brief.\n\n**Weekly status report prompt:**\n```\nWrite a professional weekly status report based on these notes:\n\nProject: [name]\nPeriod: [date range]\nCompleted this week: [list what was done]\nIn progress: [what's currently underway]\nBlockers: [anything slowing progress]\nNext week's priorities: [what comes next]\nRAG status: [Red / Amber / Green and why]\n\nFormat: bullet points under clear headings. Total length: under 300 words.\nTone: factual, honest, professional. Don't downplay problems.\n```\n\n**The honesty principle:** Status reports that hide problems reduce trust faster than the problems themselves. Ask AI to help you communicate bad news clearly:\n```\nI need to report that [problem or delay]. The cause was [reason].\nI'm addressing it by [your plan]. How do I write this clearly\nand professionally without sounding defensive?\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Policy Documents and Recommendations\n\nFor formal policy recommendations or governance documents:\n\n```\nI need to write a policy recommendation on [topic].\n\nContext: [situation that triggered the need]\nOptions considered: [list 2-4 options]\nRecommended option: [which one and why]\nImplementation steps: [how to put it in place]\nStakeholders affected: [who is impacted]\nRisks and mitigations: [what could go wrong]\n\nWrite a formal policy recommendation document. Use the structure:\n1. Background\n2. Options analysis (table format if multiple options)\n3. Recommendation and rationale\n4. Implementation plan\n5. Risk register\n6. Approval / sign-off section\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The strongest sentence in any document is the first one.** Most professional documents bury the key point at the end (\"In conclusion, we recommend...\"). Ask AI to rewrite your opening sentence so it states the main point or recommendation immediately. Decision-makers read the first sentence — always."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Write a Real Business Document",
+      "content": "Use the outline you developed in lesson 16-1, or start fresh. Choose a document you actually need to write.\n\n**Option A — Report or briefing note**\n\n```\nI need to write a [report / briefing note] on [topic].\n\nAudience: [who reads it]\nPurpose: [what decision or action should it enable?]\nKey points I want to make: [list 4-6 specific points from your knowledge]\nSupporting evidence: [data, examples, sources you have]\nLength: [500 / 800 / 1200 words]\nTone: [formal / professional plain English]\n\nWrite the full document with an executive summary at the top.\n```\n\n**Option B — Business proposal**\n\nFill in all the fields from the proposal structure prompt above with your real situation. Send it to Claude. Then:\n\n```\nRead this proposal from the perspective of my manager/client.\nList the 3 biggest objections they would have.\nFor each objection, write one paragraph that addresses it.\n```\n\nAdd the objection-addressing content to your proposal.\n\n**Final step — Executive summary:**\n\nOnce your document is complete:\n```\nWrite a 200-word executive summary of this document.\nMake it self-contained — a reader should understand the whole document\nfrom the summary alone without reading further.\n```\n\nPaste it at the top. You now have a complete, professional document ready to send."
+    },
+    {
+      "type": "quiz",
+      "question": "Your business proposal draft is well-structured but you're worried the decision-maker will object to the cost. What is the best way to address this using AI?",
+      "options": [
+        "Remove the cost from the proposal so it's not mentioned until the meeting",
+        "Ask AI to read the proposal from the decision-maker's perspective and list their objections, then address each one in the document",
+        "Ask AI to make the document shorter so there's less for them to object to",
+        "Add more features and benefits to distract from the cost"
+      ],
+      "correct": 1,
+      "explanation": "Anticipating and addressing objections directly in the proposal is the most effective technique — it shows you've thought it through, builds credibility, and pre-empts the objection before the decision-maker raises it. Hiding the cost (A) destroys trust. Shortening the document (C) doesn't address the concern. Adding features (D) changes the proposal rather than addressing the cost concern directly."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Document Type Analysis",
+      "content": "Understand the distinctive requirements of each business document type.\n\n**Step 1 — Ask Claude:** \"Compare these document types for a business professional: report, proposal, briefing, white paper, case study. For each: purpose, typical audience, structure, and what makes an excellent vs mediocre example.\"\n\n**Step 2 — Match your upcoming documents** to the right type:\n| Upcoming document | Correct type | Why |\n|---|---|---|\n| [Your doc] | | |\n\n**Step 3 — For your highest-priority upcoming document**, ask Claude to describe the ideal structure and key success criteria.\n\n**Step 4 — Find one excellent example** of that document type (ask Claude for examples, or search your organisation's past documents). Analyse what makes it excellent."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Write a Real Business Proposal",
+      "content": "Write a real business proposal with AI assistance.\n\n**Step 1 — Identify a real proposal you need to write** (or a practice one if none is pending).\n\n**Step 2 — Gather your content inputs:** What problem are you solving? What is your solution? What is the cost/benefit? Who are the decision-makers?\n\n**Step 3 — Ask Claude to draft section by section:**\n```\nDraft the [Executive Summary] for a proposal:\n- Problem: [describe it]\n- Solution: [your proposal]\n- Business case: [cost, benefit, ROI]\n- Ask: [what you need approved]\n- Audience: [decision-maker roles]\n\nThis must be 1 page maximum. Lead with the business case, not the technical details.\n```\n\n**Step 4 — Review each section.** Is every claim true? Is the business case honest?\n\n**Step 5 — Mandatory review:** Ask a colleague to read the executive summary. What questions do they have after reading it? Fill those gaps."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Data Storytelling",
+      "content": "Learn to use AI to turn data into compelling business narratives.\n\n**Step 1 — Take a real dataset or set of metrics** from your work.\n\n**Step 2 — Ask Claude:** \"Here is my data: [paste data or key numbers]. What is the most important story this data tells? What narrative would resonate with [your audience]?\"\n\n**Step 3 — Review the story Claude identifies.** Is it the right one for your context? What nuance does it miss?\n\n**Step 4 — Ask Claude to write the data narrative** for your document:\n\"Write a 3-paragraph data narrative for a business report based on this analysis [paste Claude's story analysis]. Use specific numbers. Start with the bottom-line finding.\"\n\n**Step 5 — Check every number** in the narrative against your actual data."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Document Review Workflow",
+      "content": "Build a systematic review workflow for high-stakes business documents.\n\n**Step 1 — Ask Claude to design a review workflow** for business proposals:\n```\nDesign a review workflow for a business proposal before it goes to senior leadership. Include:\n1. Accuracy review: fact-checking all claims\n2. Logic review: checking that conclusions follow from evidence\n3. Audience review: is the language and detail level right for decision-makers?\n4. Risk review: what objections will they raise?\n5. Final check: is the ask clear and actionable?\n\nCreate a checklist for each stage.\n```\n\n**Step 2 — Apply the workflow** to a document you're preparing.\n\n**Step 3 — For each checklist item**, address any gaps found.\n\n**Step 4 — Have a colleague review** using the checklist — does it help them give more useful feedback?"
+    },
+    {
+      "type": "quiz",
+      "question": "An AI-drafted business report uses the phrase \"significant increase\" repeatedly. What is the problem and fix?",
+      "options": [
+        "No problem — \"significant\" is professional business language",
+        "Vague language: \"significant\" means different things to different readers. Replace with specific numbers: \"37% increase,\" \"£2.3M improvement,\" \"3× faster\" — quantify every claim you can",
+        "Replace with \"notable increase\" for more professional language",
+        "Define \"significant\" in the glossary"
+      ],
+      "correct": 1,
+      "explanation": "Vague qualifiers (\"significant,\" \"substantial,\" \"major,\" \"considerable\") are AI writing defaults that reduce credibility. Decision-makers need specific numbers to evaluate claims. \"Significant increase in customer retention\" tells a decision-maker nothing — they can't evaluate whether this is worth the investment. \"Customer retention improved from 71% to 84% (13 percentage points) in Q3\" tells them exactly what happened. Always replace vague qualifiers with specific measurements."
+    },
+    {
+      "type": "quiz",
+      "question": "You're writing a proposal to senior leadership who are skeptical about the proposed initiative. How should you structure the proposal?",
+      "options": [
+        "Lead with all the benefits to build enthusiasm before mentioning concerns",
+        "Acknowledge the main objections early and address them directly — skeptical readers who feel their concerns are not addressed will dismiss the rest of the proposal",
+        "Keep it short to avoid giving them time to object",
+        "Lead with technical details to demonstrate credibility first"
+      ],
+      "correct": 1,
+      "explanation": "Skeptical readers read defensively — they're looking for gaps and objections. If you don't address their main concerns early, they stop reading with the concern unresolved. Structure for skeptical audiences: (1) acknowledge the key concern upfront, (2) address it with evidence, (3) then make your case. \"We know cost is the primary concern. Here's the ROI case.\" This demonstrates you understand their perspective and builds trust before making your ask."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-2.** You can now write executive summaries, business proposals, status reports, and policy documents using AI — with your specific context driving the content, AI shaping it into professional structure."
+    }
+  ],
+  "nextLesson": "16-3",
+  "prevLesson": "16-1"
+}

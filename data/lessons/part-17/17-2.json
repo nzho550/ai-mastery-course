@@ -1,0 +1,120 @@
+{
+  "id": "17-2",
+  "title": "Breaking Down Complex Problems",
+  "part": 17,
+  "estimatedMinutes": 60,
+  "tags": [
+    "projects",
+    "beginner",
+    "problem-solving",
+    "thinking",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nComplex problems feel overwhelming when they're treated as single things. The key skill is decomposition: breaking a large, vague problem into smaller, specific, solvable pieces. AI is excellent at this — it can decompose any problem, reveal hidden sub-problems, structure your thinking before you commit to an approach, and apply frameworks that experienced consultants use. This lesson covers the decomposition principle, four structured frameworks (MECE, Five Whys, fishbone, and Pareto), and how to prioritise which problem to solve first."
+    },
+    {
+      "type": "text",
+      "content": "## The Decomposition Principle\n\nEvery complex problem is a stack of simpler problems. The goal of decomposition is to find the level where problems become small enough to act on directly.\n\n**Example:** \"Our customer satisfaction is declining\"\n- ↳ Product problems / Service problems / Communication problems / Expectation problems\n  - ↳ Service problems: long wait times / wrong resolution / staff behaviour\n    - ↳ Long wait times: understaffing / inefficient routing / high volume\n      - ↳ High volume: known seasonal spike / avoidable repeat contacts / new product issues\n\nAt the leaf level, each problem is specific enough to investigate and solve — \"reduce repeat contacts by improving the FAQ for the new product\" is actionable. \"Our customer satisfaction is declining\" is not.\n\nAI can help you decompose problems faster than doing it alone — especially when you're too close to the problem to see its components. And because it has no political stake in the organisation, it can name uncomfortable possibilities you might hesitate to say yourself."
+    },
+    {
+      "type": "text",
+      "content": "## The MECE Principle — Building a Complete Problem Map\n\n**MECE** (Mutually Exclusive, Collectively Exhaustive) is a framework from management consulting — originally developed at McKinsey — for ensuring your decomposition doesn't miss anything or double-count.\n\n- **Mutually Exclusive:** No two categories overlap. If 'understaffing' and 'long wait times' both mean the same thing, merge them.\n- **Collectively Exhaustive:** Together, the categories cover every possible cause. If there's a cause that doesn't fit any category, you need a new category.\n\nA MECE decomposition is powerful because when you solve everything on the list, you've solved the whole problem — there are no hidden gaps.\n\n**AI prompt for MECE decomposition:**\n```\nI'm trying to decompose this problem using the MECE principle:\n[describe problem]\n\nPlease:\n1. Suggest 4–6 mutually exclusive categories that together cover all possible causes\n2. Check your own list: does any cause fit multiple categories? If so, how should the categories be redrawn?\n3. Does any category leave a significant cause type unaccounted for? What's missing?\n4. For each category, list 2–4 specific sub-causes\n\nAfter the decomposition, state which categories are most likely to be productive\nto investigate first, based on the problem description.\n```\n\n**Example of MECE applied:**\nProblem: \"Our project delivery times have increased.\"\n\nMECE categories:\n1. **Process:** Handoff delays, unclear ownership, rework loops\n2. **People:** Skills gaps, capacity issues, staff turnover\n3. **Tools:** Inadequate tooling, manual steps that should be automated\n4. **External dependencies:** Waiting on vendors, client approvals, legal review\n5. **Scope:** Work is growing in complexity, not just in volume\n\nThese categories don't overlap (a delay is either a process, people, tools, external, or scope issue — not two at once), and together they cover every possible cause."
+    },
+    {
+      "type": "text",
+      "content": "## The Problem Decomposition Prompt\n\nFor general decomposition without the MECE constraint, this prompt works for almost any problem:\n\n```\nI'm trying to solve this problem: [describe problem clearly]\n\nPlease:\n1. Restate the problem in one sentence — confirm I've described it accurately\n2. Break it into 3–5 main categories or root causes\n3. For each category, break it down one level further into specific sub-problems\n4. Identify which sub-problems are most likely to be root causes vs. symptoms\n   (A symptom is something you can see; a root cause is what's causing the symptom)\n5. Suggest which 1–2 sub-problems should be investigated first, and why\n```\n\n**Adding data to the analysis:**\nIf you have data (metrics, feedback, incident logs), include it:\n```\nHere is the data I have about this problem:\n[paste data, customer feedback, error logs, survey results]\n\nGiven this data, which sub-problems does it point to most strongly?\nAre there any obvious explanations I should rule out first?\n```\n\n**When you don't know the cause:**\n```\nI don't know why [problem] is happening.\nHelp me generate a set of diagnostic questions — things I should investigate\nto narrow down the cause. What data would I need to collect?\nWhat would tell me it's cause A vs. cause B?\n```"
+    },
+    {
+      "type": "text",
+      "content": "## The Fishbone Diagram (Ishikawa)\n\nThe fishbone diagram (also called an Ishikawa diagram or cause-and-effect diagram) is a visual framework for organising causes of a problem. It structures causes into standard categories, making it easy to see which areas have been explored and which haven't.\n\nThe standard categories for business problems:\n- **People** — Skills, behaviour, training, availability\n- **Process** — Steps, procedures, handoffs, sequencing\n- **Tools/Technology** — Systems, equipment, software, data quality\n- **Environment** — Physical or organisational context, culture, external pressures\n- **Measurement** — How you define and track the problem (sometimes the measurement is wrong)\n- **Materials/Inputs** — Quality or availability of inputs, data, or resources\n\n**AI prompt for fishbone analysis:**\n```\nApply a fishbone (Ishikawa) analysis to this problem: [problem statement]\n\nFor each of the six standard categories (People, Process, Tools/Technology,\nEnvironment, Measurement, Materials/Inputs):\n1. List 2–4 specific potential causes in that category\n2. For the most likely cause in each category, suggest one diagnostic question\n   that would confirm or rule it out\n\nAfter completing the fishbone, identify the 2–3 causes that appear most\nfrequently or seem most likely based on the context I've given you.\n```\n\nFishbone is particularly useful when you need to involve a team in problem analysis — it provides a shared structure that everyone can contribute to, rather than one person deciding what causes matter."
+    },
+    {
+      "type": "text",
+      "content": "## The Five Whys — Finding Root Causes\n\nThe Five Whys is a classic root cause analysis technique from the Toyota Production System: ask \"why\" five times in succession until you reach the fundamental cause.\n\n**AI can help you apply it rigorously:**\n\n```\nApply the Five Whys technique to this problem: [problem]\n\nFor each \"why\", suggest the most likely answers based on what I've told you.\nIf there are multiple plausible causes at a given level, branch the analysis\nand explore both paths.\nAfter 5 levels, state the likely root cause and what it would mean to address\nit at that level vs. at a surface level.\n```\n\n**Classic example:**\n- Problem: Our reports are late every month\n- Why? → The data is late from the source team\n- Why? → They don't know the deadline\n- Why? → We never told them formally\n- Why? → There's no SLA or documented expectation\n- Why? → Nobody owns the end-to-end process\n- **Root cause: Process ownership gap — not a data problem at all**\n\nWithout the Five Whys, the team would have fixed \"the data\" and the reports would still be late. The root cause was organisational, not technical.\n\n**When to use Five Whys vs. MECE vs. Fishbone:**\n- **MECE:** When you need to be sure you've covered all possible causes (audit, compliance)\n- **Fishbone:** When working with a team and you need a shared visual structure\n- **Five Whys:** When you already have a strong hypothesis and want to find the root cause quickly"
+    },
+    {
+      "type": "text",
+      "content": "## Pareto Analysis — The 80/20 Rule for Problems\n\nThe Pareto principle states that roughly 80% of effects come from 20% of causes. In problem-solving terms: a small number of root causes typically account for most of the problem's impact.\n\nBefore investing energy in fixing every sub-problem on your list, identify the vital few:\n\n```\nI have this list of sub-problems and their measured impact: [list with data or estimates]\n\nApply Pareto analysis:\n1. Rank the sub-problems by impact (which ones, if fixed, would reduce the overall problem most?)\n2. Identify the top 20% of causes that likely account for 80% of the problem\n3. For the top 2–3 causes, what would it cost to fix them vs. the impact of fixing them?\n4. What's the recommended sequence: what should we fix first for maximum impact with minimum effort?\n```\n\n**Without data:** If you don't have measured impact data, you can still apply the principle:\n```\nI don't have quantitative data. Based on the context I've described,\nwhich 2–3 causes do you estimate are driving the most impact?\nWhat would be the evidence to confirm or deny this hypothesis?\n```\n\n**Pareto + MECE together:** MECE ensures you haven't missed any categories. Pareto ensures you don't spend equal effort on unequal problems. Together, they produce a complete picture with a prioritised action list."
+    },
+    {
+      "type": "text",
+      "content": "## Prioritising Which Problem to Solve First\n\nOnce you've decomposed a problem, you often have a list of 8–12 sub-problems. They can't all be solved at once. Use AI to help prioritise:\n\n```\nHere is a list of sub-problems I've identified: [list]\n\nHelp me prioritise them using these four criteria:\n- Impact: which ones, if solved, would most improve the overall situation?\n- Effort: which are relatively quick to address vs. requiring major work?\n- Dependencies: which must be solved before others can be attempted?\n- Urgency: which will get worse fastest if left unaddressed?\n\nSuggest a prioritised order and explain your reasoning.\n```\n\n**The 2x2 Impact/Effort matrix:**\nFor visual thinkers, ask Claude to categorise each sub-problem:\n```\nPlace each sub-problem in an Impact vs. Effort matrix:\n- High impact, low effort → Do first (quick wins)\n- High impact, high effort → Plan carefully, resource properly\n- Low impact, low effort → Do if time allows\n- Low impact, high effort → Avoid or deprioritise\n\nFor each quadrant, list the relevant sub-problems.\nThen give me a recommended action sequence.\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Decompose a Problem You're Facing",
+      "content": "Apply these frameworks to a real, current problem in your work.\n\n**Step 1 — Choose the problem (2 minutes)**\n\nIdentify a problem you're currently dealing with that feels too large or vague. Good candidates:\n- A recurring issue your team can't seem to fix\n- A project that's consistently behind\n- A process that everyone agrees is broken but nobody has fixed\n- A situation where you're not sure what's causing the problem\n\n**Step 2 — Run the MECE decomposition (5 minutes)**\n\nDescribe the problem to Claude using the MECE prompt. Be honest — include all the symptoms you can see.\n\nAfter Claude responds:\n- Do the categories make sense for your context? If not, ask Claude to revise them.\n- Does any cause fit multiple categories (meaning the decomposition isn't fully mutually exclusive)?\n- Is there a cause type that isn't covered (meaning the decomposition isn't collectively exhaustive)?\n\n**Step 3 — Apply Five Whys to the top root cause (5 minutes)**\n\nTake the sub-problem Claude identifies as most likely a root cause. Run Five Whys:\n```\nApply Five Whys to: [root cause from step 2]\n```\n\nDoes the root cause at level 5 point to a process, a people, or a structural issue? This matters — each requires a different type of intervention.\n\n**Step 4 — Prioritise with the 2x2 matrix (5 minutes)**\n\nAfter decomposition, run the Impact/Effort prioritisation prompt. Get a prioritised action sequence.\n\n**Step 5 — Choose one action**\n\nFrom the 'High impact, low effort' quadrant, identify one specific action you can take in the next week. Write it down with a target date.\n\nThe value of decomposition isn't the analysis itself — it's getting to a specific, actionable next step faster than thinking alone."
+    },
+    {
+      "type": "quiz",
+      "question": "Your team's project delivery times have increased by 40% over the last quarter. You don't yet know why. What is the most effective use of AI at this stage?",
+      "options": [
+        "Ask AI to tell you the reason your delivery times have increased",
+        "Use AI to build a Gantt chart with more aggressive deadlines",
+        "Use AI to decompose the problem into potential causes and generate diagnostic questions — then gather data to narrow down the root cause",
+        "Ask AI to generate a process improvement plan immediately"
+      ],
+      "correct": 2,
+      "explanation": "When you don't know the root cause, the right first step is using a framework (MECE, fishbone, Five Whys) to generate a structured list of possible causes and the diagnostic questions that would distinguish between them. This guides your data collection so you're investigating the right things. AI can't tell you the reason (A) because it doesn't have your internal data. More aggressive deadlines (B) would worsen the problem if the root cause is capacity or process — you'd be adding pressure without addressing the cause. A process improvement plan (D) is only valid once you know what's causing the problem — improving the wrong process can make things worse."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Problem Decomposition Drill",
+      "content": "Practice breaking complex problems into solvable pieces.\n\n**Step 1 — Choose a genuinely complex problem** you're facing: a technical challenge, a strategic decision, an operational problem.\n\n**Step 2 — Ask Claude to decompose it:**\n```\nHelp me break down this complex problem:\n[describe the problem]\n\nDecompose it into:\n1. Sub-problems (what are the distinct components?)\n2. Dependencies (which sub-problems depend on solving others first?)\n3. Knowns vs unknowns (what do we know? what do we need to discover?)\n4. Quick wins (what can be solved immediately with high confidence?)\n5. Long-pole items (what will take the most time/resources?)\n```\n\n**Step 3 — Review the decomposition.** Does it match your understanding?\n\n**Step 4 — Identify the first sub-problem to tackle** and start working on it."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Root Cause Analysis",
+      "content": "Use AI to conduct a rigorous root cause analysis.\n\n**Step 1 — Choose a problem or failure** that occurred recently.\n\n**Step 2 — Apply the 5 Whys with AI:**\n```\nConduct a root cause analysis using the 5 Whys method.\n\nProblem: [describe what happened]\n\nFor each \"why,\" don't accept the first answer — dig one level deeper:\nWhy 1: Why did [problem] happen?\nWhy 2: Why did [answer to why 1] happen?\n...continue 5 levels deep.\n\nAt the end, identify: what is the true root cause? Is it a system problem or a people problem?\n```\n\n**Step 3 — Validate the root cause.** Does it explain all instances of the problem?\n\n**Step 4 — Design a fix for the root cause** (not a band-aid for the symptom).\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Is the root cause you identified actually addressable? Or does it lead to another problem that can't be solved?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Decision Tree Construction",
+      "content": "Build a decision tree for a complex multi-step decision.\n\n**Step 1 — Identify a decision** with multiple branches and conditional paths.\n\n**Step 2 — Ask Claude to build a decision tree:**\n```\nCreate a decision tree for this situation:\n[describe the decision context]\n\nFor each decision point:\n- What question determines the branch?\n- What are the possible answers?\n- What action does each answer lead to?\n- What are the terminal states (final outcomes)?\n\nFormat as a text-based decision tree I can follow.\n```\n\n**Step 3 — Test the decision tree** on 3 different scenarios. Does it lead to the right decisions?\n\n**Step 4 — Identify any missing branches** — scenarios the tree doesn't handle.\n\n**Step 5 — Share with colleagues** as a shared decision framework."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Complexity Reduction",
+      "content": "Use AI to identify which complexity in a problem can be eliminated.\n\n**Step 1 — Describe a complex problem** you're working on.\n\n**Step 2 — Ask Claude:**\n```\nI'm dealing with this complex problem: [describe it]\n\nHelp me reduce unnecessary complexity:\n1. What aspects of this problem are complex because they need to be vs complex because of how we've approached them?\n2. What constraints are real vs assumed?\n3. What would a simple, direct solution look like? (Even if it seems too simple)\n4. What is the minimum viable solution that addresses the core problem?\n5. What am I overcomplicating?\n```\n\n**Step 3 — Evaluate the \"simple solution.\"** Is it actually too simple, or is it workable?\n\n**Step 4 — Try the simplest approach first** before adding complexity back in."
+    },
+    {
+      "type": "quiz",
+      "question": "You're solving a complex technical problem and Claude gives you a very detailed decomposition with 15 sub-problems. What should you do?",
+      "options": [
+        "Solve all 15 sub-problems simultaneously for maximum efficiency",
+        "Prioritise: identify the 2-3 sub-problems that are blocking everything else or that have the highest impact if unsolved — solve those first",
+        "Delegate each sub-problem to a different team member",
+        "Ask Claude to reduce it to 5 sub-problems maximum"
+      ],
+      "correct": 1,
+      "explanation": "Not all sub-problems are equal. The critical path principle: some sub-problems block everything else (must be solved first), some have high impact, and some are edge cases that matter only if the core solution works. Identify your blocking dependencies first, then your highest-impact items. Solving 15 sub-problems in parallel is usually impossible and often inefficient — dependencies mean you'll be blocked waiting for prerequisite sub-problems anyway."
+    },
+    {
+      "type": "quiz",
+      "question": "The 5 Whys root cause analysis leads to \"the culture doesn't value quality.\" How useful is this root cause, and what should you do?",
+      "options": [
+        "Very useful — culture is the most important factor",
+        "Not very actionable: \"culture\" is too large to address directly. Ask: what specific behaviours or incentives create this culture? What is the one behaviour change or process change that would most improve quality?",
+        "This means the problem is unsolvable",
+        "Escalate immediately to senior leadership"
+      ],
+      "correct": 1,
+      "explanation": "\"Culture\" as a root cause is almost always an intermediate cause, not the true root cause. Culture is a result of specific behaviours, incentives, and systems. Push one level deeper: \"Why doesn't the culture value quality? Is it because quality isn't measured? Because speed is rewarded and quality isn't? Because there's no feedback loop when quality fails?\" Each of these has a more specific, actionable fix than \"change the culture.\""
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 17-2.** You can now use AI with four structured frameworks — MECE decomposition, fishbone analysis, Five Whys, and Pareto prioritisation — to break any complex problem into manageable pieces, identify root causes rather than symptoms, and decide which sub-problems to tackle first for maximum impact."
+    }
+  ],
+  "nextLesson": "17-3",
+  "prevLesson": "17-1"
+}

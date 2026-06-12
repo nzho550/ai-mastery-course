@@ -1,0 +1,120 @@
+{
+  "id": "9-1",
+  "title": "Aider — Terminal-Based AI Coding",
+  "part": 9,
+  "estimatedMinutes": 60,
+  "tags": ["aider", "ai-coding", "terminal", "git"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have Aider installed and running, understand why it exists alongside tools like Claude Code, and see its defining feature in action: every AI edit becomes a git commit automatically."
+    },
+    {
+      "type": "text",
+      "content": "## What is Aider?\n\nAider is an open-source, terminal-based AI coding assistant. Like Claude Code, you run it in your terminal and give it instructions in plain English. Unlike Claude Code, it is opinionated about one thing above all else: **git**.\n\nEvery single change Aider makes to your code is automatically committed to your git history with a meaningful commit message. You always have a complete, reversible record of what the AI did and why.\n\nAider was created by Paul Gauthier and is free and open source. It works with most major AI models — Claude, GPT-4, Gemini, and local models via Ollama. In this lesson we'll use it with Claude."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Prerequisites:** Python must be installed on your machine. Check by running `python --version` in PowerShell. If you see `Python 3.x.x` you're ready. If not, download Python from python.org and install it with default settings, making sure to check **\"Add Python to PATH\"** during setup."
+    },
+    {
+      "type": "text",
+      "content": "## Installing Aider\n\nInstall Aider using pip, Python's package manager:\n\n```bash\npip install aider-chat\n```\n\nAfter installation, verify it worked:\n\n```bash\naider --version\n```\n\nYou should see a version number like `aider 0.x.x`.\n\nAider needs access to an AI model. Since you already have an Anthropic API key from Part 11 setup, you can set it before launching:\n\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\n```\n\nOr create a `.env` file in your project folder containing:\n\n```plaintext\nANTHROPIC_API_KEY=sk-ant-your-key-here\n```\n\nAider reads `.env` automatically, so you don't have to set the variable every session."
+    },
+    {
+      "type": "text",
+      "content": "## Launching Aider\n\nAider must be run inside a **git repository**. Navigate to your project folder and launch it:\n\n```bash\ncd Documents\\ai-course-projects\naider --model claude-sonnet-4-6\n```\n\nThe `--model` flag tells Aider which AI model to use. `claude-sonnet-4-6` is the current Claude Sonnet model — fast and capable for most coding tasks.\n\nYou'll see a prompt like this:\n\n```plaintext\nAider v0.x.x\nModel: claude-sonnet-4-6\nGit repo: .git\nRepo-map: using 1024 tokens\n> \n```\n\nThat `>` is where you type your instructions."
+    },
+    {
+      "type": "text",
+      "content": "## The /add Command — Putting Files in Context\n\nAider doesn't automatically read every file in your project. You tell it which files to work on using the `/add` command:\n\n```plaintext\n/add exercises/about-me.html\n/add exercises/practice.js\n```\n\nNow Aider knows about those two files and can edit both in a single instruction. This is intentional — it keeps the context focused and the AI's edits precise.\n\nYou can add as many files as needed. List what's loaded with `/ls`."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Why specify files?** Aider builds a \"repo map\" — a summary of every file in your project — but only deeply reads the files you `/add`. This keeps token usage low and responses fast. Add only what's relevant to your current task."
+    },
+    {
+      "type": "text",
+      "content": "## The Git-Native Workflow\n\nHere's what makes Aider different from every other tool in this course.\n\nWhen you ask Aider to make a change and approve it, Aider:\n1. Edits the files\n2. Stages the changes\n3. Commits them with a descriptive message — automatically\n\nYou never need to write a commit message. After a session you can run `git log` and see a clean history of every change the AI made:\n\n```plaintext\ncommit a3f1b2c\nAuthor: Aider <aider@example.com>\nDate:   ...\n\n    Add navigation bar to about-me.html and date formatter to practice.js\n```\n\nThis is powerful when something breaks. You can `git diff`, `git revert`, or `git bisect` your way back through AI edits just like you would with human-written code."
+    },
+    {
+      "type": "text",
+      "content": "## Aider vs Claude Code — When to Use Each\n\nBoth tools are strong. The right choice depends on your workflow:\n\n| | Aider | Claude Code |\n|---|---|---|\n| Interface | Terminal only | Terminal (with VS Code integration) |\n| Git commits | Automatic, every change | Manual — you commit when ready |\n| File selection | You specify with /add | Claude reads the whole project |\n| Model support | Many providers | Claude only |\n| Cost | Free (open source) | Subscription (Claude Pro / API) |\n| Best for | Focused edits, clean git history | Whole-project tasks, agentic work |\n\nMany developers use both: Aider for quick targeted edits with automatic commit history, Claude Code for larger exploratory work.\n\nThe fact that Aider commits everything automatically is either its greatest strength or a reason to be careful — make sure you're in a git repo with a clean state before you start."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Install Aider and Watch It Commit",
+      "content": "**Goal:** Install Aider, run it in your project, ask it to create a Python script, and observe the automatic git commit.\n\n**Step 1 — Install:**\n```bash\npip install aider-chat\naider --version\n```\n\n**Step 2 — Set up API key:**\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\n```\nOr create a `.env` file in your project with the key.\n\n**Step 3 — Navigate to your project and verify it's a git repo:**\n```bash\ncd Documents\\ai-course-projects\ngit status\n```\nYou should see output like `On branch main, nothing to commit`. If the folder isn't a git repo, run `git init` first.\n\n**Step 4 — Launch Aider:**\n```bash\naider --model claude-sonnet-4-6\n```\n\n**Step 5 — Add a target file and give an instruction:**\n```plaintext\n/add exercises/practice.js\nAdd a function called formatDate that takes a JavaScript Date object and returns a nicely formatted string like \"Tuesday, June 10 2025\"\n```\n\nAider will show you the proposed change. Review it, then type `y` to accept.\n\n**Step 6 — Check the git log:**\n```bash\n/exit\ngit log --oneline -5\n```\n\nYou should see a commit Aider created automatically — something like `\"Add formatDate function to practice.js\"`.\n\n**What to observe:** The code changed, and git history updated, without you typing a single git command. That's the Aider workflow.\n\n**Bonus:** Run `git show HEAD` to see the full diff of what Aider committed."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Quick Drill: Aider Multi-File Edit",
+      "content": "**Goal:** Use Aider to edit two files in one instruction and see both changes committed in a single atomic commit. (5-10 min)\n\n1. Launch Aider in your project folder:\n```bash\naider --model claude-sonnet-4-6\n```\n2. Add two files to context:\n```plaintext\n/add exercises/practice.js\n/add README.md\n```\n3. Confirm both are loaded with `/ls`\n4. Give a single instruction that affects both files:\n```plaintext\nAdd a JSDoc comment to the top of practice.js describing the file's purpose. Also add a line to README.md under a new section called \"Exercises\" listing practice.js and what it does.\n```\n5. Review the proposed diff — read it carefully before accepting\n6. Type `y` to accept\n7. Exit Aider: `/exit`\n8. Run `git log --oneline -3` — observe that one commit was created for both file changes\n9. Run `git show HEAD` — read the full diff and the AI-generated commit message\n\n**What to notice:** Aider writes commit messages that describe what changed, not vague placeholders. One instruction → one clean commit covering multiple files."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build It With AI: Aider Refactor Sprint",
+      "content": "**Goal:** Use Aider to refactor a real JavaScript file across multiple focused sessions, building a clean git history as you go. (25-35 min)\n\n1. Open `exercises/practice.js` in VS Code to understand what's currently there\n2. Launch Aider:\n```bash\naider --model claude-sonnet-4-6\n```\n3. Add the file: `/add exercises/practice.js`\n4. **Refactor step 1 — Add input validation:**\n```plaintext\nFor every function in practice.js, add input validation at the top of the function. If an argument is the wrong type or missing, throw a descriptive TypeError. Example: if formatDate receives a non-Date, throw TypeError('formatDate expects a Date object').\n```\nReview diff → accept → observe commit\n\n5. **Refactor step 2 — Add error handling:**\n```plaintext\nWrap the body of each function in a try/catch. On error, log the error with console.error and return null rather than letting the error propagate.\n```\nReview diff → accept → observe commit\n\n6. **Refactor step 3 — Add a module export:**\n```plaintext\nAdd a module.exports at the bottom of practice.js that exports all functions as named exports.\n```\nReview diff → accept → observe commit\n\n7. **Refactor step 4 — Create a test file:**\n```plaintext\nCreate a new file exercises/practice.test.js. Write a simple test for each exported function using plain Node.js (no framework). Each test should call the function with valid input and log PASS or FAIL.\n```\nReview diff → accept\n\n8. Exit Aider and run: `git log --oneline -6`\n\n9. **AI REVIEW step:** Open Claude Code or Claude.ai and paste your full `practice.js`. Say: \"Review this code — find 3 failure modes or inefficiencies. Do not validate it, find problems.\" Fix at least one issue Aider missed.\n\n10. Commit the fix manually:\n```bash\ngit add exercises/practice.js\ngit commit -m \"fix: address AI review finding — [describe what you fixed]\"\n```\n\n**Keep the result:** You now have a refactored file with full error handling, exports, tests, and a clean multi-commit git history documenting every step."
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "Workshop C — Failure Mode Testing: What Happens When Aider Gets It Wrong?",
+      "content": "**Goal:** Deliberately trigger Aider errors and edge cases so you know how to recover. (10-15 min)\n\n1. Start a fresh Aider session\n2. **Failure mode 1 — Uncommitted changes conflict:**\nMake a manual edit to `practice.js` in VS Code without saving through Aider. Then run Aider and try to edit the same file. Observe the warning Aider gives about uncommitted changes. How do you recover? (Answer: commit the manual change first with `git add` + `git commit`, then start Aider)\n\n3. **Failure mode 2 — Ambiguous instruction:**\nGive Aider a vague instruction:\n```plaintext\nMake the code better\n```\nObserve what happens — does Aider ask for clarification or guess? Read the proposed diff carefully. Is the change actually what you wanted?\n\n4. **Failure mode 3 — Out-of-context file:**\nDo NOT use `/add` to add a file. Instead, reference a file by name in your instruction:\n```plaintext\nAdd error handling to the formatDate function in practice.js\n```\nAider will attempt to work from its repo map alone. Compare the quality of this change to the in-context version from Workshop A.\n\n5. **Ask AI to diagnose:**\nOpen Claude Code and say: \"I'm using Aider for AI-assisted coding. What are the top 3 ways developers accidentally corrupt their git history when using Aider, and how do I prevent each one?\"\n\n6. Write your 3 recovery procedures in `notes/aider-recovery.md`:\n- What to do if Aider commits something wrong\n- What to do if Aider and your manual edits conflict\n- What to do if a session crashes mid-edit"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Real Workflow: Your Personal Code Quality Script",
+      "content": "**Goal:** Use Aider to build a real script that automates a code quality check you'd actually run regularly. (15-25 min)\n\n1. Think of a file or pattern you repeatedly need to clean up in your own code. Examples:\n   - Functions without JSDoc comments\n   - Missing error handling\n   - console.log statements left in production code\n   - Variables named `x`, `y`, `temp`, `foo`\n\n2. Launch Aider:\n```bash\naider --model claude-sonnet-4-6\n```\n\n3. Ask Aider to create a quality-check script:\n```plaintext\nCreate a new file called scripts/check-quality.js. This script should:\n- Read all .js files in the exercises/ folder\n- Check each file for: functions without JSDoc, console.log statements, and variables shorter than 2 characters\n- Print a report: file name, issue type, line number\n- Exit with code 1 if any issues are found (so it can be used in CI)\n```\n\n4. Review the proposed file → accept\n\n5. Test it:\n```bash\nnode scripts/check-quality.js\n```\n\n6. Ask Aider to fix any issues with the script based on the test output:\n```plaintext\nThe script reported [describe the issue]. Fix it.\n```\n\n7. Once the script works, add it to your GitHub Actions workflow from lesson 10-6 (or do that in lesson 10-6 when you get there):\n```yaml\n- name: Run code quality check\n  run: node scripts/check-quality.js\n```\n\n8. Commit the working script — let Aider write the commit message as usual\n\n9. Observe your final git log — you've built a real, useful tool with a clean, readable history"
+    },
+    {
+      "type": "quiz",
+      "question": "You're working in a git repository and want to make three separate changes to different files using Aider. After the session, you run 'git log --oneline' and see three commits, one per change. What is the correct interpretation of this behavior?",
+      "options": [
+        "A bug — Aider should batch all changes into a single commit",
+        "Expected behavior — Aider commits each accepted change atomically, giving you a granular, reversible history",
+        "A warning sign — too many commits will slow down your git repository",
+        "Optional — you can configure Aider to skip commits entirely"
+      ],
+      "correct": 1,
+      "explanation": "Aider's automatic-commit-per-change behavior is intentional and one of its core design principles. Each accepted change becomes an atomic commit with a descriptive message. This granularity is valuable: if change 2 of 3 introduced a bug, you can revert exactly that commit without losing the other changes. This is far more useful than a single large commit covering all three changes."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Aider to edit 'src/auth.js' but you haven't used /add to load that file. What is the most likely result?",
+      "options": [
+        "Aider refuses with an error — it can only edit files explicitly added",
+        "Aider edits the file perfectly, since it scans the entire repo automatically",
+        "Aider works from its repo map summary, which may produce a lower-quality or incomplete edit compared to having the file in full context",
+        "Aider creates a new empty file called src/auth.js"
+      ],
+      "correct": 2,
+      "explanation": "Aider builds a repo map — a summary of all files — but only deeply reads files you explicitly /add. Without the full file content in context, Aider may miss details like variable names, existing function signatures, or import paths. For best results, always /add the specific files you want Aider to modify before giving instructions."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague says they don't use Aider because 'the automatic commits are annoying — I want to control when I commit.' What is the most accurate response?",
+      "options": [
+        "They are wrong — automatic commits are mandatory and cannot be disabled",
+        "Aider can be run with --no-auto-commits to disable automatic commits, though you lose the per-change audit trail",
+        "Automatic commits cannot be undone, making Aider unsafe for production codebases",
+        "The colleague should switch to Cursor, which also commits automatically but with better messages"
+      ],
+      "correct": 1,
+      "explanation": "Aider supports --no-auto-commits (or the equivalent config setting) for developers who prefer to commit manually. This disables the automatic commit after each accepted change. The trade-off is losing the granular per-change history that is Aider's primary differentiator. Many developers start with auto-commits enabled, appreciate the clean history, and never turn it off."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson complete.** You've installed Aider, used it to edit a file, and seen its automatic git commit in action. Aider's niche is clear: it's the best tool when you want a clean, auditable history of every AI edit — with no extra steps."
+    }
+  ],
+  "nextLesson": "9-2",
+  "prevLesson": "8-15"
+}

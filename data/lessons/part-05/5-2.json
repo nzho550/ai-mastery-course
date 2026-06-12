@@ -1,0 +1,101 @@
+{
+  "id": "5-2",
+  "title": "Downloading & Installing VS Code",
+  "part": 5,
+  "estimatedMinutes": 60,
+  "tags": [
+    "vscode",
+    "beginner",
+    "setup",
+    "install"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson VS Code will be installed on your computer and open to its Welcome screen. You'll also know how to change the colour theme — one of the first things everyone does.\n\nThis lesson is hands-on from start to finish. Follow each step exactly as written."
+    },
+    {
+      "type": "text",
+      "content": "## Installing VS Code on Windows\n\nFollow these steps carefully. Each one matters.\n\n**Step 1 — Download the installer**\n1. Open your web browser (Edge, Chrome, Firefox — any of them)\n2. Go to **code.visualstudio.com**\n3. You'll see a large blue button that says **Download for Windows** — click it\n4. A file called something like `VSCodeSetup-x64-1.xx.x.exe` starts downloading\n5. Wait for the download to finish (it's about 100 MB — takes 30–60 seconds on most connections)\n\n**Step 2 — Run the installer**\n1. Open your **Downloads** folder (Win+E → click Downloads in the left sidebar)\n2. Double-click the `VSCodeSetup-x64...exe` file you just downloaded\n3. If Windows asks \"Do you want to allow this app to make changes?\" → click **Yes**\n\n**Step 3 — Work through the installer screens**\n1. **Screen 1** — Information: just click **Next**\n2. **Screen 2** — License Agreement: click **I accept the agreement** → click **Next**\n3. **Screen 3** — Destination Location: leave the default path as-is → click **Next**\n4. **Screen 4** — Start Menu Folder: leave as \"Visual Studio Code\" → click **Next**\n5. **Screen 5** — Additional Tasks: this screen is important. Check these two boxes:\n   - **\"Add 'Open with Code' action to Windows Explorer file context menu\"** (lets you right-click any file and open it in VS Code)\n   - **\"Add to PATH (requires shell restart)\"** (lets you type `code .` in the terminal to open VS Code)\n   - Leave the other checkboxes as they are → click **Next**\n6. **Screen 6** — Ready to Install: click **Install**\n7. Wait about 60 seconds while the installation runs\n8. **Screen 7** — Completing Setup: keep **\"Launch Visual Studio Code\"** checked → click **Finish**\n\nVS Code opens automatically."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Mac users:** Go to code.visualstudio.com, click **Download Mac Universal**. A `.zip` file downloads. Open it and a VS Code icon appears. Drag that icon into your **Applications** folder. On first launch, right-click it → **Open** (this bypasses macOS's security warning for apps not from the App Store). VS Code opens normally from then on."
+    },
+    {
+      "type": "text",
+      "content": "## Your First Look: The Welcome Screen\n\nWhen VS Code opens for the first time, you'll see a **Welcome** tab. This is completely normal — it's not an error or a demo, it's VS Code's starting page.\n\nYou'll notice:\n- The **interface is dark by default** (dark theme is easier on the eyes for long coding sessions)\n- There's a menu bar at the very top: File, Edit, Selection, View, Go, Run, Terminal, Help\n- On the left side there are some icons stacked vertically — this is the **Activity Bar** (you'll learn all of these in lesson 5-3)\n- The Welcome tab has links to open files, tutorials, and recent projects — ignore these for now\n\n**You installed VS Code correctly if:** the window opened without errors and you can see the Welcome tab."
+    },
+    {
+      "type": "text",
+      "content": "## Changing the Colour Theme\n\nOne of the most personal choices in VS Code is your colour theme. The default is \"Dark+\" (dark background, coloured text). Let's confirm yours is set correctly and show you how to change it.\n\n**How to change the theme:**\n1. Press **Ctrl+Shift+P** on your keyboard (this opens the Command Palette — VS Code's search box for all commands)\n2. A search box appears at the top of the screen with a `>` already typed in it\n3. Type the word `theme` after the `>`\n4. You'll see a suggestion appear: **Preferences: Color Theme** — click it (or press Enter)\n5. A list of themes appears. Use your arrow keys to preview them live, or click one to select it\n6. Try: **Dark+** (the recommended default), **Monokai** (popular warm colours), or **Light+** (if you prefer a white background)\n\nYou can change this any time — there's no wrong answer. Dark+ is what most tutorials use, so it's the easiest for following along."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**What is Ctrl+Shift+P?** You'll use this combination constantly. It opens the **Command Palette** — a search box that can run any VS Code command by name. Instead of hunting through menus, you just type what you want. We cover this in detail in lesson 5-6."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Install & First Launch",
+      "content": "Work through this checklist and check off each item:\n\n- [ ] VS Code is installed on your computer (follow the steps above)\n- [ ] VS Code is open and showing the Welcome screen\n- [ ] The interface has loaded without any error messages\n- [ ] Open the Command Palette: press **Ctrl+Shift+P**\n- [ ] Type `theme` → select **Preferences: Color Theme**\n- [ ] Choose **Dark+** if it isn't already selected (or choose a different theme you prefer)\n- [ ] Close the Command Palette (press Esc or click elsewhere)\n\n**Optional — install a font (makes code easier to read):**\nMany developers use a \"monospace\" font designed for code. One popular free option is **JetBrains Mono**:\n1. Go to jetbrains.com/lp/mono — click **Download JetBrains Mono**\n2. Open the zip file and install the font files (right-click → Install for all users)\n3. In VS Code: press Ctrl+Shift+P → type `Open User Settings JSON` → press Enter\n4. Inside the `{}`, add: `\"editor.fontFamily\": \"JetBrains Mono, Consolas, monospace\"`\n5. Save with Ctrl+S — the editor font changes immediately\n\nThis step is optional — Consolas (the default) is perfectly readable. But good tooling setup pays dividends over hundreds of hours of use."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Install and Verify VS Code",
+      "content": "If you haven't installed VS Code yet, this drill guides you through it. If you have, you'll verify the installation is complete.\n\n**Step 1 — Download VS Code** from code.visualstudio.com. Choose the installer for your operating system.\n\n**Step 2 — During installation**, ensure these options are checked:\n- \"Add to PATH\" (allows running `code .` from terminal)\n- \"Register Code as an editor for supported file types\"\n- \"Add Open with Code action to file/directory context menu\"\n\n**Step 3 — Verify the installation:**\n```powershell\ncode --version\n```\nYou should see a version number like `1.x.x`. If not, VS Code wasn't added to PATH.\n\n**Step 4 — Test the `code .` shortcut:**\n```powershell\nmkdir test-workspace\ncd test-workspace\ncode .\n```\nVS Code should open with the test-workspace folder loaded.\n\n**Step 5 — If `code .` doesn't work**, ask Claude: *\"VS Code is installed but `code .` doesn't work in PowerShell. How do I fix this on Windows?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Install Python and Node.js Alongside VS Code",
+      "content": "VS Code alone is just an editor. To run code, you need interpreters. This workshop sets up both Python and Node.js.\n\n**Step 1 — Check what's already installed:**\n```powershell\npython --version\nnode --version\nnpm --version\n```\n\n**Step 2 — Install Python** (if not installed): python.org → Download Python 3.x. During installation, CHECK \"Add Python to PATH\".\n\n**Step 3 — Install Node.js** (if not installed): nodejs.org → Download LTS version. The installer also installs npm.\n\n**Step 4 — Verify both:**\n```powershell\npython --version\nnode --version\n```\n\n**Step 5 — In VS Code**, open the Command Palette (Ctrl+Shift+P) and type \"Python: Select Interpreter\". Select your installed Python version.\n\n**Step 6 — Ask Claude:** *\"I've installed VS Code, Python, and Node.js. What are the first 3 things I should verify to make sure everything is configured correctly for [your learning goal]?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — VS Code Extensions for AI Development",
+      "content": "The right extensions turn VS Code into an AI-powered development environment.\n\n**Step 1 — Open the Extensions panel** (Ctrl+Shift+X).\n\n**Step 2 — Install these AI-specific extensions:**\n- \"GitHub Copilot\" — AI code completion (free tier available)\n- \"Continue\" (continue.dev) — open-source AI assistant, works with Claude\n- \"Codeium\" — free AI completion alternative\n\n**Step 3 — Configure Continue** to use Claude: After installing, open its settings and add your Anthropic API key (or use the free tier).\n\n**Step 4 — Test AI assistance:** Open a Python file, start typing a function, and see if AI suggests a completion.\n\n**Step 5 — Ask Claude:** *\"I've installed AI extensions in VS Code. What are the most effective ways to use AI code assistance — not just tab-complete, but for bigger tasks like explaining code, generating tests, and refactoring?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Write and Run Your First Program in VS Code",
+      "content": "End-to-end: write a real program, run it, see the output — all inside VS Code.\n\n**Step 1 — Open VS Code** and open a project folder.\n\n**Step 2 — Create a new Python file**: Right-click in Explorer → New File → `hello.py`.\n\n**Step 3 — Ask Claude:** *\"Write me a Python script that does something useful in about 20 lines: [describe something you want — a calculator, a to-do list, a file organiser, a text formatter]. Include comments explaining each part.\"*\n\n**Step 4 — Paste the code** into hello.py.\n\n**Step 5 — Run it** using the VS Code terminal (Ctrl+` to open):\n```powershell\npython hello.py\n```\n\n**Step 6 — If there are errors**, paste them back to Claude. Ask for the fix.\n\n**Step 7 — Mandatory code review:** Ask Claude: *\"Review this code you just wrote. What are 3 improvements you would make to make it more robust, readable, or useful?\"* Apply at least one improvement."
+    },
+    {
+      "type": "quiz",
+      "question": "After installing VS Code, you run `code .` in PowerShell and get \"command not found.\" What is the most likely cause?",
+      "options": [
+        "VS Code needs to be restarted",
+        "The \"Add to PATH\" option was not checked during installation, so the shell doesn't know where to find the code command",
+        "PowerShell doesn't support VS Code commands",
+        "You need to install a VS Code extension first"
+      ],
+      "correct": 1,
+      "explanation": "\"Add to PATH\" adds VS Code to the list of locations Windows checks when you type a command. If you skipped this option, PowerShell can't find the `code` command. The fix: reinstall VS Code with \"Add to PATH\" checked, or manually add VS Code to your system PATH (Settings → System → Advanced system settings → Environment Variables)."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to run a Python file you just wrote in VS Code. Which approach runs the code?",
+      "options": [
+        "Double-click the .py file in Explorer",
+        "Open the integrated terminal (Ctrl+`) and run `python filename.py`",
+        "Press Ctrl+S to save and it automatically runs",
+        "Click File → Run"
+      ],
+      "correct": 1,
+      "explanation": "The standard way to run a Python file in VS Code is through the integrated terminal: Ctrl+` opens the terminal, then `python filename.py` runs the file. You can also press F5 (Run and Debug) or use the Run button that appears when a Python extension is installed. Double-clicking a .py file usually opens it in the editor, not runs it."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-2.** VS Code is installed, open, and themed. In the next lesson you'll learn the names and purposes of every panel in the interface — so you're never lost again."
+    }
+  ],
+  "nextLesson": "5-3",
+  "prevLesson": "5-1"
+}

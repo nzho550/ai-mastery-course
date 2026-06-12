@@ -1,0 +1,95 @@
+{
+  "id": "5-1",
+  "title": "What is VS Code and Why Use It",
+  "part": 5,
+  "estimatedMinutes": 50,
+  "tags": [
+    "vscode",
+    "beginner",
+    "tools"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what Visual Studio Code is, why professional developers use it, and why it's worth learning before we go any further in this course.\n\nNo installation yet — that's next lesson. This lesson is about building the mental model."
+    },
+    {
+      "type": "text",
+      "content": "## VS Code Is Not Just Notepad\n\nWhen you write code in Notepad, you get a blank white box. Nothing tells you if you made a mistake. Nothing helps you navigate. Nothing auto-completes anything. It's like writing an essay in a plain text box with no spell-check.\n\n**Visual Studio Code** (VS Code) is a free code editor made by Microsoft that changes all of this. It understands the structure of code — it knows the difference between a keyword, a variable name, and a string. It highlights problems as you type, suggests completions, shows you your whole project as a tree of files, and contains a fully working terminal right inside the window.\n\nBut the most important thing: **VS Code is extensible.** It has a marketplace of thousands of extensions — add-ons that give it new abilities. This includes AI assistants like GitHub Copilot, code formatters like Prettier, live browser preview, Git tools, and much more. You'll install several of these in upcoming lessons.\n\nFor this course, VS Code is our home base. Every hands-on exercise from here forward happens inside it."
+    },
+    {
+      "type": "text",
+      "content": "## Comparing the Options\n\nHere is an honest comparison of the tools you might consider for editing files:\n\n| Feature | Notepad | Microsoft Word | VS Code |\n|---------|---------|---------------|--------|\n| Free | Yes | No (Microsoft 365) | Yes |\n| Made for code | No | No | Yes |\n| Syntax highlighting (colour-codes code) | No | No | Yes |\n| Shows errors as you type | No | Grammar only | Yes |\n| File explorer built-in | No | No | Yes |\n| Built-in terminal | No | No | Yes |\n| Git integration | No | No | Yes |\n| AI assistant add-ons | No | Limited | Yes |\n| Extensions/plugins | No | Limited | 30,000+ |\n| Best for | Quick notes | Documents | Code, config, everything technical |\n\nNotepad is fine for jotting a quick note. Word is for formatted documents. VS Code is for anything technical — code, configuration files, Markdown, JSON, HTML, CSS, scripts, and more. Once you start using VS Code, you'll find yourself reaching for it far beyond just code."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**VS Code by the numbers:** In the 2024 Stack Overflow Developer Survey, 73% of professional developers use VS Code as their primary editor — more than all other editors combined. Every tutorial, every StackOverflow answer, and every colleague on a technical team will assume you know it."
+    },
+    {
+      "type": "text",
+      "content": "## Why It Matters for AI Work\n\nThis is an AI course, so you might be wondering: why are we spending a whole part on a code editor?\n\nHere's why: **everything AI-related that goes beyond chatting in a browser lives in files.** API keys, prompt templates, configuration files, automation scripts, MCP server configs, project notes — all of it is plain text in files. VS Code is the best tool in existence for working with those files.\n\nBeyond that, VS Code is where you'll install GitHub Copilot (Part 6), Claude Code (Part 7), Continue.dev, and other AI tools that work *inside your editor*. The editor is not separate from the AI workflow — it is the AI workflow.\n\nFinally, VS Code is free and open source. Microsoft maintains it, but the source code is public. It works on Windows, Mac, and Linux. There is no lock-in."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Read the Numbers",
+      "content": "Visit the Stack Overflow Developer Survey results at **stackoverflow.com/survey** and find the section on \"Most popular development environments\" (or \"Integrated development environment\").\n\n1. Note VS Code's percentage among professional developers.\n2. Note which editor is in second place and by how much.\n3. Write two sentences in your notes:\n   - What the numbers tell you about VS Code's dominance\n   - One reason you think it became so popular (based on what you read in this lesson)\n\nThis single data point is the practical argument for learning VS Code before anything else technical: whatever resource you use next — YouTube tutorial, GitHub README, blog post — the author almost certainly uses VS Code. You'll be following along without friction."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — VS Code First Impressions Drill",
+      "content": "This 8-minute drill gets you oriented in VS Code before diving into details.\n\n**Step 1 — Open VS Code** (if not installed: code.visualstudio.com). Notice the Welcome tab.\n\n**Step 2 — Identify the 5 zones** of the VS Code interface by hovering over each icon in the Activity Bar (left side):\n- Explorer (files)\n- Search\n- Source Control (git)\n- Run & Debug\n- Extensions\n\n**Step 3 — Open the Command Palette** (Ctrl+Shift+P). Type \"theme\" and switch to a different colour theme. This shows you can customise anything.\n\n**Step 4 — Open a new file** (Ctrl+N). Type a few lines of anything. Notice how VS Code auto-detects file type when you save it with a .txt, .py, or .js extension.\n\n**Step 5 — Ask Claude.ai:** *\"I just opened VS Code for the first time. What are the 5 things I should set up or learn in my first hour? Be specific to my goal of [your learning goal].\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Configure VS Code for Your Workflow",
+      "content": "VS Code works best when configured for your specific work. This workshop personalises it.\n\n**Step 1 — Open VS Code settings** (Ctrl+,). Browse through the categories.\n\n**Step 2 — Configure the 5 most impactful settings:**\n- Font size: set to a comfortable reading size (14-16)\n- Auto save: enable \"After Delay\"\n- Word wrap: enable \"On\"\n- Tab size: set to your preference (2 or 4)\n- Theme: browse and select a theme you find comfortable\n\n**Step 3 — Install 3 essential extensions** via the Extensions panel (Ctrl+Shift+X):\n- \"Prettier\" — automatic code formatting\n- \"GitLens\" — enhanced git features\n- One language-specific extension for the language you're learning\n\n**Step 4 — Ask Claude:** *\"I'm setting up VS Code for [describe your goals]. What extensions and settings would you recommend specifically for my use case? Give me the exact extension names and the specific settings to change.\"*\n\n**Step 5 — Mandatory review:** Ask Claude: *\"Review the VS Code setup you just recommended. What are 3 settings or extensions you didn't mention that a professional developer in [your context] would consider essential?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — VS Code vs Other Editors",
+      "content": "Understanding why VS Code is dominant helps you understand what it's optimised for.\n\n**Step 1 — Ask Claude:** *\"Compare VS Code to these alternatives: Notepad++, Sublime Text, Cursor, and JetBrains IDEs. For each, tell me: (1) what type of user it's designed for, (2) its main advantage over VS Code, (3) when I would choose it over VS Code.\"*\n\n**Step 2 — Read the comparison.** Which alternative sounds most interesting for your use case?\n\n**Step 3 — Look up Cursor** (cursor.sh) — it's a VS Code fork built for AI-first development. Ask Claude: \"How is Cursor different from VS Code? Would it be better than VS Code for someone learning to work with AI on code?\"\n\n**Step 4 — Make an informed decision:** For your specific goals, is VS Code the right editor? Write one sentence explaining your choice.\n\n**Step 5 — Note:** The skills you learn in VS Code transfer almost directly to Cursor — they share 95% of the same interface and keyboard shortcuts."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Set Up a VS Code Workspace for a Real Project",
+      "content": "A VS Code Workspace keeps your project organised and saves your editor settings.\n\n**Step 1 — Create a real project folder** for something you're working on: a learning project, a scripts folder, a writing project.\n\n**Step 2 — Open VS Code and open the folder** (File → Open Folder, or `code .` from the terminal inside the folder).\n\n**Step 3 — Save it as a Workspace** (File → Save Workspace As). Name it after your project.\n\n**Step 4 — Ask Claude:** *\"I'm setting up a VS Code workspace for [describe your project]. What folder structure should I create? What files should I add to get started? Give me the exact commands to run in the terminal.\"*\n\n**Step 5 — Create the folder structure** Claude recommends.\n\n**Step 6 — Open the workspace next time** by double-clicking the .code-workspace file. VS Code will restore your open files and settings."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main reason VS Code became the most popular code editor, despite many alternatives existing?",
+      "options": [
+        "It was the first code editor ever made",
+        "It's free, open source, highly extensible through extensions, and has excellent AI integration support",
+        "It's made by Apple, which ensures quality",
+        "It can only be used for web development, making it specialised"
+      ],
+      "correct": 1,
+      "explanation": "VS Code dominates because of its combination of: being free and open-source, a vast extension ecosystem (50,000+ extensions for any language or workflow), great performance, excellent git integration built-in, and being the first major editor to deeply integrate AI coding assistance (GitHub Copilot). Its extensibility means it adapts to virtually any development workflow."
+    },
+    {
+      "type": "quiz",
+      "question": "You open VS Code and cannot find the Command Palette. What keyboard shortcut opens it?",
+      "options": [
+        "Ctrl+P",
+        "Ctrl+Shift+P",
+        "Alt+F4",
+        "F1 or Ctrl+Shift+P both work"
+      ],
+      "correct": 3,
+      "explanation": "The Command Palette opens with Ctrl+Shift+P (or F1). It's the single most important keyboard shortcut in VS Code — it gives access to every command VS Code can execute, without needing to find it in menus. Ctrl+P (without Shift) opens the file picker (Go to File), which is also extremely useful. Memorise both."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 5-1.** You now understand what VS Code is, how it compares to the alternatives, and why it's the right tool for AI work. Next lesson: install it."
+    }
+  ],
+  "nextLesson": "5-2",
+  "prevLesson": "4-6"
+}
