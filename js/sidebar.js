@@ -62,7 +62,7 @@ function render() {
     const header = document.createElement('div');
     header.className = 'part-header';
     header.innerHTML = `
-      <span>Part ${part.id} — ${part.title}</span>
+      <span>Part ${part.number} — ${part.title}</span>
       <span class="chevron">${icons.chevronDown}</span>
     `;
     header.addEventListener('click', () => {

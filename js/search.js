@@ -9,7 +9,7 @@ export function initSearch(curriculum) {
     part.lessons.map(lesson => ({
       id:    lesson.id,
       title: lesson.title,
-      part:  `Part ${part.id}: ${part.title}`,
+      part:  `Part ${part.number}: ${part.title}`,
       tags:  (lesson.tags || []).join(' '),
     }))
   );

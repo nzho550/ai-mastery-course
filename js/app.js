@@ -92,12 +92,12 @@ function renderDashboard() {
   main.innerHTML = `
     <section class="hero">
       <h1>Master <span>AI Tools</span> From Zero</h1>
-      <p>14 parts · 112 lessons · hands-on workshops that leave you with real skills, real tools, real results.</p>
+      <p>${curriculum.parts.length} parts · ${totalStats.total} lessons · hands-on workshops that leave you with real skills, real tools, real results.</p>
       <div class="stats-row">
         <div class="stat"><span class="stat-value">${totalStats.done}</span><span class="stat-label">Lessons Done</span></div>
         <div class="stat"><span class="stat-value">${totalStats.pct}%</span><span class="stat-label">Complete</span></div>
-        <div class="stat"><span class="stat-value">112</span><span class="stat-label">Total Lessons</span></div>
-        <div class="stat"><span class="stat-value">14</span><span class="stat-label">Parts</span></div>
+        <div class="stat"><span class="stat-value">${totalStats.total}</span><span class="stat-label">Total Lessons</span></div>
+        <div class="stat"><span class="stat-value">${curriculum.parts.length}</span><span class="stat-label">Parts</span></div>
       </div>
       <div class="hero-actions">
         ${resumeHtml}
@@ -122,7 +122,7 @@ function renderDashboard() {
           return `
             <a class="part-card" href="#/lesson/${part.lessons[0].id}">
               <div class="part-card-header">
-                <span class="part-number">Part ${part.id}</span>
+                <span class="part-number">Part ${part.number}</span>
                 <h3>${part.title}</h3>
               </div>
               <div class="progress-bar">
@@ -153,7 +153,7 @@ function renderDashboard() {
 function findLesson(id) {
   for (const part of curriculum.parts) {
     const lesson = part.lessons.find(l => l.id === id);
-    if (lesson) return { ...lesson, partId: part.id };
+    if (lesson) return { ...lesson, partId: part.id, partNumber: part.number };
   }
   return null;
 }

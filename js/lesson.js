@@ -47,7 +47,7 @@ export async function renderLesson(id) {
 function findLesson(id) {
   for (const part of curriculum.parts) {
     const lesson = part.lessons.find(l => l.id === id);
-    if (lesson) return { ...lesson, partTitle: part.title, partId: part.id };
+    if (lesson) return { ...lesson, partTitle: part.title, partId: part.id, partNumber: part.number };
   }
   return null;
 }
@@ -65,14 +65,14 @@ function buildLesson(meta, data) {
       <nav class="breadcrumb">
         <a href="#/">Home</a>
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
-        <a href="#/">Part ${meta.partId}</a>
+        <a href="#/">Part ${meta.partNumber}</a>
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
         <span>${meta.title}</span>
       </nav>
 
       <header class="lesson-header">
         <div class="lesson-header-meta">
-          <span class="badge badge-accent">Part ${meta.partId}</span>
+          <span class="badge badge-accent">Part ${meta.partNumber}</span>
           ${meta.estimatedMinutes ? `<span class="badge badge-muted">${icons.clock} ${formatMinutes(meta.estimatedMinutes)}</span>` : ''}
           ${status === 'complete' ? `<span class="badge badge-success">${icons.checkCircle} Complete</span>` : ''}
         </div>
@@ -189,13 +189,13 @@ function buildComingSoon(meta) {
       <nav class="breadcrumb">
         <a href="#/">Home</a>
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
-        <span>Part ${meta.partId}</span>
+        <span>Part ${meta.partNumber}</span>
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
         <span>${meta.title}</span>
       </nav>
       <header class="lesson-header">
         <div class="lesson-header-meta">
-          <span class="badge badge-accent">Part ${meta.partId}</span>
+          <span class="badge badge-accent">Part ${meta.partNumber}</span>
           ${meta.estimatedMinutes ? `<span class="badge badge-muted">${icons.clock} ${formatMinutes(meta.estimatedMinutes)}</span>` : ''}
         </div>
         <h1 class="lesson-title">${meta.title}</h1>
