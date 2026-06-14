@@ -2097,7 +2097,7 @@
             "knowledge-engine",
             "hands-on"
           ],
-          "nextLesson": null,
+          "nextLesson": "18-7",
           "prevLesson": "18-5"
         },
         {
@@ -2229,8 +2229,78 @@
             "pkm",
             "hands-on"
           ],
-          "nextLesson": "18-1",
+          "nextLesson": "20-1",
           "prevLesson": "19-7"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Building Custom AI Skills",
+      "lessons": [
+        {
+          "id": "20-1",
+          "title": "Custom Skills — What They Are and Why They Change Everything",
+          "estimatedMinutes": 35,
+          "tags": ["skills", "claude-code", "slash-commands", "automation", "beginner"],
+          "nextLesson": "20-2",
+          "prevLesson": "19-8"
+        },
+        {
+          "id": "20-2",
+          "title": "Skill Design Principles — Anatomy of a Great Skill",
+          "estimatedMinutes": 40,
+          "tags": ["skills", "claude-code", "prompt-engineering", "design", "intermediate"],
+          "nextLesson": "20-3",
+          "prevLesson": "20-1"
+        },
+        {
+          "id": "20-3",
+          "title": "The Email Intelligence Suite — Build 3 Email Skills",
+          "estimatedMinutes": 75,
+          "tags": ["skills", "email", "gmail", "mcp", "productivity", "build", "intermediate"],
+          "nextLesson": "20-4",
+          "prevLesson": "20-2"
+        },
+        {
+          "id": "20-4",
+          "title": "The Multi-Subagent Analyzer — 5 Agents That Beat Hallucination",
+          "estimatedMinutes": 80,
+          "tags": ["skills", "agents", "subagents", "hallucination", "parallel", "advanced", "build"],
+          "nextLesson": "20-5",
+          "prevLesson": "20-3"
+        },
+        {
+          "id": "20-5",
+          "title": "Document Intelligence — Extract Any Data From Any Document",
+          "estimatedMinutes": 70,
+          "tags": ["skills", "documents", "extraction", "pdf", "contracts", "build", "intermediate"],
+          "nextLesson": "20-6",
+          "prevLesson": "20-4"
+        },
+        {
+          "id": "20-6",
+          "title": "The Productivity Suite — Build 4 Daily-Use Skills",
+          "estimatedMinutes": 80,
+          "tags": ["skills", "productivity", "morning-brief", "code-review", "weekly-review", "build", "intermediate"],
+          "nextLesson": "20-7",
+          "prevLesson": "20-5"
+        },
+        {
+          "id": "20-7",
+          "title": "Skill Chaining — Your Personal AI Workflow System",
+          "estimatedMinutes": 75,
+          "tags": ["skills", "chaining", "workflow", "system", "advanced", "build"],
+          "nextLesson": "20-8",
+          "prevLesson": "20-6"
+        },
+        {
+          "id": "20-8",
+          "title": "Advanced Skill Patterns — Subagents, Parameters & Sharing",
+          "estimatedMinutes": 85,
+          "tags": ["skills", "subagents", "advanced", "sharing", "team", "build"],
+          "nextLesson": null,
+          "prevLesson": "20-7"
         }
       ]
     }

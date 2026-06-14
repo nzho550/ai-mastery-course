@@ -1,0 +1,88 @@
+{
+  "id": "20-1",
+  "title": "Custom Skills — What They Are and Why They Change Everything",
+  "part": 20,
+  "estimatedMinutes": 35,
+  "tags": ["skills", "claude-code", "slash-commands", "automation", "beginner"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand what a custom AI skill is, how Claude Code executes them, and you'll have created your first real skill — `/daily-brief` — that you can run every morning to get a personalised summary of what matters most that day. Every skill you build from this point forward is yours permanently: saved in a file you own, working on your machine, free to run as often as you want."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**What SkillShare-style AI skills actually are:** You've probably seen demos of AI doing impressive things — sorting thousands of emails, extracting structured data from contracts, running parallel research agents. What makes that possible isn't a special AI — it's a *skill*: a carefully designed instruction file that tells Claude exactly what to do, step by step, with access to your tools. You're about to learn to build those."
+    },
+    {
+      "type": "text",
+      "content": "## The Core Idea: A Skill Is a Saved, Reusable Prompt With Superpowers\n\nA **custom skill** in Claude Code is a Markdown file that lives in your `.claude/commands/` folder. When you type `/skill-name` in Claude Code, Claude reads that file and executes it as a complete, sophisticated task.\n\nThat's it. One file. One command. But the power comes from what's inside:\n\n- **Role and context** — you tell Claude what it is and what data it has access to\n- **Step-by-step instructions** — a structured sequence Claude follows reliably\n- **Tool access** — skills can use every MCP server you have connected (Gmail, Calendar, GitHub, databases, the web)\n- **Dynamic arguments** — pass different inputs each time via `$ARGUMENTS`\n- **File writing** — skills can create and update files on your disk\n- **Subagent spawning** — advanced skills can launch multiple AI agents in parallel\n\n**The result:** things that would take you 20–45 minutes manually take 30 seconds to kick off, and 2–5 minutes to complete while you do something else."
+    },
+    {
+      "type": "text",
+      "content": "## Where Skills Live — Two Levels\n\nSkills exist at two levels, and understanding which level to use matters:\n\n**Project-level: `.claude/commands/` inside a project folder**\nOnly available when working in that specific project. Use for project-specific workflows:\n```\nyour-project/\n  .claude/\n    commands/\n      deploy.md        → /deploy\n      test-coverage.md → /test-coverage\n      migration.md     → /migration\n```\n\n**User-level: `~/.claude/commands/` in your home directory**\nAvailable in *every* project, in every session — your personal skill library. Use for general skills that work anywhere:\n```\n~/.claude/\n  commands/\n    daily-brief.md    → /daily-brief   (works in any folder)\n    email-sort.md     → /email-sort    (works in any folder)\n    deep-analyze.md   → /deep-analyze  (works in any folder)\n```\n\n**How to create the user-level folder:**\n```powershell\nNew-Item -ItemType Directory -Force -Path ~/.claude/commands\n```\nOr on Mac/Linux:\n```bash\nmkdir -p ~/.claude/commands\n```\n\nBoth levels load simultaneously — a user-level `/email-sort` and a project-level `/deploy` both work in the same session."
+    },
+    {
+      "type": "text",
+      "content": "## Anatomy of a Skill File\n\nHere's the structure of a well-designed skill:\n\n```markdown\n# Role (who Claude IS for this skill)\nYou are my personal morning briefing assistant. You have access to my Gmail,\nCalendar, and a list of my current projects.\n\n# Context (what Claude knows going in)\nThis command runs every morning. The user wants a concise, actionable overview\nof their day — not a wall of text. Brevity and prioritisation matter most.\n\n# Steps (the exact sequence to follow)\n1. Check Gmail for unread emails from the last 12 hours\n2. Look for any emails marked Action Required or from my manager\n3. Check today's calendar events\n4. Identify the 3 most important things to handle today\n5. Check if any of today's meetings have prep materials I should review\n\n# Output Format (how to present results)\nRespond with:\n**Good morning! Here's your day:**\n\n📧 **Email** — [X unread, top action: ...]\n📅 **Calendar** — [X meetings, next: ...]\n🎯 **Top 3 priorities:** ...\n⚠️ **Watch for:** [anything urgent]\n\n# Constraints (what NOT to do)\n- Do not list every email — summarise\n- Keep the whole response under 200 words\n- If nothing is urgent, say so explicitly — don't invent urgency\n```\n\nThis structure — Role, Context, Steps, Output Format, Constraints — is the template for every skill you'll build in this part. It produces reliable, predictable results because Claude doesn't have to guess what you want."
+    },
+    {
+      "type": "text",
+      "content": "## The `$ARGUMENTS` System — Dynamic Skills\n\nStatic skills are useful. Dynamic skills are more powerful. The `$ARGUMENTS` placeholder lets you pass different input each time you run a skill.\n\n**Example — a skill that works on any file:**\n\nFile: `~/.claude/commands/explain.md`\n```markdown\nExplain the file or concept: $ARGUMENTS\n\nProvide:\n1. What it does in one sentence\n2. How it works, step by step\n3. Why it's designed this way\n4. What would break if it were changed\n\nAssume the reader is smart but hasn't seen this before.\n```\n\nUsage:\n- `/explain src/auth.js` → explains that file\n- `/explain JWT tokens` → explains the concept\n- `/explain the database schema` → explains whatever Claude can see\n\n**Multi-argument pattern:**\n```markdown\nCompare $ARGUMENTS to the existing patterns in this codebase.\n```\n\n**Making arguments optional:**\n```markdown\nAnalyse $ARGUMENTS (or the most recently discussed file if nothing is specified).\n```\n\nSkills with smart `$ARGUMENTS` usage become general-purpose tools rather than one-trick commands."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Skills vs prompts vs CLAUDE.md:** CLAUDE.md gives Claude permanent context about your project (don't modify X, always use Y pattern). Prompts are one-off instructions you type. Skills are reusable, saved prompt programs that combine role + context + steps + format — the best of all three."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build Your First Skill — /daily-brief",
+      "content": "Build the `/daily-brief` skill and run it for real. This skill produces a personalised morning briefing by reading your email and calendar.\n\n**Requirements:** Gmail MCP connected (from Part 8). Google Calendar MCP connected (optional — if not, it reads email only).\n\n---\n\n**Step 1 — Create the commands folder:**\n```powershell\nNew-Item -ItemType Directory -Force -Path ~/.claude/commands\n```\n\n**Step 2 — Create the skill file:**\n\nCreate `~/.claude/commands/daily-brief.md` with this content:\n\n```markdown\n# Role\nYou are my personal morning briefing assistant. You have access to my Gmail\nMCP and optionally my Google Calendar MCP.\n\n# Task\nProduce a concise, actionable morning briefing. The goal is: I read this in\n90 seconds and know exactly what matters most today.\n\n# Steps — execute these in order\n1. Use the Gmail MCP to count my unread emails from the last 24 hours\n2. Find any emails from people in my management chain, clients, or marked urgent\n3. Find any emails where someone is waiting for a response from me\n4. If Calendar MCP is available: check today's meetings and any with prep materials\n5. Identify the single most time-sensitive thing I need to handle\n6. Note anything from yesterday that I left unfinished (check drafts)\n\n# Output Format\nRespond ONLY with:\n\n**Good morning! Here's what matters today:**\n\n📧 **Inbox** — [X unread] | Action needed: [list of 1-3 items, or 'none']\n📅 **Calendar** — [X meetings today] | First: [time + title] | Prep needed: [yes/no]\n🎯 **Top priority:** [the single most important thing]\n⚡ **Quick wins:** [2-3 things I can clear in under 5 minutes each]\n\n**Yesterday's loose ends:** [anything unfinished, or 'all clear']\n\n# Constraints\n- Keep total response under 250 words\n- Do not list everything — prioritise and curate\n- If something is genuinely urgent, make that clear\n- If today is quiet, say so — don't invent urgency\n```\n\n**Step 3 — Test the skill:**\nOpen Claude Code in any folder and type:\n```\n/daily-brief\n```\n\nWatch Claude read your email and produce a real briefing.\n\n**Step 4 — Refine it:**\nAfter the first run, tell Claude:\n```\nThat was good but [what you'd improve]. Update the skill file to [specific change].\n```\nAsk Claude to edit `~/.claude/commands/daily-brief.md` directly.\n\n**Step 5 — Run it again:**\n```\n/daily-brief\n```\n\n**Accomplishment check:** If you ran `/daily-brief` and got a real, personalised morning summary from your actual email — you've built your first skill. It will be there tomorrow, and every day after."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Your Personal Command Centre",
+      "content": "Set up your personal skill library with 3 starter skills you'll actually use.\n\n**Step 1 — Confirm the folder exists:**\n```powershell\nls ~/.claude/commands/\n```\nYou should see `daily-brief.md` from the main workshop.\n\n**Step 2 — Create a /summarize skill:**\nCreate `~/.claude/commands/summarize.md`:\n```markdown\nSummarise $ARGUMENTS concisely.\n\nIf $ARGUMENTS is a file path: read the file, then summarise.\nIf $ARGUMENTS is a URL: retrieve the page, then summarise.\nIf $ARGUMENTS is pasted text: summarise that directly.\n\nFormat:\n- What it is (1 sentence)\n- Key points (3-5 bullets)\n- Most important takeaway (1 sentence)\n- What action, if any, it suggests (1 sentence or 'no action needed')\n\nKeep total under 150 words.\n```\n\nTest it:\n```\n/summarize README.md\n```\nor\n```\n/summarize https://anthropic.com/research/claude\n```\n\n**Step 3 — Create a /note skill:**\nCreate `~/.claude/commands/note.md`:\n```markdown\nCreate a structured note from: $ARGUMENTS\n\nWrite the note to notes/[today's-date]-[topic-slug].md.\n\nNote structure:\n# [Topic from $ARGUMENTS]\nDate: [today's date]\n\n## Summary\n[2-3 sentence summary of $ARGUMENTS]\n\n## Key Points\n[bullet list]\n\n## Action Items\n[ ] [any actions identified]\n\n## Related\n[anything this connects to in the project]\n```\n\nTest it:\n```\n/note Meeting with Alex about Q3 budget review — we decided to cut 15% from marketing\n```\n\nCheck your notes folder — the file should be there.\n\n**Step 4 — Verify all three skills work:**\n```\n/daily-brief\n/summarize README.md\n/note [something real from your day]\n```\n\n**Outcome:** You now have 3 skills saved permanently in `~/.claude/commands/`. They work in every project, in every session, indefinitely."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Reverse-Engineer a Skill",
+      "content": "The best way to understand skill design is to read existing ones and understand why they're written the way they are.\n\n**Step 1 — Ask Claude to design a skill for a specific need:**\n```\nI want a skill that helps me prepare for any meeting I have coming up.\nIt should: read the meeting invite and attendees from my calendar,\ncheck my email history with those people, and produce a pre-meeting\nbriefing with: who the people are, what we've discussed before,\nwhat this meeting is about, and 3 questions I should be ready to answer.\n\nWrite this as a complete skill file I could save in ~/.claude/commands/meeting-prep.md\n```\n\n**Step 2 — Read the skill Claude wrote.** Identify:\n- Where is the Role defined?\n- What are the specific steps?\n- How does it handle missing data (what if I have no email history with someone)?\n- What constraints prevent it from being too verbose?\n\n**Step 3 — Improve it:**\nAsk Claude:\n```\nMake this skill more robust:\n1. Add a step that checks if I've met this person before\n2. Add a step that looks for any files or docs shared with them\n3. Make the output tell me: the one thing I most need to be prepared for\n```\n\n**Step 4 — Save the final version:**\n```\nSave the improved skill to ~/.claude/commands/meeting-prep.md\n```\n\n**Step 5 — Run it on a real upcoming meeting:**\n```\n/meeting-prep\n```\n(No argument needed if you design it to find the next calendar event automatically)\n\nor\n\n```\n/meeting-prep meeting with [Name] at [Time]\n```\n\n**Outcome:** A meeting preparation skill that actually saves you 10-15 minutes of manual research before every important meeting."
+    },
+    {
+      "type": "quiz",
+      "question": "You create a skill file at `~/.claude/commands/review.md`. Where will this skill be available?",
+      "options": [
+        "Only in the current project folder where you created the file",
+        "In all Claude Code sessions across all projects, on your machine",
+        "Only if you explicitly load it with /load-skill",
+        "Only in projects that also have a .claude folder"
+      ],
+      "correct": 1,
+      "explanation": "Files in `~/.claude/commands/` are user-level skills — they load automatically in every Claude Code session regardless of which project folder you're in. This is the right place for general-purpose skills like /review, /summarize, /daily-brief. Project-level skills go in `.claude/commands/` inside a specific project and are only available when working in that project."
+    },
+    {
+      "type": "quiz",
+      "question": "A skill file contains `Analyse the file $ARGUMENTS for security issues`. You type `/security src/auth.js`. What does Claude receive?",
+      "options": [
+        "Analyse the file $ARGUMENTS for security issues (unchanged)",
+        "Analyse the file src/auth.js for security issues",
+        "src/auth.js (just the argument, not the full skill)",
+        "An error — $ARGUMENTS requires quotes around the value"
+      ],
+      "correct": 1,
+      "explanation": "`$ARGUMENTS` is a placeholder that gets replaced with whatever text you type after the slash command name. Typing `/security src/auth.js` replaces `$ARGUMENTS` with `src/auth.js`, so Claude receives the full instruction: 'Analyse the file src/auth.js for security issues.' This is how you make skills dynamic and reusable across different inputs."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 20-1.** You understand what custom skills are (saved Markdown instruction files in `.claude/commands/`), how they execute, the difference between user-level and project-level, and you've built your first real skill — `/daily-brief`. The next lesson teaches you to design skills that are reliable, robust, and significantly more powerful than simple prompts."
+    }
+  ],
+  "nextLesson": "20-2",
+  "prevLesson": "19-8"
+}

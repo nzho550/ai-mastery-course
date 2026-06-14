@@ -99,8 +99,13 @@
     },
     {
       "type": "callout",
+      "variant": "tip",
+      "content": "**Save this as a skill:** The most powerful thing you can do after this lesson is save the workflow you just ran as a custom skill file. Create `~/.claude/commands/email-triage.md` with instructions based on the prompts that worked best for you today — then next Monday, run it with `/email-triage` instead of re-typing everything. Part 20 of this course teaches exactly how to build robust, reusable email skills including an `/email-sort`, `/email-report`, and `/email-draft` that work on your real inbox every time."
+    },
+    {
+      "type": "callout",
       "variant": "success",
-      "content": "**You've completed lesson 8-11.** Your inbox is cleaner and you have a repeatable process. Lesson 8-12 extends this to Google Drive and Calendar."
+      "content": "**You've completed lesson 8-11.** Your inbox is cleaner, you have active labels and a repeatable triage process. Lesson 8-12 extends this to Google Drive and Calendar. In Part 20, you'll build permanent email skills that run this same workflow with a single command."
     }
   ],
   "nextLesson": "8-12",

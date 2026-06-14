@@ -1,0 +1,82 @@
+{
+  "id": "20-2",
+  "title": "Skill Design Principles — Anatomy of a Great Skill",
+  "part": 20,
+  "estimatedMinutes": 40,
+  "tags": ["skills", "claude-code", "prompt-engineering", "design", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThe difference between a skill that works once and a skill you rely on every day is design. This lesson teaches you the principles behind skills that are reliable, robust, and improve over time. You'll learn why some prompts produce consistent results and others feel random, and how to build skills that handle edge cases gracefully — even when your MCP isn't connected or the data you expected isn't there."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Why skill quality matters so much:** A weak prompt occasionally produces a useful result. A well-designed skill consistently produces the result you need, handles missing data gracefully, and gets better every time you refine it. The difference isn't intelligence — it's structure. This lesson gives you that structure."
+    },
+    {
+      "type": "text",
+      "content": "## The 6-Part Skill Architecture\n\nEvery reliable skill uses this structure. Each part has a specific job:\n\n```\n[1] ROLE — who Claude IS for this skill\n[2] CONTEXT — what situation it's in, what data it has access to\n[3] STEPS — the exact sequence to follow, numbered\n[4] OUTPUT FORMAT — precisely how to present results\n[5] CONSTRAINTS — what NOT to do\n[6] FALLBACK — what to do if data is missing or tools aren't connected\n```\n\n**Why each part matters:**\n\n**ROLE** sets Claude's perspective and expertise. `You are an expert code reviewer` vs `You are an assistant` produces measurably different outputs on the same code. Be specific: `You are a senior security engineer reviewing code for OWASP Top 10 vulnerabilities.`\n\n**CONTEXT** prevents Claude from making wrong assumptions. Tell it: what project this is, what MCP tools it has, what the user's goal is, what time constraints exist. Without context, Claude fills the gaps with generic assumptions.\n\n**STEPS** is the most important part. A numbered sequence forces Claude to complete each step before moving to the next — preventing it from jumping to conclusions. Each step should be a single, specific action.\n\n**OUTPUT FORMAT** removes ambiguity about what the result should look like. Include: headers, bullet vs prose, length limit, what to include and omit. Format matters as much as content.\n\n**CONSTRAINTS** prevent the most common failure modes: being too verbose, including caveats when you want directness, doing extra work you didn't ask for, apologising when there's nothing to apologise for.\n\n**FALLBACK** is what separates production-quality skills from fragile demos. What if Gmail isn't connected? What if no emails match? What if the file doesn't exist? A skill with good fallbacks degrades gracefully — it tells you what it couldn't do and gives you what it could."
+    },
+    {
+      "type": "text",
+      "content": "## XML Tags — The Structural Secret\n\nClaude is specifically trained to parse XML tags as structural delimiters. Using XML in your skills makes them significantly more reliable — especially on complex, multi-part tasks.\n\nInstead of:\n```markdown\nYou are a code reviewer. Review the code. Check for bugs and security issues.\nFormat it as a numbered list.\n```\n\nUse:\n```xml\n<role>\nYou are a senior code reviewer with expertise in security and production systems.\n</role>\n\n<task>\nReview $ARGUMENTS for bugs and security vulnerabilities.\n</task>\n\n<steps>\n1. Read the full file before commenting on any part\n2. Identify all functions and their inputs/outputs\n3. Check each function for: null/undefined handling, injection risks, logic errors\n4. Look for cross-cutting concerns: auth checks, logging, error propagation\n5. Synthesise findings by severity\n</steps>\n\n<output>\nFormat:\n## Critical (must fix before shipping)\n- [Issue]: [Line] — [Why it matters] — [How to fix]\n\n## High (should fix this week)\n- ...\n\n## Low (worth noting)\n- ...\n\n## Summary\n[1-sentence overall quality judgment, 1-10 score]\n</output>\n\n<constraints>\n- Be direct — skip hedging language like 'you might want to consider'\n- If there are no critical issues, say so explicitly\n- Don't praise good code — focus on what needs attention\n- Total response under 500 words unless there are many critical issues\n</constraints>\n\n<fallback>\nIf no file is specified, review the most recently discussed code.\nIf the file cannot be read, explain why and ask for the correct path.\n</fallback>\n```\n\nThe XML version is more reliable because Claude treats each tag as a distinct mental mode — it reads `<steps>` and knows to execute sequentially, reads `<constraints>` and knows what to avoid."
+    },
+    {
+      "type": "text",
+      "content": "## Making Skills Robust — Handling What Goes Wrong\n\nFragile skills work in demos. Robust skills work every day. The key is anticipating failures:\n\n**Pattern 1 — Conditional tool use:**\n```markdown\nIf the Gmail MCP is available:\n- Check unread emails from the last 24 hours\nIf Gmail is NOT available:\n- Note: email data unavailable. Continue with other steps.\n```\n\n**Pattern 2 — Graceful degradation:**\n```markdown\nFor each calendar event today:\n- If Calendar MCP is available: read the event details\n- If not: skip calendar section and note: 'Connect Calendar MCP for full briefing'\n```\n\n**Pattern 3 — Input validation:**\n```markdown\nIf $ARGUMENTS is empty or unclear:\n- Ask: 'Which file or topic should I analyse?'\n- Wait for a response before proceeding\n```\n\n**Pattern 4 — Empty results handling:**\n```markdown\nIf no unread emails are found: report '0 unread emails — inbox clear' and continue.\nDo not skip the section or leave it blank.\n```\n\n**Pattern 5 — Scope limiting:**\n```markdown\nAnalyse the top 20 results only. If there are more, note: '[X more results not shown\n— run again with a more specific search to narrow down].'\n```\n\nAdding these patterns to your skills turns them from brittle scripts into reliable assistants."
+    },
+    {
+      "type": "text",
+      "content": "## The Skill Iteration Process\n\nNo skill is right the first time. The best skills are refined through use. Here's how to improve a skill systematically:\n\n**1. Run it. Note what's wrong.**\nAfter each run, identify: What was missing? What was too long? What did Claude do that you didn't ask for? What did you want that it didn't provide?\n\n**2. Make one change at a time.**\nChanging everything at once makes it impossible to know what helped. Fix the biggest problem first, run again, then fix the next.\n\n**3. Add a version note:**\n```markdown\n<!-- v2: added fallback for missing Gmail, shortened output format -->\n```\nJust a comment in the file. Helps you track what changed.\n\n**4. Ask Claude to critique the skill itself:**\n```\nRead ~/.claude/commands/daily-brief.md. What are the weakest parts of this skill?\nWhat would make it produce more consistent, useful output?\nRewrite it to fix the top 3 problems.\n```\n\n**5. Build a test scenario:**\nFor skills that use live data (email, calendar), create a test by asking Claude:\n```\nImagine it's Monday morning, I have 47 unread emails, 3 meetings today,\nand the most urgent thing is a reply needed from my manager about a deadline.\nRun /daily-brief with that scenario and show me what the output would look like.\n```\nThis lets you test the skill without needing real data to match the scenario."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The 'newspaper front page' test:** After designing a skill, ask: if this skill ran on real data and printed on a newspaper front page, would it be embarrassing? Too verbose? Too terse? Wrong tone? Missing something important? If yes, that's what to fix. Skills are ambassadors of your intelligence — they should represent how you think, not generic AI output."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Refactor /daily-brief Using the Full Architecture",
+      "content": "Take the `/daily-brief` skill from lesson 20-1 and rebuild it using the complete 6-part skill architecture with XML tags.\n\n**Step 1 — Read your current skill:**\n```\nask: Read the file ~/.claude/commands/daily-brief.md and show me its current content.\n```\n\n**Step 2 — Apply the architecture. Ask Claude:**\n```\nRewrite ~/.claude/commands/daily-brief.md using this structure:\n\n<role> — define who Claude is for this skill\n<context> — what MCP tools it has, what time of day this runs\n<steps> — numbered sequence, one action per step\n<output> — exact format with headers and length limit\n<constraints> — what to avoid, length limit, tone\n<fallback> — what to do if Gmail/Calendar MCP isn't connected\n\nKeep the core purpose the same — a morning briefing under 250 words —\nbut make it significantly more robust and structured.\n```\n\n**Step 3 — Review the rewritten skill.**\nDoes it:\n- [ ] Have a clear role with specific expertise?\n- [ ] List steps in numbered order?\n- [ ] Specify the exact output format?\n- [ ] Have a fallback for when MCP tools aren't connected?\n- [ ] Have constraints preventing common failure modes?\n\nIf any of these are missing, ask Claude to add them.\n\n**Step 4 — Run the refactored skill:**\n```\n/daily-brief\n```\n\n**Step 5 — Compare to the original.**\nIs the output more structured? More concise? Did it handle any edge case better?\nNote the improvement.\n\n**Outcome:** A production-quality `/daily-brief` that reliably produces the same structure every morning, handles missing MCP connections gracefully, and respects the length constraint."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Design a Skill From Scratch",
+      "content": "Build a `/project-status` skill that reads your project's files and produces a concise status report.\n\n**The goal:** Running `/project-status` in any project should give you: what the project is, what's done, what's in progress, what's blocked, and the next 3 most important tasks.\n\n**Step 1 — Design it yourself first.** Before asking Claude, write out:\n- What ROLE should Claude have?\n- What STEPS should it take to understand a project's status?\n- What should the OUTPUT look like?\n- What CONSTRAINTS should limit the response?\n- What FALLBACK handles projects with no obvious structure?\n\nWrite your answers in a scratch note.\n\n**Step 2 — Ask Claude to write the skill:**\n```\nBased on this design, write a skill file for ~/.claude/commands/project-status.md:\n\nRole: [your role]\nSteps: [your steps]\nOutput: [your format]\nConstraints: [your constraints]\nFallback: [your fallback]\n\nUse XML tags for structure. Make it work for any project type — code, writing,\nresearch, or business — by detecting which type it is and adapting accordingly.\n```\n\n**Step 3 — Save and test it:**\nOpen Claude Code in a project you're working on and run:\n```\n/project-status\n```\n\n**Step 4 — Identify one thing that's wrong.**\nEvery first version has something. Fix it:\n```\nUpdate ~/.claude/commands/project-status.md to [specific improvement].\n```\n\n**Step 5 — Run it in a different project.**\nDoes it adapt? If not, what needs to change to make it work across project types?\n\n**Outcome:** A `/project-status` skill that gives you an instant read on any project you're working in."
+    },
+    {
+      "type": "quiz",
+      "question": "A skill produces inconsistent results — sometimes verbose, sometimes too brief, sometimes in the wrong format. Which part of the 6-part skill architecture most directly addresses this?",
+      "options": [
+        "ROLE — changing who Claude is will fix the inconsistency",
+        "OUTPUT FORMAT — explicitly specifying headers, length limit, and exact structure forces consistent results every run",
+        "CONTEXT — providing more background information reduces variability",
+        "STEPS — adding more steps will produce more consistent output"
+      ],
+      "correct": 1,
+      "explanation": "Inconsistent format and length almost always come from an underspecified OUTPUT FORMAT section. When you tell Claude exactly what headers to use, how many bullet points, what length limit, and what to include vs. omit, the output becomes reliable across runs. Role, Context, and Steps affect the quality and completeness of the analysis — but OUTPUT FORMAT controls what the result looks like."
+    },
+    {
+      "type": "quiz",
+      "question": "You have a skill that checks Gmail for urgent emails. What should the FALLBACK section say for when Gmail MCP isn't connected?",
+      "options": [
+        "Nothing — if Gmail isn't connected, the skill should fail with an error",
+        "Tell Claude to skip email and check local files instead, noting that Gmail was unavailable",
+        "Automatically reconnect Gmail and retry",
+        "Ask the user to restart Claude Code"
+      ],
+      "correct": 1,
+      "explanation": "A robust fallback allows the skill to degrade gracefully rather than fail completely. If Gmail isn't connected, the skill should note that and continue with whatever it can do — checking local files, calendar, or other available data. Failing with an error (A) is fragile. Auto-reconnecting (C) isn't something a skill can do. Asking for a restart (D) interrupts the user unnecessarily. Good fallbacks preserve maximum usefulness even when one input is unavailable."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 20-2.** You now have the complete framework for designing reliable skills: 6-part architecture (Role, Context, Steps, Output, Constraints, Fallback), XML structuring for Claude, robustness patterns for handling missing data, and the iteration process. Apply this framework to every skill you build from here — it's the difference between a skill you use once and one you use every day."
+    }
+  ],
+  "nextLesson": "20-3",
+  "prevLesson": "20-1"
+}
