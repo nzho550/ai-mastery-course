@@ -1,0 +1,70 @@
+{
+  "id": "9-7",
+  "title": "Lovable & Replit — From Idea to Deployed App",
+  "part": 9,
+  "estimatedMinutes": 60,
+  "tags": [
+    "lovable",
+    "replit",
+    "vibe-coding",
+    "no-code",
+    "deployment",
+    "full-stack",
+    "beginner-friendly"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have used Lovable and Replit to build full applications, understand when each fits, and have a clear decision framework for choosing between Bolt, v0, Lovable, Replit, and Claude Code."
+    },
+    {
+      "type": "text",
+      "content": "## Lovable — Full Product, Not Just Prototype\n\n**Lovable** (lovable.dev) is a full-stack AI development platform built on the \"GPT Engineer\" concept. Like Bolt, you describe an app and it builds it — but Lovable adds:\n\n- **Supabase integration out of the box** — real database, user authentication, file storage, all wired up automatically\n- **GitHub sync** — every project has a real GitHub repo; you can edit in VS Code and sync changes\n- **Persistent project state** — your app keeps its codebase between sessions; you're building a real product, not starting fresh each time\n- **Design polish** — Lovable produces especially good-looking UIs by default\n\n**When to choose Lovable over Bolt:**\n- You want user accounts (login/signup)\n- You need a real database with multiple tables\n- You're building something you plan to keep using (not a one-off prototype)\n- You want to continue development in VS Code alongside the AI"
+    },
+    {
+      "type": "text",
+      "content": "## Replit — Code and Deploy in the Browser\n\n**Replit** (replit.com) is a cloud development environment — a full VS Code-like editor that runs in your browser. You don't install anything. You write (or generate) code, and Replit runs and hosts it.\n\n**Replit AI Agent** takes this further: describe what you want, and the AI writes, runs, and debugs the code in your browser. You can see the terminal output, fix errors in chat, and iterate until it works.\n\n**Replit strengths:**\n- Supports almost any programming language (Python, Node.js, Go, Rust, 50+ others)\n- Built-in hosting — your app is live the moment it runs\n- Database (Replit DB) built in — no external setup needed\n- Great for Python applications (ML scripts, data tools, bots) — where Bolt and Lovable are more web-app focused\n- Free tier is genuinely useful; paid tier needed for always-on apps\n\n**When to choose Replit:**\n- Building a Python tool, script, or bot\n- Learning to code (the environment is forgiving for beginners)\n- Want to share running code without deploying anywhere separately\n- Need a quick backend API without a frontend"
+    },
+    {
+      "type": "text",
+      "content": "## The Full Decision Framework\n\nYou now have multiple options. Here's when to use each:\n\n| Situation | Best tool |\n|-----------|----------|\n| Quick web app prototype, no login needed | Bolt.new |\n| App needs user accounts + database | Lovable |\n| Need beautiful React components fast | v0.dev |\n| Python tool, script, or data app | Replit |\n| Complex existing codebase | Claude Code |\n| Deep code quality, git-native workflow | Aider |\n| Enterprise codebase understanding | Cody |\n| Full control, privacy-first | Local Ollama + Continue.dev |\n\nThe workflow that works for most people: **start in Bolt or Lovable → refine with Claude Code → deploy via GitHub Actions**. Use v0 when you need specific UI components. Use Replit for Python or backend-only tools."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build a Real App in Lovable with User Authentication",
+      "content": "Build a full-stack application with user accounts — something Bolt can't do without significant extra work.\n\n**Step 1 — Choose a project that needs user accounts:**\n- Personal journal (private entries per user)\n- Bookmark manager (each user's own links)\n- Goal tracker (personal goals and progress)\n- Team task board (multiple users share a board)\n\n**Step 2 — Open Lovable** (lovable.dev) and start a new project.\n\n**Step 3 — Write your prompt:**\n```\nBuild a [your choice] app.\n\nAuthentication: email/password sign up and login. Each user sees only their own data.\n\nCore features:\n- [Feature 1]\n- [Feature 2]\n- [Feature 3]\n\nDesign: [dark/light], clean and minimal. Mobile responsive.\n\nDatabase: [describe the data you need to store]\n```\n\n**Step 4 — Let Lovable build.** It will set up:\n- React frontend\n- Supabase for auth and database\n- Row-level security so users only see their data\n\n**Step 5 — Test the auth flow:**\n1. Sign up as User A, create some data\n2. Log out\n3. Sign up as User B — confirm User B sees no data from User A\n4. Log back in as User A — your data is still there\n\n**Step 6 — Connect to GitHub:** In Lovable settings, connect your GitHub account. Lovable creates a repo — you can now edit in VS Code and push changes.\n\n**Step 7 — Share the link.** Your app is live with real auth."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Replit: Build a Python Tool",
+      "content": "Use Replit to build a Python automation tool without installing Python locally.\n\n**Step 1 — Sign up at replit.com** (free tier is sufficient).\n\n**Step 2 — Create a new Repl:** Select Python as the language.\n\n**Step 3 — Use Replit AI to build a URL shortener or text processor:**\nIn the Replit AI chat, type:\n```\nBuild a Python web app using Flask that:\n1. Has a form where I can paste a long piece of text\n2. Calls the Anthropic API to summarize it (use the ANTHROPIC_API_KEY secret)\n3. Shows the summary on the page\n4. Keeps a history of the last 5 summaries in memory\n\nMake it simple and functional — no database needed.\n```\n\n**Step 4 — Add your API key:** In Replit's Secrets tab (padlock icon), add:\n- Key: `ANTHROPIC_API_KEY`\n- Value: your Anthropic API key from lesson 11-3\n\n**Step 5 — Run it.** Click the Run button — Replit installs dependencies and starts your server. A preview pane shows your running app.\n\n**Step 6 — Test with real text.** Paste a long article and summarize it.\n\n**Step 7 — Share the URL.** Your Replit app URL works for anyone (while the Repl is running).\n\n**Note:** Free Replit apps sleep when not in use. The Hacker plan ($7/month) keeps them always-on."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Choose the Right Tool for Your Use Case",
+      "content": "Practice applying the decision framework to real scenarios.\n\nFor each scenario, decide which tool fits best and explain why. Then build the one that interests you most.\n\n**Scenario 1:** You want to build a scheduling tool where clients can book time with you. It needs to check your calendar availability, send confirmation emails, and let you see upcoming bookings. Multiple clients will use it.\n→ *Which tool? Why?*\n\n**Scenario 2:** You have a Python script that processes CSV files and generates reports. You want to turn it into a web app where you upload a CSV and download the report — no public users, just you.\n→ *Which tool? Why?*\n\n**Scenario 3:** You want to add a beautiful pricing table to your existing React app that you're building with Claude Code. You don't want to rebuild the whole app.\n→ *Which tool? Why?*\n\n**Scenario 4:** You want to quickly prototype a social app idea — users post short updates, follow each other, see a feed. You want to demo it to friends this weekend.\n→ *Which tool? Why?*\n\n**Build it:** Pick the scenario that interests you most, apply the right tool, and build a working version.\n\n**Share your reasoning with Claude Code:** \"I chose [tool] for [scenario] because [reason]. Was this the right call? What would have been different with an alternative tool?\""
+    },
+    {
+      "type": "quiz",
+      "question": "You use Lovable to build an app with user authentication. A security researcher tells you your app has a SQL injection vulnerability. Who is responsible for fixing it?",
+      "options": [
+        "Lovable — they generated the code",
+        "Supabase — they host the database",
+        "You — it's your application and you're responsible for it regardless of how the code was generated",
+        "No one — AI-generated apps can't have SQL injection"
+      ],
+      "correct": 2,
+      "explanation": "You are responsible for the security of any application you deploy — regardless of whether you wrote the code or AI generated it. AI tools can and do produce vulnerable code. For apps handling user data, you need to: (1) understand the security model (Lovable uses Supabase row-level security — learn how it works), (2) test for common vulnerabilities before going public, (3) have a process for responding to security issues. 'The AI built it' is not a defence — you chose to deploy it."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 9-7 complete.** You now have a complete vibe-coding toolkit: Bolt.new for quick prototypes, v0.dev for UI components, Lovable for apps with user accounts, Replit for Python tools. Combined with Claude Code for depth and GitHub Actions for deployment, you can build and ship almost anything. Next: the full AI coding tool landscape comparison."
+    }
+  ],
+  "nextLesson": "7-1",
+  "prevLesson": "9-6"
+}

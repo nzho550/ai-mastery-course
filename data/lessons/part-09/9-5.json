@@ -1,0 +1,80 @@
+{
+  "id": "9-5",
+  "title": "Bolt.new — Build a Full App by Describing It",
+  "part": 9,
+  "estimatedMinutes": 65,
+  "tags": [
+    "bolt",
+    "vibe-coding",
+    "no-code",
+    "full-stack",
+    "deployment",
+    "beginner-friendly"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have built and deployed a working web application without writing a single line of code from scratch — using Bolt.new to go from a text description to a live URL in one session."
+    },
+    {
+      "type": "text",
+      "content": "## What is Bolt.new?\n\nBolt.new is an AI-powered full-stack development environment built by StackBlitz. You describe an app in plain English, and Bolt builds it — HTML, CSS, JavaScript, backend routes, database connections — and runs it live in your browser so you can see it immediately.\n\nThis is different from every other tool in this part of the course:\n- **GitHub Copilot, Continue.dev** — help you write code in an editor you already have\n- **Aider, Claude Code** — AI assistant inside your local project\n- **Bolt.new** — generates an entire working application from a single prompt, runs it instantly, deploys to the internet with one click\n\nNo setup. No npm install. No local environment. Just describe what you want."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Who this is for:** Anyone who wants to build a real app quickly — non-coders included. Bolt.new closes the gap between \"I have an idea\" and \"here's a working prototype you can share.\" If you're a developer, it's a rapid prototyping tool. If you're not a developer, it may be the most powerful thing in this entire course."
+    },
+    {
+      "type": "text",
+      "content": "## How Bolt.new Works\n\n**The basic flow:**\n1. Go to **bolt.new**\n2. Type a description of what you want to build\n3. Bolt generates the full codebase and runs it in a preview panel\n4. You iterate by chatting: \"change the color to blue\", \"add a delete button\", \"make it save to a database\"\n5. When ready, deploy to Netlify with one click — live URL, shareable with anyone\n\n**What Bolt can build:**\n- Web apps with UI (forms, dashboards, to-do lists, calculators)\n- Apps with local storage or a database\n- Apps that call external APIs\n- Multi-page applications with navigation\n- React, Vue, Svelte, or plain HTML/CSS/JS — you choose or let it pick\n\n**What Bolt struggles with:**\n- Very complex existing codebases (it builds fresh; it's not great at importing large existing projects)\n- Apps requiring native mobile features (camera, GPS beyond web APIs)\n- Long sessions where context grows very large — break big apps into phases"
+    },
+    {
+      "type": "text",
+      "content": "## The Bolt Prompting Style\n\nBolt responds best to specific, concrete prompts — not vague ones.\n\n**Too vague:**\n> Make me a productivity app\n\n**Good:**\n> Build a daily habit tracker. Users can add habits with a name and target frequency (daily/weekly). Each day they can check off completed habits. Show a streak counter for each habit. Dark theme, mobile-friendly. Use local storage to save data between sessions. No user login needed.\n\n**The elements of a strong Bolt prompt:**\n- What the app does (core function)\n- Who uses it and how (the key user actions)\n- Data that needs to persist (and where: local storage, database)\n- Visual style (theme, color, layout preferences)\n- What it does NOT need (simplifies scope)\n\nAfter the first build, iterate with specific requests: \"The streak counter should reset if I miss a day\", \"Add a way to delete a habit\". Don't rewrite the whole prompt — just describe the next change."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build and Deploy a Real App in One Session",
+      "content": "You'll build something genuinely useful to you — not a tutorial toy — and have it live on the internet by the end.\n\n---\n\n## Step 1 — Choose Your App (5 min)\n\nPick something you'd actually use. Ideas:\n- **Link saver**: paste a URL + note, retrieves your saved links later\n- **Daily standup writer**: enter 3 bullet points, formats them as a standup message ready to paste\n- **Decision log**: record decisions with context and date, searchable later\n- **Meal planner**: plan a week of meals, generates a shopping list\n- **Expense tracker**: log expenses with category, shows totals by category\n- **Vocabulary builder**: add words + definitions, quiz yourself\n\nOr pick something specific to your work.\n\n---\n\n## Step 2 — Write Your Prompt (5 min)\n\nBefore opening Bolt, write your prompt here. Use this template:\n\n```\nBuild a [name] app. \n\nWhat it does: [core function in 1-2 sentences]\nUser actions: [list the 3-5 things the user can do]\nData: [what gets saved, where: local storage or database]\nDesign: [dark/light, simple/detailed, any color preferences]\nNot needed: [login, payment, anything that would complicate it]\n```\n\nFill this in before going to Bolt — prompting with a written spec beats improvising.\n\n---\n\n## Step 3 — Build in Bolt (20 min)\n\n1. Go to **bolt.new** (free tier available; sign up with GitHub)\n2. Paste your prompt\n3. Watch Bolt generate and run the app in the preview panel\n4. Test it — click every button, fill in every form\n5. Make specific improvement requests one at a time:\n   - Fix anything broken first\n   - Then add features\n   - Then refine design\n\n**If Bolt gets confused:** Start a new chat with a refined prompt rather than trying to rescue a session that's gone off the rails.\n\n---\n\n## Step 4 — Deploy (5 min)\n\n1. Click **Deploy** in the Bolt toolbar\n2. Connect your Netlify account (free — sign up at netlify.com)\n3. Bolt deploys your app and gives you a live URL like `https://app-name-abc123.netlify.app`\n4. Open the URL on your phone — does it work?\n5. Share the URL with one person\n\n---\n\n## Step 5 — Document What You Built (5 min)\n\nIn `notes/apps-built.md`, add:\n```markdown\n## [App Name]\n- URL: [your Netlify URL]\n- What it does: [1 sentence]\n- Built with: Bolt.new\n- Date: [today]\n- Next improvement: [one thing you'd add]\n```\n\nYou built and deployed a real web app. You wrote zero code from scratch."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Rapid Prototyping: 3 Apps in 30 Minutes",
+      "content": "Build three small apps quickly to develop your intuition for what Bolt handles well.\n\n**Round 1 (10 min): A simple calculator**\nPrompt: \"Build a tip calculator. User enters bill amount and tip percentage, shows tip amount and total. Clean design, mobile-friendly.\"\nBuild it, test it, note what Bolt did well and what it missed.\n\n**Round 2 (10 min): A content tool**\nPrompt: \"Build a text word counter. User pastes text, shows: word count, character count (with and without spaces), reading time estimate at 200wpm, and most frequent words (top 10). Clean, minimal.\"\nBuild it, test with real text.\n\n**Round 3 (10 min): Something with persistence**\nPrompt: \"Build a simple notes app. User types a note with a title, saves it (local storage), can see all notes in a list, click to expand, delete notes. Dark theme.\"\nTest that notes survive a page refresh.\n\n**Debrief:** What patterns did you notice across all three? Where did Bolt excel? Where did it struggle? What type of app prompts work best?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build Something for Work",
+      "content": "Build a real tool that solves a problem you actually have at work or in your studies.\n\n**Step 1 — Identify a pain point.** What do you do repeatedly that feels inefficient? Common candidates:\n- Formatting data from one form to another\n- Looking up reference information repeatedly\n- Tracking something in a spreadsheet that could be a proper form\n- Generating the same type of document with different inputs\n\n**Step 2 — Scope it tightly.** Bolt works best with focused apps. If your idea is complex, pick the core 20% that delivers 80% of the value.\n\n**Step 3 — Write a precise Bolt prompt** (use the template from the main workshop).\n\n**Step 4 — Build in Bolt.** Iterate until the core functionality works correctly.\n\n**Step 5 — Deploy and use it for one real task.** Does it actually save you time?\n\n**Step 6 — Mandatory review:** Ask Claude Code: *\"I built this app with Bolt: [describe it]. What are the 3 most important improvements I should make to make it production-ready? What security concerns exist if I share this publicly?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Workshop C — Bolt + Claude Code: The Best of Both",
+      "content": "Bolt builds fast but has limits. Claude Code can take over when the app needs depth. Practice the handoff.\n\n**Step 1 — Export from Bolt:** After building your app in Bolt, click **Download** to get the full codebase as a ZIP.\n\n**Step 2 — Open in VS Code:** Extract the ZIP, open the folder in VS Code, launch Claude Code.\n\n**Step 3 — Extend with Claude Code.** Ask Claude to:\n- \"Add proper input validation to the form — check for empty fields and give helpful error messages\"\n- \"Review this codebase and identify any security issues\"\n- \"Add a feature Bolt couldn't do: [describe something complex]\"\n\n**Step 4 — Push to GitHub** using the MCP workflow from lesson 10-8.\n\n**Step 5 — Redeploy to Netlify** by connecting the GitHub repo (Netlify auto-deploys on every push).\n\n**Result:** You have a Bolt prototype refined by Claude Code, deployed via GitHub, auto-updating on every push. This is the complete vibe-coding-to-production workflow."
+    },
+    {
+      "type": "quiz",
+      "question": "You build an app in Bolt that collects user email addresses to send a newsletter. What critical concern does Bolt's one-click deployment NOT address?",
+      "options": [
+        "The app might be slow to load",
+        "Collecting email addresses requires a privacy policy, GDPR compliance, and secure storage — Bolt deploys the UI but gives you no data handling, legal compliance, or email infrastructure",
+        "Bolt doesn't support email collection",
+        "The Netlify URL looks unprofessional"
+      ],
+      "correct": 1,
+      "explanation": "Bolt handles the UI and deployment but not the surrounding concerns of a real product: data privacy (GDPR requires consent, a privacy policy, and the right to deletion), secure storage (where are those emails stored and who can access them?), email infrastructure (you still need SendGrid, Mailchimp, or similar to actually send). Bolt is a rapid prototyping tool — moving from prototype to a real product that handles user data requires additional thought, tooling, and legal awareness."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 9-5 complete.** You can now build and deploy full web apps from text descriptions. This is one of the highest-leverage skills in this entire course — you went from idea to live URL without a development environment or deep coding knowledge. Next: v0.dev for when you need UI components fast."
+    }
+  ],
+  "nextLesson": "9-6",
+  "prevLesson": "9-4"
+}

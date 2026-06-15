@@ -1,0 +1,73 @@
+{
+  "id": "19-10",
+  "title": "AI for Content Creation — A Week of Posts in One Hour",
+  "part": 19,
+  "estimatedMinutes": 65,
+  "tags": [
+    "content-creation",
+    "social-media",
+    "linkedin",
+    "writing",
+    "repurposing",
+    "productivity"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have a repeatable system for generating a full week of social media content, newsletter drafts, and blog posts from a single core idea — in one focused session."
+    },
+    {
+      "type": "text",
+      "content": "## The Content Creation Problem\n\nMost people who want to build an audience online struggle not with ideas but with output. You have things worth saying, but:\n- Writing one good post takes 45 minutes\n- You need content 3-5 times a week to build momentum\n- Starting from a blank page every time is draining\n- You second-guess yourself before publishing\n\nAI doesn't solve the blank-page problem by writing for you — your authentic experience and perspective are what make content worth reading. AI solves the *output problem*: once you have an idea, it helps you develop it faster, in more formats, more consistently."
+    },
+    {
+      "type": "text",
+      "content": "## The Content Flywheel\n\nThe most efficient content system works from a single core piece to many outputs:\n\n```\nCore Idea (your insight, experience, or opinion)\n    ↓\nLong-form piece (blog post or newsletter, 600-1000 words)\n    ↓\nLinkedIn post (the key idea, 150-300 words)\nTwitter/X thread (5-8 tweets)\nShort LinkedIn post (a one-liner or question, 50 words)\nInstagram caption (if visual, 100-150 words)\n```\n\nThe same insight, repurposed for each platform's native format. AI makes each repurposing fast once the core piece is written.\n\n**The key principle:** You supply the real experience, opinion, or insight. AI helps you format, expand, and adapt it — not invent it. Content that resonates is always based on something real."
+    },
+    {
+      "type": "text",
+      "content": "## Writing LinkedIn Posts That Get Engagement\n\nLinkedIn's algorithm rewards posts that generate comments — not just likes. The structure that works:\n\n**Line 1 (the hook):** The only part visible before \"see more\" — it must create a reason to click. Strong hooks:\n- A counter-intuitive claim: \"Most advice about [topic] is wrong.\"\n- A specific number: \"I spent 6 months building a product. Here's what I'd do differently.\"\n- A question with a surprising answer: \"Which AI tool saves me the most time? Not the one you'd guess.\"\n\n**Lines 2-5 (the setup):** Brief context that earns the reader's trust — why should they believe you on this?\n\n**Lines 6-12 (the substance):** The actual insight, lesson, or story. Use short paragraphs. One idea per paragraph.\n\n**Final line (the CTA):** Don't just end — invite response. \"What's your experience?\" or \"What would you add?\" turns readers into commenters.\n\n**What doesn't work:** Starting with \"I'm excited to share...\", long blocks of text with no white space, no specific details, generic advice anyone could have written."
+    },
+    {
+      "type": "text",
+      "content": "## Twitter/X Threads That Build Following\n\nTwitter threads work differently from LinkedIn — shorter, punchier, with a clear promise in Tweet 1.\n\n**Tweet 1 (promise):** Tell people exactly what they'll get if they read the thread.\n> 7 ways AI changed how I work in the last 6 months (with specific examples):\n\n**Tweets 2-7 (delivery):** One idea per tweet. Start each with a number or emoji bullet. Keep each tweet under 200 characters so it reads fast.\n\n**Last tweet (summary + CTA):** Restate the core lesson in one sentence, then: \"Follow me for more on [topic].\"\n\n**The thread formula:** Make a promise → deliver specifically → end with a clear summary and follow invitation."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build a Week of Content From One Idea",
+      "content": "Start from a single real experience or insight you have and generate a full week of content.\n\n---\n\n## Step 1 — Find Your Core Idea (10 min)\n\nThe best content ideas come from:\n- Something you learned this week that surprised you\n- A mistake you made and what it taught you\n- A question someone asked you that you could answer well\n- An opinion you hold that many people in your field disagree with\n- A before/after: how you used to do something vs how you do it now\n\nPick one real thing. Write it in 2-3 sentences — your raw idea, unpolished.\n\n---\n\n## Step 2 — Develop the Long-Form Piece (15 min)\n\nAsk Claude:\n```\nI want to write a blog post / LinkedIn article about this idea:\n[your 2-3 sentence raw idea]\n\nMy experience with this: [2-3 sentences about what you've actually done or seen]\nMy opinion: [your take]\nWho should read this: [your target audience]\n\nHelp me develop this into a 600-word piece. Structure:\n- Opening hook (one punchy sentence)\n- Why this matters (2 paragraphs)\n- The main insight with 3 specific examples or points\n- Practical takeaway\n- Closing question for the reader\n\nTone: [conversational/professional/direct — your choice]\nWrite in first person. Sound like a knowledgeable practitioner, not a consultant.\n```\n\nRead the draft. Mark every sentence that doesn't sound like you or isn't accurate. Revise those.\n\n---\n\n## Step 3 — Repurpose to LinkedIn (10 min)\n\nAsk Claude:\n```\nHere is my blog post: [paste the edited version]\n\nNow create a LinkedIn post based on this. Requirements:\n- Opens with a hook that works before 'see more' (under 140 chars)\n- 150-250 words total\n- Short paragraphs (2-3 sentences max)\n- Ends with a question to encourage comments\n- Should feel like me talking, not an article excerpt\n```\n\n---\n\n## Step 4 — Create a Twitter/X Thread (10 min)\n\nAsk Claude:\n```\nTurn my blog post into a 7-tweet thread.\n- Tweet 1: promise what the thread delivers\n- Tweets 2-7: one specific point each, under 200 chars\n- Tweet 8: one-sentence summary + 'Follow for more on [topic]'\n\nUse plain language. No hashtag spam. Number each tweet.\n```\n\n---\n\n## Step 5 — Create 3 Short Posts for the Rest of the Week (10 min)\n\nAsk Claude:\n```\nFrom my blog post, extract 3 short standalone LinkedIn posts (50-100 words each).\nEach should be a different angle:\n1. A counter-intuitive fact or claim\n2. A practical tip someone can use today\n3. A personal reflection or opinion\n```\n\n---\n\n## Your Week of Content\n\nFrom one idea in one hour:\n- 1 long-form blog post / article\n- 1 full LinkedIn post\n- 1 Twitter thread (7-8 tweets)\n- 3 short LinkedIn posts\n\nSave everything in `notes/content-calendar.md`. Schedule it out — don't publish everything at once."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Build Your Content Bank",
+      "content": "Create a reusable content system — a bank of ideas, templates, and drafts — so you're never starting from zero.\n\n**Step 1 — Generate 10 content ideas in 10 minutes:**\nAsk Claude:\n```\nI want to create content about [your topic/industry/expertise]. \nMy audience is [who you're trying to reach].\nI have experience in [your background].\n\nGenerate 10 specific content ideas I could post this month. For each, give me:\n- The angle (what makes it interesting)\n- The target reader\n- The format that suits it best (long post, thread, short reflection)\n```\n\n**Step 2 — Score and select:** Rate each idea 1-3 on: how much you care about it, how much you know about it, and how useful it is for your audience. Pick the top 3.\n\n**Step 3 — Develop one idea** using the full workflow from the main workshop.\n\n**Step 4 — Create a content calendar in Notion or Google Sheets:**\nColumns: Date, Topic, Format, Status (Draft/Scheduled/Published), URL when live.\n\nFill in the next 2 weeks with your 10 ideas mapped to formats and dates.\n\n**Step 5 — Set up a repeating system:** Schedule 1 hour per week as your content creation session. One session, one core idea, one week of content."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Newsletter Draft in 30 Minutes",
+      "content": "Set up and draft your first newsletter issue using AI to handle the structure while you supply the substance.\n\n**Step 1 — Choose a newsletter platform:** Beehiiv, Substack, or Kit (formerly ConvertKit) all have free tiers. Sign up for one.\n\n**Step 2 — Design your newsletter format:** Ask Claude:\n```\nI want to write a weekly newsletter about [your topic] for [your audience].\nI have [your background/experience].\n\nDesign a newsletter format I can repeat every week. Include:\n- A name for the newsletter\n- A consistent structure (sections that appear every issue)\n- An opening hook style\n- Length target per section\n- What makes this newsletter different from others in [topic area]\n```\n\n**Step 3 — Write Issue 1** using the main workshop workflow — start from a core idea, develop the long-form piece, then adapt it to your newsletter format.\n\n**Step 4 — Write the subject line:** Ask Claude: \"Write 5 subject line options for this newsletter issue. Optimise for open rate — be specific and create curiosity without being clickbait.\"\n\n**Step 5 — Send to yourself first.** Read the email in your actual inbox. Does it feel right? Are there formatting issues?\n\n**Step 6 — Publish.** Even if no one subscribes yet — starting matters more than starting with an audience."
+    },
+    {
+      "type": "quiz",
+      "question": "You use Claude to write a LinkedIn post about \"lessons from my 5 years in marketing\" but you only have 2 years of experience. What is the problem with publishing it?",
+      "options": [
+        "No problem — the content quality matters more than the claim",
+        "A credibility claim (5 years) that's false undermines all the real value in the post — if someone checks your profile and sees 2 years, you lose their trust permanently",
+        "LinkedIn will remove the post for misinformation",
+        "The content will be lower quality because you have less experience"
+      ],
+      "correct": 1,
+      "explanation": "False credibility claims in content are discovered — LinkedIn shows your experience dates, recruiters check, colleagues who know you see it. The real damage is trust: once someone catches one factual error about you, they question everything else. The solution is simple: write '2 years in marketing' — real experience honestly framed is more credible than inflated claims. AI should help you communicate your real experience more effectively, not invent experience you don't have."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 19-10 complete.** You have a repeatable content creation system: one idea → one hour → a week of posts across LinkedIn, Twitter/X, and a newsletter. Consistency compounds — the people who show up every week build audiences that matter. Next: the computer basics section that grounds everything technical in this course."
+    }
+  ],
+  "nextLesson": "4-1",
+  "prevLesson": "19-9"
+}

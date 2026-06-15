@@ -1,0 +1,69 @@
+{
+  "id": "10-9",
+  "title": "Webhooks & Event-Driven AI — Trigger Automation From Anything",
+  "part": 10,
+  "estimatedMinutes": 60,
+  "tags": [
+    "webhooks",
+    "event-driven",
+    "automation",
+    "n8n",
+    "zapier",
+    "triggers"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand webhooks, have built an automation that triggers from an external event (not a schedule), and know how to wire any webhook-capable service into an AI workflow."
+    },
+    {
+      "type": "text",
+      "content": "## The Limit of Scheduled Automation\n\nIn lessons 10-2 through 10-4, you built automations that run on schedules — every morning at 7am, every Monday, every hour. Scheduled automation is powerful, but it has a fundamental limitation:\n\n**It can't react to things that just happened.**\n\n- A customer just submitted a form → you want to respond within 2 minutes, not wait until tonight's batch\n- Someone just paid → you want to send their receipt instantly\n- A GitHub PR just failed CI → you want a Slack alert now\n- A new row appeared in your Google Sheet → you want to process it immediately\n\nWebhooks solve this. A webhook is a push notification from one service to another — \"something just happened, here's the data.\" Your automation receives the webhook and runs instantly."
+    },
+    {
+      "type": "text",
+      "content": "## How Webhooks Work\n\nA webhook is just an HTTP POST request. When an event happens in Service A, it sends a POST request to a URL you provide — the webhook URL — with JSON data describing what happened.\n\n**The flow:**\n```\nEvent happens in Service A\n    ↓\nService A sends HTTP POST to your webhook URL\n    ↓\nYour automation tool (n8n, Zapier, Make) receives the request\n    ↓\nYour workflow runs: AI processes the data, sends a response, updates a database\n```\n\n**Who can send webhooks:** Almost any modern service — Stripe (payment events), GitHub (code events), Typeform/Tally (form submissions), Shopify (orders), Calendly (bookings), and hundreds more. If a service has a developer section, it almost certainly supports webhooks.\n\n**Creating a webhook URL:** In n8n, Zapier, or Make — add a webhook trigger node/step. The tool gives you a unique URL. Copy that URL, paste it into the sending service's webhook settings. Done."
+    },
+    {
+      "type": "text",
+      "content": "## Common Webhook + AI Patterns\n\n**Form submission → AI response:**\nUser submits a Typeform/Tally form → webhook hits n8n → Claude analyses the response → personalised follow-up email sent within 60 seconds\n\n**Payment received → AI onboarding:**\nStripe payment → webhook → Claude generates a personalised onboarding email based on the plan purchased → email sent via SendGrid\n\n**GitHub PR → AI code review:**\nPR opened on GitHub → webhook → Claude reads the diff → posts a review comment on the PR automatically\n\n**New lead → AI qualification:**\nNew row in Google Sheet (from a lead gen form) → webhook via Zapier → Claude scores the lead → sends a qualification summary to Slack\n\n**Support ticket → AI triage:**\nNew Zendesk ticket → webhook → Claude categorises the issue and suggests a response draft → ticket updated with AI suggestion"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build a Webhook-Triggered AI Workflow",
+      "content": "You'll build a real event-driven automation: a form submission triggers an AI workflow that sends a personalised response within seconds.\n\n---\n\n## Step 1 — Set Up Your Form (5 min)\n\nCreate a free form at **Tally.so** (or use Typeform's free tier):\n1. Go to tally.so and sign up\n2. Create a new form\n3. Add these fields:\n   - Name (Short text)\n   - Email (Email)\n   - Question: \"What's your biggest challenge right now?\" (Long text)\n   - Question: \"What type of help are you looking for?\" (Multiple choice: Advice / Resources / Connection / Other)\n4. Publish the form — you'll have a shareable link\n\n---\n\n## Step 2 — Create the Webhook Trigger in n8n (10 min)\n\nOpen your n8n instance (from lesson 10-2) or use the n8n cloud free trial:\n\n1. Create a new workflow\n2. Add a **Webhook** trigger node\n3. Set Method: POST\n4. Copy the **Webhook URL** (will look like `https://your-n8n.com/webhook/abc123`)\n5. Set it to **Test** mode for now\n\n---\n\n## Step 3 — Connect the Form to the Webhook (5 min)\n\nIn Tally:\n1. Go to your form → Integrations\n2. Select **Webhooks**\n3. Paste your n8n webhook URL\n4. Save\n\nNow any form submission will POST to your n8n workflow.\n\n---\n\n## Step 4 — Add the AI Processing Step (15 min)\n\nIn your n8n workflow, after the webhook trigger add:\n\n**Node: Anthropic Claude**\n- Model: claude-haiku-4-5 (fast and cheap for this use case)\n- System prompt:\n```\nYou are a helpful assistant that writes warm, personalised responses to people who submitted a contact form. \nBe genuine, specific to their situation, and concise (3-4 sentences max).\nNever sound like a template.\n```\n- User message (use n8n expressions to pull form data):\n```\nName: {{ $json.Name }}\nChallenge: {{ $json['What is your biggest challenge right now?'] }}\nType of help: {{ $json['What type of help are you looking for?'] }}\n\nWrite a personalised response acknowledging their specific challenge and confirming I'll follow up.\n```\n\n---\n\n## Step 5 — Add Email Sending (10 min)\n\nAfter the Claude node, add an email node:\n- **Gmail node** (if you have Gmail MCP configured) or\n- **Send Email node** with your SMTP settings\n\nConfigure:\n- To: `{{ $('Webhook').item.json.Email }}`\n- Subject: `Re: Your submission, {{ $('Webhook').item.json.Name }}`\n- Body: `{{ $('Anthropic Claude').item.json.text }}`\n\n---\n\n## Step 6 — Test the Full Flow (10 min)\n\n1. In n8n, click **Listen for test event** (puts the webhook in test mode)\n2. Submit your form at the Tally URL\n3. n8n captures the webhook data — you can see the raw JSON\n4. Run the workflow — watch the Claude node process it\n5. Check that the email was sent\n\nIf it works, switch the workflow from Test to **Production** mode.\n\n**Submit the form again.** You should receive a personalised AI-generated email within 30 seconds.\n\n---\n\n## What You've Built\n\nAn event-driven AI workflow: someone submits a form → AI generates a personalised response → email sent automatically. No scheduled batch, no manual work — it responds the moment it receives data.\n\nThe same pattern scales to: support tickets, payment confirmations, onboarding sequences, lead qualification, any service that sends webhooks."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — GitHub Webhook: AI PR Review Comment",
+      "content": "Build an automation that posts an AI-generated code review comment whenever a pull request is opened.\n\n**Step 1 — Create a GitHub webhook:**\n1. Go to your GitHub repository → Settings → Webhooks\n2. Click **Add webhook**\n3. Payload URL: your n8n webhook URL (create a new webhook trigger node)\n4. Content type: application/json\n5. Events: select **Pull requests** only\n6. Save\n\n**Step 2 — Build the n8n workflow:**\n- Trigger: Webhook (receives GitHub PR events)\n- Filter: only process `action: opened` events (ignore closed/merged)\n- HTTP Request node: fetch the PR diff from `{{ $json.pull_request.diff_url }}`\n- Claude node: \"Review this code diff. In 3-5 bullet points, note: the main changes made, any obvious issues or risks, and one specific improvement suggestion. Be constructive.\"\n- GitHub node: post the review as a comment on the PR\n\n**Step 3 — Test by opening a real PR** in your repository.\n\n**Step 4 — Check the PR** — Claude's review should appear as a comment automatically.\n\n**Step 5 — Refine the prompt:** Does the AI review add value? What would make it more useful for your specific type of code?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Design Your Own Event-Driven Workflow",
+      "content": "Identify a real event in your work or life that currently requires manual response, and automate it.\n\n**Step 1 — Find your manual response pattern:**\nWhat do you do that follows this pattern: \"When X happens, I need to do Y quickly\"?\n\nExamples:\n- When a new booking is made → I manually send prep instructions\n- When a customer emails asking about pricing → I respond with the same information each time\n- When a new order comes in → I manually update my inventory tracker\n- When a colleague asks for a weekly report → I compile it manually from multiple sources\n\n**Step 2 — Check if X sends webhooks:**\nGoogle \"[service name] webhooks\" to confirm. Almost all modern tools support them.\n\n**Step 3 — Design the workflow on paper:**\n```\nTrigger: [what event]\nWebhook source: [which service]\nAI processing: [what Claude does with the data]\nOutput: [what gets sent/created/updated]\n```\n\n**Step 4 — Ask Claude Code to help build it:**\n\"I want to build this webhook automation: [describe]. I'm using n8n. Help me design the node structure and write the Claude prompt for the AI processing step.\"\n\n**Step 5 — Build and test.** The first time it works end-to-end without you touching anything, note how it feels. That's the value of event-driven automation."
+    },
+    {
+      "type": "quiz",
+      "question": "Your webhook workflow receives sensitive customer data (names, emails, payment amounts). The n8n webhook URL is publicly accessible. What security concern does this create?",
+      "options": [
+        "No concern — webhook URLs are always secure",
+        "Anyone who discovers your webhook URL could POST fake data to trigger your workflow — always verify incoming webhook data using a secret token or signature provided by the sending service",
+        "The URL only accepts data from the configured service automatically",
+        "n8n encrypts all incoming webhook data by default"
+      ],
+      "correct": 1,
+      "explanation": "Webhook URLs are publicly accessible — they have to be, because the sending service needs to reach them. This means anyone who finds your URL could send fake payloads. To prevent this, most services (Stripe, GitHub, Shopify) sign their webhook payloads with a secret — a hash you can verify proves the data really came from them. Always validate the webhook signature before processing data, especially for workflows that send emails, update databases, or trigger financial actions. In n8n, this is handled in the webhook node's authentication settings."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 10-9 complete.** Event-driven automation is the final piece of the workflow puzzle — your automations now respond to the world in real time, not just on a schedule. Combined with the AI processing you built in earlier lessons, you can automate almost any repetitive response pattern. Next: the AI API section where you build your own tools from scratch."
+    }
+  ],
+  "nextLesson": "11-1",
+  "prevLesson": "10-8"
+}

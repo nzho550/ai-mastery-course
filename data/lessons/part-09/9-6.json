@@ -1,0 +1,70 @@
+{
+  "id": "9-6",
+  "title": "v0 by Vercel — UI Prototyping at the Speed of Thought",
+  "part": 9,
+  "estimatedMinutes": 50,
+  "tags": [
+    "v0",
+    "vercel",
+    "ui",
+    "react",
+    "components",
+    "prototyping",
+    "vibe-coding"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to generate production-quality UI components and full page layouts from text descriptions using v0.dev, and integrate them into a project."
+    },
+    {
+      "type": "text",
+      "content": "## What is v0.dev?\n\nv0.dev is Vercel's AI UI generator. You describe a component or page in plain English, and it generates clean React code using **shadcn/ui** and **Tailwind CSS** — the same components used by modern production apps.\n\n**v0 vs Bolt:**\n- **Bolt** builds full applications — backend, routing, data, all in one\n- **v0** specialises in UI — it generates beautiful components and layouts, ready to drop into any React project\n\nUse v0 when:\n- You need a specific UI component fast (a pricing table, a nav bar, a data table)\n- You're building a React app and want production-quality components without writing CSS\n- You want to prototype a page layout before writing the real code\n- You're exploring design options and want to see 3 variations quickly"
+    },
+    {
+      "type": "text",
+      "content": "## How to Use v0.dev\n\n**Access:** Go to **v0.dev** — sign in with your Vercel or GitHub account. Free tier gives you a generous number of generations per month.\n\n**Basic workflow:**\n1. Describe the component or page you want\n2. v0 generates 3 variations\n3. Select the one closest to what you want\n4. Chat to refine: \"make the button red\", \"add a dark mode toggle\", \"replace the chart with a table\"\n5. Copy the code — it's clean, importable React\n\n**What v0 generates:**\n- React components with TypeScript\n- Tailwind CSS classes for styling\n- shadcn/ui components (pre-built accessible components)\n- Responsive layouts that work on mobile and desktop\n- The code is production-quality — not demo code"
+    },
+    {
+      "type": "text",
+      "content": "## Prompting v0 Effectively\n\nv0 responds best to prompts that describe the visual outcome, the data it shows, and the user interaction.\n\n**Weak prompt:**\n> A dashboard\n\n**Strong prompt:**\n> A SaaS analytics dashboard. Left sidebar with navigation (Overview, Users, Revenue, Settings). Main content area shows: a top stat row with 4 KPI cards (total revenue, active users, conversion rate, churn). Below that, a line chart (revenue over 30 days) and a data table (recent signups: name, email, plan, date, status). Dark theme.\n\n**Elements of a strong v0 prompt:**\n- Layout structure (sidebar, tabs, grid, sections)\n- What data is displayed and where\n- Interaction states (hover, selected, empty state)\n- Visual style (dark/light, minimal/detailed)\n- The specific component type (card, table, chart, form, modal)"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build a Landing Page with v0",
+      "content": "Use v0 to generate a complete landing page for a real product or project.\n\n**Step 1 — Define what you're building a landing page for:**\n- Your portfolio site\n- A side project or tool you've built\n- A hypothetical product (practice counts)\n- Your freelance services\n\n**Step 2 — Write your v0 prompt:**\n```\nA landing page for [product name]. \n\nHero section: headline \"[your main value proposition]\", subheadline, \nprimary CTA button \"[action]\" and secondary \"[action]\". \n\nFeatures section: 3 features with icons, title, description.\nPricing section: 3 tiers (Free, Pro $29/mo, Team $99/mo) with feature lists.\nFooter: links to Features, Pricing, Blog, Contact.\n\n[Light/dark] theme. Clean, modern, professional.\n```\n\n**Step 3 — Generate and pick the best variation.**\n\n**Step 4 — Iterate on specifics:**\n- \"Change the primary color from blue to indigo\"\n- \"The hero image placeholder should be replaced with a code editor screenshot mockup\"\n- \"Make the pricing cards highlight the Pro tier as recommended\"\n\n**Step 5 — Copy the code.** Click the code tab, copy all.\n\n**Step 6 — Drop it into Bolt:** Paste the component into a new Bolt project as the starting point for a full working site. Ask Bolt to add a working contact form and deploy it.\n\n**End result:** A professional landing page, generated in under 30 minutes."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Component Sprint: 5 Components in 25 Minutes",
+      "content": "Build intuition for v0 by generating 5 different component types quickly.\n\nFor each, write a specific prompt and generate the component. Note what works and what needs refinement.\n\n**Component 1 (5 min): Data table**\nPrompt: \"A data table showing employees: name, department, role, start date, status (active/inactive). Sortable columns, search input, pagination, row actions (edit, delete). Clean, minimal.\"\n\n**Component 2 (5 min): Navigation bar**\nPrompt: \"A top navigation bar for a SaaS app. Left: logo + product name. Centre: nav links (Dashboard, Projects, Team, Reports). Right: notifications bell, avatar with dropdown (Profile, Settings, Log out). Sticky on scroll. Light theme.\"\n\n**Component 3 (5 min): Settings page**\nPrompt: \"An account settings page. Left sidebar nav (Profile, Security, Notifications, Billing, Team). Main content shows Profile section: avatar upload, name, email, bio fields, save button. Clean form layout.\"\n\n**Component 4 (5 min): Stats cards**\nPrompt: \"4 KPI stat cards in a row. Each has: icon (top left), metric name, large number, trend (% up/down with arrow), sparkline chart. Cards for: Revenue, New Users, Conversion Rate, Churn. Dark background cards.\"\n\n**Component 5 (5 min): Empty state**\nPrompt: \"An empty state for a projects list. Illustration area (abstract shapes), heading 'No projects yet', subtext 'Create your first project to get started', primary button 'New Project'. Centered, friendly.\"\n\n**Debrief:** Which component type did v0 handle best? Which needed the most iteration?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — v0 + Bolt: Full-Stack from UI First",
+      "content": "Use v0 for the UI and Bolt to add functionality — the UI-first development workflow.\n\n**Step 1 — Design in v0:** Build the UI for your app idea from Lesson 9-5 (or pick a new one). Focus on getting the layout and components right. Generate: the main screen, an empty state, and a modal or form.\n\n**Step 2 — Export to Bolt:** Copy the v0 code. Open bolt.new, paste your v0 code as the starting point, and tell Bolt: \"This is the UI for my app. Now add: [the data and logic the app needs].\"\n\n**Step 3 — Connect data:** Ask Bolt to wire up the UI to real data — local storage first, then a database if needed.\n\n**Step 4 — Test the full flow:** Does data appear in the UI? Do the buttons do something? Can you complete the core user journey end to end?\n\n**Step 5 — Deploy and share.** Get a live URL.\n\n**Reflect:** How does this compare to starting in Bolt directly? Which approach felt more controlled?"
+    },
+    {
+      "type": "quiz",
+      "question": "v0 generates a component using shadcn/ui and Tailwind CSS. You want to use it in a plain HTML project (no React, no build step). What is the issue?",
+      "options": [
+        "There is no issue — React code runs in any browser",
+        "v0's output requires a React environment and a build step (like Vite or Next.js) — it won't work pasted into a plain HTML file. You'd need to either set up a React project, use Bolt to run it, or ask v0 for a plain HTML/CSS version",
+        "You need to pay for v0 to get plain HTML",
+        "shadcn/ui components auto-convert to plain HTML"
+      ],
+      "correct": 1,
+      "explanation": "v0 generates React components — JSX syntax and Tailwind utility classes. These can't be pasted into a plain HTML file and opened in a browser. To use v0 output you need a React project (Next.js, Vite + React, Create React App) with Tailwind configured. The workaround for plain HTML projects: ask v0 to 'Generate this as plain HTML and CSS with no framework dependencies', or use Bolt which handles the environment setup for you."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 9-6 complete.** v0.dev is now in your toolkit — describe a UI, get production-quality React code, iterate in chat. Combined with Bolt for functionality and Claude Code for depth, you have a complete rapid development stack. Next: Lovable for full product development from a single idea."
+    }
+  ],
+  "nextLesson": "9-7",
+  "prevLesson": "9-5"
+}

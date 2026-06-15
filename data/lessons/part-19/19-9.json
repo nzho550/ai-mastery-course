@@ -1,0 +1,84 @@
+{
+  "id": "19-9",
+  "title": "AI for Your Career — Resume, LinkedIn & Interview Prep",
+  "part": 19,
+  "estimatedMinutes": 70,
+  "tags": [
+    "career",
+    "resume",
+    "linkedin",
+    "interviews",
+    "job-search",
+    "practical"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have an AI-optimized resume tailored to a specific job, an improved LinkedIn profile, a framework for writing cover letters in minutes, and a system for practicing job interviews with AI."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The honest reality of AI in job searching:** Recruiters now use AI to scan hundreds of applications. AI-powered ATS (Applicant Tracking Systems) filter resumes before any human sees them. Using AI to optimize your application isn't gaming the system — it's levelling the playing field. The goal is still to represent yourself honestly. AI helps you say true things more effectively."
+    },
+    {
+      "type": "text",
+      "content": "## Resume Optimization — The ATS Reality\n\nMost large companies run applications through an Applicant Tracking System before a human reads them. ATS software scores your resume against the job description — looking for keyword matches, formatting compatibility, and experience alignment.\n\n**The core technique: tailoring, not templating.**\n\nA generic resume sent to 50 jobs performs worse than a resume tailored to each job. AI makes tailoring fast — what used to take 30 minutes per application now takes 5.\n\n**The AI resume process:**\n1. Paste your current resume into Claude\n2. Paste the job description\n3. Ask Claude to: identify missing keywords, suggest rephrased bullet points that better match the role, flag experience you have that you're not emphasising, and highlight potential red flags\n4. Review every suggestion — keep only what is genuinely true about your experience\n5. Never fabricate experience — AI can help you word things better, not invent things that didn't happen"
+    },
+    {
+      "type": "text",
+      "content": "## Writing Resume Bullet Points That Work\n\nMost resume bullets describe responsibilities. Strong bullets describe impact.\n\n**Weak (responsibility):**\n> Managed social media accounts\n\n**Strong (impact):**\n> Grew Instagram following from 2,400 to 18,000 in 8 months through consistent video content, increasing inbound enquiries by 34%\n\n**The formula: Action verb + what you did + measurable result**\n\nAsk Claude:\n> \"Here are my bullet points for [role]. Rewrite each to lead with impact rather than responsibility. Where I haven't given you numbers, ask me — don't invent them.\"\n\nThe asking-for-numbers part is important. AI should never guess metrics. If you grew something, you know by how much — give Claude the real numbers."
+    },
+    {
+      "type": "text",
+      "content": "## LinkedIn Profile Optimization\n\nLinkedIn has its own algorithm. Profiles with complete, keyword-rich sections rank higher in recruiter searches. The sections that matter most:\n\n**Headline** (140 chars, most viewed field):\nDon't just write your job title. Write your value proposition.\n- Weak: `Software Engineer at Acme Corp`\n- Strong: `Full-Stack Engineer | React + Node.js | Building AI-powered products | Open to senior roles`\n\n**About section** (2,600 chars available):\nMost people write a formal bio. Better: write it like you're explaining your career to a smart friend. What do you do, why, and what are you good at? End with a call to action.\n\n**Experience section:**\nSame bullet point rules as your resume. LinkedIn allows more space — use it. Add media (screenshots, PDFs, links to your work).\n\n**Skills section:**\nLinkedIn's algorithm uses this for recruiter searches. Add all relevant skills. Ask Claude: \"What skills should I add to my LinkedIn based on my experience and target roles?\"\n\n**Asking AI to help:**\n> \"Here is my LinkedIn 'About' section: [paste it]. Rewrite it to be more engaging, highlight my key strengths as [role], and end with a clear call to action for [type of opportunity]. Keep my authentic voice.\""
+    },
+    {
+      "type": "text",
+      "content": "## Cover Letters in 10 Minutes\n\nThe mistake: writing a generic cover letter, then tweaking it slightly for each application.\n\nThe approach: generate a fresh, specific letter for each application — it takes the same time when AI is doing the drafting.\n\n**Give Claude the full context:**\n> Here is the job description: [paste]\n> Here is my resume: [paste]\n> About the company: [paste their About page or 2-3 sentences about them]\n> The specific reason I want this role: [your genuine motivation in 2-3 sentences]\n> One specific thing about my experience that's most relevant: [the thing you most want them to notice]\n>\n> Write a cover letter that: opens with the specific role and a hook (not 'I am writing to apply for'), connects my experience to their specific needs, mentions the company specifically (not a template), and ends with confidence not desperation. Keep it to 3 paragraphs max.\n\nRevise until it sounds like you. The goal is AI helping you write faster, not AI writing for you."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Optimize Your Resume for a Real Job",
+      "content": "Choose a real job listing — something you'd actually apply for, or a role you're targeting.\n\n**Step 1 — Collect your materials:**\n- Your current resume (copy the text)\n- The full job description from the listing\n- Any specific achievements/projects you want to highlight\n\n**Step 2 — Run the ATS analysis:**\nAsk Claude:\n```\nI'm applying for this role: [paste job description]\n\nHere is my resume: [paste resume]\n\nPlease:\n1. List keywords from the job description missing from my resume\n2. Identify experiences I have that are underemphasised for this role\n3. Suggest rewrites for my 3 weakest bullet points to better match the role\n4. Flag any potential red flags a recruiter might notice\n5. Rate the current match (1-10) and what score is achievable after optimisation\n\nOnly suggest changes that reflect things I've actually done.\n```\n\n**Step 3 — Apply the suggestions:** Update your resume based on Claude's feedback. For every suggestion, ask: is this true? Does this accurately represent what I did?\n\n**Step 4 — Re-run:** Paste the updated resume and ask: \"How has the match improved? What still needs work?\"\n\n**Step 5 — Save:** Keep both versions — your original and the tailored one. Build a system: for each application, start from your master resume and tailor.\n\n**End result:** A resume that passes ATS filters and accurately represents your experience."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop A — AI Mock Interview",
+      "content": "Practice job interviews with Claude as your interviewer. This is one of the highest-value uses of AI for career development — unlimited practice, instant feedback, no scheduling required.\n\n**Step 1 — Set up the interview:**\nAsk Claude:\n```\nYou are a senior hiring manager at [company type] interviewing me for [role].\nHere is the job description: [paste]\nHere is my background: [2-3 sentence summary]\n\nConduct a 30-minute mock interview. Ask me one question at a time, wait for my answer, then give me feedback (what worked, what to improve) before asking the next question.\n\nStart with a behavioural question, then mix in technical/role-specific questions. End with questions I might ask you.\n```\n\n**Step 2 — Do the interview.** Treat it as real — answer in full, don't edit yourself mid-answer.\n\n**Step 3 — Ask for overall feedback** after 5-6 questions:\n\"Now stop the interview. Give me overall feedback: what patterns did you notice? What were my strongest answers? Where am I weakest? What specific phrase or structure would improve my weaker answers?\"\n\n**Step 4 — Practice the weak spots again.** Ask Claude to re-ask your weakest question and give you another attempt.\n\n**Step 5 — Build your answer bank.** For each question type you struggled with, write out a strong answer in your own words and save it to `notes/interview-answers.md`."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Rebuild Your LinkedIn About Section",
+      "content": "Rewrite your LinkedIn About section to be the strongest version of your professional story.\n\n**Step 1 — Copy your current About section** (or write what you currently have if it's empty).\n\n**Step 2 — Gather context:**\n- What roles are you targeting?\n- What are your top 3 professional strengths?\n- What's the most impressive thing you've done professionally?\n- What type of opportunity are you looking for?\n\n**Step 3 — Ask Claude to generate 3 versions:**\n```\nHere is my current LinkedIn About section: [paste]\n\nI'm targeting: [role type]\nMy top strengths: [list]\nMost impressive achievement: [describe]\nLooking for: [type of role/company]\n\nWrite 3 different versions of my LinkedIn About section:\n1. Professional/formal tone\n2. Conversational/personable tone\n3. Achievement-focused tone\n\nEach should be 150-250 words, end with a call to action, and not start with 'I am a...'\n```\n\n**Step 4 — Pick the version closest to your voice** and refine it with Claude. Make it sound like you, not like a template.\n\n**Step 5 — Update LinkedIn.** Copy your new About section directly.\n\n**Step 6 — Build your headline:** Ask Claude: \"Suggest 5 LinkedIn headline options based on my background. I want one that's honest, keyword-rich, and stands out from generic job titles.\"\n\nPick the one that feels most true."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop C — Salary Research & Negotiation Prep",
+      "content": "Use AI to research market rates and prepare for salary conversations.\n\n**Step 1 — Market rate research:**\nAsk Claude:\n```\nWhat is the market salary range for [role] in [city/country] with [X] years of experience? \nCover: base salary range, typical bonus structure, equity (if tech), and what factors move someone \nfrom the bottom to the top of the range.\n\nNote: I know you can't guarantee accuracy on current figures — I'll cross-reference with \nLevels.fyi, Glassdoor, and LinkedIn Salary.\n```\n\nThen actually check those three sources to validate.\n\n**Step 2 — Identify your position:** Based on your experience, skills, and the market data — where in the range should you be?\n\n**Step 3 — Practice the salary conversation:**\nAsk Claude to roleplay as a recruiter who has just made you a below-market offer.\nPractice:\n- Asking for time to consider\n- Counter-offering with a specific number and rationale\n- Responding to pushback\n- Negotiating non-salary (PTO, remote, equity, start date)\n\n**Step 4 — Write your negotiation script:**\nSave a brief script for the salary conversation in your notes. Having the words ready means nerves are less likely to make you accept a lower number than you should."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude suggests you add '40% revenue growth' to a bullet point where you contributed to a team effort. You did work on this project but weren't the sole driver. What should you do?",
+      "options": [
+        "Add it — the growth happened while you were on the team",
+        "Rephrase to be accurate: 'Contributed to a team initiative that grew revenue 40%' or 'Part of a team that delivered 40% revenue growth'",
+        "Don't use the number at all",
+        "Round down to 30% to be conservative"
+      ],
+      "correct": 1,
+      "explanation": "Using accurate language matters — both ethically and practically. If you claim sole credit for a team result and an interviewer asks 'walk me through exactly how you drove that 40% growth', you'll struggle to answer convincingly. Phrases like 'contributed to', 'supported', or 'as part of a team' are honest and still impressive — the result is real, your role just needs accurate framing. Rounding the number doesn't address the attribution problem."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 19-9 complete.** You have an ATS-optimized resume, a stronger LinkedIn profile, a framework for cover letters, a system for mock interviews, and a process for salary research. These tools compound — every application gets faster and better. Next: using AI to create a week of social media content in an hour."
+    }
+  ],
+  "nextLesson": "19-10",
+  "prevLesson": "19-8"
+}

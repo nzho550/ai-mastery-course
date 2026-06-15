@@ -1,0 +1,70 @@
+{
+  "id": "11-10",
+  "title": "Turn Your CLI Tool Into a Shareable Web App",
+  "part": 11,
+  "estimatedMinutes": 75,
+  "tags": [
+    "express",
+    "web-app",
+    "deployment",
+    "railway",
+    "anthropic-api",
+    "full-stack"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Build\n\nYou built a text summarizer CLI in lesson 11-8. In this lesson you'll wrap it in a web interface — a simple HTML form anyone can visit in a browser — and deploy it to Railway so it's live on the internet with a permanent URL you can share.\n\nThis is the bridge between \"I built a tool for myself\" and \"I built a tool others can use.\""
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Why web UI matters:** A CLI tool requires someone to have Node.js installed and know how to use a terminal. A web app requires a browser. Going from CLI to web UI expands your potential users from ~100 people (technical) to billions (anyone with a phone). The code change is smaller than you think."
+    },
+    {
+      "type": "text",
+      "content": "## The Architecture\n\nYour CLI tool reads text from a file and calls the Anthropic API. The web version does the same thing, but instead of reading from a file, it reads from an HTML form.\n\n**CLI flow:**\n```\nUser → terminal command → reads file → Anthropic API → prints to terminal\n```\n\n**Web flow:**\n```\nUser → browser form → Express server → Anthropic API → HTML response in browser\n```\n\nThe Anthropic API call is identical. You're adding:\n1. An Express.js server (handles HTTP requests)\n2. An HTML form (the user interface)\n3. A route that connects the form to your existing summarization logic\n\n**Express.js** is a minimal Node.js web framework — the most widely used in the world. It handles the HTTP plumbing so you can focus on the application logic."
+    },
+    {
+      "type": "text",
+      "content": "## Setting Up Express\n\nIn your summarizer project folder, install Express:\n\n```bash\nnpm install express\n```\n\nCreate `server.js` in the same folder as your existing `summarize.js`:\n\n```javascript\nimport express from 'express';\nimport Anthropic from '@anthropic-ai/sdk';\n\nconst app = express();\nconst client = new Anthropic();\n\n// Parse form submissions\napp.use(express.urlencoded({ extended: true }));\n\n// Serve the HTML form\napp.get('/', (req, res) => {\n  res.send(`\n    <!DOCTYPE html>\n    <html>\n    <head>\n      <title>AI Summarizer</title>\n      <style>\n        body { font-family: system-ui; max-width: 800px; margin: 40px auto; padding: 0 20px; }\n        textarea { width: 100%; height: 200px; margin: 10px 0; font-size: 16px; padding: 10px; }\n        button { background: #6366f1; color: white; border: none; padding: 12px 24px; \n                 font-size: 16px; border-radius: 6px; cursor: pointer; }\n        .result { margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 8px; \n                  white-space: pre-wrap; line-height: 1.6; }\n      </style>\n    </head>\n    <body>\n      <h1>AI Text Summarizer</h1>\n      <form method=\"POST\" action=\"/summarize\">\n        <label>Paste your text below:</label>\n        <textarea name=\"text\" placeholder=\"Paste an article, document, or any text here...\"></textarea>\n        <button type=\"submit\">Summarize</button>\n      </form>\n    </body>\n    </html>\n  `);\n});\n\n// Handle form submission\napp.post('/summarize', async (req, res) => {\n  const text = req.body.text;\n\n  if (!text || text.trim().length < 50) {\n    return res.send('<p>Please paste at least 50 characters of text. <a href=\"/\">Go back</a></p>');\n  }\n\n  try {\n    const message = await client.messages.create({\n      model: 'claude-haiku-4-5-20251001',\n      max_tokens: 1024,\n      messages: [{\n        role: 'user',\n        content: `Summarize this text concisely in 3-5 bullet points:\\n\\n${text}`\n      }]\n    });\n\n    const summary = message.content[0].text;\n\n    res.send(`\n      <!DOCTYPE html>\n      <html>\n      <head><title>Summary</title>\n        <style>\n          body { font-family: system-ui; max-width: 800px; margin: 40px auto; padding: 0 20px; }\n          .result { padding: 20px; background: #f8f9fa; border-radius: 8px; \n                    white-space: pre-wrap; line-height: 1.8; }\n          a { color: #6366f1; }\n        </style>\n      </head>\n      <body>\n        <h1>Summary</h1>\n        <div class=\"result\">${summary}</div>\n        <p><a href=\"/\">Summarize another text</a></p>\n      </body>\n      </html>\n    `);\n  } catch (err) {\n    res.send(`<p>Error: ${err.message}. <a href=\"/\">Try again</a></p>`);\n  }\n});\n\nconst PORT = process.env.PORT || 3000;\napp.listen(PORT, () => {\n  console.log(`Server running at http://localhost:${PORT}`);\n});\n```\n\nRun it: `node server.js` — then open `http://localhost:3000` in your browser."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build and Deploy Your Web App",
+      "content": "Take your summarizer from CLI to a live web app on the internet.\n\n---\n\n## Phase 1 — Build the Web Server Locally (20 min)\n\n**Step 1 — Set up the project:**\nOpen your summarizer project from lesson 11-8 in VS Code and launch Claude Code:\n```\nclaude\n```\n\n**Step 2 — Ask Claude Code to add the web layer:**\n```\nI have a CLI text summarizer that uses the Anthropic API (see summarize.js).\nAdd a web interface to this project:\n\n1. Install Express.js\n2. Create server.js with:\n   - A GET / route that shows an HTML form with a textarea\n   - A POST /summarize route that takes the form text, calls Anthropic,\n     returns the summary in a styled HTML page\n   - Clean, minimal styling inline\n   - Error handling that shows a user-friendly message\n3. The ANTHROPIC_API_KEY should come from process.env (not hardcoded)\n4. PORT should come from process.env with fallback to 3000\n\nUse the same summarization logic from summarize.js.\n```\n\n**Step 3 — Test locally:**\n```\nnode server.js\n```\nOpen http://localhost:3000, paste some text, click Summarize. Does it work?\n\n**Step 4 — Improve the UI:** Ask Claude Code:\n- \"Add a character counter that shows how many characters are in the textarea\"\n- \"Show a loading spinner while the summary is being generated\"\n- \"Add a 'Copy summary' button to the results page\"\n\nEach of these makes the app genuinely more usable.\n\n---\n\n## Phase 2 — Deploy to Railway (20 min)\n\nRailway is the simplest free platform for deploying Node.js apps with environment variables.\n\n**Step 1 — Sign up at railway.app** (use GitHub sign in)\n\n**Step 2 — Push your code to GitHub first:**\nAsk Claude Code: \"Create a .gitignore that excludes node_modules and .env. Then help me push this project to a new GitHub repo called 'ai-summarizer'.\"\n\n**Step 3 — Deploy to Railway:**\n1. In Railway dashboard, click **New Project**\n2. Select **Deploy from GitHub repo**\n3. Pick your `ai-summarizer` repo\n4. Railway detects Node.js automatically and starts deploying\n\n**Step 4 — Add your API key:**\n1. In Railway, go to your service → **Variables**\n2. Add: `ANTHROPIC_API_KEY` = your API key\n3. Railway restarts the deployment with the variable available\n\n**Step 5 — Get your URL:**\nIn Railway: Settings → Generate Domain → copy the `*.railway.app` URL\n\nOpen it in your browser. Test it. Share the URL.\n\n---\n\n## Phase 3 — Make It Better (15 min)\n\nAsk Claude Code to add at least one of:\n\n**Rate limiting:** \"Add rate limiting so one IP can only make 5 summarize requests per hour.\"\n\n**Word count stats:** \"Before showing the summary, show the original text's word count and estimated reading time.\"\n\n**Different summary styles:** \"Add a dropdown on the form: Bullet points, Short paragraph (50 words), Detailed (200 words). Pass the selected style to the API prompt.\"\n\n**Text length limit:** \"If the pasted text is over 10,000 characters, show a warning that only the first 10,000 characters will be summarised.\"\n\nPush changes to GitHub — Railway auto-deploys on every push."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop A — Add Authentication to Your Web App",
+      "content": "Add a simple password gate to your web app so only people you share the password with can use it.\n\nThis is not enterprise authentication — it's a quick gate for a personal tool. Good enough for sharing with a small group.\n\n**Step 1 — Ask Claude Code:**\n```\nAdd simple password protection to my Express web app.\nImplement it with a cookie-based session:\n- A login page (/login) with a password form\n- If password matches the PASSWORD environment variable, set a session cookie and redirect to /\n- All other routes check for the session cookie — if missing, redirect to /login\n- A /logout route that clears the cookie\n\nUse express-session for session management.\n```\n\n**Step 2 — Add the PASSWORD variable in Railway:**\nGo to Variables → add `PASSWORD` = a strong password of your choice\n\n**Step 3 — Test:** Open your Railway URL. Does it redirect to /login? After logging in, can you use the summarizer? Does /logout work?\n\n**Step 4 — Share with 2 people.** Give them the URL and password. Can they use it on their devices?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Build a Different AI Web Tool",
+      "content": "Apply the Express + Anthropic pattern to build a different AI tool of your choice.\n\n**Step 1 — Choose a tool to build:** Ideas:\n- **Writing improver:** paste text, choose improvement type (clarity/tone/grammar), get improved version\n- **Email subject line generator:** paste email body, get 5 subject line options\n- **Code explainer:** paste code, Claude explains it in plain English\n- **Meeting notes formatter:** paste raw notes, get a structured summary with action items\n- **Headline generator:** paste article, get 5 headline options\n\n**Step 2 — Ask Claude Code to build the full web app:**\n```\nBuild an Express.js web app that does [your chosen tool].\n\nUI: [describe the form inputs — what does the user provide?]\nAI processing: [describe what Claude should do with the input]\nOutput: [what does the user see — formatted text, list, comparison?]\n\nRequirements:\n- ANTHROPIC_API_KEY from environment variable\n- PORT from environment variable (fallback 3000)\n- Clean, minimal UI\n- Loading state while API call is in progress\n- Error handling\n```\n\n**Step 3 — Test locally, then deploy to Railway.**\n\n**Step 4 — Share and get feedback.** Ask 3 people to try it. What confused them? What would they use it for?"
+    },
+    {
+      "type": "quiz",
+      "question": "Your web app is live on Railway. A user pastes a 50,000-word document. The Anthropic API call fails with 'max_tokens exceeded'. What should you do?",
+      "options": [
+        "Increase max_tokens to unlimited",
+        "Show an error and ask the user to paste less text",
+        "Truncate input to a sensible limit on the server, warn the user, and process the truncated version — never let raw user input reach the API without validation",
+        "Use a different model"
+      ],
+      "correct": 2,
+      "explanation": "Always validate and limit user input on the server before sending it to an external API. A 50,000-word document would exceed context limits and cost significantly more than intended. The correct approach: check input length on the server, if it exceeds your limit (e.g., 5,000 words) either reject it with a clear message or truncate with a warning. This protects your API budget, prevents errors, and gives users feedback about what your tool can handle. Never pass raw user input to an API without bounds checking."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 11-10 complete.** You've bridged the gap between a local tool and a deployed web application. Everything you build with the Anthropic API can become a web tool someone else can use — the pattern is always the same: Express server + form + API call + response page. Next: running AI locally with Ollama."
+    }
+  ],
+  "nextLesson": "12-1",
+  "prevLesson": "11-9"
+}
