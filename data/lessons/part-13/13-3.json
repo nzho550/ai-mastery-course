@@ -12,6 +12,11 @@
   ],
   "sections": [
     {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Reading vs. workshops in this lesson:** The concept sections (spending limits, usage dashboard) apply right now regardless of where you are in the course. The workshops reference `exercises/summarize.py` from lesson 11-8 and ask you to use Claude Code — tools covered later in the study order. Recommendation: read all the concept sections now, bookmark this lesson, and return for the workshops after completing Part 13 (Claude Code) and Part 17 (AI APIs). The browser step to set a spending limit (Workshop Step 2) can be done now if you already have an Anthropic API key."
+    },
+    {
       "type": "text",
       "content": "## What You'll Learn\n\nAPI costs compound in ways that surprise beginners. This lesson shows you how to set hard limits before you accidentally run something expensive, how to read your actual usage data, and how to apply the cost-engineering techniques from lesson 11-9 to real tools you've already built."
     },

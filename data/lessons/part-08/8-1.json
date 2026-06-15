@@ -10,6 +10,11 @@
       "content": "## What You'll Learn\n\nBy the end of this lesson you'll be able to explain what MCP is, why the open standard matters, how the architecture works at a high level, and what kinds of tools it unlocks — in plain English, to anyone. You'll also understand the 2026 ecosystem and which MCP servers are most widely used.\n\nNo code yet. Just the mental model."
     },
     {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Security note before you start:** MCP gives Claude access to real data — your files, email, GitHub, database. This is powerful and requires care. A security guide is at the end of this lesson (before the workshops). Don't skip it — it explains which servers to trust and how to avoid mistakes like accidentally letting Claude send an email you didn't intend."
+    },
+    {
       "type": "text",
       "content": "## Before MCP: Claude in a Box\n\nBefore MCP, Claude only knew what was inside the conversation window. You had to paste in every piece of context manually — file contents, search results, calendar data, database records.\n\nClaude was powerful, but isolated. Like a brilliant consultant locked in a room with no phone, no laptop, and no window to the outside world.\n\nWith MCP, that changes completely. Claude can now:\n- Read and write files on your computer\n- Query your email inbox\n- Search GitHub repositories\n- Run queries against a database\n- Control a real web browser\n- Check your calendar\n- Search documentation for any library\n\nThe information flows to Claude automatically, on demand, without you copying and pasting anything."
     },
