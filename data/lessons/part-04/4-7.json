@@ -1,0 +1,86 @@
+{
+  "id": "4-7",
+  "title": "Your First Python Automation Script with AI",
+  "part": 4,
+  "estimatedMinutes": 60,
+  "tags": [
+    "python",
+    "automation",
+    "beginner",
+    "claude-code",
+    "scripting",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Build\n\nBy the end of this lesson you'll have written and run a real Python script that automates something useful — without needing to know Python first. You'll use AI to write the code and learn how to guide, run, and modify it."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Why Python first?** Of all the programming languages you could start with, Python is the most useful for AI users. It's the language used in data analysis, automation, web scraping, and AI tool-building — and it reads almost like English. More importantly, Claude writes excellent Python, which means you can build real things before you fully understand the language."
+    },
+    {
+      "type": "text",
+      "content": "## Installing Python\n\nFirst, check if Python is already installed:\n\nOpen PowerShell (search for it in the Start menu) and type:\n```\npython --version\n```\n\nIf you see `Python 3.x.x` — you're ready. If you see an error:\n\n1. Go to **python.org/downloads**\n2. Click the yellow **Download Python 3.x.x** button\n3. Run the installer\n4. **Important:** On the first screen, tick the box that says **\"Add Python to PATH\"** — this is easy to miss and causes problems if skipped\n5. Click **Install Now**\n6. After installation, close and reopen PowerShell, then run `python --version` again\n\nYou should now see the version number."
+    },
+    {
+      "type": "text",
+      "content": "## Running Your First Python Line\n\nIn PowerShell, type `python` and press Enter. You'll enter the Python interactive shell — it looks like:\n```\nPython 3.12.0 (main, ...)\n>>>\n```\n\nThe `>>>` means Python is waiting for instructions. Try these:\n```python\nprint(\"Hello, I'm running Python\")\n2 + 2\n\"hello\".upper()\n```\n\nPress `Ctrl+Z` then Enter to exit the interactive shell.\n\n**This is how all Python scripts work:** you give Python instructions, it executes them. The difference between the interactive shell and a script is that a script saves your instructions in a file so you can run them again."
+    },
+    {
+      "type": "text",
+      "content": "## Writing a Script File\n\nA Python script is just a text file with a `.py` extension.\n\n**Create your first script:**\n1. Open Notepad (or VS Code if you already have it)\n2. Type: `print(\"This is my first Python script\")`\n3. Save the file as `first_script.py` — make sure it ends in `.py`, not `.txt`\n4. In PowerShell, navigate to where you saved it:\n   ```\n   cd C:\\Users\\YourName\\Documents\n   ```\n5. Run it:\n   ```\n   python first_script.py\n   ```\n\nYou should see your message printed. That's it — you just ran a Python script."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build a Real Automation Script with AI",
+      "content": "You'll use Claude Code to write a Python script that does something genuinely useful. Pick whichever task fits your situation.\n\n---\n\n## Step 1 — Choose Your Automation (5 min)\n\nPick one that you'll actually use:\n\n**Option A — File organiser:** Sorts files in your Downloads folder into subfolders by type (images → Images/, PDFs → Documents/, etc.)\n\n**Option B — Text processor:** Reads a folder of text files and creates a summary of each one using keyword extraction\n\n**Option C — Rename batch:** Renames all files in a folder by adding today's date as a prefix (useful for organising photos or documents)\n\n**Option D — Daily notes template:** Creates a new markdown file for today with date, a checklist template, and sections for notes and tasks\n\n**Option E — CSV cleaner:** Takes a messy CSV spreadsheet and cleans it — removes blank rows, trims whitespace, standardises capitalisation\n\n---\n\n## Step 2 — Create a Project Folder (2 min)\n\n```\nmkdir C:\\Users\\YourName\\Documents\\python-scripts\ncd C:\\Users\\YourName\\Documents\\python-scripts\n```\n\n---\n\n## Step 3 — Get Claude to Write It (10 min)\n\nOpen Claude.ai (or Claude Code if you have it installed from lesson 7-2). Describe your chosen automation:\n\n**For Option A (file organiser):**\n```\nWrite a Python script that organises files in a folder I specify.\n\nThe script should:\n- Accept a folder path as input (or use a hardcoded path I can edit)\n- Move files into subfolders by extension:\n  - .jpg, .png, .gif, .webp → Images/\n  - .pdf, .docx, .doc, .txt → Documents/  \n  - .mp4, .mov, .avi → Videos/\n  - .mp3, .wav, .m4a → Audio/\n  - Everything else → Other/\n- Create the subfolders if they don't exist\n- Print a log of every file moved\n- Skip files if their destination already exists (don't overwrite)\n\nMake it safe — don't delete anything, only move. Add a confirmation step before running.\n```\n\nFor other options, describe the task just as specifically.\n\n---\n\n## Step 4 — Save and Read the Script (5 min)\n\n1. Copy Claude's code\n2. Save it as `organise.py` (or `notes.py`, `rename.py`, etc.) in your python-scripts folder\n3. **Read every line.** You don't need to understand all the Python syntax, but you should understand what each section is doing at a high level\n4. If anything is confusing, ask Claude: \"What does this part do?\" and paste the confusing section\n\n---\n\n## Step 5 — Run It (10 min)\n\n**Before running:** Make sure you're testing on copies of files, not originals. Create a test folder:\n```\nmkdir C:\\Users\\YourName\\Documents\\test-folder\n```\nCopy a few different file types into it.\n\n**Run the script:**\n```\npython organise.py\n```\n\n**If you get an error:** Copy the full error message and paste it to Claude:\n```\nI ran your Python script and got this error:\n[paste the error]\n\nWhat does it mean and how do I fix it?\n```\n\nMost beginner Python errors are:\n- Wrong file path (use double backslashes: `C:\\\\Users\\\\` or switch to forward slashes: `C:/Users/`)\n- Missing Python module (Claude will tell you to run `pip install [module-name]`)\n- Indentation error (Python is strict about indentation — ask Claude to fix it)\n\n---\n\n## Step 6 — Modify It (10 min)\n\nNow practice changing the script. Ask Claude:\n- \"Add a command-line argument so I can specify the folder when I run the script instead of hardcoding it\"\n- \"Make the script log all the moves to a file called `organise-log.txt` with today's date\"\n- \"Add a dry-run mode that shows what would be moved without actually moving anything\"\n\nEach change Claude makes, read the new code and make sure you understand what changed and why.\n\n---\n\n## What You've Done\n\nYou wrote (guided) a real Python automation script, ran it, fixed errors, and modified it. This is the complete AI-assisted coding workflow — you'll use the same pattern for every script you build in this course."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Workshop A — Build a Useful Daily Script",
+      "content": "Build a script you'll actually run every day or week. The best automation is one that saves you time on something you do repeatedly.\n\n**Step 1 — Identify a repetitive file/data task.** Examples:\n- Every week you manually rename files to include a date\n- You regularly copy files from one folder to another\n- You have a folder that gets cluttered and you manually sort it\n- You keep a text log that you manually update\n\n**Step 2 — Describe it to Claude Code** (if installed) or Claude.ai:\n```\nI want to automate [describe your task].\n\nSpecific details:\n- Input: [what files/data does it start with]\n- Output: [what should the result be]\n- Frequency: [daily/weekly/when I run it]\n- Edge cases: [what could go wrong that the script should handle]\n\nWrite a Python script for this. Add clear comments explaining what each section does.\n```\n\n**Step 3 — Test it on sample data** before using it on real files.\n\n**Step 4 — Save it permanently** in `C:\\Users\\YourName\\Documents\\python-scripts\\` with a descriptive name.\n\n**Step 5 — Create a shortcut** so you can run it easily:\nAsk Claude: \"How do I create a Windows shortcut or batch file so I can run this Python script with a double-click?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop B — Understanding and Modifying AI Code",
+      "content": "The critical skill is not writing Python from scratch — it's understanding and modifying AI-generated code. This workshop builds that skill.\n\n**Step 1 — Ask Claude to write a simple script:**\n```\nWrite a Python script that:\n- Reads all .txt files in the current folder\n- Counts the words in each file\n- Prints a table: filename | word count | longest line\n- At the end, prints which file has the most words\n```\n\n**Step 2 — Before running it**, read each line and try to guess what it does. Write your guesses in comments above each line.\n\n**Step 3 — Ask Claude to explain** the parts you weren't sure about:\n```\nIn this script, explain:\n- What does `with open(file, 'r') as f:` do?\n- What is `enumerate()` doing?\n- Why does the script use `try/except`?\n```\n\n**Step 4 — Deliberately break it** in small ways and see what error you get:\n- Remove a colon at the end of a line\n- Change the indentation of one line\n- Misspell a variable name\n\nRead each error message. Ask Claude what it means. Pattern recognition for error types is one of the most useful skills in programming.\n\n**Step 5 — Add a feature yourself** — try writing one new line of Python code based on what you've learned. Even if it doesn't work, ask Claude to fix it. The attempt builds understanding."
+    },
+    {
+      "type": "quiz",
+      "question": "You run a Python script and get this error: `ModuleNotFoundError: No module named 'pandas'`. What does this mean and what do you do?",
+      "options": [
+        "The script has a bug — ask Claude to rewrite it without using pandas",
+        "Python can't find the 'pandas' library because it hasn't been installed yet. Run `pip install pandas` in PowerShell, then run the script again",
+        "Your Python version is too old — reinstall Python",
+        "The script file is corrupted — delete it and ask Claude to generate it again"
+      ],
+      "correct": 1,
+      "explanation": "ModuleNotFoundError means the script uses a Python library that isn't installed on your system. Python comes with built-in libraries, but thousands of additional libraries (like pandas for data analysis, requests for web calls, pillow for images) need to be installed separately using pip — Python's package installer. Run `pip install pandas` in PowerShell (while not inside the Python shell), then run your script again. This is one of the most common beginner Python issues and always has the same fix."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask Claude to write a Python script that deletes duplicate files from a folder. What should you do BEFORE running it?",
+      "options": [
+        "Run it immediately — AI-generated scripts are always safe",
+        "Test it on a backup copy of the folder first, and review exactly what the script considers 'duplicate' before running on real data",
+        "Ask Claude if the script is safe",
+        "Run it with administrator privileges"
+      ],
+      "correct": 1,
+      "explanation": "Scripts that delete files are irreversible. Before running any script that modifies, moves, or deletes files: (1) test it on copies of your data, (2) read the deletion logic carefully — 'duplicate' can be defined many ways (same name, same size, same content hash), and (3) consider adding a dry-run mode that prints what would be deleted without actually deleting. Claude generates what you ask for, but you're responsible for verifying the logic before running it on real data."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 4-7 complete.** You can now install Python, run scripts, use AI to write automation code, fix errors, and modify existing scripts. This is the foundation for everything in Parts 16 (Automation), 17 (APIs), and 20 (Custom Skills). When you reach those parts, you'll already know how to guide AI code and run what it produces."
+    }
+  ],
+  "nextLesson": "5-1",
+  "prevLesson": "4-6"
+}

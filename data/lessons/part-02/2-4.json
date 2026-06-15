@@ -14,6 +14,11 @@
       "content": "## What You'll Learn\n\nYou'll understand what Google Gemini is and how it's differentiated from Claude and ChatGPT, why its 1-million-token context window is genuinely important, how Google Workspace integration makes it uniquely useful in daily work, and how to use Gemini's live search and multimodal capabilities. You'll also understand NotebookLM — Google's related tool that solves a completely different but equally valuable problem."
     },
     {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Gemini free vs paid — what you need:**\n- **Free (Google account only):** Gemini 2.5 Flash, live web search, image uploads, basic Google Workspace integration\n- **Google One AI Premium (~$20/month):** Gemini 2.5 Pro (full 1M token context), Deep Research, Gemini in Gmail/Docs/Sheets/Slides, NotebookLM Plus\n- **NotebookLM:** Free for everyone — no paid tier required\n\nImage analysis, web search, and basic chat all work on the free tier. The 1M token context window and Workspace integration require Google One AI Premium."
+    },
+    {
       "type": "text",
       "content": "## What is Google Gemini? (2026 State)\n\nGemini is Google's family of large language models, developed by Google DeepMind. It's available at **gemini.google.com** and requires only a Google account — no separate signup.\n\n**The model lineup (2026):**\n- **Gemini 2.5 Flash** — free tier; fast, capable, good for everyday tasks\n- **Gemini 2.5 Pro** — Google One AI Premium subscription; the most capable model in the family with the full 1M token context window\n- **Gemini Nano** — on-device model in Pixel phones and select Android devices; runs locally without internet\n\n**Historical context:** Google researchers wrote the \"Attention Is All You Need\" paper (2017) that invented the transformer architecture underlying all modern LLMs. Despite this fundamental contribution, Google was caught off guard by ChatGPT's 2022 launch and rushed to release Bard in early 2023. After a rocky initial reception, Google reorganised its AI efforts under Google DeepMind and released the Gemini family — which is now genuinely competitive on most benchmarks with Claude and ChatGPT."
     },
