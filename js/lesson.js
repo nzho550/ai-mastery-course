@@ -177,9 +177,75 @@ function renderSection(section) {
           ${section.caption ? `<p style="margin-top:var(--sp-2);font-size:var(--text-sm);color:var(--text-faint);text-align:center">${section.caption}</p>` : ''}
         </div>`;
 
+    case 'diagram': {
+      const variant = section.variant || '';
+      if (variant === 'ai-stack') return renderAiStack(section);
+      if (variant === 'misconceptions') return renderMisconceptions(section);
+      if (variant === 'roadmap') return renderRoadmap(section);
+      return '';
+    }
+
     default:
       return '';
   }
+}
+
+function renderAiStack(section) {
+  const layers = (section.layers || []).slice().reverse();
+  const rows = layers.map(l => `
+    <div class="ai-stack-row" style="--layer-color:${escapeHtml(l.color || '#818cf8')}">
+      <div class="ai-stack-num">${l.num}</div>
+      <div class="ai-stack-body">
+        <span class="ai-stack-term">${escapeHtml(l.term)}</span>
+        <span class="ai-stack-sep">—</span>
+        <span class="ai-stack-analogy">${escapeHtml(l.analogy)}</span>
+        <span class="ai-stack-desc">${escapeHtml(l.desc)}</span>
+      </div>
+    </div>`).join('');
+  return `
+    <div class="diagram-section">
+      ${section.title ? `<div class="diagram-title">${escapeHtml(section.title)}</div>` : ''}
+      <div class="ai-stack">${rows}</div>
+      ${section.caption ? `<div class="diagram-caption">${escapeHtml(section.caption)}</div>` : ''}
+    </div>`;
+}
+
+function renderMisconceptions(section) {
+  const cards = (section.items || []).map(item => `
+    <div class="misconception-card">
+      <div class="misconception-wrong">
+        <span class="misconception-badge">Myth</span>
+        <span class="misconception-text">${escapeHtml(item.myth)}</span>
+      </div>
+      <div class="misconception-right">
+        <span class="misconception-badge">Reality</span>
+        <span class="misconception-text">${escapeHtml(item.reality)}</span>
+      </div>
+    </div>`).join('');
+  return `
+    <div class="diagram-section">
+      ${section.title ? `<div class="diagram-title">${escapeHtml(section.title)}</div>` : ''}
+      <div class="misconception-grid">${cards}</div>
+    </div>`;
+}
+
+function renderRoadmap(section) {
+  const steps = (section.steps || []).map((step, i) => `
+    <div class="roadmap-step" style="--step-color:${escapeHtml(step.color || '#818cf8')}">
+      <div class="roadmap-step-num">${i + 1}</div>
+      <div class="roadmap-step-level">${escapeHtml(step.level)}</div>
+      <div class="roadmap-step-title">${escapeHtml(step.title)}</div>
+      <div class="roadmap-step-layers">
+        ${(step.layers || []).map(l => `<span class="roadmap-layer-tag">${escapeHtml(l)}</span>`).join('')}
+      </div>
+      <div class="roadmap-step-outcome">${escapeHtml(step.outcome)}</div>
+    </div>`).join('');
+  return `
+    <div class="diagram-section">
+      ${section.title ? `<div class="diagram-title">${escapeHtml(section.title)}</div>` : ''}
+      <div class="learning-roadmap">${steps}</div>
+      ${section.caption ? `<div class="diagram-caption">${escapeHtml(section.caption)}</div>` : ''}
+    </div>`;
 }
 
 function buildComingSoon(meta) {

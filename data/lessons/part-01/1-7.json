@@ -1,0 +1,197 @@
+{
+  "id": "1-7",
+  "title": "The AI Stack: Your Complete Mental Model",
+  "part": 1,
+  "estimatedMinutes": 25,
+  "tags": ["foundations", "beginner", "concepts", "mental-model"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou've spent six lessons learning what AI is, how language models work, which tools exist, and where to be careful. Now it's time to zoom out.\n\nThis lesson gives you the **big-picture mental model** that ties everything together — the 7-Layer AI Stack. It maps every concept you'll encounter in this course to its correct place in the AI hierarchy, from the smallest unit (a token) to the most powerful capability (custom Skills).\n\nThink of this as the map. Every lesson from this point forward fills in one piece of it."
+    },
+    {
+      "type": "text",
+      "content": "## The 7-Layer AI Stack\n\nModern AI systems — especially advanced tools like Claude Code — are built in layers. Each layer adds a new level of capability on top of the one below it.\n\nYou already understand Layers 1 and 2 from earlier lessons. As you move through this course, you'll work your way up through each layer until you can operate at all seven."
+    },
+    {
+      "type": "diagram",
+      "variant": "ai-stack",
+      "title": "The 7-Layer AI Stack",
+      "caption": "Read from bottom to top: each layer builds on the ones below it. Layer 7 is the most powerful; Layer 1 is the foundation everything else depends on.",
+      "layers": [
+        {
+          "num": 1,
+          "term": "Token",
+          "analogy": "Grain of Text",
+          "desc": "The smallest unit AI processes — roughly three-quarters of a word",
+          "color": "#64748b"
+        },
+        {
+          "num": 2,
+          "term": "Prompt",
+          "analogy": "Verbal Instruction",
+          "desc": "What you say to AI — the instructions or questions you give it",
+          "color": "#6366f1"
+        },
+        {
+          "num": 3,
+          "term": "Context",
+          "analogy": "Memo / Notes",
+          "desc": "Everything AI can see in the current conversation window",
+          "color": "#818cf8"
+        },
+        {
+          "num": 4,
+          "term": "Agent",
+          "analogy": "Butler",
+          "desc": "AI that sets goals, makes plans, and takes multi-step actions",
+          "color": "#a78bfa"
+        },
+        {
+          "num": 5,
+          "term": "Harness",
+          "analogy": "Seatbelt",
+          "desc": "The safety and configuration layer that guides your AI Agent",
+          "color": "#f59e0b"
+        },
+        {
+          "num": 6,
+          "term": "MCP",
+          "analogy": "Universal Adapter",
+          "desc": "Connects AI to external tools, apps, and real-world data sources",
+          "color": "#3b82f6"
+        },
+        {
+          "num": 7,
+          "term": "Skills",
+          "analogy": "Toolbox",
+          "desc": "Custom commands and capabilities you build once and reuse forever",
+          "color": "#22c55e"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "content": "## What Each Layer Means\n\n**Layer 1 — Token (Grain of Text)**\nThe fundamental unit of how AI reads text. Everything — your words, the conversation history, the AI's response — gets broken into tokens before processing. One token is roughly three-quarters of a word. Tokens are also the unit of cost when you use the API. Covered in Lesson 1-2.\n\n**Layer 2 — Prompt (Verbal Instruction)**\nYour message to the AI — the question or instruction you type. The skill of writing effective prompts is called *prompt engineering*, and it's the subject of Part 3. A better prompt produces dramatically better results from the exact same AI model.\n\n**Layer 3 — Context (Memo / Notes)**\nThe context window: everything the AI can see at once. This includes the conversation history, any files or documents you've shared, background instructions, and your current message. The AI can only work with what's in the context — which is why it forgets things between separate conversations. Covered in Lesson 1-2.\n\n**Layer 4 — Agent (Butler)**\nAn AI that doesn't just answer questions — it *acts*. An Agent can set goals, break them into steps, use tools, evaluate results, and course-correct, all without you directing each individual action. Claude Code is an Agent. You work with Agents starting in Part 13.\n\n**Layer 5 — Harness (Seatbelt)**\nThe configuration and safety layer around an Agent. The Harness defines what the Agent is allowed to do, what tools it has access to, how it handles mistakes, and what guardrails exist. In Claude Code, the CLAUDE.md file and settings files are the Harness. Covered in Parts 13–14.\n\n**Layer 6 — MCP (Universal Adapter)**\nModel Context Protocol — a standard interface that connects AI to external tools, apps, and data. MCP is why AI can browse your files, query a database, send a calendar invite, or read your emails — because MCP plugs those capabilities in like a universal adapter. Covered in depth in Part 15.\n\n**Layer 7 — Skills (Toolbox)**\nCustom AI capabilities you define, name, and reuse. In Claude Code, Skills are slash commands stored in `~/.claude/commands/`. They let you package a complex, multi-step workflow into a single reusable command. Covered in Part 14."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The key insight:** Each layer doesn't replace the ones below it — it *uses* them. A Skill (Layer 7) runs an Agent (Layer 4) that follows a Harness (Layer 5), uses MCP tools (Layer 6), which all operate through prompts (Layer 2) processed as tokens (Layer 1). Pull any lower layer out and the higher layers stop working."
+    },
+    {
+      "type": "text",
+      "content": "## 3 Misconceptions That Slow People Down\n\nMost beginners get stuck at one of the lower layers and miss the bigger picture. Here are the most common mental blocks, and what the reality actually is:"
+    },
+    {
+      "type": "diagram",
+      "variant": "misconceptions",
+      "title": "Common Misconceptions",
+      "items": [
+        {
+          "myth": "Prompts are everything. If I just learn to write better prompts, I'll be an AI power user.",
+          "reality": "Prompts are Layer 2 out of 7. Above them sit Context, Agents, Harnesses, MCP, and Skills — each unlocking a completely different level of capability. Prompt skills are necessary but not sufficient."
+        },
+        {
+          "myth": "An Agent is just a smart chatbot — it's the same thing as a regular Claude conversation with a fancier name.",
+          "reality": "An Agent (Layer 4) is fundamentally different. It sets its own sub-goals, makes plans, calls tools, evaluates results, and takes dozens of actions autonomously — not just one response at a time."
+        },
+        {
+          "myth": "MCP and Skills are basically the same thing — they both add capabilities to AI.",
+          "reality": "MCP (Layer 6) is an interface standard — the plug socket that connects AI to external tools. Skills (Layer 7) are the capabilities you define and package yourself. MCP gives access to tools; Skills define how you use them."
+        },
+        {
+          "myth": "Once you reach the higher layers, you don't need to think about the lower ones anymore.",
+          "reality": "Higher layers build on lower ones, not replace them. An Agent still runs via prompts and tokens. A Skill still uses an Agent running through a Harness. Mastering the lower layers makes you better at every layer above them."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "content": "## Your Learning Roadmap\n\nThis course is structured to take you through all 7 layers in a logical sequence. You build real capability at each stage before moving up:"
+    },
+    {
+      "type": "diagram",
+      "variant": "roadmap",
+      "title": "From Entry to Mastery",
+      "caption": "Each stage gives you a power the previous stage could not achieve.",
+      "steps": [
+        {
+          "level": "Entry",
+          "title": "Ask Great Questions",
+          "layers": ["Token", "Prompt"],
+          "outcome": "Get high-quality answers from any AI chat tool. Write prompts that actually work.",
+          "color": "#6366f1"
+        },
+        {
+          "level": "Hands-On",
+          "title": "Work With AI",
+          "layers": ["Context", "Agent"],
+          "outcome": "Have productive multi-step conversations. Use AI that takes initiative and works through problems autonomously.",
+          "color": "#a78bfa"
+        },
+        {
+          "level": "Advanced",
+          "title": "Power Up AI",
+          "layers": ["Harness", "MCP"],
+          "outcome": "Configure Claude Code for your projects. Connect AI to real tools: files, databases, calendars, email.",
+          "color": "#f59e0b"
+        },
+        {
+          "level": "Mastery",
+          "title": "Build AI Systems",
+          "layers": ["Skills"],
+          "outcome": "Package complex workflows as reusable commands. Build custom AI systems anyone on your team can use.",
+          "color": "#22c55e"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "content": "## Where You Are Right Now\n\nYou're at the **Entry Level** — you understand how tokens and context work, and you're about to dive deep into prompts in Part 3. That's exactly where you should be.\n\nBy the time you reach Part 15 (MCP), you'll have touched every layer of this stack. The diagram above will make each new concept click into place, because you'll always know where it fits in the bigger picture.\n\n**Use this mental model as a diagnostic tool.** When something isn't working with AI, ask: *Which layer is the problem at?* Is the prompt unclear (Layer 2)? Is context missing (Layer 3)? Does the Agent need different instructions (Layer 4)? Do I need to configure a permission (Layer 5)? Do I need to connect a new tool (Layer 6)? Or should I build a custom Skill (Layer 7)?\n\nThe answer almost always points you to the right fix."
+    },
+    {
+      "type": "quiz",
+      "question": "You're using Claude Code and it keeps asking for confirmation on every small action, slowing you down. Which layer of the AI Stack is this behaviour controlled by — and where should you look to change it?",
+      "options": [
+        "Layer 2 (Prompt) — write a better prompt telling it to stop asking for confirmation",
+        "Layer 5 (Harness) — the Harness controls what the Agent can do autonomously; adjust the settings or CLAUDE.md file",
+        "Layer 7 (Skills) — build a custom Skill that skips the confirmation steps",
+        "Layer 1 (Token) — the AI is using too many tokens and needs to be more concise"
+      ],
+      "correct": 1,
+      "explanation": "Confirmation prompts and permission settings live in the Harness layer (Layer 5). The Harness defines the guardrails around what the Agent can do without checking with you first. In Claude Code, you adjust this in settings files or your CLAUDE.md project instructions — not by rephrasing your prompt."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague says: 'I use Claude every day for writing emails, so I'm already operating at all 7 layers.' How would you respond?",
+      "options": [
+        "They're right — heavy daily use implies mastery of all layers",
+        "They're working at Layers 1–3: tokens, prompts, and context. Layers 4–7 involve Agents, Harness configuration, MCP tool connections, and custom Skills — capabilities they haven't accessed yet",
+        "Layer mastery is determined by how many months you've been using AI",
+        "Writing emails is a Layer 7 Skill because it's a complex task"
+      ],
+      "correct": 1,
+      "explanation": "A standard chat session — even a very skilled one — operates at Layers 1–3: the AI processes tokens, you write prompts, and the context window manages the conversation. Layers 4 through 7 involve autonomous action (Agent), configuration (Harness), external tool connections (MCP), and custom reusable capabilities (Skills). These aren't about frequency of use — they're distinct technical capabilities that require different tools and techniques to access."
+    },
+    {
+      "type": "quiz",
+      "question": "You want Claude to query your company's internal database and pull the latest sales figures into a report automatically. Which layer makes this possible — and why?",
+      "options": [
+        "Layer 2 (Prompt) — write a detailed enough prompt describing the database structure",
+        "Layer 3 (Context) — paste the database contents into the context window each time",
+        "Layer 6 (MCP) — MCP is the standard interface that connects AI to external systems like databases, letting the Agent actually retrieve live data",
+        "Layer 7 (Skills) — build a custom Skill that knows about your database format"
+      ],
+      "correct": 2,
+      "explanation": "Connecting AI to an external system like a live database requires MCP (Layer 6) — the standard interface for plugging external tools and data sources into AI. A prompt alone (Layer 2) can't reach outside the conversation. Pasting data into context (Layer 3) is a manual workaround that breaks with large or frequently-changing data. A Skill (Layer 7) could package the workflow, but the underlying database connection is still MCP."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 1-7.** You now have the complete mental model for how all AI layers fit together — from Token to Skills. Keep this map in mind throughout the course. When a new concept appears, ask: 'Which layer does this belong to?' — and the rest will fall into place."
+    }
+  ],
+  "nextLesson": "2-1",
+  "prevLesson": "1-6"
+}
