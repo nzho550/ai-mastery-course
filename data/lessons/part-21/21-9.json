@@ -1,0 +1,89 @@
+{
+  "id": "21-9",
+  "title": "Scheduled & Continuous Loops",
+  "part": 20,
+  "estimatedMinutes": 45,
+  "tags": ["loop-engineering", "advanced", "scheduled", "automation", "cron"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nMost AI loops are triggered by you: you ask, the AI responds. But some of the most valuable loops run on their own — monitoring for changes, checking conditions, sending daily summaries, or watching for anomalies. This lesson covers **scheduled and continuous loops**: how to design AI that runs on a timer or event trigger, the patterns for polling vs event-driven loops, and how to build them in Claude Code."
+    },
+    {
+      "type": "text",
+      "content": "## Triggered vs Scheduled vs Continuous\n\n**Triggered loops** (on-demand) — run when you explicitly ask. Most AI interactions. Examples: 'summarise this document', 'review this code'.\n\n**Scheduled loops** (time-based) — run on a calendar schedule regardless of external events. Examples: daily standup summary every morning, weekly report every Friday, monthly data quality check.\n\n**Event-driven loops** (condition-based) — run when a specific condition is detected. Examples: alert when a file changes, run when a new email arrives in a folder, trigger when a metric exceeds a threshold.\n\n**Continuous loops** (always-on monitoring) — run at a very high frequency, effectively always watching. Examples: anomaly detection on a live data stream, real-time translation, live transcription.\n\n**The design trade-off:** Scheduled and continuous loops are more powerful but require more infrastructure. Triggered loops are simpler but require human initiation. Choose based on whether the value of autonomous initiation justifies the setup cost."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Start with a manual trigger.** Before automating any loop, run it manually 5-10 times to verify the output is consistently useful. Automated loops that produce unreliable output will be ignored or turned off. Proven manual loops that run themselves are genuinely valuable. Automate what you've already validated."
+    },
+    {
+      "type": "text",
+      "content": "## Polling Loops vs Event-Driven Loops\n\n**Polling** means checking a source on a regular interval:\n```\nEvery 15 minutes:\n  - Check the news feed for mentions of [company name]\n  - If found: summarize and send to Slack\n  - If not found: do nothing\n```\n\n**Event-driven** means responding to a notification that something changed:\n```\nWhen a new file appears in the /invoices folder:\n  - Extract key data from the invoice\n  - Check if the amount is within budget\n  - If not: flag for review\n  - Log the invoice to the tracker spreadsheet\n```\n\n**Polling pros:** Simple to implement, works with any data source, no webhook setup required.\n**Polling cons:** Misses events that occur and resolve between poll intervals; wastes resources polling when nothing changes.\n\n**Event-driven pros:** Responds immediately when something happens; no wasted resources when nothing is happening.\n**Event-driven cons:** Requires the source system to support webhooks or events; more complex to set up.\n\n**Rule of thumb:** If the source system supports webhooks (GitHub, Slack, email services, most modern APIs), use event-driven. If it doesn't, use polling. For low-frequency events (once per day), polling overhead is negligible."
+    },
+    {
+      "type": "text",
+      "content": "## Designing Scheduled Loops That Stay Useful\n\nScheduled loops have a specific failure mode: they start useful and become noise. The pattern:\n\n1. You set up a daily AI summary loop\n2. First week: you read every summary carefully\n3. Second week: you skim the summaries\n4. Third week: you stop opening them\n5. Fourth week: the loop still runs but produces no value\n\n**Why this happens:** Scheduled loops without feedback mechanisms keep producing output even when the output is no longer meeting the user's need. They don't know you stopped caring.\n\n**How to design loops that stay useful:**\n\n**Adaptive content:** Don't send the same type of summary every time. Include: what's new today that wasn't present yesterday. Filter for novelty, not just recency.\n\n**Quality thresholds:** Only send output if something actually worth sending happened. A daily email monitor that sends 'no unusual emails today' teaches you to ignore it.\n\n**Feedback loops within loops:** Include a one-click 'this wasn't useful' link. When feedback drops below a threshold, the loop alerts you rather than continuing silently.\n\n**Sunset triggers:** Build in expiry. 'Run this loop for 30 days, then ask me if I want to continue.' Forces a periodic usefulness check.\n\n**The key insight:** Scheduled loops should earn their place in your inbox every time they run. The design work is in what they filter out, not just what they include."
+    },
+    {
+      "type": "text",
+      "content": "## Building Scheduled Loops in Claude Code\n\nClaude Code has built-in support for scheduled loops via hooks and the `/loop` skill:\n\n**The `/loop` skill** (covered in Claude Code settings) runs a prompt or slash command on a recurring interval:\n```\n/loop 15m /check-inbox\n```\nThis runs `/check-inbox` every 15 minutes until stopped. The skill checks your email inbox, summarises anything urgent, and flags items needing action.\n\n**Hooks for event-driven loops:**\nClaude Code hooks can trigger on specific events:\n- `PreToolCall` — before a tool runs\n- `PostToolCall` — after a tool completes\n- `Stop` — when a session ends\n\nYou can chain hooks to create event-driven behaviour:\n```json\n{\n  \"hooks\": {\n    \"PostToolCall\": [\n      {\n        \"matcher\": \"Write\",\n        \"hooks\": [{\"type\": \"command\", \"command\": \"git add -A && git commit -m 'auto-commit'\"}]\n      }\n    ]\n  }\n}\n```\nThis hook commits to git every time Claude Code writes a file — a simple event-driven loop.\n\n**OS-level scheduling** (for loops that need to run even when Claude Code isn't active):\n- Windows: Task Scheduler\n- Mac/Linux: cron jobs\n- With n8n, Zapier, or Make: visual workflow schedulers that can trigger Claude API calls"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build a Daily Briefing Loop",
+      "content": "Create a scheduled loop that produces a genuinely useful daily briefing. Takes 35 minutes.\n\n**Step 1 — Design the briefing.** Decide what your ideal daily briefing includes. Good candidates:\n- Summary of files changed yesterday in your project\n- Outstanding TODOs in the codebase\n- Git commits from yesterday with brief explanations\n- Any test failures in the last 24 hours\n\n**Step 2 — Create the briefing skill.** In `~/.claude/commands/`, create `daily-briefing.md`:\n```markdown\n---\ndescription: Generate a daily development briefing\n---\n\nGenerate a daily development briefing for this project.\n\nInclude:\n1. Files changed in the last 24 hours (use git log --since='24 hours ago')\n2. Current open TODOs (grep for TODO in source files)\n3. Any failing tests (run npm test or equivalent, capture results)\n4. One-sentence summary of what got done yesterday\n5. Top 3 priorities for today based on the state of the project\n\nFormat: concise, scannable, under 200 words. Lead with the most important item.\n```\n\n**Step 3 — Run it manually.** Test the skill:\n```\n/daily-briefing\n```\nIs the output useful? Does it surface things you care about? Refine the skill until it's genuinely worth reading.\n\n**Step 4 — Schedule it (choose one):**\n\n*Option A — Claude Code /loop:*\nAt the start of each work session, run:\n```\n/loop 24h /daily-briefing\n```\n\n*Option B — Windows Task Scheduler:*\nCreate a scheduled task that runs a batch file at 9am daily:\n```batch\ncd C:\\your-project\nclaude --print \"/daily-briefing\" >> daily-briefings.txt\n```\n\n*Option C — n8n or Zapier:*\nSet up a scheduled trigger → Claude API call → Slack or email delivery.\n\n**Step 5 — Run it for 5 days.** After 5 days, ask: did you read every briefing? Was there anything in the briefing that you acted on that you might have missed otherwise? What would you change?\n\n**The meta-lesson:** A briefing loop that you actually read for 5 consecutive days is valuable. One you skip after day 2 needs redesign."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build a Watchdog Loop",
+      "content": "Create a loop that monitors for a condition and only alerts when something actually needs attention. Takes 25 minutes.\n\n**Step 1 — Pick your watchdog target.** Good candidates:\n- A folder that should contain daily files (alert if today's file is missing)\n- A set of tests that should all pass (alert on first failure)\n- A log file that shouldn't contain ERROR entries (alert when it does)\n- A configuration file that shouldn't change (alert if it changes)\n\n**Step 2 — Create the watchdog skill.** Create `watchdog.md`:\n```markdown\n---\ndescription: Monitor a condition and alert only when something is wrong\n---\n\nMonitor: $ARGUMENTS\n\nCheck the current state. \nIf everything is normal: output only the word CLEAR.\nIf something needs attention: output ALERT followed by a specific, \nactionable description of the problem and what the likely fix is.\n\nDo not output anything else. Do not explain when nothing is wrong.\n```\n\n**Step 3 — Test the watchdog.** Run it in a normal state — does it return CLEAR without noise?\nThen simulate a problem (create a test error file, delete an expected file, etc.).\nDoes it return an accurate ALERT?\n\n**Step 4 — Build in the 'only alert on problems' logic.** The key design: a watchdog that cries wolf (alerts when there's no problem) trains you to ignore it. A watchdog that's silent when everything's fine makes alerts meaningful.\n\n**Step 5 — Schedule the watchdog.** Set it to run every 30 minutes or hourly. Confirm it stays silent when things are fine and produces clear alerts when there's a problem.\n\n**Reflection:** What's the difference in your response to a watchdog that always sends something vs one that only alerts on actual problems? How does this apply to designing any scheduled AI loop?"
+    },
+    {
+      "type": "quiz",
+      "question": "You set up a daily AI summary loop for your team's Slack channel. After two weeks, you notice team members have stopped reading the summaries. What is the most likely cause and how do you fix it?",
+      "options": [
+        "The AI is summarizing incorrectly — use a better model",
+        "The loop is sending summaries even when there's nothing novel — redesign to filter for novelty and only send when something worth reading occurred",
+        "The summaries are too long — use a shorter format",
+        "The loop frequency is too high — switch from daily to weekly"
+      ],
+      "correct": 1,
+      "explanation": "Scheduled loops that send output regardless of whether anything interesting happened teach recipients to ignore them. The fix is building a novelty filter: only send when something actually changed, something unusual happened, or a threshold was exceeded. 'Nothing notable today' should produce no output, not a message saying 'nothing notable today.' Reducing frequency (daily → weekly) sometimes helps, but doesn't fix the root cause — a weekly 'nothing happened' summary is ignored just as reliably."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to process incoming customer support emails with AI as soon as they arrive. Should you use polling or event-driven architecture?",
+      "options": [
+        "Polling — check the inbox every 5 minutes",
+        "Event-driven — configure the email service to trigger a webhook on new email arrival, which invokes the AI processing pipeline immediately",
+        "Neither — AI should only process emails when a human requests it",
+        "Both — poll every 5 minutes AND set up a webhook for redundancy"
+      ],
+      "correct": 1,
+      "explanation": "Event-driven is the right architecture when the source system supports webhooks (most modern email platforms do). Event-driven responds immediately on email arrival, uses zero resources when no email arrives, and doesn't miss emails that arrive and are resolved within a 5-minute polling window. Polling every 5 minutes adds unnecessary latency, wastes resources, and could miss fast-moving events. Using both adds complexity without meaningful benefit — if the webhook is reliable, polling is redundant."
+    },
+    {
+      "type": "quiz",
+      "question": "You build a watchdog loop that monitors your production database for anomalies and runs every 10 minutes. After a week, you notice you've been ignoring its alerts. What design flaw caused this?",
+      "options": [
+        "The loop runs too frequently — reduce to hourly",
+        "The alerts probably lack specificity — 'anomaly detected' isn't actionable. Alerts need to state exactly what is wrong and what to do about it",
+        "The watchdog model isn't accurate enough",
+        "Alerts should be sent to a manager, not the developer"
+      ],
+      "correct": 1,
+      "explanation": "Alert fatigue has two causes: false positives (alerting when nothing is wrong) and vague alerts (alerting without telling you what to do). An alert that says 'anomaly detected' requires investigation before action — which adds friction and trains people to delay or ignore. An alert that says 'Orders table has 0 new entries in the last 2 hours (expected: 50-200). Check database connection and payment processor.' is immediately actionable. Specific, actionable alerts get acted on; vague alerts get ignored."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-9.** You understand triggered vs scheduled vs event-driven vs continuous loops, polling vs webhook patterns, how to design scheduled loops that stay useful over time, and how to build watchdog loops that alert precisely without producing noise. You've built a daily briefing loop and a watchdog loop."
+    }
+  ],
+  "nextLesson": "21-10",
+  "prevLesson": "21-8"
+}

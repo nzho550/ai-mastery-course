@@ -1,0 +1,89 @@
+{
+  "id": "21-6",
+  "title": "Iterative Refinement Loops",
+  "part": 20,
+  "estimatedMinutes": 45,
+  "tags": ["loop-engineering", "advanced", "refinement", "iteration"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nIterative refinement loops are the workhorses of quality AI output. Unlike self-critique (which asks AI to find its own errors) or LLM-as-judge (which scores output objectively), refinement loops are about **progressive transformation** — taking raw output and moving it closer to a target state through structured passes. This lesson covers the refinement patterns used for writing, code, data, and analysis, and teaches you how to sequence passes for maximum impact."
+    },
+    {
+      "type": "text",
+      "content": "## What is Iterative Refinement?\n\nIterative refinement means passing output through a series of focused transformation steps, each targeting a different quality dimension:\n\n**Example: Refining a technical article**\n- Pass 1: **Structure** — does the argument flow logically? Is the outline right?\n- Pass 2: **Content** — are all claims accurate? Is anything missing?\n- Pass 3: **Audience fit** — is the level right? Too technical? Too basic?\n- Pass 4: **Polish** — word choice, sentence rhythm, transitions\n- Pass 5: **Final check** — does the whole thing hang together?\n\n**Why separate passes instead of asking for all improvements at once?**\nAsking Claude to 'make this article better' produces a superficially edited version. Asking it to 'restructure the argument, then — separately — check all the claims, then — separately — adjust the technical level' produces a genuinely transformed piece. Each focused pass applies more attention to that specific dimension than a combined pass would."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The pass-sequencing rule:** Always fix structure before content, content before language, language before style. Polishing sentences that will be cut in a restructure is wasted effort. Getting the word choice perfect in a section whose argument is wrong just makes the wrong thing sound better."
+    },
+    {
+      "type": "text",
+      "content": "## The Standard Refinement Pass Sequences\n\nDifferent output types benefit from different pass sequences:\n\n**For long-form writing:**\n1. Structure pass (outline, flow, argument order)\n2. Completeness pass (what's missing? what's unnecessary?)\n3. Accuracy pass (fact-check, cite, verify claims)\n4. Audience pass (calibrate level and tone)\n5. Polish pass (sentence-level editing)\n\n**For code:**\n1. Correctness pass (does it do what it's supposed to?)\n2. Edge case pass (what inputs break it?)\n3. Performance pass (are there O(n²) patterns? redundant work?)\n4. Security pass (injection risks, validation gaps, exposed secrets)\n5. Readability pass (naming, structure, comments where needed)\n\n**For data analysis:**\n1. Methodology pass (is the approach correct?)\n2. Data quality pass (what's missing, outlying, or miscoded?)\n3. Interpretation pass (do the conclusions follow from the data?)\n4. Presentation pass (are visualisations and summaries clear?)\n\n**For any output:**\nYou don't need all passes every time. Identify which dimensions matter most for your specific task and run only those passes. A quick internal document needs structure and completeness; it doesn't need a polish pass."
+    },
+    {
+      "type": "text",
+      "content": "## Expansion, Reduction, and Transformation Passes\n\nNot all refinement passes improve quality in the same direction. Three major types:\n\n**Expansion passes** — add what's missing\n```\nThis analysis is missing the competitor perspective. Add a section \nanalyzing how competitors are likely to respond to this product launch.\nDon't change anything else.\n```\n\n**Reduction passes** — remove what shouldn't be there\n```\nThis report is 30% too long. Identify and cut everything that:\n- Repeats a point already made\n- Provides context the audience already has\n- Is hedging or filler ('it's worth noting that...')\nCut ruthlessly. The ideas should survive; the wordcount should drop.\n```\n\n**Transformation passes** — change the form of what's there\n```\nRewrite this technical specification as an executive summary.\nSame facts, completely different format: shorter, less jargon, \nfocus on business impact rather than implementation details.\n```\n\n**The key to all three:** tell the model exactly what to target and what to leave alone. 'Don't change the tone' or 'keep the existing examples' prevents refinement passes from destroying what already works while fixing what doesn't."
+    },
+    {
+      "type": "text",
+      "content": "## Budget-Aware Refinement\n\nRefinement loops cost tokens and time. Design them with budget in mind:\n\n**Fixed-pass approach** — always run N passes. Simple, predictable cost, and works well for regular production workflows where quality bar is consistent.\n\n**Threshold approach** — run passes until a quality metric is met (or until a judge rates the output above a threshold). Variable cost, but stops as soon as quality is sufficient.\n\n**Priority-pass approach** — identify which pass has the highest expected quality improvement and run that one first. If the improvement is sufficient, stop. Only run additional passes if needed.\n\n**Cost estimate for a refinement loop:**\n- Each pass typically costs 2× the output token count (you re-read the full output + generate the refined version)\n- A 5-pass refinement of a 1,000-word document ≈ 10,000-15,000 tokens per complete loop\n- At typical API pricing, this is very cheap — but for high-volume production systems, multiply by the number of documents per day\n\n**The rule of diminishing returns:** Pass 1 typically gives the biggest improvement. Pass 5 gives the least. If you're optimising for cost-to-quality ratio, invest most in designing the best Pass 1."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Run a Multi-Pass Refinement on Real Work",
+      "content": "Apply structured multi-pass refinement to something you actually need improved. Takes 35 minutes.\n\n**Choose your target.** Pick a real piece of work you need to produce or improve:\n- A project proposal or business case\n- A technical documentation section\n- A report or analysis you've written\n- A presentation outline\n\n**Step 1 — Get a raw draft (5 min).** Either use something you've already written, or ask Claude to produce a first draft based on your brief.\n\n**Step 2 — Structure pass (8 min).** Send:\n```\nAnalyse the structure of this [document type]. Don't change any content yet.\nTell me:\n1. Is the argument or information flow logical?\n2. What should come first that doesn't?\n3. What sections are in the wrong place?\n4. What's missing structurally?\n\nThen restructure it based on your analysis. Change only the order and organisation, \nnot the content.\n```\n\n**Step 3 — Content pass (8 min).** Send:\n```\nNow audit the content of the restructured version.\n1. What claims are unsupported or need evidence?\n2. What is missing that the audience will need?\n3. What is present that the audience doesn't need?\n\nMake the content additions and removals. Don't change the structure or language quality.\n```\n\n**Step 4 — Audience pass (7 min).** Send:\n```\nThe audience for this is [describe audience: role, knowledge level, goals].\nRewrite it calibrated exactly to that audience.\nAdjust: technical level, assumed knowledge, examples, and emphasis.\nDon't add or remove content — just adjust how it's written for them.\n```\n\n**Step 5 — Polish pass (7 min).** Send:\n```\nNow polish the language. For each paragraph:\n- Cut any sentence that could be removed without losing meaning\n- Replace any phrase over 4 words where 2 words would do\n- Fix any awkward transitions or structural words\n\nKeep every idea; cut every word that doesn't carry weight.\n```\n\n**Compare:** Read the original and the final version side by side. Write 3 specific improvements the multi-pass approach produced that a single 'make this better' prompt would not have."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build a Code Refinement Pipeline",
+      "content": "Create a reusable multi-pass code review skill. Takes 25 minutes.\n\n**Step 1 — Create a code refinement skill.** In `~/.claude/commands/`, create `refine-code.md`:\n```markdown\n---\ndescription: Run a structured multi-pass refinement on code\n---\n\nRun a structured 4-pass refinement on this code. For each pass, show only \nthe changes made in that pass, then show the full updated code after that pass.\n\nPass 1 — CORRECTNESS: Does it do what it's supposed to? Fix any logical errors.\nPass 2 — EDGE CASES: What inputs would break it? Add guards and validation.\nPass 3 — PERFORMANCE: Any unnecessary work, redundant operations, or O(n²) patterns?\nPass 4 — READABILITY: Variable names, function structure, comments where logic is non-obvious.\n\nCode to refine:\n$ARGUMENTS\n```\n\n**Step 2 — Generate some mediocre code to refine.** In Claude Code, ask:\n```\nWrite a quick, rough implementation of a function that:\n- Takes a list of order objects (each with: id, customer_id, items[], total, status)\n- Filters by status\n- Groups by customer_id\n- Returns the top N customers by total order value\nWrite it quickly without worrying about edge cases or efficiency.\n```\n\n**Step 3 — Run the refinement skill** on the rough implementation:\n```\n/refine-code [paste the rough code]\n```\n\n**Step 4 — Track the improvements per pass.** For each pass:\n- What did it catch/fix?\n- How significant was the improvement?\n- Would you have caught this issue in a standard code review?\n\n**Step 5 — Run it on your own real code.** Pick a function from a project you're working on and run it through the refinement pipeline. How does it perform on code you wrote yourself vs AI-generated code?"
+    },
+    {
+      "type": "quiz",
+      "question": "You're refining a 2,000-word technical proposal. In what order should you run the passes, and why?",
+      "options": [
+        "Polish first (fix the writing), then structure (reorganise), then content (add/remove) — make it readable before analysing it",
+        "Structure first, then content, then polish — fixing the arrangement and completeness before polishing prevents wasted effort on text that may be cut or moved",
+        "Content first (get everything in), then structure, then polish — completeness should come before organisation",
+        "All passes simultaneously — ask Claude to improve everything at once for efficiency"
+      ],
+      "correct": 1,
+      "explanation": "Structure before content before polish is the correct sequence, because each pass can undo the work of later passes. If you polish sentences first, then restructure the document, much of the polished text moves or gets cut — the polish was wasted effort. If you add content after restructuring, it may disrupt the structure you just fixed. The correct order minimises rework: fix the framework, then fill it with the right content, then polish the final text."
+    },
+    {
+      "type": "quiz",
+      "question": "You're running a refinement loop on 500 product descriptions for an e-commerce site. After Pass 1 (structure) and Pass 2 (content), the quality score from your LLM judge jumps from 5.2 to 7.8 out of 10. Pass 3 (audience) brings it to 8.1. Pass 4 (polish) brings it to 8.3. What should you do?",
+      "options": [
+        "Continue to Pass 5 to see if quality improves further",
+        "Stop after Pass 3 or 4 — the improvement from Pass 3 and 4 is marginal (0.3 and 0.2) compared to Pass 1-2 (2.6). The cost of running 2 more passes on 500 descriptions likely outweighs the quality gain",
+        "Re-run Pass 2 since it was the most effective",
+        "Lower the quality threshold to 7.5 so you can stop earlier"
+      ],
+      "correct": 1,
+      "explanation": "This is a clear diminishing returns scenario. Passes 1-2 produced a 2.6 point quality gain; Pass 3 produced 0.3; Pass 4 produced 0.2. At 500 descriptions, each additional pass costs real money and time. If a score of 8.1 or 8.3 meets your quality bar, the right decision is to stop. Budget-aware refinement means explicitly comparing quality gains to processing costs at each pass, and stopping when the marginal gain no longer justifies the marginal cost."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the key instruction to include in any refinement pass prompt to prevent it from undoing the improvements from a previous pass?",
+      "options": [
+        "Tell the model to 'be careful'",
+        "Explicitly tell the model what to target AND what to leave unchanged — e.g., 'adjust the technical level for this audience, but don't add or remove content and don't change the document structure'",
+        "Run each pass in a separate chat window",
+        "Include the original version in every pass prompt so the model can compare"
+      ],
+      "correct": 1,
+      "explanation": "Scoping each pass with both a target ('do this') and a constraint ('leave this unchanged') is essential for multi-pass refinement. Without the constraint, a model asked to 'polish the language' might reorganise sections, add new content, or remove examples — undoing the structure and content passes. Explicit constraints keep each pass focused on its specific dimension and protect the improvements already made."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-6.** You understand multi-pass refinement sequences, the difference between expansion, reduction, and transformation passes, how to scope each pass to protect prior improvements, and how to design budget-aware loops that stop when quality is sufficient."
+    }
+  ],
+  "nextLesson": "21-7",
+  "prevLesson": "21-5"
+}

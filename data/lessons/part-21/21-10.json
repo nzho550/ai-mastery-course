@@ -1,0 +1,89 @@
+{
+  "id": "21-10",
+  "title": "Error Recovery & Retry Loops",
+  "part": 20,
+  "estimatedMinutes": 45,
+  "tags": ["loop-engineering", "advanced", "error-handling", "resilience"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nEvery AI loop fails sometimes. A tool call returns an error. A model produces output that doesn't pass validation. A dependency is unavailable. An operation times out. The difference between a brittle loop and a production-ready loop is how it handles failure. This lesson covers the failure types common in AI loops, the retry patterns that handle them, and how to design loops that degrade gracefully rather than fail catastrophically."
+    },
+    {
+      "type": "text",
+      "content": "## The Four Failure Types in AI Loops\n\n**Type 1: Transient failures**\nTemporary issues that usually resolve on retry: API rate limits, momentary network errors, temporary service unavailability. Characteristic: retry after a brief wait usually works.\n\n**Type 2: Input failures**\nThe loop's input is problematic: malformed data, missing required context, ambiguous instructions. Characteristic: retrying with the same input produces the same failure — you need different input.\n\n**Type 3: Model quality failures**\nThe AI produces output that fails validation: wrong format, factually incorrect, below quality threshold, off-task. Characteristic: may improve on retry with better context or prompt adjustments, but sometimes requires a fundamentally different approach.\n\n**Type 4: Permanent failures**\nThe requested action is impossible: file doesn't exist, permission denied, external service returns a definitive error. Characteristic: retry will never succeed — the loop must fail gracefully and report the problem.\n\n**Why the distinction matters:** Retrying a permanent failure wastes resources and time. Not retrying a transient failure wastes a perfectly good operation. Designing a loop requires identifying which failure types are possible and handling each appropriately."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The infinite retry anti-pattern:** A loop that retries any failure indefinitely is dangerous. It can run up large API costs, consume system resources, and delay the detection of permanent failures. Every retry strategy needs a maximum retry count, a timeout, or both. When the maximum is reached, the loop should fail cleanly and report what it attempted."
+    },
+    {
+      "type": "text",
+      "content": "## Retry Strategies\n\n**Immediate retry** — retry as soon as failure occurs, once or twice. For transient failures that resolve in milliseconds.\n\n**Fixed-delay retry** — wait a fixed time between retries (e.g., 30 seconds, 60 seconds). For failures that take a predictable amount of time to resolve.\n\n**Exponential backoff** — wait exponentially longer between each retry: 1s → 2s → 4s → 8s → 16s → give up. The industry standard for API rate limits and service outages. Prevents hammering a struggling service with retries.\n\n**Exponential backoff with jitter** — add randomness to the backoff: 1s → 1.8s → 3.6s → 7.2s. When many clients retry simultaneously (as when a service goes down), random jitter prevents them all retrying at exactly the same time and causing a thundering herd.\n\n**Contextual retry** — before retrying, change something about the request. For model quality failures: add more context, simplify the instruction, switch to a different model, or provide the error as context so the model can self-correct.\n\n**Prompt for AI loops:**\n```\nYour previous attempt to [task] produced this error/problem:\n[error or quality failure description]\n\nPlease try again, addressing this specific issue:\n[specific guidance based on the failure type]\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Circuit Breakers\n\nA circuit breaker is a pattern that stops retrying when a failure pattern indicates the retries won't succeed. Named after electrical circuit breakers that cut power when current is too high.\n\n**How it works:**\n```\nSTATE: CLOSED (normal operation)\n  → All operations proceed normally\n  → Track failures: if failure_count > threshold in time_window → trip to OPEN\n\nSTATE: OPEN (circuit broken)\n  → All operations fail immediately (no retries attempted)\n  → After timeout_period → move to HALF-OPEN\n\nSTATE: HALF-OPEN (testing recovery)\n  → Allow one test operation through\n  → If it succeeds → back to CLOSED\n  → If it fails → back to OPEN with reset timer\n```\n\n**Why this matters for AI loops:** If an external service (an MCP tool, an API, a database) is genuinely down, a circuit breaker stops the loop from hammering it with retries. This protects the external service, preserves your API budget, and makes the failure visible immediately rather than after 20 failed retries.\n\n**Simplified circuit breaker for Claude Code skills:**\n```markdown\nBefore attempting [operation]:\n1. Check if this operation has failed 3+ times in this session\n2. If yes: report 'This operation has failed repeatedly. \n   Likely cause: [inferred cause]. Recommended action: [action]'\n3. If no: proceed with the operation\n```"
+    },
+    {
+      "type": "text",
+      "content": "## State Preservation Across Retries\n\nThe most expensive retry is one that restarts from scratch when only the last step failed. Preserve state between retries to avoid wasted work.\n\n**The checkpoint pattern:**\nDivide a long loop into checkpoints. After each checkpoint, save the current state. If a failure occurs, restart from the last checkpoint, not from the beginning.\n\n**Example:** A loop processing 100 files:\n```\n- Process files 1-25 → save progress: {completed: [1-25], remaining: [26-100]}\n- Process files 26-50 → save progress: {completed: [1-50], remaining: [51-100]}\n- [Failure at file 67]\n- Retry: load progress → start from file 51, not file 1\n```\n\n**In Claude Code:** You can implement this by having the loop write progress to a file at regular intervals:\n```\n/process-batch files 1-100\n→ Claude processes files, writes progress.json every 10 files\n→ If interrupted, resume: /process-batch --resume progress.json\n```\n\n**State to preserve:** Which items have been processed, what outputs were produced, any intermediate results needed for the final synthesis, and the current loop configuration."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build a Resilient Retry Skill",
+      "content": "Create a skill that gracefully handles failures and retries with intelligence. Takes 30 minutes.\n\n**Step 1 — Create a base skill that can fail.** In `~/.claude/commands/`, create `fetch-and-summarize.md`:\n```markdown\n---\ndescription: Fetch a URL and summarise its content\n---\n\nFetch this URL and produce a 150-word summary: $ARGUMENTS\n\nIf you cannot access the URL, report: FETCH_FAILED: [specific reason]\nIf the content is too short to summarise (< 100 words), report: CONTENT_TOO_SHORT\nIf the content is not in English, report: NON_ENGLISH: [detected language]\nOtherwise: summarise normally.\n```\n\n**Step 2 — Create a retry wrapper skill.** Create `resilient-fetch.md`:\n```markdown\n---\ndescription: Fetch and summarize a URL with retry logic\n---\n\nAttempt to fetch and summarize: $ARGUMENTS\n\nAttempt 1: Run /fetch-and-summarize on the URL.\n\nIf result starts with FETCH_FAILED:\n  - Wait 2 seconds, then try once more\n  - If second attempt also fails: report 'Could not fetch URL after 2 attempts. \n    Likely cause: [infer from error]. Suggested alternative: [suggest]'\n\nIf result starts with CONTENT_TOO_SHORT:\n  - Do not retry. Report: 'Page has insufficient content to summarize.'\n  - Suggest: 'Try the full article URL if this was a preview page.'\n\nIf result starts with NON_ENGLISH:\n  - Retry once with instruction to translate then summarize\n  - If translation succeeds, include a note that summary was translated\n\nIf all retries exhausted: escalate with full context of what was attempted.\n```\n\n**Step 3 — Test failure scenarios:**\n- Try a valid URL → should succeed on first attempt\n- Try an invalid URL → should retry once then fail gracefully\n- Try a very short page → should fail with specific message, no retry\n\n**Step 4 — Build a batch processor with checkpoints.** Create `batch-summarize.md`:\n```markdown\n---\ndescription: Summarize a list of URLs with progress tracking\n---\n\nProcess this list of URLs: $ARGUMENTS\n\nFor each URL:\n1. Call /resilient-fetch on it\n2. Write the result to summaries.md with the URL and timestamp\n3. Log progress: 'Completed X of Y URLs'\n\nIf any URL fails after retries: mark it as FAILED in summaries.md and continue.\nAt the end: report total completed, total failed, and list the failed URLs.\n```\n\n**Step 5 — Run it on 5 real URLs** from different sites. Observe how the batch handles individual failures without stopping the entire run."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Failure Mode Analysis for Your Loops",
+      "content": "Apply systematic failure analysis to loops you've built or plan to build. Takes 20 minutes.\n\n**Step 1 — List your loops.** Write down all AI loops you've built in this course or plan to build (daily briefing, vendor evaluation, batch summarization, etc.).\n\n**Step 2 — For each loop, identify potential failures using this framework:**\n\n| Failure | Type | Recovery |\n|---|---|---|\n| External API unavailable | Transient | Exponential backoff, max 3 retries |\n| Model output below quality threshold | Model quality | Retry with critique as context |\n| Required file doesn't exist | Permanent | Fail cleanly, report specific path |\n| Input is in unexpected format | Input | Alert user, request corrected input |\n\n**Step 3 — For your highest-stakes loop**, do a full failure mode analysis:\n- What happens if each individual component fails?\n- Is the failure silent (loop continues producing wrong output) or loud (loop stops)?\n- What is the cost of each failure mode (wasted time, wrong decisions, data corruption)?\n- What recovery action makes the loop most resilient?\n\n**Step 4 — Share your analysis with Claude:**\n```\nHere is my failure mode analysis for [loop name]: [paste analysis]\n\nIdentify: which failure mode has the highest severity × probability score, \nand suggest a specific implementation change that would make the loop \nmost resilient to that failure.\n```"
+    },
+    {
+      "type": "quiz",
+      "question": "Your AI loop calls an external API that occasionally returns 429 (Too Many Requests) errors. What is the correct retry strategy?",
+      "options": [
+        "Immediate retry — try again instantly",
+        "No retry — surface the error to the user immediately",
+        "Exponential backoff with jitter — wait increasingly longer between retries, with randomness to avoid thundering herd when many clients retry simultaneously",
+        "Fixed 60-second delay between all retries"
+      ],
+      "correct": 2,
+      "explanation": "Rate limit errors (429) are classic transient failures that typically resolve with time. Immediate retry just hits the rate limit again. Fixed delays work but don't scale well when many clients all retry at exactly the same interval. Exponential backoff with jitter is the industry standard: each retry waits longer than the last (preventing hammering), and jitter prevents all clients from retrying at exactly the same moment (preventing thundering herd). Most API providers explicitly recommend this pattern."
+    },
+    {
+      "type": "quiz",
+      "question": "A long-running loop processing 200 documents fails at document 147. Without checkpointing, what happens when you retry?",
+      "options": [
+        "It resumes from document 147",
+        "It starts over from document 1, wasting all the work done on documents 1-146",
+        "It skips to document 148",
+        "It produces a partial result with the first 146 documents"
+      ],
+      "correct": 1,
+      "explanation": "Without state preservation, a retry starts from the beginning. All work on documents 1-146 is lost and must be redone. The checkpoint pattern solves this: after each batch of documents, write progress to a file. On retry, read the progress file and resume from the last successful checkpoint. For a 200-document loop that fails at 147, a checkpoint every 25 documents means at worst you restart from document 126 — not from document 1."
+    },
+    {
+      "type": "quiz",
+      "question": "Your circuit breaker trips after 5 consecutive failures connecting to a database. What should happen next?",
+      "options": [
+        "Keep retrying with increasing delays until the database responds",
+        "The circuit opens — subsequent operations fail immediately without attempting the database connection. After a timeout period, the circuit enters half-open state and allows one test operation through",
+        "Alert the user and shut down the entire system",
+        "Switch to a backup database automatically"
+      ],
+      "correct": 1,
+      "explanation": "A tripped circuit breaker stops all retry attempts immediately — this is the point. Rather than hammering a struggling database with retries, the circuit breaks: subsequent operations fail fast without reaching the database. After a configurable timeout, the circuit enters half-open state, allowing one test operation. If that succeeds, the circuit closes (normal operation resumes). If it fails, the circuit stays open. This pattern protects struggling services and makes failures visible and fast rather than slow and resource-consuming."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-10.** You understand the four failure types in AI loops (transient, input, model quality, permanent), five retry strategies including exponential backoff with jitter, the circuit breaker pattern, and state preservation through checkpointing. Your loops can now fail gracefully, retry intelligently, and preserve work across interruptions."
+    }
+  ],
+  "nextLesson": "21-11",
+  "prevLesson": "21-9"
+}

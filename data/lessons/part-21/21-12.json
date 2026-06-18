@@ -1,0 +1,85 @@
+{
+  "id": "21-12",
+  "title": "Loop Debugging & Observability",
+  "part": 20,
+  "estimatedMinutes": 45,
+  "tags": ["loop-engineering", "advanced", "debugging", "observability"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLoops fail in ways that simple prompts don't. A single-prompt failure is visible immediately: you asked, you got a bad answer. A loop failure might not be visible until iteration 30, by which point the error has compounded through every subsequent step. This lesson covers the specific failure modes of AI loops, how to make loops observable, techniques for tracing and diagnosing problems, and how to design loops that are easy to debug."
+    },
+    {
+      "type": "text",
+      "content": "## Why Loops Are Hard to Debug\n\nDebugging a loop is harder than debugging a single prompt for three reasons:\n\n**1. Error propagation.** An error in iteration 3 influences iterations 4, 5, 6... By iteration 10, the output reflects the compounded effect of a mistake made 7 iterations ago. The symptom (wrong final output) is far removed from the cause (wrong assumption in iteration 3).\n\n**2. Emergent behavior.** The loop's overall behavior is the product of many small decisions, no one of which would cause the problem alone. It's only when those decisions combine that something unexpected emerges.\n\n**3. Non-determinism.** The same loop, run twice, may produce slightly different results. This makes reproducing bugs harder — the exact failure might not recur under the same conditions.\n\n**The debugging mindset shift:** Don't debug the output — debug the trace. You need to see *what the loop did at each step*, not just *what it produced at the end*."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Build loops for observability from the start.** It's far easier to add logging during construction than to retrofit it after a bug appears. Every loop you build should answer three questions at any given point: What has been done? What was the result of each step? What is the current state of the loop? If you can't answer these, the loop isn't observable."
+    },
+    {
+      "type": "text",
+      "content": "## Common Loop Failure Modes\n\n**Failure Mode 1: Premature convergence**\nThe loop stops too early, before the task is complete. Usually caused by an ambiguous or too-easily-satisfied stopping condition.\n\n*Symptom:* Output is incomplete or superficial.\n*Diagnosis:* Check the stopping condition — is it measuring what you actually care about, or a proxy that's too easy to satisfy?\n\n**Failure Mode 2: Infinite (or near-infinite) loop**\nThe loop never reaches its stopping condition and runs until the budget is exhausted.\n\n*Symptom:* Loop runs far longer than expected, high token cost, stops only at budget limit.\n*Diagnosis:* Check whether the stopping condition is reachable. Is the task impossible? Is the criterion too strict? Is the loop producing results that should satisfy the criterion but aren't being evaluated correctly?\n\n**Failure Mode 3: State corruption**\nEarlier loop results are misinterpreted or incorrectly used in later iterations.\n\n*Symptom:* Output degrades as the loop progresses — early iterations are better than late ones.\n*Diagnosis:* Add explicit intermediate state summaries and verify each one. Find the iteration where quality drops.\n\n**Failure Mode 4: Goal drift**\nThe loop gradually drifts away from the original goal across iterations.\n\n*Symptom:* The final output technically answers the task but in a way that doesn't match what was intended. Each individual step seemed reasonable, but the cumulative direction was wrong.\n*Diagnosis:* At every 5th iteration, re-read the original task and verify the current trajectory is still aligned with it.\n\n**Failure Mode 5: Silent success / wrong success**\nThe loop produces output that satisfies its stopping condition but that condition was the wrong measure of success.\n\n*Symptom:* The loop completed successfully, but the output isn't what was needed.\n*Diagnosis:* The evaluation rubric or stopping criterion was a poor proxy for actual quality. Redesign the success measure."
+    },
+    {
+      "type": "text",
+      "content": "## Making Loops Observable\n\nObservability means being able to understand what a loop is doing at any point, after the fact or in real time.\n\n**Technique 1: Iteration headers**\nStart each iteration with a structured header:\n```\n=== ITERATION 4 of 10 ===\nStatus: In progress\nCompleted so far: [list]\nCurrent focus: [what this iteration addresses]\nRemaining: [what's left after this iteration]\n```\n\n**Technique 2: Decision logging**\nFor key decisions, have the loop explicitly log its reasoning:\n```\n[DECISION] At this point I am choosing to [action] because [reason]. \nAlternatives I considered: [alternatives]. \nWhy I didn't choose them: [rationale].\n```\n\n**Technique 3: Progress files**\nFor long loops, write progress to an external file that can be inspected without interrupting the loop:\n```\nAfter each major step, append to loop-trace.md:\n- Timestamp\n- Step completed\n- Key finding or output\n- Next planned action\n```\n\n**Technique 4: Mid-loop state checks**\nAt regular intervals, produce a structured state summary:\n```\nEvery 5 iterations, pause and report:\n- What have I accomplished?\n- What have I found/produced?\n- Is this aligned with the original goal?\n- What do I expect the next 5 iterations to accomplish?\n```\n\n**Technique 5: Confidence scores**\nHave the loop report its confidence at key decision points:\n```\nConfidence that current approach will reach the goal: [Low/Medium/High]\nReason: [one sentence]\n```\nLow confidence signals that human review or a direction change is warranted."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Add Observability to an Existing Loop",
+      "content": "Take any loop you've built and add full observability. Takes 30 minutes.\n\n**Step 1 — Choose a loop.** Pick a loop from earlier in this part (daily briefing, batch processor, watchdog, etc.).\n\n**Step 2 — Add iteration headers.** Modify the skill to produce a structured header at the start of each major step:\n```\nFormat each major step as:\n=== STEP [N]: [what this step does] ===\nPrevious steps completed: [list]\nThis step's goal: [specific goal]\nSuccess criteria for this step: [how to know it's done]\n```\n\n**Step 3 — Add a progress log file.** Add to the skill:\n```\nAt the end of each step, append to loop-progress.md:\n- Step number and description\n- What was found/produced\n- Whether the step met its success criteria\n- Next step planned\n```\n\n**Step 4 — Add mid-loop alignment checks.** Add:\n```\nAfter every 3 steps, pause and check:\n'Re-read the original task. Am I still on track to achieve it? \nIs my current direction the most efficient path to the goal?\nIf not, what should change?'\n```\n\n**Step 5 — Run the observable loop.** Execute it on a real task. Read the loop-progress.md file after completion.\n\n**Questions to answer:**\n- At what step did the loop spend the most effort?\n- Was there a step where the alignment check revealed a drift?\n- If you were to debug an error in this loop, would the progress log give you enough information to find it quickly?\n\n**Step 6 — Deliberately introduce a problem.** Give the loop a slightly ambiguous or contradictory task. Watch how the observability mechanisms help you see where it goes wrong."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Diagnose a Broken Loop",
+      "content": "Practice debugging a loop by finding where its reasoning diverged. Takes 20 minutes.\n\n**Step 1 — Create a deliberately flawed loop task.** In Claude.ai, set up a multi-step loop with hidden issues:\n```\nYou are running a research loop. Your task: identify the 3 best practices \nfor writing Python unit tests.\n\nProcess:\n1. Generate 5 candidate best practices\n2. Evaluate each on: specificity, actionability, and novelty\n3. Rank them by combined score\n4. Select the top 3\n5. For each of the top 3, write a concrete example\n```\n\n**Step 2 — Run the loop** but skip step 2 deliberately:\n```\nRun steps 1, 3, 4, and 5 — skip the evaluation step (step 2).\n```\n\n**Step 3 — Note the effect.** What happens to the quality of the selection when the evaluation step is missing? Is the ranking principled or arbitrary?\n\n**Step 4 — Diagnose using the loop trace.** Ask Claude:\n```\nLooking back at this loop:\n- At which step did the lack of structured evaluation first affect the output?\n- What assumption did the selection step have to make that the evaluation step would have answered?\n- What would the output have looked like if evaluation was included?\n```\n\n**Step 5 — Fix and re-run.** Add the evaluation step back and rerun the full loop. Compare the two outputs.\n\n**The debugging insight:** Missing steps in loops aren't always obvious until you look at what information is missing at the step that follows. Tracing backwards from a poor output to the step where the needed information wasn't produced is the core skill of loop debugging."
+    },
+    {
+      "type": "quiz",
+      "question": "A loop processes research articles and by article 20, you notice the summaries are shorter and less detailed than articles 1-5. The loop hasn't errored. What is the most likely cause?",
+      "options": [
+        "The articles themselves are lower quality",
+        "State corruption or context crowding — earlier article content accumulated in the context window is competing with the current article for the model's attention, reducing quality",
+        "The model gets tired over long tasks",
+        "The stopping condition was triggered prematurely"
+      ],
+      "correct": 1,
+      "explanation": "Quality degradation over a long loop is a classic sign of context crowding. The context window accumulates all prior tool call results. By article 20, the model is trying to process a new article while the context is filled with 19 prior summaries. The earlier content crowds out the current content's 'attention weight.' The fix: intermediate summarisation that condenses what's been learned so far, freeing context space for quality processing of new items."
+    },
+    {
+      "type": "quiz",
+      "question": "A loop's stopping condition is: 'Stop when you have found 5 examples.' The loop stops at 5 examples, but 2 of them are weak. What failure mode is this?",
+      "options": [
+        "Infinite loop — the stopping condition wasn't reached",
+        "Silent success / wrong success — the stopping criterion (count=5) was a poor proxy for the actual goal (5 good examples). The loop satisfied the criterion without satisfying the intent",
+        "Premature convergence — the loop stopped before the task was complete",
+        "State corruption — the loop incorrectly counted examples"
+      ],
+      "correct": 1,
+      "explanation": "This is the 'wrong success' failure mode: the loop satisfied its stated stopping criterion (count = 5) but not its intended goal (5 quality examples). The fix is a better stopping criterion: 'Stop when you have found 5 examples that each score at least 7/10 on the evaluation rubric.' Stopping conditions should measure what you actually care about, not a proxy that's easy to game. If quality matters, quality must be part of the criterion."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to debug why a loop's final output diverged from the original goal. Which observability technique gives you the most direct insight into where the divergence occurred?",
+      "options": [
+        "Re-running the loop with a different model",
+        "Mid-loop alignment checks — explicit step where the loop re-reads the original goal and reports whether its current trajectory is still aligned",
+        "Reducing the number of iterations",
+        "Increasing the token budget"
+      ],
+      "correct": 1,
+      "explanation": "Mid-loop alignment checks directly catch goal drift as it happens. Instead of diagnosing from the final output backwards, the loop itself reports at regular intervals: 'Am I still on track?' When the alignment check shows a discrepancy, you know exactly which iteration introduced the drift. This is far more efficient than post-hoc analysis of a completed loop. It's also preventive — catching drift at iteration 5 rather than after 20 iterations prevents 15 iterations of wasted effort in the wrong direction."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-12.** You understand the five loop failure modes (premature convergence, infinite loop, state corruption, goal drift, wrong success), the five observability techniques (iteration headers, decision logging, progress files, mid-loop checks, confidence scores), and how to diagnose failures by tracing loop execution. Your loops are now both observable and debuggable."
+    }
+  ],
+  "nextLesson": "21-13",
+  "prevLesson": "21-11"
+}

@@ -1,0 +1,89 @@
+{
+  "id": "21-4",
+  "title": "Self-Critique Loops — AI That Checks Its Own Work",
+  "part": 20,
+  "estimatedMinutes": 50,
+  "tags": ["loop-engineering", "advanced", "self-critique", "quality"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThe single biggest quality improvement available to any AI user costs nothing extra and takes two minutes to learn: ask the AI to critique its own output before you accept it. This lesson teaches the **Draft → Critique → Revise** loop in depth — the patterns, the prompt structures, the pitfalls, and the techniques for knowing when to stop."
+    },
+    {
+      "type": "text",
+      "content": "## Why AI Self-Critique Works\n\nAt first glance, asking AI to critique its own output seems circular — won't it just validate what it already produced? In practice, it doesn't, for an important reason:\n\n**The generation context and the evaluation context are different.**\n\nWhen Claude generates a first draft, it's in creative/generative mode — optimising for producing something complete and coherent. When you then ask it to critique that draft, it switches to evaluative mode — optimising for finding problems. These two modes activate different reasoning patterns. The critique often catches genuine issues the generation missed.\n\nThis works especially well because:\n- The critique prompt can focus attention on specific failure modes the generation didn't prioritise\n- Reading a finished output is cognitively different from producing it\n- The critique can be given an adversarial stance ('find everything wrong') that the generation was not\n\n**The limit:** Self-critique has diminishing returns after 2-3 cycles, and it can't catch factual errors the model genuinely doesn't know about (it will validate its own hallucinations). For factual accuracy, you need external verification — not more self-critique cycles."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The adversarial critique prompt:** The single most effective self-critique instruction is: *'Do not validate this output. Your job is to find everything wrong with it. Be specific, be harsh, be constructive. List problems, not compliments.'* Generic 'please review' prompts produce generic reviews. Adversarial prompts produce useful ones."
+    },
+    {
+      "type": "text",
+      "content": "## The Draft → Critique → Revise Loop Structure\n\nHere's the full three-phase loop:\n\n**Phase 1: Draft**\nGenerate the initial output. Don't overthink the initial prompt — you're going to iterate. A decent first draft is enough.\n\n```\nWrite a 500-word introduction for a technical blog post on \nRAG (Retrieval-Augmented Generation) aimed at senior engineers \nwho haven't worked with LLMs before.\n```\n\n**Phase 2: Critique**\nAsk for a specific, adversarial critique focused on the dimensions that matter most for this type of output:\n\n```\nYou are a technical editor. Critique the introduction above without mercy.\nFocus on:\n1. Technical accuracy — anything imprecise or wrong?\n2. Audience fit — is this actually pitched at senior engineers or does it talk down?\n3. Hook quality — does the opening compel someone to keep reading?\n4. Missing context — what does a RAG-curious engineer need that's missing?\n5. Length and pace — where does it drag?\n\nList specific problems with the specific text that causes each problem.\nDo not suggest fixes yet — just identify issues.\n```\n\n**Phase 3: Revise**\nRevise based on the critique:\n\n```\nNow rewrite the introduction addressing every critique above.\nKeep what worked; fix everything that didn't.\nTrack which critiques you're addressing so I can verify.\n```\n\nRepeat the cycle once or twice more, tightening each iteration. Stop when the critique returns no significant issues."
+    },
+    {
+      "type": "text",
+      "content": "## Single-Model vs Dual-Model Critique\n\nYou can run self-critique with one model or two:\n\n**Single-model critique (same conversation)**\nThe same model that generated the draft also critiques it, in the same conversation. Fast, free, and usually effective. The main risk: the model may be overly charitable to itself.\n\n**Dual-model critique (separate model or instance)**\nYou paste the output into a completely separate conversation — or use a different model entirely — to critique it. Because this model has no stake in the original output and no memory of generating it, it tends to be more objective. If you're using the Claude API, you can literally use two separate API calls with different system prompts.\n\n**Cross-model critique (most powerful)**\nUse Claude to generate, GPT-4 to critique, then Claude to revise using GPT-4's critique. Different models have different failure modes and biases — cross-model critique catches errors either model alone would miss.\n\n**When to use which:**\n- Single-model: everyday writing, drafts, code reviews, quick iterations\n- Dual-model: important documents, public-facing content, anything where \"close enough\" isn't good enough\n- Cross-model: high-stakes outputs, research synthesis, any domain where you need a genuine second opinion"
+    },
+    {
+      "type": "text",
+      "content": "## Knowing When to Stop: Convergence Criteria\n\nOne of the most common mistakes with self-critique loops is running too many iterations. Diminishing returns set in quickly:\n\n- **Iteration 1 → 2:** Usually the largest quality jump. The critique finds real issues.\n- **Iteration 2 → 3:** Meaningful improvement, though smaller.\n- **Iteration 3 → 4:** Usually marginal. The critique starts finding style preferences rather than problems.\n- **Iteration 4+:** Often harmful — over-polishing removes naturalness, or the model starts changing things that were fine.\n\n**Practical convergence tests:**\n1. The critique returns only stylistic preferences, not substantive problems\n2. The revised version is not meaningfully different from the previous version\n3. You've addressed the specific failure modes you cared about at the start\n4. A human reviewer would struggle to identify which version is better\n\n**Build termination into your loop:** When designing critique loops programmatically, include a step that asks: 'Is this revision significantly better than the previous version, or are we making only minor changes?' If the answer is 'minor changes', exit the loop."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Run a 3-Round Self-Critique Loop",
+      "content": "Apply the Draft → Critique → Revise cycle to something you actually need. Takes 30 minutes.\n\n**Choose your target** — pick one of:\n- A work email or proposal you need to write\n- A bio or about page for yourself\n- A LinkedIn post or article introduction\n- A technical explanation of a concept in your field\n\n**Round 1 — Draft (5 min)**\nWrite your normal prompt and get a first draft from Claude. Don't labour over the prompt — just get something on the page.\n\n**Round 1 — Critique (5 min)**\nSend this critique prompt, filling in the blanks:\n```\nCritique this [email/bio/post/explanation] without mercy. Your job is to \nfind problems, not validate. Focus specifically on:\n- Does it achieve its purpose: [describe purpose]?\n- Audience fit: is the tone and level right for [describe audience]?\n- The weakest sentence in the entire piece — what's wrong with it?\n- One structural change that would make it more effective\n- Any clichés, vague language, or filler phrases\n\nList problems specifically. Quote the problematic text.\n```\n\n**Round 1 — Revise (5 min)**\nAsk Claude to revise based on the critique.\n\n**Round 2 — Critique & Revise (10 min)**\nRepeat the critique and revision cycle.\n\n**Round 3 — Final evaluation (5 min)**\nSend:\n```\nCompare the original draft and the current version. List: what improved, \nwhat stayed the same, and whether there is anything left that would \nbenefit from another revision cycle — or are we done?\n```\n\n**Track your results:** Save all three versions. Rate each on a 1-10 scale for its specific purpose. Calculate the average improvement per cycle. Is it diminishing?"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build a Self-Critique Loop for Code Review",
+      "content": "Use self-critique to improve code quality before review. Takes 25 minutes.\n\n**Step 1 — Write code with Claude Code.** Give it a real coding task:\n```\nWrite a JavaScript function that takes an array of user objects \n(each with: id, name, email, role) and returns a filtered, \nsorted, paginated subset. Parameters: filter by role, sort by \nname or email, page size and page number. Include input validation.\n```\n\n**Step 2 — Run a code critique.** After Claude writes the code, send:\n```\nCritique this code as a senior engineer doing a code review.\nFocus on:\n1. Edge cases not handled (what inputs would break this?)\n2. Performance issues (any O(n²) patterns? unnecessary work?)\n3. Security issues (any injection risks? validation gaps?)\n4. Readability issues (naming, structure, documentation)\n5. Missing tests (what test cases are critically missing?)\n\nBe specific. Quote the problematic lines.\n```\n\n**Step 3 — Revise the code.** Ask Claude to fix every issue the critique identified.\n\n**Step 4 — Run a second critique.** Do the critiques improve? Are the issues smaller?\n\n**Step 5 — Compare to your own review.** Read the code yourself. Did the self-critique loop catch issues you would have caught in a human review? Did it miss anything?\n\n**Real-world application:** This workflow — write → self-critique → revise — is a production-quality pre-review step. Running it before human code review means reviewers spend their time on architecture and business logic, not catching mechanical issues."
+    },
+    {
+      "type": "quiz",
+      "question": "You run a self-critique loop on a factual research summary. After 3 cycles, the critique says 'this looks accurate and well-sourced.' Should you trust this assessment?",
+      "options": [
+        "Yes — if Claude says it's accurate after 3 critique cycles, it is",
+        "No — self-critique cannot verify factual accuracy; it can only improve structure, clarity, and reasoning. The model validates its own knowledge, including its errors",
+        "Yes, but only if you used dual-model critique",
+        "It depends on the topic complexity"
+      ],
+      "correct": 1,
+      "explanation": "Self-critique is excellent for improving writing quality, structure, tone, and logical consistency — but it cannot catch factual errors the model doesn't know it made. If Claude hallucinated a statistic in the draft, it will likely validate that hallucination in the critique, because the model's knowledge (or lack thereof) is the same in both phases. For factual accuracy, you need external verification: checking sources, running web searches, or human expert review. Self-critique is a quality tool, not a fact-checking tool."
+    },
+    {
+      "type": "quiz",
+      "question": "After 4 critique-and-revise cycles, each cycle produces smaller changes. The 4th critique mostly comments on word choice and sentence rhythm. What should you do?",
+      "options": [
+        "Run two more cycles to catch any remaining issues",
+        "Stop — you've reached convergence. The loop has extracted the available quality improvements; further iterations will produce marginal changes or over-polish",
+        "Switch to a different model for fresh perspective",
+        "Ask Claude to produce a completely new draft from scratch"
+      ],
+      "correct": 1,
+      "explanation": "Critiques that focus on minor stylistic preferences rather than substantive problems are a convergence signal. The loop has done its work. Running more iterations risks over-polishing — introducing changes that feel like improvements but actually remove naturalness or introduce new inconsistencies. The practical rule: stop when the critique can't identify problems worth fixing, only preferences worth considering."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main advantage of cross-model critique (using Claude to generate and GPT-4 to critique) over single-model critique?",
+      "options": [
+        "It is faster",
+        "It is cheaper",
+        "Different models have different training biases and failure modes — a second model is more likely to catch errors the generating model would consistently overlook",
+        "GPT-4 is always more critical than Claude"
+      ],
+      "correct": 2,
+      "explanation": "Different LLMs have different strengths, weaknesses, and biases baked in by their training. A model tends to be lenient toward errors it would make itself. Cross-model critique breaks this — GPT-4 critiquing Claude's output may catch systematic patterns Claude consistently gets wrong (and vice versa). This is especially valuable for high-stakes content where missing a systematic error type could be costly."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-4.** You understand the Draft → Critique → Revise loop, the adversarial critique prompt technique, when to use single vs dual vs cross-model critique, and how to identify convergence. You can now systematically improve the quality of any AI output through structured iteration."
+    }
+  ],
+  "nextLesson": "21-5",
+  "prevLesson": "21-3"
+}

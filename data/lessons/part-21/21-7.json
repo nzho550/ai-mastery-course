@@ -1,0 +1,89 @@
+{
+  "id": "21-7",
+  "title": "Human-in-the-Loop Design",
+  "part": 20,
+  "estimatedMinutes": 45,
+  "tags": ["loop-engineering", "advanced", "hitl", "human-oversight"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nFull automation is not always the goal. For high-stakes, ambiguous, or irreversible actions, inserting a human into the AI loop is not a limitation — it's good engineering. This lesson covers **Human-in-the-Loop (HITL)** design: when to pause automated loops for human input, how to design effective handoffs, and how to build systems that escalate intelligently rather than blindly."
+    },
+    {
+      "type": "text",
+      "content": "## Why Full Automation Isn't Always the Goal\n\nEvery fully automated AI loop has the same risk: when it fails, it fails silently at scale. A loop that processes 1,000 customer emails autonomously and gets something wrong applies that error to 1,000 cases before anyone notices.\n\nHuman-in-the-Loop design acknowledges that some decisions should never be fully automated:\n\n**Irreversible actions** — sending emails, deleting records, publishing content, making purchases. Once done, they can't be undone automatically.\n\n**High-stakes decisions** — actions with large financial, legal, or reputational consequences require human sign-off regardless of AI confidence.\n\n**Ambiguous situations** — when the AI genuinely doesn't know what the right answer is, guessing is worse than asking. A loop that surfaces uncertainty rather than hiding it produces better outcomes.\n\n**Novel situations** — when the AI encounters something outside its training distribution, it may produce confidently wrong results. A well-designed HITL system detects novelty and escalates.\n\n**The engineering goal:** Automate the routine; involve humans for the exceptional. The skill is designing the boundary correctly."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Automation bias is real.** Research consistently shows that humans who oversee automated systems tend to approve AI decisions without sufficient scrutiny — especially when the AI presents its output confidently. If you're designing a HITL loop, design it to actively prompt human judgment, not just rubber-stamp AI decisions. Show the AI's confidence level, show alternative options, and require the human to make an active choice — not just click 'approve'."
+    },
+    {
+      "type": "text",
+      "content": "## The Four HITL Checkpoint Types\n\n**1. Pre-action approval gates**\nThe AI plans an action, presents it to a human, and waits for explicit approval before executing. Best for irreversible or high-stakes actions.\n\n```\nAI: I'm about to send this email to 500 customers notifying them of the \nprice increase. Here is the draft:\n[email content]\n\nConfirm to send, or provide edits.\n```\n\n**2. Exception escalation**\nThe loop runs fully automated for routine cases but automatically escalates unusual cases to a human queue.\n\n```\n[Rule: if customer refund > $500, flag for human review]\n[Rule: if customer sentiment = 'extremely angry', flag for human review]\n[Rule: if AI confidence < 70%, flag for human review]\n```\n\n**3. Quality sampling**\nA human reviews a random sample of automated outputs rather than every output. Detects systematic errors without requiring full human review.\n\n```\n[Automated quality check on 100% of outputs]\n[Human review of 5% random sample]\n[Alert if sample quality drops below threshold]\n```\n\n**4. Human-in-the-conversation (interactive)**\nThe AI produces a recommendation, a human modifies or approves it, and the AI continues with the human's input. Claude Code's permission prompts are this pattern — the AI pauses at a specific action and continues based on your response."
+    },
+    {
+      "type": "text",
+      "content": "## Designing the Human-AI Handoff\n\nA good handoff makes it easy for the human to make a good decision quickly. A bad handoff either overwhelms with information or hides what matters.\n\n**What to include in a HITL handoff:**\n\n1. **The specific decision needed** — not 'please review this', but 'approve or reject this customer refund of $347'\n2. **The AI's recommendation and confidence** — 'I recommend: approve (confidence: 85%)'\n3. **The AI's reasoning** — the 2-3 key factors that drove the recommendation\n4. **The alternatives** — what happens if the human chooses differently\n5. **The deadline** — how long until this decision blocks the loop\n\n**What NOT to include:**\n- Everything the AI thought about (information overload kills quality decisions)\n- The full conversation log or trace (unless the human specifically needs it)\n- Leading language that nudges the human toward the AI's recommendation without transparency\n\n**The interface matters.** A human receiving 100 approval requests in an email inbox will make worse decisions than one using a purpose-built review interface. Design the review experience, not just the handoff content."
+    },
+    {
+      "type": "text",
+      "content": "## Building HITL into Claude Code Workflows\n\nClaude Code has HITL patterns built in:\n\n**The permission prompt** — Claude Code pauses and asks before taking actions that require your approval (file deletion, running certain commands). This is a built-in pre-action approval gate.\n\n**Plan Mode** — Claude Code generates a plan and shows it before executing. You review the plan, request changes, and only then does execution begin. This is a high-level approval gate for the entire task.\n\n**Interruption** — You can interrupt any Claude Code session mid-task. The partial work is preserved. This is manual HITL: you observe and intervene whenever something looks wrong.\n\n**Building custom HITL in Skills:**\nYou can design your own HITL checkpoints in custom Skills:\n\n```markdown\n# my-workflow.md\n1. Analyse the situation and produce a recommendation\n2. PAUSE: Present the recommendation and ask the user to confirm before continuing\n3. Only proceed with implementation after explicit confirmation\n4. After implementation, PAUSE: Show what was done and ask if the result is correct\n5. If not correct, revert and ask for clarification\n```\n\nThe key is making the checkpoints explicit in the Skill design — not leaving them to Claude's judgment."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build a HITL Approval Workflow",
+      "content": "Build a custom Skill that implements a human-in-the-loop approval gate. Takes 30 minutes.\n\n**The scenario:** You want a skill that researches a vendor or tool, produces a recommendation, and only proceeds with any action (saving to a file, sending an email) after you've reviewed and approved the recommendation.\n\n**Step 1 — Create the skill.** In `~/.claude/commands/`, create `vendor-eval.md`:\n```markdown\n---\ndescription: Research and evaluate a vendor or tool with HITL approval\n---\n\nEvaluate this vendor/tool for our team: $ARGUMENTS\n\nPhase 1 — Research (run this automatically):\n- What does it do?\n- Pricing model\n- Key features vs alternatives\n- Reported issues or limitations\n- Integration complexity\n\nPhase 2 — Recommendation (PAUSE HERE):\nPresent a structured recommendation:\n- Verdict: Recommended / Not Recommended / Needs More Info\n- Top 3 reasons for the verdict\n- Key risks\n- Suggested next step\n\nTHEN ASK: \"Do you want me to save this evaluation to vendor-evaluations.md? \nOr do you have questions or changes before I proceed?\"\n\nPhase 3 — Only proceed after explicit confirmation.\nSave to vendor-evaluations.md with date and your recommendation.\n```\n\n**Step 2 — Test the skill:**\n```\n/vendor-eval Linear (project management tool)\n```\n\n**Step 3 — Observe the HITL pattern.** Notice:\n- Does it pause at Phase 2 as instructed?\n- Is the information clear enough to make a quick decision?\n- Can you redirect it (ask follow-up questions, request changes) before it saves?\n\n**Step 4 — Run it 3 more times** with different vendors. Each time, try:\n- Approving and letting it save\n- Rejecting and asking a follow-up question\n- Asking it to change the recommendation format\n\n**Step 5 — Improve the handoff.** After 4 runs, identify one change to the Phase 2 output that would make the approval decision faster or better-informed. Update the skill.\n\n**The skill you're building:** Designing HITL checkpoints that are genuinely useful — not just obstacles, but genuine decision points where human judgment adds value."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Map Your Automation Risk Profile",
+      "content": "Identify where HITL belongs in your actual work. Takes 15 minutes.\n\n**Step 1 — List your current or planned AI automations.** Include both simple (email drafting) and complex (data processing pipelines) automations you use or could build.\n\n**Step 2 — For each automation, rate it on two dimensions:**\n\n**Reversibility (1-5):**\n1 = completely reversible (can undo instantly)\n5 = completely irreversible (can't undo once done)\n\n**Stakes (1-5):**\n1 = low stakes (internal notes, private drafts)\n5 = high stakes (public communications, financial transactions, legal actions)\n\n**Step 3 — Plot each automation** in this 2x2:\n- Low stakes + reversible → Full automation is fine\n- Low stakes + irreversible → Exception review only\n- High stakes + reversible → Quality sampling\n- High stakes + irreversible → Pre-action approval gate required\n\n**Step 4 — For each automation that needs HITL**, write one sentence describing: what decision the human needs to make, and what information they need to make it well.\n\n**Step 5 — Share your mapping with Claude:**\n```\nHere is my HITL risk profile for my automations: [paste your mapping]\n\nFor the three highest-risk automations, suggest specific HITL checkpoint \ndesigns — what should the human see, what decisions should they make, \nand how can the interface be designed to prevent automation bias?\n```"
+    },
+    {
+      "type": "quiz",
+      "question": "You're building an automated system that processes customer support tickets and sends resolutions. 95% of cases are routine (password resets, order status). 5% are complex complaints. How should you design the HITL?",
+      "options": [
+        "Require human approval for every single ticket — the risk of errors is too high",
+        "Fully automate all tickets — 95% accuracy is good enough",
+        "Automate routine cases, escalate complex complaints (detected by sentiment, refund size, repeat contact) to a human queue, and quality-sample a random 5% of automated resolutions",
+        "Let the AI decide which tickets to escalate based on its own confidence"
+      ],
+      "correct": 2,
+      "explanation": "This is the correct tiered HITL design: automate the routine, escalate the exceptional, and sample for quality assurance. Requiring human approval for all tickets defeats the purpose of automation. Fully automating all tickets risks poor handling of complex cases that could damage customer relationships. Rule-based escalation (sentiment, refund size, repeat contact) is more reliable than asking the AI to self-assess its confidence — models often express high confidence in wrong answers."
+    },
+    {
+      "type": "quiz",
+      "question": "A reviewer in your HITL system approves 98% of AI recommendations without reading them carefully. What is this failure mode called, and how do you fix it?",
+      "options": [
+        "Human error — retrain the reviewer",
+        "Automation bias — fix it by redesigning the interface to require active choices rather than passive approvals, and by showing AI confidence levels and the cases where the AI is likely to be wrong",
+        "AI overconfidence — fix it by reducing the AI's confidence threshold",
+        "Sample size problem — review more outputs to catch errors"
+      ],
+      "correct": 1,
+      "explanation": "Automation bias — humans deferring to AI recommendations without sufficient scrutiny — is a well-documented phenomenon. The fix is interface design: require the human to make an active choice ('approve' and 'reject' with equal prominence), show the AI's confidence level and what drove the recommendation, highlight when the case has unusual features, and rotate the 'default' option so it isn't always approve. Passive approval interfaces cause automation bias; active choice interfaces reduce it."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to add a HITL checkpoint to a Claude Code workflow where Claude is making code changes. At which point in the loop is the most valuable place to insert a human checkpoint?",
+      "options": [
+        "After every file write, to review each individual change",
+        "Before execution begins — show the plan and get approval before any changes are made",
+        "After the entire task is complete — review the final output",
+        "Only when Claude asks for input"
+      ],
+      "correct": 1,
+      "explanation": "A pre-execution plan review (Claude Code's Plan Mode) is the most cost-effective HITL checkpoint for code changes. It lets you catch misunderstandings, wrong approaches, or scope creep before any changes are made — when it costs zero effort to redirect. Reviewing after every file write creates constant interruption that defeats the purpose of agentic work. Reviewing only at the end means mistakes propagate through the entire task before you see them."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-7.** You understand when HITL is essential (irreversible, high-stakes, ambiguous actions), the four checkpoint types (pre-action gates, exception escalation, quality sampling, interactive), how to design effective handoffs, and how to counter automation bias. You can now build AI workflows that automate intelligently and involve humans when it genuinely matters."
+    }
+  ],
+  "nextLesson": "21-8",
+  "prevLesson": "21-6"
+}

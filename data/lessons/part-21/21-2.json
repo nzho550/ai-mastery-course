@@ -1,0 +1,89 @@
+{
+  "id": "21-2",
+  "title": "The Agent Loop Anatomy",
+  "part": 20,
+  "estimatedMinutes": 45,
+  "tags": ["loop-engineering", "advanced", "agents", "claude-code"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBefore you can engineer loops, you need to understand exactly how an AI agent loop operates at the mechanical level. This lesson dissects Claude Code's internal loop: what happens at each step, how tool calls feed into the next decision, how context accumulates, and where the loop can break down. Understanding the anatomy makes you a better loop designer."
+    },
+    {
+      "type": "text",
+      "content": "## Inside the Claude Code Agent Loop\n\nWhen you give Claude Code a task, it doesn't execute it in one shot. It runs a loop that repeats until the task is complete (or it gives up). Here's what each iteration looks like:\n\n**Step 1 — Read the Task & Current State**\nClaude reads your instruction, the CLAUDE.md context, and any previous tool call results already in the conversation. This is the full context window at the start of each loop iteration.\n\n**Step 2 — Plan the Next Action**\nClaude decides what single action to take next. This might be: read a file, write a file, run a command, search for a pattern, or ask a clarifying question. It doesn't plan all actions upfront — just the next one.\n\n**Step 3 — Execute the Tool Call**\nClaude issues a structured tool call (e.g., `Read file: src/app.js`). The tool runs and returns a result (the file contents, the command output, an error message, etc.).\n\n**Step 4 — Observe the Result**\nThe tool result is appended to the context window. Claude now sees the original task, all prior tool calls, and this new result.\n\n**Step 5 — Decide: Continue or Stop?**\nClaude evaluates whether the task is complete. If yes, it produces a final response. If no, it loops back to Step 2 and plans the next action.\n\nThis cycle repeats — often dozens of times — until completion or a stopping condition is hit."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Why one action at a time?** Claude Code doesn't plan all steps upfront because later steps depend on earlier results. You can't know whether you need to create a file until you've checked if it already exists. One-action-at-a-time makes the loop adaptive — each decision is informed by everything that happened before it."
+    },
+    {
+      "type": "text",
+      "content": "## Context Accumulation Across Iterations\n\nEvery tool call result is appended to the context window. After 10 loop iterations, the context contains: your original task + 10 sets of tool call requests + 10 tool call results. After 50 iterations, it's significantly larger.\n\n**This has important consequences:**\n\n**1. Context window limits matter in long loops.** If a loop runs long enough, early content gets pushed out or the context fills entirely. For very long tasks, Claude Code periodically summarises earlier work to keep the window manageable.\n\n**2. Earlier results affect later decisions.** Claude can reference anything it read or wrote in prior iterations. This is powerful — it builds a growing understanding of the codebase or task — but also means early errors propagate if not caught.\n\n**3. Token cost scales with loop length.** Each iteration costs tokens proportional to the current context size. A 50-iteration loop with a 10,000-token context uses far more tokens than a 5-iteration loop. Budget accordingly.\n\n**Context efficiency tip:** Keep your CLAUDE.md focused and your initial task description concise. Unnecessary tokens in the starting context compound across every iteration."
+    },
+    {
+      "type": "text",
+      "content": "## Loop Stopping Conditions\n\nA loop that never stops is as bad as a loop that stops too early. Claude Code has several stopping conditions built in:\n\n**Natural completion** — Claude determines the task is done and produces a final response. This is the happy path.\n\n**Token budget exhaustion** — If the loop runs long enough to exhaust the configured token budget, Claude stops and reports what it accomplished so far.\n\n**Permission halt** — If Claude needs to take an action it doesn't have permission for (delete a file, run a destructive command), it pauses and asks you.\n\n**Error loop detection** — If Claude makes the same error repeatedly without progress, it will surface the error rather than loop infinitely.\n\n**Your interruption** — You can interrupt any loop at any time. The partial work is preserved.\n\n**Designing explicit stopping conditions** is one of the most important skills in loop engineering. For every loop you build, define upfront: what does success look like? What's the maximum number of iterations? What failure states should abort the loop early?"
+    },
+    {
+      "type": "text",
+      "content": "## Tool Calls: The Loop's Actuators\n\nTool calls are how the agent loop reaches out and changes the world. In Claude Code, the built-in tools include:\n\n- **Read** — read a file\n- **Write** — create or overwrite a file\n- **Edit** — make targeted edits to a file\n- **Bash** — run a shell command\n- **Glob** — find files matching a pattern\n- **Grep** — search file contents\n- **WebFetch** — retrieve a URL\n- **Agent** — spawn a sub-agent for a subtask\n\nEach tool call is: a request Claude sends → execution by the harness → result returned to Claude. The result could be success data, an error, or partial output. Claude sees all of this and uses it to plan the next iteration.\n\n**Key insight:** tool calls are the only way the agent loop interacts with the external world. Everything else — planning, reasoning, decision-making — happens inside the model. This means if a tool call fails, the loop must handle it gracefully. If a tool returns unexpected data, the loop must adapt."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Observe the Agent Loop in Action",
+      "content": "Watch Claude Code's loop mechanics in real time. Takes 20 minutes.\n\n**Setup:** Open Claude Code in a project with at least a few files.\n\n**Step 1 — Give a multi-step task.** Enter a task that requires several tool calls to complete:\n```\nFind every TODO comment in this project, list them in a file called TODO-report.md \nwith: the file name, line number, and the TODO text. Sort them by file name.\n```\n\n**Step 2 — Watch the loop.** As Claude works, observe:\n- How many separate Read/Grep/Write tool calls does it make?\n- Does it read files before writing the report?\n- Does it course-correct at any point (e.g., run the grep, see unexpected results, adjust)?\n\n**Step 3 — Count the iterations.** After it finishes, count how many tool calls were made. This is the loop iteration count.\n\n**Step 4 — Analyse the context growth.** Open the TODO-report.md file. Is it accurate? Did the loop miss any TODOs or include false positives?\n\n**Step 5 — Give a harder follow-up task.** Add a context-dependent requirement:\n```\nNow prioritise the TODOs in the report: put critical/security-related ones \nfirst, then performance, then general cleanup. Add a priority label to each entry.\n```\n\nObserve how Claude reads the file it just created (the previous loop's output becomes this loop's input).\n\n**Reflection:** Write two sentences describing what the agent loop's observe-think-act cycle looked like in practice — not in theory, but in what you actually watched."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Map a Loop's Context Growth",
+      "content": "Understand how context accumulates across iterations — and why it matters for cost and quality.\n\n**Step 1 — Start a new session.** Open Claude Code with a medium-sized project (10+ files).\n\n**Step 2 — Run a comprehensive task:**\n```\nAudit this codebase for potential security issues. Check: input validation, \nhardcoded secrets, SQL injection risks, insecure dependencies. Produce a \nsecurity-audit.md report with findings and recommended fixes.\n```\n\n**Step 3 — During execution, note:**\n- Approximately how many files is Claude reading?\n- Is Claude referencing earlier findings when evaluating later files?\n- Does the quality of its analysis seem consistent across the first and last files it checks?\n\n**Step 4 — After completion, check the report.** Are the later-analysed files reviewed with the same depth as the earlier ones? If you notice shallower analysis for files read later, this is the context-accumulation effect — earlier content fills the window and less capacity remains for new observations.\n\n**Step 5 — Run it again with a focus directive.** Start fresh:\n```\nAudit ONLY the authentication-related files in this project for security issues. \nFocus on: token handling, session management, and permission checks.\n```\n\nCompare the focused run to the broad run — is the quality higher with a narrower scope? Why?\n\n**Key learning:** Loop scope directly affects loop quality. Focused loops produce better results than unfocused ones, because context is a finite resource."
+    },
+    {
+      "type": "quiz",
+      "question": "You set Claude Code on a task that requires reading 80 files and producing a synthesis. Halfway through, you notice Claude's analysis of files 40-80 is shallower than files 1-40. What is the most likely cause?",
+      "options": [
+        "Claude gets tired during long tasks",
+        "The context window is filling up with earlier tool call results, leaving less capacity for detailed analysis of new files",
+        "The later files are less important",
+        "The token budget needs to be increased"
+      ],
+      "correct": 1,
+      "explanation": "Context accumulation is the core issue. Every tool call and result appended to the context window takes up tokens. By file 40-80, the context contains dozens of prior reads, and less 'attention capacity' remains for deep analysis of new content. The fix: scope the loop more narrowly (only the relevant files), or design the loop to process files in batches with intermediate summaries to free up context."
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code stops mid-task and says 'I need permission to delete the file old-config.json before proceeding.' What type of loop stopping condition is this?",
+      "options": [
+        "Natural completion — the task is done",
+        "Token budget exhaustion",
+        "Permission halt — the loop paused because a required action is outside the current permission scope",
+        "Error loop detection"
+      ],
+      "correct": 2,
+      "explanation": "This is a permission halt — a safety mechanism where the agent loop pauses rather than taking a potentially destructive action it hasn't been authorised to perform. This is by design: the Harness layer (CLAUDE.md settings and permissions) controls what actions the Agent loop can take autonomously versus what requires explicit human approval. You can pre-authorise destructive actions in settings, or grant permission when prompted."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the primary reason Claude Code takes one action at a time rather than planning all actions upfront at the start of a task?",
+      "options": [
+        "It's a technical limitation — the model can't plan multiple steps",
+        "Later actions depend on the results of earlier ones; planning all steps upfront would assume results you don't have yet",
+        "It's cheaper — planning everything upfront uses more tokens",
+        "Sequential actions are easier to debug"
+      ],
+      "correct": 1,
+      "explanation": "Adaptive action-by-action planning is a feature, not a limitation. You can't know what code to write until you've read the existing code. You can't know whether to create a file until you've checked if it exists. Planning all actions upfront would produce a rigid script that breaks when reality differs from assumption. Acting one step at a time and observing results makes the loop genuinely adaptive."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-2.** You understand Claude Code's Observe → Think → Act cycle at the mechanical level: how tool calls work, how context accumulates, and what stops a loop. This foundation makes everything in the rest of this part click into place."
+    }
+  ],
+  "nextLesson": "21-3",
+  "prevLesson": "21-1"
+}

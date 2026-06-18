@@ -1,0 +1,89 @@
+{
+  "id": "21-13",
+  "title": "Convergence & Termination Patterns",
+  "part": 20,
+  "estimatedMinutes": 40,
+  "tags": ["loop-engineering", "advanced", "convergence", "termination"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nKnowing when to stop is as important as knowing how to loop. Stop too early and the output is incomplete. Stop too late and you've wasted resources, over-polished the output, or fallen into repetitive cycles. This lesson covers convergence theory applied to AI loops: how to define what 'done' looks like, the patterns for detecting it, and how to terminate gracefully when a loop doesn't converge naturally."
+    },
+    {
+      "type": "text",
+      "content": "## What is Convergence?\n\nIn mathematics, a sequence converges when its values stop changing significantly. In AI loops, convergence means the loop has reached a stable state where additional iterations produce diminishing returns — the output isn't meaningfully improving anymore.\n\n**Convergence is not always obvious:**\n- A writing loop might produce higher scores on iteration 4 than iteration 3, but iteration 4 is not meaningfully better to a human reader\n- A research loop might find one more source on iteration 8, but it doesn't change the conclusions\n- A debugging loop might find edge cases on iteration 6, but they're too unlikely to affect production\n\n**Convergence is context-dependent:**\n- For a critical medical document: convergence requires very high quality, possibly more iterations\n- For an internal Slack message: convergence can be declared after 1-2 iterations\n- For real-time processing: convergence must be declared within a time budget regardless of quality\n\n**The fundamental tension:** Declaring convergence early saves resources. Declaring it late ensures quality. Loop engineering is largely the practice of finding the right threshold for your specific context."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The 'good enough' principle:** Perfect is the enemy of shipped. Most loops should not run until the output is perfect — they should run until the output is good enough for its purpose. Define 'good enough' before the loop starts, not after you see the output. Post-hoc definitions of good enough tend to keep shifting upward."
+    },
+    {
+      "type": "text",
+      "content": "## Hard Stop Patterns\n\nHard stops terminate the loop unconditionally, regardless of quality:\n\n**Maximum iteration count**\nThe simplest and most reliable stopping mechanism. Set a maximum and enforce it:\n```\nRun a maximum of 5 iterations. After iteration 5, compile and output whatever \nhas been produced, regardless of completeness.\n```\n*Use when:* You need predictable cost and time, or when you don't have a reliable quality metric.\n\n**Token budget**\nStop when a token budget is reached:\n```\nYou have a budget of 10,000 tokens for this task. When 80% of the budget \nis spent, begin synthesis mode. At 95%, produce the final output immediately.\n```\n*Use when:* Cost is the primary constraint.\n\n**Time limit**\nStop after a fixed time:\n```\nThis loop must complete within 2 minutes. At 90 seconds, stop discovering \nand begin compiling the final output from what you have.\n```\n*Use when:* The output is needed by a deadline (real-time systems, interactive use cases)."
+    },
+    {
+      "type": "text",
+      "content": "## Soft Stop Patterns\n\nSoft stops terminate the loop when the output meets a quality criterion — but require measuring quality:\n\n**Quality threshold**\nStop when an evaluation score exceeds a target:\n```\nAfter each revision, evaluate the output on the quality rubric.\nIf score >= 8/10: accept and stop.\nIf score < 8/10: revise and repeat.\n```\n\n**No-improvement detection**\nStop when consecutive iterations produce no meaningful change:\n```\nAfter each iteration, compare to the previous version.\nIf the difference is less than [threshold]: declare convergence and stop.\n```\nThis is the most principled approach — it directly measures diminishing returns.\n\n**Completion criteria**\nStop when all required components are present:\n```\nContinue until the output contains all of: \n[executive summary, methodology, findings, recommendations, appendix].\nCheck after each iteration; stop as soon as all are present at acceptable quality.\n```\n\n**Confidence threshold**\nStop when the model's stated confidence exceeds a level:\n```\nAfter each iteration, rate your confidence that the output is complete \nand accurate on a scale of 1-10.\nIf confidence >= 8: stop and output.\nIf confidence < 8: identify the specific uncertainty and address it.\n```\nNote: model confidence is not perfectly calibrated — use as one signal among several, not the sole criterion."
+    },
+    {
+      "type": "text",
+      "content": "## Graceful Partial Termination\n\nSometimes a loop reaches its hard stop before achieving its goal. Graceful partial termination means the loop produces useful output even when it couldn't complete:\n\n**What not to do:**\n```\nMax iterations reached. Task incomplete.\n```\n*(Gives nothing useful)*\n\n**What to do:**\n```\nMax iterations reached. Here is what was accomplished:\n\n[Completed sections with full detail]\n[Partially completed sections with what was done and what remains]\n[Not started sections: listed]\n\nTo complete the remaining sections, continue with:\n[Specific instruction for picking up where this left off]\n```\n\n**Partial termination design principles:**\n1. Always produce *something* useful, even on incomplete runs\n2. Clearly mark what's complete vs incomplete\n3. Provide enough context for someone (or a subsequent loop) to continue from where this one stopped\n4. Never silently produce incomplete output that looks complete\n\n**Handoff design:** A loop that terminates early should output enough information for the next invocation to resume efficiently. This is the loop equivalent of a good commit message — leave the project in a state where the next person (or process) can understand what happened and what's next."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Design Convergence Criteria for Real Tasks",
+      "content": "Practice defining precise convergence criteria before building loops. Takes 25 minutes.\n\n**Step 1 — Choose 3 real tasks** you might build loops for. Examples:\n- Writing a technical specification\n- Researching a topic for a report\n- Reviewing code for a pull request\n- Building a list of vetted job candidates from resumes\n- Generating test cases for a new feature\n\n**Step 2 — For each task, define convergence using this template:**\n\n```\nTask: [describe]\nPurpose: [what this output is actually used for]\nAudience: [who will use it]\n\nHard stop: Max [N] iterations OR [time/token budget]\n\nSoft stop: [choose one or more]\n- Quality threshold: [rubric score >= X]\n- Completion criteria: [all required components present: list them]\n- No-improvement: [if last iteration changed < X% of output]\n\nPartial termination: If stopped early, the output must at minimum include:\n- [non-negotiable component 1]\n- [non-negotiable component 2]\n\nOver-iteration risk: [what happens if the loop runs too long?]\nUnder-iteration risk: [what happens if the loop stops too early?]\n```\n\n**Step 3 — Share with Claude:**\n```\nHere are my convergence criteria for 3 tasks: [paste]\n\nFor each task:\n1. Is the stopping criterion measuring what actually matters, or a proxy?\n2. What's the most likely failure mode: stopping too early or too late?\n3. What one change would make the convergence criteria most robust?\n```\n\n**Step 4 — Build one of the loops** using the convergence criteria you designed. Run it and observe: did the loop stop when you expected? Did the stopping condition work as designed?"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build a Loop with Full Termination Design",
+      "content": "Create a loop with explicit hard stops, soft stops, and graceful partial termination. Takes 30 minutes.\n\n**Build a 'comprehensive code review' loop.** This loop reads a codebase, reviews it across multiple dimensions, and produces a structured report — with explicit stopping at each stage.\n\n**Create `deep-code-review.md`:**\n```markdown\n---\ndescription: Comprehensive code review with convergence controls\n---\n\nPerform a deep code review of this project. $ARGUMENTS\n\nPhase 1 — INVENTORY (max 3 tool calls):\nList all source files. Identify the 5 most important files for this review.\nIf done in fewer than 3 calls: proceed immediately.\n\nPhase 2 — REVIEW (max 10 tool calls, stop early if all critical files reviewed):\nFor each important file:\n- Read it\n- Check: correctness, edge cases, security, performance, readability\n- Write findings to code-review-progress.md\n\nAfter every 2 files, check: have I reviewed all critical files?\nIf yes: STOP Phase 2 early and proceed to Phase 3.\nIf at 10 tool calls without finishing: proceed to Phase 3 with what you have.\n\nPhase 3 — SYNTHESIS (always runs, even if Phase 2 hit limits):\nFrom code-review-progress.md, produce a final report:\n- Executive summary\n- Critical issues (must fix before ship)\n- Important issues (should fix soon)\n- Minor issues (nice to fix)\n- What was NOT reviewed (if Phase 2 hit limits)\n\nBe explicit about whether the review is complete or partial.\n```\n\n**Step 2 — Run on a real project.** Execute the skill on a codebase you have.\n\n**Step 3 — Observe the termination.** Did Phase 2 hit the limit or stop early? Did the synthesis correctly report partial vs complete review?\n\n**Step 4 — Test the partial termination.** Reduce the Phase 2 limit to 4 tool calls and re-run. Does it gracefully produce a useful partial report rather than silently truncating?\n\n**Step 5 — Review the report.** Is it useful even in the partial case? Does it clearly communicate what was and wasn't reviewed?"
+    },
+    {
+      "type": "quiz",
+      "question": "You're building a loop to write a 10-section report. After 7 sections, the loop hits its token budget. What should the loop do?",
+      "options": [
+        "Output only the 7 completed sections with no indication that 3 are missing",
+        "Output nothing — the report is incomplete",
+        "Output the 7 completed sections clearly marked as complete, list the 3 missing sections, and provide enough context for the next invocation to complete them",
+        "Start over with a larger token budget"
+      ],
+      "correct": 2,
+      "explanation": "Graceful partial termination means producing maximum value from a partially-completed loop. Silently outputting 7 of 10 sections could mislead the reader into thinking the report is complete. Outputting nothing wastes all the work done on sections 1-7. The right approach: clearly mark what's done, list what's missing, and provide a handoff so the work can be continued. This preserves value and maintains trust in the loop's outputs."
+    },
+    {
+      "type": "quiz",
+      "question": "A self-critique loop for a 500-word blog post has been running for 8 iterations. Iterations 7 and 8 each changed less than 2% of the text. What convergence pattern should trigger termination?",
+      "options": [
+        "Quality threshold — wait until the score hits 10/10",
+        "Maximum iteration count — run to 10 and then stop",
+        "No-improvement detection — consecutive iterations with less than X% change indicates convergence; declare it and stop",
+        "Human checkpoint — ask the human if the loop should continue"
+      ],
+      "correct": 2,
+      "explanation": "No-improvement detection is the right pattern here. When two consecutive iterations are changing less than 2% of the text, the loop has reached a stable state — it's not improving meaningfully anymore, it's micro-adjusting. Continuing produces over-polishing at increasing cost. The no-improvement criterion directly measures what you care about: whether the loop is still adding value. Waiting for a 10/10 score may never terminate (few outputs score perfect). Stopping at iteration 10 is arbitrary. Human checkpoints add unnecessary friction."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the most important principle when defining the 'good enough' threshold for a loop's soft stop?",
+      "options": [
+        "Set it as high as possible to ensure maximum quality",
+        "Set it as low as possible to minimise token cost",
+        "Define it before the loop starts, based on the output's actual use case — not based on what the output looks like after running",
+        "Let the model decide when the output is good enough"
+      ],
+      "correct": 2,
+      "explanation": "Pre-defining 'good enough' based on actual use case is the key principle. When you define the threshold after seeing the output, you're susceptible to anchoring — evaluating quality relative to what you see rather than what you need. A marketing email that scores 7/10 on a quality rubric might be perfectly sufficient for an A/B test but insufficient for a major product launch. The use case determines the threshold. Letting the model self-declare satisfaction is unreliable — models tend toward sycophantic self-assessment when asked 'is this good enough?'"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-13.** You understand convergence in AI loops, hard stop patterns (iteration count, token budget, time limit), soft stop patterns (quality threshold, no-improvement detection, completion criteria), and graceful partial termination design. You can now build loops that stop at exactly the right moment — not too early, not too late."
+    }
+  ],
+  "nextLesson": "21-14",
+  "prevLesson": "21-12"
+}

@@ -1,0 +1,93 @@
+{
+  "id": "21-8",
+  "title": "Multi-Agent Feedback Loops",
+  "part": 20,
+  "estimatedMinutes": 55,
+  "tags": ["loop-engineering", "advanced", "multi-agent", "orchestration"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nSingle-agent loops hit quality ceilings. A single model critiquing its own work, evaluating its own output, or checking its own reasoning will always be limited by the biases baked into a single perspective. **Multi-agent feedback loops** break that ceiling by having different agents with different roles, perspectives, or specializations interact — producing outputs that no single agent could achieve alone. This lesson covers the major multi-agent patterns: orchestrator/worker, debate, actor-critic, and pipeline."
+    },
+    {
+      "type": "text",
+      "content": "## Why Multiple Agents Beat One Smart Agent\n\nIntuition says: just use the best single model, prompted very well. Practice shows this has hard limits:\n\n**Perspective bias:** Any single model has consistent blind spots. It tends to write the same types of errors, make the same types of assumptions, and miss the same types of problems. A second agent with a different role or prompt breaks these patterns.\n\n**Role specialisation:** A writer and an editor shouldn't be the same person — the mental modes conflict. A 'generate creative ideas' agent and a 'rigorously critique those ideas' agent are genuinely better when separated, because each can go further in its direction without the other holding it back.\n\n**Parallel processing:** Multiple agents can work on different parts of a problem simultaneously, reducing wall-clock time even if total token cost is similar.\n\n**Cross-checking:** When two independent agents produce the same answer, you have more confidence than if one agent says it twice. Disagreement between agents is a signal that the question is genuinely ambiguous — valuable information.\n\n**The key constraint:** More agents = more coordination overhead and cost. Use multiple agents only when the task genuinely benefits from parallelism, specialisation, or cross-checking."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Claude Code sub-agents** are the built-in mechanism for multi-agent work. When you give Claude Code a task that can be parallelised, it can spawn sub-agents to work on different pieces simultaneously. Each sub-agent runs independently and reports results back to the orchestrator. You can also trigger this explicitly by asking Claude Code to 'work on parts A and B in parallel.'"
+    },
+    {
+      "type": "text",
+      "content": "## Pattern 1: Orchestrator / Worker\n\nThe most fundamental multi-agent pattern. One orchestrator agent manages the workflow; multiple worker agents execute specific tasks.\n\n**Structure:**\n```\nOrchestrator: receives the high-level task, decomposes it into subtasks, \nassigns subtasks to workers, monitors progress, integrates results\n\nWorker A: executes subtask 1\nWorker B: executes subtask 2  \nWorker C: executes subtask 3\n\nOrchestrator: receives results, integrates into final output\n```\n\n**When to use it:**\n- Tasks that can be decomposed into independent parallel subtasks\n- Large research tasks (each worker researches a different aspect)\n- Content production (each worker writes a different section)\n- Data processing (each worker handles a different data source)\n\n**Example in Claude Code:**\n```\nI have a 20-chapter book to summarize. \nSpawn 4 parallel sub-agents, each summarizing 5 chapters.\nWhen all 4 complete, combine the summaries into a cohesive overview.\n```\n\n**Key design decisions:**\n- How to decompose: does the decomposition produce truly independent tasks, or do workers need each other's outputs?\n- How to integrate: does the orchestrator just concatenate, or does it synthesise?\n- Error handling: if one worker fails, does the orchestrator retry, reassign, or produce a partial result?"
+    },
+    {
+      "type": "text",
+      "content": "## Pattern 2: Actor-Critic\n\nOne agent (the Actor) generates output; a second agent (the Critic) evaluates it and provides feedback; the Actor revises based on the feedback. This is the multi-agent version of self-critique, but with genuine independence between Generator and Evaluator.\n\n**Structure:**\n```\nActor [system prompt: creative generative role] → produces output\nCritic [system prompt: rigorous evaluative role] → critiques output\nActor → revises based on critique\n... (loop until Critic is satisfied)\n```\n\n**Why it beats self-critique:**\nThe Actor is primed to generate boldly. The Critic is primed to find problems rigorously. These are genuinely separate modes that a single model switches between imperfectly. When separated into two agents with dedicated system prompts, each can go further in its respective direction.\n\n**Example system prompts:**\n\n*Actor:* 'You are a creative writer. Your job is to produce compelling, original work. Do not self-censor. Produce the best version of what's asked.'\n\n*Critic:* 'You are a ruthless editor. Your job is to find every problem in the text: logical inconsistencies, factual errors, weak arguments, clichés, structural problems. Do not be kind. Find everything that could be better.'\n\n**Stopping condition for Actor-Critic:** The Critic's feedback contains only preferences, no problems. Or after a fixed number of cycles (3-4 is usually enough)."
+    },
+    {
+      "type": "text",
+      "content": "## Pattern 3: Debate\n\nTwo agents argue opposite sides of a question; a third agent (the Judge) evaluates the arguments and decides the answer.\n\n**Structure:**\n```\nAgent A: argues position X\nAgent B: argues position Y (or argues against X)\nAgent A: rebuts B's arguments\nAgent B: rebuts A's arguments\nJudge: evaluates the full debate and decides the answer\n```\n\n**When to use it:**\n- Complex decisions with genuine trade-offs (architecture choices, strategy decisions)\n- Claims that need stress-testing (verify that a conclusion holds up under challenge)\n- Creative decisions where 'better' is subjective (which design direction to pursue)\n\n**Why it works:**\nForcibly arguing a position finds arguments you wouldn't find by neutral analysis. When Agent A is instructed to defend option X as strongly as possible, it finds every advantage of X — including ones that would have been unconsciously downweighted in a neutral analysis. The Debate pattern surfaces the strongest case for each option before judging.\n\n**Example prompt structure:**\n```\nYou are Advocate A. Argue strongly that [position X] is the right choice \nfor [decision]. Find every argument in favour. Do not hedge.\n\nYou are Advocate B. Argue strongly against [position X] and in favour of \n[position Y]. Find every flaw in position X and every advantage of Y.\n\nYou are the Judge. Having heard both arguments, rule on which position \nis stronger and why. Identify which arguments from each side were most compelling.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Pattern 4: Pipeline\n\nA series of specialised agents where each agent's output becomes the next agent's input. Unlike orchestrator/worker (which is parallel), pipeline is sequential and each agent transforms the work.\n\n**Structure:**\n```\nAgent 1 [Researcher] → raw information\nAgent 2 [Analyst] → structured analysis from raw information\nAgent 3 [Writer] → readable narrative from structured analysis\nAgent 4 [Editor] → polished output from readable narrative\n```\n\n**When to use it:**\n- Workflows where each transformation requires a genuinely different capability or role\n- When you want to verify intermediate outputs before proceeding to the next stage\n- Complex content production where quality compounds through stages\n\n**Example: Research → Report pipeline:**\n1. Research Agent: 'Find all available information about [topic]. Organise by theme. Do not interpret.'\n2. Analysis Agent: 'Given this raw research, identify the 5 most important insights. For each, explain the evidence and its significance.'\n3. Writing Agent: 'Convert these 5 insights into a clear, executive-audience readable report. Narrative form. No jargon.'\n4. Quality Agent: 'Review this report. Does each claim trace to the original research? Flag anything that goes beyond what the evidence supports.'"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Build an Actor-Critic Writing System",
+      "content": "Create a two-agent system that produces higher quality writing than either agent alone. Takes 35 minutes.\n\n**Step 1 — Create the Actor skill.** In `~/.claude/commands/`, create `actor-write.md`:\n```markdown\n---\ndescription: Generate bold, compelling content (Actor role)\n---\n\nYou are a bold creative writer. Your goal is to produce compelling, original, \nspecific content. Do not hedge. Do not be generic. Produce the best version \nof what is asked without self-censoring.\n\nWrite: $ARGUMENTS\n```\n\n**Step 2 — Create the Critic skill.** Create `critic-review.md`:\n```markdown\n---\ndescription: Ruthlessly critique content (Critic role)\n---\n\nYou are a ruthless but constructive editor. Your job is to find every problem \nin the following content. Be specific: quote the exact text that has the problem, \nexplain the specific issue, and suggest the direction of a fix (not the full fix).\n\nLook for: logical inconsistencies, unsupported claims, weak openings, \nclichés, vague language, structural problems, audience mismatch, missed opportunities.\n\nContent to critique:\n$ARGUMENTS\n```\n\n**Step 3 — Run a 3-cycle Actor-Critic loop.** Choose a piece of writing you need:\n\nCycle 1:\n- `/actor-write [your brief]` → get first draft\n- `/critic-review [paste draft]` → get critique\n\nCycle 2:\n- In a new Claude conversation: 'Revise this draft addressing the critique below: [paste draft + critique]'\n- `/critic-review [paste revision]` → second critique\n\nCycle 3:\n- Revise again based on second critique\n- `/critic-review [paste second revision]` → final critique\n\n**Step 4 — Compare all versions.** Read all 3 versions and the critiques. Track: which critique points repeated across cycles (systematic issues the actor has trouble fixing) and which resolved (points the actor fixed successfully).\n\n**Step 5 — Quality rating.** Rate each version 1-10 for its purpose. Calculate the improvement per cycle. At what cycle did you see the biggest quality jump?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Run a Debate Pattern on a Real Decision",
+      "content": "Use the Debate pattern to make a better decision on something you're actually deciding. Takes 25 minutes.\n\n**Choose a real decision.** Pick something you're genuinely undecided about — a tool choice, a strategy choice, a project approach, a career move. It needs two plausible sides.\n\n**Step 1 — Set up Advocate A.** Open Claude.ai and send:\n```\nYou are Advocate A. Your role is to argue as strongly as possible that \n[your option 1] is the right choice for [your decision context].\nFind every advantage, every supporting argument, every reason this is \nclearly the better path. Do not hedge, do not acknowledge downsides.\nPresent the strongest possible case for [option 1].\n```\n\n**Step 2 — Set up Advocate B.** In a NEW conversation, send:\n```\nYou are Advocate B. Your role is to argue as strongly as possible that \n[your option 2] is the right choice for [your decision context].\nAlso: anticipate the arguments in favour of [option 1] and explain \nwhy they are wrong or overstated.\nPresent the strongest possible case for [option 2].\n```\n\n**Step 3 — Run the debate.** Copy Advocate A's argument and paste it for Advocate B: 'Here is your opponent's argument. Rebut it.' Then vice versa.\n\n**Step 4 — Judge.** Open a third conversation:\n```\nYou are an impartial judge. Here is a debate between two positions \non [your decision]:\n\nAdvocate A (for [option 1]): [paste A's arguments]\nAdvocate B (for [option 2]): [paste B's arguments]\n\nBased on the quality of the arguments, which position is stronger \nand why? Identify the 2-3 most compelling arguments from each side.\n```\n\n**Step 5 — Reflect.** Did the debate surface arguments you hadn't considered? Did either side's strongest argument change your initial intuition?"
+    },
+    {
+      "type": "quiz",
+      "question": "You're building a content production system where 10 articles need to be written simultaneously. Which multi-agent pattern is most appropriate?",
+      "options": [
+        "Debate — have agents argue about which article topic is best",
+        "Actor-Critic — have one agent write all 10 articles, then another critique each",
+        "Orchestrator/Worker — orchestrator decomposes by article, spawns 10 parallel workers each writing one article simultaneously",
+        "Pipeline — pass each article through 10 sequential transformation stages"
+      ],
+      "correct": 2,
+      "explanation": "Orchestrator/Worker is the right pattern when tasks can be parallelised independently. 10 articles with no dependencies between them are perfectly suited to 10 parallel workers. Debate is for comparing options, not producing independent content. Actor-Critic is sequential (one produces, one evaluates), not parallel — it doesn't reduce time. Pipeline is sequential by definition. For parallel independent work, Orchestrator/Worker is the architecture."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the key advantage of a true Actor-Critic setup over a single model doing both generation and critique in the same conversation?",
+      "options": [
+        "It is faster",
+        "The Actor and Critic can be primed with genuinely separate system prompts — the Actor for bold generation, the Critic for rigorous evaluation — without either role inhibiting the other",
+        "It uses fewer tokens",
+        "The Critic model is always more accurate than the Actor model"
+      ],
+      "correct": 1,
+      "explanation": "The separation of system prompts is the key advantage. In a single conversation, asking the model to first generate boldly and then critique rigorously creates internal tension — the same model tries to hold both stances, which makes it neither maximally generative nor maximally critical. With separate agents, the Actor can be primed to generate without limits, and the Critic can be primed to find every flaw without being pulled toward validating the generation. The separation enables specialisation."
+    },
+    {
+      "type": "quiz",
+      "question": "In a Pipeline pattern for research → analysis → writing, you notice the Writing agent adds claims that weren't in the Analysis agent's output. What's the most likely cause and fix?",
+      "options": [
+        "The Writing agent is hallucinating — replace it with a more accurate model",
+        "The Writing agent's system prompt doesn't constrain it to only the provided analysis — add an explicit instruction: 'Only include claims that appear in the analysis. Flag any claim you want to make that isn't explicitly supported there'",
+        "The Analysis agent's output is too brief — give it more data",
+        "The Pipeline needs a fourth stage to fact-check"
+      ],
+      "correct": 1,
+      "explanation": "Pipeline agents need explicit constraints on what they're allowed to add versus what they're only allowed to transform. A writing agent prompted to 'write a compelling article' will add information it knows, because it's optimising for compelling — not for accuracy relative to its input. The fix is constraining the agent's scope: 'Only write from the analysis provided. Do not add information not present in the analysis. Flag any gap where more information would strengthen the piece.' A separate quality check stage is also valuable but doesn't fix the root cause."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-8.** You understand the four multi-agent patterns — Orchestrator/Worker, Actor-Critic, Debate, and Pipeline — when each applies, and how to design the coordination between agents. You've built a real Actor-Critic system and used the Debate pattern for a real decision."
+    }
+  ],
+  "nextLesson": "21-9",
+  "prevLesson": "21-7"
+}

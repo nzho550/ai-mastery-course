@@ -1,0 +1,89 @@
+{
+  "id": "21-3",
+  "title": "ReAct Loops — Reasoning + Acting",
+  "part": 20,
+  "estimatedMinutes": 50,
+  "tags": ["loop-engineering", "advanced", "react", "reasoning"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nReAct (Reasoning + Acting) is one of the most important patterns in AI loop engineering. It's a structured loop where the model explicitly alternates between reasoning about what to do and taking actions — making the thinking visible at every step. This lesson teaches you what ReAct is, why it outperforms both pure reasoning and pure acting, and how to design prompts and tasks that elicit ReAct behaviour."
+    },
+    {
+      "type": "text",
+      "content": "## What is ReAct?\n\nReAct is a loop pattern where each iteration has a fixed structure:\n\n```\nThought: [model reasons about the current state and what to do next]\nAction: [model takes a specific action — tool call, search, calculation]\nObservation: [result of the action is returned]\nThought: [model reasons about what the observation means]\nAction: [next action based on updated understanding]\nObservation: [result]\n... (repeat until done)\nFinal Answer: [conclusion]\n```\n\nThe critical innovation is the **Thought** step. By requiring the model to articulate its reasoning before acting, you get:\n\n1. **Visible reasoning** — you can see exactly why the model took each action\n2. **Better decisions** — writing out a thought before acting forces more deliberate planning\n3. **Easier debugging** — when something goes wrong, you can see exactly where the reasoning diverged\n4. **Correctable trajectory** — you can intervene at any Thought step if the reasoning is heading in the wrong direction"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**ReAct vs Chain-of-Thought:** Chain-of-Thought (CoT) is pure reasoning — the model thinks through a problem without taking any actions. ReAct *interleaves* reasoning with actions. Use CoT when the problem requires only thinking (math, logic, analysis). Use ReAct when the problem requires gathering information, using tools, or modifying state between reasoning steps."
+    },
+    {
+      "type": "text",
+      "content": "## The ReAct Prompt Structure\n\nTo elicit ReAct behaviour, your prompt needs to:\n\n**1. Define the available actions explicitly**\nList what the model is allowed to do at each step:\n```\nYou have access to these actions:\n- Search[query]: search for information\n- Read[filename]: read a file\n- Calculate[expression]: evaluate a mathematical expression\n- Finish[answer]: provide the final answer\n```\n\n**2. Require the Thought-Action-Observation format**\nInstruct the model to always produce a Thought before an Action:\n```\nFor each step, you must produce:\nThought: your reasoning about what to do next\nAction: the action you're taking\nObservation: (I will provide this after each action)\n```\n\n**3. Give a specific task**\nReAct works best with tasks that require gathering information before answering — research questions, debugging, multi-step analysis.\n\n**Example ReAct prompt:**\n```\nYou are a research assistant. Answer the question below using the ReAct pattern.\n\nAvailable actions:\n- Search[query]: find information on a topic\n- Lookup[term]: look up a specific fact or definition  \n- Finish[answer]: provide your final answer\n\nAlways produce a Thought before each Action. I will provide Observations.\n\nQuestion: What are the three largest carbon emitters by country, and what \npercentage of global emissions does each represent?\n```"
+    },
+    {
+      "type": "text",
+      "content": "## When ReAct Outperforms Direct Answers\n\nReAct doesn't improve every task — it shines specifically where:\n\n**Tasks requiring information gathering before answering**\nIf the model needs to look something up, read a file, or run a query before it can reason, ReAct ensures it does so systematically rather than guessing.\n\n**Tasks with uncertain starting state**\nDebugging is the perfect ReAct use case: the model doesn't know what's wrong, so it must observe → hypothesise → test → observe again.\n\n**Tasks where errors compound**\nIn tasks where a wrong early assumption leads to completely wrong later outputs, ReAct's visible thought steps let you catch the divergence early.\n\n**Multi-hop reasoning chains**\nWhen answering a question requires 3+ steps of reasoning with information lookups between each step (e.g., 'What was the GDP of the country that won the 2018 World Cup, in the year they won?'), ReAct structures this naturally.\n\n**ReAct does NOT help:**\n- Simple one-step lookups\n- Creative tasks where reasoning interleaved with action doesn't add structure\n- Tasks where the model already has all needed information in context"
+    },
+    {
+      "type": "text",
+      "content": "## ReAct in Claude Code: What It Looks Like in Practice\n\nClaude Code naturally runs a ReAct-style loop. When you watch it work, you see exactly the Thought-Action-Observation pattern:\n\n```\n[Thought] I need to understand the project structure before I can find the bug.\n[Action] Glob: **/*.js\n[Observation] Found: src/app.js, src/auth.js, src/db.js, tests/auth.test.js\n\n[Thought] The bug is likely in auth.js since it's the authentication module. Let me read it.\n[Action] Read: src/auth.js\n[Observation] [file contents — sees a JWT validation issue]\n\n[Thought] The JWT expiry check is missing the clock skew tolerance. That's the bug. \nLet me check how the tests are written to make sure my fix matches the expected behaviour.\n[Action] Read: tests/auth.test.js\n[Observation] [test file shows expected token validation behaviour]\n\n[Thought] Now I can write the fix.\n[Action] Edit: src/auth.js\n```\n\nYou didn't need to tell Claude Code to use the ReAct pattern — it emerges naturally from the agent loop architecture. But understanding ReAct lets you *design tasks* that produce better ReAct traces, and *read traces* to diagnose where reasoning went wrong."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Build Your First Explicit ReAct Loop",
+      "content": "Construct a ReAct loop manually in Claude.ai — this forces you to understand each component. Takes 25 minutes.\n\n**Step 1 — Set up the ReAct environment.** Open Claude.ai and send this system-prompt-style message:\n```\nYou are a research assistant operating in ReAct mode.\n\nFor every step, produce exactly:\nThought: [your reasoning about what to do next]\nAction: [one of: Search[query] | Lookup[term] | Calculate[expr] | Finish[answer]]\n\nAfter each Action, I will provide:\nObservation: [the result]\n\nDo not skip the Thought step. Do not take multiple Actions at once.\n\nWait for my Observation before proceeding.\n```\n\n**Step 2 — Give it a multi-hop task:**\n```\nTask: Estimate the carbon savings (in tonnes of CO2) if the 10 most \nemission-heavy countries each reduced emissions by 5% in a single year.\n```\n\n**Step 3 — Play the role of the environment.** When Claude produces an Action like `Search[top carbon emitting countries]`, respond with an Observation providing that data. You can look it up yourself or make it realistic.\n\n**Step 4 — Run 4-6 iterations** until Claude reaches a Finish action.\n\n**Step 5 — Review the trace.** Look back at the full conversation:\n- Were the Thoughts accurate predictions of what the Action would find?\n- Did any Observation change the direction of reasoning?\n- At what point did the model have enough information to answer?\n\n**Write two sentences:** What did making the reasoning visible reveal that a direct answer would have hidden?"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Read a ReAct Trace and Fix a Reasoning Error",
+      "content": "Learn to diagnose ReAct loops by finding where reasoning diverged. Takes 20 minutes.\n\n**Step 1 — Create a broken task.** In Claude Code, create a file with a subtle bug:\n```\ncreate a file called broken-calculator.js with this content:\n\nfunction divide(a, b) {\n  return a / b;  // No zero-division check\n}\n\nfunction average(nums) {\n  return nums.reduce((a, b) => a + b) / nums.length;  // Crashes on empty array\n}\n\nmodule.exports = { divide, average };\n```\n\n**Step 2 — Ask Claude to audit it for bugs:**\n```\nAudit broken-calculator.js for edge cases and bugs. List every issue with \na specific example of input that would cause a failure.\n```\n\n**Step 3 — Watch the ReAct trace.** Notice:\n- Does Claude read the file before stating observations (correct ReAct order)?\n- Does it identify both bugs?\n- Does it give concrete failure examples?\n\n**Step 4 — Introduce a harder version.** Create a more complex file with 3-4 subtle bugs and repeat. At what point does the ReAct trace show reasoning uncertainty — where Claude says something like 'I'm not sure if this is a bug, let me check...'?\n\n**Step 5 — Ask Claude to explain its reasoning:**\n```\nFor each bug you found, explain: what Observation led you to identify it, \nand what Thought process let you confirm it was a real issue versus \na false alarm?\n```\n\n**The skill you're building:** Reading ReAct traces teaches you to distinguish confident, grounded reasoning from reasoning that guessed and got lucky — a critical skill for evaluating AI outputs in production."
+    },
+    {
+      "type": "quiz",
+      "question": "You're building a ReAct loop to answer complex questions about a company's database. The model often gives plausible-sounding answers without actually querying the database. What change to the prompt fixes this?",
+      "options": [
+        "Tell the model to 'always be accurate'",
+        "Explicitly define the available Actions and require a Thought before every Action — make querying the database a required Action type, not an optional one",
+        "Use a more powerful model",
+        "Add 'do not guess' to the prompt"
+      ],
+      "correct": 1,
+      "explanation": "The fix is structural, not instructional. By explicitly defining available Actions (e.g., `Query[SQL]`) and requiring the Thought-Action-Observation format, you force the model to take a real action and receive a real Observation before reasoning about the answer. Generic instructions like 'be accurate' don't constrain the loop structure — they just add aspirational text. Structured ReAct prompting changes the actual behaviour pattern."
+    },
+    {
+      "type": "quiz",
+      "question": "In a ReAct loop debugging a failing test, the model produces this sequence: Thought: 'The test is failing because of a race condition.' Action: Finish['Fix the race condition in thread.js']. What is wrong with this trace?",
+      "options": [
+        "Nothing — the model identified the problem and provided a solution",
+        "The model skipped the observation step by jumping from Thought directly to Finish without taking any investigative actions to verify the race condition hypothesis",
+        "The model should have used a different action type",
+        "The Thought is too short"
+      ],
+      "correct": 1,
+      "explanation": "A hallmark of bad ReAct loops is hypothesis → conclusion without verification. The model asserted 'race condition' as a Thought, then immediately Finished — it never Read the thread.js file, never ran the test, never checked the actual error message. A correct ReAct trace would: hypothesise the cause → run the test → read the error → read the relevant file → then conclude. The Finish action should only appear after sufficient Observations to ground the conclusion."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main advantage of the explicit Thought step in ReAct compared to direct action-taking?",
+      "options": [
+        "It makes loops run faster by reducing unnecessary actions",
+        "It uses fewer tokens overall",
+        "It makes reasoning visible and interruptible — you can see exactly where the model's thinking diverged from correct reasoning and intervene",
+        "It forces the model to use all available tools"
+      ],
+      "correct": 2,
+      "explanation": "The Thought step is primarily a transparency and debuggability mechanism. When reasoning is hidden inside a black-box action sequence, errors are only visible in the final output. When reasoning is explicit, you can trace the exact point where the model made a wrong assumption or missed a relevant observation. This lets you intervene mid-loop, redesign the task, or adjust the available Actions — none of which is possible when you can only see inputs and outputs."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-3.** You understand the Thought → Action → Observation cycle, how to construct ReAct prompts, when ReAct adds value versus direct answers, and how to read ReAct traces to diagnose reasoning errors. You can now apply this pattern to research tasks, debugging, and any multi-step information-gathering workflow."
+    }
+  ],
+  "nextLesson": "21-4",
+  "prevLesson": "21-2"
+}

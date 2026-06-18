@@ -1,0 +1,83 @@
+{
+  "id": "21-11",
+  "title": "Loop Efficiency & Cost Control",
+  "part": 20,
+  "estimatedMinutes": 40,
+  "tags": ["loop-engineering", "advanced", "cost", "efficiency", "tokens"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nA loop that runs 50 iterations with a 20,000-token context costs 10× more than a loop that runs 5 iterations with a 10,000-token context. At personal scale, this is pocket change. At production scale — processing thousands of documents daily — it's a significant budget line. This lesson covers how to analyse loop costs, where to cut without sacrificing quality, caching strategies, short-circuit conditions, and how to design budget-aware loops that stop when they've done enough."
+    },
+    {
+      "type": "text",
+      "content": "## How Loop Costs Compound\n\nToken costs in loops are not linear — they compound with context accumulation.\n\n**Example: A 10-iteration loop processing a 2,000-token document:**\n\n| Iteration | Context size | Tokens used this iteration |\n|---|---|---|\n| 1 | 2,000 + instructions | ~3,000 tokens |\n| 2 | + tool result 1 | ~4,000 tokens |\n| 3 | + tool result 2 | ~5,000 tokens |\n| ... | ... | ... |\n| 10 | + tool results 1-9 | ~12,000 tokens |\n\nTotal: ~75,000 tokens for one 10-iteration loop.\n\n**At Claude Sonnet 4.6 pricing (~$3/MTok input, ~$15/MTok output):**\n- This single loop costs ~$0.25-$0.40\n- At 100 documents per day: $25-$40/day\n- At 1,000 documents per day: $250-$400/day\n\nContext accumulation is the primary cost driver in AI loops. Controlling it is the primary efficiency lever."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The 3 biggest cost levers in order of impact:** (1) Iteration count — fewer iterations = dramatically lower cost. (2) Context size per iteration — smaller context = lower cost per iteration. (3) Model choice — a smaller model for evaluation passes and a larger one only for critical generation cuts cost significantly without proportional quality loss."
+    },
+    {
+      "type": "text",
+      "content": "## Cost Reduction Patterns\n\n**1. Summarise intermediate results**\nInstead of accumulating raw tool call results across iterations, summarise them:\n```\nAfter each batch of 5 tool calls:\n'Summarise everything learned so far in 3 bullet points.'\nDiscard the raw tool call history; continue with the summary.\n```\nThis resets context size while preserving the knowledge gained.\n\n**2. Front-load information**\nProvide all needed context upfront rather than discovering it through tool calls:\n```\nBefore starting: read CLAUDE.md, the project structure, and relevant files.\nProvide all of this as context in the initial prompt.\n```\nThis reduces discovery iterations that cost tokens without producing output.\n\n**3. Use smaller models for filtering passes**\nIf a loop has a 'filter' step (deciding what to process) and a 'process' step (doing the work), use a smaller, cheaper model for filtering and the main model only for processing:\n- Haiku 4.5 for classification/filtering: ~10× cheaper than Sonnet\n- Sonnet 4.6 for generation/analysis: full quality when it matters\n\n**4. Batch processing**\nProcess multiple items per iteration instead of one at a time:\n```\nProcess these 10 emails in this iteration: [batch of 10]\nClassify each as: urgent / informational / action-required\n```\nInstead of 10 separate iterations, 1 iteration produces 10 results.\n\n**5. Cache deterministic results**\nIf a loop calls the same lookup repeatedly (same search query, same file read), cache the result rather than re-running the tool call:\n```\nSave all search results to a temporary cache. Before running a search, \ncheck if the same query was already run and use the cached result.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Short-Circuit Conditions\n\nA short-circuit condition stops the loop early when the goal is already achieved. This is the most direct cost reduction available.\n\n**Example scenarios:**\n\n*Bug-finding loop:* Stop as soon as 3 bugs are found — don't continue searching after the quota is met.\n\n*Quality-improvement loop:* Stop as soon as the quality score exceeds 8/10 — don't run more iterations just because the budget allows it.\n\n*Research loop:* Stop as soon as 5 high-quality sources are found — don't keep searching after enough information is available.\n\n**How to implement:**\n```\nAfter each iteration, evaluate:\n- Has the success condition been met? [specific criterion]\n- If yes: compile results and stop.\n- If no: continue (up to maximum iterations).\n```\n\n**The stopping criteria taxonomy:**\n- **Quality threshold:** Output scores above X on the evaluation rubric\n- **Quantity threshold:** Found/produced N items of acceptable quality\n- **Convergence:** Last 2 iterations produced no meaningful change\n- **Confidence threshold:** Model's stated confidence exceeds X%\n- **Time/budget limit:** Maximum iterations or token budget reached"
+    },
+    {
+      "type": "text",
+      "content": "## Budget-Aware Loop Design\n\nFor production loops, design the loop with an explicit token budget and behaviour when that budget is approached:\n\n**Budget zone 1 (0-60% of budget):** Normal operation\n**Budget zone 2 (60-80% of budget):** Begin prioritising — focus on highest-value remaining work\n**Budget zone 3 (80-95% of budget):** Synthesis mode — stop discovering, start compiling what you have\n**Budget zone 4 (95-100% of budget):** Emergency stop — produce best possible output with current state\n\n**Example prompt addition:**\n```\nYou have a token budget for this task. Manage it wisely:\n- Use the first 60% for exploration and discovery\n- At 60% budget: assess what you've found and prioritise remaining work\n- At 80% budget: stop discovering, start writing the final output from what you have\n- Never exceed the budget; produce the best output possible within it\n```\n\nClaude Code respects this kind of budget guidance when included in task instructions or CLAUDE.md."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Optimise a Costly Loop",
+      "content": "Take a loop you've built and reduce its cost without reducing its quality. Takes 30 minutes.\n\n**Step 1 — Pick a loop to optimise.** Use any loop from this part (daily briefing, vendor evaluation, batch summarizer, etc.) or one you've built yourself.\n\n**Step 2 — Measure baseline cost.** Run the loop once and ask Claude Code:\n```\nHow many tool calls did you make in that last task? \nRoughly how many tokens did you use? \nWhich steps used the most tokens?\n```\n\n**Step 3 — Apply the cost reduction checklist:**\n\n[ ] Can I reduce the number of iterations by batching multiple items per iteration?\n[ ] Am I accumulating raw tool call outputs that could be summarised after each batch?\n[ ] Is there information I'm discovering via tool calls that I could provide upfront?\n[ ] Are there filtering/classification steps that a smaller model could do?\n[ ] Is there a short-circuit condition — a point where the loop has achieved enough that further iterations add little value?\n\n**Step 4 — Implement one optimisation.** Choose the highest-impact change from your checklist and update the skill or workflow.\n\n**Step 5 — Measure again.** Run the optimised loop on the same task. Did the token count decrease? Did the quality of the output change?\n\n**Step 6 — Add a short-circuit condition.** Modify your loop to include an explicit stopping check after each iteration:\n```\nAfter each step, assess: has the goal been achieved well enough to stop?\nIf yes, compile results and stop early.\nIf no, continue to next iteration.\n```\n\n**Target:** Reduce the loop's token cost by at least 30% while keeping output quality the same or better."
+    },
+    {
+      "type": "quiz",
+      "question": "A 15-iteration research loop is accumulating tool call results in the context window. By iteration 15, the context is 40,000 tokens and costs are high. What is the most effective structural fix?",
+      "options": [
+        "Use a cheaper model for all iterations",
+        "Reduce to 10 iterations maximum",
+        "After every 3-5 iterations, summarise the accumulated tool call results into 3 bullet points and discard the raw history — this caps context growth while preserving knowledge",
+        "Increase the token budget to accommodate the large context"
+      ],
+      "correct": 2,
+      "explanation": "Context summarisation is the most effective fix for compounding context costs. Instead of accumulating every tool call result in full, periodic summarisation condenses what's been learned into a compact form and discards the verbose raw output. This prevents context from growing linearly with iteration count. Switching models helps but doesn't fix the root cause. Reducing iterations may cut results. Increasing the budget just accepts the inefficiency."
+    },
+    {
+      "type": "quiz",
+      "question": "You're running a loop to find 5 high-quality sources for a research report. The loop has found 5 strong sources after 8 iterations but is set to run 20 iterations. What should you add?",
+      "options": [
+        "Let it run all 20 — more sources are always better",
+        "A short-circuit condition that stops the loop as soon as 5 quality sources are found, rather than running all 20 iterations regardless",
+        "Increase the target to 10 sources since the loop has budget remaining",
+        "Add a human checkpoint at iteration 10"
+      ],
+      "correct": 1,
+      "explanation": "A short-circuit condition is exactly right here. Once the goal is achieved (5 high-quality sources), continuing the loop wastes tokens without proportional benefit. More sources beyond what's needed adds noise and cost. The short-circuit adds a check after each iteration: 'Have we found 5 quality sources? If yes, stop and synthesise.' This is one of the simplest and highest-impact efficiency patterns — stop when you've done enough."
+    },
+    {
+      "type": "quiz",
+      "question": "A loop has a filtering step (classify 1,000 items as relevant/irrelevant) and a processing step (deeply analyse the relevant items). What is the most cost-effective model allocation?",
+      "options": [
+        "Use the most capable model for both steps",
+        "Use a cheaper, faster model (like Haiku) for filtering, and the main model (Sonnet) only for deep analysis — classification is a lower-complexity task that smaller models handle well",
+        "Use two instances of the same model running in parallel",
+        "Do the filtering with a rule-based system before involving any AI"
+      ],
+      "correct": 1,
+      "explanation": "Model tiering is one of the most effective cost strategies in AI systems. Classification and filtering are tasks where the performance gap between large and small models is small, but the cost gap is large — Haiku 4.5 is ~10-20× cheaper than Sonnet 4.6. Running 1,000 items through Haiku for filtering, then 100 relevant items through Sonnet for deep analysis, produces near-identical quality at a fraction of the cost of using Sonnet for all 1,000 items."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 21-11.** You understand how token costs compound with loop iterations and context accumulation, the five cost reduction patterns (summarisation, front-loading, model tiering, batching, caching), how to design short-circuit conditions, and budget-aware loop design. You can now build loops that are both high-quality and cost-conscious."
+    }
+  ],
+  "nextLesson": "21-12",
+  "prevLesson": "21-10"
+}

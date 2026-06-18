@@ -2467,14 +2467,133 @@
             "next-steps",
             "llm-engineer"
           ],
-          "nextLesson": "14-1",
+          "nextLesson": "21-1",
           "prevLesson": "18-7"
         }
       ]
     },
     {
-      "id": 14,
+      "id": 21,
       "number": 20,
+      "title": "Loop Engineering",
+      "lessons": [
+        {
+          "id": "21-1",
+          "title": "What Is Loop Engineering?",
+          "estimatedMinutes": 30,
+          "tags": ["loop-engineering", "advanced", "concepts", "overview"],
+          "nextLesson": "21-2",
+          "prevLesson": "18-8"
+        },
+        {
+          "id": "21-2",
+          "title": "Agent Loop Anatomy — Observe, Think, Act",
+          "estimatedMinutes": 35,
+          "tags": ["loop-engineering", "advanced", "agents", "react"],
+          "nextLesson": "21-3",
+          "prevLesson": "21-1"
+        },
+        {
+          "id": "21-3",
+          "title": "ReAct Loops — Reasoning + Acting in Sequence",
+          "estimatedMinutes": 40,
+          "tags": ["loop-engineering", "advanced", "react", "reasoning", "tools"],
+          "nextLesson": "21-4",
+          "prevLesson": "21-2"
+        },
+        {
+          "id": "21-4",
+          "title": "Self-Critique Loops — Draft, Critique, Revise",
+          "estimatedMinutes": 40,
+          "tags": ["loop-engineering", "advanced", "self-critique", "quality"],
+          "nextLesson": "21-5",
+          "prevLesson": "21-3"
+        },
+        {
+          "id": "21-5",
+          "title": "Evaluation Loops — LLM-as-Judge",
+          "estimatedMinutes": 45,
+          "tags": ["loop-engineering", "advanced", "evaluation", "llm-judge"],
+          "nextLesson": "21-6",
+          "prevLesson": "21-4"
+        },
+        {
+          "id": "21-6",
+          "title": "Iterative Refinement Loops",
+          "estimatedMinutes": 40,
+          "tags": ["loop-engineering", "advanced", "refinement", "iteration"],
+          "nextLesson": "21-7",
+          "prevLesson": "21-5"
+        },
+        {
+          "id": "21-7",
+          "title": "Human-in-the-Loop (HITL) Patterns",
+          "estimatedMinutes": 40,
+          "tags": ["loop-engineering", "advanced", "hitl", "human-oversight"],
+          "nextLesson": "21-8",
+          "prevLesson": "21-6"
+        },
+        {
+          "id": "21-8",
+          "title": "Multi-Agent Feedback Loops",
+          "estimatedMinutes": 45,
+          "tags": ["loop-engineering", "advanced", "multi-agent", "orchestration"],
+          "nextLesson": "21-9",
+          "prevLesson": "21-7"
+        },
+        {
+          "id": "21-9",
+          "title": "Scheduled & Continuous Loops",
+          "estimatedMinutes": 40,
+          "tags": ["loop-engineering", "advanced", "scheduled", "continuous", "automation"],
+          "nextLesson": "21-10",
+          "prevLesson": "21-8"
+        },
+        {
+          "id": "21-10",
+          "title": "Error Recovery & Retry Loops",
+          "estimatedMinutes": 45,
+          "tags": ["loop-engineering", "advanced", "error-handling", "resilience"],
+          "nextLesson": "21-11",
+          "prevLesson": "21-9"
+        },
+        {
+          "id": "21-11",
+          "title": "Loop Efficiency & Cost Control",
+          "estimatedMinutes": 40,
+          "tags": ["loop-engineering", "advanced", "cost", "efficiency", "tokens"],
+          "nextLesson": "21-12",
+          "prevLesson": "21-10"
+        },
+        {
+          "id": "21-12",
+          "title": "Loop Debugging & Observability",
+          "estimatedMinutes": 45,
+          "tags": ["loop-engineering", "advanced", "debugging", "observability"],
+          "nextLesson": "21-13",
+          "prevLesson": "21-11"
+        },
+        {
+          "id": "21-13",
+          "title": "Convergence & Termination Patterns",
+          "estimatedMinutes": 40,
+          "tags": ["loop-engineering", "advanced", "convergence", "termination"],
+          "nextLesson": "21-14",
+          "prevLesson": "21-12"
+        },
+        {
+          "id": "21-14",
+          "title": "Capstone — Build a Self-Improving Research Loop",
+          "estimatedMinutes": 90,
+          "tags": ["loop-engineering", "advanced", "capstone", "build", "research"],
+          "nextLesson": "14-1",
+          "prevLesson": "21-13"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "number": 21,
       "title": "Capstone Projects",
       "lessons": [
         {
@@ -2489,7 +2608,7 @@
             "build"
           ],
           "nextLesson": "14-2",
-          "prevLesson": "18-8"
+          "prevLesson": "21-14"
         },
         {
           "id": "14-2",
