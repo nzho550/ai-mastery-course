@@ -15,12 +15,21 @@
     },
     {
       "type": "callout",
+      "variant": "warning",
+      "content": "**The real cost of a runaway loop (2025 case):** An agent tasked with debugging a complex system executed 847 reasoning steps at $47 per minute — and never delivered a final answer. It kept refining logic, questioning conclusions, and requesting more data in an endless self-reinforcing cycle. A single runaway loop with modern frontier models can consume thousands of dollars in minutes, with each iteration costing $0.01–$0.10 per LLM call, compounding until the context window limit or API budget is hit. A hard stop is not optional — it is the most important design decision in any loop."
+    },
+    {
+      "type": "callout",
       "variant": "tip",
       "content": "**The 'good enough' principle:** Perfect is the enemy of shipped. Most loops should not run until the output is perfect — they should run until the output is good enough for its purpose. Define 'good enough' before the loop starts, not after you see the output. Post-hoc definitions of good enough tend to keep shifting upward."
     },
     {
       "type": "text",
       "content": "## Hard Stop Patterns\n\nHard stops terminate the loop unconditionally, regardless of quality:\n\n**Maximum iteration count**\nThe simplest and most reliable stopping mechanism. Set a maximum and enforce it:\n```\nRun a maximum of 5 iterations. After iteration 5, compile and output whatever \nhas been produced, regardless of completeness.\n```\n*Use when:* You need predictable cost and time, or when you don't have a reliable quality metric.\n\n**Token budget**\nStop when a token budget is reached:\n```\nYou have a budget of 10,000 tokens for this task. When 80% of the budget \nis spent, begin synthesis mode. At 95%, produce the final output immediately.\n```\n*Use when:* Cost is the primary constraint.\n\n**Time limit**\nStop after a fixed time:\n```\nThis loop must complete within 2 minutes. At 90 seconds, stop discovering \nand begin compiling the final output from what you have.\n```\n*Use when:* The output is needed by a deadline (real-time systems, interactive use cases)."
+    },
+    {
+      "type": "text",
+      "content": "## Stall Detection: The Pattern That Saves You from Subtle Loops\n\nA loop can technically continue without technically making progress. **Stall detection** catches this:\n\n**The pattern:** Stop the loop when the same output, error, or diff appears N times in a row.\n\n```\nAfter each iteration:\n- Compare this iteration's output to the previous iteration's output\n- If they are functionally identical (< 2% change), increment stall_counter\n- If stall_counter >= 3: the loop has converged or is stuck — terminate\n- If they are different: reset stall_counter to 0\n```\n\n**The three stall scenarios:**\n\n1. **Quality stall** — The loop is revising but producing outputs indistinguishable from the previous version. This is convergence — stop, the loop is done.\n\n2. **Error stall** — The loop hits the same error three times in a row. This is a stuck loop — no retry will fix it; stop and escalate.\n\n3. **Empty diff stall** — The loop says it made changes but the diff is empty or trivial. Often caused by the model hallucinating edits. Stop and flag.\n\n**Practical implementation in Claude Code skills:**\n```markdown\nAfter each revision:\n1. Compare the current version to the previous version\n2. If they are not meaningfully different, say: \n   'STALL DETECTED: No meaningful change from previous iteration. \n   Terminating loop. Final output is above.'\n3. Otherwise continue.\n```\n\n**Semantic similarity convergence (advanced):** For text outputs, rather than comparing exact text, compute semantic similarity using embeddings. If two consecutive outputs are >95% semantically similar, they've converged even if the exact wording differs. This is more robust than character-level comparison for prose content."
     },
     {
       "type": "text",

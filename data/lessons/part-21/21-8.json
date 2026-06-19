@@ -15,6 +15,11 @@
     },
     {
       "type": "callout",
+      "variant": "warning",
+      "content": "**The #1 multi-agent failure mode: sycophancy cascading.** When agents in a group-chat or debate pattern interact, they tend to agree with the emerging majority position — even when the majority is wrong. This produces *false consensus*: the agents appear to agree and converge, but the foundation is a shared error no individual agent independently verified. Five rounds with three agents means 15 LLM calls, and the result can still be confidently incorrect because the agents reinforced each other's mistakes. Design patterns: use genuinely independent system prompts, ensure agents can't see each other's prior answers before forming their own, and treat high-confidence unanimous agreement with suspicion."
+    },
+    {
+      "type": "callout",
       "variant": "tip",
       "content": "**Claude Code sub-agents** are the built-in mechanism for multi-agent work. When you give Claude Code a task that can be parallelised, it can spawn sub-agents to work on different pieces simultaneously. Each sub-agent runs independently and reports results back to the orchestrator. You can also trigger this explicitly by asking Claude Code to 'work on parts A and B in parallel.'"
     },
@@ -33,6 +38,10 @@
     {
       "type": "text",
       "content": "## Pattern 4: Pipeline\n\nA series of specialised agents where each agent's output becomes the next agent's input. Unlike orchestrator/worker (which is parallel), pipeline is sequential and each agent transforms the work.\n\n**Structure:**\n```\nAgent 1 [Researcher] → raw information\nAgent 2 [Analyst] → structured analysis from raw information\nAgent 3 [Writer] → readable narrative from structured analysis\nAgent 4 [Editor] → polished output from readable narrative\n```\n\n**When to use it:**\n- Workflows where each transformation requires a genuinely different capability or role\n- When you want to verify intermediate outputs before proceeding to the next stage\n- Complex content production where quality compounds through stages\n\n**Example: Research → Report pipeline:**\n1. Research Agent: 'Find all available information about [topic]. Organise by theme. Do not interpret.'\n2. Analysis Agent: 'Given this raw research, identify the 5 most important insights. For each, explain the evidence and its significance.'\n3. Writing Agent: 'Convert these 5 insights into a clear, executive-audience readable report. Narrative form. No jargon.'\n4. Quality Agent: 'Review this report. Does each claim trace to the original research? Flag anything that goes beyond what the evidence supports.'"
+    },
+    {
+      "type": "text",
+      "content": "## Multi-Agent Frameworks: What's Out There\n\nIf you move beyond Claude Code and build standalone multi-agent systems, these are the leading frameworks in 2026:\n\n| Framework | Best for | Model |\n|---|---|---|\n| **LangGraph** | Complex stateful workflows with explicit loops and conditionals | Graph-based — you define nodes and edges |\n| **CrewAI** | Role-based teams with assigned responsibilities | Role-based — define agents by job title |\n| **Microsoft Agent Framework** | Enterprise, integrates with Office and Azure | Converged AutoGen + Semantic Kernel |\n| **Google Agent Dev Kit** | Hierarchical agent trees, A2A protocol | Tree-based with native Google Cloud integration |\n| **OpenAI Swarm** | Lightweight agent handoffs | Minimal — code-first, no abstraction |\n\n**Which to choose:**\n- For Claude Code extensions: you don't need a framework — Claude Code's Agent sub-agent tool handles orchestration natively\n- For standalone Python pipelines: **LangGraph** is the 2026 standard for complex stateful loops\n- For role-based teams: **CrewAI** has the simplest authoring experience\n- For enterprise with Microsoft stack: **Microsoft Agent Framework**\n\n**Telemetry is non-negotiable for multi-agent systems.** McKinsey research calls measurable feedback loops 'the difference between scaling AI and stagnating it.' Without tracing across agents, failures in multi-agent systems are nearly impossible to diagnose because the error could have originated in any agent in the chain."
     },
     {
       "type": "workshop",
