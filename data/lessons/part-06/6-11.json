@@ -1,0 +1,95 @@
+{
+  "id": "6-11",
+  "title": "Chat Participants, Variables & Slash Commands",
+  "part": 6,
+  "estimatedMinutes": 50,
+  "tags": ["copilot", "vscode", "chat", "workspace", "slash-commands", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nMost people use Copilot Chat as a generic question-answering tool. They type a question, get an answer, and move on. That works — but it misses the most powerful layer of Copilot Chat: **context control**.\n\nCopilot Chat has a precision targeting system built in:\n- **Participants** (starting with `@`) — route your question to a specialist that knows about your workspace, your terminal, or GitHub itself\n- **Variables** (starting with `#`) — attach specific files, selections, or codebase context to your message\n- **Slash commands** (starting with `/`) — trigger pre-defined behaviors instead of describing them in prose\n\nUsing these tools, you can ask questions that are precisely scoped to exactly the right context, and get answers that are actually usable — not generic responses that require you to translate them to your specific situation."
+    },
+    {
+      "type": "text",
+      "content": "## Chat Participants: The @ System\n\nParticipants are built-in specialists you invoke with `@`. Each one has a different understanding of your environment.\n\n### `@workspace`\nThe most important participant. `@workspace` gives Copilot the ability to search your entire project — all files, not just the one open in the editor. It builds an index of your codebase and uses semantic search to find relevant context.\n\nUse it for questions that span multiple files:\n```\n@workspace Where is the user authentication logic? Show me all the files involved.\n@workspace What database tables does this app use and which files query each one?\n@workspace I need to add rate limiting. What existing patterns in this codebase should I follow?\n```\n\n### `@terminal`\nGives Copilot access to your VS Code integrated terminal — its last command output, current directory, and shell type. Use it to debug terminal errors without copy-pasting:\n```\n@terminal Why did this command fail? How do I fix it?\n@terminal Explain what that error means and what I should do next.\n```\n\n### `@vscode`\nGives Copilot knowledge of VS Code itself — settings, extensions, keybindings, UI elements. Use it when you have a question about VS Code configuration rather than your code:\n```\n@vscode How do I set up launch.json for debugging a Node.js app?\n@vscode What's the keybinding for multi-cursor selection?\n@vscode How do I exclude node_modules from the file explorer?\n```\n\n### `@github`\nGives Copilot access to GitHub — issues, pull requests, code search, and release notes across GitHub.com. Requires being signed into GitHub:\n```\n@github Search for examples of how other projects implement OAuth2 refresh tokens\n@github What does PR #234 in this repo change?\n@github Are there any open issues related to the login bug?\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Chat Variables: The # System\n\nVariables let you attach specific context to a single message without changing the overall participant scope.\n\n| Variable | What it attaches |\n|----------|------------------|\n| `#file` | A specific file — opens a file picker or type the path |\n| `#selection` | Whatever you have highlighted in the editor right now |\n| `#editor` | The entire currently active file |\n| `#codebase` | The full workspace index (similar to @workspace) |\n| `#terminalLastCommand` | The output of the last terminal command run |\n| `#terminalSelection` | Text you've selected in the terminal panel |\n\n**Example — asking about two specific files at once:**\n```\nCompare the error handling in #file:services/auth.js and #file:services/payments.js. \nAre they consistent? Which approach is better and why?\n```\n\n**Example — explaining a selected code block:**\nSelect 20 lines of confusing code in the editor, then in chat:\n```\nExplain #selection line by line. Focus on what could go wrong.\n```\n\n**Example — diagnosing a terminal error:**\n```\n#terminalLastCommand — why did this fail and what's the correct command?\n```\n\n**Combining participants and variables:**\n```\n@workspace Using #file:docs/api-spec.yaml as the source of truth, find any routes \nin the codebase that don't match the spec.\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The workspace index takes a moment to build.** The first time you use `@workspace` in a session, Copilot scans and indexes your project. On large projects, this can take 30-60 seconds. After that first index, responses are fast. If `@workspace` seems to miss obvious files, try asking again — the index may still be building. For very large monorepos, results are sampled, not exhaustive."
+    },
+    {
+      "type": "text",
+      "content": "## Slash Commands: Trigger Behaviors, Not Descriptions\n\nSlash commands replace long natural-language descriptions with precise, pre-defined instructions that Copilot executes reliably.\n\n### Available Slash Commands\n\n| Command | What it does | Best combined with |\n|---------|-------------|-------------------|\n| `/explain` | Plain-English explanation of code | `#selection` or `#file` |\n| `/fix` | Analyze and suggest fix for a bug or error | `#terminalLastCommand` for errors |\n| `/doc` | Generate documentation comment (JSDoc, docstring, etc.) | `#selection` of a function |\n| `/tests` | Generate unit tests | `#selection` or `#file` |\n| `/simplify` | Suggest a more concise version | `#selection` |\n| `/new` | Scaffold a new file or project structure | Tell it what to create |\n| `/newNotebook` | Create a Jupyter notebook | Describe the analysis task |\n\n### Real Usage Examples\n\n**Generate comprehensive tests:**\n```\n/tests #file:utils/date-formatter.js \nFocus on edge cases: null input, invalid date strings, timezone handling, leap years.\n```\n\n**Fix an error from the terminal:**\n```\n/fix #terminalLastCommand\nThis is a Python type error. Show me the specific line that's wrong and the corrected version.\n```\n\n**Document a complex function:**\n```\n/doc #selection\nWrite JSDoc comments. Include @param types, @returns, @throws for any exceptions, and a usage example.\n```\n\n**Create a new file with structure:**\n```\n/new Create a Python FastAPI router file for user management. Include endpoints for:\nGET /users, GET /users/{id}, POST /users, PATCH /users/{id}, DELETE /users/{id}.\nFollow the patterns in #file:routers/auth.py\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Combining Everything: Power Prompts\n\nThe real skill is combining participants, variables, and slash commands to create highly specific, highly effective prompts.\n\n**Pattern: Workspace-aware code generation**\n```\n@workspace /new Create a new API endpoint for exporting user data as CSV.\nFollow the existing patterns in #file:routes/export.js and use the same \nauth middleware I can see in #file:middleware/auth.js.\n```\n\n**Pattern: Multi-file debugging**\n```\n@workspace I'm getting a null reference error when processing payments.\nThe error trace points to payments.js line 47 but I think the root cause \nis in how orders are created. Search the codebase and trace the data flow \nfrom order creation to payment processing.\n```\n\n**Pattern: Cross-file consistency check**\n```\n@workspace Compare how errors are handled across all service files in /services/.\nList any inconsistencies and suggest a unified error handling approach.\n```\n\n**Pattern: Test gap analysis**\n```\n@workspace /tests #file:services/auth.js\nList all public functions in this file. For each one, check if a corresponding\ntest exists in the test directory. Generate tests for any untested functions.\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workspace Exploration — Know Your Codebase",
+      "content": "Use `@workspace` to build a complete picture of a project you're working on.\n\n**Open your project in VS Code.** This can be any project — work code, a tutorial, or any folder with multiple files.\n\n**Run these prompts in sequence:**\n\n1. `@workspace Give me an overview of this project. What does it do, what's the folder structure, and what are the main components?`\n\n2. `@workspace What are all the external dependencies this project uses? List them by category (database, API, testing, etc.)`\n\n3. `@workspace Where is the entry point? Walk me through what happens when this application starts up.`\n\n4. `@workspace What would I need to know before making changes to this codebase? List 5 things a new developer should understand.`\n\n**Verify accuracy:** After each response, open the referenced files and check that what Copilot described is actually there. Note any factual errors or gaps — this teaches you the limits of `@workspace`'s index.\n\n**Outcome:** A mental map of the project, built in 5 minutes instead of hours of manual reading."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop A — The # Variable Drill",
+      "content": "Practice every chat variable in one 10-minute drill.\n\n**In VS Code with a project open:**\n\n**Round 1 — #file**\nOpen any two files. In chat:\n```\nWhat is the relationship between #file:[file1] and #file:[file2]? \nHow do they interact?\n```\n\n**Round 2 — #selection**\nSelect the most confusing 10 lines in any file. In chat:\n```\n/explain #selection\nExplain this to someone who's never seen this codebase. What is it doing and why?\n```\n\n**Round 3 — #editor**\nMake sure a large file is open. In chat:\n```\nReview #editor. What's the most brittle or risky part of this code? \nWhat's most likely to break under unexpected input?\n```\n\n**Round 4 — #terminalLastCommand**\nRun any terminal command (even just `ls` or `dir`). In chat:\n```\n#terminalLastCommand — describe what this output means in plain English.\n```\n\n**Verdict:** Which variable gave you the most useful result? Which felt awkward? Write one sentence each."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop B — Slash Command Test Drive",
+      "content": "Test every slash command on real code from your project.\n\n**For each command, use a real file or function — not a toy example:**\n\n**`/explain`**\nSelect a function you wrote more than a week ago. Run `/explain #selection`. Does Copilot's explanation match your memory of what it does? Is anything missing from its explanation?\n\n**`/fix`**\nIntroduce an obvious bug in a function (e.g., off-by-one error, missing null check). Run `/fix #selection`. Does it identify the correct issue? Does its fix maintain the original intent?\n\n**`/doc`**\nSelect an undocumented function. Run `/doc #selection`. Request JSDoc format if not already specified. Is the documentation accurate and complete? Would it help a new team member?\n\n**`/tests`**\nSelect a function with no tests. Run `/tests #selection`. Ask it to include: the happy path, null/empty input, boundary values, and one unexpected input. Are the generated tests meaningful?\n\n**`/simplify`**\nSelect a complex conditional or loop. Run `/simplify #selection`. Is the simplified version actually more readable? Does it preserve the exact behavior?\n\n**Tally:** Which command produced the highest-quality output? Which needs the most human correction afterward?"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop C — Power Prompt: Cross-File Analysis",
+      "content": "Build a real cross-file analysis using participants and variables together.\n\n**Choose one of these tasks that applies to your project:**\n\n**Option A — API + Implementation check**\n```\n@workspace I have a documented API spec or README. Compare what's documented \nwith what's actually implemented. List any routes, functions, or features \nthat are documented but not implemented, or implemented but not documented.\n```\n\n**Option B — Error handling audit**\n```\n@workspace Audit the error handling across this codebase. List every place \nwhere errors are caught, logged, or returned. Are there any places where \nerrors could be silently swallowed? Show me the specific file and line numbers.\n```\n\n**Option C — Dependency analysis**\n```\n@workspace Which parts of this codebase would break if I removed [name a module or function]? \nTrace all the import/require chains and list every file that depends on it directly or indirectly.\n```\n\n**After getting the response:**\n1. Open two or three of the files Copilot referenced\n2. Verify that the specific things Copilot mentioned actually exist at those locations\n3. Identify one thing Copilot got wrong or missed\n\n**This verification step is mandatory.** It builds your instinct for when to trust `@workspace` and when to double-check."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Government Document Workflow",
+      "content": "For government workers: use Copilot Chat with participants and variables to process real work documents — policy analysis, report drafting, or data processing automation.\n\n**Choose your task:**\n\n**Track A — Policy/Document Review**\nIf you have a policy, procedure, or technical document (even a long email chain):\n1. Save it as a `.md` or `.txt` file in VS Code\n2. In chat: `@workspace Summarize #file:[your-document] into 5 key points. Then list: what actions are required, by whom, and by when.`\n3. Follow up: `@workspace What questions should a government employee ask their supervisor after reading this document?`\n\n**Track B — Automation Script**\nIf you have a repeated manual data task (copying from spreadsheets, formatting reports):\n1. Describe the task in a comment block in a new .py file\n2. `@workspace /new Write a Python script that [your task description]. Use the pattern in #file:[any existing script in the project].`\n\n**Track C — Report Structure**\n```\n@workspace /new Create a Python script that reads a CSV file, validates that \nit has required columns [list columns], removes duplicate rows, outputs a \nsummary count by [a category column], and saves the cleaned file with a \ntimestamp in the filename. The output should match the format in #file:[any sample report].\n```\n\n**Deliverable:** A working script or structured document summary that reduces your actual manual workload."
+    },
+    {
+      "type": "quiz",
+      "question": "You're debugging an error that appeared in the VS Code integrated terminal. What is the most efficient way to ask Copilot about it?",
+      "options": [
+        "Copy the error text, paste it into Copilot Chat, and describe what command you ran",
+        "Use @terminal in Copilot Chat — this gives Copilot direct access to your last command and its output without you needing to copy anything",
+        "Take a screenshot of the terminal and attach it to a chat message",
+        "Ask @workspace to search for the error message in your codebase"
+      ],
+      "correct": 1,
+      "explanation": "The @terminal participant gives Copilot direct access to the terminal context — the last command run, its output, your current directory, and your shell type. This eliminates copy-pasting and gives Copilot the full context (not just the part you'd think to copy). Just open chat, type @terminal, add your question, and Copilot sees the whole terminal state."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the difference between using #file to attach a file and using @workspace to ask about it?",
+      "options": [
+        "There is no difference — they both provide the same file content",
+        "#file attaches the specific file content to your current message; @workspace searches your entire project index and pulls in whatever context is most relevant to your question",
+        "#file is only for reading; @workspace can edit files",
+        "@workspace is faster because it only reads one file at a time"
+      ],
+      "correct": 1,
+      "explanation": "#file explicitly attaches the full content of a specific file to your message. @workspace searches the entire indexed codebase and retrieves the most relevant snippets — you don't specify what it reads, it decides. Use #file when you know exactly which file is relevant. Use @workspace when you're not sure which files matter, or when the answer might involve multiple files across the project."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-11 complete.** You now have full control of Copilot Chat's context system: participants to route questions to the right specialist, variables to attach precise file and selection context, and slash commands to trigger specific behaviors reliably. Most Copilot users never use any of these — which means your questions are now dramatically more specific, and your answers are dramatically more useful. Lesson 6-12 covers Copilot Edits, which applies this same precision to multi-file editing sessions."
+    }
+  ],
+  "nextLesson": "6-12",
+  "prevLesson": "6-10"
+}

@@ -1,0 +1,124 @@
+{
+  "id": "6-9",
+  "title": "Copilot Agent Mode: MCP, Jira & Model Selection",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": [
+    "copilot",
+    "vscode",
+    "mcp",
+    "jira",
+    "agent-mode",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLessons 6-1, 6-2, and 6-3 covered the basics: code suggestions, autocomplete, and chat. Those are all **ask-and-receive** tools — you ask, Copilot answers, you decide what to do with the result.\n\nThis lesson covers the **next level: Copilot Agent Mode**, where Copilot can act on your behalf — not just suggest code, but read files, run terminal commands, call external tools, and update your Jira board without you switching apps.\n\nSpecifically, you'll learn:\n- What Copilot Agent Mode is and how to turn it on\n- How to connect **MCP servers** to Copilot (so it can talk to external systems)\n- How to wire Copilot to **Jira** so it can read and update your backlog from VS Code\n- How to **switch AI models** inside Copilot to get the best result for each task"
+    },
+    {
+      "type": "text",
+      "content": "## From Chat to Agent: What's the Difference?\n\nIn normal Copilot Chat (lesson 6-3), the workflow looks like this:\n\n1. You ask a question\n2. Copilot responds with text and code suggestions\n3. You copy, apply, or reject the suggestions yourself\n\n**Agent Mode** changes step 3. Instead of just giving you text, Copilot can:\n- Open and edit multiple files\n- Run terminal commands and read their output\n- Call tools connected via MCP\n- Chain multiple steps together without you re-prompting\n\nThink of it like the difference between asking a colleague \"how would you fix this bug?\" (chat) versus asking them to \"go fix this bug, run the tests, and update the Jira ticket\" (agent).\n\nAgent Mode is more powerful — and more important to supervise. You should always review what it's about to do before confirming."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Requirements before you start:**\n- VS Code version **1.99 or later** (check via Help → About)\n- GitHub Copilot extension installed and signed in (lesson 6-1)\n- A GitHub Copilot subscription (Individual, Business, or Enterprise)\n- Node.js installed (for MCP servers that use `npx`)\n\nTo check your VS Code version: open VS Code, press **Ctrl+Shift+P**, type `About`, and select **Help: About**. If you're below 1.99, go to Help → Check for Updates."
+    },
+    {
+      "type": "text",
+      "content": "## Enabling Agent Mode in Copilot\n\nAgent Mode is built into recent versions of the Copilot extension but may not be enabled by default.\n\n**Step 1 — Open VS Code Settings**\nPress **Ctrl+,** (comma) to open Settings. Search for `chat agent`.\n\n**Step 2 — Enable the setting**\nFind **GitHub Copilot Chat: Agent Enabled** and tick the checkbox.\n\n**Step 3 — Open Copilot Chat**\nPress **Ctrl+Alt+I** to open the Copilot Chat panel.\n\n**Step 4 — Switch to Agent mode**\nAt the top of the chat panel, you'll see a mode selector. It may say **Ask** or **Edit**. Click it and select **Agent**.\n\nYou're now in Agent Mode. Copilot can use tools, run commands, and operate across your codebase. You'll notice a new **Tools** button appears — this is where MCP tools show up once you connect them.\n\n> **What Agent Mode looks like differently:** When you ask something in Agent Mode, Copilot shows its reasoning steps — \"Reading file...\", \"Running command...\", \"Calling tool...\" — before giving you a final answer. You can approve or cancel at each step."
+    },
+    {
+      "type": "text",
+      "content": "## What Is MCP and Why Does It Matter Here?\n\nYou first met MCP in Part 8 of this course. Quick recap:\n\n**MCP (Model Context Protocol)** is an open standard that lets AI tools connect to external systems — databases, APIs, project management tools — using a common plug-in format. Instead of every AI tool building its own custom Jira integration, any MCP-compatible AI can use any MCP server.\n\nCopilot Agent Mode **supports MCP servers** natively in VS Code 1.99+. This means:\n- You install an MCP server once\n- Configure it in VS Code\n- Every Copilot Agent Mode session can call its tools\n\nFor this lesson, you'll connect the **Atlassian MCP server**, which gives Copilot tools to search Jira issues, read issue details, and create or update issues — all from inside VS Code chat."
+    },
+    {
+      "type": "text",
+      "content": "## Connecting an MCP Server to Copilot\n\nVS Code reads MCP server configuration from two places:\n\n**1. Workspace-scoped (just this project):** `.vscode/mcp.json` in your project folder\n**2. User-scoped (all projects):** Your VS Code `settings.json` under the `mcp.servers` key\n\nFor most team use, workspace-scoped (`.vscode/mcp.json`) is recommended — it version-controls the config with your project and every teammate picks it up automatically.\n\n### The Config File Format\n\nCreate (or open) `.vscode/mcp.json` in your project and add this structure:\n\n```json\n{\n  \"servers\": {\n    \"server-name\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"package-name\"],\n      \"env\": {\n        \"KEY\": \"value\"\n      }\n    }\n  }\n}\n```\n\n- **`command`** — the executable VS Code will run to start the MCP server (`npx`, `uvx`, `node`, `python`, etc.)\n- **`args`** — arguments passed to that command\n- **`env`** — environment variables the server needs (API keys, URLs, etc.)\n\nVS Code starts and stops the MCP server automatically when you open Agent Mode. You don't run it manually."
+    },
+    {
+      "type": "text",
+      "content": "## Jira via MCP: Step-by-Step Setup\n\nThe Atlassian MCP server (`@atlassian/mcp-atlassian`) is the official package for connecting to Jira and Confluence. Here's how to set it up.\n\n### Step 1 — Get a Jira API Token\n\n1. Go to **id.atlassian.com/manage-profile/security/api-tokens**\n2. Click **Create API token**\n3. Give it a name like `VS Code Copilot`\n4. Copy the token — you won't see it again\n\n> **Don't have Jira?** You can create a free Atlassian Cloud account at atlassian.com — it includes a free Jira project you can use to practice.\n\n### Step 2 — Create the MCP config file\n\nIn your VS Code project, create `.vscode/mcp.json`:\n\n```json\n{\n  \"servers\": {\n    \"atlassian\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@atlassian/mcp-atlassian\"],\n      \"env\": {\n        \"JIRA_URL\": \"https://your-domain.atlassian.net\",\n        \"JIRA_USERNAME\": \"your@email.com\",\n        \"JIRA_API_TOKEN\": \"your-api-token-here\"\n      }\n    }\n  }\n}\n```\n\nReplace the three values with your actual Jira URL, email, and API token.\n\n### Step 3 — Reload VS Code\n\nPress **Ctrl+Shift+P** → **Developer: Reload Window**. VS Code will detect the new MCP config.\n\n### Step 4 — Open Agent Mode and check the Tools list\n\nPress **Ctrl+Alt+I**, switch to **Agent** mode, then click the **Tools** icon (looks like a plug or wrench). You should see Atlassian tools listed:\n- `jira_get_issue` — read a specific issue by key\n- `jira_search` — search issues with JQL\n- `jira_create_issue` — create a new issue\n- `jira_update_issue` — update fields on an existing issue\n- `confluence_search` — search Confluence pages\n\nIf you see these, Copilot is now connected to your Jira.\n\n### Step 5 — Test it with a quick prompt\n\nIn Agent Mode, type:\n```\nSearch my Jira for any open bugs. Show me the issue keys and summaries.\n```\n\nCopilot will call `jira_search` with a JQL query, read the response, and summarise the results in chat. No app switching, no copy-pasting issue keys."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Keep API tokens out of version control.** The `.vscode/mcp.json` file contains your Jira API token. If your project is on GitHub, add `.vscode/mcp.json` to your `.gitignore` immediately:\n```\necho \".vscode/mcp.json\" >> .gitignore\n```\nNever commit credentials to a repository, even a private one. For team setups, use environment variables or a secrets manager — your team's `.vscode/mcp.json` should reference `${env:JIRA_API_TOKEN}` instead of a hardcoded value."
+    },
+    {
+      "type": "text",
+      "content": "## What You Can Do With Copilot + Jira\n\nOnce connected, Copilot Agent Mode can participate in your real workflow:\n\n**Reading issues before starting work:**\n```\nI'm about to start ticket PROJ-142. Fetch that issue and summarise what needs to be done.\n```\n\n**Connecting code to tickets:**\n```\nLook at the changes I just made (in git diff). Which open Jira tickets do these changes address? \nList the issue keys.\n```\n\n**Creating tickets from code:**\n```\nI found a bug in auth.js line 47 — null check is missing on the user object before calling .getRole(). \nCreate a Jira bug ticket for this: severity Medium, component Backend Auth, with a clear description \nand steps to reproduce.\n```\n\n**Updating ticket status:**\n```\nI just finished the implementation for PROJ-156. Update that ticket's status to In Review \nand add a comment: \"Implementation complete, PR #234 ready for review.\"\n```\n\nEvery one of these used to require switching to a browser, finding the right project, navigating to the issue, and typing manually. With MCP, it's a one-sentence prompt."
+    },
+    {
+      "type": "text",
+      "content": "## Choosing the Right Model in Copilot\n\nCopilot doesn't use just one AI model. As of 2025, Copilot Chat gives you a **model picker** — a dropdown that lets you choose which model handles your request.\n\n### How to Switch Models\n\nIn the Copilot Chat panel (either Ask or Agent mode), look for the **model selector** at the bottom or top of the input field. It shows the current model name (e.g., \"GPT-4o\"). Click it to see the full list.\n\n### Available Models (varies by subscription)\n\n| Model | Best for |\n|-------|----------|\n| **GPT-4.1** | General coding, refactoring, explanations — the reliable default |\n| **GPT-4o** | Balanced speed and quality; good for interactive chat |\n| **o3** | Complex reasoning, algorithm design, hard bugs — slower but thorough |\n| **o4-mini** | Fast reasoning tasks, good for routine questions |\n| **Claude Sonnet 4** | Long context, documentation, nuanced explanations |\n| **Claude Opus 4** | The most capable for complex multi-step tasks |\n| **Gemini 2.0 Flash** | Very fast, great for quick lookups and short tasks |\n| **Gemini 2.5 Pro** | Strong at analysis and multi-file reasoning |\n\n> **Not all models appear for all subscription tiers.** Copilot Individual has access to the main models. Copilot Business and Enterprise add additional options and higher rate limits. Check GitHub's documentation for the current model list for your plan.\n\n### When to Switch Models\n\n**Stick with the default (GPT-4.1 or GPT-4o) for:**\n- Everyday autocomplete and quick fixes\n- Explaining code\n- Writing tests\n\n**Switch to a reasoning model (o3, o4-mini) for:**\n- Debugging a tricky multi-file issue\n- Designing an algorithm\n- When the default gives you a wrong or shallow answer\n\n**Switch to Claude for:**\n- Reading and summarising long files or documentation\n- Writing commit messages, PR descriptions, or Jira ticket summaries\n- Tasks where tone and phrasing quality matter\n\n**Switch to Gemini for:**\n- Very fast, iterative back-and-forth where you need quick responses\n- When you're on a rate limit from other models\n\n### Models and Agent Mode\n\nYou can switch models while in Agent Mode. The model choice affects the **reasoning quality** — complex multi-step agent tasks (like \"read the codebase, find the relevant bug, fix it, write a test, and update Jira\") benefit from reasoning models. Simpler tasks run faster on Gemini Flash or GPT-4o."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Model switching tip for Jira tasks:** When using Copilot Agent + Jira MCP to write ticket descriptions or summaries, switch to **Claude Sonnet** or **Claude Opus**. These models produce noticeably better prose — clearer descriptions, better-structured acceptance criteria, more useful comments. Switch back to GPT-4o or Gemini when doing the actual code work."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Set Up MCP + Jira and Resolve a Real Ticket",
+      "content": "In this workshop you'll connect Copilot to a real Jira project and use it to close out an actual ticket — not a demo, not a fake task.\n\n**Preparation (do before starting the timer):**\n- A Jira Cloud project you have access to (free atlassian.com account works)\n- A Jira API token (from id.atlassian.com/manage-profile/security/api-tokens)\n- VS Code 1.99+ with Copilot Agent Mode enabled\n\n**Step 1 — Create the MCP config**\nIn your project folder (or any folder open in VS Code), create `.vscode/mcp.json`:\n```json\n{\n  \"servers\": {\n    \"atlassian\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@atlassian/mcp-atlassian\"],\n      \"env\": {\n        \"JIRA_URL\": \"https://YOUR-DOMAIN.atlassian.net\",\n        \"JIRA_USERNAME\": \"your@email.com\",\n        \"JIRA_API_TOKEN\": \"your-token\"\n      }\n    }\n  }\n}\n```\n\n**Step 2 — Reload and verify**\nReload VS Code. Open Copilot Chat → Agent mode → Tools. Confirm Atlassian tools appear.\n\n**Step 3 — Pick a real ticket to work on**\nIn Jira, find one open ticket — a bug, a feature, a task. Note its issue key (e.g., `MYPROJ-23`).\n\n**Step 4 — Brief yourself from VS Code**\nIn Copilot Agent Mode:\n```\nFetch Jira issue [YOUR-KEY] and give me a briefing: what needs to be done, what the acceptance criteria are, and any notes in the comments.\n```\nCopilot reads the ticket and summarises it. Did it capture the important details?\n\n**Step 5 — Do the work, then update Jira from VS Code**\nDo whatever the ticket requires (even if just a small change for practice). Then in Copilot:\n```\nI just completed [YOUR-KEY]. Please:\n1. Update the ticket status to Done (or In Review)\n2. Add a comment explaining what was done and referencing any relevant files changed\n```\nVerify in your browser that Jira was actually updated.\n\n**What you've built:** A real end-to-end workflow from ticket read to ticket close, entirely within VS Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop A — Model Comparison: Same Task, Three Models",
+      "content": "This workshop reveals how much model choice matters — and when it doesn't.\n\n**Setup:** Open a file in your codebase (at least 50 lines of real code). Open Copilot Chat in Ask mode.\n\n**Task to repeat with 3 different models:**\nAsk: *\"Explain what this file does, what its main responsibilities are, and what I should watch out for when making changes to it.\"*\n\n**Round 1 — Default model (GPT-4o or GPT-4.1)**\nAsk the question. Copy the response.\n\n**Round 2 — Claude Sonnet or Claude Opus**\nSwitch the model using the model picker. Ask the exact same question. Copy the response.\n\n**Round 3 — Gemini Flash or o4-mini**\nSwitch again. Same question. Copy the response.\n\n**Evaluation (write your answers):**\n1. Which response was the most accurate about what the code does?\n2. Which response was the most readable and well-written?\n3. Which was fastest?\n4. Was there a meaningful quality difference, or were they roughly equivalent for this task?\n\n**Verdict:** For most code explanation tasks, quality differences are small. But for longer files or more nuanced analysis, Claude and o3 often outperform GPT-4o on thoroughness. Gemini Flash is the fastest if speed matters more than depth."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop B — Jira Workflow: Brief → Build → Close",
+      "content": "Build a complete ticket lifecycle using Copilot + Jira MCP.\n\n**Prerequisite:** MCP config from the main workshop is already set up.\n\n**Step 1 — Search for work to do**\nIn Copilot Agent Mode:\n```\nSearch my Jira project for open tickets assigned to me, or unassigned tickets in the To Do column. \nList the top 5 by priority.\n```\n\n**Step 2 — Pick one and read it properly**\nFrom the list, pick the highest-priority ticket. Then:\n```\nFetch [ISSUE-KEY] in full. Include: description, acceptance criteria, attachments mentioned, \ncomments from other team members, and the current status.\n```\n\n**Step 3 — Ask Copilot to plan the implementation**\nWith the ticket loaded:\n```\nBased on this Jira ticket, suggest an implementation plan. What files in my project would need to \nchange? What's the right order of changes? What edge cases should I handle?\n```\nCopilot uses both the Jira data AND your codebase (if you have workspace access enabled) to answer.\n\n**Step 4 — Make at least one real change**\nEven if small. Real code change, not just a note.\n\n**Step 5 — Close the loop**\n```\nI've completed [ISSUE-KEY]. Transition it to Done. Add a comment: what I changed, which file, \nand why it addresses the original problem. Keep the comment professional.\n```\n\n**Outcome:** You've run a full sprint ticket from your IDE without opening Jira in a browser once."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop C — Agent Mode Multi-Step Task",
+      "content": "Test what Copilot Agent Mode can do with a complex, multi-step instruction.\n\n**Setup:** Have a project open in VS Code with at least a few source files.\n\n**The prompt (give this to Copilot Agent Mode in one go):**\n```\nDo the following in sequence:\n1. Search my Jira for any open bug tickets\n2. Pick the highest-priority one and read its full details\n3. Search my codebase for the code most likely related to that bug\n4. Suggest a fix\n5. Apply the fix to the file\n6. Update the Jira ticket with a comment describing what you found and changed\n\nAt each step, show me what you're doing before doing it.\n```\n\n**What to watch:**\n- Copilot shows each tool call before executing\n- You can approve or cancel at any step\n- Watch how it reasons between the Jira data and the codebase — does it connect the right dots?\n\n**Evaluation:**\n- Did the agent complete all 6 steps?\n- Was the bug it identified actually related to the Jira ticket?\n- Was the fix it applied reasonable?\n- Would you use this workflow in real work, or was it too unreliable?\n\n**Key lesson:** Agent Mode is powerful for well-defined tasks but requires supervision. Complex chains sometimes go wrong in step 4 or 5. You are the reviewer, not just the requester."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build Your Personal Copilot + Jira Workflow Document",
+      "content": "Turn what you've learned into a documented workflow you'll actually use.\n\n**Create a file** in your project called `ai-workflow.md` (or add to an existing team wiki).\n\n**Include these sections:**\n\n**Section 1 — My MCP Setup**\nDocument your `.vscode/mcp.json` config (with API token replaced by a placeholder). Include what servers you've connected and why.\n\n**Section 2 — My Jira Prompts**\nWrite 5 specific prompts you'll use regularly:\n- One for reading your morning backlog\n- One for briefing yourself before starting a ticket\n- One for creating a bug report from code you just found\n- One for writing an end-of-sprint update\n- One custom prompt for something specific to your team's workflow\n\n**Section 3 — My Model Selection Rules**\nFinish these sentences based on your Workshop A results:\n- \"For code explanation I use [MODEL] because...\"\n- \"For complex debugging I use [MODEL] because...\"\n- \"For writing Jira ticket descriptions I use [MODEL] because...\"\n- \"For quick iterative questions I use [MODEL] because...\"\n\n**Section 4 — Limitations I found**\nWrite 2-3 things that didn't work as expected in Agent Mode or the Jira integration. This section is as valuable as the rest — knowing the limits of a tool is knowing the tool.\n\n**Outcome:** A reference document you can hand to a teammate who asks \"how do you use Copilot with Jira?\""
+    },
+    {
+      "type": "quiz",
+      "question": "You open Copilot Agent Mode and ask it to fetch a Jira ticket, but no Atlassian tools appear in the Tools list. What is the most likely cause?",
+      "options": [
+        "Your Jira API token is wrong",
+        "VS Code has not loaded the .vscode/mcp.json file, possibly because you haven't reloaded the window after creating it, or the JSON syntax is invalid",
+        "Copilot does not support MCP yet",
+        "You need to restart your computer"
+      ],
+      "correct": 1,
+      "explanation": "VS Code reads MCP config when the window loads. If you created or edited .vscode/mcp.json without reloading, the MCP servers won't appear. Also check that the JSON is valid — a missing comma or bracket silently breaks the whole file. Use Ctrl+Shift+P → Developer: Reload Window after any change to mcp.json. If tools still don't appear after reloading, check the Output panel (View → Output → MCP) for error messages."
+    },
+    {
+      "type": "quiz",
+      "question": "You want Copilot Agent Mode to write a detailed Jira ticket description from a code review you just completed. Which model switch makes the most sense and why?",
+      "options": [
+        "Switch to GPT-4o — it is the fastest for all tasks",
+        "Switch to Gemini Flash — it handles Jira integrations natively",
+        "Switch to Claude Sonnet or Opus — Claude produces noticeably clearer prose and better-structured written content compared to the default models",
+        "No switch needed — model selection doesn't affect ticket writing quality"
+      ],
+      "correct": 2,
+      "explanation": "Model selection matters most for writing tasks. Claude models are trained to produce high-quality, well-structured prose — and Jira ticket descriptions, acceptance criteria, and comments are writing tasks, not code tasks. Switching to Claude Sonnet (or Opus for the most thorough output) before asking Copilot to draft ticket content typically produces noticeably cleaner results than the GPT-4o default. Switch back to the default for the actual coding work."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-9 complete.** You can now connect MCP servers to Copilot Agent Mode, integrate Jira so you can read and update tickets without leaving VS Code, and pick the right model for each kind of task. These three capabilities together — agent autonomy, external tool access via MCP, and deliberate model selection — are what separate a basic Copilot user from someone who's genuinely faster with AI than without it. Lesson 6-4 covers Continue.dev, the free open-source alternative that follows a similar agent + MCP model using any AI backend you choose."
+    }
+  ],
+  "nextLesson": "6-10",
+  "prevLesson": "6-3"
+}

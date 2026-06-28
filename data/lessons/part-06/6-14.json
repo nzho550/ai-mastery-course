@@ -1,0 +1,99 @@
+{
+  "id": "6-14",
+  "title": "GitHub Copilot CLI — Terminal-Native AI Agent",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": ["copilot", "cli", "terminal", "agents", "automation", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nVS Code is not the only place Copilot lives. **GitHub Copilot CLI** is a fully autonomous, terminal-native coding agent that you run directly from your command line — no IDE required.\n\nThe CLI has grown into a complete development environment of its own: it plans, builds, reviews, and remembers across sessions. It can delegate work to background cloud agents while you continue in the terminal. It has persistent memory that builds up understanding of your repository over time.\n\nFor government workers and analysts who work heavily in terminals, scripts, and automated pipelines, the CLI is often faster than switching to VS Code for every AI task. You'll learn:\n- How to install and set up Copilot CLI\n- All key slash commands and what they do\n- The specialized built-in agents\n- Session context management and memory\n- Tool permissions and security controls"
+    },
+    {
+      "type": "text",
+      "content": "## Installing GitHub Copilot CLI\n\nCopilot CLI is generally available for all paid Copilot subscribers (Individual, Business, Enterprise).\n\n### Installation Options\n\n**Windows (WinGet — recommended, auto-updates):**\n```\nwinget install GitHub.CopilotCLI\n```\n\n**Windows (npm):**\n```\nnpm install -g @github/copilot-cli\n```\n\n**Mac (Homebrew — auto-updates):**\n```\nbrew install gh-copilot-cli\n```\n\n**Universal (shell install script):**\n```\ncurl -fsSL https://cli.github.com/copilot/install.sh | sh\n```\n\n**Via GitHub CLI extension:**\n```\ngh extension install github/gh-copilot\n```\n\n### First-Time Setup\n\nAfter installation, authenticate:\n```\ngh auth login\n```\nFollow the prompts to sign in with your GitHub account. Copilot CLI uses your existing GitHub Copilot subscription — no separate billing.\n\nStart a session:\n```\ngh copilot\n```\nOr use the shorter alias `copilot` if your installation sets it up.\n\nYou'll see a prompt. You're now talking to a terminal-native AI agent with full access to your shell."
+    },
+    {
+      "type": "text",
+      "content": "## The Core Slash Commands\n\nCopilot CLI has a set of slash commands that control the session, manage context, and trigger specific behaviors.\n\n### Session Management Commands\n\n**`/diff`**\nShows all code changes made during your current session as syntax-highlighted inline diffs. You can add line-specific comments and submit them as structured feedback. Toggle between session changes and branch diffs to see what's changed relative to main.\n```\n/diff\n```\n\n**`/review`**\nAnalyzes staged or unstaged changes directly in the CLI for a quick sanity check before committing. Gives you the same quality of review as the GitHub.com PR review, but for uncommitted local changes.\n```\n/review\n```\n\n**`/compact`**\nManually compresses the session context. Copilot CLI auto-compacts at 80% context usage, but you can trigger it manually before starting a new major task — clears old context and gives the new task maximum space.\n```\n/compact\n```\n\n**`/resume`**\nResumes a previous session. Copilot CLI saves session history — you can list previous sessions and pick up exactly where you left off, even days later.\n```\n/resume\n```\n\n**`/model`**\nSwitches the AI model mid-session.\n```\n/model\n```\nShows available models. Select one to switch. The session continues with the new model from that point forward.\n\n### The `/chronicle` Commands — Your AI Work Journal\n\nChronicle analyzes your session history across multiple past sessions to extract useful patterns and summaries.\n\n**`/chronicle standup`** — Generates a standup report: what you worked on in recent CLI sessions. Useful for morning standups or weekly reports.\n\n**`/chronicle tips`** — Reviews your sessions and gives you personalized tips for using Copilot CLI more effectively, based on patterns in your actual usage.\n\n**`/chronicle improve`** — Analyzes sessions where Copilot misunderstood your intent and generates custom instruction suggestions to prevent the same misunderstanding in future.\n\n**`/chronicle search [query]`** — Searches your session history for sessions related to a query. Useful for finding a past conversation where you solved a specific problem."
+    },
+    {
+      "type": "text",
+      "content": "## Specialized Built-In Agents\n\nCopilot CLI automatically delegates to specialized sub-agents when the task matches their expertise. You don't summon these manually — Copilot routes to them based on what you ask.\n\n### Explore Agent\nFast codebase analysis. When you ask questions about your code (\"where is X defined?\", \"how does Y work?\", \"what files handle authentication?\"), Copilot delegates to Explore to analyze the repo quickly without cluttering the main context window.\n\nThe Explore agent reads code rapidly and reports back findings. It's like having a senior developer do a fast code read and summarize what they found.\n\n### Task Agent\nRuns builds and tests. When you ask Copilot to verify something, run the test suite, or check that a build succeeds, Task handles the execution and reports results back to the main agent.\n\n### Code Review Agent\nHigh-signal change review. Invoked when you ask Copilot to review code — either via `/review` or by asking it to evaluate a diff. Focuses on actionable issues, not superficial style comments.\n\n### Plan Agent\nImplementation planning. When you ask \"how should I implement X?\" or \"what's the best approach for Y?\", Plan creates a structured implementation plan before any code is written. Useful for aligning on approach before committing to an implementation.\n\n### Background Delegation with `&`\nPrefix any prompt with `&` to delegate the work to the Copilot cloud agent in the background. Your terminal stays free while the cloud agent works. Use `/resume` to check in on or continue the background session.\n\n```\n& Fix all the failing tests in the authentication module and create a PR\n```\nCopilot starts the cloud agent, you get your terminal back, the agent works in the cloud."
+    },
+    {
+      "type": "text",
+      "content": "## Context Management and Memory\n\n### The Context Window\nEvery message, response, tool call, and system instruction in your session occupies space in Copilot's context window. When it fills up, older context is lost, which can cause Copilot to forget earlier parts of the conversation.\n\nCopilot CLI manages this automatically:\n- **80% context used:** Auto-compaction begins in the background. Session continues uninterrupted.\n- **95% context used:** CLI briefly pauses to wait for compaction to finish before continuing.\n- **Manual compaction:** Run `/compact` any time to preemptively clear space before starting a new major task.\n\n### Copilot Memory — Persistent Understanding\nCopilot Memory is a feature where Copilot builds a persistent understanding of your repository across sessions. It stores memories — coding conventions, architecture decisions, naming patterns, recurring issues — as it works.\n\nThese memories load automatically in future sessions, so you don't have to re-explain your project every time. Think of it as Copilot gradually building its own `copilot-instructions.md` from observing your work.\n\nYou can view and manage memories with:\n```\n/memory list\n/memory forget [memory-id]\n```\n\n### Tool Permissions and Security\n\nYou can control exactly which tools Copilot can use. This is critical for security-sensitive environments.\n\n```bash\n# Allow only specific tools\ncopilot --allow-tool='shell(grep)' --allow-tool='shell(cat)'\n\n# Deny specific dangerous commands\ncopilot --deny-tool='shell(rm)'\ncopilot --deny-tool='shell(git push)'\n\n# Allow specific git subcommands\ncopilot --allow-tool='shell(git add)' --deny-tool='shell(git push)'\n```\n\nWeb fetch permissions are controlled in `~/.copilot/config`:\n```yaml\nallowed_urls:\n  - \"https://docs.github.com/*\"\ndenied_urls:\n  - \"*\"\n```\n\nThis allows Copilot to fetch GitHub docs but nothing else — useful in government environments where external data access must be controlled."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Security note for government environments:** Copilot CLI can execute shell commands. Before using it on government systems, check your organization's policies on:\n1. AI tool usage on government-managed hardware\n2. What data can be sent to external AI services (even enterprise plans)\n3. Whether command execution by AI requires additional approval\n\nUse `--deny-tool` flags to restrict Copilot from performing destructive operations (rm, git push --force, database writes) until you're confident in its judgment on a specific task."
+    },
+    {
+      "type": "text",
+      "content": "## Custom Agents\n\nYou can define your own specialized agents as Markdown files. Custom agents have a specific expertise, a limited toolset, and specific instructions.\n\n**Example: A compliance-checker agent**\n\nCreate `~/.copilot/agents/compliance-check.md` (or in your repo at `.copilot/agents/`):\n```markdown\n---\nname: compliance-check\ndescription: Checks code changes for government compliance requirements\ntools:\n  - read_file\n  - list_files\n  - search_files\n---\n\nYou are a government compliance checker. When reviewing code, check for:\n1. PII exposure: variables, logs, or outputs that contain personal data\n2. Audit logging: all data modifications must be logged with user ID and timestamp\n3. Error message safety: error messages must not expose system internals\n4. Access control: all data access must check user permissions first\n\nFor each issue found: state the file, line number, the specific concern, and the recommended fix.\nDo not suggest code changes — only identify and explain issues.\n```\n\nInvoke it: `copilot use compliance-check`\n\nThen ask it to review your changes. It operates with read-only tools and compliance-specific instructions, separate from your main coding agent."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Install Copilot CLI and Run Your First Session",
+      "content": "Set up Copilot CLI and complete a real task from start to finish.\n\n**Step 1 — Install**\nChoose your installation method from the lesson above. For Windows users: `winget install GitHub.CopilotCLI` is the easiest.\n\n**Step 2 — Authenticate**\n```\ngh auth login\n```\nSign in with the GitHub account that has your Copilot subscription.\n\n**Step 3 — Navigate to a project folder**\n```\ncd path/to/your/project\n```\n\n**Step 4 — Start a session**\n```\ngh copilot\n```\n\n**Step 5 — Run these exploration prompts:**\n```\nExplain what this project does in 3 sentences.\n```\n```\nList the 5 most important files in this project and what each one does.\n```\n```\nWhat would a new developer need to set up to run this project locally?\n```\n\n**Step 6 — Run `/diff`**\n```\n/diff\n```\nIf you've made any changes, you'll see them as highlighted diffs. If not, the output is empty.\n\n**Step 7 — Check session chronicle**\n```\n/chronicle standup\n```\nOn your first session it may have nothing to summarize, but run it to confirm it's working.\n\n**Step 8 — Switch models**\n```\n/model\n```\nSelect a different model (Claude Sonnet if available). Ask the same exploration question. Compare the output quality."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Real Bug Fix with CLI",
+      "content": "Use Copilot CLI to find and fix a real bug without opening VS Code.\n\n**Step 1 — Find a real failing test or known bug** in your project. If you don't have one, introduce a deliberate bug: off-by-one error in a loop, missing null check, wrong conditional.\n\n**Step 2 — Start a CLI session** in your project directory.\n\n**Step 3 — Describe the bug:**\n```\nThe test test_[name] is failing. Find out why and fix it.\n```\nCopilot reads the test, finds the code under test, analyzes the failure.\n\n**Step 4 — Let it apply the fix.** Review what it proposes. Type `yes` to allow it to edit the file.\n\n**Step 5 — Verify:**\n```\nRun the tests and confirm the fix works.\n```\n\n**Step 6 — Review the changes:**\n```\n/review\n```\nSee Copilot's analysis of what it changed and whether it looks clean.\n\n**Step 7 — Chronicle the session:**\n```\n/chronicle standup\n```\nDoes it accurately summarize what you just did?\n\n**Measure:** How long did this take compared to the same task in VS Code? Is the CLI workflow faster or slower for this type of bug?"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop B — Background Delegation",
+      "content": "Use the `&` prefix to run a task in the background cloud agent while you continue working.\n\n**Step 1 — Start a Copilot CLI session** in your project.\n\n**Step 2 — Give a background task** (something that takes a while):\n```\n& Search the entire codebase for any functions that don't have error handling on database operations. Create a list in a file called missing-error-handling.md with: file name, function name, line number, and why it's a risk.\n```\n\nThe `&` prefix delegates this to the cloud. You get your terminal back immediately.\n\n**Step 3 — Continue other work** in the terminal while it runs. This is the point — you don't wait.\n\n**Step 4 — Check the background session:**\n```\n/resume\n```\nSelect the background session. See what the cloud agent found and produced.\n\n**Step 5 — Review `missing-error-handling.md`**\nIs the file accurate? Are the identified functions genuinely missing error handling?\n\n**Key insight:** Background delegation is most valuable for long analysis tasks (scanning the whole codebase, generating comprehensive documentation, running tests with analysis) that would otherwise block your terminal for minutes."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop C — Context Management Under Pressure",
+      "content": "Deliberately stress-test context management to understand how and when to use /compact.\n\n**Step 1 — Start a fresh CLI session** in a large project (or the largest one you have).\n\n**Step 2 — Have a long conversation.** Ask 8-10 questions about the codebase, make some code changes, run some tools. Keep going until Copilot starts to seem like it's forgetting earlier context.\n\n**Step 3 — Test context retention:**\nAsk about something specific you discussed in step 1:\n```\nEarlier I asked about [topic]. What did you find?\n```\nDoes it remember? If not, context may have been partially lost.\n\n**Step 4 — Run /compact manually:**\n```\n/compact\n```\n\n**Step 5 — Start a new phase of work.** Notice that Copilot has preserved the key facts about your project but the conversational history is summarized.\n\n**Step 6 — Test memory:**\nDo a task that touches patterns Copilot has seen before. Does it remember your coding conventions from earlier in the session after compaction?\n\n**Insight to document:** At approximately what point in a session does context degradation become noticeable? Write this down — it'll help you know when to proactively /compact."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop D — Tool Permissions Setup for Secure Use",
+      "content": "Configure Copilot CLI for use in a security-conscious environment.\n\n**Scenario:** You want to use Copilot CLI to help with code analysis and writing, but you don't want it to be able to: delete files, push to remote git, or make network requests outside of approved documentation sites.\n\n**Step 1 — Create a restricted startup alias.**\nIn your shell config (`.bashrc`, `.zshrc`, or PowerShell profile):\n```bash\nalias safe-copilot='gh copilot --deny-tool=\"shell(rm)\" --deny-tool=\"shell(git push)\" --deny-tool=\"shell(curl)\" --deny-tool=\"shell(wget)\"'\n```\n\n**Step 2 — Configure allowed URLs** in `~/.copilot/config`:\n```yaml\nallowed_urls:\n  - \"https://docs.github.com/*\"\n  - \"https://docs.python.org/*\"\n  - \"https://docs.microsoft.com/*\"\ndenied_urls:\n  - \"*\"\n```\nThis allows Copilot to fetch official documentation but nothing else.\n\n**Step 3 — Test the restrictions.**\nStart a session with `safe-copilot`. Ask it to delete a test file:\n```\nDelete the file test_temp.txt\n```\nCopilot should refuse or report that the rm tool is denied.\n\n**Step 4 — Test web fetch restrictions.**\nAsk it to fetch content from a non-approved URL. It should fail or report the URL is denied.\n\n**Step 5 — Document your configuration** in a README for your team so everyone uses the same safe setup.\n\n**Outcome:** A Copilot CLI setup that can help with coding tasks but is locked out of destructive or unauthorized operations — appropriate for regulated environments."
+    },
+    {
+      "type": "quiz",
+      "question": "Your Copilot CLI session is running a long codebase analysis and you need to start working on a different, unrelated task immediately. What should you do?",
+      "options": [
+        "Wait for the analysis to finish — the session can only do one thing at a time",
+        "Open a second terminal window and start a new Copilot CLI session there",
+        "Type & before your new task prompt to delegate the analysis to the background cloud agent, freeing your current terminal for the new task",
+        "Use /compact to cancel the analysis and start fresh with the new task"
+      ],
+      "correct": 2,
+      "explanation": "The & prefix delegates the current task to Copilot's background cloud agent and immediately returns your terminal. The cloud agent continues the analysis while you work on something else in the same terminal session. Use /resume later to check the background agent's progress or results. Opening a second terminal also works but is less integrated — you'd lose the context of your current session."
+    },
+    {
+      "type": "quiz",
+      "question": "After two weeks of using Copilot CLI on your project, you run /chronicle improve. What does it produce?",
+      "options": [
+        "A summary of all code you've written in the past two weeks",
+        "A performance report on how fast Copilot completed your tasks",
+        "Custom instruction suggestions based on patterns where Copilot misunderstood your intent, to prevent the same issues in future sessions",
+        "A list of all slash commands you've used, sorted by frequency"
+      ],
+      "correct": 2,
+      "explanation": "/chronicle improve analyzes patterns in your session history where Copilot produced something that needed correction — where you said 'no, not that', rewrote what it generated, or rejected its approach. From these patterns it generates specific custom instruction suggestions that, if added to your config, would prevent Copilot from making those same mistakes in the future. It's a learning loop that makes Copilot better at your specific work over time."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-14 complete.** The GitHub Copilot CLI gives you a full agentic AI development environment without opening VS Code. Session management, persistent memory, background delegation, and tool permission controls make it a serious tool — not a toy. For analysts and developers who live in the terminal, the CLI combined with the `&` background mode is often faster than any IDE-based workflow. Lesson 6-15 covers Copilot for Pull Requests and automated code review — where Copilot participates in your team's review process on GitHub.com."
+    }
+  ],
+  "nextLesson": "6-15",
+  "prevLesson": "6-13"
+}

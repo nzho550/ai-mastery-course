@@ -1,0 +1,95 @@
+{
+  "id": "6-10",
+  "title": "Ghost Text & Next Edit Suggestions Mastery",
+  "part": 6,
+  "estimatedMinutes": 50,
+  "tags": ["copilot", "vscode", "autocomplete", "ghost-text", "next-edit", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 6-2 introduced autocomplete basics. This lesson goes deeper into how Copilot's suggestions actually work — so you can train them, manipulate them, and get dramatically better output than the default experience gives most users.\n\nYou'll master:\n- The exact signals Copilot uses to generate suggestions\n- Every keyboard shortcut for accepting, rejecting, and navigating suggestions\n- **Next Edit Suggestions** — Copilot's prediction of where you'll edit *next*, not just what you're typing now\n- How to write code that teaches Copilot what you want before you ask"
+    },
+    {
+      "type": "text",
+      "content": "## How Ghost Text Actually Works\n\nWhen you type in VS Code with Copilot active, Copilot sends your current file (and open tabs) to its AI model and receives a completion. That completion appears as **ghost text** — greyed-out text that is not yet part of your file.\n\nCopilot builds its suggestion from several context signals, in rough order of influence:\n\n1. **Cursor position** — what's immediately before and after where you're typing\n2. **Current file content** — functions, imports, variable names, comments in the same file\n3. **Open tabs** — other files you have open in VS Code are sampled and sent as additional context\n4. **File name** — `auth.js` primes different suggestions than `utils.js` or `test_payment.py`\n5. **Comments you wrote** — a comment above a function is the single strongest hint you can give Copilot\n6. **Recent edits** — what you just typed or deleted in the last few keystrokes\n\n**The most important insight:** Copilot is predicting what a skilled developer would write next, given everything it can see. The more context you give it, the better it predicts."
+    },
+    {
+      "type": "text",
+      "content": "## Every Ghost Text Keyboard Shortcut\n\n| Action | Windows/Linux | Mac |\n|--------|--------------|-----|\n| Accept full suggestion | `Tab` | `Tab` |\n| Reject suggestion | `Esc` | `Esc` |\n| Accept next word only | `Ctrl+→` | `Cmd+→` |\n| Accept next line only | `Ctrl+Alt+→` | `Cmd+Option+→` |\n| Next suggestion (cycle) | `Alt+]` | `Option+]` |\n| Previous suggestion (cycle) | `Alt+[` | `Option+[` |\n| Open completions panel | `Ctrl+Enter` | `Ctrl+Enter` |\n| Trigger suggestion manually | `Alt+\\` | `Option+\\` |\n\n**Partial acceptance is the most underused feature.** When Copilot suggests a full function you mostly agree with, press `Ctrl+→` to accept word by word. You get the parts you want and can override the parts you don't — without dismissing the whole suggestion and starting over.\n\nThe completions panel (`Ctrl+Enter`) shows up to 10 alternative completions at once. This is especially useful when the first suggestion is wrong but you want to see what else Copilot considered."
+    },
+    {
+      "type": "text",
+      "content": "## Next Edit Suggestions — Copilot's Predictive Cursor\n\n**Next Edit Suggestions** is a distinct feature from autocomplete. While ghost text predicts what you're about to *type*, Next Edit Suggestions predicts where you'll *edit next* — a different and more powerful capability.\n\nHere's how it works:\n\nYou rename a variable. Copilot notices the rename and predicts that you'll need to update every place that variable is referenced. It shows a subtle arrow indicator `→` in the gutter next to the next predicted edit location.\n\nPress **Tab** to jump to that location. Copilot shows a ghost-text suggestion for the change. Press **Tab** again to accept and jump to the next predicted edit.\n\nThis turns a chain of related edits (rename, update call sites, fix tests) into a Tab-Tab-Tab flow rather than a manual search-and-edit cycle.\n\n**When Next Edit Suggestions is most powerful:**\n- Renaming variables, functions, or types across a file\n- Changing a function signature and updating all call sites\n- Copying a pattern from one part of a file and adapting it to another\n- Fixing a repeated mistake (Copilot sees the pattern and predicts the same fix elsewhere)\n\n**Enabling Next Edit Suggestions:**\nIn VS Code Settings (`Ctrl+,`), search for `next edit suggestions` and enable `GitHub Copilot: Next Edit Suggestions Enabled`. The gutter arrow indicator appears automatically when Copilot detects a predictable next edit."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The comment-first technique.** Before writing any function, write a detailed comment describing what it should do. Include: the purpose, the inputs and their types, the expected output, and any edge cases to handle. Then press Enter and wait. Copilot will often write the entire function body correctly from this description alone. This is dramatically faster than typing incrementally and accepting partial suggestions."
+    },
+    {
+      "type": "text",
+      "content": "## Teaching Copilot With Your Code Style\n\nCopilot learns your style from open tabs. If you consistently:\n- Use `const` instead of `let`\n- Prefer `async/await` over `.then()` chains\n- Always add JSDoc comments\n- Use a specific error handling pattern\n\n...then Copilot will apply those patterns in its suggestions, because those patterns appear in the files it reads from your editor.\n\n**Practical technique — the anchor pattern:** Before starting a new function, write one complete example of the pattern you want. Then position your cursor where the next instance should go. Copilot sees the first example and mirrors the pattern exactly.\n\nThis works for:\n- API route handlers (write one, then generate the rest)\n- Test cases (write one test, position cursor, Tab for the next)\n- Configuration blocks\n- Repeated data structures"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Master Ghost Text in 10 Minutes",
+      "content": "This workshop drills all the ghost text controls until they're muscle memory.\n\n**Setup:** Open or create any JavaScript or Python file in VS Code with Copilot active.\n\n**Drill 1 — Comment-first function generation (3 min)**\nWrite this comment exactly as shown, then press Enter and wait:\n```javascript\n// Takes an array of objects with a .date property (ISO string) and returns\n// them sorted by date ascending. Returns empty array if input is null or empty.\nfunction sortByDate\n```\nDid Copilot write the body? Accept with Tab.\n\n**Drill 2 — Partial accept practice (3 min)**\nStart typing a new function. When ghost text appears, practice:\n- `Ctrl+→` three times to accept just three words\n- `Esc` to dismiss, then `Alt+\\` to re-trigger\n- `Ctrl+Enter` to open the completions panel and see alternatives\n- `Alt+]` and `Alt+[` to cycle through suggestions\n\n**Drill 3 — Next Edit Suggestions (4 min)**\n1. Write a simple function that uses a variable called `userData`\n2. Use Find (`Ctrl+H`) to rename `userData` to `userRecord` — change the first occurrence only, not all\n3. Watch for the gutter arrow `→` indicating the next predicted edit\n4. Press Tab to jump. Does Copilot suggest the same rename at the call site?\n5. Continue Tab-hopping through all predicted edits\n\n**Key question:** After this drill, which partial acceptance shortcut (`Ctrl+→`) do you expect to use most, and in what situations?"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop A — Context Signal Testing",
+      "content": "Discover how different context signals change suggestion quality.\n\n**Experiment 1 — File name effect**\nCreate two empty files: `auth_handler.py` and `data_utils.py`.\nIn each, type just: `def process(`\nNote the difference in what Copilot suggests for the same partial code. The auth file likely suggests security-related parameters; the utils file suggests data-related ones.\n\n**Experiment 2 — Comment quality vs. no comment**\nIn a new file, without any comment, type:\n`function validateInput(data) {`\nNote the suggestion. Reject it. Now add above the function:\n```javascript\n// Validates that data is an object with required fields: name (string, min 3 chars),\n// email (valid email format), age (integer, 18-120). Returns { valid: boolean, errors: string[] }.\n```\nNote the new suggestion. Is it meaningfully different?\n\n**Experiment 3 — Anchor pattern**\nWrite one complete unit test manually:\n```javascript\nit('returns 0 for empty array', () => {\n  expect(sum([])).toBe(0);\n});\n```\nNow on the next line, just write `it('` and observe what Copilot suggests. Does it mirror your test structure?\n\n**Write your conclusion:** In one sentence per experiment, what changed and why?"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop B — Real Code Acceleration",
+      "content": "Apply ghost text mastery to a real task from your own work.\n\n**Step 1 — Pick a real task** you need to do today or this week that involves writing repetitive code structures. Examples:\n- Multiple API endpoints that follow the same pattern\n- A set of database query functions\n- Multiple similar test cases\n- A config file with repeated blocks\n\n**Step 2 — Set up the anchor.** Write the first instance completely and correctly by hand.\n\n**Step 3 — Use Copilot for the rest.** Position your cursor where the next instance should start. Accept the suggestion with Tab (or partial accept with Ctrl+→ where Copilot gets part wrong).\n\n**Step 4 — Count the keystrokes.** Estimate: how many keystrokes did you save using Copilot vs. typing all instances manually?\n\n**Step 5 — Identify the failure point.** At what point did Copilot's suggestion diverge from what you actually needed? What context was it missing?"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop C — Next Edit Suggestions Real Workflow",
+      "content": "Use Next Edit Suggestions to propagate a real refactor across a file.\n\n**Step 1 — Find a function in your code** that takes a parameter you want to rename. Something meaningful — not `a` or `x`, but a name that actually appears multiple times inside the function body.\n\n**Step 2 — Rename just the parameter declaration.** Don't use find-and-replace yet — manually change just the one in the function signature.\n\n**Step 3 — Watch for the gutter arrow.** Does Copilot predict the next edit location?\n\n**Step 4 — Tab through all predicted edits.** Accept where Copilot is right. Reject (`Esc`) where it's wrong and make the edit manually.\n\n**Step 5 — Measure accuracy.** How many of the predicted edit locations were correct? Were any missed?\n\n**For comparison:** After the Copilot-assisted refactor, verify with Find (`Ctrl+F`) that no instances of the old name remain. Did Copilot catch them all, or were there gaps?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Build a Personal Ghost Text Cheat Sheet",
+      "content": "Create a reference card you'll actually use.\n\n**Create a file** called `copilot-shortcuts.md` in your home directory or a notes folder.\n\n**Section 1 — My most-used shortcuts** (fill in the ones you used in this lesson's drills)\n\n**Section 2 — My comment templates**\nWrite 3 comment templates for the kinds of functions you write most often at work. Example:\n```\n// [DESCRIBE WHAT THIS FUNCTION DOES]\n// Input: [parameter name] — [type and description]\n// Returns: [type and description]\n// Edge cases: [list any special handling]\n```\nCustomize these for your actual work context.\n\n**Section 3 — My anchor patterns**\nWrite one anchor pattern for the most common repetitive structure in your code. If you write government reports as Python scripts, your anchor might be a standard report function signature. If you process data, it might be a standard data validation block.\n\n**Section 4 — When NOT to use autocomplete**\nList 2-3 situations where you've found that accepting Copilot suggestions made things worse. This is as important as knowing when to use them."
+    },
+    {
+      "type": "quiz",
+      "question": "You rename a function from `getUser` to `fetchUserById`. The Next Edit Suggestions gutter arrow appears. What is Copilot predicting?",
+      "options": [
+        "That you'll want to rename the function back to getUser",
+        "The next location in the file where getUser is called or referenced, which likely also needs to be updated to fetchUserById",
+        "That you should run your tests now",
+        "That you'll want to write documentation for the renamed function"
+      ],
+      "correct": 1,
+      "explanation": "Next Edit Suggestions tracks the semantic consequence of your last edit. When you rename a function, Copilot predicts that the next edit is at a call site where the old name is used — because that reference is now stale. The gutter arrow jumps you there and shows a ghost-text suggestion updating the old name to the new one. This propagates the rename through the file with Tab presses instead of manual search."
+    },
+    {
+      "type": "quiz",
+      "question": "You're writing a new function and the first ghost text suggestion is mostly right but the variable name it chose is wrong. What is the best action?",
+      "options": [
+        "Press Esc, fix the variable name manually, and retype the whole function",
+        "Accept the suggestion with Tab, then fix the variable name in a second pass",
+        "Use Ctrl+→ to accept word by word, stopping before the wrong variable name and typing the correct name yourself",
+        "Open the completions panel with Ctrl+Enter and hope another suggestion has the right name"
+      ],
+      "correct": 2,
+      "explanation": "Partial acceptance with Ctrl+→ (accept next word) is the right tool here. Accept everything before the wrong variable name word by word, then type the correct name yourself. The ghost text continues — Copilot re-reads what you just typed and adjusts its remaining suggestion accordingly. This is faster than either rejecting the whole suggestion (losing the correct parts) or accepting it fully (then fixing errors)."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-10 complete.** You now understand every keyboard shortcut for ghost text, how to shape Copilot's suggestions with comments and anchors, and how to use Next Edit Suggestions to propagate changes through a file. These skills compound — the better you get at guiding Copilot's context, the less time you spend rejecting suggestions and the more time you spend just pressing Tab. Lesson 6-11 covers Chat Participants and Variables — the tools that let Copilot see your entire workspace, not just the current file."
+    }
+  ],
+  "nextLesson": "6-11",
+  "prevLesson": "6-9"
+}

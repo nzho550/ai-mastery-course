@@ -1,0 +1,95 @@
+{
+  "id": "6-12",
+  "title": "Copilot Edits — Multi-File AI Editing Sessions",
+  "part": 6,
+  "estimatedMinutes": 55,
+  "tags": ["copilot", "vscode", "edits", "multi-file", "refactoring", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nCopilot Chat (lesson 6-3) works on one question at a time. Agent Mode (lesson 6-9) executes autonomously. **Copilot Edits** sits between them — a structured multi-file editing mode where you give Copilot a task, it proposes changes across multiple files simultaneously, and you review and accept or reject each change before anything touches your code.\n\nThis is the mode to use for:\n- Refactoring that touches 5-15 files\n- Adding a new feature that spans multiple layers (API + service + tests)\n- Renaming or restructuring code across a module\n- Applying a consistent pattern change across many files\n- Any multi-file change where you want human review before commit"
+    },
+    {
+      "type": "text",
+      "content": "## Opening Copilot Edits\n\nCopilot Edits is accessed from the Copilot Chat panel:\n\n1. Press **Ctrl+Alt+I** to open Copilot Chat\n2. At the top of the panel, click the mode dropdown (may say **Ask** or **Agent**)\n3. Select **Edit**\n\nYou're now in Copilot Edits mode. The interface has two important new elements:\n- **Working Set** — a panel showing which files are in scope for this edit session\n- **Edit controls** — Accept All, Reject All, and per-file navigation buttons\n\n### Adding Files to the Working Set\n\nBy default, Copilot Edits starts with no files in scope. You need to explicitly add the files you want it to consider and potentially edit.\n\n**Methods to add files:**\n- Click **Add Files** in the Working Set panel and browse\n- Drag files from the Explorer sidebar into the Working Set\n- Type `#file:filename` in your first message\n- Use **Add Open Files** to include all currently open editor tabs\n\n> **Best practice:** Be deliberate about what you add. Adding irrelevant files wastes tokens and makes Copilot's changes less focused. Start with the minimum set needed for the task."
+    },
+    {
+      "type": "text",
+      "content": "## How an Edit Session Works\n\nAn edit session has four phases:\n\n**Phase 1 — Setup**\nAdd files to the Working Set. Write a clear, specific instruction in the chat input describing the change you want.\n\n**Phase 2 — Generation**\nCopilot reads all Working Set files and generates proposed changes. Each changed file gets a diff view — green for additions, red for deletions — overlaid directly in the editor.\n\n**Phase 3 — Review**\nYou navigate through each changed file using the arrow controls. Within each file, you can:\n- Accept the entire file's changes\n- Reject the entire file's changes\n- Accept or reject individual change hunks (specific blocks of changes within the file)\n\n**Phase 4 — Iterate**\nIf the changes aren't right, you can ask Copilot to refine them without starting over. Type a follow-up message like \"The auth.js change is right, but in payments.js the error handling is missing. Add error handling to the payment processor function.\" Copilot re-generates only what needs to change.\n\n### The Edit Session History\n\nEdit sessions maintain a history of your conversation and all proposed changes. You can scroll back to see previous rounds of edits. If you go too far in the wrong direction, you can click **Undo** to revert to a previous state in the session."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Never add more than 15-20 files to a Working Set at once.** Copilot Edits works within a context window — the more files you add, the thinner each file's representation becomes. For large refactors, break the work into sessions: files 1-10 in session one, files 11-20 in session two. Each session produces better results than one massive session with everything."
+    },
+    {
+      "type": "text",
+      "content": "## Writing Effective Edit Instructions\n\nThe quality of your edit instruction determines everything. Vague instructions produce vague changes.\n\n**Weak instruction:**\n```\nRefactor the auth code\n```\n\n**Strong instruction:**\n```\nRefactor the authentication module. Specifically:\n1. Replace all uses of jwt.sign() with the signToken() helper in utils/auth.js\n2. Replace all uses of jwt.verify() with the verifyToken() helper in the same file\n3. Remove the direct import of 'jsonwebtoken' from any file except utils/auth.js\n4. Update the error messages to use the AUTH_ERRORS constants from constants/errors.js\nDo not change any function signatures or return types.\n```\n\n**What makes the strong instruction work:**\n- Specifies exactly what to change (and what NOT to change)\n- References specific files and function names\n- Lists numbered steps that can be verified one by one\n- Draws on specific existing patterns (the helper functions, the constants)\n\n**The boundary rule:** Always specify what's out of scope. \"Do not change function signatures,\" \"do not add new dependencies,\" \"do not modify test files\" — these boundaries prevent Copilot from making well-intentioned changes that break things."
+    },
+    {
+      "type": "text",
+      "content": "## Reviewing Diffs Like a Pro\n\nThe most important skill in Copilot Edits is reviewing what Copilot changed before accepting. Here's a structured review approach:\n\n**Step 1 — Read each diff top to bottom.**\nDon't skim. Every changed line was changed for a reason — make sure that reason is the one you intended.\n\n**Step 2 — Check the unchanged context.**\nThe grey lines (unchanged code) around the diff are as important as the changes. They show you what code the change is adjacent to, which tells you whether the change is correctly placed.\n\n**Step 3 — Verify logic, not just syntax.**\nCopilot Edits can produce syntactically valid changes that are logically wrong. Ask: does this change produce the correct output? Does it handle edge cases?\n\n**Step 4 — Check for unintended changes.**\nScroll through the entire diff to make sure Copilot only changed what you asked. Copilot sometimes makes additional 'helpful' changes (reformatting, adding imports, changing unrelated functions). Decide whether to accept or reject those.\n\n**Step 5 — Run tests before accepting.**\nIf you have tests, run them against the proposed changes (VS Code shows proposed changes in the file even before you accept, so tests run against the proposed state). Only accept if tests pass."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "First Edit Session — Feature Addition Across Files",
+      "content": "Add a new feature that touches multiple files, using Copilot Edits to manage the changes.\n\n**Choose a real task** from your work that requires touching at least 3 files. If you don't have one handy, use this scenario on any project: add input validation to an existing form or API endpoint.\n\n**Step 1 — Open Copilot Edits**\nCtrl+Alt+I → mode dropdown → Edit\n\n**Step 2 — Build your Working Set**\nAdd the files that need to change. For a validation feature, that might be: the form/route file, a validators module (or create one), and a tests file.\n\n**Step 3 — Write a precise instruction**\nDescribe exactly what validation you want: which fields, which rules, what error messages to return, and what format the errors should be in.\n\n**Step 4 — Review each changed file**\nUse the navigation controls to go through each diff. For each change:\n- Is this what you asked for?\n- Does it handle the case where validation fails?\n- Does it break any existing behavior?\n\n**Step 5 — Iterate**\nIf one file's changes are wrong, write a follow-up message describing the specific correction needed.\n\n**Step 6 — Accept, run tests**\nAccept all changes. Run your test suite. If tests fail, open a new chat and debug from there.\n\n**Outcome:** A feature that touches multiple files, reviewed in one place, with full control over what changed."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop A — Refactor Session",
+      "content": "Use Copilot Edits to apply a consistent pattern change across multiple files.\n\n**Find a repeated problem in your codebase.** Examples:\n- Multiple files that each import the same 3-4 utilities separately when there's a barrel export\n- Multiple functions that duplicate the same error handling boilerplate\n- Multiple files that use an old API that you've replaced with a newer one\n- Multiple test files that use `console.log` for debugging that should be removed\n\n**Step 1 — Inventory the problem.** Use `@workspace` in chat to find all instances: \"Find all files that [describe the pattern]\". Note the list.\n\n**Step 2 — Add those files to the Working Set** in a new Edit session.\n\n**Step 3 — Write a precise refactor instruction:**\n```\nIn each of these files, replace [old pattern] with [new pattern].\nDo not change any other code. Do not change imports unless removing the old pattern\nrequires updating an import.\n```\n\n**Step 4 — Review the diffs carefully.** Copilot's pattern-matching can be imprecise — verify each change is correct.\n\n**Step 5 — Accept and run tests.**\n\n**Metric to track:** How many files did you change? How long would this have taken manually vs. with Copilot Edits?"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop B — Hunk-Level Review Practice",
+      "content": "Practice the most granular level of Copilot Edits review — accepting and rejecting individual change hunks.\n\n**Give Copilot a complex, multi-change task** that will produce several change hunks per file:\n```\nIn [your main service file]:\n1. Add input validation to every public function\n2. Add a try/catch block to every async function that doesn't already have one\n3. Add a JSDoc comment to every function that doesn't already have one\n```\n\n**Then practice selective hunk acceptance:**\n- Accept the validation additions (they're what you actually wanted)\n- Reject the try/catch additions for functions that have different error handling requirements\n- Accept the JSDoc additions only where the generated comments are accurate\n\n**The exercise:**\nFor each hunk, make a conscious decision: accept or reject. Write down your reason for at least 3 rejections. What was wrong with those hunks?\n\n**Key insight:** Hunk-level control means you never have to choose between \"accept everything\" (including wrong changes) or \"reject everything\" (losing the correct changes). You take exactly what's right."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop C — Iterative Refinement",
+      "content": "Practice multi-round iteration in a single Edit session to get from a rough first pass to production-ready changes.\n\n**Round 1 — Give a broad instruction:**\n```\nAdd logging to the key functions in [your service file]. Log function entry, \nthe input parameters, and the return value.\n```\nReview what Copilot generates. Note what's wrong or missing.\n\n**Round 2 — Refine in the same session:**\n```\nThe logging looks good for most functions but:\n- The logging in [specific function] is exposing the password field — remove that field from the logged parameters\n- The return value logging in [another function] is logging the full user object — log only the user ID instead\n- Add log level 'debug' to the parameter logs and 'info' to the return logs\n```\n\n**Round 3 — Final check:**\n```\nCheck that none of the new log statements could expose sensitive data (tokens, \npasswords, PII). List any remaining concerns.\n```\n\n**What to notice:** Each round builds on the last — you don't reset or lose context. The session history lets you reference earlier rounds. This is how real, production-quality changes get made: iteratively, not in one perfect pass."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop D — Large-Scale Government Document Processor",
+      "content": "Build a real multi-file Python application using Copilot Edits — a document processing tool useful for government work.\n\n**What you'll build:** A 4-file Python application that:\n- Reads multiple `.txt` or `.docx` files from a folder\n- Extracts key metadata: dates, reference numbers, department names, action items\n- Outputs a structured summary CSV\n- Logs all processing steps to a log file\n\n**Edit Session 1 — Scaffold the structure:**\nWorking Set: start empty.\nInstruction:\n```\nCreate a 4-file Python project: main.py (entry point), parser.py (text extraction), \nexporter.py (CSV writing), logger.py (logging setup). \nmain.py should orchestrate the other three. Use Python standard library only — no pip packages.\nAdd docstrings to all classes and public functions.\n```\n\n**Edit Session 2 — Add the real extraction logic:**\nAdd all 4 new files to Working Set.\nInstruction:\n```\nIn parser.py, implement extract_metadata() to find:\n- Dates in formats: DD/MM/YYYY, MM/DD/YYYY, and spelled-out months\n- Reference numbers matching pattern: [A-Z]{2,4}-[0-9]{4,8}\n- Lines that start with 'Action:' or 'Required:' as action items\nReturn a dict with keys: dates, reference_numbers, action_items.\n```\n\n**Edit Session 3 — Review and fix**\nAfter reviewing both sessions' diffs, identify any issues and write a third refinement round.\n\n**Outcome:** A working multi-file government document scanner, built through structured iterative editing."
+    },
+    {
+      "type": "quiz",
+      "question": "You're using Copilot Edits to refactor 8 files. Copilot makes changes to 7 of them that look correct, but in file #8 it added an unwanted import. What should you do?",
+      "options": [
+        "Reject all changes and start over with a better instruction",
+        "Accept all changes and manually remove the unwanted import afterward",
+        "Accept the 7 correct files, reject only file #8, then write a follow-up message asking Copilot to fix file #8 without the unwanted import",
+        "Dismiss the session and use Find & Replace to make the changes manually"
+      ],
+      "correct": 2,
+      "explanation": "Copilot Edits supports per-file accept/reject, so you don't have to choose between accepting everything or rejecting everything. Accept the 7 correct files, reject #8, then in the same session write a follow-up describing exactly what's wrong with #8. Copilot re-generates only the rejected file. This iterative refinement is the core workflow — you never need to throw away correct work because one file is wrong."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to add error handling across 25 service files. What is the best Copilot Edits approach?",
+      "options": [
+        "Add all 25 files to one Working Set and run a single instruction",
+        "Use @workspace in chat mode instead — Edits can't handle that many files",
+        "Split into multiple sessions of 8-10 files each, verifying after each session before moving to the next",
+        "Use Agent Mode instead, which has no file limit"
+      ],
+      "correct": 2,
+      "explanation": "Copilot Edits works within a context window. With 25 files, each file gets very thin representation and quality degrades. The right approach is batching: 8-10 files per session, verify correctness (run tests), then move to the next batch. This gives each session enough context to make accurate changes, and lets you catch issues early before they propagate to all 25 files."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-12 complete.** Copilot Edits is the most powerful tool for making large, safe, reviewable code changes. You now know how to set up a working set, write precise multi-file instructions, review diffs at the hunk level, and iterate within a session to refine changes. The review discipline — read every diff, verify logic, check for unintended changes — is as important as the generation. Lesson 6-13 covers Custom Instructions, which shape every single Copilot interaction to match your codebase, team standards, and work context."
+    }
+  ],
+  "nextLesson": "6-13",
+  "prevLesson": "6-11"
+}

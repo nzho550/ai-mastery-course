@@ -1,0 +1,85 @@
+{
+  "id": "6-16",
+  "title": "Copilot Extensions & the Skills Marketplace",
+  "part": 6,
+  "estimatedMinutes": 45,
+  "tags": ["copilot", "extensions", "skills", "marketplace", "github", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nCopilot's built-in capabilities cover a lot. But Copilot also has an extension system — a marketplace of skills, tools, and integrations that expand what Copilot can do in chat, in the CLI, and in agent workflows.\n\nYou'll learn:\n- The built-in `@` participants that are often overlooked\n- How to find, install, and use Copilot Extensions from the GitHub Marketplace\n- Agent Skills — the file-based skill system for CLI and cloud agent\n- How to create your own simple skill\n- What extensions government and enterprise users should consider"
+    },
+    {
+      "type": "text",
+      "content": "## Built-In Participants You May Have Missed\n\nBeyond `@workspace`, `@terminal`, and `@vscode` (covered in lesson 6-11), Copilot has several other built-in participants.\n\n### `@github` — Deep GitHub Integration\n\n`@github` gives Copilot access to GitHub.com data — repositories, issues, PRs, code search, and release notes — directly in chat. You must be signed into GitHub for this to work.\n\n**Real use cases:**\n```\n@github What are the latest changes in the React repository's changelog?\n@github Search for open-source Python libraries that handle PDF generation\n@github What does this repository's README say about installation requirements?\n@github Find examples of how developers typically implement OAuth2 PKCE flow in Node.js\n```\n\n### Vision for Copilot — Image Input\n\nCopilot supports image input in Chat. You can paste or drag in:\n- A screenshot of an error message — ask Copilot to explain and fix\n- A UI mockup or wireframe — ask Copilot to generate the HTML/CSS\n- A diagram or flowchart — ask Copilot to implement it as code\n- A screenshot of legacy software — ask Copilot to recreate it with modern code\n\nTo use it: in Copilot Chat, click the paperclip icon and attach an image, or drag an image into the chat input."
+    },
+    {
+      "type": "text",
+      "content": "## Copilot Extensions — The Marketplace\n\nCopilot Extensions are GitHub Apps that integrate with Copilot Chat. Once installed, they appear as `@extension-name` participants in chat.\n\n### How to Browse and Install\n\n1. Go to **github.com/marketplace** and filter by **Copilot**\n2. Find an extension and click **Install**\n3. Authorize for your personal account or an organization\n4. In Copilot Chat (anywhere — IDE, GitHub.com, Mobile), type `@extension-name` to invoke it\n\n### Notable Copilot Extensions\n\n**`@docker`** — Docker official extension\nManage containers, generate Dockerfiles, troubleshoot container issues:\n```\n@docker Create a Dockerfile for a Python FastAPI app with PostgreSQL\n@docker Why is my container failing to start? [paste docker logs output]\n@docker Convert my docker-compose.yml to a Kubernetes deployment manifest\n```\n\n**`@azure`** — Microsoft Azure\nQuery Azure resources, generate ARM templates, troubleshoot Azure services:\n```\n@azure What VMs are running in my subscription?\n@azure Generate a bicep template for an App Service with a SQL Database\n@azure Why is my Azure Function timing out?\n```\n\n**`@atlassian`** — Jira and Confluence (if the MCP version isn't installed)\nSearch and manage Atlassian tools directly in Copilot Chat:\n```\n@atlassian Search for all open critical bugs in project MYPROJ\n@atlassian Summarize the Confluence page on our deployment process\n```\n\n**`@datadog`** — Observability\n```\n@datadog What's the error rate on the payments service in the last hour?\n@datadog Show me the slowest API endpoints by P95 latency\n```\n\n**`@sentry`** — Error tracking\n```\n@sentry What's the most common error in the last 7 days?\n@sentry Show me the stack trace for issue [ID]\n```\n\n### Finding Extensions for Government Work\n\nSearchable from GitHub Marketplace → Copilot filter:\n- ServiceNow, Jira (Azure DevOps alternative)\n- Microsoft 365 integrations\n- Security scanning tools\n- Documentation generators"
+    },
+    {
+      "type": "text",
+      "content": "## Agent Skills — File-Based Extensions for the CLI\n\nAgent Skills are a different kind of extension, designed specifically for the GitHub Copilot CLI and cloud agent. Instead of a GitHub App, a Skill is a folder containing:\n- A `SKILL.md` file — describes what the skill does and when to use it\n- Optional scripts, templates, or resource files the skill needs\n\n### How Skills Work\n\nWhen you're in a CLI session or using the cloud agent, Copilot scans available skills and decides which ones are relevant to the current task. When it chooses a skill, the `SKILL.md` is injected into the agent's context — giving it the instructions, scripts, and examples it needs.\n\nYou don't invoke skills manually — they load automatically when relevant.\n\n### Installing Skills with `gh skill`\n\n```bash\n# Discover available skills\ngh skill search [query]\n\n# Install a skill from GitHub\ngh skill install [owner/repo]\n\n# List your installed skills\ngh skill list\n\n# Update a skill\ngh skill update [skill-name]\n```\n\n### Writing Your Own Skill\n\nCreate a folder for your skill with a `SKILL.md`:\n\n**Example: A government report generation skill**\n\nCreate `~/.copilot/skills/gov-report/SKILL.md`:\n```markdown\n---\nname: gov-report\ndescription: Generates government-format reports from data files. Use when asked to create, format, or export administrative reports.\ntrigger_keywords:\n  - report\n  - generate summary\n  - export data\n  - administrative output\n---\n\n# Government Report Generation Skill\n\n## Standard Report Format\n\nAll reports must include:\n1. Header: Report title, generation date, department name\n2. Executive summary: 3-5 sentences, plain English\n3. Data section: tabular format, no more than 10 columns\n4. Findings: numbered list of key observations\n5. Footer: data source, processing timestamp, operator name\n\n## File Naming Convention\n\n`DEPT_REPORTTYPE_YYYYMMDD_vN.csv` where N increments if the file already exists.\n\n## Required Output Validation\n\nBefore finalizing any report:\n- Verify no PII columns are included (names, SSNs, addresses)\n- Verify all dates are in YYYY-MM-DD format\n- Verify total row count matches source file\n- Log the run to audit.log with: timestamp, source file, output file, row count\n```\n\nWhen you ask Copilot CLI to \"generate a monthly report from transactions.csv\", it recognizes the report keyword, loads this skill, and applies all the standards automatically."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Skills vs. Custom Instructions — when to use each:**\n- **Custom instructions** (`.github/copilot-instructions.md`): Rules that apply to every single interaction in a repository. Best for: coding standards, naming conventions, error handling patterns.\n- **Agent Skills**: Domain-specific expertise that loads on demand, only when the task matches the skill's trigger keywords. Best for: complex workflows with specific steps, government reporting formats, specialized tooling procedures.\n\nThink of custom instructions as the background rules that are always on, and skills as specialized reference cards that activate when the situation calls for them."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Explore the Extension Marketplace",
+      "content": "Find and evaluate Copilot Extensions relevant to your work.\n\n**Step 1 — Go to GitHub Marketplace**\nOpen github.com/marketplace in your browser. Use the filter or search for 'Copilot'.\n\n**Step 2 — Browse with intent.** You're looking for extensions that connect to tools you actually use. Answer these questions as you browse:\n- Do you use any cloud platform (Azure, AWS, GCP)? Is there an extension?\n- Do you use Jira, Linear, or another project tracker?\n- Do you use Datadog, Sentry, or another monitoring tool?\n- Do you use Docker or Kubernetes?\n- Are there any government-specific tools listed?\n\n**Step 3 — Install one extension** that looks useful for your actual work. Install it for your personal account.\n\n**Step 4 — Use it.** Open Copilot Chat (in VS Code or GitHub.com) and type `@[extension-name]` followed by a real question from your work.\n\n**Step 5 — Evaluate:**\n- Did it connect to the right data?\n- Was the response accurate and useful?\n- Would you use this in your actual workflow?\n- What would you use it for specifically?\n\n**Document:** Write one sentence on what this extension does well and one sentence on its limitations."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Workshop A — Build Your First Agent Skill",
+      "content": "Create a custom agent skill for a task you do repeatedly.\n\n**Step 1 — Identify a repeated task.** Think of something you do regularly in the terminal that involves multiple steps, specific formats, or rules you have to remember. Examples:\n- Processing a specific type of data file\n- Generating a report in a specific format\n- Reviewing code for a specific type of issue\n- Running a specific deployment checklist\n\n**Step 2 — Create the skill folder:**\n```\nmkdir -p ~/.copilot/skills/my-skill-name\n```\n\n**Step 3 — Write the SKILL.md:**\n```markdown\n---\nname: my-skill-name\ndescription: [One sentence describing what this skill does and when to use it]\ntrigger_keywords:\n  - [keyword1]\n  - [keyword2]\n---\n\n# [Skill Name]\n\n## When to Use This Skill\n[Describe the scenarios where this skill applies]\n\n## Steps\n1. [Step 1 with specific details]\n2. [Step 2]\n3. [Step 3]\n\n## Rules\n- [Specific rule 1]\n- [Specific rule 2]\n\n## Output Format\n[Describe what the output should look like]\n```\n\n**Step 4 — Test it.** Start a Copilot CLI session and ask it to do the task your skill covers. Watch whether it uses your skill (the SKILL.md content appears in the references).\n\n**Step 5 — Refine.** If the skill wasn't triggered, adjust the trigger_keywords. If it was triggered but didn't apply the rules correctly, make the rules more specific.\n\n**Outcome:** A persistent agent skill that improves Copilot's performance on your specific repeated task — every time, automatically."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop B — Vision for Copilot: Image to Code",
+      "content": "Use Copilot's image input capability to convert visual content into working code.\n\n**Choose one of these real scenarios:**\n\n**Scenario A — UI Screenshot to Code**\nTake a screenshot of any form, dashboard, or table from any website or app. In Copilot Chat:\n- Paste the image (Ctrl+V or drag into chat)\n- Ask: 'Recreate this UI as clean HTML and CSS. Make it responsive.'\n- Evaluate: does the output match the screenshot layout?\n\n**Scenario B — Error Screenshot to Fix**\nTake a screenshot of any error message — from your terminal, a browser, any application. In Copilot Chat:\n- Paste the screenshot\n- Ask: 'What does this error mean and how do I fix it? Be specific about the file and line.'\n- Evaluate: is the analysis accurate without you typing out the error text?\n\n**Scenario C — Government Form/Document to Data Structure**\nTake a screenshot of any form, table, or structured document from your work (remove any real sensitive data). In Copilot Chat:\n- Paste the screenshot\n- Ask: 'Generate a Python dataclass (or JSON schema) that models this data structure. Include field names, types, and any validation rules visible in the form.'\n- Evaluate: does the generated structure match the form's fields?\n\n**Document:** Which scenario worked best? What was the quality of the image-to-code conversion? Where would you use this in real work?"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop C — Government Workflow Skill Library",
+      "content": "Build a library of 3 agent skills tailored for government/administrative work.\n\n**Skill 1 — Data Quality Checker**\nCreate a skill that activates when you ask to validate or clean a dataset. The skill should specify:\n- How to check for duplicate rows\n- How to check for required fields\n- How to flag out-of-range values\n- What to log and report\n- The format of the validation report output\n\n**Skill 2 — Compliance Review**\nCreate a skill that activates when reviewing code or scripts for compliance. The skill should specify:\n- What PII patterns to look for\n- What audit logging requirements to check\n- What access control patterns to verify\n- How to format the compliance finding report\n\n**Skill 3 — Report Standardizer**\nCreate a skill that activates when generating reports. The skill should specify:\n- Required header and footer format\n- Required columns and their order\n- Date format requirements\n- Naming conventions\n- What to log to the audit trail\n\n**Test all three** in a Copilot CLI session by giving tasks that should trigger each skill.\n\n**Outcome:** A skill library that makes Copilot your specialized government workflow assistant — not a generic coding AI."
+    },
+    {
+      "type": "quiz",
+      "question": "You install a Copilot Extension for your monitoring tool (e.g., @datadog). Where can you use it?",
+      "options": [
+        "Only in VS Code Copilot Chat",
+        "Only on GitHub.com Copilot Chat",
+        "In Copilot Chat anywhere it's available: VS Code, GitHub.com, GitHub Mobile, and other supported surfaces",
+        "Only in the GitHub Copilot CLI"
+      ],
+      "correct": 2,
+      "explanation": "Copilot Extensions are GitHub Apps — they integrate at the GitHub account level, not the IDE level. Once installed, they're available as @extension-name participants in Copilot Chat on any supported surface: VS Code, GitHub.com, GitHub Mobile, and other GitHub Copilot Chat integrations. You invoke them the same way everywhere — just type @extension-name followed by your request."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the main difference between a Copilot Extension and an Agent Skill?",
+      "options": [
+        "Extensions cost money; Skills are free",
+        "Extensions are GitHub Apps that integrate with Copilot Chat and are invoked with @name; Skills are Markdown files that load automatically into the CLI/cloud agent when a task matches the skill's trigger keywords",
+        "Extensions work in VS Code; Skills work only in the terminal",
+        "Extensions require administrator approval; Skills can be installed by any user"
+      ],
+      "correct": 1,
+      "explanation": "Copilot Extensions are GitHub Apps installed from the marketplace — they're invoked explicitly with @extension-name in chat and give Copilot access to external services. Agent Skills are Markdown files stored locally or in your repository — they load automatically when the CLI or cloud agent detects the task matches the skill's trigger keywords, without you invoking them explicitly. Extensions are for integrating external services; Skills are for codifying your own expertise and procedures."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 6-16 complete.** The Copilot extension ecosystem — marketplace extensions for external tools, agent skills for your own procedures, and built-in @github participant for repository search — significantly expands what Copilot can do. The most powerful combination for professional work: install the extensions for your core tools (Azure, Jira, monitoring), and write skills for your team's specific workflows. Lesson 6-17 covers Advanced MCP — connecting multiple external systems simultaneously and chaining their tools together in a single prompt."
+    }
+  ],
+  "nextLesson": "6-17",
+  "prevLesson": "6-15"
+}

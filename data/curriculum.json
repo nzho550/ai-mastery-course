@@ -1219,8 +1219,168 @@
             "chat",
             "debugging"
           ],
-          "nextLesson": "6-4",
+          "nextLesson": "6-9",
           "prevLesson": "6-2"
+        },
+        {
+          "id": "6-9",
+          "title": "Copilot Agent Mode: MCP, Jira & Model Selection",
+          "estimatedMinutes": 60,
+          "tags": ["vscode", "intermediate", "copilot", "mcp", "jira", "agent-mode", "hands-on"],
+          "nextLesson": "6-10",
+          "prevLesson": "6-3"
+        },
+        {
+          "id": "6-10",
+          "title": "Ghost Text & Next Edit Suggestions Mastery",
+          "estimatedMinutes": 50,
+          "tags": ["vscode", "intermediate", "copilot", "ghost-text", "next-edit"],
+          "nextLesson": "6-11",
+          "prevLesson": "6-9"
+        },
+        {
+          "id": "6-11",
+          "title": "Chat Participants, Variables & Slash Commands",
+          "estimatedMinutes": 50,
+          "tags": ["vscode", "intermediate", "copilot", "chat", "workspace", "slash-commands"],
+          "nextLesson": "6-12",
+          "prevLesson": "6-10"
+        },
+        {
+          "id": "6-12",
+          "title": "Copilot Edits — Multi-File AI Editing Sessions",
+          "estimatedMinutes": 55,
+          "tags": ["vscode", "intermediate", "copilot", "edits", "multi-file", "refactoring"],
+          "nextLesson": "6-13",
+          "prevLesson": "6-11"
+        },
+        {
+          "id": "6-13",
+          "title": "Custom Instructions — Teaching Copilot Your Rules",
+          "estimatedMinutes": 50,
+          "tags": ["vscode", "intermediate", "copilot", "custom-instructions", "configuration"],
+          "nextLesson": "6-14",
+          "prevLesson": "6-12"
+        },
+        {
+          "id": "6-14",
+          "title": "GitHub Copilot CLI — Terminal-Native AI Agent",
+          "estimatedMinutes": 60,
+          "tags": ["copilot", "cli", "terminal", "agents", "automation", "intermediate"],
+          "nextLesson": "6-15",
+          "prevLesson": "6-13"
+        },
+        {
+          "id": "6-15",
+          "title": "Copilot for Pull Requests & Code Review",
+          "estimatedMinutes": 55,
+          "tags": ["copilot", "github", "pull-requests", "code-review", "team", "intermediate"],
+          "nextLesson": "6-16",
+          "prevLesson": "6-14"
+        },
+        {
+          "id": "6-16",
+          "title": "Copilot Extensions & the Skills Marketplace",
+          "estimatedMinutes": 45,
+          "tags": ["copilot", "extensions", "skills", "marketplace", "github", "intermediate"],
+          "nextLesson": "6-17",
+          "prevLesson": "6-15"
+        },
+        {
+          "id": "6-17",
+          "title": "Advanced MCP — Multiple Servers & Tool Chaining",
+          "estimatedMinutes": 60,
+          "tags": ["copilot", "mcp", "vscode", "azure", "agent-mode", "advanced"],
+          "nextLesson": "6-18",
+          "prevLesson": "6-16"
+        },
+        {
+          "id": "6-18",
+          "title": "Copilot for Testing — Real Coverage, Not Just Green Tests",
+          "estimatedMinutes": 55,
+          "tags": ["copilot", "testing", "vscode", "pytest", "tdd", "quality", "intermediate"],
+          "nextLesson": "6-19",
+          "prevLesson": "6-17"
+        },
+        {
+          "id": "6-19",
+          "title": "Copilot for Documentation & Professional Writing",
+          "estimatedMinutes": 50,
+          "tags": ["copilot", "documentation", "writing", "reports", "government", "intermediate"],
+          "nextLesson": "6-20",
+          "prevLesson": "6-18"
+        },
+        {
+          "id": "6-20",
+          "title": "Security, Privacy & Content Exclusions",
+          "estimatedMinutes": 55,
+          "tags": ["copilot", "security", "privacy", "enterprise", "government", "advanced"],
+          "nextLesson": "6-21",
+          "prevLesson": "6-19"
+        },
+        {
+          "id": "6-21",
+          "title": "Copilot for Teams & Enterprise Governance",
+          "estimatedMinutes": 55,
+          "tags": ["copilot", "enterprise", "governance", "teams", "knowledge-base", "advanced"],
+          "nextLesson": "6-22",
+          "prevLesson": "6-20"
+        },
+        {
+          "id": "6-22",
+          "title": "Model Optimization & Your Personal Copilot System",
+          "estimatedMinutes": 55,
+          "tags": ["copilot", "models", "optimization", "workflow", "system", "advanced"],
+          "nextLesson": "6-23",
+          "prevLesson": "6-21"
+        },
+        {
+          "id": "6-23",
+          "title": "Copilot for Email — Inbox Management & Professional Correspondence",
+          "estimatedMinutes": 55,
+          "tags": ["copilot", "email", "outlook", "gmail", "mcp", "productivity", "government", "intermediate"],
+          "nextLesson": "6-24",
+          "prevLesson": "6-22"
+        },
+        {
+          "id": "6-24",
+          "title": "Managing Your Team with Copilot — Tasks, Blockers & Workload",
+          "estimatedMinutes": 60,
+          "tags": ["copilot", "team-management", "ado", "jira", "tasks", "government", "intermediate"],
+          "nextLesson": "6-25",
+          "prevLesson": "6-23"
+        },
+        {
+          "id": "6-25",
+          "title": "Copilot for Meetings — Prep, Notes & Follow-Up",
+          "estimatedMinutes": 55,
+          "tags": ["copilot", "meetings", "productivity", "calendar", "notes", "action-items", "government", "intermediate"],
+          "nextLesson": "6-26",
+          "prevLesson": "6-24"
+        },
+        {
+          "id": "6-26",
+          "title": "Gathering & Synthesizing Information from Your Team",
+          "estimatedMinutes": 55,
+          "tags": ["copilot", "team-communication", "slack", "teams", "synthesis", "reporting", "government", "intermediate"],
+          "nextLesson": "6-27",
+          "prevLesson": "6-25"
+        },
+        {
+          "id": "6-27",
+          "title": "Stakeholder Communication — Writing for Every Audience",
+          "estimatedMinutes": 55,
+          "tags": ["copilot", "communication", "stakeholders", "writing", "government", "executive", "reports", "intermediate"],
+          "nextLesson": "6-28",
+          "prevLesson": "6-26"
+        },
+        {
+          "id": "6-28",
+          "title": "Your Daily AI Chief of Staff — The Full Government Workday",
+          "estimatedMinutes": 75,
+          "tags": ["copilot", "productivity", "workflow", "government", "capstone", "daily-system", "advanced"],
+          "nextLesson": "6-4",
+          "prevLesson": "6-27"
         },
         {
           "id": "6-4",
@@ -1234,7 +1394,7 @@
             "setup"
           ],
           "nextLesson": "6-5",
-          "prevLesson": "6-3"
+          "prevLesson": "6-28"
         },
         {
           "id": "6-5",
