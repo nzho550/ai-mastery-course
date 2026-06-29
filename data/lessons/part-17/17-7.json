@@ -1,0 +1,80 @@
+{
+  "id": "17-7",
+  "title": "AI for Team Adoption — Policies, Rollout & Governance",
+  "part": 17,
+  "estimatedMinutes": 50,
+  "tags": ["project-management", "intermediate", "team", "ai-policy", "governance", "leadership"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nKnowing how to use AI yourself is one skill. Helping a team adopt AI effectively — and avoiding the pitfalls that cause AI initiatives to stall or backfire — is another. This lesson gives you the practical frameworks for introducing AI to a team: how to build a policy, how to roll it out without resistance, how to train others, and how to measure whether it's actually working.\n\nBy the end of this lesson you'll have a draft AI use policy, a rollout plan, and a measurement framework you can adapt for any team or organisation."
+    },
+    {
+      "type": "text",
+      "content": "## Why AI Rollouts Fail\n\nMost failed AI adoptions fail for the same reasons:\n\n**1. Top-down mandate without buy-in**\nTelling a team 'we're using AI now' without involving them in how or why creates resistance. People feel their expertise is being devalued rather than augmented.\n\n**2. No clear policy on what's allowed**\nWithout a policy, employees either use AI for everything recklessly (risking data leaks) or avoid it entirely out of fear of doing something wrong. Both outcomes are bad.\n\n**3. Training that shows the tool, not the value**\n'Here's how to open Claude' does nothing. Training needs to show 'here's how Claude saves you 2 hours on a report you write every week.'\n\n**4. Picking the wrong first use case**\nStarting with a complex or risky use case before the team has confidence. Successful rollouts start with low-risk, high-visibility wins.\n\n**5. No measurement**\nIf you can't show the benefit, you can't maintain momentum. Track time saved, quality improvements, or output volume — something concrete.\n\n**6. Ignoring legitimate concerns**\nJob security anxiety, quality concerns, and ethical worries are real and valid. Dismissing them breeds distrust. Engaging them honestly builds trust."
+    },
+    {
+      "type": "text",
+      "content": "## Building an AI Use Policy\n\nAn AI use policy tells your team: what tools are approved, what data is allowed to flow through them, what requires human review, and what AI must never be used for.\n\n**A good policy is short (1-2 pages) and specific.** Here's the structure:\n\n**Section 1 — Purpose (1 paragraph)**\nWhy we're using AI and what we're trying to achieve. Avoids: 'to increase efficiency' (too vague). Better: 'to reduce time on [specific task type] so the team can focus on [higher-value activity].'\n\n**Section 2 — Approved Tools**\n- List specific tools and their approved use cases\n- Note any tools that are not approved (and why)\n- Include the subscription/licence status of each tool\n\n**Section 3 — Data Classification**\nWhat data can be used with which tools:\n- Public information: any approved tool\n- Internal company information: enterprise tier only (or approved tools with DPAs)\n- Confidential client data: local AI only, or de-identified before use\n- Credentials, PII, legal documents: never with any AI tool without explicit approval\n\n**Section 4 — Required Human Review**\nWhat AI output must always be reviewed before use:\n- Anything published externally\n- Legal or compliance documents\n- Financial calculations or projections\n- Medical or safety-related information\n- Final hiring decisions\n\n**Section 5 — Prohibited Uses**\n- What AI must never do in your organisation\n\n**Section 6 — Disclosure Requirements**\n- When to disclose AI involvement to clients or stakeholders\n\n**Section 7 — Reporting**\n- How to report AI-related incidents or concerns\n- Who to contact with questions"
+    },
+    {
+      "type": "text",
+      "content": "## The Rollout Playbook: A 4-Phase Approach\n\n**Phase 1 — The Pilot (weeks 1-4)**\n- Identify 3-5 enthusiastic early adopters (not necessarily the most senior — the most curious)\n- Choose 1-2 specific, low-risk, high-repetition tasks to start with\n- Give the pilot group training, support, and permission to experiment\n- Collect feedback and results weekly\n\n**Phase 2 — The First Win (week 4-6)**\n- Document a concrete result from the pilot: 'Sarah saved 4 hours per week on report writing' or 'the team produced 3x more outreach content in the same time'\n- Share this story — not as a mandate but as an invitation: 'Look what's possible'\n- Run a 1-hour show-and-tell where pilot participants demonstrate for others\n\n**Phase 3 — Broad Rollout (weeks 6-12)**\n- Expand to the full team with a policy in place\n- Run role-specific training (not a generic AI demo — show people how AI helps their specific job)\n- Create a channel (Slack, Teams) where people share what's working and ask questions\n- Designate an internal AI champion who can help colleagues troubleshoot\n\n**Phase 4 — Continuous Improvement**\n- Monthly review: what's working, what's not, what new tools should be evaluated\n- Update the policy as tools evolve\n- Track metrics and report back\n- Celebrate successes publicly — people adopt tools that they see colleagues succeeding with\n\n**Handling resistance:**\n- Job security concerns: acknowledge directly, then show how AI augments rather than replaces (the people who don't learn AI will lose ground; the ones who do will be more valuable)\n- Quality concerns: build in review checkpoints rather than fighting the concern\n- Privacy concerns: show the policy and explain what's allowed and why"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Draft Your Team's AI Use Policy",
+      "content": "You'll create a draft AI use policy for your team or organisation.\n\n**Step 1 — Gather context before prompting.** Decide:\n- What tools does your team currently use or would consider using? (Claude, Copilot, ChatGPT, others)\n- What kinds of data does your team typically work with? (client data, internal only, public info)\n- What are the 3 most common use cases where AI would help your team?\n- Are there any regulatory requirements in your industry (GDPR, healthcare, legal, financial services)?\n\n**Step 2 — Prompt Claude:**\n```\nCreate an AI use policy for a [team size, e.g., 12-person] [team type, e.g., marketing] team at a [company type, e.g., B2B software company].\n\nContext:\n- Tools we're considering: [list]\n- Typical data we work with: [describe]\n- Most common use cases: [list 3]\n- Industry/regulatory context: [any relevant regulations]\n- Company values relevant to AI: [e.g., transparency with clients, data privacy first]\n\nThe policy should:\n- Be 1-2 pages maximum — usable, not encyclopaedic\n- Use plain language — not legal jargon\n- Be specific about what's allowed, not just what's prohibited\n- Include clear data classification guidelines\n- Specify what needs human review\n- Explain the rationale for each major rule (so people understand it, not just follow it)\n```\n\n**Step 3 — Identify gaps.** Ask Claude: 'What scenarios does this policy NOT cover that a real team would encounter? List 5 edge cases we should address.'\n\n**Step 4 — Refine** with your specific context and save the draft.\n\n**Outcome:** A working draft policy ready for review with your manager or team."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop B — Design a Role-Specific Training Session",
+      "content": "Generic AI training ('here's what ChatGPT can do') rarely changes behaviour. Role-specific training ('here's how this saves you 2 hours on the report you write every Monday') does.\n\n**Step 1 — Choose a role and their real weekly tasks.** Use your own role, or a role you'd want to train. List 5-7 tasks this person does regularly that AI could help with.\n\n**Step 2 — Design a 60-minute training session.** Prompt Claude:\n```\nDesign a 60-minute AI training session for a [role title]. \n\nThe audience: [describe the role — what they do daily, their technical comfort level, their biggest time sinks]\n\nGoals: By the end of the session, each participant should have:\n- Completed one real task using AI that previously took longer\n- Understood the guardrails (what they can and can't share with AI tools)\n- Had a chance to ask questions and try things themselves\n\nThe session should cover:\n- A 10-min demo of 2-3 role-specific use cases (live, not slides)\n- A 30-min hands-on exercise where each person uses AI for a real task from their own work\n- A 10-min Q&A on concerns and edge cases\n- A 10-min wrap-up: how to get help, where to share what you learn, how the policy works\n\nCreate:\n1. A run-of-show / facilitator guide\n2. The 3 best demo scenarios for this role (each taking under 5 minutes to demo)\n3. The hands-on exercise instructions\n4. A FAQ document with the 10 most common concerns from this role type and honest answers\n```\n\n**Step 3 — Review the FAQ.** Are the concerns realistic for your actual team? Add any that are missing.\n\n**Step 4 — Run a practice demo** with yourself — open Claude and actually do each demo task. Adjust timing and polish the phrasing.\n\n**Outcome:** A complete training session ready to run with your team."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop C — Identify Your Team's First AI Win",
+      "content": "The first successful AI use case in a team changes everything. Choosing the right one is a strategic decision.\n\n**Step 1 — List 10 tasks your team does repeatedly** that are time-consuming, somewhat standardised, and low-risk if an AI draft needs editing.\n\n**Step 2 — Score each task on these criteria (1-5):**\n- Time saved: how many hours per week across the team?\n- Risk if wrong: how bad if AI makes an error? (1 = bad, 5 = easily caught and fixed)\n- Team motivation: would people actually be excited about AI helping here?\n- Ease of demo: can you show a compelling before/after in 5 minutes?\n- Measurability: can you prove the benefit with a number?\n\n**Step 3 — Add up the scores and identify your top 2 candidates.**\n\n**Step 4 — For your top candidate, ask Claude:**\n'Help me design a compelling demonstration of AI for [specific task]. The goal is to show my team a clear before/after comparison in 5 minutes that makes them think: I want that for my own work. Describe exactly what I should show and say.'\n\n**Step 5 — Run the demo** with your manager or a trusted colleague first. Refine before the full team.\n\n**Outcome:** A clear plan for the first AI win that builds momentum and team enthusiasm."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop D — Measure AI Impact",
+      "content": "You can only sustain an AI programme if you can demonstrate its value. This workshop creates your measurement framework.\n\n**Step 1 — Choose 2-3 things to measure.** The best metrics are:\n- Time saved on a specific, repeatable task (e.g., 'first draft of weekly report: was 4 hours, now 1.5 hours')\n- Volume output (e.g., 'blog posts per month: was 2, now 5 with same team')\n- Quality improvement (harder to measure — use customer satisfaction or error rates if relevant)\n- Employee satisfaction with the task (a simple before/after survey works)\n\n**Step 2 — Establish baselines NOW** — before the rollout. Ask your team: 'How long does [task X] currently take you each week?' Document the answers.\n\n**Step 3 — Set a measurement cadence.** Decide:\n- You'll re-measure after 4 weeks, then monthly\n- Who is responsible for tracking\n- How results will be shared (team meeting, Slack update, monthly report)\n\n**Step 4 — Design a simple survey.** Ask Claude: 'Create a 5-question monthly survey for a team using AI tools. The survey should measure: time saved, quality of AI output, confidence in using AI tools, biggest friction points, and one win they want to share. Keep it under 3 minutes to complete.'\n\n**Step 5 — Create a one-page AI ROI report template** — the format you'll use to communicate results to leadership. Ask Claude: 'Create a one-page AI programme results report template for a team of [size]. It should show: key metrics, wins to highlight, issues identified, and next steps. Format it for a leadership audience.'\n\n**Outcome:** A complete measurement framework so you can prove — not just claim — that AI adoption is working."
+    },
+    {
+      "type": "quiz",
+      "question": "Your team is starting to use AI tools and a senior colleague says: 'I'm worried this will replace my job.' What is the most effective and honest response?",
+      "options": [
+        "Reassure them that AI will never replace human roles",
+        "Acknowledge the concern is understandable, then explain the actual pattern: AI doesn't eliminate jobs in aggregate, but it does change what skills are valued. The people who learn to use AI tools will be significantly more productive and more valuable. The risk is in not adapting — not in adapting.",
+        "Tell them management has decided we're using AI and they need to get on board",
+        "Suggest they wait and see before using AI themselves"
+      ],
+      "correct": 1,
+      "explanation": "Option B is honest and constructive. Promising 'AI will never replace jobs' (A) isn't credible and isn't fully true — AI does automate tasks, and some roles will shrink. The honest framing is that the distribution of work changes: roles that primarily involve repetitive information processing are most at risk; roles that involve judgment, relationships, creativity, and domain expertise are most augmented. The competitive threat is from other people using AI better than you, not from AI itself. Forcing compliance (C) creates resistance; passive waiting (D) means falling behind."
+    },
+    {
+      "type": "quiz",
+      "question": "Which of these is the BEST choice for a first AI use case when rolling out AI to a sceptical team?",
+      "options": [
+        "Automated customer-facing chatbot (high visibility, proves AI can interact with customers)",
+        "Automated hiring screening (reduces manual CV review time significantly)",
+        "First-draft generation for a type of internal report the team writes every week — draft reviewed by a human before use",
+        "AI-generated code for the company's main product"
+      ],
+      "correct": 2,
+      "explanation": "Option C is the ideal first use case: high frequency (weekly), low risk (human reviews before use), clear time saving, and immediately demonstrable. A customer-facing chatbot (A) is high risk and high complexity for a team just starting out — mistakes are visible to customers. Automated hiring screening (B) carries significant legal and ethical risk and is not a good starting point. AI-generated code for the main product (D) is too risky without strong engineering oversight. The best first use cases are internal, high-repetition, with human review in the loop."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 17.** You now have a complete AI-augmented professional workflow covering projects (planning, problem-solving, documentation, quality review, stakeholder communication) and team AI adoption (policy, rollout, training, measurement). These skills compound — the most effective AI users aren't those who use the most tools, they're those who've built reliable workflows for the work they do every day. Part 19 applies AI to personal life: home, travel, health, learning, and everyday decisions."
+    }
+  ],
+  "nextLesson": "19-1",
+  "prevLesson": "17-6"
+}

@@ -10,7 +10,7 @@
         {
           "id": "1-1",
           "title": "What is Artificial Intelligence?",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 55,
           "tags": [
             "foundations",
             "beginner",
@@ -22,7 +22,7 @@
         {
           "id": "1-2",
           "title": "How Language Models Work (Plain English)",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "foundations",
             "beginner",
@@ -34,8 +34,8 @@
         },
         {
           "id": "1-3",
-          "title": "The AI Tools Landscape (2025)",
-          "estimatedMinutes": 20,
+          "title": "The AI Tools Landscape (2026)",
+          "estimatedMinutes": 65,
           "tags": [
             "foundations",
             "beginner",
@@ -48,7 +48,7 @@
         {
           "id": "1-4",
           "title": "AI Hallucinations & Limitations",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 60,
           "tags": [
             "foundations",
             "beginner",
@@ -61,7 +61,7 @@
         {
           "id": "1-5",
           "title": "Privacy & Safety — What NOT to Share with AI",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 60,
           "tags": [
             "foundations",
             "beginner",
@@ -74,7 +74,7 @@
         {
           "id": "1-6",
           "title": "AI & The Law: Legal Limits You Need to Know",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "foundations",
             "beginner",
@@ -106,7 +106,7 @@
         {
           "id": "2-1",
           "title": "Claude.ai — First Real Conversation",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "tools",
             "beginner",
@@ -119,7 +119,7 @@
         {
           "id": "2-2",
           "title": "Claude Projects & Memory",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "tools",
             "beginner",
@@ -132,8 +132,8 @@
         },
         {
           "id": "2-3",
-          "title": "ChatGPT & GPT-4o",
-          "estimatedMinutes": 20,
+          "title": "ChatGPT & OpenAI's AI Models",
+          "estimatedMinutes": 60,
           "tags": [
             "tools",
             "beginner",
@@ -147,7 +147,7 @@
         {
           "id": "2-4",
           "title": "Google Gemini",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "tools",
             "beginner",
@@ -160,8 +160,8 @@
         },
         {
           "id": "2-5",
-          "title": "Perplexity AI — AI-Powered Search",
-          "estimatedMinutes": 15,
+          "title": "Perplexity — AI-Powered Research",
+          "estimatedMinutes": 55,
           "tags": [
             "tools",
             "beginner",
@@ -175,7 +175,7 @@
         {
           "id": "2-6",
           "title": "Microsoft Copilot",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "tools",
             "beginner",
@@ -189,7 +189,7 @@
         {
           "id": "2-7",
           "title": "AI Media Generation — Images, Audio & Video",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "tools",
             "beginner",
@@ -203,7 +203,7 @@
         {
           "id": "2-8",
           "title": "Choosing the Right AI Tool",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 55,
           "tags": [
             "tools",
             "beginner",
@@ -216,7 +216,7 @@
         {
           "id": "2-9",
           "title": "Copilot for Microsoft 365 — AI in Outlook, Teams, Word & Excel",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "tools",
             "beginner",
@@ -231,7 +231,7 @@
         {
           "id": "2-10",
           "title": "AI Meeting Tools — Zoom, Otter.ai & Teams Summaries",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "tools",
             "beginner",
@@ -245,7 +245,7 @@
         {
           "id": "2-11",
           "title": "Browser AI Extensions — AI on Every Page",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "tools",
             "beginner",
@@ -260,7 +260,7 @@
         {
           "id": "2-12",
           "title": "Slack AI & Notion AI — AI in Your Work Apps",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "tools",
             "beginner",
@@ -268,8 +268,89 @@
             "notion",
             "productivity"
           ],
-          "nextLesson": "3-1",
+          "nextLesson": "2-13",
           "prevLesson": "2-11"
+        },
+        {
+          "id": "2-13",
+          "title": "Multimodal AI — Working with Images, Charts & Documents",
+          "estimatedMinutes": 50,
+          "tags": [
+            "tools",
+            "beginner",
+            "multimodal",
+            "vision",
+            "images",
+            "hands-on"
+          ],
+          "nextLesson": "2-14",
+          "prevLesson": "2-12"
+        },
+        {
+          "id": "2-14",
+          "title": "Custom GPTs & Claude Projects — Build Your Own AI Expert",
+          "estimatedMinutes": 50,
+          "tags": [
+            "tools",
+            "beginner",
+            "custom-gpt",
+            "claude-projects",
+            "customization",
+            "hands-on"
+          ],
+          "nextLesson": "2-15",
+          "prevLesson": "2-13"
+        },
+        {
+          "id": "2-15",
+          "title": "AI Image Generation — Deep Dive",
+          "estimatedMinutes": 60,
+          "tags": [
+            "tools",
+            "intermediate",
+            "image-generation",
+            "midjourney",
+            "dall-e",
+            "stable-diffusion",
+            "prompting",
+            "hands-on"
+          ],
+          "nextLesson": "2-16",
+          "prevLesson": "2-14"
+        },
+        {
+          "id": "2-16",
+          "title": "Google Workspace + AI — Gemini in Gmail, Docs, Sheets & Slides",
+          "estimatedMinutes": 55,
+          "tags": [
+            "tools",
+            "beginner",
+            "google",
+            "gemini",
+            "gmail",
+            "google-docs",
+            "google-sheets",
+            "workspace",
+            "hands-on"
+          ],
+          "nextLesson": "2-17",
+          "prevLesson": "2-15"
+        },
+        {
+          "id": "2-17",
+          "title": "Grok & DeepSeek — The Free AI Powerhouses You're Missing",
+          "estimatedMinutes": 55,
+          "tags": [
+            "tools",
+            "beginner",
+            "grok",
+            "deepseek",
+            "xai",
+            "open-source",
+            "hands-on"
+          ],
+          "nextLesson": "3-1",
+          "prevLesson": "2-16"
         }
       ]
     },
@@ -281,19 +362,19 @@
         {
           "id": "3-1",
           "title": "Why Prompting Matters",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 55,
           "tags": [
             "prompting",
             "intermediate",
             "concepts"
           ],
           "nextLesson": "3-2",
-          "prevLesson": "2-12"
+          "prevLesson": "2-17"
         },
         {
           "id": "3-2",
           "title": "The Anatomy of a Good Prompt",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "prompting",
             "intermediate",
@@ -305,7 +386,7 @@
         {
           "id": "3-3",
           "title": "Role & Persona Prompting",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "prompting",
             "intermediate",
@@ -318,7 +399,7 @@
         {
           "id": "3-4",
           "title": "Chain-of-Thought Prompting",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "prompting",
             "intermediate",
@@ -331,7 +412,7 @@
         {
           "id": "3-5",
           "title": "Few-Shot Examples",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "prompting",
             "intermediate",
@@ -343,8 +424,8 @@
         },
         {
           "id": "3-6",
-          "title": "Structured Output (JSON, Tables, Lists)",
-          "estimatedMinutes": 20,
+          "title": "Structured Output — JSON, Tables, and Data Extraction",
+          "estimatedMinutes": 60,
           "tags": [
             "prompting",
             "intermediate",
@@ -357,7 +438,7 @@
         {
           "id": "3-7",
           "title": "Iterative Refinement",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "prompting",
             "intermediate",
@@ -370,7 +451,7 @@
         {
           "id": "3-8",
           "title": "Prompt Templates & Reuse",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "prompting",
             "intermediate",
@@ -390,7 +471,7 @@
         {
           "id": "13-1",
           "title": "AI Hallucinations — Deep Dive",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "safety",
             "intermediate",
@@ -403,7 +484,7 @@
         {
           "id": "13-2",
           "title": "What NOT to Share With Cloud AI",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "safety",
             "intermediate",
@@ -416,7 +497,7 @@
         {
           "id": "13-3",
           "title": "API Cost Management — Budgets, Monitoring & Architecture",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "safety",
             "intermediate",
@@ -430,7 +511,7 @@
         {
           "id": "13-4",
           "title": "AI & Copyright — What You Need to Know",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "safety",
             "intermediate",
@@ -444,7 +525,7 @@
         {
           "id": "13-5",
           "title": "Security Risks in AI Workflows",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "safety",
             "intermediate",
@@ -464,7 +545,7 @@
         {
           "id": "15-1",
           "title": "AI as Your Research Partner",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 60,
           "tags": [
             "research",
             "beginner",
@@ -477,7 +558,7 @@
         {
           "id": "15-2",
           "title": "Deep Research with Perplexity & Claude",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 65,
           "tags": [
             "research",
             "beginner",
@@ -491,7 +572,7 @@
         {
           "id": "15-3",
           "title": "AI Web Search & Web Crawling",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 63,
           "tags": [
             "research",
             "intermediate",
@@ -506,7 +587,7 @@
         {
           "id": "15-4",
           "title": "Working with Documents & PDFs",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 65,
           "tags": [
             "research",
             "beginner",
@@ -521,7 +602,7 @@
         {
           "id": "15-5",
           "title": "Organizing & Synthesizing Research",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 63,
           "tags": [
             "research",
             "beginner",
@@ -535,7 +616,7 @@
         {
           "id": "15-6",
           "title": "Writing Research Reports with AI",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 70,
           "tags": [
             "research",
             "beginner",
@@ -549,15 +630,30 @@
         {
           "id": "15-7",
           "title": "Research Capstone — A Complete Research Sprint",
-          "estimatedMinutes": 60,
+          "estimatedMinutes": 85,
           "tags": [
             "research",
             "intermediate",
             "capstone",
             "hands-on"
           ],
-          "nextLesson": "16-1",
+          "nextLesson": "15-8",
           "prevLesson": "15-6"
+        },
+        {
+          "id": "15-8",
+          "title": "NotebookLM — Your AI Research Companion",
+          "estimatedMinutes": 55,
+          "tags": [
+            "research",
+            "beginner",
+            "notebooklm",
+            "google",
+            "knowledge",
+            "hands-on"
+          ],
+          "nextLesson": "16-1",
+          "prevLesson": "15-7"
         }
       ]
     },
@@ -569,7 +665,7 @@
         {
           "id": "16-1",
           "title": "The AI Writing Workflow",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "office",
             "beginner",
@@ -577,12 +673,12 @@
             "workflow"
           ],
           "nextLesson": "16-2",
-          "prevLesson": "15-7"
+          "prevLesson": "15-8"
         },
         {
           "id": "16-2",
           "title": "Reports, Proposals & Business Documents",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "office",
             "beginner",
@@ -596,7 +692,7 @@
         {
           "id": "16-3",
           "title": "Data Analysis Without Coding",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "office",
             "beginner",
@@ -611,7 +707,7 @@
         {
           "id": "16-4",
           "title": "AI-Powered Presentations",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "office",
             "beginner",
@@ -625,7 +721,7 @@
         {
           "id": "16-5",
           "title": "Email & Communication Templates",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "office",
             "beginner",
@@ -639,7 +735,7 @@
         {
           "id": "16-6",
           "title": "The End-to-End Meeting Workflow",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "office",
             "beginner",
@@ -653,7 +749,7 @@
         {
           "id": "16-7",
           "title": "Creating Process Documentation & SOPs",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "office",
             "beginner",
@@ -661,8 +757,53 @@
             "sop",
             "hands-on"
           ],
-          "nextLesson": "17-1",
+          "nextLesson": "16-8",
           "prevLesson": "16-6"
+        },
+        {
+          "id": "16-8",
+          "title": "AI for Marketing & Content Teams",
+          "estimatedMinutes": 55,
+          "tags": [
+            "document-work",
+            "intermediate",
+            "marketing",
+            "content",
+            "copywriting",
+            "hands-on"
+          ],
+          "nextLesson": "16-9",
+          "prevLesson": "16-7"
+        },
+        {
+          "id": "16-9",
+          "title": "AI for HR & Recruiting",
+          "estimatedMinutes": 55,
+          "tags": [
+            "document-work",
+            "intermediate",
+            "hr",
+            "recruiting",
+            "people-management",
+            "hands-on"
+          ],
+          "nextLesson": "16-10",
+          "prevLesson": "16-8"
+        },
+        {
+          "id": "16-10",
+          "title": "AI for Sales & Business Development",
+          "estimatedMinutes": 55,
+          "tags": [
+            "document-work",
+            "intermediate",
+            "sales",
+            "business-development",
+            "outreach",
+            "hands-on"
+          ],
+          "nextLesson": "17-1",
+          "prevLesson": "16-9"
         }
       ]
     },
@@ -674,7 +815,7 @@
         {
           "id": "17-1",
           "title": "Planning Any Project with AI",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 65,
           "tags": [
             "project-management",
             "beginner",
@@ -682,12 +823,12 @@
             "hands-on"
           ],
           "nextLesson": "17-2",
-          "prevLesson": "16-7"
+          "prevLesson": "16-10"
         },
         {
           "id": "17-2",
           "title": "Breaking Down Complex Problems",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "project-management",
             "beginner",
@@ -700,7 +841,7 @@
         {
           "id": "17-3",
           "title": "Research + Planning Combined",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 65,
           "tags": [
             "project-management",
             "beginner",
@@ -714,7 +855,7 @@
         {
           "id": "17-4",
           "title": "Documentation & Decision Capture as You Work",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "project-management",
             "beginner",
@@ -727,7 +868,7 @@
         {
           "id": "17-5",
           "title": "Review, Quality Check & Stakeholder Communication",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 63,
           "tags": [
             "project-management",
             "beginner",
@@ -741,15 +882,30 @@
         {
           "id": "17-6",
           "title": "Project Capstone — The AI-Augmented Work Sprint",
-          "estimatedMinutes": 90,
+          "estimatedMinutes": 85,
           "tags": [
             "project-management",
             "intermediate",
             "capstone",
             "hands-on"
           ],
-          "nextLesson": "19-1",
+          "nextLesson": "17-7",
           "prevLesson": "17-5"
+        },
+        {
+          "id": "17-7",
+          "title": "AI for Team Adoption — Policies, Rollout & Governance",
+          "estimatedMinutes": 50,
+          "tags": [
+            "project-management",
+            "intermediate",
+            "team",
+            "ai-policy",
+            "governance",
+            "leadership"
+          ],
+          "nextLesson": "19-1",
+          "prevLesson": "17-6"
         }
       ]
     },
@@ -761,7 +917,7 @@
         {
           "id": "19-1",
           "title": "AI for Everyday Decisions — Meals, Shopping & Home",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "personal-life",
             "beginner",
@@ -771,12 +927,12 @@
             "hands-on"
           ],
           "nextLesson": "19-2",
-          "prevLesson": "17-6"
+          "prevLesson": "17-7"
         },
         {
           "id": "19-2",
           "title": "AI for Travel Planning",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "personal-life",
             "beginner",
@@ -790,7 +946,7 @@
         {
           "id": "19-3",
           "title": "AI for Personal Finance",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "personal-life",
             "beginner",
@@ -805,7 +961,7 @@
         {
           "id": "19-4",
           "title": "AI for Health & Wellbeing",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "personal-life",
             "beginner",
@@ -820,7 +976,7 @@
         {
           "id": "19-5",
           "title": "Learning Anything with AI",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "personal-life",
             "beginner",
@@ -835,7 +991,7 @@
         {
           "id": "19-6",
           "title": "AI Journaling & The Thinking Partner",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "personal-life",
             "beginner",
@@ -850,7 +1006,7 @@
         {
           "id": "19-7",
           "title": "Voice AI — Talking With Your AI",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "personal-life",
             "beginner",
@@ -864,7 +1020,7 @@
         {
           "id": "19-8",
           "title": "Your Second Brain — AI-Powered Personal Organisation",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "personal-life",
             "beginner",
@@ -904,8 +1060,41 @@
             "repurposing",
             "productivity"
           ],
-          "nextLesson": "4-1",
+          "nextLesson": "19-11",
           "prevLesson": "19-9"
+        },
+        {
+          "id": "19-11",
+          "title": "AI for Video Creation",
+          "estimatedMinutes": 55,
+          "tags": [
+            "personal-life",
+            "intermediate",
+            "video",
+            "content-creation",
+            "sora",
+            "runway",
+            "hands-on"
+          ],
+          "nextLesson": "19-12",
+          "prevLesson": "19-10"
+        },
+        {
+          "id": "19-12",
+          "title": "Real-Time Voice AI — ChatGPT Advanced Voice & Gemini Live",
+          "estimatedMinutes": 50,
+          "tags": [
+            "personal-life",
+            "intermediate",
+            "voice",
+            "real-time",
+            "chatgpt-voice",
+            "gemini-live",
+            "accessibility",
+            "hands-on"
+          ],
+          "nextLesson": "4-1",
+          "prevLesson": "19-11"
         }
       ]
     },
@@ -917,7 +1106,7 @@
         {
           "id": "4-1",
           "title": "How Computers Organize Files",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "computer-basics",
             "beginner",
@@ -925,12 +1114,12 @@
             "concepts"
           ],
           "nextLesson": "4-2",
-          "prevLesson": "19-8"
+          "prevLesson": "19-12"
         },
         {
           "id": "4-2",
           "title": "Windows: File Explorer & Paths",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "computer-basics",
             "beginner",
@@ -944,7 +1133,7 @@
         {
           "id": "4-3",
           "title": "Opening the Terminal (PowerShell)",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 65,
           "tags": [
             "computer-basics",
             "beginner",
@@ -958,7 +1147,7 @@
         {
           "id": "4-4",
           "title": "Essential Terminal Commands",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 65,
           "tags": [
             "computer-basics",
             "beginner",
@@ -972,7 +1161,7 @@
         {
           "id": "4-5",
           "title": "What is Code? A Plain-English Introduction",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 55,
           "tags": [
             "computer-basics",
             "beginner",
@@ -985,7 +1174,7 @@
         {
           "id": "4-6",
           "title": "Your First HTML File (Without VS Code)",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 65,
           "tags": [
             "computer-basics",
             "beginner",
@@ -998,7 +1187,7 @@
         {
           "id": "4-7",
           "title": "Your First Python Automation Script with AI",
-          "estimatedMinutes": 60,
+          "estimatedMinutes": 90,
           "tags": [
             "python",
             "automation",
@@ -1020,7 +1209,7 @@
         {
           "id": "5-1",
           "title": "What is VS Code and Why Use It",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "vscode",
             "beginner",
@@ -1033,7 +1222,7 @@
         {
           "id": "5-2",
           "title": "Downloading & Installing VS Code",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "vscode",
             "beginner",
@@ -1046,7 +1235,7 @@
         {
           "id": "5-3",
           "title": "The Interface: A Named Tour",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "vscode",
             "beginner",
@@ -1059,7 +1248,7 @@
         {
           "id": "5-4",
           "title": "Opening a Folder / Workspace",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "vscode",
             "beginner",
@@ -1072,7 +1261,7 @@
         {
           "id": "5-5",
           "title": "Creating, Renaming & Deleting Files",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "vscode",
             "beginner",
@@ -1085,7 +1274,7 @@
         {
           "id": "5-6",
           "title": "The Command Palette — VS Code's Superpower",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "vscode",
             "beginner",
@@ -1098,7 +1287,7 @@
         {
           "id": "5-7",
           "title": "The Integrated Terminal",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "vscode",
             "beginner",
@@ -1111,7 +1300,7 @@
         {
           "id": "5-8",
           "title": "Extensions — Installing & Managing",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 70,
           "tags": [
             "vscode",
             "beginner",
@@ -1124,7 +1313,7 @@
         {
           "id": "5-9",
           "title": "Settings — UI Mode & JSON Mode",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "vscode",
             "beginner",
@@ -1137,7 +1326,7 @@
         {
           "id": "5-10",
           "title": "Essential Keyboard Shortcuts",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "vscode",
             "beginner",
@@ -1150,7 +1339,7 @@
         {
           "id": "5-11",
           "title": "Split Editor & Working With Multiple Files",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "vscode",
             "beginner",
@@ -1163,7 +1352,7 @@
         {
           "id": "5-12",
           "title": "VS Code Git Integration (Source Control)",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "vscode",
             "beginner",
@@ -1183,7 +1372,7 @@
         {
           "id": "6-1",
           "title": "GitHub Copilot — Setup & First Suggestion",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "vscode",
             "intermediate",
@@ -1197,7 +1386,7 @@
         {
           "id": "6-2",
           "title": "Copilot Autocomplete in Practice",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "vscode",
             "intermediate",
@@ -1211,7 +1400,7 @@
         {
           "id": "6-3",
           "title": "Copilot Chat — Explain, Refactor, Debug",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "vscode",
             "intermediate",
@@ -1219,22 +1408,36 @@
             "chat",
             "debugging"
           ],
-          "nextLesson": "6-9",
+          "nextLesson": "6-4",
           "prevLesson": "6-2"
         },
         {
           "id": "6-9",
           "title": "Copilot Agent Mode: MCP, Jira & Model Selection",
           "estimatedMinutes": 60,
-          "tags": ["vscode", "intermediate", "copilot", "mcp", "jira", "agent-mode", "hands-on"],
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "mcp",
+            "jira",
+            "agent-mode",
+            "hands-on"
+          ],
           "nextLesson": "6-10",
-          "prevLesson": "6-3"
+          "prevLesson": "6-8"
         },
         {
           "id": "6-10",
           "title": "Ghost Text & Next Edit Suggestions Mastery",
           "estimatedMinutes": 50,
-          "tags": ["vscode", "intermediate", "copilot", "ghost-text", "next-edit"],
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "ghost-text",
+            "next-edit"
+          ],
           "nextLesson": "6-11",
           "prevLesson": "6-9"
         },
@@ -1242,7 +1445,14 @@
           "id": "6-11",
           "title": "Chat Participants, Variables & Slash Commands",
           "estimatedMinutes": 50,
-          "tags": ["vscode", "intermediate", "copilot", "chat", "workspace", "slash-commands"],
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "chat",
+            "workspace",
+            "slash-commands"
+          ],
           "nextLesson": "6-12",
           "prevLesson": "6-10"
         },
@@ -1250,7 +1460,14 @@
           "id": "6-12",
           "title": "Copilot Edits — Multi-File AI Editing Sessions",
           "estimatedMinutes": 55,
-          "tags": ["vscode", "intermediate", "copilot", "edits", "multi-file", "refactoring"],
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "edits",
+            "multi-file",
+            "refactoring"
+          ],
           "nextLesson": "6-13",
           "prevLesson": "6-11"
         },
@@ -1258,7 +1475,13 @@
           "id": "6-13",
           "title": "Custom Instructions — Teaching Copilot Your Rules",
           "estimatedMinutes": 50,
-          "tags": ["vscode", "intermediate", "copilot", "custom-instructions", "configuration"],
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "custom-instructions",
+            "configuration"
+          ],
           "nextLesson": "6-14",
           "prevLesson": "6-12"
         },
@@ -1266,7 +1489,14 @@
           "id": "6-14",
           "title": "GitHub Copilot CLI — Terminal-Native AI Agent",
           "estimatedMinutes": 60,
-          "tags": ["copilot", "cli", "terminal", "agents", "automation", "intermediate"],
+          "tags": [
+            "copilot",
+            "cli",
+            "terminal",
+            "agents",
+            "automation",
+            "intermediate"
+          ],
           "nextLesson": "6-15",
           "prevLesson": "6-13"
         },
@@ -1274,7 +1504,14 @@
           "id": "6-15",
           "title": "Copilot for Pull Requests & Code Review",
           "estimatedMinutes": 55,
-          "tags": ["copilot", "github", "pull-requests", "code-review", "team", "intermediate"],
+          "tags": [
+            "copilot",
+            "github",
+            "pull-requests",
+            "code-review",
+            "team",
+            "intermediate"
+          ],
           "nextLesson": "6-16",
           "prevLesson": "6-14"
         },
@@ -1282,7 +1519,14 @@
           "id": "6-16",
           "title": "Copilot Extensions & the Skills Marketplace",
           "estimatedMinutes": 45,
-          "tags": ["copilot", "extensions", "skills", "marketplace", "github", "intermediate"],
+          "tags": [
+            "copilot",
+            "extensions",
+            "skills",
+            "marketplace",
+            "github",
+            "intermediate"
+          ],
           "nextLesson": "6-17",
           "prevLesson": "6-15"
         },
@@ -1290,7 +1534,14 @@
           "id": "6-17",
           "title": "Advanced MCP — Multiple Servers & Tool Chaining",
           "estimatedMinutes": 60,
-          "tags": ["copilot", "mcp", "vscode", "azure", "agent-mode", "advanced"],
+          "tags": [
+            "copilot",
+            "mcp",
+            "vscode",
+            "azure",
+            "agent-mode",
+            "advanced"
+          ],
           "nextLesson": "6-18",
           "prevLesson": "6-16"
         },
@@ -1298,7 +1549,15 @@
           "id": "6-18",
           "title": "Copilot for Testing — Real Coverage, Not Just Green Tests",
           "estimatedMinutes": 55,
-          "tags": ["copilot", "testing", "vscode", "pytest", "tdd", "quality", "intermediate"],
+          "tags": [
+            "copilot",
+            "testing",
+            "vscode",
+            "pytest",
+            "tdd",
+            "quality",
+            "intermediate"
+          ],
           "nextLesson": "6-19",
           "prevLesson": "6-17"
         },
@@ -1306,7 +1565,14 @@
           "id": "6-19",
           "title": "Copilot for Documentation & Professional Writing",
           "estimatedMinutes": 50,
-          "tags": ["copilot", "documentation", "writing", "reports", "government", "intermediate"],
+          "tags": [
+            "copilot",
+            "documentation",
+            "writing",
+            "reports",
+            "government",
+            "intermediate"
+          ],
           "nextLesson": "6-20",
           "prevLesson": "6-18"
         },
@@ -1314,7 +1580,14 @@
           "id": "6-20",
           "title": "Security, Privacy & Content Exclusions",
           "estimatedMinutes": 55,
-          "tags": ["copilot", "security", "privacy", "enterprise", "government", "advanced"],
+          "tags": [
+            "copilot",
+            "security",
+            "privacy",
+            "enterprise",
+            "government",
+            "advanced"
+          ],
           "nextLesson": "6-21",
           "prevLesson": "6-19"
         },
@@ -1322,7 +1595,14 @@
           "id": "6-21",
           "title": "Copilot for Teams & Enterprise Governance",
           "estimatedMinutes": 55,
-          "tags": ["copilot", "enterprise", "governance", "teams", "knowledge-base", "advanced"],
+          "tags": [
+            "copilot",
+            "enterprise",
+            "governance",
+            "teams",
+            "knowledge-base",
+            "advanced"
+          ],
           "nextLesson": "6-22",
           "prevLesson": "6-20"
         },
@@ -1330,15 +1610,31 @@
           "id": "6-22",
           "title": "Model Optimization & Your Personal Copilot System",
           "estimatedMinutes": 55,
-          "tags": ["copilot", "models", "optimization", "workflow", "system", "advanced"],
+          "tags": [
+            "copilot",
+            "models",
+            "optimization",
+            "workflow",
+            "system",
+            "advanced"
+          ],
           "nextLesson": "6-23",
           "prevLesson": "6-21"
         },
         {
           "id": "6-23",
           "title": "Copilot for Email — Inbox Management & Professional Correspondence",
-          "estimatedMinutes": 55,
-          "tags": ["copilot", "email", "outlook", "gmail", "mcp", "productivity", "government", "intermediate"],
+          "estimatedMinutes": 60,
+          "tags": [
+            "copilot",
+            "email",
+            "outlook",
+            "gmail",
+            "mcp",
+            "productivity",
+            "government",
+            "intermediate"
+          ],
           "nextLesson": "6-24",
           "prevLesson": "6-22"
         },
@@ -1346,7 +1642,15 @@
           "id": "6-24",
           "title": "Managing Your Team with Copilot — Tasks, Blockers & Workload",
           "estimatedMinutes": 60,
-          "tags": ["copilot", "team-management", "ado", "jira", "tasks", "government", "intermediate"],
+          "tags": [
+            "copilot",
+            "team-management",
+            "ado",
+            "jira",
+            "tasks",
+            "government",
+            "intermediate"
+          ],
           "nextLesson": "6-25",
           "prevLesson": "6-23"
         },
@@ -1354,7 +1658,16 @@
           "id": "6-25",
           "title": "Copilot for Meetings — Prep, Notes & Follow-Up",
           "estimatedMinutes": 55,
-          "tags": ["copilot", "meetings", "productivity", "calendar", "notes", "action-items", "government", "intermediate"],
+          "tags": [
+            "copilot",
+            "meetings",
+            "productivity",
+            "calendar",
+            "notes",
+            "action-items",
+            "government",
+            "intermediate"
+          ],
           "nextLesson": "6-26",
           "prevLesson": "6-24"
         },
@@ -1362,7 +1675,16 @@
           "id": "6-26",
           "title": "Gathering & Synthesizing Information from Your Team",
           "estimatedMinutes": 55,
-          "tags": ["copilot", "team-communication", "slack", "teams", "synthesis", "reporting", "government", "intermediate"],
+          "tags": [
+            "copilot",
+            "team-communication",
+            "slack",
+            "teams",
+            "synthesis",
+            "reporting",
+            "government",
+            "intermediate"
+          ],
           "nextLesson": "6-27",
           "prevLesson": "6-25"
         },
@@ -1370,7 +1692,16 @@
           "id": "6-27",
           "title": "Stakeholder Communication — Writing for Every Audience",
           "estimatedMinutes": 55,
-          "tags": ["copilot", "communication", "stakeholders", "writing", "government", "executive", "reports", "intermediate"],
+          "tags": [
+            "copilot",
+            "communication",
+            "stakeholders",
+            "writing",
+            "government",
+            "executive",
+            "reports",
+            "intermediate"
+          ],
           "nextLesson": "6-28",
           "prevLesson": "6-26"
         },
@@ -1378,14 +1709,55 @@
           "id": "6-28",
           "title": "Your Daily AI Chief of Staff — The Full Government Workday",
           "estimatedMinutes": 75,
-          "tags": ["copilot", "productivity", "workflow", "government", "capstone", "daily-system", "advanced"],
-          "nextLesson": "6-4",
+          "tags": [
+            "copilot",
+            "productivity",
+            "workflow",
+            "government",
+            "capstone",
+            "daily-system",
+            "advanced"
+          ],
+          "nextLesson": "6-29",
           "prevLesson": "6-27"
+        },
+        {
+          "id": "6-29",
+          "title": "AI for Entrepreneurs — Validate and Launch Your Business Idea",
+          "estimatedMinutes": 90,
+          "tags": [
+            "entrepreneur",
+            "business",
+            "startup",
+            "market-research",
+            "strategy",
+            "no-code",
+            "advanced"
+          ],
+          "nextLesson": "6-30",
+          "prevLesson": "6-28"
+        },
+        {
+          "id": "6-30",
+          "title": "AI for Managers — Performance Reviews, Hiring & OKRs",
+          "estimatedMinutes": 80,
+          "tags": [
+            "management",
+            "performance-review",
+            "hiring",
+            "okr",
+            "leadership",
+            "team",
+            "no-code",
+            "advanced"
+          ],
+          "nextLesson": "9-1",
+          "prevLesson": "6-29"
         },
         {
           "id": "6-4",
           "title": "Continue.dev — Free, Open-Source AI in VS Code",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "vscode",
             "intermediate",
@@ -1394,12 +1766,12 @@
             "setup"
           ],
           "nextLesson": "6-5",
-          "prevLesson": "6-28"
+          "prevLesson": "6-3"
         },
         {
           "id": "6-5",
           "title": "AI-Assisted Debugging in VS Code",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "vscode",
             "intermediate",
@@ -1413,7 +1785,7 @@
         {
           "id": "6-6",
           "title": "Cursor IDE — The AI-Native Editor",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "vscode",
             "intermediate",
@@ -1427,7 +1799,7 @@
         {
           "id": "6-7",
           "title": "Windsurf — Another AI-First Editor",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "vscode",
             "intermediate",
@@ -1441,14 +1813,14 @@
         {
           "id": "6-8",
           "title": "Choosing Your AI Editor Setup",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "vscode",
             "intermediate",
             "strategy",
             "overview"
           ],
-          "nextLesson": "9-1",
+          "nextLesson": "6-9",
           "prevLesson": "6-7"
         }
       ]
@@ -1461,7 +1833,7 @@
         {
           "id": "9-1",
           "title": "Aider — Terminal-Based AI Coding",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "ai-coding",
             "intermediate",
@@ -1470,12 +1842,12 @@
             "hands-on"
           ],
           "nextLesson": "9-2",
-          "prevLesson": "6-8"
+          "prevLesson": "6-30"
         },
         {
           "id": "9-2",
           "title": "Cody by Sourcegraph — Enterprise Codebase AI",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "ai-coding",
             "intermediate",
@@ -1489,7 +1861,7 @@
         {
           "id": "9-3",
           "title": "Tabnine — Privacy-First Completion",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "ai-coding",
             "intermediate",
@@ -1503,7 +1875,7 @@
         {
           "id": "9-4",
           "title": "The Full AI Coding Tool Landscape",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "ai-coding",
             "intermediate",
@@ -1570,7 +1942,7 @@
         {
           "id": "7-1",
           "title": "What is Claude Code?",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 55,
           "tags": [
             "claude-code",
             "intermediate",
@@ -1578,12 +1950,12 @@
             "overview"
           ],
           "nextLesson": "7-2",
-          "prevLesson": "9-4"
+          "prevLesson": "9-7"
         },
         {
           "id": "7-2",
           "title": "Installing Claude Code",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "claude-code",
             "intermediate",
@@ -1596,7 +1968,7 @@
         {
           "id": "7-3",
           "title": "First Session — Reading a Project",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 70,
           "tags": [
             "claude-code",
             "intermediate",
@@ -1609,7 +1981,7 @@
         {
           "id": "7-4",
           "title": "Asking Claude to Write a File",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "claude-code",
             "intermediate",
@@ -1622,7 +1994,7 @@
         {
           "id": "7-5",
           "title": "Reviewing & Accepting Changes",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "claude-code",
             "intermediate",
@@ -1635,7 +2007,7 @@
         {
           "id": "7-6",
           "title": "CLAUDE.md — Your Project Instruction File",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "claude-code",
             "intermediate",
@@ -1648,7 +2020,7 @@
         {
           "id": "7-7",
           "title": "Custom Slash Commands",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 70,
           "tags": [
             "claude-code",
             "intermediate",
@@ -1661,7 +2033,7 @@
         {
           "id": "7-8",
           "title": "Hooks — Automate Actions Around Claude's Work",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "claude-code",
             "intermediate",
@@ -1674,7 +2046,7 @@
         {
           "id": "7-9",
           "title": "The Memory System",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "claude-code",
             "intermediate",
@@ -1687,7 +2059,7 @@
         {
           "id": "7-10",
           "title": "Plan Mode & Permissions",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "claude-code",
             "intermediate",
@@ -1700,7 +2072,7 @@
         {
           "id": "7-11",
           "title": "Sub-Agents & Parallel Work",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "claude-code",
             "advanced",
@@ -1713,15 +2085,22 @@
         {
           "id": "7-12",
           "title": "Claude Code Settings Deep Dive",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "claude-code",
             "advanced",
             "settings",
             "configuration"
           ],
-          "nextLesson": "20-1",
+          "nextLesson": "7-13",
           "prevLesson": "7-11"
+        },
+        {
+          "id": "7-13",
+          "title": "The 7 Essential Hook Patterns — Real-World Workflows",
+          "estimatedMinutes": 80,
+          "prevLesson": "7-12",
+          "nextLesson": "20-1"
         }
       ]
     },
@@ -1742,7 +2121,7 @@
             "beginner"
           ],
           "nextLesson": "20-2",
-          "prevLesson": "7-12"
+          "prevLesson": "7-13"
         },
         {
           "id": "20-2",
@@ -1862,7 +2241,7 @@
         {
           "id": "8-1",
           "title": "What is MCP and Why It's a Big Deal",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 60,
           "tags": [
             "mcp",
             "intermediate",
@@ -1875,7 +2254,7 @@
         {
           "id": "8-2",
           "title": "MCP Architecture — Client, Server, Transport",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "mcp",
             "intermediate",
@@ -1888,7 +2267,7 @@
         {
           "id": "8-3",
           "title": "Installing Your First MCP Server",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "mcp",
             "intermediate",
@@ -1902,7 +2281,7 @@
         {
           "id": "8-4",
           "title": "context7 — Live Documentation for Any Library",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "mcp",
             "intermediate",
@@ -1916,7 +2295,7 @@
         {
           "id": "8-5",
           "title": "sequential-thinking — Structured Reasoning",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "mcp",
             "intermediate",
@@ -1930,7 +2309,7 @@
         {
           "id": "8-6",
           "title": "The Self-Critique Pattern — Actor-Critic Thinking",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "mcp",
             "intermediate",
@@ -1944,7 +2323,7 @@
         {
           "id": "8-7",
           "title": "task-master-ai — AI Project Management",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "mcp",
             "intermediate",
@@ -1958,7 +2337,7 @@
         {
           "id": "8-8",
           "title": "GitHub MCP — Issues, PRs, and Code via Chat",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "mcp",
             "intermediate",
@@ -1971,7 +2350,7 @@
         {
           "id": "8-9",
           "title": "Filesystem MCP — AI Navigates Your Files",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "mcp",
             "intermediate",
@@ -1984,7 +2363,7 @@
         {
           "id": "8-10",
           "title": "Browser / Playwright MCP — AI Controls a Real Browser",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "mcp",
             "advanced",
@@ -1998,7 +2377,7 @@
         {
           "id": "8-11",
           "title": "Gmail MCP — Real Inbox Cleanup Session",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "mcp",
             "intermediate",
@@ -2012,7 +2391,7 @@
         {
           "id": "8-12",
           "title": "Google Drive & Calendar MCP — Real Workspace Organisation",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "mcp",
             "intermediate",
@@ -2026,7 +2405,7 @@
         {
           "id": "8-13",
           "title": "Database MCP — SQLite",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "mcp",
             "intermediate",
@@ -2040,7 +2419,7 @@
         {
           "id": "8-14",
           "title": "Finding Community MCP Servers",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "mcp",
             "intermediate",
@@ -2053,7 +2432,7 @@
         {
           "id": "8-15",
           "title": "Build a Simple Custom MCP Server",
-          "estimatedMinutes": 60,
+          "estimatedMinutes": 100,
           "tags": [
             "mcp",
             "advanced",
@@ -2067,7 +2446,7 @@
         {
           "id": "8-16",
           "title": "Outlook MCP — Your Inbox Inside Claude Code",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "mcp",
             "intermediate",
@@ -2082,7 +2461,7 @@
         {
           "id": "8-17",
           "title": "Microsoft Teams MCP — Channels & Meetings in Claude Code",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "mcp",
             "intermediate",
@@ -2097,7 +2476,7 @@
         {
           "id": "8-18",
           "title": "Slack MCP — Channels, Threads & Messages in Claude Code",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "mcp",
             "intermediate",
@@ -2111,7 +2490,7 @@
         {
           "id": "8-19",
           "title": "Notion MCP — Your Knowledge Base in Claude Code",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "mcp",
             "intermediate",
@@ -2125,7 +2504,7 @@
         {
           "id": "8-20",
           "title": "The Unified Office — Chaining MCPs Across All Your Tools",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "mcp",
             "intermediate",
@@ -2133,8 +2512,43 @@
             "integration",
             "hands-on"
           ],
-          "nextLesson": "10-1",
+          "nextLesson": "8-21",
           "prevLesson": "8-19"
+        },
+        {
+          "id": "8-21",
+          "title": "Memory MCP — Giving Claude a Persistent Brain",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "memory",
+            "knowledge-graph",
+            "persistent-memory",
+            "claude-code",
+            "intermediate"
+          ],
+          "nextLesson": "8-22",
+          "prevLesson": "8-20"
+        },
+        {
+          "id": "8-22",
+          "title": "The Complete MCP Stack — All 6 Tools in One Real Workflow",
+          "estimatedMinutes": 90,
+          "tags": [
+            "mcp",
+            "advanced",
+            "filesystem",
+            "sequential-thinking",
+            "github",
+            "playwright",
+            "context7",
+            "memory",
+            "multi-mcp",
+            "capstone",
+            "hands-on"
+          ],
+          "nextLesson": "10-1",
+          "prevLesson": "8-21"
         }
       ]
     },
@@ -2146,7 +2560,7 @@
         {
           "id": "10-1",
           "title": "What is Workflow Automation?",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 55,
           "tags": [
             "automation",
             "intermediate",
@@ -2154,12 +2568,12 @@
             "overview"
           ],
           "nextLesson": "10-2",
-          "prevLesson": "8-20"
+          "prevLesson": "8-22"
         },
         {
           "id": "10-2",
           "title": "n8n — Open-Source AI Automation",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "automation",
             "intermediate",
@@ -2173,7 +2587,7 @@
         {
           "id": "10-3",
           "title": "Zapier + AI Actions",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "automation",
             "intermediate",
@@ -2186,7 +2600,7 @@
         {
           "id": "10-4",
           "title": "Make (Integromat) — Visual Automation",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "automation",
             "intermediate",
@@ -2200,7 +2614,7 @@
         {
           "id": "10-5",
           "title": "AI-Assisted Git Workflows",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "automation",
             "intermediate",
@@ -2213,7 +2627,7 @@
         {
           "id": "10-6",
           "title": "GitHub Actions + AI",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "automation",
             "intermediate",
@@ -2227,7 +2641,7 @@
         {
           "id": "10-7",
           "title": "Designing Your Personal AI Workflow",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "automation",
             "intermediate",
@@ -2266,8 +2680,25 @@
             "zapier",
             "triggers"
           ],
-          "nextLesson": "11-1",
+          "nextLesson": "10-10",
           "prevLesson": "10-8"
+        },
+        {
+          "id": "10-10",
+          "title": "Microsoft Copilot Studio & No-Code AI Agent Builders",
+          "estimatedMinutes": 55,
+          "tags": [
+            "automation",
+            "intermediate",
+            "copilot-studio",
+            "no-code",
+            "agents",
+            "microsoft",
+            "gumloop",
+            "hands-on"
+          ],
+          "nextLesson": "11-1",
+          "prevLesson": "10-9"
         }
       ]
     },
@@ -2279,7 +2710,7 @@
         {
           "id": "11-1",
           "title": "What is an API? (Plain English)",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 55,
           "tags": [
             "api",
             "intermediate",
@@ -2287,12 +2718,12 @@
             "overview"
           ],
           "nextLesson": "11-2",
-          "prevLesson": "10-9"
+          "prevLesson": "10-10"
         },
         {
           "id": "11-2",
           "title": "The Anthropic API — Overview",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "api",
             "intermediate",
@@ -2306,7 +2737,7 @@
         {
           "id": "11-3",
           "title": "Getting Your First API Key",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "api",
             "intermediate",
@@ -2320,7 +2751,7 @@
         {
           "id": "11-4",
           "title": "First API Call with curl",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "api",
             "intermediate",
@@ -2333,7 +2764,7 @@
         {
           "id": "11-5",
           "title": "Using the Anthropic SDK",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "api",
             "intermediate",
@@ -2347,7 +2778,7 @@
         {
           "id": "11-6",
           "title": "Understanding Tokens & Cost",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "api",
             "intermediate",
@@ -2361,7 +2792,7 @@
         {
           "id": "11-7",
           "title": "Streaming Responses",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "api",
             "intermediate",
@@ -2374,7 +2805,7 @@
         {
           "id": "11-8",
           "title": "Build a Simple AI Tool — Text Summarizer CLI",
-          "estimatedMinutes": 60,
+          "estimatedMinutes": 90,
           "tags": [
             "api",
             "intermediate",
@@ -2388,7 +2819,7 @@
         {
           "id": "11-9",
           "title": "Cost Engineering — Token Minimization, Model Routing & Prompt Caching",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "api",
             "advanced",
@@ -2424,7 +2855,7 @@
         {
           "id": "12-1",
           "title": "Why Run AI Locally?",
-          "estimatedMinutes": 15,
+          "estimatedMinutes": 50,
           "tags": [
             "local-ai",
             "intermediate",
@@ -2438,7 +2869,7 @@
         {
           "id": "12-2",
           "title": "Installing Ollama",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "local-ai",
             "intermediate",
@@ -2452,7 +2883,7 @@
         {
           "id": "12-3",
           "title": "Running Your First Local Model",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "local-ai",
             "intermediate",
@@ -2465,7 +2896,7 @@
         {
           "id": "12-4",
           "title": "LM Studio — GUI for Local Models",
-          "estimatedMinutes": 25,
+          "estimatedMinutes": 60,
           "tags": [
             "local-ai",
             "intermediate",
@@ -2479,7 +2910,7 @@
         {
           "id": "12-5",
           "title": "Connecting Local Models to Continue.dev in VS Code",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "local-ai",
             "intermediate",
@@ -2493,7 +2924,7 @@
         {
           "id": "12-6",
           "title": "Connecting Local Models to Claude Code",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "local-ai",
             "advanced",
@@ -2507,7 +2938,7 @@
         {
           "id": "12-7",
           "title": "Choosing the Right Local Model",
-          "estimatedMinutes": 20,
+          "estimatedMinutes": 55,
           "tags": [
             "local-ai",
             "intermediate",
@@ -2527,7 +2958,7 @@
         {
           "id": "18-1",
           "title": "Advanced Prompting: CoT, ToT, ReAct & Beyond",
-          "estimatedMinutes": 40,
+          "estimatedMinutes": 70,
           "tags": [
             "advanced",
             "prompting",
@@ -2541,7 +2972,7 @@
         {
           "id": "18-2",
           "title": "Model Selection Intelligence — The Right AI for Every Job",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "advanced",
             "models",
@@ -2555,7 +2986,7 @@
         {
           "id": "18-3",
           "title": "Systematic AI Research — Perplexity, Elicit, Consensus & Scite",
-          "estimatedMinutes": 35,
+          "estimatedMinutes": 70,
           "tags": [
             "advanced",
             "research",
@@ -2570,7 +3001,7 @@
         {
           "id": "18-4",
           "title": "RAG & Personal Knowledge Systems",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "advanced",
             "rag",
@@ -2584,7 +3015,7 @@
         {
           "id": "18-5",
           "title": "AI Agents in Practice",
-          "estimatedMinutes": 30,
+          "estimatedMinutes": 65,
           "tags": [
             "advanced",
             "agents",
@@ -2598,7 +3029,7 @@
         {
           "id": "18-6",
           "title": "Capstone — Build Your Personal AI Knowledge Engine",
-          "estimatedMinutes": 90,
+          "estimatedMinutes": 115,
           "tags": [
             "advanced",
             "capstone",
@@ -2612,7 +3043,7 @@
         {
           "id": "18-7",
           "title": "Building an AI Research Tool — The Full Lifecycle",
-          "estimatedMinutes": 90,
+          "estimatedMinutes": 145,
           "prevLesson": "18-6",
           "nextLesson": "18-8"
         },
@@ -2627,8 +3058,59 @@
             "next-steps",
             "llm-engineer"
           ],
-          "nextLesson": "21-1",
+          "nextLesson": "18-9",
           "prevLesson": "18-7"
+        },
+        {
+          "id": "18-9",
+          "title": "Fine-Tuning & Custom Models — When, Why & How",
+          "estimatedMinutes": 60,
+          "tags": [
+            "advanced",
+            "intermediate",
+            "fine-tuning",
+            "custom-models",
+            "machine-learning",
+            "api",
+            "concepts"
+          ],
+          "nextLesson": "18-10",
+          "prevLesson": "18-8"
+        },
+        {
+          "id": "18-10",
+          "title": "Reasoning Models — When AI Thinks Before It Answers",
+          "estimatedMinutes": 60,
+          "tags": [
+            "advanced",
+            "reasoning-models",
+            "o3",
+            "extended-thinking",
+            "deepseek-r1",
+            "model-selection",
+            "concepts",
+            "hands-on"
+          ],
+          "nextLesson": "18-11",
+          "prevLesson": "18-9"
+        },
+        {
+          "id": "18-11",
+          "title": "AI Agent Frameworks — LangGraph, CrewAI & AutoGen",
+          "estimatedMinutes": 65,
+          "tags": [
+            "advanced",
+            "agents",
+            "langchain",
+            "langgraph",
+            "crewai",
+            "autogen",
+            "multi-agent",
+            "frameworks",
+            "hands-on"
+          ],
+          "nextLesson": "21-1",
+          "prevLesson": "18-10"
         }
       ]
     },
@@ -2639,73 +3121,120 @@
       "lessons": [
         {
           "id": "21-1",
-          "title": "What Is Loop Engineering?",
-          "estimatedMinutes": 30,
-          "tags": ["loop-engineering", "advanced", "concepts", "overview"],
+          "title": "What is Loop Engineering?",
+          "estimatedMinutes": 40,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "concepts",
+            "overview"
+          ],
           "nextLesson": "21-2",
-          "prevLesson": "18-8"
+          "prevLesson": "18-11"
         },
         {
           "id": "21-2",
-          "title": "Agent Loop Anatomy — Observe, Think, Act",
-          "estimatedMinutes": 35,
-          "tags": ["loop-engineering", "advanced", "agents", "react"],
+          "title": "The Agent Loop Anatomy",
+          "estimatedMinutes": 45,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "agents",
+            "react"
+          ],
           "nextLesson": "21-3",
           "prevLesson": "21-1"
         },
         {
           "id": "21-3",
-          "title": "ReAct Loops — Reasoning + Acting in Sequence",
-          "estimatedMinutes": 40,
-          "tags": ["loop-engineering", "advanced", "react", "reasoning", "tools"],
+          "title": "ReAct Loops — Reasoning + Acting",
+          "estimatedMinutes": 50,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "react",
+            "reasoning",
+            "tools"
+          ],
           "nextLesson": "21-4",
           "prevLesson": "21-2"
         },
         {
           "id": "21-4",
-          "title": "Self-Critique Loops — Draft, Critique, Revise",
-          "estimatedMinutes": 40,
-          "tags": ["loop-engineering", "advanced", "self-critique", "quality"],
+          "title": "Self-Critique Loops — AI That Checks Its Own Work",
+          "estimatedMinutes": 50,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "self-critique",
+            "quality"
+          ],
           "nextLesson": "21-5",
           "prevLesson": "21-3"
         },
         {
           "id": "21-5",
-          "title": "Evaluation Loops — LLM-as-Judge",
-          "estimatedMinutes": 45,
-          "tags": ["loop-engineering", "advanced", "evaluation", "llm-judge"],
+          "title": "Evaluation Loops — LLM as Judge",
+          "estimatedMinutes": 50,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "evaluation",
+            "llm-judge"
+          ],
           "nextLesson": "21-6",
           "prevLesson": "21-4"
         },
         {
           "id": "21-6",
           "title": "Iterative Refinement Loops",
-          "estimatedMinutes": 40,
-          "tags": ["loop-engineering", "advanced", "refinement", "iteration"],
+          "estimatedMinutes": 45,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "refinement",
+            "iteration"
+          ],
           "nextLesson": "21-7",
           "prevLesson": "21-5"
         },
         {
           "id": "21-7",
-          "title": "Human-in-the-Loop (HITL) Patterns",
-          "estimatedMinutes": 40,
-          "tags": ["loop-engineering", "advanced", "hitl", "human-oversight"],
+          "title": "Human-in-the-Loop Design",
+          "estimatedMinutes": 45,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "hitl",
+            "human-oversight"
+          ],
           "nextLesson": "21-8",
           "prevLesson": "21-6"
         },
         {
           "id": "21-8",
           "title": "Multi-Agent Feedback Loops",
-          "estimatedMinutes": 45,
-          "tags": ["loop-engineering", "advanced", "multi-agent", "orchestration"],
+          "estimatedMinutes": 55,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "multi-agent",
+            "orchestration"
+          ],
           "nextLesson": "21-9",
           "prevLesson": "21-7"
         },
         {
           "id": "21-9",
           "title": "Scheduled & Continuous Loops",
-          "estimatedMinutes": 40,
-          "tags": ["loop-engineering", "advanced", "scheduled", "continuous", "automation"],
+          "estimatedMinutes": 45,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "scheduled",
+            "continuous",
+            "automation"
+          ],
           "nextLesson": "21-10",
           "prevLesson": "21-8"
         },
@@ -2713,7 +3242,12 @@
           "id": "21-10",
           "title": "Error Recovery & Retry Loops",
           "estimatedMinutes": 45,
-          "tags": ["loop-engineering", "advanced", "error-handling", "resilience"],
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "error-handling",
+            "resilience"
+          ],
           "nextLesson": "21-11",
           "prevLesson": "21-9"
         },
@@ -2721,7 +3255,13 @@
           "id": "21-11",
           "title": "Loop Efficiency & Cost Control",
           "estimatedMinutes": 40,
-          "tags": ["loop-engineering", "advanced", "cost", "efficiency", "tokens"],
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "cost",
+            "efficiency",
+            "tokens"
+          ],
           "nextLesson": "21-12",
           "prevLesson": "21-10"
         },
@@ -2729,7 +3269,12 @@
           "id": "21-12",
           "title": "Loop Debugging & Observability",
           "estimatedMinutes": 45,
-          "tags": ["loop-engineering", "advanced", "debugging", "observability"],
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "debugging",
+            "observability"
+          ],
           "nextLesson": "21-13",
           "prevLesson": "21-11"
         },
@@ -2737,7 +3282,12 @@
           "id": "21-13",
           "title": "Convergence & Termination Patterns",
           "estimatedMinutes": 40,
-          "tags": ["loop-engineering", "advanced", "convergence", "termination"],
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "convergence",
+            "termination"
+          ],
           "nextLesson": "21-14",
           "prevLesson": "21-12"
         },
@@ -2745,9 +3295,56 @@
           "id": "21-14",
           "title": "Capstone — Build a Self-Improving Research Loop",
           "estimatedMinutes": 90,
-          "tags": ["loop-engineering", "advanced", "capstone", "build", "research"],
-          "nextLesson": "14-1",
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "capstone",
+            "build",
+            "research"
+          ],
+          "nextLesson": "21-15",
           "prevLesson": "21-13"
+        },
+        {
+          "id": "21-15",
+          "title": "The 6 Loop Components — Automations, Worktrees, Skills, Connectors, Subagents & Memory",
+          "estimatedMinutes": 55,
+          "tags": [
+            "loop-engineering",
+            "architecture",
+            "components",
+            "systems-thinking"
+          ],
+          "prevLesson": "21-14",
+          "nextLesson": "21-16"
+        },
+        {
+          "id": "21-16",
+          "title": "Loop Risks — Cognitive Atrophy, Over-Reliance & the Black Box Problem",
+          "estimatedMinutes": 50,
+          "tags": [
+            "loop-engineering",
+            "risk",
+            "responsible-ai",
+            "critical-thinking",
+            "metacognition"
+          ],
+          "prevLesson": "21-15",
+          "nextLesson": "21-17"
+        },
+        {
+          "id": "21-17",
+          "title": "Strategic Elevation — How Loops Move You to the Design Level",
+          "estimatedMinutes": 50,
+          "tags": [
+            "loop-engineering",
+            "strategy",
+            "design-thinking",
+            "leadership",
+            "career"
+          ],
+          "prevLesson": "21-16",
+          "nextLesson": "14-1"
         }
       ]
     },
@@ -2759,7 +3356,7 @@
         {
           "id": "14-1",
           "title": "Capstone: Personal Portfolio Website",
-          "estimatedMinutes": 60,
+          "estimatedMinutes": 85,
           "tags": [
             "capstone",
             "advanced",
@@ -2768,12 +3365,12 @@
             "build"
           ],
           "nextLesson": "14-2",
-          "prevLesson": "21-14"
+          "prevLesson": "21-17"
         },
         {
           "id": "14-2",
           "title": "Capstone: AI-Powered Research Tool",
-          "estimatedMinutes": 60,
+          "estimatedMinutes": 85,
           "tags": [
             "capstone",
             "advanced",
@@ -2787,7 +3384,7 @@
         {
           "id": "14-3",
           "title": "Capstone: Automated Email Workflow",
-          "estimatedMinutes": 60,
+          "estimatedMinutes": 85,
           "tags": [
             "capstone",
             "advanced",
@@ -2801,7 +3398,7 @@
         {
           "id": "14-4",
           "title": "Capstone: Your Full AI-Powered Dev Environment",
-          "estimatedMinutes": 60,
+          "estimatedMinutes": 85,
           "tags": [
             "capstone",
             "advanced",
@@ -2815,7 +3412,7 @@
         {
           "id": "14-5",
           "title": "Capstone: Your Own Project",
-          "estimatedMinutes": 60,
+          "estimatedMinutes": 85,
           "tags": [
             "capstone",
             "advanced",

@@ -1,13 +1,13 @@
 {
   "id": "21-14",
   "title": "Capstone — Build a Self-Improving Research Loop",
-  "part": 20,
+  "part": 21,
   "estimatedMinutes": 90,
   "tags": ["loop-engineering", "advanced", "capstone", "build", "research"],
   "sections": [
     {
       "type": "text",
-      "content": "## What You'll Build\n\nThis capstone integrates every pattern from Part 20 into a single working system: a **self-improving research loop** that searches for information, evaluates what it finds, refines its approach based on quality, and produces a polished report — all with proper error handling, convergence detection, and observability.\n\nThis is not a tutorial with predetermined steps. It's a real engineering project where you design the system, build it, run it, and improve it based on what you observe. By the end, you'll have a reusable research tool that outperforms any single-prompt research approach."
+      "content": "## What You'll Build\n\nThis capstone integrates every pattern from Part 21 into a single working system: a **self-improving research loop** that searches for information, evaluates what it finds, refines its approach based on quality, and produces a polished report — all with proper error handling, convergence detection, and observability.\n\nThis is not a tutorial with predetermined steps. It's a real engineering project where you design the system, build it, run it, and improve it based on what you observe. By the end, you'll have a reusable research tool that outperforms any single-prompt research approach."
     },
     {
       "type": "text",
@@ -34,7 +34,7 @@
       "type": "workshop",
       "tag": "REFLECT",
       "title": "Design Your Own Loop Engineering System",
-      "content": "Apply the Part 20 patterns to a real problem in your own work. Takes 25 minutes.\n\n**Step 1 — Identify your highest-value loop opportunity.** What single task in your work would benefit most from a well-engineered feedback loop? It could be:\n- A content or document production workflow\n- A code quality assurance process\n- A research or analysis pipeline\n- A monitoring or alerting system\n- A data processing pipeline\n\n**Step 2 — Design the loop architecture.** For your chosen task, answer:\n\n*Loop type:* Which patterns apply? (ReAct / self-critique / evaluation / multi-agent / scheduled / HITL)\n\n*Stages:* What are the distinct phases of the loop?\n\n*Evaluation:* How will quality be measured? What rubric?\n\n*Convergence:* Hard stop: [max iterations/budget]. Soft stop: [quality criterion].\n\n*Error handling:* What can fail? What's the recovery for each failure type?\n\n*Observability:* What does the progress log capture? What mid-loop checks?\n\n*HITL:* Where (if anywhere) does a human need to be in this loop?\n\n**Step 3 — Identify your gaps.** Which aspects of this design are you least confident about? What would you need to learn or test to be confident?\n\n**Step 4 — Share with Claude:**\n```\nHere is my loop engineering design for [task]: [paste your design]\n\nReview it for:\n1. Any pattern from Part 20 I'm not using that would significantly improve it\n2. The most likely failure mode I haven't accounted for\n3. One specific change that would make the loop most robust\n```\n\n**Step 5 — Build it.** Implement the design as Claude Code skills. Run it once. What works? What needs adjustment?\n\n**Deliverable:** A working loop system for a real task in your work — not a tutorial exercise, but something you'll actually use."
+      "content": "Apply the Part 21 patterns to a real problem in your own work. Takes 25 minutes.\n\n**Step 1 — Identify your highest-value loop opportunity.** What single task in your work would benefit most from a well-engineered feedback loop? It could be:\n- A content or document production workflow\n- A code quality assurance process\n- A research or analysis pipeline\n- A monitoring or alerting system\n- A data processing pipeline\n\n**Step 2 — Design the loop architecture.** For your chosen task, answer:\n\n*Loop type:* Which patterns apply? (ReAct / self-critique / evaluation / multi-agent / scheduled / HITL)\n\n*Stages:* What are the distinct phases of the loop?\n\n*Evaluation:* How will quality be measured? What rubric?\n\n*Convergence:* Hard stop: [max iterations/budget]. Soft stop: [quality criterion].\n\n*Error handling:* What can fail? What's the recovery for each failure type?\n\n*Observability:* What does the progress log capture? What mid-loop checks?\n\n*HITL:* Where (if anywhere) does a human need to be in this loop?\n\n**Step 3 — Identify your gaps.** Which aspects of this design are you least confident about? What would you need to learn or test to be confident?\n\n**Step 4 — Share with Claude:**\n```\nHere is my loop engineering design for [task]: [paste your design]\n\nReview it for:\n1. Any pattern from Part 20 I'm not using that would significantly improve it\n2. The most likely failure mode I haven't accounted for\n3. One specific change that would make the loop most robust\n```\n\n**Step 5 — Build it.** Implement the design as Claude Code skills. Run it once. What works? What needs adjustment?\n\n**Deliverable:** A working loop system for a real task in your work — not a tutorial exercise, but something you'll actually use."
     },
     {
       "type": "quiz",
@@ -75,9 +75,9 @@
     {
       "type": "callout",
       "variant": "success",
-      "content": "**You've completed Lesson 21-14 and Part 20: Loop Engineering.** You've built a self-improving research loop that integrates ReAct reasoning, LLM-as-judge evaluation, iterative refinement, self-critique, convergence detection, error recovery, and observability into a single coherent system. The patterns you've learned in this part — observe, think, act, evaluate, refine, terminate — are the foundation of every sophisticated AI system built today. You now design loops, not just prompts."
+      "content": "**You've completed Lesson 21-14.** You've built a self-improving research loop that integrates ReAct reasoning, LLM-as-judge evaluation, iterative refinement, self-critique, convergence detection, error recovery, and observability into a single coherent system. The patterns you've learned in Part 21 — observe, think, act, evaluate, refine, terminate — are the foundation of every sophisticated AI system built today. You now design loops, not just prompts."
     }
   ],
-  "nextLesson": "14-1",
+  "nextLesson": "21-15",
   "prevLesson": "21-13"
 }

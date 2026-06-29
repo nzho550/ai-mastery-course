@@ -1,7 +1,7 @@
 {
   "id": "21-8",
   "title": "Multi-Agent Feedback Loops",
-  "part": 20,
+  "part": 21,
   "estimatedMinutes": 55,
   "tags": ["loop-engineering", "advanced", "multi-agent", "orchestration"],
   "sections": [
@@ -41,7 +41,7 @@
     },
     {
       "type": "text",
-      "content": "## Multi-Agent Frameworks: What's Out There\n\nIf you move beyond Claude Code and build standalone multi-agent systems, these are the leading frameworks in 2026:\n\n| Framework | Best for | Model |\n|---|---|---|\n| **LangGraph** | Complex stateful workflows with explicit loops and conditionals | Graph-based — you define nodes and edges |\n| **CrewAI** | Role-based teams with assigned responsibilities | Role-based — define agents by job title |\n| **Microsoft Agent Framework** | Enterprise, integrates with Office and Azure | Converged AutoGen + Semantic Kernel |\n| **Google Agent Dev Kit** | Hierarchical agent trees, A2A protocol | Tree-based with native Google Cloud integration |\n| **OpenAI Swarm** | Lightweight agent handoffs | Minimal — code-first, no abstraction |\n\n**Which to choose:**\n- For Claude Code extensions: you don't need a framework — Claude Code's Agent sub-agent tool handles orchestration natively\n- For standalone Python pipelines: **LangGraph** is the 2026 standard for complex stateful loops\n- For role-based teams: **CrewAI** has the simplest authoring experience\n- For enterprise with Microsoft stack: **Microsoft Agent Framework**\n\n**Telemetry is non-negotiable for multi-agent systems.** McKinsey research calls measurable feedback loops 'the difference between scaling AI and stagnating it.' Without tracing across agents, failures in multi-agent systems are nearly impossible to diagnose because the error could have originated in any agent in the chain."
+      "content": "## Multi-Agent Frameworks: What's Out There\n\nIf you move beyond Claude Code and build standalone multi-agent systems, these are the leading frameworks in 2026:\n\n| Framework | Best for | Model |\n|---|---|---|\n| **LangGraph** | Complex stateful workflows with explicit loops and conditionals | Graph-based — you define nodes and edges |\n| **CrewAI** | Role-based teams with assigned responsibilities | Role-based — define agents by job title |\n| **Microsoft Agent Framework** | Enterprise, integrates with Office and Azure | Converged AutoGen + Semantic Kernel |\n| **Google Agent Dev Kit** | Hierarchical agent trees, A2A protocol | Tree-based with native Google Cloud integration |\n| **OpenAI Agents SDK** | Lightweight agent handoffs (OpenAI-model-locked) | Code-first, replaced experimental Swarm |\n\n**Which to choose:**\n- For Claude Code extensions: you don't need a framework — Claude Code's Agent sub-agent tool handles orchestration natively\n- For standalone Python pipelines: **LangGraph** is the 2026 standard for complex stateful loops\n- For role-based teams: **CrewAI** has the simplest authoring experience\n- For enterprise with Microsoft stack: **Microsoft Agent Framework**\n\n**Telemetry is non-negotiable for multi-agent systems.** McKinsey research calls measurable feedback loops 'the difference between scaling AI and stagnating it.' Without tracing across agents, failures in multi-agent systems are nearly impossible to diagnose because the error could have originated in any agent in the chain."
     },
     {
       "type": "workshop",

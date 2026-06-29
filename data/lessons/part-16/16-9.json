@@ -1,0 +1,81 @@
+{
+  "id": "16-9",
+  "title": "AI for HR & Recruiting",
+  "part": 16,
+  "estimatedMinutes": 55,
+  "tags": ["document-work", "intermediate", "hr", "recruiting", "people-management", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nHR and People Operations involves a massive amount of writing, structuring, and document work — job descriptions, interview frameworks, onboarding guides, performance reviews, policy documents, and communication to candidates and employees. AI is transforming how quickly and consistently all of this gets done.\n\nBy the end of this lesson you'll have practical workflows for every major HR document type, understand the ethical guardrails around AI in hiring, and have templates you can use immediately for your organisation's recruiting and people management needs."
+    },
+    {
+      "type": "text",
+      "content": "## The AI-HR Opportunity\n\nHR professionals typically spend 60-70% of their time on documentation and communication tasks. AI can dramatically accelerate:\n\n**Recruiting pipeline:**\n- Job description writing and optimisation\n- Candidate outreach and follow-up email sequences\n- Interview question banks tailored to specific roles\n- Structured scoring rubrics for interview evaluation\n- Offer letter drafts\n- Rejection communication templates (professional and kind)\n\n**Onboarding:**\n- Welcome emails and day-1 checklists\n- Role-specific onboarding plans\n- FAQ documents for new starters\n- 30/60/90-day plan frameworks\n\n**Performance management:**\n- Performance review frameworks and question banks\n- Goal-setting templates aligned to company OKRs\n- Feedback conversation guides for managers\n- Performance improvement plan (PIP) structures\n\n**Policy & documentation:**\n- Employee handbook sections\n- Policy documents and updates\n- Internal communication drafts\n- Training materials and guides\n\n**AI tools used in this lesson:** Claude.ai for all document drafting (no special HR tool required — Claude handles this better than most HR-specific tools and without the subscription cost)."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Important: AI and hiring bias.** AI tools trained on historical data can perpetuate or amplify existing biases in hiring. When using AI to screen candidates, score applications, or draft criteria, always:\n1. Have diverse humans review AI-generated job requirements and screening criteria\n2. Never use AI to make final hiring decisions — use it to assist human judgement, not replace it\n3. Audit AI-suggested requirements: does each one genuinely predict job performance, or does it reflect historical patterns?\n4. Comply with employment law in your jurisdiction — AI hiring tools may require disclosure to candidates in some regions (EU AI Act, for example)\nThis lesson focuses on AI for documentation and drafting — not automated candidate screening, where the legal and ethical risks are significantly higher."
+    },
+    {
+      "type": "text",
+      "content": "## Writing Job Descriptions That Attract the Right Candidates\n\nJob descriptions are marketing documents as much as they are role specifications. Bad job descriptions attract the wrong people and deter great candidates with requirements that weren't actually necessary.\n\n**What AI can do:**\n- Identify requirements that may unnecessarily narrow the candidate pool (e.g., '5 years of experience' for entry-level tasks)\n- Restructure descriptions from a wall of bullet points to an engaging narrative\n- Check for gender-coded language (research shows masculine-coded words deter women from applying even when qualified)\n- Suggest alternative phrasings for requirements that might be interpreted as discriminatory\n- Ensure the 'what you'll do' section is specific and accurate rather than vague and inflated\n\n**The job description formula that works:**\n1. **One-sentence company snapshot** — what you do and why it matters\n2. **The role in one paragraph** — what success looks like, who they'll work with\n3. **What you'll do** — specific outcomes, not generic activities (not 'manage projects' — 'own the roadmap for X, deliver quarterly releases to Y customers')\n4. **What we're looking for** — two sections: Essential (genuinely needed on day 1) and Nice to have (can be learned)\n5. **What we offer** — compensation range, benefits, flexibility, growth\n6. **About us** — mission, culture, team, why this role matters"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Write & Critique a Job Description",
+      "content": "You'll draft a job description using AI and then audit it for quality and inclusivity.\n\n**Step 1 — Choose a role.** Use a real role you're hiring for, a role at your current job, or pick one from a job board as a practice subject.\n\n**Step 2 — Gather the inputs.** Before prompting, note:\n- What will this person actually do day-to-day?\n- What does success look like at 6 months?\n- Who will they work with and report to?\n- What must they know on day 1 vs. what can they learn on the job?\n- What does your company offer that's genuinely competitive?\n\n**Step 3 — Prompt Claude:**\n```\nWrite a job description for the role of [Role Title] at [type of company].\n\nKey responsibilities:\n[list 4-6 specific outcomes, not activities]\n\nEssential requirements (needed on day 1):\n[list only genuinely essential requirements]\n\nNice to have:\n[things that would be a bonus]\n\nWhat we offer: [compensation, benefits, flexibility]\n\nOur culture: [2-3 sentences about what the team is like]\n\nWrite this as a compelling narrative job description, not a list of bullet points. Make it sound like a real person wrote it, not a legal document.\n```\n\n**Step 4 — Audit for bias.** After the first draft, ask Claude:\n'Audit this job description for:\n1. Unnecessary requirements that may reduce diversity (e.g., degree requirements for roles that don't need them)\n2. Gender-coded language that might deter female applicants\n3. Ageist language\n4. Requirements that describe preferred backgrounds rather than job performance\nSuggest specific rewrites for any issues you find.'\n\n**Step 5 — Refine and save.** This job description is now your template for this role type.\n\n**Outcome:** A job description that's more inclusive and better at attracting the right candidates."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop B — Build an Interview Framework",
+      "content": "Unstructured interviews are one of the least predictive hiring tools. Structured interviews with consistent questions and scoring rubrics are significantly more predictive of job performance. AI makes structured interviewing fast to set up.\n\n**Step 1 — Choose the role** you created a job description for in Workshop A (or choose a different one).\n\n**Step 2 — Define your interview stages.** A common structure:\n- Stage 1: 30-min phone screen (culture/motivation fit)\n- Stage 2: 45-min competency interview (skills and experience)\n- Stage 3: Task/case study (see them do the work)\n- Stage 4: Final interview (leadership/stakeholders)\n\n**Step 3 — Prompt Claude:**\n```\nCreate a structured interview framework for a [Role Title] candidate. Include:\n\n1. A 30-minute phone screen guide:\n   - 5 questions to assess motivation and culture fit\n   - A scoring rubric (1-5 scale with descriptors for each score)\n   \n2. A 45-minute competency interview:\n   - 6 behavioral questions (using STAR format: Situation, Task, Action, Result)\n   - Each question should assess a specific competency for this role\n   - A scoring rubric for each competency\n   \n3. 3 red flag indicators at each stage (things that would rule a candidate out)\n\n4. Legal reminders: 5 questions interviewers must NEVER ask and why\n\nThe key competencies for this role are: [list 4-5 things that predict success in this role]\n```\n\n**Step 4 — Review for relevance.** Are the questions actually testing the right things for this role? Adjust any that feel generic.\n\n**Step 5 — Test a question on yourself.** Answer one of the behavioral questions as if you were the candidate. Does the question actually surface the competency it's meant to test?\n\n**Outcome:** A structured interview kit ready to use with hiring managers."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Onboarding Plan for a New Hire",
+      "content": "A well-structured first month makes the difference between a confident new hire who contributes quickly and someone who's still lost at month three.\n\n**Step 1 — Choose a role** to create an onboarding plan for. Use the same role from earlier workshops or a real role in your organisation.\n\n**Step 2 — Prompt Claude:**\n```\nCreate a comprehensive 30/60/90-day onboarding plan for a new [Role Title].\n\nCompany context:\n- Type of company: [size, industry]\n- Team they're joining: [team name, size]\n- Who they report to: [manager title]\n- Tools and systems they'll use: [list the key software/tools]\n\nFor each phase (days 1-30, 31-60, 61-90), provide:\n- The overarching goal for this phase\n- Week-by-week priorities (what they should focus on each week)\n- Key people to meet (by role, not name)\n- Documents and resources to read\n- Skills to acquire or practice\n- Milestones that indicate they're on track\n- A simple check-in framework for their manager\n\nAlso provide:\n- A first-day checklist (practical items for day 1)\n- A welcome email template from their manager\n- 5 questions a new starter in this role typically has in week 1, with answers\n```\n\n**Step 3 — Customise.** Replace any generic items with your actual team's real documents, tools, and people.\n\n**Step 4 — Add the 'culture' layer** — ask Claude: 'Add a section on informal onboarding: how to actually fit into the team, read the room, understand unwritten norms, and build relationships during the first 30 days.'\n\n**Outcome:** A complete onboarding kit that reduces time-to-productivity for new hires."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop D — Performance Review Frameworks",
+      "content": "Performance reviews are often rushed, inconsistent, and dreaded by managers. AI helps create frameworks that make reviews more structured, fair, and useful.\n\n**Step 1 — Decide on your review format.** Common types:\n- Annual/semi-annual review: comprehensive assessment\n- 360 review: feedback from multiple directions\n- Check-in conversation: lighter, more frequent\n- OKR review: focused on goal achievement\n\n**Step 2 — Prompt Claude:**\n```\nCreate a performance review framework for [review type] for a [role or job level].\n\nInclude:\n1. Rating categories (4-5 dimensions, e.g., Results, Collaboration, Growth, Leadership)\n   - For each: a description of what excellent / meets expectations / needs improvement looks like\n   - A 1-5 rating scale with behavioural anchors (specific examples for each score)\n\n2. Manager reflection questions (5-7 questions to help a manager think before writing):\n   - Questions about results delivered\n   - Questions about behaviours and how they worked\n   - Questions about growth and development\n\n3. Employee self-assessment template (questions for the employee to complete first):\n   - Reflect on your key achievements\n   - What has been your biggest challenge?\n   - Where do you want to grow?\n   - What support do you need from your manager?\n\n4. A guide for the conversation itself:\n   - How to open the review meeting\n   - How to give difficult feedback constructively\n   - How to close with agreed next steps\n```\n\n**Step 3 — Adapt for your culture.** Add or remove dimensions that reflect what your organisation actually values.\n\n**Step 4 — Create a difficult scenario guide.** Ask: 'Give me a guide for how to navigate performance reviews for: (a) someone performing below expectations, (b) someone who is strong technically but difficult to work with, (c) someone who rates themselves much higher than you would. What should a manager say in each case?'\n\n**Outcome:** A complete performance management kit that makes reviews more consistent and useful."
+    },
+    {
+      "type": "quiz",
+      "question": "You're using AI to help screen applications for a software engineering role. The AI suggests filtering out anyone without a Computer Science degree. What should you do?",
+      "options": [
+        "Apply the filter — a CS degree predicts engineering quality",
+        "Challenge the requirement: ask whether a CS degree is genuinely necessary for this role's day-to-day responsibilities, or whether it's a proxy for skills that can be demonstrated other ways. Remove or soften the requirement if it can't be justified.",
+        "Apply the filter to save time, then correct for bias later in the process",
+        "Let the AI decide — it's more objective than human judgment"
+      ],
+      "correct": 1,
+      "explanation": "Questioning unnecessary requirements (option B) is the right move. Many engineering roles have been filled excellently by self-taught engineers, bootcamp graduates, or those with adjacent degrees. A degree requirement that isn't genuinely predictive of performance reduces your candidate pool and may perpetuate socioeconomic or demographic biases. Option A assumes correlation equals necessity. Option C doesn't work — bias baked in early affects who you even see. Option D misunderstands AI: it amplifies historical patterns, including biased ones, and must be overseen by humans with current context."
+    },
+    {
+      "type": "quiz",
+      "question": "A hiring manager says structured interviews with scoring rubrics are too rigid and they prefer to follow their instincts. What is the evidence-based response?",
+      "options": [
+        "Agree — experienced managers have good instincts that structured interviews would constrain",
+        "Research consistently shows that structured interviews (same questions, scoring rubrics) predict job performance significantly better than unstructured conversations. The rubric doesn't remove judgment — it channels judgment into the right dimensions and makes it comparable across candidates.",
+        "Compromise: use half structured, half unstructured questions",
+        "Use AI to make the final decision instead of the manager"
+      ],
+      "correct": 1,
+      "explanation": "The research is clear (option B): structured interviews outperform unstructured ones in predicting job performance. Unstructured interviews are heavily influenced by rapport, appearance, shared backgrounds, and irrelevant conversational factors. The rubric doesn't constrain good judgment — it focuses it on relevant competencies and makes assessment comparable across candidates. The hiring manager's 'instinct' often reflects unconscious bias rather than predictive evaluation. Option C is a reasonable compromise if you're facing resistance. Option D replaces one form of bias with another."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-9.** You now have AI-assisted workflows for every major HR document type: job descriptions with bias auditing, structured interview frameworks, onboarding plans, and performance review systems. The ethical guardrail to remember: AI accelerates and improves HR documentation — but hiring decisions must remain with accountable humans who can explain their reasoning."
+    }
+  ],
+  "nextLesson": "16-10",
+  "prevLesson": "16-8"
+}

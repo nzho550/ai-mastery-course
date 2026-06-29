@@ -42,7 +42,7 @@
     },
     {
       "type": "code",
-      "language": "javascript",
+      "language": "python",
       "content": "import anthropic\nfrom dotenv import load_dotenv\n\nload_dotenv()\nclient = anthropic.Anthropic()\n\nprint(\"Claude: \", end=\"\", flush=True)\n\nwith client.messages.stream(\n    model=\"claude-haiku-4-5-20251001\",\n    max_tokens=500,\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": \"Tell me a very short story about a robot learning to paint.\"\n        }\n    ]\n) as stream:\n    for text in stream.text_stream:\n        print(text, end=\"\", flush=True)\n\nprint()  # newline at end\n\nfinal = stream.get_final_message()\nprint(f\"\\nTokens: {final.usage.input_tokens} in / {final.usage.output_tokens} out\")"
     },
     {

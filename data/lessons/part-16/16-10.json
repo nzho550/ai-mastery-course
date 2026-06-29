@@ -1,0 +1,76 @@
+{
+  "id": "16-10",
+  "title": "AI for Sales & Business Development",
+  "part": 16,
+  "estimatedMinutes": 55,
+  "tags": ["document-work", "intermediate", "sales", "business-development", "outreach", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nSales and business development involves a constant stream of research, personalised writing, and follow-up — tasks that are time-consuming when done manually but can be dramatically accelerated with AI. From researching prospects to drafting the first outreach email to writing a tailored proposal, AI handles the groundwork so you can focus on the conversations and relationships that actually close deals.\n\nBy the end of this lesson you'll have AI workflows for prospect research, personalised outreach, proposal writing, and CRM note-taking — plus the habit of using AI to prepare for every important sales conversation."
+    },
+    {
+      "type": "text",
+      "content": "## Where AI Fits in the Sales Cycle\n\n**Prospecting & Research:**\n- Research a company and their recent news, challenges, and strategic priorities\n- Identify likely decision-makers and their backgrounds\n- Understand the industry trends affecting a prospect's business\n- Find connection points between your solution and their stated priorities\n\n**Outreach:**\n- Write personalised first-contact emails that reference specific, real details about the prospect\n- Generate subject line variations for A/B testing\n- Create LinkedIn connection request messages\n- Write follow-up sequences that add value rather than just chasing\n\n**Discovery & Preparation:**\n- Generate discovery questions tailored to the prospect's industry and role\n- Anticipate objections and prepare responses\n- Research competitors they might be considering\n- Brief yourself on the prospect's company before a call\n\n**Proposals & Documents:**\n- Draft proposals and statements of work\n- Create tailored case studies from existing ones\n- Write executive summaries for complex proposals\n- Generate ROI calculations based on prospect-provided data\n\n**CRM & Follow-Up:**\n- Transcribe and summarise meeting notes\n- Write follow-up emails immediately after calls while memory is fresh\n- Generate next-step action plans from conversation notes\n- Draft recap emails that confirm what was discussed and agreed\n\n**The AI advantage in sales:** Speed and personalisation at scale. AI can produce a well-researched, personalised email in 3 minutes that would have taken 30 minutes manually. The quality bar is higher than generic outreach, and the volume possible per day is 10x."
+    },
+    {
+      "type": "text",
+      "content": "## The Personalised Outreach Framework\n\nThe biggest failure in sales outreach is generic messages that the prospect can tell were sent to 500 people. AI helps you write messages that feel personal and specific — because they are.\n\n**The research-first workflow:**\n1. Find the prospect's name, role, company\n2. Research: recent company news, LinkedIn posts, company blog, any published interviews\n3. Identify: a specific problem your solution solves that this company likely faces\n4. Connection: why you are a credible person to bring them this message\n\n**The personalised outreach prompt:**\n```\nI need to write a cold outreach email to [Name], [Title] at [Company].\n\nContext about them:\n- Company does: [what they do and their business model]\n- Recent news or context: [something specific and recent about their company]\n- Their likely challenges: [what problems companies like theirs typically face]\n- Their LinkedIn / posts show they care about: [any specific interests or priorities]\n\nMy offer:\n- I sell/offer: [what you do in one sentence]\n- Most relevant to them because: [specific connection to their situation]\n- Proof point: [one relevant case study or result]\n- Ask: [what you want them to do — not 'buy', usually just 'talk']\n\nWrite a 100-word personalised email with a compelling subject line. Make it feel like I wrote it specifically for them — not a template. Be direct and specific, not vague and flattering.\n```\n\n**What separates good AI outreach from bad:**\n- Good: references a specific real detail about them (their product launch, a post they wrote, a challenge in their industry)\n- Bad: generic praise ('I'm a huge fan of your company') + generic pitch\n- Good: clear, specific value prop in their terms\n- Bad: feature list that could apply to anyone\n- Good: a specific, low-commitment ask ('15 minutes to see if this applies to you')\n- Bad: asking for a meeting before demonstrating any value"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Research a Prospect in 10 Minutes",
+      "content": "You'll use AI to research a real or hypothetical prospect before an outreach or meeting.\n\n**Step 1 — Choose a prospect.** Pick a real company you'd like to do business with, or create a realistic hypothetical (e.g., 'Acme Corp, a mid-size retail company with 500 employees').\n\n**Step 2 — Open Perplexity (perplexity.ai)** for research with citations:\n- Search: '[Company Name] recent news 2025 2026'\n- Search: '[Company Name] strategy challenges'\n- Search: '[Industry] trends challenges 2025'\n\n**Step 3 — Paste what you found into Claude** and ask:\n```\nI'm about to reach out to a decision-maker at [Company Name]. Based on this research:\n[paste your research findings]\n\n1. What are the 3 most pressing challenges they likely face right now?\n2. What industry trends are creating urgency for them to act?\n3. What questions should I ask to understand their situation better?\n4. What information am I missing that I should find before making contact?\n```\n\n**Step 4 — Research the specific person** (if you have a name). Search LinkedIn for their role and recent activity. Ask Claude: 'Based on what [Name] has posted about on LinkedIn ([paste examples]), what does this tell me about their priorities and how they like to communicate?'\n\n**Step 5 — Create a one-page prospect brief** — a concise summary you can read in 3 minutes before a call. Ask Claude: 'Turn this research into a one-page prospect brief I can review before a sales call.'\n\n**Outcome:** A prospect brief that would have taken 2 hours to compile manually, done in 15 minutes."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop B — Personalised Outreach Email",
+      "content": "You'll write a genuinely personalised cold outreach email using the research from Workshop A.\n\n**Step 1 — Use the prospect from Workshop A** (or any other you choose).\n\n**Step 2 — Apply the personalised outreach prompt** from the lesson theory section above. Fill in all the fields with real specifics — not placeholders.\n\n**Step 3 — Generate 3 variations:**\nAfter the first draft, ask Claude: 'Write 2 alternative versions:\n- Version B: Lead with the pain point (what problem I solve) rather than the connection\n- Version C: Lead with the social proof (a result we got for a similar company)'\n\n**Step 4 — A/B test subject lines:**\n'Generate 5 subject line variations. For each, label the emotional angle: curiosity / pain / social proof / relevance / direct.'\n\n**Step 5 — Send-readiness check:**\nAsk Claude: 'Review this email critically. If you were [Name] and received this cold, would you reply? What would make you delete it? What would make you click? What makes it feel personalised vs. templated?'\n\n**Step 6 — Edit the winner** — incorporate the feedback and make any final personal touches only you could add.\n\n**Outcome:** A cold email that reads as personalised because it is, produced in 20 minutes instead of 45."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Proposal or Statement of Work",
+      "content": "A well-structured proposal is often what wins the deal. AI speeds up drafting without sacrificing quality.\n\n**Step 1 — Define the deal.** For a real deal or a hypothetical:\n- What is the client asking for?\n- What is your proposed solution?\n- What are the key deliverables?\n- What is the timeline?\n- What is the investment (pricing)?\n- What proof do you have that you can deliver this?\n\n**Step 2 — Prompt Claude:**\n```\nWrite a professional proposal for the following:\n\nClient: [Company name and industry]\nSituation: [Their problem or goal in 2-3 sentences]\nProposed solution: [What you will do for them]\nDeliverables: [Specific outputs they will receive]\nTimeline: [Phases and schedule]\nInvestment: [Pricing structure]\nProof points: [2-3 relevant results you've achieved for similar clients]\n\nProposal structure:\n1. Executive Summary (1 paragraph — their situation + our solution + key outcome)\n2. Understanding Your Situation (shows we listened)\n3. Our Proposed Approach (methodology and why this will work for them)\n4. What We'll Deliver (specific deliverables with acceptance criteria)\n5. Timeline (visual or table format)\n6. Investment (clear pricing, what's included, what's not)\n7. Why Us (brief proof section with specific examples)\n8. Next Steps (clear, low-friction ask)\n\nTone: Professional but conversational. No jargon. Write like a human expert, not a consultant who charges for every word.\n```\n\n**Step 3 — Customise the executive summary** — this is the most important section and requires your real insight into the client's situation.\n\n**Step 4 — Add specific proof.** Replace any generic 'case study' references with real numbers and real client results (anonymised if needed).\n\n**Outcome:** A professional proposal draft in 30 minutes that previously took a day to write."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop D — Meeting Notes to CRM in 5 Minutes",
+      "content": "After every sales call, you need to capture what happened, update your CRM, and send a follow-up email. AI turns this from a 30-minute admin task into a 5-minute one.\n\n**Step 1 — During or immediately after a call**, type rough notes about:\n- What did they tell you about their situation?\n- What pain points or challenges came up?\n- What objections did they raise?\n- What were the key decisions or commitments from the call?\n- What are the next steps and who owns each one?\n\n**Step 2 — Paste your rough notes into Claude** and ask:\n```\nConvert these rough call notes into:\n\n1. A structured CRM entry with these fields:\n   - Company\n   - Contact name and title\n   - Call date\n   - Stage\n   - Key pain points identified\n   - Objections raised\n   - Agreed next steps\n   - Follow-up date\n\n2. A professional follow-up email that:\n   - Thanks them for their time\n   - Recaps the key points we discussed (shows I listened)\n   - Confirms the agreed next steps with specific owners and dates\n   - Any resources or materials I promised to send\n   - A soft close reinforcing why this move forward makes sense for them\n\nRough notes: [paste your notes here]\n```\n\n**Step 3 — Send the follow-up email within 2 hours.** Research shows follow-up speed is strongly correlated with deal outcomes.\n\n**Step 4 — Update your CRM** with the structured entry.\n\n**Outcome:** Your post-call admin takes 5 minutes instead of 30, and the follow-up is better quality because AI helped structure what you actually discussed."
+    },
+    {
+      "type": "quiz",
+      "question": "You have 50 prospects to reach out to this week. Using AI, which approach will produce the best results?",
+      "options": [
+        "Generate one generic email template with AI and send it to all 50",
+        "For each prospect, spend 5 minutes researching 1-2 specific facts about them, then use AI to personalise the core email template using those facts — producing 50 genuine personalised emails in a few hours",
+        "Write all 50 emails manually to ensure quality",
+        "Use AI to identify which 10 of the 50 are most likely to buy and only contact those"
+      ],
+      "correct": 1,
+      "explanation": "Option B is the right balance. Research shows personalised emails have dramatically higher reply rates than generic ones. AI lets you personalise at scale: the research investment per prospect (5 minutes) is realistic and the AI handles the drafting from there. Generic templates (A) rarely outperform manual personalised outreach. All manual (C) is too slow to maintain the volume. Using AI for predictive targeting (D) can be useful but still requires good outreach copy for the contacts you do reach."
+    },
+    {
+      "type": "quiz",
+      "question": "A prospect objects in a call: 'Your solution is more expensive than Competitor X.' What AI workflow helps you best prepare for objections like this?",
+      "options": [
+        "Ask AI to list all possible objections and generic responses before the call",
+        "After your research phase, prompt Claude: 'I'm meeting with [company type] about [solution]. What objections will they likely raise? For each, draft a response that acknowledges the concern, reframes it, and provides specific evidence — not just general reassurance.'",
+        "Ignore objections in preparation — you handle them better thinking on your feet",
+        "Send a price comparison document to every prospect before the call"
+      ],
+      "correct": 1,
+      "explanation": "Option B is the most effective preparation. AI can help you anticipate specific objections based on the prospect type and prepare substantive responses — not just platitudes. 'We're more expensive because...' needs specific, credible proof: ROI data, case studies, feature comparisons. Preparing these before the call means you respond confidently with evidence rather than fumbling. Option A (generic list) is less effective because it doesn't use the specific context of this prospect. Option C relies on improvisation where preparation would outperform."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Part 16.** You now have AI workflows for every major office and knowledge-work task: writing, reports, proposals, data analysis, presentations, emails, meeting management, process documentation, financial analysis, and sales. These tools work for any role — no coding or technical background required. Part 17 takes the next step: using AI to manage and lead teams more effectively."
+    }
+  ],
+  "nextLesson": "17-1",
+  "prevLesson": "16-9"
+}

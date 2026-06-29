@@ -1,0 +1,97 @@
+{
+  "id": "2-14",
+  "title": "Custom GPTs & Claude Projects — Build Your Own AI Expert",
+  "part": 2,
+  "estimatedMinutes": 50,
+  "tags": ["tools", "beginner", "custom-gpt", "claude-projects", "customization", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nSo far in this course you've used AI as it comes out of the box. But the real power comes when you customise AI for a specific purpose — turning a general assistant into a specialist that always knows your rules, your context, and your preferred way of working.\n\nTwo platforms let you do this without any coding: **OpenAI's Custom GPT builder** and **Claude Projects**. By the end of this lesson you'll have built at least one custom AI configuration that you can reuse for a specific recurring task."
+    },
+    {
+      "type": "text",
+      "content": "## What Are Custom AI Configurations?\n\nA custom AI configuration is a version of an AI model that has been given:\n- **Specific instructions** — a system prompt that shapes how it always responds\n- **Knowledge** — documents, data, and context it has access to\n- **A defined role** — so it behaves as a specialist rather than a generalist\n- **Constraints** — things it won't do, topics it stays focused on\n\nThink of it like hiring a new member of staff and giving them a thorough onboarding: here's your role, here's what you know, here's how we communicate, here's what's off limits.\n\n**Why this matters:** If you have a task you do regularly — drafting emails in a particular style, reviewing documents with the same criteria, answering the same type of questions — a custom AI configuration means you don't have to re-explain your context every session. The AI is pre-loaded with everything it needs.\n\n**Two platforms, one concept:**\n| Platform | Tool | Requires |\n|---------|------|----------|\n| OpenAI (ChatGPT) | Custom GPT | ChatGPT account (free tier) |\n| Anthropic (Claude) | Claude Projects | Claude.ai account (free tier) |\n\nBoth accomplish the same goal — a reusable, pre-configured AI. They have different strengths and we'll cover both."
+    },
+    {
+      "type": "text",
+      "content": "## Custom GPTs — OpenAI's Builder\n\nCustom GPTs are shareable, reusable AI assistants you create inside ChatGPT. OpenAI launched the GPT Store in 2024 where anyone can publish a Custom GPT — there are now millions created by individuals and companies.\n\n**What you can do with a Custom GPT:**\n- Set a system prompt (instructions that always apply)\n- Upload knowledge files (PDFs, spreadsheets, text files the AI can reference)\n- Enable specific capabilities: web search, image generation (DALL-E), code execution\n- Configure a conversation starter (a welcome message and suggested first prompts)\n- Share it with others via a link, or keep it private\n\n**How to create one:**\n1. Open chatgpt.com → click your profile icon → 'My GPTs'\n2. Click 'Create a GPT'\n3. The GPT Builder opens with a split view: left is the conversation where you describe what you want; right is a live preview of your GPT\n4. Tell the Builder: 'I want to create a GPT that [describe your use case]'\n5. The Builder asks clarifying questions and configures it for you\n6. Switch to 'Configure' tab to fine-tune instructions and upload files\n7. Click 'Save' → choose 'Only me' to keep it private or 'Anyone with a link' to share\n\n**The GPT Store:** Visit chatgpt.com/gpts to explore existing Custom GPTs for every purpose. Before building your own, search for existing ones that might already do what you need.\n\n**Limitations of the free tier:** Creating Custom GPTs is available to ChatGPT Plus subscribers. Free accounts can use Custom GPTs from the store but not create them. Creating your own requires a Plus subscription (~$20/month) or access through a school/workplace plan."
+    },
+    {
+      "type": "text",
+      "content": "## Claude Projects — Anthropic's Approach\n\nClaude Projects are available to all Claude.ai users (including the free tier) and offer a different but equally powerful approach to custom AI.\n\n**Key difference:** Claude Projects are private to you and not shareable via a link (you'd need to invite someone to share a project). The strength is deeper context and a more conversational memory within the project.\n\n**What you can do with a Claude Project:**\n- Write project instructions (system prompt) that apply to every conversation in the project\n- Upload files as project knowledge (PDFs, Word docs, text files)\n- All conversations within the project share the same context\n- Claude refers back to uploaded files automatically when relevant\n\n**Best uses for Claude Projects:**\n- A personal assistant that knows your work context, style preferences, and recurring tasks\n- A writing assistant with your tone guide and style examples uploaded\n- A research assistant with your key reference documents\n- A specialist for your job role with domain documentation uploaded\n\n**How to create a Claude Project:**\n1. On claude.ai, click 'Projects' in the left sidebar → 'New Project'\n2. Name your project and write instructions in the 'Project Instructions' box\n3. Upload files using the 'Add Content' button\n4. Start a conversation within the project — Claude now has your instructions and files as permanent context\n5. Every new conversation within the same project starts with that context already loaded\n\n**Free tier:** Claude Projects are available on all tiers. File upload size and the amount of context may vary — check the current limits on claude.ai."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**When to use which:** Custom GPTs are better when you want to share the tool with others or want to browse/use tools made by the community. Claude Projects are better for deeply personal context (your writing style, your specific files) where you want privacy and rich context. Many power users maintain both: a Custom GPT for shareable specialist tools and Claude Projects for personal workflow context."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Build a Claude Project for Your Role",
+      "content": "You'll create a Claude Project that makes every conversation smarter by pre-loading your context.\n\n**Step 1 — Identify your use case.** Think about a task you do regularly where you currently have to re-explain context to Claude each time. Examples:\n- Writing emails in your professional voice\n- Reviewing documents with specific criteria\n- Answering questions in your area of expertise\n- Research in your professional domain\n\n**Step 2 — Go to claude.ai → Projects → New Project.** Name it something useful: 'Work Writing Assistant', 'Code Review Helper', 'Customer Communication Hub'.\n\n**Step 3 — Write your Project Instructions.** This is the most important step. Include:\n- Your role/context: 'I am a [your job title] at a [type of company]. I work primarily on [main activities].'\n- Your preferences: 'When I ask for help with writing, always use a formal but approachable tone. Avoid jargon. Keep emails under 150 words unless I ask otherwise.'\n- Your recurring context: Any facts Claude should always know (your team structure, your key products, your standard processes)\n- What you want Claude to do by default: 'When I describe a situation, ask clarifying questions before drafting anything.'\n\n**Step 4 — Upload 1-2 reference documents** if you have them: a style guide, a template, a list of your products/services, a team handbook page.\n\n**Step 5 — Test it.** Start a conversation in the project and give Claude a real task. Notice how it uses your context without you having to re-explain.\n\n**Step 6 — Refine the instructions.** After testing, go back to project settings and improve the instructions based on what you noticed.\n\n**Outcome:** A reusable AI assistant that knows your context. Every session starts where you left off."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop B — Browse the GPT Store (No Account Required)",
+      "content": "You can explore Custom GPTs even without a ChatGPT Plus account. This workshop gives you a feel for what's possible.\n\n**Step 1 — Go to chatgpt.com/gpts** (or explore.gpt.myapp.com — the community store). You can browse without logging in.\n\n**Step 2 — Search for GPTs relevant to your work.** Try searching:\n- Your job title or industry\n- A specific task you do regularly (e.g., 'contract review', 'email writing', 'data analysis')\n- A skill you're learning\n\n**Step 3 — Read the descriptions of 5 Custom GPTs** you find interesting. For each, note:\n- What instructions does this GPT seem to have?\n- What uploaded knowledge does it reference?\n- Who made it and why?\n\n**Step 4 — If you have ChatGPT access, try 2-3 GPTs.** Notice the welcome message and suggested starter prompts — these are configurable in the GPT builder.\n\n**Step 5 — Identify a gap:** Is there a specialist GPT you'd want that doesn't seem to exist in the store? Note what you'd build and what instructions you'd give it.\n\n**Outcome:** Understanding of what's already available and what you might build."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Create a Custom GPT (ChatGPT Plus Users)",
+      "content": "If you have ChatGPT Plus, you'll build a Custom GPT from scratch.\n\n**Step 1 — Go to chatgpt.com → your profile → 'My GPTs' → 'Create a GPT.'**\n\n**Step 2 — Choose a specific, useful purpose.** The best Custom GPTs have a narrow focus. Ideas:\n- An email rewriter that matches your professional tone\n- A meeting agenda builder with your standard format\n- A domain-specific explainer (for your industry or specialty)\n- A habit or journal assistant with your personal structure\n- A code reviewer with your team's specific conventions\n\n**Step 3 — In the GPT Builder chat (left panel), describe your GPT:**\n'I want to create a GPT called [name] that helps me [specific task]. It should always [key behaviour]. It should never [things to avoid]. When someone starts a conversation, it should [opening behaviour].'\n\n**Step 4 — Switch to the 'Configure' tab** to fine-tune:\n- Name and description\n- The system prompt (Instructions field) — read what the Builder wrote and improve it\n- Upload any files to 'Knowledge'\n- Set conversation starters (suggested first messages that appear in the welcome screen)\n\n**Step 5 — Test in the preview panel (right side).** Is it behaving as you intended? What's missing?\n\n**Step 6 — Iterate** on the instructions until it behaves correctly.\n\n**Step 7 — Save as 'Only me'** for a private tool, or 'Anyone with a link' if you want to share it.\n\n**Outcome:** Your first shareable AI specialist, ready to use for any recurring task."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop D — Map Your Custom AI Opportunities",
+      "content": "Before this course is over you'll likely have multiple custom AI configurations. Plan them now.\n\n**Step 1 — List 5-7 recurring tasks** in your work or personal life where you currently use AI but have to re-explain context each time.\n\n**Step 2 — For each task, answer:**\n- What context does the AI need every time? (role, preferences, style, constraints)\n- Are there documents the AI should always reference?\n- Should this be private (Claude Project) or shareable (Custom GPT)?\n- How often do you do this task? (Daily tasks = highest priority to configure)\n\n**Step 3 — Prioritise:** Rank your 5-7 tasks by how much time and friction a custom AI would save.\n\n**Step 4 — Build the top 2 right now.** You've already set up one in Workshop A. Use what you learned to set up the second highest-priority one.\n\n**Step 5 — Write a one-paragraph note** about how you expect these custom configurations to change your daily AI use in the next month.\n\n**Outcome:** A prioritised plan for custom AI configurations you'll actually use — not just a theoretical exercise."
+    },
+    {
+      "type": "quiz",
+      "question": "You write weekly client reports that always follow the same structure and tone. Every time you use Claude, you have to re-explain this structure. What is the best solution?",
+      "options": [
+        "Copy and paste your instructions at the start of every Claude session",
+        "Create a Claude Project with your report structure and style preferences in the Project Instructions, then write all your reports as conversations within that project",
+        "Use a Custom GPT since it has more features",
+        "Memorise your instructions and type them faster"
+      ],
+      "correct": 1,
+      "explanation": "A Claude Project (option B) is the right solution here. You write your instructions once in the Project Instructions, upload an example report as a reference file, and every conversation within that project automatically has your full context. You never re-explain again. Option A still requires repetitive effort. Option C could also work, but Claude Projects are available on the free tier and are better for personal context. Option D doesn't scale."
+    },
+    {
+      "type": "quiz",
+      "question": "A friend who uses ChatGPT asks you to recommend an AI tool for their team to use for a specific recurring task. The most important requirement is that everyone on the team can access the same pre-configured AI assistant. Which is the best tool?",
+      "options": [
+        "A Claude Project — it's free and easy to use",
+        "A Custom GPT shared via a link — team members can use it directly without needing to configure anything",
+        "Regular ChatGPT — everyone can type the same instructions manually each time",
+        "NotebookLM — it's designed for team use"
+      ],
+      "correct": 1,
+      "explanation": "Custom GPTs (option B) are designed for sharing. You build one, share the link, and team members can use it with the instructions and knowledge you configured — they never have to set anything up. Claude Projects are private (not easily shared via link), so option A doesn't work for team sharing. Option C is repetitive and inconsistent. NotebookLM (D) is for source-grounded research, not recurring task assistance."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the most important factor in making a useful Custom GPT or Claude Project?",
+      "options": [
+        "Using the most advanced AI model available",
+        "Uploading as many files as possible to the knowledge base",
+        "Writing clear, specific instructions that define the AI's role, constraints, preferences, and default behaviours — especially the edge cases it might encounter",
+        "Making it available to the public so others can benefit from it"
+      ],
+      "correct": 2,
+      "explanation": "The instructions (system prompt) are the most critical element (option C). A Custom GPT with a vague system prompt will behave like a generic AI despite all the configuration. The best custom configurations define: what role the AI plays, what it should and shouldn't do, how it should handle ambiguous situations, and what format its responses should take. The model choice (A) matters less than the instructions. Files (B) are helpful but only if the instructions tell the AI how to use them. Public sharing (D) is optional."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-14.** You now know how to create both Claude Projects and Custom GPTs — reusable AI configurations for recurring tasks. The habit to build: whenever you notice yourself typing the same context or instructions to an AI more than twice, that's the signal to create a custom configuration. Once set up, it saves that explanation forever."
+    }
+  ],
+  "nextLesson": "2-15",
+  "prevLesson": "2-13"
+}

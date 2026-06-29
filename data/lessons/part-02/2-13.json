@@ -1,0 +1,103 @@
+{
+  "id": "2-13",
+  "title": "Multimodal AI — Working with Images, Charts & Documents",
+  "part": 2,
+  "estimatedMinutes": 50,
+  "tags": ["tools", "beginner", "multimodal", "vision", "images", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nFor the first few years of AI, you could only type text. That era is over. Today's leading AI models — Claude, ChatGPT, Gemini — can see images, read charts, analyse photographs, interpret diagrams, and extract data from documents. This is called **multimodal AI**: AI that works with multiple types of input, not just text.\n\nBy the end of this lesson you'll be able to drag an image into an AI conversation and ask questions about it, use AI to interpret charts and data visualisations you don't fully understand, troubleshoot technical problems by showing AI a screenshot, and extract information from scanned documents or photos of physical papers."
+    },
+    {
+      "type": "text",
+      "content": "## How Vision AI Works (Plain English)\n\nWhen you upload an image to Claude or ChatGPT, the AI doesn't 'see' it the way your eyes do. Instead, it converts the image into a numerical representation and processes it alongside your text prompt — treating the image as additional context for your question.\n\nWhat this means in practice:\n- The AI can describe what's in an image\n- It can read text that appears in the image (menus, labels, signs, code)\n- It can analyse charts, graphs, and diagrams\n- It can answer specific questions about visual content\n- It can compare two images if you provide both\n\n**What it can't do reliably:**\n- Precise counting of many small objects\n- Reading very small or blurry text (though it tries)\n- Identifying specific real people by face\n- Tasks that require true spatial reasoning (though it's improving fast)\n\n**Which models support vision:**\n| Tool | Vision Support |\n|------|---------------|\n| Claude.ai (claude.com) | Yes — all current models |\n| ChatGPT | Yes — GPT-4o |\n| Google Gemini | Yes — all current models |\n| Microsoft Copilot | Yes — Copilot uses GPT-4o |\n| Perplexity | Yes — with image upload |\n\nAll the major consumer AI tools now support images. If you're on a free tier, you almost certainly have image support."
+    },
+    {
+      "type": "text",
+      "content": "## The 7 Most Useful Vision AI Use Cases\n\nThese are the scenarios where image input saves the most time or solves problems that text prompts simply can't:\n\n**1. Chart & graph interpretation**\nPaste a screenshot of any graph — a stock chart, a marketing dashboard, a scientific figure — and ask Claude to explain what it means, what the trend is, and what conclusions you could draw. This is enormously useful for non-technical people who receive data visualisations from analysts.\n\n**2. Screenshot troubleshooting**\nWhen something on your screen is broken and you don't know how to describe it in words, take a screenshot and paste it. Ask: 'What's wrong with this screen?' or 'What does this error mean?' This works for software errors, UI problems, and anything visual.\n\n**3. Document extraction**\nPhoto a physical document — a receipt, a form, a letter, a whiteboard — and ask AI to extract the key information into a structured format. AI can convert a photo of a handwritten list into a text document.\n\n**4. Diagram & flowchart explanation**\nPaste any diagram (architecture diagram, org chart, process flow, circuit diagram) and ask AI to explain it. Useful for understanding documentation, technical specifications, or process maps you've been handed.\n\n**5. Image-based data entry**\nPhoto a stack of business cards, receipts, invoices, or labels and ask AI to extract the data into a CSV or table. This replaces hours of manual typing.\n\n**6. Design and UI feedback**\nUpload a screenshot of a website, app interface, or presentation slide and ask for design feedback, accessibility issues, or specific improvements.\n\n**7. Learning from visual content**\nUpload a page from a textbook, a scientific figure, or an infographic and ask AI to teach you what it means. Particularly useful for complex diagrams you'd otherwise need to research separately."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Privacy note for image uploads:** The same rules apply as for text. Don't upload images containing faces of private individuals without consent, images with visible passwords or credentials, confidential documents, or images with sensitive personal information. A photo of your whiteboard from a private meeting may contain information you wouldn't want stored on a third-party server. Apply the same de-identification principle: crop or blur sensitive details before uploading."
+    },
+    {
+      "type": "text",
+      "content": "## How to Upload Images: The Mechanics\n\nThe interface is similar across all major tools:\n\n**Claude.ai:**\n- Click the paperclip icon or image icon in the message bar\n- Or simply drag and drop an image directly into the chat\n- Or paste from clipboard: take a screenshot → `Ctrl+V` in the Claude chat box\n- Maximum image size and count varies by plan — the current version supports multiple images per conversation\n\n**ChatGPT:**\n- Click the paperclip/image icon in the message input area\n- Paste from clipboard works here too\n- For Advanced Data Analysis (Code Interpreter), upload a CSV or image for data processing\n\n**Google Gemini:**\n- Click the image icon in the prompt bar\n- Supports Google Photos integration for easy access to your photos\n- Can also handle images from Google Drive\n\n**Microsoft Copilot:**\n- Click the image icon in the chat input\n- In Edge, you can also right-click any image on a webpage → 'Ask Copilot about this image'\n\n**Tip: The fastest way on Windows:** Press `Win+Shift+S` to take a screenshot of any region of your screen → it's automatically on your clipboard → paste it directly into the AI chat with `Ctrl+V`. No saving to disk required."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Chart Interpretation",
+      "content": "You'll use AI to interpret a chart you find confusing or interesting.\n\n**Step 1 — Find a chart.** Choose one of:\n- Go to Google Finance (finance.google.com) and take a screenshot of any stock or index chart\n- Take a screenshot of a dashboard from any tool you use at work\n- Find any chart in a news article that you find complex or hard to interpret\n- Take a photo of a chart in a printed document (a report, a book, a magazine)\n\n**Step 2 — Open Claude.ai.**\n\n**Step 3 — Upload the image.** Drag and drop the screenshot into the chat, or press `Ctrl+V` if you have it on your clipboard.\n\n**Step 4 — Ask:** *'Describe what this chart shows. What is the main trend? What is the most important thing someone looking at this needs to understand? What questions should I ask before drawing conclusions from this data?'*\n\n**Step 5 — Follow up:** Pick one part of the explanation that interests you and ask a follow-up question.\n\n**Outcome:** You've just turned a confusing visual into a clear explanation. This takes 2 minutes and replaces the need to research how to read the specific chart type."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop B — Screenshot Troubleshooting",
+      "content": "You'll use AI vision to troubleshoot something on your screen.\n\n**Step 1 — Find a problem to troubleshoot.** Choose one of:\n- A software error message you've seen on your computer recently\n- A confusing UI element (a settings screen you don't understand)\n- A broken webpage layout (find one with a visual issue)\n- Any screen that shows something you've wanted to understand better\n\n**If you can't find a real problem:** Press `Win+Shift+S`, capture your desktop, and then ask Claude: *'What applications and windows are open on this screen? What task does it look like I'm working on?'*\n\n**Step 2 — Take a screenshot:** Press `Win+Shift+S` → draw around the area you want to capture → it's now on your clipboard.\n\n**Step 3 — Paste into Claude.ai** (`Ctrl+V`) and ask: *'What is happening on this screen? Explain it to a beginner and tell me what I should do to fix the problem / understand this better.'*\n\n**Step 4 — Follow the instructions Claude provides.**\n\n**Outcome:** You now have a technique for getting instant help with any visual problem on your computer. This is one of the highest-ROI habits in modern AI use."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Document & Receipt Data Extraction",
+      "content": "You'll convert a physical or digital document into structured data using AI vision.\n\n**Step 1 — Find a document to extract.** Choose one of:\n- A physical receipt (take a photo with your phone → transfer to computer or email it to yourself)\n- A scanned document in PDF or image format\n- A screenshot of an invoice, table, or form from an email\n- A photo of a whiteboard or notebook page with lists or notes\n\n**Step 2 — Upload to Claude.ai** by dragging the file into the chat.\n\n**Step 3 — Ask for extraction:**\n- For a receipt: *'Extract all the line items from this receipt into a Markdown table with columns: Item, Quantity, Price.'*\n- For a document with names/contacts: *'Extract all names, companies, and contact details from this document into a JSON array.'*\n- For a whiteboard: *'Transcribe everything written on this whiteboard and organise it into bullet points by topic.'*\n- For an invoice: *'Extract: supplier name, invoice number, date, each line item, and the total. Format as a simple table.'*\n\n**Step 4 — Verify accuracy.** Compare the extracted data to the original. Note any errors — this teaches you when to trust AI extraction and when to double-check.\n\n**Step 5 — Export the data.** Copy the output and paste it into a spreadsheet, a notes app, or a text file.\n\n**Outcome:** A skill that replaces manual data entry for common document types."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop D — Technical Diagram Explanation",
+      "content": "You'll use AI to understand a technical diagram you would otherwise need to research separately.\n\n**Step 1 — Find a diagram.** Choose one:\n- A network or architecture diagram from a work document\n- A flowchart from a business process document\n- A technical diagram from any documentation you've struggled with\n- An infographic about any complex topic (search 'AI architecture diagram' or 'supply chain infographic' to find one)\n\n**Step 2 — Upload to Claude or Gemini** (either works well for diagrams).\n\n**Step 3 — Ask:** *'Explain this diagram to me as if I have no prior knowledge of the domain. Start with what the overall diagram represents, then walk me through the key components one by one. End by explaining how information/resources/work flows through the diagram from start to finish.'*\n\n**Step 4 — Ask a follow-up:** *'What would go wrong if [component X] was removed or failed?'* — this tests your understanding of what you just learned.\n\n**Outcome:** The ability to rapidly understand any visual documentation without separate research."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop E — Multi-Image Comparison",
+      "content": "Some tasks are clearest when you show AI two images to compare. You'll practise this here.\n\n**Step 1 — Find two images to compare.** Options:\n- Two screenshots of similar software (before/after a change, two versions of an interface)\n- Two versions of a document or design\n- Screenshots of two different products/options you're trying to choose between\n- Two charts showing similar data from different sources\n\n**Step 2 — Upload BOTH images to the same Claude.ai message.** You can drag multiple images into the chat at once or add them one at a time before sending.\n\n**Step 3 — Ask a comparison question:**\n- *'Compare these two interfaces. What are the main differences? Which do you think is more user-friendly and why?'*\n- *'Both charts show [topic]. What do they agree on? Where do they differ? Which appears more reliable?'*\n- *'Compare these two before/after screenshots. What changed? Was the change an improvement?'*\n\n**Step 4 — Note:** AI vision is often better at identifying specific, concrete differences than at making subjective aesthetic judgements. Push it to be specific: 'Name 5 specific differences' rather than 'which is better?'\n\n**Outcome:** Multi-image prompting is one of the most underused AI capabilities. Most people only upload one image at a time."
+    },
+    {
+      "type": "quiz",
+      "question": "You receive a complex bar chart from your data team and you're not sure what it means. What is the best way to get a quick explanation using AI?",
+      "options": [
+        "Describe the chart in text as best you can and ask Claude to guess what it shows",
+        "Take a screenshot of the chart, paste it into Claude.ai with Ctrl+V, and ask Claude to explain the main trend and what conclusions you should draw",
+        "Wait for the data team to explain it in the next meeting",
+        "Search Google for how to read bar charts in general"
+      ],
+      "correct": 1,
+      "explanation": "Uploading the actual chart image (option B) gives Claude the complete visual information — every label, axis, data point, and colour legend. Describing it in text (option A) loses critical detail. Waiting or searching (C, D) takes much longer and doesn't give you a specific answer about your specific chart. Pasting from clipboard (Ctrl+V) is the fastest method — no need to save the file first."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague sends you a photo of a printed contract and asks you to extract the key dates and parties into a structured list. What is the most efficient approach?",
+      "options": [
+        "Type out the document manually from the photo",
+        "Open the photo in Claude.ai and ask: 'Extract all names, company names, dates, and contract terms from this document into a structured list'",
+        "Use a separate OCR tool first, then paste the text into Claude",
+        "Tell your colleague to send you a digital version instead"
+      ],
+      "correct": 1,
+      "explanation": "Claude's vision capabilities can read text in images directly (B) — no separate OCR tool is needed. Ask for exactly the structured output you want. Option A (manual typing) defeats the purpose. Option C (separate OCR) adds an unnecessary step since Claude handles OCR and extraction in one step. Option D isn't always possible if the original is physical. The vision AI approach replaces a workflow that used to require a dedicated OCR application."
+    },
+    {
+      "type": "quiz",
+      "question": "Which of the following is NOT a reliable use of AI vision?",
+      "options": [
+        "Reading text from a screenshot of an error message",
+        "Explaining what a flowchart diagram shows",
+        "Precisely counting 500 identical small objects in a photo",
+        "Describing the layout and components of a website screenshot"
+      ],
+      "correct": 2,
+      "explanation": "Precisely counting large numbers of similar objects (option C) is a known weakness of current vision AI. Models will often give approximate counts rather than exact ones, or make errors on densely packed items. The other options are all reliable: reading text from screenshots, explaining diagrams, and describing layouts are all tasks that current vision AI handles well. If you need precise counts, use dedicated counting software or do it manually."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-13.** You can now use AI vision for chart interpretation, screenshot troubleshooting, document extraction, diagram explanation, and multi-image comparison. The key habit: when you have something visual you don't understand, your first move should be to paste it into an AI — not to search Google and spend 30 minutes reading articles."
+    }
+  ],
+  "nextLesson": "2-14",
+  "prevLesson": "2-12"
+}

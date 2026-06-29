@@ -38,7 +38,7 @@
     },
     {
       "type": "code",
-      "language": "javascript",
+      "language": "python",
       "content": "import anthropic\nfrom dotenv import load_dotenv\n\nload_dotenv()  # reads .env file\n\nclient = anthropic.Anthropic()\n# SDK reads ANTHROPIC_API_KEY from environment automatically\n\nmessage = client.messages.create(\n    model=\"claude-haiku-4-5-20251001\",\n    max_tokens=200,\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": \"What is the most exciting thing about AI in 2025? One paragraph.\"\n        }\n    ]\n)\n\nprint(message.content[0].text)"
     },
     {

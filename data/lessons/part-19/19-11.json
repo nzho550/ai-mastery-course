@@ -1,0 +1,86 @@
+{
+  "id": "19-11",
+  "title": "AI for Video Creation",
+  "part": 19,
+  "estimatedMinutes": 55,
+  "tags": ["personal-life", "intermediate", "video", "content-creation", "sora", "runway", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nAI video tools have crossed a threshold in 2025-2026: what required a studio, camera crew, and post-production team a few years ago can now be produced on a laptop using AI. Whether you want to create social media content, explainer videos, presentations with narration, or short-form content for YouTube, there are free and low-cost AI tools for every step of the pipeline.\n\nBy the end of this lesson you'll understand the end-to-end AI video creation workflow (script → voice → visuals → editing), know which tools handle which part, and have produced at least one piece of video content entirely with AI."
+    },
+    {
+      "type": "text",
+      "content": "## The AI Video Pipeline\n\nVideo creation has five stages, and AI now assists with every one:\n\n**Stage 1 — Script & Concept (AI: Claude / ChatGPT)**\n- Scriptwriting for any format: explainer, social clip, tutorial, testimonial, ad\n- Hook writing (the first 3 seconds that determine whether people keep watching)\n- B-roll suggestions (visual ideas to pair with narration)\n- Storyboard outlines\n\n**Stage 2 — Voiceover (AI: ElevenLabs, Murf, LOVO)**\n- Text-to-speech with realistic, expressive voices\n- Clone your own voice (create a voice model from a 30-minute recording)\n- Multiple languages and accents\n- Free tiers available on all major platforms\n\n**Stage 3 — Video Generation (AI: Sora, Runway, Kling, Pika)**\n- Text-to-video: describe a scene, AI generates it\n- Image-to-video: upload a still image, AI animates it\n- Video-to-video: transform existing video style\n\n**Stage 4 — AI Avatars (AI: HeyGen, Synthesia, D-ID)**\n- Create a realistic talking-head video from text\n- Your own AI avatar (clone yourself)\n- Multilingual avatar videos (translate and re-lip-sync)\n\n**Stage 5 — Editing & Captions (AI: Descript, CapCut AI, Adobe Premiere AI)**\n- Auto-transcription and caption generation\n- Remove filler words ('um', 'uh') with one click\n- AI B-roll matching (auto-insert relevant footage)\n- Background noise removal\n- Auto-resize for different platforms"
+    },
+    {
+      "type": "text",
+      "content": "## AI Video Tools: Free vs. Paid\n\n| Stage | Free Option | Best Paid Option | What it Does |\n|-------|------------|------------------|--------------|\n| Script | Claude.ai free | Claude Pro | Scriptwriting, hooks, storyboards |\n| Voice | ElevenLabs (free tier) | ElevenLabs Starter | Realistic TTS, voice cloning |\n| Video gen | Runway (free credits) | Runway Gen-3 Alpha | Text-to-video, image-to-video |\n| Avatar | HeyGen (free intro) | HeyGen Starter | Talking head, your own avatar |\n| Editing | CapCut (free, web) | Descript Pro | Captions, filler removal, B-roll |\n| Captions | CapCut auto-caption | Descript | Styled subtitles for social |\n\n**The fully free pipeline:**\n1. Claude.ai (free) → write the script\n2. ElevenLabs (free tier) → generate the voiceover\n3. Runway (free credits) or Pika → generate video clips\n4. CapCut (free, browser-based) → assemble, caption, and export\n\n**For professional output:**\nRunway Gen-3 Alpha + ElevenLabs + Descript produces broadcast-quality results for ~$50/month combined.\n\n**Fastest single-tool approach:**\nHeyGen or Synthesia: paste your script, choose an avatar, get a complete talking-head video in minutes. No editing required. Ideal for explainer videos, onboarding content, and training materials."
+    },
+    {
+      "type": "text",
+      "content": "## What Makes AI Video Work (and What Doesn't)\n\n**What works well in 2026:**\n- Short-form content (15-60 seconds) — AI video quality holds up well at shorter durations\n- Explainer and educational content — talking heads + slides/animation\n- Social media clips — CapCut AI handles the entire workflow for Reels/TikTok/Shorts format\n- B-roll footage — AI generates supporting visuals that would have required stock footage purchases\n- Voiceovers — AI voices are now indistinguishable from human for most listeners\n- Captions and subtitles — AI auto-captioning saves hours of manual work\n\n**Where it still struggles:**\n- Long continuous video (over 10-15 seconds) — AI video generation still has coherence issues over longer durations\n- Specific real people — AI can't generate realistic video of specific named individuals without consent (and for good reason)\n- Complex action sequences — AI still produces visual artifacts in fast motion or complex physics\n- Exact text on screen in generated video — text in AI-generated video is often garbled\n\n**The workaround:** Combine AI generation with screen recording and presentation footage. Use AI for b-roll, atmosphere, and short illustrative clips. Use screen recording or slide export for anything requiring precision."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Write a Video Script with AI",
+      "content": "You'll write a complete short-form video script using Claude — the foundation for all the other workshops.\n\n**Step 1 — Choose your video format and topic.** Options:\n- 60-second explainer video about something in your professional domain\n- 30-second social media clip (LinkedIn or YouTube Shorts format)\n- 2-minute product or service explanation\n- A personal introduction video ('about me' style)\n- A tutorial for a process you know well\n\n**Step 2 — Prompt Claude:**\n```\nWrite a [duration] video script for [platform/format] about [topic].\n\nTarget audience: [who will watch this]\nGoal: [what you want them to think, feel, or do after watching]\nTone: [conversational / professional / energetic / calm]\nFormat: [talking head / voiceover with visuals / social clip / explainer]\n\nInclude:\n1. A hook (first 3 seconds — make people stop scrolling)\n2. The main content broken into clear sections with transitions\n3. A closing call to action\n4. B-roll suggestions for each section (what visuals could appear behind the narration)\n5. Approximate word count for each section (to hit the time target)\n\nAlso provide:\n- 3 alternative hooks to A/B test\n- A shorter 30-second version cut from the same script\n```\n\n**Step 3 — Read the script out loud.** Does it sound natural when spoken? What feels awkward? Edit anything that sounds like writing rather than speaking.\n\n**Step 4 — Time yourself.** Read it at a natural speaking pace. Adjust length to hit your target duration.\n\n**Outcome:** A production-ready script you can record or feed into AI tools for the next workshops."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop B — AI Voiceover with ElevenLabs",
+      "content": "You'll convert your script from Workshop A into a realistic AI voiceover.\n\n**Step 1 — Go to elevenlabs.io** and create a free account.\n\n**Step 2 — Go to Text to Speech.** The free tier gives you a monthly character allowance — enough to generate several short voiceovers.\n\n**Step 3 — Browse the voice library.** Listen to several voices to find one that matches your intended tone: professional, warm, energetic, calm, authoritative, friendly. The voice selection significantly impacts how the content is received.\n\n**Step 4 — Paste your script** into the text field. Before generating:\n- Add punctuation strategically — commas create pauses\n- Use '...' for longer pauses between sections\n- Break long sentences into shorter ones for more natural delivery\n\n**Step 5 — Adjust settings:**\n- Stability: higher = more consistent, lower = more expressive\n- Similarity/Clarity: higher = cleaner, lower = more natural variation\n- Start at default settings, then adjust if the delivery sounds robotic\n\n**Step 6 — Generate and listen.** Does it sound natural? Fix any mispronunciations by adjusting spelling or using phonetic spelling in the text.\n\n**Step 7 — Download the MP3** and save it.\n\n**Bonus — Voice cloning (if you want your own voice):** Go to 'Voice Lab' → 'Add Generative or Cloned Voice' → record or upload 30 minutes of clear audio of yourself speaking → ElevenLabs creates a model of your voice that you can use for all future generations.\n\n**Outcome:** A professional-quality voiceover for your script."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Generate Video with Runway or Kling",
+      "content": "You'll generate short AI video clips to accompany your voiceover.\n\n**Step 1 — Go to runwayml.com** and sign up for a free account. You get a limited number of free credits to start.\n\n**Alternative:** Try kling.ai — a competitor with a free tier that produces different visual results.\n\n**Step 2 — Choose your generation mode:**\n- **Text-to-Video:** Describe a scene and Runway generates it\n- **Image-to-Video:** Upload a photo or AI-generated image and animate it\n- Image-to-video tends to produce more coherent results — consider creating an image in Bing Image Creator first, then animating it\n\n**Step 3 — Generate clips for each B-roll suggestion from your script.** For each section of your script that needs a visual:\n- Write a specific prompt describing the scene: not 'a person using a computer' but 'a young professional at a clean modern desk with natural light, typing on a laptop, viewed from slightly above, cinematic colour grading'\n- Specify the mood, lighting, camera angle, and visual style\n- Keep clips to 4-8 seconds — AI video quality drops significantly at longer durations\n\n**Step 4 — Download your clips** and note which script sections each one covers.\n\n**Step 5 — Evaluate quality.** Note which prompts produced good results and which didn't — this teaches you how to prompt video AI effectively.\n\n**Outcome:** 3-5 short AI video clips ready to assemble with your voiceover."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop D — Assemble and Caption with CapCut",
+      "content": "You'll combine your voiceover and video clips into a finished video with captions.\n\n**Step 1 — Go to capcut.com** (the web version — no download required). Create a free account.\n\n**Step 2 — Create a new project** and choose your aspect ratio:\n- 16:9 (landscape) for YouTube\n- 9:16 (portrait) for TikTok, Instagram Reels, YouTube Shorts\n- 1:1 for LinkedIn\n\n**Step 3 — Import your assets:**\n- Upload your ElevenLabs voiceover MP3\n- Upload your Runway video clips\n\n**Step 4 — Assembly:**\n- Drag the voiceover to the timeline as your base audio track\n- Arrange your video clips in the video track, timing them to match the sections of narration\n- Add transitions between clips (keep them subtle — cuts work better than flashy transitions for professional content)\n\n**Step 5 — Auto-captions (this is the AI magic):**\n- In the left panel, find 'Auto Captions' or 'Subtitles'\n- Click generate — CapCut transcribes your voiceover and places captions on screen\n- Choose a caption style (for social media: bold, large, high-contrast — viewers often watch without sound)\n- Edit any errors in the caption text\n\n**Step 6 — Add your B-roll timing.** Caption placement and B-roll should roughly align: when you're talking about concept A, the relevant B-roll clip should be visible.\n\n**Step 7 — Export:** Choose 1080p or the highest quality available on the free tier. Download your finished video.\n\n**Outcome:** A complete, captioned video ready to publish — created entirely with free AI tools."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop E — AI Talking Head with HeyGen",
+      "content": "For a simpler approach to video creation without assembling clips, try an AI avatar video.\n\n**Step 1 — Go to heygen.com** and create a free account. You get limited free credits for an introductory video.\n\n**Step 2 — Browse the avatar library.** HeyGen has many pre-built AI avatars (realistic AI-generated people) in various styles and languages.\n\n**Step 3 — Choose a template or start from scratch.** Templates provide a layout (avatar on one side, text on the other). For a simple explainer, use a template.\n\n**Step 4 — Paste your script** (from Workshop A or a shorter version) into the script field.\n\n**Step 5 — Choose a voice** (or use the voice associated with your avatar).\n\n**Step 6 — Generate.** HeyGen renders the video — the avatar speaks your script with synchronized lip movement.\n\n**Step 7 — Evaluate the output.** Compare this approach (full talking-head video, no assembly required) to the Workshop D approach (more control, more effort). Which fits your use case better?\n\n**Use cases for AI avatar video:**\n- Onboarding and training videos for a team or clients\n- Product explainers in multiple languages (HeyGen can translate and re-lip-sync)\n- FAQ videos that present consistent information\n- Personalised outreach videos at scale (with caution on the authenticity expectations this creates)\n\n**Outcome:** A complete talking-head explainer video produced without recording anything yourself."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to create a 60-second explainer video for LinkedIn without spending any money. What is the correct tool sequence?",
+      "options": [
+        "Premiere Pro → stock footage → professional voiceover artist",
+        "Claude.ai (script) → ElevenLabs free tier (voiceover) → Runway free credits (b-roll clips) → CapCut web (assembly and captions)",
+        "Canva (design) → screen record → upload directly",
+        "HeyGen paid plan only — free tools can't produce professional results"
+      ],
+      "correct": 1,
+      "explanation": "Option B is the correct fully-free AI pipeline. Claude for the script (free), ElevenLabs free tier for voiceover (limited monthly credits but enough for a 60-second script), Runway free credits for b-roll generation, and CapCut web (free, no download) for assembly and auto-captions. Each tool is genuinely free for the limited usage needed for a single 60-second video. Option A is expensive and doesn't use AI. Option C produces a lower-quality result and still requires manual work. Option D is incorrect — the free tiers of multiple tools combine to enable professional output."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the most important limitation to understand about AI video generation tools in 2026?",
+      "options": [
+        "They can only generate videos in English",
+        "They cannot generate any type of realistic visual",
+        "Individual generated clips are convincing but quality degrades significantly over 10-15 seconds — the best AI video productions combine short AI-generated clips with screen recording, slides, or real footage",
+        "AI video tools require a professional GPU to run"
+      ],
+      "correct": 2,
+      "explanation": "Option C correctly identifies the key limitation: coherence over time. AI video generation (Runway, Sora, Kling) produces impressive 4-10 second clips but degrades in coherence at longer durations — subjects change appearance, physics becomes inconsistent, and motion becomes erratic. Professional AI video content addresses this by cutting frequently between short generated clips, combining AI with real footage, or using talking-head AI (HeyGen) for longer sustained video. Option A is incorrect — most tools support multiple languages. Option B is wrong — AI visual quality is very high for short clips. Option D is wrong — all listed tools are cloud-based and run in a browser."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-11.** You now have a complete AI video production toolkit: script writing with Claude, voiceovers with ElevenLabs, clip generation with Runway, assembly and captions with CapCut, and turnkey talking-head videos with HeyGen. The pace of improvement in AI video is faster than any other AI category — what feels like a demo today will be production-standard in 12 months. The best time to start experimenting is now."
+    }
+  ],
+  "nextLesson": "19-12",
+  "prevLesson": "19-10"
+}

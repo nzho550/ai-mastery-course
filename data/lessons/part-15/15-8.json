@@ -1,0 +1,103 @@
+{
+  "id": "15-8",
+  "title": "NotebookLM — Your AI Research Companion",
+  "part": 15,
+  "estimatedMinutes": 55,
+  "tags": ["research", "beginner", "notebooklm", "google", "knowledge", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nNotebookLM is Google's free AI research tool — and it's one of the most powerful free AI applications available in 2025. Unlike general-purpose chat AI, NotebookLM is built specifically for working with a collection of sources: PDFs, YouTube videos, websites, Google Docs, audio files, and text you paste in. It reads all your sources first, then you ask questions that are answered with citations from those specific sources — not from the AI's general training data.\n\nBy the end of this lesson you'll have a working NotebookLM notebook with real sources, know how to ask questions and get cited answers, understand how to generate audio overviews and study guides, and be able to use NotebookLM as your personal research assistant for any deep topic."
+    },
+    {
+      "type": "text",
+      "content": "## What Makes NotebookLM Different\n\nMost AI tools answer from their training knowledge. NotebookLM answers from YOUR documents. This difference is fundamental:\n\n**Traditional AI (Claude, ChatGPT, Perplexity):**\n- Answers from training data (everything on the internet up to a cutoff date)\n- Can hallucinate or make up details\n- Doesn't know the specific documents in front of you\n- Good for general knowledge, bad for specific source analysis\n\n**NotebookLM:**\n- Only answers from the sources YOU provide\n- Every answer includes citations so you can verify exactly where the claim came from\n- Knows nothing outside your uploaded sources (this is the feature, not the limitation)\n- Excellent for: research papers, company reports, study materials, documentation\n\n**What you can upload:**\n| Source Type | How |\n|------------|-----|\n| PDF | Upload directly |\n| Website / URL | Paste the URL |\n| YouTube video | Paste the URL — NotebookLM reads the transcript |\n| Google Doc / Slides | Connect from Google Drive |\n| Audio file | Upload MP3 or WAV |\n| Text | Paste directly |\n\n**Limits (as of 2026):** Up to 50 sources per notebook, up to 500,000 words per source, up to 25 notebooks per account. All free.\n\n**Why it matters for learning:** If you're studying a course (like this one), reading a book, or researching a topic deeply, you can upload your materials to NotebookLM and then interrogate them like a knowledgeable assistant who has read everything."
+    },
+    {
+      "type": "text",
+      "content": "## NotebookLM's Key Features\n\n**1. Q&A with Citations**\nAsk any question about your sources. Every answer includes numbered citations you can click to see the exact source passage. This means you can verify claims instantly and there's no guessing about where the AI got its information.\n\n**2. Audio Overview (the Podcast Feature)**\nNotebookLM's most famous feature: it generates a realistic 5-10 minute audio conversation between two AI hosts who discuss the key ideas from your sources. This sounds like a well-produced podcast episode. Useful for:\n- Commute-time learning from material you've uploaded\n- Getting an audio summary before diving into dense reading\n- Sharing a digestible version of complex material with others\n\n**3. Study Guide**\nNotebookLM generates an automatic study guide from your sources, including key concepts, definitions, a timeline (if relevant), and quiz questions based on the material. Dramatically speeds up exam preparation.\n\n**4. Briefing Document**\nA structured summary of the most important points across all your sources — useful as a quick-reference document before a meeting, presentation, or exam.\n\n**5. FAQ**\nNotebookLM generates the most likely questions someone would ask about your material and answers each one from the sources. Useful for preparing to explain a topic to others.\n\n**6. Table of Contents**\nFor long or complex source collections, NotebookLM creates a navigable map of what's covered."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Privacy & data:** When you upload sources to NotebookLM, Google processes them on their servers. NotebookLM's privacy policy states that your notebooks and sources are private to you and not used to train Google's models (as of 2026 — always check the current policy at notebooklm.google.com). For highly sensitive documents, use the de-identification techniques from lesson 1-5 before uploading, or use a local AI tool instead."
+    },
+    {
+      "type": "text",
+      "content": "## When to Use NotebookLM vs General AI\n\nUse NotebookLM when:\n- You have specific documents you need to understand or analyse\n- You want cited, verifiable answers (not AI 'hallucinations' from training data)\n- You're studying a topic with a defined set of source materials\n- You want to synthesise across multiple documents at once\n- You want audio content from written material\n\nUse Claude/ChatGPT when:\n- You need general knowledge the AI already knows\n- You're writing, brainstorming, or creating content\n- You don't have specific source documents to work with\n- You want to have a back-and-forth conversation over time\n\n**The power combination:** Use Perplexity (Part 5, lesson 15-2) to find good sources. Upload those sources to NotebookLM. Then use NotebookLM to synthesise and ask specific questions. This is the complete research workflow."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Create Your First Notebook",
+      "content": "You'll set up NotebookLM with real sources on a topic you care about.\n\n**Step 1 — Go to notebooklm.google.com.** Sign in with a Google account. (If you don't have one, create a free one at accounts.google.com.)\n\n**Step 2 — Click 'New Notebook.'** Give it a name related to a topic you're genuinely curious about or researching. Examples:\n- 'AI learning journey' — upload lessons or articles about AI\n- '[Industry] trends' — your professional field\n- 'Book I'm reading' — upload PDFs or paste key passages\n- A course you're studying\n- A business problem you're researching\n\n**Step 3 — Add at least 3 sources.** Mix source types for best results:\n- **URL source:** Find a relevant long article or blog post → paste the URL → click Add\n- **YouTube video:** Find a relevant YouTube video (10+ minutes works best) → paste the URL → click Add. NotebookLM reads the auto-generated transcript.\n- **Text paste:** Find a PDF article or document → copy several paragraphs of key content → paste directly into NotebookLM as a text source\n\n**Step 4 — Wait for processing.** NotebookLM reads all your sources (usually 30-60 seconds).\n\n**Step 5 — Ask a question.** In the chat panel on the right, ask something specific about your sources: 'What are the main themes across all my sources?' or 'What does [source title] say about [specific topic]?'\n\n**Observe:** Every answer has numbered citations in brackets. Click a number to jump to the exact passage in the source."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop B — Generate the Audio Overview",
+      "content": "NotebookLM's most popular feature creates a podcast-style audio discussion of your sources.\n\n**Prerequisites:** You have a notebook with at least 2-3 sources from Workshop A.\n\n**Step 1 — In your notebook**, look for the 'Studio' panel or the 'Audio Overview' button (the interface may label it differently — look for a headphone or audio icon).\n\n**Step 2 — Click 'Generate Audio Overview'** (or 'Generate' under Audio Overview).\n\n**Step 3 — Wait 2-5 minutes** while NotebookLM synthesises your sources and generates a conversation between two AI voices.\n\n**Step 4 — Listen.** The hosts will discuss the key ideas from your sources in a natural conversation style. Notice:\n- They cover the main themes from all your sources, not just one\n- They sometimes disagree or raise questions about the material\n- The format makes dense content accessible to listen to while multitasking\n\n**Step 5 — Download the audio** (there's a download button) and listen during a commute or walk.\n\n**Use case:** Before a meeting where you need to know a topic well, upload the key documents and generate an audio overview. Listen during your commute to the meeting."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Deep Q&A with Citations",
+      "content": "You'll ask NotebookLM challenging, specific questions and use citations to verify the answers.\n\n**Step 1 — Add a substantial source** to your notebook if you haven't already. A research paper, a long report, or multiple articles on the same topic work best.\n\n**Step 2 — Ask questions at 3 levels of depth:**\n\n**Surface level:** 'Summarise the main argument of [source name]'\n**Connection-finding:** 'What do my sources agree on? Where do they disagree?'\n**Gap-finding:** 'What important question about [topic] is NOT answered by any of my sources?'\n\n**Step 3 — Click each citation.** For every answer, open at least one citation and read the original passage to verify the AI interpreted it correctly.\n\n**Step 4 — Test the limits.** Ask a question that you suspect is NOT covered by your sources. Notice: NotebookLM should either say it can't find that information in your sources, or it may invent an answer. Identifying when it confabulates (invents citations) is an important quality check.\n\n**Step 5 — Note what NotebookLM does well vs. poorly** for your specific use case.\n\n**Outcome:** You've learned the full power and the key limitation of grounded AI: it's only as good as the sources you provide, and you still need to verify citations."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop D — Build a Study Guide",
+      "content": "Use NotebookLM to turn your sources into a structured study guide — useful for exams, presentations, or learning a new domain.\n\n**Step 1 — Choose a topic you want to learn.** Options:\n- Lessons from this course (upload a few lesson PDFs or paste lesson content)\n- A topic from your work that you need to understand better\n- A subject for an exam or certification\n\n**Step 2 — Upload 3-5 good sources** on this topic.\n\n**Step 3 — Generate a Study Guide.** Look for the 'Study Guide' option under the source panel or ask directly: 'Generate a study guide for all my sources covering key concepts, definitions, and potential exam questions.'\n\n**Step 4 — Review the study guide.** Does it cover the most important points? Are there gaps?\n\n**Step 5 — Ask follow-up questions** on any concept in the study guide you want to understand more deeply.\n\n**Step 6 — Generate quiz questions:** Ask: 'Create 10 quiz questions based on the most important concepts in my sources. Include the correct answer and a brief explanation for each.'\n\n**Outcome:** A complete study resource created in 15 minutes from your source materials."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop E — Map Your NotebookLM Use Cases",
+      "content": "Identify where NotebookLM fits into your work and learning life.\n\n**Step 1 — List 5 situations in your life where you regularly deal with large amounts of text you need to understand quickly.** Examples:\n- Industry reports or research papers for your job\n- Course materials you need to study\n- Meeting preparation documents\n- Legal or financial documents\n- Books or long articles you want to get more from\n\n**Step 2 — For each situation, ask:**\n- How long do I currently spend reading and understanding this material?\n- Could I upload it to NotebookLM and get the key points faster?\n- Would cited Q&A be more useful than a general summary?\n\n**Step 3 — Pick the highest-value use case** and create a dedicated notebook for it. Set it up now while you're in the lesson.\n\n**Step 4 — Add it to your AI Toolkit document** (from lesson 2-8): add NotebookLM as your tool for deep source-grounded research and study.\n\n**Outcome:** A concrete plan for where NotebookLM saves you the most time — and a notebook already set up for that purpose."
+    },
+    {
+      "type": "quiz",
+      "question": "You're preparing for a meeting about a topic covered in a 60-page report. You have 30 minutes to prepare. Which NotebookLM workflow is most efficient?",
+      "options": [
+        "Read the entire 60-page report carefully",
+        "Upload the report to NotebookLM, generate an Audio Overview, listen while getting ready, then ask 5 targeted questions about the key decision points before the meeting",
+        "Search Google for summaries of the report topic",
+        "Ask ChatGPT to summarise the topic from its training data"
+      ],
+      "correct": 1,
+      "explanation": "Option B is the most efficient workflow. The Audio Overview turns dense reading into listenable content, and the targeted Q&A with citations means you can verify exactly what the report says on key points — ready to cite in the meeting. Option A takes too long. Option C gives general knowledge, not the specific report's content. Option D gives the AI's general knowledge, not what your specific report says."
+    },
+    {
+      "type": "quiz",
+      "question": "NotebookLM gives you an answer about your research topic and includes a citation '[3]'. What should you do before using this information in work you'll share with others?",
+      "options": [
+        "Trust the answer — NotebookLM only uses your sources so it must be accurate",
+        "Click the citation to read the original passage in source 3 and verify the AI interpreted it correctly",
+        "Ask NotebookLM to confirm it is confident in the answer",
+        "Check if the answer sounds reasonable"
+      ],
+      "correct": 1,
+      "explanation": "Always verify citations (option B). Even though NotebookLM grounds its answers in your sources, it can still misinterpret passages, take them out of context, or occasionally confabulate a citation. Clicking the citation number takes you directly to the original passage — this is the key workflow that makes NotebookLM trustworthy. Option A is overconfident. Option C (asking for confidence) is not reliable — AI can be confidently wrong. Option D (sounds reasonable) is not verification."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague asks you to explain the difference between NotebookLM and asking Claude the same research question. What is the most accurate answer?",
+      "options": [
+        "They are essentially the same — both use AI to answer questions",
+        "Claude is better because it knows more information overall",
+        "NotebookLM answers only from the specific sources you upload and provides citations to those sources, while Claude answers from its broader training data without citations. NotebookLM is better when you have specific documents you need to interrogate; Claude is better for general knowledge tasks.",
+        "NotebookLM is faster because it uses newer AI technology"
+      ],
+      "correct": 2,
+      "explanation": "The key distinction is source grounding and citation (option C). NotebookLM is a closed-source tool: it only knows what you tell it, and every answer is cited. This makes it verifiable and reliable for document analysis. Claude uses its full training knowledge, which is broader but not cited to specific documents. Neither is universally 'better' — they're optimised for different tasks. NotebookLM for your documents; Claude for general knowledge."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 15-8.** You now have a working NotebookLM notebook and have used its core features: Q&A with citations, Audio Overview, and study guide generation. The single most impactful habit from this lesson: any time you have a document (PDF, article, report) that you need to understand deeply, upload it to NotebookLM before spending an hour reading it cover-to-cover."
+    }
+  ],
+  "nextLesson": "16-1",
+  "prevLesson": "15-7"
+}

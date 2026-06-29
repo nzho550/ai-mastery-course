@@ -3,7 +3,11 @@
   "title": "What is MCP and Why It's a Big Deal",
   "part": 8,
   "estimatedMinutes": 60,
-  "tags": ["mcp", "claude-code", "integrations"],
+  "tags": [
+    "mcp",
+    "claude-code",
+    "integrations"
+  ],
   "sections": [
     {
       "type": "text",
@@ -38,7 +42,7 @@
     {
       "type": "callout",
       "variant": "info",
-      "content": "**MCP was created by Anthropic** and released as an open standard in November 2024. It has since been adopted by Cursor, Zed, VS Code extensions, JetBrains, Windsurf, and other AI coding tools. The official specification lives at modelcontextprotocol.io. The GitHub repository at github.com/modelcontextprotocol/servers contains official reference servers maintained by Anthropic."
+      "content": "**MCP was created by Anthropic** and released as an open standard in November 2024. It has since been adopted across the entire AI industry — Cursor, Zed, VS Code, JetBrains, Windsurf, and every major AI framework. As of mid-2026: 81,000+ GitHub stars, 97 million monthly SDK downloads, and official support from Anthropic, OpenAI, Google, Microsoft, and AWS. **When all major AI companies adopt a protocol, that protocol is the standard.** The official specification lives at modelcontextprotocol.io. The official registry at **registry.modelcontextprotocol.io** lists 200+ community servers including GitHub, Slack, PostgreSQL, Stripe, Figma, Docker, Kubernetes, and more. Google has also released A2A (Agent-to-Agent protocol) as a complementary standard — MCP handles agent-to-tool communication, A2A handles agent-to-agent communication."
     },
     {
       "type": "text",
@@ -46,7 +50,7 @@
     },
     {
       "type": "text",
-      "content": "## What This Part of the Course Covers\n\nPart 8 is a hands-on tour through the most useful MCP servers available today:\n\n- **8-2:** Installing your first MCP server — the filesystem server\n- **8-3:** MCP configuration — `settings.json` structure for MCP servers\n- **8-4:** GitHub MCP — issues, PRs, code search\n- **8-5:** Gmail + Google Calendar\n- **8-6:** Playwright browser automation\n- **8-7:** Database MCP (SQLite)\n- **8-8:** Notion and productivity tools\n- **8-9:** Context7 — live documentation for any library\n- **8-10:** Slack and team communication\n- **8-11:** Building your own MCP server from scratch\n\nBy the end of Part 8, Claude will have access to your files, your GitHub, your email, your calendar, your browser, and a database — and you'll know how to add any other tool that has an MCP server."
+      "content": "## What This Part of the Course Covers\n\nPart 15 is a hands-on tour through the most important MCP servers — from reasoning tools to real browsers to your email inbox:\n\n**Architecture & setup:**\n- **8-2:** MCP Architecture — Client, Server, Transport (how the protocol works)\n- **8-3:** Installing Your First MCP Server (filesystem — the foundation)\n\n**Reasoning & productivity MCPs:**\n- **8-4:** context7 — Live documentation for any library, always current\n- **8-5:** sequential-thinking — Structured multi-step reasoning\n- **8-6:** The Self-Critique Pattern — Actor-Critic thinking MCP\n- **8-7:** task-master-ai — AI project management from Claude\n\n**Developer MCPs:**\n- **8-8:** GitHub MCP — Issues, PRs, and code search via chat\n- **8-9:** Filesystem MCP — Claude navigates your files\n- **8-10:** Browser / Playwright MCP — Claude controls a real browser\n\n**Productivity & office MCPs:**\n- **8-11:** Gmail MCP — Real inbox cleanup session\n- **8-12:** Google Drive & Calendar MCP — Workspace organisation\n- **8-13:** Database MCP — SQLite queries from Claude\n- **8-14:** Finding community MCP servers\n- **8-15:** Build a simple custom MCP server from scratch\n- **8-16:** Outlook MCP — Microsoft email inside Claude Code\n- **8-17:** Microsoft Teams MCP — Channels & meetings\n- **8-18:** Slack MCP — Channels, threads & messages\n- **8-19:** Notion MCP — Your knowledge base in Claude Code\n\n**Capstone stack:**\n- **8-20:** The Unified Office — Chaining MCPs across all your tools\n- **8-21:** Memory MCP — Giving Claude a persistent brain\n- **8-22:** The Complete MCP Stack — All 6 core tools in one real workflow\n\nBy the end of Part 15, Claude will have access to your files, your GitHub, your email, your calendar, your browser, a database, and persistent memory — and you'll know how to add any other tool that publishes an MCP server."
     },
     {
       "type": "callout",
@@ -126,5 +130,5 @@
     }
   ],
   "nextLesson": "8-2",
-  "prevLesson": "7-12"
+  "prevLesson": "20-8"
 }

@@ -1,7 +1,7 @@
 {
   "id": "21-11",
   "title": "Loop Efficiency & Cost Control",
-  "part": 20,
+  "part": 21,
   "estimatedMinutes": 40,
   "tags": ["loop-engineering", "advanced", "cost", "efficiency", "tokens"],
   "sections": [
@@ -20,7 +20,7 @@
     },
     {
       "type": "text",
-      "content": "## Cost Reduction Patterns\n\n**1. Summarise intermediate results**\nInstead of accumulating raw tool call results across iterations, summarise them:\n```\nAfter each batch of 5 tool calls:\n'Summarise everything learned so far in 3 bullet points.'\nDiscard the raw tool call history; continue with the summary.\n```\nThis resets context size while preserving the knowledge gained.\n\n**2. Front-load information**\nProvide all needed context upfront rather than discovering it through tool calls:\n```\nBefore starting: read CLAUDE.md, the project structure, and relevant files.\nProvide all of this as context in the initial prompt.\n```\nThis reduces discovery iterations that cost tokens without producing output.\n\n**3. Use smaller models for filtering passes**\nIf a loop has a 'filter' step (deciding what to process) and a 'process' step (doing the work), use a smaller, cheaper model for filtering and the main model only for processing:\n- Haiku 4.5 for classification/filtering: ~10× cheaper than Sonnet\n- Sonnet 4.6 for generation/analysis: full quality when it matters\n\n**4. Batch processing**\nProcess multiple items per iteration instead of one at a time:\n```\nProcess these 10 emails in this iteration: [batch of 10]\nClassify each as: urgent / informational / action-required\n```\nInstead of 10 separate iterations, 1 iteration produces 10 results.\n\n**5. Cache deterministic results**\nIf a loop calls the same lookup repeatedly (same search query, same file read), cache the result rather than re-running the tool call:\n```\nSave all search results to a temporary cache. Before running a search, \ncheck if the same query was already run and use the cached result.\n```"
+      "content": "## Cost Reduction Patterns\n\n**1. Summarise intermediate results**\nInstead of accumulating raw tool call results across iterations, summarise them:\n```\nAfter each batch of 5 tool calls:\n'Summarise everything learned so far in 3 bullet points.'\nDiscard the raw tool call history; continue with the summary.\n```\nThis resets context size while preserving the knowledge gained.\n\n**2. Front-load information**\nProvide all needed context upfront rather than discovering it through tool calls:\n```\nBefore starting: read CLAUDE.md, the project structure, and relevant files.\nProvide all of this as context in the initial prompt.\n```\nThis reduces discovery iterations that cost tokens without producing output.\n\n**3. Use smaller models for filtering passes**\nIf a loop has a 'filter' step (deciding what to process) and a 'process' step (doing the work), use a smaller, cheaper model for filtering and the main model only for processing:\n- Haiku 4.5 for classification/filtering: ~3× cheaper than Sonnet\n- Sonnet 4.6 for generation/analysis: full quality when it matters\n\n**4. Batch processing**\nProcess multiple items per iteration instead of one at a time:\n```\nProcess these 10 emails in this iteration: [batch of 10]\nClassify each as: urgent / informational / action-required\n```\nInstead of 10 separate iterations, 1 iteration produces 10 results.\n\n**5. Cache deterministic results**\nIf a loop calls the same lookup repeatedly (same search query, same file read), cache the result rather than re-running the tool call:\n```\nSave all search results to a temporary cache. Before running a search, \ncheck if the same query was already run and use the cached result.\n```"
     },
     {
       "type": "text",
@@ -70,7 +70,7 @@
         "Do the filtering with a rule-based system before involving any AI"
       ],
       "correct": 1,
-      "explanation": "Model tiering is one of the most effective cost strategies in AI systems. Classification and filtering are tasks where the performance gap between large and small models is small, but the cost gap is large — Haiku 4.5 is ~10-20× cheaper than Sonnet 4.6. Running 1,000 items through Haiku for filtering, then 100 relevant items through Sonnet for deep analysis, produces near-identical quality at a fraction of the cost of using Sonnet for all 1,000 items."
+      "explanation": "Model tiering is one of the most effective cost strategies in AI systems. Classification and filtering are tasks where the performance gap between large and small models is small, but the cost gap is large — Haiku 4.5 is ~3× cheaper than Sonnet 4.6 per token. Running 1,000 items through Haiku for filtering, then 100 relevant items through Sonnet for deep analysis, produces near-identical quality at a fraction of the cost of using Sonnet for all 1,000 items."
     },
     {
       "type": "callout",

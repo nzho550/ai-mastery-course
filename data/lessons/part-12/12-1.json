@@ -25,7 +25,7 @@
     },
     {
       "type": "text",
-      "content": "## The Tradeoffs\n\nLocal AI is not free lunch. Here's what you give up:\n\n**Quality gap.** The best local models available today (Phi-4, Llama 3.3, Mistral) are impressive — but they're not as capable as Claude Sonnet or GPT-4o for complex reasoning, long-context tasks, or nuanced writing. For many tasks this doesn't matter. For some tasks it does.\n\n**Hardware requirements.** Model size determines RAM needed. A 3B model needs about 3–4GB of RAM. A 7B model needs 6–8GB. A 70B model needs 64GB+ (usually a dedicated GPU). If your machine is older or has limited RAM, your options narrow to the smaller, less capable models.\n\n**Setup complexity.** Installing Ollama is easy (covered in the next lesson). But troubleshooting GPU acceleration, understanding quantization formats, or wiring a local model into your development tools takes more effort than signing up for Claude.ai.\n\n**No latest models.** Frontier models like Claude Opus and GPT-4 are not available locally. The open-source models released for local use typically lag behind the frontier by 6–12 months in capability."
+      "content": "## The Tradeoffs\n\nLocal AI is not free lunch. Here's what you give up:\n\n**Quality gap.** The best local models available today (Phi-4, Llama 4 Scout, Mistral Small 3) are impressive — but they're not as capable as Claude Sonnet 4.6 or GPT-5.x models for complex reasoning, long-context tasks, or nuanced writing. For many tasks this doesn't matter. For some tasks it does.\n\n**Hardware requirements.** Model size determines RAM needed. A 3B model needs about 3–4GB of RAM. A 7B model needs 6–8GB. A 70B model needs 64GB+ (usually a dedicated GPU). If your machine is older or has limited RAM, your options narrow to the smaller, less capable models.\n\n**Setup complexity.** Installing Ollama is easy (covered in the next lesson). But troubleshooting GPU acceleration, understanding quantization formats, or wiring a local model into your development tools takes more effort than signing up for Claude.ai.\n\n**No latest models.** Frontier models like Claude Opus and GPT-4 are not available locally. The open-source models released for local use typically lag behind the frontier by 6–12 months in capability."
     },
     {
       "type": "text",
@@ -34,7 +34,7 @@
     {
       "type": "callout",
       "variant": "tip",
-      "content": "**The sweet spot for local AI in 2025:** Code completion and explanation, summarizing your own documents, drafting emails about private matters, and running experiments without paying per token. For anything that requires genuine reasoning quality — architecture decisions, complex debugging, creative writing — cloud models still win."
+      "content": "**The sweet spot for local AI:** Code completion and explanation, summarizing your own documents, drafting emails about private matters, and running experiments without paying per token. For anything that requires genuine reasoning quality — architecture decisions, complex debugging, creative writing — cloud models still win."
     },
     {
       "type": "text",
@@ -101,5 +101,5 @@
     }
   ],
   "nextLesson": "12-2",
-  "prevLesson": "11-9"
+  "prevLesson": "11-10"
 }

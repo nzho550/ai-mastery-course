@@ -1,0 +1,103 @@
+{
+  "id": "2-17",
+  "title": "Grok & DeepSeek — The Free AI Powerhouses You're Missing",
+  "part": 2,
+  "estimatedMinutes": 55,
+  "tags": ["tools", "beginner", "grok", "deepseek", "xai", "open-source", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy now you've used Claude, ChatGPT, and Gemini. But the AI landscape in 2026 includes two more tools that millions of people rely on daily — and both are completely free to start. Grok (from Elon Musk's xAI company) and DeepSeek (from a Chinese AI lab) each have genuine strengths that the better-known tools don't. This lesson gets you set up on both, teaches you when each one wins, and shows you how to make real use of them."
+    },
+    {
+      "type": "text",
+      "content": "## Grok — xAI's Real-Time Intelligence Machine\n\nGrok is the conversational AI built by xAI, Elon Musk's AI company. It's available at **grok.com** and through dedicated iOS and Android apps — you don't need an X (Twitter) account to use it. The free tier gives generous access with some usage limits; heavier use comes through the SuperGrok subscription ($30/month) or the xAI API for developers.\n\n**What makes Grok different:**\n\n**1. Real-time X (Twitter) data.** Unlike every other AI chatbot that works from a static training cutoff, Grok can search live X posts and the open web in real time. If a news story broke an hour ago, Grok knows about it. This makes it uniquely powerful for social media monitoring, trend analysis, breaking news, and market sentiment.\n\n**2. Think Mode.** Grok has a reasoning mode called Think Mode — it pauses to work through problems step by step before answering, similar to Claude's Extended Thinking or OpenAI's o3. Activate it for hard math, logic puzzles, or multi-step analysis.\n\n**3. DeepSearch.** A research agent that analyses and synthesises multiple sources simultaneously, surfacing a cited summary rather than just a search result list. Think of it as a Perplexity-style research tool baked directly into the chatbot.\n\n**4. Massive 2 million token context window.** The largest consumer-facing context window in 2026. You can load enormous documents, entire codebases, or very long conversation histories without hitting limits.\n\n**5. Multi-agent architecture (Grok 4+).** Four specialised agents — Grok (coordinator), Harper (research), Benjamin (logic and math), Lucas (contrarian analysis) — work in parallel and cross-verify before responding. This improves accuracy on complex tasks.\n\n**Free tier access:** Go to grok.com, create an account, and start immediately. Rate limits apply but are generous for casual use."
+    },
+    {
+      "type": "text",
+      "content": "## DeepSeek — The Open-Weight Model That Shocked the World\n\nDeepSeek is a Chinese AI research company that released a series of open-weight language models that compete with the best closed models from OpenAI and Anthropic — at a fraction of the cost.\n\n**Why it matters:** When DeepSeek R1 was released in early 2025, it matched or exceeded GPT-4o on reasoning benchmarks while being open-source and free. This caused significant discussion in the AI industry because it demonstrated that frontier-level AI doesn't require OpenAI-level compute budgets.\n\n**The DeepSeek family:**\n\n**DeepSeek Chat (V4, 2026)** — The general-purpose conversational model. Free at chat.deepseek.com with no usage limits. 1 million token context window. Scores 81% on SWE-bench Verified (a coding benchmark). API pricing: $0.30 per million input tokens, $0.50 per million output tokens — one of the cheapest frontier-quality APIs available.\n\n**DeepSeek R1** — The dedicated reasoning model for complex math, science, and multi-step logic. Unlike OpenAI's o3 which hides its reasoning, DeepSeek R1 streams its chain of thought inline so you can see how it's thinking. Particularly strong on competitive programming, physics problems, and mathematical proofs.\n\n**What makes DeepSeek unique:**\n\n- **Open-weight:** The model weights are publicly available. Developers can download and self-host DeepSeek models, unlike Claude or GPT which are only available via API\n- **Free with no limits:** chat.deepseek.com has no daily message cap on the free tier\n- **Transparent reasoning:** DeepSeek R1 shows its thinking process inline, which is excellent for learning and debugging complex reasoning chains\n- **API cost:** When you need to build on top of a reasoning-capable model, DeepSeek's API is dramatically cheaper than alternatives\n\n**Practical caution:** As a Chinese company's product, DeepSeek has different content policies and data handling practices than US-based providers. It's less appropriate for sensitive professional or personal information. Use it for technical, creative, and general-purpose tasks where data sensitivity is not a concern."
+    },
+    {
+      "type": "text",
+      "content": "## The Complete AI Chatbot Landscape: When to Use What\n\n| Tool | Best For | Free Tier | Unique Strength |\n|------|----------|-----------|------------------|\n| **Claude** (Anthropic) | Writing, analysis, coding, long documents | Yes | Best writing quality, longest reliable context, safest |\n| **ChatGPT** (OpenAI) | General tasks, image gen (DALL-E), plugins | Yes | Largest ecosystem, best tool integrations, voice mode |\n| **Gemini** (Google) | Google Workspace integration, real-time search | Yes | Best integration with Gmail/Docs/Sheets, Google Search |\n| **Grok** (xAI) | Real-time trends, social media, news, long docs | Yes | Only AI with live X/Twitter data, 2M token context |\n| **DeepSeek** | Math, reasoning, cost-sensitive API use | Yes (no limits) | Open weights, transparent reasoning, ultra-cheap API |\n| **Perplexity** | Research with citations | Yes | Best for cited web research, academic sources |\n\n**The practical rule:** Pick the tool that wins for your specific task. A social media manager monitoring brand mentions reaches for Grok. A developer needing a reasoning-capable API at minimal cost reaches for DeepSeek R1. A writer drafting a long document reaches for Claude. A Google Workspace user reaches for Gemini.\n\n**Don't marry one model.** The professionals getting the most out of AI in 2026 switch between tools throughout their day, routing each task to the best available option."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Data privacy with DeepSeek:** DeepSeek is a Chinese company subject to Chinese data laws. Do not use it for anything involving personal information, confidential business data, client details, or sensitive research. It's excellent for public-domain tasks: math problems, general coding, creative writing with no sensitive content, and learning new concepts."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Set Up Grok and Try DeepSearch",
+      "content": "You'll get your Grok account working and use its signature DeepSearch feature for real research.\n\n**Step 1 — Create your Grok account.** Go to grok.com in a browser. Sign up with your email or Google account. Note: you do not need an X (Twitter) account.\n\n**Step 2 — Explore the interface.** Grok's chat interface looks similar to Claude or ChatGPT. Notice the buttons at the bottom of the input field — these include modes like DeepSearch and Think.\n\n**Step 3 — Test Grok's real-time knowledge.** Ask something time-sensitive:\n```\nWhat's the most discussed AI news from the past 48 hours?\n```\nCompare this to what Claude or ChatGPT says about recent AI news. Grok's answer will be more current because it accesses live X data.\n\n**Step 4 — Use DeepSearch for research.** Click the DeepSearch button (or type your prompt and toggle DeepSearch on). Ask:\n```\nWhat are the top 5 AI tools for [your industry/job role] in 2026?\nInclude recent community discussions and tool comparisons.\n```\nNote how DeepSearch provides a synthesised, cited response rather than just a list of links.\n\n**Step 5 — Test the 2M token context.** If you have a very long document (a book PDF, a large codebase, or a detailed report), try uploading it. Grok's 2 million token context means it can handle documents that would hit the limit on other tools.\n\n**Step 6 — Compare a task you've done on Claude.** Pick a writing or analysis task you've done before and try it on Grok. Note the differences in tone, depth, and quality.\n\n**Outcome:** Active Grok account with a first impression of how it differs from your existing AI tools."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop B — DeepSeek Setup and Reasoning Test",
+      "content": "You'll set up DeepSeek and experience its transparent reasoning chain — one of the most educational features in any AI tool.\n\n**Step 1 — Go to chat.deepseek.com.** Create a free account. The free tier has no daily message limits as of 2026.\n\n**Step 2 — Test DeepSeek Chat on a general task.** Start with something you'd normally use Claude or ChatGPT for:\n```\nExplain the key differences between SQL and NoSQL databases,\nthen recommend which I should learn first as a beginner.\n```\nEvaluate the response: is it comparable in quality to what you'd expect from Claude or ChatGPT?\n\n**Step 3 — Switch to DeepSeek R1 (the reasoning model).** In the interface, look for a model selector and choose the R1 model. Ask it a genuinely hard problem:\n```\nI need to plan a vegetable garden that maximises yield in a\n10x6 foot space with partial shade (4 hours sun/day).\nI want to grow tomatoes, lettuce, spinach, and beans.\nGive me a detailed planting layout with spacing, companion\nplanting considerations, and a season calendar.\n```\n\n**Step 4 — Watch the reasoning chain.** Unlike other AI tools, DeepSeek R1 shows its thinking process in real time before it answers. You'll see it consider shade requirements, companion planting conflicts, spacing mathematics, and seasonal timing — then synthesise a plan. This transparency is unique and educational.\n\n**Step 5 — Test a math or logic problem.** Try:\n```\nA train leaves City A at 8:00am going 60mph. A second train\nleaves City B (240 miles away) at 9:00am going 80mph toward\nCity A. At what time do they meet, and how far from City A?\n```\nWatch R1 work through the algebra step by step before presenting the answer.\n\n**Outcome:** Active DeepSeek account; understanding of why transparent reasoning chains are valuable for complex problem-solving and verification."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Head-to-Head Comparison Across 5 AI Tools",
+      "content": "This workshop builds your intuition for which AI wins on which tasks by running the same prompt across multiple tools.\n\n**Choose one of these test prompts based on your interests:**\n\n**Option 1 — Writing task:**\n```\nWrite a compelling LinkedIn post about the importance of\ncontinuous learning in a rapidly changing industry. Keep it\nunder 200 words, conversational tone, end with a question.\n```\n\n**Option 2 — Analysis task:**\n```\nI'm thinking about starting a side business offering AI\nconsulting for small businesses. What are the 5 biggest\nrisks I should think through before committing?\n```\n\n**Option 3 — Research task:**\n```\nWhat are the most effective evidence-based strategies for\nbreaking bad habits, according to behavioural science?\n```\n\n**Step 1 — Run your chosen prompt on Claude.ai** (free). Save the response.\n\n**Step 2 — Run the same prompt on ChatGPT.** Save the response.\n\n**Step 3 — Run it on Grok.** Save the response.\n\n**Step 4 — Run it on DeepSeek Chat.** Save the response.\n\n**Step 5 — Analyse the differences.** For each response, assess:\n- Depth and thoroughness\n- Tone and readability\n- Practical usefulness\n- Any unique insights one tool had that others missed\n- Speed of response\n\n**Step 6 — Write your own 3-sentence verdict:** Which tool won for this specific task? Which was second? Was any response clearly worse than the others?\n\n**Outcome:** A concrete, personalised understanding of how these tools differ — more useful than any comparison table."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop D — Use Grok's Think Mode for a Hard Problem",
+      "content": "Grok's Think Mode activates deeper reasoning, similar to Claude's Extended Thinking. This workshop gives you hands-on experience with when it helps.\n\n**Step 1 — Open Grok.** Find the Think Mode toggle in the interface (usually a small button near the input field or in a settings area).\n\n**Step 2 — Run a prompt WITHOUT Think Mode first:**\n```\nI'm the manager of a 12-person customer support team.\nWe're struggling with:\n1. Response times averaging 8 hours (target is 2 hours)\n2. Quality inconsistency between team members\n3. Agent burnout — 3 people left this quarter\n\nGive me a prioritised improvement plan.\n```\nNote the response.\n\n**Step 3 — Enable Think Mode and run the same prompt.** Compare:\n- Does Think Mode produce a more structured or nuanced response?\n- Does it consider more angles (e.g., why agents are burning out, not just how to fill gaps)?\n- Does it suggest anything the standard mode missed?\n\n**Step 4 — Test Think Mode on a logic puzzle:**\n```\nThere are three boxes: one contains only apples, one contains\nonly oranges, and one contains both. All three boxes are\nmislabelled. You can reach into one box and pull out one\nfruit (without looking inside first). Which box do you choose\nand what does it tell you? Explain your reasoning.\n```\n\n**Step 5 — Reflect on the cost-benefit.** Think Mode responses take longer. For the management problem, was the extra depth worth the wait? For the logic puzzle, was it necessary or would the standard mode have solved it?\n\n**Outcome:** Practical understanding of when reasoning modes add genuine value versus when standard mode is sufficient."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop E — Build a Personal AI Tool Routing Guide",
+      "content": "You'll create a personalised reference guide for which AI tool to use for which tasks in your life and work.\n\n**Step 1 — List 10 things you regularly use AI for.** Examples:\n- Draft professional emails\n- Research competitors\n- Debug code\n- Brainstorm ideas\n- Summarise long documents\n- Track news in my industry\n- Plan projects\n- Generate images\n- Prepare for meetings\n- Analyse data from spreadsheets\n\n**Step 2 — For each task, assign a primary and backup tool.** Use this framework:\n- Real-time info needed → Grok or Perplexity\n- Deep writing or long documents → Claude\n- Google Workspace integration → Gemini\n- Hard math or transparent reasoning → DeepSeek R1\n- Image generation → ChatGPT (GPT-4o image gen, free) or Midjourney (best quality)\n- General conversation / broad tool access → ChatGPT\n- Cost-sensitive API use → DeepSeek\n\n**Step 3 — Prompt Claude to format your routing guide as a table:**\n```\nI use AI for these tasks: [paste your list]\n\nBased on these tool strengths:\n- Grok: real-time X data, 2M context, Think Mode\n- DeepSeek: transparent reasoning, free/unlimited, cheap API\n- Claude: writing quality, long documents, safety\n- ChatGPT: ecosystem, plugins, image generation\n- Gemini: Google Workspace, real-time search\n\nCreate a personal AI routing guide as a clean table with:\nTask | Primary Tool | Why | Backup Tool\n```\n\n**Step 4 — Save this table** somewhere you can access it (a note in Notion, a screenshot, a bookmarked page). When you're starting a new task, consult it before defaulting to whatever AI you opened last.\n\n**Outcome:** A practical, personalised tool routing guide that makes you measurably more efficient by matching tasks to the best available tool."
+    },
+    {
+      "type": "quiz",
+      "question": "You're a social media manager and need to understand what people are saying about your brand on X (Twitter) right now — conversations from the past 12 hours. Which AI tool is uniquely suited to this task?",
+      "options": [
+        "Claude — it has the best long-form analysis capabilities",
+        "Grok — it's the only major AI chatbot with access to live X (Twitter) data and real-time web information",
+        "DeepSeek R1 — its reasoning model is best for analytical tasks",
+        "ChatGPT — it has the largest plugin ecosystem including social media tools"
+      ],
+      "correct": 1,
+      "explanation": "Grok is the correct answer because it's the only major AI chatbot with native access to live X (Twitter) data. All other AI chatbots (Claude, ChatGPT, Gemini, DeepSeek) work from a static training cutoff and cannot access real-time social media posts. Grok was specifically designed with X integration as a core feature, making it uniquely suited for social media monitoring, brand sentiment, and real-time trend analysis. For anything requiring current information from the last few hours, Grok is the tool to reach for first."
+    },
+    {
+      "type": "quiz",
+      "question": "A developer needs to call an AI API thousands of times per day for a reasoning-heavy task (complex classification decisions). Cost is a major constraint. Which approach gives the best balance of reasoning capability and price efficiency?",
+      "options": [
+        "Claude Opus — the most capable model available",
+        "ChatGPT Plus subscription — best value for individuals",
+        "DeepSeek R1 via API — frontier-quality reasoning at $0.30 per million input tokens, dramatically cheaper than comparable closed-model APIs",
+        "Local Ollama models — completely free, no API costs"
+      ],
+      "correct": 2,
+      "explanation": "DeepSeek R1 via API is the correct answer for cost-sensitive, high-volume reasoning tasks. At $0.30 per million input tokens and $0.50 per million output tokens, it's one of the cheapest frontier-quality reasoning APIs available — typically 5-10x cheaper than equivalent OpenAI or Anthropic models for the same capability level. Option A (Opus) would be far more expensive. Option B (ChatGPT Plus) is a consumer subscription not suitable for API-level scaling. Option D (local Ollama) eliminates API costs but requires GPU hardware and typically produces lower quality on complex reasoning tasks. DeepSeek R1 is specifically designed for scenarios where you need consistent, high-quality reasoning at volume."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the most important thing to know about using DeepSeek for professional work?",
+      "options": [
+        "It requires a paid subscription for most features",
+        "It only works in Chinese language",
+        "As a Chinese company product, it has different data privacy practices — avoid using it for confidential business data, personal information, or sensitive research",
+        "It's only useful for coding tasks, not general professional work"
+      ],
+      "correct": 2,
+      "explanation": "The correct answer is C. DeepSeek is an excellent AI tool for general and technical tasks, but as a Chinese company subject to Chinese data laws, it has different data handling practices than US-based providers like Anthropic, OpenAI, and Google. The appropriate guideline is to use DeepSeek freely for public-domain tasks (math, coding practice, creative writing, learning new concepts) but avoid inputting confidential business data, personal information, client details, or sensitive research. Option A is incorrect — DeepSeek's chat interface is genuinely free with no message limits. Option B is wrong — DeepSeek fully supports English and many other languages. Option D is too narrow — DeepSeek is a strong general-purpose AI, not coding-only."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-17.** You now have working accounts on two of the most important AI tools that most people overlook: Grok for real-time intelligence and DeepSeek for reasoning-capable tasks at minimal cost. Combined with Claude, ChatGPT, and Gemini from earlier lessons, you now have a complete toolkit covering every major strength in the 2026 AI landscape. The key skill — routing the right task to the right tool — will save you hours every week."
+    }
+  ],
+  "nextLesson": "3-1",
+  "prevLesson": "2-16"
+}

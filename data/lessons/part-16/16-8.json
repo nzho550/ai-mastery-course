@@ -1,0 +1,80 @@
+{
+  "id": "16-8",
+  "title": "AI for Marketing & Content Teams",
+  "part": 16,
+  "estimatedMinutes": 55,
+  "tags": ["document-work", "intermediate", "marketing", "content", "copywriting", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nMarketing and content creation is one of the highest-ROI applications of AI in the workplace. Tasks that used to take a day — writing a blog post, drafting a campaign email sequence, creating social media content for a month — can now be produced in an afternoon, with AI handling the heavy lifting of drafts while you handle strategy, editing, and brand voice.\n\nBy the end of this lesson you'll know the full AI-assisted content creation pipeline, how to maintain brand voice while using AI, which tools handle which tasks, and how to work faster without the output feeling generic or off-brand."
+    },
+    {
+      "type": "text",
+      "content": "## The AI Marketing Toolkit\n\n**Writing & Copywriting:**\n- **Claude** — best for long-form content, nuanced brand voice, and complex copy that requires reasoning\n- **ChatGPT** — strong for variation generation and brainstorming\n- **Jasper** — marketing-specific AI with brand voice training (paid)\n- **Copy.ai** — templates for specific marketing formats (free tier)\n- **Notion AI** — writing directly inside Notion (if you use it)\n\n**Social Media:**\n- **Buffer AI** — write and schedule posts\n- **Hootsuite OwlyWriter** — social content at scale\n- **Predis.ai** — social post generation with AI images\n\n**SEO & Research:**\n- **Semrush AI** — keyword research and content briefs\n- **Surfer SEO** — AI-assisted content optimisation\n- **Perplexity** — research with citations for article sourcing\n\n**Visual Content:**\n- **ChatGPT (GPT-4o image gen)** — free tier, excellent instruction-following and text rendering\n- **Canva AI** — design with AI text-to-image (free tier)\n- **Adobe Firefly** — integrated into Creative Cloud, commercially safe\n- **Midjourney** — highest aesthetic quality (subscription; no longer requires Discord — use midjourney.com directly)\n\n**Video & Presentation:**\n- **Gamma** — AI-generated presentations from a brief\n- **Descript** — AI-assisted video editing and transcription\n- **HeyGen** — AI avatars for video content\n\n**The core principle:** AI handles the first draft and variations. You handle strategy, brand voice calibration, and final editing."
+    },
+    {
+      "type": "text",
+      "content": "## Maintaining Brand Voice with AI\n\nThe biggest concern with AI-generated content is that it sounds generic. Here's how to prevent that:\n\n**Method 1 — The Style Guide Prompt**\nBefore every AI writing session, paste a brief style guide:\n```\nBrand voice rules for [Company name]:\n- Tone: [e.g., friendly but authoritative, never stuffy]\n- Vocabulary: Use [preferred words], avoid [words that feel off-brand]\n- Sentence length: [e.g., short punchy sentences, never more than 20 words]\n- What we never say: [clichés, overused phrases, jargon to avoid]\n- We always: [key messages, values, phrases we use consistently]\n```\n\n**Method 2 — Few-Shot Examples**\nProvide 3-5 examples of existing content you're proud of before asking Claude to write something new. Say: 'Write in the same voice as these examples:' then paste them. Claude will match the pattern.\n\n**Method 3 — Claude Project for Marketing**\nSet up a dedicated Claude Project (from lesson 2-14) with:\n- Your brand style guide as a file\n- 5-10 example pieces of high-quality content from your brand\n- Instructions for tone, vocabulary, and what to avoid\n\nThis means every marketing session automatically has the correct voice without re-uploading each time.\n\n**Method 4 — Critique and Iterate**\nAfter the first draft, paste it back to Claude and ask: 'This doesn't quite sound like us. Our brand voice is more [describe the gap]. Rewrite it, specifically making it [more specific instruction].'\n\n**The quality bar:** Good AI-assisted content should require editing, not rewriting. If you're rewriting everything, your prompts need to be more specific."
+    },
+    {
+      "type": "text",
+      "content": "## The Content Pipeline: A Week of Content in One Session\n\nHere's a repeatable workflow for producing a full week of marketing content in 90 minutes:\n\n**Hour 1 — Strategy & Brief**\n- Choose 3-5 topics (use AI to brainstorm: 'Give me 10 content ideas for [industry] that would resonate with [audience] in the current market')\n- For each topic, generate a brief: headline, angle, key messages, CTA\n\n**Hour 2 — Draft Production**\n- Long-form: Blog post or LinkedIn article draft (~800 words) — 10 min\n- Email campaign: 3-email sequence with subject lines — 15 min\n- Social media: 5 LinkedIn posts, 5 Twitter/X posts, 3 Instagram captions — 15 min\n- Ad copy: 3-5 variations of headline + body for paid ads — 10 min\n\n**Remaining time — Edit & Refine**\n- Read everything out loud (the fastest way to spot AI-sounding text)\n- Add specific details, statistics, examples, and personal observations\n- Run the final through Grammarly or ask Claude to do a final tightening pass\n- Format for each platform\n\n**Tools used:** Claude for drafts, Canva AI for visuals, Buffer/Hootsuite for scheduling"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Build a Content Brief with AI",
+      "content": "A strong content brief is the foundation of good AI-assisted content. You'll build one from scratch.\n\n**Step 1 — Choose a real topic** for your business, project, or a practice scenario. The topic should be something you'd genuinely want to write about.\n\n**Step 2 — Open Claude.ai and use this prompt structure:**\n```\nI need to create a content brief for a [blog post / LinkedIn article / email / social post] about [topic].\n\nAudience: [describe your target reader — who they are, what they care about, their knowledge level]\nGoal: [what you want the reader to do or think after reading]\nCompetition: [who else writes about this topic and what angle they usually take]\nUnique angle: [what perspective can only you bring that others don't cover]\nKey messages (3-5 bullet points): [what must the content convey?]\nCall to action: [what should the reader do next?]\n\nGenerate a detailed content brief based on these inputs.\n```\n\n**Step 3 — Review and refine the brief.** Ask Claude to adjust anything that doesn't fit.\n\n**Step 4 — Use the brief as the input for a first draft.** Say: 'Using this brief, write a [800-word blog post / 200-word LinkedIn post / 3-email sequence]. Apply this voice: [paste 2-3 sentences describing your tone]'\n\n**Step 5 — Evaluate:** Does the draft follow the brief? What's missing? What's generic?\n\n**Outcome:** A reusable briefing process that produces better AI drafts because the instructions are more specific."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop B — A Month of Social Posts in One Hour",
+      "content": "You'll generate a month of social media content for one platform of your choice.\n\n**Step 1 — Choose your platform and topic area.** Pick the platform you actually use (LinkedIn, Twitter/X, Instagram, Facebook) and 2-3 content themes you want to post about this month.\n\n**Step 2 — Paste this prompt into Claude:**\n```\nI need 20 social media posts for [platform] spread across [month]. My content themes are:\n- Theme 1: [e.g., AI productivity tips]\n- Theme 2: [e.g., lessons from my work / industry insights]\n- Theme 3: [e.g., behind-the-scenes / personal perspective]\n\nVoice: [describe your tone — e.g., professional but conversational, practical not theoretical, uses short punchy sentences]\nAudience: [who follows you — their role, interests, level]\nAvoid: [clichés, topics to stay away from, phrases you hate]\n\nFor each post, include:\n- The post text (platform-appropriate length)\n- 3-5 relevant hashtags\n- A suggested image concept (I'll create the images separately)\n\nGenerate all 20 posts.\n```\n\n**Step 3 — Review the output.** Rate each post: Keep / Edit / Replace.\n\n**Step 4 — Edit the 'Keep' posts** — add specific details, data points, or personal observations that only you could add. These make the difference between generic AI content and content that sounds like you.\n\n**Step 5 — For 'Replace' posts**, give Claude specific feedback: 'Post 5 feels generic. Rewrite it with a more contrarian take — I think [your actual opinion on the topic].'\n\n**Step 6 — Schedule the final batch** using Buffer, Hootsuite, or your preferred scheduling tool.\n\n**Outcome:** A full month of planned content ready to schedule in about an hour."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop C — Email Campaign Sequence",
+      "content": "You'll create a 3-email marketing sequence for a real campaign.\n\n**Step 1 — Define your campaign.** Choose:\n- A product, service, or event you want to promote (real or hypothetical)\n- The audience segment receiving the emails\n- The goal (sign-ups, purchases, registrations, awareness)\n\n**Step 2 — Prompt Claude:**\n```\nWrite a 3-email marketing sequence for the following campaign:\n\nProduct/Service: [describe what you're promoting]\nAudience: [who are they, what do they already know about you]\nGoal: [what should each email achieve?]\nTone: [describe your brand voice]\n\nEmail 1 (sent immediately): [goal — e.g., introduce the offer, build curiosity]\nEmail 2 (sent 3 days later): [goal — e.g., address objections, provide proof]\nEmail 3 (sent 2 days after that): [goal — e.g., urgency, final CTA]\n\nFor each email, provide:\n- Subject line (and 2 A/B test variations)\n- Preview text (50 characters)\n- Email body (200-300 words)\n- Call to action text and where it should link\n```\n\n**Step 3 — A/B test the subject lines** by asking Claude: 'Now write 3 more subject line variations for each email. Make each one take a different emotional angle: one curiosity, one fear of missing out, one direct benefit.'\n\n**Step 4 — Critique the sequence.** Ask: 'Review this sequence critically. Where does it lose momentum? What objections does it fail to address? What would make a reader stop reading?'\n\n**Step 5 — Revise based on the critique.**\n\n**Outcome:** A full email campaign ready for your ESP (email service provider), plus A/B test variants."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop D — SEO-Optimised Blog Post",
+      "content": "You'll write a full SEO-optimised blog post using AI at each stage of the process.\n\n**Step 1 — Keyword research with AI (free method):**\nAsk Claude or Perplexity: 'What are the 10 most searched questions people ask about [your topic]? Include long-tail variations and phrases someone would type when looking for this information.'\n\n**Step 2 — Choose your target keyword** — the phrase you want this post to rank for. Pick one that is:\n- Specific enough that you can answer it fully in one post\n- Relevant to your audience\n- Used naturally in how people actually search\n\n**Step 3 — Generate the article outline:**\n```\nCreate an SEO-optimised blog post outline for the keyword: '[target keyword]'\n\nRequirements:\n- H1 title (include the keyword naturally)\n- Introduction (hook + what the reader will learn)\n- 4-6 H2 sections covering the topic comprehensively\n- Each H2 should answer a specific question the reader has\n- FAQ section at the end (good for featured snippets)\n- Conclusion with CTA\n- Target length: 1,200 words\n- Audience: [describe who will be reading this]\n```\n\n**Step 4 — Write the first draft** using the outline. Ask Claude to write each section separately if the full article is too long for one prompt.\n\n**Step 5 — Optimise:** Ask Claude: 'Review this article for SEO. Does it naturally use the target keyword and related terms? Are the headings clear and descriptive? Is the introduction strong enough to reduce bounce rate? Suggest specific improvements.'\n\n**Step 6 — Add your unique value:** Before publishing, add:\n- A specific example from your experience\n- A data point or statistic from a current source\n- Your genuine opinion on a debated point\n\n**Outcome:** A publishable blog post with a clear SEO strategy — created in 45-60 minutes instead of a full day."
+    },
+    {
+      "type": "quiz",
+      "question": "You produce AI-drafted social media content for your company and your manager says it 'doesn't sound like us.' What is the most effective fix?",
+      "options": [
+        "Use a more expensive AI model",
+        "Create a Claude Project or Custom GPT with your brand style guide, 5-10 example posts you're proud of, and specific instructions about tone, vocabulary, and phrases to avoid — then regenerate everything from within that configured context",
+        "Ask the AI to 'sound more human'",
+        "Write all the content manually to avoid AI voice problems"
+      ],
+      "correct": 1,
+      "explanation": "Option B (custom AI configuration with brand context) is the systematic fix. Uploading real examples of good content alongside a style guide gives the AI specific pattern-matching material — not vague instructions. Asking it to 'sound more human' (C) is too vague to be effective. A more expensive model (A) doesn't fix the problem if the instructions are vague. Writing manually (D) defeats the productivity advantage. The root cause of generic AI content is always insufficient specificity in instructions."
+    },
+    {
+      "type": "quiz",
+      "question": "Which task in the content pipeline benefits MOST from AI assistance, and which still requires significant human input?",
+      "options": [
+        "AI is best at strategy; humans are best at execution",
+        "AI is best at first drafts and variations; humans must add specific data, personal examples, genuine opinions, and brand voice calibration that only insiders can provide",
+        "AI handles everything equally well; human review is just for errors",
+        "AI is best at SEO; humans are best at social media"
+      ],
+      "correct": 1,
+      "explanation": "Option B captures the correct division of labour. AI excels at producing volume (many drafts, variations, and formats quickly) but lacks the insider knowledge, genuine experience, and real opinions that make content trustworthy and distinctive. The specific data point from your own company's results, the anecdote from a real client interaction, the contrarian take based on your actual experience — these are what transform generic AI content into content worth reading. AI handles the structure and volume; you handle the substance and voice."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-8.** You now have a complete AI marketing toolkit: the content pipeline, brand voice maintenance techniques, and practical workflows for social media, email campaigns, and SEO content. The key shift in mindset: stop thinking of AI as a replacement for your marketing skills and start thinking of it as a production machine — you supply the strategy and judgment, it supplies the speed."
+    }
+  ],
+  "nextLesson": "16-9",
+  "prevLesson": "16-7"
+}

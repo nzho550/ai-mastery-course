@@ -35,7 +35,7 @@
     },
     {
       "type": "text",
-      "content": "## Setting the Model\n\nThe `model` key accepts a Claude model ID. The current production models as of mid-2025:\n\n- `claude-opus-4-5` — most capable, higher cost, best for complex reasoning tasks\n- `claude-sonnet-4-6` — balanced capability and speed, recommended for most development work\n- `claude-haiku-4-5` — fastest and most economical, great for simple tasks and high-volume operations\n\nFor day-to-day development work, Sonnet is usually the best balance. For complex architecture decisions or difficult debugging, try Opus. For repetitive tasks (generating boilerplate, summarizing many files), Haiku keeps costs low.\n\nYou can override the model mid-session with the `/model` command in the Claude Code prompt."
+      "content": "## Setting the Model\n\nThe `model` key accepts a Claude model ID. The current production models as of 2026:\n\n- `claude-fable-5` — top tier (Mythos class), 1M context window, 128K output; best for the most demanding multi-step tasks; $10/$50 per 1M tokens\n- `claude-opus-4-8` — flagship workhorse, 84% SWE-bench Verified, adaptive thinking with effort controls; $5/$25 per 1M tokens\n- `claude-sonnet-4-6` — best value, 79.6% SWE-bench Verified, recommended for most development work; $3/$15 per 1M tokens\n- `claude-haiku-4-5-20251001` — fastest (97 tokens/sec) and most economical; $1/$5 per 1M tokens\n\nFor day-to-day development work, Sonnet is usually the best balance. For complex architecture decisions or difficult debugging, Opus 4.8 is the go-to choice. Reserve Fable 5 for the most demanding long-context or reasoning-heavy tasks. For repetitive tasks (generating boilerplate, summarising many files), Haiku keeps costs very low.\n\nYou can override the model mid-session with the `/model` command in the Claude Code prompt."
     },
     {
       "type": "text",
@@ -50,6 +50,10 @@
       "type": "callout",
       "variant": "info",
       "content": "**Where to get your API key:** Log in to console.anthropic.com → click your profile → API Keys → Create Key. Copy the key immediately — it's only shown once. Store it in a password manager, not in a text file."
+    },
+    {
+      "type": "text",
+      "content": "## Claude Code's Expanded Platform (2026)\n\nClaude Code has evolved well beyond a CLI with hooks. These features significantly expand what's possible:\n\n**`/rewind` — Resume from before `/clear`**\nIf you clear a session but wish you hadn't, `/rewind` returns to the conversation state before the clear. Essential for recovering from accidental clears.\n\n**`/effort xhigh` — Max reasoning effort for Opus 4.8**\nWhen working on genuinely difficult problems (complex architecture, hard bugs, security audits), use `/effort xhigh` before your prompt to engage Opus 4.8's maximum reasoning capacity. Slower but significantly more thorough.\n\n**Auto mode — Intelligent permission handling**\nIn research preview: Claude Code handles permission prompts automatically for most routine actions. Hard deny rules block specific actions regardless. Reduces the friction of interactive agentic sessions while maintaining safety.\n\n**Managed Agents — Scheduled recurring tasks**\nIn public beta: create agents that run on a schedule (cron-style) with vault-stored environment variables. No server infrastructure needed. Example: a daily code quality scan that runs at 2am, posts results to Slack. Access via `claude agents create`.\n\n**Artifacts — Shareable live outputs**\nSession work (data visualisations, analysis, reports) can be published as shareable live web pages with automatic version history. Teams and clients can view outputs without running Claude Code themselves.\n\n**`/ultrareview` — Fleet-based code review**\nIn research preview: launches a fleet of cloud-based agents that systematically hunt bugs across your codebase. Reports back to your CLI. Particularly useful before major releases or after significant refactors.\n\n**`claude mcp login/logout` — Authenticate from shell**\nOAuth-based MCP server authentication directly from the command line — no manual browser flow for MCP servers that support it.\n\n**Windows: Native PowerShell**\nOn Windows, Claude Code now defaults to PowerShell — Git Bash is no longer required. This removes a common setup barrier for Windows users."
     },
     {
       "type": "workshop",
@@ -108,9 +112,9 @@
     {
       "type": "callout",
       "variant": "success",
-      "content": "**You've completed lesson 7-12 and all of Part 7.** You now have a production-ready Claude Code setup: CLAUDE.md for context, custom commands for your workflows, hooks for automation, permissions for safety, and settings configured for your preferred model. Part 8 extends Claude Code further with MCP servers — connecting it to Gmail, GitHub, your browser, and more."
+      "content": "**You've completed lesson 7-12 and all of Part 7.** You now have a production-ready Claude Code setup: CLAUDE.md for context, custom commands for your workflows, hooks for automation, permissions for safety, and settings configured for your preferred model (including the new four-tier lineup with Fable 5 at the top). You also know the 2026 platform expansions — Managed Agents for scheduled tasks, Artifacts for shareable outputs, /rewind for session recovery, and /effort xhigh for maximum reasoning. Part 8 extends Claude Code further with MCP servers — connecting it to Gmail, GitHub, your browser, and more."
     }
   ],
-  "nextLesson": "8-1",
+  "nextLesson": "7-13",
   "prevLesson": "7-11"
 }

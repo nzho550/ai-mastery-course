@@ -17,7 +17,7 @@
     },
     {
       "type": "text",
-      "content": "## Why Cost Engineering Matters\n\nAPI costs compound fast. A script you run 10 times as a learning exercise is free. The same script running 10,000 times per day as a production tool generates a real bill.\n\nThe good news: most of that bill is avoidable with the right techniques. The four you'll learn here can reduce costs by 10–50× without changing the quality of output on appropriate tasks.\n\n**The reference numbers — 10,000 calls × 1,000 input tokens each:**\n\n| Approach | Cost |\n|----------|------|\n| Always Opus | $150.00 |\n| Switched to Sonnet | $30.00 |\n| Model routing (80% simple → Haiku) | $8.64 |\n| Added prompt caching on large system prompt | $3.46 |\n| Non-real-time tasks moved to Batch API | $1.73 |\n\nSame 10,000 responses. 87× cheaper. No quality loss on the simple tasks."
+      "content": "## Why Cost Engineering Matters\n\nAPI costs compound fast. A script you run 10 times as a learning exercise is free. The same script running 10,000 times per day as a production tool generates a real bill.\n\nThe good news: most of that bill is avoidable with the right techniques. The four you'll learn here can reduce costs by 10–50× without changing the quality of output on appropriate tasks.\n\n**The reference numbers — 10,000 calls × 1,000 input tokens each:**\n\n| Approach | Cost |\n|----------|------|\n| Always Opus | $50.00 |\n| Switched to Sonnet | $30.00 |\n| Model routing (80% simple → Haiku) | $8.64 |\n| Added prompt caching on large system prompt | $3.46 |\n| Non-real-time tasks moved to Batch API | $1.73 |\n\nSame 10,000 responses. ~29× cheaper. No quality loss on the simple tasks."
     },
     {
       "type": "text",
@@ -35,7 +35,7 @@
     {
       "type": "callout",
       "variant": "tip",
-      "content": "**Rule of thumb:** If you cannot explain why a specific call needs Sonnet instead of Haiku, it probably doesn't. Haiku handles classification, extraction, yes/no decisions, and short factual questions extremely well at 4× lower cost."
+      "content": "**Rule of thumb:** If you cannot explain why a specific call needs Sonnet instead of Haiku, it probably doesn't. Haiku handles classification, extraction, yes/no decisions, and short factual questions extremely well at 3× lower cost."
     },
     {
       "type": "text",
@@ -61,7 +61,7 @@
     },
     {
       "type": "text",
-      "content": "For small batches like this demo, results arrive in seconds. For thousands of items, allow up to 24 hours."
+      "content": "For small batches like this demo, results arrive in seconds. For thousands of items, allow up to 24 hours.\n\n**Stacking bonus — Batch API + Prompt Caching:** These two techniques stack multiplicatively. Cached input tokens already cost 10% of normal; the Batch API then applies an additional 50% discount on top. The result: cached tokens in batch requests cost approximately 5% of standard input token prices — a 20× reduction on that portion of your bill. For applications with large repeated system prompts run in non-real-time batches, this combination is the highest-leverage cost reduction available."
     },
     {
       "type": "workshop",
@@ -71,7 +71,7 @@
     },
     {
       "type": "text",
-      "content": "## The Full Cost Picture\n\nApplied together, these techniques compound:\n\n| Approach | Cost per 10K calls |\n|----------|-------------------|\n| Always Opus, no optimization | $150.00 |\n| Switched to Sonnet | $30.00 |\n| Model routing (80% simple → Haiku) | $8.64 |\n| Added prompt caching on 5,000-token system prompt | $3.46 |\n| Non-real-time tasks moved to Batch API | $1.73 |\n\nSave your `cost-demo.py` or `summarize-v2.js` — they're reference implementations you'll return to every time you build something that calls the API at any real scale."
+      "content": "## The Full Cost Picture\n\nApplied together, these techniques compound:\n\n| Approach | Cost per 10K calls |\n|----------|-------------------|\n| Always Opus, no optimization | $50.00 |\n| Switched to Sonnet | $30.00 |\n| Model routing (80% simple → Haiku) | $8.64 |\n| Added prompt caching on 5,000-token system prompt | $3.46 |\n| Non-real-time tasks moved to Batch API | $1.73 |\n\nSave your `cost-demo.py` or `summarize-v2.js` — they're reference implementations you'll return to every time you build something that calls the API at any real scale."
     },
     {
       "type": "workshop",
@@ -127,6 +127,6 @@
       "content": "**You've completed lesson 11-9 and all of Part 11.** You've gone from zero API knowledge to building real tools, understanding token economics, and optimizing for cost. The summarizer you built is a template for any AI CLI tool. Part 12 takes a different direction: running AI entirely on your own machine with Ollama."
     }
   ],
-  "nextLesson": "12-1",
+  "nextLesson": "11-10",
   "prevLesson": "11-8"
 }

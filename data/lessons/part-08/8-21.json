@@ -1,0 +1,113 @@
+{
+  "id": "8-21",
+  "title": "Memory MCP — Giving Claude a Persistent Brain",
+  "part": 8,
+  "estimatedMinutes": 65,
+  "tags": ["mcp", "memory", "knowledge-graph", "persistent-memory", "claude-code", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nEvery Claude conversation starts fresh. When you close a session and open a new one, Claude remembers nothing from before — not your project context, not what you discussed, not the decisions you made. For one-off tasks, this is fine. For ongoing projects spanning days or weeks, it's a major friction point.\n\nThe **Memory MCP** (`@modelcontextprotocol/server-memory`) solves this by giving Claude a **persistent knowledge graph** — a structured store of entities, relationships, and facts that survives between sessions. By the end of this lesson you'll have Memory MCP configured, you'll understand how to read and write to it effectively, and you'll see how it transforms Claude from a stateless chatbot into a genuine long-term collaborator."
+    },
+    {
+      "type": "text",
+      "content": "## What Is a Knowledge Graph?\n\nA knowledge graph stores information as three things:\n\n**Entities** — named things in the world: people, projects, concepts, organisations, tools. Each entity has a type and a list of observations (facts) about it.\n\n**Relations** — connections between entities: 'Alex *works on* Project Falcon', 'Project Falcon *uses* React', 'React *is maintained by* Meta'.\n\n**Observations** — facts attached to entities: 'Alex prefers Python over JavaScript', 'Project Falcon is due March 15th', 'The API key for Project Falcon is stored in 1Password under Falcon-prod'.\n\nWhen Claude uses Memory MCP, it can:\n- **Write** new entities, relations, and observations after a productive conversation\n- **Read** existing memory to restore context at the start of a new session\n- **Search** the graph to find specific information\n- **Update** entities as facts change\n- **Delete** outdated information\n\nThis is fundamentally different from copying notes into a text file. A knowledge graph is queryable — Claude can ask 'who are all the people involved in Project Falcon?' or 'what do I know about React?' and get structured answers instantly."
+    },
+    {
+      "type": "text",
+      "content": "## Installation and Configuration\n\nThe Memory MCP server is maintained by the Anthropic team as part of the official MCP repository. It requires Node.js (which you have from earlier in the course).\n\n**Add to your global `settings.json`** (`C:\\Users\\YourName\\.claude\\settings.json`):"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"memory\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-memory\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Where is memory stored?** The Memory MCP stores its knowledge graph as a JSON file on your local machine — typically at `C:\\Users\\YourName\\AppData\\Local\\@modelcontextprotocol\\memory\\memory.json`. It's fully private: nothing is sent to any server. You can inspect, back up, or edit this file directly if needed."
+    },
+    {
+      "type": "text",
+      "content": "## The Memory MCP's Tools\n\nOnce installed, Claude Code has access to these tools via Memory MCP:\n\n**`create_entities`** — Add new entities to the graph:\n```\nCreate entity: name='Project Falcon', type='Project',\nobservations=['Backend API in Python FastAPI', 'Due 2026-09-01', 'Client: AcmeCorp']\n```\n\n**`create_relations`** — Connect entities:\n```\nCreate relation: from='Alex Chen', to='Project Falcon', relationType='works_on'\nCreate relation: from='Project Falcon', to='FastAPI', relationType='uses'\n```\n\n**`add_observations`** — Add facts to an existing entity:\n```\nAdd to 'Project Falcon': ['Authentication system is incomplete', 'Budget is $50K']\n```\n\n**`search_nodes`** — Search the graph by keyword:\n```\nSearch 'Project Falcon' → returns the entity and all connected entities\nSearch 'FastAPI' → returns all projects using FastAPI\n```\n\n**`open_graph`** — Retrieve the complete knowledge graph to see everything Claude knows.\n\n**`delete_entities`** — Remove outdated entities.\n\n**`delete_observations`** — Remove specific outdated facts while keeping the entity."
+    },
+    {
+      "type": "text",
+      "content": "## The Two-Phase Memory Workflow\n\nThe most effective pattern for using Memory MCP has two phases:\n\n**At the START of a session — Load context:**\n```\nSearch memory for everything related to [Project X].\nGive me a briefing: what is the project, who is involved,\nwhat was the last status, and what were the open questions?\n```\nThis replaces the need to recap everything at the start of every new conversation.\n\n**At the END of a session — Save context:**\n```\nBefore we finish this session, update memory with:\n- New decisions made today: [list them]\n- Open questions to address next time: [list them]\n- Any new entities, people, or facts we discussed: [list them]\nCreate or update the relevant entities and observations.\n```\nThis ensures the next session starts informed.\n\n**Between sessions — The context survives.** When you start a new Claude Code session tomorrow, the project context, decisions, open questions, and relevant relationships are all retrievable in seconds instead of spending 10 minutes re-establishing context.\n\n**Making the workflow automatic:** You can add memory loading to your CLAUDE.md file so Claude automatically searches memory at the start of every session for projects you're actively working on."
+    },
+    {
+      "type": "text",
+      "content": "## What to Store in Memory (and What Not To)\n\n**Good candidates for Memory MCP:**\n- Project names, goals, status, and key decisions\n- People: their roles, preferences, contact context\n- Technical decisions and the reasoning behind them (architectural choices, library preferences)\n- Open questions and blockers\n- Ongoing commitments (\"I told Alex I'd deliver by Friday\")\n- Recurring instructions (\"always use tabs not spaces in this project\")\n- Relationships between components, teams, or systems\n\n**Don't store in Memory MCP:**\n- Passwords, API keys, or credentials (store in a password manager)\n- Information that changes so frequently it's outdated immediately\n- Sensitive personal information you wouldn't want in any file\n- Very long documents or codebases (use the Filesystem MCP instead)\n- Temporary context that's only relevant to the current session\n\n**The pruning principle:** Memory is most useful when it's curated. An overcrowded knowledge graph with outdated facts is harder to use than a small, accurate one. Spend 2 minutes at the end of each session deleting or updating stale observations."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Custom slash command for memory loading:** Create a file at `.claude/commands/load-memory.md` with the content: `Search memory for everything related to the current project. Give me a status briefing before we begin.` Then type `/load-memory` at the start of any session to instantly restore context."
+    },
+    {
+      "type": "text",
+      "content": "## Real-World Memory Scenarios\n\n**Scenario 1 — Ongoing software project:**\nYou're building a web app over several weeks. Memory stores: the tech stack decisions, the file structure conventions, the names and roles of contributors, current sprint goals, and blocking issues. Each session starts with a 30-second memory load instead of a 10-minute context re-establishment.\n\n**Scenario 2 — Client management:**\nYou have 5 clients. Memory stores: each client's name, company, project, preferences, last discussed topic, open items, and relationship context. When starting a conversation about Client A, Memory MCP retrieves everything you need to be contextually prepared.\n\n**Scenario 3 — Learning a new subject:**\nYou're learning machine learning over 3 months. Memory stores: concepts you've understood, concepts you're still confused about, resources you've found valuable, analogies that clicked, and questions to explore next. Each learning session picks up intelligently from where you left off.\n\n**Scenario 4 — Personal productivity:**\nMemory stores: your current goals, commitments you've made to others, important deadlines, and personal context (preferences, constraints, working style) you want Claude to apply consistently. Claude stops asking for the same context every session."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Set Up Memory MCP and Build Your First Knowledge Graph",
+      "content": "You'll install Memory MCP and populate it with real project or personal context that you'll actually want to retrieve.\n\n**Step 1 — Add Memory MCP to your settings.json.** Add the `memory` entry from the configuration block shown earlier. Save and restart Claude Code. Type `/mcp` — confirm `memory` is listed.\n\n**Step 2 — Create your first entities.** Choose a real ongoing project, area of work, or learning goal. Ask Claude Code:\n```\nUsing memory tools, create entities for my current project:\n\nProject entity:\n- Name: [your project name]\n- Type: Project\n- Observations: [current status, key technologies, main goal, deadline if any]\n\nPerson entities (for each person involved):\n- Name: [person's name]\n- Type: Person\n- Observations: [role, what they're responsible for, any relevant preferences or context]\n\nTech entities (for each major tool/library you're using):\n- Name: [tool name]\n- Type: Technology\n- Observations: [why you chose it, key configuration decisions, known issues]\n```\n\n**Step 3 — Create relations.** Ask:\n```\nCreate these relations in memory:\n- [Person A] works_on [Project]\n- [Project] uses [Technology A]\n- [Project] uses [Technology B]\n- [Person A] manages [Person B]\n```\n\n**Step 4 — Open the graph.** Ask: `\"Use open_graph to show me everything currently in memory.\"` Verify your entities and relations are correct.\n\n**Step 5 — Test retrieval.** Start a new Claude Code session (`/clear` or close and reopen). Ask: `\"Search memory for everything about [your project name] and give me a briefing.\"` You should get back all the context you created in Step 2-3.\n\n**Outcome:** A working, populated knowledge graph and direct experience with the read-write memory cycle."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Workshop A — The End-of-Session Memory Capture Routine",
+      "content": "The most valuable Memory MCP habit is a consistent end-of-session capture. This workshop builds that routine.\n\n**Step 1 — Work on a real task in Claude Code.** Do any task that generates decisions, discoveries, or context worth keeping: write some code, make an architectural decision, draft a plan, research something.\n\n**Step 2 — At the end of the session, run the capture prompt:**\n```\nBefore we finish, capture this session to memory.\n\nFor each thing we worked on, determine:\n1. New entities to create (people, projects, systems I mentioned for the first time)\n2. New observations to add to existing entities (new facts, decisions, status changes)\n3. New relations to create (new connections between things)\n4. Any observations that are now outdated and should be deleted\n\nWalk me through each update before writing it, so I can confirm.\n```\n\n**Step 3 — Review and confirm each update.** Don't let Claude write to memory without you approving each item. This is where you ensure quality: if Claude proposes capturing something wrong, correct it before it goes in.\n\n**Step 4 — Verify the capture.** Ask: `\"Open the graph and confirm the new information is there.\"`\n\n**Step 5 — Start a fresh session.** Close and reopen Claude Code. Ask: `\"What do I know about [the topic from Step 1]?\"` The captured context should be retrievable immediately.\n\n**Step 6 — Build the habit.** Create a custom slash command: save the end-of-session capture prompt to `.claude/commands/save-session.md`. Now `/save-session` at the end of any work session captures everything worth keeping.\n\n**Outcome:** A repeatable end-of-session memory capture routine that makes every subsequent session smarter."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Workshop B — People and Relationship Memory",
+      "content": "Memory MCP is exceptionally useful for remembering people — their roles, preferences, and context. This workshop builds a personal contact knowledge graph.\n\n**Step 1 — Choose 5 people** you regularly work with or communicate with. These could be colleagues, clients, collaborators, or even instructors.\n\n**Step 2 — For each person, create a rich entity.** Ask Claude Code:\n```\nFor each of these 5 people, create a memory entity with:\n- Their name and type (Person)\n- Their role and how we work together\n- Key facts about working with them: communication preferences, what they care about, ongoing topics, last discussed\n- Any commitments or open items between us\n\nHere are the people and what I know about each:\n[describe each person briefly]\n```\n\n**Step 3 — Create relations between people and projects.** Ask:\n```\nCreate relations:\n- [Person] works_at [Company]\n- [Person] manages [Other person]\n- [Person] is_stakeholder_on [Project]\n```\n\n**Step 4 — Test person-based retrieval.** Ask: `\"I'm about to contact [person's name]. What do I know about them? What's our open business? What would be relevant to mention?\"` This is exactly the briefing you'd want before any meeting or email.\n\n**Step 5 — After a real interaction, update memory.** After a meeting or email exchange, ask: `\"Update [person's name] in memory: we discussed X, I committed to do Y by Z date, and the next step is W.\"`\n\n**Outcome:** A personal CRM-style knowledge graph that means Claude can always brief you on any person in seconds."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Workshop C — Learning Context Memory",
+      "content": "If you're using Claude Code as a learning tool (which you are — you're using it right now), Memory MCP can make that learning compounding rather than starting fresh each time.\n\n**Step 1 — Create a learning subject entity.** For something you're currently learning through this course or elsewhere:\n```\nCreate a memory entity:\n- Name: [Subject you're learning — e.g., 'MCP Development', 'Machine Learning', 'TypeScript']\n- Type: LearningSubject\n- Observations:\n  - Current knowledge level\n  - Key concepts understood\n  - Key concepts still confusing\n  - Resources found valuable\n  - Questions to explore next\n  - Analogies or mental models that clicked\n```\n\n**Step 2 — After each learning session, update the entity.** At the end of any Claude Code session where you learned something new:\n```\nUpdate my [Subject] learning entity in memory:\n- Add to 'concepts understood': [what became clear this session]\n- Update 'still confusing': [what's still unclear]\n- Add to 'questions to explore': [new questions that arose]\n- Add to 'resources': [anything valuable you referenced]\n```\n\n**Step 3 — At the START of the next learning session, load context:**\n```\nSearch memory for my [Subject] learning context.\nBrief me: what do I know, what am I working on understanding, and what questions did I leave open last time?\n```\n\n**Step 4 — After 3-4 sessions, open the graph** and look at your learning entity's observations. You should see a growing record of what you've understood, what's still unclear, and the open questions that are driving your exploration.\n\n**Step 5 — Ask Claude Code to identify patterns:**\n```\nLook at my [Subject] learning observations.\nWhat concepts appear repeatedly as 'confusing'?\nWhat pattern does that suggest about gaps in my mental model?\nWhat should I study next to address the most fundamental gap?\n```\n\n**Outcome:** A compounding learning knowledge graph that transforms each study session from a fresh start into progress built on what came before."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop D — Memory Architecture Design",
+      "content": "Before you fill your knowledge graph with hundreds of entries, design your memory architecture thoughtfully. A well-designed graph is far more useful than a chaotic one.\n\n**Step 1 — Define your entity types.** What categories of things are you going to track? Common types:\n- Person\n- Project\n- Company / Client\n- Technology / Tool\n- Concept (for learning)\n- Decision (a specific choice made and why)\n- Goal (personal or professional objective)\n- Task (something you committed to do)\n\n**Step 2 — Define your relation vocabulary.** What verbs connect your entities? Having a consistent vocabulary makes the graph searchable. Examples:\n- works_on (Person → Project)\n- uses (Project → Technology)\n- reports_to (Person → Person)\n- decided_by (Decision → Person)\n- part_of (Task → Project)\n- blocks (Task → Task)\n\n**Step 3 — Prompt Claude for your specific situation:**\n```\nI want to design a Memory MCP knowledge graph for my work and learning.\n\nMy situation:\n- I am a [your role]\n- I work on [describe your work briefly]\n- I'm learning [what you're learning]\n- My key contacts include [number] people across [contexts]\n- I want to track [what matters to you]\n\nDesign:\n1. What entity types should I use, and what observations go in each?\n2. What relation types should I define for consistency?\n3. What's the most important information to capture first (start with what adds most immediate value)?\n4. What should I NOT put in the knowledge graph (risks, overhead not worth it)?\n5. How should I structure the naming convention for entities to avoid duplicates?\n```\n\n**Step 4 — Document your memory schema.** Save your entity types, observation categories, and relation vocabulary as a note. This becomes your guide for consistent memory population.\n\n**Step 5 — Seed the graph.** Create 5-10 core entities using your schema. Start small — a quality graph of 10 accurate entities beats a bloated graph of 100 stale ones.\n\n**Outcome:** A deliberate, coherent memory architecture rather than an ad-hoc collection of facts."
+    },
+    {
+      "type": "quiz",
+      "question": "You start a new Claude Code session after a week away from a project. Without Memory MCP, what would you typically need to do to restore context?",
+      "options": [
+        "Nothing — Claude automatically remembers all previous sessions",
+        "Manually re-explain the project: its purpose, tech stack, current status, key decisions, and open questions — often 5-15 minutes of re-establishment",
+        "Upload a backup file and Claude restores from it",
+        "Use the /history command to load the previous session"
+      ],
+      "correct": 1,
+      "explanation": "Without Memory MCP, every Claude session starts completely fresh — there is no automatic carry-over of context. The typical workaround is pasting a context document into the start of each session, which is time-consuming and error-prone. Memory MCP solves this by maintaining a persistent knowledge graph that survives between sessions. At the start of a new session, a single search_nodes query retrieves all stored context about the project in seconds. This is one of the highest-value productivity improvements possible for anyone doing ongoing work with Claude."
+    },
+    {
+      "type": "quiz",
+      "question": "You store API credentials in Memory MCP for easy retrieval in future sessions. What is wrong with this approach?",
+      "options": [
+        "Memory MCP can't store strings, only entity names",
+        "API credentials in the knowledge graph JSON file on disk are stored in plain text — anyone with access to your machine can read them, and syncing or sharing the file exposes the credentials",
+        "This is fine — Memory MCP has built-in encryption for sensitive values",
+        "API credentials expire too quickly for memory to be useful"
+      ],
+      "correct": 1,
+      "explanation": "Memory MCP stores data in a JSON file on your local disk in plain text — there is no encryption. Storing API keys, passwords, or other credentials in this file means they're readable by any process that can access that file path. More importantly, if you ever share, sync, or back up the memory file, credentials go with it. The correct approach: store credentials in a password manager or environment variables, and store in memory only a reference ('API key stored in 1Password under Falcon-prod') — the location, not the secret itself."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-21.** Memory MCP transforms Claude from a session-by-session tool into a genuine long-term collaborator that accumulates context about your work, your projects, and the people you work with. The two-phase workflow — load context at start, save context at end — is the habit that makes everything else more productive. Lesson 8-22 is the capstone: all six key MCPs working together in one complete workflow."
+    }
+  ],
+  "nextLesson": "8-22",
+  "prevLesson": "8-20"
+}
