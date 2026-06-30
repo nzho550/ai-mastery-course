@@ -11,7 +11,7 @@
     },
     {
       "type": "text",
-      "content": "## AI Is Pattern Recognition at Scale\n\nAt its core, artificial intelligence is software that learns patterns from data and uses those patterns to make decisions or generate outputs — without being explicitly programmed for every situation.\n\nThink about how you learned to recognise a cat. Nobody gave you a rulebook that said *\"if it has pointy ears AND whiskers AND fur AND says meow, it's a cat.\"* You saw hundreds of cats over years, and your brain built a pattern automatically.\n\nAI does the same thing — just with millions of examples instead of hundreds, and in hours instead of years.\n\n**Machine learning** is the branch of AI where systems learn from data. **Deep learning** uses neural networks (loosely inspired by the brain) to learn very complex patterns. **Large language models (LLMs)** — like Claude, GPT-4, and Gemini — are deep learning systems trained on enormous amounts of text to understand and generate language."
+      "content": "## AI Is Pattern Recognition at Scale\n\nAt its core, artificial intelligence is software that learns patterns from data and uses those patterns to make decisions or generate outputs — without being explicitly programmed for every situation.\n\nThink about how you learned to recognise a cat. Nobody gave you a rulebook that said *\"if it has pointy ears AND whiskers AND fur AND says meow, it's a cat.\"* You saw hundreds of cats over years, and your brain built a pattern automatically.\n\nAI does the same thing — just with millions of examples instead of hundreds, and in hours instead of years.\n\n**Machine learning** is the branch of AI where systems learn from data. **Deep learning** uses neural networks (loosely inspired by the brain) to learn very complex patterns. **Large language models (LLMs)** — like Claude, ChatGPT, and Gemini — are deep learning systems trained on enormous amounts of text to understand and generate language."
     },
     {
       "type": "callout",
@@ -52,7 +52,7 @@
         "Yes — modern AI models have human-like understanding, just faster",
         "No — it generates statistically likely text based on patterns, which can produce outputs that look like understanding but work fundamentally differently from human comprehension",
         "We don't know — AI understanding is a philosophical question with no consensus",
-        "Only some models understand — Claude and GPT-4 do, but smaller models don't"
+        "Only some models understand — large models like Claude and ChatGPT do, but smaller models don't"
       ],
       "correct": 1,
       "explanation": "LLMs don't understand in the way humans do. They predict the next token based on learned patterns. This produces outputs that can look remarkably like understanding — useful analogies, coherent reasoning, appropriate empathy — but the underlying mechanism is different. 'We don't know' (C) is a reasonable philosophical position, but from an engineering perspective, what the model *does* is well understood: pattern-based prediction. This distinction matters because it explains both the model's impressive capabilities and its failure modes (hallucination, brittleness on novel situations)."

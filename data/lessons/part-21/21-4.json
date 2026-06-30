@@ -24,7 +24,7 @@
     },
     {
       "type": "text",
-      "content": "## Single-Model vs Dual-Model Critique\n\nYou can run self-critique with one model or two:\n\n**Single-model critique (same conversation)**\nThe same model that generated the draft also critiques it, in the same conversation. Fast, free, and usually effective. The main risk: the model may be overly charitable to itself.\n\n**Dual-model critique (separate model or instance)**\nYou paste the output into a completely separate conversation — or use a different model entirely — to critique it. Because this model has no stake in the original output and no memory of generating it, it tends to be more objective. If you're using the Claude API, you can literally use two separate API calls with different system prompts.\n\n**Cross-model critique (most powerful)**\nUse Claude to generate, GPT-4 to critique, then Claude to revise using GPT-4's critique. Different models have different failure modes and biases — cross-model critique catches errors either model alone would miss.\n\n**When to use which:**\n- Single-model: everyday writing, drafts, code reviews, quick iterations\n- Dual-model: important documents, public-facing content, anything where \"close enough\" isn't good enough\n- Cross-model: high-stakes outputs, research synthesis, any domain where you need a genuine second opinion"
+      "content": "## Single-Model vs Dual-Model Critique\n\nYou can run self-critique with one model or two:\n\n**Single-model critique (same conversation)**\nThe same model that generated the draft also critiques it, in the same conversation. Fast, free, and usually effective. The main risk: the model may be overly charitable to itself.\n\n**Dual-model critique (separate model or instance)**\nYou paste the output into a completely separate conversation — or use a different model entirely — to critique it. Because this model has no stake in the original output and no memory of generating it, it tends to be more objective. If you're using the Claude API, you can literally use two separate API calls with different system prompts.\n\n**Cross-model critique (most powerful)**\nUse Claude to generate, ChatGPT to critique, then Claude to revise using ChatGPT's critique. Different models have different failure modes and biases — cross-model critique catches errors either model alone would miss.\n\n**When to use which:**\n- Single-model: everyday writing, drafts, code reviews, quick iterations\n- Dual-model: important documents, public-facing content, anything where \"close enough\" isn't good enough\n- Cross-model: high-stakes outputs, research synthesis, any domain where you need a genuine second opinion"
     },
     {
       "type": "text",
@@ -78,15 +78,15 @@
     },
     {
       "type": "quiz",
-      "question": "What is the main advantage of cross-model critique (using Claude to generate and GPT-4 to critique) over single-model critique?",
+      "question": "What is the main advantage of cross-model critique (using Claude to generate and ChatGPT to critique) over single-model critique?",
       "options": [
         "It is faster",
         "It is cheaper",
         "Different models have different training biases and failure modes — a second model is more likely to catch errors the generating model would consistently overlook",
-        "GPT-4 is always more critical than Claude"
+        "ChatGPT is always more critical than Claude"
       ],
       "correct": 2,
-      "explanation": "Different LLMs have different strengths, weaknesses, and biases baked in by their training. A model tends to be lenient toward errors it would make itself. Cross-model critique breaks this — GPT-4 critiquing Claude's output may catch systematic patterns Claude consistently gets wrong (and vice versa). This is especially valuable for high-stakes content where missing a systematic error type could be costly."
+      "explanation": "Different LLMs have different strengths, weaknesses, and biases baked in by their training. A model tends to be lenient toward errors it would make itself. Cross-model critique breaks this — ChatGPT critiquing Claude's output may catch systematic patterns Claude consistently gets wrong (and vice versa). This is especially valuable for high-stakes content where missing a systematic error type could be costly."
     },
     {
       "type": "callout",
