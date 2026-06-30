@@ -28,7 +28,7 @@
     {
       "type": "callout",
       "variant": "tip",
-      "content": "**Model selection for writing tasks:** Always switch to Claude Sonnet or Claude Opus when using Copilot for professional writing. The quality difference compared to GPT-4o is significant for documentation, reports, and structured prose. Claude produces clearer topic sentences, better paragraph structure, and more appropriate formal register for government and professional contexts. Switch back to GPT-4o or the default model for code generation tasks."
+      "content": "**Model selection for writing tasks:** Always switch to Claude Sonnet or Claude Opus when using Copilot for professional writing. The quality difference compared to the default models is significant for documentation, reports, and structured prose. Claude produces clearer topic sentences, better paragraph structure, and more appropriate formal register for government and professional contexts. Switch back to GPT-4.1 or Auto for code generation tasks."
     },
     {
       "type": "workshop",
@@ -76,7 +76,7 @@
         "Searching the codebase with @workspace"
       ],
       "correct": 2,
-      "explanation": "Claude models (Sonnet and Opus) are trained to produce high-quality, well-structured prose and are particularly strong at formal writing, nuanced explanations, and professional document formats. For technical briefings, status reports, policy analysis, and documentation that needs to read clearly to both technical and non-technical audiences, Claude consistently outperforms the default models. Switch back to the default (GPT-4.1 or GPT-4o) for code generation tasks where Claude's prose strengths don't apply."
+      "explanation": "Claude models (Sonnet and Opus) are trained to produce high-quality, well-structured prose and are particularly strong at formal writing, nuanced explanations, and professional document formats. For technical briefings, status reports, policy analysis, and documentation that needs to read clearly to both technical and non-technical audiences, Claude consistently outperforms the default models. Switch back to GPT-4.1 or Auto for code generation tasks where Claude's prose strengths don't apply."
     },
     {
       "type": "callout",
