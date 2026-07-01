@@ -13,7 +13,7 @@
   "sections": [
     {
       "type": "text",
-      "content": "## What You'll Learn\n\nGitHub Copilot is excellent, but it's a closed product tied to GitHub's model choices. **Continue.dev** is a free, open-source VS Code extension that gives you the same in-editor AI experience — but you choose the model. Claude, GPT-5.x, Gemini, or a local Ollama model running on your own machine. One interface, any backend."
+      "content": "## What You'll Learn\n\nGitHub Copilot is excellent, but it's a closed product tied to GitHub's model choices. **Continue.dev** is a free, open-source VS Code extension that gives you the same in-editor AI experience — but you choose the model. Claude, GPT-5, Gemini, or a local Ollama model running on your own machine. One interface, any backend."
     },
     {
       "type": "text",
@@ -73,7 +73,7 @@
         "Continue.dev works without an internet connection"
       ],
       "correct": 1,
-      "explanation": "The key advantage: Continue.dev is model-agnostic — configure it to use Claude, GPT-5.x, Gemini, or local Ollama models for both inline completions and chat. While GitHub Copilot now supports Claude in its Chat panel via the model picker, its inline completions still use GitHub's own model. Continue.dev gives you Claude for everything — completions, chat, and edits — with no subscription required, just API tokens. It also supports fully local models (Ollama) so no data ever leaves your machine."
+      "explanation": "The key advantage: Continue.dev is model-agnostic — configure it to use Claude, GPT-5, Gemini, or local Ollama models for both inline completions and chat. While GitHub Copilot now supports Claude in its Chat panel via the model picker, its inline completions still use GitHub's own model. Continue.dev gives you Claude for everything — completions, chat, and edits — with no subscription required, just API tokens. It also supports fully local models (Ollama) so no data ever leaves your machine."
     },
     {
       "type": "quiz",

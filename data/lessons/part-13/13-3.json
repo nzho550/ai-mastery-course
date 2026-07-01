@@ -22,7 +22,7 @@
     },
     {
       "type": "text",
-      "content": "## Why Costs Sneak Up on You\n\nDuring a normal lesson, you make a few API calls. Each one costs fractions of a cent. The total for the entire course should be under $5 if you've been using Haiku for small tasks.\n\nBut API costs scale non-linearly when you start building real things:\n\n- A loop that processes 1,000 documents costs 1,000× a single call\n- Forgetting to set `max_tokens` means the model can output 4,096 tokens when you only needed 50\n- Using Sonnet for tasks that Haiku can handle costs 3.75× more per call\n- An n8n workflow that runs every hour on 50 emails is 43,800 API calls per month\n\nNone of these are disasters if you catch them. They're all preventable with a few configuration choices."
+      "content": "## Why Costs Sneak Up on You\n\nDuring a normal lesson, you make a few API calls. Each one costs fractions of a cent. The total for the entire course should be under $5 if you've been using Haiku for small tasks.\n\nBut API costs scale non-linearly when you start building real things:\n\n- A loop that processes 1,000 documents costs 1,000× a single call\n- Forgetting to set `max_tokens` means the model can output 4,096 tokens when you only needed 50\n- Using Sonnet for tasks that Haiku can handle costs 3× more per call\n- An n8n workflow that runs every hour on 50 emails is 43,800 API calls per month\n\nNone of these are disasters if you catch them. They're all preventable with a few configuration choices."
     },
     {
       "type": "text",
