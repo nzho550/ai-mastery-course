@@ -1,0 +1,160 @@
+{
+  "id": "8-15",
+  "title": "构建一个简单的自定义 MCP 服务器",
+  "part": 8,
+  "estimatedMinutes": 100,
+  "tags": [
+    "mcp",
+    "python",
+    "custom-server",
+    "claude-code",
+    "build"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将用 Python 构建出一个可用的 MCP 服务器，配置 Claude Code 加载它，并在真实对话中成功调用它的工具。这是第 8 部分的压轴课——从使用者转变为构建者。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**前提条件——Python 3.10+：** 打开 PowerShell，输入 `python --version`。如果看到 `Python 3.10.x` 或更高版本，就可以开始了。如果没有：前往 python.org/downloads → 点击下载 Python 3.12（或最新稳定版）→ 运行安装程序 → 在第一个界面上，点击“安装”之前先勾选**“Add Python to PATH”**→ 完成安装 → 关闭并重新打开 PowerShell → 用 `python --version` 验证。不勾选那个选项，`python` 和 `pip` 在终端中都无法使用。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么要构建自己的 MCP 服务器？\n\n第 8 部分你用过的每一个服务器，都是由某个人决定“我想让 Claude 能访问这个东西”，然后写出的代码。MCP 服务器就只是这样的东西而已。\n\n一旦你理解了这个模式，你就可以为以下场景构建服务器：\n- 你公司的内部 API\n- 一个没有公开 MCP 服务器的数据库\n- 你自己搭建的个人工具\n- 任何对你具体工作流程有意义的数据源\n\n模式始终是一样的。本课通过一个简单的例子来讲解它。一旦你理解了这个模式，扩展到复杂的服务器只需要不断添加更多工具而已。"
+    },
+    {
+      "type": "text",
+      "content": "## 我们要构建的服务器\n\n我们会构建一个带有一个工具的服务器：`get_motivation`。\n\n当 Claude 调用这个工具时，服务器会从一份写死的列表中返回一句随机的激励语录。\n\n这刻意设计得非常简单。没有外部依赖，没有 API 密钥，没有数据库。纯 Python 代码，运行瞬间完成。重点不在于语录本身——而在于理解服务器的结构。一旦你看懂了它是怎么运作的，你就知道该怎样把语录换成你想构建的任何工具。"
+    },
+    {
+      "type": "text",
+      "content": "## 安装 MCP Python SDK\n\n打开 PowerShell 并运行："
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "pip install mcp"
+    },
+    {
+      "type": "text",
+      "content": "## 完整的服务器代码\n\n在 VS Code 中创建一个新文件：`exercises/my-mcp-server.py`\n\n下面是完整的服务器代码。请仔细通读——每一部分都有注释解释它的作用："
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "# my-mcp-server.py\n# A minimal MCP server that exposes one tool: get_motivation\n\nimport random\nfrom mcp.server.fastmcp import FastMCP\n\n# Create the MCP server instance.\n# The string argument is the server's display name.\nmcp = FastMCP(\"My Motivation Server\")\n\n# A hardcoded list of motivational quotes.\n# In a real server, this might come from a database or an API.\nQUOTES = [\n    \"The best time to plant a tree was 20 years ago. The second best time is now.\",\n    \"Every expert was once a beginner. Every pro was once an amateur.\",\n    \"Progress, not perfection.\",\n    \"Small steps every day add up to big results.\",\n    \"The only way to do great work is to love what you do.\",\n]\n\n# Define a tool using the @mcp.tool() decorator.\n# The function name becomes the tool name Claude calls.\n# The docstring becomes the tool's description — Claude reads this to\n# understand when and how to use the tool.\n@mcp.tool()\ndef get_motivation() -> str:\n    \"\"\"Returns a random motivational quote to encourage the user.\n    Use this when the user needs a boost or asks for motivation.\"\"\"\n    return random.choice(QUOTES)\n\n# Start the server.\n# stdio transport means Claude Code communicates with this server\n# via standard input/output — the same way all npx-based servers work.\nif __name__ == \"__main__\":\n    mcp.run(transport=\"stdio\")"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**这个文件是 Python，不是 JavaScript。** 上面的代码块使用的是 Python 语法。`language: javascript` 这个标签只是课程平台里的一种显示格式选择——你实际写的代码是 Python（`.py` 文件、`import random`、Python 函数语法）。"
+    },
+    {
+      "type": "text",
+      "content": "## 直接测试服务器\n\n在把它连接到 Claude Code 之前，先验证服务器能无错误地启动：\n\n在 PowerShell 中："
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "cd C:\\Users\\YourName\\Documents\\ai-course-projects\npython exercises/my-mcp-server.py"
+    },
+    {
+      "type": "text",
+      "content": "服务器会启动并等待输入。你不会看到太多输出——这是正常的。它正在 stdio 上监听，等待一个 MCP 客户端连接。\n\n按 `Ctrl+C` 停止它。\n\n如果看到错误，最常见的原因是 `mcp` 没有安装。运行 `pip install mcp` 再试一次。"
+    },
+    {
+      "type": "text",
+      "content": "## 将其连接到 Claude Code\n\n把你的服务器加入你全局的 `settings.json`。把 `YourName` 替换为你实际的 Windows 用户名："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"my-motivation-server\": {\n      \"command\": \"python\",\n      \"args\": [\n        \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\\\\exercises\\\\my-mcp-server.py\"\n      ]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Python MCP 服务器要使用绝对路径。** 与 npx 服务器不同，Python 服务器需要完整的绝对路径，因为 Claude Code 启动服务器时的工作目录可能与你的项目文件夹不同。如果出现“文件未找到”的错误，请仔细核对路径。"
+    },
+    {
+      "type": "text",
+      "content": "## 验证并使用你的服务器\n\n1. 保存 `settings.json`\n2. 重新启动 `claude`\n3. 输入 `/mcp`——你应该能看到 `my-motivation-server` 已列出\n4. 提问：`\"Get me some motivation\"`\n\nClaude 会调用你的 `get_motivation` 工具，并从你的 Python 服务器返回一句语录。\n\n你刚刚创建了一个 Claude 可以使用的工具。就是这么简单。"
+    },
+    {
+      "type": "text",
+      "content": "## 扩展这个模式：添加更多工具\n\n要给服务器添加更多工具，只需添加更多 `@mcp.tool()` 函数。每个函数都会成为 Claude 可以调用的一个工具。\n\n例如，添加一个返回今天日期的工具："
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "from datetime import date\n\n@mcp.tool()\ndef get_todays_date() -> str:\n    \"\"\"Returns today's date in a human-readable format.\n    Use when the user asks what day or date it is.\"\"\"\n    today = date.today()\n    return today.strftime(\"%A, %B %d, %Y\")"
+    },
+    {
+      "type": "text",
+      "content": "把这个函数加入你的 `my-mcp-server.py` 文件，重启 Claude Code，然后提问：`\"What day is it today?\"`\n\nClaude 会调用你的新工具，并告诉你真实的当前日期——而不是根据训练数据猜测的日期。\n\n这就是最基本的模式：任何你能用 Python 函数表达的能力，都可以通过 MCP 暴露给 Claude。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "构建、配置并扩展你的 MCP 服务器",
+      "content": "**第 1 步 — 安装与创建：**\n1. 在 PowerShell 中运行 `pip install mcp`\n2. 在 VS Code 中创建 `exercises/my-mcp-server.py`，写入上面展示的完整代码\n3. 测试一下：`python exercises/my-mcp-server.py`——确认它能启动，按 Ctrl+C 停止\n\n**第 2 步 — 连接到 Claude Code：**\n1. 把 `my-motivation-server` 条目加入你的 `settings.json`\n2. 重新启动 `claude`\n3. 输入 `/mcp`——确认 `my-motivation-server` 已列出\n4. 提问：`\"Get me some motivation\"`——确认能从你的服务器返回一句语录\n\n**第 3 步 — 添加一个日期工具：**\n把 `get_todays_date` 函数（上面展示过）加入你的服务器。\n重启 Claude Code（重启时服务器会重新加载）。\n提问：`\"What day is it today?\"`\n确认它返回的是今天真实的日期。\n\n**第 4 步 — 添加你自己的工具：**\n这是最有创造性的部分。再添加一个你真正会觉得有用的工具。想法：\n\n- `get_word_of_the_day()` — 从一份写死的列表中返回一个单词及其释义\n- `flip_coin()` — 随机返回“正面”或“反面”\n- `get_pomodoro_reminder()` — 返回一条关于休息的提醒消息\n- `get_project_checklist()` — 返回一份提交代码前要做的检查清单\n\n编写函数，加上 `@mcp.tool()` 装饰器，写一段清晰的文档字符串，重启 Claude Code，测试它。\n\n**第 5 步 — 反思：**\n问 Claude Code：`\"What tools does my-motivation-server expose? Describe each one based on its documentation.\"`\n\nClaude 会读取你的文档字符串，准确地描述你的工具。这就是文档字符串很重要的原因——它们是 Claude 用来理解每个工具作用的接口。\n\n保存服务器的最终版本，并在 `notes/my-mcp-stack.md` 中记录下来。\n\n---\n\n**你刚刚构建了一个 MCP 服务器。** 第 8 部分之前的一切都是在使用别人的服务器。现在你造了一个属于自己的。使用者和构建者之间的距离，比看起来要小得多。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A — 规划你的自定义 MCP 服务器",
+      "content": "在写任何代码之前，先设计你的自定义 MCP 服务器。\n\n**第 1 步 — 回顾你在第 8-14 课工作坊 D 中写的服务器规格说明。**\n\n**第 2 步 — 让 Claude 帮你完善设计：**\n```\nI want to build an MCP server. Here is my specification: [paste it]\n\nHelp me finalize the design:\n1. Review each tool for correct input/output format\n2. Identify any tools that should be split or merged\n3. Design the error handling strategy\n4. Recommend the implementation language (Python or TypeScript) for my use case\n5. Identify the external library/API I'll need\n```\n\n**第 3 步 — 根据 Claude 的建议和你自己的经验**选择实现语言。\n\n**第 4 步 — 创建项目结构：**\n```\nmcp-server-[name]/\n  src/\n    server.py (or index.ts)\n  tests/\n  README.md\n  requirements.txt (or package.json)\n```\n\n**第 5 步 — 先写 README**——在任何代码存在之前，先描述这个服务器要做什么。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — 构建核心 MCP 服务器",
+      "content": "在 Claude Code 的协助下实现你的 MCP 服务器。\n\n**第 1 步 — 让 Claude Code 搭建服务器脚手架：**\n```\nBuild an MCP server in Python using the mcp package. The server should:\n- Expose these tools: [list your tools with descriptions]\n- Authenticate with: [your API/service]\n- Handle errors by: [your error strategy]\n\nStart with the basic structure and the first tool implemented. I'll review each tool before we add the next.\n```\n\n**第 2 步 — 在添加工具之前**先审查脚手架结构。\n\n**第 3 步 — 逐个实现工具。** 对每个工具：\n- 让 Claude Code 实现它\n- 审查代码\n- 手动测试它\n- 修复问题后再继续下一个\n\n**第 4 步 — 每个工具完成后强制代码审查：** *\"Review the [tool name] implementation. Find 3 potential failure modes: edge cases, API errors, or unexpected inputs that would break this tool.\"* 修复找出的问题。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C — 测试你的 MCP 服务器",
+      "content": "为你的自定义 MCP 服务器编写并运行测试。\n\n**第 1 步 — 让 Claude Code 编写测试：**\n```\nWrite a test file for this MCP server. For each tool:\n1. A happy path test (valid input, expected output)\n2. An error case test (invalid input or API failure)\n3. An edge case test (boundary values, empty input)\n\nUse pytest and mock the external API calls.\n```\n\n**第 2 步 — 运行测试：**\n```powershell\npython -m pytest tests/ -v\n```\n\n**第 3 步 — 在 Claude Code 的帮助下**修复所有测试失败的问题。\n\n**第 4 步 — 为 Claude Code 可能遗漏的场景**添加错误处理测试：\n- 外部服务宕机时会发生什么？\n- 响应格式错误时会发生什么？\n- 输入非常大时会发生什么？\n\n**第 5 步 — 强制复查：** 问：*\"Review the test coverage. What important scenarios are NOT tested that a code reviewer would flag?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — 集成并使用你的 MCP 服务器",
+      "content": "完成完整的循环：构建 → 测试 → 集成 → 使用。\n\n**第 1 步 — 在 Claude Code 的 MCP 设置中**配置你的服务器。\n\n**第 2 步 — 重启 Claude Code**以加载你的新服务器。\n\n**第 3 步 — 验证发现：** 问 Claude Code：“你现在有哪些可用的 MCP 工具？”——你的自定义工具应该会出现。\n\n**第 4 步 — 用你的新服务器运行一个真实任务：** “使用 [你的工具名称] 来 [服务器所支持的实际任务]。”\n\n**第 5 步 — 强制的真实场景复查：** 运行该任务，验证输出是否正确、有用。服务器是否在做你设计它要做的事？\n\n**第 6 步 — 记录经验教训：** 与原始设计相比，你不得不做出哪些改动？下次你会怎么做得不一样？\n\n**第 7 步 — 如果它解决了共同的问题**，把你的服务器分享给同事。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的自定义 MCP 服务器成功连接了，但某个工具返回的数据是错误的。正确的调试方法是什么？",
+      "options": [
+        "重写整个服务器",
+        "为出问题的那个工具的实现添加日志，追踪调用了什么 API、收到了什么响应，然后找出数据转换在哪里出了错",
+        "让 Claude Code 直接修复它，不添加任何日志",
+        "把那个工具标记为损坏，不再使用它"
+      ],
+      "correct": 1,
+      "explanation": "调试单个失败的工具需要追踪数据流：Claude Code 发送了什么输入 → 调用了什么 API → API 返回了什么 → 又是如何被转换成输出的。在每一步添加日志语句（或使用 Python 的 logging 模块）。一旦你能看到实际的 API 响应与你预期的对比，问题所在就会一目了然。这是任何集成代码通用的调试方法。"
+    },
+    {
+      "type": "quiz",
+      "question": "你构建了一个把凭据存储在纯文本配置文件中的 MCP 服务器。安全问题是什么？该如何修复？",
+      "options": [
+        "如果文件权限受限，纯文本是可以的",
+        "纯文本凭据可能被不小心提交到 git、被记录到日志中，或被恶意软件读取——应改用环境变量或密钥管理工具",
+        "凭据应该直接写在服务器代码里，而不是配置文件中",
+        "MCP 服务器不需要凭据"
+      ],
+      "correct": 1,
+      "explanation": "文件中的纯文本凭据是一个重大安全风险：它们可能被不小心提交到版本控制中（一种非常常见的事故）、被包含在备份文件中，或被其他进程读取。正确的做法是：使用环境变量（凭据完全不存储在任何文件中），或者使用需要认证才能访问凭据的密钥管理工具（AWS Secrets Manager、1Password 等）。立即把含有凭据的配置文件加入 .gitignore。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 8-15 课。** 你已经构建了自己的第一个自定义 MCP 服务器——Claude Code 现在既能访问预置服务器，也能访问你自己的工具。第 8-16 到 8-22 课将介绍多 MCP 办公工作流和高级集成模式。"
+    }
+  ],
+  "nextLesson": "8-16",
+  "prevLesson": "8-14"
+}

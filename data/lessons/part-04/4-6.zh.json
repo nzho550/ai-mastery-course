@@ -1,0 +1,112 @@
+{
+  "id": "4-6",
+  "title": "你的第一个 HTML 文件（不用 VS Code）",
+  "part": 4,
+  "estimatedMinutes": 65,
+  "tags": [
+    "computer-basics",
+    "beginner",
+    "html",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你将只用记事本，从零开始写一个真正的网页。没有框架，没有教程依赖，没有任何依赖包——只有一个文本文件和一个浏览器。学完之后，你会拥有一个自己亲手搭建出来的、真正能用的网页，理解最基本、最重要的 HTML 标签，并且感受到“编辑—保存—刷新”这个循环是怎么运作的。互联网上的每一个网站，最初都是这样开始的。"
+    },
+    {
+      "type": "text",
+      "content": "## HTML 只是一个文本文件\n\n关于网站，大多数人没意识到的一点是：无论是一个简单的博客，还是一个复杂的 Web 应用，每一个网页最底层，都是一个扩展名为 `.html` 的纯文本文件。浏览器读取这个文件，然后把它渲染成视觉上的样子。仅此而已。\n\nHTML（超文本标记语言，HyperText Markup Language）使用**标签（tags）**——用尖括号 `< >` 包起来的标记——来描述文档的*结构*。浏览器读到这些标签就知道：“这是一个标题”“这是一个段落”“这是一张图片”。\n\n一个标签是这样工作的：`<h1>` 打开一个标题，`</h1>` 关闭它。开始标签和结束标签之间的所有内容，就是内容本身。名字前面的 `/` 表示这是一个结束标签：\n\n```html\n<h1>This is a heading</h1>\n<p>This is a paragraph.</p>\n<a href=\"https://example.com\">This is a link</a>\n```\n\n这种“开始标签、内容、结束标签”的模式，就是所有 HTML 的根基。一旦理解了这一点，读懂别人写的 HTML 就会变得很自然。"
+    },
+    {
+      "type": "text",
+      "content": "## 最简单的合法 HTML 文件\n\n每一个 HTML 文件都有相同的基本骨架：\n\n```html\n<!DOCTYPE html>\n<html>\n  <head>\n    <title>Page Title</title>\n  </head>\n  <body>\n    <h1>Hello, world!</h1>\n    <p>This is my first webpage.</p>\n  </body>\n</html>\n```\n\n我们逐行来读一遍：\n\n**`<!DOCTYPE html>`**——告诉浏览器“这是一份 HTML5 文档”。每个 HTML 文件的最顶部都需要它。严格来说它不是一个标签——它是一条声明。\n\n**`<html>` 和 `</html>`**——根元素。页面上的所有内容都活在这两者之间。\n\n**`<head>` 和 `</head>`**——包含*关于*这个页面的信息，这些信息不会被直接显示出来：页面标题、样式表的链接、元数据（metadata）。浏览器会读取它，但访问者看不到它。\n\n**`<title>Page Title</title>`**——出现在浏览器标签页上的文字。\n\n**`<body>` 和 `</body>`**——`<body>` 里面的一切，都是用户*能看到*的内容。你所有的内容都放在这里。\n\n**`<h1>Hello, world!</h1>`**——一级标题。最大的标题。总共有六个级别：从 `<h1>` 到 `<h6>`。\n\n**`<p>This is my first webpage.</p>`**——一段文字。\n\n缩进（标签前面的空格）只是为了方便人类阅读——浏览器会忽略它。但保持统一的缩进是所有开发者的通用习惯，因为这样一眼就能看清结构。"
+    },
+    {
+      "type": "text",
+      "content": "## 必备的 HTML 标签\n\n你不需要记住每一个 HTML 标签——总共有一百多个。但下面这 15 个就足以覆盖你写基础网页所需要的一切：\n\n**文字和标题：**\n```html\n<h1>Largest heading</h1>\n<h2>Second level heading</h2>\n<h3>Third level heading</h3>\n<p>A paragraph of text.</p>\n<strong>Bold text</strong>\n<em>Italic text</em>\n<br>   <!-- line break — no closing tag needed -->\n```\n\n**链接和图片：**\n```html\n<a href=\"https://example.com\">Click here</a>\n<a href=\"about.html\">About page (relative link)</a>\n<img src=\"photo.jpg\" alt=\"Description of image\">\n```\n\n**列表：**\n```html\n<ul>\n  <li>Unordered list item (bullet points)</li>\n  <li>Another item</li>\n</ul>\n\n<ol>\n  <li>Ordered list item (numbered)</li>\n  <li>Second item</li>\n</ol>\n```\n\n**结构和样式：**\n```html\n<div>A generic container (block element)</div>\n<span>Inline container for text styling</span>\n<hr>   <!-- horizontal rule / divider line -->\n\n<!-- This is a comment — not shown in the browser -->\n```\n\n**`style` 属性（快速的行内 CSS）：**\n```html\n<h1 style=\"color: darkblue;\">Blue heading</h1>\n<p style=\"font-size: 18px; color: grey;\">Styled paragraph</p>\n<body style=\"background-color: #f5f5f5; font-family: Arial, sans-serif;\">\n```\n\n`style` 属性让你可以直接给一个元素加上 CSS，而不需要单独的样式表。对于大型项目来说，这不是最佳实践，但对学习和快速试验来说非常合适。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**记事本的陷阱：** 当你在记事本里保存文件时，它默认会存成 `.txt`。如果你把文件命名为 `hello.html`，但“保存类型”下拉框仍然是“文本文档 (*.txt)”，Windows 就会把它存成 `hello.html.txt`——浏览器就没法把它当作网页打开。**在记事本里保存 HTML 文件时，一定要把“保存类型”改成“所有文件 (*.*)”。** 然后在文件名框里输入完整的文件名，包括 `.html`。"
+    },
+    {
+      "type": "text",
+      "content": "## 如何在浏览器里打开你的文件\n\n保存好 `hello.html` 之后，不需要任何服务器或托管服务就能在本地查看它：\n\n1. 打开文件资源管理器\n2. 导航到你保存文件的位置\n3. 双击 `hello.html`\n\n你的默认浏览器会打开并显示这个页面。地址栏会显示 `file:///C:/Users/.../hello.html`——那是一个本地文件 URL。整个过程完全在你的电脑上完成。\n\n**编辑—保存—刷新循环：**\n1. 在记事本里做一处修改\n2. 按 `Ctrl+S` 保存\n3. 切换到浏览器，按 `F5` 刷新\n4. 看到你的改动\n\n这个循环——编辑、保存、刷新——是所有 Web 开发的根本流程。用 React、Vue 或任何现代框架的专业开发者，做的本质上是同一件事，只是第 3 步被自动化得更多而已。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Hello Web——搭建一个有样式的个人主页",
+      "content": "你将搭建一个真正的关于你自己的网页，包含标题、段落、列表，以及基础样式。请跟着每一步操作。\n\n**第 1 步——打开记事本：**\n按 Windows 键，输入 `notepad`，按回车。\n\n**第 2 步——输入你的 HTML：**\n输入下面的内容，把所有 `[占位符]` 文字换成你自己的内容：\n\n```html\n<!DOCTYPE html>\n<html>\n  <head>\n    <title>About [Your Name]</title>\n  </head>\n  <body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; color: #333;\">\n\n    <h1 style=\"color: #2c3e50;\">[Your Name]</h1>\n    <p style=\"color: grey; font-size: 14px;\">Learning AI Tools &amp; Code</p>\n\n    <h2>About Me</h2>\n    <p>I'm currently [describe what you do or are learning in one sentence].</p>\n\n    <h2>What I'm Learning</h2>\n    <ul>\n      <li>AI tools and how to use them effectively</li>\n      <li>[One thing you want to learn from this course]</li>\n      <li>[Another skill or topic you're interested in]</li>\n    </ul>\n\n    <h2>A Quote I Like</h2>\n    <p><em>\"[Write your favourite quote here]\"</em></p>\n\n    <hr>\n    <p style=\"font-size: 12px; color: grey;\">\n      Built with HTML on [today's date].\n    </p>\n\n  </body>\n</html>\n```\n\n**第 3 步——正确保存：**\n1. 点击 **文件** → **另存为**\n2. 导航到 `Documents\\ai-course-projects\\exercises`\n3. 把**“保存类型”**下拉框改成**“所有文件 (*.*)”**\n4. 在**“文件名”**框里，准确输入：`hello.html`\n5. 点击 **保存**\n\n**第 4 步——在浏览器里打开：**\n1. 打开文件资源管理器\n2. 导航到 `Documents\\ai-course-projects\\exercises`\n3. 双击 `hello.html`\n\n你应该会看到你的带样式的页面：深蓝色的标题、灰色的副标题、各个板块、一个项目符号列表，以及斜体的引用。\n\n**第 5 步——做一处修改：**\n1. 回到记事本\n2. 找到 `<body style=\"...\"` 那一行\n3. 把 `color: #333` 改成 `color: #1a1a2e`（一个更深的藏青色）\n4. 保存（`Ctrl+S`）\n5. 在浏览器里按 `F5` 刷新\n\n你应该会看到文字颜色发生了变化。这就是编辑—保存—刷新循环。\n\n**第 6 步——加一个链接：**\n在 `</body>` 之前，加上：\n```html\n<h2>Useful Link</h2>\n<p><a href=\"https://claude.ai\">Go to Claude.ai</a></p>\n```\n保存并刷新。点击这个链接测试一下。\n\n**第 7 步——加一张图片（可选）：**\n如果你电脑上存了任何照片，把它复制到你的 `exercises` 文件夹里，然后加上：\n```html\n<img src=\"yourphoto.jpg\" alt=\"A photo\" style=\"width: 200px; border-radius: 8px;\">\n```\n\n**反思：**\n打开 `notes/html-notes.md`，写下：\n- 哪种标签结构让你最困惑？\n- `style` 属性让你做到了什么？\n- 要把这个变成一个真正的网站，你还需要学些什么？"
+    },
+    {
+      "type": "quiz",
+      "question": "你在记事本里搭建了一个 HTML 页面，保存了它，并在浏览器里打开了。你对 HTML 做了一处修改——但在浏览器里按了 F5 之后，什么都没变。最可能的原因是什么？",
+      "options": [
+        "浏览器缓存了旧版本，没法刷新",
+        "你在记事本里编辑了 HTML，但在浏览器刷新之前忘了保存文件",
+        "HTML 文件一旦在浏览器里打开，就没法再更新了",
+        "文件扩展名不对——它被存成了 .txt 而不是 .html"
+      ],
+      "correct": 1,
+      "explanation": "浏览器每次按 F5 时，都会重新从磁盘读取文件——但它读到的是磁盘上当前保存的内容。如果你在记事本里做了修改，但在浏览器里按 F5 之前没有先按 Ctrl+S 保存，浏览器刷新出来的就是之前保存的旧版本。编辑—保存—刷新这个循环，要求你先保存。这是初学者在记事本里编辑 HTML 时最常犯的一个错误。解决方法：始终先保存（在记事本里按 Ctrl+S），再刷新（在浏览器里按 F5）。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "小练习 A——给你的 HTML 文件加一个页面",
+      "content": "这个练习会扩展你在这一课里创建的 HTML 文件——把它变成一个真正的两页网站。\n\n**第 1 步——用文本编辑器（记事本或 VS Code）打开**这一课里的 index.html。\n\n**第 2 步——添加一个新页面。** 在同一个文件夹里创建第二个文件，命名为 `about.html`，结构如下：\n```html\n<!DOCTYPE html>\n<html>\n<head>\n    <title>About — My First Site</title>\n</head>\n<body>\n    <h1>About This Site</h1>\n    <p>Write a sentence about yourself or this project here.</p>\n    <a href=\"index.html\">Back to Home</a>\n</body>\n</html>\n```\n\n**第 3 步——把两个页面链接起来。** 在 index.html 里，加一个指向 about.html 的链接：\n```html\n<a href=\"about.html\">About</a>\n```\n\n**第 4 步——测试一下。** 在浏览器里打开 index.html。点击你新加的链接。它能跳转到 about.html 吗？\n\n**第 5 步——问 Claude：** *“我有一个 index.html 和一个 about.html，它们互相链接着。为了让它看起来更像一个真正的网站，接下来我应该添加哪 3 件东西？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "小练习 B——为真实场景由 AI 构建一个网页",
+      "content": "用 AI 构建一个你真的会用到的 HTML 页面——不是一个练习用的东西。\n\n**第 1 步——为一个网页选一个真实的用途：** 个人作品集、项目落地页、速查表、活动邀请函、简单的仪表盘。\n\n**第 2 步——向 Claude 描述它：**\n```\n我想创建一个单独的 HTML 页面（不用任何框架，只用纯 HTML 和行内 CSS），用途是：[描述你的使用场景]\n\n它应该包含：\n- [列出你想要的板块]\n- [任何具体的内容]\n- [任何样式偏好——颜色、字体、布局]\n\n让它看起来专业一些。把所有 HTML 都放在一个完整的文件里，方便我保存后直接在浏览器里打开。\n```\n\n**第 3 步——把 Claude 给你的 HTML 保存**成一个文件，并在浏览器里打开它。\n\n**第 4 步——请求有针对性的改进：**\n- “页头看起来太单调了——给它加一个彩色背景”\n- “在底部加一个联系方式板块”\n- “让它在手机上显示得更好”\n\n**第 5 步——必做的审查：** 问 Claude：*“审查一下你刚写的这段 HTML。找出 3 个具体的问题：无障碍访问方面的问题、在小屏幕上的布局问题，或者一个专业的 Web 开发者会加上的缺失元素。”* 至少修复其中 2 个问题。\n\n**第 6 步——这个页面是你自己的了。** 留着它，并把它展示给别人看。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "小练习 C——用 AI 排查 HTML 问题",
+      "content": "当 HTML 出问题时，懂得怎么让 AI 帮你修好它，比记住每一个 HTML 标签更有价值。\n\n**第 1 步——故意弄坏你的 HTML**，方法是删掉一个结束标签（删掉 `</p>` 或 `</div>`），或者在一个链接里打错字（把 `href` 写成 `hrf`）。\n\n**第 2 步——在浏览器里打开这个被弄坏的文件。** 它看起来怎么样？浏览器有没有显示错误，还是布局悄无声息地就乱了？\n\n**第 3 步——把这段坏掉的 HTML 粘贴给 Claude**，并问：*“这段 HTML 渲染不正常。找出所有的错误并修复它们。解释每一个错误是什么，以及它为什么导致了它所引发的问题。”*\n\n**第 4 步——对比** Claude 修复后的版本和你的原始版本。Claude 有没有找到你故意引入的那个错误？它还找到了其他问题吗？\n\n**第 5 步——使用浏览器开发者工具：** 在浏览器里按 F12。点击“元素（Elements）”标签页。这里会显示浏览器实际渲染出来的 HTML——如果存在错误，它可能和你写的不一样。\n\n**第 6 步——记住这个规律：** 在任何网页的任何元素上右键 → 检查元素（Inspect Element）。你可以看到任何网站的 HTML。这正是 Web 开发者的学习方式——通过阅读真实网站的真实 HTML。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "小练习 D——给你的网站加上 CSS 样式",
+      "content": "你的 HTML 网站已经能用了——现在让它变得好看一点。CSS 控制外观：颜色、字体、布局、间距。\n\n**第 1 步——用文本编辑器打开** index.html。\n\n**第 2 步——请 Claude 加上专业的样式：**\n```\n我有这个 HTML 文件：[粘贴它]\n\n加上 CSS 样式，让它看起来更专业。要求：\n- 一个干净、现代的字体（用 Google Fonts 或系统字体）\n- 一套配色方案，有一个主色和一个辅助色\n- 合适的间距和边距\n- 链接应该看起来像按钮，而不是普通文字\n- 在桌面端和移动端都要好看\n\n把所有 CSS 都放进 <head> 里的一个 <style> 标签中。给我完整的更新后的文件。\n```\n\n**第 3 步——保存并打开**更新后的文件。它看起来是你想要的样子吗？\n\n**第 4 步——自己动手做一处具体的修改：** 在 CSS 里找到颜色代码（比如 `#3498db`），把它改成另一种颜色。刷新浏览器，立刻看到效果。\n\n**第 5 步——把你完成的网站分享**给别人看——哪怕只是一张截图。你搭建了一个真正的网页。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在浏览器里打开你的 HTML 文件，页面看起来完全是空白的。Claude 建议检查有没有未闭合的标签。这是什么意思？",
+      "options": [
+        "文件没有正确保存",
+        "一个用 <tag> 打开的标签，从来没有用 </tag> 关闭，导致浏览器不知道这个元素在哪里结束",
+        "文件扩展名不对",
+        "浏览器不支持这个版本的 HTML"
+      ],
+      "correct": 1,
+      "explanation": "HTML 使用成对的标签：<p> 打开，</p> 关闭。如果你打开了一个标签却从来没关闭它，浏览器往往会把后面所有的内容都当成这个元素的一部分——这可能导致内容变得不可见、失去格式，或者位置错乱。举个例子，忘记关闭 <style> 标签，会导致浏览器把你页面上的所有内容都当成 CSS 来解读。永远要检查每一个开始标签都有对应的结束标签。"
+    },
+    {
+      "type": "quiz",
+      "question": "HTML 和 CSS 之间的区别是什么？",
+      "options": [
+        "HTML 用于网站，CSS 用于应用程序",
+        "HTML 定义内容和结构（页面上有什么）；CSS 定义外观（它看起来怎么样）",
+        "HTML 更古老，CSS 取代了它",
+        "它们是同一项技术的两个不同名字"
+      ],
+      "correct": 1,
+      "explanation": "HTML（超文本标记语言）定义结构和内容——标题、段落、链接、图片、列表。CSS（层叠样式表）控制视觉呈现——颜色、字体、间距、布局、动画。它们是配合工作的：HTML 是骨架，CSS 是皮肤和衣服。你可以只改 CSS，而完全不动 HTML 内容，就彻底改变一个页面的整体视觉设计。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了课程 4-6。** 你理解了文件是如何组织的，能自信地在终端里导航，知道什么是代码、错误是怎么运作的，并且已经搭建并打开了你的第一个有样式的网页。接下来：课程 4-7 会在这些基础上进一步扩展。"
+    }
+  ],
+  "nextLesson": "4-7",
+  "prevLesson": "4-5"
+}

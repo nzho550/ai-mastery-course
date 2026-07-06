@@ -1,0 +1,93 @@
+{
+  "id": "6-20",
+  "title": "安全、隐私与内容排除",
+  "part": 6,
+  "estimatedMinutes": 55,
+  "tags": ["copilot", "security", "privacy", "enterprise", "government", "content-exclusion", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n对政府工作者以及任何处理敏感数据的人来说，弄清楚 Copilot 会怎么处理你的代码，不是可选项——而是一项职业要求。这节课会回答你的 IT 安全团队会问的那些问题：\n\n- Copilot 什么时候会把哪些数据发送到外部服务器？\n- GitHub 拿这些数据做了什么？\n- 如何阻止 Copilot 看到敏感文件？\n- 个人版、商业版和企业版的数据保护有什么区别？\n- 如何扫描 Copilot 生成的代码，找出安全漏洞？\n- 当 Copilot 建议的代码看起来不安全时，应该怎么办？\n\n这节课教你在数据敏感性、合规性和审计追踪都很重要的环境中，放心地使用 Copilot。"
+    },
+    {
+      "type": "text",
+      "content": "## Copilot 发送哪些数据、什么时候发送\n\n理解数据流向，是就 Copilot 使用做出明智决策的基础。\n\n### 数据类别\n\nGitHub Copilot 会收集并发送三类数据：\n\n**1. 用户参与度数据**\n匿名化的使用统计：你用了哪些功能、你接受还是拒绝了建议、会话时长。这是遥测数据——不包含你的代码。GitHub 会保留 24 个月。所有 Copilot 套餐都必须提供——无法关闭。\n\n**2. 提示词（Prompts）**\n为了生成回复而发送的聊天消息、选中的代码和文件内容。提示词在返回建议后会**立即被丢弃**——GitHub 不会保留它们。\n\n**3. 建议（Suggestions）**\nCopilot 生成的代码和文本。GitHub **不会保留**这些建议。\n\n### 这在实际中意味着什么\n\n- 你在启用了 Copilot 的文件中输入的代码**会被发送**，用来生成行内建议\n- 你选中并附加到聊天中的代码**会被发送**，作为上下文\n- 你添加到 Copilot Edits 工作集中的文件**会被发送**，作为上下文\n- 你工作区中的配置文件（`.env`、`secrets.yaml`）**有可能被抽样**作为上下文\n- 回复之后：提示词和建议就消失了——GitHub 不会保留它们\n\n### 模型提供商与数据处理\n\n当你在 Copilot 中使用非 OpenAI 模型时：\n- **Claude 模型（Anthropic）：** GitHub 与 Anthropic 之间有零数据保留协议。托管在 AWS/GCP 上。\n- **Gemini 模型（Google）：** 不用于模型训练。托管在 GCP 上。\n- **OpenAI 模型：** 零数据保留协议。托管在 Azure 上。\n- **MAI-Code-1-Flash（Microsoft）：** 微软自研模型，托管在 GitHub 租户内的 Azure 上。"
+    },
+    {
+      "type": "text",
+      "content": "## 商业版、企业版与个人版的数据保护对比\n\n你的套餐决定了你的数据保护级别。\n\n### 个人版 / Pro / Pro+（个人账户）\n\n截至 2026 年 4 月，GitHub 会使用来自个人 Copilot 账户的交互数据来训练和改进 AI 模型，**除非你选择退出**。\n\n**退出方法：** GitHub 设置 → Copilot → 取消勾选“允许 GitHub 使用我的数据进行 AI 训练”\n\n### 商业版（组织套餐）\n\n- **数据不会用于训练**——受 GitHub 数据保护协议（DPA）保护\n- 提示词和建议在响应后会被丢弃\n- 组织管理员可以管理策略\n- 可以为敏感文件设置内容排除\n\n### 企业版\n\n具备商业版的所有保护，另外还有：\n- 企业级策略强制执行\n- 知识库（在已批准的内部文档上训练）\n- 组织级内容排除\n- Copilot 使用指标与审计日志\n- MCP 服务器白名单\n- 微调能力\n\n**对政府而言：** 大多数政府部门部署的 GitHub Copilot 都是商业版或企业版，这意味着你的代码不会被用于训练 AI 模型。在做任何假设之前，先核实你所在的套餐。"
+    },
+    {
+      "type": "text",
+      "content": "## 内容排除——让敏感文件远离 Copilot\n\n内容排除是防止 Copilot 读取特定文件的主要工具。\n\n### 内容排除的作用\n\n当一个文件被排除后：\n- 该文件中**不再提供**行内建议\n- 该文件内容**不会用来影响**其他文件中的建议\n- 该文件**不会被发送**给 AI 模型作为上下文\n- 该文件**不会被纳入** Copilot 代码审查\n\n**重要的局限性：** 内容排除目前**不适用于** Copilot CLI、Copilot 云端代理，以及 VS Code 中的 Agent Mode。如果你在使用这些功能，被排除的文件可能仍然可以被访问到。对于真正高度敏感的文件，最好把它们完全排除在项目目录之外。\n\n### 设置内容排除\n\n内容排除是由仓库管理员或组织所有者在 GitHub 设置中配置的——而不是在仓库文件里。\n\n**仓库级排除：**\n1. 进入你的仓库 → Settings → Copilot\n2. 在 **Content exclusion** 下，添加要排除的文件的 glob 模式：\n\n```\n# Exclude all environment files\n**/.env\n**/.env.*\n\n# Exclude credential files\n**/secrets.*\n**/credentials.*\n**/config/production.*\n\n# Exclude sensitive data directories\ndata/restricted/**\ndata/classified/**\ndocs/internal/**\n\n# Exclude specific file types with sensitive data\n**/*.pem\n**/*.key\n**/*.p12\n```\n\n**组织级排除**（适用于组织内所有仓库）：\n1. GitHub 组织设置 → Copilot → Content exclusion\n2. 添加适用于所有仓库的排除模式\n\n**企业级排除**适用于企业内所有组织的所有用户。\n\n改动最多需要 30 分钟才能同步到已经加载了 Copilot 的 IDE 中。"
+    },
+    {
+      "type": "text",
+      "content": "## 安全漏洞检测\n\nCopilot 内置了安全扫描功能，你也可以在自己的工作流中添加明确的安全审查步骤。\n\n### 密钥检测（推送保护）\n\nCopilot MCP 服务器包含推送保护——它们会阻止密钥出现在 AI 生成的回复中，也会防止你通过 MCP 工具操作不小心暴露密钥。\n\nGitHub 还有原生的密钥扫描功能（独立于 Copilot），会扫描推送事件并对检测到的凭据发出警报。\n\n**最佳实践：** 即便有这些保护，也绝不要把真实凭据写进代码或提示词里。使用环境变量（通过 git 忽略的 `.env` 文件），在代码中通过 `os.environ.get('SECRET_NAME')` 这样的方式引用它们。\n\n### 安全审查提示词\n\n在 Copilot Chat 中，或结合合规技能，用这些提示词来审查代码中的安全问题：\n\n**OWASP Top 10 检查：**\n```\n@workspace 审查 #file:[文件名]，检查 OWASP Top 10 漏洞：\n1. 注入（SQL、命令、LDAP）\n2. 身份验证失效\n3. 敏感数据暴露\n4. XML 外部实体\n5. 访问控制失效\n6. 安全配置错误\n7. XSS（跨站脚本）\n8. 不安全的反序列化\n9. 使用已知存在漏洞的组件\n10. 日志记录不足\n\n对每一类：说明是 Clear（无问题）、Flag（有问题）还是 N/A。对任何 Flag，引用具体的代码行和具体的风险。\n```\n\n**政府专用安全检查：**\n```\n审查这段代码是否符合政府安全要求：\n1. 身份验证：任何数据访问之前是否都验证了用户身份？\n2. 授权：是否在每一次数据操作时都检查了权限，而不只是在登录时检查一次？\n3. 审计日志：所有的创建、更新、删除操作是否都记录了用户 ID 和时间戳？\n4. PII 保护：个人标识信息（姓名、ID、联系方式）在静态存储和传输过程中是否都受到保护？\n5. 错误处理：错误信息是否避免暴露内部系统细节？\n6. 输入校验：所有外部输入在处理或存储之前是否都经过了净化？\n```\n\n### 评估 Copilot 生成代码的安全性\n\nCopilot 生成的代码可能存在安全问题——它是在补全模式，而不是在推理安全影响。对生成的代码应用这些检查：\n\n```\n审查 Copilot 刚生成的代码。具体检查：\n- 它在使用输入之前是否正确校验了输入？\n- 如果这个输入来自用户，它有没有可能被用于注入攻击？\n- 有没有任何地方把用户可控的数据拼接进了查询或命令里？\n- 有没有任何地方硬编码了凭据或密钥？\n- 它是否处理了身份验证和授权，还是假定调用方已经处理好了？\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**对政府用户而言——开始之前：** 在工作中使用 Copilot 之前，先和你的 IT/安全团队核实这三件事：\n1. **Copilot 是否已获批准**在政府管理的硬件和网络上使用？\n2. **Copilot 被允许处理什么密级**的信息？（未分级？敏感但未分级？official sensitive？机密？）\n3. **你的机构是否有 GitHub Enterprise 协议**——你是否在这个协议之内？（这决定了你的数据保护级别。）\n\n永远不要假设某个工具已经获批——对任何用于政府数据的 AI 工具，都要拿到明确的书面确认。"
+    },
+    {
+      "type": "text",
+      "content": "## 遥测与隐私设置\n\n### 关闭代码片段收集（个人账户）\n\n对个人账户来说，你可以选择退出用于生成建议的代码片段收集：\n\n**在 VS Code 中：** Settings → 搜索 “telemetry” → 把 `github.copilot.telemetry.enabled` 设为 false。\n\n**在 GitHub.com 上：** Settings → Copilot → 取消勾选遥测收集选项。\n\n**商业版/企业版：** 用于训练的片段收集本来就已经关闭——无需操作。\n\n### IDE 层面的隐私设置\n\n**VS Code `settings.json`——有用的 Copilot 隐私设置：**\n```json\n{\n  \"github.copilot.enable\": {\n    \"*\": true,\n    \".env\": false,\n    \"*.key\": false,\n    \"*.pem\": false,\n    \"secrets.*\": false\n  },\n  \"github.copilot.telemetry.enabled\": false\n}\n```\n\n`github.copilot.enable` 对象让你可以在 IDE 层面为特定的文件模式关闭 Copilot。注意：这是一个 IDE 层面的设置，不是服务器端的内容排除——它只影响你本地的 VS Code，不会影响你同事的 IDE 设置。\n\n### 内容排除 vs. IDE 层面关闭\n\n| | 内容排除（仓库/组织设置） | IDE 层面关闭（settings.json） |\n|---|---|---|\n| 影响范围 | 所有在这个仓库上使用 Copilot 的团队成员 | 只影响你自己的 VS Code |\n| 阻止文件被发送 | 是 | 是（对于建议而言） |\n| 阻止该文件影响其他建议 | 是 | 否 |\n| 组织管理员可见 | 是 | 否 |\n\n要实现真正的组织级强制执行，需要在 GitHub 组织设置中配置内容排除。IDE 设置只是个人层面的一层保护。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "对 Copilot 生成的代码做安全审计",
+      "content": "用 Copilot 审计它自己生成的一段代码——应用安全审查员的思维方式。\n\n**第 1 步——生成一段有安全影响的代码。** 好的例子：\n- 一个登录表单处理程序\n- 一个文件上传处理器\n- 一个使用用户输入的数据库查询函数\n- 一个根据用户 ID 返回数据的 API 端点\n\n先接受 Copilot 的第一个建议——暂时不要审查它的安全性。\n\n**第 2 步——对生成的代码做安全审计：**\n```\n审查你刚生成的代码。以资深安全审查员的心态检查：\n1. SQL 注入：有没有把用户输入拼接进查询里？\n2. 命令注入：有没有把输入传给 shell 命令？\n3. 路径穿越：输入中的恶意路径有没有可能访问未授权的文件？\n4. 身份验证绕过：是否在返回任何数据之前都检查了身份验证？\n5. 敏感数据暴露：返回结果中有没有可能包含用户无权查看的数据？\n6. 批量赋值：任何对象创建时，是否只接受了预期的字段？\n\n对每个发现的问题：引用具体代码、解释攻击途径、并给出修复后的版本。\n```\n\n**第 3 步——应用修复。** 用 Copilot Edits 或行内聊天应用每一个修复。\n\n**第 4 步——重新审计。** 修复之后问：“现在这段代码是否解决了所有已发现的安全问题？修复过程有没有引入新的问题？”\n\n**收获：** 对比最初生成的代码和修复后的版本。Copilot 第一次生成的代码是否存在安全问题？这很正常——AI 代码生成默认并不具备安全意识。始终要对生成的代码做安全审计。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "实战 A——设置内容排除",
+      "content": "为一个包含敏感文件类型的真实仓库配置内容排除。\n\n**第 1 步——审计你的仓库，找出敏感文件。**\n在终端中查找：\n```bash\nfind . -name '*.env' -o -name '*.env.*' -o -name 'secrets.*' -o -name '*.key' -o -name '*.pem' -o -name '*.p12' | grep -v node_modules\n```\n也要留意：\n- 硬编码了凭据的配置文件\n- 包含真实用户数据的数据目录\n- 内部政策或限制级文档\n\n**第 2 步——进入仓库设置。**\n在 GitHub.com 上：你的仓库 → Settings → Copilot → Content exclusion\n\n**第 3 步——为你找到的所有敏感内容添加排除模式。** 使用 glob 模式：\n```\n**/.env\n**/.env.*\ndata/sensitive/**\ndocs/restricted/**\n**/*.key\n**/*.pem\n```\n\n**第 4 步——测试排除效果。** 打开 VS Code，导航到一个被排除的文件。Copilot 不应该给出建议。把鼠标悬停在 Copilot 的状态栏图标上——它可能会提示这个文件已被排除。\n\n**第 5 步——等待 30 分钟**（或重新加载 VS Code），如果排除没有立即生效，再测试一次。\n\n**第 6 步——把你的排除配置记录下来**，写进团队 README 或安全运行手册：排除了哪些文件、为什么排除。这能让审计人员和新团队成员清楚地了解，哪些数据永远不会离开本地环境。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "实战 B——VS Code 隐私配置",
+      "content": "为负责任地使用 Copilot 配置你的个人 VS Code 设置。\n\n**打开 VS Code 的 settings.json**（Ctrl+Shift+P → “Open User Settings JSON”），添加以下设置：\n\n**第 1 步——为敏感文件类型关闭 Copilot：**\n```json\n\"github.copilot.enable\": {\n  \"*\": true,\n  \".env\": false,\n  \"*.env\": false,\n  \"*.key\": false,\n  \"*.pem\": false,\n  \"*.p12\": false,\n  \"*.pfx\": false,\n  \"*.cer\": false\n}\n```\n\n**第 2 步——测试它。** 打开一个 `.env` 文件。Copilot 应该不会给出任何建议。打开一个普通的 `.js` 或 `.py` 文件——建议应该正常工作。\n\n**第 3 步——检查遥测设置：**\n```json\n\"github.copilot.telemetry.enabled\": false\n```\n如果你在商业版/企业版套餐上，这可能已经由你的组织控制了。如果你是个人套餐，且不想发送遥测数据，就设置这一项。\n\n**第 4 步——添加一个 `.copilotignore` 文件。** 一些 MCP 客户端和 CLI 工具支持 `.copilotignore` 文件（类似 `.gitignore`），用来把文件排除在上下文之外：\n```\n# .copilotignore (create in project root)\n.env\n.env.*\nsecrets.yaml\nconfig/production.yaml\ndata/pii/**\n*.key\n*.pem\n```\n\n**第 5 步——通过询问 Copilot 你被排除的文件来验证配置：**\n```\n你能看到我们 .env 文件的内容吗？它定义了哪些环境变量？\n```\n如果排除配置生效，Copilot 应该无法描述被排除文件的内容。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "实战 C——为 AI 辅助开发构建安全检查清单",
+      "content": "为负责任地使用 Copilot 创建一份团队安全检查清单。\n\n**在你仓库的 `.github/` 文件夹中创建 `COPILOT-SECURITY.md`。**\n\n**第 1 部分——开始之前（每位开发者）**\n- [ ] 已确认我的 Copilot 套餐（个人版/商业版/企业版）以及对应的数据保护级别\n- [ ] 已核实 Copilot 被批准在这台设备上、处理这个密级的数据\n- [ ] 已配置 VS Code，为 .env 和凭据文件关闭 Copilot\n- [ ] 没有在包含 [列出你的具体敏感数据类型] 的文件中使用 Copilot\n\n**第 2 部分——向 Copilot 发送敏感数据之前**\n- [ ] 这些数据在 Copilot 使用的已批准敏感级别范围内\n- [ ] 要发送的文件中没有真实的 PII、凭据或机密信息\n- [ ] 如果我发送的是数据示例，它们是匿名化/脱敏后的测试数据\n\n**第 3 部分——审查 Copilot 生成的代码**\n- [ ] 检查了任何输入处理中的 SQL/命令注入\n- [ ] 验证了数据访问之前是否检查了身份验证\n- [ ] 验证了生成的代码中没有硬编码凭据\n- [ ] 验证了错误信息不会暴露系统内部细节\n- [ ] 在接受生成的代码之前，针对它运行了现有测试\n\n**第 4 部分——仓库设置（管理员职责）**\n- [ ] 已为敏感文件模式配置内容排除\n- [ ] 已审查组织的 Copilot 策略，确认它们是恰当的\n- [ ] 如果适用，已配置 MCP 服务器白名单\n- [ ] 每季度审查一次 Copilot 使用指标\n\n**根据你所在机构的具体要求，定制**每一部分。让安全团队对最终版本签字确认。\n\n**成果：** 一份有文档记录、可审计的团队 Copilot 安全使用规范。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在 GitHub Copilot Business 套餐上。你用 Copilot 写一个处理员工薪资数据的函数。拿到建议之后，你发送作为上下文的薪资数据会发生什么？",
+      "options": [
+        "GitHub 会保留它 24 个月，用来改进 Copilot 模型",
+        "在返回建议之后会立即被丢弃——在商业版套餐上，GitHub 不会保留提示词",
+        "GitHub 会保留它 24 个月，但不用于训练",
+        "取决于你在设置里有没有选择退出数据收集"
+      ],
+      "correct": 1,
+      "explanation": "在 Copilot Business 套餐上，提示词（包括你作为上下文发送的代码/数据）在建议返回后会立即被丢弃。GitHub 与商业客户之间的数据保护协议明确排除了将这类数据用于 AI 训练。24 个月的保留期只适用于匿名化的用户参与度数据（关于你用了哪些功能的遥测），不适用于你的代码内容。这正是各机构选择购买商业版套餐、而不是用个人账户处理敏感数据的关键原因之一。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在仓库设置中为 data/restricted/** 配置了内容排除。一位同事在 VS Code 中打开了其中一个文件，发现 Copilot 依然给出了建议。最可能的原因是什么？",
+      "options": [
+        "内容排除对本地文件不起作用，只对 GitHub.com 有效",
+        "内容排除最多需要 30 分钟才能同步到 IDE。如果你同事在排除生效之前就打开了 VS Code，他们需要重新加载 VS Code",
+        "你同事使用的是个人版套餐，不支持内容排除",
+        "内容排除需要每位开发者安装一个 VS Code 扩展才能生效"
+      ],
+      "correct": 1,
+      "explanation": "内容排除是在服务器端应用的，但 VS Code 需要接收到更新后的策略才能生效。配置排除之后，最多需要 30 分钟才能同步到已经在运行的 IDE 会话中。你的同事应该重新加载 VS Code（Ctrl+Shift+P → Developer: Reload Window），以获取最新的排除设置。如果重新加载后建议仍然出现，要核实排除模式是否匹配文件路径——glob 模式区分大小写，目录分隔符必须使用正斜杠。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-20 课完成。** 理解 Copilot 发送什么数据、这些数据如何被处理，以及如何排除敏感内容，能为你在受监管环境中放心、负责任地使用 Copilot 打下基础。内容排除、IDE 隐私设置和安全审查提示词共同构成了一个框架，让 Copilot 在加速你工作的同时，不会暴露敏感数据。第 6-21 课将介绍 Copilot 团队与企业治理——IT 管理员和团队负责人需要管理的组织层面。"
+    }
+  ],
+  "nextLesson": "6-21",
+  "prevLesson": "6-19"
+}

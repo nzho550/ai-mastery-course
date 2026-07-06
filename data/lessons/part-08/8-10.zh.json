@@ -1,0 +1,129 @@
+{
+  "id": "8-10",
+  "title": "浏览器 / Playwright MCP——AI 控制一个真实的浏览器",
+  "part": 8,
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "playwright",
+    "browser-automation",
+    "claude-code"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将安装并运行好 Playwright MCP——并使用 Claude 打开网站、截图，以及从真实页面中提取信息。"
+    },
+    {
+      "type": "text",
+      "content": "## Playwright MCP 的作用\n\nPlaywright 是一个浏览器自动化框架——它可以通过程序控制 Chrome、Firefox 和 Safari。Playwright MCP 服务器将这项能力暴露给 Claude。\n\n有了 Playwright MCP，Claude 可以：\n- 导航到任意 URL\n- 为任意页面截图\n- 点击按钮和链接\n- 填写表单\n- 滚动、悬停，以及与页面元素交互\n- 提取页面中的文本内容\n- 在浏览器上下文中运行 JavaScript\n- 等待元素出现后再进行交互\n\n这是一个运行在你电脑上的真实浏览器。当 Claude 使用 Playwright 导航到一个网站时，一个真实的浏览器窗口会打开（或在后台以无头模式运行）。这不是模拟。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**在真实网站上进行真实操作。** 因为 Playwright 控制的是一个真实浏览器，Claude 可以与真实网站交互——包括你已登录的网站。它可以填写表单、点击提交按钮，并触发真实的操作。在确认之前，始终审查 Claude 计划做什么，尤其是在包含你账户凭证的网站上。"
+    },
+    {
+      "type": "text",
+      "content": "## 安装\n\nPlaywright MCP 服务器由 Microsoft 维护。安装它并将其添加到你的配置中："
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "npm install -g @playwright/mcp@latest"
+    },
+    {
+      "type": "text",
+      "content": "然后把它添加到你的全局 `settings.json`："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"playwright\": {\n      \"command\": \"npx\",\n      \"args\": [\"@playwright/mcp\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**首次运行时下载浏览器：** Playwright 首次运行时，可能需要下载浏览器二进制文件。这可能需要一两分钟。如果出现提示，允许它完成即可。这只会发生一次。"
+    },
+    {
+      "type": "text",
+      "content": "## 实际使用场景\n\n**网页抓取与监控：**\n`\"访问 news.ycombinator.com，列出排名前 10 的文章标题及其 URL。\"`\n\n**文档查阅：**\n`\"导航到 docs.anthropic.com，找到关于速率限制的页面。总结它写了什么。\"`\n\n**截图捕获：**\n`\"给 code.visualstudio.com 截个图，描述今天的首页展示了什么内容。\"`\n\n**表单填写：**\n`\"打开 [表单 URL]，用 [值] 填写各字段。在提交之前先给我看看填好的表单。\"`\n\n**对比调研：**\n`\"访问 Vercel、Netlify 和 Cloudflare Pages 的定价页面，比较它们免费套餐的限制。\"`\n\n**网站测试：**\n`\"在浏览器中打开我的 about-me.html 文件。检查所有链接是否正常，并给它的样子截图。\"`"
+    },
+    {
+      "type": "text",
+      "content": "## 无头模式 vs 有头模式\n\n默认情况下，Playwright MCP 以有头模式运行——当 Claude 导航时，你会看到浏览器窗口打开。这在学习阶段很有用，因为你可以观察到底发生了什么。\n\n对于后台自动化，你可以将其配置为无头运行（不显示窗口）：\n\n如果你想要静默的后台执行，在参数中加入 `\"--headless\"`。但在这一课中，请保持有头模式——观看 Claude 导航是理解它在做什么的最佳方式。"
+    },
+    {
+      "type": "text",
+      "content": "## Playwright 做不到的事\n\nPlaywright 并非无所不能：\n\n- **CAPTCHA**——大多数现代 CAPTCHA 系统能检测到自动化并加以阻止\n- **有强力反机器人检测的网站**——一些网站能检测到 Playwright 的特征并将其屏蔽\n- **需要双因素认证的操作**——如果一个网站需要双因素认证，Playwright 无法处理认证步骤\n- **Flash 或旧版插件**——现代 Playwright 不支持旧的插件技术\n\n对于常规网站、文档站点、新闻网站和公开的网页应用，Playwright 都能可靠地工作。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "网页自动化与信息提取",
+      "content": "**准备工作：**\n1. 在 PowerShell 中运行 `npm install -g @playwright/mcp@latest`\n2. 把 playwright 条目添加到你的 `settings.json`\n3. 重新启动 `claude`，输入 `/mcp` 确认 `playwright` 已列出\n\n**任务 1——截图并描述：**\n问：`\"使用 Playwright，导航到 code.visualstudio.com 并截图。描述首页上有什么——他们目前在展示什么？\"`\n\n观看浏览器窗口打开、导航，并捕获页面。\n\n**任务 2——提取实时信息：**\n问：`\"访问 news.ycombinator.com，列出排名前 5 的文章标题、它们的 URL，以及各自的点数。\"`\n\n**任务 3——文档抓取：**\n问：`\"导航到 modelcontextprotocol.io，告诉我首页或文档页面上列出了哪些 MCP 服务器。\"`\n\n**任务 4——多站点对比：**\n问：`\"访问 Vercel（vercel.com/pricing）和 Netlify（netlify.com/pricing）的免费套餐页面，比较：带宽限制、构建分钟数，以及免费套餐允许的网站数量。\"`\n\n观看 Claude 访问这两个页面并提取对比数据。\n\n**任务 5——测试你自己的作品：**\n问：`\"用 Playwright 在浏览器中打开我的 exercises/about-me.html 文件。截图，然后告诉我它看起来怎么样，并建议一个视觉上的改进。\"`\n\n注意：要打开一个本地文件，需要提供完整路径：`file:///C:/Users/YourName/Documents/ai-course-projects/exercises/about-me.html`\n\n把 Playwright 能做什么的摘要保存到 `notes/playwright-capabilities.md`。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——浏览器 MCP 能力巡览",
+      "content": "在 8 分钟内探索 Playwright/Browser MCP 能做什么。\n\n**第 1 步——在你的 Claude Code 设置中配置 Browser MCP**（Playwright MCP）。\n\n**第 2 步——测试基础导航：**\n- “打开一个浏览器，导航到 example.com”\n- “给当前页面截图”\n- “这个页面上有哪些链接？”\n\n**第 3 步——测试表单交互：**\n- “导航到一个简单的表单页面，在姓名字段中填入 'Test User'”\n\n**第 4 步——测试内容提取：**\n- “导航到 [一个与你工作相关的公开网页]，提取主要内容中的所有关键数据点”\n\n**第 5 步——问 Claude：** “哪些类型的网页自动化任务最适合用 Browser MCP？哪些应该使用其他方法（例如直接调用 API 而不是浏览器自动化）？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——自动化一个真实的网页任务",
+      "content": "使用 Browser MCP 自动化一个你目前每周至少手动做一次的真实网页任务。\n\n**第 1 步——找出一个你至少每周手动做一次的网页任务：** 检查一个仪表盘、填写一份表单、从网页表格中复制数据、监控某个网页的变化。\n\n**第 2 步——向 Claude Code 详细描述这个任务：** URL、你查看什么、你如何处理这些信息。\n\n**第 3 步——让 Claude Code 使用 Browser MCP 自动化这个任务：**\n```\n使用浏览器控制来自动化这个网页任务：\n任务：[描述它]\n从这里开始：[URL]\n每一步都描述你在做什么，让我能跟上进度。\n```\n\n**第 4 步——观看这次自动化执行。** 注意：哪些步骤它处理得正确，哪些需要人工判断？\n\n**第 5 步——评估：** 这次自动化每次能节省多少时间？它是否可靠到可以在无人监督的情况下运行？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——用 Browser MCP 进行网页抓取",
+      "content": "使用 Browser MCP 从网站进行符合道德规范的数据收集。\n\n**第 1 步——选择一个你需要定期获取数据的公开网站：** 招聘信息、新闻标题、（公开的）竞争对手定价、活动日历。\n\n**第 2 步——先检查法律和道德方面的考量：** 问 Claude：“为 [目的] 抓取 [网站] 是否合法且符合道德规范？我在继续之前应该检查什么？”\n\n**第 3 步——如果合适，设计提取方案：**\n```\n导航到 [URL]，提取：\n- [数据字段 1]：[它在页面上出现的位置]\n- [数据字段 2]：[它出现的位置]\n将输出格式化为 CSV 表格。\n```\n\n**第 4 步——运行这次提取。** 数据准确吗？格式有用吗？\n\n**第 5 步——考虑替代方案：** 对于有公开 API 的网站，直接调用 API 比浏览器抓取更可靠、也更礼貌。问 Claude：“[网站] 是否有比浏览器抓取更适合获取这些数据的公开 API？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——搭建一份自动化测试脚本",
+      "content": "使用 Browser MCP 自动化测试一个网页应用。\n\n**第 1 步——选择一个你正在构建或维护的网页应用。**\n\n**第 2 步——确定 3 个最重要的用户流程**进行测试：登录、核心功能、结账等。\n\n**第 3 步——让 Claude Code 创建测试场景：**\n```\n为 [应用名称] 中的这些用户流程创建浏览器自动化测试场景：\n1. [流程 1]：[描述预期行为]\n2. [流程 2]：[描述预期行为]\n3. [流程 3]：[描述预期行为]\n\n针对每个测试：描述步骤、需要验证什么，以及失败会是什么样子。\n```\n\n**第 4 步——使用 Browser MCP 执行一个测试场景。**\n\n**第 5 步——强制审查：** 问 Claude：*“审查你刚执行的测试场景。有哪些重要的用户行为你没有测试到？测试没有覆盖到的哪些边缘情况可能会破坏这个流程？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "工作坊 E——文件上传自动化：通过浏览器自动发送文档",
+      "content": "这正是用户特别问到的能力：使用 Browser MCP 自动定位、填写并提交文件上传表单——完全不碰键盘。这就是 Claude 如何代表你上传文档到各种服务的方式。\n\n**你什么时候需要这个功能：**\n- 上传 PDF、报告或图片到网页门户\n- 提交一份需要附件的表单\n- 上传文件到诸如 Google Drive（网页界面）、Notion 或客户门户等服务\n- 批量上传多个文件到某个网页服务\n- 自动化重复性的文档提交工作流程\n\n**浏览器中文件上传的工作原理：** HTML 文件上传元素（`<input type=\"file\">`）需要设置文件路径，而不是输入文本。Playwright 通过 `setInputFiles()` 原生支持这一点——Claude 可以定位文件输入元素并设置文件路径，触发上传，就像你自己点击了“选择文件”按钮并选择了文件一样。\n\n**第 1 步——准备一个测试文件。** 创建一份你愿意上传到某处的简单 PDF 或文本文件。把它放在一个已知路径：`C:\\Users\\YourName\\Documents\\test-upload.txt`。\n\n**第 2 步——找一个安全的上传目标。** 使用一个专门用于测试文件上传的服务：\n- `httpbin.org/forms/post`——一个接受文件上传的测试表单\n- 或者你自己的任何应用或服务，你通常在那里上传文件\n\n**第 3 步——让 Claude Code 执行这个文件上传工作流程：**\n```\n使用 Browser MCP，执行这个文件上传工作流程：\n\n1. 导航到 [带有文件上传表单的 URL]\n2. 找到页面上的文件上传输入元素\n   （它可能是一个 <input type=\"file\"> 元素，或一个可见的“选择文件”按钮）\n3. 将文件路径设置为：C:\\Users\\YourName\\Documents\\test-upload.txt\n4. 用以下值填写任何其他必填的表单字段：\n   - [字段名]：[值]\n   - [字段名]：[值]\n5. 截图展示文件已被选中且表单已填写完成\n6. 在提交*之前*把截图给我看——我会在你提交之前确认\n```\n\n**第 4 步——审查提交前的截图。** 验证：\n- 选中了正确的文件（上传字段中显示文件名）\n- 所有其他表单字段都包含正确的值\n- 你正处于正确的页面上\n\n**第 5 步——确认之后，让 Claude 提交。** 问：`\"表单看起来没问题。现在提交吧。\"`\n\n**第 6 步——验证结果。** 问：`\"给结果页面截图。上传成功了吗？显示了什么确认信息？\"`\n\n**真实场景延伸——批量上传工作流程：**\n```\n我需要把 5 个文件上传到 [服务]。这些文件位于：\n- C:\\Users\\YourName\\Documents\\reports\\january.pdf\n- C:\\Users\\YourName\\Documents\\reports\\february.pdf\n- [等等]\n\n对于每个文件：\n1. 导航到上传页面\n2. 选择文件\n3. 在文件名字段中填入不带扩展名的文件名\n4. 将类别设置为 'Monthly Report'\n5. 提交\n6. 等待成功确认，再进行下一个文件\n\n每次上传确认成功后，给我一张截图。\n```\n\n**关于文件上传自动化的重要说明：**\n- 提交前务必先预览填好的表单——一旦提交，上传可能会触发不可逆的操作\n- 有些服务使用自定义上传控件（拖放区域、Dropzone.js），其工作方式与标准文件输入不同——先让 Claude 识别输入机制\n- 如果某个网站在上传前使用 CAPTCHA，自动化会被阻止——这些需要手动处理\n- 大文件的上传可能需要时间；指示 Claude 等待完成指示器出现后再继续\n\n**成果：** 全面理解基于浏览器的文件上传自动化——具备用 Claude 自动向任何网页服务发送、提交和上传文档的能力。"
+    },
+    {
+      "type": "quiz",
+      "question": "Browser MCP 让 Claude Code 能够控制一个真实的浏览器。在需要登录的网站上使用它时，最重要的安全考量是什么？",
+      "options": [
+        "浏览器速度——已登录的会话自动化速度较慢",
+        "Claude Code 将以你的身份进行操作——它采取的任何行动（发帖、购买、删除）都会在你的账户下真实发生，产生真实后果",
+        "Browser MCP 不支持登录流程",
+        "所有 Browser MCP 会话都必须使用隐身模式"
+      ],
+      "correct": 1,
+      "explanation": "当 Claude Code 控制一个已登录的浏览器会话时，它是以你的身份进行操作的——使用你的权限、你的账户、你的数据。错误是真实的：如果它不小心公开发布了内容、购买了商品或删除了数据，这些后果都是真实的。对于任何在已认证会话上进行的浏览器自动化：在 Claude Code 采取行动之前，仔细审查它将要做什么，并且在没有逐步明确确认的情况下，避免让浏览器自动化执行任何不可逆的操作（购买、发帖、删除）。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude Code 使用 Browser MCP 填写并提交第三方网站上的一份表单。提交之前你必须验证什么？",
+      "options": [
+        "表单字段名称是否与 Claude Code 使用的一致",
+        "即将提交的数据是否完全符合你的意图——在提交之前审查每个字段的值，因为表单提交通常是不可逆的",
+        "网站是否使用了 HTTPS",
+        "表单是否没有 CAPTCHA 保护"
+      ],
+      "correct": 1,
+      "explanation": "表单提交往往是不可逆的——你无法撤销一份求职申请、取消一次活动报名，或撤回一封联系表单邮件。在提交之前，要求 Claude Code：“列出你即将提交的所有表单字段值。”阅读每一个值，验证其正确性，然后才确认提交。请像对待一笔金融交易一样对待浏览器表单提交——在确认之前先验证。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 8-10 课。** Claude 现在可以代表你浏览网页了。第 8-11 课是 MCP 的旗舰课程——一次使用 Gmail MCP 进行真实收件箱整理的会话。"
+    }
+  ],
+  "nextLesson": "8-11",
+  "prevLesson": "8-9"
+}

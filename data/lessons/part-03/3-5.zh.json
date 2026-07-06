@@ -1,0 +1,129 @@
+{
+  "id": "3-5",
+  "title": "少样本示例",
+  "part": 3,
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "few-shot",
+    "examples"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 本课你将学到什么\n\n你将学到如何通过给 AI 展示示例——而不需要任何训练、配置或技术设置——来教会它一种自定义的格式、风格或模式。这项技巧叫做少样本提示（few-shot prompting），对于输出需要遵循精确模式的任务，它的效果稳定优于纯文字说明。你还会学到什么时候该把少样本提示和思维链推理结合起来使用、如何写出能“教会”而不是“搞混”模型的示例，以及 8 种适用于不同职场任务的高价值应用场景。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**少样本提示为什么在技术上有效：** 语言模型是在数据中的模式上训练出来的。当你在提示词里提供示例时，你激活的是一种“上下文内学习”（in-context learning）——模型会调整自己的输出分布，去匹配你的示例所展示的模式。这个过程不涉及任何模型参数的改变，也不需要微调。模型只是在这次上下文窗口内，临时从你的示例中“学习”了一下。"
+    },
+    {
+      "type": "text",
+      "content": "## 光谱两端：零样本 → 少样本\n\n这里的“shot”指的是“示例”。因此：\n\n- **零样本（Zero-shot）**——不提供任何示例；模型仅凭描述来完成任务\n- **单样本（One-shot）**——提供一个示例；模型从这一个案例中学习模式\n- **少样本（Few-shot）**——提供两到五个示例；模型能学到更可靠、更一致的模式\n- **多样本（Many-shot）**——超过五个；很少有必要，有时反而会因为信号冲突而让模型困惑\n\n到目前为止，你在每一课中用的都是零样本提示。你描述你想要什么，模型尽力去做。对大多数任务来说，零样本已经够用。\n\n在以下情况，少样本提示就变得至关重要：\n- 你有一种模型不会自然产出的**特定格式**\n- 你需要一种**很难用语言描述**的一致风格\n- 你在做分类、抽取或转换任务，**正确性至关重要**\n- “正确”的输出是由**模式**定义的，而不是由指令定义的\n- 你需要在 **50 个条目上保持同样的输出质量**，而不只是一个条目\n\n**核心洞察：** 展示比讲述更精确。一段描述你邮件风格的文字，只能大致告诉模型你想要什么。而三封你实际写的邮件，能精确地展示出来。"
+    },
+    {
+      "type": "text",
+      "content": "## 用于格式的少样本：教会模型精确的输出结构\n\n少样本最常见的用途，是建立一种精确的输出格式。看看它能让结果发生多大的变化：\n\n**零样本（描述格式）：**\n```\nWrite a subject line for an email telling a client their project is delayed two weeks.\nThe subject should be short, honest, and professional — no clickbait.\n```\n典型输出：“Project Update: Timeline Adjustment”——很笼统，也很容易被忘记。\n\n**少样本（展示格式）：**\n```\nWrite subject lines in this style. Examples:\n\nEmail: Telling a client their invoice is ready\nSubject: Invoice #2847 ready — please review by Friday\n\nEmail: Following up on a proposal sent 2 weeks ago\nSubject: Proposal follow-up — next steps for your consideration\n\nEmail: Informing a client a feature they requested won't be in this release\nSubject: Feature update — scope decision for Q3 release\n\nNow write a subject line for:\nEmail: Telling a client their project will be delayed by two weeks due to\na technical issue we discovered during testing.\n```\n\n这三个示例教会了模型一种很难用文字描述的格式：主题-破折号-诚实具体的描述语。模型会产出类似这样的结果：\n```\nProject timeline — two-week delay due to testing findings\n```\n\n注意：无论写多少条指令，都很难像三个示范这样干净利落地捕捉到这种模式。"
+    },
+    {
+      "type": "text",
+      "content": "## 用于分类的少样本：一致的归类\n\n分类任务是少样本提示价值最高的应用场景之一。没有示例时，对同一分类标准的不同描述方式会产出不一致的结果。示例能锁定每个类别实际意味着什么。\n\n**客户消息分诊：**\n```\nClassify these customer messages by urgency and type. Examples:\n\nMessage: \"My order hasn't arrived and it was due 3 days ago.\"\nUrgency: HIGH | Type: LOGISTICS | Action: Escalate to fulfilment team immediately\n\nMessage: \"Do you have this product in blue?\"\nUrgency: LOW | Type: PRODUCT_QUERY | Action: Reply with product page link\n\nMessage: \"I was charged twice for my last order.\"\nUrgency: HIGH | Type: BILLING_ERROR | Action: Process refund, apologise\n\nMessage: \"Your packaging was really beautiful — thank you!\"\nUrgency: LOW | Type: POSITIVE_FEEDBACK | Action: Thank, log as testimonial potential\n\nNow classify:\nMessage: \"Can I change the delivery address on my current order — it ships tomorrow?\"\n```\n\n这些示例不仅确立了分类类别，还确立了具体是什么样的措辞会把一条消息归为“高紧急度”（时间压力、财务错误），并且确立了一致分类所需要的三字段输出格式（紧急度、类型、行动）。\n\n**使用自定义类别的情感分析：**\n```\nAnalyse employee feedback sentiment. Use these categories with examples:\n\nFeedback: \"I finally understand what's expected of me since our 1:1 last week.\"\nCategory: POSITIVE_MANAGEMENT | Key theme: Clarity\n\nFeedback: \"I feel like my suggestions never go anywhere.\"\nCategory: NEGATIVE_VOICE | Key theme: Agency\n\nFeedback: \"The office move was disruptive but I'm settling in.\"\nCategory: NEUTRAL_TRANSITION | Key theme: Change adaptation\n\nNow categorise:\nFeedback: \"My manager is great but I have no idea what the promotion criteria are.\"\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 用于抽取的少样本：从文字中提取结构化数据\n\n数据抽取是少样本提示投资回报最明显的场景。没有示例时，从 50 份格式各异的文档中抽取数据，会产出 50 份格式各异的输出。有了示例，每一次抽取都遵循同一个模式（schema）。\n\n**招聘信息抽取：**\n```\nExtract the key information from job postings in this format. Examples:\n\nPosting: \"We're looking for a Python developer with 3+ years experience\nin Django. Remote-friendly, competitive salary, must be based in Europe.\"\nOutput:\n  Role: Python Developer\n  Experience: 3+ years\n  Stack: [Python, Django]\n  Location: Europe (remote-friendly)\n  Salary: Not stated\n\nPosting: \"Junior React developer wanted. No experience required — we'll\ntrain you. London office, £30k starting salary.\"\nOutput:\n  Role: Junior React Developer\n  Experience: None required (training provided)\n  Stack: [React]\n  Location: London (on-site)\n  Salary: £30k\n\nNow extract from:\nPosting: \"Full-stack engineer (5+ years) for fast-growing SaaS startup.\nMust know Node.js and PostgreSQL. San Francisco or fully remote. $140-170k.\"\n```\n\n**合同条款抽取：**\n```\nExtract key information from contract clauses in this format. Examples:\n\nClause: \"Either party may terminate this agreement with 30 days written notice.\"\nType: TERMINATION | Notice period: 30 days | Method: Written | Restrictions: None\n\nClause: \"This agreement shall automatically renew for successive one-year terms\nunless written notice is provided at least 60 days before renewal.\"\nType: RENEWAL | Auto-renews: Yes | Period: 1 year | Opt-out notice: 60 days\n\nNow extract from:\nClause: \"Vendor may not subcontract any portion of the services without prior\nwritten approval from Client, which shall not be unreasonably withheld.\"\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 用于风格迁移的少样本：教会模型你的声音\n\n这是少样本提示最强大、也最被低估的应用之一。如果你有一些体现目标风格的写作示例——你自己过去的文字、某个品牌的语气、某位特定作者的风格——那么通过示例来教会这种风格，会比用文字描述有效得多。\n\n**教会模型你个人的写作风格：**\n```\nWrite in my style. Here are three examples of how I actually write:\n\n\"Spent 3 hours on a bug that turned out to be a missing semicolon.\nDebugging is mostly archaeology.\"\n\n\"Your first version will be embarrassing. Ship it anyway.\nThe embarrassment fades. The learning doesn't.\"\n\n\"Every 'simple feature' has a graveyard of edge cases behind it.\nRest in peace, assumptions.\"\n\nNow write something in this style about:\nThe experience of using AI tools for the first time.\n```\n\n这些示例捕捉到了节奏感、笑点的位置、隐喻的使用、句子长度，以及一种特定的“历经沧桑但仍怀希望”的语气。这些都无法被精确地描述出来——只能靠展示。\n\n**匹配品牌语气：**\n```\nWrite product descriptions in our brand voice. Examples from our existing products:\n\nProduct: Canvas tote bag\nDescription: Carries your groceries. And your dignity. Built to last as long\nyou remember to bring it.\n\nProduct: Stainless steel water bottle  \nDescription: Your coffee shop cup, but you own it. Keeps things hot until you\nremember it's in your bag. Keeps things cold for exactly as long as you need.\n\nNow write a description for: Reusable beeswax food wrap\n```\n\n这些示例教会了一种需要一整段话才能描述清楚的语气特质：冷幽默、第二人称叙述，以及“简短的陈述句后面跟一句略带调侃的观察”这种节奏。"
+    },
+    {
+      "type": "text",
+      "content": "## 少样本 + 思维链：强强联合\n\n对于复杂的分类或推理任务，可以把少样本示例和思维链推理结合起来使用。展示的示例应该包含推理步骤，而不只是简单的输入输出对。\n\n**用于合同风险评估的少样本思维链：**\n```\nAssess contract risk using this reasoning pattern. Examples:\n\nClause: \"Client may terminate with 7 days notice for any reason.\"\nReasoning:\n- Duration asymmetry: only Client can terminate quickly, not Vendor\n- Consequence: Vendor could lose project with no financial recovery time\n- Standard comparison: industry standard is 30 days mutual termination\nRisk level: HIGH | Recommended change: Mutual 30-day notice for any reason\n\nClause: \"All work product created under this agreement is the exclusive\nproperty of the Client.\"\nReasoning:\n- Work for hire doctrine: standard for client projects\n- IP reversion: all created IP transfers to client\n- Risk: if Vendor used existing code/frameworks, there may be licensing conflict\n- Standard comparison: this is normal and expected in service agreements\nRisk level: LOW — standard clause | Note: Ensure no prior IP was used in deliverables\n\nNow assess:\nClause: \"Vendor warrants that the software will be free of defects for a period\nof 24 months following delivery, and will provide unlimited corrections at no charge.\"\n```\n\n这种做法把示例的好处（展示分析结构）和思维链的好处（要求在给出结论前展示可见的推理过程）结合了起来。产出的结果比单独使用任何一种技巧都要可靠、也更可审计。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**示例的质量决定了输出的质量。** 模型学的是你示例中的模式——包括其中的缺陷。如果你的示例格式不一致，模型就会学到不一致。如果你的示例本身就是错的，模型就会学到错误的模式。在大规模使用少样本提示之前，先确认你的示例确实代表了你想要的质量和格式。"
+    },
+    {
+      "type": "text",
+      "content": "## 实用少样本模板库\n\n以下是 4 个可直接使用的少样本模板，适用于常见的职场任务。每一个都是一个起始结构——用你自己工作中的示例替换其中的例子，效果最好。\n\n**模板 1——会议行动项：**\n```\nExtract action items from meeting notes in this format. Examples:\n\nNotes: \"Sarah said she'd handle the client report by end of week.\"\nAction: [Sarah] Deliver client report | Due: Friday | Priority: HIGH\n\nNotes: \"Team agreed to review the new onboarding flow — no timeline set.\"\nAction: [Team] Review new onboarding flow | Due: TBD | Priority: MEDIUM\n\nExtract from these notes:\n[paste your meeting notes]\n```\n\n**模板 2——邮件语气校准：**\n```\nRewrite these emails in a direct but warm professional tone. Examples:\n\nOriginal: \"FYI the thing we talked about is done now.\"\nRewritten: \"Quick update: the [project/task] we discussed is now complete.\n            Happy to walk you through it if helpful.\"\n\nOriginal: \"Not sure if you saw my last message but just checking.\"\nRewritten: \"Following up on my message from [date] — still on your radar?\n            Let me know if you need any information from me.\"\n\nNow rewrite:\nOriginal: [paste your email]\n```\n\n**模板 3——报告部分分析：**\n```\nAnalyse these data points in this format. Examples:\n\nData: Monthly revenue dropped 12% in March vs. February.\nAnalysis: Trend: NEGATIVE | Magnitude: SIGNIFICANT | Context needed:\n          Is this seasonal? Compare to March last year.\n          \nData: Customer satisfaction scores rose from 7.2 to 8.1 this quarter.\nAnalysis: Trend: POSITIVE | Magnitude: NOTABLE | Context needed:\n          What changed? Survey methodology consistent?\n\nNow analyse:\nData: [paste your data point]\n```\n\n**模板 4——批量内容创作：**\n```\nGenerate LinkedIn posts in this style. Examples:\n\nTopic: A mistake I made early in my career\nPost: \"Three years into my career, I thought being the hardest worker in the\nroom was the strategy. I was burning out and my impact was average at best.\nIt took a mentor pointing out that 80% of results come from 20% of effort.\nIdentify the 20%. Protect it ruthlessly. The rest: delegate, automate, or drop.\"\n\nTopic: An insight about team communication\nPost: \"The most expensive meeting you'll ever hold isn't the one you planned.\nIt's the one that spawns three more. Before any meeting: one line — what will\nbe decided or changed? If you can't answer, you might not need the meeting.\"\n\nNow generate a post about:\nTopic: [your topic]\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "为一项真实任务搭建少样本提示词模板",
+      "content": "你将为工作或生活中一项真实的、经常性的任务，搭建一个可用的少样本提示词模板——并在规模化场景下测试它。\n\n**第 1 步——选定你的任务（2 分钟）**\n从下面选一个，或者换成你自己的：\n- 符合你个人风格的邮件主题行\n- 会议记录整理成统一格式的行动项清单\n- 符合你品牌/个人语气的社交媒体帖子\n- 按优先级/类型分类的客户消息\n- 团队状态更新消息\n- 你工作领域特有的某项任务\n\n**第 2 步——收集 3 个示例（5 分钟）**\n写出三个你想要的输出的真实示例——不是凭空构造的近似值，而是来自你工作中、达到你想要的质量水平的真实示例。如果你没有真实示例，就构造三个你愿意直接拿来用作输出的示例。\n\n确保你的三个示例：\n- 格式一致\n- 真正达到了你想要的质量水平\n- 能代表你将会遇到的输入范围\n\n**第 3 步——搭建少样本提示词（5 分钟）**\n使用这个结构：\n```\n[Brief instruction about the task]\n\nExamples:\n\nInput: [example 1 input]\nOutput: [example 1 output]\n\nInput: [example 2 input]\nOutput: [example 2 output]\n\nInput: [example 3 input]\nOutput: [example 3 output]\n\nNow produce:\nInput: [your real input]\n```\n\n**第 4 步——测试并对比（10 分钟）**\n- 打开 [Claude.ai](https://claude.ai)，运行你的零样本版本（描述任务，不给示例）\n- 然后运行你的少样本版本\n- 用不同的输入再运行 2-3 次少样本版本\n\n**写下：**\n1. 少样本输出和零样本输出相比如何？\n2. 在 3 个输入上，格式是否保持一致，还是你需要调整某个示例？\n3. 对你的示例做哪一处改动，能让输出变得更加一致？\n\n**第 5 步——保存到你的提示词库**\n这个模板现在可以复用了。以后每次需要完成这项任务，只需在模板底部粘贴你的新输入即可。把它加入你在第 3-2 课练习中开始建立的 `prompt-library.md`。\n\n**挑战：少样本思维链**\n重写你的模板，让每个示例在给出输出之前都包含一小段推理步骤。运行它，对比一下：在示例中展示推理过程，是否让新的输出更可靠？"
+    },
+    {
+      "type": "quiz",
+      "question": "你需要把 200 张客服工单分成 6 个类别。你尝试用一条零样本提示词，描述了全部 6 个类别，但分类结果不一致——边缘情况每次的归类都不一样。最有效的解决办法是什么？",
+      "options": [
+        "写更长、更详细的类别描述",
+        "让 Claude 更努力一点、更一致一点",
+        "为每个类别添加 2-3 个真实示例，尤其是那些被不一致分类的边缘情况，明确展示它们应该归属哪个类别",
+        "换一个更擅长分类的 AI 工具"
+      ],
+      "correct": 2,
+      "explanation": "边缘情况分类不一致，明确说明类别描述没有给模型提供足够的信息去消除歧义。添加示例——尤其是那些被误分类的具体消息类型的示例——能直接展示每个类别里应该包含什么。这比写更长的描述有效得多，因为真实示例包含的模式信息，是很难用书面规则捕捉到的。专门针对被不一致分类的边缘情况（通过展示它们该归入哪个类别）来处理，是最高效的解决办法。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 A——少样本格式练习",
+      "content": "这个 8 分钟的练习会展示，示例能让 AI 输出的格式和质量发生多大的变化。\n\n**第 1 步——选一种你经常产出的内容类型：** 报告的一部分、状态更新、简报、建议、邮件模板。\n\n**第 2 步——不提供示例**，让 Claude 产出一份这类内容。保存结果。\n\n**第 3 步——现在提供 2 个你真正想要的输出格式的示例**（用你工作中的真实示例，或者写 2 个简短的样例）。然后让 Claude 产出另一份内容，“遵循和这些示例相同的风格和格式”。\n\n**第 4 步——对比两次输出。** 差异有多大？哪个更符合你实际的风格偏好？\n\n**第 5 步——找出少样本版本捕捉到、而零样本版本遗漏的那些具体格式元素。**\n\n**第 6 步——记下：** 对任何风格一致性很重要的经常性内容类型，少样本示例是让格式做对的最快途径。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——搭建你的少样本内容模板",
+      "content": "为你最常产出的内容类型创建少样本模板——这样你就永远不用从零开始处理重复性的格式了。\n\n**第 1 步——找出 3 种你经常产出、且一致性和格式都很重要的内容类型：** 邮件、报告、会议记录、代码注释、分析章节等。\n\n**第 2 步——找出每种类型的 2 个真实示例**，能代表你理想中的输出。可以是你写过、自己觉得满意的内容。\n\n**第 3 步——为每种内容类型搭建一个模板：**\n```\nHere are examples of [content type] that represent the style and format I want:\n\nExample 1:\n[your example]\n\nExample 2:\n[your example]\n\nNow write [content type] for: [new input]\n\nFollow the exact same structure, tone, and level of detail as the examples.\n```\n\n**第 4 步——用一个该内容类型的真实新实例测试每个模板。**\n\n**第 5 步——必做的审查：** 问 Claude：*“把你的输出和我的示例对比一下。你在格式或风格上哪里发生了偏离？列出具体的差异。”* 如有需要，打磨模板。\n\n**第 6 步——把全部 3 个模板保存**到你的提示词库中。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 C——用于分类任务的示例",
+      "content": "少样本示例对分类和归类任务特别有效。这个练习会展示原因。\n\n**第 1 步——选一件你在工作中经常要分类的事情：** 客户反馈、客服工单、报销类型、内容主题、优先级——任何分类任务。\n\n**第 2 步——不提供示例**，让 Claude 从你的真实数据中分类 5 个条目。留意它是怎么归类的。\n\n**第 3 步——现在提供 3 个已标注的示例**，精确展示你在自己的分类体系中会怎么归类：\n```\nHere are examples of how I classify [item type]:\n\n[Item 1]: Category A — because [brief reason]\n[Item 2]: Category B — because [brief reason]\n[Item 3]: Category C — because [brief reason]\n\nNow classify these new items using the same approach: [your 5 items]\n```\n\n**第 4 步——对比两组分类结果。** 示例让结果发生了多大变化？哪一组更符合你实际会做出的分类？\n\n**第 5 步——写一句规则：** 在什么情况下，你在让 Claude 分类之前，应该总是先提供示例？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 D——用示例搭建风格指南",
+      "content": "与其描述你的写作风格，不如展示它。这个练习会创建一份基于示例的风格指南。\n\n**第 1 步——选出 3-4 篇你写过、最能代表你偏好风格的内容：** 邮件、报告、文档、社交媒体帖子等。\n\n**第 2 步——让 Claude 基于这些示例分析你的风格：**\n```\nHere are 3 examples of content I've written. Analyse them and identify:\n1. My sentence length preference (short/medium/long/mixed)\n2. My tone (formal/professional/conversational/direct)\n3. My paragraph structure patterns\n4. What I never do (e.g., I never use buzzwords, I never write passive voice)\n5. Any distinctive stylistic choices\n\n[paste your examples]\n```\n\n**第 3 步——审阅 Claude 的风格分析。** 准不准确？补充它遗漏的地方。\n\n**第 4 步——创建一段风格说明**，以便你在任何想要 Claude 用你的口吻写作的提示词中直接粘贴使用：\n```\nWrite in my voice, which is characterised by: [paste Claude's analysis, corrected]\n```\n\n**第 5 步——在一份新内容上测试这段风格说明。** 输出听起来像你写的吗？"
+    },
+    {
+      "type": "quiz",
+      "question": "你希望 Claude 按照你团队使用的确切格式来写状态更新。哪种做法最有效？",
+      "options": [
+        "用文字描述格式：“写一份包含三部分的状态更新：进展、阻碍、下一步”",
+        "粘贴两个你团队认可过的真实状态更新示例，然后让 Claude 遵循相同的格式",
+        "让 Claude 先写一份状态更新，然后再让它修改格式",
+        "告诉 Claude 格式是“专业且简洁”"
+      ],
+      "correct": 1,
+      "explanation": "展示示例远比用文字描述格式有效。当你粘贴 2 个真实示例时，Claude 能够匹配你团队实际使用的确切标题风格、句子长度、详细程度和格式惯例——这些细节很难用文字描述清楚。“专业且简洁”（D）几乎没有给 Claude 提供任何可用的信息。"
+    },
+    {
+      "type": "quiz",
+      "question": "你提供了 3 个语气温暖、友好的客服邮件少样本示例。但 Claude 的输出却明显更加正式。最可能的原因是什么？",
+      "options": [
+        "Claude 无法从示例中学习语气",
+        "示例太短，Claude 学不到东西",
+        "你提示词里其他地方的指令和示例相互矛盾（比如“写得专业一点”）",
+        "语气要迁移过来，至少需要 5 个示例"
+      ],
+      "correct": 2,
+      "explanation": "当示例和明确指令相互冲突时，结果会变得不可预测。如果你的提示词说“写得专业一点”（Claude 会理解为正式），但示例却是温暖友好的，Claude 可能会遵循明确的指令而不是示例。解决办法是去掉相互冲突的指令，或者让语气说明和示例保持一致：“用这些示例中展示的温暖、口语化语气来写。”"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 3-5 课。** 你现在能把少样本提示用于分类、抽取、风格迁移和格式约束——并能把它和思维链结合起来处理复杂的推理任务。对于需要精确性和一致性的任务，少样本提示是你工具箱里最强大的技巧之一。"
+    }
+  ],
+  "nextLesson": "3-6",
+  "prevLesson": "3-4"
+}

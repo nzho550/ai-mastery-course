@@ -1,0 +1,102 @@
+{
+  "id": "12-6",
+  "title": "把本地模型连接到 Claude Code",
+  "part": 12,
+  "estimatedMinutes": 65,
+  "tags": [
+    "local-ai",
+    "claude-code",
+    "ollama",
+    "lm-studio",
+    "settings"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nClaude Code 可以配置为使用任何暴露了兼容 OpenAI 接口的模型——包括你本地的 Ollama 或 LM Studio 模型。学完本课后，你将知道如何完成这项设置，同样重要的是，你也会对这样做在什么情况下值得有一个诚实的判断。"
+    },
+    {
+      "type": "text",
+      "content": "## 这是如何工作的\n\nClaude Code 通常会调用 Anthropic 的 API 来获取响应。但你可以在 `.claude/settings.json` 中覆盖模型和 API 端点。当你把 Claude Code 指向本地的 Ollama 或 LM Studio 服务器时，它会发送同样的请求——只不过请求的目标变成了 `localhost`，而不是 Anthropic 的服务器。\n\n之所以能这样做，是因为 Ollama 和 LM Studio 都实现了 OpenAI 的 `/v1/chat/completions` 接口格式。Claude Code 能识别这种格式，所以切换过去只需要改一下 URL 和模型名称。\n\n整体架构是这样的：\n```\nClaude Code → HTTP request → localhost:1234 (LM Studio)\n                          OR localhost:11434 (Ollama)\n                          → Local model responds\n```\n没有任何数据离开你的机器。"
+    },
+    {
+      "type": "text",
+      "content": "## 配置方法\n\n打开你项目中的 `.claude/settings.json`（如果不存在就创建一个）。添加以下字段：\n\n**选项 A——使用 LM Studio（端口 1234）：**\n\n在 LM Studio 的本地服务器运行的情况下（Settings → Local Server → enable）：\n```json\n{\n  \"model\": \"local/phi4\",\n  \"apiBaseUrl\": \"http://localhost:1234/v1\",\n  \"apiKey\": \"local\"\n}\n```\n\n**选项 B——直接使用 Ollama（端口 11434）：**\n\n在 Ollama 于后台运行的情况下（`ollama serve`）：\n```json\n{\n  \"model\": \"ollama/phi4\",\n  \"apiBaseUrl\": \"http://localhost:11434/v1\",\n  \"apiKey\": \"ollama\"\n}\n```\n\n`model` 的值可以是任意字符串——Claude Code 会把它传给服务器，服务器则会使用已加载的模型。`apiKey` 是格式要求必须提供的，但本地服务器会忽略这个值。\n\n启动 Claude Code 后，输入 `/model` 即可查看当前激活的是哪个模型。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**作用范围很重要：** 把这段配置放在某个项目的 `.claude/settings.json` 中，只会影响这一个项目。如果想让所有 Claude Code 会话都使用本地模型，需要把它加到用户级配置中：Windows 上是 `C:\\Users\\YourName\\.claude\\settings.json`，macOS 上是 `~/.claude/settings.json`。\n\n如果要恢复使用 Claude，删除或注释掉 `model`、`apiBaseUrl` 和 `apiKey` 这几个字段即可。"
+    },
+    {
+      "type": "text",
+      "content": "## 一次诚实的质量评估\n\n以下是当你通过 Claude Code 使用一个 7B 本地模型、与使用 Claude Sonnet 相比时，你会注意到的差异：\n\n**本地模型表现尚可的场景：**\n- 解释一个简单函数的作用\n- 编写样板代码（CRUD 操作、基础工具函数）\n- 回答关于语法的直接问题\n- 重新格式化或整理代码\n\n**本地模型明显吃力的场景：**\n- 需要理解整个代码库的多文件重构\n- 调试复杂的逻辑错误\n- 架构决策\n- 可靠地遵循详细的 CLAUDE.md 指令\n- 理解大型上下文窗口\n\n对于复杂的工程任务，本地模型会产出不完整的计划、遗漏边界情况，有时还会忽略你的指令。这不是配置失败——而是 7B 本地模型与前沿级模型之间客观存在的质量差距。这个差距在简单任务上会缩小，在复杂任务上会放大。\n\n**什么时候本地 Claude Code 是正确的选择：**\n- 处理不能发送到云服务的敏感代码\n- 在没有互联网访问的代码库上做简单任务\n- 不消耗 API 额度地进行实验和学习\n- 高频、重复性的代码生成，且每 token 成本很关键"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**一个实用的混合策略：** 保留两套 Claude Code 配置——你的默认配置（云端）和一套本地覆盖配置。对私有代码库或快速的一次性任务使用本地配置。当任务需要真正的推理质量时，切换到云端。切换配置只需要 30 秒。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "用本地模型配置 Claude Code",
+      "content": "**前置条件：** 已安装模型的 Ollama（第 12-2 课）或已加载模型并运行本地服务器的 LM Studio（第 12-4 课）。\n\n**第 1 步——创建本地配置：**\n在 VS Code 中，打开（或创建）`ai-course-projects` 文件夹下的 `.claude/settings.json`。\n\n添加你选择的配置（Ollama 或 LM Studio——选一个你正在运行的）：\n\n**Ollama：**\n```json\n{\n  \"model\": \"ollama/phi4\",\n  \"apiBaseUrl\": \"http://localhost:11434/v1\",\n  \"apiKey\": \"ollama\"\n}\n```\n\n**LM Studio：**\n```json\n{\n  \"model\": \"local/phi4\",\n  \"apiBaseUrl\": \"http://localhost:1234/v1\",\n  \"apiKey\": \"local\"\n}\n```\n\n把 `phi4` 改成你实际拥有的模型。保存文件。\n\n**第 2 步——启动 Claude Code 并验证模型：**\n1. 打开 VS Code 终端（`Ctrl+\\``）\n2. 进入你的项目：`cd Documents\\ai-course-projects`\n3. 启动：`claude`\n4. 输入 `/model`——确认显示的是你的本地模型，而不是某个 Claude 模型的名字\n\n**第 3 步——运行一个简单任务：**\n问 Claude Code：“What does the about-me.html file in this project do? Describe it in 3 bullet points.”\n\n观察：响应速度有多快？和你知道的文件实际内容相比，准确度如何？\n\n**第 4 步——用 Claude 运行同样的任务：**\n1. 从 settings.json 中删除或注释掉 `model`、`apiBaseUrl` 和 `apiKey` 这几行\n2. 保存并重新启动 `claude`\n3. 问同样的问题\n4. 比较两次响应：准确性、完整性、响应时间\n\n**第 5 步——写下你的评估：**\n在你的笔记中，补全这句话：“对于这个具体任务，本地模型比 Claude [更好 / 相当 / 更差]，因为 ___。我会在 ___ 的情况下使用本地模型。”\n\n**完成后：** 决定是保留本地配置，还是恢复使用云端。两种选择都是合理的——重点在于做出这个决定时是经过深思熟虑的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——Claude Code 本地模型练习",
+      "content": "把 Claude Code 连接到一个本地模型，测试使用体验。\n\n**第 1 步——启动 LM Studio 的本地服务器**，端口 1234，加载你的代码模型。\n\n**第 2 步——配置 Claude Code** 使用本地模型：\n```bash\nexport ANTHROPIC_BASE_URL=http://localhost:1234/v1\nexport ANTHROPIC_API_KEY=local\nclaude\n```\n\n**第 3 步——在 Claude Code 中**，在你的本地模型上尝试以下任务：\n- “Explain what the function in [file.py] does”\n- “Write a unit test for this function”\n- “What are the issues in this code?”\n\n**第 4 步——记录**与云端 Claude Code 的差异：\n- 速度\n- 响应质量\n- 工具使用能力（本地模型能否正确地使用工具？）\n\n**第 5 步——问 Claude：** “Claude Code 的哪些能力依赖于较小的本地模型可能不具备的高级模型能力？相比之下，哪些会退化，哪些能正常工作？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用本地模型进行代码审查",
+      "content": "用本地模型构建一套代码审查工作流。\n\n**第 1 步——创建一个** 针对本地模型代码审查调优的 CLAUDE.md：\n```markdown\n# Code Review Guidelines\n\nYou are reviewing code for quality, correctness, and security.\n\nFor each review:\n1. List issues found (bug/security/style/performance)\n2. Rate severity: Critical/High/Medium/Low\n3. Suggest specific fixes with code examples\n4. Note any positive aspects\n\nBe specific about line numbers.\n```\n\n**第 2 步——用本地模型和这份 CLAUDE.md** 运行 Claude Code。\n\n**第 3 步——审查你项目中的一个真实代码文件：** “Review [file.py] using the guidelines.”\n\n**第 4 步——比较这份审查**与 Claude Sonnet（云端）对同一文件产出的审查结果。\n\n**第 5 步——必做审阅：** 问本地模型：“审阅一下你刚才做的代码审查。你可能遗漏或评估错误了哪些问题？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——本地模型失效时：识别边界",
+      "content": "系统性地找出本地模型不如云端 AI 的地方。\n\n**第 1 步——在你的本地模型上运行以下测试提示词**，记录它表现吃力的地方：\n- 复杂的架构分析：“Design a system to handle 1M concurrent users for a real-time chat app. Consider: load balancing, caching, database design, and failure modes.”\n- 最新知识：“What are the newest features in Python 3.13?”\n- 长文档分析：[粘贴 5000 字的文档]\n- 复杂的多步推理：“Given these 5 business constraints, identify the optimal tech stack...”\n\n**第 2 步——为每项测试打分（1-5 分）。**\n\n**第 3 步——找出规律：** 是知识截止日期的问题？上下文长度的问题？推理深度的问题？还是指令遵循的问题？\n\n**第 4 步——针对每一项局限**，定义一条规则：“当我的任务需要 [X] 时，改用云端 AI，而不是本地模型。”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——以隐私优先的开发工作流",
+      "content": "构建一个完全只使用本地 AI 的完整开发会话。\n\n**第 1 步——在一个敏感/私有项目中，选择一个小功能或 bug 修复。**\n\n**第 2 步——只用本地 AI（不使用云端）完成整个任务：**\n- 用 Claude Code + 本地模型进行规划\n- 用 Claude Code + 本地模型生成代码\n- 用 Claude Code + 本地模型进行审查\n- 用 Claude Code + 本地模型编写测试\n\n**第 3 步——评估这次体验：** 只使用本地 AI 在多大程度上限制了你的能力？哪些任务完成得还不错？哪些任务如果用云端 AI 会明显更好？\n\n**第 4 步——记录结果：** 这个功能实现得正确吗？如果用云端 AI，质量会更高吗？\n\n**第 5 步——定义你个人的判断标准：** 对于哪些类型的工作，纯本地方案是可以接受的？在什么情况下你需要云端 AI？**"
+    },
+    {
+      "type": "quiz",
+      "question": "你用一个本地模型替代 Anthropic 云端来使用 Claude Code。最主要的功能差异是什么？",
+      "options": [
+        "没有任何功能差异——本地模型和 Claude 一样强大",
+        "在复杂推理上能力有所下降，知识的时效性较差，上下文窗口可能更小——体验的上限取决于本地模型的能力，而不是 Claude 的能力",
+        "在所有情况下响应速度都会更快",
+        "本地模型可以访问互联网，而 Claude 不能"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code 只是一个界面——当它连接到本地模型时，功能依然可用，但响应质量取决于本地模型的能力，而不是 Claude 的能力。界面本身的功能（文件编辑、终端命令、工具使用）只要本地模型能正确生成工具调用，就依然能用。但模型的推理能力、知识面和指令遵循能力可能明显更弱，尤其是在需要大型云端模型能力的复杂多步任务上。"
+    },
+    {
+      "type": "quiz",
+      "question": "你发现连接到 Claude Code 的本地模型不会使用工具（比如读取文件）——它只是给出文本答案，而不实际执行操作。最可能的原因是什么？",
+      "options": [
+        "Claude Code 的工具不支持本地模型",
+        "本地模型没有正确生成工具调用格式——它需要产出 Claude Code 能够解析的结构化工具调用语法",
+        "你需要为本地模型单独配置工具使用功能",
+        "工具只对参数量超过 13B 的模型有效"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code 中的工具使用要求模型能生成格式正确的工具调用。较小的本地模型可能没有经过训练，无法可靠地生成精确的工具调用格式。症状表现为：模型描述它将要做什么，而不是真的去做（“I would read the file...”），或者它生成的工具调用格式有误，Claude Code 无法解析。经过专门指令遵循训练的更大模型（13B 以上）在工具使用上更可靠。测试一下你的具体本地模型，哪些工具能用，哪些不能用。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 12-6 课。** 你现在知道如何让 Claude Code 使用本地模型运行，并且对其中的质量权衡有了诚实的理解。下一课：一份系统性的指南，教你为特定任务选择合适的本地模型。"
+    }
+  ],
+  "nextLesson": "12-7",
+  "prevLesson": "12-5"
+}

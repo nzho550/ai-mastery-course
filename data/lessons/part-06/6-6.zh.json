@@ -1,0 +1,95 @@
+{
+  "id": "6-6",
+  "title": "Cursor IDE——AI 原生编辑器",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": [
+    "cursor",
+    "ai-coding",
+    "ide"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nCopilot 和 Continue 是把 AI 添加*到* VS Code 里。**Cursor** 走的是不同的路线：它是把 VS Code 从头重新构建了一遍，让 AI 成为一等公民，而不是一个扩展。这节课会讲清楚 Cursor 有什么不同、如何上手，以及这种区别在什么时候真正重要。"
+    },
+    {
+      "type": "text",
+      "content": "## Cursor 是什么\n\nCursor 是 VS Code 的一个分支（fork）——也就是说，它从同一套开源代码库出发，添加了那些没法作为扩展来实现的 AI 功能。它看起来和 VS Code 几乎一模一样（同样的布局、同样的快捷键、同样的扩展市场），所以切换过去会立刻感到熟悉。\n\n**下载地址：** cursor.com——提供免费版，Pro 版每月 20 美元。\n\n**首次启动时从 VS Code 导入：** 当你第一次打开 Cursor 时，它会提示导入你所有的 VS Code 扩展和设置。接受这个提示大约需要 30 秒，这意味着你从一开始就能用上熟悉的环境——外加叠加在其上的 AI。\n\nCursor 的免费版相当慷慨：你每月能获得一定额度的“fast”AI 请求（由 Claude 和前沿的 OpenAI 模型驱动），以及无限量的“slow”请求。对于学习环境来说，免费版就足够了。"
+    },
+    {
+      "type": "text",
+      "content": "## Cursor 的关键功能\n\n**Ctrl+K——内联 AI 编辑**\n选中任意代码（或者只是把光标放在任意位置），按 **Ctrl+K**，会出现一个命令栏。输入你想要的操作：“添加错误处理”“把这个转换成 async/await”“让这个函数接受一个可选的第二个参数”。Cursor 会以一个你可以接受或拒绝的差异（diff）形式应用这个更改。\n\n**Ctrl+L——聊天面板**\n打开 AI 聊天侧边栏。和 Copilot Chat 类似，但有一个关键区别：Cursor 可以用 **@** 符号引用项目中的任意文件。在聊天中输入 `@文件名`，就能立刻把该文件拉入上下文。你也可以输入 `@docs` 来引用外部文档。\n\n**Composer（Ctrl+Shift+I）——多文件编辑**\n这是 Cursor 最具代表性的功能。Composer 是一个能够*同时*读取和编辑多个文件的 AI 智能体。你描述一个功能——“创建一个 HTML 联系表单，把数据发送给一个独立文件中的 JavaScript 校验函数”——Cursor 会同时写出这两个文件，并保持它们相互一致。VS Code + Copilot 是逐个文件地工作。而 Cursor 的 Composer 会考虑整个项目。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**VS Code + Copilot 与 Cursor——真正的区别：** 如果只是编辑单个文件，体验是相似的。Cursor 的优势体现在多文件更改上：重构一个在 10 个地方被调用的函数、在整个项目中一致地重命名一个变量，或者同时创建一个涉及 HTML、CSS 和 JS 的功能。如果你的工作大多是单文件脚本，VS Code + Copilot 就足够了。如果你在构建有很多相互关联文件的应用，Cursor 的架构是一次有意义的升级。"
+    },
+    {
+      "type": "text",
+      "content": "## Cursor 的隐私设置\n\n默认情况下，Cursor 会把你的代码发送到它的服务器进行 AI 处理。如果你在处理敏感代码，请检查 **Cursor Settings → Privacy Mode**——这会启用一种不在 Cursor 服务器上存储代码的模式。免费版也支持 Privacy Mode。在把 Cursor 用于任何专业或客户项目之前，这一点值得先检查一下。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "安装 Cursor 并构建一个多文件项目",
+      "content": "**第 1 步——下载并安装 Cursor**\n1. 打开浏览器，访问 cursor.com\n2. 点击 **Download**——它会自动检测你的操作系统\n3. 运行安装程序（和 VS Code 的流程一样：下一步 → 同意 → 安装 → 完成）\n4. 首次启动时，Cursor 会询问是否导入 VS Code 设置——点击 **Import from VS Code** 来复制你的扩展和设置\n5. 出现提示时注册一个免费的 Cursor 账号（AI 功能需要账号）\n\n**第 2 步——打开你的项目**\n1. 在 Cursor 中：点击 **File → Open Folder**\n2. 导航到并选中你的 `ai-course-projects` 文件夹\n3. 熟悉的 VS Code 布局会出现——主要区别在于贯穿整个界面的 AI 元素\n\n**第 3 步——试试 Ctrl+K 内联编辑**\n1. 打开 `exercises/practice.js`\n2. 选中排序函数\n3. 按 **Ctrl+K**\n4. 输入：“在这个函数上方添加一个 JSDoc 注释”\n5. Cursor 会显示一个差异视图——绿色表示新增，红色表示删除\n6. 按 **Accept**（或 **Tab**）应用它\n\n**第 4 步——试试用 Composer 构建一个双文件项目**\n1. 按 **Ctrl+Shift+I** 打开 Composer\n2. 输入这个提示词：\n```\nCreate two new files in the exercises folder:\n1. contact-form.html — a clean contact form with name, email, and message fields\n2. form-validator.js — a JavaScript file with a validateForm() function that checks all fields are filled and the email contains @ and .\nLink the JS file from the HTML file.\n```\n3. 观察 Cursor 同时提出这两个文件\n4. 逐个查看生成的代码，然后点击 **Accept All** 创建它们\n5. 打开 `contact-form.html`，右键 → Open with Live Server（如果已安装）在浏览器中查看效果\n\n**第 5 步——比较体验**\n在你的笔记中写一句话：在这个工作坊中，Cursor 做到了哪些事情，如果单独用 VS Code + Copilot 需要更多步骤才能完成？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——Cursor 首次会话",
+      "content": "Cursor 是一个把 AI 更深度地内建到编辑器中的 VS Code 分支。这个练习会探索它的关键差异化功能。\n\n**第 1 步——下载并打开 Cursor**（cursor.sh）。它会自动导入你所有的 VS Code 扩展和设置。\n\n**第 2 步——测试 Cursor 的 AI 聊天：** 按 Ctrl+L 打开 AI 聊天侧边栏。问一问关于你当前项目的问题。\n\n**第 3 步——测试 Cmd+K（或 Ctrl+K）内联编辑：** 点击某个函数内部，按 Ctrl+K，输入“添加输入校验”——Cursor 会直接在原地生成代码，不需要切换到侧边栏。\n\n**第 4 步——测试从聊天中应用（Apply）：** 在聊天中，让 Cursor 重构一个函数。注意它会展示一个差异视图，你可以选择接受或拒绝。\n\n**第 5 步——测试 Cursor 对代码库的理解：** 问“[某个函数名] 是在哪里定义的？”或者“这个项目是做什么的？”——Cursor 会为你整个代码库建立索引。\n\n**第 6 步——与 Copilot Chat 对比：** Cursor 能做到哪些 Copilot Chat 做不到、或做得更好的事情？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用 Cursor 的 AI 构建一个功能",
+      "content": "利用 Cursor 更深层的 AI 集成，从规格说明到可运行代码，构建一个完整的功能。\n\n**第 1 步——在 Cursor 中打开一个真实项目。**\n\n**第 2 步——在 Cursor 的聊天中（Ctrl+L）描述**你想添加的功能：\n```\nI want to add [feature description] to this project. The feature should:\n- [requirement 1]\n- [requirement 2]\n- [requirement 3]\n\nBefore writing any code: describe your implementation plan. What files will you modify? What new functions/classes will you create? What are the risks?\n```\n\n**第 3 步——审查这份计划。** 如果你认可，就说“实现它”。\n\n**第 4 步——观察 Cursor 编写更改。** 它会为每个文件展示差异。在接受之前审查每一个差异。\n\n**第 5 步——强制复审：** 接受所有更改后，问：*“审查你刚才做出的更改。找出 3 个潜在问题：未处理的错误情形、遗漏的边界情况，或者与现有代码可能产生的冲突。”*\n\n**第 6 步——运行并测试**新功能。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——Cursor 与 VS Code + Copilot 对比",
+      "content": "理解 Cursor 与搭配 Copilot 的 VS Code 之间的真实差异——这样你才能做出明智的选择。\n\n**第 1 步——选一个真实的编程任务**——最好涉及多个文件。\n\n**第 2 步——在 VS Code + Copilot Chat 中完成这个任务。** 记录：花了多少步骤、你需要提供多少上下文、代码质量如何。\n\n**第 3 步——在 Cursor 中完成同一个任务。** 记录同样的指标。\n\n**第 4 步——比较：**\n- 哪个需要更少的人工提供上下文？\n- 哪个更好地理解了你现有的代码？\n- 哪个第一次生成的代码质量更高？\n- 哪个在展示它正在做什么方面更透明？\n\n**第 5 步——问 Claude：** *“我在 [你的任务] 上对比了 VS Code+Copilot 和 Cursor。以下是我的观察：[描述]。对于 [你的工作类型]，我应该用哪个作为主力编辑器，为什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——用 Cursor Composer 处理多文件任务",
+      "content": "Cursor Composer（Ctrl+Shift+I，或完整版中的 Ctrl+I）可以同时对多个文件进行更改——这项任务需要仔细的人工监督。\n\n**第 1 步——打开 Composer**（在 Cursor 中按 Ctrl+Shift+I）。\n\n**第 2 步——给它一个多文件任务：**\n```\nI want to rename the function `calculate_total` to `compute_final_price` everywhere in this project. Make sure to update:\n- The function definition\n- All call sites\n- Any docstrings or comments that reference the function name\n- Any test files\n```\n\n**第 3 步——在接受之前，仔细查看 Composer 展示的每一个差异。** 这一点至关重要——如果其中任何一处更改有误，多文件更改可能会破坏功能。\n\n**第 4 步——接受更改后运行你的测试。**\n\n**第 5 步——强制安全检查：** 问 Cursor：*“你刚才做的这些更改可能出什么问题？我应该运行哪些测试来验证没有破坏任何功能？”*\n\n**第 6 步——提交这些更改**，写上一条描述清楚的提交信息。"
+    },
+    {
+      "type": "quiz",
+      "question": "Cursor 的 AI 能够读取你整个代码库。这给你——作为开发者——带来了什么关键责任？",
+      "options": [
+        "你必须始终接受 Cursor 的建议才能获得全部好处",
+        "你必须仔细审查每一处 AI 生成的更改——Cursor 对代码库的理解让它更有能力，但也让它更有可能在很多文件中自信地犯错",
+        "你应该只在小项目中使用 Cursor，以免 AI 感到困惑",
+        "你必须让你的代码库保持很小，Cursor 才能有效工作"
+      ],
+      "correct": 1,
+      "explanation": "具备代码库感知能力的 AI 更强大，但并非万无一失——因为它能看到你的整个代码库，所以可能做出听起来合理但实际错误的架构决策。AI 越强大，仔细审查就越重要。当 Cursor 做出多文件更改时，要审查每一个单独的差异、运行你的测试，不要接受你没读过的批量更改。"
+    },
+    {
+      "type": "quiz",
+      "question": "相比聊天侧边栏，Cursor 的 Ctrl+K（内联编辑）最适合用在什么场景？",
+      "options": [
+        "Ctrl+K 对复杂功能更强大",
+        "Ctrl+K 对现有代码做小范围、有针对性的编辑更快，不需要离开当前上下文——而聊天更适合规划和更大的功能",
+        "Ctrl+K 只对 Python 文件有效",
+        "Ctrl+K 是唯一能在不经审查的情况下做出 AI 更改的方式"
+      ],
+      "correct": 1,
+      "explanation": "Ctrl+K 是为小范围、原地进行的编辑优化的：“添加一个参数”“重命名这个变量”“在这里添加错误处理”。它直接在编辑器中生成代码，不需要对话。聊天侧边栏（Ctrl+L）更适合：理解代码、规划更大的更改、多文件操作，以及在实现之前想先讨论一下方案。根据任务的范围选用合适的工具，是关键技能。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-6 课完成。** 你已经安装了 Cursor，并体验了它的三大 AI 功能：用于内联编辑的 Ctrl+K、带 @ 引用的聊天 Ctrl+L，以及用于多文件更改的 Composer。在第 6-7 课中，你将尝试 Windsurf——另一款来自不同团队的 AI 原生编辑器——这样你就能做出一个信息充分的比较。"
+    }
+  ],
+  "nextLesson": "6-7",
+  "prevLesson": "6-5"
+}

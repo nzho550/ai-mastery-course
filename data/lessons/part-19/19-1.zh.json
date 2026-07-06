@@ -1,0 +1,108 @@
+{
+  "id": "19-1",
+  "title": "AI 助力日常决策——饮食、购物与居家",
+  "part": 19,
+  "estimatedMinutes": 60,
+  "tags": ["personal-life", "beginner", "everyday", "meal-planning", "shopping", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nAI 不只是为工作而生。它最有价值的用途之一，恰恰是那些充斥日常生活的低风险、重复性决策——今天吃什么、买什么、水龙头漏水该怎么办。本课涵盖三个高回报的日常应用：饮食规划、购物决策和居家管理。学完之后，你将拥有可以立刻用上的具体提示词（prompt），分别对应这三类场景。"
+    },
+    {
+      "type": "text",
+      "content": "## 饮食规划——从一团乱麻到自动化\n\n饮食规划的难点在于：你需要定期为不同口味偏好的人准备餐食，还要用上冰箱里现有的食材，控制在预算内，同时不能每周都吃一样的东西。这正是 AI 擅长的那种多约束优化问题。\n\n**核心饮食规划提示词：**\n```\nPlan 5 weeknight dinners for this week.\n\nHousehold: [e.g., 2 adults, 1 child aged 8]\nDietary requirements: [e.g., no nuts, one vegetarian day per week]\nFridge/pantry: [list what you already have]\nBudget: [e.g., £60 for the week's groceries]\nTime available: [e.g., max 30 minutes on weeknights, longer at weekends]\nDon't repeat: [meals you've had recently]\n\nFor each dinner:\n- Name and brief description\n- Key ingredients needed (not what I already have)\n- Prep time and cook time\n- Any make-ahead steps\n\nAt the end, generate the full shopping list grouped by supermarket section.\n```\n\n**专门的饮食规划应用（如果你想要更多自动化）：**\n- **Eat This Much** —— 根据指定的卡路里/宏量营养素目标生成方案，并自动生成购物清单\n- **Strongr Fastr** —— 与健身目标挂钩的饮食规划，会根据健身日和休息日进行调整\n- **Samsung Food** —— 可与智能冰箱联动，根据你现有的食材推荐食谱\n\n**值得一试的变体：**\n\n*预算优化：*\n```\nI have £40 to feed 2 people for a week. Generate 7 dinners that minimise waste\n(each ingredient appears in at least 2 meals). Include a shopping list with estimated costs.\n```\n\n*用冰箱里现有的食材：*\n```\nI have: [list everything]. It's Wednesday, shopping day is Saturday.\nWhat are 3 dinners I can make from only what I have? Include breakfast options too.\n```\n\n*饮食转型：*\n```\nWe're trying to eat less meat. Generate a month's rotation of 20 weeknight meals\nthat are vegetarian or have small amounts of meat (less than 200g per serving).\nWe like Asian, Mediterranean, and Mexican flavours. Include variety — no more than\n2 meals from the same cuisine per week.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 购物决策——先研究，再购买\n\nAI 能大幅缩短从\"我需要买 X\"到\"我买对了 X\"之间的时间。关键是把 AI 当作研究加速器，而不是万能预言家——它能帮你梳理决策思路，但价格和货源信息仍需你自己核实。\n\n**产品调研提示词：**\n```\nI need to buy [product]. Help me make a good decision.\n\nContext:\n- Budget: [range]\n- Primary use: [what you'll actually do with it]\n- What matters most to me: [e.g., reliability, low noise, compact size, long warranty]\n- What I don't care about: [e.g., smart features, multiple colours]\n- I'll be comparing on: [Amazon / John Lewis / local shops]\n\nPlease:\n1. Explain the key specs or features I should actually understand for this type of product\n   (not a full spec sheet — just the 3-4 things that actually affect my use case)\n2. Describe what distinguishes a good one from a mediocre one\n3. Suggest 2-3 specific models to look at and why each one might suit me\n4. Flag any known reliability issues or common buyer regrets for this category\n5. What questions should I ask the seller or check in reviews?\n```\n\n**比较你已经找到的选项：**\n```\nI'm deciding between these [product type]:\n\nOption A: [Name, price, key specs]\nOption B: [Name, price, key specs]\nOption C: [Name, price, key specs]\n\nMy use case: [describe]\nWhat matters: [your priorities]\n\nWhich would you recommend and why? What are the trade-offs I'm actually giving up with each option?\n```\n\n**Amazon Rufus 和沃尔玛的 AI 购物助手：** 两家零售商现在都内置了 AI 助手。Amazon Rufus 能回答关于具体产品的详细问题——你可以问\"评论者对这款产品有什么抱怨？\"或\"这个适合我的[具体使用场景]吗？\"这通常比自己翻阅几百条评论要快得多。\n\n**\"我到底该不该买\"提示词：**\n```\nI'm considering buying [item] for [purpose].\nCost: [price]\nHow often I'd use it: [honest estimate]\n\nAm I solving a real problem or is this an impulse? What alternatives exist?\nWhat's the total cost of ownership (maintenance, consumables, storage)?\nIs there a version of this I could trial before committing?\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 居家管理——你随叫随到的居家专家\n\nAI 可以扮演一位懂水电、园艺、家电维修和房屋保养的博学朋友——随时待命。它不会替你动手干活，但往往能告诉你这件事能不能自己搞定、有哪些选择，以及该问维修师傅哪些问题。\n\n**排查问题：**\n```\n[Describe the problem in detail — what you see, hear, or smell; when it started;\nwhat changed recently; what you've already tried]\n\nPlease:\n1. Tell me what's likely causing this (most common causes first)\n2. What I can safely check or try myself\n3. When this requires a professional\n4. Roughly what professional repair should cost (so I can evaluate quotes)\n5. If I call a tradesperson, what specifically should I ask for?\n```\n\n**季节性保养规划：**\n```\nI own a [house/flat] with [key features: gas boiler, older wiring, large garden, flat roof section, etc.].\nI'm in [country/climate zone].\n\nCreate a home maintenance calendar for the year with:\n- What to check or service each season\n- What to do before winter / before summer\n- Which tasks I can do myself vs. which require a professional\n- Rough time and cost for each task\n```\n\n**DIY 指导：**\n```\nI want to [describe the task — e.g., install a curtain pole, bleed my radiators, reseal the bath].\nI'm a [complete beginner / have done basic DIY / comfortable with tools].\n\n1. Is this a reasonable DIY job for my experience level, or should I hire someone?\n2. What tools and materials do I need?\n3. Step-by-step instructions\n4. Common mistakes to avoid\n5. How will I know I've done it right?\n```\n\n**请维修师傅之前：**\n```\nI need to hire someone to [describe the job].\nHelp me:\n1. Understand what type of tradesperson I need\n2. Know what questions to ask when getting quotes\n3. Understand what a fair price range looks like\n4. Know what the job should involve (so I can tell if someone is cutting corners)\n5. Know what to check before they start and after they finish\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**\"要框架，不要答案\"模式：** 对于复杂的决策（大额购买、居家项目、育儿问题），向 AI 要一个决策框架往往比直接要答案更有用。\"决定修理还是更换热水器时，我该权衡哪些因素？\"能让你获得一个可反复使用的结构化决策工具。而\"我该修理还是更换热水器？\"只能给你一个基于不完整信息的一次性答案。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**涉及安全的任务：** 涉及燃气、市电、结构改动或承重构件的任何事项，绝不要仅凭 AI 的指导操作，务必让有资质的专业人士核实。AI 非常适合处理低风险的居家任务，但无法评估你家的具体状况、当地建筑法规，或系统之间涉及安全的相互作用。拿不准的时候，就叫专业人士来——报价通常是免费的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "打造你的家庭 AI 工具箱",
+      "content": "本次工作坊将产出三个你会反复使用的实际成果。\n\n**第一部分——你的标准饮食规划提示词（10 分钟）**\n\n用你家的真实情况写出属于你自己的饮食规划提示词：\n- 人数和年龄\n- 任何饮食要求或强烈偏好\n- 你平常工作日晚上的时间限制\n- 预算\n- 5 道你已经吃腻了的菜（明确要求排除）\n\n在 Claude 中运行这个提示词。检查一下这份计划——你真的会做这些菜吗？根据不合适的地方修改提示词，再运行一次。把最终版本保存为你的标准每周饮食规划提示词。\n\n**第二部分——研究一项待定的购买（10 分钟）**\n\n想一件你一直想买但没时间好好研究的东西。运行产品调研提示词。查看回复后思考：\n- 你学到了什么之前不知道的信息吗？\n- 它有没有提出你没想到过的考虑因素？\n- 现在是买的好时机，还是应该再等等？\n\n**第三部分——居家保养日历（10 分钟）**\n\n为你家运行季节性保养日历提示词。输出结果不会完美（它不了解你家的具体情况），但会提醒你注意那些容易被忽视的事项。把适用的任务加入你的日历或笔记应用，设为循环提醒。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude 推荐一款具体品牌的洗碗机。Claude 给出了一个型号，并说它\"根据消费者评价，可靠性极佳\"。在购买之前你应该怎么做？",
+      "options": [
+        "相信 Claude 的推荐——它综合了大量消费者数据",
+        "在网上查一下当前价格，只要在预算内就买",
+        "核实该型号确实存在，在零售网站上查看当前的评价，并核实当前价格——Claude 的训练数据可能已经过时",
+        "再问 Claude 一次以确认，因为两次回答一致会提高可靠性"
+      ],
+      "correct": 2,
+      "explanation": "Claude 的训练数据有截止日期，这意味着具体的产品推荐可能已经过时——该型号可能已停产、改版，或被更好的选择取代。消费者评价的整体格局也会随时间变化。务必核实：（1）该具体型号是否仍然存在且有货；（2）当前的评价是否仍然支持这一推荐；（3）当前价格。再问 Claude 一次（D）没有帮助——两次回答都来自同一份训练数据，无论准不准确都会互相一致。AI 最适合用来了解该关注哪些方面，而不是作为具体当前产品的最终权威信息来源。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——快速日常 AI 演练",
+      "content": "一个 7 分钟的快速演练，练习本课的核心技能：把一个模糊的日常需求变成一句精准的 AI 提示词。\n\n**场景：** 你需要只用冰箱里现有的食材规划今晚的晚餐，同时你还一直想买一个新的[任选其一：水壶 / 烤面包机 / 搅拌机]，但一直没抽出时间研究。\n\n**第一步——从冰箱到晚餐的提示词（3 分钟）**\n\n在浏览器中打开 Claude（claude.ai）。花 60 秒在脑海里盘点一下你的冰箱和食品柜。然后发送这个填入真实细节的提示词：\n\n```\nI have: [list 8-12 things actually in your fridge/pantry right now]\nHousehold: [your actual household]\nTime available: [your real weeknight time]\nDietary notes: [anything relevant]\n\nWhat are 2 dinners I can make tonight from exactly what I have? No shopping.\nFor each: name, cook time, brief method, and which ingredient is the star.\n```\n\n阅读回复。这两道菜你真的会做吗？\n\n**第二步——快速购买调研（4 分钟）**\n\n现在为你选定的家电发送这个提示词：\n\n```\nI need a new [your item]. Budget: [your actual budget].\nI care most about: reliability and ease of cleaning. I don't care about: smart features or fancy design.\nWhat are 3 things I should actually check before buying one? What's a common regret people have with cheap [item]s?\n```\n\n**AI 自我复核步骤：** 把你的晚餐建议复制回一条新消息，问：\"批判性地审视这个晚餐建议——找出 2 件我应该再三确认或需要留意的事。\"看看 Claude 会指出什么。\n\n**反思：** AI 有没有给你一些你自己想不到的有用建议？如果有，记下来是什么——那正是 AI 在为你的日常生活增添真正价值的地方。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——打造你的家庭 AI 工具箱（实战版）",
+      "content": "本次工作坊将产出三个你每周都会用到的、真正可复用的工具。预计用时 30 分钟。\n\n**第一步——搭建你个性化的饮食规划提示词（10 分钟）**\n\n这是你的定制版本——不是通用模板，而是填入你家真实情况的版本。在 Claude 中通过对话完成以下步骤：\n\n1. 发送课程中的核心饮食规划提示词，填入你的真实信息：实际家庭人数和年龄、真实的饮食要求、真实预算、你实际的工作日晚间时间，以及 5 道你已经吃腻的具体菜品。\n\n2. 查看 Claude 给出的方案。对每道菜问自己：\"我真的会做这道菜吗？\"如果不会，说明原因并让 Claude 替换掉。\n\n3. 修改完成后，问 Claude：\"把这个变成一个我每周一早上都能直接粘贴使用的紧凑可复用模板，用[占位符]标出每周会变化的细节。\"\n\n4. 把最终模板复制到你的笔记应用（Apple 备忘录、Google Keep，或任何你惯用的地方）。标注为\"周一饮食规划提示词\"。\n\n**第二步——研究一项真实的待定购买（10 分钟）**\n\n选一件你确实一直想买的东西。用真实的具体信息运行完整的产品调研提示词。阅读 Claude 的回复后：\n\n1. 找出你学到的一件最有用、之前不知道的信息。\n2. 问：\"根据我的使用场景，有没有价格明显更低但不会让我后悔的替代版本？\"\n3. 问：\"我应该在亚马逊/Google 评价里具体搜索什么，来验证你的推荐？\"\n\n**第三步——居家保养日历（10 分钟）**\n\n为你实际的家运行季节性保养日历提示词。要具体：说明你的热水器类型、有没有排水沟、所在气候区，以及你是自住还是租房。\n\nClaude 回复后：\n- 找出 3 项适用于你、但你最近没做过的任务。\n- 问：\"对于这 3 项任务中的每一项，如果我拖延 6 个月，最坏的情况是什么？\"\n\n**强制性 AI 复核步骤：** 把你的购物调研输出复制回 Claude，说：\"批判性地审视这个——找出 3 个关于这项购买决策的具体改进点、遗漏或我忽略的地方。\"在做出任何购买决定之前，至少修正它指出的两个问题。\n\n**你已经打造出了：** 一个随时可用的饮食规划提示词、一项经过充分调研的购买决策，以及一份根据你实际生活定制的季节性保养任务清单。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——AI 人生教练：日常决策会谈",
+      "content": "本次工作坊把 AI 当作思考伙伴，用来处理一个你目前正在面对的真实日常决策。12 分钟。\n\n**选定你的决策（2 分钟）**\n\n从你现在的生活中选一个真实的决策——不是假设情境。它应该是你一直拖延或感到不确定的事，例如：\n- 是否要取消一个很少用的订阅\n- 家里某样东西是修还是换\n- 如何处理一个反复出现的家庭困扰（一个乱糟糟的空间、一个失控的习惯、一项预算漏洞）\n- 是现在就买某样东西，还是再等等\n\n**教练式对话（10 分钟）**\n\n打开一个新的 Claude 对话，用这句话开头：\n\n```\nI want your help thinking through a decision I've been putting off. I'll describe it, and I want you to act as a thinking partner — asking me questions that help me think more clearly, rather than just giving me an answer.\n\nThe decision: [describe it honestly, including why you've been avoiding it]\n```\n\n让对话顺其自然地展开。诚实地回应。如果 Claude 的某个问题让你意识到了什么，就说出来。\n\n经过 3-4 轮对话后，问：\"根据我告诉你的一切，你认为我实际上想怎么做——是什么在阻止我？\"\n\n然后问：\"我在接下来 24 小时内能采取的、能推动这件事的最小行动是什么？\"\n\n**反思：** 和 AI 聊过之后，你是否比之前更接近做出决定？Claude 注意到了哪些你自己没有清楚表达出来的事？写一句话，说说你接下来会做什么。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——打造可复用的家庭 AI 习惯",
+      "content": "目标：为你每周都要做的一项家庭任务，创建一个可循环使用的 AI 提示词流程，然后测试三次。\n\n**第一步——选择你的循环任务（2 分钟）**\n\n选一项你每周都要做（或应该每周做）、AI 能帮你节省时间或提升结果质量的任务：\n- 每周购物清单的制定\n- 根据促销或时令食材决定吃什么\n- 检查某项保养任务是否已经过期\n- 每周研究一项小的居家改进\n\n**第二步——搭建你可复用的提示词（8 分钟）**\n\n在 Claude 中，描述你的任务，请它帮你搭建一个提示词模板：\n\n```\nI want to create a weekly AI routine for [your task]. Help me build a prompt template I can use every [day/week] that:\n- Takes less than 2 minutes to fill in\n- Produces something useful and specific to my situation\n- Has [PLACEHOLDERS] for the details that change each week\n\nMy situation: [brief description of your household/context]\n```\n\n与 Claude 一起打磨，直到感觉合适为止。这个模板应该足够简短，让你真的会去用它。\n\n**第三步——测试三次（三轮）**\n\n- **第一轮（现在）：** 填入本周的具体细节并运行。保存输出结果。\n- **第二轮（下一次出现该任务时）：** 再次使用该模板。记下哪些有效、哪些感觉不对劲。\n- **第三轮（再下一次）：** 根据第二轮的发现改进模板，再运行一次。\n\n第三轮结束后，把最终改进版的模板保存到你的笔记应用中，标注为\"[任务名] 每周提示词——已测试\"。\n\n**习惯养成的标志：** 你在不假思索的情况下使用这个提示词——它已经成为你处理这项任务的默认方式。这就是目标。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude 建议一份每周饮食计划，它给了你五道晚餐，但其中两道含有你非常不喜欢的食材。最佳做法是什么？",
+      "options": [
+        "接受这个计划——已经够好了，改动太麻烦",
+        "开一个新对话，寄希望于下一次回复能避开这些食材",
+        "明确告诉 Claude 你不喜欢什么、为什么不喜欢，让它只替换那两道菜，并检查替换后的菜品仍符合你的预算和时间限制",
+        "在决定是否接受之前，先问 Claude 为什么选了这些食材"
+      ],
+      "correct": 2,
+      "explanation": "AI 饮食规划最好当作一个反复迭代的对话，而不是一次性的请求。明确告诉 Claude 该改什么，并检查替换后的方案是否仍满足你的其他约束条件（预算、时间、多样性），会比重新来一遍得到更好的方案。第一次回复只是草稿；你的反馈才能让它变得真正有用。开新对话（B）会丢失 Claude 已经掌握的关于你家情况的上下文。要求解释（D）并不能真正解决问题。"
+    },
+    {
+      "type": "quiz",
+      "question": "你用 AI 研究购买洗碗机，Claude 推荐了一个具体型号，说它\"根据最近的测试，能效表现优异\"。你在零售商网站上找到了这个型号。购买前最重要的下一步是什么？",
+      "options": [
+        "立即购买——Claude 的推荐加上零售商有货，就足以确认这是正确的选择",
+        "先判断 Claude 的训练数据是否足够新，能反映\"最近的测试\"是否对应当前在售的型号，然后在零售商或消费者评价网站上核实当前的评价和能效等级",
+        "再问 Claude 一次以确认这个推荐",
+        "在网上搜索最低价，从报价最低的商家购买"
+      ],
+      "correct": 1,
+      "explanation": "Claude 的训练数据有截止日期，所以从 Claude 的角度来说，\"最近的测试\"可能已经是一两年前的事了。家电型号变化很快——一个被推荐的型号可能已被淘汰、出现过质量问题，或者能效等级已被更新。务必在零售网站（Amazon、John Lewis、Which?）上核实具体的产品推荐是否有当前评价支持，并查看当前的能效认证标签。对于你要用上好几年的家电来说，这一点尤其重要。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 19-1 课。** 你现在拥有了饮食规划、购物调研和居家管理的提示词模板——这是日常生活中三个高频决策场景。第 19-2 课将讲解 AI 在旅行规划中的应用，那里的物流复杂度让 AI 的辅助尤为有价值。"
+    }
+  ],
+  "nextLesson": "19-2",
+  "prevLesson": "17-7"
+}

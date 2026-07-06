@@ -1,0 +1,124 @@
+{
+  "id": "3-6",
+  "title": "结构化输出——JSON、表格与数据提取",
+  "part": 3,
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "structured-output",
+    "json"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你将学会如何要求 AI 以结构化格式返回数据——JSON、markdown 表格、CSV、YAML——以及这为什么不仅仅是为了美观。结构化输出是 AI 与其他一切之间的桥梁：电子表格、数据库、API 和自动化工具。即使你从不写代码，结构化输出也能每周为你节省数小时手动重新排版的时间。你还将学会如何定义精确的输出模式（schema）、如何在大批量处理中保持一致性，以及如何在使用 AI 生成的数据之前进行校验。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么结构会改变一切\n\n当 AI 用流畅的散文回答时，输出是给人阅读的。当它以结构化格式回答时，输出是**机器可读的**——可以直接输入其他系统而无需转换。\n\n看看同样的信息用两种格式表达：\n\n**散文输出：**\n“John Smith 是一名后端开发者，有五年经验，主要使用 Python。Jane Doe 是一名前端开发者，有三年 React 经验。Marcus Lee 是一名 DevOps 工程师，有七年 AWS 和 Kubernetes 经验。”\n\n**JSON 输出：**\n```json\n[\n  {\"name\": \"John Smith\", \"role\": \"Backend Developer\", \"years\": 5, \"skills\": [\"Python\"]},\n  {\"name\": \"Jane Doe\", \"role\": \"Frontend Developer\", \"years\": 3, \"skills\": [\"React\"]},\n  {\"name\": \"Marcus Lee\", \"role\": \"DevOps Engineer\", \"years\": 7, \"skills\": [\"AWS\", \"Kubernetes\"]}\n]\n```\n\nJSON 版本可以：\n- 一次粘贴就直接导入电子表格（Google Sheets、Excel）\n- 加载进数据库导入工具\n- 用一个 3 行的 Python 脚本处理\n- 作为输入喂给另一个 API 调用\n- 用程序进行比较、筛选或排序\n\n结构化输出解决了三个实际问题：\n1. **复制粘贴问题**——表格可以完美粘贴进电子表格；散文不行\n2. **一致性问题**——处理 50 个条目时，你需要每个输出都是相同的形状\n3. **自动化问题**——工作流的下一步需要读取 AI 的输出，而不仅仅是给人看"
+    },
+    {
+      "type": "text",
+      "content": "## 定义你的 Schema：关键的一步\n\n最常见的结构化输出错误，是要求某种格式却没有指定应该包含哪些字段。“把这个返回为 JSON”会产出模型自己认为相关的字段。当你需要特定的 schema 时，这是不可靠的。\n\n**始终明确指定你的字段：**\n\n```\n❌  提取团队信息并返回为 JSON。\n\n✅  提取团队信息并返回为一个 JSON 数组。\n    每个对象必须恰好包含这些字段：\n    - name（字符串）\n    - role（字符串）\n    - years_experience（数字）\n    - primary_skills（字符串数组）\n    - location（字符串，如果没有提及则为 null）\n```\n\n**为什么这很重要：** 当你指定了 schema，无论是 1 个条目还是 100 个条目，你得到的结构都是一样的。如果让模型自己决定，第 37 个条目的字段名可能和第 1 个不一样——这会破坏任何自动化流程。\n\n**对于复杂的嵌套结构，展示出形状：**\n```\n把结果返回为具有以下确切结构的 JSON：\n{\n  \"summary\": \"一句话概述\",\n  \"key_points\": [\"要点 1\", \"要点 2\", \"要点 3\"],\n  \"action_items\": [\n    {\"owner\": \"姓名\", \"task\": \"描述\", \"due\": \"日期或 null\"}\n  ],\n  \"sentiment\": \"positive\" | \"neutral\" | \"negative\"\n}\n```\n\n展示形状可以避免在嵌套数组、可选字段和数据类型上产生歧义。"
+    },
+    {
+      "type": "text",
+      "content": "## 实践中的 JSON：高价值模式\n\n**会议纪要 → 行动项：**\n```\n阅读这些会议纪要，将所有行动项提取为一个 JSON 数组。\n每个行动项必须恰好包含这些字段：\n- owner：负责人姓名（字符串）\n- task：需要做什么（字符串，1 句话）\n- due_date：如有提及的截止日期（字符串），否则为 null\n- priority：根据纪要上下文判断为 HIGH、MEDIUM 或 LOW\n\n会议纪要：\n[在此粘贴你的纪要]\n```\n\n**邮件 → 结构化联系人：**\n```\n从这封邮件的签名中提取联系信息，返回为 JSON：\n{\n  \"name\": \"\",\n  \"title\": \"\",\n  \"company\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\" or null,\n  \"linkedin\": \"\" or null,\n  \"location\": \"\" or null\n}\n\n邮件签名：\n[在此粘贴签名]\n```\n\n**研究 → 结构化对比：**\n```\n我会描述 4 款软件工具。返回一个 JSON 数组来对比它们。\n每个工具对象必须包含：\n- name：工具名称\n- price：月费或 \"free\" 或 \"custom pricing\"\n- best_for：一句话描述最理想的用户\n- limitations：包含 2-3 个关键限制的数组\n- rating：针对[你的具体使用场景]，你给出的 1-10 分评估\n\n需要分析的工具：[描述你的工具或粘贴描述]\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Markdown 表格：快速、易读、兼容性广\n\nMarkdown 表格是最容易使用的结构化格式——它们能在 Notion、GitHub、GitLab、Obsidian、Linear 以及任何支持 markdown 的工具中正常渲染，还能作为真正的表格粘贴进 Google Docs 和 Word。\n\n**请求一份对比表：**\n```\n对比这三款项目管理工具——Trello、Asana 和 Notion——\n从以下几个维度：\n- 月费（免费版 → 专业版）\n- 学习曲线（低 / 中 / 高）\n- 最适合谁（团队规模和类型）\n- 一个突出的功能特点\n- 一个显著的局限\n\n以 markdown 表格呈现，列为：\n工具 | 定价 | 学习曲线 | 最适合 | 突出功能 | 主要局限\n```\n\n**打造更好表格的小技巧：**\n- 明确命名每一列——“工具 | 定价”比“做一个对比表”更好\n- 说明分类列有哪些合法取值（“低 / 中 / 高”，而不是自由文本）\n- 要求限定行数以避免表格臃肿：“只要前 5 行”\n- 要求统一的取值格式：“价格用 $/月”，而不只是“价格”\n\n**把表格转换回另一种格式：**\n```\n[粘贴 Claude 刚生成的 markdown 表格]\n\n把这个表格转换为 CSV 格式，逗号分隔，首行为表头。\n```\n\n这样你就可以在三次提示中完成：自然语言 → markdown 表格 → CSV → 电子表格。"
+    },
+    {
+      "type": "text",
+      "content": "## 批量处理：在大量条目中保持一致的输出\n\n结构化输出投资回报率最高的用途之一，就是处理一长串条目——所有条目都是同一种格式，一次性完成。\n\n**对一系列条目分类：**\n```\n针对下面的每个邮件主题行，返回一个 JSON 对象，包含：\n- subject：原始主题行\n- category：SALES、SUPPORT、INTERNAL、SPAM、OTHER 之一\n- urgency：HIGH、MEDIUM 或 LOW\n- suggested_folder：建议归档的文件夹名称\n\n返回为一个 JSON 数组，每封邮件一个对象。\n\n邮件主题：\n1. \"Your invoice is overdue — action required\"\n2. \"Team lunch this Friday?\"\n3. \"CLICK HERE WIN £1000 AMAZING DEAL\"\n4. \"Re: Q3 roadmap discussion\"\n5. \"Your order has shipped!\"\n```\n\n**分析一份阅读清单：**\n```\n针对下面每个书名，返回一个 JSON 对象，包含：\n- title：书名\n- category：类型或领域（一个词）\n- audience：主要面向谁（一句话）\n- core_idea：核心论点或洞见（一句话）\n- read_if：什么样的具体触发条件会让人想读这本书\n\n返回为一个 JSON 数组。\n\n书籍：\n- Atomic Habits\n- The Pragmatic Programmer\n- Thinking, Fast and Slow\n- Zero to One\n- Deep Work\n- The Mom Test\n```\n\n这种批量提示能用一次提示和 30 秒的处理时间，替代数小时的人工调研和记录工作。"
+    },
+    {
+      "type": "text",
+      "content": "## CSV 和 YAML：另外两种有用的格式\n\n**CSV（逗号分隔值）**——最适合导入电子表格：\n```\n把这份联系人列表转换为 CSV 格式。\n列为：first_name, last_name, company, email, role, city。\n包含表头行。如果某个字段没有提及，就留空。\n\n联系人列表：\n[粘贴非结构化的联系人列表]\n```\nCSV 输出可以直接逐行粘贴进任何电子表格，无需重新排版。\n\n**YAML**——在配置文件和开发者工具中更受青睐：\n```\n把这份 JSON 转换为 YAML 格式：\n[在此粘贴 JSON]\n```\n\nYAML 广泛用于 DevOps、CI/CD 流水线和配置文件（Docker Compose、GitHub Actions）。如果你和开发者一起工作，他们通常更喜欢 YAML 而不是 JSON，因为更易读。\n\n**复杂文档的嵌套结构：**\n```\n从这份合同中提取关键条款，返回为 YAML：\n\ndefinitions:\n  [术语]: [定义]\n  [术语]: [定义]\n\nkey_dates:\n  effective_date:\n  expiry_date:\n  renewal_notice_deadline:\n\nobligations:\n  client:\n    - [义务]\n  vendor:\n    - [义务]\n\n合同文本：\n[在此粘贴合同]\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**使用前先校验。** AI 生成的 JSON 有时会有一些小的格式错误——逗号位置不对、括号没闭合、字段名不一致。在把 AI 生成的 JSON 输入另一个工具或脚本之前，先把它粘贴进一个免费的 JSON 校验工具（jsonlint.com 或 jsonformatter.curiousconcept.com）确认它是有效的。这只需要 10 秒钟，却能避免下游出现令人困惑的错误。\n\n还要验证：如果你要求了特定的取值（HIGH/MEDIUM/LOW），检查一个样本以确认模型确实使用了完全相同的值，而不是换成了 “High” 或 “URGENT”——大小写和拼写的不一致会破坏排序和筛选。"
+    },
+    {
+      "type": "text",
+      "content": "## 结构化输出 + 自动化：更大的图景\n\n结构化输出是让 AI 在自动化工作流中真正有用的关键。一旦 AI 能持续产出符合 schema 的 JSON，你就可以：\n\n- 自动将其导入 Airtable、Notion 或 Coda 数据库\n- 根据具体字段的值触发 Zapier 或 Make 的操作\n- 将其作为输入喂给另一个 API 调用\n- 保存为文件供另一个系统读取\n- 记录到一个会随时间更新的电子表格中\n\n**一个自动化流水线示例：**\n1. 新客户邮件到达 → 触发 Zapier\n2. 邮件文本连同你的分类提示词发送给 Claude API → 输出 JSON\n3. JSON 字段映射到 Airtable 字段 → 自动创建工单\n4. 如果 priority = HIGH → 发送 Slack 通知\n5. 如果 category = BILLING → 通知财务团队\n\n你将在第 13 部分（自动化）中构建这类流水线。就目前而言，关键点是：每一次让 AI 生成结构化输出，你都是在为自动化打基础。即使你从不做任何自动化，结构化输出本身也能节省时间——它已经可以直接使用，无需重新排版。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "搭建一个数据提取流水线",
+      "content": "打开 [Claude.ai](https://claude.ai)，完成这个三部分的练习。完成后，你会拥有一个可复用的提示词，能把非结构化文本转换为你真正能用的结构化数据。\n\n**第一部分——Schema 优先的 JSON 提取（8 分钟）**\n\n粘贴这段文本，并要求以指定 schema 输出 JSON：\n```\n提取团队成员信息为一个 JSON 数组。\n每个对象必须恰好包含这些字段：\n- name（字符串）\n- role（字符串）\n- years_experience（数字）\n- skills（字符串数组）\n- location（字符串，如果没有提及则为 null）\n\n文本：\nOur team has grown this year. Sarah joined the backend team two years ago\nand has become our Python specialist. Marcus has been doing frontend work\nfor three years — he's our React lead. Priya heads DevOps and brings seven\nyears of AWS and Kubernetes expertise. She's based in our London office.\n```\n\n验证：输出是否与你指定的 schema 完全一致？\n\n**第二部分——表格和格式转换（5 分钟）**\n\n在同一个对话中：\n```\n现在把同样的数据重新排版为 markdown 表格，列为：\nName | Role | Experience | Skills | Location\n```\n\n然后：\n```\n现在把这个表格转换为 CSV 格式，逗号分隔，表头在第一行。\n```\n\n注意：同一份数据，三次提示得到三种不同的格式。\n\n**第三部分——你自己的真实数据（10 分钟）**\n\n从你自己的工作中选一样东西。选项：\n- 你正在跟踪的一份任务或项目清单\n- 你管理的一组联系人或公司\n- 一次近期会议的记录\n- 你想整理的一批链接或资源\n- 你需要对比的产品功能\n\n先自己设计 schema——在运行提示词之前，先写出你想要的确切字段名和类型。然后运行它。\n\n拿到输出后：\n1. 把 JSON 粘贴进 jsonlint.com 进行校验\n2. 如果无效，让 Claude 修复任何格式错误\n3. 把结果导入电子表格工具（Google Sheets：使用 Import Data > Paste JSON，或者直接粘贴进 Notion 并使用它的导入功能）\n\n**保存你的提取提示词。** 这就是你处理这类内容的数据提取模板——把它加入你的提示词库。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude 从 50 份邮件签名中提取数据并返回 JSON——但你发现有些对象有 'phone_number' 字段，有些是 'phone'，还有些是 'tel'。这破坏了你的电子表格导入。你本应该怎么做？",
+      "options": [
+        "换一个其他 AI 工具——Claude 生成的字段名不一致",
+        "在你的提示词 schema 中明确指定确切的字段名，并要求模型只使用这些名字，包括对于空值也要用 null 而不是省略字段",
+        "反复运行几次，直到得到一致的结果",
+        "事后让 Claude 猜测正确的字段名"
+      ],
+      "correct": 1,
+      "explanation": "字段名不一致是一个 schema 规范问题。当你没有指定字段名时，模型会选择它认为合理的名字——而 'phone'、'phone_number' 和 'tel' 对同一个概念来说都算合理。解决办法是在提示词中指定确切的字段名：“每个对象必须恰好包含这些字段：name、email、phone（字符串或 null）、company”。明确使用“或 null”（而不是在为空时省略字段）能确保 schema 在所有输出中都是完整且一致的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——结构化输出快速练习",
+      "content": "这个练习从非结构化输入中提取结构化输出——这是最立竿见影的 AI 工作流之一。\n\n**第 1 步——找到手头的非结构化文本：** 一组笔记、一段邮件往来、一份会议记录、一篇网络文章、一份反馈列表。\n\n**第 2 步——从中提取一张表：**\n```\n从以下文本中提取所有[任务 / 决定 / 提及的人 / 日期 / 关键要点]，并以 markdown 表格呈现，列为：[列1] | [列2] | [列3]\n\n[粘贴你的文本]\n```\n\n**第 3 步——从同一文本中提取 JSON：**\n```\n把同样的信息提取为结构化 JSON。使用这个 schema：\n{\n  \"items\": [\n    {\n      \"field1\": \"\",\n      \"field2\": \"\",\n      \"field3\": \"\"\n    }\n  ]\n}\n```\n\n**第 4 步——对比：** 表格还是 JSON，哪种格式对你的具体使用场景更有用？\n\n**第 5 步——记下使用场景：** 在你实际的工作中，从非结构化文本提取结构化数据在什么时候能为你节省最多时间？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——搭建一个数据提取流水线",
+      "content": "为你经常处理的一种文档类型创建一个可复用的提取提示词。\n\n**第 1 步——确定一种你经常收到、并需要从中提取特定信息的文档类型：** 发票、报告、反馈问卷、会议纪要、求职申请、合同。\n\n**第 2 步——确定你需要从这类文档中提取的所有字段。** 要具体。\n\n**第 3 步——设计你的提取 schema。** 对于 JSON：\n```\n{\n  \"document_type\": \"[类型]\",\n  \"extracted_at\": \"[时间戳]\",\n  \"data\": {\n    \"field1\": \"\",\n    \"field2\": [],\n    \"field3\": {\n      \"subfield1\": \"\",\n      \"subfield2\": \"\"\n    }\n  },\n  \"missing_fields\": [],\n  \"extraction_confidence\": \"high/medium/low\"\n}\n```\n\n**第 4 步——用上面的 schema 写出你的提取提示词。** 要包含：如果字段缺失该怎么做（“留空并加入 missing_fields”），以及如果信息含糊不清该怎么做（“照字面提取，并在备注中标记”）。\n\n**第 5 步——用该文档类型的 3 个真实样本进行测试。**\n\n**第 6 步——必做的复查：** 问 Claude：*“回顾一下你自己做的提取结果。你在哪一份提取结果中最没有把握？你可能遗漏或误解了什么？”*\n\n**第 7 步——把你的提取提示词保存进你的提示词库。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——从原始数据到报告",
+      "content": "这个工作坊用两步流程，把原始结构化数据转化为一份人类可读的报告。\n\n**第 1 步——收集你手头的原始数据：** 调查结果、来自看板的指标、财务数字、绩效数据——任何数字或结构化记录。\n\n**第 2 步——步骤 A（提取/整理）：** 让 Claude：\n```\n这是原始数据：[粘贴数据]\n\n把它整理成一份结构化摘要，包含：\n- 总数和关键总计\n- 按[指标]排名的前 3 项发现\n- 值得注意的模式或异常\n- 任何缺失或不一致的数据\n```\n\n**第 3 步——步骤 B（叙述）：** 拿这份结构化摘要问：\n```\n把这份结构化数据摘要转换为一份面向[受众]的 3 段式高管简报。重点关注影响以及数据应该指引的决策——而不只是描述数字。\n```\n\n**第 4 步——审阅最终简报。** 它准确吗？结论是否正确？\n\n**第 5 步——问 Claude：** *“数据中有哪个重要的洞见，你没有包含进简报里？一个数据专家可能会注意到，但非专家可能会错过的是什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——创建一个结构化输出模板库",
+      "content": "为你最常见的数据需求，搭建一套结构化输出模板库。\n\n**第 1 步——列出你经常产出、或者希望能更轻松产出的 4-5 种结构化输出：** 项目状态报告、标准格式的会议纪要、风险登记表、内容日历、问题跟踪表。\n\n**第 2 步——针对每一种类型**，设计一个能捕捉你所需一切信息的理想 JSON schema 或表格结构。\n\n**第 3 步——问 Claude：** *“帮我为[类型]设计一个完整的 JSON schema。它需要捕捉：[描述你的需求]。要让粘贴原始文本、得到结构化数据的用户觉得实用。加入一个 'confidence' 字段和一个 'notes' 字段，供模型标记不确定之处。”*\n\n**第 4 步——用一个真实的原始输入样本测试每一个 schema。**\n\n**第 5 步——把所有 schema 保存到你提示词库中的“结构化输出模板”分类下。**"
+    },
+    {
+      "type": "quiz",
+      "question": "你想让 Claude 从会议记录中提取所有行动项，返回为 JSON。哪一条指令能产生最可靠的结构化输出？",
+      "options": [
+        "从这份会议记录中提取行动项",
+        "提取行动项并返回为 JSON",
+        "提取行动项为 JSON，使用恰好这个 schema：{\"action_items\": [{\"task\": \"\", \"owner\": \"\", \"deadline\": \"\", \"priority\": \"high/medium/low\"}]}。如果没有提及负责人，用 \"Unassigned\"。如果没有提及截止日期，用 null。",
+        "以有用的格式提取行动项、负责人和截止日期"
+      ],
+      "correct": 2,
+      "explanation": "提供确切的 schema，包含明确的字段名、类型，以及缺省情况的处理说明（当字段缺失时该怎么做），是结构化输出的黄金标准。没有 schema，Claude 会自创一套结构，可能和你下游流程所期望的对不上。schema 越具体，边界情况（缺失字段、含糊值）处理得越清楚，输出就越可靠、越一致。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude 从你的文档中提取了一个表格，但其中一行包含了一个源文本中不存在、它自己编造出来的值。最好的缓解措施是什么？",
+      "options": [
+        "始终手动逐个单元格核对",
+        "在你的 schema 中加一个 \"source_quote\" 字段，强制 Claude 为它提取的每个值引用确切的原文",
+        "让 Claude 重新做一遍提取",
+        "接受 AI 提取总会有一些错误"
+      ],
+      "correct": 1,
+      "explanation": "加入一个 \"source_quote\" 字段，强制 Claude 为每个提取出的值引用确切的原文。这让幻觉（hallucination）立刻变得可见——如果某个单元格没有有效的原文引用，你就知道它是编造的。这也让核实变得很快：你可以抽查引用的原文，而不需要独立核实每一个值。对于任何会被采取行动的 AI 数据提取任务而言，这才是专业的做法。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 3-6 课。** 你现在可以提取 JSON、markdown 表格、CSV 和 YAML 格式的结构化数据——用精确的 schema，在任意数量的条目上产出一致的输出。这项技能是本课程自动化部分一切内容的基础。"
+    }
+  ],
+  "nextLesson": "3-7",
+  "prevLesson": "3-5"
+}

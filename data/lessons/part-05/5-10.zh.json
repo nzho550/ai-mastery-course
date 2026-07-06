@@ -1,0 +1,101 @@
+{
+  "id": "5-10",
+  "title": "必学键盘快捷键",
+  "part": 5,
+  "estimatedMinutes": 55,
+  "tags": [
+    "vscode",
+    "beginner",
+    "shortcuts",
+    "keyboard",
+    "productivity"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将练习掌握 10 个能消除 VS Code 中最常见操作阻碍的键盘快捷键。你不会靠读一份清单来死记硬背——你会通过在真实内容上实际操作，把它们练成肌肉记忆。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么键盘快捷键很重要\n\n每一次你为了保存文件、撤销修改、切换注释而伸手去够鼠标，你的心流就会被打断。单次打断算不上灾难性，但每小时重复 50 次，累积下来就相当可观了。\n\n键盘快捷键消除了这种阻碍。经过几周的刻意练习后，你的双手会自动做出正确的动作。你不再去思考“怎么做”，而是直接思考“该做什么”。\n\n好消息是：你不需要学 100 个快捷键，你只需要学会那 10 个会反复用到的。其余的都可以随查随用。"
+    },
+    {
+      "type": "text",
+      "content": "## 10 个必学快捷键\n\n| 快捷键 | 操作 | 使用场景 |\n|----------|--------|----------------|\n| `Ctrl+Shift+P` | 命令面板 | 想通过名称调用任意 VS Code 功能时 |\n| `Ctrl+P` | 快速打开文件 | 通过输入文件名跳转到项目中的任意文件 |\n| `Ctrl+S` | 保存文件 | 每次做出有意义的修改之后 |\n| `Ctrl+Z` | 撤销 | 撤销上一次修改 |\n| `Ctrl+Shift+Z` | 重做 | 重新应用刚才撤销的操作 |\n| `Ctrl+/` | 切换行注释 | 注释或取消注释当前行 |\n| `Alt+Up` / `Alt+Down` | 移动行 | 无需剪切/粘贴，直接把一行代码上下移动 |\n| `Ctrl+D` | 选中下一个匹配项 | 选中光标所在的单词，然后依次选中下一个匹配项…… |\n| `Ctrl+Shift+K` | 删除当前行 | 无需先选中就能删除整行 |\n| `Ctrl+` \\`` | 切换集成终端 | 显示或隐藏终端 |\n\n以上是 Windows 版 VS Code 的快捷键。Mac 用户请将 Ctrl 替换为 Cmd（Alt+Up/Down 中的 Alt 替换为 Option）。"
+    },
+    {
+      "type": "text",
+      "content": "## 三个值得多说几句的快捷键\n\n**Ctrl+/ —— 切换行注释**\n\n这是 VS Code 中最令人愉悦的快捷键之一。把光标放在某一行的任意位置，按 Ctrl+/。VS Code 会用当前语言对应的注释符号把这一行包起来：\n- HTML：`<!-- your code -->`\n- JavaScript：`// your code`\n- CSS：`/* your code */`\n- Python：`# your code`\n\n再按一次即可取消注释。先选中多行，就能一次性把它们全部注释掉。当你想暂时禁用一行代码而不删除它时，会一直用到这个快捷键。\n\n**Ctrl+D —— 选中下一个匹配项**\n\n把光标放在一个单词上（或双击选中它）。按 Ctrl+D，VS Code 会选中该单词下一个完全相同的出现位置。再按一次会加选下一个。所有选中项都会保持激活状态——此时你输入的任何内容都会同时替换掉全部选中项。\n\n使用场景：你有一个叫 `userName` 的变量，想把它改名为 `userEmail`。点击 `userName`，反复按 Ctrl+D 直到所有出现位置都被选中，然后输入 `userEmail`。它们会同时改变。\n\n**Alt+Up / Alt+Down —— 移动行**\n\n把光标放在某一行的任意位置，按住 Alt，然后按 Up 或 Down。这一行会实实在在地上下移动，把周围的行挤开。VS Code 会自动处理所需的缩进调整。不需要剪切、移动、粘贴。这是重新排列代码行最快的方式。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**查看所有快捷键：** 按 Ctrl+K 然后 Ctrl+S（或者进入 File → Preferences → Keyboard Shortcuts）。这会显示一份可搜索的列表，包含每一个 VS Code 操作及其对应的快捷键。你也可以双击任意一项来修改它的快捷键。如果需要一份可打印的参考资料，可以使用 Help → Keyboard Shortcut Reference（PDF）。"
+    },
+    {
+      "type": "text",
+      "content": "## 还有几个值得了解的快捷键\n\n这些没有进入前 10 名，但也很接近：\n\n- **Ctrl+F** —— 在当前文件中查找文本。按 Enter 跳转到下一个匹配项。\n- **Ctrl+H** —— 查找并替换。类似 Ctrl+F，但多了一个替换输入框。\n- **Ctrl+G** —— 跳转到指定行号。输入数字后按 Enter。\n- **Ctrl+B** —— 切换主侧边栏（需要更多屏幕空间时使用）。\n- **Ctrl+W** —— 关闭当前标签页。\n- **Ctrl+Tab** —— 在已打开的标签页之间循环切换。\n- **Ctrl+`** —— 我们已经讲过了：切换终端。\n- **Shift+Alt+Down** —— 在当前行下方复制一份（对于重复代码模式非常有用）。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "快捷键肌肉记忆",
+      "content": "从练习文件夹中打开 `part-05-notes.md`，把每个快捷键至少练习 3 遍。目标不是速度——而是养成生理性的习惯。\n\n**首先，添加一些内容用来练习。** 点击 `part-05-notes.md`，输入：\n```\n# VS Code Notes\n\nThe Command Palette is Ctrl+Shift+P.\nThe terminal shortcut is Ctrl+backtick.\nI can save files with Ctrl+S.\nI can undo mistakes with Ctrl+Z.\nI can toggle a comment with Ctrl+slash.\nThis line should be moved.\nThis line should stay.\nI can select multiple words with Ctrl+D.\nthis line should be deleted entirely.\n```\n\n**现在依次练习每个快捷键：**\n\n**Ctrl+S —— 保存：**\n现在就按 Ctrl+S。标签页标题上的圆点会消失。（如果自动保存已开启，圆点可能已经不见了——那也没关系。）\n\n**Ctrl+Z —— 撤销 / Ctrl+Shift+Z —— 重做：**\n删除一个单词，然后按 Ctrl+Z——它会恢复。按 Ctrl+Shift+Z——它又被删除了。练习 3 次。\n\n**Ctrl+/ —— 切换注释：**\n点击 `The Command Palette is Ctrl+Shift+P.` 这一行，按 Ctrl+/。它会变成一个 Markdown 注释。再按一次 Ctrl+/ 取消注释。在 3 个不同的行上练习。\n\n**Alt+Up / Alt+Down —— 移动行：**\n点击 `This line should be moved.`，按住 Alt，按两次 Up，再按三次 Down。观察这一行是如何实际移动的。\n\n**Ctrl+D —— 选中下一个匹配项：**\n双击文件中任意位置的 `Ctrl` 这个词。按 Ctrl+D——下一个 `Ctrl` 会被选中。再按一次 Ctrl+D——又选中一个。现在随便输入点什么——所有被选中的实例都会改变。按几次 Ctrl+Z 撤销。\n\n**Ctrl+Shift+K —— 删除行：**\n点击 `this line should be deleted entirely.` 这一行的任意位置，按 Ctrl+Shift+K。整行都消失了。\n\n**Ctrl+P —— 快速打开文件：**\n按 Ctrl+P，输入 `hello`——VS Code 会找到 `hello.html`。按 Enter 打开它。再按一次 Ctrl+P，输入 `readme`——找到 `README.md`。按 Esc 取消。\n\n**Ctrl+` —— 切换终端：**\n按 Ctrl+` 打开终端。再按一次关闭。再打开一次。练习 3 次。\n\n**检查清单：**\n- [ ] 练习了以上全部 8 个快捷键\n- [ ] Ctrl+/ 正确地切换了注释\n- [ ] Ctrl+D 选中了多个匹配项\n- [ ] Alt+Up/Down 移动了一行\n- [ ] Ctrl+Shift+K 删除了完整的一行"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A —— 键盘快捷键速度测试",
+      "content": "键盘快捷键的效果会随时间累积——你学会的每一个快捷键，每天都要节省成百上千次的时间。\n\n**第 1 步 —— 在 VS Code 中打开一个代码或文本文件。**\n\n**第 2 步 —— 只用键盘（不用鼠标）为每项任务计时：**\n\n| 任务 | 快捷键 | 你的用时 |\n|---|---|---|\n| 跳转到第 20 行 | Ctrl+G → 20 → Enter | |\n| 查找单词 “function” | Ctrl+F → 输入 | |\n| 选中当前行 | Ctrl+L | |\n| 复制当前行 | Shift+Alt+Down | |\n| 删除当前行 | Ctrl+Shift+K | |\n| 上移一行 | Alt+Up | |\n| 注释当前行 | Ctrl+/ | |\n| 打开终端 | Ctrl+` | |\n| 格式化文档 | Shift+Alt+F | |\n| 保存文件 | Ctrl+S | |\n\n**第 3 步 —— 对任何用时超过 5 秒的快捷键**，练习 10 遍直到它变得自动化。\n\n**第 4 步 —— 打印 VS Code 键盘快捷键参考卡**（Ctrl+Shift+P → \"Open Default Keyboard Shortcuts\" → PDF）。挑选本周要学的 3 个新快捷键。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 自定义键盘快捷键设置",
+      "content": "为那些你经常使用却没有默认快捷键绑定的命令分配快捷键。\n\n**第 1 步 —— 找出你需要用鼠标点击的前 5 个操作**（并且每次工作时会做超过 5 次）。\n\n**第 2 步 —— 打开 Keyboard Shortcuts：** Ctrl+Shift+P → \"Open Keyboard Shortcuts\"（可搜索的 UI）。\n\n**第 3 步 —— 针对每个操作**，搜索命令名称，点击铅笔图标，然后按下你想要的快捷键组合。\n\n**第 4 步 —— 请 Claude 给出建议：**\n```\n我用 VS Code 做[你的工作]。我想为以下操作设置自定义键盘快捷键：\n[列出你的主要操作]\n\n请给出满足以下条件的快捷键组合建议：\n- 不与 VS Code 内置快捷键冲突\n- 符合人体工程学（易于按下）\n- 遵循开发者常用的惯例（重要操作用 Ctrl+Shift+字母）\n```\n\n**第 5 步 —— 导出你的快捷键：** Ctrl+Shift+P → \"Open Keyboard Shortcuts (JSON)\" → 复制并保存到安全的地方（云端、dotfiles 仓库）。\n\n**第 6 步 —— 坚持两周：** 针对你刚设置好的快捷键，只用键盘，不用鼠标。肌肉记忆大约需要两周的持续使用才能养成。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C —— 重构相关快捷键",
+      "content": "这些快捷键专门用于高效地编辑和重构代码——是区分快速编码者和缓慢编码者的关键按键。\n\n**第 1 步 —— 创建一个 Python 文件**，写入一些测试代码：\n```python\ndef calculate_total(price, quantity, tax_rate):\n    subtotal = price * quantity\n    tax = subtotal * tax_rate\n    total = subtotal + tax\n    return total\n\nresult = calculate_total(10.99, 3, 0.08)\nprint(result)\n```\n\n**第 2 步 —— 练习以下重构快捷键：**\n- 重命名符号：点击 `calculate_total`，按 F2，输入新名称 → 重命名会在全局生效\n- 提取选中内容：选中 `subtotal * tax_rate`，Ctrl+Shift+P → \"Extract Variable\"\n- 格式化文档：Shift+Alt+F\n- 转到定义：点击最后一行的 `calculate_total`，按 F12\n- 查看定义：Alt+F12（无需离开当前文件即可查看定义）\n\n**第 3 步 —— 使用多光标编辑：** 按住 Alt 并点击可以添加光标。同时在第 2-4 行的行首添加光标。\n\n**第 4 步 —— 问 Claude：** *“针对 Python 开发，最强大的 VS Code 重构快捷键有哪些？给我 5 个我应该练成肌肉记忆的快捷键。”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 为你的使用场景搭建快捷键速查表",
+      "content": "为你自己的具体工作流程创建一份个性化的键盘快捷键参考资料。\n\n**第 1 步 —— 问 Claude：**\n```\n为一位这样的 VS Code 用户创建一份键盘快捷键速查表：\n- 主要使用[你的编程语言]\n- 使用[你的扩展，例如 GitHub Copilot]\n- 主要任务：[写代码 / 审阅 AI 生成的代码 / 编辑文档]\n\n格式为表格：操作 | 快捷键 | 备注\n按以下分类分组：导航、编辑、Git、终端、扩展\n只包含我第一个月就应该学会的快捷键。\n```\n\n**第 2 步 —— 审阅并个性化**这份速查表。加上你自己的自定义快捷键。删掉任何不适用的内容。\n\n**第 3 步 —— 测试列表中的每一个快捷键**——确认它们在你的 VS Code 安装环境中都能正常工作。\n\n**第 4 步 —— 将速查表保存**为一个 Markdown 文件，放在你的项目或笔记应用中。\n\n**第 5 步 —— 分享给同样使用 VS Code 的同事。** 让他们也使用相同的快捷键，意味着你们可以互相帮助。"
+    },
+    {
+      "type": "quiz",
+      "question": "你想一次性注释掉 10 行代码。最快的 VS Code 方法是什么？",
+      "options": [
+        "手动在每一行开头输入 //",
+        "用 Shift+Click 选中全部 10 行，然后按 Ctrl+/ 对所有选中的行切换注释",
+        "使用 Find & Replace 给每一行添加 //",
+        "让 AI 助手帮你注释代码"
+      ],
+      "correct": 1,
+      "explanation": "Ctrl+/ 会对当前行或所有选中的行切换注释状态。选中这 10 行（点击起始位置，Shift+click 结束位置），然后按 Ctrl+/——10 行会同时被注释。在这些行仍处于选中状态时再按一次同样的快捷键，就会取消注释。这适用于 VS Code 识别的任何语言的行注释（JS/Python/C# 用 //，Python 用 #，SQL 用 -- 等等）。"
+    },
+    {
+      "type": "quiz",
+      "question": "在 VS Code 中按 Alt+Up/Down 会发生什么？",
+      "options": [
+        "上下滚动编辑器视口",
+        "把当前选中的一行或多行在文件中上下移动",
+        "在编辑器标签页之间切换文件",
+        "放大或缩小文字大小"
+      ],
+      "correct": 1,
+      "explanation": "Alt+Up/Down 会把当前行（或选中的多行）在文件中上下移动——这是对代码物理位置的重新排序。当你想调整代码顺序时，这比剪切粘贴快得多。它既可以用于单行，也可以用于多行选区。一个类似的操作 Shift+Alt+Down 会在当前行下方复制一份——对于快速创建类似的代码结构很有用。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 5-10 课。** 这些快捷键一开始会让你觉得别扭，但经过一周的持续使用就会变得自动化。这项投入会在课程剩余的全部内容中——以及你的整个职业生涯中——持续带来回报。下一课：使用 Split Editor（分屏编辑器）并排查看两个文件。"
+    }
+  ],
+  "nextLesson": "5-11",
+  "prevLesson": "5-9"
+}

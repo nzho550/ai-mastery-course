@@ -1,0 +1,126 @@
+{
+  "id": "7-3",
+  "title": "第一次会话——读取项目",
+  "part": 7,
+  "estimatedMinutes": 70,
+  "tags": [
+    "claude-code",
+    "context",
+    "codebase",
+    "first-session"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将已经在一个真实的项目文件夹中运行过 Claude Code，向它提出关于代码库的问题，并看到它如何自动读取文件——而无需你粘贴任何内容。你还将理解如何在小型和大型代码库中高效管理上下文，以及在陌生代码中定位自己时哪些问题最有价值。"
+    },
+    {
+      "type": "text",
+      "content": "## 如何启动一个 Claude Code 会话\n\nClaude Code 总是从项目文件夹内部启动。你输入 `claude` 时所在的文件夹会成为 Claude 的工作目录——也就是它能看到和操作的范围的根目录。\n\n模式始终是：\n```powershell\ncd your-project-folder\nclaude\n```\n\nClaude Code 启动后，你会看到一个欢迎界面，显示：\n- 它正在工作的当前目录\n- 它找到的任何 CLAUDE.md 指令的摘要（在第 7-6 课中讲解）\n- 一个供你输入请求的提示符\n\n从这里开始，你可以提问、给出指令，或使用斜杠命令——全部用简单的英语（或中文）表达。\n\n**始终从项目根目录启动。** 如果你从 `C:\\` 或你的主目录启动，Claude 会有错误的工作上下文。如果你从 `src/` 内部而不是项目根目录启动，它就看不到父文件夹结构。项目根目录——也就是 `package.json`、`CLAUDE.md` 或 `README.md` 所在的位置——才是正确的起点。"
+    },
+    {
+      "type": "code",
+      "language": "powershell",
+      "content": "# Navigate to your project folder first\ncd C:\\Projects\\my-project\n\n# Or using Documents\ncd Documents\\ai-course-projects\n\n# Launch Claude Code\nclaude"
+    },
+    {
+      "type": "text",
+      "content": "## Claude 读取你的项目时会发生什么\n\n当你向 Claude Code 提出关于项目的问题时，它不会猜测——而是读取实际的文件。具体过程如下：\n\n1. Claude 判断哪些文件与你的问题相关\n2. 它将这些文件读入自己的上下文窗口\n3. 它利用这些内容，就你的实际代码给出准确、具体的回答\n\n对于小型项目（几十个文件），Claude 通常可以一次性读完整个项目。对于更大的项目，它会根据你的问题有选择地读取最相关的文件——你也可以通过明确提及文件来引导它。\n\n**@ 提及语法：** 在 Claude Code 提示符中，输入 `@` 加上文件名或文件夹，可以将其明确添加到上下文中：\n\n```\n@src/api/auth.js what does the authenticate function do?\n```\n\n```\n@src/ give me a summary of all files in this folder\n```\n\n这比让 Claude \"查找\"某样东西更快、更可靠——你是在明确告诉它该去哪里看。\n\n**上下文窗口限制：** Claude 一次能在内存中保存约 200,000 个 token 的内容。对于大多数项目（500 个文件以下），这不构成限制。对于非常大的代码库：\n- 具体一些：与其问\"这个项目是做什么的？\"，不如问\"`src/auth/middleware.js` 是做什么的？\"\n- 使用 `/compact` 压缩对话历史以释放上下文（下文会讲解）\n- 一次专注于一个子系统，而不是试图加载整个代码库"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**# 与 @ 的区别：** 在 Claude Code 中，`#` 用于在你提问之前将特定文件读入上下文（单独一行输入 `# filename.md`），而 `@` 用于在问题内联使用（输入 `@filename.js what does this do?`）。两者都可以用——`@` 对于提问更自然，`#` 用于预加载上下文时更明确。"
+    },
+    {
+      "type": "text",
+      "content": "## 有用的初始问题（按价值排序）\n\n当你在陌生的项目中打开 Claude Code——或休息一段时间后重新回到某个项目时——这些问题能让你和 Claude 都迅速定位方向。顺序很重要：先从宏观入手，再逐步深入。\n\n**1. 概览——理解项目的整体形态：**\n```\nWhat is this project? Describe its purpose, main components,\nand the key files I should know about.\n```\n\n**2. 入口点——理解执行从哪里开始：**\n```\nWhat is the entry point of this project?\nWhere does execution start when this runs?\n```\n\n**3. 架构——理解各部分如何关联：**\n```\nHow do the major files/modules relate to each other?\nDescribe the data flow from input to output.\n```\n\n**4. 深入研究——理解某个具体部分：**\n```\nRead src/auth.js and explain every function. What does\nthe whole file accomplish? What could go wrong?\n```\n\n**5. 健康检查——找出问题和缺口：**\n```\nAre there any obvious issues, bugs, or TODOs in this codebase?\nWhat's missing that should probably be there?\n```\n\n**6. \"帮我开始\"——实用的定向问题：**\n```\nI want to add [feature]. Which files should I look at first?\nWhat already exists that I can build on?\n```\n\n这些问题不仅仅是给初学者用的。资深工程师也用完全相同的模式来在陌生的代码仓库中定位方向——而且由于 Claude 读取的是实际文件，得到的答案是针对你的项目的，而不是泛泛的建议。"
+    },
+    {
+      "type": "text",
+      "content": "## 在长会话中管理上下文\n\n每一条对话消息都会加入到 Claude 的上下文窗口中。随着会话变长，会发生两件事：\n1. **成本增加**——每次请求发送的 token 更多\n2. **焦点可能漂移**——较早的对话上下文可能会干扰后续的回复\n\n**`/compact` 命令：**\n当会话变长时，在 Claude Code 提示符中运行 `/compact`。这会将对话历史压缩成一个简洁的摘要，同时保留重要的上下文。本质上就是：\"记住重要的，忘掉次要的填充内容。\"\n\n```\n/compact\n```\n\n在以下情况使用 `/compact`：\n- 你完成了一个子任务，正要开始一个新的\n- 会话已经运行了 30 分钟以上，积累了大量的交流\n- 你注意到 Claude 开始引用不相关的早期上下文\n\n**`/clear` 命令：**\n这会完全清空对话并重新开始——就像启动一个新会话，而不用重启。当你想为一个完全不同的任务获得一个干净的开始时使用。Claude 仍然会读取你的 CLAUDE.md，但所有之前的对话上下文都会消失。\n\n```\n/clear\n```\n\n**为新任务启动新会话：**\n对于不相关的任务，始终启动一个新会话，而不是继续旧的。使用 `/exit` 退出，然后导航到相关文件夹，再次运行 `claude`。这能让每个会话都保持专注和上下文高效。"
+    },
+    {
+      "type": "text",
+      "content": "## 从命令中读取项目状态\n\nClaude Code 可以运行终端命令并读取其输出——这意味着你可以让它运行诊断命令来了解项目的当前状态：\n\n**了解依赖项：**\n```\nRun `npm list --depth=0` and tell me what the main dependencies\nin this project are and what each one does.\n```\n\n**了解 git 历史：**\n```\nRun `git log --oneline -20` and summarise what the recent\ndevelopment activity has been on this project.\n```\n\n**发现问题：**\n```\nRun the test suite and tell me which tests are failing and why.\n```\n\n**了解文件结构：**\n```\nRun `dir /s /b` to list all files, then give me a summary\nof the project structure — what each major folder is for.\n```\n\n这种读取命令的能力意味着 Claude Code 能够诊断运行时问题，而不仅仅是阅读静态代码——相比向一个基于文本的 AI 聊天窗口提出相同的问题，这是一个显著的优势。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**斜杠命令快速参考：**\n- `/help` —— 列出所有可用命令\n- `/status` —— 显示当前会话信息（已使用的 token、已读取的文件）\n- `/compact` —— 压缩对话历史（释放上下文，保留重要部分）\n- `/clear` —— 清空对话并重新开始\n- `/exit` —— 退出 Claude Code\n- `/model` —— 查看或更改当前模型\n- `/mcp` —— 列出已连接的 MCP 服务器\n\n在提示符中输入 `/` 可查看带说明的完整列表。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "完整的项目定向会话",
+      "content": "在 Claude Code 中运行一次结构化的定向会话。每一步都要完整完成后再进入下一步。\n\n**第 1 步 —— 从项目根目录启动：**\n在 VS Code 的集成终端中（`Ctrl+\\``）或任意 PowerShell 窗口：\n```powershell\ncd Documents\\ai-course-projects\nclaude\n```\n\n**第 2 步 —— 宏观概览：**\n```\nWhat is this project? Describe its purpose, main components,\nand the key files I should know about.\n```\n仔细阅读 Claude 的回复。它准确描述了你的项目吗？\n\n**第 3 步 —— 入口点问题：**\n```\nWhat is the entry point of this project? Where does execution start?\n```\n\n**第 4 步 —— 深入研究某个具体文件：**\n```\n@hello.html Read this file and tell me what it does, how the CSS\nand HTML are structured, and what could be improved.\n```\n\n注意：你并没有粘贴文件内容。Claude 是直接从磁盘读取的。\n\n**第 5 步 —— 请求建议：**\n```\nBased on what you've read, what are 3 specific improvements\nI could make to this project? Be concrete about which files to change.\n```\n\n这是\"咨询模式\"——征求想法，而不是要求 Claude 立刻做出改动。\n\n**第 6 步 —— 尝试健康检查：**\n```\nAre there any obvious issues, incomplete code, or things\nthat should exist but don't in this project?\n```\n\n**第 7 步 —— 测试上下文管理：**\n运行 `/status` 查看这个会话中你用了多少 token。\n\n然后运行 `/compact`，并观察：Claude 对到目前为止的会话进行了总结。\n\n现在提问：\n```\nWhat do you remember about this project from our conversation?\n```\nClaude 应该给出一份保留下来的关键要点摘要——证明 `/compact` 在压缩细节的同时保留了重要的上下文。\n\n**第 8 步 —— 干净地退出：**\n```\n/exit\n```\n\n**在 `notes/orientation-notes.md` 中回答以下反思问题：**\n1. 在你没有粘贴内容的情况下，Claude 知道你文件的内容吗？（是/否）\n2. Claude 告诉你关于你自己项目的最有用的一件事是什么？\n3. Claude 有哪里说错了或理解错了？\n4. 如果你用普通的 Claude.ai 聊天，而不是这次会话，情况会有何不同？"
+    },
+    {
+      "type": "quiz",
+      "question": "你正处于一个较长的 Claude Code 会话中，注意到 Claude 引用了 20 分钟前你已经放弃的一个功能的早期对话。最有效的解决方法是什么？",
+      "options": [
+        "用 /exit 退出 Claude Code，重新开始一个全新的会话，丢失所有上下文",
+        "使用 /compact 压缩对话历史——这会保留关键上下文，同时去除噪音，包括那个已放弃的功能讨论",
+        "手动输入'忘掉关于已放弃功能的一切'，并寄希望于 Claude 遵从",
+        "会话中途无法管理上下文——你总是得重新开始"
+      ],
+      "correct": 1,
+      "explanation": "/compact 正是这种情况所需要的。它将整个对话历史压缩成一份精炼的摘要——保留重要的技术上下文（读取过哪些文件、项目是做什么的、当前任务），同时丢弃不相关的细节，比如已放弃的功能讨论。这比 /clear（会丢失所有内容）更高效，也比在对话中要求 Claude '忘记'某样东西更可靠。在子任务之间过渡时就主动使用 /compact，而不仅仅是在出现问题时才被动使用。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A —— 项目阅读训练",
+      "content": "Claude Code 最强大的第一步就是阅读并理解你的整个项目。这个训练专门练习这一点。\n\n**第 1 步 —— 在真实项目中打开 Claude Code：**\n```powershell\ncd your-project\nclaude\n```\n\n**第 2 步 —— 让 Claude Code 理解项目**（这些是不同的问题，答案也不同）：\n- \"What does this project do?\"\n- \"What are the main files and what does each one do?\"\n- \"What dependencies does this project have?\"\n- \"How would I run this project?\"\n- \"What tests exist, if any?\"\n\n**第 3 步 —— 验证每个答案。** 打开提到的文件。Claude Code 的描述准确吗？\n\n**第 4 步 —— 提出一个需要阅读代码的具体问题：**\"What happens when a user submits the login form?\" 或 \"What does the main() function do step by step?\"\n\n**第 5 步 —— 询问问题：**\"What are potential issues or improvements you notice in this codebase?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 生成项目文档",
+      "content": "使用 Claude Code 为项目生成真实的文档——这是它最直接有价值的用途之一。\n\n**第 1 步 —— 在缺乏文档的项目中打开 Claude Code。**\n\n**第 2 步 —— 请求全面的文档：**\n```\nGenerate documentation for this project:\n1. A README.md with: project description, installation instructions, usage examples, configuration options\n2. Inline comments for any functions that lack them\n3. A CONTRIBUTING.md with: how to set up the development environment, code style guidelines, how to run tests, how to submit changes\n\nBase everything on what you actually see in the code — don't make up features that don't exist.\n```\n\n**第 3 步 —— 审查所有生成的文档。** 对照实际代码检查每一项声明。\n\n**第 4 步 —— 强制审查：** 在 Claude Code 中：*\"Review the documentation you just wrote. What did you assume or infer that might be wrong? What important information might you have missed?\"*\n\n**第 5 步 —— 提交文档**，提交信息为\"Add auto-generated documentation (reviewed)\"。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C —— 代码质量评估",
+      "content": "使用 Claude Code 评估一个真实代码库的质量，并产出一份可执行的改进计划。\n\n**第 1 步 —— 在项目中打开 Claude Code。**\n\n**第 2 步 —— 运行一次结构化的质量评估：**\n```\nPerform a code quality assessment of this project. For each category, rate it Good/Fair/Poor and explain why:\n\n1. Code organisation: Are files and functions well-organised?\n2. Error handling: Are errors caught and handled appropriately?\n3. Documentation: Are functions and complex code documented?\n4. Test coverage: Are there tests? Do they cover important cases?\n5. Security: Any obvious security issues?\n6. Performance: Any obvious performance problems?\n7. Dependencies: Are dependencies up-to-date and minimal?\n\nEnd with: the top 3 improvements I should make first, in priority order.\n```\n\n**第 3 步 —— 审查这份评估。** 你同意吗？有没有哪些类别你比 Claude Code 更了解？\n\n**第 4 步 —— 保存这份评估**，并计划本周处理最优先的事项。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 让 Claude Code 熟悉一个新项目",
+      "content": "创建一个可复用的引导流程，让 Claude Code 快速熟悉任何项目。\n\n**第 1 步 —— 为 Claude Code 制定一个标准的\"项目引导\"提示词：**\n```\nI'm going to have you work on this project. Before we start:\n1. Read the README.md and CLAUDE.md (if they exist)\n2. List all the main source files and their purposes\n3. Identify the project's entry points\n4. Note any configuration files and what they control\n5. List the commands to: install dependencies, run the project, run tests\n6. Identify any patterns or conventions you notice in the code\n7. Tell me what you're unsure about — what would you need to know to work on this project effectively?\n```\n\n**第 2 步 —— 在一个真实项目上运行这个引导提示词。**\n\n**第 3 步 —— 回答 Claude Code 的问题。** 好的问题说明它理解了这个项目。糟糕的问题说明文档需要改进。\n\n**第 4 步 —— 更新 CLAUDE.md**，加入 Claude Code 提出的问题的答案。这能确保下一次会话有一个更好的开始。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code 读取你的项目后说\"我看这是一个 Flask Web 应用\"。但它实际上是一个 Django 应用。你应该怎么做？",
+      "options": [
+        "相信 Claude Code——它的模式识别能力比你强",
+        "立即纠正 Claude Code：\"这是 Django，不是 Flask\"——永远不要让它带着错误的假设工作",
+        "重启会话，寄希望于这次它能弄对",
+        "这无关紧要——两个框架的工作方式相似"
+      ],
+      "correct": 1,
+      "explanation": "要立即纠正错误的假设。如果 Claude Code 相信了错误的框架，它接下来编写的每一段代码都会使用 Flask 的模式而不是 Django 的模式——可能出现错误的导入、错误的规范、错误的 CLI 命令。在 Claude Code 中，你可以说\"That's incorrect — this is a Django project, not Flask. Please re-read [key files] to confirm.\"未被纠正的错误假设会在整个会话中蔓延。"
+    },
+    {
+      "type": "quiz",
+      "question": "你问 Claude Code\"这个项目是做什么的？\"，它给出了一个详细的长回答。最重要的后续检查是什么？",
+      "options": [
+        "让它把描述缩短一些",
+        "打开主源文件，验证描述是否与代码实际的行为相符",
+        "让 Claude Code 对自己的置信度打分",
+        "把描述分享给同事，看他们是否同意"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code 对项目的描述是基于它在代码、文档和注释中读到的内容。如果这些内容不完整、有误导性或已过时，Claude Code 的描述就会反映出这些问题。始终通过检查实际代码来验证。一种常见的失败模式：README.md 描述的是这个项目过去做什么，而不是它现在做什么——而 Claude Code 描述的是 README，而不是现实。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成 7-3 课。** 你已经运行了第一次真实的 Claude Code 会话，就代码库提出了结构化的问题，使用了 @ 提及语法进行有针对性的文件阅读，并练习了用 /compact 管理上下文。这些习惯——正确地启动会话、提出结构化的问题、有意识地管理上下文——正是那些能持续获得良好结果的实践者与随意使用者之间的区别所在。接下来：让 Claude 从零开始编写一个文件。"
+    }
+  ],
+  "nextLesson": "7-4",
+  "prevLesson": "7-2"
+}

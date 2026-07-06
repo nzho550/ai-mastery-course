@@ -1,0 +1,140 @@
+{
+  "id": "11-2",
+  "title": "Anthropic API 概览",
+  "part": 11,
+  "estimatedMinutes": 55,
+  "tags": [
+    "api",
+    "anthropic",
+    "foundations",
+    "claude"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将理解 Anthropic API 提供了什么、Messages 端点是如何工作的、请求和响应长什么样，以及使用 Claude.ai 和使用 API 之间的关键区别。"
+    },
+    {
+      "type": "text",
+      "content": "## API 能给你什么\n\nClaude.ai 是一款面向消费者的产品——一个简洁的界面，你在里面进行对话、使用 Projects、上传文件。\n\nAnthropic API 是底层的编程接口层。有了 API，你可以获得：\n\n- **任意模型、任意系统提示词**——你可以控制每一个参数\n- **集成到你自己的工具中**——脚本、应用、自动化流程\n- **批量处理**——一次性发送 10,000 份文档\n- **结构化输出**——获得 JSON 而不是纯文本\n- **多种模型可选**——根据成本/质量的权衡选择合适的模型\n- **流式传输**——像 Claude.ai 一样，随着 token 生成实时展示\n\n代价是：默认情况下 API 在调用之间没有记忆（每个请求都是无状态的），没有内置的项目历史记录，而且你需要按 token 付费。"
+    },
+    {
+      "type": "text",
+      "content": "## Messages 端点\n\nAnthropic API 有一个你会用于所有场景的主端点：\n\n```\nPOST https://api.anthropic.com/v1/messages\n```\n\n这个端点接受一个 JSON 请求体，并返回一个 JSON 响应。所有场景——单轮对话、多轮对话、流式传输、视觉、工具调用——都通过这一个端点完成。"
+    },
+    {
+      "type": "text",
+      "content": "## 请求结构\n\n一个最简单的请求体长这样："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 1024,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Hello, Claude. What is 2 + 2?\"\n    }\n  ]\n}"
+    },
+    {
+      "type": "text",
+      "content": "三个必填字段：\n\n- **`model`**——使用哪个 Claude 模型。查阅 `docs.anthropic.com/en/docs/about-claude/models` 获取当前的模型 ID——随着新版本发布，模型名称会发生变化。\n- **`max_tokens`**——响应中允许的最大 token 数量。这是一个硬性上限——请设置合理的值。简短回答：100-200。完整的文章：1000-4000。\n- **`messages`**——一个消息对象数组。每个对象都有一个 `role`（`user` 或 `assistant`）和 `content`（文本内容）。\n\n可选但常用的字段：\n- **`system`**——一条系统级指令，用于塑造 Claude 在整个对话中的行为\n- **`temperature`**——控制随机性（0 表示确定性输出，1 表示更有创造性）\n- **`stream`**——设为 `true` 以启用流式响应"
+    },
+    {
+      "type": "text",
+      "content": "## 响应结构\n\n一个成功的响应长这样："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"id\": \"msg_01XFDUDYJgAACzvnptvVoYEL\",\n  \"type\": \"message\",\n  \"role\": \"assistant\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"2 + 2 equals 4.\"\n    }\n  ],\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"stop_reason\": \"end_turn\",\n  \"usage\": {\n    \"input_tokens\": 14,\n    \"output_tokens\": 9\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "响应中的关键字段：\n\n- **`content[0].text`**——Claude 的回复就在这里。对于文本响应，回复内容始终位于 `content[0].text`。\n- **`usage.input_tokens`**——你的请求中包含了多少 token（输入端你要为此付费）\n- **`usage.output_tokens`**——Claude 生成了多少 token（输出端你要为此付费）\n- **`stop_reason`**——响应结束的原因。`end_turn` 表示 Claude 自然完成了回答。`max_tokens` 表示你达到了 token 上限。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**你最常访问的字段：** `response.content[0].text`——这就是 Claude 的回复。响应中其他所有内容都是元数据。在代码中：`print(response.content[0].text)` 或 `console.log(response.content[0].text)`。"
+    },
+    {
+      "type": "text",
+      "content": "## 多轮对话\n\nAPI 是无状态的——它不会记住之前的请求。要进行多轮对话，你需要在 `messages` 数组中传入完整的对话历史："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 1024,\n  \"messages\": [\n    {\"role\": \"user\", \"content\": \"My name is Alex.\"},\n    {\"role\": \"assistant\", \"content\": \"Nice to meet you, Alex! How can I help?\"},\n    {\"role\": \"user\", \"content\": \"What's my name?\"}\n  ]\n}"
+    },
+    {
+      "type": "text",
+      "content": "每次 API 调用都会接收到截至那一刻的完整对话内容。这正是 Claude.ai 的工作方式——它在每条消息中都会重新发送完整的对话历史。提示词缓存（第 11-9 课）能让重复的上下文变得便宜得多。"
+    },
+    {
+      "type": "text",
+      "content": "## 模型——查阅文档获取当前 ID\n\n可用的 Claude 模型覆盖了一个性能/成本的谱系：\n\n- **Haiku**——最快、最便宜，最适合分类、提取、简单任务\n- **Sonnet**——性能均衡，最适合包括编程和写作在内的大多数任务\n- **Opus**——能力最强，也最贵，适合复杂推理\n\n每个系列内部都有具体的带版本号的模型 ID，比如 `claude-haiku-4-5-20251001`。这些 ID 会随着 Anthropic 发布新版本而变化。在构建任何东西之前，务必先查阅 `docs.anthropic.com/en/docs/about-claude/models` 获取当前的 ID——该页面会显示当前可用的模型，并标记已弃用的模型。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**模型名称的时效性：** 本课程中使用的模型 ID 是编写时的最新版本。Anthropic 会定期发布新模型。在构建任何长期项目之前，请到 `docs.anthropic.com/en/docs/about-claude/models` 核实当前的 ID。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "阅读 API 文档",
+      "content": "花 15 分钟浏览 Anthropic API 文档。目标是熟悉——你不需要背下任何内容，只需要知道东西放在哪里。\n\n**打开 docs.anthropic.com 并浏览：**\n\n1. **Messages API 参考文档**——找到完整的请求参数列表。留意哪些是必填的，哪些是可选的。\n2. **模型页面**——找到当前的模型 ID。最新的 Haiku 和 Sonnet 版本分别是什么？\n3. **定价页面**（anthropic.com/pricing）——记下 Haiku 和 Sonnet 每百万 token 的价格。输入比输出便宜多少倍？\n\n**阅读完之后，向 Claude.ai 提问：**\n*『我刚读完 Anthropic API 文档。初学者在发起第一次 API 调用之前应该理解的 3 件最重要的事情是什么？』*\n\n把答案保存在你的笔记中——在第 11-4 课完成第一次调用之后，你会回顾这个答案，看看你的理解是否吻合。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——Anthropic API 概览练习",
+      "content": "构建对 Anthropic API 结构的心智模型。\n\n**第一步——问 Claude：** *『解释一下 Anthropic API 的结构。主要的端点有哪些？messages API 是什么，它和 completions API 有什么不同？每种请求的关键参数是什么？』*\n\n**第二步——阅读官方 API 文档**（console.anthropic.com/docs 或 docs.anthropic.com）。将其与 Claude 的描述进行比较。\n\n**第三步——把 API 映射到你已知的知识：** Anthropic API 与你之前用过的 REST API 相比有何不同或相似之处？\n\n**第四步——问 Claude：** *『Anthropic API 的 messages 格式和 OpenAI 的 chat completions 格式之间有哪些关键区别？如果我要从 OpenAI 迁移过来，需要改动什么？』*\n\n**第五步——在纸上画出请求/响应结构：** 一次最简 API 调用长什么样。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——通过代码探索 API 能力",
+      "content": "写一个小程序来探索 Anthropic API 的能力。\n\n**第一步——让 Claude Code 写一个 Python 或 JavaScript 脚本**，演示多项 API 功能：\n```\nWrite a Python script that calls the Anthropic API and demonstrates:\n1. Basic single-turn conversation\n2. Multi-turn conversation (maintaining context)\n3. System prompt customisation\n4. Different max_tokens settings and their effect\n\nFor each demo, print the request and response clearly labelled.\n```\n\n**第二步——在运行代码之前先审阅代码。**\n\n**第三步——运行脚本。** 每个演示是否都按预期工作？\n\n**第四步——修改一个参数**，观察效果。\n\n**第五步——必做的审查环节：** 问 Claude：*『审查一下你写的代码。缺少了哪些最佳实践？要让它达到生产级质量而不只是探索性代码，还需要做什么？』*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——API 速率限制与错误处理",
+      "content": "理解 Anthropic API 的限制以及如何处理这些限制。\n\n**第一步——问 Claude：** *『Anthropic API 的速率限制是怎样的？它们是如何运作的（每分钟请求数、每分钟 token 数、每天 token 数）？不同套餐之间有何不同？』*\n\n**第二步——询问错误响应：** 『Anthropic API 最常见的错误有哪些（速率限制、过载、无效请求、身份验证错误）？每一种对应的 HTTP 状态码是什么，我的代码应该如何处理？』\n\n**第三步——让 Claude Code 编写错误处理代码：**\n『写一个 Python 函数，调用 Anthropic API 并配备恰当的错误处理：对速率限制使用指数退避，对瞬时错误进行重试，对用户造成的错误给出清晰的错误信息。』\n\n**第四步——通过模拟错误（错误的 API 密钥、超长输入）来审查和测试错误处理逻辑。**\n\n**第五步——问：** 『在我的应用接近速率限制、开始收到 429 错误之前，我应该添加什么样的监控？』"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——构建一个 API 封装类",
+      "content": "为 Anthropic API 构建一个可复用的封装类。\n\n**第一步——让 Claude Code** 设计一个 Anthropic API 封装类：\n```\nDesign and implement a Python class AnthropicClient that wraps the Anthropic API with:\n- Retry logic with exponential backoff\n- Token counting before requests\n- Response caching for identical requests\n- Conversation history management\n- Configurable model and default parameters\n- Logging of all requests and responses\n\nMake it production-quality with proper error handling.\n```\n\n**第二步——在实现之前先审阅设计。** 它是否满足你的需求？\n\n**第三步——实现这个类，并用真实的 API 调用进行测试。**\n\n**第四步——必做的审查环节：** 问 Claude：*『审查这个封装类，找出 3 个会在生产环境中造成问题的 bug 或设计缺陷。』*\n\n**第五步——修复这些问题，并为重试逻辑添加测试。**"
+    },
+    {
+      "type": "quiz",
+      "question": "Anthropic API 使用一种用户/助手轮流交替的 messages 格式。如果你连续发送两条用户消息会怎样？",
+      "options": [
+        "API 会把它们当作一条合并消息来处理",
+        "API 会返回一个错误——消息必须严格在 user 和 assistant 角色之间交替（可选地在最前面加一条 system 消息）",
+        "API 会忽略第一条用户消息",
+        "API 会自动插入一条占位的助手消息"
+      ],
+      "correct": 1,
+      "explanation": "Anthropic 的 messages API 要求对话历史中的用户/助手角色必须交替出现。连续发送两条用户消息会返回一个验证错误。如果你需要从用户这一方发送多段上下文，应在发送之前把它们合并成一条用户消息。对于多轮对话，务必保持正确的交替模式：system（可选）、user、assistant、user、assistant……"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在构建一个使用 Anthropic API 的应用。你的 API 密钥保存在一个 .env 文件中。在部署之前，最关键的安全步骤是什么？",
+      "options": [
+        "加密 .env 文件",
+        "确保 .env 已被加入 .gitignore、永远不会提交到版本控制中——在生产环境中使用环境变量或密钥管理服务",
+        "使用一个只读的 API 密钥",
+        "每周轮换一次 API 密钥"
+      ],
+      "correct": 1,
+      "explanation": "最常见的 API 密钥泄露方式：意外提交到 git。即使是提交到私有仓库，包含在已提交 .env 文件中的 API 密钥也可能在推送后几分钟内就被自动扫描工具发现。步骤：(1) 立即把 .env 加入 .gitignore；(2) 用 `git check-ignore -v .env` 确认它没有被跟踪；(3) 如果已经提交过，就假定密钥已经泄露，立即轮换。在生产环境中，使用你的托管平台设置的环境变量，而不是 .env 文件。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 11-2 课。** 你理解了 Messages 端点、请求中包含什么、响应中返回什么，以及去哪里找 Claude 的回复。接下来：安全地配置你的 API 密钥。"
+    }
+  ],
+  "nextLesson": "11-3",
+  "prevLesson": "11-1"
+}

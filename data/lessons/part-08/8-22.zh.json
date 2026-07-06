@@ -1,0 +1,112 @@
+{
+  "id": "8-22",
+  "title": "完整的 MCP 技术栈——6 大工具协同完成一次真实工作流程",
+  "part": 8,
+  "estimatedMinutes": 90,
+  "tags": [
+    "mcp",
+    "advanced",
+    "filesystem",
+    "sequential-thinking",
+    "github",
+    "playwright",
+    "context7",
+    "memory",
+    "multi-mcp",
+    "capstone",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你已经分别使用过每一个 MCP 工具：\n- **Memory MCP**——跨会话的持久知识\n- **Sequential Thinking MCP**——结构化的逐步推理\n- **Context7 MCP**——任意库的实时文档\n- **GitHub MCP**——通过对话处理 issue、PR 和代码\n- **Filesystem MCP**——导航并读取你的本地文件\n- **Browser/Playwright MCP**——控制真实浏览器、上传文档、抓取网站\n\n这一课是压轴课：六个工具同时协同工作，处理一个真实场景。你将看到这些工具如何相互交接、每个工具如何填补其他工具无法填补的空白，以及当整套技术栈同时激活时会实现什么。"
+    },
+    {
+      "type": "text",
+      "content": "## 场景：离开一周后重返项目\n\n这是最常见、也最令人沮丧的开发者体验之一：你一直在做一个项目，然后你离开了一周（度假、其他优先事项、上下文切换），现在你需要准确地从上次离开的地方继续。在没有工具的情况下，这涉及：\n\n- 翻查邮件和消息，回想发生了什么\n- 重新阅读上周写的代码\n- 检查 GitHub 看有什么变化\n- 回想你在文档中读到哪里了\n- 在做任何实际工作之前重新建立所有上下文\n\n有了全部六个 MCP 同时激活，这种从冷启动到高效工作的重新定位过程只需不到 5 分钟。\n\n**六 MCP 重返工作流程：**\n1. **Memory MCP** → 检索上次会话存储的项目上下文\n2. **Sequential Thinking MCP** → 针对已改变的内容构建一份重返计划\n3. **GitHub MCP** → 检查你离开期间仓库中发生了什么\n4. **Filesystem MCP** → 阅读与下一个任务相关的具体文件\n5. **Context7 MCP** → 验证你即将使用的库 API 是否仍然是最新的\n6. **Browser MCP** → 研究一个具体问题，然后把一份文档上传到利益相关者门户\n\n每个工具都处理它最擅长的部分。它们共同把一个 45 分钟的重新定位仪式，替换成一份 5 分钟的自动简报。"
+    },
+    {
+      "type": "text",
+      "content": "## 你完整的 MCP 配置\n\n在运行组合工作流程之前，确保你的 `settings.json` 中有全部六个 MCP。以下是一份完整、可直接使用的配置："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"memory\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-memory\"]\n    },\n    \"sequential-thinking\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-sequential-thinking\"]\n    },\n    \"context7\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@upstash/context7-mcp\"]\n    },\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"ghp_your-token-here\"\n      }\n    },\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@modelcontextprotocol/server-filesystem\",\n        \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"\n      ]\n    },\n    \"playwright\": {\n      \"command\": \"npx\",\n      \"args\": [\"@playwright/mcp\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**验证你的技术栈：** 保存配置并重启 Claude Code 后，输入 `/mcp`，确认全部 6 个服务器都出现：memory、sequential-thinking、context7、github、filesystem、playwright。如果有缺失，请查阅它们各自的设置课程（第 8-4 至 8-21 课）获取安装说明。"
+    },
+    {
+      "type": "text",
+      "content": "## 工具之间是如何相互交接的\n\n理解交接模式对于设计你自己的组合工作流程至关重要。\n\n**Memory → 向 → Sequential Thinking 提供项目上下文**\nMemory 检索的是我们*在做什么*。Sequential thinking 使用那个上下文来决定*如何*构建重返计划。Memory 提供领域知识；sequential thinking 提供方法。\n\n**Sequential Thinking → 向 → GitHub + Filesystem + Context7 提供一份计划**\nSequential thinking 生成一份结构化的重返检查清单。清单上的每一项都对应一个具体的 MCP 工具：'检查发生了什么变化' → GitHub，'阅读相关文件' → Filesystem，'验证 API 是否没变' → Context7。\n\n**GitHub + Filesystem + Context7 → 向 → Browser 提供发现的内容**\n在阅读代码、检查 issue 和核对文档之后，Browser MCP 会去研究一些其他工具都无法提供的具体内容（实时网页内容），并可选地把一份文档上传到利益相关者门户。\n\n**Browser → 触发最终的 → Memory 更新**\n会话结束时，把学到的内容——新的决策、新的状态、还留着什么悬而未决——保存回 Memory MCP。下一次会话开始时就已经掌握了信息。\n\n**完整循环：** Memory → 计划 → 收集 → 行动 → 保存。这就是一句话概括的六 MCP 工作流程。"
+    },
+    {
+      "type": "text",
+      "content": "## 每个工具如何贡献：快速参考\n\n| MCP | 贡献了什么 | 回答什么问题 |\n|-----|--------------------|-----------------------|\n| Memory | 持久的项目上下文 | 关于这个我已经知道什么？ |\n| Sequential Thinking | 结构化的推理计划 | 处理这件事正确的顺序是什么？ |\n| GitHub | 离开期间仓库的变化 | 自从我上次来这里之后发生了什么？ |\n| Filesystem | 本地文件内容 | 实际的代码现在写的是什么？ |\n| Context7 | 当前的库文档 | 我使用的 API 是否仍然是最新的？ |\n| Browser | 实时网页研究 + 上传 | 互联网上说了什么？以及发送这份文档。 |\n\n**每个工具填补了其他工具无法填补的空白：**\n- 没有 Memory：你每次会话都要重新解释上下文\n- 没有 Sequential Thinking：你会在没有计划的情况下就直接行动\n- 没有 GitHub：你会错过队友做出的更改\n- 没有 Filesystem：你无法读取实际的代码\n- 没有 Context7：你可能使用了一个已弃用的 API\n- 没有 Browser：你无法访问实时网页内容或提交文档"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "工作坊 A——完整技术栈实战：6-MCP 重返工作流程",
+      "content": "在一个真实或近似真实的项目上运行完整的六 MCP 重返工作流程。这是本课的主要工作坊。\n\n**准备工作（在启动 Claude Code 之前）：**\n- 确保全部 6 个 MCP 都在你的 settings.json 中，且 Claude Code 正在运行\n- 准备一个你可以引用的 GitHub 仓库（你的 ai-course-exercises 仓库就可以）\n- 如果你有第 8-21 课中的真实项目记忆，就用它；如果没有，先创建一个模拟的项目实体\n\n**工作流程提示词——在 Claude Code 中运行：**\n\n```\n我在离开 [项目名称] 一周之后回来了。\n使用所有可用的 MCP 工具，运行完整的重返工作流程：\n\n阶段 1——记忆加载\n搜索记忆中关于 [项目名称] 的所有内容。\n给我一份 3 句话的状态摘要：这是什么、我上次停在哪里，\n以及有哪些悬而未决的问题？\n\n阶段 2——用 Sequential Thinking 制定计划\n使用 sequential-thinking，分析这个情况，生成一份\n逐步进行的重返计划。考虑：\n- 最应该先检查什么（有什么可能已经出问题了？）\n- 在写任何新代码之前，我需要什么上下文？\n- 今天应该完成的第一个有意义的任务是什么？\n\n阶段 3——GitHub 侦察\n使用 GitHub MCP：\n- 列出 [你的仓库] 过去 7 天内开启或关闭的 issue\n- 检查有没有 pull request 被合并\n- 最近一次提交是什么，改动了什么？\n\n阶段 4——文件系统审查\n使用文件系统 MCP：\n- 读取我项目主入口文件\n  （给出路径，例如 C:\\Users\\...\\project\\main.py）\n- 列出目录结构，让我能看到有哪些文件存在\n- 找出代码库中的任何 TODO 注释\n\n阶段 5——文档核查\n使用 context7：\n- 获取这个项目主要使用的库的当前文档\n  （说出库的名字，例如 FastAPI、React、Express、Prisma）\n- 有没有我应该知道的新功能或破坏性更改？\n- 我在代码中使用它的方式是否符合当前的最佳实践？\n\n阶段 6——浏览器研究\n使用 Browser MCP：\n- 导航到 [相关的文档页面或资源]\n  （例如你所用库的发行说明页面）\n- 找出过去 30 天内影响这个项目的任何公告\n- 截图并总结相关内容\n\n阶段 7——综合与规划\n根据以上全部六个阶段：\n1. 我离开期间发生了什么变化？\n2. 现在正确的第一项任务是什么？\n3. 有没有我需要先清除的阻碍才能开始工作？\n4. 这次会话结束时我应该在记忆中更新什么？\n\n把综合结果呈现为一份单页的重返简报。\n```\n\n**在运行过程中观察并互动：**\n- 阶段 1 之后，这份记忆简报是否准确反映了这个项目？\n- 阶段 2 之后，这份重返计划是否合理？\n- 阶段 3 之后，有没有 GitHub 上的变化让你感到意外？\n- 阶段 4 之后，代码看起来是否和你记得的一样？\n- 阶段 5 之后，文档是否是最新的？\n- 阶段 6 之后，网上有没有什么值得了解的新内容？\n- 阶段 7 之后，这份综合结果是否具有可执行性？\n\n**通过保存上下文来结束这次会话：**\n```\n根据这次重返会话，用以下内容更新记忆：\n- 新的项目状态\n- 我今天正在处理什么\n- 我发现的任何影响这个项目的变化\n- 下次会话的悬而未决问题\n```\n\n**成果：** 完整体验六个 MCP 在一个真实工作流程上协同工作的端到端过程。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "工作坊 B——文档研究与自动上传工作流程",
+      "content": "这个工作坊专门结合 Browser MCP（用于研究*和*文件上传）与其他工具，演示专业场景中常见的“研究 → 起草 → 提交”工作流程。\n\n**场景：** 你需要撰写一份简短的技术状态报告，让 AI 审阅，保存到文件系统，然后上传到一个网页门户——全程通过 Claude 完成。\n\n**第 1 步——研究阶段（Browser + Context7）：**\n```\n我需要为 [你的项目/主题] 写一份技术状态报告。\n\n使用 Browser MCP：\n- 导航到 [你所用技术相关的新闻或更新页面]\n- 提取 3 个与状态报告相关的关键近期进展\n\n使用 Context7：\n- 获取 [库名称] 影响我们项目的任何近期变化\n- 有没有应该提及的新最佳实践？\n```\n\n**第 2 步——规划阶段（Sequential Thinking）：**\n```\n使用 sequential thinking，为一份关于 [项目/主题] 的单页技术状态报告\n规划结构，涵盖：\n- 项目的当前状态\n- 近期进展（使用第 1 步中浏览器研究的发现）\n- 下一步计划\n- 任何风险或阻碍\n\n这些部分最佳的顺序是什么？每部分应该包含什么？\n```\n\n**第 3 步——收集内容（Memory + GitHub）：**\n```\n使用记忆：检索当前的项目上下文\n使用 GitHub：获取最近 5 次提交和任何未解决的 issue\n\n把这些与第 1 步的研究结合起来，填充第 2 步的报告模板。\n```\n\n**第 4 步——起草并保存（Filesystem）：**\n```\n使用所有收集到的信息撰写完整的状态报告。\n保存到：C:\\Users\\YourName\\Documents\\status-report-[今天的日期].md\n然后展示报告内容供我审阅。\n```\n\n**第 5 步——上传（Browser）：**\n对于这一步，你需要一个你通常用于上传此类文档的目标 URL。可选：\n- 你的 GitHub 仓库：创建一个 issue，把报告作为正文粘贴进去\n- 一个你用于状态更新的网页表单\n- 你的 Notion 工作区（如果你有 Browser 访问权限）\n\n```\n使用 Browser MCP：\n- 导航到 [你的上传目标 URL]\n- [要么：创建一个包含报告内容的 GitHub issue]\n  [要么：找到文件上传按钮，上传 status-report-[日期].md]\n- 截图确认提交成功\n```\n\n**成果：** 使用全部六个 MCP 工具，在一个真实的专业工作流程中完成研究 → 起草 → 保存 → 提交的完整流水线。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "工作坊 C——工具选择精通",
+      "content": "现在你已经体验过全部六个 MCP 组合工作，这个工作坊将培养你对任何场景该使用哪个工具的判断力。\n\n**第 1 步——阅读以下 12 个任务描述，把每一个分配给正确的 MCP：**\n\n1. “我想看看我项目的文件夹结构”\n2. “我应该了解哪些 React 19 最新的 hook？”\n3. “记住我决定为这个项目使用 PostgreSQL 而不是 MongoDB”\n4. “谁提出了关于登录 bug 的 issue，他们写了什么？”\n5. “我应该先添加认证还是先构建数据层？帮我理清思路”\n6. “填写 careers.acme.com 上的求职申请表并上传我的简历”\n7. “我们之前的会话中关于数据库模式做出的最后一个决定是什么？”\n8. “检查我离开期间有没有 PR 被合并到 main”\n9. “获取 Prisma 的 findMany 方法的当前文档”\n10. “读取我的 config.py 文件，告诉我它需要哪些环境变量”\n11. “去 news.ycombinator.com 找出关于数据库的前 3 条热门文章”\n12. “把在这个项目中实现 OAuth2 所需的 5 个步骤，按正确顺序拆解出来”\n\n**第 2 步——对照下面这份答案核对你的答案：**\n1. Filesystem | 2. Context7 | 3. Memory | 4. GitHub | 5. Sequential Thinking | 6. Browser | 7. Memory | 8. GitHub | 9. Context7 | 10. Filesystem | 11. Browser | 12. Sequential Thinking\n\n**第 3 步——对于任何答错的题目，重新阅读相关课程。** 混淆通常揭示了对某个工具适用范围的误解。\n\n**第 4 步——找出你觉得最难区分的地方：**\n- Memory vs Filesystem？（Memory：你希望被查询的结构化知识；Filesystem：原始文件内容）\n- GitHub vs Filesystem？（GitHub：远程仓库状态；Filesystem：你机器上的本地文件）\n- Browser vs Context7？（Browser：任何实时网页；Context7：专门精选的库文档）\n- Sequential Thinking vs 普通 Claude？（Sequential Thinking：当明确的、可检查的推理步骤很重要时）\n\n**第 5 步——设计属于你自己的组合工作流程。** 想一个来自你实际工作的 3 步任务，它至少会用到 6 个 MCP 中的 3 个。写出对应的提示词。\n\n**成果：** 自信、直觉式的工具选择——你能立刻知道该用哪个 MCP，减少使用完整技术栈时的额外负担。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——搭建你的个人 6-MCP 命令套件",
+      "content": "你 MCP 投资回报最高的方式，是把你最常见的多工具工作流程转变成一条命令的自定义斜杠命令。这个工作坊将搭建这个套件。\n\n**第 1 步——创建你的 `.claude/commands/` 目录**（如果之前的课程还没做过）。这里存放着你的自定义命令。\n\n**第 2 步——搭建早晨简报命令。** 创建 `.claude/commands/morning.md`：\n```\n使用所有可用的 MCP 工具，运行我的早晨工作简报：\n\n1. MEMORY：加载所有活跃项目的上下文。每个的当前状态是什么？\n\n2. GITHUB：对于每个活跃的项目仓库，过去 24 小时内发生了什么？\n   - 新开启的 issue\n   - 合并的 PR\n   - 任何等待我回复的评论\n\n3. SEQUENTIAL THINKING：根据记忆上下文和 GitHub 的变化，\n   我今天应该优先处理什么？给我一份排序后的 3 项任务清单。\n\n格式为：\n## 早上好——[今天的日期]\n### 活跃项目状态\n[每个项目的记忆摘要]\n### 自昨天以来的变化\n[github 变化]\n### 今天的优先顺序\n1. [最优先的任务]\n2. [第二优先]\n3. [第三优先]\n```\n保存这个文件。现在在任何会话开始时输入 `/morning`。\n\n**第 3 步——搭建会前准备命令。** 创建 `.claude/commands/prep.md`：\n```\n我 30 分钟后有一个关于 $ARGUMENTS 的会议。帮我做好准备。\n\n1. MEMORY：关于这个主题/项目/人物，我了解什么？\n2. GITHUB：相关仓库有没有我应该了解的近期变化？\n3. FILESYSTEM：有没有相关的本地文件我应该review？\n   （搜索与主题名称匹配的文件）\n4. SEQUENTIAL THINKING：最可能被提及的 3 个话题是什么，\n   每一个我应该了解什么？\n\n以一页会议简报的形式输出。\n```\n保存这个文件。现在在任何会议前输入 `/prep Henderson project`。\n\n**第 4 步——搭建研究并上传命令。** 创建 `.claude/commands/report.md`：\n```\n为 $ARGUMENTS 生成并提交一份状态报告。\n\n1. MEMORY：获取这个项目当前的状态\n2. GITHUB：获取最近 5 次提交和未解决的 issue\n3. CONTEXT7：检查与这个项目相关的任何库更新\n4. 结合以上内容起草一份单页状态报告\n5. FILESYSTEM：把报告保存到 Documents/reports/[项目]-[日期].md\n6. 问我要上传到哪里，然后使用 BROWSER 提交\n```\n保存这个文件。现在输入 `/report Project Falcon` 来生成并提交一份状态报告。\n\n**第 5 步——搭建日终记录命令。** 创建 `.claude/commands/eod.md`：\n```\n对 $ARGUMENTS 进行日终记录。\n\n问我：\n1. 我今天完成了什么？\n2. 我做出了什么决策？\n3. 有什么被阻塞或还在等待？\n4. 明天的第一个任务是什么？\n\n然后：\n- MEMORY：用今天的决策和状态更新相关实体\n- GITHUB：如果今天有 issue 被解决了，添加一条评论说明已完成\n- FILESYSTEM：检查今天有没有创建应该被记录的新文件\n\n确认记忆中更新了什么。\n```\n保存这个文件。在任何工作会话结束时输入 `/eod Project Falcon`。\n\n**第 6 步——测试每个命令。** 运行每一个，根据输出优化提示词。\n\n**成果：** 一套个人的一条命令工作流程套件，让你的完整六 MCP 技术栈随时可用。这些命令代表了你个性化的 AI 运营系统。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "工作坊 E——从零设计任意多 MCP 工作流程",
+      "content": "终极技能是能够为任何情况设计新的多 MCP 工作流程。这个工作坊为此提供框架。\n\n**多 MCP 工作流程设计框架：**\n\n**第 1 步——定义结果。** 在结束时，应该存在什么现在还不存在的东西？一份文档？一个决策？一个 GitHub issue？一份已上传的文件？一份已保存的记忆？要具体。\n\n**第 2 步——反向推导。** 要产出那个结果，你需要什么信息？每一条信息存在于哪里？把每个信息需求映射到一个工具：\n- 项目背景 → Memory\n- 远程仓库状态 → GitHub\n- 本地文件内容 → Filesystem\n- 当前的库文档 → Context7\n- 结构化推理 → Sequential Thinking\n- 实时网页内容或表单提交 → Browser\n\n**第 3 步——排列步骤顺序。** 哪些信息需要在其他信息变得有用之前先获得？\n- 记忆加载几乎总是应该排在第一位（为后续一切设定上下文）\n- Sequential thinking 通常排第二（规划如何使用后续工具）\n- 数据收集工具（GitHub、Filesystem、Context7、Browser）紧随其后\n- 综合与输出放在最后\n- 记忆保存始终是最后一步\n\n**第 4 步——写出组合提示词。** 给每个阶段标注它的 MCP 工具。给 Claude 每个阶段明确的指令。指明交接的格式（“在第 5 阶段撰写分析时，使用第 3 阶段的 GitHub 发现”）。\n\n**第 5 步——加入审查检查点。** 确定哪些阶段需要在继续之前进行人工审查：\n- 任何写操作（Filesystem 写入、GitHub issue 创建、Browser 表单提交、Memory 写入）\n- 任何一旦出错就会使后续所有阶段失效的阶段\n\n**现在应用这个框架：**\n为以下真实场景之一设计一个工作流程：\n\n**场景 A——新贡献者上手文档：**\n结果：一份保存到本地并作为 GitHub wiki 页面上传的 Markdown 文档，向新团队成员介绍你的项目。\n所需工具：Memory（项目上下文）+ GitHub（近期活动、未解决的 issue）+ Filesystem（阅读 CLAUDE.md 或 README）+ Sequential Thinking（组织文档结构）+ Browser（上传到 GitHub wiki）\n\n**场景 B——库升级评估：**\n结果：一份关于是否升级关键依赖项的决策文档。\n所需工具：Context7（新版本文档）+ Browser（更新日志和破坏性更改）+ Filesystem（阅读代码中当前的使用方式）+ Sequential Thinking（分析升级风险）+ Memory（存储这个决策）\n\n**场景 C——每周团队更新邮件：**\n结果：一封总结本周进展、可以直接发送的草稿邮件。\n所需工具：Memory（项目状态）+ GitHub（本周的提交和已关闭的 issue）+ Sequential Thinking（组织叙述结构）+ Filesystem（本周生成的任何报告）\n\n**为你选择的场景写出完整的提示词。** 如果你已经连接了所有 MCP，运行它。\n\n**成果：** 一套可用于任何多 MCP 工作流程的可复用设计框架，加上一个你从零开始亲手设计的完整工作流程。"
+    },
+    {
+      "type": "quiz",
+      "question": "你需要检查一个即将在代码中使用的库，自从你的训练数据收集以来是否有过更新。你还需要验证你的本地文件是否正确使用了它。以下哪两个 MCP 组合是正确的？",
+      "options": [
+        "Memory MCP（存储过去的决策）和 GitHub MCP（针对该库的仓库）",
+        "Context7 MCP（获取当前的实时文档）和 Filesystem MCP（读取本地代码文件以验证使用方式）",
+        "Browser MCP（搜索网络）和 Sequential Thinking MCP（分析发现的内容）",
+        "Context7 MCP 单独就能处理文档和本地文件读取两方面"
+      ],
+      "correct": 1,
+      "explanation": "选项 B 是正确的。Context7 MCP 会获取该特定库当前的、实时的文档——这正是它的用途，而且它比通用网页搜索做得更好，因为它从官方文档来源提取内容，并筛选出相关部分。然后 Filesystem MCP 读取你实际的本地代码文件，检查你目前是如何使用这个库的。把它们结合起来，你就能得到：（1）来自 Context7 的确定性的当前 API，以及（2）来自 Filesystem 的与你实际代码的对比，从而揭示任何差距或已弃用的用法。选项 A 完全没有涉及实时文档。选项 C 也可行，但精确度较低——一次网页搜索可能找不到你需要的具体文档部分。选项 D 不正确——Context7 只处理文档，不处理本地文件访问。"
+    },
+    {
+      "type": "quiz",
+      "question": "在一个六 MCP 工作流程中，为什么 Memory MCP 几乎总是应该排在第一位，而记忆保存几乎总是应该排在最后？",
+      "options": [
+        "Memory MCP 是最慢的，应该在其他设置进行时运行",
+        "先加载记忆能建立上下文，让所有后续工具交互更有针对性、更相关；最后保存记忆能确保这次会话的收获被保留，供下次使用——用这两个操作为每次会话加上括号，能形成一个不断改善上下文的复利循环",
+        "这是 MCP 协议的技术要求",
+        "Memory MCP 必须预热之后，其他 MCP 才能连接到它"
+      ],
+      "correct": 1,
+      "explanation": "选项 B 描述的是战略性原因，而不是技术要求。以记忆加载开始，意味着 Claude 在开始搜索 GitHub、阅读文件或规划任何事情之前，就已经知道这个项目、相关的人、已做出的决策，以及悬而未决的问题——每一次后续的工具调用都会从这个上下文中受益。没有记忆加载，GitHub 搜索就是泛泛的；有了它，搜索就是有针对性的（'查找与我们讨论过的认证重构相关的 issue'）。以记忆保存结束，能闭合这个循环：这次会话产生了新的决策、新的状态、新的问题——保存这些能让下一次会话的记忆加载更加准确、更有用。跳过这个括号的任何一端，都意味着要么从零开始，要么丢失这次会话的收获。这种复利效应——每次会话保存的上下文让下次会话更智能——正是让 Memory MCP 从一个可有可无的功能，变成一项基础性工作流程工具的原因。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 8-22 课，以及本课程 MCP 部分的全部内容。** 你已经搭建了完整的六 MCP 技术栈：用于持久化的 Memory、用于结构化推理的 Sequential Thinking、用于实时文档的 Context7、用于仓库智能的 GitHub、用于本地文件访问的 Filesystem，以及用于实时网页交互和文档上传的 Browser。你已经分别体验过它们，也体验过它们的协同工作。你已经搭建了自定义斜杠命令，让整个技术栈只需一次按键就能访问。这就是 MCP 层在满负荷状态下的样子——一个为你的工作服务的、集成化的、AI 驱动的操作环境。"
+    }
+  ],
+  "nextLesson": "10-1",
+  "prevLesson": "8-21"
+}

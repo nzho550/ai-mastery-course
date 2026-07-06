@@ -1,0 +1,105 @@
+{
+  "id": "5-9",
+  "title": "设置 — UI 模式与 JSON 模式",
+  "part": 5,
+  "estimatedMinutes": 55,
+  "tags": [
+    "vscode",
+    "beginner",
+    "settings",
+    "configuration",
+    "json"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将知道如何同时使用图形化 Settings（设置）界面和底层的 JSON 文件来修改 VS Code 设置。你会为自己的开发环境设置四项实用改进，从今以后一直会用到它们。\n\n理解 settings.json 也是你第一次接触本课程会反复出现的一种模式：Claude Code、MCP 服务器以及其他工具，都是通过 JSON 文件来配置的。"
+    },
+    {
+      "type": "text",
+      "content": "## 修改设置的两种方式\n\nVS Code 的设置是分层的。所有设置最终都存储在一个 JSON 文件中——但 VS Code 也提供了一个图形界面（Settings UI），让你无需直接编辑 JSON 就能修改设置。\n\n**方式 1 —— Settings UI（图形化方式）：**\n- 按 **Ctrl+,**（逗号）\n- 或者：File → Preferences → Settings\n- 或者：命令面板 → `Open User Settings`\n\nSettings UI 会展示所有可用设置及其说明、搜索框和下拉菜单。这是探索和修改设置最友好的方式。你在这里所做的更改会自动保存到背后的 JSON 文件中。\n\n**方式 2 —— settings.json（直接方式）：**\n- 按 **Ctrl+Shift+P** → 输入 `Open User Settings JSON` → 按 Enter\n- 或者：在 Settings UI 中，点击 Settings 标签页右上角那个带花括号的文件图标\n\n这会打开原始的 JSON 配置文件。你可以直接在这里输入设置项。一旦你熟悉了设置项的名称，这种方式会更快，而且你可以直接从文档或教程中复制粘贴设置。\n\n这两种方式修改的是同一个底层文件，只是同一份数据的两种呈现视角。"
+    },
+    {
+      "type": "text",
+      "content": "## 用户设置 vs 工作区设置\n\nVS Code 有两个层级的设置：\n\n**用户设置（User Settings）** —— 应用于你在这台电脑上用 VS Code 打开的每一个项目。这是我们要配置的内容。\n\n**工作区设置（Workspace Settings）** —— 仅应用于当前打开的文件夹，存储在项目内的 `.vscode/settings.json` 文件中。当不同项目需要不同设置时（例如不同代码库使用不同的缩进宽度），这很有用。\n\n本课程中，我们使用的是用户设置——适用于所有场景的全局默认值。"
+    },
+    {
+      "type": "text",
+      "content": "## 现在就要配置的四项设置\n\n以下四项设置值得立即配置。我们先在 UI 中设置它们，然后再看看它们在 JSON 中长什么样。\n\n**1. 字体大小（Font Size）**\n默认值是 14。许多人觉得 15 或 16 更容易阅读。\nUI 路径：Settings → 搜索 `font size` → **Editor: Font Size**\n\n**2. 自动保存（Auto Save）**\n不必总是按 Ctrl+S，VS Code 可以自动保存。\nUI 路径：Settings → 搜索 `auto save` → **Files: Auto Save** → 设为 `afterDelay`\n这样会在你停止输入后 1 秒自动保存。\n\n**3. 自动换行（Word Wrap）**\n当一行代码比窗口宽度长时，VS Code 要么自动换行，要么让你横向滚动查看。自动换行通常更易读。\nUI 路径：Settings → 搜索 `word wrap` → **Editor: Word Wrap** → 设为 `on`\n\n**4. 保存时格式化（Format on Save）**\n安装了 Prettier（第 5-8 课）之后，启用这个选项会让 VS Code 在每次保存时自动格式化你的代码。\nUI 路径：Settings → 搜索 `format on save` → 启用 **Editor: Format On Save**（勾选复选框）"
+    },
+    {
+      "type": "text",
+      "content": "## settings.json 中的样子\n\n通过 UI 设置好上述四项之后，打开 settings.json（Ctrl+Shift+P → `Open User Settings JSON`），你会看到类似这样的内容：\n\n```json\n{\n  \"editor.fontSize\": 15,\n  \"files.autoSave\": \"afterDelay\",\n  \"editor.wordWrap\": \"on\",\n  \"editor.formatOnSave\": true\n}\n```\n\n每个设置都是一个键值对。键是设置名称（用点号表示法），值是你设置的内容。数字不加引号书写，字符串（如 `\"afterDelay\"`）用双引号包裹，true/false 值不加引号书写。\n\n你可以直接在 `{}` 内输入设置项来添加它们。每一项设置都必须用逗号与前一项隔开。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**JSON 语法非常严格。** 每个键和字符串值都必须用双引号包裹。各项之间必须用逗号分隔。列表中的最后一项不能有多余的逗号。如果出现语法错误，VS Code 会显示红色下划线——把鼠标悬停在上面即可看到问题所在。常见错误包括：使用单引号而不是双引号、项之间漏加逗号，或在最后一项后面多加了一个逗号。"
+    },
+    {
+      "type": "text",
+      "content": "## 添加字体系列设置\n\n让我们直接在 JSON 中再添加一项设置，练习一下编辑它：\n\n```json\n{\n  \"editor.fontSize\": 15,\n  \"files.autoSave\": \"afterDelay\",\n  \"editor.wordWrap\": \"on\",\n  \"editor.formatOnSave\": true,\n  \"editor.fontFamily\": \"JetBrains Mono, Consolas, monospace\"\n}\n```\n\n这行 `\"editor.fontFamily\"` 告诉 VS Code 优先尝试使用 JetBrains Mono（如果已安装），如果没有则回退到 Consolas（Windows 内置字体），再没有就使用系统中任意等宽字体。这就是回退字体栈的工作方式。\n\n保存（Ctrl+S）之后，编辑器字体会立即改变——你会在这个 JSON 文件本身里马上看到效果。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "配置你的开发环境",
+      "content": "通过 UI 和 JSON 两种模式来配置 VS Code。\n\n**第 1 部分 —— Settings UI（Ctrl+,）：**\n\n1. 按 **Ctrl+,** 打开 Settings\n2. 搜索 `font size` → 将 **Editor: Font Size** 设为 `15`\n3. 搜索 `auto save` → 将 **Files: Auto Save** 设为 `afterDelay`\n4. 搜索 `word wrap` → 将 **Editor: Word Wrap** 设为 `on`\n5. 搜索 `format on save` → 启用 **Editor: Format On Save**（勾选复选框）\n6. 关闭 Settings 标签页（Ctrl+W）\n\n**第 2 部分 —— settings.json（直接编辑 JSON）：**\n\n1. 按 **Ctrl+Shift+P** → 输入 `Open User Settings JSON` → 按 Enter\n2. 你应该能看到刚才添加的四项设置：\n```json\n{\n  \"editor.fontSize\": 15,\n  \"files.autoSave\": \"afterDelay\",\n  \"editor.wordWrap\": \"on\",\n  \"editor.formatOnSave\": true\n}\n```\n3. 添加字体系列这一行——将光标放在最后一项设置之后（`true` 后面），加一个逗号，然后另起一行：\n```json\n{\n  \"editor.fontSize\": 15,\n  \"files.autoSave\": \"afterDelay\",\n  \"editor.wordWrap\": \"on\",\n  \"editor.formatOnSave\": true,\n  \"editor.fontFamily\": \"JetBrains Mono, Consolas, monospace\"\n}\n```\n4. 按 **Ctrl+S** 保存\n5. 编辑器字体立即更新\n\n**第 3 部分 —— 验证 Prettier + 保存时格式化：**\n1. 打开 `hello.html`\n2. 故意破坏缩进——在某一行开头加几个多余的空格\n3. 按 Ctrl+S\n4. 如果 Prettier 被设为默认格式化工具，保存时缩进会自动修复\n\n**检查清单：**\n- [ ] Settings UI 中的更改已反映到 settings.json 中\n- [ ] 字体系列这一行添加后没有出现 JSON 错误（没有红色下划线）\n- [ ] Prettier 在保存 hello.html 时自动格式化了它"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A —— 设置探索练习",
+      "content": "这个 8 分钟的练习会带你探索 VS Code 的设置项，让你了解自己可以自定义哪些内容。\n\n**第 1 步 —— 打开 Settings**（Ctrl+,）。\n\n**第 2 步 —— 探索每个主要分类**（左侧边栏），每个分类阅读 2-3 项设置：\n- Text Editor：字体、光标、格式化\n- Workbench：外观、侧边栏布局\n- Extensions：每个已安装的扩展在这里都有自己的设置\n- Terminal：终端外观和行为\n\n**第 3 步 —— 找一个你想修改的设置**（字体大小、缩进宽度、自动保存）。修改它，观察效果是否立即生效。\n\n**第 4 步 —— 打开 Settings (JSON)：** Ctrl+Shift+P → \"Open User Settings (JSON)\"。这就是 UI 背后的原始 JSON。\n\n**第 5 步 —— 添加一项 UI 中没有的 JSON 设置**（问 Claude：“给我 5 个只能通过 JSON 配置、UI 中没有的 VS Code 设置项”）。\n\n**第 6 步 —— 注意其中的差异：** UI 设置 = 易于发现。JSON 设置 = 更强大、更便于迁移。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 搭建属于你的理想 Settings.json",
+      "content": "创建一份完全按照你的意愿配置 VS Code 的 settings.json——为你的工作、你的眼睛、你的工作流程量身定制。\n\n**第 1 步 —— 问 Claude：**\n```\n为一位这样的开发者创建一份 VS Code settings.json：\n- 主要使用[你的编程语言]\n- 重视[可读性 / 性能 / 减少干扰 / 等等]\n- 使用[你的 AI 扩展]\n- 常见痛点：[任何你不喜欢的设置]\n\n在每一项设置上方用注释解释它的作用。让这份配置达到可直接投入使用的水平。\n```\n\n**第 2 步 —— 逐项审阅**输出中的每一项设置，移除任何你不想要的内容。\n\n**第 3 步 —— 应用设置：** Ctrl+Shift+P → \"Open User Settings (JSON)\" → 用 Claude 的输出替换（保留你已有的任何自定义设置）。\n\n**第 4 步 —— 打开你工作中会用到的每种文件类型进行测试。** 一切是否显示和运行正常？\n\n**第 5 步 —— 必做的审阅：** 问 Claude：*“审阅这份 settings.json。哪些设置可能会相互冲突？哪些设置可能会给[你的使用场景]带来意料之外的行为？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C —— 跨设备同步设置",
+      "content": "VS Code 的 Settings Sync 功能能让你的配置跟随你到任何一台设备上。\n\n**第 1 步 —— 启用 Settings Sync：** 点击左下角的人形图标 → 打开 Settings Sync。\n\n**第 2 步 —— 选择要同步的内容：**\n- Settings（设置）\n- Keyboard Shortcuts（键盘快捷键）\n- Extensions（扩展）\n- Snippets（代码片段）\n- UI State（界面状态）\n\n**第 3 步 —— 使用 Microsoft 或 GitHub 账号登录。**\n\n**第 4 步 —— 验证同步效果：** 如果你能访问第二台设备（或可以通过 VS Code 网页版查看），验证你的设置是否出现在那里。\n\n**第 5 步 —— 备选方案：使用 dotfiles 仓库进行手动同步。** 问 Claude：“什么是 dotfiles 仓库？开发者如何用它在不使用内置同步功能的情况下，跨设备同步 VS Code 设置？”\n\n**第 6 步 —— 决定你的同步策略：** 内置同步最省事。dotfiles 能提供更多控制权，并且适用于所有工具，不仅限于 VS Code。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 配置特定语言的设置",
+      "content": "在 VS Code 中，不同的文件类型可以有不同的设置——例如，Python 可能使用 4 空格缩进，而 JavaScript 使用 2 空格。\n\n**第 1 步 —— 打开你的 settings.json**（Ctrl+Shift+P → \"Open User Settings JSON\"）。\n\n**第 2 步 —— 添加特定语言的覆盖设置：**\n```json\n{\n    \"[python]\": {\n        \"editor.tabSize\": 4,\n        \"editor.defaultFormatter\": \"ms-python.black-formatter\",\n        \"editor.formatOnSave\": true\n    },\n    \"[javascript]\": {\n        \"editor.tabSize\": 2,\n        \"editor.defaultFormatter\": \"esbenp.prettier-vscode\",\n        \"editor.formatOnSave\": true\n    },\n    \"[json]\": {\n        \"editor.tabSize\": 2,\n        \"editor.formatOnSave\": true\n    }\n}\n```\n\n**第 3 步 —— 测试：** 打开一个 .py 文件，加一些混乱的缩进，保存。它会自动格式化吗？打开一个 .js 文件——格式化方式是否不同？\n\n**第 4 步 —— 问 Claude：** *“针对[你的编程语言]，我应该配置哪些特定语言的设置？包括格式化工具的选择、linter 设置，以及任何与 VS Code 默认行为不同的特殊行为。”*"
+    },
+    {
+      "type": "quiz",
+      "question": "你在 UI 中修改了一项 VS Code 设置，但项目中什么都没变。你怀疑存在一个工作区 settings.json，正在覆盖你的用户设置。你该如何检查？",
+      "options": [
+        "重启 VS Code —— 有些设置需要重启才能生效",
+        "打开项目中的 .vscode/settings.json，检查其中是否定义了同一项设置——工作区设置会覆盖用户设置",
+        "重新安装 VS Code，使用全新的设置",
+        "禁用所有扩展再试一次"
+      ],
+      "correct": 1,
+      "explanation": "VS Code 的设置有一个层级结构：用户设置（全局）< 工作区设置（.vscode/settings.json）< 文件夹设置。工作区设置会覆盖该项目的用户设置。如果你全局修改了一项设置，但在某个项目中没有生效，请检查该项目的 .vscode/settings.json 中是否有同一项设置在覆盖它。"
+    },
+    {
+      "type": "quiz",
+      "question": "你想只为 JavaScript 文件启用“保存时格式化”，而不为 Python 文件启用。你该如何在 settings.json 中配置？",
+      "options": [
+        "你无法针对特定文件类型应用“保存时格式化”——这是一个全有或全无的设置",
+        "使用特定语言的设置：\"[javascript]\": {\"editor.formatOnSave\": true}，而不给 Python 设置这一项",
+        "安装一个专门为 JavaScript 添加“保存时格式化”功能的扩展",
+        "把 formatOnSave 加到你的 .eslintrc 文件里"
+      ],
+      "correct": 1,
+      "explanation": "VS Code 支持在 settings.json 中使用 `\"[languageid]\"` 这个键来设置特定语言的选项。这让你可以对 JavaScript 启用 formatOnSave 而不对 Python 启用（反之亦然）、为不同语言设置不同的缩进宽度、为不同语言使用不同的格式化工具，以及任何其他因文件类型而异的设置。这对于跨多种语言、遵循不同约定工作的多语言开发者来说至关重要。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 5-9 课。** VS Code 现在已经按照你的偏好配置好了——自动保存、格式化的代码、自动换行，以及一个舒适的字体。你刚学到的 JSON 设置模式，正是本课程中 Claude Code、MCP 服务器以及其他所有需要配置的工具所使用的相同模式。下一课：键盘快捷键。"
+    }
+  ],
+  "nextLesson": "5-10",
+  "prevLesson": "5-8"
+}

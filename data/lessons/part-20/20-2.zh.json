@@ -1,0 +1,82 @@
+{
+  "id": "20-2",
+  "title": "技能设计原则——一个优秀技能的构成",
+  "part": 20,
+  "estimatedMinutes": 40,
+  "tags": ["skills", "claude-code", "prompt-engineering", "design", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n一个只成功过一次的技能，和一个你每天都依赖的技能，两者之间的差别就在于设计。本课教你打造可靠、健壮、并能随时间不断改进的技能背后的原则。你会明白为什么有些提示词能产生稳定的结果，而有些则显得很随机，也会学到如何构建能优雅处理边界情况的技能——即便你的 MCP 没有连接，或者你预期的数据不存在。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**为什么技能质量如此重要：** 一个薄弱的提示词偶尔能产生有用的结果。一个精心设计的技能则能稳定地产生你需要的结果，优雅地处理缺失数据，并且每次你打磨它都会变得更好。区别不在于智能程度——而在于结构。本课就是要给你这套结构。"
+    },
+    {
+      "type": "text",
+      "content": "## 六段式技能架构\n\n每一个可靠的技能都使用这套结构。每一段都有它明确的职责：\n\n```\n[1] ROLE（角色）—— 在这个技能里 Claude 是谁\n[2] CONTEXT（上下文）—— 它身处什么情境，能访问哪些数据\n[3] STEPS（步骤）—— 要遵循的确切顺序，逐条编号\n[4] OUTPUT FORMAT（输出格式）—— 结果具体该如何呈现\n[5] CONSTRAINTS（约束）—— 不该做什么\n[6] FALLBACK（兜底方案）—— 数据缺失或工具未连接时该怎么办\n```\n\n**为什么每一段都很重要：**\n\n**ROLE（角色）** 决定了 Claude 的视角和专业性。`You are an expert code reviewer` 和 `You are an assistant` 在同一段代码上会产生明显不同的结果。要具体：`You are a senior security engineer reviewing code for OWASP Top 10 vulnerabilities.`\n\n**CONTEXT（上下文）** 能防止 Claude 做出错误的假设。告诉它：这是什么项目、它有哪些 MCP 工具、用户的目标是什么、有什么时间限制。没有上下文，Claude 就会用通用的假设去填补空白。\n\n**STEPS（步骤）** 是最重要的一部分。编号的顺序会强制 Claude 在进入下一步之前完成当前步骤——防止它急于下结论。每一步都应该是单一、具体的动作。\n\n**OUTPUT FORMAT（输出格式）** 消除了结果应该长什么样的歧义。要包含：标题、列表还是段落、长度限制、该包含什么该省略什么。格式和内容同样重要。\n\n**CONSTRAINTS（约束）** 能防止最常见的失败模式：过于冗长、在你想要直接的时候加了一堆免责声明、做了你没要求的额外工作、在没什么好道歉的时候道歉。\n\n**FALLBACK（兜底方案）** 是区分生产级技能和脆弱演示品的关键。如果 Gmail 没连接怎么办？如果没有匹配的邮件怎么办？如果文件不存在怎么办？拥有良好兜底方案的技能会优雅地降级——它会告诉你它做不到什么，同时把它能做到的都给你。"
+    },
+    {
+      "type": "text",
+      "content": "## XML 标签——结构化的秘密武器\n\nClaude 经过专门训练，能够把 XML 标签解析为结构分隔符。在技能中使用 XML 会让它们明显更可靠——尤其是在复杂的多步骤任务上。\n\n与其这样写：\n```markdown\nYou are a code reviewer. Review the code. Check for bugs and security issues.\nFormat it as a numbered list.\n```\n\n不如这样写：\n```xml\n<role>\nYou are a senior code reviewer with expertise in security and production systems.\n</role>\n\n<task>\nReview $ARGUMENTS for bugs and security vulnerabilities.\n</task>\n\n<steps>\n1. Read the full file before commenting on any part\n2. Identify all functions and their inputs/outputs\n3. Check each function for: null/undefined handling, injection risks, logic errors\n4. Look for cross-cutting concerns: auth checks, logging, error propagation\n5. Synthesise findings by severity\n</steps>\n\n<output>\nFormat:\n## Critical (must fix before shipping)\n- [Issue]: [Line] — [Why it matters] — [How to fix]\n\n## High (should fix this week)\n- ...\n\n## Low (worth noting)\n- ...\n\n## Summary\n[1-sentence overall quality judgment, 1-10 score]\n</output>\n\n<constraints>\n- Be direct — skip hedging language like 'you might want to consider'\n- If there are no critical issues, say so explicitly\n- Don't praise good code — focus on what needs attention\n- Total response under 500 words unless there are many critical issues\n</constraints>\n\n<fallback>\nIf no file is specified, review the most recently discussed code.\nIf the file cannot be read, explain why and ask for the correct path.\n</fallback>\n```\n\nXML 版本更可靠，是因为 Claude 会把每个标签当作一种独立的思维模式来对待——读到 `<steps>` 就知道要按顺序执行，读到 `<constraints>` 就知道该避免什么。"
+    },
+    {
+      "type": "text",
+      "content": "## 让技能更健壮——应对可能出错的情况\n\n脆弱的技能只能在演示中好用。健壮的技能能每天都好用。关键在于提前预判各种失败情况：\n\n**模式 1 —— 条件式工具使用：**\n```markdown\nIf the Gmail MCP is available:\n- Check unread emails from the last 24 hours\nIf Gmail is NOT available:\n- Note: email data unavailable. Continue with other steps.\n```\n\n**模式 2 —— 优雅降级：**\n```markdown\nFor each calendar event today:\n- If Calendar MCP is available: read the event details\n- If not: skip calendar section and note: 'Connect Calendar MCP for full briefing'\n```\n\n**模式 3 —— 输入校验：**\n```markdown\nIf $ARGUMENTS is empty or unclear:\n- Ask: 'Which file or topic should I analyse?'\n- Wait for a response before proceeding\n```\n\n**模式 4 —— 空结果处理：**\n```markdown\nIf no unread emails are found: report '0 unread emails — inbox clear' and continue.\nDo not skip the section or leave it blank.\n```\n\n**模式 5 —— 范围限制：**\n```markdown\nAnalyse the top 20 results only. If there are more, note: '[X more results not shown\n— run again with a more specific search to narrow down].'\n```\n\n把这些模式加入你的技能，能把它们从脆弱的脚本变成可靠的助手。"
+    },
+    {
+      "type": "text",
+      "content": "## 技能迭代流程\n\n没有任何技能一开始就是完美的。最好的技能都是在使用中不断打磨出来的。以下是系统性改进技能的方法：\n\n**1. 运行它，记录哪里不对。**\n每次运行之后，找出：缺了什么？哪里太长了？Claude 做了什么你没要求的事？你想要什么但它没提供？\n\n**2. 一次只改一个地方。**\n一次性改动所有东西，会让你无法判断到底是哪个改动起了作用。先修复最大的问题，再运行一次，然后再修复下一个。\n\n**3. 加一条版本备注：**\n```markdown\n<!-- v2: added fallback for missing Gmail, shortened output format -->\n```\n只是文件里的一条注释。能帮你追踪都改了什么。\n\n**4. 请 Claude 自己批判这个技能：**\n```\n读一下 ~/.claude/commands/daily-brief.md。这个技能最薄弱的部分是什么？\n怎样才能让它产生更一致、更有用的输出？\n把排名前三的问题改掉，重写这个技能。\n```\n\n**5. 构建一个测试场景：**\n对于使用实时数据（邮件、日历）的技能，可以让 Claude 帮你造一个测试场景：\n```\n假设现在是周一早上，我有 47 封未读邮件，今天有 3 场会议，\n最紧急的事情是需要回复我的经理关于截止日期的问题。\n在这个场景下运行 /daily-brief，给我看看输出会是什么样子。\n```\n这样你就能在没有真实数据完全匹配场景的情况下测试技能。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**\"报纸头版\"测试：** 设计好一个技能后，问自己：如果这个技能在真实数据上运行，并印在报纸头版上，会不会让人尴尬？太啰嗦？太简略？语气不对？漏掉了重要信息？如果答案是会，那就是要修的地方。技能是你智慧的代言人——它们应该体现你是怎么思考的，而不是千篇一律的通用 AI 输出。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "用完整架构重构 /daily-brief",
+      "content": "把第 20-1 课中的 `/daily-brief` 技能，用完整的六段式架构加上 XML 标签重新构建一遍。\n\n**第 1 步——读取你当前的技能：**\n```\n请：读取 ~/.claude/commands/daily-brief.md 文件，把它当前的内容展示给我。\n```\n\n**第 2 步——套用这套架构。请 Claude：**\n```\n用下面这套结构重写 ~/.claude/commands/daily-brief.md：\n\n<role> —— 定义这个技能里 Claude 是谁\n<context> —— 它有哪些 MCP 工具，这是一天中的什么时段运行的\n<steps> —— 编号的操作序列，每步一个动作\n<output> —— 精确的格式，包括标题和长度限制\n<constraints> —— 要避免什么、长度限制、语气\n<fallback> —— 如果 Gmail/日历 MCP 未连接该怎么办\n\n核心目的保持不变——一份 250 字以内的早晨简报——\n但要让它明显更健壮、更结构化。\n```\n\n**第 3 步——审查重写后的技能。**\n它是否：\n- [ ] 有一个具体专业领域的清晰角色？\n- [ ] 按编号顺序列出了步骤？\n- [ ] 指定了确切的输出格式？\n- [ ] 有针对 MCP 工具未连接情况的兜底方案？\n- [ ] 有约束来防止常见的失败模式？\n\n如果缺了任何一项，请 Claude 补上。\n\n**第 4 步——运行重构后的技能：**\n```\n/daily-brief\n```\n\n**第 5 步——和原来的版本对比。**\n输出是否更有结构？更简洁？是否更好地处理了某些边界情况？\n记录下这些改进。\n\n**成果：** 一个生产级的 `/daily-brief`，每天早上都能稳定输出相同的结构，能优雅处理 MCP 连接缺失的情况，并且遵守长度限制。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A —— 从零设计一个技能",
+      "content": "构建一个 `/project-status` 技能，读取你项目中的文件，生成一份简明的状态报告。\n\n**目标：** 在任何项目中运行 `/project-status`，都应该告诉你：这个项目是什么、已完成什么、正在进行什么、被什么卡住了，以及接下来最重要的 3 项任务。\n\n**第 1 步——先自己设计一遍。** 在问 Claude 之前，先写下：\n- Claude 应该扮演什么 ROLE（角色）？\n- 要理解一个项目的状态，应该走哪些 STEPS（步骤）？\n- OUTPUT（输出）应该长什么样？\n- 什么样的 CONSTRAINTS（约束）应该限制回复？\n- 什么样的 FALLBACK（兜底方案）能处理结构不明显的项目？\n\n把你的答案写在一份草稿笔记里。\n\n**第 2 步——请 Claude 编写这个技能：**\n```\n基于这个设计，为 ~/.claude/commands/project-status.md 写一个技能文件：\n\nRole（角色）：[你的角色设计]\nSteps（步骤）：[你的步骤设计]\nOutput（输出）：[你的格式设计]\nConstraints（约束）：[你的约束设计]\nFallback（兜底方案）：[你的兜底方案设计]\n\n使用 XML 标签来组织结构。让它能识别项目类型——代码、写作、\n研究或商业——并据此自适应，从而适用于任何类型的项目。\n```\n\n**第 3 步——保存并测试：**\n在你正在做的一个项目里打开 Claude Code，运行：\n```\n/project-status\n```\n\n**第 4 步——找出一个不对的地方。**\n第一版总会有问题。修复它：\n```\n把 ~/.claude/commands/project-status.md 更新为 [具体改进]。\n```\n\n**第 5 步——在另一个项目中运行它。**\n它能否自适应？如果不能，需要改什么才能让它适用于不同类型的项目？\n\n**成果：** 一个 `/project-status` 技能，能让你在任何你在做的项目中，立刻了解现状。"
+    },
+    {
+      "type": "quiz",
+      "question": "一个技能产生的结果不一致——有时太啰嗦，有时太简略，有时格式不对。六段式技能架构中的哪一部分最直接解决这个问题？",
+      "options": [
+        "ROLE（角色）—— 改变 Claude 的身份就能解决不一致的问题",
+        "OUTPUT FORMAT（输出格式）—— 明确指定标题、长度限制和精确结构，能强制每次运行都产生一致的结果",
+        "CONTEXT（上下文）—— 提供更多背景信息能减少多变性",
+        "STEPS（步骤）—— 增加更多步骤会产生更一致的输出"
+      ],
+      "correct": 1,
+      "explanation": "格式和长度不一致，几乎总是源于 OUTPUT FORMAT（输出格式）部分定义不够清楚。当你明确告诉 Claude 该用什么标题、要多少个要点、长度限制是多少、该包含什么该省略什么，输出在每次运行之间就会变得可靠。角色、上下文和步骤会影响分析的质量和完整性——但输出格式决定了结果长什么样。"
+    },
+    {
+      "type": "quiz",
+      "question": "你有一个检查 Gmail 紧急邮件的技能。当 Gmail MCP 未连接时，FALLBACK（兜底方案）部分应该怎么写？",
+      "options": [
+        "什么都不写——如果 Gmail 没连接，技能就应该报错失败",
+        "告诉 Claude 跳过邮件、改为检查本地文件，并注明 Gmail 不可用",
+        "自动重新连接 Gmail 并重试",
+        "要求用户重启 Claude Code"
+      ],
+      "correct": 1,
+      "explanation": "一个健壮的兜底方案能让技能优雅降级，而不是彻底失败。如果 Gmail 没连接，技能应该注明这一点，然后继续做它能做的事——检查本地文件、日历或其他可用数据。直接报错失败（A）很脆弱。自动重连（C）不是技能能做到的事。要求重启（D）会不必要地打断用户。好的兜底方案能在某一项输入不可用时，最大程度保留技能的实用性。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 20-2 课。** 你现在拥有了设计可靠技能的完整框架：六段式架构（角色、上下文、步骤、输出、约束、兜底方案）、面向 Claude 的 XML 结构化方式、处理缺失数据的健壮性模式，以及迭代流程。把这套框架应用到你从这里开始构建的每一个技能上——这就是\"只用一次的技能\"和\"每天都在用的技能\"之间的区别。"
+    }
+  ],
+  "nextLesson": "20-3",
+  "prevLesson": "20-1"
+}

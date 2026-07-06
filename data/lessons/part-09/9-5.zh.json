@@ -1,0 +1,80 @@
+{
+  "id": "9-5",
+  "title": "Bolt.new——靠描述就能构建完整应用",
+  "part": 9,
+  "estimatedMinutes": 65,
+  "tags": [
+    "bolt",
+    "vibe-coding",
+    "no-code",
+    "full-stack",
+    "deployment",
+    "beginner-friendly"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将在没有从零写过一行代码的情况下，构建并部署一个可正常运行的网页应用——用 Bolt.new，在一次会话中从一段文字描述走到一个可访问的在线网址。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 Bolt.new？\n\nBolt.new 是由 StackBlitz 打造的一款 AI 驱动的全栈开发环境。你用简单的语言描述一个应用，Bolt 就会把它构建出来——HTML、CSS、JavaScript、后端路由、数据库连接——并直接在浏览器中运行，让你立刻看到效果。\n\n这与本课程这一部分中的其他所有工具都不同：\n- **GitHub Copilot、Continue.dev**——在你已有的编辑器里帮你写代码\n- **Aider、Claude Code**——你本地项目中的 AI 助手\n- **Bolt.new**——只凭一条提示词就生成一整个可运行的应用，即时运行，一键部署到互联网\n\n无需搭建环境，无需 npm install，无需本地开发环境。只需描述你想要什么。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**适合谁用：** 任何想快速构建一个真实应用的人——包括不会写代码的人。Bolt.new 弥合了“我有一个想法”和“这是一个你可以分享的可用原型”之间的鸿沟。如果你是开发者，它是一款快速原型工具。如果你不是开发者，它可能是这整门课程里最强大的东西。"
+    },
+    {
+      "type": "text",
+      "content": "## Bolt.new 是如何工作的\n\n**基本流程：**\n1. 打开 **bolt.new**\n2. 输入你想构建的东西的描述\n3. Bolt 生成完整的代码库，并在预览面板中运行\n4. 你通过对话来迭代：“把颜色改成蓝色”“加一个删除按钮”“让它保存到数据库里”\n5. 准备好之后，一键部署到 Netlify——获得一个可分享给任何人的在线网址\n\n**Bolt 能构建什么：**\n- 带界面的网页应用（表单、仪表盘、待办清单、计算器）\n- 带本地存储或数据库的应用\n- 调用外部 API 的应用\n- 带导航的多页面应用\n- React、Vue、Svelte，或纯 HTML/CSS/JS——你可以自己选，也可以让它自己决定\n\n**Bolt 不擅长什么：**\n- 非常复杂的现有代码库（它擅长从零构建，不太擅长导入大型现有项目）\n- 需要原生移动端功能的应用（超出 Web API 范围的相机、GPS 等）\n- 上下文变得非常庞大的长会话——把大型应用拆分成几个阶段来做"
+    },
+    {
+      "type": "text",
+      "content": "## Bolt 的提示词写法\n\nBolt 对具体、明确的提示词反应最好——而不是模糊的提示词。\n\n**太模糊：**\n> Make me a productivity app\n\n**比较好：**\n> Build a daily habit tracker. Users can add habits with a name and target frequency (daily/weekly). Each day they can check off completed habits. Show a streak counter for each habit. Dark theme, mobile-friendly. Use local storage to save data between sessions. No user login needed.\n\n**一条优秀 Bolt 提示词应包含的要素：**\n- 应用做什么（核心功能）\n- 谁来用、怎么用（关键的用户操作）\n- 需要持久化保存的数据（以及保存在哪里：本地存储、数据库）\n- 视觉风格（主题、颜色、布局偏好）\n- 不需要什么（用来简化范围）\n\n完成第一次构建之后，用具体的请求来迭代：“连续记录（streak counter）如果漏打卡一天就应该重置”“加一种删除某个习惯的方式”。不要重写整段提示词——只需描述下一步的改动。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "在一次会话中构建并部署一个真实应用",
+      "content": "你将构建一个对你自己真正有用的东西——而不是一个教学玩具——并在结束前让它上线到互联网上。\n\n---\n\n## 第 1 步——选择你的应用（5 分钟）\n\n选一个你会真正用到的东西。一些想法：\n- **链接收藏夹**：粘贴一个网址 + 备注，之后可以取回你保存的链接\n- **每日站会记录生成器**：输入 3 条要点，把它们格式化成一条可直接粘贴使用的站会消息\n- **决策日志**：记录决策及其背景和日期，之后可以搜索\n- **备餐计划**：规划一周的餐食，生成购物清单\n- **支出记录器**：按类别记录支出，显示各类别的总额\n- **单词学习本**：添加单词和释义，自我测验\n\n或者选一个和你工作直接相关的东西。\n\n---\n\n## 第 2 步——写出你的提示词（5 分钟）\n\n在打开 Bolt 之前，先在这里写好你的提示词。使用这个模板：\n\n```\nBuild a [name] app. \n\nWhat it does: [core function in 1-2 sentences]\nUser actions: [list the 3-5 things the user can do]\nData: [what gets saved, where: local storage or database]\nDesign: [dark/light, simple/detailed, any color preferences]\nNot needed: [login, payment, anything that would complicate it]\n```\n\n在去 Bolt 之前先填好这个模板——带着写好的规格去提示，比临场发挥效果更好。\n\n---\n\n## 第 3 步——在 Bolt 中构建（20 分钟）\n\n1. 打开 **bolt.new**（提供免费版；用 GitHub 注册）\n2. 粘贴你的提示词\n3. 观察 Bolt 在预览面板中生成并运行应用\n4. 测试它——点击每个按钮，填写每个表单\n5. 逐条提出具体的改进请求：\n   - 先修复任何有问题的地方\n   - 然后添加功能\n   - 最后再打磨设计\n\n**如果 Bolt 弄乱了：** 用一条更明确的提示词开启一个新对话，而不是试图去挽救一个已经跑偏的会话。\n\n---\n\n## 第 4 步——部署（5 分钟）\n\n1. 点击 Bolt 工具栏中的 **Deploy**\n2. 连接你的 Netlify 账号（免费——在 netlify.com 注册）\n3. Bolt 会部署你的应用，并给你一个在线网址，类似 `https://app-name-abc123.netlify.app`\n4. 在手机上打开这个网址——能正常运行吗？\n5. 把这个网址分享给一个人\n\n---\n\n## 第 5 步——记录你构建的成果（5 分钟）\n\n在 `notes/apps-built.md` 中，加入：\n```markdown\n## [App Name]\n- URL: [your Netlify URL]\n- What it does: [1 sentence]\n- Built with: Bolt.new\n- Date: [today]\n- Next improvement: [one thing you'd add]\n```\n\n你已经构建并部署了一个真实的网页应用。你没有从零写过一行代码。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 A——快速原型演练：30 分钟做 3 个应用",
+      "content": "快速构建三个小应用，培养你对 Bolt 擅长什么的直觉。\n\n**第一轮（10 分钟）：一个简单的计算器**\n提示词：“Build a tip calculator. User enters bill amount and tip percentage, shows tip amount and total. Clean design, mobile-friendly.”\n构建它，测试它，记录下 Bolt 做得好的地方和遗漏的地方。\n\n**第二轮（10 分钟）：一个内容工具**\n提示词：“Build a text word counter. User pastes text, shows: word count, character count (with and without spaces), reading time estimate at 200wpm, and most frequent words (top 10). Clean, minimal.”\n构建它，用真实文本测试。\n\n**第三轮（10 分钟）：带数据持久化的东西**\n提示词：“Build a simple notes app. User types a note with a title, saves it (local storage), can see all notes in a list, click to expand, delete notes. Dark theme.”\n测试笔记在刷新页面后是否还在。\n\n**复盘：** 你在这三次中注意到了什么共同的规律？Bolt 在哪些地方表现出色？在哪些地方遇到困难？什么类型的应用提示词效果最好？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——为工作构建点东西",
+      "content": "构建一个能解决你工作或学习中实际问题的真实工具。\n\n**第 1 步——找出一个痛点。** 你有什么反复在做、感觉效率低下的事情？常见的候选：\n- 把数据从一种格式转换成另一种格式\n- 反复查找同一份参考信息\n- 在电子表格里追踪某些本该用正规表单管理的东西\n- 用不同的输入反复生成同一类文档\n\n**第 2 步——把范围收紧。** Bolt 在聚焦的小应用上表现最好。如果你的想法比较复杂，先挑出能带来 80% 价值的核心 20%。\n\n**第 3 步——写一条精确的 Bolt 提示词**（使用主练习中的模板）。\n\n**第 4 步——在 Bolt 中构建。** 不断迭代，直到核心功能正确运行。\n\n**第 5 步——部署并用它完成一项真实任务。** 它真的帮你节省了时间吗？\n\n**第 6 步——强制性审查：** 问 Claude Code：*“我用 Bolt 构建了这个应用：[描述它]。要让它达到生产可用的水平，我最应该做的 3 项重要改进是什么？如果我公开分享它，存在哪些安全隐患？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "练习 C——Bolt + Claude Code：两者之长兼得",
+      "content": "Bolt 构建速度快，但也有局限。当应用需要更深入的开发时，Claude Code 可以接手。练习这个交接过程。\n\n**第 1 步——从 Bolt 导出：** 在 Bolt 中构建好应用后，点击 **Download**，以 ZIP 文件形式获取完整代码库。\n\n**第 2 步——在 VS Code 中打开：** 解压 ZIP 文件，在 VS Code 中打开该文件夹，启动 Claude Code。\n\n**第 3 步——用 Claude Code 进行扩展。** 让 Claude：\n- “给表单添加规范的输入校验——检查空字段，并给出有帮助的错误提示”\n- “审查这个代码库，找出任何安全问题”\n- “添加一个 Bolt 做不到的功能：[描述某个复杂的东西]”\n\n**第 4 步——推送到 GitHub**，使用第 10-8 课中的 MCP 工作流。\n\n**第 5 步——重新部署到 Netlify**，方法是连接你的 GitHub 仓库（Netlify 会在每次推送时自动部署）。\n\n**结果：** 你现在拥有一个经过 Claude Code 打磨、通过 GitHub 部署、每次推送都自动更新的 Bolt 原型。这就是完整的“从氛围编程到生产上线”的工作流。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在 Bolt 中构建了一个收集用户邮箱地址、用于发送新闻通讯的应用。Bolt 的一键部署没有解决什么关键问题？",
+      "options": [
+        "应用加载可能会很慢",
+        "收集邮箱地址需要隐私政策、GDPR 合规以及安全存储——Bolt 部署的只是界面，并不提供数据处理、法律合规或邮件发送基础设施",
+        "Bolt 不支持收集邮箱",
+        "Netlify 的网址看起来不够专业"
+      ],
+      "correct": 1,
+      "explanation": "Bolt 负责界面和部署，但不负责一个真实产品周边的种种问题：数据隐私（GDPR 要求获得用户同意、提供隐私政策以及删除数据的权利）、安全存储（这些邮箱地址存在哪里，谁能访问？）、邮件发送基础设施（你仍然需要 SendGrid、Mailchimp 之类的服务来真正发送邮件）。Bolt 是一款快速原型工具——从原型走到一个能真正处理用户数据的产品，需要额外的思考、工具和法律意识。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 9-5 课完成。** 你现在能够从文字描述出发构建并部署完整的网页应用。这是本课程中杠杆效应最高的技能之一——你在没有开发环境、也没有深入编程知识的情况下，从一个想法走到了一个可访问的在线网址。接下来：v0.dev，用于快速搭建 UI 组件。"
+    }
+  ],
+  "nextLesson": "9-6",
+  "prevLesson": "9-4"
+}

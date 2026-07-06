@@ -1,0 +1,116 @@
+{
+  "id": "2-5",
+  "title": "Perplexity——AI 驱动的调研工具",
+  "part": 2,
+  "estimatedMinutes": 55,
+  "tags": [
+    "search",
+    "beginner",
+    "research",
+    "tools"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你将理解 Perplexity 与 Claude、ChatGPT——以及与 Google 搜索——有着怎样根本性的不同，以及每种场景下该用哪个工具。你将掌握能获得最佳调研结果的具体查询结构，学会使用 Perplexity 的 Deep Research 模式来生成全面的报告，并培养出让 AI 辅助调研真正可靠的核实习惯。"
+    },
+    {
+      "type": "text",
+      "content": "## 根本性的区别：实时、带引用的调研\n\nClaude 和 ChatGPT 是语言模型——它们基于训练中学到的模式生成文本。它们的知识有一个截止日期，在标准模式下不会访问实时网络。Perplexity 建立在一个完全不同的前提之上：它是一个 **AI 原生的搜索引擎**，能实时检索网页，阅读它们，综合出一个答案——而且关键是，会向你展示它使用的每一个来源。\n\n**为什么引用来源能改变一切：**\n当 Claude 说“阿司匹林可能与抗凝血药物相互作用”时，你无法知道这是来自可靠的医学来源还是一篇博客文章。而当 Perplexity 说同样的话时，你会看到编号引用：[1] 梅奥诊所，[2] NHS.uk，[3] 美国心脏协会。你可以点击每一个来源，核实它是否真的说了 Perplexity 所声称的内容。这就是根本性的区别。\n\n**一份 Perplexity 回答包含什么：**\n- 用散文形式综合出的答案\n- 正文中的编号引用标记（类似学术论文）\n- 展示实际使用网站的来源面板\n- 后续问题建议\n- 深入查看任何被引用来源的选项\n\n**以下情况引用来源至关重要：**\n- 健康、医疗或药物相关问题（来源权威性极其重要）\n- 法律或监管相关问题（司法辖区和日期都很重要）\n- 财务相关问题（当前利率、最近的变化）\n- 任何具有时效性的内容（时事新闻、最新消息）\n- 你将会引用或据此行动的学术或专业调研\n- 核实某个具体论断\n- 任何“这来自世界卫生组织”和“这来自某个随便的博客”有本质区别的场景"
+    },
+    {
+      "type": "text",
+      "content": "## 写出能获得好结果的查询\n\nPerplexity 能很好地处理自然语言查询——但具体的查询结构始终比模糊的查询表现更好。\n\n**一个强有力的调研查询的结构：**\n\n```\n[Specific topic] + [Specific question] + [Context that limits scope]\n```\n\n**弱查询：**\n```\nWhat is the best diet?\n```\n→ 返回泛泛的、宽泛的健康内容\n\n**强查询：**\n```\nWhat does the research from the last 3 years show about intermittent fasting\nfor people over 50 with type 2 diabetes? Focus on randomised controlled trials.\n```\n→ 返回具体、最新、有针对性的结果，并附有学术来源引用\n\n**能改善结果的范围限定词：**\n- “as of [year]”——限定为最近的信息\n- “according to peer-reviewed research”——优先选用学术来源\n- “in [country]”——将监管或价格问题本地化\n- “for [specific type of person/company/situation]”——缩小适用范围\n- “compare [A] vs [B]”——触发对比格式\n- “pros and cons of”——触发平衡的结构化输出\n\n**特定领域的查询模式：**\n\n| 任务类型 | 查询结构 |\n|-----------|----------------|\n| 当前价格 | “What is the current pricing for [product/service] in [year]?” |\n| 最新新闻 | “What has happened with [topic] in the last [timeframe]?” |\n| 研究共识 | “What does the research say about [health/scientific claim]?” |\n| 法律/监管 | “What are the current [regulations/laws] around [topic] in [jurisdiction]?” |\n| 对比 | “Compare [A] and [B] across [criteria] for [use case]” |\n| 带来源的操作指南 | “Step-by-step guide to [task] with sources” |"
+    },
+    {
+      "type": "text",
+      "content": "## Deep Research 模式——Perplexity 最强大的功能\n\nDeep Research 是 Perplexity 的自主多步骤调研模式。它不是只进行一轮搜索，而是会：\n1. 分析你的问题，规划调研策略\n2. 运行 15-30 次以上的定向网络搜索\n3. 阅读并评估找到的每一个来源\n4. 找出信息缺口，并运行后续搜索\n5. 将所有内容综合成一份结构化、全面的报告\n\nDeep Research 需要 5-15 分钟才能完成，产出的结果更接近一份调研简报，而不是一次聊天式回答。\n\n**什么时候使用 Deep Research：**\n- “给我一份关于[行业/主题]的全面概览，用于准备一场会议”\n- “调研[某个细分市场]的所有竞争对手，包括定价和市场定位”\n- “关于[某个健康论断/科学问题]，目前的证据现状如何？”\n- “帮我从多个角度理解[某个复杂主题]”\n\n**如何启用：** 在 Perplexity 的搜索栏上，找到“Deep Research”（一个按钮或提交前的下拉选项）。**免费版：** 每天 5 次 Deep Research 会话。**Pro（按年计费每月 17 美元，或每月 20 美元）：** 无限次 Deep Research。**Max（每月 200 美元）：** 无限次 Deep Research，外加所有 AI 模型的访问权限，包括 GPT-5、Claude Opus 4.8 和 Grok。\n\n**构建你的 Deep Research 查询：**\n\n```\n[Topic]: [specific domain or question]\n\nI need to understand:\n- [Key question 1]\n- [Key question 2]\n- [Key question 3]\n\nFocus particularly on: [your most important concern]\nContext: I'm [your role/situation] and will use this to [purpose]\n```\n\n**Deep Research 查询示例：**\n```\nTopic: Solar panel installation for residential homes in the UK\n\nI need to understand:\n- Current average costs and what affects the price\n- UK government incentive schemes available in 2026\n- How to evaluate installer quality and avoid scams\n- Realistic timeline from decision to installation\n\nFocus particularly on: Government grants and the payback period.\nContext: I'm a homeowner considering this in the next 6 months.\n```\n\n这种查询结构能给 Perplexity 的调研引擎足够的上下文，让它在 20 多次搜索中正确排出优先级。"
+    },
+    {
+      "type": "text",
+      "content": "## 2026 年的 Perplexity——新能力\n\nPerplexity 已经从一个搜索工具扩展成了一个更广泛的 AI 平台。三项重大新增功能最为重要：\n\n**1. Perplexity Computer（2026 年 6 月 11 日发布）**\nPerplexity Computer 是内置于 Perplexity Pro 中的自主计算机操作代理。你给它一个任务——不仅仅是一次搜索——它会操作一个真实的浏览器：点击、在多页网站间导航、填写表单、跨页面提取数据，并完成一连串的操作。使用场景：\n- “打开[某竞争对手网站]，记录他们目前所有的定价档位”\n- “在 LinkedIn 上查看[某公司]最近发布的招聘信息，并总结这些职位”\n- “访问 10 个航空公司的网站，找出 9 月飞往东京最便宜的往返机票”\n\n这是搜索加行动，而不仅仅是搜索加综合。适用于 Pro 档位。\n\n**2. Search as Code 架构**\nPerplexity 已经将其基础架构重建为“Search as Code”——这意味着搜索可以通过编程方式组合、串联，并集成进自动化工作流中。对专业人士和创业者来说，这意味着 Perplexity 可以被嵌入到业务流程中：自动化的每日简报、竞争对手监控流水线、将调研结果导入内部工具。API 使这一切成为可能；而 UI 让基础用例无需编写代码即可实现。\n\n**3. Model Council（2026 年 2 月发布）**\nPerplexity 的 Model Council 不再只路由到单一 AI 模型，而是让你的查询同时经过多个 AI 模型（GPT-5.5、Claude、Gemini 等），并综合出一个能同时发挥它们各自优势的回答。适用于 Pro 和 Max 档位。对于没有单一模型能明确胜出的复杂问题，这项功能很有用——综合出来的答案往往更均衡、更全面。\n\n**定价总览（2026 年）：**\n| 档位 | 价格 | 主要限制 |\n|------|-------|------------|\n| 免费 | 0 美元 | 每天 5 次 Deep Research，模型访问权限有限 |\n| Pro | 每月 17 美元（按年计费）/ 每月 20 美元 | 无限 Deep Research、Perplexity Computer、Model Council、所有 AI 模型 |\n| Max | 每月 200 美元 | Pro 的一切功能 + 企业级功能，最高的速率限制 |\n\n## 5 个追问技巧\n\nPerplexity 中最被低估的技巧之一，就是主动追问。在得到初步结果之后：\n\n1. **澄清某个具体论断：** “你提到了[X]。这方面的证据质量如何——相关研究足够扎实吗？”\n2. **深入了解某个来源：** “能跟我多讲讲你为[某个论断]引用的[具体研究/来源]吗？”\n3. **挑战共识：** “反对这种观点的人是怎么说的？”\n4. **收窄范围：** “现在只关注你主题中[更狭窄的某个方面]”\n5. **落到实际行动：** “基于这一切，对于[你的具体情况]来说，最重要的 3 条可执行启示是什么？”\n\nPerplexity 的对话线程会在追问之间保留上下文——同一会话中的每个问题都会在此前查询的调研基础上继续深入。\n\n**结果：** 一场从宽泛问题开始的调研会话，能在 15-20 分钟内逐步深入，得出具体、经过核实、可执行的结论。这能替代原本需要花几个小时手动打开标签页、阅读、做笔记的工作。"
+    },
+    {
+      "type": "text",
+      "content": "## Perplexity vs. Google vs. Claude：什么时候用哪个\n\n| 任务 | 最佳工具 | 原因 |\n|------|-----------|-----|\n| “什么是复利？” | Claude | 解释类任务，不需要引用来源 |\n| “英国目前的储蓄利率是多少？” | Perplexity | 具有时效性，来源很重要 |\n| “本周最新的 AI 新闻” | Perplexity | 实时时事 |\n| “帮我写一篇 500 字的文章，关于……” | Claude | 生成类任务，不是调研 |\n| “在 NHS 网站上找到关于 X 的具体页面” | Google | 在已知网站中做索引查找 |\n| “关于[某健康主题]，研究怎么说？” | Perplexity | 需要来源可信度的调研 |\n| “分析这份文档并总结要点” | Claude | 文档处理，不需要网络搜索 |\n| “关于[某行业]的全面调研报告” | Perplexity Deep Research | 多来源综合 |\n| “这个数据是真的吗？” | Perplexity | 带来源的事实核实 |\n\n**规则：** 当来源很重要、需要当前信息时，使用 Perplexity。当你在进行生成、分析、写作或推理时，使用 Claude。当你需要找到某个特定网站或页面时，使用 Google。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**使用前先核实。** Perplexity 偶尔仍会把信息错误地归到某个引用来源上——来源本身是真实的，但可能并没有说 Perplexity 所声称的内容。对于任何重要的事情（医疗决策、专业建议、已发表的事实），请点开原始来源进行核实。引用让核实变得很容易——请善用这项功能，而不是只信任综合出来的结论。这正是可靠的 AI 辅助调研和草率的 AI 辅助调研之间的区别。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "系统性调研冲刺",
+      "content": "针对一个你真正想深入了解的话题，完成一次完整的调研会话。这是一次真实的调研任务，不是一次演示。\n\n**第 1 步——选择一个真实的话题（2 分钟）**\n选一个与你的工作、健康、财务或学习相关的话题——一个你能从可靠、当前、带来源的信息中真正受益的话题。不要用虚构的例子。\n\n**第 2 步——写一个强有力的初始查询（3 分钟）**\n使用本课的查询结构：\n```\n[Specific topic] — [specific question] — [context that limits scope]\n```\n先别提交。检查一下你的查询：够具体吗？是否包含了限定范围的上下文（时间、地点、使用场景）？\n\n**第 3 步——运行查询并评估结果（5 分钟）**\n前往 [perplexity.ai](https://perplexity.ai) 并运行你的查询。\n\n针对每一个编号引用：\n- 对于这类问题，这个来源权威吗？\n- 至少点开两个引用，核实这些页面是否真的说了 Perplexity 所声称的内容\n\n**第 4 步——运用 5 个追问技巧（10 分钟）**\n在同一个 Perplexity 对话中，至少提出 3 个能深入挖掘的追问：\n1. 澄清初始回答中的某个具体论断\n2. 挑战共识（反对者是怎么说的？）\n3. 落到实际行动（对你的具体情况有什么启示？）\n\n**第 5 步——把结果带给 Claude（5 分钟）**\n打开 Claude.ai。粘贴你从 Perplexity 调研中核实过的关键发现，并问：\n```\nBased on these research findings:\n[paste your verified findings]\n\nHelp me think through the implications for [your specific situation].\nWhat questions should I still be asking?\n```\n\n这才是正确的调研工作流：Perplexity 负责有来源支撑的事实，Claude 负责综合和写作。\n\n**写下来：**\n- 哪些内容是你通过引用核实过的，哪些只是你选择相信的？\n- 5 个追问技巧如何改变或加深了你学到的东西？\n- 这和你平时调研这类话题的方式有什么不同？"
+    },
+    {
+      "type": "quiz",
+      "question": "你用 Perplexity 调研药物相互作用，它给了你一个带 3 个引用的答案。在据此采取行动之前，最重要的一件事是什么？",
+      "options": [
+        "再运行一次同样的查询，看答案是否一致",
+        "问 Claude 对同一个问题的第二意见",
+        "至少点开最重要的那个引用，核实这个来源是否真的支持 Perplexity 所声称的内容",
+        "直接相信这些引用，因为 Perplexity 只使用权威的医学来源"
+      ],
+      "correct": 2,
+      "explanation": "Perplexity 可能会出现信息归因错误的情况——来源是真实的，但可能并没有确切说出综合结论所声称的内容，或者它可能是一个排名靠前但权威性较低的页面。对于医疗决策而言尤其如此，点开核实原始来源（最好是 NHS、梅奥诊所或类似机构）是否真的说了引用所声称的内容，是必不可少的一步。Perplexity 让核实变得很容易——请善用它。再运行一次同样的查询（A）或询问 Claude（B）都无法解决归因错误的问题。盲目相信引用（D）则违背了引用存在的意义。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——带引用核实的 Perplexity 调研练习",
+      "content": "Perplexity 的价值在于带引用的、最新的答案。这个练习训练你既使用它，又核实它的输出。\n\n**第 1 步——打开 Perplexity**（perplexity.ai）。\n\n**第 2 步——调研一个你工作中真正需要了解的真实话题：** 一个行业趋势、一个竞争对手、一项监管更新、一项技术。写一个清晰的问题。\n\n**第 3 步——阅读答案**，识别出：(a) 哪些论断附有来源链接引用，(b) 哪些论断没有引用。\n\n**第 4 步——点开其中 3 个被引用的来源。** 这些来源实际说的内容和 Perplexity 所声称的一致吗？\n\n**第 5 步——测试一个 Focus 模式：** 点击 Focus 下拉菜单，从“All”切换到“Academic”（学术来源）或“Reddit”（社区观点）。答案发生了什么变化？\n\n**第 6 步——评价你这次调研：** 对于这个具体问题，相比 Google 搜索，Perplexity 有多大用处？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——调研冲刺：从提问到带引用的简报",
+      "content": "用 Perplexity 针对一个与你工作相关的话题，产出一份完整的带引用调研简报——然后严格审阅它。\n\n**第 1 步——确定一个来自你工作的真实调研问题：** 一个你一直想深入了解的话题、一场即将到来的会议的主题、一个决策的背景信息。\n\n**第 2 步——在 Perplexity 中进行调研。** 先从宽泛的问题开始，然后用具体的子问题追问。争取进行 3-5 轮逐步深入的交流。\n\n**第 3 步——保存或复制调研输出**及其关键引用。\n\n**第 4 步——把调研结果带入 Claude.ai。** 粘贴 Perplexity 的输出，问：*“基于这份调研，对于[你的角色]来说，最重要的 3 条启示是什么？这份调研没有回答、但我应该进一步调查的问题是什么？”*\n\n**第 5 步——必做的审阅：** 问 Claude：*“批判性地审阅这份调研简报。哪些论断看起来最不确定？可能遗漏了哪些重要视角？在据此行动之前，我应该核实什么？”*\n\n**第 6 步——产出你的最终简报：** 一份一页纸的话题总结，包含 3-5 个关键发现，每个都附有来源引用。留存它——这是一份真实的工作成果。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——Perplexity Focus 模式对比",
+      "content": "针对同一个问题，Perplexity 的 Focus 模式会给出非常不同的结果。理解这些模式能帮你选对合适的一个。\n\n**第 1 步——选一个有多种合理视角的问题：** 一个商业决策、一个技术选型、一场政策辩论、一个健康话题。\n\n**第 2 步——用 3 种不同的 Focus 模式问同一个问题：**\n- “All”——通用网络来源\n- “Academic”——学术论文\n- “Reddit”——社区讨论\n\n**第 3 步——对比这 3 个答案：** 它们有什么不同？对你这个具体问题来说，哪个最有用？\n\n**第 4 步——确定各自的适用时机：**\n- Academic：当你需要经过同行评审的证据时\n- Reddit/Social：当你需要真实用户的体验时\n- All：当你想要一个均衡的整体图景时\n\n**第 5 步——把这个方法应用到你的工作流中：** 对于你最常见的调研任务，你应该默认使用哪种 Focus 模式？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——为你的工作领域配置 Perplexity",
+      "content": "配置 Perplexity，让它更好地为你的具体领域服务。\n\n**第 1 步——找出你工作中最常调研的话题：** 你经常搜索的那些主题。\n\n**第 2 步——在 Perplexity 中**，测试它如何处理你领域特定的问题。它使用的来源适合你的领域吗？\n\n**第 3 步——为你的领域创建一个调研提示词模板。** 一个包含你的上下文、始终能获得更好结果的标准提示词：\n\n```\nContext: I work in [role] in [industry]. [Key context about what I need.]\nQuestion: [Your specific question]\nPlease focus on [academic sources / practitioner sources / recent news] and include publication dates for all sources.\n```\n\n**第 4 步——在你领域内的 3 个不同问题上测试你的模板。** 不断调整，直到结果稳定可靠。\n\n**第 5 步——把你的模板保存**到你的提示词库中。"
+    },
+    {
+      "type": "quiz",
+      "question": "你找到一个带 8 个编号引用的 Perplexity 答案。在把这份信息用于客户报告之前，你应该做什么？",
+      "options": [
+        "直接相信这些引用——Perplexity 就是专为带引用的调研设计的",
+        "至少点开 3-5 个最重要的引用，核实原始来源是否真的说了 Perplexity 所声称的内容",
+        "让 Perplexity 自己再检查一遍它的引用",
+        "只使用来自 .gov 或 .edu 域名的引用"
+      ],
+      "correct": 1,
+      "explanation": "Perplexity 的引用链接指向真实的来源，但摘录的归因可能不准确——来源可能确实存在，但可能并不真正支持那个具体论断。对于任何会出现在客户报告中的内容，点开原始来源、核实它是否真的说了被归因的内容，这一步很重要。这只需要 5 分钟，却能避免专业上的尴尬。"
+    },
+    {
+      "type": "quiz",
+      "question": "你需要了解客户使用某个竞争对手产品时的真实体验。哪个 Perplexity Focus 模式最合适？",
+      "options": [
+        "Academic——用于客观的、经过同行评审的分析",
+        "All——用于最广泛的来源范围",
+        "Reddit 或 Social——用于真实的用户体验和社区讨论",
+        "Writing——用于结构清晰的分析性摘要"
+      ],
+      "correct": 2,
+      "explanation": "对于真实的用户体验和社区观点，Reddit/Social Focus 模式能呈现出反映真实用户实际想法和体验的讨论、评价和社区帖子——而不是营销宣传或正式评测。Academic 模式找到的是学术论文（对消费者体验类问题来说有些大材小用）。这里的关键技能是，根据你具体问题最需要的信息类型，匹配合适的 Focus 模式。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 2-5 课。** 你现在知道何时以及如何使用 Perplexity：写出有效的调研查询、用 Deep Research 生成全面的报告、5 个追问技巧，以及核实的习惯。这套工作流是：Perplexity 负责有来源支撑的调研事实 → Claude 负责综合和写作。"
+    }
+  ],
+  "nextLesson": "2-6",
+  "prevLesson": "2-4"
+}

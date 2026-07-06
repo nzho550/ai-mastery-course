@@ -1,0 +1,126 @@
+{
+  "id": "4-4",
+  "title": "必备终端命令",
+  "part": 4,
+  "estimatedMinutes": 65,
+  "tags": [
+    "computer-basics",
+    "beginner",
+    "terminal",
+    "powershell",
+    "commands"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n课程 4-3 讲了如何打开 PowerShell 以及基础导航。这一课会更进一步：输入/输出重定向、使用环境变量、从终端运行程序、使用包管理器，以及 PowerShell 管道。学完之后，你就会拥有本课程中使用 Claude Code、Git、Node.js 和 Python 所需要的完整工具箱。"
+    },
+    {
+      "type": "text",
+      "content": "## 输入/输出重定向——写入和追加到文件\n\n在终端中，`>` 和 `>>` 会把一条命令的输出重定向到一个文件里，而不是打印在屏幕上。\n\n**`>`——写入（如果文件已存在会覆盖它）：**\n```powershell\necho \"First line\" > notes.txt\necho \"Replaced content\" > notes.txt   # 覆盖了之前的内容！\n```\n\n**`>>`——追加（在不删除已有内容的情况下追加到文件）：**\n```powershell\necho \"First line\" > notes.txt\necho \"Second line\" >> notes.txt\necho \"Third line\" >> notes.txt\ncat notes.txt   # 显示全部三行\n```\n\n**捕获命令输出：**\n你可以重定向任意命令的输出，不仅仅是 echo：\n```powershell\nls > file-list.txt              # 把目录列表保存到文件\ngit log --oneline > commits.txt  # 把 git 历史保存到文件\nnpm install > install-log.txt    # 把包安装的输出保存下来\n```\n\n这在保存日志、留存工具输出以供审阅，或者把命令结果传给 Claude 分析时都很有用。"
+    },
+    {
+      "type": "text",
+      "content": "## 管道——在命令之间传递输出\n\n管道符号 `|` 会把一个命令的输出，作为输入发送给下一个命令。这就是把命令串联起来完成更复杂操作的方式。\n\n```powershell\nls | Select-String \"html\"        # 列出文件，只筛选名称中含 'html' 的\ncat notes.txt | Measure-Object -Line    # 统计文件的行数\nGet-Process | Sort-Object CPU -Descending | Select-Object -First 5  # CPU 占用最高的 5 个进程\n```\n\n**一个实用的例子：** 找出项目中所有的 `.json` 文件：\n```powershell\nGet-ChildItem -Recurse -Filter \"*.json\" | Select-Object FullName\n```\n\n**另一个实用的例子：** 统计有多少个 JavaScript 文件：\n```powershell\nGet-ChildItem -Recurse -Filter \"*.js\" | Measure-Object | Select-Object Count\n```\n\n你不会每天都用到复杂的管道，但 `|` 结合 `Select-String`（相当于 grep）在项目中查找东西时非常有用。"
+    },
+    {
+      "type": "text",
+      "content": "## 环境变量\n\n环境变量是存在于你终端会话中、可供该会话内运行的程序访问的命名值。它们被用来传递配置、API 密钥和设置，而不需要把这些内容硬编码进代码里。\n\n**读取一个环境变量：**\n```powershell\n$env:USERNAME          # 你的 Windows 用户名\n$env:USERPROFILE       # 你的主目录路径\n$env:PATH              # 终端查找命令时搜索的所有目录\n```\n\n**设置一个环境变量（仅对当前会话有效）：**\n```powershell\n$env:MY_PROJECT = \"ai-course\"\necho $env:MY_PROJECT   # 打印：ai-course\n```\n当你关闭 PowerShell 时它就会消失——它的作用域仅限于当前会话。\n\n**设置 API 密钥（最常见的用法）：**\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\n```\n然后运行 `claude`——它会自动找到这个密钥，不需要你手动粘贴。\n\n**检查某个工具是否已安装：**\n```powershell\n$env:PATH\n```\n`PATH` 变量是一个以分号分隔的目录列表。当你输入像 `claude` 或 `git` 这样的命令时，Windows 会按顺序在 PATH 中的每个目录里搜索。如果在任何目录中都找不到这个可执行文件，你就会得到“无法识别命令”的提示。\n\n**让环境变量永久生效（系统属性）：**\n1. 在开始菜单中搜索“环境变量”\n2. 点击“编辑系统环境变量”\n3. 点击“环境变量”按钮\n4. 在“用户变量”（针对你的账户）或“系统变量”（针对所有用户）下添加/编辑\n5. 打开一个新终端——改动即可生效"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**永远不要把 API 密钥粘贴进代码文件，或提交（commit）到 git 里。** 环境变量才是存放密钥的正确位置——它们存在于你的终端会话（或系统设置）中，而不在任何可能进入版本控制的文件里。如果你不小心提交了一个 API 密钥，请立刻轮换它——即使是在私有仓库中，它也被视为已经泄露。"
+    },
+    {
+      "type": "text",
+      "content": "## 从终端运行程序\n\n本课程中安装的每一个工具都是从终端运行的。模式始终是：输入命令名，加上任何参数或标志，按回车。\n\n**检查已安装的内容：**\n```powershell\nnode --version     # Node.js（Claude Code 需要它）\nnpm --version      # Node 包管理器\ngit --version      # Git\npython --version   # Python\nclaude --version   # Claude Code\ncode --version     # VS Code\n```\n\n如果一条命令返回了版本号，说明它已经安装并在 PATH 中。如果返回“无法识别”，说明它要么没安装，要么不在 PATH 中。\n\n**启动程序：**\n```powershell\nclaude             # 在当前目录中启动 Claude Code\ncode .             # 在 VS Code 中打开当前文件夹\nnode script.js     # 用 Node.js 运行一个 JavaScript 文件\npython script.py   # 运行一个 Python 文件\n```\n\n**运行 npm 脚本：**\n大多数 Node.js 项目会在 `package.json` 中定义快捷命令。运行它们的方式是：\n```powershell\nnpm run start      # 启动开发服务器\nnpm run test       # 运行测试\nnpm run build      # 构建生产版本\nnpm install        # 安装所有依赖\n```\n\n**用 npx 运行一次性工具：**\n`npx` 可以在不永久安装的情况下运行一个 npm 包：\n```powershell\nnpx create-react-app my-app    # 搭建一个 React 项目脚手架\nnpx prettier --write *.js      # 格式化 JS 文件（不需要全局安装）\n```\nClaude Code 的 MCP 服务器就是这样启动的——它们用 `npx` 来运行服务器，而不需要你全局安装它们。"
+    },
+    {
+      "type": "text",
+      "content": "## 包管理器\n\n包管理器用来安装和管理库与工具。本课程中你会用到两个：\n\n**npm（Node 包管理器）：**\n随 Node.js 一起提供。管理 JavaScript 包。\n```powershell\nnpm install -g @anthropic-ai/claude-code   # 全局安装 Claude Code\nnpm install express                         # 安装 express（局限于当前项目）\nnpm uninstall package-name                 # 移除一个包\nnpm list -g --depth=0                      # 列出全局安装的包\nnpm update -g @anthropic-ai/claude-code    # 更新 Claude Code\n```\n\n**pip（Python 包安装器）：**\n随 Python 一起提供。管理 Python 包。\n```powershell\npip install requests                        # 安装 requests 库\npip install -r requirements.txt            # 从 requirements 文件安装所有包\npip list                                   # 列出已安装的包\npip uninstall package-name                 # 移除一个包\n```\n\n**Chocolatey（Windows 包管理器）：**\n可选但很有用——从终端安装 Windows 工具：\n```powershell\nchoco install git         # 安装 Git\nchoco install nodejs      # 安装 Node.js\nchoco install vscode      # 安装 VS Code\n```\n如果你想用，可以在 chocolatey.org 安装 Chocolatey。本课程不做要求。"
+    },
+    {
+      "type": "text",
+      "content": "## 理解并修复常见错误\n\n终端错误几乎总是以下四种类型之一：\n\n**“not recognized as the name of a cmdlet”（无法识别为 cmdlet 名称）：**\n这条命令不存在，或者不在 PATH 中。要么是工具没有安装，要么是安装程序没有把它加入 PATH。解决方法：重新运行安装程序，或手动把该工具的文件夹添加到 PATH 环境变量中。\n\n**“Access is denied” / “permission denied”（拒绝访问/权限不足）：**\n你没有所需的权限。解决方法：关闭 PowerShell，以管理员身份重新打开（右键 → 以管理员身份运行）。\n\n**“Cannot find path”（找不到路径）：**\n命令中的文件或文件夹不存在，或者你用错了路径。解决方法：运行 `pwd` 检查你在哪里，运行 `ls` 看看那里有什么，然后修正路径。\n\n**“The process cannot access the file because it is being used by another process”（进程无法访问该文件，因为它正被另一个进程使用）：**\n另一个程序锁定了这个文件。解决方法：找到并关闭那个程序，或者用任务管理器结束它的进程。\n\n**拿不准的时候：**\n复制完整的错误信息，问 Claude：\n```\n我在 PowerShell 中运行了 [命令]，得到了这个错误：[粘贴错误]\n我想做的是 [你想做的事]。哪里出错了？我该怎么修复？\n```\n这确实是找到解决方案最快的路径。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**`--help` 参数：** 几乎每一个命令行工具都支持 `--help` 或 `-h`，用来显示用法信息。当你不确定某个命令接受哪些参数时，先试试 `command --help`。例如：`claude --help`、`git --help`、`npm --help`。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "终端强化工具",
+      "content": "完整地完成每一个练习。这些内容涵盖了你在本课程中会用到的模式。\n\n**第 1 部分——输入/输出重定向**\n\n**第 1 步——导航到你的课程文件夹：**\n```powershell\ncd ~\\Documents\\ai-course-projects\n```\n\n**第 2 步——用重定向创建一个文件：**\n```powershell\necho \"Line 1: PowerShell is a text interface\" > terminal-notes.txt\necho \"Line 2: > overwrites, >> appends\" >> terminal-notes.txt\necho \"Line 3: | sends output to another command\" >> terminal-notes.txt\ncat terminal-notes.txt\n```\n你应该会看到全部三行。\n\n**第 3 步——捕获一份目录列表：**\n```powershell\nls > my-files.txt\ncat my-files.txt\n```\n你已经把目录列表捕获到了一个文件里。\n\n**第 2 部分——用管道查找东西**\n\n**第 4 步——查找特定文件：**\n```powershell\nGet-ChildItem -Recurse | Select-String \"html\"\n```\n这会递归搜索所有文件，找出名称中含 'html' 的。\n\n**第 5 步——统计文件数量：**\n```powershell\nGet-ChildItem | Measure-Object | Select-Object Count\n```\n\n**第 3 部分——环境变量**\n\n**第 6 步——读取环境变量：**\n```powershell\n$env:USERNAME\n$env:USERPROFILE\n```\n\n**第 7 步——设置一个临时变量：**\n```powershell\n$env:COURSE = \"AI Mastery\"\necho $env:COURSE\n```\n关闭并重新打开 PowerShell——这个变量就消失了。它的作用域仅限于当前会话。\n\n**第 4 部分——检查你的工具版本**\n\n**第 8 步——确认已安装的内容：**\n```powershell\nnode --version\nnpm --version\ngit --version\ncode --version\nclaude --version\n```\n\n对于任何返回错误的命令，把它记在你的笔记里——在用到那个工具的课程之前，你需要先安装它。\n\n**第 9 步——列出全局安装的 npm 包：**\n```powershell\nnpm list -g --depth=0\n```\n如果你已经安装了 Claude Code，你应该会看到 `@anthropic-ai/claude-code`，以及其他任何全局工具。\n\n**最后练习：**\n把你的工具版本保存到一个文件里以备参考：\n```powershell\nnode --version > versions.txt\nnpm --version >> versions.txt\ngit --version >> versions.txt\nclaude --version >> versions.txt\ncat versions.txt\n```"
+    },
+    {
+      "type": "quiz",
+      "question": "你想全局安装一个新的 npm 包，让这个命令在你终端的任何地方都能使用。用哪条命令？",
+      "options": [
+        "npm install package-name（不加任何标志）",
+        "npm install -g package-name（-g 标志意味着全局）",
+        "npm global-install package-name",
+        "npx package-name（npx 一步完成安装和运行）"
+      ],
+      "correct": 1,
+      "explanation": "-g 标志告诉 npm 全局安装这个包——这样这条命令就能在任何终端会话的任意目录中使用。不加 -g，npm 会把包安装在当前项目的 node_modules 文件夹里，只能在该项目内使用。`npx` 不一样：它会下载并运行一个包一次，而不做永久安装——适合一次性工具，但不适合像 Claude Code 这样你想到处都能用的东西。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "小练习 A——必备命令速度测试",
+      "content": "这是一个 8 分钟的训练，验证你能否流畅使用最重要的终端命令。\n\n**第 1 步——打开 PowerShell。** 给下面每个任务计时。每个任务的目标是控制在 30 秒以内。\n\n**任务 1：** 找到你当前所在的目录，并列出它的内容。\n\n**任务 2：** 在桌面上创建一个名为 `workshop-test` 的文件夹，并导航进去。\n\n**任务 3：** 在该文件夹内创建一个名为 `notes.txt` 的文件：\n```powershell\nnew-item notes.txt\n```\n\n**任务 4：** 显示该文件夹的内容，包括隐藏文件：\n```powershell\nls -Force\n```\n\n**任务 5：** 检查安装了什么版本的 Python（或 Node.js）：\n```powershell\npython --version\nnode --version\n```\n\n**任务 6：** 用一条命令回到你的主目录。\n\n**任务 7：** 删除这个测试文件夹：\n```powershell\nRemove-Item ~/Desktop/workshop-test -Recurse\n```\n\n**第 2 步——哪个任务花的时间最长？** 那就是你需要多加练习的命令。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "小练习 B——AI 辅助的搭建任务",
+      "content": "使用 AI 来帮你完成一项真实的终端搭建任务——安装或配置一些你确实需要的东西。\n\n**第 1 步——选择一项你一直拖着没做的真实搭建任务：** 安装某个开发工具、搭建一个项目文件夹、配置 git、安装一个包管理器。\n\n**第 2 步——问 Claude：** *“帮我在 Windows 11 上用 PowerShell [描述你的搭建任务]。按顺序给我完整的步骤、确切的命令、每条命令的作用，以及如何验证它成功了。告诉我如果出错该怎么办。”*\n\n**第 3 步——逐条按照 Claude 的步骤操作。** 不要一次性全部运行——运行一条命令，检查输出，再进行下一条。\n\n**第 4 步——当你遇到错误时**（你很可能会遇到），把确切的错误文本粘贴回去给 Claude。问：“我遇到了这个错误：[粘贴错误]。是什么导致的？我该怎么修复？”\n\n**第 5 步——用 Claude 给你的验证命令确认安装成功。**\n\n**第 6 步——记录下你做了什么。** 写一段简短的笔记：你安装了什么、哪条命令成功了、如何验证它。未来的你会感谢现在的你。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "小练习 C——终端中的 Git 基础",
+      "content": "Git 是几乎所有软件项目都在使用的版本控制系统。即使是非程序员也在用它。这个练习带你入门。\n\n**第 1 步——检查是否安装了 git：**\n```powershell\ngit --version\n```\n如果没有安装：访问 git-scm.com 进行安装。\n\n**第 2 步——配置 git**（一次性设置）：\n```powershell\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"your.email@example.com\"\n```\n\n**第 3 步——创建一个测试仓库：**\n```powershell\nmkdir git-test\ncd git-test\ngit init\n```\n\n**第 4 步——完成你的第一次提交：**\n```powershell\nnew-item README.txt\n\"Hello from git\" | Out-File README.txt\ngit add README.txt\ngit commit -m \"My first commit\"\n```\n\n**第 5 步——查看历史记录：**\n```powershell\ngit log\ngit status\n```\n\n**第 6 步——问 Claude：** *“我刚完成了第一次 git 提交。解释一下 git status 和 git log 分别向我展示了什么。接下来我应该学习哪 5 个 git 命令，各自的作用是什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "小练习 D——为重复性任务构建一个 shell 脚本",
+      "content": "shell 脚本是一个包含一系列命令、可以自动运行的文件。这个练习将带你创建第一个这样的脚本。\n\n**第 1 步——找出一组你反复一起运行的终端命令：** 搭建项目、启动开发服务器、做备份、运行测试。\n\n**第 2 步——问 Claude：** *“我想创建一个 PowerShell 脚本，完成以下操作：[描述这一系列命令]。写出完整的脚本，解释每一行，并告诉我如何运行它。”*\n\n**第 3 步——审阅 Claude 提供的脚本。** 你理解每一行的作用吗？如果不理解，请 Claude 解释具体的某几行。\n\n**第 4 步——保存这个脚本：**\n```powershell\nnew-item my-setup.ps1\n# 把 Claude 的脚本内容粘贴进这个文件\n```\n\n**第 5 步——运行这个脚本：**\n```powershell\n.\\my-setup.ps1\n```\n\n**第 6 步——如果失败了**，把错误粘贴给 Claude。请求修复方法。\n\n**第 7 步——把这个脚本添加到 PATH 中的一个文件夹里**，这样你就能从任何地方运行它。"
+    },
+    {
+      "type": "quiz",
+      "question": "你运行了 `git commit -m \"fixes\"`，然后发现某个文件里有个打字错误。修复它最安全的方法是什么？",
+      "options": [
+        "运行 git commit --amend 来修改上一次提交",
+        "修复这个文件，然后运行 git add 和 git commit，写一条像“fix typo from previous commit”这样的新提交信息",
+        "删除这个 git 仓库，重新开始",
+        "提交是永久性的——你无法修改它"
+      ],
+      "correct": 1,
+      "explanation": "最安全的修复方式是创建一次新的提交：修复文件，用 git add 暂存改动，然后写一条描述清楚的提交信息进行提交。git commit --amend（选项 A）虽然可行，但会重写历史，如果其他人已经拉取了原来的提交，就会造成问题。永远不要 amend 已经发布出去的提交。创建一次修正提交能保持历史记录完整，这是标准做法。"
+    },
+    {
+      "type": "quiz",
+      "question": "`git status` 能告诉你哪些 `git log` 不能告诉你的信息？",
+      "options": [
+        "git status 显示完整的提交历史；git log 只显示最新的一次提交",
+        "git status 显示文件的当前状态（已暂存、已修改、未跟踪）；git log 显示过去提交的历史",
+        "git status 显示远程仓库信息；git log 显示本地改动",
+        "它们展示的是同样的信息，只是格式不同"
+      ],
+      "correct": 1,
+      "explanation": "git status 回答的是“现在正在发生什么？”——它显示自上次提交以来哪些文件发生了变化，哪些改动已经暂存等待下一次提交，以及哪些文件是新增的/未被跟踪的。git log 回答的是“过去发生了什么？”——它显示之前提交的历史，包括提交信息和时间戳。两者都很重要：在每次 add/commit 之前经常使用 status，需要了解历史时使用 log。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了课程 4-4。** 你能重定向输出、使用管道、管理环境变量、运行已安装的程序，并使用 npm 和 pip 包管理器。你还知道如何识别并修复最常见的四种终端错误。这就是本课程剩余部分所需要的完整终端工具箱。"
+    }
+  ],
+  "nextLesson": "4-5",
+  "prevLesson": "4-3"
+}

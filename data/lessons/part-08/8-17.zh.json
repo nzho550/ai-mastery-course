@@ -1,0 +1,106 @@
+{
+  "id": "8-17",
+  "title": "Microsoft Teams MCP——把频道和会议装进 Claude Code",
+  "part": 8,
+  "estimatedMinutes": 60,
+  "tags": [
+    "mcp",
+    "intermediate",
+    "teams",
+    "microsoft",
+    "meetings",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nMicrosoft Teams 里沉淀着大量组织知识——频道讨论、会议录像、埋藏在多条消息串里的决定。这一课会通过 MCP 把 Teams 连接到 Claude Code，这样你就能搜索对话、获取频道摘要、检索会议转录，并在不切换应用的情况下撰写消息。"
+    },
+    {
+      "type": "text",
+      "content": "## Teams MCP 能做什么\n\nTeams MCP 服务器（通过 Microsoft Graph API——就是你在第 8-16 课创建的那个注册）暴露以下能力：\n\n**频道：**\n- 列出你所属的所有团队和频道\n- 读取任意频道的最近消息\n- 跨你所有的 Teams 搜索频道历史记录\n- 向频道发布消息\n\n**会议：**\n- 列出你最近的和即将到来的会议\n- 检索会议转录（如果启用了转录功能）\n- 获取会议参与者名单\n\n**聊天：**\n- 读取最近的私信和群聊\n- 搜索聊天记录，查找特定的决定或信息\n\n**文件：**\n- 列出频道中共享的文件（Teams 把文件存储在 SharePoint 中）\n\n**与 Outlook MCP 结合使用：** 你可以让 Claude Code 把一条邮件线程和 Teams 里关于同一话题的对话对照起来——在一次查询中找出两个工具中所有相关的上下文。"
+    },
+    {
+      "type": "text",
+      "content": "## 设置——使用第 8-16 课中的 Graph API 注册\n\n如果你完成了第 8-16 课，你已经有一个 Azure 应用注册了。你只需要添加 Teams 相关的权限并配置服务器。\n\n**第 1 步 — 给你的 Azure 应用添加 Teams 权限**\n\n1. 前往 portal.azure.com → App registrations（应用注册） → 你的 `claude-outlook-mcp` 应用\n2. 前往 **API permissions（API 权限）** → **Add a permission（添加权限）** → **Microsoft Graph** → **Delegated（委托）**\n3. 添加：`Team.ReadBasic.All`、`Channel.ReadBasic.All`、`ChannelMessage.Read.All`、`Chat.Read`、`OnlineMeetings.Read`\n4. 点击 **Grant admin consent（授予管理员同意）**\n\n（如果你跳过了第 8-16 课，请先在那里完成完整的 Azure 应用注册步骤。）\n\n**第 2 步 — 查找或安装一个 Teams MCP 服务器**\n\n在 npm 上搜索 `teams-mcp`，或前往 github.com/modelcontextprotocol 查看官方的 Microsoft Teams 服务器。截至 2025 年，社区版和官方版都已存在。安装你选定的服务器：\n```\nnpm install -g teams-mcp-server\n```\n（使用你搜索到的确切包名。）\n\n**第 3 步 — 加入 Claude Code 配置**\n\n在 `%APPDATA%\\Claude\\claude_desktop_config.json` 中，与已有条目并列添加：\n```json\n\"teams\": {\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"teams-mcp-server\"],\n  \"env\": {\n    \"AZURE_CLIENT_ID\": \"your-application-client-id\",\n    \"AZURE_CLIENT_SECRET\": \"your-client-secret-value\",\n    \"AZURE_TENANT_ID\": \"your-tenant-id-or-common\"\n  }\n}\n```\n保存并重新启动 Claude Code。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Teams 频道智能分析",
+      "content": "一旦你的 Teams MCP 已连接（`/mcp` 显示它处于活动状态），在 Claude Code 中运行以下任务。\n\n**任务 1 — 绘制你的 Teams 全貌**\n```\n提问：\"List all the Microsoft Teams teams and channels I have access to.\nFor each team, tell me how many channels it has.\"\n```\n这能让你对自己的 Teams 结构有一个鸟瞰式的了解——有助于决定要重点关注哪些频道。\n\n**任务 2 — 补看某个频道**\n```\n提问：\"Read the last 3 days of messages in [your busiest channel name].\nSummarize: what was discussed, what decisions were made, and what\nquestions are still unresolved?\"\n```\n把 `[your busiest channel name]` 换成一个真实的频道名。把这份摘要和你自己记忆中发生的事对比一下——准确度如何？\n\n**任务 3 — 找出一个被埋藏的决定**\n想一个团队在过去 2-3 个月里在 Teams 上做出的、你需要手动滚动才能找到的决定。提问：\n```\n提问：\"Search my Teams channels for any discussion about [topic]. Summarize\nwhat was decided and who made the call.\"\n```\n\n**任务 4 — 邮件 + Teams 联合搜索（如果你已有第 8-16 课的 Outlook MCP）**\n```\n提问：\"I need to prepare for a meeting about [project name]. Check both my\nemail inbox and my Teams channels for any messages about this project in\nthe last 2 weeks. Give me a combined briefing: key decisions, open questions,\nand who the main stakeholders are.\"\n```\n这正是让 MCP 与单一应用的 AI 工具真正不同的多工具组合能力。\n\n**任务 5 — 检索会议转录（如果启用了转录）**\n```\n提问：\"Find my most recent Teams meeting that had a transcript. Retrieve\nthe transcript and give me: a 5-bullet summary, a list of action items,\nand any decisions that were made.\"\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Teams MCP 的成熟度：** Teams MCP 生态比 Gmail 或 GitHub MCP 更新。如果你选用的服务器没有实现某个具体功能，查看该服务器的 GitHub issues 页面——这可能是一个已知的局限并有变通方法，也可能是一个正在开发中的功能。Microsoft Graph API 涵盖了所有这些能力；差别只在于哪个服务器实现了它们。"
+    },
+    {
+      "type": "quiz",
+      "question": "你需要为经理准备一份项目状态更新。这个项目在过去一个月里，既有 Teams 频道的讨论，也有邮件线程的往来。用 MCP 处理这个问题的最高效方式是什么？",
+      "options": [
+        "手动读完所有 Teams 消息和邮件，然后自己写更新",
+        "让 Claude Code（同时启用 Outlook + Teams MCP）搜索两个来源，生成一份综合的项目简报，然后审查并编辑它",
+        "让团队先把所有相关邮件和 Teams 消息转发给你",
+        "分别用 Teams Copilot 处理 Teams、Outlook Copilot 处理邮件，然后手动合并两份摘要"
+      ],
+      "correct": 1,
+      "explanation": "在一个 Claude Code 会话中同时启用 Outlook 和 Teams MCP，一条自然语言命令就能同时搜索两个来源，并把结果综合成一份统一的简报。这正是 MCP 相较于使用各应用原生 Copilot 的关键优势：你能在一次查询中获得跨工具的综合结果，而不需要在各应用之间来回切换、手动合并结果。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A — Teams MCP 首次操作",
+      "content": "在你的真实 Teams 账号上测试 Teams MCP 的关键操作。\n\n**第 1 步 — 用 Microsoft Graph 凭据**配置 Teams MCP。\n\n**第 2 步 — 测试频道操作：**\n- \"List my Teams channels\"\n- \"Show the last 10 messages in [channel name]\"\n- \"Find any messages mentioning me in the last 24 hours\"\n\n**第 3 步 — 测试消息搜索：**\n\"Search for messages about 'project deadline' in [team name] from the last week.\"\n\n**第 4 步 — 测试会议信息：**\n\"What Teams meetings am I scheduled for this week?\"\n\n**第 5 步 — 评估：** 哪些操作最准确？哪些比预期慢？这和直接使用 Teams 的搜索功能相比如何？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — 频道补看工作流",
+      "content": "使用 Teams MCP 补看你错过的频道活动。\n\n**第 1 步 — 找出你已经超过一天没查看的频道。**\n\n**第 2 步 — 让 Claude Code：**\n```\nI've been away from Teams for [time period]. For each of these channels [list them]:\n1. Summarise what was discussed\n2. Are there any decisions that were made?\n3. Any action items that involve me or my team?\n4. Any urgent items that need immediate attention?\n5. What conversations should I follow up on?\n```\n\n**第 3 步 — 审查这些摘要。** 它们准确吗？AI 遗漏了什么？\n\n**第 4 步 — 对于找到的任何行动项**，起草一份回复或下一步计划。\n\n**第 5 步 — 与你平常的补看流程做对比：** AI 辅助的补看比手动阅读频道快多少？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C — 从 Teams 挖掘会议洞察",
+      "content": "从你的 Teams 会议历史中提取洞察。\n\n**第 1 步 — 让 Claude Code 回顾最近的 Teams 会议：**\n```\nLook at my Teams meeting history for the last 2 weeks:\n1. Which meetings recurred that might be candidates for being fewer or shorter?\n2. Are there topics that appear across multiple meetings that might indicate a process problem?\n3. Which meetings had me as organiser vs attendee?\n4. What patterns do you notice in my meeting schedule?\n```\n\n**第 2 步 — 审查这份会议分析。** 哪些模式是你早已知道的？哪些让你感到意外？\n\n**第 3 步 — 找出一场**可以取消、缩短或改为异步进行的会议。\n\n**第 4 步 — 让 Claude Code**起草一条消息，向相关方提议这个变更。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — Teams 状态和通知管理",
+      "content": "使用 Teams MCP 更智能地管理你的 Teams 状态和通知。\n\n**第 1 步 — 让 Claude Code 分析你的 Teams 通知模式：**\n“看看我的 Teams 活动。哪些频道或人产生的消息最多？其中哪些是高优先级的，哪些只是噪音？”\n\n**第 2 步 — 基于这份分析**，让 Claude Code 帮你配置更好的默认设置：\n- 哪些频道应该静音？\n- 哪些应该保留通知？\n- 哪些关键词应该触发提醒？\n\n**第 3 步 — 起草一条**关于你的可用时间和响应时间预期的团队通知。\n\n**第 4 步 — 强制复查：** 问 Claude：*\"Review your analysis of my Teams usage. What important context did you miss that would change your recommendations?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "你使用 Teams MCP 让 Claude Code 代你向团队频道发布一条消息。在它发布之前，你必须审查什么？",
+      "options": [
+        "消息的语法是否正确",
+        "即将发布的确切文字内容，以及它是否适合该频道的受众——Claude 发布的消息在所有频道成员看来都是以你的名义发出的",
+        "频道的隐私设置是否正确",
+        "你的表情回应是否已经准备好"
+      ],
+      "correct": 1,
+      "explanation": "发布到 Teams 频道的消息是给团队的永久性沟通，会被记录在消息历史中，并归属于你。审查内容包括：确切的措辞（这真的是你想说的话吗？）、语气是否适合该频道的受众、所引用的任何技术性说法或数据是否准确，以及时机是否合适。通过 MCP 服务器发布并不会减轻你对内容的责任——它仍然是你的职业沟通。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code 总结了一个 Teams 频道，说“团队决定推迟项目截止日期”。在依据这条信息采取行动之前，你应该做什么？",
+      "options": [
+        "立即照做——Claude Code 的摘要是可靠的",
+        "在原始消息中核实这个决定——Claude Code 可能把一场讨论（而不是决定）误读了，或者错过了一条较长线程最终的结论",
+        "让某位团队成员通过邮件确认",
+        "只有在 Claude Code 同时提供消息时间戳时才采取行动"
+      ],
+      "correct": 1,
+      "explanation": "AI 对对话的总结可能会误传其中的细微差别，尤其是涉及决定的时候。一场关于“是否要推迟”的讨论，可能会被总结成“已决定推迟”。重要的决定应该在原始消息中核实——阅读做出该决定的具体线程，确认是谁说的、在什么语境下说的。对于任何有实际后果的事情，绝不要在没有核实的情况下依据 AI 总结的决定采取行动。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 8-17 课。** Microsoft Teams 现在已经可以从 Claude Code 访问了。你可以总结频道内容、检索会议转录，并在一次查询中把 Teams 数据与邮件、日历上下文结合起来。"
+    }
+  ],
+  "nextLesson": "8-18",
+  "prevLesson": "8-16"
+}

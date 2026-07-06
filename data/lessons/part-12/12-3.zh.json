@@ -1,0 +1,106 @@
+{
+  "id": "12-3",
+  "title": "运行你的第一个本地模型",
+  "part": 12,
+  "estimatedMinutes": 60,
+  "tags": [
+    "local-ai",
+    "ollama",
+    "terminal",
+    "llama",
+    "models"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n在本课中，你会真正与一个本地模型对话，理解模型大小如何影响速度和质量，并了解 Ollama 的 API 是如何工作的——这也是 Continue.dev 和 Claude Code 在接下来两课中会用到的同一个 API。"
+    },
+    {
+      "type": "text",
+      "content": "## 交互式运行模型\n\n模型下载完成后，运行它只需要一条命令：\n\n```\nollama run phi4\n```\n\n这会启动一个交互式会话。你输入消息，按回车，模型就会响应——这一切都发生在你的机器上。\n\n要退出会话，输入 `/bye` 并按回车。\n\nOllama 会话内一些有用的命令：\n```\n/help        — list all session commands\n/clear       — clear conversation history\n/show info   — show the current model's details\n/bye         — exit\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 理解模型大小\n\n模型是用参数数量来描述的：3B、7B、13B、70B。这个数字指的是数十亿个参数——也就是构成模型\"知识\"的那些学习到的数值权重。\n\n下面是一份实用指南：\n\n| 大小 | 所需 RAM | 速度 | 质量 | 最适合 |\n|------|-----------|-------|---------|----------|\n| 3B | ~4GB | 非常快 | 基础 | 简单问答、短摘要、快速补全 |\n| 7B | ~8GB | 快 | 良好 | 大多数日常任务、代码讲解、起草文字 |\n| 13B | ~16GB | 中等 | 更好 | 推理、较长文档、更细腻的输出 |\n| 70B | ~64GB | 慢（CPU） | 优秀 | 接近前沿质量（需要专用 GPU 才能保证速度） |\n\n对大多数人来说，7B 档位是实用的最佳选择：能力足以应付实际工作，速度快到能感觉响应迅速，内存占用也可控。\n\n**量化：** 你会看到像 `:q4_K_M` 或 `:fp16` 这样的模型标签。这些标注了模型权重被压缩的方式。Q4 量化（4-bit）能让模型体积缩小约 4 倍，同时质量损失很小——大多数 Ollama 模型默认使用这种量化，这也是为什么文件大小比你预想的要小。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**为什么\"3B\"意味着 30 亿？** 每个参数都是模型在训练过程中学到的一个数字。GPT-3 有 1750 亿个参数。Claude Opus 4.8 和 GPT-5 据估计有数千亿到数万亿个参数。相比之下，一个 3B 的本地模型确实很小——但现代训练技术意味着，在聚焦的任务上，小模型的表现能超出其体量。"
+    },
+    {
+      "type": "text",
+      "content": "## Ollama 模型库\n\nOllama 在 `ollama.com/library` 托管了一个精选模型库。你会遇到的主要模型家族有：\n\n**Llama（Meta）** —— 使用最广泛的家族。`llama3.2:3b` 非常适合追求速度的任务。`llama3.3:70b` 是一个强劲的 70B 选项。Llama 4 Scout（17B MoE 架构）带来了高达 1000 万 token 的巨大上下文窗口，可以通过 Ollama 模型库获取，适合需要超长上下文本地处理的用户。\n\n**Phi（Microsoft）** —— 微软的紧凑型模型，在代码和推理方面的表现超出其体量。`phi4` 以 9GB 的体积做到了出色的水准。`phi4-mini`（约 2.5GB）是更快、更轻量的版本，适合内存较小的机器。\n\n**Mistral / Mixtral** —— 法国 AI 实验室出品，以强大的编码能力著称。`mistral:7b` 是一个可靠的主力模型。\n\n**Gemma（Google）** —— Google 的开源模型家族。`gemma2:9b` 在指令遵循方面表现出色。\n\n**Qwen（阿里巴巴）** —— 强大的多语言模型，尤其擅长中文文本处理。`qwen2.5:7b` 是一个扎实的选择。\n\n**DeepSeek-R1** —— 来自一家中国实验室的强推理模型。在数学和代码方面，即使体积小也表现不俗。\n\n用 `ollama pull <name>` 拉取以上任意一个模型。"
+    },
+    {
+      "type": "text",
+      "content": "## 直接调用 API\n\n即使你不在交互式会话中，`localhost:11434` 上的 Ollama API 依然可用。下面是如何从 PowerShell 调用它：\n\n```\n$body = @{\n    model = \"phi4\"\n    prompt = \"What is the capital of France? One word answer.\"\n    stream = $false\n} | ConvertTo-Json\n\nInvoke-RestMethod -Uri \"http://localhost:11434/api/generate\" `\n    -Method POST `\n    -ContentType \"application/json\" `\n    -Body $body\n```\n\n你会看到一个 JSON 响应，其中的 `response` 字段包含模型的回答。\n\n这个 API 也在 `/v1/chat/completions` 上支持 OpenAI 的聊天格式——这正是 Connect.dev、Claude Code 等工具用来连接的方式。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**速度提示：** 加载模型后的第一次响应会比较慢——模型需要先加载到 RAM 中（\"预热\"）。同一会话中后续的响应会快得多，因为模型一直保持已加载状态。如果你要重复执行任务，保持会话开着，而不要重新启动。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "运行一个模型并与 Claude 对比",
+      "content": "你需要至少一个在第 12-2 课中下载好的模型。根据你拉取的模型，使用 `phi4` 或 `llama3.2:3b`。\n\n**第 1 步——如果你只有一个模型，再拉取第二个：**\n如果你拉取的是 `phi4`，再拉取一个小的 Llama：\n```\nollama pull llama3.2:3b\n```\n如果你拉取的是 `llama3.2:3b`，再拉取 Phi-4（如果你有足够的磁盘空间）：\n```\nollama pull phi4\n```\n\n**第 2 步——用同一个问题问两个模型：**\n\n分别在每个模型上运行这个提示词：\n```\nollama run phi4 \"Explain recursion in programming using a real-world analogy. Be concise.\"\n```\n然后：\n```\nollama run llama3.2:3b \"Explain recursion in programming using a real-world analogy. Be concise.\"\n```\n\n**观察：** 哪个更快？哪个给出的解释更好？\n\n**第 3 步——问一个编码问题：**\n```\nollama run phi4 \"Write a JavaScript function that takes an array of numbers and returns only the even ones.\"\n```\n在你的另一个模型上运行同样的提示词。比较代码质量。\n\n**第 4 步——在私密任务上测试：**\n输入一些你不想发送给云服务的内容——比如总结一份私人笔记、审查一份私密文档，或者问一个你希望保密的问题。看看本地模型处理得怎么样。\n\n**第 5 步——与 Claude 对比：**\n打开 Claude.ai，问同样的递归问题。写下两条观察：\n- 本地模型在哪些方面做得更好或更差？\n- 质量差异对这个具体任务而言重要吗？\n\n**保存好你的笔记。** 在第 12-7 课中，你会基于这样的观察搭建一份完整的模型选择指南。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——模型速度基准测试",
+      "content": "衡量你本地模型的性能。\n\n**第 1 步——为你安装的每个模型运行一次速度测试：**\n```powershell\n# Time a response\n$start = Get-Date\nollama run phi4-mini \"Write a 200-word story about a robot learning to paint\" --nowordwrap\n$elapsed = (Get-Date) - $start\nWrite-Host \"Time: $($elapsed.TotalSeconds) seconds\"\n```\n\n**第 2 步——记录每个模型的指标：**\n| 模型 | 加载时间 | Tokens/秒 | 内存占用 | 质量 |\n|---|---|---|---|---|\n| phi4-mini | | | | |\n| qwen2.5-coder:7b | | | | |\n\n**第 3 步——在模型运行时监控内存占用：**\n```powershell\nGet-Process ollama | Select-Object CPU, WorkingSet64\n```\n\n**第 4 步——找到你的\"最佳平衡点\"**——在你的硬件上质量与速度权衡最好的模型。\n\n**第 5 步——问 Claude：** \"以我每秒 [X] 个 token 的速度，本地模型的速度和打字速度、阅读速度、云端 API 速度相比如何？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用本地模型完成一个真实任务",
+      "content": "只用你的本地模型完成一项真实任务。\n\n**第 1 步——选择一个任务**，这个任务你通常会用云端 AI 来完成，但涉及敏感内容：\n- 审查专有代码中的问题\n- 起草一份机密文档\n- 分析敏感的业务数据\n\n**第 2 步——完全在本地完成这个任务。** 不要把任何数据发送给云端 AI。\n\n**第 3 步——评估输出质量。** 与 Claude Sonnet 相比，按 1-10 分打分：\n- 输出是否正确？\n- 是否足够详细？\n- 是否理解了你的意图？\n\n**第 4 步——找出质量差距。** 如果用云端模型，哪些地方会更好？\n\n**第 5 步——必做的审查环节：** 问你的本地模型：*\"审查一下你自己上面给出的输出。你的回答中有哪些薄弱之处或错误？\"* 把它的自我评估和你自己的评估做个对比。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——模型卡片与能力调研",
+      "content": "学习在下载模型之前先研究本地模型的能力。\n\n**第 1 步——访问 ollama.com/library**，查看你感兴趣的 3 个模型的模型卡片。\n\n**第 2 步——针对每个模型，找出：**\n- 上下文窗口大小（一次能处理多少文本）\n- 训练侧重方向（通用 vs 代码 vs 对话）\n- 基准测试分数（如果有列出的话，比如 MMLU、HumanEval 等）\n- 模型家族及开发者\n\n**第 3 步——问 Claude：** *\"解释一下这些基准测试分数：MMLU、HumanEval、GSM8K、GPQA。每一个测试的是什么，多少分才算适合处理一般编码任务？\"*\n\n**第 4 步——把你已安装模型的基准分数**与 Claude Haiku 和 Sonnet 做对比（从 Anthropic 的模型卡片中查询这些分数）。\n\n**第 5 步——培养直觉：** 对你日常的编码任务来说，多少的基准分数才算\"够用\"？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——自定义模型配置",
+      "content": "为你的具体使用场景创建自定义的 Ollama modelfile。\n\n**第 1 步——问 Claude：** \"什么是 Ollama Modelfile？我可以用它来自定义模型的系统提示词、temperature 和上下文窗口吗？\"\n\n**第 2 步——为你的代码审查场景创建一个自定义 modelfile：**\n```dockerfile\nFROM qwen2.5-coder:7b\n\nPARAMETER temperature 0.1\nPARAMETER num_ctx 8192\n\nSYSTEM \"\"\"\nYou are an expert code reviewer. Your role is to:\n1. Find bugs and logic errors\n2. Identify security issues\n3. Suggest performance improvements\n4. Check for adherence to SOLID principles\n\nBe specific about line numbers and exact issues. Prioritise critical issues.\n\"\"\"\n```\n\n**第 3 步——创建这个模型：**\n```powershell\nollama create code-reviewer -f ./Modelfile\n```\n\n**第 4 步——在真实代码上测试这个自定义模型。** 系统提示词是否提升了它的代码审查质量？\n\n**第 5 步——为另一个使用场景创建第二个自定义模型**（文档撰写、测试生成等）。"
+    },
+    {
+      "type": "quiz",
+      "question": "你运行一个本地模型，它在一段长对话中不断丢失前面的上下文。最可能是什么原因？",
+      "options": [
+        "模型存在内存 bug",
+        "对话已经超出了模型的上下文窗口——较早的消息被截断以适应这个限制",
+        "Ollama 没有存储对话历史",
+        "你需要重启 Ollama 来刷新上下文"
+      ],
+      "correct": 1,
+      "explanation": "每个模型都有一个最大上下文窗口（例如 4096、8192 或 128000 个 token）。当对话超出这个限制时，较早的消息会被丢弃。本地模型的上下文窗口通常比云端模型小。解决办法：(1) 使用上下文窗口更大的模型，(2) 在 Modelfile 中配置 `num_ctx` 以使用更大的上下文（代价是占用更多内存），(3) 定期总结对话内容，并用压缩后的历史重新开始。"
+    },
+    {
+      "type": "quiz",
+      "question": "一个本地模型给出的回答质量很高，但每次响应需要 45 秒。这适合用在哪种场景？",
+      "options": [
+        "边打字边进行的实时代码补全",
+        "对 100 份文档进行的通宵批处理，速度并不重要",
+        "需要来回互动的交互式对话",
+        "所有场景——质量值得等待"
+      ],
+      "correct": 1,
+      "explanation": "45 秒的响应时间对任何需要近乎实时反馈的交互式场景来说都太慢了。批处理才是合适的场景：如果你是在通宵生成摘要或分析报告，只要质量够好，响应时间就无关紧要。对于交互式使用，要么改用更小、更快的本地模型（接受质量上的取舍），要么在交互任务上改用云端 AI，同时把本地模型留给对隐私敏感的批处理工作。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 12-3 课。** 你已经交互式地运行过本地模型，对质量与速度的取舍有了亲身体会。接下来：LM Studio，同样这些模型的图形界面。"
+    }
+  ],
+  "nextLesson": "12-4",
+  "prevLesson": "12-2"
+}

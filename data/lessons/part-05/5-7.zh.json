@@ -1,0 +1,100 @@
+{
+  "id": "5-7",
+  "title": "集成终端",
+  "part": 5,
+  "estimatedMinutes": 55,
+  "tags": [
+    "vscode",
+    "beginner",
+    "terminal",
+    "powershell"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将使用活在 VS Code 内部的终端——而不是切换到一个单独的 PowerShell 窗口。你会理解为什么这很重要，如何打开和关闭它，如何用它导航，以及如何在不离开编辑器的情况下运行基本命令。\n\n这是让 VS Code 感觉像一个完整工作环境、而不仅仅是一个文本编辑器的功能之一。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么要在编辑器内置一个终端？\n\n在第 4.3 课和第 4.4 课中，你使用的是一个单独的 PowerShell 窗口。那样也能用，但会带来摩擦：你要不停地在两个窗口之间切换——编辑器和终端。\n\nVS Code 的集成终端解决了这个问题。它是一个完整的 PowerShell（在 Mac 上是 bash）会话，运行在和你代码相同的窗口里。你可以同时看到代码和终端，就在同一个地方。\n\n实际的好处：\n- **自动在正确的文件夹中启动。** 集成终端总是在你的项目文件夹中打开，不需要用 `cd` 来定位。\n- **不用切换窗口。** 写代码、运行命令、看结果——全程不用切换窗口。\n- **你可以同时打开多个终端。** 每一个都是独立的会话。\n- **它就是同一个终端。** 你在第 4 部分学到的关于 PowerShell 的一切，在这里完全一样适用。\n\n从这一课开始，只要你在 VS Code 里工作时需要命令行，就使用集成终端。"
+    },
+    {
+      "type": "text",
+      "content": "## 打开和关闭终端\n\n**打开终端：**\n- 按 **Ctrl+`**（反引号键——位于键盘左上角，Esc 键正下方，与波浪号 ~ 共用一个键）\n- 或：点击菜单栏中的 **Terminal** → **New Terminal**\n- 或：使用命令面板（Ctrl+Shift+P）→ 输入 `new terminal`\n\n**切换显示/隐藏：**\n- 再次按 **Ctrl+`**——会隐藏终端面板。再按一次可以重新显示。\n- 或：按 **Ctrl+J** 来切换整个面板区域（包括 Terminal、Problems、Output）\n\n**关闭某个具体的终端会话：**\n- 点击终端工具栏中的垃圾桶图标（🗑），或\n- 在终端中输入 `exit` 并按 Enter\n\n终端会作为面板区域的一部分，出现在窗口底部。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**找不到反引号键？** 在标准键盘上，它位于主键区左上角，与波浪号（~）共用一个键。它就在 `1` 键的左边，Esc 键的正下方。如果 Ctrl+` 对你不起作用，可以使用菜单：Terminal → New Terminal。"
+    },
+    {
+      "type": "text",
+      "content": "## 终端会在你的项目文件夹中启动\n\n这是集成终端的关键优势。当 VS Code 把一个文件夹作为工作区打开时，终端会自动在同一个文件夹中启动。你不需要自己导航。\n\n输入 `pwd` 确认：\n```\nPS C:\\Users\\YourName\\Documents\\ai-course-projects>\n```\n\n提示符会准确显示你所在的位置。如果你打开终端后发现文件夹不对，说明 VS Code 打开的是一个不同的文件夹（或者根本没有打开任何文件夹）。回到 File → Open Folder 打开正确的那个。\n\n**基本导航命令（来自第 4.4 课）：**\n- `pwd`——打印当前目录（我在哪？）\n- `ls`——列出这里的文件和文件夹\n- `cd foldername`——进入某个子文件夹\n- `cd ..`——返回上一级\n- `cd ~`——回到你的主文件夹（C:\\Users\\YourName）"
+    },
+    {
+      "type": "text",
+      "content": "## 多个终端与拆分终端\n\nVS Code 允许你同时运行多个终端会话。当你想让一个终端运行服务器、另一个用于处理常规命令时，这非常有用。\n\n**创建一个新的终端会话：**\n- 点击终端工具栏（终端面板右上角）的 **+** 按钮\n- 或：按 Ctrl+Shift+`（Ctrl+Shift+反引号）\n\n会出现一个新的终端标签页。你可以点击终端面板右侧列表中的标签名称在它们之间切换。\n\n**把终端拆分成左右两个并排面板：**\n- 点击终端工具栏中的**拆分终端**图标（看起来像一个列拆分）\n- 或：按 **Ctrl+Shift+5**\n\n现在你同时看到两个终端会话，并排显示。点击任意一个即可在其中输入。\n\n**关闭一个终端会话：**\n- 点击终端列表中其名称旁边的 X，或输入 `exit`"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "VS Code 内的终端",
+      "content": "只使用 VS Code 内的集成终端完成以下步骤。不要打开单独的 PowerShell 窗口。\n\n**第 1 步——打开终端：**\n1. 按 **Ctrl+`**（反引号）\n2. 终端面板出现在窗口底部\n3. 输入 `pwd` 并按 Enter\n4. 确认你看到的是 `ai-course-projects` 文件夹的路径\n\n**第 2 步——浏览你的项目：**\n1. 输入 `ls` 并按 Enter——你应该能看到 `exercises`、`notes`、`prompts` 文件夹和 `README.md`\n2. 输入 `cd exercises` 并按 Enter\n3. 输入 `ls`——你应该能看到 `hello.html` 和 `part-05-notes.md`\n4. 输入 `cd ..` 回到项目根目录\n\n**第 3 步——从终端创建一个文件：**\n1. 确保你在项目根目录（`pwd` 应该显示 `ai-course-projects`）\n2. 输入以下命令并按 Enter：\n   `echo \"# My Notes\" > notes/terminal-test.md`\n3. 在资源管理器面板中，打开 `notes` 文件夹看看——`terminal-test.md` 出现了！\n4. 在资源管理器中点击它——它会在编辑区打开，内容是“# My Notes”\n\n**第 4 步——切换和拆分终端：**\n1. 按 Ctrl+` 隐藏终端\n2. 再按一次 Ctrl+` 重新显示它\n3. 点击终端工具栏中的拆分图标（或按 Ctrl+Shift+5）\n4. 你现在有两个并排的终端面板\n5. 点击右侧面板，输入 `ls`——它也会显示你的项目文件\n6. 点击右侧面板的 X 将其关闭\n\n**检查：**\n- [ ] 终端打开并显示你的项目文件夹\n- [ ] `ls` 显示了你的文件夹结构\n- [ ] `terminal-test.md` 被创建并出现在资源管理器中\n- [ ] 你成功地切换和拆分了终端"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——集成终端训练",
+      "content": "VS Code 的集成终端是你会花很多时间待着的地方。这个训练会帮你建立熟练度。\n\n**第 1 步——打开集成终端**（Ctrl+`）。\n\n**第 2 步——练习以下终端操作：**\n- 打开第二个终端：点击终端面板中的 + 图标\n- 在终端之间切换：点击下拉菜单中的终端名称\n- 拆分终端：点击拆分图标——两个终端并排显示\n- 关闭终端：点击垃圾桶图标\n\n**第 3 步——配置你的终端：**\n- 点击 + 旁边的下拉箭头 → Select Default Profile → 选择 PowerShell 或 Git Bash\n- 右键点击终端区域 → Font Size → 增大到一个舒适的大小\n\n**第 4 步——终端的实用快捷键：**\n- Ctrl+C：停止一个正在运行的进程\n- Ctrl+L 或 `clear`：清空终端屏幕\n- 上箭头：调出之前的命令\n- Tab：自动补全文件名/命令名\n\n**第 5 步——向 Claude 提问：** *“对于 [你的工作类型] 来说，在 VS Code 中使用 PowerShell 的 5 个最省时的终端技巧是什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——在终端中运行一个真实项目",
+      "content": "使用集成终端从头到尾运行一个完整的项目工作流。\n\n**第 1 步——在 VS Code 中打开你的项目。**\n\n**第 2 步——在集成终端中运行以下项目命令**（根据你的项目类型调整）：\n\n对于 Python：\n```powershell\npython --version\npython main.py\n```\n\n对于 Node.js：\n```powershell\nnode --version\nnpm install\nnode index.js\n```\n\n对于任何项目：\n```powershell\ngit status\ngit log --oneline\n```\n\n**第 3 步——如果遇到错误，**直接把它从终端粘贴给 Claude。问它：“我在 VS Code 的集成终端里运行 [命令] 时出现了这个错误：[粘贴错误信息]。这是什么意思？我该怎么修复？”\n\n**第 4 步——从终端安装一个依赖**（以 Python 为例）：\n```powershell\npip install requests\n```\n\n**第 5 步——验证这个依赖能正常工作**，写一个 3 行的 Python 脚本导入它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C——终端配置文件与个性化设置",
+      "content": "把你的终端设置得更快、信息更丰富。\n\n**第 1 步——查看有哪些可用的 shell：**\n```powershell\n# In PowerShell:\nGet-Command -Name pwsh, bash, zsh 2>$null\n```\n\n**第 2 步——安装 Windows Terminal**（如果你在 Windows 上）：它比默认的 cmd 更好用。从 Microsoft Store 安装。\n\n**第 3 步——配置 VS Code 的终端设置：**\n打开设置（Ctrl+,）→ 搜索“terminal”→ 配置：\n- `terminal.integrated.fontSize`：设置为一个舒适的大小\n- `terminal.integrated.cursorBlinking`：启用\n- `terminal.integrated.defaultProfile.windows`：设置为 PowerShell\n\n**第 4 步——安装 Oh My Posh**（可选但效果显著）：它会给你的 PowerShell 提示符添加一个主题，显示 git 分支、Python 环境和其他有用的上下文信息。向 Claude 提问：“我该如何安装 Oh My Posh 来改善我的 PowerShell 终端体验？”\n\n**第 5 步——测试你改进后的终端**，进入一个 git 仓库，留意提示符中显示的分支名称。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——终端自动化脚本",
+      "content": "用一个从 VS Code 终端运行的脚本，自动化你的项目启动流程。\n\n**第 1 步——梳理你的项目启动流程**——你在每次工作开始时都会运行的命令：激活虚拟环境、启动服务器、运行初步检查。\n\n**第 2 步——向 Claude 提问：** *“创建一个名为 `start.ps1`（或 `start.sh`）的 PowerShell/bash 脚本，用来自动化我的项目启动流程。脚本应该：[描述你的启动流程]。每一步之后，都应该打印一条确认消息，让我知道它成功了。”*\n\n**第 3 步——从 VS Code 终端创建并测试**这个脚本。\n\n**第 4 步——把它添加到你的 VS Code Task 中：**\n在 .vscode/tasks.json 中，添加一个运行你的启动脚本的任务：\n```json\n{\n    \"label\": \"Start Project\",\n    \"type\": \"shell\",\n    \"command\": \".\\\\start.ps1\",\n    \"group\": \"build\"\n}\n```\n\n**第 5 步——必做的复核：** 向 Claude 提问：*“复核一下这个启动脚本。在不同的机器上或系统更新后，可能是什么原因导致它失败？我应该添加什么来让它更健壮？”*"
+    },
+    {
+      "type": "quiz",
+      "question": "你在 VS Code 终端里运行一个 Python 服务器，它卡住了——不再接受新命令。你该怎么停止它？",
+      "options": [
+        "关闭 VS Code 再重新打开",
+        "按 Ctrl+C——这会向正在运行的进程发送一个中断信号",
+        "关闭终端标签页——这样会终止该进程",
+        "按 Ctrl+Z"
+      ],
+      "correct": 1,
+      "explanation": "Ctrl+C 会向正在运行的进程发送一个中断信号（SIGINT），这是优雅地停止服务器、脚本或任何正在运行的终端程序的标准方式。大多数写得好的程序都会处理这个信号，进行清理并关闭。Ctrl+Z 只是挂起进程（它仍在后台运行）。关闭终端标签页（选项 C）确实也会终止该进程，但没那么干净利落。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在 VS Code 中打开了三个终端，各自运行着不同的东西：一个运行你的服务器，一个用于 git 命令，一个用于运行测试。你要怎么在它们之间切换？",
+      "options": [
+        "同一时间只能打开一个终端",
+        "点击终端下拉面板中的终端名称",
+        "按 Ctrl+Tab",
+        "在任意终端中输入 `switch`"
+      ],
+      "correct": 1,
+      "explanation": "VS Code 的集成终端面板会把多个终端显示为独立的标签或下拉列表中的条目。点击你想切换到的终端的名称/编号即可。你也可以点击终端面板标题旁边的下拉箭头来查看所有活跃的终端。同时保持多个终端打开（服务器、git、测试）是标准的专业工作流——你不需要在任务之间来回停止和重启。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 5-7 课。** 集成终端现在是你工作流中的核心部分。在这门课程中你会一直用到它——运行 Git 命令、安装 Node 依赖包、启动 Claude Code 等等。下一课：VS Code 扩展应用市场。"
+    }
+  ],
+  "nextLesson": "5-8",
+  "prevLesson": "5-6"
+}

@@ -1,0 +1,118 @@
+{
+  "id": "18-3",
+  "title": "系统化 AI 研究——Perplexity、Elicit、Consensus 与 Scite",
+  "part": 18,
+  "estimatedMinutes": 70,
+  "tags": [
+    "advanced",
+    "research",
+    "perplexity",
+    "elicit",
+    "consensus",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n大多数人使用 AI 研究工具的方式，和用谷歌搜索没什么两样：输入查询，看第一条结果，结束。系统化 AI 研究则完全不同。它把研究当作一个有验证环节、多个专业工具、以及刻意综合的结构化过程。这节课教你像专业分析师一样做研究——不仅仅是更快，而是更好。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**为什么专业研究工具很重要：** Claude 或 ChatGPT 这类通用 AI 是基于训练数据（有知识截止日期）来综合内容的，可能会编造引用。而专业研究工具搜索的是真实论文和来源的实时数据库。对于任何事实准确性和引用质量很重要的场景，使用正确的研究工具是不可妥协的。"
+    },
+    {
+      "type": "text",
+      "content": "## 四工具研究栈\n\n这套工具栈中的每一个工具都能做其他工具做不到的特定事情：\n\n**1. Perplexity AI——实时带引用的网络研究**\n- 最适合：时事新闻、市场数据、近期动态，任何时效性重要的话题\n- 工作原理：运行多次网络搜索，阅读实际页面，带引用地进行综合\n- 关键特性：每个论断都链接到一个具体来源——你可以立即核实\n- 深度研究模式（Pro）：运行 10-20 次以上的搜索，生成一份结构化的多页报告\n- 免费版：每天 5 份深度研究报告；Pro（每月 20 美元）：无限量\n\n**2. Elicit——系统化的学术文献综述**\n- 最适合：“研究对 X 到底是怎么说的？”——医疗健康、社会科学、商业战略、科学研究\n- 工作原理：搜索超过 2 亿篇学术论文，提取结构化数据（样本量、结果、方法论）\n- 关键特性：自动生成多篇论文研究发现的对比表\n- 何时使用：当你需要了解证据的整体状态，而不只是一个人的观点时\n- 免费版：额度慷慨；付费版支持批量提取\n\n**3. Consensus——科学共识验证**\n- 最适合：有证据支撑的是非问题（“X 会导致 Y 吗？”“Z 有效吗？”）\n- 工作原理：搜索科学文献，展示一个“共识计（Consensus Meter）”——显示有多少百分比的研究支持该论断\n- 关键特性：告诉你证据的整体权重，而不只是一篇论文的发现\n- 使用场景：在文档中提出某个论断之前，先用 Consensus 验证，避免引用离群的研究\n\n**4. Scite.ai——引用质量与撤稿核查**\n- 最适合：验证你想引用的研究是否已被撤稿或反驳\n- 工作原理：追踪每篇论文被引用的方式——后续论文是支持、反对，还是仅仅提及了它\n- 关键特性：“智能引用（Smart Citations）”——查看一篇论文的发现是否经受住了时间的考验\n- 使用场景：在正式工作中引用任何研究之前，先在 Scite 上核查该发现是否被重复验证过，还是受到过质疑"
+    },
+    {
+      "type": "text",
+      "content": "## Perplexity 深度研究——完整工作流\n\n对大多数专业人士来说，Perplexity 的深度研究模式是最实用的高级研究工具。以下是如何从中获得最大价值。\n\n**深度研究做了什么：**\n它不只是做一次搜索，而是运行 15-30 次有针对性的子搜索，阅读实际页面（而不只是摘要片段），并将所有内容综合成一份带引用的结构化报告。一次深度研究查询，能完成原本需要 45-90 分钟人工网络研究才能做到的事情。\n\n**如何构建深度研究查询：**\n\n弱查询（得到笼统的结果）：\n```\nWhat is the market for electric vehicles?\n```\n\n强查询（得到有针对性、可执行的结果）：\n```\nProvide a deep research report on the electric vehicle market focusing on:\n1. Current market size and 3-year growth projections for Australia specifically\n2. The top 5 barriers to EV adoption among Australian consumers (with data)\n3. Government incentive programs in Australia active in 2026\n4. The 3 fastest-growing EV models by sales volume in 2025-2026\n\nI'm preparing a market entry analysis for a company considering launching EV charging infrastructure in major Australian cities. Prioritise recent data (2024-2026) and cite all statistics.\n```\n\n**5 个追问技巧：**\n拿到任何一份深度研究报告后，不要只是照单全收。提出 5 个追问，深入挖掘最重要的部分：\n```\n1. What is the most surprising or counterintuitive finding in this research?\n2. Where is the evidence weakest or most contested?\n3. What important angle did this research NOT cover that I should investigate separately?\n4. Give me the strongest argument against the main conclusions\n5. What would the leading expert in this field say was missing from this analysis?\n```\n\n**保存和整理深度研究输出：**\n1. 点击 Perplexity 中的导出按钮，获取格式化文档\n2. 保存到你的研究文件夹，并注明日期和查询内容\n3. 在 Notion 或你的笔记应用中创建一个“研究日志”，为每份报告添加摘要和链接\n4. 之后在写文档时，把研究报告粘贴给 Claude，让它为你的具体目的提取最相关的 5 个要点"
+    },
+    {
+      "type": "text",
+      "content": "## 用 Elicit 做系统化文献综述\n\nElicit 专为回答这个问题而设计：“科学证据到底是怎么说的？”\n\n**何时用 Elicit 而不是 Perplexity：**\n- 当你需要学术级证据，而不只是网络内容时\n- 当你想对比多项研究的发现时\n- 当你在写会被严格审视的内容时（商业案例、学术作品、政策建议）\n- 当话题是实证性的时候——健康、经济、心理学、教育、科学\n\n**Elicit 工作流：**\n\n**第一步——查找论文：**\n前往 elicit.com → 用问句形式搜索你的话题：\n- “Does remote work increase employee productivity?”\n- “What interventions reduce employee burnout?”\n- “How effective is mindfulness training for stress reduction?”\n\nElicit 会搜索超过 2 亿篇论文，返回最相关的结果。\n\n**第二步——提取结构化数据：**\n对每篇论文，Elicit 可以自动提取：\n- 样本量\n- 研究类型（随机对照试验、荟萃分析、观察性研究）\n- 关键发现\n- 地点和背景\n- 效应量（如有）\n\n这样你不用通读每篇论文全文，就能建立一张证据表。\n\n**第三步——用 Claude 进行综合：**\n导出你的 Elicit 证据表，再交给 Claude：\n```\nHere is a table of research findings on [topic]: [paste table]\n\nPlease synthesise this evidence:\n1. What is the overall direction of the evidence?\n2. How consistent are the findings across studies?\n3. What is the strength of the evidence (study types, sample sizes)?\n4. What are the key caveats or limitations?\n5. Write a 2-paragraph evidence summary I could include in a formal document\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 用 Consensus 做证据验证\n\nConsensus 会用证据权重来回答是非问题——不只是一篇论文的发现，而是大多数研究显示的结果。\n\n**最佳使用场景：**\n- “[某种补充剂/干预措施/做法] 真的有效吗？”\n- “X 会导致 Y 吗？”\n- “关于 [某论断] 是否存在科学共识？”\n\n**Consensus 工作流：**\n1. 前往 consensus.app\n2. 用自然语言输入你的问题：“Does cognitive behavioural therapy reduce anxiety?”\n3. 阅读共识计（显示同意的研究所占的百分比）\n4. 浏览各项研究的具体发现，了解其中的细微差别\n5. 留意持不同意见的研究——这里往往藏着真正的洞见\n\n**用 Consensus 验证论断：**\n在正式写作中加入任何实证性论断之前，先用 Consensus 核实一下：\n```\nClaim to validate: \"Regular exercise reduces symptoms of depression\"\nConsensus result: [what you found]\nStudy count: [how many papers]\nMajority finding: [what most studies show]\nKey caveats: [where evidence is weaker or contested]\n```\n\n这能让你避免自信满满地引用一个被更广泛文献所反驳的离群研究。"
+    },
+    {
+      "type": "text",
+      "content": "## 完整的系统化研究工作流\n\n对于任何将用于专业或正式场合的研究任务，使用以下完整工作流：\n\n**阶段一——绘制地图（15 分钟）**\n```\nAsk Claude:\n\"I'm researching [topic] for [purpose]. Generate:\n1. The 5 most important sub-questions I need to answer\n2. The 3 most likely sources of bias or missing information\n3. The 3 best academic databases or research areas to search\n4. 5 specific search queries I should run in Elicit or Perplexity\"\n```\n\n**阶段二——收集（30-60 分钟）**\n- 在 Perplexity 深度研究中运行你最重要的 2-3 个查询\n- 在 Elicit 中运行你的实证性问题\n- 在 Consensus 中验证关键论断\n- 在 Scite 中核查你计划引用的具体研究\n\n**阶段三——核实（15 分钟）**\n对你研究笔记中的每一个具体统计数据或论断：\n- 你能看到原始来源吗（而不只是 AI 的转述）？\n- 这个来源可信吗（经过同行评审？信誉良好的机构？足够新？）？\n- Scite 有没有确认它没有被撤稿？\n\n**阶段四——综合（20 分钟）**\n把所有已核实的发现交给 Claude：\n```\nHere are my verified research findings on [topic]: [paste findings]\n\nSynthesize them into:\n1. A clear statement of what the evidence shows\n2. Where there is strong consensus vs. genuine uncertainty\n3. The 3 most important implications for [your purpose]\n4. What a sceptic would say is missing from this analysis\n```\n\n**阶段五——写作**\n根据你的笔记和综合结果来写，而不是照搬 AI 的输出。AI 处理了这些来源；论点由你来写。每一个具体论断都要配上一个你能核实的引用。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "完成一次完整的系统化研究冲刺",
+      "content": "本次工作坊将使用完整的四工具栈，在一个与你相关的话题上，产出一份经过核实、带引用的研究简报。\n\n**选择你的话题（2 分钟）**\n\n选一个对你有职业或个人意义、你希望获得可靠信息的话题。好的选项：\n- 一个你一直好奇的商业或行业问题\n- 一个你想获得证据支持的健康或生活方式话题\n- 一个你需要更深入理解的技术趋势\n- 一个与你工作相关的政策或战略问题\n\n**第一部分——与 Claude 一起绘制地图（5 分钟）**\n\n让 Claude 生成你的研究计划：\n```\nI'm researching [your topic]. Create a research plan:\n1. The 5 most important questions I need to answer\n2. Which of these questions need academic evidence vs. current data?\n3. Write 3 specific queries for Perplexity Deep Research\n4. Write 2 specific questions for Elicit\n```\n\n**第二部分——Perplexity 深度研究（15 分钟）**\n\n在 Perplexity 深度研究中运行你最好的查询（使用完整的结构化查询格式——而不只是一个话题词）。阅读完整输出。对最重要的发现使用 5 个追问技巧。\n\n记下输出中 5 个具体的、有来源的论断。\n\n**第三部分——Elicit（10 分钟）**\n\n如果你的话题有实证性的角度（健康、行为、商业结果、教育），运行你的 Elicit 查询。为排名前 5 的论文提取研究类型、样本量和关键发现。\n\n**第四部分——Consensus 核查（5 分钟）**\n\n如果有一个具体的实证性论断你想验证，在 Consensus 中运行它。记下共识分数以及任何主要的反对证据。\n\n**第五部分——与 Claude 一起综合（10 分钟）**\n\n把你的发现交给 Claude：\n```\nHere are my research findings on [topic], from Perplexity, Elicit, and Consensus:\n\n[paste your notes]\n\nWrite a research brief with:\n- Executive summary (3 sentences)\n- Key findings (5 bullets with evidence strength noted)\n- Areas of uncertainty or debate\n- 3 implications for [your purpose]\n- Questions that would require additional research to answer\n```\n\n**产出：** 一份你真正能用得上的研究简报——来源经过核实，论断有证据支撑，不确定性被清楚标注。这就是系统化 AI 研究应有的样子。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在撰写一份政策建议，想引用研究来证明每周工作 4 天能提高生产力。什么是负责任的研究流程？",
+      "options": [
+        "让 Claude 总结一下研究对每周工作 4 天是怎么说的",
+        "找一篇支持每周工作 4 天的研究并引用它",
+        "在 Elicit 中搜索“每周工作 4 天是否能提高生产力”，查看证据表，在 Consensus 中核查整体证据权重，在 Scite 中验证关键研究，然后综合出一份关于证据实际显示内容的平衡摘要",
+        "用 Perplexity 找近期文章，引用排名前 3 的结果"
+      ],
+      "correct": 2,
+      "explanation": "一份政策建议需要系统化的证据审查，而不仅仅是一条支持性的引用。使用 Elicit 能给你广度（多项研究），Consensus 显示整体证据权重，Scite 则验证关键研究没有被反驳过。挑选一篇支持性研究（选项 B）是一种确认偏误，在同行评审中会被揭穿。让 Claude 总结（选项 A）只是基于训练数据，没有实时引用验证。Perplexity 文章（选项 D）总比什么都没有强，但达不到政策文件所需要的学术文献深度。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——研究工具对比",
+      "content": "将专业研究工具与通用 AI 做学术研究的能力进行对比。\n\n**第一步——问 Claude：** “Explain the purpose and strengths of these research tools: Perplexity, Elicit, Consensus, and Scite. For each: what type of research question is it best suited for? What can it do that Claude cannot?”\n\n**第二步——在现有工具上测试同一个研究问题：**\n问题：“What does the research say about [a topic in your field]?”\n\n**第三步——对比结果：**\n- 来源质量（同行评审 vs. 普通网页）\n- 引用准确性\n- 发现矛盾证据的能力\n- 综合质量\n\n**第四步——针对你的具体研究需求，构建一份工具选择指南。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用 AI 做系统化文献综述",
+      "content": "使用 AI 研究工具进行一次系统化文献综述。\n\n**第一步——从你所在的领域定义一个具体的研究问题。**\n\n**第二步——使用专业工具**（Elicit、Consensus 或 Semantic Scholar）查找相关论文。\n\n**第三步——对每篇找到的论文**，用 Claude 提取关键信息：\n```\nExtract from this paper abstract:\n- Research question\n- Methodology\n- Key findings\n- Sample size/scope\n- Limitations acknowledged\n- Confidence level in findings: High/Medium/Low (based on methodology)\n```\n\n**第四步——跨论文综合：**\n“Based on these paper extractions [paste them], synthesise the state of research on [question]. What is the consensus? What is disputed? What are the research gaps?”\n\n**第五步——强制审查：** 问 Claude：*“What important papers might this systematic review have missed? What should I search for to make this more complete?”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——引用验证",
+      "content": "为 AI 辅助研究建立严谨的引用验证习惯。\n\n**第一步——找一份带有 5 个以上引用的 Perplexity 或 AI 研究输出。**\n\n**第二步——核实每一条引用：**\n1. 这个来源真的存在吗？（搜索准确的标题）\n2. 这个来源说的内容和被归到它名下的内容一致吗？（阅读相关部分）\n3. 这个来源是否像暗示的那样权威？\n4. 这个来源够新吗？\n\n**第三步——计算你的验证通过率：** 有多少百分比的引用完全核实通过？多少百分比存在问题？\n\n**第四步——问 Claude：** “I found that [X%] of AI-sourced citations had problems of type [list them]. How should I adjust my research workflow to account for this citation reliability rate?”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——构建研究数据库",
+      "content": "使用 AI 辅助策展，构建一个个人研究数据库。\n\n**第一步——让 Claude Code** 设计一个研究数据库系统：\n```\nDesign a personal research database using Obsidian/markdown or a simple SQLite database:\n1. Paper/source entries: title, authors, date, abstract, key findings, tags, credibility score\n2. Connection mapping: which papers cite each other? Which contradict each other?\n3. Question tracking: which research questions does each paper address?\n4. Review scheduling: flag papers for re-review if new contradictory evidence emerges\n```\n\n**第二步——搭建数据库**，加入 10 篇与你的工作相关的论文/来源。\n\n**第三步——建立一个月度维护流程：** 需要新增哪些论文，需要更新哪些过时条目。\n\n**第四步——测试这个数据库**，用它而不是从零开始来回答一个研究问题。"
+    },
+    {
+      "type": "quiz",
+      "question": "Scite 显示你要引用的一篇论文，“反对”它的引用多于“支持”它的引用。你应该怎么做？",
+      "options": [
+        "把这篇论文从你的研究中删除——它已经名誉扫地",
+        "调查那些反对的论文：了解方法论上的差异，阅读反对的具体语境，然后要么在自己的分析中承认这一争议，要么寻找更有力的支持性证据",
+        "引用更多支持性论文来平衡比例",
+        "忽略 scite 的数据——它不能反映论文质量"
+      ],
+      "correct": 1,
+      "explanation": "反对性引用是有价值的信息，而不是自动的失格证明。许多合理的研究发现在科学界都存在争议。要去调查：这些反对论文具体在质疑什么？是方法论、可推广性，还是解读方式？有些反对揭示了研究中真实存在的弱点；有些则只是方法论上的分歧，没有明确的胜负。你的任务是：在自己的研究中准确地承认这一争议，而不是忽略它，或干脆放弃这个来源。"
+    },
+    {
+      "type": "quiz",
+      "question": "Elicit 找到了 8 篇与你的研究问题相关的论文，但你只有时间精读 2 篇。应该优先选哪 2 篇？",
+      "options": [
+        "最新的 2 篇",
+        "引用次数最多的 2 篇",
+        "最直接针对你具体问题、方法论最扎实的 2 篇——让 Claude 基于摘要分析帮你挑选",
+        "最能支持你假设的 2 篇"
+      ],
+      "correct": 2,
+      "explanation": "优先选择这样的论文：(1) 直接针对你的具体问题（而不只是相关话题）；(2) 方法论扎实（大样本、有对照组、经过同行评审）；(3) 要么是该领域的奠基性研究，要么是最新的综合性综述。引用次数只是影响力的一个替代指标，不代表质量。对于发展迅速的领域，新近程度很重要。问 Claude：“Based on these abstracts, which 2 papers would most advance my understanding of [specific question]?”"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 18-3 课。** 你现在拥有了一套四工具的系统化研究栈，以及一套完整的工作流：与 Claude 一起绘制地图 → 用 Perplexity + Elicit 收集 → 用 Consensus + Scite 验证 → 与 Claude 一起综合。这就是专业分析师和研究人员使用 AI 的方式——不是用它取代严谨性，而是用它加速严谨性。"
+    }
+  ],
+  "nextLesson": "18-4",
+  "prevLesson": "18-2"
+}

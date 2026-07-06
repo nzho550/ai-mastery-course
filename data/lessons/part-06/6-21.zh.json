@@ -1,0 +1,88 @@
+{
+  "id": "6-21",
+  "title": "面向团队与企业的 Copilot 治理",
+  "part": 6,
+  "estimatedMinutes": 55,
+  "tags": ["copilot", "enterprise", "governance", "teams", "knowledge-base", "policies", "advanced"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n第 6-1 课到第 6-20 课讲的是作为个人开发者如何使用 Copilot。这一课讲的是组织层面——团队、IT 管理员和组织领导者如何在大规模场景下设置、管理和治理 Copilot。\n\n如果你符合以下情况，这一课就与你相关：\n- 你领导或管理一个使用 Copilot 的开发团队\n- 你负责组织内 AI 工具的采用\n- 你在一个政策控制很重要的企业或政府组织中工作\n- 你想了解你组织的 Copilot 管理员能控制什么、不能控制什么\n\n你将学到：\n- 组织和企业层面的 Copilot 政策\n- Knowledge Bases（知识库）——在你的内部文档上训练 Copilot\n- 指标与用量监控\n- 有效地为团队引入 Copilot\n- 针对专门团队角色的自定义 agent\n- 用于重复性任务的 Copilot Automations（自动化）"
+    },
+    {
+      "type": "text",
+      "content": "## 组织与企业政策\n\n政策控制你团队成员能访问哪些 Copilot 功能，以及他们能如何使用这些功能。\n\n### 政策设置在哪里\n\n**企业层级：** 企业所有者设定基线政策。可以将某项政策锁定为特定值，也可以允许各组织自行决定。\n\n**组织层级：** 组织所有者在企业设定的范围内配置政策。\n\n**用户层级：** 个人开发者可以在组织允许的范围内进行调整。\n\n**冲突解决：** 如果企业政策被锁定，组织就无法覆盖它。如果某个用户从多个存在政策冲突的组织获得许可证，通常以最严格的政策为准。\n\n### 可用的关键政策\n\n| 政策 | 控制内容 |\n|--------|--------|\n| Copilot in IDEs | 允许/禁止在受支持的 IDE 中提供行内建议 |\n| Copilot Chat | 允许/禁止聊天功能 |\n| Agent mode | 允许/禁止自主 agent 操作 |\n| Copilot CLI | 允许/禁止终端 CLI 使用 |\n| Copilot code review | 允许/禁止自动 PR 审阅 |\n| Copilot cloud agent | 允许/禁止 issue 到 PR 的云端 agent |\n| MCP server access | 允许连接哪些 MCP 服务器的白名单 |\n| Model availability | 用户可以选择哪些 AI 模型 |\n| Copilot in GitHub.com | GitHub 网页界面上的 Copilot |\n| Copilot Workspace | 访问实验性功能 |\n\n### 如何配置政策\n\n**企业：** Enterprise account settings → Policies → Copilot\n**组织：** Organization settings → Copilot → Policies\n\n**面向政府的最佳实践：** 从最严格的政策集开始，随着具体使用场景被批准再逐步放宽限制。记录设置了哪项政策、为什么设置、由谁批准——这能为监管者所期待的审计追踪打下基础。"
+    },
+    {
+      "type": "text",
+      "content": "## Knowledge Bases —— 在你的内部文档上训练 Copilot\n\nKnowledge Bases（Copilot Enterprise 功能）让你的组织能够为内部文档建立索引，并在其上训练 Copilot。当用户向 Copilot 提问时，它会搜索你的 Knowledge Base，并在回答中融入来自你内部文档的答案——而不仅仅是公开信息。\n\n**你可以索引的内容：**\n- GitHub 仓库（公开或私有）\n- Wiki 和文档站点\n- 内部 API 文档\n- 政策文档（如果存储在 GitHub 中）\n- 架构决策记录\n- 操作手册和应急预案\n\n### 设置一个 Knowledge Base\n\n1. 前往你的 GitHub 组织设置 → Copilot → Knowledge bases\n2. 点击 **New knowledge base**\n3. 给它起一个名字（例如“内部平台文档”、“政府政策库”）\n4. 添加要索引的仓库——选择包含相关文档的仓库\n5. 配置索引设置（多久刷新一次）\n6. 指定哪些用户或团队可以使用这个 knowledge base\n\n### 在聊天中使用 Knowledge Base\n\n设置好之后，你组织的成员就可以在 GitHub.com 上的 Copilot Chat 中使用这个 knowledge base：\n\n```\n@github 我们该如何为一个新的微服务配置部署流水线？\n查一下我们的内部文档。\n```\n\nCopilot 会先搜索你已建立索引的仓库，再根据需要用通用知识补充。它会引用它所使用的内部文档。\n\n### Knowledge Bases 在政府场景下的应用\n\n- 为团队的操作手册建立索引——Copilot 能引导新员工完成流程\n- 为内部 API 文档建立索引——Copilot 了解你的内部系统，而不只是公开的 API\n- 为政策文档建立索引——Copilot 能回答关于特定政策和流程的问题\n- 为架构文档建立索引——Copilot 能解释你实际的系统，而不是一个通用的等价物"
+    },
+    {
+      "type": "text",
+      "content": "## Copilot 指标与用量监控\n\n组织和企业管理员可以查看整个团队的 Copilot 使用指标。\n\n### 访问指标\n\n**组织：** Organization settings → Copilot → Usage\n**企业：** Enterprise settings → Copilot → Metrics dashboard\n\n### 你可以衡量什么\n\n**采用度指标：**\n- 活跃用户数（至少接受过一次建议的用户）\n- 席位利用率（已分配席位 vs. 实际使用的席位）\n- 日/周/月活跃用户趋势\n\n**生产力指标：**\n- 建议被接受 vs. 被驳回的比例\n- 生成并被接受的代码行数\n- 聊天会话数量和用量\n- 代码审阅数量和审阅耗时\n\n**功能采用情况：**\n- 哪些功能被使用（聊天、补全、代码审阅、CLI、agent 模式）\n- 哪些模型被选用最多\n- 如果启用了的话，MCP 工具的使用情况\n\n### 用指标衡量 ROI 和合规性\n\n```\n对于一个 20 人的开发团队，使用 Copilot Business（每人每月 19 美元 = 每月 380 美元）：\n\n如果平均每位开发者每周用 Copilot 节省 2 小时：\n20 位开发者 × 2 小时 × 4 周 = 每月节省 160 小时\n按照政府开发者平均每小时的成本 [你的具体数字]\nROI 计算 = 节省的小时数 × 每小时成本，与每月订阅费用对比\n```\n\n对于政府采购来说，指标还能证明：\n- 席位正在被实际使用（证明成本合理）\n- 哪些功能提供了最大的价值（为培训重点提供依据）\n- 可能表明政策合规问题的使用模式\n\n**基于用量的计费说明：** 自 2026 年起，Copilot 的部分功能（agent 模式、代码审阅、CLI）使用 AI Credits 计费。用量单独监控 credit 消耗和席位数——用量大的团队可能需要预算额外的 credit。"
+    },
+    {
+      "type": "text",
+      "content": "## 面向团队角色的自定义 Agent\n\nCopilot Enterprise 允许创建自定义 agent——针对不同团队角色，具有特定专长、工具和指令的专属版云端 agent。\n\n### 自定义 Agent 可以拥有的能力\n- 角色特定的指令（“你是一名了解我们设计系统的前端专家”）\n- 访问特定的 MCP 服务器（前端 agent 可能有 Figma MCP，但没有数据库 MCP）\n- 访问特定的 Knowledge Bases\n- 特定的语气和沟通风格\n\n### 面向政府团队的自定义 Agent 示例\n\n**安全审阅 Agent**\n```\n你是一名政府安全审阅员。审阅代码时：\n1. 检查每一次数据操作是否在访问前进行了授权验证\n2. 标记任何可能暴露 PII 的代码——姓名、身份证号、联系信息\n3. 验证所有创建/更新/删除操作是否有审计日志\n4. 检查错误信息是否向终端用户暴露了内部系统细节\n5. 验证所有外部数据来源的输入是否经过校验\n\n始终引用具体的行号。给出具体的修复方案，而不是笼统的指导。\n把发现按 CRITICAL / HIGH / MEDIUM / LOW 格式化，并附上具体的补救步骤。\n```\n\n**新人引导助手 Agent**\n```\n你是团队的新人引导助手。你可以访问我们的内部文档知识库和代码库。\n\n帮助新团队成员：\n- 通过我们的架构文档理解系统架构\n- 找到某个具体功能实现在哪里\n- 遵循我们的开发工作流和约定\n- 搭建他们的开发环境\n\n回答时始终引用具体的内部文档。如果在我们的内部文档中找不到答案，\n说明这一点，并建议该向谁询问。\n```\n\n**报告生成器 Agent**\n```\n你是政府行政数据的报告生成专家。\n生成报告时：\n- 始终包含一个页眉，标明：报告标题、日期、数据来源、操作人\n- 日期格式为 YYYY-MM-DD\n- 绝不在输出中包含 PII 列\n- 为所有表格数据添加一行总计\n- 输出文件命名为：DEPT_REPORTTYPE_YYYYMMDD.csv\n- 把每次报告生成都记录到 audit.log 中\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Copilot Automations —— 重复性 AI 任务\n\nCopilot Automations（企业功能）让你可以设置 Copilot 按计划或响应事件自动运行——不需要人工触发。\n\n### 自动化触发方式\n\n- **定时：** 在设定的时间运行一次自动化（每天、每周）\n- **Issue 打开：** 当一个新 issue 被创建时，运行 Copilot 进行分类、归类或响应\n- **PR 打开：** 当一个 PR 被创建时自动运行代码审阅\n- **安全警报：** 当密钥扫描警报触发时，创建一个补救 issue\n- **构建失败：** 当 CI 失败时，分析失败原因并创建一份 bug 报告\n\n### 自动化在政府场景下的应用\n\n**每日自动数据质量检查：**\n```\n触发：每天早上 8 点\n任务：检查数据库中过去 24 小时内新增的记录，是否存在：\n  - 缺失必填字段\n  - 数值超出有效范围\n  - 重复条目\n如果发现问题：创建一个 GitHub issue，列出具体记录，指派给数据团队\n```\n\n**Issue 分类自动化：**\n```\n触发：任意仓库中打开的 issue\n任务：阅读该 issue，按类型分类（bug/功能/问题/安全）\n添加合适的标签，估算复杂度，指派给相关团队\n```\n\n**冲刺回顾助手：**\n```\n触发：每个冲刺周期的最后一个周五\n任务：总结本次冲刺中所有已关闭的 issue 和已合并的 PR\n创建一份冲刺回顾 issue，包括：完成了什么、速度指标、\n任何遗留事项，以及对下个冲刺的建议重点\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "审阅并配置你所在组织的 Copilot 政策",
+      "content": "为你的组织或团队开展一次 Copilot 政策审计。\n\n**面向普通用户：** 完成第 1-3 步，了解你所在组织允许/限制了什么。\n**面向管理员/团队负责人：** 完成全部步骤。\n\n**第 1 步 —— 了解你当前的订阅计划。**\n前往 github.com → 你的头像 → Settings → Copilot。\n是 Individual/Pro 还是 Business/Enterprise？记下这一点——它决定了你的数据保护级别。\n\n**第 2 步 —— 审阅你所在组织允许的内容。**\n如果你在某个组织中：GitHub.com → 你的组织 → Settings → Copilot → Policies。\n列出哪些功能是 Enabled（启用）、Disabled（禁用），或 'No policy'（没有政策）。\n\n**第 3 步 —— 找出政策缺口。**\n对每一项已启用的功能，问：这对于我们团队所处理数据的敏感程度来说合适吗？\n对每一项已禁用的功能，问：我们是否在不必要地阻止一个合理的使用场景？\n\n**第 4 步 —— （管理员）配置缺失的政策。**\n对于任何应该有政策、却处于 'No policy' 状态的功能：\n- 如果该功能应该可用：明确启用它\n- 如果该功能应该受限：明确禁用它\n避免让功能处于未定义状态——这会造成不一致。\n\n**第 5 步 —— （管理员）记录你的政策决定。**\n创建一个 wiki 页面或 `.github/COPILOT-POLICY.md`：\n- 哪些功能是启用/禁用的\n- 为什么（每一项简短说明理由）\n- 每个决定由谁批准\n- 上次审查日期\n- 计划的下次审查日期（AI 工具政策至少应每年审查一次）\n\n**成果：** 一套完全记录在案、经过深思熟虑配置的 Copilot 政策——而不是一堆默认值和意外的集合。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 A —— 搭建一个 Knowledge Base",
+      "content": "从你团队的内部文档中创建一个 Knowledge Base。\n\n**前提条件：** Copilot Enterprise 订阅。如果你是 Business 订阅，用这个工作坊来规划你会如何设置它。\n\n**第 1 步 —— 找出你最有价值的内部文档。**\n问问自己：新团队成员最常问什么问题？资深成员经常参考哪些文档？这些就是你应该优先索引的内容。\n\n示例：\n- 架构决策记录（ADR）\n- 内部服务的 API 文档\n- 常见操作流程的操作手册\n- 新人引导指南\n- 编码标准和指南\n\n**第 2 步 —— 确保文档存放在 GitHub 仓库中。**\nKnowledge Bases 会为 GitHub 仓库建立索引。如果你的文档在 Confluence、SharePoint 或某个 wiki 中，创建一个用 Markdown 格式存放这些内容的 GitHub 仓库。\n\n**第 3 步 —— 创建 Knowledge Base。**\nOrganization settings → Copilot → Knowledge bases → New knowledge base。\n添加仓库。设置刷新计划（对于频繁更新的文档，设为每天刷新）。\n\n**第 4 步 —— 用新团队成员常问的真实问题来测试：**\n```\n@github 我们如何把一个新服务部署到生产环境？用我们的内部文档回答。\n```\n```\n@github 我们对 Python 服务中错误处理的标准是什么？\n```\n```\n@github [系统名称] 服务的日志在哪里？\n```\n\n**评估：** 回答是否准确？是否引用了正确的内部文档？索引中是否明显缺失了什么？\n\n**第 5 步 —— 迭代。** 找出最重要的缺口，把那部分文档添加到已建立索引的仓库中。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 B —— 团队 Copilot 引导计划",
+      "content": "为一个首次采用 Copilot 的团队设计一份实用的引导计划。\n\n**为你的团队创建一份 `COPILOT-ONBOARDING.md`。** 它应该涵盖：\n\n**第 1 周 —— 基础**\n- 设置指南：安装、身份验证、验证建议是否正常工作\n- 我们使用的订阅计划及其提供的数据保护\n- 哪些文件/目录被排除在外，以及原因\n- 第一周要尝试的三个具体任务（自动补全、聊天、/explain）\n- 三个最重要的键盘快捷键\n\n**第 2 周 —— 生产力工作流**\n- 如何用 @workspace 提出代码库相关的问题\n- 我们的 copilot-instructions.md 文件——里面有哪些规则，为什么\n- 如何用 Copilot Edits 进行多文件改动\n- 代码审阅：请求和回应 Copilot 的审阅\n\n**第 3 周 —— 进阶功能**\n- 针对你的角色的自定义指令和提示词文件\n- 如果被批准使用的话，CLI 的使用\n- 如果被批准使用的话，MCP 服务器（有哪些以及被批准的使用场景）\n\n**团队规则部分：**\n- 不要把 [列出你的敏感数据类型] 发送给 Copilot\n- 始终用团队安全检查清单审阅安全关键的生成代码\n- 对 [列出关键代码区域] 的改动使用 Medium 强度审阅\n- 当 Copilot 给出错误内容时，[如何上报或反馈]\n\n**资源部分：**\n- 本课程的链接\n- 内部 Wiki/Confluence 页面链接\n- 有问题该联系谁\n- 在哪里反馈 AI 生成代码的问题\n\n**成果：** 一份能让新团队成员在第一天就有效、安全地使用 Copilot 的资源，而不需要 3 小时的引导会议。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 C —— 设计一个 Copilot Automation",
+      "content": "为你的团队目前手动完成的一项重复性任务设计一个 Copilot Automation。\n\n**第 1 步 —— 找出候选任务。**\n寻找具备以下特征的任务：\n- 重复且可预测（每次步骤相同）\n- 手动完成很耗时\n- 由某个事件触发（PR 打开、定时、警报触发）\n- 常规情况下不需要人工判断\n\n政府场景示例：\n- 对传入数据流的每日数据质量校验\n- 每周冲刺摘要生成\n- 传入服务请求的自动分类\n- 每晚对下班后活动的访问日志审计\n\n**第 2 步 —— 写出自动化规格说明。**\n创建一份文档（或 GitHub issue），规定：\n```\nAutomation 名称：[名称]\n\n触发条件：\n  类型：[定时 / 事件]\n  细节：[Cron 表达式或事件类型]\n\nCopilot 应该做什么：\n  1. [步骤 1 —— 要具体]\n  2. [步骤 2]\n  3. [步骤 3]\n\n所需输入：\n  - [列出任何数据来源、API、文件]\n\n输出：\n  - [创建、更新或发送了什么]\n\n失败处理：\n  - 如果 [失败条件]：[应该发生什么]\n\n是否需要审批才能执行？\n  - [是/否 —— 描述任何人工干预步骤]\n\n安全考量：\n  - [这个自动化会访问什么数据？是否获得授权？]\n  - [如果这个自动化出故障，是否会造成损害？]\n```\n\n**第 3 步 —— （仅限 Enterprise）在 GitHub 中实现。**\nOrganization settings → Copilot → Automations → New automation。\n根据你的规格说明进行配置。\n\n**第 4 步 —— 在启用生产环境之前，先进行一次演练测试。**\n\n**成果：** 一个经过设计、有规格说明，并（如果是 Enterprise）已实现的自动化，永久性地从你团队的工作量中移除一项重复性手动任务。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的组织有一个 Copilot Enterprise 订阅。你想让 Copilot 回答关于你内部 API 文档的问题，而这些文档并不公开可用。哪个功能能实现这一点？",
+      "options": [
+        "@workspace —— 它会自动索引所有私有仓库",
+        "Knowledge Base —— 你为你的文档仓库建立索引，Copilot 在 GitHub.com 上回答问题时会搜索它们",
+        "Custom Instructions —— 你把 API 文档粘贴进 copilot-instructions.md",
+        "GitHub MCP Server —— 它会自动让 Copilot 访问私有仓库文件"
+      ],
+      "correct": 1,
+      "explanation": "Knowledge Bases（Copilot Enterprise）让你可以索引私有 GitHub 仓库，并让它们的内容可以被 Copilot 在 GitHub.com 上搜索到。当用户提问时，Copilot 会搜索你已索引的文档，并在回答中引用具体的内部文档。@workspace 只会搜索在你本地 VS Code 工作区中打开的仓库。自定义指令有大小限制，是用来设定行为规则的，而不是用来存放大量文档的。GitHub MCP Server 提供对仓库文件的访问，但是按请求调用的，而不是用来充实 Copilot 的后台知识的。"
+    },
+    {
+      "type": "quiz",
+      "question": "你是一名组织管理员。你组织中的一名开发者在他个人的 VS Code 设置中，针对 .env 文件把 github.copilot.enable 设为了 false。而在组织层面，你还没有为 .env 文件配置内容排除规则。现在的情况是什么？",
+      "options": [
+        "这名开发者的 .env 文件在 IDE 层面和服务器层面都得到了完全的保护",
+        "这名开发者的 .env 文件只在 IDE 层面得到了保护——Copilot 不会在 VS Code 中为这些文件提供建议。但服务器端的排除规则并未生效，所以 Copilot 理论上仍可能通过其他途径（GitHub.com、CLI）访问这些文件，或者如果这名开发者使用了不同的 IDE",
+        "组织的内容排除规则会优先生效——这名开发者的本地设置会被忽略",
+        "这名开发者的本地设置会自动创建一个组织范围的排除规则"
+      ],
+      "correct": 1,
+      "explanation": "IDE 层面的设置（settings.json）只会保护那名特定开发者 VS Code 中的文件。它们能阻止 VS Code 中针对这些文件出现建议，但不会创建服务器端的内容排除规则。这些文件仍然可能通过 GitHub.com（如果在那里被查看）、通过 CLI、通过被手动添加进 working set 的 Copilot Edits，或者通过另一名没有相同设置的开发者的 IDE 被 Copilot 访问到。要实现组织层面的强制执行，内容排除规则必须在 GitHub 组织或仓库设置中设置——这些规则会在任何 IDE 设置或使用 Copilot 的开发者身份之外，普遍生效。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-21 课完成。** 你现在从组织的视角理解了 Copilot：控制团队能使用什么的政策、让 Copilot 成为你内部系统专家的 Knowledge Bases、证明并证实投入合理性的指标、面向专门角色的自定义 agent，以及消除重复性手动工作的自动化。对于政府和企业团队来说，这层治理和个人生产力功能同样重要。得到良好治理的 AI 工具是值得信赖的工具——而值得信赖的工具才会被使用。第 6-22 课是压轴课：优化整个 Copilot 工作流中的模型选择，把一切整合进一套个人优化系统。"
+    }
+  ],
+  "nextLesson": "6-22",
+  "prevLesson": "6-20"
+}

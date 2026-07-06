@@ -1,0 +1,79 @@
+{
+  "id": "14-5",
+  "title": "毕业设计：你自己的项目",
+  "part": 14,
+  "estimatedMinutes": 85,
+  "tags": [
+    "capstone",
+    "build",
+    "open-project",
+    "graduation"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将构建什么\n\n这是一个开放式的毕业设计。项目由你自己选择。“完成”的定义由你自己界定。你可以使用课程中任何适合这项工作的工具。\n\n唯一的约束是：它必须为你解决一个真实的问题。不是教程练习，不是演示。而是一个构建完成后，你会真正去用的东西。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "定义、规划并构建你的项目",
+      "content": "## 开始之前：项目简报\n\n这类项目中最大的错误，就是在还没想清楚之前就动手开始构建。花前 15 分钟写一份一页的简报。这份简报会成为你的 CLAUDE.md 和规划文档。\n\n打开 VS Code，创建 `notes/my-project-brief.md`。用书面形式回答以下问题：\n\n**1. 这个项目解决什么问题？**\n要具体。“我想更有效率”不是一个问题。“我每天早上要花 30 分钟手动阅读 5 个新闻来源，然后总结出对我重要的内容”才是一个问题。\n\n**2. 这是为谁服务的？**\n只是你自己？你生活中的某个具体的人？你工作中的团队？答案会改变“足够好”的含义。\n\n**3. 最小可运行版本能做什么？**\n不是理想中的完整版——而是用最少的功能解决核心问题的版本。一个邮件回复工具的最小版本是：点击一个按钮就能起草一封回复。而不是带标签和排程的完整工作流。\n\n**4. 你会用到课程中的哪些工具？为什么？**\n要具体：“用 Claude Code 来构建它，用 Python + Anthropic SDK 调用 API，用 n8n 触发自动化流程，用 Gmail MCP 与我的收件箱交互。”\n\n**5. 通过构建它你会学到什么？**\n这不是项目值得做的必要条件，但把它说清楚有助于在遇到挫折时保持动力。\n\n---\n\n> **提示：** **如果你不确定要构建什么：** 这很正常。以下是一些使用课程工具、并能产出真正有用东西的项目想法：\n\n- **每日简报工具：** 从几个 RSS 订阅源或网页中抓取内容，通过邮件发给你一份早间摘要\n- **会议纪要处理器：** 接收一份转录文本（来自 Otter.ai 或类似工具），提取行动项、决议和摘要\n- **个人变更日志：** 自动为你所有仓库中的 git 提交生成一份每周摘要\n- **想法收集与整理：** 一个 CLI 工具，让你输入一个想法，Claude 对其分类并存储，之后你可以搜索/浏览这些想法\n- **求职申请追踪器：** 一个电子表格 + 自动化工具，追踪状态、起草跟进邮件，并在需要跟进时提醒你\n- **为你的个人作品集网站添加功能：** 添加一个联系表单、一个博客栏目、一个项目展示区\n\n选一个会让你说“我真的会用这个”的项目。如果这些都无法引起你的共鸣，想想你生活中最烦人的一件反复出现的任务，问问自己：“AI 能帮上忙吗？”\n\n---\n\n## AI 辅助的规划工作流\n\n简报写好之后，用 AI 来规划构建过程——不要立刻开始写代码。\n\n**第 1 步——让 Claude 把它拆解成任务：**\n在你的项目文件夹中启动 Claude Code，说：\n\n```\nI want to build [your project]. I've written a brief — let me share it with you:\n\n[paste your brief from my-project-brief.md]\n\nPlease:\n1. Ask me any clarifying questions before we start\n2. Break this into a concrete task list, ordered by dependencies\n3. Identify the 2-3 highest-risk parts (things most likely to be harder than expected)\n4. Tell me what we should build first to get a working proof of concept as fast as possible\n```\n\n**第 2 步——审阅这份计划：**\n阅读 Claude 的拆解结果。对任何看起来不对的地方提出反对意见。在这个阶段，对话的成本很低——改动发生在文字层面，而不是代码层面。\n\n**第 3 步——可选：设置 task-master-ai：**\n如果你已经配置了 task-master-ai（第 8-7 课），可以让 Claude Code 根据你的简报创建一份任务列表。这会给你一套可以在工作过程中更新的追踪系统。\n\n**第 4 步——先构建概念验证：**\n从能证明这个方案可行的最小版本开始。核心功能跑通之前不要添加其他功能。\n\n---\n\n## 构建与迭代\n\n在构建过程中，运用本课程中学到的习惯：\n\n**对涉及多个文件的改动使用规划模式（Plan Mode）**（在 Claude Code 中按 `Shift+Tab`）。不要让智能体在没有先展示计划的情况下做出大范围的改动。\n\n**为你的项目写一份 CLAUDE.md。** 哪怕是一份简单的，也会有帮助：\n```markdown\n# [Project Name]\n\n## What This Is\n[one sentence]\n\n## Tech Stack\n[language, libraries, services]\n\n## How to Run\n[command to run the project]\n\n## Current Status\n[what works, what doesn't yet]\n```\n\n**频繁提交。** 每完成一个可运行的里程碑之后：`git add . && git commit -m \"[what just started working]\"`。如果出了问题，你会有一个可以恢复的节点。\n\n**遇到困难时，精确地向 Claude Code 描述问题：**\n- 你原本预期会发生什么\n- 实际发生了什么\n- 确切的报错信息（如果有的话）\n- 你已经尝试过什么\n\n含糊的“它不工作”这类问题只会得到含糊的答案。对失败情况的具体描述才能得到具体的解决方案。\n\n---\n\n## 定义“完成”\n\n一个项目永远可以被继续改进。对于这个毕业设计而言，“完成”意味着：\n\n- 你在简报中定义的最小可运行版本已经完成\n- 你至少在真实输入（而不是测试数据）上运行过一次\n- 得到的结果是你会真正去使用的东西\n- 代码已经提交到一个仓库中\n\n完美是“已完成”的敌人。一个你会使用的、可运行的初版，胜过一个你永远无法完成的精雕细琢的版本。\n\n---\n\n## 完成之后\n\n在 `notes/my-ai-dev-environment.md` 的 **Live Projects** 部分添加你的项目：\n- 项目名称\n- 它是做什么的\n- 代码的 URL 或路径\n- 如果有更多时间，你接下来会构建什么\n\n然后把它分享到某个地方——一个 GitHub 仓库、发给可能会觉得它有用的人的一条消息、在 LinkedIn 或你活跃的其他地方发一篇帖子。分享你的作品，是巩固学习成果并获得反馈的方式。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——你的项目范围与设计",
+      "content": "以严谨的范围界定来设计你自己的毕业设计项目。\n\n**第 1 步——定义你的项目。** 让 Claude Code 帮你界定范围：\n```\nI want to build [describe your project idea].\n\nHelp me scope this properly:\n1. What is the smallest useful version (MVP) I can build in [your time budget]?\n2. What features are \"nice to have\" vs truly required for the MVP?\n3. What technical challenges am I likely to face?\n4. What AI tools and techniques from this course would best serve this project?\n5. What does success look like? How will I know the project is done?\n```\n\n**第 2 步——写一份一页的项目简报：**\n- 解决的问题\n- 目标用户\n- MVP 功能列表（最多 5 项功能）\n- 技术栈\n- “完成”的定义\n\n**第 3 步——让 Claude Code 验证这个范围：** “审阅这个项目范围。在 [时间] 内，这个 MVP 可行吗？我低估了哪些方面？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——从头到尾用 AI 构建",
+      "content": "全程使用 AI 辅助开发来执行你的项目。\n\n**第 1 步——在写代码之前**，先为你的项目开始写一份 CLAUDE.md。\n\n**第 2 步——在每一项开发任务中都使用 Claude Code：**\n- 架构决策 → 让 Claude Code 审阅你的方案选项\n- 实现 → 在 Claude Code 的协助下编写代码\n- 测试 → 用 Claude Code 生成测试\n- 调试 → 描述 bug，让 Claude Code 诊断\n\n**第 3 步——追踪你使用了哪些 AI 工具**，以及用于哪些任务。最后计算：有百分之多少的代码是人工编写的、AI 辅助的，或是 AI 生成后经人工审阅的？\n\n**第 4 步——每完成一个主要功能后必做审阅：** 问 Claude Code：“审阅 [功能名称] 的实现。找出 3 个我还没有处理、可能在生产环境中失败的地方。”\n\n**第 5 步——在进入下一个功能之前**，修复每一个问题。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C——测试并加固你的项目",
+      "content": "用 AI 辅助测试，让你的项目达到生产就绪状态。\n\n**第 1 步——让 Claude Code** 编写一套全面的测试：\n```\nWrite tests for my project. I need:\n1. Unit tests for each core function\n2. Integration tests for the main user flows\n3. Edge case tests for boundary conditions\n4. Performance tests to verify response time under load\n\nPrioritise: what's most important to test given the project type?\n```\n\n**第 2 步——运行所有测试。** 在继续之前，至少达到 80% 的通过率。\n\n**第 3 步——运行一次安全审查：** “针对一个 [web app/CLI/API]，审阅这个项目中最关键的安全问题。标记出任何在生产使用的第一周内就可能被利用的漏洞。”\n\n**第 4 步——修复**发现的安全问题。修复后再次运行测试。\n\n**第 5 步——记录已知局限**——这个项目目前还处理不好哪些情况？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——上线、文档化并反思",
+      "content": "完成你的项目：部署、写文档，并反思你构建的成果。\n\n**第 1 步——部署你的项目。** 即使它是一个 CLI 工具，也要创建一个带有优质 README 的 GitHub 仓库。\n\n**第 2 步——让 Claude Code 写你的 README：**\n```\nWrite a comprehensive README.md for my project:\n- Project name and one-line description\n- What problem it solves and for whom\n- Screenshots or terminal recordings if applicable\n- Installation instructions\n- Usage examples\n- Configuration options\n- Known limitations\n- Contributing guidelines\n- License\n```\n\n**第 3 步——写一份关于你毕业设计项目的反思：**\n- 哪些地方进展顺利？\n- 哪些地方比预期花费的时间更长？为什么？\n- AI 工具如何改变了你的开发流程？\n- 你会有什么不同的做法？\n\n**第 4 步——把这个项目**添加到你在毕业设计 14-1 中建立的作品集中。\n\n**第 5 步——公开分享**——GitHub、LinkedIn，或者写一篇关于你构建了什么、学到了什么的博客文章。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在毕业设计项目中一直使用 AI 辅助，代码也能正常运行。但你意识到自己不理解其中 30% 的代码是如何工作的。在宣布完成之前，你应该怎么做？",
+      "options": [
+        "不用管它——能运行的代码就是目标",
+        "让 Claude Code 解释你不理解的代码——你应该能够维护和扩展自己的项目；理解比速度更重要",
+        "删除你不理解的部分并重写",
+        "为代码添加注释解释它做了什么（即便你不理解为什么这样做）"
+      ],
+      "correct": 1,
+      "explanation": "一个你自己都不理解的代码库是一种负债：你无法有效地调试它，无法自信地扩展它，也无法向别人解释它。在把项目标记为完成之前，让 Claude Code 解释任何你还不太清楚的部分：“详细解释一下这个函数——每个部分做了什么，为什么要这样实现？”目标是充分理解自己的代码库，做到即便没有 AI 协助，也能对每个部分做出修改。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的毕业设计项目完成了。作为一名 AI 增强型开发者，继续成长最有价值的下一步是什么？",
+      "options": [
+        "立即开始下一个更复杂的项目",
+        "把你构建的东西以及构建方式教给别人——教学能迫使你把自己的理解表达清楚，暴露出理解上的空白；同时也有助于整个生态的成长",
+        "等待更好的 AI 工具出现，再开始新项目",
+        "不断添加功能，直到项目变得“完美”"
+      ],
+      "correct": 1,
+      "explanation": "教学是最强大的学习工具之一：解释你构建了什么、如何构建的，能迫使你梳理自己的知识结构，暴露出你还无法清晰解释的地方，也能帮助那些在学习旅程中比你更早期的人。分享方式有很多：写一篇博客文章、做一次分享、教一位同事，或者为你的项目写文档。当人们分享自己学到的东西时，AI 开发者社区就会变得更强大。你现在已经完成了一门重要的课程——你所拥有的知识对其他人是有价值的。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了 AI 精通课程。**\n\n二十一个部分，233 节课。你从“什么是 AI”出发，走到了构建真实工具、自动化真实工作流，并搭建了一套专业的 AI 开发环境。\n\n你知道如何使用 AI 工具，如何用 AI API 构建应用，如何用 MCP 连接系统，如何用 n8n 实现自动化，如何为了隐私在本地运行 AI，以及如何安全地做好这一切。\n\n工具会不断变化。新模型会不断发布。新能力会不断涌现。但你已经打下的基础——如何快速学会一个新工具、如何批判性地评估 AI 输出、如何去构建而不仅仅是消费——这些不会过时。\n\n**接下来该做什么：**\n- 随着你的配置不断演进，持续更新你的 `notes/my-ai-workflow.md`\n- 想要扩展毕业设计项目时，随时回来继续\n- 关注 Anthropic 的更新日志、Simon Willison 的博客，以及 Hacker News，保持信息同步\n- 为别人构建一些东西\n\n深化所学最好的方式，就是把它教给别人，或者把它应用出来。你现在已经准备好做这两件事了。"
+    }
+  ],
+  "nextLesson": null,
+  "prevLesson": "14-4"
+}

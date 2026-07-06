@@ -1,0 +1,132 @@
+{
+  "id": "11-9",
+  "title": "成本工程——Token 最小化、模型路由与提示词缓存",
+  "part": 11,
+  "estimatedMinutes": 65,
+  "tags": [
+    "api",
+    "cost",
+    "optimization",
+    "prompt-caching",
+    "model-routing"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将掌握四种在不牺牲输出质量的前提下降低 API 成本的技巧——并且已经在实际代码中应用过它们。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么成本工程很重要\n\nAPI 成本会迅速累积。作为学习练习运行 10 次的脚本是免费的。同样的脚本作为生产工具每天运行 10,000 次，就会产生一笔实实在在的账单。\n\n好消息是：这笔账单中的大部分都是可以通过正确的技巧避免的。这里你将学到的四种技巧，可以在适用的任务上把成本降低 10-50 倍，而不会改变输出质量。\n\n**参考数字——10,000 次调用 × 每次 1,000 个输入 token：**\n\n| 方案 | 成本 |\n|----------|------|\n| 始终使用 Opus | $50.00 |\n| 改用 Sonnet | $30.00 |\n| 模型路由（80% 简单任务 → Haiku） | $8.64 |\n| 在大型系统提示词上加入提示词缓存 | $3.46 |\n| 非实时任务改用 Batch API | $1.73 |\n\n同样的 10,000 次响应，成本降低了约 29 倍。简单任务上的质量没有任何损失。"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧 1——Token 最小化\n\n提示词中的每一个 token 都要花钱——包括那些没有任何价值的 token。最常见的浪费：充满客套话和冗余指令的冗长系统提示词。\n\n比较下面这两个系统提示词：\n\n**臃肿版（约 60 个 token）：**\n```\nHello! You are an extremely helpful, polite, and thorough assistant.\nI would greatly appreciate your assistance with whatever I ask you today.\nPlease always be detailed and friendly in your responses. Thank you so much!\n```\n\n**精简版（约 8 个 token）：**\n```\nYou are a helpful assistant.\n```\n\n以 10,000 次调用为例，你每一次都在为 50 多个 token 的“非常感谢”买单。这在规模化之后是实打实的钱。\n\n**精简提示词的规则：**\n- 不要写问候语、感谢语或客套话——模型会忽略它们，但你却要为它们付费\n- 只陈述任务和输出格式，其他都不需要\n- 把 `max_tokens` 设为仍然有效的最小值（一个是/否的答案只需要 5，而不是 1024）\n- 预处理长文档：先摘要，再发送，而不是直接倾倒原始文本"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧 2——模型路由\n\n大多数真实工作负载都是简单任务和复杂任务的混合体。用一个便宜、快速的模型对每个请求进行分类，再把它路由到合适的模型上。\n\n这就是**老板/员工模式（boss/worker pattern）**：Haiku（几乎免费）来决定使用哪个“员工”——简单任务由它自己处理，复杂任务交给 Sonnet。"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\nasync function routeAndAnswer(question) {\n  // Haiku classifies complexity — costs ~$0.000001 per call\n  const classification = await client.messages.create({\n    model: 'claude-haiku-4-5-20251001',\n    max_tokens: 5,\n    system: \"Reply 'simple' or 'complex'. Simple = factual, single-step. Complex = analysis, judgment, or multi-step reasoning.\",\n    messages: [{ role: 'user', content: question }]\n  });\n\n  const complexity = classification.content[0].text.trim().toLowerCase();\n  const model = complexity.includes('simple')\n    ? 'claude-haiku-4-5-20251001'\n    : 'claude-sonnet-4-6';\n\n  const response = await client.messages.create({\n    model,\n    max_tokens: 300,\n    messages: [{ role: 'user', content: question }]\n  });\n\n  console.log(`  → routed to: ${model}`);\n  return response.content[0].text;\n}\n\nconst testQuestions = [\n  'What does HTTP stand for?',\n  'Analyse the security tradeoffs between JWT and session-based auth for a 10M-user fintech app',\n  'What year was Python created?',\n  'Design a database schema for multi-tenant SaaS with usage-based billing',\n];\n\nfor (const q of testQuestions) {\n  console.log(`\\nQ: ${q.slice(0, 70)}`);\n  const answer = await routeAndAnswer(q);\n  console.log(`A: ${answer.slice(0, 100)}...`);\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**经验法则：** 如果你说不出为什么某次调用一定需要 Sonnet 而不是 Haiku，那它很可能不需要。Haiku 在分类、信息提取、是/否判断，以及简短的事实性问题上表现非常出色，成本却只要三分之一。"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧 3——提示词缓存\n\n当同一个系统提示词、大型文档，或一组示例出现在很多次调用中时，你每一次都要为这些 token 付费。提示词缓存让你只需为这些内容付费一次，之后在命中缓存时，读取成本约为正常输入价格的 10%。\n\n**它是如何工作的：**\n- 在你想要缓存的任何内容块上添加 `\"cache_control\": {\"type\": \"ephemeral\"}`\n- 可缓存的最小尺寸：1,024 个 token\n- 缓存有效期为 5 分钟，每次命中会刷新\n- 缓存写入：正常价格的 1.25 倍\n- 缓存读取：正常价格的 0.1 倍（每次缓存 token 读取节省 90%）\n\n对于拥有大型、重复出现的系统提示词的应用——客服机器人、文档问答工具、RAG 系统——这是最大的成本杠杆。"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\n// Simulate a large company knowledge base (repeated 6x to exceed 1,024 token minimum)\nconst COMPANY_DOCS = `\nYou are a customer support agent for TechCorp.\n\nProduct overview: TechCorp sells cloud data tools. Our three products are:\nDataPipe (ETL automation), DataStore (managed PostgreSQL), and DataViz (dashboards).\nPricing: DataPipe $99/mo, DataStore $149/mo, DataViz $49/mo. Bundle: $249/mo.\nSupport SLA: free tier 48h response, paid tier 4h response, enterprise 1h response.\nRefund policy: 30-day money-back guarantee, no questions asked.\n`.repeat(6);  // repeat to exceed 1,024 token minimum for this demo\n\nasync function answerWithCache(question) {\n  const response = await client.messages.create({\n    model: 'claude-haiku-4-5-20251001',\n    max_tokens: 150,\n    system: [\n      {\n        type: 'text',\n        text: COMPANY_DOCS,\n        cache_control: { type: 'ephemeral' }  // mark this block for caching\n      }\n    ],\n    messages: [{ role: 'user', content: question }]\n  });\n\n  const u = response.usage;\n  const created = u.cache_creation_input_tokens || 0;\n  const read    = u.cache_read_input_tokens || 0;\n  const status  = created > 0 ? 'CACHE MISS (full price)' : 'CACHE HIT  (~10% price)';\n  console.log(`  ${status} | created=${created} read=${read} regular=${u.input_tokens}`);\n  return response.content[0].text;\n}\n\nconsole.log('=== Call 1 (writes the cache) ===');\nawait answerWithCache('What is your refund policy?');\n\nconsole.log('\\n=== Call 2 (reads from cache) ===');\nawait answerWithCache('How much does the bundle cost?');\n\nconsole.log('\\n=== Call 3 (reads from cache) ===');\nawait answerWithCache('What is the support SLA for paid tier?');"
+    },
+    {
+      "type": "text",
+      "content": "在第 2 次和第 3 次调用中，`cache_read_input_tokens` 承担了系统提示词的大部分内容，成本仅为 10%。对于一个每小时处理 100 个问题、知识库有 5,000 个 token 的客服机器人来说，缓存能把系统提示词部分的成本削减 90%。"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧 4——Batch API\n\n对于不需要即时结果的任务，可以作为一个批处理任务提交，从而在所有 token 成本上获得 50% 的折扣。代价是：批处理是异步的——根据规模不同，结果可能需要几分钟到几个小时。\n\n理想的使用场景：批量分类、隔夜生成报告、处理大型数据集，以及任何不需要实时响应的工作负载。"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\nconst emails = [\n  \"You've won $1,000,000! Click here now\",\n  \"Your AWS invoice for $23.50 is ready\",\n  \"URGENT: Your account will be suspended\",\n  \"Team standup moved to 3pm tomorrow\",\n  \"Exclusive offer — claim your free gift card\",\n];\n\nconst batch = await client.messages.batches.create({\n  requests: emails.map((email, i) => ({\n    custom_id: `email-${i}`,\n    params: {\n      model: 'claude-haiku-4-5-20251001',\n      max_tokens: 5,\n      system: \"Reply 'spam' or 'not_spam' only.\",\n      messages: [{ role: 'user', content: email }]\n    }\n  }))\n});\n\nconsole.log(`Batch submitted: ${batch.id}`);\nconsole.log(`Status: ${batch.processing_status}`);\nconsole.log('Poll status:  await client.messages.batches.retrieve(batchId)');\nconsole.log('Get results:  await client.messages.batches.results(batchId)');\nconsole.log('(results available when processing_status === \"ended\")');"
+    },
+    {
+      "type": "text",
+      "content": "对于像这个演示这样的小批量任务，结果会在几秒钟内到达。对于成千上万个条目的情况，需要预留最多 24 小时。\n\n**叠加加成——Batch API + 提示词缓存：** 这两种技巧可以乘数叠加。缓存的输入 token 本身已经只需支付正常价格的 10%；而 Batch API 会在此基础上再叠加 50% 的折扣。结果是：批处理请求中的缓存 token，成本大约只是标准输入 token 价格的 5%——这部分账单降低了 20 倍。对于拥有大型重复系统提示词、且以非实时批处理方式运行的应用，这个组合是目前可用的最高杠杆的成本削减方式。"
+    },
+    {
+      "type": "workshop",
+      "tag": "API",
+      "title": "用模型路由重构摘要工具",
+      "content": "把模型路由应用到第 11-8 课的 `summarize.js` 工具上。你将添加一个 `--quality` 标志：不带这个标志时使用 Haiku（快速且便宜）；带上时使用 Sonnet（更高质量，适合重要摘要）。\n\n**第 1 步——创建 `exercises/summarize-v2.js`**\n\n从你现有的 `summarize.js` 出发，添加：\n```javascript\n// At the top, after the argument parsing:\nconst highQuality = process.argv.includes('--quality');\nconst model = highQuality ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001';\n\nconsole.log(`Model: ${model} ${highQuality ? '(high quality mode)' : '(fast mode)'}`);\n```\n\n然后把 `client.messages.stream()` 调用中的模型改为使用 `model` 变量，而不是写死的字符串。\n\n**第 2 步——测试两种模式**\n```powershell\n# Fast mode (default — Haiku)\nnode summarize-v2.js ../notes/my-ai-workflow.md\n\n# High quality mode (Sonnet)\nnode summarize-v2.js ../notes/my-ai-workflow.md --quality\n\n# Bullet points in high quality mode\nnode summarize-v2.js ../notes/my-ai-workflow.md --bullets --quality\n```\n\n**第 3 步——比较输出结果**\n针对一份中等长度的文档，分别运行两种模式并比较：\n- Sonnet 的输出明显更好吗？\n- 对于这份特定文档来说，成本差异值得吗？\n- 对于较短的文件（少于 500 字），实际差别大吗？\n\n**第 4 步——添加一个更智能的自动路由器（可选挑战）**\n\n不用 `--quality`，而是根据文件大小自动判断使用哪个模型：\n```javascript\nconst wordCount = fileContent.split(/\\s+/).length;\nconst model = wordCount > 2000 ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001';\nconsole.log(`${wordCount} words → using ${model}`);\n```\n\n长文档从 Sonnet 的推理能力中获益更多。短文档用 Haiku 就能处理得很好。\n\n**需要记录的内容：**\n完成测试后，在你的笔记文件中写下 2-3 句话，说明什么情况下会用 `--quality`，什么情况下用默认设置。这就是你个人的模型路由策略。"
+    },
+    {
+      "type": "text",
+      "content": "## 完整的成本全景\n\n把这些技巧综合运用起来，效果会不断叠加：\n\n| 方案 | 每 1 万次调用的成本 |\n|----------|-------------------|\n| 始终使用 Opus，不做任何优化 | $50.00 |\n| 改用 Sonnet | $30.00 |\n| 模型路由（80% 简单任务 → Haiku） | $8.64 |\n| 在 5,000 个 token 的系统提示词上加入提示词缓存 | $3.46 |\n| 非实时任务改用 Batch API | $1.73 |\n\n保存好你的 `cost-demo.py` 或 `summarize-v2.js`——它们是参考实现，每当你构建任何需要在实际规模上调用 API 的东西时，都可以回来参考。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——Token 成本地图",
+      "content": "为不同的 token 优化策略绘制成本全景图。\n\n**第 1 步——问 Claude：** “解释一下 Anthropic 的提示词缓存功能。它是如何工作的？缓存 token 与非缓存 token 之间的价格差异是多少？哪些类型的内容从缓存中获益最多？”\n\n**第 2 步——为你的使用场景计算节省：**\n```\nMy system prompt: ~500 tokens\nRequests per day: 100\nWithout caching: 500 tokens × 100 × input price = X\nWith caching: 500 tokens × 0.10 × input price (first request) + (cached price × 100 × 500) = Y\nMonthly savings: (X - Y) × 30\n```\n\n**第 3 步——问 Claude：** “解释一下模型路由——对更简单的请求使用更便宜的模型，只对复杂请求使用昂贵的模型。为[描述你应用的请求类型]设计一套路由策略。”\n\n**第 4 步——针对你的使用场景**计算模型路由能带来的节省。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——实现提示词缓存",
+      "content": "为你的 API 封装添加提示词缓存，以节省重复出现的系统提示词的开销。\n\n**第 1 步——阅读 Anthropic 的提示词缓存文档**，理解 cache_control 参数。\n\n**第 2 步——让 Claude Code** 修改你的 API 封装以使用提示词缓存：\n```\nModify the AnthropicClient class to support prompt caching:\n1. Add a cache_system_prompt parameter (default True)\n2. When enabled, add cache_control: {type: \"ephemeral\"} to the system message\n3. Track cache_creation_input_tokens and cache_read_input_tokens separately\n4. Update the cost calculator to use correct prices for cached tokens\n5. Show cache hit rate in usage summaries\n```\n\n**第 3 步——通过多次调用同一个系统提示词来测试缓存。** 响应中是否出现了缓存 token 的计数？\n\n**第 4 步——在用量统计中验证**成本的降低。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C——模型路由器的实现",
+      "content": "构建一个能为每个请求选择合适且最便宜模型的路由器。\n\n**第 1 步——让 Claude Code** 设计并实现一个模型路由器：\n```\nBuild a model_router function that:\n1. Classifies the request as simple/medium/complex based on:\n   - Input length (short/medium/long)\n   - Presence of reasoning keywords (\"analyse\", \"explain why\", \"compare\")\n   - Whether it asks for creative generation\n2. Routes simple requests to claude-haiku-4-5-20251001\n3. Routes medium requests to claude-haiku-4-5-20251001 (with higher max_tokens)\n4. Routes complex/creative requests to claude-sonnet-4-6\n5. Logs which model was selected for each request\n```\n\n**第 2 步——用 10 个多样化的请求**测试这个路由器。它分类正确吗？\n\n**第 3 步——比较**经过路由分发的响应与始终使用 Sonnet 的响应，在同样请求上的输出质量。\n\n**第 4 步——必做审阅：** 问 Claude：“审阅这套路由逻辑。哪些类型的请求会被错误分类？有哪些失败模式？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——完整的成本工程实现",
+      "content": "把所有成本工程技巧综合成一套生产级方案。\n\n**第 1 步——针对你最昂贵的 API 使用场景**，应用以下三种策略：\n1. **提示词缓存：** 缓存系统提示词\n2. **Token 最小化：** 审查并精简系统提示词和少样本示例\n3. **模型路由：** 在保持质量的前提下使用最便宜的模型\n\n**第 2 步——测量优化前后的差异**——针对 10 个相同的请求，分别记录优化前后的 token 数和预估成本。\n\n**第 3 步——计算年度节省**：假设按你预期的生产规模来调用这个接口。\n\n**第 4 步——必做审阅：** 问 Claude：“审阅我的成本优化方案。我遗漏了什么？还有哪些额外的技巧可以在不影响质量的情况下进一步降低成本？”\n\n**第 5 步——将最终的优化策略记录下来**，作为你下一个 API 项目的参考。"
+    },
+    {
+      "type": "quiz",
+      "question": "当同一个系统提示词在多次请求中被重复使用时，提示词缓存能节省成本。要让缓存生效，必须满足什么条件？",
+      "options": [
+        "系统提示词必须少于 1000 个 token",
+        "被缓存的内容在各次请求中必须完全相同，并且达到最低 token 门槛（系统消息通常是 1024 个 token）",
+        "缓存只对同一个用户生效",
+        "你必须预先注册要缓存的提示词"
+      ],
+      "correct": 1,
+      "explanation": "Anthropic 的提示词缓存要求：（1）内容在各次请求中必须完全相同（哪怕一个字符不同都会导致缓存未命中），（2）内容必须达到最低 token 门槛（通常为 1024 个 token），（3）API 请求中必须设置 cache_control 参数。对于在多次请求中被重复使用的长系统提示词，缓存尤其有效——一个 2000 个 token 的系统提示词被重复使用 100 次，能节省相当可观的成本。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的模型路由器把一个复杂的分析请求错误地分类为“简单”，并将其路由给了 Claude Haiku。用户收到了质量较低的回答。你应该如何改进这个路由器？",
+      "options": [
+        "始终使用 Claude Sonnet——路由太冒险了",
+        "收集被错误分类的请求样本，分析其中的模式，改进路由逻辑——然后添加一个反馈机制，让用户可以标记质量不佳的回答供人工复核",
+        "调低门槛，让更多请求流向 Sonnet",
+        "让用户手动选择模型档位"
+      ],
+      "correct": 1,
+      "explanation": "模型路由本质上是一个实证问题——正确的做法是建立反馈闭环。收集那些路由结果不理想的案例，分析这些请求的哪些特征导致了错误分类，并更新路由逻辑。同时添加质量信号：跟踪用户反馈或代理指标（用户是否提出了追问，暗示回答不够充分？）。利用这些信号持续改进路由的准确性。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 11-9 课，也完成了整个第 11 部分。** 你从对 API 一无所知，到构建真实工具、理解 token 经济学，再到进行成本优化。你构建的摘要工具是任何 AI CLI 工具的模板。第 12 部分将走一条不同的路线：完全在自己的机器上运行 AI，使用 Ollama。"
+    }
+  ],
+  "nextLesson": "11-10",
+  "prevLesson": "11-8"
+}

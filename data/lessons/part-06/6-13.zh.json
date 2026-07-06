@@ -1,0 +1,95 @@
+{
+  "id": "6-13",
+  "title": "Custom Instructions —— 教会 Copilot 你的规则",
+  "part": 6,
+  "estimatedMinutes": 50,
+  "tags": ["copilot", "vscode", "custom-instructions", "configuration", "team", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n每次打开 Copilot Chat，你都是从零开始——Copilot 不会记得你想要 TypeScript 严格模式、你的团队使用 async/await 而不是 .then()，或者所有 API 响应都必须遵循特定的信封格式。没有自定义指令，你就得在每一次对话中重复这些上下文。\n\n**Custom Instructions（自定义指令）**能永久解决这个问题。你把规则写在一个文件里，写一次，Copilot 就会自动把它应用到每一次交互中——聊天、编辑、agent 模式、代码审阅——你再也不需要重复提起它们。\n\n你将学到：\n- 自定义指令的 5 个层级（个人、仓库、路径特定、组织、agent）\n- 如何写出真正能改变 Copilot 行为的指令\n- `copilot-instructions.md`、`AGENTS.md` 和 `*.prompt.md` 之间的区别\n- 强制执行合规要求的政府/企业专用指令模式"
+    },
+    {
+      "type": "text",
+      "content": "## 自定义指令的 5 个层级\n\n自定义指令在多个范围内起作用。它们会叠加——所有相关层级会被合并，一起发送给 Copilot。\n\n### 层级 1 —— 个人指令（你，无处不在）\n应用于你在 GitHub.com 和你的 IDE 中进行的每一次对话，跨越所有项目。\n\n**设置位置：** 在 GitHub.com 上 → 头像（左下角）→ **Personal instructions**\n\n用途：你偏好的编程语言、你的经验水平、你偏好的解释深度、你偏好的注释风格。\n\n### 层级 2 —— 仓库指令（`.github/copilot-instructions.md`）\n应用于所有在这个仓库中使用 Copilot 的人。会被提交进版本控制，所以所有队友都能自动获得相同的规则。\n\n**创建位置：** 仓库根目录 → `.github/` 文件夹 → `copilot-instructions.md`\n\n用途：编码规范、命名约定、该用哪些库、项目特定的模式、不该用什么。\n\n### 层级 3 —— 路径特定指令（`*.instructions.md`）\n仅在 Copilot 处理匹配特定 glob 模式的文件时生效。\n\n**创建位置：** `.github/instructions/` 文件夹 → 文件命名为 `NAME.instructions.md`，带有 `applyTo` frontmatter 字段\n\n示例：`python.instructions.md`，带有 `applyTo: **/*.py`，只对 Python 文件应用 Python 专属规则。\n\n### 层级 4 —— 组织指令\n应用于你整个组织在 GitHub.com 上进行的所有 Copilot Chat 对话。由组织所有者在 GitHub 组织设置中设定。\n\n目前支持：GitHub.com 上的 Copilot Chat、Copilot 代码审阅，以及 Copilot 云端 agent。\n\n### 层级 5 —— Agent 指令（`AGENTS.md`）\n一种较新的格式，主要供自主 agent（Copilot 云端 agent）使用。当 `AGENTS.md` 和 `.github/copilot-instructions.md` 同时存在时，两者都会被使用。你也可以用 `CLAUDE.md` 和 `GEMINI.md` 来提供模型专属的指令。\n\n**优先级顺序（从高到低）：** 个人 → 仓库 → 路径特定 → 组织"
+    },
+    {
+      "type": "text",
+      "content": "## `copilot-instructions.md` 中该写什么\n\n这个文件使用纯 Markdown。没有特殊语法——只需要清晰、直接的陈述句。简短、独立的陈述比长段落效果更好。\n\n### 什么样的写法效果好\n\n**技术和框架选择：**\n```markdown\n这个项目使用 Python 3.11+。用 f-strings 来做格式化。用 pathlib 处理文件路径，而不是 os.path。\n```\n\n**要遵循的模式：**\n```markdown\n所有 API 端点函数必须返回一个字典，键为：success（布尔值）、data（任意类型）、error（字符串或 null）。\n绝不能不带这层信封直接返回原始数据。\n```\n\n**要避免的模式：**\n```markdown\n不要用 print() 来调试。使用从 utils/logging.py 导入的 logger 模块。\n不要在函数签名中使用可变的默认参数。\n```\n\n**测试要求：**\n```markdown\n测试文件放在 tests/ 中，必须命名为 test_[module_name].py。\n所有测试使用 pytest。多个输入场景用 parametrize 来实现。\n```\n\n**代码风格：**\n```markdown\n使用清晰的变量名。除了循环计数器外，避免使用单字母变量。\n给每个超过 3 行的函数添加一个文档字符串。\n```\n\n### 什么样的写法效果不好\n```markdown\n# 差 —— 太笼统：\n写出好的、干净的、专业的代码。\n\n# 差 —— 太冗长：\n[一篇 500 字关于你编码哲学的论述]\n\n# 差 —— 自相矛盾：\n始终添加类型提示。但简单函数不要添加类型提示。\n```\n\n笼统的指令会被忽略。自相矛盾的指令会导致输出不一致。过长的指令文件会导致后面的指令被忽略。"
+    },
+    {
+      "type": "text",
+      "content": "## 路径特定指令：为不同文件设置不同规则\n\n有些规则只在特定情境下适用。路径特定指令能让你精确定位规则。\n\n**设置：** 在你的仓库中创建 `.github/instructions/`。\n\n**示例：仅限 Python 的规则**\n\n创建 `.github/instructions/python.instructions.md`：\n```markdown\n---\napplyTo: \"**/*.py\"\n---\n\n对所有函数参数和返回值使用类型提示。\n数据容器优先使用 dataclass，而不是普通字典。\n使用 `logging` 模块，不用 print()。Logger 名称应与模块名一致。\n所有异常都应该继承自 exceptions.py 中的自定义基础异常类。\n```\n\n**示例：测试文件规则**\n\n创建 `.github/instructions/tests.instructions.md`：\n```markdown\n---\napplyTo: \"**/test_*.py\"\n---\n\n使用能够描述场景和预期结果的、有描述性的测试函数名称。\n格式：test_[函数名]_[场景]_[预期结果]\n示例：test_authenticate_with_invalid_token_returns_401\n\n始终至少包含一个边界情况测试：空输入、null 输入，或边界值。\n```\n\n**示例：政府文档脚本**\n\n创建 `.github/instructions/reports.instructions.md`：\n```markdown\n---\napplyTo: \"**/reports/**\"\n---\n\n所有输出文件的文件名中必须包含生成时间戳。\n把处理过的每个文件记录到运行日志中，包括：文件名、行数、处理耗时。\n绝不能覆盖已有的输出文件——改为追加一个版本号。\n所有日期字段必须格式化为 YYYY-MM-DD，以保持与 PIMS 的一致性。\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**验证你的指令是否生效：** 在 Copilot Chat（VS Code）中，得到任意回答后，向下滚动，查看回答下方的 **References（引用来源）**部分。如果你的 `copilot-instructions.md` 文件列在其中，说明这次回答确实应用了你的指令。如果没有列出来，说明这个指令文件可能没有被找到——检查一下文件路径（它必须准确地是仓库根目录下的 `.github/copilot-instructions.md`，而不是某个子文件夹中）。"
+    },
+    {
+      "type": "text",
+      "content": "## Prompt Files —— 可复用的任务模板\n\n除了持续生效的后台指令外，Copilot 还支持 **Prompt Files（提示词文件）**——预先写好的、可复用的提示词，你可以针对特定任务按需触发。\n\n**存放位置：** `.github/prompts/` 目录，文件命名为 `*.prompt.md`\n\n**何时使用提示词文件而不是自定义指令：**\n- 自定义指令：应用于每一次交互的规则，自动生效\n- 提示词文件：针对特定任务的详细指令，你在需要时触发\n\n**示例提示词文件 —— PR 描述生成器：**\n\n`.github/prompts/pr-description.prompt.md`：\n```markdown\n为这个分支上的改动生成一份 pull request 描述。\n\n格式：\n## 摘要\n[最多 3 个要点 —— 改动了什么、为什么改动]\n\n## 技术细节\n[改动是如何实现的，做出了哪些关键决策]\n\n## 测试\n[测试了什么，有哪些手动测试步骤]\n\n## 风险\n[低/中/高 —— 可能出什么问题，影响会是什么]\n\n保持语气专业、客观。避免使用“各种改进”这类笼统的说法。\n```\n\n**面向政府工作的示例 —— 合规检查提示词：**\n\n`.github/prompts/compliance-check.prompt.md`：\n```markdown\n审阅以下代码或文档，检查合规方面的问题：\n\n1. 个人信息：这段代码是否会记录、存储或传输任何个人身份信息（PII）？\n2. 访问控制：是否有适当的身份验证和授权检查？\n3. 审计追踪：所有重要操作是否都记录了用户 ID、时间戳和操作内容？\n4. 数据保留：任何存储的记录是否受到某项保留政策的约束，而这段代码可能绕过了它？\n5. 错误信息：任何错误信息是否会向用户泄露内部系统信息？\n\n针对每个类别，给出结论：Clear（无问题）/ Concern（有顾虑）/ Not Applicable（不适用）。对于任何“有顾虑”的项，具体描述需要改动什么。\n```\n\n使用提示词文件的方法：在 Copilot Chat 中输入 `/`，后面跟上提示词文件名。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "写出你的第一份仓库指令",
+      "content": "为你实际参与的项目创建一份真实的 `.github/copilot-instructions.md`。\n\n**第 1 步 —— 审计你当前代码库中的模式。**\n在 VS Code 中打开一个项目。查看 5-10 个现有文件，记下：\n- 使用什么语言和版本？\n- 一贯使用哪些关键库？\n- 一贯出现哪些命名约定？\n- 使用什么样的错误处理模式？\n- 在这里，一个“好”的函数长什么样？\n\n**第 2 步 —— 请 Copilot 帮你写指令。**\n在 Copilot Chat 中：\n```\n@workspace 分析这个代码库，写一份 copilot-instructions.md 文件，涵盖：\n1. 使用的编程语言、版本和关键框架\n2. 我应该遵循的主要编码模式和约定\n3. 测试方法\n4. 不该做什么（代码中可见的反模式）\n每条指令都要简短、具体。\n```\n\n**第 3 步 —— 审阅和优化。**\nAI 生成的指令只是一个起点。编辑它们以便：\n- 移除任何不准确的内容\n- 添加你凭经验知道、但代码中看不出来的规则\n- 添加与你的工作相关的任何政府/合规专属规则\n\n**第 4 步 —— 创建这个文件。**\n保存到仓库根目录下的 `.github/copilot-instructions.md`。\n\n**第 5 步 —— 验证它是否生效。**\n问 Copilot 一个应该触发你指令中某条规则的问题。查看 References 部分，确认这个文件被使用了。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 A —— 衡量自定义指令的影响",
+      "content": "量化一下自定义指令对 Copilot 输出的改变程度。\n\n**测试 1 —— 使用指令之前（基线）**\n在 VS Code Settings 中临时禁用自定义指令（搜索 'instruction file'，取消勾选该设置）。然后问：\n```\n写一个函数，读取一个 CSV 文件，把每一行作为字典返回成一个列表。\n```\n保存这次回答。\n\n**测试 2 —— 使用指令之后（有规则）**\n重新启用。确保你的 copilot-instructions.md 至少有 3 条具体规则（例如错误处理风格、日志记录方式、类型提示要求）。问同样的问题。\n\n**对比：**\n- 有指令的版本是否使用了你指定的日志记录模式？\n- 如果你要求了类型提示，它是否添加了？\n- 它是否按你指定的方式处理错误？\n- 代码是否与你现有的代码库更加一致？\n\n**评分：** 数一数在有指令的回答中，你的规则有多少条被应用了。\n\n**关键洞察：** 如果你的规则应用率低于 70%，说明你的指令可能太模糊、太冗长，或自相矛盾。优化后再测试一次。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 B —— 政府合规指令集",
+      "content": "为政府或受监管行业的工作，搭建一份聚焦合规的自定义指令文件。\n\n**创建 `.github/copilot-instructions.md`，包含以下适用于政府场景的部分：**\n\n**第 1 部分 —— 数据处理：**\n```markdown\n绝不记录、打印或返回：密码、令牌、社会安全号码、税号，或任何名称匹配以下模式的字段：\n*_secret、*_token、*_password、*_key、api_*。\n在任何输出操作之前，始终对这些字段进行掩码处理或省略。\n```\n\n**第 2 部分 —— 审计要求：**\n```markdown\n所有创建、更新或删除数据的函数都必须记录：操作名称、\n执行该操作的用户 ID、时间戳，以及受影响的记录 ID。\n使用 utils/audit.py 中的 audit_log() 函数——审计事件绝不能使用 print() 或普通日志记录。\n```\n\n**第 3 部分 —— 错误处理：**\n```markdown\n展示给用户的错误信息绝不能包含：堆栈跟踪、内部文件路径、\n数据库错误信息，或系统配置细节。\n在内部完整记录错误；只向调用方返回一条通用的错误信息。\n```\n\n**第 4 部分 —— 输入校验：**\n```markdown\n所有外部输入（文件上传、表单字段、API 参数）在使用前都必须经过校验。\n拒绝并记录任何未通过校验的输入——绝不能悄悄丢弃它。\n```\n\n**测试一下：** 让 Copilot 写一个处理表单提交的函数。验证它在你没有在提示词中提及的情况下，是否应用了全部 4 条合规规则。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 C —— 为你的团队搭建提示词库",
+      "content": "创建一个包含 5 个可复用提示词的提示词文件库，供你和你的团队经常使用。\n\n**创建文件夹：** 在你的仓库中创建 `.github/prompts/`。\n\n**写出以下 5 个提示词文件：**\n\n**1. `code-review.prompt.md`** —— 一份详尽的代码审阅清单，涵盖：逻辑错误、安全隐患、缺失的测试、不清晰的变量名，以及文档缺口。\n\n**2. `pr-description.prompt.md`** —— 与你组织格式匹配的 PR 描述模板（包括摘要、技术方案、已完成的测试、风险等级）。\n\n**3. `explain-to-non-technical.prompt.md`** —— 一个能把任何代码或技术决策，用通俗英语解释给没有技术背景的经理或政策官员听的提示词。\n\n**4. `security-check.prompt.md`** —— 一个针对你工作相关的具体安全问题审阅代码的提示词：数据暴露、访问控制缺口、审计日志、输入校验。\n\n**5. 一个自定义提示词**，针对你实际的工作——报告生成器、数据校验工作流、文档解析器，或任何重复性任务。\n\n**测试每个提示词：** 在真实工作中使用它。不断打磨措辞，直到输出无需编辑即可立即使用。\n\n**成果：** 一个团队通用的提示词库，让每个人的 Copilot 交互更一致、更有用。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 D —— 为你的工作风格设置个人指令",
+      "content": "设置应用于你在 GitHub.com 上每一次交互的个人指令——不局限于某一个仓库。\n\n**第 1 步 —— 前往 GitHub.com**\n点击头像（左下角）→ Personal instructions\n\n**第 2 步 —— 写出针对你角色定制的个人指令。**\n\n面向政府工作者/分析师：\n```\n我在政府部门工作。我的代码主要处理行政数据、生成报告，并自动化文档工作流。\n我倾向于尽可能使用带标准库的 Python。\n\n解释代码时：假设我理解基本的编程概念，但可能不了解高级的计算机科学概念。\n提出解决方案时：优先考虑简单性和可维护性，而不是炫技。\n编写函数时：始终包含文档字符串和类型提示。\n审阅代码时：标记出任何可能暴露个人或敏感政府数据的地方。\n\n我偏好的回答长度：简洁。先给我答案，再根据需要给背景信息。\n```\n\n**第 3 步 —— 在 GitHub.com 的 GitHub Copilot Chat 中测试**（不是 VS Code——这些设置应用于 GitHub.com）。\n问一个通用的编程问题，观察你的个人偏好是否得到体现。\n\n**第 4 步 —— 迭代。** 个人指令只对你私密可见——可以自由迭代，直到 Copilot 稳定地匹配你偏好的风格和深度。\n\n**成果：** 一个说你的“语言”、匹配你的水平、默认贴合你工作情境的个性化 Copilot——在 GitHub 上的每一个项目中都是如此。"
+    },
+    {
+      "type": "quiz",
+      "question": "你有一份 `.github/copilot-instructions.md`，其中写着“始终为 Python 函数添加类型提示”。你打开一个 JavaScript 文件，让 Copilot 写一个函数。这条规则会生效吗？",
+      "options": [
+        "会——仓库指令适用于所有文件，无论语言",
+        "不会——仓库指令适用于所有文件，但由于 JavaScript 中不存在类型提示，Copilot 会忽略与该语言无关的规则",
+        "取决于你是否有一份路径特定的指令文件来覆盖它",
+        "不会——你需要专门为 JavaScript 再创建一份 copilot-instructions.md"
+      ],
+      "correct": 1,
+      "explanation": "仓库指令会随每次请求一同发送，但 Copilot 会智能地应用它们。当生成 JavaScript 代码时，一条关于 Python 类型提示的规则在情境上是不相关的，所以 Copilot 会忽略它——JavaScript 在同样的意义上并没有类型提示（不过如果你在 TypeScript 文件中，它可能会应用 TypeScript 风格的类型注解）。这条指令依然存在且会被读取，但 Copilot 会正确判断出它不适用于当前情境。"
+    },
+    {
+      "type": "quiz",
+      "question": "你想为测试文件和生产代码设置不同的规则。正确的 Copilot 自定义指令方法是什么？",
+      "options": [
+        "创建两份独立的 copilot-instructions.md 文件——一份给测试，一份给生产代码",
+        "在 .github/instructions/ 中创建带有 applyTo 模式的路径特定指令文件，分别针对测试文件和生产文件",
+        "把所有规则写在一份 copilot-instructions.md 中，在开头注明哪些规则适用于测试、哪些适用于生产",
+        "自定义指令无法按范围划分——你必须把所有规则放进一个文件，由 Copilot 自行判断哪些适用"
+      ],
+      "correct": 1,
+      "explanation": "路径特定指令文件（.github/instructions/ 中的 *.instructions.md）正是为此而设计的。创建 test.instructions.md，配上 applyTo: '**/test_*.py'，再创建 production.instructions.md，配上 applyTo: 'src/**/*.py'。每份文件中的规则只在 Copilot 处理匹配该模式的文件时才生效。当条件都满足时，路径特定规则和主 copilot-instructions.md 中的规则会被一起合并使用。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-13 课完成。** 自定义指令是你能做出的杠杆效应最高的 Copilot 配置——它们会在每一次交互中持续累积。一份写得好的 copilot-instructions.md 意味着，每一条建议在你阅读之前，就已经遵循了你的模式、你的标准，以及你的合规要求。第 6-14 课讲的是 GitHub Copilot CLI——一个完全自主的、原生运行在终端中的 AI agent，运行在 VS Code 之外。"
+    }
+  ],
+  "nextLesson": "6-14",
+  "prevLesson": "6-12"
+}

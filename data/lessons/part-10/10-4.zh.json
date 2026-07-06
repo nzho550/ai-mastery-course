@@ -1,0 +1,109 @@
+{
+  "id": "10-4",
+  "title": "Make（原 Integromat）——可视化自动化",
+  "part": 10,
+  "estimatedMinutes": 60,
+  "tags": [
+    "automation",
+    "make",
+    "no-code",
+    "ai-workflows"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 学习目标\n\n学完本课后，你将理解 Make 基于模块的可视化自动化方式，并能够使用 HTTP 模块直接从 Make 场景（scenario）中调用 Anthropic API。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 Make？\n\nMake（原名 Integromat）是 make.com 上的一款可视化自动化平台。和 n8n、Zapier 一样，它连接各种应用和服务。Make 的与众不同之处：\n\n- **可视化画布**——由线条连接的圆形节点，非常直观\n- **基于模块**——每一步都是一个你需要配置的\"模块\"\n- **免费额度充裕**——每月 1000 次操作免费（一次操作 = 一次模块执行）\n- **仅限云端**——没有自托管选项（这点和 n8n 不同）\n- **计划任务**——场景按你设定的计划运行\n\n就复杂度而言，Make 介于 Zapier（最精致）和 n8n（最强大）之间。它在营销人员和运营团队中很受欢迎，因为它的可视化界面让复杂的数据转换变得非常清晰易读。"
+    },
+    {
+      "type": "text",
+      "content": "## 从 Make 调用 Claude\n\nMake 内置了 OpenAI 模块，但**没有官方的 Anthropic/Claude 模块**。这不是什么大问题——Make 的 HTTP 模块可以调用任何 REST API，包括 Anthropic 的 Messages API。\n\nHTTP 模块发送的是原始的 HTTP 请求。对于 Claude 来说，这意味着：\n- URL：`https://api.anthropic.com/v1/messages`\n- 方法：POST\n- 请求头：需要三个必需的请求头\n- 请求体：包含你的模型、max_tokens 和 messages 数组的 JSON\n\n这比用专用模块需要更多的配置，但它能让你完全掌控请求内容，并且适用于任何 Anthropic 模型。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**其他替代方案：** 如果你想减少 HTTP 配置，可以（1）使用指向兼容 Claude 的代理的 OpenAI 模块，或（2）改用第 10-2 课中 n8n 的原生 Claude 集成。本课教的这个概念——在可视化工具中通过 HTTP 调用 API——放到哪里都适用。"
+    },
+    {
+      "type": "text",
+      "content": "## HTTP 模块配置\n\n以下是从 Make 的 HTTP 模块调用 Claude 时你会用到的具体配置：\n\n**URL：** `https://api.anthropic.com/v1/messages`\n\n**方法：** POST\n\n**请求头：**\n- `x-api-key` → 你的 Anthropic API 密钥\n- `anthropic-version` → `2023-06-01`\n- `content-type` → `application/json`\n\n**请求体（Raw / JSON）：**"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"{{your_input_from_previous_module}}\"\n    }\n  ]\n}"
+    },
+    {
+      "type": "text",
+      "content": "`{{your_input_from_previous_module}}` 这部分是 Make 的动态变量语法——你把上一个模块（比如 Google Sheets 的一行数据或邮件正文）的数据映射到提示词里。\n\n响应会以 JSON 对象的形式返回。要提取 Claude 的文本回复，需要解析：`body > content > 0 > text`。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "构建一个调用 Anthropic API 的 Make 场景",
+      "content": "你将构建一个场景：监控 Google Sheet 中的新行，通过 HTTP 模块把这一行的内容发送给 Claude 处理，再把结果邮件发给你。\n\n**准备工作：**\n1. 前往 make.com，注册免费套餐\n2. 准备好你在第 11-3 课中获取的 Anthropic API 密钥（如果你还没上过 Part 11，先用占位符代替，之后再回来补上）\n3. 创建一个新的 Google Sheet，包含两列：`Topic` 和 `Status`\n\n**构建这个场景：**\n\n**第 1 步——添加 Google Sheets 模块（触发器）**\n1. 点击 **Create a new scenario**\n2. 点击画布上的大 `+` 号\n3. 搜索 **Google Sheets** → 选择 **Watch new rows**\n4. 连接你的 Google 账户\n5. 选择你的电子表格和工作表\n6. 把 \"Maximum number of returned rows\" 设为 1\n\n**第 2 步——添加 HTTP 模块**\n1. 点击 Google Sheets 模块右侧的 `+`\n2. 搜索 **HTTP** → 选择 **Make a request**\n3. 配置：\n   - URL：`https://api.anthropic.com/v1/messages`\n   - 方法：POST\n   - 请求头（每一项点击 Add item）：\n     - 名称：`x-api-key` / 值：`sk-ant-your-key-here`\n     - 名称：`anthropic-version` / 值：`2023-06-01`\n     - 名称：`content-type` / 值：`application/json`\n   - 请求体类型：Raw\n   - 内容类型：JSON（application/json）\n   - 请求内容（粘贴并替换 topic 变量）：\n```\n{\"model\":\"claude-haiku-4-5-20251001\",\"max_tokens\":200,\"messages\":[{\"role\":\"user\",\"content\":\"Write a 3-sentence social media post about this topic: {{1.Topic}}\"}]}\n```\n   - 解析响应：是\n\n**第 3 步——添加 Gmail 模块**\n1. 点击 HTTP 模块后面的 `+`\n2. 搜索 **Gmail** → **Send an email**\n3. 收件人：你自己的邮箱地址\n4. 主题：`Social Post Draft — {{1.Topic}}`\n5. 内容：点击这个字段，然后映射：HTTP 模块 → body → content → 0 → text\n\n**测试并激活：**\n1. 点击 **Run once**\n2. 在你的 Google Sheet 中添加一行，填入一个主题（例如 \"The future of AI coding tools\"）\n3. 观察场景的执行——每个成功的模块都会变绿\n4. 检查你的收件箱，查看起草的社媒帖子\n5. 点击时钟图标设置计划：每 15 分钟一次（或任意间隔）\n6. 把场景开关切换到 ON\n\n**需要观察的点：** HTTP 模块让你能直接访问任何 Make 没有原生模块支持的 API。这个模式适用于任何 REST API——不只是 Anthropic。"
+    },
+    {
+      "type": "text",
+      "content": "## Make、n8n 与 Zapier：坦诚的对比\n\n| | Make | n8n | Zapier |\n|--|------|-----|--------|\n| 免费套餐的 AI | 仅 HTTP 模块 | 原生 AI 节点免费 | 需要付费套餐 |\n| 视觉风格 | 圆形画布 | 流程图画布 | 逐步表单 |\n| 最适合 | 视觉型思考者、数据转换 | 最大功能 + 免费 | 最快上手 |\n| 原生支持 Claude | 否（用 HTTP） | 是 | 否（用 Webhook 或付费） |\n| 复杂度 | 中等 | 中高 | 低 |\n\n这几个工具都不能说哪个绝对更好——各有权衡。大多数人会选定一个，把它学精。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A — Make 场景探索",
+      "content": "探索 Make（原 Integromat），理解它的可视化方式。\n\n**第 1 步——登录 Make**（make.com——有免费套餐）。\n\n**第 2 步——探索可视化场景构建器。** 它和 Zapier 的线性 Zap 模型有什么不同？注意 Make 支持：\n- 循环（遍历数组）\n- 多个分支/路径\n- 模块级别的错误处理器\n- 聚合器（合并多条记录）\n\n**第 3 步——询问 Claude：** *\"对比 Make 的可视化自动化构建器和 Zapier，在处理复杂工作流时有什么不同？Make 有哪些 Zapier 做不到或做得不好的具体能力？什么情况下我该选 Make 而不是 Zapier？\"*\n\n**第 4 步——探索**一个与你工作相关的、来自 Make 模板库的模板。\n\n**第 5 步——找出**一个在 Zapier 上会很复杂、但在 Make 上会更简单的工作流（涉及循环、多重数据转换，或非线性分支）。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — 构建一个带数据转换的 Make 场景",
+      "content": "构建一个涉及真实数据转换的 Make 场景——这是 Make 的强项。\n\n**第 1 步——选择一个**需要处理多个条目的场景：\n- 获取所有 GitHub 议题，用 AI 分类每一条，把分类结果保存到表格\n- 获取每日报表 CSV，转换每一行，发送个性化邮件\n- 处理一份 URL 列表，提取每个页面的内容，汇总所有内容并发送摘要\n\n**第 2 步——请 Claude Code 设计这个 Make 场景：**\n```\nI want to build this in Make (formerly Integromat):\n[describe your scenario]\n\nHelp me:\n1. Which modules should I use?\n2. How should I structure the iterator/aggregator?\n3. For the AI step, write the HTTP module configuration to call the Anthropic API\n4. What's the data transformation approach at each step?\n```\n\n**第 3 步——按照 Claude 的设计**构建这个场景。\n\n**第 4 步——用真实数据测试。** 验证 3 个输入条目的输出结果。\n\n**第 5 步——强制审查环节：** 询问：*\"这个场景存在哪些故障模式？当 Anthropic API 返回意外格式时会发生什么？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C — Make 的错误处理与监控",
+      "content": "配置 Make 的错误处理功能。\n\n**第 1 步——询问 Claude：** *\"解释一下 Make 的错误处理方式：error handler、ignore、break、resume、rollback、commit。我应该在什么情况下分别使用它们？\"*\n\n**第 2 步——为你的场景添加错误处理：**\n- 为 HTTP 模块添加一个 Break 处理器（该条目停止遍历，其他条目继续处理）\n- 添加一个最终的错误通知模块\n\n**第 3 步——测试错误处理：** 发送一个会导致 HTTP 模块失败的畸形输入。场景是否能优雅地处理它？\n\n**第 4 步——配置场景监控：**\n- 为场景失败设置邮件通知\n- 配置 Make 内置的场景监控（如果你的套餐支持）\n\n**第 5 步——询问 Claude：** \"为一个每晚处理 500 条记录的 Make 场景设计一个监控方案。如果有 10% 的记录处理失败，我该如何得知？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — 自动化整合复盘",
+      "content": "回顾你试用过的所有自动化工具，整合出你自己的方案。\n\n**第 1 步——列出**你在第 10-1 课到第 10-4 课中构建或测试过的所有自动化：n8n、Zapier、Make。\n\n**第 2 步——为每个自动化**打分：\n- 运行是否可靠？（1-5 分）\n- 是否交付了真实价值？（1-5 分）\n- 是否易于维护？（1-5 分）\n\n**第 3 步——询问 Claude：** *\"基于这些自动化 [描述它们]，我应该投入时间改进哪些，放弃哪些？我接下来该构建的最高价值自动化是什么？\"*\n\n**第 4 步——选择一个工具**作为你今后的主要自动化平台（或者定义你会在什么情况下分别使用哪个）。写一段话说明你的选择理由。\n\n**第 5 步——承诺**在评估是否继续之前，先让至少一个自动化在生产环境中运行 30 天。"
+    },
+    {
+      "type": "quiz",
+      "question": "Make 的迭代器模块处理 100 个条目，其中 5 个失败了。默认情况下会发生什么？你应该改为如何配置？",
+      "options": [
+        "只要有任何条目失败，整个场景就会失败",
+        "默认情况下，失败的条目会中断迭代器；配置一个 Break 错误处理器来跳过失败的条目，继续处理成功的条目，并单独记录失败情况",
+        "Make 会自动重试失败的条目 3 次",
+        "失败的条目会自动加入重试队列"
+      ],
+      "correct": 1,
+      "explanation": "Make 迭代器默认的出错行为可能会中断整个批次。对于处理多个条目、且允许部分失败的场景，请恰当地配置错误处理器：Break（跳过失败条目并继续），或 Resume（标记为失败但继续）。同时添加一个后处理步骤来收集失败情况并生成报告。一个能成功处理 100 个条目中 95 个、并附带清晰失败报告的场景，远比一个在第一个失败处就停止的场景更有用。"
+    },
+    {
+      "type": "quiz",
+      "question": "Make 按操作次数（模块运行次数）收费。一个包含 5 个模块的场景处理了 200 个条目。这会消耗多少次操作？",
+      "options": [
+        "200 次操作——按场景每次运行计算",
+        "5 次操作——按场景中的模块数计算",
+        "1000 次操作——5 个模块 × 200 个条目",
+        "200 次操作——迭代器算作一次"
+      ],
+      "correct": 2,
+      "explanation": "Make 是按每次模块执行计算的，而不是按场景运行次数计算。如果一个迭代器让 200 个条目各经过 5 个模块：200 × 5 = 1000 次操作。这一点对于成本规划至关重要：一个看起来简单（5 个模块）、但要处理大数据集的场景，在规模化之后会变得很昂贵。设计 Make 场景时应尽量减少迭代器内部（内循环中）的模块数量，并尽可能使用聚合器或批量操作。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 10-4 课。** 你已经了解了三大主流无代码自动化平台，也知道了如何从其中任何一个平台调用 Anthropic API，即使没有原生模块支持也能做到。接下来：用 AI 改进你的 git 工作流。"
+    }
+  ],
+  "nextLesson": "10-5",
+  "prevLesson": "10-3"
+}

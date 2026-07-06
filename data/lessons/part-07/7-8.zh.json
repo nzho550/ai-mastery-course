@@ -1,0 +1,121 @@
+{
+  "id": "7-8",
+  "title": "Hooks——自动化 Claude 工作前后的操作",
+  "part": 7,
+  "estimatedMinutes": 65,
+  "tags": [
+    "claude-code",
+    "hooks",
+    "automation",
+    "settings-json"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将理解 hooks（钩子）是什么、了解三种主要的钩子类型，并拥有一个在 Claude Code 修改文件时自动触发的可用钩子。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 Hooks？\n\nHooks 是 Claude Code 在工作流程的特定节点自动运行的 shell 命令——在 Claude 使用工具之前、使用工具之后，或者在它完成一次回答时。\n\n可以把 hooks 想象成自动化触发器：*“每次 Claude 编辑文件时，也执行 X。”* 你定义 X，Claude Code 负责触发它。\n\nHooks 在 `.claude/settings.json` 的 `hooks` 键下定义。这个文件位于你的项目根目录中（不在 `commands/` 文件夹内）。\n\n常见的实际用途：\n- **自动 lint：** 在 Claude 编辑的每个文件上运行 `prettier --write` 或 `eslint --fix`，让代码始终保持格式化\n- **自动测试：** 在 Claude 做出更改后运行你的测试套件，让你立刻知道是否有东西被破坏\n- **日志记录：** 每次 Claude 修改文件时写入一条日志，留下审计记录\n- **通知：** 在 Claude 完成一项长任务时发送桌面通知或提示音\n- **Git 自动提交：** 在每次更改被接受后自动创建一次提交"
+    },
+    {
+      "type": "text",
+      "content": "## 五种钩子事件类型\n\n**`PreToolUse`**\n在 Claude 使用工具*之前*运行。使用场景：确认你处于正确的目录、向 Claude 的上下文中注入提醒、记录 Claude 即将做的事情、阻止危险操作。\n\n**`PostToolUse`**\n在 Claude 使用工具*之后*运行。这是最常用的钩子。使用场景：对刚刚编辑的文件进行 lint 检查、在代码更改后运行测试、记录修改内容、将上下文保存到记忆文件中。\n\n**`Stop`**\n在 Claude 完成生成一次完整回答、等待你输入时运行。使用场景：播放提示音表示 Claude 已完成、发送桌面通知、总结这次会话。\n\n**`SubagentStop`**\n在子代理（由编排者生成）完成其工作时运行。使用场景：收集子代理的输出、触发汇总步骤、记录并行代理的结果。仅在多代理工作流中相关（第 7-11 课）。\n\n**`PreCompact`**\n在 Claude 压缩一段长对话以释放上下文空间之前运行。使用场景：在重要上下文被压缩掉之前将其保存到文件中、在对话摘要取代完整历史记录之前提取关键决策。\n\n每种钩子类型都接受一个匹配器列表。`matcher` 字段是一个匹配工具名称的正则表达式——因此你可以只在 `Write` 调用、只在 `Bash` 调用，或它们的任意组合上触发钩子。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**用户级 vs 项目级钩子：** Hooks 可以存放在两个位置：\n- **项目级：** 项目根目录下的 `.claude/settings.json`——仅适用于该项目\n- **用户级：** 主目录下的 `~/.claude/settings.json`——适用于所有项目\n\n用户级钩子对通用习惯非常强大：例如一个每次 Claude 完成任务都会提醒你的通知钩子，或者一个始终把 AI 操作记录到中央审计日志中的日志钩子。项目级钩子则用于特定项目的规则：自动运行该项目的测试套件、强制执行该项目的代码风格。\n\n两个级别会同时加载——用户级钩子和项目级钩子会在一次会话中一起触发。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**钩子环境变量——你的钩子命令可以读取什么：**\n\n| 变量 | 内容 | 可用范围 |\n|----------|----------|-------------|\n| `CLAUDE_TOOL_NAME` | 正在使用的工具名称（例如 `Write`、`Bash`） | PreToolUse、PostToolUse |\n| `CLAUDE_TOOL_INPUT` | 传给工具的完整 JSON 输入 | PreToolUse、PostToolUse |\n| `CLAUDE_TOOL_RESULT` | 工具返回的结果 | 仅 PostToolUse |\n| `CLAUDE_SESSION_ID` | 本次会话的唯一 ID | 所有类型 |\n| `CLAUDE_PROJECT_DIR` | 项目文件夹的绝对路径 | 所有类型 |\n\n你的钩子脚本可以读取这些变量来做出符合上下文的判断——例如，检查 `CLAUDE_TOOL_NAME` 以只在 `Write` 操作上运行你的格式化工具，或者记录 `CLAUDE_TOOL_INPUT` 来捕获被编辑的文件。\n\n**将反馈注回给 Claude：** 如果你的钩子写入了标准输出（stdout），Claude Code 会读取该输出，并将其作为下一步行动的上下文。这意味着一个钩子可以主动告知 Claude：写入 `echo 'WARNING: this function is deprecated'`，Claude 就会在继续之前考虑到这一点。"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude just edited a file\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**匹配器语法：** `matcher` 字段使用正则表达式。常见模式：\n- `\"Write\"`——仅在 Write 工具调用（创建或覆盖文件）时触发\n- `\"Edit\"`——仅在 Edit 工具调用（原地编辑）时触发\n- `\"Write|Edit\"`——两者之一触发\n- `\"Bash\"`——Claude 运行 shell 命令时触发\n- `\".*\"`——每次工具调用都会触发（范围很广——请谨慎使用）"
+    },
+    {
+      "type": "text",
+      "content": "## 一个真实的 Hooks 示例\n\n下面是一个 `settings.json`，其中包含针对 Web 开发项目的三个实用钩子：\n\n- 一个 PostToolUse 钩子，记录哪个文件被修改了\n- 一个 Stop 钩子，打印“Claude is done”消息\n- 一个 PreToolUse 钩子，在任何 Bash 命令运行之前输出一条警告"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo [HOOK] Claude is about to run a shell command\"\n          }\n        ]\n      }\n    ],\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo [HOOK] File modified by Claude Code\"\n          }\n        ]\n      }\n    ],\n    \"Stop\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo [HOOK] Claude finished responding\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**钩子以你的用户权限运行。** 一个运行 `rm -rf` 的钩子会真的删除文件。请保持钩子简单且行为确定。如果你要添加一个运行 linter 或格式化工具的钩子，请先确保该工具已安装且能正常工作——一个失败的钩子会打断 Claude 的工作流程。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "搭建一个文件编辑钩子",
+      "content": "添加一个 PostToolUse 钩子，每次 Claude 修改文件时在终端中打印一条消息。验证它是否触发。\n\n**第 1 步——创建或打开 `.claude/settings.json`：**\n在 VS Code 资源管理器中，查找项目根目录下的 `.claude/settings.json`。如果不存在，就创建它。（`.claude/` 文件夹应该在第 7-7 课创建 `commands/` 子文件夹时就已经存在了。）\n\n**第 2 步——添加钩子：**\n将以下内容粘贴到 `.claude/settings.json`：\n```json\n{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude just edited a file\"\n          }\n        ]\n      }\n    ]\n  }\n}\n```\n保存文件。\n\n**第 3 步——启动 Claude Code：**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**第 4 步——触发钩子：**\n让 Claude 对任意文件做一个小修改：\n```\n在 exercises/about-me.html 的顶部添加一条 HTML 注释，内容为\n\"Last updated by Claude Code\"\n```\n审阅差异并接受它。\n\n**第 5 步——观察钩子输出：**\nClaude 应用更改后，你应该会看到：\n```\nClaude just edited a file\n```\n打印在终端中。这就是你的钩子被触发了。\n\n**第 6 步——升级钩子（可选）：**\n把钩子改成信息量更大的内容。在 Windows（PowerShell）上，把命令更新为：\n```\necho File modified at %TIME%\n```\n这会打印每次编辑的时间，给你一份轻量级的审计日志。\n\n**真实场景延伸：** 如果你安装了 Prettier（`npm install -g prettier`），把 echo 命令替换为：\n```\nprettier --write %CLAUDE_TOOL_INPUT_PATH%\n```\n这会自动格式化 Claude 触及的每个文件。仅这一行钩子就能消除一整类手动格式化工作。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——你的第一个钩子",
+      "content": "Hooks 是围绕 Claude Code 操作自动运行的 shell 命令。这个练习将创建你的第一个钩子。\n\n**第 1 步——打开 Claude Code 设置：**\n```\n/settings\n```\n或通过 CLI：`claude config`\n\n**第 2 步——理解钩子事件**（询问 Claude Code 或查阅文档）：\n- `PreToolUse`——在 Claude Code 使用工具之前运行\n- `PostToolUse`——在 Claude Code 使用工具之后运行\n- `Stop`——在 Claude Code 完成时运行\n\n**第 3 步——创建一个简单的通知钩子**——在 Claude Code 完成时播放提示音或显示通知：\n```json\n{\n    \"hooks\": {\n        \"Stop\": [\n            {\n                \"matcher\": \"\",\n                \"hooks\": [\n                    {\n                        \"type\": \"command\",\n                        \"command\": \"echo 'Claude Code task completed!' | powershell -command \\\"[System.Media.SystemSounds]::Beep.Play()\\\"\"\n                    }\n                ]\n            }\n        ]\n    }\n}\n```\n\n**第 4 步——测试钩子**，方法是运行一个 Claude Code 任务。\n\n**第 5 步——调整通知内容**，使其适合你的工作流程。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——自动测试钩子",
+      "content": "构建一个钩子，每当 Claude Code 修改 Python 文件时自动运行你的测试。\n\n**第 1 步——确定你的测试命令：**\n```powershell\npython -m pytest tests/  # 或任何能运行你测试的命令\n```\n\n**第 2 步——添加一个 PostToolUse 钩子**，在文件编辑之后运行测试：\n```json\n{\n    \"hooks\": {\n        \"PostToolUse\": [\n            {\n                \"matcher\": \"Write|Edit\",\n                \"hooks\": [\n                    {\n                        \"type\": \"command\",\n                        \"command\": \"python -m pytest tests/ --tb=short -q\",\n                        \"timeout\": 60\n                    }\n                ]\n            }\n        ]\n    }\n}\n```\n\n**第 3 步——测试钩子：** 让 Claude Code 编辑一个 Python 文件。测试是否自动运行了？\n\n**第 4 步——审查钩子的输出：** 当测试失败时，Claude Code 是否调整了它的行为？\n\n**第 5 步——问 Claude：** *“审查这个钩子配置。哪些边缘情况可能导致它在错误的时机运行或产生令人困惑的输出？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C——用于 AI 可审计性的日志钩子",
+      "content": "构建一个钩子，记录 Claude Code 使用的每一个工具——建立 AI 操作的审计记录。\n\n**第 1 步——创建一个日志文件：**\n```powershell\nnew-item claude-audit.log\n```\n\n**第 2 步——添加一个日志钩子**，记录所有工具使用情况：\n```json\n{\n    \"hooks\": {\n        \"PreToolUse\": [\n            {\n                \"matcher\": \"\",\n                \"hooks\": [\n                    {\n                        \"type\": \"command\",\n                        \"command\": \"echo [$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] CLAUDE TOOL: $CLAUDE_TOOL_NAME >> claude-audit.log\"\n                    }\n                ]\n            }\n        ]\n    }\n}\n```\n\n**第 3 步——运行一次 Claude Code 会话**，完成一个真实任务。之后检查日志文件。\n\n**第 4 步——将日志文件加入 .gitignore**（它是运行时数据，不是代码）。\n\n**第 5 步——问 Claude：** *“看看这份来自我 Claude Code 会话的审计日志 [粘贴关键内容]，工具使用的顺序是否符合我给 Claude Code 布置的任务的预期？它揭示了什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——针对危险操作的安全钩子",
+      "content": "构建一个拦截危险命令并在执行前要求确认的钩子。\n\n**第 1 步——识别你所处环境中的危险命令：** `rm -rf`、`DROP TABLE`、`git push --force`、`DELETE FROM`。\n\n**第 2 步——构建一个阻断型钩子**，在危险操作前发出提示：\n```json\n{\n    \"hooks\": {\n        \"PreToolUse\": [\n            {\n                \"matcher\": \"Bash\",\n                \"hooks\": [\n                    {\n                        \"type\": \"command\",\n                        \"command\": \"if ($env:CLAUDE_TOOL_INPUT -match 'rm -rf|DROP TABLE|--force') { Write-Host '⚠️  DANGEROUS COMMAND DETECTED. Claude Code wants to run: ' + $env:CLAUDE_TOOL_INPUT; $confirm = Read-Host 'Allow? (yes/no)'; if ($confirm -ne 'yes') { exit 1 } }\"\n                    }\n                ]\n            }\n        ]\n    }\n}\n```\n\n**第 3 步——测试钩子**，方法是让 Claude Code 做一件会触发它的事情。\n\n**第 4 步——审查这个钩子。** 还有哪些危险模式没有覆盖到？有没有误报（会错误触发它的安全命令）？\n\n**第 5 步——问 Claude：** *“审查这个安全钩子。它遗漏了哪些危险命令？它可能会错误标记哪些安全命令？”*"
+    },
+    {
+      "type": "quiz",
+      "question": "你添加了一个 PostToolUse 钩子，在每次文件编辑后运行测试。Claude Code 依次编辑了 10 个文件。潜在的问题是什么？",
+      "options": [
+        "多次编辑之后钩子将不再运行",
+        "每一次单独编辑之后测试都会运行，即使项目处于损坏的中间状态——这会导致临时不完整的代码出现大量测试失败",
+        "钩子会永久拖慢 Claude Code",
+        "无法从钩子中运行测试"
+      ],
+      "correct": 1,
+      "explanation": "在每一次单独编辑之后都运行测试，会导致“中间状态”失败——当实现一个需要修改多个文件的功能时，项目在各次编辑之间处于损坏状态。更明智的做法：只在 Claude Code 表示已完成任务后运行测试，或者添加延迟。可以使用 `Stop` 钩子（在会话结束时运行）而不是 `PostToolUse`，或者添加一个只在前一次编辑是序列中最后一次时才运行测试的钩子。"
+    },
+    {
+      "type": "quiz",
+      "question": "一个阻断型 PreToolUse 钩子在检测到危险命令时以代码 1 退出。Claude Code 会发生什么？",
+      "options": [
+        "Claude Code 会忽略这个钩子并照常运行命令",
+        "Claude Code 会将非零退出代码视为反馈，不应继续该工具调用——钩子有效地阻止了这个操作",
+        "Claude Code 会崩溃并丢失所有进度",
+        "钩子必须以特定的错误代码退出才能阻断——仅退出代码 1 是不够的"
+      ],
+      "correct": 1,
+      "explanation": "当一个钩子以非零退出代码退出时，Claude Code 会将其视为不应继续执行原计划工具调用的信号。这就是设计好的阻断机制。钩子的 stdout/stderr 会作为上下文提供给 Claude Code，说明操作被阻止的原因，使它能够向你报告阻断原因，并可能请求许可或调整计划。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 7-8 课。** 你已经配置了一个可用的钩子，并理解了三种钩子类型。Hooks 是 Claude Code 用于构建可靠、可重复工作流程的最强大功能之一。接下来：记忆系统。"
+    }
+  ],
+  "nextLesson": "7-9",
+  "prevLesson": "7-7"
+}

@@ -1,0 +1,95 @@
+{
+  "id": "6-10",
+  "title": "Ghost Text 与 Next Edit Suggestions 精通指南",
+  "part": 6,
+  "estimatedMinutes": 50,
+  "tags": ["copilot", "vscode", "autocomplete", "ghost-text", "next-edit", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n第 6-2 课介绍了自动补全的基础知识。这一课会深入探讨 Copilot 的建议究竟是如何运作的——这样你就能训练它、操控它，得到比大多数用户默认体验好得多的输出。\n\n你将掌握：\n- Copilot 用来生成建议的确切信号\n- 接受、拒绝和导航建议的每一个键盘快捷键\n- **Next Edit Suggestions（下一步编辑建议）**——Copilot 对你*接下来会在哪里编辑*的预测，而不仅仅是你现在正在输入什么\n- 如何在提问之前，先用代码本身“教会” Copilot 你想要什么"
+    },
+    {
+      "type": "text",
+      "content": "## Ghost Text 实际的工作原理\n\n当你在启用了 Copilot 的 VS Code 中打字时，Copilot 会把你当前的文件（以及已打开的标签页）发送给它的 AI 模型，并收到一个补全建议。这个建议会以 **ghost text（幽灵文字）**的形式出现——灰色的、尚未成为你文件一部分的文字。\n\nCopilot 会根据几种上下文信号来构建它的建议，大致按影响力排序：\n\n1. **光标位置**——你正在输入的位置紧邻的前后内容\n2. **当前文件内容**——同一文件中的函数、导入语句、变量名、注释\n3. **已打开的标签页**——VS Code 中你打开的其他文件会被采样并作为额外上下文发送\n4. **文件名**——`auth.js` 会引导出与 `utils.js` 或 `test_payment.py` 不同的建议\n5. **你写的注释**——函数上方的一条注释，是你能给 Copilot 的最强提示\n6. **最近的编辑**——你在最近几次按键中输入或删除的内容\n\n**最重要的一点洞察：** Copilot 是在预测，给定它所能看到的一切，一位熟练的开发者接下来会写什么。你给它的上下文越多，它的预测就越准确。"
+    },
+    {
+      "type": "text",
+      "content": "## 每一个 Ghost Text 键盘快捷键\n\n| 操作 | Windows/Linux | Mac |\n|--------|--------------|-----|\n| 接受完整建议 | `Tab` | `Tab` |\n| 拒绝建议 | `Esc` | `Esc` |\n| 只接受下一个单词 | `Ctrl+→` | `Cmd+→` |\n| 只接受下一行 | `Ctrl+Alt+→` | `Cmd+Option+→` |\n| 下一个建议（循环切换） | `Alt+]` | `Option+]` |\n| 上一个建议（循环切换） | `Alt+[` | `Option+[` |\n| 打开补全面板 | `Ctrl+Enter` | `Ctrl+Enter` |\n| 手动触发建议 | `Alt+\\` | `Option+\\` |\n\n**部分接受是最被低估的功能。** 当 Copilot 建议了一整段你大体认同的函数时，按 `Ctrl+→` 逐词接受。你可以只保留自己想要的部分，同时覆盖不想要的部分——而不需要放弃整个建议、从头再来。\n\n补全面板（`Ctrl+Enter`）一次最多能展示 10 个备选建议。当第一个建议不对、但你想看看 Copilot 还考虑了什么其他方案时，这个功能特别有用。"
+    },
+    {
+      "type": "text",
+      "content": "## Next Edit Suggestions —— Copilot 的预测性光标\n\n**Next Edit Suggestions** 是一项独立于自动补全的功能。ghost text 预测的是你*即将输入*的内容，而 Next Edit Suggestions 预测的是你*接下来会在哪里编辑*——这是一种不同且更强大的能力。\n\n它的运作方式是这样的：\n\n你重命名了一个变量。Copilot 注意到了这次重命名，并预测你需要更新该变量被引用的每一处。它会在装订线（gutter）里、下一个预测编辑位置旁边显示一个不太起眼的箭头指示符 `→`。\n\n按 **Tab** 跳转到那个位置。Copilot 会展示这处改动的 ghost-text 建议。再按一次 **Tab** 接受并跳转到下一个预测编辑处。\n\n这把一连串相关的编辑（重命名、更新调用位置、修复测试）变成了一套 Tab-Tab-Tab 的流程，而不是手动的搜索加编辑循环。\n\n**Next Edit Suggestions 最强大的场景：**\n- 在一个文件中重命名变量、函数或类型\n- 修改函数签名并更新所有调用位置\n- 从文件的一部分复制一个模式，并将其适配到另一部分\n- 修复一个重复出现的错误（Copilot 会发现这个模式，并预测其他地方需要同样的修复）\n\n**启用 Next Edit Suggestions：**\n在 VS Code Settings（`Ctrl+,`）中搜索 `next edit suggestions`，启用 `GitHub Copilot: Next Edit Suggestions Enabled`。当 Copilot 检测到一处可预测的下一步编辑时，装订线箭头指示符会自动出现。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**注释优先技巧。** 在编写任何函数之前，先写一段详细的注释来描述它应该做什么。包括：目的、输入及其类型、预期输出，以及需要处理的任何边界情况。然后按 Enter 并等待。Copilot 通常会仅凭这段描述，就正确地写出整个函数体。这比逐步输入、逐个接受部分建议要快得多。"
+    },
+    {
+      "type": "text",
+      "content": "## 用你的代码风格训练 Copilot\n\nCopilot 会从已打开的标签页中学习你的风格。如果你始终：\n- 使用 `const` 而不是 `let`\n- 偏好 `async/await` 而不是 `.then()` 链式调用\n- 总是添加 JSDoc 注释\n- 使用某种特定的错误处理模式\n\n……那么 Copilot 会在它的建议中应用这些模式，因为它从你编辑器中读取的文件里就包含了这些模式。\n\n**实用技巧 —— 锚点模式：** 在开始编写一个新函数之前，先手写一个完整的模式示例。然后把光标移动到下一个实例应该出现的位置。Copilot 会看到第一个示例，并精确地模仿这种模式。\n\n这适用于：\n- API 路由处理函数（写一个，然后生成其余的）\n- 测试用例（写一个测试，定位光标，按 Tab 生成下一个）\n- 配置块\n- 重复出现的数据结构"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "10 分钟精通 Ghost Text",
+      "content": "这个工作坊会反复练习所有 ghost text 控制方式，直到它们成为肌肉记忆。\n\n**准备工作：** 在启用了 Copilot 的 VS Code 中打开或创建任意一个 JavaScript 或 Python 文件。\n\n**练习 1 —— 注释优先生成函数（3 分钟）**\n完全按照下面的样子写这段注释，然后按 Enter 并等待：\n```javascript\n// Takes an array of objects with a .date property (ISO string) and returns\n// them sorted by date ascending. Returns empty array if input is null or empty.\nfunction sortByDate\n```\nCopilot 写出函数体了吗？用 Tab 接受。\n\n**练习 2 —— 部分接受练习（3 分钟）**\n开始写一个新函数。当 ghost text 出现时，练习：\n- 按三次 `Ctrl+→`，只接受三个单词\n- 按 `Esc` 取消，然后按 `Alt+\\` 重新触发\n- 按 `Ctrl+Enter` 打开补全面板，查看备选方案\n- 按 `Alt+]` 和 `Alt+[` 循环切换建议\n\n**练习 3 —— Next Edit Suggestions（4 分钟）**\n1. 写一个使用名为 `userData` 的变量的简单函数\n2. 用 Find（`Ctrl+H`）把 `userData` 改名为 `userRecord`——只改第一处出现的地方，不要全部替换\n3. 观察装订线上的箭头 `→`，它指示着下一个预测的编辑位置\n4. 按 Tab 跳转过去。Copilot 是否在调用位置也建议了同样的重命名？\n5. 继续用 Tab 跳过所有预测的编辑位置\n\n**关键问题：** 做完这个练习后，你觉得自己会最常用到哪个部分接受快捷键（`Ctrl+→`）？会在什么场景下使用？"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 A —— 上下文信号测试",
+      "content": "探索不同的上下文信号如何改变建议质量。\n\n**实验 1 —— 文件名的影响**\n创建两个空文件：`auth_handler.py` 和 `data_utils.py`。\n在每个文件中，只输入：`def process(`\n注意 Copilot 针对相同的部分代码给出的建议有何不同。auth 文件很可能建议与安全相关的参数；utils 文件则建议与数据相关的参数。\n\n**实验 2 —— 注释质量 vs. 没有注释**\n在一个新文件中，不加任何注释，输入：\n`function validateInput(data) {`\n记下这个建议。拒绝它。现在在函数上方添加：\n```javascript\n// Validates that data is an object with required fields: name (string, min 3 chars),\n// email (valid email format), age (integer, 18-120). Returns { valid: boolean, errors: string[] }.\n```\n记下新的建议。它是否有实质性的不同？\n\n**实验 3 —— 锚点模式**\n手动写一个完整的单元测试：\n```javascript\nit('returns 0 for empty array', () => {\n  expect(sum([])).toBe(0);\n});\n```\n现在在下一行，只写 `it('`，观察 Copilot 建议了什么。它有没有模仿你的测试结构？\n\n**写下你的结论：** 针对每个实验，用一句话说明发生了什么变化，以及为什么。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 B —— 真实代码加速",
+      "content": "把 ghost text 的精通技巧应用到你自己工作中的一个真实任务上。\n\n**第 1 步 —— 挑选一个你今天或本周需要完成的真实任务**，且涉及编写重复的代码结构。例如：\n- 多个遵循相同模式的 API 端点\n- 一组数据库查询函数\n- 多个相似的测试用例\n- 一个包含重复代码块的配置文件\n\n**第 2 步 —— 搭建锚点。** 手动完整、正确地写出第一个实例。\n\n**第 3 步 —— 用 Copilot 完成剩下的部分。** 把光标定位到下一个实例应该开始的位置。用 Tab 接受建议（或在 Copilot 有部分出错时用 Ctrl+→ 部分接受）。\n\n**第 4 步 —— 统计按键次数。** 估算一下：相比手动输入所有实例，使用 Copilot 节省了多少次按键？\n\n**第 5 步 —— 找出失效点。** Copilot 的建议在哪个点开始偏离你实际需要的内容？它缺少了什么上下文？"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 C —— Next Edit Suggestions 真实工作流",
+      "content": "使用 Next Edit Suggestions 在一个文件中传播一次真实的重构。\n\n**第 1 步 —— 在你的代码中找一个函数**，它有一个你想重命名的参数。要选一个有实际意义的名称——不是 `a` 或 `x`，而是在函数体内确实多次出现的名称。\n\n**第 2 步 —— 只重命名参数声明本身。** 先不要用查找替换——手动只改函数签名中的那一处。\n\n**第 3 步 —— 观察装订线箭头。** Copilot 是否预测出了下一个编辑位置？\n\n**第 4 步 —— 用 Tab 逐一走过所有预测的编辑。** 在 Copilot 正确的地方接受。在它错误的地方拒绝（`Esc`），并手动完成编辑。\n\n**第 5 步 —— 衡量准确率。** 预测的编辑位置中有多少是正确的？有没有遗漏的？\n\n**用于对比：** 在 Copilot 辅助完成重构之后，用 Find（`Ctrl+F`）验证没有残留旧名称的实例。Copilot 是否全部捕捉到了，还是存在遗漏？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 搭建你的个人 Ghost Text 速查表",
+      "content": "创建一份你会真正用到的参考卡片。\n\n**创建一个文件**，命名为 `copilot-shortcuts.md`，放在你的主目录或笔记文件夹中。\n\n**第 1 部分 —— 我最常用的快捷键**（填入你在本课练习中用到的那些）\n\n**第 2 部分 —— 我的注释模板**\n为你在工作中最常写的几类函数写 3 个注释模板。例如：\n```\n// [描述这个函数做什么]\n// 输入：[参数名] —— [类型和说明]\n// 返回：[类型和说明]\n// 边界情况：[列出任何需要特殊处理的情况]\n```\n针对你实际的工作情境自定义这些模板。\n\n**第 3 部分 —— 我的锚点模式**\n为你代码中最常见的重复结构写一个锚点模式。如果你以 Python 脚本的形式写政府报告，你的锚点可能是一个标准的报告函数签名。如果你处理数据，可能是一个标准的数据校验代码块。\n\n**第 4 部分 —— 什么时候不该用自动补全**\n列出 2-3 个你发现接受 Copilot 建议反而让情况变糟的场景。这和知道何时该用它一样重要。"
+    },
+    {
+      "type": "quiz",
+      "question": "你把一个函数从 `getUser` 重命名为 `fetchUserById`。Next Edit Suggestions 的装订线箭头出现了。Copilot 在预测什么？",
+      "options": [
+        "你会想把函数改回 getUser",
+        "文件中下一个调用或引用 getUser 的位置，很可能也需要更新为 fetchUserById",
+        "你应该现在运行测试了",
+        "你会想为重命名后的函数写文档"
+      ],
+      "correct": 1,
+      "explanation": "Next Edit Suggestions 追踪的是你上一次编辑在语义上的连锁后果。当你重命名一个函数时，Copilot 会预测下一处编辑是在某个调用位置，那里使用的是旧名称——因为那个引用现在已经过时了。装订线箭头会带你跳转过去，并展示一个把旧名称更新为新名称的 ghost-text 建议。这样就能通过按 Tab，而不是手动搜索，把重命名传播到整个文件中。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在写一个新函数，第一个 ghost text 建议大体正确，但它选用的变量名是错的。最好的做法是什么？",
+      "options": [
+        "按 Esc，手动修正变量名，然后重新输入整个函数",
+        "用 Tab 接受这个建议，然后在第二遍中修正变量名",
+        "用 Ctrl+→ 逐词接受，在错误的变量名之前停下，自己输入正确的名称",
+        "用 Ctrl+Enter 打开补全面板，寄希望于另一个建议里有正确的名称"
+      ],
+      "correct": 2,
+      "explanation": "这里正确的工具是用 Ctrl+→（接受下一个单词）进行部分接受。逐词接受错误变量名之前的所有内容，然后自己输入正确的名称。ghost text 会继续——Copilot 会重新读取你刚输入的内容，并相应地调整剩余的建议。这比拒绝整个建议（丢失正确的部分）或完全接受它（之后再修正错误）都要快。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-10 课完成。** 你现在已经理解了 ghost text 的每一个键盘快捷键，知道如何用注释和锚点来塑造 Copilot 的建议，以及如何使用 Next Edit Suggestions 在文件中传播改动。这些技能是会累积的——你越擅长引导 Copilot 的上下文，花在拒绝建议上的时间就越少，花在单纯按 Tab 上的时间就越多。第 6-11 课讲的是 Chat Participants（聊天参与者）和 Variables（变量）——这些工具能让 Copilot 看到你整个工作区，而不仅仅是当前文件。"
+    }
+  ],
+  "nextLesson": "6-11",
+  "prevLesson": "6-9"
+}

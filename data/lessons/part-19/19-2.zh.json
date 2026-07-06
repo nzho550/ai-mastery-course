@@ -1,0 +1,117 @@
+{
+  "id": "19-2",
+  "title": "AI 助力旅行规划",
+  "part": 19,
+  "estimatedMinutes": 60,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "travel",
+    "planning",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n旅行规划是 AI 个人应用中价值最高的场景之一——物流复杂度高、需要决策的事项多，规划不周的代价也是实实在在的。学完本课后，你将拥有一套完整的 AI 辅助旅行规划工作流：从最初的灵感激发到可随身携带的行程单，每个阶段都有具体的技巧，并了解在每一步该用哪种 AI 工具。"
+    },
+    {
+      "type": "text",
+      "content": "## 在每个阶段使用合适的工具\n\n不同的旅行规划任务需要不同的工具：\n\n| 任务 | 最佳工具 | 原因 |\n|------|-----------|-----|\n| 当前价格、可订情况、近期旅客反馈 | **Perplexity AI** | 搜索实时网络内容，并引用当前来源 |\n| 实际物流安排（时间、距离、合理的行程节奏） | **Claude** | 擅长兼顾约束条件的规划，能生成结构化行程 |\n| 体验类建议（餐厅、小众景点、氛围） | **ChatGPT** | 在文化和体验类推荐上表现出色 |\n| 签证要求、入境规定、旅行警示 | **Perplexity** + 官方政府网站 | 信息会变化，务必与权威来源核实 |\n| 航班和住宿调研 | **Perplexity**，再用专门工具（Skyscanner、Booking.com） | 当前价格和空房情况需要实时搜索 |\n| 根据你的行程定制打包清单 | **Claude 或 ChatGPT** | 静态任务，完全在训练数据范围内 |\n\n**核心原则：** 对任何可能在过去一年内发生变化的事（价格、政策、营业时间、当前状况），用 Perplexity。对规划、物流和结构性内容，用 Claude 或 ChatGPT。"
+    },
+    {
+      "type": "text",
+      "content": "## 第一阶段——目的地调研\n\n在规划任何物流细节之前，先了解你要去的地方。\n\n**目的地概览提示词（Claude）：**\n```\nI'm considering [destination] for a [length] trip in [month/season].\nWe are [travel party description: e.g., couple in our 40s / family with two kids 6 and 10 / solo traveller].\nOur interests: [list: food, history, outdoor activities, art, nightlife, etc.]\nOur travel style: [e.g., mix of relaxing and exploring / very active / slow travel, one base]\n\nGive me:\n1. A honest overview of [destination] for this type of trip — what works well and what's harder than expected\n2. Best areas to stay and why (with trade-offs between them)\n3. The 5 things we absolutely shouldn't miss\n4. The 3 most common tourist mistakes to avoid\n5. The best time of year to visit and how [month] compares\n6. A realistic daily budget range per person (accommodation, food, activities)\n```\n\n**当前情况核查（Perplexity）：**\n```\nWhat do travellers say about visiting [destination] right now?\nAny recent changes to entry requirements, popular attractions, or safety considerations?\nAre there any current issues I should know about (strikes, construction, crowds, etc.)?\n```\n\n检查 Perplexity 引用的来源——点进去核实官方政府网站上的入境要求，因为 AI 可能会曲解或携带过时的信息。"
+    },
+    {
+      "type": "text",
+      "content": "## 第二阶段——搭建行程\n\n这正是 Claude 擅长的地方——根据你的约束条件和偏好，生成一份切实可行、细节完整的日程安排。\n\n**行程生成提示词：**\n```\nCreate a [X]-day itinerary for [destination].\n\nOur group: [description]\nArrival: [day/time, e.g., fly in Tuesday afternoon]\nDeparture: [day/time, e.g., fly out Sunday morning — need to be at airport by 8am]\nStaying: [area or specific accommodation]\nTransport: [e.g., renting a car / relying on public transport / walking distance only]\n\nInterests and must-sees:\n- [list specific things you want to do or see]\n\nConstraints:\n- [e.g., one of us has limited mobility / travelling with a toddler who naps / avoid early starts]\n- [e.g., budget for paid attractions: £X per day per person]\n- [e.g., we want at least 2 proper sit-down meal experiences]\n\nFor each day:\n- Morning, afternoon, and evening activities\n- Recommended time at each location (realistic, not rushed)\n- Transit time between locations\n- A specific restaurant recommendation for one meal\n- One 'if we have time or energy' optional extra\n\nAt the end, note any day where the plan is tight and might need to be trimmed.\n```\n\n**关键提示：** 对自己的精力和节奏要诚实。多数 AI 生成的行程都偏乐观。明确问 Claude：*\"这对一个带小孩的家庭来说现实吗？\"*或*\"我们是不是安排得太满了？\"*Claude 通常会指出某天的安排是否过于紧凑。\n\n**转换成手机适用格式：**\n```\nNow reformat the above itinerary for mobile. Use this structure for each day:\n\nDAY [X]: [day name]\n[Short thematic title for the day]\n\n09:00 — [Activity] [Approx. time: X hrs] [Address or landmark]\n10:30 — Transit to [next location] [Approx. time]\n...\n\n💡 [One tip or note for that day]\n\nMake it easy to read on a phone screen while navigating.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 第三阶段——物流与实际细节\n\n**签证与入境要求：**\n务必在你所属国籍对应的官方政府网站上核实——切勿完全依赖 AI。AI 能告诉你通常的要求是什么，但这些规定会变化，出错的代价很高。\n\n作为起点的实用提示词：\n```\nI'm a [nationality] citizen visiting [destination] for [duration] as a tourist.\nWhat are the typical visa requirements? I'll verify this on the official government site,\nbut I want to understand what documentation I'll likely need to prepare.\n```\n\n**打包清单（这项 AI 处理得很好）：**\n```\nCreate a packing list for [X] days in [destination] in [season/month].\nActivities will include: [list: beach, hiking, formal dinners, etc.]\nClimate: [hot/cold/wet/variable]\nWe're travelling with [carry-on only / checked bags].\nNote any destination-specific items (dress codes for temples, specific medications to bring, etc.).\n```\n\n**餐厅候选清单：**\n```\nSuggest 5 specific restaurants in [destination/neighbourhood] for [meal type].\nOur preferences: [cuisine, price range, atmosphere — e.g., local not touristy]\n\nFor each: name, what to order, approximate cost per person, and why it's worth going.\n\nNote: I'll verify these are still open on Google Maps or TripAdvisor before going.\n```\n\n**周边一日游：**\n```\nFrom [base city], what are the best day trips for [our group type]?\nWe have a car / we prefer public transport.\nList 3-4 options with: distance and travel time, what makes it worth the trip,\nbest time to go (morning vs. afternoon), and whether to book in advance.\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**依赖 AI 的旅行信息前，始终要核实的内容：**\n- 签证和入境要求（仅限官方政府网站）\n- 景点营业时间（会随季节和翻修而变化）\n- 具体的餐厅推荐（餐厅会倒闭，用 Google 地图或 TripAdvisor 确认）\n- 交通时刻表和票价（使用运营商官网）\n- 安全警示（查看你所在国家的官方旅行警示）\n\n对于行程物流和大方向的建议，AI 是可靠的。但对于任何频繁变化或出错后果严重的信息，都要用一手来源核实。"
+    },
+    {
+      "type": "text",
+      "content": "## 旅途中——AI 作为随行助手\n\n一旦开始旅行，AI 依然有用，不只是在规划阶段。\n\n**翻译菜单、标志和对话：**\n把你看到的东西粘贴或描述出来。ChatGPT 和 Claude 能翻译并解释背景——这是当地特色菜吗？这道菜里到底有什么？\n\n**应对突发变化：**\n```\nOur original plan was [describe]. We've had to change because [reason].\nWe're currently at [location], have [time] remaining, and want to [goal].\nWhat are our options?\n```\n\n**现场的本地知识：**\n```\nWe're in [specific area] and have 2 free hours we hadn't planned for.\nWe've already done [list what you've seen]. What would you suggest for this neighbourhood?\n```\n\n**用语音模式实现免提导航：** Claude 和 ChatGPT 的语音模式让你无需停下打字就能提问——在步行、开车或嘈杂环境中很有用。（语音 AI 的详细内容将在第 19-7 课深入讲解。）"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "规划一次真实的旅行",
+      "content": "使用一次真实的、即将到来的旅行——或者规划一次你真心想去的旅行（即便是假设情境，也要让偏好保持真实）。\n\n**第一步——目的地调研（10 分钟）**\n\n用你真实的旅行背景运行目的地概览提示词。查看回复后思考：\n- 你学到了什么之前不知道的信息？\n- Claude 认为你可能高估或低估了这个目的地的哪些方面？\n\n然后运行一次 Perplexity 搜索：*\"[目的地]近期旅客在 [当前年份] 怎么评价？\"*至少点开一个引用来源进行核实。\n\n**第二步——搭建行程草案（10 分钟）**\n\n运行行程生成提示词。具体说明你的团队构成、约束条件和你在意的事。查看结果后：\n- 这个节奏对你的旅行风格来说现实吗？\n- 问：*\"哪一天安排得最满？如果我们需要放慢节奏，你会砍掉什么？\"*\n\n**第三步——转换成手机格式（5 分钟）**\n\n运行手机格式转换提示词。把结果复制到你的笔记应用（Apple 备忘录、Google Keep、Notion）。这就是你可以离线使用的行程参考。\n\n**第四步——核实一项关键细节**\n\n如果你真的要去：查一下你所在国家官方旅行建议页面上的入境/签证要求。和 Claude 说的对比一下，一致吗？这能帮你养成核实 AI 旅行信息的习惯。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude 确认你的国籍前往某个具体国家所需的签证要求。Claude 给出了一个自信且详细的回答。接下来你应该怎么做？",
+      "options": [
+        "按照 Claude 的回答行动——它给出的回答详细且具体",
+        "让 Perplexity 确认一下——如果两者一致，大概率就是正确的",
+        "在你所属国籍对应的官方政府网站上核实——涉及签证的 AI 旅行信息必须始终核实",
+        "查看 Reddit 上的旅行社区，看近期旅客是否有相同经历"
+      ],
+      "correct": 2,
+      "explanation": "签证和入境要求正是那种会毫无预兆地变化、出错后果严重、且 AI 的自信程度并不等于准确性的信息类型。Claude 的训练数据有截止日期，而签证规则可能随政治关系、对等协议或新政策的出台而改变。务必在你所在国家的官方境外旅行建议页面（如 gov.uk/foreign-travel-advice、travel.state.gov、smartraveller.gov.au）以及目的地国家的官方移民网站上核实。Perplexity（B）会搜索网络，但可能会呈现非官方或过时的来源。Reddit（D）提供的是旅客的个人经历，而非权威规则。对于入境要求，只有官方来源才具有权威性。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——AI 旅行调研演练",
+      "content": "用 AI 调研工具规划一次真实的旅行。\n\n**第一步——选一次你正在规划或想规划的真实旅行。**\n\n**第二步——让 Claude 帮你搭建调研框架：**\n```\nHelp me research a trip to [destination] for [duration] with these preferences:\n- Budget: [range]\n- Travel style: [adventure/relaxed/cultural/food-focused]\n- Time of year: [month]\n\nWhat are the most important things to research? Structure this as a research checklist.\n```\n\n**第三步——用 Claude 和 Perplexity 逐项完成这份清单。**\n\n**第四步——从官方渠道核实时效性信息**（签证要求、季节性关闭、价格），而不是依赖 AI。\n\n**第五步——问 Claude：**\"我漏掉了什么该研究的？初次到访 [目的地] 的人通常会对什么感到意外？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——AI 行程搭建器",
+      "content": "搭建一份细节完整的 AI 辅助行程。\n\n**第一步——列出你已经调研过的行程参数。**\n\n**第二步——让 Claude 起草一份行程：**\n```\nCreate a detailed [X-day] itinerary for [destination].\n\nConstraints:\n- Accommodation: [area/type]\n- Daily budget: [amount]\n- Must-see: [your list]\n- Avoid: [things you don't want]\n- Travel pace: [1-2 major things per day or packed]\n\nFor each day:\n- Morning, afternoon, evening activities\n- Estimated travel time between locations\n- Meal suggestions (price range, type)\n- Practical tips for each activity\n```\n\n**第三步——评估行程的物流合理性**——各地点在地理上是否合理？节奏是否现实？\n\n**第四步——从官方来源核实其中 3 项活动的营业时间和价格。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——旅行风险评估",
+      "content": "用 AI 识别并准备应对旅行风险。\n\n**第一步——问 Claude：**\"在 [时间段] 前往 [目的地] 旅行，主要有哪些风险：安全、健康、天气、政治、物流？针对每一项，建议做哪些准备？\"\n\n**第二步——从官方来源核查 Claude 指出的任何高风险事项：**\n- 旅行警示：你所在国家针对该目的地的官方旅行警示\n- 健康要求：官方公共卫生指引\n- 签证要求：官方大使馆或政府网站\n\n**第三步——针对已识别的风险，创建一份行前检查清单。**\n\n**第四步——问 Claude：**\"这次旅行前，我应该保存哪些紧急联系人和信息？帮我做一张可以存在手机里的参考卡片。\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——搭建一份旅行文档包",
+      "content": "借助 AI 创建一套完整的旅行文档资料包。\n\n**第一步——让 Claude Code 创建一份旅行文档模板：**\n```\nCreate a trip document package for [destination]:\n1. Trip overview (one-page summary)\n2. Day-by-day itinerary (detailed)\n3. Key contacts (accommodation, emergency, transportation)\n4. Budget tracker (planned vs actual)\n5. Packing list (customised for [destination and activities])\n6. Language reference (key phrases if non-English destination)\n7. Health and safety info\n```\n\n**第二步——用你真实的旅行细节填写每份文档。**\n\n**第三步——把这些文档分享给同行的旅伴或紧急联系人。**\n\n**第四步——旅行结束后**，用实际花费和体验更新这些文档——它们会成为未来旅行的参考资料。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude 说某家餐厅\"是[城市]最好的餐厅之一\"。你围绕在那里用餐来规划行程。你应该做哪些核实？",
+      "options": [
+        "什么都不用做——Claude 了解餐厅情况",
+        "独立核实：查看近期评价（AI 的知识可能已过时）、确认餐厅仍在营业、核实当前的预订要求——餐厅状况会变化，而 AI 的训练数据并非实时的",
+        "打电话给餐厅确认",
+        "只有餐厅很贵的时候才需要核实"
+      ],
+      "correct": 1,
+      "explanation": "餐厅推荐具有很强的时效性：餐厅会倒闭、更换主厨、品质下滑，或者要求以前不存在的预订。Claude 关于餐厅的知识有截止日期。对于任何会影响你行程安排的具体推荐：查看近期评价（TripAdvisor、Google、Yelp 上最近 6 个月的评价）、确认餐厅仍在营业，并核实当前的预订要求。这只需要 3 分钟，却能避免一顿计划好的饭变成一场失望。"
+    },
+    {
+      "type": "quiz",
+      "question": "你用 AI 调研目的地的签证要求，它说\"你的护照无需签证\"。依赖这个信息安全吗？",
+      "options": [
+        "安全——签证要求很少变化",
+        "不安全——务必从目的地国家的官方大使馆或移民网站核实签证要求；签证要求会变化，而 AI 的知识可能已经过时",
+        "只要用另一个 AI 工具再核对一下就安全",
+        "只有你之前有过签证问题时才需要核实"
+      ],
+      "correct": 1,
+      "explanation": "签证要求高风险且具有时效性——错误信息可能导致被拒绝登机或入境。务必从官方来源核实：（1）目的地国家的官方移民局或大使馆网站；（2）你自己国家外交部/国务院的旅行指引；（3）航空公司用于登机决策的 TIMATIC 系统。AI 可能持有过时信息，对于政策变化频繁的国家尤其如此。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 19-2 课。** 你现在拥有了一套完整的 AI 辅助旅行规划工作流：目的地调研、带手机适配格式的现实行程搭建、物流规划，以及旅途中的随行辅助。核心习惯是：用 AI 做规划和结构梳理，用官方来源核实时效性信息。"
+    }
+  ],
+  "nextLesson": "19-3",
+  "prevLesson": "19-1"
+}

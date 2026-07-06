@@ -1,0 +1,129 @@
+{
+  "id": "8-2",
+  "title": "MCP 架构——客户端、服务器与传输层",
+  "part": 8,
+  "estimatedMinutes": 55,
+  "tags": [
+    "mcp",
+    "architecture",
+    "claude-code"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将理解 MCP 架构的三个组成部分、每个部分的作用，以及它们是如何协同工作的。你还会看到，一份 MCP 配置在你的设置文件中实际长什么样。"
+    },
+    {
+      "type": "text",
+      "content": "## 三个组成部分\n\n每个 MCP 系统都由三个协同工作的部分组成：\n\n**1. 客户端（Client）**\n想要使用工具的 AI 应用程序。在本课程中，Claude Code 就是客户端。Cursor 和 Zed 也是 MCP 客户端。客户端负责：\n- 发现当前配置了哪些 MCP 服务器\n- 代表 Claude 向服务器发送请求\n- 接收结果并将其传递回 Claude\n\n**2. 服务器（Server）**\n一个暴露工具、资源或提示词模板的小程序。它可以是一个 npm 包、一个 Python 脚本，或一个二进制程序。服务器负责：\n- 接收来自客户端的请求\n- 执行实际的工作（查询数据库、调用 Gmail API、读取文件）\n- 以 MCP 格式返回结果\n\n**3. 传输层（Transport）**\n客户端与服务器之间的通信通道。有两种选择：\n- **stdio**——服务器作为本地子进程运行，通过标准输入/输出通信。这是最常见、最简单的方式——本课程中所有服务器用的都是这种方式。\n- **HTTP/SSE**——服务器作为网络服务运行，使得远程服务器成为可能。在本地环境中不太常见。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**在本课程中，始终使用 stdio 传输。** 第 8-3 到 8-15 课中展示的所有 MCP 服务器配置，都是用 `npx` 或 `python` 启动一个本地子进程。要有效使用 MCP，你并不需要理解 HTTP/SSE 传输。"
+    },
+    {
+      "type": "text",
+      "content": "## 一次工具调用的完整流程\n\n下面是当你让 Claude “列出我未关闭的 GitHub issue” 时，究竟发生了什么：\n\n1. Claude Code（**客户端**）收到你的请求\n2. Claude 识别出需要用到 GitHub MCP 服务器的 `list_issues` 工具\n3. 客户端通过 **stdio** 向 GitHub MCP **服务器** 发送一个 JSON 格式的工具调用\n4. 服务器使用你的 token 向 GitHub API 进行身份验证\n5. 服务器从 GitHub 获取这些 issue\n6. 服务器将结果以 JSON 格式返回给客户端\n7. 客户端将结果传递给 Claude\n8. Claude 读取结果并向你写出回答\n\n第 2 到第 7 步都是在瞬间、不可见地完成的。从你的角度看，你只是问了一个问题，Claude 就回答了——但在背后，其实发生了一次完整的网络往返。"
+    },
+    {
+      "type": "text",
+      "content": "## 配置文件存放在哪里\n\n所有 MCP 服务器都配置在同一个 JSON 文件中：\n\n**全局配置（在每个项目中都生效）：**\n`C:\\Users\\YourName\\.claude\\settings.json`\n\n**项目级配置（只在某一个项目中生效）：**\n项目文件夹内的 `.claude/settings.json`\n\n全局文件适合放你大部分的 MCP 服务器——Gmail、GitHub、日历。项目级文件适合只与某个特定代码库相关的服务器，比如指向该项目数据库的数据库服务器。\n\nClaude Code 会合并这两个文件，因此两处的服务器都能同时使用。"
+    },
+    {
+      "type": "text",
+      "content": "## mcpServers 配置块\n\n`settings.json` 中每一条 MCP 服务器配置都遵循同样的模式："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"server-name\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@package/server-name\", \"optional-argument\"],\n      \"env\": {\n        \"API_TOKEN\": \"your-token-here\"\n      }\n    },\n    \"another-server\": {\n      \"command\": \"python\",\n      \"args\": [\"/absolute/path/to/server.py\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "各字段说明：\n\n- **`command`**——启动服务器的可执行程序。通常 npm 包用 `npx`，Python 脚本用 `python`。\n- **`args`**——传给该命令的一组参数。对于 npx 服务器，几乎总是以 `[\"-y\", \"@package/name\"]` 开头。\n- **`env`**——传给服务器进程的可选环境变量。API token 和密钥应该放在这里，而不是直接写进 args 里。\n\n`server-name` 这个键只是你自己起的一个标签。它会出现在 Claude Code 的 `/mcp` 输出和错误信息中。起一个易读的名字。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**永远不要把 token 提交到公开代码仓库中。** 如果你的 `settings.json` 位于一个 git 仓库内，把它加入 `.gitignore`，或者改用环境变量而不是在 `env` 块中硬编码 token。第 8-8 课（GitHub MCP）会详细讲解这一点。"
+    },
+    {
+      "type": "text",
+      "content": "## MCP 服务器只是普通程序\n\n这一点值得强调：MCP 服务器只是一个实现了 MCP 协议的普通程序。它没有任何神奇之处。\n\nClaude Code 启动时，会读取你的 `settings.json`，并将每个已配置的 MCP 服务器作为子进程启动。Claude Code 和每个服务器在你的电脑上都是完全独立的进程。如果某个服务器崩溃，Claude Code 会继续运行——只是失去了对该服务器工具的访问。\n\n你可以自己验证这一点：在 Claude Code 运行、且配置了多个 MCP 服务器的情况下打开任务管理器。你会看到多个 `node` 或 `python` 进程——每个活跃的服务器对应一个。"
+    },
+    {
+      "type": "quiz",
+      "question": "在 MCP 架构中，哪个组件负责真正执行工具——例如调用 GitHub API 来获取 issue？",
+      "options": [
+        "客户端（Claude Code）",
+        "传输层（stdio）",
+        "服务器（MCP 服务器程序）",
+        "Claude 的语言模型"
+      ],
+      "correct": 2,
+      "explanation": "MCP 服务器是负责执行工具的组件。它接收来自客户端的请求，调用外部服务（比如 GitHub 的 API），并返回结果。客户端（Claude Code）负责协调这次调用并把结果传递给 Claude，但它并不负责查询外部系统这项实际工作。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "查看你当前激活的 MCP 服务器",
+      "content": "让我们看看你的 Claude Code 设置中目前配置了哪些 MCP 服务器。\n\n1. 在终端中启动 `claude`\n2. 输入 `/mcp` 并按回车\n3. Claude Code 会列出每一个已连接的 MCP 服务器及其状态\n\n对于列出的每个服务器：\n- 记下它的名字\n- 问：`\"[服务器名] MCP 服务器暴露了哪些工具？列出每个工具及其功能。\"`\n\n如果没有任何服务器出现，这是正常的——你会在第 8-3 课中添加第一个。\n\n在你的笔记中，为每个服务器写一句话描述它的作用。这就是你的 MCP 起始清单。你会在 Part 8 剩余课程中不断补充它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——MCP 架构梳理练习",
+      "content": "用 8 分钟建立起对 MCP 客户端-服务器架构的具体心智模型。\n\n**第 1 步——画出架构图**（在纸上或绘图工具中）：\n- 一个标着“Claude Code”的方框（客户端）\n- 多个 MCP 服务器方框（GitHub、文件系统、数据库）\n- 用箭头表示：Claude 发送请求 → 服务器执行 → 服务器返回结果\n\n**第 2 步——让 Claude.ai 验证你的图**：“我画了这样一张 MCP 架构图：[描述它]。这准确吗？我哪里画错了或漏掉了什么？”\n\n**第 3 步——问以下这些具体问题**来检验你的理解：\n- “传输层是什么？MCP 支持哪些传输方式？”\n- “当 Claude Code 向一个 MCP 服务器发送请求时，消息使用的是什么格式？”\n- “一个 MCP 服务器能否同时连接多个客户端？”\n\n**第 4 步——根据所学更新你的图。**\n\n**第 5 步——把 MCP 与 REST API 做对比：** 问 Claude：“MCP 和 REST API 之间的关键区别是什么？为什么需要一个新协议？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——为你的工作流设计一个 MCP 服务器",
+      "content": "在动手构建之前，先设计一个真正能帮到你工作的 MCP 服务器。\n\n**第 1 步——列出你最耗时的手动任务**，那些需要在 Claude 和其他工具之间来回切换的任务：查文档、查数据库、读取特定格式的文件。\n\n**第 2 步——针对你最主要的痛点**，设计一个 MCP 服务器构想：\n- 它连接什么数据源？\n- 它会向 Claude 暴露哪 3-5 个工具？\n- 每个工具接受什么输入，返回什么输出？\n\n**第 3 步——问 Claude：** *“我正在为[你的痛点]设计一个 MCP 服务器。这是我的构想：[描述它]。这是不是 MCP 的一个合理应用场景？我应该暴露哪些工具？有哪些安全方面的考量？”*\n\n**第 4 步——根据 Claude 的反馈完善你的设计。**\n\n**第 5 步——强制复核：** 问 Claude：*“复核这个 MCP 服务器设计。找出 3 个潜在问题：安全风险、难以实现的工具，或者已经存在于标准 MCP 服务器中、我可以直接使用而无需自建的能力。”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——MCP 与直接 API 集成的对比",
+      "content": "理解什么时候该选 MCP，什么时候该选直接的 API 集成。\n\n**第 1 步——问 Claude：** *“比较以下几种让 Claude Code 访问 GitHub 的方式：（1）MCP GitHub 服务器，（2）让 Claude Code 使用 GitHub CLI（gh 命令），（3）让 Claude Code 用 curl 直接调用 GitHub API。各自的优缺点是什么？”*\n\n**第 2 步——阅读对比结果。** 什么情况下哪种方式更好？\n\n**第 3 步——询问其中的权衡：**“与直接使用工具相比，使用 MCP 的额外开销是什么？有没有 MCP 增加了复杂度却没有带来价值的情况？”\n\n**第 4 步——搭建你的决策框架：**\n| 场景 | 使用 MCP | 使用直接工具/CLI | 直接使用 API |\n|---|---|---|---|\n| 持久、可复用的集成 | | | |\n| 一次性任务 | | | |\n| 复杂的多步操作 | | | |\n| 简单的数据检索 | | | |\n\n**第 5 步——根据 Claude 的分析填写这张表格。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——为你的使用场景记录 MCP 生态",
+      "content": "创建一份与你具体工作相关的 MCP 服务器参考文档。\n\n**第 1 步——梳理你的工具生态：** 列出你工作中使用的所有外部工具和服务（GitHub、Slack、Notion、数据库、API 等）。\n\n**第 2 步——问 Claude：** *“对于这些工具中的每一个，是否存在官方或社区的 MCP 服务器？[列出你的工具]。对于每个有服务器的工具：它暴露了哪些工具？有了它，我能用 Claude Code 做到哪些目前做不到的事？”*\n\n**第 3 步——查阅 MCP 服务器注册表**（modelcontextprotocol.io 或在 GitHub 上搜索 “mcp-server”），查找 Claude 没有找到的工具。\n\n**第 4 步——创建一份参考文档：**\n```\n# My MCP Server Landscape\n\n## High Priority (install next)\n- [Tool]: [MCP server name] — enables [capability]\n\n## Medium Priority (useful, not urgent)\n- [Tool]: [MCP server name] — enables [capability]\n\n## No MCP server available\n- [Tool]: use [alternative approach]\n```\n\n**第 5 步——排出优先级，并选出一个**在下一课中安装。"
+    },
+    {
+      "type": "quiz",
+      "question": "在 MCP 架构中，Claude Code 扮演什么角色？",
+      "options": [
+        "Claude Code 是提供工具的 MCP 服务器",
+        "Claude Code 是连接并使用 MCP 服务器的 MCP 客户端",
+        "Claude Code 是服务器之间的传输层",
+        "Claude Code 同时充当客户端和服务器"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code 是 MCP 客户端——它连接到 MCP 服务器，并使用这些服务器暴露出来的工具。MCP 服务器是独立的进程（本地或远程），提供具体的能力：文件系统访问、GitHub 操作、数据库查询等等。Claude Code 会根据手头的任务决定何时调用哪个服务器，在同一次对话中协调多个服务器。"
+    },
+    {
+      "type": "quiz",
+      "question": "一个 MCP 服务器暴露了一个名为 `search_documents(query, limit)` 的工具。暴露这个工具意味着什么？",
+      "options": [
+        "每次 Claude Code 处理一条消息时都会自动调用这个工具",
+        "Claude Code 能发现这个工具，并在与任务相关时携带参数调用它——它会返回 Claude Code 用于生成回答的结果",
+        "这个工具运行在 Claude Code 的进程内存中",
+        "只有用户可以调用这个工具，Claude Code 不能自动调用"
+      ],
+      "correct": 1,
+      "explanation": "暴露一个工具，意味着它在 Claude Code 的工具使用系统中变得可用。Claude Code 会在会话开始时发现可用的工具，判断某个工具是否与当前任务相关，携带合适的参数调用它，接收结果，并将其纳入自己的回答或下一步动作中。这类似于一个拿着计算器的人会有选择地使用它——计算器一直可用，但只有在需要计算时才会被调用。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 8-2 课。** 你已经理解了客户端-服务器-传输层架构、配置文件存放在哪里，以及 `mcpServers` JSON 配置块长什么样。第 8-3 课将把这些付诸实践，安装你的第一个服务器。"
+    }
+  ],
+  "nextLesson": "8-3",
+  "prevLesson": "8-1"
+}

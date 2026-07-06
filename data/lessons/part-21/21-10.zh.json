@@ -1,0 +1,89 @@
+{
+  "id": "21-10",
+  "title": "错误恢复与重试循环",
+  "part": 21,
+  "estimatedMinutes": 45,
+  "tags": ["loop-engineering", "advanced", "error-handling", "resilience"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n每个 AI 循环都会时不时地出错。一次工具调用返回了错误。模型生成的输出没有通过校验。某个依赖项暂时不可用。某个操作超时了。脆弱的循环和生产级循环之间的区别，就在于它们如何处理失败。本课将介绍 AI 循环中常见的失败类型、能够处理这些失败的重试模式，以及如何设计出优雅降级、而不是灾难性崩溃的循环。"
+    },
+    {
+      "type": "text",
+      "content": "## AI 循环中的四种失败类型\n\n**类型 1：瞬时性失败（Transient failures）**\n通常重试后就能解决的临时性问题：API 速率限制、瞬间的网络错误、服务暂时不可用。特征：稍等片刻再重试通常就能成功。\n\n**类型 2：输入失败（Input failures）**\n循环的输入本身有问题：数据格式错误、缺少必要的上下文、指令含糊不清。特征：用同样的输入重试只会得到同样的失败——你需要不同的输入。\n\n**类型 3：模型质量失败（Model quality failures）**\nAI 生成的输出未通过校验：格式错误、事实性错误、低于质量门槛、跑题。特征：如果提供更好的上下文或调整提示词，重试可能会改善，但有时需要彻底不同的方法。\n\n**类型 4：永久性失败（Permanent failures）**\n请求的操作根本不可能完成：文件不存在、权限被拒绝、外部服务返回了确定性的错误。特征：重试永远不会成功——循环必须优雅地失败并报告问题。\n\n**为什么这个区分很重要：** 对永久性失败进行重试是在浪费资源和时间。而对瞬时性失败不重试，则会白白放弃一次本来完全可行的操作。设计一个循环，需要先识别可能出现哪些失败类型，再针对每一种做出恰当的处理。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**无限重试的反模式：** 一个对任何失败都无限重试的循环是危险的。它可能会产生巨额的 API 费用，消耗系统资源，还会延迟对永久性失败的发现。每一种重试策略都需要设定最大重试次数、超时时间，或者两者兼备。一旦达到上限，循环应该干净利落地失败，并报告它尝试过什么。"
+    },
+    {
+      "type": "text",
+      "content": "## 重试策略\n\n**立即重试** ——失败发生后立刻重试一到两次。适用于瞬时性失败。\n\n**固定延迟重试** ——每次重试之间等待固定的时间。适用于需要一段时间才能解决的失败。\n\n**指数退避（Exponential backoff）** ——每次重试之间的等待时间按指数增长：1 秒 → 2 秒 → 4 秒 → 8 秒 → 放弃。这是应对 API 速率限制的行业标准做法，能防止对一个本已吃力的服务持续施压。\n\n**带抖动的指数退避（Exponential backoff with jitter）** ——加入一些随机性：1 秒 → 1.8 秒 → 3.2 秒 → 7.5 秒。当许多客户端同时重试时，抖动能防止它们全部在同一时刻打到服务上。\n\n**上下文相关重试（Contextual retry）** ——在重试之前，*先改变请求中的某些东西*。对于模型质量失败：增加更多上下文、简化指令，或者把错误信息作为上下文提供给模型，让它自己纠正。\n\n> **对 Claude Code 技能（skill）很重要的一点：** 你无法在 Claude Code 技能内部实现真正的定时延迟（比如休眠 2 秒）——技能没有内置的 `sleep` 机制。对 Claude Code 而言，“重试”意味着：用一个改动过的提示词立即再次调用工具（即上下文相关重试）。如果需要真正的定时延迟，你需要借助外部代码——一个 Python 脚本、一个 n8n 工作流，或者一个会暂停并重新运行的 GitHub Action。\n\n**AI 循环的提示词模板：**\n```\nYour previous attempt to [task] produced this error/problem:\n[error or quality failure description]\n\nPlease try again, addressing this specific issue:\n[specific guidance based on the failure type]\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 熔断器（Circuit Breakers）\n\n熔断器是一种模式：当失败的模式表明继续重试不会成功时，就停止重试。这个名字来自会在电流过大时切断电源的电路断路器。\n\n**它是如何工作的：**\n```\nSTATE: CLOSED (normal operation)\n  → All operations proceed normally\n  → Track failures: if failure_count > threshold in time_window → trip to OPEN\n\nSTATE: OPEN (circuit broken)\n  → All operations fail immediately (no retries attempted)\n  → After timeout_period → move to HALF-OPEN\n\nSTATE: HALF-OPEN (testing recovery)\n  → Allow one test operation through\n  → If it succeeds → back to CLOSED\n  → If it fails → back to OPEN with reset timer\n```\n\n**这对 AI 循环为什么重要：** 如果一个外部服务（一个 MCP 工具、一个 API、一个数据库）确实宕机了，熔断器能阻止循环用重试不断地敲打它。这既保护了外部服务，也节省了你的 API 预算，还能让失败立刻变得可见，而不是要等到 20 次重试都失败之后。\n\n**为 Claude Code 技能简化后的熔断器：**\n```markdown\nBefore attempting [operation]:\n1. Check if this operation has failed 3+ times in this session\n2. If yes: report 'This operation has failed repeatedly. \n   Likely cause: [inferred cause]. Recommended action: [action]'\n3. If no: proceed with the operation\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 跨重试的状态保留\n\n最昂贵的重试，就是明明只有最后一步失败，却要从头重来一遍。在重试之间保留状态，能避免这种浪费。\n\n**检查点模式（checkpoint pattern）：**\n把一个长循环划分为多个检查点。每经过一个检查点，就保存当前状态。如果发生失败，就从上一个检查点重新开始，而不是从头开始。\n\n**举个例子：** 一个处理 100 个文件的循环：\n```\n- Process files 1-25 → save progress: {completed: [1-25], remaining: [26-100]}\n- Process files 26-50 → save progress: {completed: [1-50], remaining: [51-100]}\n- [Failure at file 67]\n- Retry: load progress → start from file 51, not file 1\n```\n\n**在 Claude Code 中：** 你可以让循环每隔一段时间就把进度写入一个文件，来实现这一点：\n```\n/process-batch files 1-100\n→ Claude processes files, writes progress.json every 10 files\n→ If interrupted, resume: /process-batch --resume progress.json\n```\n\n**需要保留的状态：** 哪些条目已经处理过、产生了哪些输出、最终综合所需要的任何中间结果，以及当前的循环配置。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "构建一个具备韧性的重试技能",
+      "content": "创建一个能够优雅地处理失败、并智能重试的技能。需要 30 分钟。\n\n**第一步——创建一个会失败的基础技能。** 在 `~/.claude/commands/` 中，创建 `fetch-and-summarize.md`：\n```markdown\n---\ndescription: Fetch a URL and summarise its content\n---\n\nFetch this URL and produce a 150-word summary: $ARGUMENTS\n\nIf you cannot access the URL, report: FETCH_FAILED: [specific reason]\nIf the content is too short to summarise (< 100 words), report: CONTENT_TOO_SHORT\nIf the content is not in English, report: NON_ENGLISH: [detected language]\nOtherwise: summarise normally.\n```\n\n**第二步——创建一个重试包装技能。** 创建 `resilient-fetch.md`：\n```markdown\n---\ndescription: Fetch and summarize a URL with retry logic\n---\n\nAttempt to fetch and summarize: $ARGUMENTS\n\nAttempt 1: Run /fetch-and-summarize on the URL.\n\nIf result starts with FETCH_FAILED:\n  - Wait 2 seconds, then try once more\n  - If second attempt also fails: report 'Could not fetch URL after 2 attempts. \n    Likely cause: [infer from error]. Suggested alternative: [suggest]'\n\nIf result starts with CONTENT_TOO_SHORT:\n  - Do not retry. Report: 'Page has insufficient content to summarize.'\n  - Suggest: 'Try the full article URL if this was a preview page.'\n\nIf result starts with NON_ENGLISH:\n  - Retry once with instruction to translate then summarize\n  - If translation succeeds, include a note that summary was translated\n\nIf all retries exhausted: escalate with full context of what was attempted.\n```\n\n**第三步——测试各种失败场景：**\n- 尝试一个有效的 URL → 应该第一次尝试就成功\n- 尝试一个无效的 URL → 应该重试一次，然后优雅地失败\n- 尝试一个内容很短的页面 → 应该带着具体的错误信息失败，不重试\n\n**第四步——构建一个带检查点的批处理器。** 创建 `batch-summarize.md`：\n```markdown\n---\ndescription: Summarize a list of URLs with progress tracking\n---\n\nProcess this list of URLs: $ARGUMENTS\n\nFor each URL:\n1. Call /resilient-fetch on it\n2. Write the result to summaries.md with the URL and timestamp\n3. Log progress: 'Completed X of Y URLs'\n\nIf any URL fails after retries: mark it as FAILED in summaries.md and continue.\nAt the end: report total completed, total failed, and list the failed URLs.\n```\n\n**第五步——在来自不同网站的 5 个真实 URL 上运行它。** 观察批处理是如何在不停止整个运行的情况下处理单个失败的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "为你的循环做失败模式分析",
+      "content": "把系统化的失败分析应用到你已经构建、或计划构建的循环上。需要 20 分钟。\n\n**第一步——列出你的循环。** 写下你在本课程中已经构建、或计划构建的所有 AI 循环（每日简报、供应商评估、批量摘要等等）。\n\n**第二步——对每一个循环，用下面这个框架识别潜在的失败：**\n\n| 失败 | 类型 | 恢复方式 |\n|---|---|---|\n| 外部 API 不可用 | 瞬时性 | 指数退避，最多重试 3 次 |\n| 模型输出低于质量门槛 | 模型质量 | 以批评意见作为上下文重试 |\n| 所需文件不存在 | 永久性 | 干净地失败，报告具体路径 |\n| 输入格式不符合预期 | 输入 | 提醒用户，请求更正后的输入 |\n\n**第三步——针对你风险最高的那个循环**，做一次完整的失败模式分析：\n- 如果每个独立组件出问题，会发生什么？\n- 这种失败是无声的（循环继续产生错误的输出）还是有声的（循环停止）？\n- 每种失败模式的代价是什么（浪费的时间、错误的决策、数据损坏）？\n- 什么样的恢复动作能让循环最具韧性？\n\n**第四步——和 Claude 分享你的分析：**\n```\nHere is my failure mode analysis for [loop name]: [paste analysis]\n\nIdentify: which failure mode has the highest severity × probability score, \nand suggest a specific implementation change that would make the loop \nmost resilient to that failure.\n```"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 AI 循环调用了一个外部 API，它偶尔会返回 429（请求过多）错误。正确的重试策略是什么？",
+      "options": [
+        "立即重试——马上再试一次",
+        "不重试——立刻把错误呈现给用户",
+        "带抖动的指数退避——每次重试之间等待的时间越来越长，并加入随机性，以避免多个客户端同时重试时出现\"惊群效应\"",
+        "所有重试之间都固定等待 60 秒"
+      ],
+      "correct": 2,
+      "explanation": "速率限制错误（429）是典型的瞬时性失败，通常随着时间推移就能解决。立即重试只会再次撞上速率限制。固定延迟虽然可行，但当许多客户端都在完全相同的间隔重试时，扩展性不佳。带抖动的指数退避是行业标准做法：每次重试等待的时间都比上一次更长（防止持续施压），而抖动能防止所有客户端在完全相同的时刻重试（防止\"惊群效应\"）。大多数 API 提供商都明确推荐这种模式。"
+    },
+    {
+      "type": "quiz",
+      "question": "一个处理 200 份文档的长时间运行循环，在第 147 份文档处失败了。如果没有检查点机制，重试时会发生什么？",
+      "options": [
+        "它会从第 147 份文档继续",
+        "它会从第 1 份文档重新开始，浪费掉第 1-146 份文档已经完成的所有工作",
+        "它会跳到第 148 份文档",
+        "它会输出前 146 份文档的部分结果"
+      ],
+      "correct": 1,
+      "explanation": "如果没有状态保留机制，重试就会从头开始。第 1-146 份文档上的所有工作都会丢失，必须重做。检查点模式能解决这个问题：每处理完一批文档，就把进度写入一个文件。重试时，读取进度文件，从上一个成功的检查点继续。对于一个在第 147 份处失败的、处理 200 份文档的循环，如果每 25 份文档设一个检查点，最坏情况下也只需要从第 126 份文档重新开始——而不是从第 1 份。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的熔断器在连续 5 次连接数据库失败后跳闸了。接下来应该发生什么？",
+      "options": [
+        "以越来越长的延迟持续重试，直到数据库有响应为止",
+        "熔断器打开——后续操作立即失败，不再尝试连接数据库。经过一段超时时间后，熔断器进入半开状态，允许一次测试性操作通过",
+        "提醒用户并关闭整个系统",
+        "自动切换到备用数据库"
+      ],
+      "correct": 1,
+      "explanation": "跳闸的熔断器会立即停止所有重试尝试——这正是它的意义所在。与其用重试持续敲打一个本已吃力的数据库，不如让熔断器断开：后续操作会快速失败，根本不会到达数据库。经过一段可配置的超时时间后，熔断器进入半开状态，允许一次测试性操作通过。如果成功，熔断器闭合（恢复正常运行）。如果失败，熔断器继续保持打开。这种模式既保护了本已吃力的服务，也让失败变得可见且迅速，而不是缓慢且消耗资源。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 21-10 课。** 你已经理解了 AI 循环中的四种失败类型（瞬时性、输入、模型质量、永久性）、五种重试策略（包括带抖动的指数退避）、熔断器模式，以及通过检查点实现的状态保留。你的循环现在能够优雅地失败、智能地重试，并在中断之间保留已完成的工作。"
+    }
+  ],
+  "nextLesson": "21-11",
+  "prevLesson": "21-9"
+}

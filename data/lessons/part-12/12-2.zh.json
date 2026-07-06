@@ -1,0 +1,109 @@
+{
+  "id": "12-2",
+  "title": "安装 Ollama",
+  "part": 12,
+  "estimatedMinutes": 60,
+  "tags": [
+    "local-ai",
+    "ollama",
+    "install",
+    "terminal"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，Ollama 会安装并运行在你的机器上。你会理解 Ollama 服务在后台做了什么，并通过列出你已有的模型来确认它工作正常。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 Ollama？\n\nOllama 是一个工具，负责处理运行本地 AI 时最麻烦的部分：\n\n- **模型管理：** 从 Ollama 模型库下载模型权重，并存储在你的磁盘上。\n- **运行时：** 把模型作为一个本地进程运行，自动处理内存管理和 GPU 加速。\n- **API 服务器：** 在 `http://localhost:11434` 上暴露一个兼容 OpenAI 格式的 API——这样任何为 OpenAI 构建的工具，只需改一下 URL 就能使用你的本地模型。\n\n你可以用两种方式与 Ollama 交互：通过终端（`ollama` 命令），以及通过上面那个 API（其他工具会自动连接它）。\n\nOllama 免费、开源，支持 Windows、macOS 和 Linux。"
+    },
+    {
+      "type": "text",
+      "content": "## 在 Windows 上安装\n\n**第 1 步——下载安装程序：**\n1. 打开浏览器，访问 `ollama.com/download`\n2. 点击 **Download for Windows**\n3. 安装文件（`OllamaSetup.exe`）会下载到你的下载文件夹\n\n**第 2 步——运行安装程序：**\n1. 打开你的下载文件夹，双击 `OllamaSetup.exe`\n2. 按提示一路点击——保持默认设置即可\n3. 安装完成后，Ollama 会自动启动，一个小图标会出现在系统托盘（任务栏右下角）\n\n**第 3 步——验证安装：**\n1. 打开 PowerShell（按 `Win + X` → Windows PowerShell，或在开始菜单中搜索 \"PowerShell\"）\n2. 输入：\n```\nollama --version\n```\n你应该会看到类似 `ollama version 0.x.x` 的内容。"
+    },
+    {
+      "type": "text",
+      "content": "## 在 macOS 上安装\n\n1. 访问 `ollama.com/download` → 点击 **Download for Mac**\n2. 打开下载好的 `.zip` 文件——会出现一个文件夹\n3. 把 Ollama 应用拖到你的应用程序（Applications）文件夹\n4. 从应用程序中打开它（首次启动：右键点击 → 打开，以绕过 Gatekeeper 限制）\n5. Ollama 会启动，并在菜单栏中显示一个羊驼图标\n6. 打开终端，输入：`ollama --version` 进行验证"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Ollama 在后台是如何运行的：** 安装完成后，Ollama 会作为后台服务运行。在 Windows 上它会出现在系统托盘中，在 macOS 上则在菜单栏中。你不需要手动启动它——电脑开机时它会自动启动。只要 Ollama 在运行，`localhost:11434` 上的 API 服务器就始终可用。"
+    },
+    {
+      "type": "text",
+      "content": "## 理解 Ollama 的 API\n\n当 Ollama 在运行时，它会在以下地址提供一个本地 HTTP API：\n\n```\nhttp://localhost:11434\n```\n\n这个 API 遵循 OpenAI 的格式，这一点很重要，因为这意味着任何为使用 OpenAI 而构建的工具——VS Code 扩展、自动化工具、脚本——都可以通过改一下 URL，转而使用你的本地模型。\n\n你会遇到的主要接口有：\n\n- `POST /api/generate` —— 发送一个提示词（prompt），获取一个响应\n- `POST /api/chat` —— 多轮对话（Continue.dev 和 Claude Code 使用的格式）\n- `GET /api/tags` —— 列出你已安装的模型\n\n你通常不需要直接调用这些接口。Continue.dev 和 LM Studio 这类工具会替你完成这件事。但了解这个 API 的存在，能解释为什么\"连接\"这些工具只是把它们指向正确的 URL 而已。"
+    },
+    {
+      "type": "text",
+      "content": "## 常用的 Ollama 命令\n\n以下是你最常会用到的命令：\n\n```\nollama pull <model>       # Download a model\nollama run <model>        # Start an interactive chat session\nollama list               # Show all downloaded models\nollama rm <model>         # Delete a model to free disk space\nollama show <model>       # Show model details (size, parameters)\nollama serve              # Manually start the API server (usually automatic)\n```\n\n模型通过名称和可选的标签来标识：`llama3.2`、`phi4`、`mistral`、`llama3.2:3b`。如果你省略标签，Ollama 会使用默认版本（通常是 7B 或标准版本）。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**磁盘空间提示：** 模型大小从大约 2GB（小型 3B 参数模型）到 70GB 以上（大型模型）不等。在拉取第一个模型之前，请确保你至少有 10GB 的可用磁盘空间。如果磁盘空间紧张，就选用较小的模型：`llama3.2:3b` 只有约 2GB，而且在很多任务上表现出乎意料地好。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "安装 Ollama 并拉取你的第一个模型",
+      "content": "按顺序完成以下步骤。模型下载需要几分钟——这是正常的。\n\n**第 1 步——安装 Ollama：**\n按照上面适合你操作系统的安装步骤操作。当你在系统托盘（Windows）或菜单栏（macOS）中看到 Ollama 图标时，再回到这里。\n\n**第 2 步——验证安装：**\n打开 PowerShell（Windows）或终端（macOS），运行：\n```\nollama --version\n```\n你应该会看到一个版本号。如果提示\"找不到命令\"，重启一下终端再试一次——安装后 PATH 需要刷新。\n\n**第 3 步——拉取一个模型：**\n先从微软的 `phi4` 开始——这是一个按体积衡量质量很高的模型：\n```\nollama pull phi4\n```\n这会下载大约 9GB。下载的同时，可以先阅读下一课（12-3），了解拿到模型之后该做什么。\n\n**如果你的磁盘空间有限**，可以改用更小的 Llama 模型：\n```\nollama pull llama3.2:3b\n```\n它只有约 2GB，在很多任务上仍然很实用。\n\n**第 4 步——验证模型已下载完成：**\n```\nollama list\n```\n你应该能看到你的模型及其大小出现在列表中。\n\n**第 5 步——确认 API 正在运行：**\n在 PowerShell 中：\n```\nInvoke-RestMethod http://localhost:11434/api/tags\n```\n或者直接打开浏览器，访问 `http://localhost:11434`——你应该会看到 `Ollama is running`。\n\n**完成标志：** `ollama list` 显示至少一个模型，并且 API 有响应。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——安装 Ollama 并首次运行",
+      "content": "安装 Ollama 并运行你的第一个本地模型。\n\n**第 1 步——安装 Ollama：**\n从 ollama.com 下载适合你操作系统的版本。在 Windows 上，运行安装程序。\n\n**第 2 步——验证安装：**\n```powershell\nollama --version\n```\n\n**第 3 步——下载并运行你的第一个模型：**\n```powershell\n# Phi-4 Mini is a strong 3.8B model that fits most hardware\nollama run phi4-mini\n```\n这会下载约 2.5GB 数据。等待下载完成。\n\n**第 4 步——进行一次对话：**\n在 Ollama 提示符下，问它：\"What is your name and what model are you?\"\n然后问：\"Write a Python function that reverses a string\"\n\n**第 5 步——退出并检查已安装的内容：**\n```powershell\n# Ctrl+D to exit the model\nollama list\n```\n\n**第 6 步——问 Claude：** \"phi4-mini 和 phi4 有什么区别？做代码任务应该用哪一个，需要预期哪些取舍？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——Ollama API 集成",
+      "content": "使用 Ollama 的 API 把本地 AI 集成到你的代码中。\n\n**第 1 步——把 Ollama 作为服务器启动**（安装后会自动运行，但仍需验证）：\n```powershell\ncurl http://localhost:11434/api/tags\n```\n你应该会看到你已安装模型的列表。\n\n**第 2 步——用 curl 发起一次 API 调用：**\n```powershell\ncurl http://localhost:11434/api/generate -d '{\n  \"model\": \"phi4-mini\",\n  \"prompt\": \"Write a Python function to check if a string is a palindrome\",\n  \"stream\": false\n}'\n```\n\n**第 3 步——请 Claude Code** 为 Ollama API 写一个 Python 封装：\n\"写一个 Python 类 OllamaClient，模仿 Anthropic 客户端的接口，但实际调用本地 Ollama API。这样我只需改一行代码，就能在云端和本地 AI 之间切换。\"\n\n**第 4 步——测试这个封装**，确认它能生成合理的代码。\n\n**第 5 步——必做的审查环节：** 问 Claude：*\"审查一下这个 OllamaClient 封装。Ollama 和 Anthropic 的 API 之间有哪些重要差异，可能在两者切换时导致 bug？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——用 Ollama 管理模型",
+      "content": "学习用 Ollama 管理多个模型。\n\n**第 1 步——浏览 Ollama 模型库**，地址是 ollama.com/library。浏览与你的使用场景相关的模型：\n- 代码类：codellama、deepseek-coder、qwen2.5-coder\n- 通用类：llama3.2、mistral、gemma2\n- 小型/快速：phi4-mini、gemma2:2b\n\n**第 2 步——下载一个代码专用模型：**\n```powershell\nollama pull qwen2.5-coder:7b\n```\n\n**第 3 步——用同一个提示词比较模型：**\n分别让 phi4-mini 和 qwen2.5-coder:7b \"Write a Python decorator that times function execution.\"\n比较：代码质量、速度、指令遵循程度。\n\n**第 4 步——检查磁盘占用并进行管理：**\n```powershell\nollama list\n# To remove a model:\n# ollama rm modelname\n```\n\n**第 5 步——为你的使用场景搭建一张模型对比表。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——配置本地 AI 编码助手",
+      "content": "在你的开发环境中，把 Ollama 配置成一个完整的编码助手。\n\n**第 1 步——安装 Continue.dev**（如果第 6 部分还没安装的话）到 VS Code 中。\n\n**第 2 步——配置 Continue.dev 使用你的 Ollama 模型：**\n在 `.continue/config.json` 中：\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Local Coding Assistant\",\n      \"provider\": \"ollama\",\n      \"model\": \"qwen2.5-coder:7b\"\n    }\n  ]\n}\n```\n\n**第 3 步——把它用在真实的编码任务中：** 打开一个代码文件，用 Continue.dev 配合本地模型完成：\n- 代码补全\n- 讲解某个函数\n- 提出重构建议\n\n**第 4 步——对比质量和速度**，与云端的 Claude Code 相比。本地模型在哪些任务上已经够用了？\n\n**第 5 步——确定你的切换规则：** 什么时候用本地（隐私/离线），什么时候用云端（质量/复杂任务）？"
+    },
+    {
+      "type": "quiz",
+      "question": "你运行 `ollama run llama3.2`，它开始下载。下载到 40% 时因为网络中断而停止了。再次运行这个命令会发生什么？",
+      "options": [
+        "从 0% 重新开始下载",
+        "从中断的地方继续下载——Ollama 支持断点续传",
+        "使用未下载完整的文件，产生错乱的输出",
+        "你必须先手动删除那个未完成的文件"
+      ],
+      "correct": 1,
+      "explanation": "Ollama 支持断点续传——如果下载被中断，重新运行命令会从上次完成的数据块继续，而不是从零开始。这一点对大型模型（7B 模型 4-8GB，70B 模型 40-80GB）尤其重要，因为网络中断很常见。如果下载看起来卡住了或者数据损坏了（模型输出乱码），你可以先用 `ollama rm modelname` 再用 `ollama pull modelname`，强制重新下载。"
+    },
+    {
+      "type": "quiz",
+      "question": "你把同一个问题问了本地 Ollama 模型 5 次，得到了 5 个不同的答案。这是个问题吗？",
+      "options": [
+        "是的——本地模型应该总是给出确定性的答案",
+        "不是——这是正常现象；temperature 参数控制随机性；如果需要确定性输出，可以设置 temperature=0",
+        "是的——这说明模型损坏了",
+        "不是——不同的答案说明模型很有创造力"
+      ],
+      "correct": 1,
+      "explanation": "LLM 的输出本质上是概率性的——由于生成过程中的 temperature（随机性）参数，同一个提示词每次运行都可能产生不同的输出。对于需要确定性输出的应用（分类、抽取），把 temperature 设为 0。对于创意类或对话类任务，一定的变化反而是可取的。在 Ollama 中：`{\"model\": \"...\", \"prompt\": \"...\", \"options\": {\"temperature\": 0}}`。注意：即使 temperature=0，某些实现中仍可能出现极其细微的差异。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 12-2 课。** Ollama 已经安装好，你的第一个模型也已下载完成。下一课会带你交互式地运行它，并把它的输出与 Claude 进行对比。"
+    }
+  ],
+  "nextLesson": "12-3",
+  "prevLesson": "12-1"
+}

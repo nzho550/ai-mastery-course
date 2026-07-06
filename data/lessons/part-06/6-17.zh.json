@@ -1,0 +1,101 @@
+{
+  "id": "6-17",
+  "title": "高级 MCP——多服务器与工具链",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": [
+    "copilot",
+    "mcp",
+    "vscode",
+    "jira",
+    "azure",
+    "agent-mode",
+    "advanced"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n第 6-9 课介绍了 MCP，并搭建了一个单独的 Jira 服务器。这一课会更深入：同时运行多个服务器、在同一个提示词中串联它们的工具，以及使用对专业和政府工作最有价值的 MCP 服务器。\n\n你将学到：\n- 如何同时运行多个 MCP 服务器\n- GitHub MCP 服务器——让 Copilot 查询自己所在的源代码平台\n- Azure DevOps MCP——面向使用微软工具链的团队（政府中很常见）\n- 数据库 MCP 服务器——让 Copilot 实时读取你的数据\n- Slack 及沟通工具 MCP 服务器\n- 如何在一个 agent 提示词中串联多个工具\n- 企业级 MCP 控制——你的组织可以限制哪些内容"
+    },
+    {
+      "type": "text",
+      "content": "## 同时运行多个 MCP 服务器\n\n你的 `.vscode/mcp.json` 可以定义任意数量的服务器。它们会同时运行，其工具会同时提供给 Copilot Agent Mode 使用。\n\n```json\n{\n  \"servers\": {\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"${env:GITHUB_TOKEN}\"\n      }\n    },\n    \"atlassian\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@atlassian/mcp-atlassian\"],\n      \"env\": {\n        \"JIRA_URL\": \"https://your-domain.atlassian.net\",\n        \"JIRA_USERNAME\": \"${env:JIRA_USER}\",\n        \"JIRA_API_TOKEN\": \"${env:JIRA_TOKEN}\"\n      }\n    },\n    \"postgres\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-postgres\", \"${env:DATABASE_URL}\"]\n    }\n  }\n}\n```\n\n注意 `${env:VARIABLE_NAME}`——它会从环境变量中读取值，而不是把凭据硬编码进 JSON 文件。这是安全的做法：在你的 shell profile 或 `.env` 文件中将敏感值设置为环境变量，在 `mcp.json` 中引用它们，这样你就可以安全地把 `mcp.json` 提交到版本控制。\n\n**VS Code 会在服务器启动时读取 `${env:}`**——无需额外配置。\n\n**安全地设置环境变量：**\n```bash\n# 添加到你的 .bashrc、.zshrc 或 PowerShell profile 中\nexport GITHUB_TOKEN=\"ghp_your_token_here\"\nexport JIRA_TOKEN=\"your_jira_api_token\"\nexport DATABASE_URL=\"postgresql://user:pass@localhost/mydb\"\n```"
+    },
+    {
+      "type": "text",
+      "content": "## GitHub MCP 服务器\n\nGitHub MCP 服务器是 Anthropic/GitHub 官方提供的服务器，用于在 Copilot Agent Mode 中访问 GitHub.com。它与 `@github` 聊天参与者不同——它提供 Copilot 可以自主执行的工具调用。\n\n**设置：**\n```json\n\"github\": {\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n  \"env\": {\n    \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"${env:GITHUB_TOKEN}\"\n  }\n}\n```\n\n在 github.com/settings/tokens 创建一个 GitHub 个人访问令牌（PAT），权限范围为：`repo`、`read:org`、`read:user`。\n\n**可用工具：**\n- `search_repositories` —— 搜索 GitHub 仓库\n- `get_file_contents` —— 读取任意公开（或已授权私有）仓库中的任意文件\n- `list_issues` / `get_issue` —— 列出并读取 issue\n- `create_issue` / `update_issue` —— 创建和更新 issue\n- `list_pull_requests` / `get_pull_request` —— PR 管理\n- `create_pull_request` —— 根据代码变更创建 PR\n- `list_commits` —— 浏览提交历史\n- `push_files` —— 将文件变更推送到分支\n\n**你可以用它做什么：**\n```\n在 GitHub 上搜索用于解析政府数据格式（具体来说：CSV、来自旧系统的 XML、EDIFACT）\n最流行的 Python 库。列出排名前 5 的库，附上它们的 GitHub star 数和最后更新日期。\n```\n\n```\n我刚完成了 [功能] 的实现。从我当前的分支向 main 创建一个 GitHub PR。\nPR 标题：[功能名称]，描述：[总结所做的工作]。\n```\n\n**安全性：** GitHub MCP 服务器包含推送保护——它会阻止任何 AI 生成的回复中包含密钥，并防止通过任何工具操作暴露密钥。\n\n你可以直接从 VS Code 中发现并安装 GitHub MCP 注册表中的 MCP 服务器——打开命令面板（`Ctrl+Shift+P`），搜索 **MCP: Browse Registry**。"
+    },
+    {
+      "type": "text",
+      "content": "## Azure DevOps MCP——政府标准\n\n许多政府机构使用 Azure DevOps（ADO）而非 GitHub 来做项目管理。它也有对应的 MCP 服务器。\n\n**设置：**\n```json\n\"azure-devops\": {\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"@microsoft/mcp-azure-devops\"],\n  \"env\": {\n    \"ADO_ORG_URL\": \"https://dev.azure.com/your-org\",\n    \"ADO_PAT\": \"${env:ADO_TOKEN}\"\n  }\n}\n```\n\n在 dev.azure.com/your-org/_usersSettings/tokens 创建一个 ADO 个人访问令牌，赋予其对 Work Items、Code 和 Build 的读取权限。\n\n**可用工具：**\n- `get_work_item` / `search_work_items` —— 读取工单\n- `create_work_item` / `update_work_item` —— 管理工作项\n- `list_pull_requests` / `create_pull_request` —— PR 管理\n- `run_pipeline` —— 触发 CI/CD 流水线\n- `get_build_status` —— 检查构建结果\n\n**政府工作流示例：**\n```\n在我的 Azure DevOps 项目中搜索 Sprint 12 中所有当前状态为 In Progress 的 User Story 工作项。\n对于每一项，检查代码仓库中是否有对应的分支。报告没有活跃分支的所有 story。\n```\n\n```\n我刚合并了 PR #47，它对应 ADO 工作项 #234。\n将工作项 #234 的状态更新为 Done，并添加一条链接到合并提交的评论。\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 数据库 MCP 服务器——对实时数据的读取访问\n\n数据库 MCP 服务器让 Copilot 能够读取真实数据库，从而支持从自然语言进行数据分析、模式探索和查询生成。\n\n**PostgreSQL：**\n```json\n\"postgres\": {\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"@modelcontextprotocol/server-postgres\", \"${env:DATABASE_URL}\"]\n}\n```\n\n**SQLite：**\n```json\n\"sqlite\": {\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"@modelcontextprotocol/server-sqlite\", \"/path/to/database.db\"]\n}\n```\n\n**Copilot 在拥有数据库访问权限后能做什么：**\n```\n描述这个数据库的 schema。列出所有的表、它们的列和类型，以及你能推断出的任何外键关系。\n```\n\n```\ntransactions 表中本月创建的记录有多少条？按 status 字段分类统计。\n```\n\n```\n我需要找出所有超过 90 天没有登录、但账户仍标记为活跃的用户。\n写出并解释这条 SQL 查询。\n```\n\n**关键安全规则：** 对 MCP 服务器使用只读的数据库连接。大多数数据库 MCP 服务器都支持只读模式。绝不要给 Copilot Agent Mode 生产数据库的写入权限。将连接字符串配置为只读用户：\n```bash\n# 只读的 PostgreSQL 用户\nexport DATABASE_URL=\"postgresql://readonly_user:pass@host/db?options=-c+default_transaction_read_only%3Don\"\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 在一个提示词中串联多个 MCP 工具\n\n拥有多个 MCP 服务器的真正威力在于把它们串联起来——一个提示词按顺序使用来自多个服务器的工具。\n\n### 示例 1：从 Bug 报告到修复再到 PR\n\n同时运行 GitHub + Jira MCP：\n```\n检查我们仓库的 GitHub issue。找出任何标记为 'bug' 和 'high-priority' 且尚未关联 PR 的\nissue。选择最旧的一个。完整阅读这个 issue 的详情。在我的工作区中找到相关代码。\n实现一个修复方案。创建一个 PR，描述中链接到原始 issue。将对应这个 GitHub issue 的\nJira 工单更新为 In Progress，并附上指向新 PR 的评论。\n```\n\nCopilot 会依次使用：`github.list_issues` → `github.get_issue` → 工作区搜索 → 文件编辑 → `github.create_pull_request` → `atlassian.update_issue`。\n\n### 示例 2：从数据库异常到工单\n\n使用 PostgreSQL + Azure DevOps MCP：\n```\n查询审计日志表，找出过去 7 天内在非工作时间（早上 7 点前或晚上 7 点后）执行的任何操作。\n如果发现任何此类操作，创建一个 Azure DevOps bug 工作项，标题为 “检测到非工作时间的数据\n访问 - [日期范围]”，描述中包含完整的查询结果。将优先级设为 1（严重）。\n```\n\nCopilot 会使用：`postgres.query` → `azure-devops.create_work_item`。\n\n### 示例 3：Sprint 报告\n\n使用 Azure DevOps + GitHub MCP：\n```\n生成 Sprint 15 的冲刺摘要：\n1. 列出 ADO Sprint 15 中所有已完成的工作项\n2. 对每一项，找到对应的 GitHub PR（通过在 PR 标题中搜索工作项编号）\n3. 获取 PR 的合并日期和审查人数量\n4. 输出一个 markdown 表格：Work Item | Title | PR # | Merged Date | Reviewers\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**企业级 MCP 控制。** 如果你的组织使用 GitHub Copilot Business 或 Enterprise，你的 GitHub 组织管理员可以控制你被允许连接哪些 MCP 服务器。他们可能会设置一个已批准的 MCP 服务器白名单——如果你的服务器不在白名单中，即使它已经配置在你的 mcp.json 中，Copilot 也会拒绝使用它。\n\n对政府用户而言：在连接任何访问组织数据（数据库、项目管理工具、文件系统）的 MCP 服务器之前，请先与你的 IT/安全团队确认该服务器是否已获批准。组织白名单是强制执行机制——但政策批准是第一步。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "多服务器搭建：GitHub + Jira",
+      "content": "同时搭建两个 MCP 服务器，并运行一个跨工具的工作流。\n\n**前提条件：**\n- 第 6-9 课中的 Jira MCP（已搭建完成）\n- 一个 GitHub 个人访问令牌（来自 github.com/settings/tokens，权限范围：`repo`、`read:org`）\n\n**第 1 步——将 GitHub MCP 添加到你的 .vscode/mcp.json：**\n```json\n{\n  \"servers\": {\n    \"atlassian\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@atlassian/mcp-atlassian\"],\n      \"env\": {\n        \"JIRA_URL\": \"https://YOUR-DOMAIN.atlassian.net\",\n        \"JIRA_USERNAME\": \"your@email.com\",\n        \"JIRA_API_TOKEN\": \"your-jira-token\"\n      }\n    },\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"your-github-token\"\n      }\n    }\n  }\n}\n```\n\n**第 2 步——重新加载 VS Code。** 检查工具面板——你应该能看到来自两个服务器的工具。\n\n**第 3 步——跨工具串联提示词：**\n```\n在我的 Jira 项目中搜索优先级最高的未关闭 bug 工单。阅读它的完整详情。\n然后在我们的 GitHub 仓库中搜索是否已有相关的 open issue 或 PR 可能已经解决了这个 bug。\n回报：这个 bug 是什么？GitHub 上有没有已有的工作在处理它，还是我需要创建一个新的 issue？\n```\n\n**第 4 步——如有需要则创建 GitHub issue：**\n```\n为这个 bug 创建一个 GitHub issue。标题根据 Jira 工单标题拟定。\n在描述中包含：问题摘要、来自 Jira 工单的复现步骤，以及指向 Jira 工单 ID 的链接。\n```\n\n**验证：** 检查 Jira 和 GitHub 两边，确认信息准确、链接正确。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "实战 A——数据库 Schema 探索器",
+      "content": "连接一个数据库 MCP 服务器，用 Copilot 来理解并查询它。\n\n**本次实战使用 SQLite 数据库。** 如果你没有现成的，创建一个示例：\n```bash\nnpx @modelcontextprotocol/server-sqlite create-sample sample.db\n```\n或使用你已有的任何 SQLite 文件（很多应用程序把数据存储在 SQLite 中：浏览器、消息应用、各种工具）。\n\n**添加到 .vscode/mcp.json：**\n```json\n\"sqlite\": {\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"@modelcontextprotocol/server-sqlite\", \"./sample.db\"]\n}\n```\n\n**探索提示词（在 Copilot Agent Mode 中）：**\n\n```\n描述这个数据库的 schema。列出每一张表、它们带类型的列，以及表之间的任何关系。\n```\n\n```\n每张表里有多少条记录？给我看每张表的计数。\n```\n\n```\n所有表中最近被修改的 5 条记录是什么？\n（使用你找到的任何时间戳列。）\n```\n\n```\n写一条 SQL 查询，生成一份按 [某个分类列] 分组的 [最有意思的那张表] 的摘要报告。\n在运行之前解释这条查询做了什么。\n```\n\n**关键收获：** 注意 Copilot 无需你先描述 schema，就能探索数据库 schema 并写出准确的查询——它通过 MCP 直接读取。这就是生成*可能*可用的代码，和生成*确实了解*你实际数据库结构的代码之间的区别。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "实战 B——完整的工具链",
+      "content": "构建一个完整的自动化工作流，贯穿数据库 → 分析 → 项目管理工单。\n\n**所需搭建：** 数据库 MCP（SQLite 或 PostgreSQL）+ Jira 或 Azure DevOps MCP。\n\n**工作流：自动异常检测与建单。**\n\n**第 1 步——查询异常：**\n```\n查询数据库中看起来异常的记录。查找：\n- 在异常时间创建的记录（如果有时间戳列）\n- 重要列中存在空值的记录\n- 数值远超出正常范围的记录\n列出最可疑的前 5 条记录，附上它们的 ID 和具体的异常之处。\n```\n\n**第 2 步——为每个发现创建一个工单：**\n```\n对你发现的每一个异常，创建一个 Jira bug 工单，包含：\n- 标题：'数据异常：[具体问题的简短描述]'\n- 描述：具体的记录细节、异常之处，以及建议的排查步骤\n- 优先级：中\n- 标签：data-quality\n```\n\n**第 3 步——在 Jira/ADO 中验证。** 打开你的项目管理工具，确认工单已创建且信息准确。\n\n**这展示了什么：** 一个能自动生成可执行工单的、真实的数据监控工作流——这类工作原本通常需要一个自定义脚本加上手动建单。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "实战 C——MCP 安全配置",
+      "content": "为注重安全的政府环境配置 MCP。\n\n**问题：** 你想用 MCP 把 Copilot 连接到你的工作工具，但你需要：\n1. 将凭据排除在版本控制之外\n2. 只允许对数据库进行读操作\n3. 限制哪些用户可以连接特定的 MCP 服务器\n4. 为你的团队记录已批准的服务器清单\n\n**第 1 步——创建一个 .env 文件（不提交到 git）：**\n```bash\n# .env（将此文件加入 .gitignore）\nJIRA_TOKEN=your-token-here\nGITHUB_TOKEN=ghp_your-token\nADO_TOKEN=your-ado-pat\nDB_READONLY_URL=postgresql://reader:pass@host/db\n```\n\n**第 2 步——使用环境变量引用创建 mcp.json：**\n```json\n{\n  \"servers\": {\n    \"atlassian\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@atlassian/mcp-atlassian\"],\n      \"env\": {\n        \"JIRA_URL\": \"https://your-domain.atlassian.net\",\n        \"JIRA_USERNAME\": \"your@email.com\",\n        \"JIRA_API_TOKEN\": \"${env:JIRA_TOKEN}\"\n      }\n    }\n  }\n}\n```\n\n**第 3 步——将 .env 加入 .gitignore：**\n```bash\necho \".env\" >> .gitignore\necho \".vscode/mcp.json\" >> .gitignore\n```\n\n**第 4 步——创建 `mcp.template.json`**（这一个*会*被提交）：\n把你的 mcp.json 复制一份，把 `${env:}` 引用替换成占位值，比如 `\"YOUR_JIRA_TOKEN_HERE\"`。这样队友就能看到结构，而不会暴露凭据。\n\n**第 5 步——编写 `MCP-SETUP.md`**，记录：\n- 你的团队使用哪些 MCP 服务器，为什么\n- 哪些已经获得 IT/安全团队批准\n- 如何创建 .env 文件\n- 哪些服务器尚未获批准（具体列出）\n\n**成果：** 一套在受监管环境中既能正常工作、又安全可用的 MCP 配置。"
+    },
+    {
+      "type": "quiz",
+      "question": "你为一个 PostgreSQL MCP 服务器配置了完整的读写凭据。一位同事在 Copilot Agent Mode 中运行提示词“清理 users 表中的测试数据”。风险是什么？",
+      "options": [
+        "没有风险——Copilot Agent Mode 在未经明确确认前不会删除数据",
+        "如果 Copilot 误判哪些记录是“测试数据”，它可能会在生产数据库上执行 DELETE 或 UPDATE 查询",
+        "风险很低，因为 Copilot 总是会在执行前预览 SQL",
+        "没有风险——该 MCP 服务器只允许 SELECT 查询"
+      ],
+      "correct": 1,
+      "explanation": "如果你给 MCP 服务器写入凭据，Copilot Agent Mode 就可以对数据库执行 INSERT、UPDATE 和 DELETE 操作。面对像“清理测试数据”这样含糊的提示词，Copilot 可能会删除它错误识别为测试数据的记录。始终为 MCP 服务器使用只读数据库凭据。如果确实需要写入权限，使用专门的预发布数据库，在确认前核实 Copilot 计划运行的 SQL，并且绝不给 Agent Mode 生产数据库的写入权限。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 .vscode/mcp.json 使用 ${env:JIRA_TOKEN} 来引用一个环境变量。你把 mcp.json 提交到了 GitHub。这样安全吗？",
+      "options": [
+        "不安全——GitHub 会扫描并在文件中找到该令牌",
+        "安全——${env:JIRA_TOKEN} 语法是对环境变量的引用，而不是真实的令牌值。令牌本身存在于你的环境中，而不是文件里。",
+        "只有仓库是私有的才安全",
+        "不安全——你绝不应该把任何 mcp.json 文件提交到版本控制"
+      ],
+      "correct": 1,
+      "explanation": "${env:JIRA_TOKEN} 语法是一个引用，而不是实际的值。提交的文件中只包含占位文本 '${env:JIRA_TOKEN}'——真正的令牌保存在你的 shell 环境中（通过 .bashrc、单独加载的 .env 文件，或系统环境变量设置）。克隆该仓库的任何人都会获得 mcp.json 的结构，但拿不到你的凭据。他们需要用自己的令牌设置自己的环境变量。这是与团队共享 MCP 配置的正确做法。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-17 课完成。** 现在你可以同时运行多个 MCP 服务器，在数据库、项目管理和代码平台之间用同一个提示词串联它们的工具，并在不暴露凭据的情况下安全配置一切。多服务器方案把 Copilot 从一个编码助手转变为你整个技术栈的集成层。第 6-18 课将介绍 Copilot 助力测试——用 AI 构建更好的测试套件，而不只是生成能通过的测试。"
+    }
+  ],
+  "nextLesson": "6-18",
+  "prevLesson": "6-16"
+}

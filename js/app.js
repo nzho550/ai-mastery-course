@@ -5,12 +5,14 @@ import { initLesson, renderLesson } from './lesson.js';
 import { initSearch } from './search.js';
 import { getProgress, getTotalStats, getPartStats, getLastVisited, getTheme, setTheme } from './progress.js';
 import { qs } from './utils.js';
+import { t, getLang, setLang, otherLang, curriculumPath } from './i18n.js';
 
 let curriculum = null;
 
 async function boot() {
   // Apply saved theme immediately
   applyTheme(getTheme());
+  applyStaticStrings();
 
   // Inject header icons
   const logoIcon = qs('.logo-icon');
@@ -22,10 +24,10 @@ async function boot() {
 
   // Load curriculum
   try {
-    const res = await fetch('data/curriculum.json');
+    const res = await fetch(curriculumPath());
     curriculum = await res.json();
   } catch (e) {
-    document.body.innerHTML = `<div style="padding:2rem;color:#f87171">Failed to load curriculum.json: ${e.message}</div>`;
+    document.body.innerHTML = `<div style="padding:2rem;color:#f87171">Failed to load curriculum: ${e.message}</div>`;
     return;
   }
 
@@ -50,6 +52,16 @@ async function boot() {
     });
   }
 
+  // Language toggle
+  const langBtn = qs('#lang-toggle');
+  if (langBtn) {
+    updateLangButton(langBtn);
+    langBtn.addEventListener('click', () => {
+      setLang(otherLang());
+      location.reload();
+    });
+  }
+
   // Sidebar toggle (mobile)
   if (menuBtn) {
     menuBtn.addEventListener('click', () => {
@@ -61,6 +73,26 @@ async function boot() {
       }
     });
   }
+}
+
+function applyStaticStrings() {
+  document.documentElement.lang = getLang();
+  document.title = t('meta.title');
+  const logoText = qs('.logo-text');
+  if (logoText) logoText.textContent = t('header.logo');
+  const searchInput = qs('#search-input');
+  if (searchInput) searchInput.placeholder = t('header.searchPlaceholder');
+  const sidebarToggle = qs('#sidebar-toggle');
+  if (sidebarToggle) sidebarToggle.setAttribute('aria-label', t('header.toggleSidebar'));
+  const themeToggle = qs('#theme-toggle');
+  if (themeToggle) themeToggle.setAttribute('aria-label', t('header.toggleTheme'));
+  const langToggle = qs('#lang-toggle');
+  if (langToggle) langToggle.setAttribute('aria-label', t('header.toggleLang'));
+}
+
+function updateLangButton(btn) {
+  btn.textContent = t('header.langLabel');
+  btn.title = t('header.toggleLang');
 }
 
 function handleRoute(route) {
@@ -83,53 +115,53 @@ function renderDashboard() {
 
   const resumeHtml = lastMeta ? `
     <a href="#/lesson/${lastMeta.id}" class="btn btn-primary">
-      ${icons.arrowRight} Resume: ${lastMeta.id} ${lastMeta.title}
+      ${icons.arrowRight} ${t('action.resume')}: ${lastMeta.id} ${lastMeta.title}
     </a>` : `
     <a href="#/lesson/1-1" class="btn btn-primary">
-      ${icons.zap} Start Learning
+      ${icons.zap} ${t('action.startLearning')}
     </a>`;
 
   main.innerHTML = `
     <section class="hero">
-      <h1>Master <span>AI Tools</span> From Zero</h1>
-      <p>${curriculum.parts.length} parts · ${totalStats.total} lessons · hands-on workshops that leave you with real skills, real tools, real results.</p>
+      <h1>${t('hero.title.pre')}<span>${t('hero.title.highlight')}</span>${t('hero.title.post')}</h1>
+      <p>${t('hero.subtitle', { parts: curriculum.parts.length, lessons: totalStats.total })}</p>
       <div class="stats-row">
-        <div class="stat"><span class="stat-value">${totalStats.done}</span><span class="stat-label">Lessons Done</span></div>
-        <div class="stat"><span class="stat-value">${totalStats.pct}%</span><span class="stat-label">Complete</span></div>
-        <div class="stat"><span class="stat-value">${totalStats.total}</span><span class="stat-label">Total Lessons</span></div>
-        <div class="stat"><span class="stat-value">${curriculum.parts.length}</span><span class="stat-label">Parts</span></div>
+        <div class="stat"><span class="stat-value">${totalStats.done}</span><span class="stat-label">${t('stat.lessonsDone')}</span></div>
+        <div class="stat"><span class="stat-value">${totalStats.pct}%</span><span class="stat-label">${t('stat.complete')}</span></div>
+        <div class="stat"><span class="stat-value">${totalStats.total}</span><span class="stat-label">${t('stat.totalLessons')}</span></div>
+        <div class="stat"><span class="stat-value">${curriculum.parts.length}</span><span class="stat-label">${t('stat.parts')}</span></div>
       </div>
       <div class="hero-actions">
         ${resumeHtml}
-        <a href="#/lesson/1-1" class="btn btn-ghost">${icons.bookOpen} Browse Curriculum</a>
+        <a href="#/lesson/1-1" class="btn btn-ghost">${icons.bookOpen} ${t('action.browseCurriculum')}</a>
       </div>
     </section>
 
     <div style="padding:var(--sp-8)">
       ${totalStats.done > 0 ? `
         <div style="margin-bottom:var(--sp-8)">
-          <div class="section-heading">Overall Progress</div>
+          <div class="section-heading">${t('progress.overall')}</div>
           <div class="progress-bar" style="height:8px">
             <div class="progress-bar-fill" style="width:${totalStats.pct}%"></div>
           </div>
-          <div style="font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--sp-2)">${totalStats.done} of ${totalStats.total} lessons complete</div>
+          <div style="font-size:var(--text-sm);color:var(--text-muted);margin-top:var(--sp-2)">${t('progress.lessonsComplete', { done: totalStats.done, total: totalStats.total })}</div>
         </div>` : ''}
 
-      <div class="section-heading">Course Parts</div>
+      <div class="section-heading">${t('section.courseParts')}</div>
       <div class="card-grid">
         ${curriculum.parts.map((part, i) => {
           const stats = partStats[i];
           return `
             <a class="part-card" href="#/lesson/${part.lessons[0].id}">
               <div class="part-card-header">
-                <span class="part-number">Part ${part.number}</span>
+                <span class="part-number">${t('part.label', { number: part.number })}</span>
                 <h3>${part.title}</h3>
               </div>
               <div class="progress-bar">
                 <div class="progress-bar-fill" style="width:${stats.pct}%"></div>
               </div>
               <div class="part-card-meta">
-                <span>${icons.bookOpen} ${part.lessons.length} lessons</span>
+                <span>${icons.bookOpen} ${t('part.lessonsCount', { count: part.lessons.length })}</span>
                 <span>${icons.checkCircle} ${stats.done}/${stats.total}</span>
               </div>
             </a>`;
@@ -168,7 +200,7 @@ function applyTheme(theme) {
 function updateThemeIcon(btn) {
   const theme = getTheme();
   btn.innerHTML = theme === 'light' ? icons.sun : theme === 'dark' ? icons.moon : icons.sun;
-  btn.title = `Theme: ${theme}`;
+  btn.title = `${t('theme.label')}: ${theme}`;
 }
 
 boot();

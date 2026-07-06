@@ -1,0 +1,139 @@
+{
+  "id": "5-8",
+  "title": "扩展——安装与管理",
+  "part": 5,
+  "estimatedMinutes": 70,
+  "tags": [
+    "vscode",
+    "beginner",
+    "extensions",
+    "marketplace",
+    "github-copilot",
+    "ai"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将安装三个必备的生产力扩展（Live Server、Prettier、GitLens），并理解正快速发展的 AI 编码扩展类别——包括 GitHub Copilot、Continue.dev 和 Claude Code 的 VS Code 扩展。扩展是把 VS Code 从一个能用的编辑器，变成一个完整专业环境的关键，而 AI 扩展正是应用市场中增长最快的类别。"
+    },
+    {
+      "type": "text",
+      "content": "## 扩展应用市场\n\n扩展是为 VS Code 增加新能力的附加组件。它们由微软、各家公司以及独立开发者构建——目前有超过 30,000 个扩展可用，其中大多数是免费的。\n\n可以把它理解成你编辑器的应用商店。扩展能做的事情举几个例子：\n- **自动格式化你的代码**，让它始终看起来整洁（Prettier）\n- **在浏览器中实时显示你的 HTML 文件**，随着你的输入自动更新（Live Server）\n- **为每一行代码添加强大的 Git 信息**（GitLens）\n- **为你的编辑器添加 AI 自动补全和聊天功能**（GitHub Copilot、Continue.dev）\n- **为任何语言高亮语法**——Python、Rust、SQL 等等\n- **更改整个编辑器的配色主题**\n\n**如何打开扩展面板：**\n- 点击活动栏左侧的**拼图图标**\n- 或：按 **Ctrl+Shift+X**\n- 或：使用命令面板（Ctrl+Shift+P）→ 输入 `Extensions: Install Extensions`\n\n面板会在主侧边栏中打开。顶部有一个搜索框——输入任意关键词即可查找扩展。"
+    },
+    {
+      "type": "text",
+      "content": "## 如何安装一个扩展\n\n安装扩展很简单：\n1. 打开扩展面板（Ctrl+Shift+X）\n2. 在搜索框中输入扩展的名称\n3. 找到正确的结果——确认作者名称和安装量，以确保它是官方版本\n4. 点击 **Install（安装）** 按钮\n5. 稍等几秒——VS Code 会下载并安装它\n\n有些扩展会立即生效。另一些则需要**重新加载**——会出现一个写着“Reload Required”的按钮。点击它以重启 VS Code 窗口（你打开的文件会保留）。\n\n**扩展面板有三个部分：**\n- **Installed（已安装）**——你安装过的扩展（无论是启用还是禁用状态）\n- **Enabled（已启用）**——当前处于激活状态的扩展\n- **Disabled（已禁用）**——已安装但被关闭的扩展\n\n右键点击某个扩展 → Disable 可以在不卸载的情况下临时关闭它。这在排查冲突问题时很有用。"
+    },
+    {
+      "type": "text",
+      "content": "## 扩展 1：Live Server\n\n**作者：** Ritwick Dey\n**它的作用：** 在浏览器中打开你的 HTML 文件并实时刷新——每次你保存文件时，浏览器都会自动更新。再也不用手动刷新了。\n\n**安装后如何使用：**\n1. 在 VS Code 中打开你的项目文件夹\n2. 在资源管理器面板中点击任意 `.html` 文件\n3. 右键点击该文件 → **Open with Live Server**\n4. 你的浏览器会打开并显示这个页面\n5. 回到 VS Code，做任意修改，按 Ctrl+S——浏览器会立即更新\n\n安装后，你还会在状态栏底部看到一个 **“Go Live”** 按钮。\n\n**搜索：** `Live Server`（作者 Ritwick Dey，4000 万+ 安装量）"
+    },
+    {
+      "type": "text",
+      "content": "## 扩展 2：Prettier——代码格式化工具\n\n**作者：** Prettier\n**它的作用：** 自动重新格式化你的代码，让它始终看起来整洁——正确的缩进、统一的引号风格、恰当的间距。保存文件，Prettier 立即帮你修好。\n\n**安装后，把它设为默认格式化工具：**\n1. 按 Ctrl+Shift+P → 输入 `Format Document`\n2. VS Code 可能会要求你选择一个默认格式化工具——选择 **Prettier - Code formatter**\n3. 或前往设置（Ctrl+,）→ 搜索 `default formatter` → 选择 Prettier\n\n配置好之后，按 Ctrl+Shift+P → `Format Document` 即可手动格式化，或者在设置中启用 Format on Save（保存时格式化，第 5-9 课会讲到）来让它自动发生。\n\n**搜索：** `Prettier - Code formatter`（作者 Prettier，3500 万+ 安装量）"
+    },
+    {
+      "type": "text",
+      "content": "## 扩展 3：GitLens\n\n**作者：** GitKraken\n**它的作用：** 大幅增强 VS Code 内置的 Git 集成功能。它会为每一行代码显示：谁写的、什么时候写的。它还添加了内联“blame”注释、时间线视图、历史对比等更多功能。\n\n在你于第 5-12 课初始化一个 Git 仓库之后，把鼠标悬停在任意一行代码上，就会显示一个不打扰的注释：“You, 2 minutes ago — Initial commit.”（你，2 分钟前——初始提交）。当你回顾几周前写的代码，或者和别人协作时，这非常宝贵。\n\n**注意：** 在你于第 5-12 课初始化 Git 仓库之前，GitLens 不会显示太多内容。现在安装它是正确的——一旦 Git 设置好，它会自动激活。\n\n**搜索：** `GitLens — Git supercharged`（作者 GitKraken，2000 万+ 安装量）"
+    },
+    {
+      "type": "text",
+      "content": "## AI 编码扩展——改变一切的类别\n\n上面提到的生产力扩展都是有用的工具。AI 编码扩展则完全不同——它们从根本上改变了你写代码的方式，直接在编辑器内提供实时建议、聊天协助、多文件理解，以及自主代码生成。\n\n截至 2026 年，主要有四个选项：\n\n| 扩展 | 开发方 | 工作原理 | 费用 | 最适合 |\n|-----------|--------------|-------------|------|----------|\n| **GitHub Copilot** | Microsoft/OpenAI | GPT-5 驱动内联补全 + Copilot Chat | 每月 $10（提供免费试用） | 想要深度融入 GitHub/Microsoft 生态的开发者 |\n| **Continue.dev** | Continue | 开源，可连接 Claude API 或本地模型 | 免费 + API 费用 | 想用 Claude 编码、并且要完全掌控的开发者 |\n| **Claude Code 扩展** | Anthropic | 在 VS Code 面板中提供完整的 Claude Code 智能体 | 需要 Claude Max 或 API | 更喜欢图形界面而非终端的 Claude Code 用户 |\n| **Cursor** | Cursor | 从底层就内置 AI 的 VS Code 分支版本 | 每月 $20 | 想从第一天起就体验 AI 优先开发的开发者 |\n\n这些不是那种只添加一项功能的扩展。它们是活在你编辑器内部的 AI 协作者。"
+    },
+    {
+      "type": "text",
+      "content": "## GitHub Copilot——使用最广泛的 AI 编码工具\n\n截至 2026 年，GitHub Copilot 已被超过 100 万名开发者安装使用。它在两个层面上运作：\n\n**层面 1——内联补全（升级版自动补全）：**\n当你输入时，Copilot 会预测你接下来想写什么——不只是下一个单词，而是整个函数、代码块乃至整个文件。建议会以灰色的“幽灵文字”形式出现在你的编辑器中。按 Tab 接受，或继续输入以拒绝。\n\n```javascript\n// You type:\nfunction calculateTax(price, rate) {\n\n// Copilot suggests (grey ghost text):\n  return price * (rate / 100);\n}\n```\n\nCopilot 会读取当前文件、你的函数名、参数、任何注释，以及你代码库中类似的函数，来预测你的意图。这确实很有用——它能处理重复性的结构化代码，让你专注于逻辑本身。\n\n**层面 2——Copilot Chat：**\nVS Code 内的一个聊天面板，你可以在其中就代码提问。和 Claude.ai 不同，Copilot Chat 拥有当前打开文件的上下文：\n\n```\n\"Explain what this function does\"\n\"Why is this returning undefined?\"\n\"Write a unit test for this function\"\n\"Refactor this to use async/await\"\n```\n\n**工作区智能体模式：**\n在 2025-2026 年，Copilot 增加了“智能体模式”，它可以读取你的整个工作区并进行多文件修改——类似于 Claude Code，但活在 VS Code 的聊天面板里。在 Copilot Chat 中用 `@workspace` 激活。\n\n**键盘快捷键：**\n- 接受建议：`Tab`\n- 下一个建议：`Alt+]`（`Alt+[` 为上一个）\n- 打开 Copilot Chat：`Ctrl+Alt+I`\n- 对选中内容进行内联聊天：`Ctrl+I`\n\n**如何安装：**\n1. 在扩展应用市场中搜索 `GitHub Copilot`\n2. 同时安装 `GitHub Copilot` 和 `GitHub Copilot Chat`\n3. 出现提示时登录 GitHub\n4. 免费的 30 天试用会自动开始——最初不需要信用卡\n5. 试用结束后：个人版每月 $10，商业版每月 $19\n\n**免费版说明（2026 年）：** GitHub 现在提供有限的 Copilot 免费版——大约每月 2,000 次补全和 50 条聊天消息。足够让你在正式付费之前真正体验一下。"
+    },
+    {
+      "type": "text",
+      "content": "## Continue.dev——用 Claude 编码\n\nContinue.dev 是一个开源的 VS Code 扩展，可以配合任何 AI 模型使用——包括 Claude、GPT-5、通过 Ollama 使用的本地模型等等。这让它成为如果你想把**第 2-1 课和第 2-2 课中的 Claude 能力**应用到代码上的最佳选择。\n\n**它和 GitHub Copilot 的区别：**\n- 你可以自己选择 AI 模型——Claude Sonnet、Opus、本地模型或其他\n- 开源——你可以确切看到发送给 AI 的内容是什么\n- 不被锁定在 GitHub/Microsoft/OpenAI 生态里\n- 支持 Ollama，实现完全私密的本地 AI 编码（数据不会离开你的机器）\n\n**主要功能：**\n- **内联自动补全：** 类似 Copilot——输入时出现幽灵文字补全\n- **聊天侧边栏：** 就你的代码提问，带有文件上下文\n- **`@file` 和 `@codebase` 上下文：** 在聊天中引用特定文件或搜索整个代码库\n- **编辑模式：** 选中代码，描述你想要的修改，Continue 会就地编辑\n\n**为 Continue 配置 Claude：**\n1. 从 VS Code 应用市场安装 `Continue`\n2. 点击活动栏中的 Continue 图标\n3. 打开设置，添加一个 Anthropic API 密钥（来自 console.anthropic.com）\n4. 选择 `claude-sonnet-4-6` 作为你的模型\n5. 开始就你的代码进行对话\n\n**费用：** Continue 本身免费。你只需要为调用所选模型的 API 付费——Claude API 按 token 计费（Sonnet 大约每 1K token $0.003）。\n\n**最适合：** 想用 Claude 来辅助编码的开发者、想用本地模型保护隐私的开发者，以及偏爱开源工具的开发者。"
+    },
+    {
+      "type": "text",
+      "content": "## Claude Code VS Code 扩展\n\nAnthropic 为 Claude Code 打造了一个官方 VS Code 扩展——第 7 部分中的完整编码智能体，以 VS Code 面板的形式呈现，而不是终端窗口。\n\n**你能获得：**\n- 与编辑器并排的 Claude Code 面板\n- 与 CLI 版本相同的智能体能力（读取文件、写入文件、运行命令）\n- 紧密的集成：点击 Claude 引用的文件，直接跳转到对应代码\n- 无需在终端和编辑器之间来回切换\n\n**什么时候用扩展、什么时候用 CLI：**\n- 扩展：更适合代码审查、解释和有针对性的修改，这些场景下留在 VS Code 内更重要\n- CLI：更适合长时间的自主任务、运行测试，或者你想要终端反馈循环的场景\n\n你会在第 7 部分（第 7-1 课和第 7-2 课）中正式配置它。现在先安装好，做好准备：\n\n**搜索：** 在 VS Code 应用市场中搜索 `Claude Code`（作者 Anthropic）。\n\n**身份验证：** 该扩展使用与 CLI 相同的 Anthropic API 密钥或 Claude Max 账户——你只需要验证一次。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**你应该从哪个 AI 扩展开始？**\n\n对于这门课程：\n- 安装 **GitHub Copilot**（免费试用，文档最全，社区最大）\n- 如果你想用 Claude 作为编码 AI，也安装 **Continue.dev**\n- 暂时跳过 Cursor——它是一个独立的应用，不是扩展，先学好 VS Code 会让你之后更容易理解 Cursor\n\n这三个都值得体验一下。专业习惯是在你的实际任务上进行对比，而不是永久绑定某一个。AI 编码辅助工具发展得很快——6 个月后的最佳选择可能会不一样。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**可选加分项：Peacock**\n如果你经常同时打开多个 VS Code 窗口（在处理多个项目时很常见），**Peacock** 扩展（作者 John Papa）能让你给每个窗口设置不同颜色的边框。这个项目用红色，那个项目用蓝色——这样你一眼就知道自己正在哪个窗口里打字。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "安装必备扩展 + 试用 Copilot",
+      "content": "安装全部三个必备扩展，并探索至少一个 AI 编码扩展。\n\n**第一部分——必备扩展**\n\n**第 1 步——打开扩展面板：**\n按 Ctrl+Shift+X。\n\n**第 2 步——安装 Live Server：**\n1. 搜索 `Live Server`——找到作者为 **Ritwick Dey** 的结果（4000 万+ 安装量）\n2. 点击 Install\n3. 从你的 exercises 文件夹中打开 `hello.html`\n4. 在资源管理器中右键点击该文件 → **Open with Live Server**\n5. 修改 `<h1>` 标签中的一个词，按 Ctrl+S——浏览器会自动更新\n6. 停止 Live Server：点击状态栏中的“Port: 5500”→ Stop Server\n\n**第 3 步——安装 Prettier：**\n1. 搜索 `Prettier - Code formatter`——找到作者为 **Prettier** 的结果（3500 万+ 安装量）\n2. 点击 Install\n3. 按 Ctrl+Shift+P → `Format Document` → 如果被提示，选择 Prettier 作为默认格式化工具\n4. 打开 `hello.html`——注意 Prettier 已经重新格式化了缩进\n\n**第 4 步——安装 GitLens：**\n1. 搜索 `GitLens — Git supercharged`（作者 GitKraken）\n2. 点击 Install\n3. GitLens 要到第 5-12 课才会显示很多内容——这是正常的\n\n**第二部分——AI 扩展：GitHub Copilot 免费试用**\n\n**第 5 步——安装 GitHub Copilot：**\n1. 在扩展面板中搜索 `GitHub Copilot`\n2. 同时安装：\n   - `GitHub Copilot`（补全功能）\n   - `GitHub Copilot Chat`（聊天面板）\n3. 出现提示时，点击 **Sign in to GitHub** 并完成身份验证\n4. 你的免费试用会自动开始\n\n**第 6 步——试用内联补全：**\n创建一个新文件：`exercises/copilot-test.js`\n\n输入这段注释，然后开始输入函数：\n```javascript\n// Function that takes an array of numbers and returns only the even ones\nfunction filterEven(\n```\n\n暂停 1-2 秒。Copilot 应该会以灰色幽灵文字的形式建议函数体。按 Tab 接受。\n\n再试几个：\n```javascript\n// Function that calculates the average of an array of numbers\nfunction average(\n```\n\n```javascript\n// Function that checks if a string is a valid email address\nfunction isValidEmail(\n```\n\n**第 7 步——试用 Copilot Chat：**\n1. 按 Ctrl+Alt+I 打开 Copilot Chat 面板\n2. 问：`Explain what the functions in copilot-test.js do`\n3. 问：`Write a unit test for the filterEven function`\n4. 观察：Copilot 已经拥有了当前文件的上下文——你什么都没有粘贴过\n\n**第 8 步——反思：**\n在 `notes/ai-extension-impressions.md` 中写 2-3 句话：\n- 内联补全有什么让你感到惊讶？\n- 这和你预期的 AI 编码辅助的感觉不一样吗？\n- 你会觉得这在真实项目中有用吗？\n\n**验证你安装的扩展：**\n在扩展面板的 Installed（已安装）部分，你应该能看到：\n- [ ] Live Server\n- [ ] Prettier - Code formatter\n- [ ] GitLens\n- [ ] GitHub Copilot\n- [ ] GitHub Copilot Chat"
+    },
+    {
+      "type": "quiz",
+      "question": "你是一名开发者，希望在 VS Code 中同时获得 Claude 品质的内联代码补全和聊天功能，并且想要完全的模型灵活性和本地运行模型的选项。哪个 VS Code 扩展最能满足这三项要求？",
+      "options": [
+        "GitHub Copilot——它可以配置为使用 Claude 作为底层模型",
+        "Continue.dev——它是开源的，可以配置为在补全和聊天两方面都使用 Claude API",
+        "GitLens——它添加了 Git 历史，同时也支持 AI 模型配置",
+        "在 VS Code 内没有办法使用 Claude 编码——只能用终端 CLI"
+      ],
+      "correct": 1,
+      "explanation": "Continue.dev 是正确答案。虽然 GitHub Copilot 现在通过模型选择器在其 Chat 面板中支持 Claude 模型，但它的内联补全仍然使用 GitHub 自己训练的代码补全模型——而不是直接使用 Claude。Continue.dev 会把补全和聊天都路由到 Anthropic API，让你在每一次交互中都能使用 Claude。它也是完全开源的，没有订阅费（你只需为 API token 付费），并且支持 Ollama 实现完全本地化、私密的 AI 编码。对于想在 VS Code 内到处使用 Claude 的开发者来说，Continue.dev 是首选。Claude Code VS Code 扩展也很有用，但它是一个智能体模式工具，而不是逐行自动补全。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——扩展发现训练",
+      "content": "扩展应用市场有 50,000+ 个扩展。这个训练教你如何找到合适的那些。\n\n**第 1 步——打开扩展面板**（Ctrl+Shift+X）。\n\n**第 2 步——浏览各个分类：**\n- 在搜索框输入“@popular”——安装量最高的扩展\n- “@trending”——正在流行起来的扩展\n- “@installed”——你现在已经安装的\n\n**第 3 步——为你的使用场景搜索：**\n- 输入“Python”——查看所有 Python 相关的扩展，注意安装量和评分\n- 输入“AI”——查看 AI 辅助扩展\n- 输入你的具体工具（Docker、AWS 等）\n\n**第 4 步——安装前先阅读：** 点击你考虑安装的 2-3 个扩展。阅读描述页面——它真的解决了你的实际问题吗？\n\n**第 5 步——查看扩展的 GitHub：** 大多数扩展都链接到它们的 GitHub。检查：最后更新时间（6 个月以内比较好）、未解决的 issue、star 数。\n\n**第 6 步——向 Claude 提问：** *“对于 [你的具体开发工作]，必备的 VS Code 扩展有哪些？针对每一个，告诉我为什么值得安装、它解决了什么问题。”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——AI 扩展搭建与工作流",
+      "content": "在 VS Code 中搭建一个 AI 编码助手——并学会有效地使用它，而不仅仅是当自动补全用。\n\n**第 1 步——安装一个 AI 扩展。** 可选项（按推荐顺序）：\n- GitHub Copilot——质量最好，提供免费版\n- Continue（continue.dev）——开源，可用 Claude API\n- Codeium——完全免费的版本\n\n**第 2 步——用你的 API 密钥或账号登录**配置该扩展。\n\n**第 3 步——学习 5 种最强大的用法**（如果你选择的扩展没有很好地记录这些，就问 Claude）：\n- 内联补全：开始输入，按 Tab 接受\n- 询问关于选中代码的问题：选中代码 → 右键 → Ask AI\n- 根据描述性注释生成一个函数\n- 为已有函数生成测试\n- 解释某个文件的作用\n\n**第 4 步——必做的复核：** 对于 VS Code 中任何 AI 生成的代码，始终运行：*“复核这段代码。找出一个代码审查者会发现的 3 个问题。”* 这是最重要的习惯。\n\n**第 5 步——衡量影响：** 计时完成一个有 AI 辅助的编码任务。它快了多少？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——扩展冲突与管理",
+      "content": "扩展太多会拖慢 VS Code 的速度，还可能造成冲突。这个工作坊教你扩展的“卫生习惯”。\n\n**第 1 步——检查你当前的扩展：** Ctrl+Shift+X → @installed。列出你拥有的所有扩展。\n\n**第 2 步——识别并移除重复项：** 常见的重复情况——同一种语言有两个语言服务器，同一种文件类型有多个格式化工具。\n\n**第 3 步——检查扩展对启动速度的影响：**\nCtrl+Shift+P →“Developer: Show Running Extensions”——这会显示哪些扩展被加载了，以及它们的激活时间。\n\n**第 4 步——禁用较慢的扩展：** 激活时间超过 500 毫秒的扩展，如果你不是经常用，值得禁用。\n\n**第 5 步——使用扩展配置文件（Extension Profiles）：** 创建一个只包含必备扩展的“Minimal”配置文件。在 VS Code 感觉变慢时使用它。为高强度编码会话创建一个“Full”配置文件。\n\n**第 6 步——向 Claude 提问：** *“我安装了这些 VS Code 扩展：[列表]。哪些可能互相冲突？哪些是多余的？我应该优先保留哪些？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——搭建扩展推荐文件",
+      "content": "创建一个 .vscode/extensions.json，向任何打开你项目的人推荐你认为必备的扩展。\n\n**第 1 步——列出 5-7 个**对你项目至关重要的扩展。\n\n**第 2 步——找到每个扩展的 ID：** 在扩展面板中，点击每个扩展 → 复制名称下方显示的扩展 ID。\n\n**第 3 步——创建 `.vscode/extensions.json`：**\n```json\n{\n    \"recommendations\": [\n        \"ms-python.python\",\n        \"ms-python.vscode-pylance\",\n        \"esbenp.prettier-vscode\",\n        \"dbaeumer.vscode-eslint\"\n    ]\n}\n```\n\n**第 4 步——测试它：** 关闭并重新在这个文件夹上打开 VS Code。你应该会看到一条通知：“This workspace has extension recommendations.”（该工作区有扩展推荐）\n\n**第 5 步——在 README.md 中添加一条说明**，解释在 VS Code 中打开这个项目会提示安装推荐的扩展。\n\n**第 6 步——向 Claude 提问：** *“我是否也应该把不想要的扩展添加到 'unwantedRecommendations' 里？这在什么情况下有用？”*"
+    },
+    {
+      "type": "quiz",
+      "question": "你安装了一个 VS Code 扩展，编辑器明显变慢了。你首先应该做什么？",
+      "options": [
+        "彻底重装 VS Code",
+        "禁用这个新扩展，看看性能是否有所改善——如果是，把问题反馈给扩展作者，或者寻找替代方案",
+        "增加电脑的内存",
+        "换用另一个代码编辑器"
+      ],
+      "correct": 1,
+      "explanation": "先禁用可疑的扩展（扩展面板 → 点击该扩展上的齿轮图标 → Disable），看看 VS Code 是否恢复正常速度。如果是，那这个扩展就是问题所在。之后你可以决定：保持禁用状态、寻找替代品，或者在扩展的 GitHub 上报告这个性能问题。可以使用“Developer: Show Running Extensions”来测量禁用前后的激活时间。"
+    },
+    {
+      "type": "quiz",
+      "question": "两个 VS Code 扩展都声称能格式化 Python 代码。这可能导致什么问题？",
+      "options": [
+        "它们会各自格式化代码两次，导致变慢",
+        "它们的格式化方式可能不同并产生冲突——保存时，其中一个格式化工具的修改可能会立刻被另一个覆盖",
+        "这不是问题——它们会合并各自的格式化修改",
+        "VS Code 每次都会询问你要用哪个格式化工具"
+      ],
+      "correct": 1,
+      "explanation": "同一种文件类型有两个格式化工具，常常会导致冲突：每个格式化工具都会撤销另一个的修改，导致格式化结果不稳定，或者根本没有生效。解决方法：只保留一个格式化工具，禁用或卸载另一个，并在 settings.json 中明确设置你偏好的格式化工具：`\"[python]\": {\"editor.defaultFormatter\": \"ms-python.black-formatter\"}`。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 5-8 课。** 你已经安装了三个必备的 VS Code 扩展，并通过 GitHub Copilot 亲身体验了 AI 编码辅助。你理解了四个主要的 AI 编码扩展类别，以及各自适用的场景。下一课：为你的工作流定制 VS Code 的设置。"
+    }
+  ],
+  "nextLesson": "5-9",
+  "prevLesson": "5-7"
+}

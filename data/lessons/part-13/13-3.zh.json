@@ -1,0 +1,111 @@
+{
+  "id": "13-3",
+  "title": "API 成本管理——预算、监控与架构设计",
+  "part": 13,
+  "estimatedMinutes": 60,
+  "tags": [
+    "safety",
+    "cost",
+    "api",
+    "anthropic-console",
+    "architecture"
+  ],
+  "sections": [
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**本课的阅读部分与工作坊：** 概念部分（支出限额、用量仪表盘）无论你目前学到课程的哪个阶段都适用。工作坊部分引用了第 11-8 课中的 `exercises/summarize.py`，并要求你使用 Claude Code——这些工具会在学习顺序的后面才讲到。建议：现在先读完所有概念部分，收藏本课，等你完成第 13 部分（Claude Code）和第 17 部分（AI API）之后再回来做工作坊。设置支出限额的浏览器步骤（工作坊步骤 2）如果你已经有 Anthropic API 密钥，现在就可以做。"
+    },
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nAPI 成本的累积方式常常出乎新手的意料。这节课会教你如何在意外运行了昂贵操作之前就设好硬性限额、如何解读你的实际用量数据，以及如何把第 11-9 课中的成本工程技巧应用到你已经构建好的实际工具上。"
+    },
+    {
+      "type": "text",
+      "content": "## 成本为什么会悄悄失控\n\n在正常的课程学习中，你只会调用几次 API，每次的费用都是几分之一美分。如果你一直用 Haiku 处理小任务，整门课程的总花费应该不到 5 美元。\n\n但当你开始构建真实的东西时，API 成本会呈非线性增长：\n\n- 一个处理 1000 份文档的循环，费用是单次调用的 1000 倍\n- 忘记设置 `max_tokens`，意味着模型可能输出 4096 个 token，而你实际上只需要 50 个\n- 对 Haiku 就能胜任的任务使用 Sonnet，每次调用的费用要贵 3 倍\n- 一个每小时处理 50 封邮件的 n8n 工作流，每月要调用 API 43800 次\n\n只要及时发现，这些都算不上灾难。只需做几个配置上的选择，就都可以避免。"
+    },
+    {
+      "type": "text",
+      "content": "## 在 Anthropic 控制台中设置支出限额\n\n`console.anthropic.com` 上的 Anthropic 控制台可以让你设置硬性限额，防止你的 API 密钥被使用超过某个阈值。\n\n**如何设置限额：**\n1. 前往 `console.anthropic.com` → Settings → Billing\n2. 找到 **Monthly spending limit**（月度支出限额）或 **Usage limits**（用量限额）\n3. 在学习阶段设置一个保守的限额：每月 10 美元对于实验来说已经很宽裕\n4. 在构建真实工具时：每月 25 美元能提供一定余地而不会有太大风险\n5. 开启邮件通知——在达到限额的 50% 和 80% 时设置提醒\n\n达到限额后，API 调用会返回一个错误，而不会继续扣费。这是一张安全网，而不是良好架构设计的替代品——一个构建良好的系统在正常运行中不应该触及这个限额。"
+    },
+    {
+      "type": "text",
+      "content": "## 解读你的用量仪表盘\n\n前往 `console.anthropic.com` → Usage。\n\n需要关注的内容：\n\n**模型分布：** 对于 Haiku 就能处理的任务，是否调用了 Sonnet 或 Opus？即使只是在测试阶段调用了少量 Opus，费用也会很快累积起来——Opus 每个输入 token 的费用是 Haiku 的 5 倍。\n\n**每日用量的异常峰值：** 是否有某一天的用量异常高？这通常是某个循环运行次数超出预期、某次测试使用了很大的文档，或某个自动化处理的条目数超出了预想。\n\n**输入与输出 token 的比例：** 输出 token 的费用是输入 token 的 4 到 5 倍。如果你的输出 token 数量出乎意料地高，你很可能忘记设置 `max_tokens` 限制了。\n\n**按 API 密钥统计的总支出：** 如果你有多个密钥（个人的、工作的、不同项目的），可以看出是哪个密钥导致了成本上升。\n\n对于按照本课程学习的大多数人来说，总花费应该不到 1 美元。如果明显更高，仪表盘会告诉你是哪些调用花费较高。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Anthropic 预付费额度与月度账单的区别：** Anthropic 采用预付费额度模式。你充值一定额度（5 美元、10 美元等），随着你调用 API 而逐渐消耗。支出限额限定的是你每月可以充值的上限。如果你的额度用完了，调用会优雅地失败——不会产生欠款。对学习者来说，这是最安全的计费模式。"
+    },
+    {
+      "type": "text",
+      "content": "## 控制成本的四种架构模式\n\n第 11-9 课详细讲过这些技巧，这里做一个参考性总结：\n\n**1. 始终设置 `max_tokens`**\n如果你只需要一个是/否的答案，把 `max_tokens` 设为 5。如果你需要一段文字，设为 200。默认值（4096）对大多数任务来说都过大了。仅这一个习惯，就能把输出成本削减 80%。\n\n**2. 路由到能胜任任务的最便宜模型**\nHaiku 每 100 万输入 token 费用为 1.00 美元。Sonnet 为 3.00 美元。Opus 为 5.00 美元。问问自己：\"这个任务需要 Sonnet 级别的推理能力，还是 Haiku 就能应付？\"对于分类、简短提取、是/否判断，以及简单的改写任务，Haiku 完全足够。\n\n**3. 对重复出现的系统提示词使用 prompt caching（提示词缓存）**\n如果你在每次请求中都发送同样的一大段系统提示词（例如，一个拥有庞大产品知识库的客服代理），给那部分内容加上 `cache_control`。缓存读取的费用只有正常费用的 10%——仅这一项技巧，就能削减一个庞大系统提示词 90% 的成本。\n\n**4. 对非实时任务使用 Batch API（批处理 API）**\n任何不需要即时响应的任务都适用。Batch API 的费用便宜 50%。用批处理在夜间处理 1000 份文档的积压任务，而不是实时处理，可以把成本削减一半。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**见效最快的一个改进：** 打开任何一个你写过的调用 API 的脚本，找到 `max_tokens` 参数。如果它缺失，就加上。如果某个只需要 50-100 个 token 的任务被设成了 1024 或 4096，就把它调低。这只需要 2 分钟，却能显著削减输出成本。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "设定你的预算并审计你的支出",
+      "content": "本工作坊分三步。按顺序完成——审计的结果会影响预算决定。\n\n**第 1 步 —— 审计你当前的用量（10 分钟）：**\n1. 前往 `console.anthropic.com` → Usage\n2. 查看过去 30 天的用量\n3. 在你的笔记中回答以下问题：\n   - 你在本课程中目前的总支出是多少？\n   - 使用了哪个/哪些模型？\n   - 有没有哪天的用量异常大？\n   - 你的输入/输出 token 比例是多少？\n\n如果你目前还没调用过太多次 API，数字会很小——没关系，重点是建立一个基准线。\n\n**第 2 步 —— 设置支出限额（5 分钟）：**\n1. 前往 `console.anthropic.com` → Settings → Billing\n2. 根据你的实际情况设置一个合适的月度支出限额：\n   - 仍在学习阶段：每月 10 美元\n   - 正在积极构建工具：每月 25 美元\n   - 运行自动化流程：每月 50 美元\n3. 在达到限额的 50% 和 80% 时开启邮件提醒\n4. 截图或记下确认信息——这是一张真实的安全网\n\n**第 3 步 —— 对你的摘要工具应用一项成本优化（15 分钟）：**\n打开第 11-8 课中的 `exercises/summarize.py`，应用以下技巧之一：\n\n**选项 A —— 精简系统提示词：**\n打开 `summarize.py`，找到系统提示词，用 `count_tokens()` 测量它在精简前后的 token 数。能否在保持同等质量的前提下删掉一些冗余措辞？\n\n**选项 B —— 添加模型路由：**\n添加逻辑，让短输入使用 Haiku，长输入使用 Sonnet：\n```python\nword_count = len(text.split())\nmodel = \"claude-haiku-4-5-20251001\" if word_count < 500 else \"claude-sonnet-4-6\"\n```\n\n**选项 C —— 添加显式的 max_tokens：**\n如果你的摘要工具没有设置 `max_tokens`，加上它。对于三条要点式摘要，200 个 token 完全够用。\n\n应用该技巧后，在一个测试文件上运行摘要工具，确认它仍然能正常工作。\n\n**添加到你的工作流文档：**\n打开 `notes/my-ai-workflow.md`，添加或更新 API 成本模型部分（对应内容指南中第 13-3 课）。勾选你现在已经设置好的控制项。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A —— API 成本审计",
+      "content": "审计你目前的 API 支出，找出优化空间。\n\n**第 1 步 —— 前往 console.anthropic.com**，查看你的用量仪表盘。\n\n**第 2 步 —— 找出：**\n- 本月的总支出\n- 哪些调用最频繁\n- 用量是否有任何异常峰值\n\n**第 3 步 —— 如果你还没有真实用量数据**，用假设的数字来模拟这次审计：\n- 每天 1000 次请求，每次 500 个 token\n- 分别按 Haiku、Sonnet 和 Opus 计算费用\n\n**第 4 步 —— 询问 Claude：** *\"如果我每月在 Anthropic API 上花费 X 美元，用量模式如下 [描述具体情况]，能最大程度降低成本的前 3 项优化是什么？\"*\n\n**第 5 步 —— 设定一个月度预算**，并在 Anthropic 控制台中配置一个账单提醒。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 实现成本控制",
+      "content": "为你的 API 用量添加硬性成本控制。\n\n**第 1 步 —— 让 Claude Code** 实现一个成本控制系统：\n```\nWrite a Python module api_budget.py that:\n1. Reads the current month's API spend from a local log file\n2. Checks if spend exceeds a configurable daily budget\n3. Raises BudgetExceededError if the budget is exhausted\n4. Logs every API call with: timestamp, tokens, cost, function_name\n5. Provides a summary() function that shows today's spend and remaining budget\n\nThis should wrap the Anthropic client transparently.\n```\n\n**第 2 步 —— 把这个预算模块**集成到你现有的 API 封装层中。\n\n**第 3 步 —— 测试预算限额**：设置一个非常低的预算，验证是否会触发错误。\n\n**第 4 步 —— 必做的审查：** 问 Claude：*\"审查一下这个预算控制系统。它有哪些场景会捕捉不到或者错误地报告？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C —— 面向成本效率的架构设计",
+      "content": "为成本效率设计你的 AI 应用架构。\n\n**第 1 步 —— 询问 Claude：** *\"哪些架构模式能降低生产环境中 AI API 的成本？请涵盖：缓存相同的请求、请求批处理、异步处理，以及模型级联（先尝试便宜的模型，需要时再升级）。\"*\n\n**第 2 步 —— 针对你的主要 AI 应用**，评估每种模式：\n- 你能缓存响应吗？有多大比例的请求是重复的？\n- 你能批处理请求吗？还是用户期望实时响应？\n- 异步处理是否可行，还是用户需要等待？\n- 有多大比例的请求真正需要顶级模型？\n\n**第 3 步 —— 计算适用模式**可能带来的节省。\n\n**第 4 步 —— 为你的应用设计**一份成本高效的架构图。\n\n**第 5 步 —— 询问 Claude：**\"审查一下这个 AI API 成本效率架构。我遗漏了什么？影响最大的优化是什么？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 构建成本仪表盘",
+      "content": "构建一个简单的仪表盘来监控你的 AI API 成本。\n\n**第 1 步 —— 让 Claude Code 构建一个成本监控脚本：**\n```\nWrite a Python script that generates a daily cost report:\n1. Reads the API call log from api_budget.py\n2. Calculates: calls per model, tokens per model, cost per model, total\n3. Identifies the 5 most expensive features/endpoints\n4. Shows a 7-day trend (cost per day)\n5. Outputs a formatted markdown report\n6. Optionally emails the report if daily spend exceeds $X\n```\n\n**第 2 步 —— 用真实或模拟数据运行**这份报告。\n\n**第 3 步 —— 设置每日定时运行**（Windows 任务计划程序或类似工具）。\n\n**第 4 步 —— 使用一周真实数据后**，回顾这份报告。你的用量模式有什么让你意外的地方？"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 AI 应用中有一项功能，每个用户每天调用 50 次 API。其中大多数调用都是针对同样的 10 个常见问题。哪种优化的投资回报率最高？",
+      "options": [
+        "切换到更便宜的模型",
+        "缓存这 10 个常见问题的回答——如果 80% 的 API 调用都能从缓存中获得响应，无论选择哪种模型，你都能降低 80% 的 API 成本",
+        "降低 max_tokens 以限制回答长度",
+        "把 50 次调用批处理成一次请求"
+      ],
+      "correct": 1,
+      "explanation": "当有相当一部分请求是重复的时候，响应缓存能带来最高的投资回报率。如果 80% 的调用都是针对同样的 10 个问题，缓存这些问题就能消除 80% 的 API 成本（存储响应，对相同问题直接返回）。这在以下场景中特别有效：FAQ 类应用、有常见输入的分类任务，以及任何用户会反复问相同问题的系统。可以用一个基于提示词哈希值的简单缓存来实现。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 AI 应用三月份的预算是 100 美元。到 3 月 15 日，你已经花了 97 美元。你的成本控制系统应该如何应对？",
+      "options": [
+        "立即停用剩余整个三月的所有 AI 功能",
+        "立即发出提醒，让你自己决定：停用非必要功能、切换到更便宜的模型，还是批准追加预算",
+        "照常运行，月底再结算超支部分",
+        "自动在本月剩余时间切换到本地模型"
+      ],
+      "correct": 1,
+      "explanation": "在预算达到 100% 时硬性截断，可能造成糟糕的用户体验（功能突然中断）。更好的做法是：在预算达到 80% 时发出提醒，让非关键功能降级（使用更便宜的模型、启用缓存）、保留关键功能，并提醒运营者来决定是否批准追加预算。对于你的应用在 97/100 美元的情况：自动把非关键调用切换到 Haiku、停用可选功能，并通知你，由你来决定是批准更多预算，还是实施更严格的控制。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 13-3 课。** 支出限额已设置，用量已经理清，至少已经应用了一项优化。成本管理算不上光鲜亮丽，但正是它把那些能构建可持续 AI 工具的人，与那些收到意外账单后关停一切的人区分开来。"
+    }
+  ],
+  "nextLesson": "13-4",
+  "prevLesson": "13-2"
+}

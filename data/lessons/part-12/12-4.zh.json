@@ -1,0 +1,105 @@
+{
+  "id": "12-4",
+  "title": "LM Studio——本地模型的图形界面",
+  "part": 12,
+  "estimatedMinutes": 60,
+  "tags": [
+    "local-ai",
+    "lm-studio",
+    "gui",
+    "models"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nOllama 是以命令行为核心的工具。有些人更喜欢用可视化界面来浏览模型、管理下载、进行对话，而不需要打开终端。LM Studio 提供的正是这样的体验——而且它同样运行一个兼容 OpenAI 的 API 服务器，这意味着能连接 Ollama 的工具，也同样能连接 LM Studio。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 LM Studio？\n\nLM Studio 是一款面向 Windows、macOS 和 Linux 的免费桌面应用，让你可以：\n\n- **浏览并下载模型**，来自 Hugging Face 的模型中心，可按大小和任务筛选\n- **在美观的界面中与模型对话**，并可配置系统提示词\n- **在 1234 端口运行一个本地 API 服务器**，模拟 OpenAI 的 API 格式\n- **比较不同模型**，运行多个模型并在它们之间切换\n\n它与 Ollama 的关键区别在于：LM Studio 以 **GGUF 格式**（来自 llama.cpp 项目的一种压缩模型格式）下载模型，这也正是 Ollama 底层使用的格式。可用的模型基本相同，区别在于界面。\n\n**什么时候用 LM Studio，什么时候用 Ollama：**\n- 如果你更喜欢图形界面，想以可视化方式浏览模型目录，或者想要内置的对话界面，就用 LM Studio\n- 如果你习惯在终端里操作，需要用于脚本编写，或者想更紧密地集成到开发工具中，就用 Ollama\n- 你可以同时运行两者——它们使用不同的端口（Ollama：11434，LM Studio：1234）"
+    },
+    {
+      "type": "text",
+      "content": "## 安装 LM Studio\n\n**Windows：**\n1. 访问 `lmstudio.ai` → 点击 **Download for Windows**\n2. 运行安装程序，按提示操作\n3. 从开始菜单启动 LM Studio\n\n**macOS：**\n1. 访问 `lmstudio.ai` → 点击 **Download for Mac**\n2. 打开 `.dmg` 文件，把 LM Studio 拖到应用程序中\n3. 从应用程序中启动\n\n**首次启动时：** LM Studio 会要求你指定一个模型文件夹——这是 GGUF 文件的存储位置。默认位置就可以了。请确保该磁盘上至少保留 20GB 的可用空间。"
+    },
+    {
+      "type": "text",
+      "content": "## LM Studio 界面介绍\n\nLM Studio 的左侧边栏有四个主要区域：\n\n**Discover（发现）** —— 浏览并下载模型。你可以按名称搜索、按大小筛选（方便找到适合你内存的模型），并查看社区评分。点击模型、选择一个量化等级（大多数用户推荐 Q4）、点击下载即可。\n\n**Chat（对话）** —— 加载一个已下载的模型并开始对话。系统提示词可以编辑，能提供类似 API 中 system 参数的控制能力。\n\n**Developer / Local Server（开发者/本地服务器）** —— 启动兼容 OpenAI 的 API 服务器。启用之后，任何支持 OpenAI 的工具都可以连接到 `http://localhost:1234/v1`。你会在接下来的两课中用到它。\n\n**My Models（我的模型）** —— 查看你所有已下载的模型、它们的大小，并管理存储空间。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**选择量化等级：** 在 LM Studio 中下载模型时，你会看到 `Q4_K_M`、`Q5_K_M`、`Q8_0`、`fp16` 这样的选项。数字越大意味着质量越高，但文件越大、占用内存也越多。\n\n- **Q4_K_M** —— 实用的默认选项。质量不错，一个 7B 模型约占 4GB。适合大多数用户。\n- **Q5_K_M** —— 质量略好，体积略大。如果你有富余的内存，可以选它。\n- **Q8_0** —— 接近无损的质量，体积大约是 Q4 的两倍。如果质量比速度更重要，可以选它。\n\n除非你有特别的理由，否则从 Q4_K_M 开始就好。"
+    },
+    {
+      "type": "text",
+      "content": "## 运行本地服务器\n\n本地服务器是 LM Studio 对开发者来说最强大的功能。启用之后：\n\n1. 打开 LM Studio → 进入 **Developer** 标签页（有时标注为 \"Local Server\"）\n2. 在服务器模型选择器中选一个已加载的模型\n3. 点击 **Start Server**\n4. 服务器会在 `http://localhost:1234/v1` 上运行\n\n服务器会暴露以下接口（格式与 OpenAI 相同）：\n- `POST /v1/chat/completions` —— 主要的对话接口\n- `GET /v1/models` —— 列出可用模型\n\n要测试它是否正常工作，打开 PowerShell 并运行：\n```\nInvoke-RestMethod http://localhost:1234/v1/models\n```\n你应该会看到一个包含你已加载模型的 JSON 列表。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**端口冲突提示：** 如果你同时运行 Ollama（1234 端口）和 LM Studio（1234 端口），它们不会冲突——因为它们使用不同的端口。在接下来的课程中连接工具时，请确保使用你想连接的服务器所对应的正确端口：Ollama 用 11434，LM Studio 用 1234。"
+    },
+    {
+      "type": "workshop",
+      "tag": "LOCAL",
+      "title": "安装 LM Studio 并进行一次对话",
+      "content": "**第 1 步——安装 LM Studio：**\n从 `lmstudio.ai` 下载并安装。按提示操作。\n\n**第 2 步——下载一个模型：**\n1. 打开 LM Studio → 点击侧边栏中的 **Discover**\n2. 搜索 `phi-4` 或 `llama-3.2`\n3. 点击一个搜索结果，选择 Q4_K_M 版本\n4. 点击 **Download**——这会下载 GGUF 文件\n\n注意：如果你已经通过 Ollama 下载过模型，可以让 LM Studio 指向同一个文件夹以避免重复下载，但最简单的做法是直接在 LM Studio 中下载一个。\n\n**第 3 步——开始一次对话：**\n1. 点击侧边栏中的 **Chat**\n2. 在对话面板顶部，点击模型选择器，选择你已下载的模型\n3. LM Studio 会加载模型（首次加载需要 30–60 秒）\n4. 输入一条消息，观察响应\n5. 点击 **System Prompt** 区域，添加：`You are a concise assistant. Always reply in 2 sentences or fewer.`\n6. 再问一次同样的问题——观察系统提示词是如何约束输出的\n\n**第 4 步——启动本地服务器：**\n1. 点击侧边栏中的 **Developer**（或 **Local Server**）\n2. 在服务器模型下拉菜单中选择你的模型\n3. 点击 **Start Server**\n4. 确认它在 1234 端口上显示 \"Running\"\n\n**第 5 步——测试服务器：**\n在 PowerShell 中：\n```\n$body = @{\n    model = \"local-model\"\n    messages = @(@{role=\"user\"; content=\"Say hello in exactly 5 words.\"})\n} | ConvertTo-Json\n\nInvoke-RestMethod -Uri \"http://localhost:1234/v1/chat/completions\" `\n    -Method POST `\n    -ContentType \"application/json\" `\n    -Body $body\n```\n你应该会得到一个带有 `choices` 数组的 JSON 响应。\n\n**完成标志：** 对话正常工作，本地服务器对测试请求有响应。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——LM Studio 界面导览",
+      "content": "熟悉 LM Studio 的界面。\n\n**第 1 步——从 lmstudio.ai 下载并安装 LM Studio。**\n\n**第 2 步——通过内置的模型浏览器下载一个模型。** 搜索 \"phi\"，下载 phi-4（Q4_K_M 版本）。\n\n**第 3 步——探索界面各个区域：**\n- 对话界面：进行一次对话\n- 模型浏览器：查找并下载模型\n- 本地服务器：启用 API 接口\n- 模型设置：调整 temperature、上下文等参数\n\n**第 4 步——与 Ollama 对比：** LM Studio 提供了哪些 Ollama 终端界面没有的功能？\n\n**第 5 步——问 Claude：** *\"对于想使用本地 AI 模型的非开发者来说，LM Studio 相比 Ollama 有哪些优势？对开发者来说，哪个更有用，为什么？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——把 LM Studio 用作本地 API 服务器",
+      "content": "用 LM Studio 的 API 服务器为你的代码提供支持。\n\n**第 1 步——在 LM Studio 中**，进入 Local Server 标签页，在 1234 端口启动服务器。\n\n**第 2 步——测试这个 API**（它兼容 OpenAI）：\n```powershell\ncurl http://localhost:1234/v1/chat/completions -d '{\n  \"model\": \"local-model\",\n  \"messages\": [{\"role\": \"user\", \"content\": \"Write a haiku about debugging code\"}]\n}'\n```\n\n**第 3 步——用 OpenAI Python SDK 调用它**（LM Studio 兼容 OpenAI）：\n```python\nfrom openai import OpenAI\n\nclient = OpenAI(base_url=\"http://localhost:1234/v1\", api_key=\"not-needed\")\nresponse = client.chat.completions.create(\n    model=\"local-model\",\n    messages=[{\"role\": \"user\", \"content\": \"Explain recursion briefly\"}]\n)\nprint(response.choices[0].message.content)\n```\n\n**第 4 步——用你现有的、支持自定义接口地址的 API 工具测试它。**\n\n**第 5 步——必做的审查环节：** 问 Claude：*\"在本机（localhost）上运行一个 API 服务器有哪些安全隐患？我机器上的其他应用程序能访问它吗？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——比较本地模型界面",
+      "content": "评估 LM Studio 与 Ollama 哪个更适合你的工作流程。\n\n**第 1 步——用同一个任务分别在两种界面中完成：**\n\"解释软件设计中的 SOLID 原则，并为每条原则给出一个简短的代码示例。\"\n\n分别在以下环境运行：Ollama CLI、LM Studio 对话、LM Studio API\n\n**第 2 步——从以下维度给每种界面打分：**\n| 标准 | Ollama CLI | LM Studio 对话 | LM Studio API |\n|---|---|---|---|\n| 易用性 | | | |\n| 与我工具的集成度 | | | |\n| 参数控制能力 | | | |\n| 响应质量 | | | |\n\n**第 3 步——确定你使用本地 AI 的主要场景**，并将其匹配到合适的界面。\n\n**第 4 步——问 Claude：** \"还有没有其他本地 AI 界面（Jan.ai、Msty、Open WebUI 等）值得我考虑？它们提供了哪些 LM Studio 没有的功能？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——本地模型质量评估",
+      "content": "系统性地评估本地模型在你使用场景中的质量表现。\n\n**第 1 步——为你的主要使用场景创建一份质量评估标准：**\n- 5 个能代表你实际工作的测试提示词\n- 针对每一个，定义什么样的回答才算好（评判标准）\n\n**第 2 步——在 2 个本地模型和 Claude Haiku 上分别运行每个测试提示词。**\n\n**第 3 步——按每个标准给每个回答打分（1-5 分）。**\n\n**第 4 步——计算质量得分：**\n| 模型 | 测试 1 | 测试 2 | 测试 3 | 测试 4 | 测试 5 | 平均分 |\n|---|---|---|---|---|---|---|\n| 本地模型 A | | | | | | |\n| 本地模型 B | | | | | | |\n| Claude Haiku | | | | | | |\n\n**第 5 步——做出基于数据的判断：** 对你的使用场景来说，本地模型的质量够用吗？与云端 AI 相比，质量差距有多大？"
+    },
+    {
+      "type": "quiz",
+      "question": "LM Studio 的本地服务器使用兼容 OpenAI 的 API。对开发者来说，\"兼容 OpenAI\"意味着什么？",
+      "options": [
+        "这些模型是由 OpenAI 训练的",
+        "API 请求/响应格式与 OpenAI 的 API 规范一致——为 OpenAI 编写的代码，只需改一下 base URL 就能重定向到 LM Studio",
+        "这些模型的表现和 OpenAI 的模型一样",
+        "使用 LM Studio 需要一个 OpenAI 账号"
+      ],
+      "correct": 1,
+      "explanation": "兼容 OpenAI 意味着 HTTP API 格式（接口、请求体、响应格式）与 OpenAI 的 API 规范一致。开发者只需设置 `base_url=\"http://localhost:1234/v1\"` 和 `api_key=\"anything\"`，就能把任意 OpenAI SDK 指向 LM Studio。这让你可以用现有代码搭配本地模型，而不用重写 API 集成部分。许多本地 AI 工具专门采用这种约定，以便受益于 OpenAI 的 SDK 生态。"
+    },
+    {
+      "type": "quiz",
+      "question": "你使用 LM Studio 来运行本地 AI。关于你通过 LM Studio 下载的模型文件，以下哪一项是正确的？",
+      "options": [
+        "它们以只有 LM Studio 才能读取的专有格式存储",
+        "它们是标准的 GGUF 格式文件，存储在本地目录中——你可以用 Ollama、llama.cpp 或其他工具使用它们",
+        "它们是加密的，并绑定到你的 LM Studio 许可证",
+        "它们每次使用时都从 LM Studio 的服务器流式传输"
+      ],
+      "correct": 1,
+      "explanation": "LM Studio 下载的模型以 GGUF 文件的形式存储在本地目录中（通常在 ~/.cache/lm-studio/models/ 之类的位置）。GGUF 是一种开放格式，被许多工具支持：Ollama、llama.cpp、Jan.ai 等等。你并不会被锁定在 LM Studio 中——你下载的模型文件可以用于任何兼容的推理工具。这正是本地 AI 的优势之一：你拥有模型权重，可以搭配你喜欢的任何工具使用它们。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 12-4 课。** 你现在有了两种运行本地模型的方式：以终端为核心的 Ollama，以及带有内置对话界面的图形化 LM Studio。接下来：把这些本地模型连接到 VS Code 的 Continue.dev 扩展。"
+    }
+  ],
+  "nextLesson": "12-5",
+  "prevLesson": "12-3"
+}

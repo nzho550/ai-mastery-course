@@ -1,0 +1,116 @@
+{
+  "id": "7-2",
+  "title": "安装 Claude Code",
+  "part": 7,
+  "estimatedMinutes": 60,
+  "tags": [
+    "claude-code",
+    "install",
+    "terminal",
+    "node"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，`claude --version` 将返回一个版本号，`claude` 将在你的终端中启动 Claude Code，你也会了解自己的计费选项。你还将配置你的第一个会话设置。"
+    },
+    {
+      "type": "text",
+      "content": "## 先决条件\n\n**Node.js（v18 或更高版本）：** Claude Code 是一个 Node.js 包，因此必须先安装 Node.js。检查你是否已经安装：\n\n```powershell\nnode --version\n```\n\n如果返回 `v18.x.x` 或更高版本——可以跳过 Node.js 安装。如果看到错误信息或版本低于 18：\n\n1. 前往 **nodejs.org**\n2. 点击 **LTS** 下载按钮（稳定版）\n3. 运行安装程序，保留所有默认设置\n4. 完成后，关闭并重新打开 PowerShell\n5. 再次运行 `node --version`——应该显示 v20.x.x 或更高版本\n\n**npm**（随 Node.js 一起安装——无需单独安装）：\n```powershell\nnpm --version\n```\n应该显示一个版本号。"
+    },
+    {
+      "type": "text",
+      "content": "## 安装 Claude Code\n\n准备好 Node.js 后，Claude Code 只需一条命令即可安装：\n\n```powershell\nnpm install -g @anthropic-ai/claude-code\n```\n\n`-g` 标志表示全局安装——`claude` 命令将可以在任何目录下使用。\n\n**如果遇到权限错误：** 以管理员身份打开 PowerShell（搜索 PowerShell → 右键 → 以管理员身份运行），然后重新运行该命令。\n\n安装需要 1-3 分钟。你会看到类似 `added 847 packages` 的输出结尾。\n\n**验证安装：**\n```powershell\nclaude --version\n```\n你应该看到类似 `1.x.x` 的版本号。如果看到 `command not recognized`，请关闭 PowerShell 并重新打开——有时需要一个全新的 shell 才能更新 PATH。\n\n**在发布新版本时更新 Claude Code：**\n```powershell\nnpm update -g @anthropic-ai/claude-code\n```\nAnthropic 会频繁发布更新——每隔几周运行一次这条命令以保持最新。"
+    },
+    {
+      "type": "text",
+      "content": "## 身份验证与计费选项\n\n第一次启动 Claude Code 时，它需要进行身份验证。有两种方式：\n\n**选项 1 —— Claude.ai 订阅（Max 套餐）：**\n如果你订阅了 Claude Max（每月 100 美元），Claude Code 包含在内，并附带较高的使用限额。如果你打算大量使用 Claude Code，推荐这个选项——费用可预测，无需计算 token。\n\n验证方式：\n1. 在终端运行 `claude`\n2. 选择通过 Claude.ai 进行身份验证的选项\n3. 会打开一个浏览器窗口——登录你的 Claude.ai 账户\n4. 浏览器会重定向回终端——你已通过身份验证\n\n**选项 2 —— Anthropic API（按使用付费）：**\n从 console.anthropic.com 获取一个 API 密钥（免费账户，添加一种付款方式）。这是按需付费——按你使用的 token 计费。\n\n验证方式：\n1. 前往 console.anthropic.com\n2. 创建账户（或登录）\n3. 前往 API Keys → Create Key\n4. 复制密钥（以 `sk-ant-` 开头）\n5. 在终端中：`export ANTHROPIC_API_KEY='your-key-here'`（PowerShell：`$env:ANTHROPIC_API_KEY='your-key-here'`）\n6. 或者直接运行 `claude`，它会提示你交互式地输入密钥\n\n**学习用途的费用：** Part 7 练习的典型学习使用量在 API 上总共花费 3-15 美元。大多数单次编码会话的费用为 0.10-0.50 美元。\n\n**选项 3 —— VS Code 扩展（CLI 的替代方案）：**\n从 VS Code 应用市场安装 Claude Code 扩展。它使用与 CLI 相同的身份验证方式，并在 VS Code 内提供一个 UI 面板。对于学习来说，仍然建议先用 CLI——你能确切看到发生了什么。"
+    },
+    {
+      "type": "text",
+      "content": "## 首次启动与界面概览\n\n完成身份验证后，启动 Claude Code：\n\n```powershell\nclaude\n```\n\n你会看到一条欢迎信息和一个提示符：\n```\n╭─────────────────────────────────╮\n│  Claude Code (v1.x.x)           │\n│  Type a message or /help        │\n╰─────────────────────────────────╯\n\n>\n```\n\n**REPL（读取-求值-输出循环）：** 你现在处于一个交互式会话中，输入请求，Claude Code 会做出回应。与聊天不同，Claude Code 可以从当前目录访问你的文件系统。\n\n**关键命令：**\n\n```\n/help          — 显示所有可用命令\n/status        — 显示当前会话信息（已使用的 token、已读取的文件）\n/compact       — 压缩对话历史以节省上下文\n/clear         — 清空对话并重新开始\n/exit          — 退出 Claude Code\n/model         — 查看或切换正在使用的模型\n```\n\n**用于任务的斜杠命令：**\n```\n/read [file]   — 让 Claude Code 读取指定文件\n/memory        — 显示 Claude Code 对此项目的记忆内容\n```\n\n**权限系统：** 默认情况下，Claude Code 在以下操作之前会请求许可：\n- 写入或修改文件\n- 运行终端命令\n- 发起网络请求\n\n你会看到类似这样的提示：`[Y]es / [N]o / [A]lways allow`。请谨慎回应——不要在不了解破坏性操作具体内容的情况下就为其设置\"始终允许\"。"
+    },
+    {
+      "type": "text",
+      "content": "## 正确运行 Claude Code：在你的项目中打开\n\nClaude Code 是相对于其启动目录来读取文件的。始终从项目内部启动它：\n\n```powershell\ncd C:\\Projects\\Learning\\my-project\nclaude\n```\n\n或者在文件资源管理器中：Shift+右键点击你的项目文件夹 → 在终端中打开 → 然后运行 `claude`。\n\n**为什么这很重要：** 如果你从 `C:\\` 启动 Claude Code，它对你的文件会有错误的上下文。如果从项目目录内部启动，它会自动了解文件夹结构，并能找到你所有的文件。\n\n**用于快速一次性任务的 `--print` 标志：**\n```powershell\nclaude --print \"What does the main function in main.js do?\"\n```\n这会运行一个单次问题并退出，而不进入交互式 REPL。适合快速检查。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**永远不要将 API 密钥粘贴到 Claude Code 对话中。** 你的 ANTHROPIC_API_KEY 应该保存在环境变量或 Claude Code 的凭据存储中——而不是在你的项目文件或聊天消息中。第 1-5 课中的安全习惯同样适用于此：出现在对话文本中的凭据就是处于风险中的凭据。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "完整安装与首次会话",
+      "content": "完成每一个步骤。在每一步产生预期输出之前不要继续下一步。\n\n**第 1 步 —— 验证 Node.js：**\n```powershell\nnode --version\n```\n预期：`v18.x.x` 或更高版本。如果出错，先从 nodejs.org 安装。\n\n**第 2 步 —— 安装 Claude Code：**\n```powershell\nnpm install -g @anthropic-ai/claude-code\n```\n等待完成。预期：结尾出现 `added X packages`。\n\n**第 3 步 —— 验证：**\n```powershell\nclaude --version\n```\n预期：一个版本号。\n\n**第 4 步 —— 导航到你的课程项目文件夹：**\n```powershell\ncd C:\\Projects\\Learning\n```\n（或者你在第 4-2 课中创建课程文件夹的任何位置）\n\n**第 5 步 —— 启动 Claude Code：**\n```powershell\nclaude\n```\n按照身份验证提示操作。选择与你想要的付费方式匹配的选项（Claude.ai 订阅或 API 密钥）。\n\n**第 6 步 —— 探索界面：**\n完成身份验证后，在 Claude Code REPL 内输入：\n```\n/help\n```\n仔细阅读这些命令——你在 Part 7 中会用到其中的大多数。\n\n```\n/status\n```\n查看你当前的会话信息。\n\n然后提出你的第一个真实问题：\n```\nWhat files are in the current directory? Describe what this project is.\n```\nClaude Code 会列出它能看到的文件，并描述这个项目似乎是什么。\n\n**第 7 步 —— 退出：**\n```\n/exit\n```\n\n**你完成了，如果：** `claude --version` 返回一个版本号，并且 `claude` 启动时没有身份验证错误。\n\n**故障排除：**\n- `command not found`：关闭并重新打开 PowerShell（需要更新 PATH）\n- 安装时出现权限错误：以管理员身份运行 PowerShell\n- 身份验证失败：尝试先运行 `/logout`，再运行 `claude`，或重新输入你的 API 密钥"
+    },
+    {
+      "type": "quiz",
+      "question": "你刚刚安装了 Claude Code，正在首次设置它。你有一个 Claude.ai 免费套餐账户，但还没有设置 API 计费。你有哪些身份验证选项？",
+      "options": [
+        "没有付费套餐就无法使用 Claude Code —— CLI 需要企业级访问权限",
+        "你可以用 Claude.ai 账户进行身份验证（订阅 Max 涵盖 CLI），或者从 console.anthropic.com 获取一个 API 密钥（按需付费）",
+        "只能用 API 密钥进行身份验证 —— Claude.ai 账户无法用于 CLI",
+        "免费套餐会自动提供每天 50 条消息的 Claude Code 访问权限"
+      ],
+      "correct": 1,
+      "explanation": "有两条身份验证路径：(1) Claude Max 订阅会连接你的 Claude.ai 账户，并将 Claude Code 的使用包含在月度套餐中——最适合大量使用的情况。(2) 来自 console.anthropic.com 的 Anthropic API 密钥支持按需付费——最适合偶尔使用或学习。免费套餐不包含 Claude Code 的 API 访问权限，但新的 API 账户通常会获得起始的免费额度。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A —— 安装并验证 Claude Code",
+      "content": "这个训练会让你安装 Claude Code 并运行你的第一个命令。\n\n**第 1 步 —— 安装 Claude Code：**\n```powershell\nnpm install -g @anthropic-ai/claude-code\n```\n（需要 Node.js 18+。先运行 `node --version`。）\n\n**第 2 步 —— 验证安装：**\n```powershell\nclaude --version\n```\n\n**第 3 步 —— 身份验证：**\n```powershell\nclaude\n```\n按照身份验证流程操作（基于浏览器的 OAuth，连接到你的 Claude 账户）。\n\n**第 4 步 —— 在项目文件夹中运行你的第一个命令：**\n```powershell\ncd your-project-folder\nclaude\n```\n在 Claude Code 界面中，输入：\"What files are in this project?\"\n\n**第 5 步 —— 验证它能读取你的项目：** 提问：\"Summarise what this project does based on the files you can see.\"\n\n**第 6 步 —— 退出 Claude Code：** 输入 /exit 或按 Ctrl+C。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 第一个真实的 Claude Code 任务",
+      "content": "完成你第一个真正有用的 Claude Code 任务。\n\n**第 1 步 —— 在一个真实项目中打开 Claude Code：**\n```powershell\ncd your-real-project\nclaude\n```\n\n**第 2 步 —— 给 Claude Code 一个真实、具体的任务**（使用你在第 7-1 课工作坊 D 中排好序的清单）。让它保持在 10 分钟以内能完成的范围：\n- \"Add a README.md to this project based on what you see in the files\"\n- \"Add docstrings to all functions in [filename]\"\n- \"Find any TODO comments in the codebase and list them\"\n\n**第 3 步 —— 观察 Claude Code 的工作过程。** 留意：它用了哪些工具？读取了哪些文件？运行了哪些命令？\n\n**第 4 步 —— 审查输出结果。** Claude Code 生成的内容正确且有用吗？\n\n**第 5 步 —— 强制审查：** 在 Claude Code 会话中，输入：*\"Review what you just did. What might be wrong or incomplete? What didn't you do that I might have expected?\"*\n\n**第 6 步 —— 提交结果**并附上一条描述性的提交信息。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C —— Claude Code 权限模式",
+      "content": "Claude Code 的权限系统控制它能自主做什么。理解这一点可以避免意外。\n\n**第 1 步 —— 阅读权限文档：**\n```powershell\nclaude --help\n```\n或者向 Claude.ai 提问：\"What are Claude Code's permission modes? What does each mode allow and prevent?\"\n\n**第 2 步 —— 以保守模式启动 Claude Code**（未经批准不会执行命令）：\n```powershell\nclaude --permission-mode=default\n```\n\n**第 3 步 —— 给它一个需要运行代码的任务。** 注意它会在执行前请求许可。\n\n**第 4 步 —— 对比：** 在没有权限限制的情况下启动一个新会话。给出相同的任务。行为有何不同？\n\n**第 5 步 —— 向 Claude 提问：**\"For a developer working on a production codebase, what permission mode should they use for Claude Code? What are the risks of using fully autonomous mode?\"\n\n**第 6 步 —— 设置你的默认值：** 根据你学到的内容，你默认会使用哪种权限模式？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 为你的环境配置 Claude Code",
+      "content": "配置 Claude Code，使其在你特定的开发环境中发挥最佳效果。\n\n**第 1 步 —— 检查你的 Claude Code 版本和设置：**\n```powershell\nclaude --version\nclaude config\n```\n\n**第 2 步 —— 配置你的模型偏好：**\n```powershell\nclaude config set model claude-sonnet-4-6\n```\n\n**第 3 步 —— 在你的主项目中设置一个 CLAUDE.md**（我们会在第 7-6 课中深入讲解这个，但现在先开始）：\n- 在项目根目录创建 `CLAUDE.md`\n- 添加 3 条基本内容：这个项目是什么、主要的语言/框架，以及 Claude Code 应该始终做的一件事（例如\"每次改动后都运行测试\"）\n\n**第 4 步 —— 测试配置：** 启动一个 Claude Code 会话，让它做一个任务。它遵循了你的 CLAUDE.md 指令吗？\n\n**第 5 步 —— 强制设置审查：** 向 Claude 提问：*\"Review my Claude Code setup. What configuration or CLAUDE.md instructions should I add to make Claude Code more reliable for [your project type]?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "你安装了 Claude Code，但终端中找不到 `claude` 命令。最可能的原因是什么？",
+      "options": [
+        "Claude Code 需要付费的 API 订阅",
+        "npm 没有将全局包位置添加到你系统的 PATH 中 —— 你需要修复 PATH 或使用 npx claude",
+        "Claude Code 只适用于 Mac/Linux",
+        "你需要重启电脑"
+      ],
+      "correct": 1,
+      "explanation": "当 npm 安装一个全局包（`npm install -g`）时，它会将可执行文件放在全局 npm bin 目录中。如果这个目录不在你系统的 PATH 中，就找不到该命令。Windows 上的解决方法：运行 `npm config get prefix` 找到 npm 全局安装的位置，然后将该路径 + \\node_modules\\.bin 添加到系统 PATH 中。另外，也可以使用 `npx @anthropic-ai/claude-code` 在不进行全局安装的情况下运行。"
+    },
+    {
+      "type": "quiz",
+      "question": "为什么在项目上运行 Claude Code 之前先创建一个 CLAUDE.md 文件很重要？",
+      "options": [
+        "没有 CLAUDE.md 文件，Claude Code 就无法工作",
+        "CLAUDE.md 提供持久的项目上下文 —— 没有它，Claude Code 每次会话都要重新发现你的项目结构和规范，导致结果不够一致",
+        "CLAUDE.md 是身份验证所必需的",
+        "CLAUDE.md 用于设置会话的权限模式"
+      ],
+      "correct": 1,
+      "explanation": "CLAUDE.md 是一个持久的指令文件，Claude Code 会在每次会话开始时读取它。它为 Claude Code 提供：项目目的与架构、规范与风格规则、要避免的内容、用于测试/构建的命令。没有它，你每次会话都要花时间重新建立上下文，并且有风险让 Claude Code 做出不符合项目规范的决定。这是代理的项目记忆。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成 7-2 课。** Claude Code 已安装并通过身份验证。你了解了计费选项和界面基础知识。下一课，你将第一次在真实项目中使用它。"
+    }
+  ],
+  "nextLesson": "7-3",
+  "prevLesson": "7-1"
+}

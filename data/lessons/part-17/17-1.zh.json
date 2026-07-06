@@ -1,0 +1,121 @@
+{
+  "id": "17-1",
+  "title": "用 AI 规划任何项目",
+  "part": 17,
+  "estimatedMinutes": 65,
+  "tags": [
+    "projects",
+    "beginner",
+    "planning",
+    "workflow",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nAI 是目前最有效的项目规划工具之一——不是因为它了解你的项目，而是因为它能提出正确的问题、揭示隐藏的假设，并比任何规划模板都更快地把模糊的目标转化为具体的计划。本课介绍如何用 AI 规划任意规模的项目：从小型部门倡议到复杂的多团队工作。你将学习项目启动提示词、如何搭建项目计划文档的结构、现实的时间估算、如何选择合适的方法论，以及如何绘制利益相关方地图。"
+    },
+    {
+      "type": "text",
+      "content": "## 项目为什么会失败（以及 AI 如何提供帮助）\n\n大多数项目失败的根源出现在起点，而不是执行过程中：\n- **范围不清晰**——没人对“完成”的定义达成一致\n- **隐藏的依赖关系**——没人注意到某些步骤依赖于其他步骤\n- **遗漏关键利益相关方**——某个关键人物没有被及早咨询\n- **过于乐观的时间表**——只考虑最佳情况，没有为现实留缓冲\n- **未言明的假设**——每个人都以为别人在处理某件事\n\n**来自 PMI（项目管理协会）的研究发现：** 项目失败的主要原因是需求不清晰（37%）、范围蔓延（35%）和风险管理不足（31%）。AI 能系统性地应对这三点——不是因为它了解你的项目，而是因为它能在你开始之前，提出一位资深项目经理会问的每一个问题。\n\n投入产出比：30–60 分钟的 AI 辅助规划，通常能避免项目进行到一半时数周的混乱。"
+    },
+    {
+      "type": "text",
+      "content": "## 选择你的项目方法论\n\n在规划具体工作之前，先决定*如何*组织它。方法论会影响你的规划结构、团队期望，以及你应对变化的方式。\n\n**瀑布模型（顺序阶段）：**\n适用于：需求固定、范围已知的项目——合规性倡议、监管相关工作、活动策划、文档制作。\n运作方式：定义 → 设计 → 构建 → 测试 → 上线。每个阶段完成后才开始下一个。\n风险：如果需求在项目中途发生变化，顺序结构会让变更成本很高。\n\n**敏捷/Scrum（迭代冲刺）：**\n适用于：软件、产品、研究，以及任何需求会随着了解加深而演变的场景。\n运作方式：以两周为一个冲刺，每个冲刺后回顾并调整，持续重新排定优先级。\n风险：如果没有强有力的产品负责人管理优先级，范围可能会失控增长。\n\n**混合模式：**\n适用于：大多数现实世界中的非技术项目。整体阶段结构（探索 → 交付 → 上线）采用瀑布模式，每个阶段内部保持灵活。\n\n**帮你选择方法论的 AI 提示词：**\n```\nI'm planning [project]. Here are the characteristics:\n- Requirements are [fixed/known / partially known / unclear and expected to evolve]\n- Team size: [number of people]\n- Timeline: [fixed deadline / flexible]\n- Stakeholders want: [frequent updates / defined deliverables at milestones]\n\nRecommend whether Waterfall, Agile, or a Hybrid approach fits best, and explain why.\nThen describe what the planning process should look like for that methodology.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 项目启动提示词\n\n这是你会用到的最有用的规划提示词。为你的项目填写它，让 Claude 帮你搭建结构：\n\n```\nI'm planning a project. Help me think through it thoroughly.\n\nProject name: [name]\nWhat we're trying to achieve: [goal — what does success look like?]\nWhy this matters: [business or personal value — the 'so what']\nDeadline (if any): [date or timeframe]\nTeam / people involved: [list who's involved and their roles]\nBudget / resources available: [if relevant]\nMain constraints: [what can't change? fixed deadline, fixed budget, fixed scope?]\nMethodology preference: [Waterfall / Agile / Hybrid / unsure]\n\nPlease:\n1. Clarify the goal — restate it as a clear, measurable outcome sentence\n2. Break the project into 4–8 phases or major workstreams\n3. For each phase, list the key tasks\n4. Identify the 5 biggest risks — rate each High/Medium/Low for both likelihood and impact\n5. List the assumptions we're making that should be verified before work starts\n6. Suggest who should be involved or consulted that might not be on the list above\n7. Suggest a realistic milestone timeline\n8. Identify the critical path — which tasks must not slip if the overall deadline is to be met?\n```\n\n这一个提示词通常能发现至少两件你没考虑到的事。**关键路径**这个问题尤其有价值——它迫使你找出哪些任务是时间表上真正的制约因素，而不仅仅是看起来最紧急的任务。"
+    },
+    {
+      "type": "text",
+      "content": "## 创建项目计划文档\n\n拿到 Claude 的输出后，把它转化为可分享的项目计划：\n\n```\nBased on the analysis above, create a project plan document with:\n\n1. Project overview (name, owner, goal, deadline, budget if relevant)\n2. Success criteria — specifically, how will we know the project succeeded?\n   (State measurable outcomes, not activities)\n3. Scope — what is IN scope and what is explicitly OUT of scope\n4. Phases and key tasks (table: Phase | Tasks | Owner | Target date | Status)\n5. Dependencies — what must happen before what\n   (Flag items with external dependencies — other teams, vendors, approvals)\n6. Risk register (table: Risk | Likelihood | Impact | Mitigation | Owner)\n7. Stakeholders (table: Name/Role | Interest | Required involvement | Communication frequency)\n8. Open decisions — things still to be confirmed before work can begin\n```\n\n**范围部分是最重要的一环。** “不在范围内”的清单正是防止范围蔓延的关键。不要写含糊的排除项——要写具体的：不要写“本项目不包括营销”，而要写“本项目不包括撰写或投放任何外部营销材料——那将是上线后的一个独立倡议。”\n\n**成功标准必须是可衡量的。** “提升客户满意度”不是一个成功标准——“到第三季度，75% 的受访客户认为新流程优于旧流程”才是。AI 会推动你把这些标准写得更具体。"
+    },
+    {
+      "type": "text",
+      "content": "## 用 RACI 框架绘制利益相关方地图\n\n每个项目都有需要参与的人——但参与方式各不相同。利益相关方定位错误是导致审批延迟、意外反对和项目后期返工的主要原因之一。\n\n**RACI 矩阵**是标准工具：\n- **R（Responsible，执行者）**——实际完成工作的人。\n- **A（Accountable，问责者）**——对结果负责。每项任务只有一个人——最终责任由他们承担。\n- **C（Consulted，被咨询者）**——在决策前提供意见。他们的看法会被征询并纳入考虑。\n- **I（Informed，被告知者）**——被告知决策和进展。不提供意见，但需要知情。\n\n**用于利益相关方地图绘制的 AI 提示词：**\n```\nFor this project: [describe project]\n\nThe people potentially involved are: [list everyone you can think of]\n\nFor each of the following key deliverables, suggest RACI assignments:\n[List your 4–6 main deliverables or major decisions]\n\nAlso identify:\n- Anyone who should be consulted that I haven't listed\n- Anyone whose objection could block the project if they aren't involved early\n- What stakeholders care about most (outcomes vs. cost vs. risk vs. compliance)\n```\n\n**“潜在阻碍者”这个问题至关重要。** 如果一个没被考虑到的利益相关方在工作开始后提出反对，可能会让项目延误数周。仅凭项目描述，AI 常常能发现你没考虑到的法务、财务、IT 安全或外部合作伙伴。"
+    },
+    {
+      "type": "text",
+      "content": "## 现实地估算时间\n\nAI 在项目规划方面最有用的贡献之一，就是现实的时间估算——因为它不会有情感投入去告诉你你想听的话。\n\n```\nHere are the tasks for our project: [list]\nI initially estimated this would take [your estimate].\n\nFor each task:\n- Suggest a realistic time estimate based on typical project experience\n- Flag any tasks that are often underestimated and explain why\n- Identify dependencies (task B can't start until task A finishes)\n- Suggest where buffer time should be added and why\n- Give me a realistic overall project duration\n\nAssume 20% of tasks take longer than expected due to typical interruptions,\nwaiting for approvals, or unexpected complications.\nWhat's the realistic completion date under this assumption?\n```\n\n**为什么要留 20% 的缓冲：** 研究一致发现，大多数项目所需时间比最初估计多 20%–40%。这被称为**规划谬误（planning fallacy）**——人类系统性地低估事情所需的时间。AI 之所以能避免这种偏差，是因为它借鉴的是众多项目中的模式，而不是对这个特定项目的乐观预期。\n\n**项目最常在哪里延误：** 不是核心执行环节，而是利益相关方审阅和审批周期、IT 或法务的签字确认、集成测试，以及等待外部依赖项。当你要求 AI 做时间估算时，它会专门标记出这些环节。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**让项目目标与组织目标对齐：** 在最终确定计划之前，把目标转化为 OKR（目标与关键结果）形式：\n```\nConvert this project goal into an OKR:\nProject goal: [paste your goal]\n\nObjective: [inspiring, qualitative — what we're trying to achieve]\nKey Results: [3 measurable outcomes that define success]\n```\n当你要向使用 OKR 体系的高级利益相关方汇报时，这种格式很有用——它把你的项目和他们衡量成功的语言体系连接起来。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "规划一个真实项目",
+      "content": "使用一个你目前正在规划或即将启动的真实项目——即使是很小的项目也可以。流程改进、团队活动、工具评估、商业提案——任何真实的倡议都适用。\n\n**第一步——选择你的方法论（5 分钟）**\n\n用你的项目运行方法论提示词。得到 Claude 的建议。你同意吗？如果不同意，记下原因——有时你知道一些 Claude 不知道的事（固定的监管截止日期、已有的团队标准）。\n\n**第二步——运行启动提示词（10 分钟）**\n\n用你项目的真实细节填写项目启动提示词。不要简化——价值来自诚实的输入。\n\nClaude 回应后，逐节审阅：\n- **风险：** 对每个被识别的风险：这是真实的吗？你会想到它吗？你的应对措施是什么？\n- **假设：** 对每个假设：这是已确认的还是只是假设？谁需要去核实？\n- **关键路径：** 你同意 Claude 的关键路径判断吗？如果不同意——它遗漏了什么？\n\n**第三步——绘制利益相关方地图（5 分钟）**\n\n运行利益相关方地图绘制提示词。特别关注“潜在阻碍者”这个问题。有没有 Claude 提到的人，是你原本没打算让其参与的？\n\n对最可能阻碍项目的人：写一段话——你什么时候会咨询他们，你需要什么样的意见，以及你将如何采纳他们的反馈。\n\n**第四步——创建项目计划文档**\n\n运行项目计划文档提示词。把输出保存到 Notion、Word，或你团队用来跟踪项目的任何地方。\n\n**第五步——与另一个人分享**\n\n把草案计划分享给最可能发现漏洞的人。问他们：*“有什么遗漏的吗？你会补充什么？”*\n\nAI 辅助规划加上人工审阅的组合，能在工作开始前捕捉到大多数漏洞。"
+    },
+    {
+      "type": "quiz",
+      "question": "你刚被指派规划一个需要在 3 个月内上线的项目。你还不太确定具体涉及哪些内容。用 AI 时最好的第一步是什么？",
+      "options": [
+        "立即制作甘特图并把任务分配给团队成员",
+        "把你目前所知道的一切都填入项目启动提示词——即使不完整——以发掘你还不知道的内容",
+        "等到你掌握了所有信息之后再用 AI 做规划",
+        "让 AI 在不提供任何背景信息的情况下直接生成一份项目计划"
+      ],
+      "correct": 1,
+      "explanation": "用你目前所知道的信息运行启动提示词之所以有价值，恰恰是因为你还不确定具体涉及什么。AI 会揭示假设、风险、遗漏的利益相关方和未知的未知因素——把“我不确定涉及什么”变成一份具体的待查清单。在你了解范围之前就制作甘特图（A）为时过早——等范围明确后你还是要修改它。等到信息完整（C）是个陷阱：在大多数项目中，你在起点从来不会拥有完整的信息。不提供任何背景（D）只会得到与你的情况毫不相关的通用输出。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——项目规划框架训练",
+      "content": "学习 AI 辅助项目规划的关键要素。\n\n**第一步——问 Claude：** “一份好的项目计划有哪些要素是 AI 可以帮忙的？哪些需要人的判断？对每个要素来说，AI 最有价值的帮助是什么？”\n\n**第二步——把这个框架应用**到你正在启动或正在进行的真实项目上。\n\n**第三步——让 Claude 创建一份项目计划大纲：**\n```\nCreate a project plan outline for:\nProject: [describe it]\nGoal: [specific outcome]\nTimeline: [available time]\nTeam: [who's involved]\nConstraints: [budget, technical, resource]\n\nInclude: milestones, dependencies, risk areas, and success criteria.\n```\n\n**第四步——审阅大纲。** 关于这个项目，Claude 遗漏了哪些你知道的内容？\n\n**第五步——补充遗漏的背景信息**，并让 Claude 完善计划。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——构建一份真实的项目计划",
+      "content": "在 AI 的协助下创建一份完整的项目计划。\n\n**第一步——选择一个未来 30 天内启动的真实项目。**\n\n**第二步——让 Claude 生成详细计划：**\n```\nCreate a detailed project plan:\nProject: [name and description]\nDeadline: [date]\nKey deliverables: [list them]\nTeam members and roles: [list]\nKnown risks: [list]\n\nProvide:\n1. Work breakdown structure (WBS)\n2. Timeline with milestones\n3. Dependencies (what must be done before what)\n4. Risk register with mitigation strategies\n5. Communication plan (who needs to know what, when)\n```\n\n**第三步——逐节审阅**其准确性——Claude 无法知道你团队的实际能力或组织内部的实际动态。\n\n**第四步——必做审阅：** 问 Claude：*“我还没识别出哪些关键风险？这类项目常见的失败模式是什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——风险评估深度演练",
+      "content": "用 AI 识别并缓解项目风险。\n\n**第一步——取用工作坊 B 中的项目计划。**\n\n**第二步——让 Claude 进行风险分析：**\n```\nConduct a thorough risk analysis for this project [describe it].\n\nFor each risk identify:\n- Probability: High/Medium/Low\n- Impact if it occurs: High/Medium/Low\n- Risk score: Probability × Impact\n- Mitigation strategy\n- Contingency plan (if mitigation fails)\n\nInclude both technical risks and people/process risks.\n```\n\n**第三步——按分数对风险排序**（高/高＝最关键）。\n\n**第四步——针对排名前三的风险**，让 Claude 设计详细的缓解计划。\n\n**第五步——为每个风险添加早期预警信号：** “我怎么才能在这个风险演变成危机之前就发现它正在发生？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——利益相关方沟通计划",
+      "content": "为你的项目利益相关方创建一份沟通计划。\n\n**第一步——列出项目的所有利益相关方：** 每一个受项目结果影响或对其感兴趣的人。\n\n**第二步——让 Claude 创建一份利益相关方沟通计划：**\n```\nCreate a stakeholder communication plan for [project].\n\nStakeholders:\n- [Name/Role]: [what they care about, how much detail they want]\n\nFor each stakeholder, specify:\n- Communication frequency\n- Format (email, meeting, dashboard, report)\n- Content (what they need to know)\n- Who sends it\n```\n\n**第三步——审阅这份计划。** 它符合利益相关方的实际偏好吗？\n\n**第四步——根据这份计划创建第一条沟通内容**——一封发给所有利益相关方的项目启动信息。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude 创建了一份项目时间表，其中 5 个并行工作流恰好在同一天完成。这可能遗漏了哪个关键的规划要素？",
+      "options": [
+        "这份时间表设计得很好——并行工作是高效的",
+        "缓冲时间和集成风险：当并行工作流需要汇合时，几乎总会出现集成问题。应在汇合日期与最终截止日期之间加入集成时间和缓冲",
+        "甘特图可视化",
+        "各工作流之间的资源分配"
+      ],
+      "correct": 1,
+      "explanation": "同时汇合的并行工作流是一个经典的排期风险。集成问题（依赖关系不匹配、工作流之间的接口存在缺陷、输出格式互不兼容）是常态，而非例外。最佳实践：让并行工作流在集成截止日期前 20%–30% 的时间就完成，加入明确的集成与测试阶段，并在集成汇合与最终截止日期之间留出缓冲。"
+    },
+    {
+      "type": "quiz",
+      "question": "一项项目风险是“关键团队成员可能在项目期间离职”。Claude 将其评为低/低。你同意吗？",
+      "options": [
+        "同意——关键人物风险通常被高估了",
+        "不一定——应根据你自己的情境来评估风险。如果这个人确实不可替代，且没有知识转移，这可能是中/高风险。要根据你的实际情况重新评估风险，而不是套用通用评估",
+        "同意——公司应该按 0% 的人员流动率来规划",
+        "只有在你有具体理由认为他们会离职时，才应把评级调高"
+      ],
+      "correct": 1,
+      "explanation": "AI 是基于典型情况来评估风险的，而不是你的具体情况。通用的风险评估需要根据你的实际情境进行校准。如果有良好的文档记录和交叉培训，关键人物依赖风险就是“低/低”。但如果只有一个人掌握关键且未被记录的知识、正在与猎头接触，或者是唯一能维护某个关键系统的人，那就是“高/高”。要对照你的实际情况，检视每一个 AI 给出的风险评级。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 17-1 课。** 现在你可以用 AI 来搭建任何项目的结构：选择合适的方法论、进行彻底的启动分析以揭示风险和假设、构建一份范围清晰、成功标准可衡量的项目计划、用 RACI 绘制利益相关方地图，并现实地估算时间。下一课将介绍如何拆解项目过程中出现的复杂问题。"
+    }
+  ],
+  "nextLesson": "17-2",
+  "prevLesson": "16-10"
+}

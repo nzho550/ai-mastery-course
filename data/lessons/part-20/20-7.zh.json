@@ -1,0 +1,72 @@
+{
+  "id": "20-7",
+  "title": "技能串联——你的个人 AI 工作流系统",
+  "part": 20,
+  "estimatedMinutes": 75,
+  "tags": ["skills", "chaining", "workflow", "system", "advanced", "build"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将构建什么\n\n单个技能本身就很强大。而串联技能——依次触发其他技能的技能——则具有变革性。学完本课后，你将拥有：\n\n1. **`/start-day`**——一个单一命令，依次运行你的晨间简报，然后打开你最重要的任务，再起草一条站会消息。一个命令，完成整套晨间准备工作。\n\n2. **`/project-wrap`**——为一项项目功能收尾：运行测试、生成 PR 描述、根据今天的提交生成会议笔记，并更新你的任务文件。一个命令，完成整个功能收尾。\n\n3. **`/onboard $ARGUMENTS`**——给定一个新的项目文件夹，从头到尾读取它，创建一份包含背景信息的 CLAUDE.md，并为你生成一份入门简报。这是你的个人项目上手智能体。\n\n你还将学习让串联工作流可靠且可组合的原则。"
+    },
+    {
+      "type": "text",
+      "content": "## 技能串联基础\n\n一个串联技能，简单来说，就是一个能调用其他技能、或按顺序执行多个流程的技能。这里有两个层次：\n\n**层次 1——顺序式多步骤技能：**\n一个技能的 STEPS 部分依次涵盖了多个更简单技能所做的事。不需要单独调用——整个链条已写入这个技能文件中。\n\n```markdown\n<steps>\n1. 运行晨间邮件检查（与 /email-sort 的步骤 1-3 相同）\n2. 检查今天的日历（与 /morning-brief 的步骤 3-4 相同）\n3. 生成站会文本（与 /standup 的步骤 1-3 相同）\n4. 生成综合输出\n</steps>\n```\n\n**层次 2——调用其他技能的技能：**\n一个明确引用其他技能命令、并依次触发它们的技能。之所以能实现，是因为 Claude Code 可以读取技能文件并以编程方式执行其中的逻辑。\n\n```markdown\n<steps>\n1. 执行 ~/.claude/commands/morning-brief.md 中的逻辑\n2. 使用步骤 1 的输出，执行 ~/.claude/commands/email-sort.md 中的逻辑\n3. 将结果整合为一份统一的每日启动计划\n</steps>\n```\n\n**该用哪一种：** 层次 1 更简单、更可靠——直接把组合好的步骤写进去。当你想引用已经维护好、且本身也很有用的独立技能、而不想重复它们的逻辑时，使用层次 2。\n\n**可组合性原则：** 设计单个技能时，让它们产生结构化的输出，供其他技能使用。如果 `/email-sort` 始终输出相同格式的表格，`/start-day` 就可以解析这张表格并据此行动。不一致的输出格式会破坏串联。"
+    },
+    {
+      "type": "text",
+      "content": "## 技能 1：/start-day——完整的晨间启动\n\n```markdown\n# /start-day — 完整的晨间启动序列\n\n<role>\n你是我的晨间启动协调员。你运行一套完整的晨间准备序列，让我从\n“刚打开笔记本电脑”直接过渡到“准备好开始工作”，不用自己去想\n该检查什么、从哪里开始。\n</role>\n\n<steps>\n\n阶段 1——收件箱（3-5 分钟的 AI 工作）：\n- 统计过去 12 小时的未读邮件数量\n- 找出今天需要处理的邮件（直接的问题、截止日期、请求）\n- 通过 Gmail MCP 为需要处理的邮件打上 TODO 标签\n- 记下：邮件方面前 2 个优先事项\n\n阶段 2——日历：\n- 列出今天的会议及时间\n- 标记接下来 90 分钟内需要准备的会议\n- 计算今天的总会议时长\n\n阶段 3——代码 / 项目状态：\n- 运行 `git log --since='yesterday' --oneline` 查看昨天的提交\n- 检查是否有未提交的更改（`git status`）\n- 如果 GitHub MCP 可用，检查是否有未关闭的 PR\n\n阶段 4——今日计划：\n- 基于阶段 1-3，生成今天有优先级排序的计划\n- 确定今天最重要的单一成果\n- 建议一个专注工作的时间段（避开会议空档）\n\n阶段 5——站会草稿：\n- 根据 git 日志和今天计划的任务生成一条站会消息\n- 以 3 个要点格式呈现：昨天 / 今天 / 阻碍\n\n</steps>\n\n<output>\n**🚀 Start of Day — [星期，日期，时间]**\n\n**📧 Email** — [X] 封未读 | 需要处理：[前 2 项]\n**📅 Meetings** — 今天 [X] 个，共 [X] 小时 | 下一个：[时间 - 标题]\n**💻 Code** — 昨天：[提交摘要] | PR：[状态]\n\n**Today's Priority:**\n🎯 [今天最重要的单一成果]\n\n**Suggested Schedule:**\n- [时间段 1]：[任务]\n- [时间段 2]：[会议/任务]\n- [时间段 3]：[任务]\n\n**Your Standup:**\n> Yesterday：[做了什么]\n> Today：[计划做什么]\n> Blockers：[有的话，或“无”]\n\n*（把上面的站会文本复制粘贴到你的团队频道里）*\n</output>\n\n<constraints>\n- 总输出：控制在 350 字以内\n- 站会内容应该可以立即复制粘贴使用——不需要再编辑\n- 会议日程必须符合正常工作日的实际情况\n- 如果数据不可用，优雅地跳过相应部分\n</constraints>\n```\n\n保存为 `~/.claude/commands/start-day.md`。"
+    },
+    {
+      "type": "text",
+      "content": "## 技能 2：/project-wrap——功能完成收尾序列\n\n这项技能在你完成一项功能或一段工作、想要妥善收尾时运行：运行测试、创建 PR 描述、更新文档、清理收尾。\n\n```markdown\n# /project-wrap — 功能收尾序列\n\n<role>\n你是我的发布协调员。当我完成一项功能时，你负责处理所有收尾任务：\n测试、文档、创建 PR、沟通。当我急于发布时，你要确保没有任何\n事项被遗漏。\n</role>\n\n<context>\n$ARGUMENTS 是可选的——一个功能名称或分支名称。\n如果未提供：使用当前 git 分支名称作为功能标识。\n</context>\n\n<steps>\n\n阶段 1——验证工作：\n1. 运行 `git diff main --stat` 查看所有变更文件\n2. 运行 `git log main..HEAD --oneline` 查看所有提交\n3. 检查变更文件是否有对应测试（`find . -name '*.test.*' -newer [第一个变更文件]`）\n4. 如果 package.json 中有测试命令：运行 `npm test` 并汇报结果\n5. 检查变更文件中是否有 TODO 或 FIXME：`grep -r 'TODO\\|FIXME' [变更文件]`\n\n阶段 2——文档：\n6. 读取任何引用了变更代码的 README 或文档文件\n7. 找出根据这些变更需要更新的文档\n8. 如果文档已过时：自动更新它\n\n阶段 3——PR 描述：\n9. 生成一份 pull request 描述：\n   - 摘要：这个 PR 做了什么（2-3 句话）\n   - 原因：它解决了什么问题\n   - 变更内容：关键变更文件及简要说明\n   - 测试：如何验证它可以正常工作\n   - 备注：审阅者应该重点关注的地方\n\n阶段 4——任务清理：\n10. 检查 notes/tasks.md 中与该功能相关的任务——将其标记为已完成\n11. 记下在开发过程中出现的任何后续任务\n\n</steps>\n\n<output>\n**✅ Feature Wrap: [功能/分支名称]**\n\n**Changes Summary**\n- 变更文件：[X]\n- 提交：[X]\n- 测试：[通过/失败/未找到]\n- 警告：[发现的任何 TODO/FIXME]\n\n**PR Description** *（可直接粘贴到 GitHub）*\n---\n## Summary\n[生成的摘要]\n\n## Why\n[生成的理由说明]\n\n## Changes\n[生成的变更列表]\n\n## Testing\n[生成的测试说明]\n---\n\n**Documentation** — [已更新 / 无需更新 / 需要手动更新：[内容]]\n\n**Tasks Updated** — [X] 项已完成，新增 [X] 项后续任务\n\n**Ready to merge?**[是 / 请先处理以下事项：[列表]]\n</output>\n\n<constraints>\n- 生成 PR 描述之前必须先运行测试\n- 如果测试失败：在输出顶部注明“TESTS FAILING — fix before merging”\n- PR 描述必须完整到可以直接粘贴进 GitHub、无需编辑\n- 如果测试失败或存在 TODO，不要将该功能标记为“可以合并”\n</constraints>\n```\n\n保存为 `~/.claude/commands/project-wrap.md`。"
+    },
+    {
+      "type": "text",
+      "content": "## 技能 3：/onboard——项目情报简报\n\n这项技能是你的个人项目入门智能体。把它指向任何代码库或项目文件夹，它会读取所有内容，理解该项目，创建一份包含它所收集知识的 CLAUDE.md，并为你生成一份入门简报。\n\n```markdown\n# /onboard — 项目情报与入门指引\n\n<role>\n你是一名项目情报智能体。当被投放到一个新项目中时，你会系统性地\n读取所有内容，构建完整的心智模型，并产出：（1）一份未来 Claude\n会话可以使用的 CLAUDE.md，以及（2）一份让人类快速上手的入门简报。\n</role>\n\n<context>\n$ARGUMENTS 是项目文件夹路径，或用 . 表示当前文件夹。\n这项技能在人类第一次接触一个新项目时运行。\n</context>\n\n<steps>\n1. 列出项目根目录下的所有文件（ls -la）\n2. 读取：README.md、package.json/pyproject.toml/requirements.txt、.env.example\n3. 读取主入口文件（index.js、main.py、app.py、server.js 等）\n4. 列出目录结构，并读取 3 个看起来最重要的源文件\n5. 检查是否已存在 CLAUDE.md——如果存在，扩充它，而不是替换它\n6. 检查 git 日志的最近 10 次提交，了解近期活动\n7. 确定：语言、框架、测试方法、部署方式\n8. 确定：这个项目做的主要事情（核心循环）\n9. 确定：新贡献者需要知道什么，才能做出第一次改动\n10. 用收集到的知识创建或更新 CLAUDE.md\n11. 生成入门简报\n</steps>\n\n<output>\n首先：用以下内容创建/更新 CLAUDE.md：\n```\n# Project: [名称]\n\n## What This Does\n[1-2 句话]\n\n## Tech Stack\n- Language: [X]\n- Framework: [X]\n- Database: [如果发现，填写]\n- Testing: [X]\n- Deploy: [如果发现，填写]\n\n## Key Files\n- [文件]：[它做什么]\n- [文件]：[它做什么]\n\n## Common Commands\n- Install: [命令]\n- Run dev: [命令]\n- Run tests: [命令]\n- Build: [命令]\n\n## Conventions\n[在代码库中观察到的任何命名、结构或风格约定]\n\n## Do Not Modify\n[自动生成的文件、迁移脚本、第三方代码等]\n\n## Current Focus\n[根据最近的提交——目前正在处理什么]\n```\n\n然后生成入门简报：\n**🗺️ Project Orientation: [项目名称]**\n\n**What it does:**[一句话]\n**Stack:**[技术栈简要摘要]\n**Status:**[根据提交近期程度判断：活跃/稳定/遗留]\n\n**Start here:**[新贡献者应该首先阅读的那份文件]\n\n**First task guidance:**[如何做一个小改动并验证它可以正常工作]\n\n**Watch out for:**[在代码中发现的任何陷阱或不明显的事项]\n\n**CLAUDE.md created/updated** — 未来的会话将拥有完整的项目背景信息。\n</output>\n\n<constraints>\n- 必须创建/更新 CLAUDE.md——而不仅仅是简报\n- 关于技术栈要具体——不要写“后端框架”，要写“Express.js 4.18”\n- 如果项目很大（超过 50 个文件），聚焦于入口文件和关键模块\n- 如果 CLAUDE.md 已存在：保留已有内容，加入新发现\n</constraints>\n```\n\n保存为 `~/.claude/commands/onboard.md`。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "在真实项目上运行 /start-day 和 /onboard",
+      "content": "在真实数据上测试这两项最立即有用的串联技能。\n\n**第 1 步——创建 /start-day：**\n```\n创建 ~/.claude/commands/start-day.md\n```\n\n**第 2 步——创建 /project-wrap：**\n```\n创建 ~/.claude/commands/project-wrap.md\n```\n\n**第 3 步——创建 /onboard：**\n```\n创建 ~/.claude/commands/onboard.md\n```\n\n**第 4 步——运行 /start-day：**\n```\n/start-day\n```\n综合输出是否比分别运行 /morning-brief 和 /standup 更有用？怎样能让它更好？\n\n**第 5 步——在本课程项目上运行 /onboard：**\n导航到 `C:/Projects/Learning`，运行：\n```\n/onboard .\n```\n检查它创建的 CLAUDE.md。它对项目的描述准确吗？有没有遗漏什么重要内容？\n\n**第 6 步——在另一个项目上运行 /onboard：**\n如果你有另一个项目文件夹，也在那里运行 /onboard。对比它为不同类型项目生成的内容有何不同。\n\n**第 7 步——如果你有近期的功能开发，运行 /project-wrap：**\n如果你一直在 git 中开发某个功能，运行：\n```\n/project-wrap\n```\nPR 描述是否已经准备好、可以直接粘贴到 GitHub？\n\n**第 8 步——创建你自己的串联技能：**\n想一个你反复执行、有 3 步以上的工作流程。问 Claude：\n```\n我有一个反复执行的工作流程，我[频率]会做一次：\nStep 1: [你做的事]\nStep 2: [你做的事]\nStep 3: [你做的事]\nOutput: [你产出的内容]\n\n把这个搭建成 ~/.claude/commands/[名称].md 中的技能文件。\n```\n\n**完成检查：** 三项串联技能已创建，其中至少两项已在真实数据上测试过，并为你的具体情况设计了一项自定义工作流技能。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——搭建你的个人指挥中心",
+      "content": "这个工作坊是技能搭建之旅的压轴之作。设计并实现你的个人 AI 指挥中心——一套涵盖典型工作日所需一切的技能集合。\n\n**第 1 步——梳理你的工作日：**\n列出你在典型的一周中所做的、耗时超过 15 分钟、且可以借助 AI 减少或辅助完成的每一种任务类型。将它们分组：\n- 晨间流程\n- 沟通任务\n- 分析与调研\n- 代码/项目工作\n- 每日/每周复盘\n\n**第 2 步——审计你现有的技能库：**\n```\n列出 ~/.claude/commands/ 中的所有文件\n```\n对每项技能，记下：你真的在用它吗？它运作得好吗？什么能改进它？\n\n**第 3 步——找出缺口：**\n第 1 步中哪种任务类型还没有对应的技能覆盖？\n\n**第 4 步——搭建缺失的技能：**\n为影响最大的缺口设计并搭建一项技能。使用第 20-2 课中完整的 6 部分架构。\n\n**第 5 步——创建技能索引：**\n创建 `~/.claude/commands/SKILLS.md`（这不会是一个命令——只是文档）：\n```markdown\n# 我的 AI 技能库\n\n## 日常使用\n- /start-day — 晨间启动（邮件 + 日历 + 站会）\n- /standup — 仅每日站会\n- /code-review [文件] — 代码审查\n\n## 邮件\n- /email-sort — 收件箱分类\n- /email-report — 每周分析\n- /email-draft [发件人] — 回复起草器\n- /email-unsubscribe — 找出可以取消的订阅\n\n## 分析\n- /deep-analyze [文档] — 5 视角分析\n- /research-consensus [主题] — 5 线程研究\n- /contract-review [文档] — 合同专家\n\n## 文档\n- /extract-data [文档] — 结构化提取\n- /meeting-minutes [笔记] — 专业纪要\n- /compare-docs [文档1] vs [文档2] — 对比\n\n## 项目工作\n- /project-wrap — 功能收尾\n- /onboard [文件夹] — 项目入门指引\n- /weekly-review — 周五复盘\n\n## 自定义\n- /[你的技能] — [它做什么]\n```\n\n**第 6 步——设定一个 30 天挑战：**\n在接下来的 30 天里：每个工作日至少运行一项技能。跟踪：你实际使用了哪些技能，没用哪些，为什么。30 天后，清理掉没用的技能，投入精力改进你最常用的那些。\n\n**成果：** 一个完整、有文档记录的个人 AI 技能库，覆盖你整个工作流程——已搭建、已测试、随时可用。"
+    },
+    {
+      "type": "quiz",
+      "question": "/project-wrap 技能在生成 PR 描述之前会先检查是否有失败的测试。为什么这个执行顺序很重要？",
+      "options": [
+        "并不重要——PR 描述比测试更重要",
+        "如果在知道测试是否通过之前就生成 PR 描述，可能会生成一份说“所有测试都通过”的描述，而实际情况并非如此——把验证放在文档生成之前，可以防止发布虚假的 PR 描述",
+        "GitHub 要求在接受 PR 描述之前必须提供测试结果",
+        "先运行测试再生成文档，测试运行得更快"
+      ],
+      "correct": 1,
+      "explanation": "在串联技能中，执行顺序对正确性至关重要。如果 PR 描述说“所有测试都通过”，但测试实际上是在描述生成之后才运行的——甚至根本没运行——你就向代码审阅者发布了一条虚假的声明。这里的原则是：始终先验证，后记录。这就是为什么 /project-wrap 在阶段 1 运行测试，在阶段 3 生成 PR 描述。这样描述反映的是实际状态，而不是假定的状态。"
+    },
+    {
+      "type": "quiz",
+      "question": "你想创建一项技能，把 /email-sort（一张分类表）的输出作为 /morning-brief（每日计划）的输入。是什么设计决策让这种串联成为可能？",
+      "options": [
+        "两项技能必须写在同一个文件里",
+        "技能必须用 Python 编写才能相互通信",
+        "每项技能都必须产生一致的、结构化的输出格式——这样接收方技能才能读取并解析该格式。不一致的输出会破坏串联。",
+        "你需要在两个技能文件之间配置一个 webhook"
+      ],
+      "correct": 2,
+      "explanation": "可串联技能的关键在于一致的输出格式。如果 /email-sort 始终生成一张列为“类别 | 数量 | 主要条目”的表格，那么 /morning-brief 就能可靠地读取这张表格。如果 /email-sort 有时生成表格、有时生成段落文本，/morning-brief 就无法可靠地解析它。这就是为什么 6 部分技能架构中包含明确的“输出格式”部分——这不仅是为了方便人类阅读，更是为了让技能之间能够彼此组合。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 20-7 课。** 你已经搭建了三项串联工作流技能，并学习了让技能可组合的原则：一致的输出格式、按阶段排序的执行流程，以及验证与记录之间的分离。你的技能库现在把晨间流程、项目管理和功能发布都变成了单一命令。最后一课涵盖高级模式——子智能体、参数化技能，以及与他人分享你的技能。"
+    }
+  ],
+  "nextLesson": "20-8",
+  "prevLesson": "20-6"
+}

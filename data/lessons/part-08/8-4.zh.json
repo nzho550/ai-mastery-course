@@ -1,0 +1,114 @@
+{
+  "id": "8-4",
+  "title": "context7——任意代码库的实时文档",
+  "part": 8,
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "context7",
+    "documentation",
+    "claude-code"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将配置好 context7 并让它正常运作——你还会理解为什么在 Claude Code 中拥有实时、最新的文档会改变你写代码的方式。"
+    },
+    {
+      "type": "text",
+      "content": "## 文档问题\n\n每个 AI 模型都有一个训练截止日期。Claude 对 React、Python、TypeScript 或任何其他代码库的了解，都来自这个日期之前收集的训练数据。\n\n这会带来一个真实的问题：\n\n- React 19 发布了新特性。Claude 可能对此一无所知。\n- 你正在使用的某个库发布了一个破坏其 API 的大版本更新。Claude 可能仍然给你旧版本的 API。\n- 你正在安装的某个 npm 包，在 Claude 所了解的那个版本中存在已知漏洞。\n\n你甚至可能都不知道 Claude 给你的信息已经过时了。无论对错，它都会自信满满地给出答案。\n\n**context7 解决了这个问题**，方法是从官方来源获取当前、实时的文档，并将其注入对话中。这样 Claude 就能基于真实的、最新的文档来回答，而不是依赖它的训练数据。"
+    },
+    {
+      "type": "text",
+      "content": "## context7 是如何运作的\n\ncontext7 是一个 MCP 服务器，它会：\n\n1. 接收一个代码库名称（例如 `react`、`tailwindcss`、`prisma`）\n2. 获取该代码库当前的官方文档\n3. 将相关章节作为上下文返回给 Claude\n4. Claude 利用这些上下文回答你的问题\n\n结果是：Claude 回答的是该代码库真实的、当前的 API，而不是一年前的某个版本。"
+    },
+    {
+      "type": "text",
+      "content": "## 安装\n\n把 context7 添加到你的全局 `settings.json`（`C:\\Users\\YourName\\.claude\\settings.json`）中："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"context7\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@upstash/context7-mcp\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**不需要 API 密钥。** context7 在基础使用场景下不需要账号或 API 密钥。只需添加配置并重启 Claude Code。"
+    },
+    {
+      "type": "text",
+      "content": "## 在实践中使用 context7\n\n配置完成后，你可以在任何 Claude Code 对话中通过明确请求来调用 context7：\n\n- `\"用 context7，帮我拿到 React hooks 当前的最新文档\"`\n- `\"用 context7，告诉我如何配置 Tailwind v4\"`\n- `\"用 context7，Prisma 的 findMany 方法目前的 API 是什么？\"`\n\n你也可以在写代码的过程中内联使用它：\n\n- `\"给这个页面加一个模态对话框。写代码之前，先用 context7 检查一下 HTML dialog 元素目前的 API。\"`\n\nClaude 会获取文档、阅读它，然后写出符合当前 API 的代码——而不是它训练时所知道的那个版本。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么时候该用 context7\n\n在处理以下内容时使用 context7：\n\n- **任何 npm 包**——尤其是那些发布频繁的（React、Next.js、Vite、Prisma）\n- **框架配置**——Tailwind、Webpack、ESLint 这类会在大版本之间发生变化的配置\n- **有版本化端点的 API**——当版本很重要、你需要了解当前行为时\n- **你最近没怎么用过的代码库**——它们的 API 可能自你上次使用以来已经变了\n\n你不需要事事都用它。对于稳定、很少变化的东西，比如基础的 HTML 或 CSS 知识，Claude 的训练数据完全够用、够准确。在时效性真正重要的地方，有选择地使用 context7。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**养成这个习惯：** 每当你开始使用一个新的代码库或包时，在对话一开始就让 Claude 通过 context7 拉取它的文档。事先一句提示词，能省下你几个小时用来调试过时 API 导致的问题。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "在编码时查询实时文档",
+      "content": "**准备工作：**\n1. 把 context7 配置块（如上所示）添加到你的 `settings.json`\n2. 保存文件，重新启动 `claude`\n3. 输入 `/mcp`——确认 `context7` 出现在列表中\n\n**任务 1——获取实时文档：**\n问：`\"用 context7，帮我拿到 HTML5 dialog 元素当前的文档——特别是如何用 JavaScript 打开和关闭它。\"`\n\n阅读 Claude 返回的内容。注意它引用的是真实的最新规范，而不是模糊的印象。\n\n**任务 2——把文档应用到你的项目中：**\n问：`\"用刚才那份文档，给 exercises/about-me.html 加一个模态对话框。点击‘Contact Me’按钮时打开对话框，点击‘Close’时关闭。\"`\n\n用 Live Server 打开这个文件——对话框应该能正常工作。\n\n**任务 3——对比有无 context7 的差异：**\n开始一个新的 Claude Code 会话（输入 `/clear` 清空对话）。\n不提及 context7，问同样的模态对话框问题。\n对比两次回答：\n- Claude 用的是同一套 API 吗？\n- 哪一个听起来更自信，或者更贴近当前情况？\n- 有没有哪个用了过时的写法？\n\n把你的观察记在 `notes/context7-experiment.md` 中。\n\n**加分项——查询一个你实际会用的库：**\n如果你正在学习或使用某个具体的库（Python、Vue、Svelte、Express，随便什么），就某个你好奇的话题问 context7 一下它当前的文档。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——context7 文档速练",
+      "content": "context7 让 Claude Code 获得任意代码库的实时文档。这个练习展示了它为什么重要。\n\n**第 1 步——先不用 context7 测试。** 问 Claude Code：“告诉我如何使用 Python asyncio 库中的 async_timeout 上下文管理器。展示当前的语法以及一个可运行的示例。”\n\n**第 2 步——记下这次回答。** 语法是最新的吗？反映了最新 Python 版本的建议做法吗？\n\n**第 3 步——现在启用 context7**，问同样的问题。让 Claude Code 用 context7 获取当前的 asyncio 文档。\n\n**第 4 步——对比两次回答。** context7 提供的信息是否更准确、更贴近当前情况？\n\n**第 5 步——用一个你很熟悉的库来测试：** 问 Claude Code（启用 context7）关于某个库里一个具体函数的问题，而这个函数的正确用法你自己确切知道。context7 说对了吗？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用 context7 的实时文档进行开发",
+      "content": "用 context7 来构建一些东西，选一个你不太熟悉的库——并且第一次就写对。\n\n**第 1 步——选一个你没怎么用过、但想使用的库：** requests、FastAPI、SQLAlchemy、pandas、OpenAI SDK——任何有明确 API 的库。\n\n**第 2 步——让 Claude Code 用这个库构建一个小程序。** 指示它用 context7 获取当前文档：\n```\n用 [库名] 构建一个 Python 脚本，实现 [描述你的目标]。写代码之前，先用 context7 检查你需要用到的具体函数的当前 API。\n```\n\n**第 3 步——观察 Claude Code** 通过 context7 获取文档。它在回答中引用文档了吗？\n\n**第 4 步——运行生成的代码。** 它能不经调试就正常运行吗？\n\n**第 5 步——必做的复核：** 问 Claude：*“回顾一下你刚写的代码。哪些部分最有可能随着这个库发布新版本而过时？在生产环境使用之前，我应该在文档里再核查什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——用文档验证 AI 生成的代码",
+      "content": "context7 能让你验证 Claude 生成的代码是否符合当前文档。\n\n**第 1 步——找一段使用了外部库的 AI 生成代码。**\n\n**第 2 步——问 Claude Code**（启用 context7）：“验证这段代码用的是不是 [库] 当前的 API。标出任何与当前文档不符的用法。”\n\n**第 3 步——查看 context7 找到了什么。** 原始的 AI 生成代码是否用了已废弃的方法或错误的参数？\n\n**第 4 步——根据文档验证结果更新代码。**\n\n**第 5 步——问 Claude：** *“除了你发现的这些问题之外，开发者在使用 [库] 时还常犯哪些 API 相关的错误，是我应该在自己代码里检查的？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——以文档为先的开发方式",
+      "content": "用 context7，以文档优先的方式来构建一个功能。\n\n**第 1 步——选一个需要用到某个库的功能来实现。**\n\n**第 2 步——从文档开始，而不是从代码开始：**\n```\n在写任何代码之前，先用 context7 获取 [库] 的文档，并回答：\n1. 实现 [功能] 需要用到哪些类/函数？\n2. 哪些参数是必需的，哪些是可选的？\n3. 返回值大概是什么样子？\n4. 有没有常见的坑或已废弃的用法需要避免？\n5. 给我展示文档中推荐的用法模式。\n```\n\n**第 3 步——查看这份文档摘要。** 你理解要构建什么了吗？\n\n**第 4 步——现在基于这些文档化的模式来写代码。** 代码应该与文档完全一致。\n\n**第 5 步——与“直接写代码”的方式做对比：** 如果直接让 Claude 写代码（不先查文档），你会得到同样的结果吗？实际测试一下并对比。"
+    },
+    {
+      "type": "quiz",
+      "question": "既然 Claude Code 的训练数据里已经内置了对热门库的知识，为什么 context7 还有用？",
+      "options": [
+        "Claude Code 对任何库都一无所知",
+        "训练知识有一个截止日期——context7 提供当前的文档，能捕捉到训练之后发布的 API 变更、废弃项和新特性",
+        "context7 能让回答速度更快",
+        "训练知识对所有库的信息都不可靠"
+      ],
+      "correct": 1,
+      "explanation": "即使是知名的库，AI 训练数据也有一个截止日期。库会发布新版本，改变 API、废弃方法、加入更好的用法模式。举例来说，如果一个库在训练时是 2.x 版本，但现在已经是 API 不同的 3.x 版本，Claude Code 会写出 2.x 版本的代码，除非拿到了当前的文档。context7 通过在请求发生时获取实时的、最新的文档来解决这个问题。"
+    },
+    {
+      "type": "quiz",
+      "question": "context7 获取了某个库的文档，Claude Code 用它来生成代码。在生产环境使用这段代码之前，你还应该检查什么？",
+      "options": [
+        "什么都不用检查——只要是基于当前文档写的，就一定是对的",
+        "生成的代码是否真的正确遵循了文档——Claude Code 仍可能误读或误用文档，尤其是对复杂的 API",
+        "只有当这个库不到 1 年历史时才需要检查代码",
+        "这个库的作者是否有良好的声誉"
+      ],
+      "correct": 1,
+      "explanation": "获取文档能减少但不能消除错误。Claude Code 仍可能误解文档、套用了错误章节的用法模式，或遗漏文档中重要的限定条件。要核实：（1）代码用的方法是不是 context7 描述过的那些，（2）参数是否匹配文档中的签名，（3）任何错误处理是否符合文档所说该库会抛出的异常。同时也要针对你自己的实际用例运行这段代码——文档中的示例往往只展示了最理想的情况。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 8-4 课。** context7 现在已经是你工具链的一部分了。第 8-5 课将添加 sequential-thinking——一个能让 Claude 逐步推理复杂问题的服务器。"
+    }
+  ],
+  "nextLesson": "8-5",
+  "prevLesson": "8-3"
+}

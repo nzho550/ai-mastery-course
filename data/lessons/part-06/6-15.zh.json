@@ -1,0 +1,95 @@
+{
+  "id": "6-15",
+  "title": "Copilot 用于 Pull Request 与代码审阅",
+  "part": 6,
+  "estimatedMinutes": 55,
+  "tags": ["copilot", "github", "pull-requests", "code-review", "team", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n代码审阅是软件团队中杠杆效应最高的活动之一——它能捕捉 bug、提升质量、传播知识、并落实标准。但它也很慢、不够一致，而且常常受制于审阅者是否有空。\n\nGitHub Copilot 会直接参与你在 GitHub.com 上的代码审阅流程：\n- **自动生成 PR 描述**，让审阅者立即理解改动内容\n- **充当审阅者**——在人类审阅者看到你的 PR 之前，先审阅它是否有 bug、安全问题和风格问题\n- **提出具体的修复建议**，可以一键应用\n- **实现自己提出的建议**，通过发起一个已经完成修复的子 PR\n- **在每次推送时自动审阅**——在代码推送的那一刻就捕捉问题\n\n本课会教你使用所有这些能力，让你的 PR 在任何人工审阅之前，就变得更干净、更快速、更完整。"
+    },
+    {
+      "type": "text",
+      "content": "## 用 Copilot 生成 PR 描述\n\n含糊的 PR 描述一直是个老问题——它们浪费审阅者的时间，让代码考古变得更困难，还会因为审阅者不知道该关注什么而让 bug 蒙混过关。\n\nCopilot 仅凭差异内容，就能生成一份完整、准确的 PR 描述。\n\n### 如何生成 PR 描述\n\n**方式 1 —— 在 GitHub.com 上（PR 编辑器）**\n1. 创建或打开一个 PR\n2. 在描述编辑器中，点击工具栏中的 **Copilot 图标**（星火图案）\n3. 选择 **Generate summary**\nCopilot 会读取完整的差异，生成一份涵盖以下内容的描述：改动了什么、为什么改动（如果能从代码中推断出来），以及审阅者应该关注什么。\n\n**方式 2 —— 在 Copilot CLI 中：**\n```\n/diff\n```\n然后问：\n```\n为这些改动写一份 pull request 描述。包括：3 点摘要、\n技术方案、测试覆盖情况，以及风险等级。\n```\n\n**方式 3 —— 在 VS Code Chat 中：**\n在你签出了当前分支的情况下：\n```\n@workspace 为这个分支相对于 main 的改动写一份 PR 描述。\n使用这个格式：摘要（3 点）、技术细节（2-3 句话）、\n已完成的测试、风险（低/中/高，附理由）。\n```\n\n### 什么样的 Copilot PR 描述是好的？\n\nCopilot 会读取代码差异来推断意图。以下情况下效果最好：\n- 提交信息有意义（“fix: validate email before DB insert” 能传达很多信息）\n- 代码改动是原子性的——一个 PR，一个目的\n- 差异干净（没有杂乱的空白改动、没有无关的文件）\n\n始终审阅生成的描述。Copilot 能推断出改动了什么，但可能不知道*为什么*——补上它无法从代码中看出的业务背景。"
+    },
+    {
+      "type": "text",
+      "content": "## 请求 Copilot 代码审阅\n\nCopilot 可以担任任何 pull request 的审阅者——执行与资深开发者相同类型的审阅：检查 bug、安全问题、逻辑错误，以及缺失的测试。\n\n### 手动请求审阅\n\n1. 在 GitHub.com 上打开一个 PR\n2. 在右侧边栏的 **Reviewers** 下，点击齿轮图标\n3. 在搜索框中输入 **Copilot**\n4. 选择 **Copilot** 来请求一次审阅\n5. 等待——审阅通常在 30 秒以内完成\n\n向下滚动查看 Copilot 的审阅评论。每条评论都对应特定的一行，包含：\n- 识别出的问题\n- 为什么这是个问题\n- 一个建议的修复方案（通常是一个可以一键应用的代码块）\n\n### 自动审阅（所有 PR）\n\n你可以配置 Copilot 自动审阅每一个 PR，而无需手动请求：\n\n1. 前往你的 GitHub 个人资料 → **Copilot settings**\n2. 找到 **Automatic Copilot code review**\n3. 设置为 **Enabled**\n4. 可选择启用 **Review new pushes**——每次你推送新提交时，Copilot 都会重新审阅\n5. 可选择启用 **Review draft pull requests**——更早地捕捉问题\n\n启用自动审阅后，Copilot 的审阅会在 PR 创建后几秒内出现——比任何人类审阅者打开这个 PR 都要早。\n\n### 审阅强度等级\n\nCopilot 支持两种审阅强度等级：\n\n| 等级 | 速度 | 深度 | 最适合 |\n|-------|-------|-------|----------|\n| **Low**（默认） | 快 | 标准——bug、安全、风格 | 常规改动 |\n| **Medium** | 较慢 | 深度推理模型——复杂逻辑、跨服务安全 | 安全敏感代码、复杂功能 |\n\n要使用 Medium 强度，需要通过 GitHub REST API 请求审阅，或在你团队的分支保护规则中设置。Medium 审阅会消耗更多的 AI 额度和 GitHub Actions 分钟数。"
+    },
+    {
+      "type": "text",
+      "content": "## 应用与实现建议\n\nCopilot 的审阅评论包含可操作的建议——不仅仅是观察。\n\n### 一键应用\n\n对于简单的修复（重命名一个变量、添加一个空值检查、修正一个拼写错误），Copilot 的建议会以一个带有 **Apply suggestion** 按钮的代码块形式出现。点击它会直接更新文件并创建一次提交。不需要手动编辑。\n\n你也可以批量应用多个建议：勾选每个你想应用的建议的复选框，然后点击 **Commit suggestions**，在一次提交中应用所有选中的建议。\n\n### 实现建议（多步骤修复）\n\n对于更复杂的改动，Copilot 会在审阅评论上提供一个 **Implement suggestion** 按钮。这个功能更为强大：它会创建一个**子 pull request**——一个以你的分支为目标的新 PR——Copilot 云端 agent 已经在其中实现了这项修复。你审阅这个子 PR，如果看起来没问题，就把它合并到你的分支中。这样一来，你原本的 PR 就包含了这项修复。\n\n这适用于以下工作流：\n- 需要跨多个文件改动的修复\n- 审阅者建议的、手动完成需要 30 分钟以上的重构\n- 需要谨慎、正确实现的安全补丁\n\n### 针对 Issue 的 Copilot 云端 Agent\n\n为了更早地介入：在任何 GitHub Issue 上，点击 **Assign to Copilot**。云端 agent 会：\n1. 阅读这个 issue\n2. 探索代码库中相关的部分\n3. 创建一份实现计划\n4. 在一个新分支上写代码\n5. 打开一个 PR 供你审阅\n\n你审阅并合并，或者要求修改。这能让明确定义的工作项从 issue 直接走到 PR，不需要任何人工实现。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**计费说明（自 2026 年 6 月起）：** 在基于使用量的计费模式下，每一次 Copilot 代码审阅都会按 AI Credits 计费。在私有仓库中，审阅还会消耗 GitHub Actions 分钟数。在 GitHub 组织设置 → Usage → Copilot 中监控你所在组织的用量。对于每天有大量 PR 的团队来说，Medium 强度的审阅会累积起来——默认使用 Low 强度，把 Medium 留给高风险的改动。"
+    },
+    {
+      "type": "text",
+      "content": "## 用指令文件自定义审阅\n\nCopilot 的代码审阅可以被自定义，让它专注于对你的团队真正重要的事情——而不仅仅是通用的最佳实践。\n\n### 添加审阅指令\n\nCopilot 的代码审阅使用第 6-13 课中讲到的同一套 `copilot-instructions.md` 和路径特定指令文件。但你还可以添加专门针对审阅的指令。\n\nCopilot 会从 PR 的**基础分支（base branch）**读取指令。所以你写在 `main` 中的指令，会应用于所有合并到 main 的 PR。\n\n### 审阅专属指令示例\n\n在 `.github/copilot-instructions.md` 中添加一个部分：\n\n```markdown\n## 代码审阅指南\n\n审阅代码时，按以下顺序优先考虑这些问题：\n1. 安全性：任何访问用户数据、处理身份验证，或发起外部调用的代码\n2. 数据校验：所有来自外部来源的输入在使用前都必须经过校验\n3. 审计日志：任何创建、修改或删除记录的函数都必须记录该操作\n4. 错误处理：错误必须被捕获并记录——绝不能悄悄丢弃\n5. 测试覆盖：新的公共函数应至少有一个测试\n\n不要评论以下内容：\n- 格式或空白（由我们的 linter 处理）\n- 细微的命名风格问题\n- 解释显而易见代码的注释\n\n针对政府/合规代码：始终标记任何可能暴露 PII 的输出，即使它位于权限检查之后。\n```\n\n### 路径特定的审阅规则\n\n创建 `.github/instructions/review-security.instructions.md`：\n```markdown\n---\napplyTo: \"**/auth/**\"\n---\n\n专门针对身份验证代码：\n- 验证会话令牌没有被记录\n- 检查失败的身份验证尝试是否被限流\n- 确保敏感操作会重新验证身份，而不是依赖会话状态\n- 标记任何使用 MD5 或 SHA1 进行密码哈希的地方\n```\n\nCopilot 只有在审阅 auth 目录下的文件时，才会应用这些额外的规则。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "你的第一个由 Copilot 审阅的 PR",
+      "content": "创建一个真实的 pull request，让 Copilot 作为你的第一个审阅者。\n\n**第 1 步 —— 在一个托管在 GitHub 上的项目中做一次真实的改动。** 任何有意义的改动都行：一个 bug 修复、一个小功能、一次重构。至少做 5-10 行真实的代码改动。\n\n**第 2 步 —— 生成一份 PR 描述**\n在创建 PR 之前，使用本课中提到的一种描述生成方式：\n- 在 VS Code chat 中：`@workspace 为这个分支上的改动写一份 PR 描述`\n- 或者在创建 PR 后，使用 GitHub PR 编辑器中的 Copilot 图标\n\n**第 3 步 —— 在 GitHub.com 上创建 PR。** 粘贴生成的描述。补充 Copilot 无法推断出的任何背景信息（业务原因、利益相关方背景）。\n\n**第 4 步 —— 请求 Copilot 审阅**\n在 Reviewers 部分，添加 Copilot。等待审阅完成。\n\n**第 5 步 —— 评估每一条审阅评论：**\n- 识别出的问题是真实的吗？\n- 建议的修复方案正确吗？\n- 用一键按钮应用你认同的建议\n- 对于你不认同的建议，回复说明理由\n\n**第 6 步 —— 至少根据 Copilot 的审阅做 2 处修复。** 这些应该是真实的问题，而不是表面性的改动。\n\n**成果：** 一个在任何人类审阅者看到之前，就已经经过 AI 预筛的 PR。Copilot 发现了多少你遗漏的问题？"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 A —— 自定义审阅指令",
+      "content": "写出能让 Copilot 关注你具体情境中真正重要事项的审阅指令。\n\n**第 1 步 —— 审计一下 Copilot 在主工作坊审阅中关注了什么。** 列出它最主要的 3-4 个关注点。\n\n**第 2 步 —— 评估相关性。** 这些是否是你的项目应该关注的正确内容？还是说存在：\n- 它遗漏的重要问题？\n- 它标记的无关顾虑？\n- 它不了解的特定领域规则？\n\n**第 3 步 —— 在你的 `.github/copilot-instructions.md` 中写出审阅指令：**\n- 添加一个专门说明审阅应优先关注什么的部分\n- 添加不该评论的内容（你的 linter 或格式化工具已经处理的事情）\n- 添加任何不太明显的项目专属规则\n\n对于政府/受监管的项目，添加：\n```markdown\n## 代码审阅 —— 优先规则\n\n始终检查：\n- 任何可能包含以下内容的变量或日志语句：员工 ID、税号、\n  健康数据，或财务账户细节\n- 写入数据库但没有对应审计日志的函数\n- 可能向终端用户暴露系统架构的错误信息\n```\n\n**第 4 步 —— 创建一个新的 PR**（或修改现有的），再请求一次 Copilot 审阅。\n\n**第 5 步 —— 与第一次审阅对比。** Copilot 现在是否关注了正确的内容？不断迭代指令，直到审阅输出符合你真正想要捕捉的问题。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 B —— 实现建议工作流",
+      "content": "练习完整的 Implement Suggestion 工作流——从审阅评论到合并修复。\n\n**准备工作：** 你需要一个在 GitHub.com 上的 PR，其中至少有一条 Copilot 审阅评论建议了一个不那么简单的修复（不只是一行改动）。\n\n**第 1 步 —— 找一条复杂的审阅建议。** 寻找一条建议多步骤操作的 Copilot 评论——添加错误处理、重构一个函数，或在多处添加输入校验。\n\n**第 2 步 —— 在那条评论上点击 Implement suggestion。** 如果按钮不可用，寻找 **Open in Copilot**，或在评论中请求：输入 `@copilot 请实现这条建议`。\n\n**第 3 步 —— 观察云端 agent 工作。** Copilot 会创建一个新分支和 PR。可能需要 1-3 分钟。\n\n**第 4 步 —— 审阅这个子 PR。** 这是你的判断力至关重要的地方：\n- 云端 agent 是否正确理解了这条建议？\n- 它有没有引入任何新问题？\n- 修复方案是否处理了边界情况？\n- 它是否符合你的代码风格？\n\n**第 5 步 —— 在子 PR 上合并或要求修改。** 如果合并了，验证你原本的 PR 现在是否包含了这项修复。\n\n**这里的关键技能：** 审阅一个 AI agent 代表你实现的内容。这和审阅 AI 建议不同——agent 已经写出了完整的代码，你必须像审阅任何人类编写的 PR 一样，仔细地评估它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 C —— 用 Copilot 云端 Agent 从 Issue 到 PR",
+      "content": "使用 Copilot 云端 agent，把一个明确定义的 issue 一路推进到草稿 PR。\n\n**第 1 步 —— 在你的某个 GitHub 仓库上写一份高质量的 issue。** 这份 issue 必须：\n- 具体（不是“改进代码”）\n- 自包含（所有需要的信息都在 issue 里）\n- 定义明确（读到这份 issue 的开发者知道“完成”长什么样）\n\n一份好的 issue 示例：\n```\n为 /api/users POST 端点添加输入校验\n\n目前这个端点接受任何 JSON 请求体。它应该校验：\n- email：必填，有效的邮箱格式\n- name：必填，字符串，2-100 个字符\n- role：必填，必须是以下之一：['viewer', 'editor', 'admin']\n\n返回 400 状态码，附带一个 JSON 错误，列出哪些字段未通过校验及原因。\n测试文件：tests/test_users.py —— 为有效输入和每种校验失败情况添加测试。\n```\n\n**第 2 步 —— 把这个 issue 指派给 Copilot。**\n在 issue 右侧边栏 → Assignees → 搜索并选择 **Copilot**。\n\n**第 3 步 —— 观察 agent 工作。** 它会探索仓库、创建一份实现计划，并打开一个 PR。准备好后你会收到通知（通常需要 3-10 分钟）。\n\n**第 4 步 —— 彻底审阅这个 PR。** 这个 agent 是自主的——它可能与你的本意有不同的理解，或在实现风格上做出与你不同的决定。\n\n**第 5 步 —— 要求修改或合并。** 把它当作对待一位初级开发者的 PR 一样对待——彻底审阅、给出具体反馈、明确期望。\n\n**需要记录的内容：** 对于哪类 issue，云端 agent 表现得很出色？对于哪类 issue，它遇到了困难？把这些写下来——这能定义你应该以及不应该把哪些任务交给云端 agent。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 为你的团队搭建 PR 审阅工作流",
+      "content": "设计并记录一套标准的 PR 工作流，把 Copilot 审阅整合进你团队的流程中。\n\n**在你仓库的 `.github/` 文件夹中创建一份 `PR-WORKFLOW.md`。**\n\n**第 1 部分 —— 作者检查清单（请求审阅之前）：**\n- [ ] 用 Copilot 生成了 PR 描述，并核实了准确性\n- [ ] 补充了 Copilot 无法推断的背景信息：业务原因、利益相关方影响\n- [ ] 请求了 Copilot 作为第一个审阅者\n- [ ] 处理了所有高优先级和中优先级的 Copilot 评论\n- [ ] 用一键功能应用了可自动修复的建议\n- [ ] 测试通过\n\n**第 2 部分 —— 审阅强度指南：**\n定义你的团队何时使用 Low 或 Medium 强度的 Copilot 审阅：\n- Low：常规改动、bug 修复、测试新增、文档\n- Medium：身份验证代码、数据库架构改动、外部 API 集成、安全相关的改动\n\n**第 3 部分 —— 如何回应 Copilot 的评论：**\n- 认同：应用建议（一键操作）\n- 不认同：回复说明你的理由（Copilot 的审阅是一条 Comment，而不是阻塞性审阅）\n- 不清楚：在回复中请 Copilot 澄清\n\n**第 4 部分 —— 何时使用云端 Agent 实现：**\n列出 3-4 类最适合由云端 agent 实现的 Copilot 建议（复杂的重构、多文件改动），以及应该手动实现的类型。\n\n**第 5 部分 —— 政府/合规附则：**\n[列出敏感领域] 中的任何代码改动，在合并前都需要 Medium 强度审阅，以及由[指定角色]进行的人工审阅。\n\n**成果：** 一份有文档记录的团队工作流，让 AI 代码审阅成为团队交付代码方式中一致、可靠的一部分。"
+    },
+    {
+      "type": "quiz",
+      "question": "Copilot 审阅了你的 PR，留下一条评论说“这个函数在处理输入之前没有校验它”。这条评论有一个“Apply suggestion”按钮。你点击了它。会发生什么？",
+      "options": [
+        "Copilot 会打开一个聊天会话，讨论校验方案",
+        "建议的代码改动会被直接应用到文件中，并提交到你的 PR 分支",
+        "会创建一份草稿评论，你必须自己编辑并手动提交",
+        "云端 agent 会创建一个子 PR，其中添加了校验逻辑"
+      ],
+      "correct": 1,
+      "explanation": "GitHub PR 界面中的“Apply suggestion”按钮会直接把建议的代码改动提交到你的 PR 分支中。这等同于你自己编辑文件并推送——只是一键完成。提交信息会自动生成，注明这是在应用一条 Copilot 建议。如果你想把多条建议合并成一次提交，勾选每条建议的复选框，然后使用“Commit suggestions”。对于复杂的多文件改动，“Implement suggestion”（不同的按钮）会改用云端 agent。"
+    },
+    {
+      "type": "quiz",
+      "question": "你希望 Copilot 自动审阅每一个 PR，而不需要有人手动请求。正确的设置方式是什么？",
+      "options": [
+        "在你的分支保护规则中把 Copilot 加为必需的审阅者",
+        "在 GitHub 个人资料 → Copilot settings → 启用 Automatic Copilot code review",
+        "编辑仓库的 CODEOWNERS 文件，把所有文件路由给 Copilot",
+        "创建一个 GitHub Actions 工作流，在每次 PR 打开事件时请求 Copilot 审阅"
+      ],
+      "correct": 1,
+      "explanation": "Automatic Copilot code review 是你个人 Copilot 设置中的一项设置（或用于组织范围设置的组织 Copilot 设置）。启用它之后，Copilot 会自动审阅每一个新的 PR，无需手动请求。你也可以启用“Review new pushes”，让 Copilot 在每次新提交后重新审阅。注意：Copilot 的审阅始终是一条 Comment，而不是 Approve 或 Request Changes——所以它不计入必需的批准数，也不会阻止合并。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-15 课完成。** Copilot 的 PR 能力——描述生成、自动审阅、一键应用修复，以及云端 agent 实现——能让你的 PR 显著变得更干净、更快，而不增加审阅者的负担。关键的自律：把 Copilot 的审阅当作能捕捉明显问题的第一遍筛查，而不是人工审阅逻辑、意图和业务背景的替代品。第 6-16 课讲的是 Copilot Extensions 和 Skills Marketplace——在内置工具之外添加专门的能力。"
+    }
+  ],
+  "nextLesson": "6-16",
+  "prevLesson": "6-14"
+}

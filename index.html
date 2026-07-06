@@ -31,6 +31,7 @@
 
       <div class="header-spacer"></div>
 
+      <button id="lang-toggle" class="btn btn-ghost" style="padding:var(--sp-2) var(--sp-3);height:36px" aria-label="Toggle language"></button>
       <button id="theme-toggle" class="btn btn-ghost" style="padding:var(--sp-2);width:36px;height:36px;justify-content:center" aria-label="Toggle theme"></button>
     </header>
 
@@ -58,6 +59,10 @@
         if (t === 'light' || (t === 'auto' && window.matchMedia('(prefers-color-scheme: light)').matches)) {
           document.getElementById('hljs-theme').href = 'vendor/highlight/github.min.css';
         }
+      } catch(e) {}
+      try {
+        const lang = localStorage.getItem('ai-mastery-lang') === 'zh' ? 'zh' : 'en';
+        document.documentElement.lang = lang;
       } catch(e) {}
     })();
   </script>

@@ -1,0 +1,90 @@
+{
+  "id": "4-7",
+  "title": "用 AI 写你的第一个 Python 自动化脚本",
+  "part": 4,
+  "estimatedMinutes": 90,
+  "tags": [
+    "python",
+    "automation",
+    "beginner",
+    "claude-code",
+    "scripting",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将搭建什么\n\n学完本课后，你将编写并运行一个真正实用的自动化 Python 脚本——而且不需要事先懂 Python。你将用 AI 来写代码，并学会如何引导、运行和修改它。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**为什么先学 Python？** 在所有你可以入门的编程语言中，Python 对 AI 用户来说是最有用的。它是数据分析、自动化、网页抓取和 AI 工具构建中使用的语言——而且它的写法几乎像英语一样自然。更重要的是，Claude 写的 Python 代码质量很高，这意味着在你完全理解这门语言之前，你就能构建出真正能用的东西。"
+    },
+    {
+      "type": "text",
+      "content": "## 安装 Python\n\n首先，检查 Python 是否已经安装：\n\n打开 PowerShell（在开始菜单中搜索）并输入：\n```\npython --version\n```\n\n如果你看到 `Python 3.x.x`——说明你已经准备好了。如果你看到一条错误信息：\n\n1. 前往 **python.org/downloads**\n2. 点击黄色的 **Download Python 3.x.x** 按钮\n3. 运行安装程序\n4. **重要：** 在第一个界面上，勾选写着 **“Add Python to PATH”** 的选项——这很容易被忽略，跳过它会导致后续问题\n5. 点击 **Install Now**\n6. 安装完成后，关闭并重新打开 PowerShell，再次运行 `python --version`\n\n你现在应该能看到版本号了。"
+    },
+    {
+      "type": "text",
+      "content": "## 运行你的第一行 Python\n\n在 PowerShell 中，输入 `python` 并按回车。你会进入 Python 交互式命令行——它看起来像这样：\n```\nPython 3.12.0 (main, ...)\n>>>\n```\n\n`>>>` 表示 Python 正在等待指令。试试这些：\n```python\nprint(\"Hello, I'm running Python\")\n2 + 2\n\"hello\".upper()\n```\n\n按 `Ctrl+Z` 再按回车即可退出交互式命令行。\n\n**所有 Python 脚本都是这样运作的：** 你给 Python 下达指令，它执行这些指令。交互式命令行和脚本的区别在于，脚本会把你的指令保存在一个文件里，这样你就可以再次运行它们。"
+    },
+    {
+      "type": "text",
+      "content": "## 编写一个脚本文件\n\nPython 脚本其实就是一个扩展名为 `.py` 的文本文件。\n\n**创建你的第一个脚本：**\n1. 打开记事本（如果你已经安装了 VS Code 也可以用它）\n2. 输入：`print(\"This is my first Python script\")`\n3. 将文件保存为 `first_script.py`——确保结尾是 `.py`，而不是 `.txt`\n4. 在 PowerShell 中，导航到你保存文件的位置：\n   ```\n   cd C:\\Users\\YourName\\Documents\n   ```\n5. 运行它：\n   ```\n   python first_script.py\n   ```\n\n你应该会看到你的信息被打印了出来。就是这样——你刚刚运行了一个 Python 脚本。"
+    },
+    {
+      "type": "text",
+      "content": "## 当你的脚本需要额外的库时（pip）\n\nPython 自带了许多内置工具，但有时脚本需要一些没有预装的额外工具。这些额外的东西叫做**包（package）**或**模块（module）**，Python 的包安装工具叫做 **pip**。\n\n如果你运行一个脚本，看到这样的错误：\n```\nModuleNotFoundError: No module named 'requests'\n```\n……这意味着脚本需要 `requests` 这个包，而它还没有被安装。\n\n**解决方法：用 pip 安装这个包**\n```\npip install requests\n```\n\n就是这样——一条命令。安装完成后，再次运行你的脚本。\n\n**你会遇到的常见包：**\n- `requests`——从网络获取数据\n- `pathlib`——处理文件路径（通常是内置的）\n- `csv`——读写电子表格文件（内置）\n- `shutil`——复制和移动文件（内置）\n\n当 Claude 写的代码导入了一个你还没安装的东西时，它通常会在回答的开头附上一条 `pip install` 命令。如果你看到 `ModuleNotFoundError`，一定要先运行那条命令。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "用 AI 搭建一个真正的自动化脚本",
+      "content": "你将使用 Claude Code 编写一个真正有用的 Python 脚本。选择一个适合你情况的任务。\n\n---\n\n## 第 1 步——选择你的自动化任务（5 分钟）\n\n选一个你真的会用到的：\n\n**选项 A——文件整理器：** 按类型把 Downloads 文件夹中的文件整理进子文件夹（图片 → Images/，PDF → Documents/，等等）\n\n**选项 B——文本处理器：** 读取一个文件夹里的文本文件，用关键词提取为每个文件生成摘要\n\n**选项 C——批量重命名：** 给文件夹里的所有文件重命名，在前面加上今天的日期（适合整理照片或文档）\n\n**选项 D——每日笔记模板：** 为今天创建一个新的 markdown 文件，包含日期、一份清单模板，以及笔记和任务的分区\n\n**选项 E——CSV 清理器：** 拿一份杂乱的 CSV 电子表格并清理它——删除空行、去除多余空格、统一大小写\n\n---\n\n## 第 2 步——创建一个项目文件夹（2 分钟）\n\n```\nmkdir C:\\Users\\YourName\\Documents\\python-scripts\ncd C:\\Users\\YourName\\Documents\\python-scripts\n```\n\n---\n\n## 第 3 步——让 Claude 来写它（10 分钟）\n\n打开 Claude.ai（如果你已经学到本课程的第 13 部分并安装了 Claude Code，也可以用它——目前 Claude.ai 已经完全够用）。描述你选定的自动化任务：\n\n**对于选项 A（文件整理器）：**\n```\n写一个 Python 脚本，整理我指定的文件夹中的文件。\n\n这个脚本应该：\n- 接受我指定的一个文件夹路径作为输入（或者用一个我可以自己修改的硬编码路径）\n- 按扩展名把文件移动到子文件夹：\n  - .jpg, .png, .gif, .webp → Images/\n  - .pdf, .docx, .doc, .txt → Documents/  \n  - .mp4, .mov, .avi → Videos/\n  - .mp3, .wav, .m4a → Audio/\n  - 其他所有类型 → Other/\n- 如果子文件夹不存在就创建它们\n- 打印每一个被移动文件的日志\n- 如果目标位置已经存在同名文件就跳过（不要覆盖）\n\n要做得安全——不要删除任何东西，只做移动。运行前加一个确认步骤。\n```\n\n对于其他选项，同样具体地描述任务。\n\n---\n\n## 第 4 步——保存并阅读脚本（5 分钟）\n\n1. 复制 Claude 的代码\n2. 把它保存为 `organise.py`（或 `notes.py`、`rename.py` 等），放进你的 python-scripts 文件夹\n3. **通读每一行。** 你不需要理解所有的 Python 语法，但你应该从整体上理解每一部分在做什么\n4. 如果有任何让你困惑的地方，问 Claude：“这部分是做什么的？”并粘贴让你困惑的那段代码\n\n---\n\n## 第 5 步——运行它（10 分钟）\n\n**运行之前：** 确保你测试的是文件的副本，而不是原始文件。创建一个测试文件夹：\n```\nmkdir C:\\Users\\YourName\\Documents\\test-folder\n```\n把几种不同类型的文件复制进去。\n\n**运行脚本：**\n```\npython organise.py\n```\n\n**如果你遇到错误：** 复制完整的错误信息，粘贴给 Claude：\n```\n我运行了你的 Python 脚本，得到了这个错误：\n[粘贴错误信息]\n\n这是什么意思？我该怎么修复它？\n```\n\n大多数初学者的 Python 错误是：\n- 文件路径不对（使用双反斜杠：`C:\\\\Users\\\\`，或者改用正斜杠：`C:/Users/`）\n- 缺少 Python 模块（Claude 会告诉你运行 `pip install [模块名]`）\n- 缩进错误（Python 对缩进要求很严格——让 Claude 帮你修复）\n\n---\n\n## 第 6 步——修改它（10 分钟）\n\n现在练习修改这个脚本。让 Claude：\n- “加一个命令行参数，这样我运行脚本时可以指定文件夹，而不是写死在代码里”\n- “让脚本把所有的移动操作记录到一个名为 `organise-log.txt` 的文件里，带上今天的日期”\n- “加一个演练模式（dry-run），只显示会移动什么，而不真正移动”\n\nClaude 做出的每一处改动，都读一读新代码，确保你理解改了什么、为什么这样改。\n\n---\n\n## 你完成了什么\n\n你（在引导下）编写了一个真正的 Python 自动化脚本，运行了它，修复了错误，并修改了它。这是完整的 AI 辅助编码工作流——你会在本课程中构建的每一个脚本上使用同样的模式。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "工作坊 A——搭建一个实用的每日脚本",
+      "content": "搭建一个你会每天或每周真正运行的脚本。最好的自动化，是那种能在你重复做的事情上为你节省时间的自动化。\n\n**第 1 步——找出一项重复性的文件/数据任务。** 例如：\n- 你每周都要手动重命名文件，把日期加进去\n- 你经常把文件从一个文件夹复制到另一个文件夹\n- 你有一个会变得杂乱的文件夹，你要手动整理它\n- 你保留着一份需要手动更新的文本日志\n\n**第 2 步——把它描述给 Claude Code**（如果已安装）或 Claude.ai：\n```\n我想自动化[描述你的任务]。\n\n具体细节：\n- 输入：[它从哪些文件/数据开始]\n- 输出：[结果应该是什么]\n- 频率：[每天/每周/我运行时]\n- 边界情况：[可能出什么问题，脚本应该如何处理]\n\n为此写一个 Python 脚本。加上清晰的注释，解释每一部分在做什么。\n```\n\n**第 3 步——在样本数据上测试它**，然后再用于真实文件。\n\n**第 4 步——把它永久保存**在 `C:\\Users\\YourName\\Documents\\python-scripts\\` 中，用一个描述性的名字。\n\n**第 5 步——创建一个快捷方式**，方便你轻松运行它：\n问 Claude：“我该如何创建一个 Windows 快捷方式或批处理文件，这样我就能通过双击来运行这个 Python 脚本？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——理解和修改 AI 生成的代码",
+      "content": "关键技能不是从零写 Python，而是理解和修改 AI 生成的代码。这个工作坊会培养这项技能。\n\n**第 1 步——让 Claude 写一个简单的脚本：**\n```\n写一个 Python 脚本：\n- 读取当前文件夹中所有的 .txt 文件\n- 统计每个文件的字数\n- 打印一个表格：文件名 | 字数 | 最长的一行\n- 最后打印字数最多的文件是哪一个\n```\n\n**第 2 步——在运行它之前**，逐行阅读并试着猜测它在做什么。在每一行上方以注释的形式写下你的猜测。\n\n**第 3 步——让 Claude 解释**你不确定的部分：\n```\n在这个脚本中，请解释：\n- `with open(file, 'r') as f:` 是做什么的？\n- `enumerate()` 在做什么？\n- 为什么脚本使用了 `try/except`？\n```\n\n**第 4 步——故意用一些小方式把它弄坏**，看看会出现什么错误：\n- 删掉某一行末尾的冒号\n- 改变某一行的缩进\n- 拼错一个变量名\n\n阅读每一条错误信息。问 Claude 它是什么意思。识别错误类型的模式，是编程中最有用的技能之一。\n\n**第 5 步——自己加一个功能**——根据你学到的内容，试着自己写一行新的 Python 代码。即使它不起作用，也让 Claude 帮你修好。这次尝试本身就能加深理解。"
+    },
+    {
+      "type": "quiz",
+      "question": "你运行一个 Python 脚本，得到这个错误：`ModuleNotFoundError: No module named 'pandas'`。这是什么意思，你该怎么做？",
+      "options": [
+        "脚本有一个 bug——让 Claude 重写一个不用 pandas 的版本",
+        "Python 找不到 'pandas' 库，因为它还没有被安装。在 PowerShell 中运行 `pip install pandas`，然后再次运行脚本",
+        "你的 Python 版本太旧了——重新安装 Python",
+        "脚本文件损坏了——删掉它，让 Claude 重新生成一份"
+      ],
+      "correct": 1,
+      "explanation": "ModuleNotFoundError 意味着脚本使用了一个你系统上还没安装的 Python 库。Python 自带一些内置库，但还有成千上万个额外的库（比如用于数据分析的 pandas、用于网络请求的 requests、用于图像处理的 pillow）需要用 pip——Python 的包安装工具——单独安装。在 PowerShell 中（不是在 Python 命令行内）运行 `pip install pandas`，然后再运行你的脚本。这是最常见的初学者 Python 问题之一，而且总是同一个解决办法。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude 写一个能删除文件夹中重复文件的 Python 脚本。在运行它之前你应该做什么？",
+      "options": [
+        "立即运行它——AI 生成的脚本总是安全的",
+        "先在文件夹的备份副本上测试它，并在对真实数据运行之前，仔细审查脚本对“重复”的定义",
+        "问 Claude 这个脚本是否安全",
+        "以管理员权限运行它"
+      ],
+      "correct": 1,
+      "explanation": "会删除文件的脚本是不可逆的。在运行任何会修改、移动或删除文件的脚本之前：（1）先在数据副本上测试它，（2）仔细阅读删除逻辑——“重复”可以有很多种定义方式（同名、同大小、内容哈希相同），（3）考虑加一个演练模式，打印会删除什么而不实际删除。Claude 会生成你要求的内容，但在对真实数据运行之前，验证逻辑是否正确是你的责任。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 4-7 课完成。** 你现在可以安装 Python、运行脚本、用 AI 编写自动化代码、修复错误，并修改现有脚本。这是第 16 部分（自动化）、第 17 部分（API）和第 20 部分（自定义 Skills）一切内容的基础。当你学到那些部分时，你已经知道如何引导 AI 代码并运行它产出的结果了。"
+    }
+  ],
+  "nextLesson": "5-1",
+  "prevLesson": "4-6"
+}

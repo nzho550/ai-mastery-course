@@ -1,0 +1,99 @@
+{
+  "id": "21-3",
+  "title": "ReAct 循环——推理 + 行动",
+  "part": 21,
+  "estimatedMinutes": 50,
+  "tags": ["loop-engineering", "advanced", "react", "reasoning"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nReAct（Reasoning + Acting，推理 + 行动）是 AI 循环工程中最重要的模式之一。这是一种结构化的循环，模型会在“推理该做什么”和“采取行动”之间明确交替进行——让思考过程在每一步都清晰可见。本课将教你什么是 ReAct、为什么它比纯推理和纯行动都更胜一筹，以及如何设计能够引导出 ReAct 行为的提示词和任务。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 ReAct？\n\nReAct 是一种循环模式，每一轮迭代都有固定的结构：\n\n```\nThought: [model reasons about the current state and what to do next]\nAction: [model takes a specific action — tool call, search, calculation]\nObservation: [result of the action is returned]\nThought: [model reasons about what the observation means]\nAction: [next action based on updated understanding]\nObservation: [result]\n... (repeat until done)\nFinal Answer: [conclusion]\n```\n\n关键的创新在于**思考（Thought）**这一步。通过要求模型在行动之前先阐明自己的推理，你会获得：\n\n1. **可见的推理过程**——你能确切看到模型为什么采取了每一个行动\n2. **更好的决策**——在行动之前先写出想法，会迫使模型进行更审慎的规划\n3. **更容易调试**——出问题的时候，你能准确看到推理是在哪里出现偏差的\n4. **可纠正的轨迹**——如果推理正朝着错误的方向发展，你可以在任何一个思考步骤上进行干预"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**ReAct 与思维链（Chain-of-Thought）的区别：** 思维链（CoT）是纯推理——模型在不采取任何行动的情况下把一个问题想清楚。ReAct 则是把推理和行动*交织*在一起。当问题只需要思考时（数学、逻辑、分析），使用 CoT。当问题需要收集信息、使用工具，或者在推理步骤之间修改状态时，使用 ReAct。"
+    },
+    {
+      "type": "text",
+      "content": "## ReAct 提示词的结构\n\n要引导出 ReAct 行为，你的提示词需要：\n\n**1. 明确定义可用的行动**\n列出模型在每一步中被允许做什么：\n```\nYou have access to these actions:\n- Search[query]: search for information\n- Read[filename]: read a file\n- Calculate[expression]: evaluate a mathematical expression\n- Finish[answer]: provide the final answer\n```\n\n**2. 要求遵循“思考-行动-观察”的格式**\n指示模型在每一次行动之前，都必须先产出一个思考：\n```\nFor each step, you must produce:\nThought: your reasoning about what to do next\nAction: the action you're taking\nObservation: (I will provide this after each action)\n```\n\n**3. 给出一个具体的任务**\nReAct 最适合那些需要先收集信息才能回答的任务——研究性问题、调试、多步骤分析。\n\n**ReAct 提示词示例：**\n```\nYou are a research assistant. Answer the question below using the ReAct pattern.\n\nAvailable actions:\n- Search[query]: find information on a topic\n- Lookup[term]: look up a specific fact or definition  \n- Finish[answer]: provide your final answer\n\nAlways produce a Thought before each Action. I will provide Observations.\n\nQuestion: What are the three largest carbon emitters by country, and what \npercentage of global emissions does each represent?\n```"
+    },
+    {
+      "type": "text",
+      "content": "## ReAct 何时胜过直接回答\n\nReAct 并不是对每种任务都能带来提升——它在以下场景中格外出色：\n\n**需要先收集信息才能回答的任务**\n如果模型需要在推理之前先查找某些信息、读取一个文件，或者运行一次查询，ReAct 能确保它系统地这样做，而不是靠猜测。\n\n**起始状态不确定的任务**\n调试是 ReAct 的完美应用场景：模型不知道哪里出了问题，所以必须观察 → 假设 → 测试 → 再次观察。\n\n**错误会不断累积的任务**\n在那些早期一个错误的假设会导致后面完全错误输出的任务中，ReAct 可见的思考步骤能让你及早发现偏差。\n\n**多跳推理链**\n当回答一个问题需要 3 步以上的推理、并且每一步之间都需要查找信息时（例如：“在赢得 2018 年世界杯的那一年，那个国家的 GDP 是多少？”），ReAct 能很自然地组织这类任务。\n\n**ReAct 帮不上忙的场景：**\n- 简单的一步查找\n- 推理与行动交织不会带来额外结构收益的创意型任务\n- 模型在上下文里已经拥有所需全部信息的任务"
+    },
+    {
+      "type": "text",
+      "content": "## Plan-then-Execute：ReAct 的近亲\n\nReAct 并不是唯一的代理循环模式，知道何时该用哪一种，是一项关键技能。**先规划后执行（Plan-then-Execute，P-t-E）**模式——也叫 ReWOO——采用了相反的做法：预先规划好一切，然后逐步执行这个计划。\n\n**P-t-E 是如何运作的：**\n```\n[Planning Phase]\nThought: Here is my complete plan before I take any action:\n  Step 1: Search for X to get the starting data\n  Step 2: Use that data to query Y\n  Step 3: Combine X and Y to calculate Z\n  Step 4: Format Z into the final report\n\n[Execution Phase]\nExecute Step 1... [result]\nExecute Step 2... [result]\nExecute Step 3... [result]\nExecute Step 4... done.\n```\n\n**ReAct 与 Plan-then-Execute——该用哪一个：**\n\n| 因素 | ReAct | Plan-then-Execute |\n|---|---|---|\n| 任务复杂度 | 简单、动态的任务 | 复杂、多步骤的任务 |\n| 灵活性 | 高——能根据每个结果调整 | 较低——遵循预先制定的计划 |\n| 可预测性 | 较低 | 较高——你可以先审查计划 |\n| Token 效率 | 可能浪费（每一步都要重新推理） | 更高效——规划一次，执行到底 |\n| 错误恢复 | 立即适应失败情况 | 计划失效时需要重新规划 |\n| 最适合 | 调试、研究、起始状态未知的任务 | 生成报告、已知的工作流程 |\n\n**快速判断法：** 如果你能在代理开始之前，就写出确切需要哪些步骤——用 P-t-E。如果在看到当前步骤的结果之前，你没法知道下一步该做什么——用 ReAct。\n\n*（说明：这里的“工具”指的是 Search、Read、Calculate 这类 AI 工具调用——而不是 Slack 或 GitHub 这类软件工具。）*\n\n**混合方案（最实用）：** 许多实际使用的循环会把两者结合起来。一个**规划者（planner）**先生成一份高层次的计划（P-t-E 风格），然后计划中的每一步都作为一个小型的 ReAct 循环去执行，能够根据发现的情况做出适应。规划者提供结构；执行者提供灵活性。\n\n```\n[Planner] Generate a research plan for this topic\n→ Plan: [1. Find key stats, 2. Find expert opinions, 3. Find counterarguments, 4. Synthesise]\n\n[Executor for Step 1 — ReAct mini-loop]\nThought: I need to find statistics on X\nAction: Search for stats on X\nObservation: Found Y, Z but not W\nThought: W wasn't available, use Y and Z instead\n...\n\n[Executor for Step 2 — ReAct mini-loop]\n...\n\n[Planner] Revise plan if any step failed significantly\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Claude Code 中的 ReAct：实践中是什么样子\n\nClaude Code 天生就以 ReAct 风格运行循环。当你观察它工作时，你会看到确切的“思考-行动-观察”模式：\n\n```\n[Thought] I need to understand the project structure before I can find the bug.\n[Action] Glob: **/*.js\n[Observation] Found: src/app.js, src/auth.js, src/db.js, tests/auth.test.js\n\n[Thought] The bug is likely in auth.js since it's the authentication module. Let me read it.\n[Action] Read: src/auth.js\n[Observation] [file contents — sees a JWT validation issue]\n\n[Thought] The JWT expiry check is missing the clock skew tolerance. That's the bug. \nLet me check how the tests are written to make sure my fix matches the expected behaviour.\n[Action] Read: tests/auth.test.js\n[Observation] [test file shows expected token validation behaviour]\n\n[Thought] Now I can write the fix.\n[Action] Edit: src/auth.js\n```\n\n你不需要告诉 Claude Code 去使用 ReAct 模式——它是从代理循环架构中自然涌现出来的。但理解 ReAct 能让你*设计出*能产生更好 ReAct 轨迹的任务，也能让你*读懂*轨迹，从而诊断推理在哪里出了问题。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "ReAct 与 Plan-then-Execute：并排对比",
+      "content": "用两种方式运行同一个任务并做对比。需要 25 分钟。\n\n**选择一个研究任务**，需要 4-6 个步骤，例如：\n- “咖啡消耗量最大的三个国家分别是哪三个，各自的文化因素如何解释这一点？”\n- “PostgreSQL、MySQL 和 SQLite 之间的主要区别是什么——单人开发者应该选哪一个？”\n\n**第一轮——ReAct（15 分钟）**\n\n打开 Claude.ai，从这个开始：\n```\nYou are a research assistant in ReAct mode.\nFor every step produce exactly:\nThought: [reasoning about what to do next]\nAction: [Search[query] | Lookup[term] | Finish[answer]]\n\nWait for my Observation before taking the next Action.\n\nTask: [your chosen task]\n```\n\n你要扮演“环境”这个角色——当 Claude 产出一个像 `Search[top coffee consuming countries]` 这样的行动时，*你*来回复这个观察结果。用网络搜索快速查一下，或者用一个合理的近似数据——重点是给 Claude 一些真实的东西去推理。这样回复：\n```\nObservation: [the data you found or a realistic approximation]\n```\n然后 Claude 会继续它的下一个思考。\n\n运行直到 Finish 为止，然后把完整的轨迹粘贴到一个笔记里。\n\n**第二轮——Plan-then-Execute（10 分钟）**\n\n在一个新对话中：\n```\nYou are a research assistant in Plan-then-Execute mode.\n\nStep 1 — PLAN: Before doing anything, write out your complete plan:\n  - List every piece of information you need\n  - List the exact searches/lookups you'll run in order\n  - Estimate what each search will return\n\nStep 2 — EXECUTE: Now carry out each step of your plan.\n\nTask: [same task]\n```\n让 Claude 不受打断地运行完整个计划。\n\n**对比这两次输出：**\n- 哪一个更快（轮次更少）？\n- 哪一个产出的信息更完整？\n- ReAct 循环有没有出现计划没有预料到的适应性调整？\n- Plan-then-Execute 的版本感觉是不是更可预测？\n- 如果是一个真实的决策，你会更信任哪一个输出？\n\n**写下你的结论：** 对于这个具体任务，哪种模式更好，为什么？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "构建你的第一个显式 ReAct 循环",
+      "content": "在 Claude.ai 中手动构建一个 ReAct 循环——这会迫使你理解它的每一个组成部分。需要 25 分钟。\n\n**第一步——搭建 ReAct 环境。** 打开 Claude.ai，发送这条系统提示词风格的消息：\n```\nYou are a research assistant operating in ReAct mode.\n\nFor every step, produce exactly:\nThought: [your reasoning about what to do next]\nAction: [one of: Search[query] | Lookup[term] | Calculate[expr] | Finish[answer]]\n\nAfter each Action, I will provide:\nObservation: [the result]\n\nDo not skip the Thought step. Do not take multiple Actions at once.\n\nWait for my Observation before proceeding.\n```\n\n**第二步——给它一个多跳任务：**\n```\nTask: Estimate the carbon savings (in tonnes of CO2) if the 10 most \nemission-heavy countries each reduced emissions by 5% in a single year.\n```\n\n**第三步——扮演环境的角色。** 当 Claude 产出一个像 `Search[top carbon emitting countries]` 这样的行动时，你以观察结果的形式回复数据。查一下实际数字（在任意搜索引擎里 30 秒就能查到），或者用一个合理的近似值——比如：`Observation: China 27%, USA 14%, India 7% of global CO₂ (2022 data)`。目标是给 Claude 真实的数据去推理，而不是考验你自己的知识储备。\n\n**第四步——运行 4-6 轮迭代**，直到 Claude 达到一个 Finish 行动。\n\n**第五步——回顾整条轨迹。** 回看整个对话：\n- 思考是否准确预测了行动会找到什么？\n- 有没有哪个观察结果改变了推理的方向？\n- 模型是在哪个节点上掌握了足够的信息来回答的？\n\n**写下两句话：** 让推理可见揭示了哪些直接回答会隐藏起来的东西？"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "读懂一条 ReAct 轨迹并修复一个推理错误",
+      "content": "学习通过找出推理偏差的位置来诊断 ReAct 循环。需要 20 分钟。\n\n**第一步——创建一个有问题的任务。** 在 Claude Code 中，创建一个带有细微 bug 的文件：\n```\ncreate a file called broken-calculator.js with this content:\n\nfunction divide(a, b) {\n  return a / b;  // No zero-division check\n}\n\nfunction average(nums) {\n  return nums.reduce((a, b) => a + b) / nums.length;  // Crashes on empty array\n}\n\nmodule.exports = { divide, average };\n```\n\n**第二步——让 Claude 审查它有没有 bug：**\n```\nAudit broken-calculator.js for edge cases and bugs. List every issue with \na specific example of input that would cause a failure.\n```\n\n**第三步——观察 ReAct 轨迹。** 留意：\n- Claude 是先读取文件，然后再陈述观察结果吗（正确的 ReAct 顺序）？\n- 它有没有识别出两个 bug？\n- 它有没有给出具体的失败示例？\n\n**第四步——引入一个更难的版本。** 创建一个带有 3-4 个细微 bug 的更复杂文件，然后重复一遍。ReAct 轨迹在什么时候会显现出推理上的不确定性——也就是 Claude 说出类似“我不确定这是不是个 bug，让我查一下……”这样的话？\n\n**第五步——让 Claude 解释它的推理：**\n```\nFor each bug you found, explain: what Observation led you to identify it, \nand what Thought process let you confirm it was a real issue versus \na false alarm?\n```\n\n**你正在培养的技能：** 阅读 ReAct 轨迹能教会你区分“有把握、有依据的推理”和“靠猜测侥幸对了的推理”——这是评估生产环境中 AI 输出的一项关键技能。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在构建一个 ReAct 循环，用来回答关于公司数据库的复杂问题。模型经常给出听起来很合理、但实际上并没有真正查询数据库的答案。对提示词做出什么改动能解决这个问题？",
+      "options": [
+        "告诉模型“始终保持准确”",
+        "明确定义可用的行动（Action），并要求每次行动之前都必须先有一个思考（Thought）——把查询数据库设为一种必需的行动类型，而不是可选的",
+        "使用一个更强大的模型",
+        "在提示词里加上“不要猜测”"
+      ],
+      "correct": 1,
+      "explanation": "解决办法是结构性的，而不是靠指令。通过明确定义可用的行动（例如 `Query[SQL]`），并要求遵循“思考-行动-观察”的格式，你就迫使模型在对答案进行推理之前，先采取一个真实的行动、获得一个真实的观察结果。像“保持准确”这样的通用指令并不能约束循环的结构——它们只是添加了一些美好的愿望式文字。结构化的 ReAct 提示词能改变实际的行为模式。"
+    },
+    {
+      "type": "quiz",
+      "question": "在一个用于调试失败测试的 ReAct 循环中，模型产出了这样的序列：Thought：“测试失败是因为一个竞态条件（race condition）。”Action：Finish['修复 thread.js 中的竞态条件']。这条轨迹的问题出在哪里？",
+      "options": [
+        "没有问题——模型识别出了问题并给出了解决方案",
+        "模型跳过了观察这一步，直接从思考跳到了 Finish，没有采取任何调查性行动去验证竞态条件这个假设",
+        "模型应该使用一种不同的行动类型",
+        "这个 Thought 写得太简短了"
+      ],
+      "correct": 1,
+      "explanation": "糟糕的 ReAct 循环的一个标志就是：从假设直接跳到结论，中间没有经过验证。模型把“竞态条件”作为一个 Thought 断言出来，然后立刻就 Finish 了——它从没读过 thread.js 文件，从没运行过测试，也从没检查过实际的错误信息。一条正确的 ReAct 轨迹应该是：提出原因假设 → 运行测试 → 读取错误信息 → 读取相关文件 → 然后再得出结论。Finish 这个行动，只应该在有足够的观察结果为结论提供依据之后才出现。"
+    },
+    {
+      "type": "quiz",
+      "question": "相比直接采取行动，ReAct 中明确的“思考”步骤最主要的优势是什么？",
+      "options": [
+        "通过减少不必要的行动，让循环运行得更快",
+        "整体上使用更少的 token",
+        "让推理过程变得可见、可中断——你能准确看到模型的思考在哪里偏离了正确的推理方向，并进行干预",
+        "强制模型使用所有可用的工具"
+      ],
+      "correct": 2,
+      "explanation": "思考步骤本质上是一种透明度和可调试性机制。当推理隐藏在一个黑箱式的行动序列内部时，错误只会在最终输出中才显现出来。当推理是显式的，你就可以准确追溯到模型做出错误假设或漏掉相关观察结果的那个精确节点。这让你可以在循环进行到一半时进行干预、重新设计任务，或者调整可用的行动——而当你只能看到输入和输出时，这些都是做不到的。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 21-3 课。** 你已经理解了思考 → 行动 → 观察的循环、如何构建 ReAct 提示词、ReAct 相比直接回答何时能带来价值，以及如何读懂 ReAct 轨迹来诊断推理错误。现在你可以把这个模式应用到研究任务、调试，以及任何多步骤的信息收集工作流中。"
+    }
+  ],
+  "nextLesson": "21-4",
+  "prevLesson": "21-2"
+}

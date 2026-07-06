@@ -1,0 +1,99 @@
+{
+  "id": "6-8",
+  "title": "选择你的 AI 编辑器搭配方案",
+  "part": 6,
+  "estimatedMinutes": 50,
+  "tags": [
+    "vscode",
+    "copilot",
+    "cursor",
+    "windsurf",
+    "continue-dev",
+    "decision"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n在过去的七节课里，你已经尝试过四种不同的“编辑器 + AI”搭配方案。这最后一课会把这一切综合成一套实用的决策框架——并以一个承诺收尾：为课程剩下的部分选定你的主力方案。"
+    },
+    {
+      "type": "text",
+      "content": "## 四种方案\n\n**方案 1：VS Code + Continue.dev（免费，任意模型）**\n- 成本：免费——你只需支付 API 使用费（或者使用本地 Ollama 模型，完全零成本）\n- 设置：安装扩展，在 `config.json` 中配置一个模型\n- 最适合：想在没有 GitHub 订阅的情况下使用 Claude 或其他模型的学生；任何想在本地运行 AI 以保护隐私的人；追求模型选择最大灵活性的人\n- 局限：自动补全的质量取决于你选择的模型；没有多文件 Composer\n\n**方案 2：VS Code + GitHub Copilot（GitHub 订阅）**\n- 成本：提供免费版；Copilot Pro 每月 10 美元，可无限量使用\n- 设置：安装两个扩展，用 GitHub 账号登录\n- 最适合：已经在用 GitHub 的开发者；想要最打磨的自动补全体验的人；从事代码审查或 PR 工作流的人\n- 局限：绑定于 GitHub 的模型选择（不过现在 Copilot 已经允许你选择 Claude/GPT）\n\n**方案 3：Cursor（免费版相当慷慨）**\n- 成本：免费版（每月 fast 请求额度）；Pro 版每月 20 美元\n- 设置：下载安装；自动导入 VS Code 设置\n- 最适合：构建多文件项目的人；觉得 Composer 工作流比逐条撰写提示词更快的人；更复杂的代码库\n- 局限：默认会把代码发送到 Cursor 的服务器（可开启 Privacy Mode）；是独立于 VS Code 的应用\n\n**方案 4：Windsurf（免费版）**\n- 成本：免费版（基于积分）；提供付费方案\n- 设置：下载安装；导入 VS Code 设置\n- 最适合：偏好 Cascade 实时可视化反馈的人；在第 6-7 课中觉得 Windsurf 更直观的人\n- 局限：社区规模比 Cursor 小；第三方文档较少"
+    },
+    {
+      "type": "text",
+      "content": "## 决策矩阵\n\n用这张表格，根据你的具体情况来评估每个方案：\n\n| 因素 | VS Code + Continue | VS Code + Copilot | Cursor | Windsurf |\n|--------|--------------------|-------------------|--------|----------|\n| **成本** | 免费（+ API） | 免费版 / 每月 10 美元 | 免费版 / 每月 20 美元 | 免费版 |\n| **设置成本** | 中等（配置文件） | 低（登录即可） | 低（从 VS Code 导入） | 低（从 VS Code 导入） |\n| **自动补全质量** | 取决于模型 | 出色 | 出色 | 出色 |\n| **多文件编辑** | 无 | 无 | 有（Composer） | 有（Cascade） |\n| **模型选择** | 任意（Claude、本地模型等） | GitHub 提供的选择 | Claude + GPT-5 | Codeium + Claude |\n| **数据隐私** | 可配置 | Microsoft/GitHub | 提供 Privacy Mode | 提供 Privacy Mode |\n| **最佳使用场景** | 灵活性、本地 AI | GitHub 集成的工作 | 复杂项目 | 可视化、智能体驱动的工作 |\n\n对于本课程剩下的部分——主要是构建 Web 项目、使用各种 API——**任何方案都可以**。这种差异只有在你后续（第 13-14 部分）处理更大的项目时才会真正凸显出来。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**给大多数学生的建议：** 在本课程剩下的部分，先从 **VS Code + GitHub Copilot**（免费版）开始。它需要的配置最少，文档和社区支持最多，免费版足以应付第 6-12 部分的所有内容。等你到达第 13 部分（构建一个完整项目）时，再重新考虑这个决定——当你需要同时处理许多文件时，Cursor 的 Composer 会显著更有价值。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**你随时可以切换。** 你的代码存在于你的项目文件夹里——它不会被锁定在任何一个编辑器上。Cursor、Windsurf 和 VS Code 都可以打开同一个文件夹。试用一款不同的工具一周不会有任何损失，只需要 5 分钟。不要在这个决定上过度纠结。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "选定你的搭配方案并记录你的选择",
+      "content": "这个工作坊分两部分：一个决定和一个承诺。\n\n**第 1 部分——填写矩阵**\n打开 `notes/prompt-experiments.md`（或创建一个新文件 `notes/editor-setup-decision.md`），粘贴这张表格：\n\n```\n| Factor       | VS Code + Continue | VS Code + Copilot | Cursor | Windsurf |\n|--------------|--------------------|-------------------|--------|----------|\n| Cost         |                    |                   |        |          |\n| Setup effort |                    |                   |        |          |\n| My experience|                    |                   |        |          |\n| My score /5  |                    |                   |        |          |\n```\n\n根据你在第 6-1 课到第 6-7 课中使用每款工具的真实感受，填写“My experience”这一行。给每一款打 1-5 分，评价你有多喜欢用它。\n\n**第 2 部分——写下你的承诺**\n在表格下方，按这个格式写一句话：\n\n```\nFor this course and beyond, I'm going to primarily use _____ \nbecause _____.\n```\n\n示例：\n- *“For this course and beyond, I'm going to primarily use VS Code + Copilot because I already have a GitHub account and the autocomplete just works.”*\n- *“For this course and beyond, I'm going to primarily use Cursor because I liked being able to generate multiple files at once.”*\n- *“For this course and beyond, I'm going to primarily use VS Code + Continue because I want to use Claude as my model and keep data off Microsoft's servers.”*\n\n保存这个文件。这就是你的决定。你是在承诺减少工具切换带来的摩擦——而不是永远绑定某一个选择。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——个人 AI 编辑器评估",
+      "content": "根据你的实际体验，做一个有数据支撑的 AI 编辑器搭配决定。\n\n**第 1 步——列出你试过的编辑器**（哪怕只是短暂试用过）：VS Code + Copilot、Continue.dev + Claude、Cursor、Windsurf，或其他。\n\n**第 2 步——对每一款**，从以下几个维度打 1-5 分：\n- 产出的代码质量\n- 对我现有代码的理解程度\n- 速度（响应和实现的快慢）\n- 审查体验（查看和接受更改的便捷程度）\n- 设置成本\n- 费用\n\n**第 3 步——问 Claude：** *“根据这些评分 [粘贴你的矩阵] 和我的工作特点 [描述：语言、任务类型、团队规模]，你会推荐什么样的 AI 编辑器搭配？请解释理由。”*\n\n**第 4 步——区分出你的“必须有”和“有则更好”的功能。** 什么样的因素会让你换一款编辑器？\n\n**第 5 步——写一段决定。** 你的 AI 编辑器搭配方案、为什么选择它，以及你打算什么时候重新审视这个决定。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——混合 AI 编辑器方案",
+      "content": "许多开发者会同时使用不止一种工具。这个工作坊会设计一套混合方案，让每种工具都发挥它最擅长的用途。\n\n**第 1 步——列出你最常见的 4 类 AI 编程任务：**\n- 任务类型 1：[例如“根据规格说明编写新函数”]\n- 任务类型 2：[例如“审查 AI 生成的代码”]\n- 任务类型 3：[例如“调试运行时错误”]\n- 任务类型 4：[例如“重构现有代码”]\n\n**第 2 步——针对每种任务**，决定：你会用哪款 AI 工具？\n\n**第 3 步——问 Claude：** *“我想用 [你选定的工具] 搭建一套混合 AI 编辑器方案。针对我的这些任务类型 [列出它们]，我应该用哪款工具，为什么？找出哪些任务上我的工具选择可能是错的。”*\n\n**第 4 步——把你的混合工作流记录**为一份简短的参考文档：\n```\n## My AI Editor Workflow\n- New features: [tool + how]\n- Code review: [tool + how]\n- Debugging: [tool + how]\n- Refactoring: [tool + how]\n```\n\n**第 5 步——坚持这套工作流 4 周。** 4 周后回顾：哪些部分有效？你会做出什么改变？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——成本与质量分析",
+      "content": "不同 AI 编辑器的成本差异很大。这个工作坊帮你为自己的具体情况实现价值最大化。\n\n**第 1 步——研究当前的定价**，针对每种 AI 编辑器方案：\n- GitHub Copilot Individual\n- Cursor Pro\n- Windsurf Pro\n- 通过 Continue.dev 使用的 Claude API（按使用量付费）\n- 各自的免费版\n\n**第 2 步——估算你每月的使用量：** 你每周编程多少小时？其中有百分之多少涉及 AI 辅助？\n\n**第 3 步——问 Claude：** *“帮我比较这些 AI 编辑器方案的性价比，我是一名每周编程 [X] 小时、AI 辅助占比 [Y%] 的开发者：[列出你的方案及其定价]。哪种方案性价比最高？”*\n\n**第 4 步——考虑价值因素：** 你一小时的时间值多少钱？如果一款 AI 编辑器每天为你节省 30 分钟，这和它的月费相比意味着什么？\n\n**第 5 步——做出决定：** 你想要的工具的成本是否合理？写下你的结论。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——构建你的 AI 编程工作流文档",
+      "content": "一份记录下来的工作流，是持续、高质量 AI 辅助编程的基础。\n\n**第 1 步——请 Claude 帮你撰写工作流文档：**\n```\nHelp me create an \"AI Coding Workflow\" document for my personal reference. I use [your tools] for [your work type].\n\nThe document should cover:\n1. How I start a new coding task (planning, speccing before coding)\n2. How I write code with AI assistance (tools, prompts, review process)\n3. How I review AI-generated code (checklist, mandatory steps)\n4. How I debug with AI help (process, what info to provide)\n5. How I commit and document (commit messages, code documentation)\n6. Red lines — things I never let AI do without full understanding\n```\n\n**第 2 步——用你具体的工具、提示词和实践方式**个性化每一个章节。\n\n**第 3 步——在最后添加你的审查清单：** 在接受任何 AI 生成的代码之前必须完成的步骤。\n\n**第 4 步——强制元审查：** 问 Claude：*“审查这份工作流文档。缺少了哪些重要的实践？这份工作流没能防住哪些常见的 AI 编程错误？”*\n\n**第 5 步——保存并使用：** 这份文档就是你 AI 辅助开发的操作手册。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在比较 Cursor（每月 20 美元）和通过 Continue.dev 按使用量付费使用 Claude API。你需要什么信息才能做出具有性价比的决定？",
+      "options": [
+        "只需比较每月的订阅费用",
+        "估算你每月使用的 API 调用次数以计算 Continue.dev 的费用，然后把它和 Cursor 的固定费率做比较，同时考虑价格和哪一个对你的工作产出更好",
+        "永远选更便宜的那个",
+        "永远选更贵的那个——它的质量会更高"
+      ],
+      "correct": 1,
+      "explanation": "性价比的判断既需要知道每种方案的总成本，也需要知道两者之间的价值差异。计算方法：你每天使用的 token 数 × Claude API 费率 × 每月天数 = Continue.dev 的每月成本。再拿这个数字和 Cursor 的固定费率比较。如果两者相近，那么质量和工作流的契合度就成了决定因素。固定费率适合重度用户；按使用量付费适合偶尔使用的人。没有哪一种普遍更优。"
+    },
+    {
+      "type": "quiz",
+      "question": "一位同事说：“我就用社交媒体上正在流行的那款 AI 编程工具。”这种做法的问题在哪里？",
+      "options": [
+        "流行的工具通常测试得不够充分",
+        "工具的选择应该基于哪一款对你具体的语言、任务类型和工作流产出最好——而不是基于人气",
+        "流行的工具总是最贵的",
+        "流行的工具变化太快，学不透彻"
+      ],
+      "correct": 1,
+      "explanation": "对你来说最好的 AI 编程工具取决于一些具体的因素：你使用的编程语言、你主要的任务类型（构建、审查还是调试）、你团队的技术栈、你的预算，以及你对代码的自然思考方式。一款在基准测试中表现出色或在推特上很火的工具，在你具体的场景下可能表现平平。用你自己实际体验中得出的数据——而不是别人的偏好。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6 部分完成。** 你已经从零开始，搭建出了一套完整配置的 AI 辅助编程环境。你知道 Copilot 自动补全是如何工作的，如何用 Copilot Chat 做解释和调试，Continue.dev 作为免费替代方案提供了什么，Cursor 的 Composer 如何处理多文件编辑，以及 Windsurf 的 Cascade 有什么不同之处。你已经选定了自己的搭配方案。在第 7 部分，你将彻底离开扩展生态系统，学习 Claude Code——一款基于终端的 AI 智能体，能够读取、编辑并推理整个项目。"
+    }
+  ],
+  "nextLesson": "9-1",
+  "prevLesson": "6-7"
+}

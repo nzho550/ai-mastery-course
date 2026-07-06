@@ -1,0 +1,117 @@
+{
+  "id": "7-7",
+  "title": "自定义斜杠命令",
+  "part": 7,
+  "estimatedMinutes": 70,
+  "tags": [
+    "claude-code",
+    "slash-commands",
+    "automation",
+    "workflow"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将创建至少两个自定义斜杠命令，理解存放命令的文件结构，知道如何用 `$ARGUMENTS` 让命令更灵活，并拥有一个封装了你最佳工作成果的可复用提示词库。你会理解项目级命令和用户级命令之间的区别，以及各自的使用场景。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是自定义斜杠命令？\n\nClaude Code 自带一些内置的斜杠命令，比如 `/help`、`/clear` 和 `/exit`。但你也可以创建自己的——可复用的提示词模板，通过 `/命令名` 这样的快捷方式调用。\n\n自定义命令存放在项目根目录下的 `.claude/commands/` 文件夹里。每个命令都是一个普通的 Markdown 文件。文件名（不含 `.md`）就成为命令名。\n\n例如：\n- `.claude/commands/review.md` → 可以用 `/review` 调用\n- `.claude/commands/summarize.md` → 可以用 `/summarize` 调用\n- `.claude/commands/test.md` → 可以用 `/test` 调用\n- `.claude/commands/security.md` → 可以用 `/security` 调用\n\n当你在 Claude Code 中输入 `/review` 时，它会读取 `review.md` 的内容，并把它作为这一轮会话的提示词。Claude 会像你手动输入了完整提示词一样去执行它。\n\n**为什么这很重要：** 一份优秀的代码审查提示词，不是你每次都想重新打一遍的东西。它经过精心组织，恰好按正确的顺序涵盖了正确的内容，而且花了你 15 分钟才打磨出来。斜杠命令让你能用 7 个字符调用出那份完美的提示词。"
+    },
+    {
+      "type": "text",
+      "content": "## `$ARGUMENTS` 占位符\n\n静态命令已经很有用了。动态命令则更强大。`$ARGUMENTS` 占位符让你能在运行时把文本传入一个命令。\n\n例如：如果你的 `summarize.md` 内容是：\n```\nSummarize the file $ARGUMENTS in exactly 3 bullet points.\nFocus on what the file does, not how it does it.\n```\n\n那么输入 `/summarize src/auth.js` 会在 Claude 接收提示词之前，把 `$ARGUMENTS` 替换成 `src/auth.js`。\n\n**多词参数：** 命令名之后的所有内容都会成为 `$ARGUMENTS`。所以 `/review src/api.js -- focus on security` 会把 `src/api.js -- focus on security` 作为参数字符串传入。\n\n**让参数变为可选：** 在命令文本中加入一个兜底方案：\n```\nReview the file $ARGUMENTS (or the most recently discussed file if no file is specified).\n```\n\n**多次使用 `$ARGUMENTS`：**\n```\nCompare $ARGUMENTS to the patterns established elsewhere in the codebase.\nWhat does $ARGUMENTS do differently, and is that intentional?\n```\n两处 `$ARGUMENTS` 引用都会被替换成同一个参数。"
+    },
+    {
+      "type": "text",
+      "content": "## 项目级命令与用户级命令\n\n命令可以存在于两个层级：\n\n**项目级：项目内的 `.claude/commands/`**\n只有在这个特定项目中工作时才可用。适合项目专属的工作流：\n- `/deploy`——该项目专属的部署清单\n- `/migrate`——运行并验证该项目的数据库迁移\n- `/test-feature`——该代码库特定的测试命令\n\n**用户级：主目录下的 `~/.claude/commands/`**\n在*每一个*项目、每一次会话中都可用。适合你始终会应用的通用编码实践：\n- `/review`——你个人的代码审查标准\n- `/explain`——你喜欢的代码解释方式\n- `/document`——你偏好的文档格式\n- `/security`——你在所有地方都会运行的安全审计\n\n创建用户级文件夹：\n```powershell\nNew-Item -ItemType Directory -Path ~/.claude/commands\n```\n\n两个层级会同时加载——你可以在同一次会话中同时用到项目级的 `/test` 和用户级的 `/review`，两者都能工作。"
+    },
+    {
+      "type": "text",
+      "content": "## 八个值得构建的命令\n\n**`/review` —— 按需代码审查**\n```markdown\nReview $ARGUMENTS (or the most recently discussed code if no file is specified).\n\nCheck for:\n1. Bugs, errors, and logic problems\n2. Missing edge cases (empty input, null values, unexpected types)\n3. Security issues (injection, auth, data exposure)\n4. Readability — would a junior developer understand this in 6 months?\n5. Missing things that should be there (error handling, validation, comments)\n\nFormat: numbered list. For each issue: problem + relevant line + suggested fix.\nEnd with one sentence summarising the overall quality (1–10 with brief reason).\n```\n\n**`/explain` —— 解释不熟悉的代码**\n```markdown\nExplain $ARGUMENTS in plain English.\n\nStructure your response:\n1. One sentence: what is this file/function FOR?\n2. How it works: step-by-step walkthrough\n3. Key design decisions: why was it written this way?\n4. What would break if I changed it?\n5. Anything a new developer should know before touching this\n\nAssume the reader is competent but hasn't seen this code before.\n```\n\n**`/test` —— 生成单元测试**\n```markdown\nWrite comprehensive unit tests for $ARGUMENTS.\n\nRequirements:\n- Test every function in the file\n- Cover: happy path, edge cases, error cases, empty/null inputs\n- Tests should be independent (no shared mutable state between tests)\n- Use descriptive test names that explain what the test verifies\n- Don't mock things unnecessarily — test behaviour, not implementation\n\nUse the testing framework already in the project (check package.json).\nIf no framework is set up, use Node's built-in test runner.\n```\n\n**`/security` —— 安全审计**\n```markdown\nConduct a security audit of $ARGUMENTS.\n\nCheck specifically for:\n1. Injection vulnerabilities (SQL, command, XSS)\n2. Authentication and authorisation issues\n3. Sensitive data exposure (keys in code, logging PII)\n4. Input validation gaps\n5. Dependencies with known vulnerabilities (flag if relevant)\n\nFor each issue found: severity (Critical/High/Medium/Low), description,\nwhere it is, and how to fix it. If nothing serious found, say so explicitly.\n```\n\n**`/document` —— 生成文档**\n```markdown\nWrite documentation for $ARGUMENTS.\n\nInclude:\n1. What this file/module does (2–3 sentences)\n2. JSDoc or docstring comments for every function (parameters, return type, purpose)\n3. Usage examples for the 2–3 most important functions\n4. Any gotchas or non-obvious behaviour\n\nWrite documentation a new team member would actually read, not boilerplate filler.\n```\n\n**`/refactor` —— 提出改进建议**\n```markdown\nSuggest refactoring improvements for $ARGUMENTS.\n\nFocus on:\n1. Reducing complexity (long functions, deep nesting, confusing logic)\n2. Removing duplication (code that appears in multiple places)\n3. Improving naming (variables, functions, files that are poorly named)\n4. Better structure (is the code in the right place?)\n\nPrioritise by impact. For each suggestion: what to change, why, and the risk of changing it.\nDo NOT make changes yet — just the suggestions.\n```\n\n**`/pr` —— Pull request 描述生成器**\n```markdown\nGenerate a pull request description based on the recent git changes.\n\nRun `git diff main --stat` and `git log main..HEAD --oneline` to understand what changed.\n\nWrite a PR description with:\n- Summary: what this PR does (2–3 sentences)\n- Why: what problem this solves or what value it adds\n- Changes: bullet list of meaningful changes (not every file, just the key ones)\n- Testing: what was tested or how to test it\n- Notes: anything reviewers should pay particular attention to\n\nUse plain language. No filler phrases like 'This commit introduces...'.\n```\n\n**`/standup` —— 每日站会摘要**\n```markdown\nGenerate a concise daily standup update based on today's git activity.\n\nRun `git log --since='yesterday' --oneline` to see what was committed.\n\nWrite three bullets:\n- Yesterday: what was completed\n- Today: what I plan to work on (infer from incomplete work and recent activity)\n- Blockers: any issues, failing tests, or unclear requirements visible in the code\n\nKeep each bullet to 1–2 sentences. Plain language — no jargon.\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**命令文件就是 Markdown。** 你可以在其中使用标题、列表、代码块和强调格式。Claude 会读取这些格式并用它来组织自己的回复。一份格式良好的命令提示词会产出一份更有条理的回复——提示词里的编号列表，会在回复里产出编号列表。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**迭代原则：** 你的第一版命令会是过得去的。你的第五版——在真实代码上运行了 20 次，并根据缺失的内容做出调整之后——会非常出色。在你实际用过命令之前，不要过度设计它。先写一个 v1，反复使用它，留意输出中总是缺少什么，然后更新命令。斜杠命令是靠使用不断改进的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "构建你的命令库",
+      "content": "创建一个同时包含项目级和用户级命令的命令库，然后在真实文件上测试它们。\n\n**第 1 步——创建项目命令文件夹：**\n在 VS Code 资源管理器中，在项目根目录下创建这样的文件夹结构：\n```\n.claude/\n  commands/\n```\n\n**第 2 步——创建一个 /review 命令：**\n创建 `.claude/commands/review.md`，内容如下：\n```markdown\nReview $ARGUMENTS (or the most recently discussed file if no argument is given).\n\nCheck for:\n1. Any bugs, errors, or logic problems\n2. Missing edge cases (empty input, null values, unexpected types)\n3. Readability — would a junior developer understand this in 6 months?\n4. Anything that should be there but isn't (error handling, comments)\n\nFormat: numbered list. For each issue: describe the problem,\nquote the relevant line, and suggest a fix.\nEnd with one sentence summarising the overall quality.\n```\n\n**第 3 步——创建一个 /summarize 命令：**\n创建 `.claude/commands/summarize.md`：\n```markdown\nSummarize the file $ARGUMENTS in exactly 3 bullet points.\n\nRules:\n- Each bullet must be one sentence\n- Focus on WHAT the file does, not HOW it does it\n- Use plain English that a non-developer could understand\n- If functions are present, name the most important one\n```\n\n**第 4 步——测试你的命令：**\n启动 Claude Code：\n```powershell\ncd Documents\\ai-course-projects\nclaude\n```\n\n测试每个命令：\n```\n/summarize exercises/about-me.html\n```\n```\n/review exercises/about-me.html\n```\n\n观察一下：你正在用一个简短的命令调用一段 30 个单词的提示词。输出之所以有条理，是因为提示词本身有条理。\n\n**第 5 步——创建一个用户级命令：**\n创建 `~/.claude/commands/explain.md`（你主目录下的 .claude 文件夹）：\n\n在 PowerShell 中：\n```powershell\nNew-Item -ItemType Directory -Force -Path ~/.claude/commands\n```\n\n然后创建 `~/.claude/commands/explain.md`：\n```markdown\nExplain $ARGUMENTS in plain English.\n\n1. One sentence: what is this FOR?\n2. Step-by-step: how it works\n3. Key design decisions: why was it written this way?\n4. What breaks if I change it?\n\nAssume the reader is competent but hasn't seen this code before.\n```\n\n**第 6 步——验证用户级命令有效：**\n不用重启 Claude Code，直接测试：\n```\n/explain exercises/about-me.html\n```\n这应该能用——用户级命令是立即可用的。\n\n**第 7 步——构建 PR 命令（可选，需要 git）：**\n用本课的 PR 描述模板创建 `.claude/commands/pr.md`。\n\n然后问 Claude Code：\n```\n/pr\n```\n它应该会运行 git 命令，并根据你最近的提交生成一份 PR 描述。\n\n**你构建出的东西：** 一个封装了你最佳提示词的个人命令库。在你继续学习这门课程的过程中，每当你写出一个能产出你想复用的结果的提示词，就把它加进这个库里。"
+    },
+    {
+      "type": "quiz",
+      "question": "你有一个在所有项目中都很好用的 `/review` 命令。你新建了一个项目，也想在那里用上同样的审查命令。最高效的做法是什么？",
+      "options": [
+        "每次都手动把 review.md 文件复制到新项目的 .claude/commands/ 文件夹里",
+        "把 review 命令放在 ~/.claude/commands/（用户级），这样它就会自动在每个项目中可用，无需复制",
+        "在每个新项目中从头重建 review 命令，以便为该代码库定制",
+        "斜杠命令不支持跨项目共享——你每次都得重新打一遍提示词"
+      ],
+      "correct": 1,
+      "explanation": "存放在 ~/.claude/commands/ 中的用户级命令，会在每个 Claude Code 会话中自动加载，无论你在哪个项目中——就和你的用户级 CLAUDE.md 一样。一个代表你通用代码审查标准的 /review 命令，就应该放在用户级。而项目专属的命令（比如运行该项目专属部署脚本的自定义 /deploy）应该放在项目级。大多数开发者会维护一个包含 5-10 个通用命令的小型用户级命令库，以及针对具体代码库定制的 2-5 个项目专属命令库。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A —— 第一个自定义斜杠命令",
+      "content": "构建并测试你的第一个自定义斜杠命令——一个可复用的工作流触发器。\n\n**第 1 步——检查斜杠命令目录：**\n```powershell\nmkdir -p .claude/commands\n```\n\n**第 2 步——创建一个简单的审查命令：**\n```powershell\nnew-item .claude/commands/review.md\n```\n\n**第 3 步——为 review.md 添加内容：**\n```markdown\n# Code Review\n\nPerform a thorough code review of the specified files. For each file:\n1. Check for logic errors and edge cases not handled\n2. Identify security vulnerabilities\n3. Note missing error handling\n4. Flag performance concerns\n5. List specific line-numbered improvements\n\nEnd with: priority order for addressing the issues found.\n```\n\n**第 4 步——在 Claude Code 中测试这个命令：**\n```\n/review [your filename]\n```\n\n**第 5 步——评估输出。** 它比你之前的审查更彻底吗？调整这个命令的提示词，直到它稳定地有用为止。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 构建你的自定义命令库",
+      "content": "为你最频繁的 Claude Code 任务创建一个命令库。\n\n**第 1 步——找出你最常见的 5 个 Claude Code 任务**——那些你几乎每次会话都会请求 Claude Code 做的事情。\n\n**第 2 步——为每个任务**，在 `.claude/commands/` 中编写一个自定义命令文件：\n\n可以创建的示例命令：\n- `review.md`——结构化代码审查（来自工作坊 A）\n- `document.md`——为所有未记录文档的函数生成文档字符串\n- `test.md`——为一个模块生成测试\n- `debug.md`——系统性的调试分析\n- `refactor.md`——识别并执行安全的重构\n\n**第 3 步——在每个命令中包含：**\n- 明确的目标\n- 具体的步骤或你想要的格式\n- 要检查或包含的内容\n- 不要做的事情\n\n**第 4 步——在项目中的真实代码上测试每个命令。**\n\n**第 5 步——必做的审查：** 问 Claude：*\"审查这些自定义命令。对每一个来说，缺少了哪些重要的指令，会让输出更可靠、更有用？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C —— 带参数的命令",
+      "content": "用参数让你的自定义命令更灵活。\n\n**第 1 步——在 `.claude/commands/analyse.md` 中创建一个带参数的命令：**\n```markdown\n# Analyse Code\n\nAnalyse the code at $ARGUMENTS.\n\nProvide:\n1. What this code does (1 paragraph)\n2. How it interacts with the rest of the project\n3. The 3 most important things someone maintaining this code should know\n4. Anything that looks potentially fragile or confusing\n\nBe specific — reference actual function names and line numbers.\n```\n\n**第 2 步——用参数测试：**\n```\n/analyse src/auth.py\n/analyse src/utils.py src/models.py\n```\n\n**第 3 步——留意 $ARGUMENTS 是如何被替换**成你在命令后面输入的内容的。\n\n**第 4 步——为一个你经常做的任务创建第二个带参数的命令。**\n\n**第 5 步——问 Claude：** *\"我还能用哪些技巧让自定义 Claude Code 命令更强大或更灵活？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 在团队中共享命令",
+      "content": "自定义命令可以与团队共享，让每个人都能受益于你的提示词工程成果。\n\n**第 1 步——把你的 .claude/commands/ 目录提交**到你的项目仓库：\n```powershell\ngit add .claude/commands/\ngit commit -m \"Add custom Claude Code commands for team use\"\n```\n\n**第 2 步——在 CLAUDE.md 中添加文档**，列出可用的命令以及各自的使用场景。\n\n**第 3 步——问 Claude：** *\"我想把这些自定义 Claude Code 命令分享给我的团队。我的文档里应该包含什么，才能让同事们有效地使用并贡献这个命令库？\"*\n\n**第 4 步——写一份简短的指南**（加进你的 CLAUDE.md 或 README），涵盖：\n- 有哪些自定义命令\n- 什么时候用哪个\n- 如何添加新命令\n- 如何反馈某个命令的问题\n\n**第 5 步——从同事的视角测试：** 在一个全新的 Claude Code 会话中打开这个项目，试试这些命令。它们容易被发现吗？能正常工作吗？"
+    },
+    {
+      "type": "quiz",
+      "question": "你创建了一个叫 `/deploy` 的自定义命令，用来运行生产环境的部署脚本。最重要的安全措施是什么？",
+      "options": [
+        "加一条注释写\"小心使用\"",
+        "在命令中加入明确的确认步骤，并对目标环境发出警告——生产环境部署永远不应该在没有人工确认的情况下自动运行",
+        "给命令文件加上密码保护",
+        "只在分支中包含这个命令，不放在 main 分支"
+      ],
+      "correct": 1,
+      "explanation": "像生产环境部署这样的高风险操作，需要在命令中内置明确的人工确认步骤。例如：\"在运行任何部署命令之前，先列出你将要运行的确切命令，并请求明确的确认。清楚说明这是针对预发布环境还是生产环境。\"目标是确保人类理解将会发生什么，并且能够阻止它。永远不要设计一个能不经检查点就自主执行不可逆生产操作的 AI 命令。"
+    },
+    {
+      "type": "quiz",
+      "question": "你写的一个自定义斜杠命令对 Python 文件效果很好，但对 JavaScript 文件产出的效果很差。最可能的原因是什么？",
+      "options": [
+        "自定义命令无法跨文件类型工作",
+        "命令的指令中使用了 Python 特有的语言或假设，这些内容不适用于 JavaScript",
+        "Claude Code 不支持 JavaScript 文件",
+        "针对 JavaScript 文件，命令文件需要放在不同的目录里"
+      ],
+      "correct": 1,
+      "explanation": "命令提示词往往隐含着关于语言或框架的假设。例如，\"检查是否正确使用了 Python 文档字符串\"就不适用于 JavaScript。要让一个命令做到语言无关，可以使用语言中立的措辞：用\"检查所有公共函数是否都有文档\"来代替\"检查是否有文档字符串\"。或者，也可以创建语言专属的命令：review-python.md、review-js.md，各自带有恰当的语言专属检查项。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成 7-7 课。** 你已经在项目级和用户级都创建了命令库，测试了 $ARGUMENTS 占位符，并拥有了代码审查、解释、测试、安全、文档、重构、PR 描述和站会更新的模板。**展望后续：** 本课程的 Part 20 会把自定义命令提升到新的高度——教你构建带有角色定义、多步骤序列、MCP 工具访问和子代理生成的完整 AI 技能。你在这里构建的命令，正是你将在那里构建的技能的基础。紧接着的下一课：钩子（hooks）——自动执行围绕 Claude 工作的各种操作。"
+    }
+  ],
+  "nextLesson": "7-8",
+  "prevLesson": "7-6"
+}

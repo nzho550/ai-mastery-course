@@ -1,0 +1,119 @@
+{
+  "id": "11-7",
+  "title": "流式响应（Streaming Responses）",
+  "part": 11,
+  "estimatedMinutes": 60,
+  "tags": [
+    "api",
+    "anthropic",
+    "streaming",
+    "javascript"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将理解缓冲式响应与流式响应之间的区别、知道分别该在什么场景使用它们，并且已经修改过自己的脚本，让 token 在生成的同时就实时流式输出。"
+    },
+    {
+      "type": "text",
+      "content": "## 缓冲式 vs 流式\n\n到目前为止，你在本课程中发出的每一次 AI 请求都使用的是**缓冲模式（buffered mode）**：你发送请求，等待整个响应生成完毕，然后一次性接收全部内容。\n\n对于较短的回答（50-100 个 token），这种方式感觉几乎是即时的。但对于较长的回答（500+ 个 token），会有明显的等待——2-5 秒钟什么都没有，然后所有文字突然一次性出现。\n\n**流式传输（Streaming）** 改变了内容的交付方式：Claude 每生成一个 token，就立刻发送它，而你的代码会实时接收并显示这些内容。用户会看到文字逐词出现——就像 Claude.ai 里那样。\n\n生成完整回答所需的总时长是一样的。但看到第一个字所需的时间要短得多，整体体验也会显得更快、更有生气。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**什么时候该用流式传输：**\n- 面向用户的工具（CLI、应用，任何有人在观看的场景）——始终使用\n- 回答可能会很长（500+ 个 token）时\n- 你想为一个较慢的操作展示进度时\n\n**什么时候不该用流式传输：**\n- 没有人观看输出的批处理任务\n- 你需要拿到完整回答之后才能做下一步操作时（例如解析 JSON 输出）\n- 延迟无关紧要的服务器到服务器调用"
+    },
+    {
+      "type": "text",
+      "content": "## Node.js 中的流式传输\n\nSDK 提供了一个 `.stream()` 方法，返回一个异步可迭代对象（async iterable）。你可以对它进行迭代，随着文本片段到达而接收它们："
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\nprocess.stdout.write('Claude: ');\n\nconst stream = client.messages.stream({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 500,\n  messages: [\n    {\n      role: 'user',\n      content: 'Tell me a very short story about a robot learning to paint.'\n    }\n  ]\n});\n\nfor await (const event of stream) {\n  if (\n    event.type === 'content_block_delta' &&\n    event.delta.type === 'text_delta'\n  ) {\n    process.stdout.write(event.delta.text);\n  }\n}\n\nprocess.stdout.write('\\n');\n\n// Get final message with usage stats\nconst finalMessage = await stream.finalMessage();\nconsole.log(`\\nTokens used: ${finalMessage.usage.input_tokens} in / ${finalMessage.usage.output_tokens} out`);"
+    },
+    {
+      "type": "text",
+      "content": "**每个部分的作用：**\n\n- `client.messages.stream({...})` ——发起一次流式请求（参数与 `messages.create` 相同）\n- `for await (const event of stream)` ——随着事件到达对其进行迭代\n- `event.type === 'content_block_delta'` ——只过滤出文本增量（text delta）事件（还有其他事件类型，比如 `message_start`、`message_delta` 等）\n- `process.stdout.write(event.delta.text)` ——立即写出这个文本片段，不换行（这样文字会在同一行不断累积出现）\n- `stream.finalMessage()` ——循环结束后，获取带有 usage 统计信息的完整消息对象"
+    },
+    {
+      "type": "text",
+      "content": "## Python 中的流式传输\n\nPython SDK 使用上下文管理器（context manager）："
+    },
+    {
+      "type": "code",
+      "language": "python",
+      "content": "import anthropic\nfrom dotenv import load_dotenv\n\nload_dotenv()\nclient = anthropic.Anthropic()\n\nprint(\"Claude: \", end=\"\", flush=True)\n\nwith client.messages.stream(\n    model=\"claude-haiku-4-5-20251001\",\n    max_tokens=500,\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": \"Tell me a very short story about a robot learning to paint.\"\n        }\n    ]\n) as stream:\n    for text in stream.text_stream:\n        print(text, end=\"\", flush=True)\n\nprint()  # newline at end\n\nfinal = stream.get_final_message()\nprint(f\"\\nTokens: {final.usage.input_tokens} in / {final.usage.output_tokens} out\")"
+    },
+    {
+      "type": "text",
+      "content": "Python SDK 的 `.text_stream` 属性是一个便捷的简写方式，它会自动过滤出文本增量事件，并直接产出（yield）文本字符串。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**流式传输协议中的事件类型：** 完整的流式事件序列是：`message_start` → `content_block_start` → 多个 `content_block_delta` 事件（每个 token 一个）→ `content_block_stop` → `message_delta`（最终的停止原因和 usage）→ `message_stop`。上面提到的 SDK 方法已经把这些细节都抽象封装好了——你不需要自己处理每一种事件类型。"
+    },
+    {
+      "type": "workshop",
+      "tag": "API",
+      "title": "为你的脚本添加流式传输",
+      "content": "修改你在第 11-5 课中写的 `hello-claude.js`（或 `.py`），让它流式输出响应。你将观察到输出呈现方式的差异。\n\n**第 1 步——创建流式版本**\n创建 `exercises/streaming-demo.js`，写入上面的 Node.js 流式代码。\n\n运行它：\n```powershell\nnode streaming-demo.js\n```\n观察文字逐词出现。\n\n**第 2 步——与缓冲式对比**\n现在创建 `exercises/buffered-demo.js`：\n```javascript\nimport Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\nconsole.log('Waiting for full response...');\n\nconst message = await client.messages.create({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 500,\n  messages: [{\n    role: 'user',\n    content: 'Tell me a very short story about a robot learning to paint.'\n  }]\n});\n\nconsole.log('Got response:');\nconsole.log(message.content[0].text);\n```\n\n运行它：`node buffered-demo.js`\n\n注意在任何输出出现之前的停顿，与流式版本立即开始输出形成对比。\n\n**第 3 步——用更长的提示词放大这种差异**\n把两个脚本中的提示词都改成：\n```\nWrite a 5-paragraph essay about the history of artificial intelligence.\n```\n现在缓冲版本会有明显的停顿。流式版本则会显得流畅自然。\n\n**需要记住的一点：** 对于任何有人在观看输出的工具——接下来你要构建的文本摘要工具、任何聊天界面、任何会生成文本的 CLI——都应该始终使用流式传输。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——初次体验流式响应",
+      "content": "体验流式传输，理解它何时真正重要。\n\n**第 1 步——发起一次非流式的 API 调用**，请求一段较长的回答（要求写一篇 500 字的文章）。留意文字出现之前的延迟。\n\n**第 2 步——用流式传输发起同样的调用：**\n```python\nwith client.messages.stream(\n    model=\"claude-haiku-4-5-20251001\",\n    max_tokens=1024,\n    messages=[{\"role\": \"user\", \"content\": \"Write a 500-word essay about the history of computing.\"}]\n) as stream:\n    for text in stream.text_stream:\n        print(text, end=\"\", flush=True)\nprint()  # newline at end\n```\n\n**第 3 步——比较用户体验。** 哪种感觉更灵敏？在多长的回答长度下，流式传输的优势才会变得明显？\n\n**第 4 步——问 Claude：** “流式传输在什么情况下对用户体验最重要？什么情况下它是不必要的开销？token 生成时间和 TTFB（首字节时间）与流式传输有什么关系？”\n\n**第 5 步——建立直觉：** 对于一个 10 个 token 的回答，流式传输值得吗？对于一个 500 个 token 的回答呢？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——构建一个流式聊天界面",
+      "content": "在终端中构建一个流式聊天界面。\n\n**第 1 步——让 Claude Code** 实现一个完整的流式聊天：\n```\nBuild a Python terminal chat application using the Anthropic SDK with:\n1. Streaming responses that print word-by-word\n2. Conversation history maintained across turns\n3. A typed indicator while the model is generating (\"Claude is thinking...\")\n4. Token usage displayed after each response\n5. A /clear command to reset conversation history\n6. A /exit or Ctrl+C to quit gracefully\n\nMake it feel polished like a real chat interface.\n```\n\n**第 2 步——用一次真实的对话**测试这个聊天工具。\n\n**第 3 步——故意问一个会生成长回答的问题。** 流式传输的体验感觉如何？\n\n**第 4 步——必做审阅：** 问 Claude：“审阅这个聊天实现。哪些边界情况可能出现 bug？什么情况会导致聊天意外崩溃？”\n\n**第 5 步——修复审阅中发现的至少一个问题。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——Web 应用中的流式传输",
+      "content": "理解如何在 Web 应用中实现流式传输。\n\n**第 1 步——问 Claude：** “API 流式传输在 Web 应用中是如何工作的？具体来说，如果我从后端调用 Anthropic API，并想把响应流式传输到前端浏览器，需要用到什么技术（Server-Sent Events、WebSockets 等）？”\n\n**第 2 步——比较两种主要方案：**\n| 方案 | 工作原理 | 最适合场景 |\n|---|---|---|\n| Server-Sent Events | 服务器向浏览器推送事件 | 单向流式传输，简单 |\n| WebSockets | 双向持久连接 | 实时双向通信 |\n\n**第 3 步——让 Claude Code** 生成一个简单的 FastAPI + SSE 流式接口：\n“Write a FastAPI endpoint that streams an Anthropic API response to the browser using Server-Sent Events.”\n\n**第 4 步——审阅这段代码。** 你是否理解流是如何从 Anthropic → 你的服务器 → 浏览器 这样一路传递的？\n\n**第 5 步——问：** “这种流式传输方案有哪些失败模式？如果用户在流传输过程中关闭了浏览器标签页，会发生什么？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——为你的 API 工具添加流式传输",
+      "content": "把你在第 11-5 课构建的 API 工具升级为使用流式传输。\n\n**第 1 步——拿出你在第 11-5 课工作坊 B 中构建的 CLI 工具。**\n\n**第 2 步——让 Claude Code 添加流式传输：**\n“Modify my [tool name] tool to stream the response. Show each word/chunk as it arrives instead of waiting for the full response. Add a --no-stream flag for cases where I want the full response at once.”\n\n**第 3 步——比较**有无流式传输时的体验。对于你这个工具的典型使用场景，流式传输是否带来了明显的改善？\n\n**第 4 步——添加进度提示：** 对于非常长的回答，添加一个随着 token 到达而实时更新的计数器：“Generating... [143 tokens]”\n\n**第 5 步——测试边界情况：** 如果你在流式传输过程中按下 Ctrl+C 中断，会发生什么？中断是否被优雅地处理了？"
+    },
+    {
+      "type": "quiz",
+      "question": "你在应用中实现了流式传输，但用户反映他们看到的是整个回答一次性出现的。最可能的原因是什么？",
+      "options": [
+        "Anthropic API 不再支持流式传输了",
+        "输出被缓冲了——你的 Web 服务器或代理在把流发送给客户端之前，把它先累积了起来；需要禁用缓冲或发送显式的刷新（flush）信号",
+        "流式传输需要付费方案",
+        "回答太短，无法从流式传输中获益"
+      ],
+      "correct": 1,
+      "explanation": "这是流式传输中最典型的失败原因：中间层的输出缓冲。NGINX、AWS 应用负载均衡器（ALB）、Gunicorn 等位于你的代码和用户浏览器之间的组件，出于效率考虑经常会缓冲响应。症状表现为：本地（直连）时流式传输正常，但在生产环境（经过代理）中却不正常。解决办法：设置合适的响应头（NGINX 中设为 `X-Accel-Buffering: no`，以及 `Transfer-Encoding: chunked`），并确保你的服务器在每个数据块后都执行 flush。"
+    },
+    {
+      "type": "quiz",
+      "question": "在你的应用正在流式传输响应的过程中，用户关闭了浏览器标签页。你的服务器应该怎么做？",
+      "options": [
+        "继续生成响应，并缓存起来等他们回来再用",
+        "检测到客户端断开连接，取消这次流式 API 调用，避免为一个没人会看到的响应浪费 token",
+        "完成响应生成，并把费用计入下一次请求",
+        "抛出错误并重启会话"
+      ],
+      "correct": 1,
+      "explanation": "当客户端在流传输中途断开连接时，正确的做法是终止这次 API 调用——你正在为一个没有接收者的响应持续付费生成 token。在使用 SSE 的 FastAPI 中，可以在异步生成器中检测客户端断开连接并跳出循环，这将导致 API 流被取消。这样既节省了 API 成本，也节省了计算资源。对于非流式调用，这一点不那么关键（因为调用已经完成），但对于长时间运行的流式传输来说，这是一个值得重视的成本考量。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 11-7 课。** 你现在可以逐 token 地流式传输响应——这正是每一个专业 AI 工具交付输出的方式。接下来：你将综合运用第 11-1 到 11-7 课的所有内容，构建一个完整、可用的 CLI 工具。"
+    }
+  ],
+  "nextLesson": "11-8",
+  "prevLesson": "11-6"
+}

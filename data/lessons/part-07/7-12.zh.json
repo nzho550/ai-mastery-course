@@ -1,0 +1,120 @@
+{
+  "id": "7-12",
+  "title": "Claude Code 设置深入解析",
+  "part": 7,
+  "estimatedMinutes": 65,
+  "tags": [
+    "claude-code",
+    "settings-json",
+    "configuration",
+    "model",
+    "api-key"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将理解完整的 `settings.json` 结构，知道项目级设置与用户级设置之间的区别，并拥有一份可用的配置，设定了你的模型偏好和权限规则。"
+    },
+    {
+      "type": "text",
+      "content": "## 两个设置文件\n\nClaude Code 有两个设置文件，与 CLAUDE.md 的层级结构类似：\n\n**项目级：`.claude/settings.json`**\n位于你项目的 `.claude/` 文件夹内。只适用于这个项目。你在整个第 7 部分中一直在搭建这个文件——它已经包含了你的 `hooks` 和 `permissions` 部分。\n\n**用户级：`~/.claude/settings.json`**\n位于你主目录的 `.claude/` 文件夹中（在 Windows 上是 `C:\\Users\\YourName\\.claude\\settings.json`）。适用于所有项目中的所有 Claude Code 会话。适合放模型偏好、API 配置，以及你希望在所有地方都生效的默认设置。\n\n当两个文件都存在时，它们会被合并。对于同时出现在两个文件中的任何键，项目级设置优先于用户级设置。"
+    },
+    {
+      "type": "text",
+      "content": "## 需要了解的关键设置\n\n**`model`**\n指定使用哪个 Claude 模型。如果未设置，Claude Code 会使用其默认模型（通常是最新的 Sonnet）。如果你出于成本、速度或能力方面的考虑想使用特定模型，请显式设置它。\n\n**`allowedTools` / `deniedTools`**\n另一种权限语法（较旧——建议优先使用第 7-10 课中的 `permissions.allow` 和 `permissions.deny`，但两者都可以用）。\n\n**`hooks`**\n第 7-8 课中的钩子配置。\n\n**`permissions`**\n第 7-10 课中的允许/拒绝配置。\n\n**`env`**\n为 Claude Code 会话注入的环境变量。用它来设置 `ANTHROPIC_API_KEY`，或你的钩子、工具需要的任何其他环境变量。\n\n**`mcpServers`**\nMCP 服务器配置（在第 8 部分完整介绍）。定义 Claude 可以连接到哪些外部工具。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**如果 `settings.json` 位于一个 git 仓库中，绝不要把你的 API 密钥直接放进去。** 该文件会被提交，密钥将永远留在你的版本历史中（即使之后删除也是如此）。请改用环境变量：在启动 Claude 之前，在 PowerShell 中设置 `ANTHROPIC_API_KEY`，或者使用一个已被列入 `.gitignore` 的 `.env` 文件。"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"model\": \"claude-sonnet-4-6\",\n\n  \"permissions\": {\n    \"allow\": [\n      \"Read(**)\",\n      \"Write(exercises/**)\",\n      \"Write(notes/**)\",\n      \"Write(.claude/**)\",\n      \"Bash(echo *)\",\n      \"Bash(ls *)\",\n      \"Bash(node *)\",\n      \"Bash(npm run *)\"\n    ],\n    \"deny\": [\n      \"Bash(rm *)\",\n      \"Bash(del *)\",\n      \"Bash(rmdir *)\",\n      \"Write(.env)\",\n      \"Write(**/*.env)\"\n    ]\n  },\n\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude edited a file\"\n          }\n        ]\n      }\n    ]\n  },\n\n  \"env\": {\n    \"NODE_ENV\": \"development\"\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "## 设置模型\n\n`model` 键接受一个 Claude 模型 ID。截至 2026 年，当前生产环境中的模型有：\n\n- `claude-fable-5`——顶级模型（Mythos 级别），100 万上下文窗口，12.8 万输出；最适合最苛刻的多步骤任务；每 100 万 token 10/50 美元\n- `claude-opus-4-8`——旗舰主力模型，SWE-bench Verified 得分 84%，具备可调节推理强度的自适应思考；每 100 万 token 5/25 美元\n- `claude-sonnet-4-6`——性价比最高，SWE-bench Verified 得分 79.6%，推荐用于大多数开发工作；每 100 万 token 3/15 美元\n- `claude-haiku-4-5-20251001`——最快（97 tokens/秒）且最经济；每 100 万 token 1/5 美元\n\n对于日常开发工作，Sonnet 通常是最佳平衡点。对于复杂的架构决策或棘手的调试，Opus 4.8 是首选。将 Fable 5 留给最苛刻的长上下文或推理密集型任务。对于重复性任务（生成样板代码、总结大量文件），Haiku 能把成本控制得很低。\n\n你可以在 Claude Code 提示符中使用 `/model` 命令在会话中随时切换模型。"
+    },
+    {
+      "type": "text",
+      "content": "## API 密钥配置\n\nClaude Code 需要一个 Anthropic API 密钥才能运行。提供密钥有三种方式，按优先顺序排列：\n\n**1. 环境变量（推荐用于开发）**\n在启动 Claude 之前，在 PowerShell 中设置它：\n```\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\nclaude\n```\n这能让密钥不出现在任何文件中，并在你关闭 PowerShell 后自动消失。\n\n**2. 在 `settings.json` 的 `env` 块中（仅适用于非 git 项目）**\n如果你的 settings.json 没有被 git 追踪，可以把它放进 `env` 块：\n```json\n{\n  \"env\": {\n    \"ANTHROPIC_API_KEY\": \"sk-ant-your-key-here\"\n  }\n}\n```\n\n**3. 首次启动认证**\nClaude Code 会在你首次启动时通过浏览器完成认证后存储一个令牌。这就是第 7-2 课中的令牌——它会跨会话保留，是个人开发中最简便的选择。"
+    },
+    {
+      "type": "code",
+      "language": "powershell",
+      "content": "# Set API key for the current PowerShell session (disappears on close)\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\n\n# Verify it's set\necho $env:ANTHROPIC_API_KEY\n\n# Then launch Claude Code\nclaude"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**在哪里获取你的 API 密钥：** 登录 console.anthropic.com → 点击你的头像 → API Keys → Create Key。立即复制这个密钥——它只会显示一次。把它存放在密码管理器中，而不是文本文件里。"
+    },
+    {
+      "type": "text",
+      "content": "## Claude Code 的扩展平台（2026）\n\nClaude Code 已经远远超越了一个带钩子的 CLI 工具。这些功能显著扩展了它的可能性：\n\n**`/rewind`——从 `/clear` 之前恢复**\n如果你清除了一次会话却又后悔了，`/rewind` 可以恢复到清除之前的对话状态。这对于从意外清除中恢复至关重要。\n\n**`/effort xhigh`——Opus 4.8 的最大推理强度**\n在处理真正困难的问题时（复杂架构、棘手的 bug、安全审计），在提示词之前使用 `/effort xhigh` 来调用 Opus 4.8 的最大推理能力。速度更慢，但更加彻底。\n\n**自动模式——智能权限处理**\n研究预览阶段：Claude Code 会为大多数常规操作自动处理权限提示。硬性拒绝规则仍然会无条件阻止特定操作。这减少了交互式代理会话的摩擦，同时保持安全性。\n\n**Managed Agents——按计划运行的定期任务**\n公开测试版：创建按计划（cron 风格）运行的代理，环境变量存储在保险库中。无需服务器基础设施。示例：每天凌晨 2 点运行的代码质量扫描，并将结果发布到 Slack。通过 `claude agents create` 访问。\n\n**Artifacts——可分享的实时输出**\n会话中的工作（数据可视化、分析、报告）可以发布为可分享的实时网页，并自动记录版本历史。团队和客户无需自己运行 Claude Code 就能查看输出。\n\n**`/ultrareview`——基于集群的代码审查**\n研究预览阶段：启动一支基于云端的代理集群，系统性地在你的代码库中搜寻 bug，并将结果报告回你的 CLI。在重大发布前或大规模重构后特别有用。\n\n**`claude mcp login/logout`——从 shell 进行认证**\n对于支持它的 MCP 服务器，可以直接从命令行进行基于 OAuth 的认证——无需手动完成浏览器流程。\n\n**Windows：原生 PowerShell**\n在 Windows 上，Claude Code 现在默认使用 PowerShell——不再需要 Git Bash。这消除了 Windows 用户常见的一个设置障碍。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "配置你完整的设置",
+      "content": "把第 7 部分的所有内容整合成一份完整的 `settings.json`，然后进行测试。\n\n**第 1 步——在 VS Code 中打开 `.claude/settings.json`：**\n这个文件应该已经包含了你在第 7-8 和 7-10 课中设置的钩子和权限。\n\n**第 2 步——添加模型偏好：**\n在你的 JSON 顶层添加一个 `model` 字段：\n```json\n{\n  \"model\": \"claude-sonnet-4-6\",\n  \"permissions\": { ... },\n  \"hooks\": { ... }\n}\n```\n\n**第 3 步——添加一个环境变量：**\n添加一个非敏感的环境变量来验证 `env` 块能正常工作：\n```json\n{\n  \"model\": \"claude-sonnet-4-6\",\n  \"env\": {\n    \"CLAUDE_PROJECT\": \"ai-course-projects\"\n  },\n  \"permissions\": { ... },\n  \"hooks\": { ... }\n}\n```\n\n**第 4 步——验证 JSON：**\nJSON 必须语法正确，否则 Claude Code 将无法加载设置。在 VS Code 中：\n- 查找文件中的红色下划线——那些是 JSON 语法错误\n- 检查每个 `{` 是否都有对应的 `}`，每个 `[` 是否都有 `]`，以及对象中除最后一个属性之外的每个属性后面是否都有逗号\n\n**第 5 步——测试模型设置：**\n启动 Claude Code：\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n输入 `/model` 查看 Claude Code 当前使用的模型。它应该反映你在 settings.json 中设置的模型。\n\n**第 6 步——创建用户级 settings.json：**\n对于应该适用于你所有项目的设置，创建 `~/.claude/settings.json`：\n```json\n{\n  \"model\": \"claude-sonnet-4-6\",\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(rm -rf *)\",\n      \"Bash(del /s *)\"\n    ]\n  }\n}\n```\n这给你提供了一个全局的安全网——即使某个项目的 `settings.json` 没有拒绝破坏性命令，你的用户级设置也会拒绝。\n\n**你在第 7 部分搭建了什么：** 一套完整的 Claude Code 设置：CLAUDE.md（项目 + 用户）、自定义斜杠命令、钩子、权限，以及模型配置。这是每一位专业 Claude Code 用户工作的基础。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——设置探索",
+      "content": "系统性地探索 Claude Code 的配置选项。\n\n**第 1 步——查看所有设置：**\n```powershell\nclaude config\n```\n或者问 Claude Code：“列出你所有的配置设置及其当前值。”\n\n**第 2 步——探索每个设置类别：**\n- 模型选择\n- 上下文窗口大小\n- 权限模式\n- 输出格式\n- Hooks\n\n**第 3 步——问 Claude Code：** “对于一个主要从事 [你的工作类型] 的开发者来说，最有影响力的 5 个设置是什么？每一个应该设置成什么，为什么？”\n\n**第 4 步——更改一个设置**并测试其中的差异。\n\n**第 5 步——问 Claude Code：** “你会建议我不要更改哪些默认设置？哪些默认值是出于重要原因存在的？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——为你的工作流程优化 Claude Code",
+      "content": "调整 Claude Code 的设置，为你的具体工作最大化价值。\n\n**第 1 步——向 Claude.ai 描述你的工作流程：**\n```\n我主要用 Claude Code 做以下任务：[列出你最常见的 3-4 个用途]。\n我的项目类型是：[语言、框架、复杂度]。\n我的团队规模是：[个人 / 小团队 / 大团队]。\n我的风险承受度是：[高 = 个人项目 / 低 = 生产系统]。\n\n针对我的情况，推荐具体的 Claude Code 设置。对于每一项设置，\n告诉我应该改成什么，以及为什么。\n```\n\n**第 2 步——应用推荐的设置。**\n\n**第 3 步——用新设置运行一次典型的工作会话。** 感觉更好了吗？\n\n**第 4 步——强制设置审查：** 问 Claude：*“你推荐的设置中有没有可能导致意外问题的？你改动的每个设置最坏情况是什么？”*\n\n**第 5 步——将你的设置记录**在一份 `~/.claude-settings-notes.md` 文件中，方便未来参考。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——成本优化",
+      "content": "Claude Code 的 API 使用是需要花钱的。这个工作坊在不牺牲质量的前提下优化你的使用方式。\n\n**第 1 步——理解 Claude Code 的成本驱动因素：**\n- 发送的 token（输入）：它读取的每个文件都会消耗 token\n- 接收的 token（输出）：每次回答都会消耗 token\n- 模型选择：Opus 的成本大约是 Sonnet 的 5 倍；Haiku 的成本大约是 Sonnet 的 1/20\n\n**第 2 步——问 Claude：** *“在不明显降低质量的前提下，有哪些策略可以降低我的 Claude Code API 成本？针对每种策略，估算成本降低幅度和对质量的影响。”*\n\n**第 3 步——找出你的高成本模式：** Claude Code 什么时候会不必要地读取大量大文件？什么时候会在更短的回答就足够时生成很长的回答？\n\n**第 4 步——应用降低成本的策略：**\n- 对简单任务（文件重命名、基础格式化）使用 Haiku 模型\n- 对大多数开发任务使用 Sonnet\n- 把 Opus 留给复杂的架构决策\n- 使用简洁的 CLAUDE.md（不要事无巨细——每一行都会增加上下文）\n\n**第 5 步——根据典型使用情况估算你的月度成本。** 这是否被生产力的提升所证明是值得的？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——完整的 Claude Code 设置审查",
+      "content": "对你整个 Claude Code 设置进行全面审查，并产出一份“最佳实践”配置。\n\n**第 1 步——盘点你当前的设置：**\n- CLAUDE.md：里面有什么？\n- 自定义命令：你有哪些？\n- Hooks：配置了哪些钩子？\n- 记忆：存储了什么？\n- 设置：配置了什么？\n\n**第 2 步——请 Claude 审计你的设置：**\n```\n这是我完整的 Claude Code 设置：[描述第 1 步中的所有内容]\n\n进行一次全面审计：\n1. 什么运行得好？\n2. 缺少什么会显著改善我的工作流程？\n3. 有什么是多余或不必要的？\n4. 有没有我没注意到的配置冲突或问题？\n5. 如果你要重新搭建这一切，你会先改什么？\n```\n\n**第 3 步——应用审计中排名前 3 的改进建议。**\n\n**第 4 步——将你的配置导出**到一个备份位置（云存储、单独的仓库）。\n\n**第 5 步——设置一个日历提醒**，在 60 天后审查并更新你的 Claude Code 设置。"
+    },
+    {
+      "type": "quiz",
+      "question": "你注意到 Claude Code 在回答哪怕是简单问题之前，都会读取项目中全部 50 个文件。这导致响应变慢、成本升高。你应该如何解决这个问题？",
+      "options": [
+        "接受现状——Claude Code 需要完整上下文才能可靠工作",
+        "完善 CLAUDE.md，告诉 Claude Code 哪些文件对哪类任务是重要的，并使用 @file 引用来引导它读取特定文件，而不是读取所有内容",
+        "使用一个读取文件更少的更小模型",
+        "减少项目中的文件数量"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code 的上下文效率在很大程度上取决于你如何引导它。在 CLAUDE.md 中加入：“对于认证相关的问题，阅读 auth.py。对于数据库相关的问题，阅读 models.py。只有在这些文件中找不到答案时才读取其他文件。”另外，在你的请求中使用具体的引用：“只看 auth.py，登录函数做了什么？”这能减少不必要的文件读取，同时在重要之处保持准确性。"
+    },
+    {
+      "type": "quiz",
+      "question": "你希望在 Claude Code 工作流程中，简单任务使用 Claude Haiku，复杂任务使用 Claude Sonnet。你该如何实现？",
+      "options": [
+        "Claude Code 会自动选择合适的模型",
+        "把 Claude Sonnet 设为默认模型，并在提示词中为简单任务指定 Haiku：“使用速度最快的可用模型，重命名这些文件”",
+        "在同一个 Claude Code 安装中无法使用多个模型",
+        "为不同的模型配置创建两个单独的 Claude Code 安装"
+      ],
+      "correct": 1,
+      "explanation": "你可以配置 Claude Code 的默认模型，并在每次会话或每次请求时覆盖它。把 Sonnet 设为默认（质量与成本的良好平衡）。对于速度比深度推理更重要的任务（重命名、格式化、生成样板代码），你可以在指令中指定一个更轻量的模型。有些任务确实需要 Opus 更深层的推理能力（复杂架构决策、棘手调试）；大多数常规编码任务用 Sonnet 就足够了。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 7-12 课，以及整个第 7 部分。** 你现在拥有一套可用于生产的 Claude Code 设置：CLAUDE.md 提供上下文、自定义命令支持你的工作流程、钩子实现自动化、权限保障安全，以及配置好你偏好模型的设置（包括以 Fable 5 为顶级的全新四层阵容）。你也了解了 2026 年的平台扩展——用于计划任务的 Managed Agents、用于可分享输出的 Artifacts、用于会话恢复的 /rewind，以及用于最大推理强度的 /effort xhigh。第 8 部分将通过 MCP 服务器进一步扩展 Claude Code——把它连接到 Gmail、GitHub、你的浏览器等等。"
+    }
+  ],
+  "nextLesson": "7-13",
+  "prevLesson": "7-11"
+}

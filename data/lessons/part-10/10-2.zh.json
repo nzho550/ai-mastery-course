@@ -1,0 +1,96 @@
+{
+  "id": "10-2",
+  "title": "n8n——开源 AI 自动化工具",
+  "part": 10,
+  "estimatedMinutes": 65,
+  "tags": [
+    "automation",
+    "n8n",
+    "no-code",
+    "ai-workflows"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 学习目标\n\n学完本课后，你将拥有三个真实的、在云端运行的 n8n 自动化——每天为你实实在在地工作，而且完全免费。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 n8n？\n\nn8n（读作 \"n-eight-n\"）是一款开源的工作流自动化工具。它让你可以用可视化的拖拽式画布来连接应用、加入 AI 处理步骤——大多数工作流都不需要写代码。\n\nn8n 的特别之处：\n- **免费且开源**——核心产品完全不收费\n- **可自托管**——你可以在自己的服务器上运行，完全掌控隐私\n- **云端选项**——n8n.io 提供托管的云版本，带免费额度\n- **原生 AI 节点**——对 Claude、OpenAI 等 LLM 提供一流支持\n- **需要时可以写代码**——遇到复杂逻辑，可以插入 JavaScript 代码节点\n\n本课你将使用 **n8n Cloud**（app.n8n.cloud）——无需安装。免费额度足够支撑你完成本课要构建的所有内容。"
+    },
+    {
+      "type": "text",
+      "content": "## 可视化画布\n\n每个 n8n 工作流都存在于一块画布上。画布由**节点（nodes）**和连接它们的**箭头（称为 edges）**组成。\n\n每个节点就是一个步骤：\n- **触发器节点（Trigger nodes）**启动工作流（计划触发器、Webhook、Gmail 触发器等）\n- **动作节点（Action nodes）**在应用中执行某个操作（发送邮件、添加表格行、发布到 Slack）\n- **AI 节点**用 LLM 处理文本（AI Agent、LLM Chain、Summarize 等）\n- **代码节点**让你编写 JavaScript 来实现自定义逻辑\n- **HTTP 请求节点**可以调用任何没有专用节点的 API\n\n连接节点的方法：把鼠标悬停在一个节点的输出点上，拖动到下一个节点的输入点。你画出的箭头就是它们之间流动的数据。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**AI Agent 节点**是你最常用的节点。它接收文本输入，把它连同你写的系统提示词一起发送给某个模型（Claude、OpenAI 等），再输出模型的回复。一个节点就能搞定整个 AI 步骤。"
+    },
+    {
+      "type": "text",
+      "content": "## 成果标准\n\n完成这个工作坊后，你会有三个正式投入运行的自动化——不是演示品，而是在你做其他事情的时候，在后台真正工作的工作流。\n\n这三个自动化都使用 n8n Cloud 的免费额度，都按计划运行，都用一个 AI 步骤在交付结果前处理数据。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "构建 3 个真实的 n8n 自动化",
+      "content": "**准备工作：注册 n8n Cloud**\n1. 前往 app.n8n.cloud/register\n2. 创建一个免费账户\n3. 你的工作区会加载出一块空白画布\n\n---\n\n**自动化 1 —— 每日 AI 新闻摘要（15 分钟）**\n\n这个工作流每天早上获取科技新闻，让 Claude 总结出热门文章，并把摘要邮件发给你。\n\n流水线：`计划触发器（每天 8 点）` → `HTTP 请求（获取 RSS 订阅源）` → `AI Agent（总结前 5 条新闻）` → `Gmail（把摘要发给自己）`\n\n构建步骤：\n1. 在画布上点击 **New workflow（新建工作流）**\n2. 添加一个 **Schedule Trigger（计划触发器）** 节点——设置为每天早上 8:00 运行\n3. 添加一个 **HTTP Request（HTTP 请求）** 节点：\n   - URL：`https://feeds.feedburner.com/TechCrunch`（或使用 `https://hnrss.org/frontpage` 获取 Hacker News）\n   - 方法：GET\n   - 响应格式：String\n4. 添加一个 **AI Agent** 节点：\n   - 连接你的 Claude 或 OpenAI 凭据（节点会提示你添加）\n   - 系统提示词：`You are a tech news editor. Given an RSS feed, extract the top 5 most interesting stories. For each story: title, one-sentence summary, and why it matters. Flag anything AI-related with a star.`\n   - 把 HTTP Request 的输出连接到 AI Agent 的输入\n5. 添加一个 **Gmail** 节点：\n   - 操作：发送邮件\n   - 收件人：你自己的邮箱地址\n   - 主题：`Your Daily Tech Digest — {{$now.format('MMMM D')}}`\n   - 正文：连接到 AI Agent 的输出\n6. 点击 **Test workflow（测试工作流）**——手动运行一次，验证是否正常工作\n7. 点击 **Activate（激活）**——工作流现在每天早上 8 点都会自动运行\n\n**验证：** 激活后一分钟内检查你的收件箱——刚才的手动测试应该已经发出了一封邮件。\n\n---\n\n**自动化 2 —— GitHub 星标追踪器（20 分钟）**\n\n这个工作流每周检查你的 GitHub 星标，找出过去 7 天内你标星的仓库，让 Claude 解释每一个，然后把摘要邮件发给你。\n\n流水线：`计划触发器（每周一 9 点）` → `HTTP 请求（GitHub 星标仓库）` → `代码节点（按日期过滤）` → `AI Agent（解释每个仓库）` → `Gmail（每周摘要）`\n\n> **API 说明：** GitHub 的星标仓库接口返回的是你所有的星标，而不仅仅是最近的。代码节点负责按日期过滤。\n\n构建步骤：\n1. 新建工作流 → **计划触发器**：每周一早上 9:00\n2. **HTTP Request** 节点：\n   - URL：`https://api.github.com/users/YOUR_GITHUB_USERNAME/starred`\n   - 方法：GET\n   - 添加请求头：`Accept: application/vnd.github.star+json`（这样响应中会包含 `starred_at` 时间戳）\n3. **Code** 节点（JavaScript）：\n```javascript\nconst sevenDaysAgo = new Date();\nsevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);\n\nconst recentStars = $input.all()\n  .flatMap(item => item.json)\n  .filter(repo => {\n    const starredAt = new Date(repo.starred_at);\n    return starredAt >= sevenDaysAgo;\n  });\n\nreturn recentStars.map(repo => ({ json: repo }));\n```\n4. **AI Agent** 节点：\n   - 提示词：`Here is a GitHub repository a developer just starred. Explain in 2-3 sentences: what it does, who it's for, and one reason it might be interesting. Repository data: {{$json}}`\n5. **Gmail** 节点：发送一份包含所有 AI 解释内容的每周摘要\n6. 激活\n\n---\n\n**自动化 3 —— 会议准备简报（25 分钟）**\n\n这个工作流在每个工作日早上 7:30 运行，检查你 Google 日历当天的会议，并给你发一份准备简报邮件。\n\n流水线：`计划触发器（工作日 7:30）` → `Google Calendar（获取当天日程）` → `AI Agent（为每场会议生成准备问题）` → `Gmail（8 点前发送简报）`\n\n构建步骤：\n1. 新建工作流 → **计划触发器**：工作日早上 7:30\n2. **Google Calendar** 节点：\n   - 操作：Get many events（获取多个事件）\n   - 日历：你的主日历\n   - 起始时间：今天 00:00\n   - 结束时间：今天 23:59\n3. **AI Agent** 节点：\n   - 提示词：`I have the following meeting today: {{$json.summary}} at {{$json.start.dateTime}}. Description: {{$json.description}}. Generate: 3 preparation questions I should think about before this meeting, and any likely action items I should be ready to discuss.`\n4. **Gmail** 节点：把简报发给自己，主题为 `Meeting Prep — {{$now.format('dddd MMMM D')}}`\n5. 激活\n\n---\n\n**三个都激活之后：**\n在你的笔记文件中记录这些工作流：每个做什么、什么时候运行、需要修改时该怎么改。现在你有了一个 24 小时运转的私人 AI 助理，而且是免费的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A — n8n 安装与第一个工作流",
+      "content": "让 n8n 运行起来，并执行你的第一个工作流。\n\n**第 1 步——安装 n8n：**\n```powershell\nnpx n8n\n```\n或者通过 Docker：`docker run -it --rm --name n8n -p 5678:5678 n8nio/n8n`\n\n**第 2 步——打开 n8n**，访问 http://localhost:5678 并创建一个账户。\n\n**第 3 步——创建你的第一个工作流：**\n- 添加一个 **Schedule Trigger（计划触发器）** 节点（测试期间设为每分钟运行一次）\n- 添加一个 **Set** 节点，创建一个变量 `message = \"Hello from n8n at {{$now}}\"`\n- 添加一个 **No Operation** 节点用来查看输出\n- 按顺序把它们连接起来\n\n**第 4 步——手动执行**这个工作流，并在执行日志中验证输出。\n\n**第 5 步——询问 Claude：** *\"我正在学习 n8n。最重要的、需要先弄懂的 5 种节点类型是什么？对每一种，描述它的作用以及一个常见的使用场景。\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — 用 AI 构建一个真实的 n8n 工作流",
+      "content": "借助 AI 的帮助，构建一个真正有用的 n8n 工作流。\n\n**第 1 步——从第 10-1 课的工作坊 D 中，选择你的自动化蓝图。**\n\n**第 2 步——请 Claude** 帮你设计这个 n8n 工作流：\n```\nI want to build this workflow in n8n: [describe your automation].\n\nHelp me:\n1. Which n8n nodes should I use for each step?\n2. What should the workflow look like structurally?\n3. For any step involving AI processing, how do I use the OpenAI or HTTP Request node to call the Anthropic API?\n4. What are the common pitfalls for this type of workflow?\n```\n\n**第 3 步——按照 Claude 的指导**在 n8n 中构建这个工作流。\n\n**第 4 步——用真实数据测试。** 它是否按预期工作？\n\n**第 5 步——强制审查环节：** 询问 Claude：*\"审查一下我构建的这个 n8n 工作流 [描述它]。哪些故障模式我还没处理？当 [某个具体 API] 宕机或返回错误时会发生什么？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C — n8n 错误处理",
+      "content": "为你的 n8n 工作流添加健壮的错误处理。\n\n**第 1 步——询问 Claude：** *\"n8n 工作流在生产环境中最常见的失败方式有哪些？针对每一种失败模式，n8n 的错误处理方式是什么？\"*\n\n**第 2 步——找出**你在工作坊 B 中构建的工作流里的故障点。\n\n**第 3 步——为每个关键节点添加错误处理：**\n- 添加一个 **Error Trigger** 工作流，在任何工作流失败时运行\n- 为 HTTP Request 节点添加重试逻辑\n- 添加条件节点来处理空值/null 响应\n- 在失败时添加通知步骤（邮件或 Slack）\n\n**第 4 步——测试错误处理**：故意破坏工作流的一部分（使用错误的 API 密钥或 URL），验证错误通知是否触发。\n\n**第 5 步——询问 Claude：** *\"对于一个生产环境的 n8n 工作流，除了错误通知之外，我还应该设置哪些监控和告警？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — n8n + AI 处理流水线",
+      "content": "构建一个通过 Anthropic API 包含 AI 文本处理的 n8n 工作流。\n\n**第 1 步——选择一个使用场景**，让 AI 处理在工作流中间创造价值：\n- 按主题分类收到的邮件\n- 在保存到 Notion 之前总结长文档\n- 从非结构化文本中提取结构化数据\n- 根据输入数据生成个性化内容\n\n**第 2 步——请 Claude Code 生成 Anthropic API 调用配置：**\n```\nGenerate an n8n HTTP Request node configuration to call the Anthropic API.\nEndpoint: https://api.anthropic.com/v1/messages\nModel: claude-haiku-4-5-20251001\nTask: [describe what you want the AI to do with each input]\nThe input comes from: [previous node output]\n```\n\n**第 3 步——构建**包含 AI 处理步骤的工作流。\n\n**第 4 步——用多样化的输入测试。** AI 是否始终能产出正确的输出格式？\n\n**第 5 步——添加输出校验：** 如果 AI 输出不符合预期格式，就路由到一个兜底分支。"
+    },
+    {
+      "type": "quiz",
+      "question": "你构建了一个用 AI 处理收到邮件的 n8n 工作流。它在测试中运行良好，但在生产环境中偶尔会失败。最可能的原因是什么？",
+      "options": [
+        "n8n 不是可用于生产环境的软件",
+        "现实世界的输入比测试输入更多样化——工作流遇到了测试中没有覆盖到的边缘情况（空字段、异常字符、意外的邮件格式）",
+        "AI 模型的行为会随时间发生变化",
+        "n8n 工作流会在 30 天后过期"
+      ],
+      "correct": 1,
+      "explanation": "自动化从测试进入生产环境后最常见的失败原因：真实数据比测试数据更混乱。你的测试邮件格式规整；生产环境中的邮件可能有空的主题行、异常的字符编码、超长的正文、只有附件没有正文的消息，或是你工作流没有预料到的格式。解决办法：上线前用多样化的真实数据样本进行测试，并为工作流读取的每一个字段构建防御性处理。"
+    },
+    {
+      "type": "quiz",
+      "question": "一个 n8n 工作流会根据 AI 对收到消息的分类结果自动发送回复邮件。最重要的安全机制是什么？",
+      "options": [
+        "限速，防止发送过多邮件",
+        "为任何 AI 分类置信度低于 90% 的消息，或任何包含个人承诺或敏感内容的回复，设置人工审核队列",
+        "只在工作时间处理邮件",
+        "记录所有 AI 分类结果供后续审查"
+      ],
+      "correct": 1,
+      "explanation": "以你或你所在组织的名义自动发送的回复会带来真实的后果。关键的安全机制是：找出自动化可能给出错误回复的情形，并将这些情况路由给人工审核。低置信度分类是一个信号；回复内容是另一个信号——任何包含承诺（安排会议、批准请求、提供报价）的自动回复，都应该先经过人工批准。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 10-2 课。** 三个真实的自动化正在后台运行。你的收件箱每天都在变得更聪明——而且你完全免费实现了它，几乎不用写代码（只写了一个 JavaScript 过滤器）。接下来：Zapier 处理同样问题的方式。"
+    }
+  ],
+  "nextLesson": "10-3",
+  "prevLesson": "10-1"
+}

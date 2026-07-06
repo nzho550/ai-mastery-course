@@ -1,0 +1,79 @@
+{
+  "id": "20-3",
+  "title": "邮件智能套件——构建 3 个邮件技能",
+  "part": 20,
+  "estimatedMinutes": 75,
+  "tags": ["skills", "email", "gmail", "mcp", "productivity", "build", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将构建什么\n\n学完本课后，你会拥有三个永久保存的邮件技能：\n\n1. **`/email-sort`** ——读取你的收件箱，自动把邮件分类到不同的行动类别中\n2. **`/email-report`** ——每周邮件分析报告：邮件量、主要发件人、哪些邮件需要回复\n3. **`/email-draft $ARGUMENTS`** ——先读懂线程上下文，再起草回复的智能技能\n\n这些都不是花架子演示。学完本课后，你会在每周一早上运行 `/email-sort`，每周五运行 `/email-report`，把它们变成你实际工作流程的一部分。这些技能保存在你自己的电脑上，处理你真实的收件箱，每周为你节省 30 到 45 分钟。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**前置条件：** 必须已连接 Gmail MCP。在 Claude Code 中输入 `/mcp` 检查——应该能看到 `gmail` 或 `claude_ai_Gmail` 显示为已连接。如果没有，请先完成第 8-11 课，设置好 Gmail MCP。"
+    },
+    {
+      "type": "text",
+      "content": "## 技能 1：/email-sort ——智能收件箱分类\n\n`/email-sort` 技能会读取你的收件箱，对每一封未读邮件进行分类，打上 Gmail 标签，并生成一份分诊报告。第一次运行时你会觉得这简直是魔法——但其实它只是一个设计精良、调用了 Gmail MCP 工具的技能而已。\n\n**它会做什么：**\n- 统计未读邮件数量\n- 搜索需要处理的邮件（直接提问、请求、有截止日期的邮件）\n- 识别你正在等待回复的邮件（你最后一次发送消息的线程）\n- 找出可以归档的新闻通讯和批量邮件\n- 应用 Gmail 标签：`TODO`、`Waiting`、`Newsletter`、`FYI`\n- 生成一份简短的分诊报告\n\n**完整的技能文件：**\n\n```markdown\n# /email-sort — Intelligent Inbox Triage\n\n<role>\nYou are an expert email triage assistant with access to Gmail MCP tools.\nYou understand how to read intent from email subject lines, senders, and\nbody content. Your job is to sort my inbox efficiently and apply labels\nso I know exactly what needs my attention.\n</role>\n\n<context>\nThe user's inbox may have anywhere from 5 to 500 unread emails. Prioritise\naccuracy over speed — it is better to process fewer emails correctly than\nto misclassify many. The user will review the triage report and can correct\nmisclassifications.\n</context>\n\n<steps>\n1. Count total unread emails using Gmail search: `is:unread label:inbox`\n2. Find ACTION emails: unread threads where I was directly asked a question,\n   given a task, or where a deadline is mentioned — apply label `TODO`\n3. Find WAITING emails: threads where my last message was the most recent\n   and I'm expecting a reply — apply label `Waiting`\n4. Find NEWSLETTER emails: unread emails with unsubscribe links from senders\n   I've never replied to — apply label `Newsletter`\n5. Find FYI emails: informational emails (announcements, CC'd on things,\n   notifications) that need no action — apply label `FYI`\n6. Leave anything ambiguous unlabelled and note it in the report\n</steps>\n\n<output>\nAfter completing all steps, produce this report:\n\n**📥 Inbox Triage Complete**\n\nTotal unread: [X]\n\n| Category | Count | Top items |\n|----------|-------|----------|\n| ✅ TODO | [n] | [top 2 senders/subjects] |\n| ⏳ Waiting | [n] | [top 2 threads] |\n| 📰 Newsletter | [n] | [top 2 senders] |\n| ℹ️ FYI | [n] | [brief description] |\n| ❓ Unclear | [n] | [brief description] |\n\n**Most urgent TODO:**\n[The single most time-sensitive email, with sender + subject + why it's urgent]\n\n**Recommended next action:** [1 specific thing to do right now]\n</output>\n\n<constraints>\n- Process a maximum of 50 unread emails per run (most recent first)\n- If more than 50 unread exist, note '[X] older emails not processed — run again after clearing these'\n- Do not draft replies — just categorise\n- Do not archive or delete — only apply labels\n- If a label doesn't exist yet, create it before applying it\n</constraints>\n\n<fallback>\nIf Gmail MCP is not connected: explain that /email-sort requires Gmail MCP\nand link to lesson 8-11 for setup instructions.\nIf no unread emails exist: report 'Inbox clear — 0 unread emails.'\n</fallback>\n```\n\n把它保存为 `~/.claude/commands/email-sort.md`。"
+    },
+    {
+      "type": "text",
+      "content": "## 技能 2：/email-report ——每周邮件分析报告\n\n`/email-report` 技能能让你从周度视角看清自己的邮件模式：你和谁沟通最多、什么话题占据了你的收件箱、哪些线程还没有解决、你的邮件时间都花在了哪里。\n\n每周五下午或周一早上运行一次，就能对自己的沟通全貌有一个高层次的了解。\n\n**完整的技能文件：**\n\n```markdown\n# /email-report — Weekly Email Analytics\n\n<role>\nYou are an email analytics assistant. You read email data and produce\nclear, actionable insights — not just counts, but patterns and implications.\n</role>\n\n<steps>\n1. Count total emails received in the last 7 days (search: `newer_than:7d`)\n2. Find the top 10 senders by volume in the last 7 days\n3. Count emails where I was the only recipient vs. emails I was CC'd on\n4. Find all threads started in the last 7 days where I haven't replied yet\n5. Count emails I sent in the last 7 days\n6. Find the longest active thread (most back-and-forth) in the last 7 days\n7. Identify any recurring senders I haven't subscribed to but appear weekly\n</steps>\n\n<output>\n**📊 Weekly Email Report — [Current week dates]**\n\n**Volume**\n- Received: [X] | Sent: [X] | Net: [+/- X]\n- Solo recipient: [X]% | CC'd only: [X]%\n\n**Top Senders This Week**\n1. [Sender] — [X] emails — [brief topic]\n2. [Sender] — [X] emails — [brief topic]\n3. [Sender] — [X] emails — [brief topic]\n(up to 5)\n\n**Unresolved Threads** ([X] total)\n- [Subject] from [Sender] — [X] days old — [why it's likely important]\n(up to 3 most important)\n\n**Most Active Thread:** [Subject] — [X] messages\n\n**Patterns & Recommendations**\n- [1-2 observations about communication patterns this week]\n- [1 specific recommendation: e.g., 'You have 5 unresolved threads with clients — worth a reply batch today']\n\n**Action:** [The single most valuable email task to do right now]\n</output>\n\n<constraints>\n- Keep total under 300 words\n- Recommendations must be specific and actionable, not generic\n- Don't list every email — identify patterns\n</constraints>\n\n<fallback>\nIf fewer than 10 emails in the last 7 days: note this and shorten the report accordingly.\nIf Gmail MCP unavailable: explain the requirement and stop.\n</fallback>\n```\n\n把它保存为 `~/.claude/commands/email-report.md`。"
+    },
+    {
+      "type": "text",
+      "content": "## 技能 3：/email-draft ——上下文感知回复起草器\n\n`/email-draft` 技能是这三个技能中实用性最强的一个。你给它传入一个发件人姓名或主题，它会读取完整的线程，理解上下文，再用你的语气起草一封回复。\n\n关键的设计决策在于：它总是先读线程，然后（如果你还没说明）询问你想表达什么，最后再起草——顺序绝不能反过来。这能防止回复遗漏线程前面已经讨论过的上下文。\n\n**完整的技能文件：**\n\n```markdown\n# /email-draft — Context-Aware Reply Drafter\n\n<role>\nYou are my email writing assistant. You read email threads carefully before\ndrafting — never guess at context. You write in a professional but natural\ntone: direct, not stiff; warm, not casual. You do not use filler phrases\nlike 'I hope this email finds you well' or 'Please don't hesitate to reach out.'\n</role>\n\n<steps>\n1. If $ARGUMENTS is provided: search Gmail for threads matching $ARGUMENTS\n   (treat it as a sender name, subject keyword, or thread description)\n   If no argument: find the most recent email in my inbox that needs a reply\n2. Read the complete thread — every message, in order\n3. Identify: What is being asked of me? What is the context? What has already been agreed?\n4. If the user hasn't told me what to say: briefly summarise the situation and ask\n   'What would you like your reply to say?' then wait\n5. Once you know what the user wants to say: draft a complete, professional reply\n6. Save the draft using Gmail MCP create_draft tool\n</steps>\n\n<output>\nFirst, show a thread summary:\n---\n**Thread:** [Subject]\n**From:** [Sender] | **Date:** [date of most recent message]\n**Summary:** [2 sentences: what this thread is about and what's being asked of me]\n---\n\nThen, if I told you what to say, produce the draft immediately.\nIf I haven't told you: ask what I'd like to say.\n\nDraft format:\n---\n**DRAFT REPLY:**\n\nHi [Name],\n\n[Body of reply]\n\n[Sign-off],\n[My name]\n---\n\nAfter the draft: 'This has been saved as a Gmail draft. Review and send from Gmail.'\n</output>\n\n<constraints>\n- Never send — only create a draft\n- Do not invent facts about the thread that aren't in the emails\n- Keep replies under 200 words unless the thread requires more\n- Do not apologise unnecessarily or use corporate filler phrases\n- Match the formality of the incoming email\n</constraints>\n\n<fallback>\nIf no matching thread found: 'No thread found matching \"$ARGUMENTS\". Try a different\nsearch term (sender name, subject word, or date range).'\n</fallback>\n```\n\n把它保存为 `~/.claude/commands/email-draft.md`。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "构建并测试全部三个邮件技能",
+      "content": "创建全部三个邮件技能，并在你真实的收件箱上逐一运行它们。\n\n**第 1 步——创建技能文件夹（如果还没创建）：**\n```powershell\nNew-Item -ItemType Directory -Force -Path ~/.claude/commands\n```\n\n**第 2 步——创建 email-sort.md：**\n在 Claude Code 中：\n```\nCreate ~/.claude/commands/email-sort.md with the /email-sort skill content\nfrom lesson 20-3.\n```\n（把本课的技能内容粘贴进去，或者让 Claude 根据描述写出来。）\n\n**第 3 步——创建 email-report.md：**\n```\nCreate ~/.claude/commands/email-report.md with the /email-report skill content.\n```\n\n**第 4 步——创建 email-draft.md：**\n```\nCreate ~/.claude/commands/email-draft.md with the /email-draft skill content.\n```\n\n**第 5 步——确认三个文件都已存在：**\n```\nList all files in ~/.claude/commands/\n```\n你应该能看到：`daily-brief.md`、`email-sort.md`、`email-report.md`、`email-draft.md`（以及之前课程中创建的其他技能）。\n\n**第 6 步——运行 /email-sort：**\n```\n/email-sort\n```\n看着它读取你的收件箱并打上标签。去 Gmail 里检查——标签应该已经出现了。\n\n**第 7 步——运行 /email-report：**\n```\n/email-report\n```\n阅读这份分析报告。它和你对本周收件箱的实际感受一致吗？\n\n**第 8 步——在一封真实邮件上运行 /email-draft：**\n```\n/email-draft [本周给你发过邮件的某个人的名字]\n```\n查看草稿。它和你实际会发的内容有多接近？\n\n**第 9 步——根据观察改进其中一个技能：**\n运行完三个技能后，找出其中最值得改进的一个点。请 Claude：\n```\nUpdate ~/.claude/commands/[skill-name].md to [specific improvement].\n```\n\n**完成检查：** 三个技能都已创建，都在真实数据上运行过，并且至少有一个根据真实结果做了改进。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A —— 构建一个 /email-unsubscribe 技能",
+      "content": "构建第四个邮件技能，找出你不再阅读的新闻通讯和订阅邮件，提取它们的退订链接，并把这些链接一次性展示出来，方便你一键退订。\n\n**为什么这很重要：** 手动退订需要打开每一封邮件、找到邮件底部那个小小的链接、点进去、等待确认。10 个订阅就要花掉 20 分钟。这个技能能在 30 秒内完成搜索，把所有链接一次性给你。\n\n**第 1 步——设计这个技能：**\n在写任何东西之前，先想清楚：\n- 用什么样的 Gmail 搜索查询能找到新闻通讯/订阅类邮件？\n- 如何区分带退订链接的邮件和普通邮件？\n- 呈现 10 个以上退订链接时，怎样才能既清晰又不让人眼花缭乱？\n- 如果在邮件正文中找不到退订链接，这个技能该怎么办？\n\n**第 2 步——编写这个技能：**\n```\nWrite ~/.claude/commands/email-unsubscribe.md:\n\nThis skill should:\n1. Search for emails with unsubscribe links from senders I've received 3+ emails from\n2. For each sender: count how many emails I've received from them in the last 90 days\n3. Check if I've ever REPLIED to any of their emails\n4. If I've never replied: include them in the 'consider unsubscribing' list\n5. Extract the unsubscribe link from their most recent email\n6. Present a ranked list: highest volume senders first, with their unsubscribe link\n\nOutput format: a clean list I can scan quickly, with each sender on one line.\nDo NOT automatically unsubscribe — just show me the links.\n```\n\n**第 3 步——测试它：**\n```\n/email-unsubscribe\n```\n它找到了多少个订阅？有没有出乎你意料的？\n\n**第 4 步——对结果采取行动：**\n对每一个你想要停止的订阅：\n- 点击退订链接\n- 确认退订\n- 记录一下这比手动查找每个链接花的时间少了多少\n\n**成果：** 一个能在 30 秒内找出收件箱杂物、并把清理所需全部链接呈现出来的退订技能。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 让 /email-draft 更贴近你自己的语气",
+      "content": "通用版的 /email-draft 技能写出来的是专业但中性的语气。这个工作坊教你如何把它调整为贴合你自己真实写作风格的版本。\n\n**第 1 步——捕捉你的语气：**\n```\nRead the last 10 emails I sent (use Gmail MCP: search `from:me newer_than:30d`\nand read the sent emails). Based on these, describe:\n- My typical email length\n- My greeting style (Hi, Hello, Hey, [Name])\n- My sign-off style\n- My tone (formal/informal, direct/chatty)\n- Phrases I use frequently\n- What I avoid (do I skip 'I hope this finds you well'?)\n```\n\n**第 2 步——用你的语气档案更新这个技能：**\n```\nUpdate ~/.claude/commands/email-draft.md:\n\nIn the <role> section, add this voice profile based on what you found:\n'Write in [Your Name]'s voice: [tone], [length], greeting '[their greeting style]',\nsign-off '[their sign-off]'. Avoid: [phrases they never use].'\n```\n\n**第 3 步——用一封真实邮件测试：**\n```\n/email-draft [发件人姓名]\n```\n现在的草稿听起来更像你了吗？\n\n**第 4 步——做一次 A/B 测试：**\n针对同一封邮件，请 Claude：\n```\nDraft two versions of a reply to [sender] about [topic]:\nVersion A: using my voice profile in /email-draft\nVersion B: generic professional email\nShow both side by side.\n```\n你会真正发送哪一个版本？\n\n**成果：** 一个用你真实语气写作的 `/email-draft` 技能——而不是那种通用的、公司腔调的 AI 语气。"
+    },
+    {
+      "type": "quiz",
+      "question": "/email-sort 技能被设计为每次运行最多处理 50 封未读邮件。为什么这个限制很重要？",
+      "options": [
+        "Gmail MCP 每次只能处理 50 次 API 调用",
+        "一次处理太多邮件可能导致 Claude 的上下文窗口被填满，使后面的分类变得不够准确——这个限制能确保所有处理过的邮件都保持较高质量",
+        "50 是 Gmail 允许创建的标签数量上限",
+        "Claude Code 每个会话有 50 条消息的限制"
+      ],
+      "correct": 1,
+      "explanation": "在单次运行中处理大量邮件，可能会随着上下文窗口被填满而导致质量下降——Claude 在处理到后面时，可能因为“思考空间”变少而做出不那么准确的分类。50 封的限制能确保所有处理过的邮件保持一致的质量。对于有数百封未读邮件的收件箱来说，与其试图一次性处理完所有邮件、任由准确率下降，不如多运行几次这个技能，每次清理一批。"
+    },
+    {
+      "type": "quiz",
+      "question": "/email-draft 技能会在起草之前先读完整个线程。这对邮件质量为什么很重要？",
+      "options": [
+        "其实无关紧要——最新的那封邮件就包含了所需的全部信息",
+        "读完整个线程能避免回复遗漏早前的上下文、与之前已达成的决定相矛盾、或重复询问已经回答过的问题——这样写出来的回复会显得自然，而不是一看就是 AI 生成的",
+        "阅读完整线程是 Gmail API 的强制要求",
+        "这只是让草稿显得更长、更全面"
+      ],
+      "correct": 1,
+      "explanation": "早前消息中的上下文会关键性地影响一封好回复该说什么。常见的 AI 邮件错误——比如“你能把那份文件发给我吗？”而那份文件其实在 3 条消息之前就已经分享过了，或者同意了一件其实已经被回绝的事情——都是因为 AI 只看到了最新的一条消息才会发生。读完整个线程意味着草稿会考虑到之前已经说过、达成过、分享过或拒绝过的内容——写出的回复会让人感觉是出自一个真正在认真读邮件的人之手。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 20-3 课。** 你已经构建了三个能在你真实收件箱上运行的邮件技能：用于分诊的 `/email-sort`、用于每周分析的 `/email-report`，以及用于上下文感知回复的 `/email-draft`。仅这三个技能，每周就能为你节省 30 分钟以上。接下来：本课程中最强大的技能模式——用 5 个并行子代理消除幻觉。"
+    }
+  ],
+  "nextLesson": "20-4",
+  "prevLesson": "20-2"
+}

@@ -3,6 +3,7 @@ import { getLessonStatus, setLessonStatus, setLastVisited } from './progress.js'
 import { setActiveLesson } from './sidebar.js';
 import { navigate } from './router.js';
 import { qs, formatMinutes } from './utils.js';
+import { t, lessonPath } from './i18n.js';
 
 let curriculum = null;
 let scrollHandler = null;
@@ -17,7 +18,7 @@ export async function renderLesson(id) {
 
   // Find lesson metadata
   const meta = findLesson(id);
-  if (!meta) { main.innerHTML = `<div class="lesson-page"><p style="color:var(--text-muted)">Lesson not found.</p></div>`; return; }
+  if (!meta) { main.innerHTML = `<div class="lesson-page"><p style="color:var(--text-muted)">${t('lesson.notFound')}</p></div>`; return; }
 
   setLastVisited(id);
   setActiveLesson(id);
@@ -26,7 +27,7 @@ export async function renderLesson(id) {
   // Load lesson JSON
   let data;
   try {
-    const res = await fetch(`data/lessons/part-${String(meta.partId).padStart(2,'0')}/${id}.json`);
+    const res = await fetch(lessonPath(meta.partId, id));
     if (!res.ok) throw new Error('not found');
     data = await res.json();
   } catch {
@@ -63,18 +64,18 @@ function buildLesson(meta, data) {
     <div id="scroll-progress"></div>
     <div class="lesson-page">
       <nav class="breadcrumb">
-        <a href="#/">Home</a>
+        <a href="#/">${t('breadcrumb.home')}</a>
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
-        <a href="#/">Part ${meta.partNumber}</a>
+        <a href="#/">${t('part.label', { number: meta.partNumber })}</a>
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
         <span>${meta.title}</span>
       </nav>
 
       <header class="lesson-header">
         <div class="lesson-header-meta">
-          <span class="badge badge-accent">Part ${meta.partNumber}</span>
+          <span class="badge badge-accent">${t('part.label', { number: meta.partNumber })}</span>
           ${meta.estimatedMinutes ? `<span class="badge badge-muted">${icons.clock} ${formatMinutes(meta.estimatedMinutes)}</span>` : ''}
-          ${status === 'complete' ? `<span class="badge badge-success">${icons.checkCircle} Complete</span>` : ''}
+          ${status === 'complete' ? `<span class="badge badge-success">${icons.checkCircle} ${t('badge.complete')}</span>` : ''}
         </div>
         <h1 class="lesson-title">${data.title || meta.title}</h1>
       </header>
@@ -87,14 +88,14 @@ function buildLesson(meta, data) {
         ${prevMeta ? `
           <div class="lesson-nav-prev">
             <a href="#/lesson/${prevMeta.id}">
-              <span class="lesson-nav-label">${icons.arrowLeft} Previous</span>
+              <span class="lesson-nav-label">${icons.arrowLeft} ${t('nav.previous')}</span>
               <span class="lesson-nav-title">${prevMeta.id} ${prevMeta.title}</span>
             </a>
           </div>` : '<div></div>'}
         ${nextMeta ? `
           <div class="lesson-nav-next">
             <a href="#/lesson/${nextMeta.id}">
-              <span class="lesson-nav-label">Next ${icons.arrowRight}</span>
+              <span class="lesson-nav-label">${t('nav.next')} ${icons.arrowRight}</span>
               <span class="lesson-nav-title">${nextMeta.id} ${nextMeta.title}</span>
             </a>
           </div>` : ''}
@@ -102,9 +103,9 @@ function buildLesson(meta, data) {
     </div>
 
     <div class="complete-bar">
-      <p>${status === 'complete' ? 'You\'ve completed this lesson.' : 'When you\'re done with the workshop, mark this lesson complete.'}</p>
+      <p>${status === 'complete' ? t('complete.done') : t('complete.todo')}</p>
       <button class="btn btn-primary" id="mark-complete-btn">
-        ${status === 'complete' ? `${icons.checkCircle} Completed` : `${icons.check} Mark Complete`}
+        ${status === 'complete' ? `${icons.checkCircle} ${t('button.completed')}` : `${icons.check} ${t('button.markComplete')}`}
       </button>
     </div>
   `;
@@ -130,7 +131,7 @@ function renderSection(section) {
         <div class="code-block">
           <div class="code-block-header">
             <span>${section.language || 'code'}</span>
-            <button class="copy-btn" data-code="${encodeURIComponent(section.content || '')}">${icons.copy} Copy</button>
+            <button class="copy-btn" data-code="${encodeURIComponent(section.content || '')}">${icons.copy} ${t('copy.button')}</button>
           </div>
           <pre><code class="language-${section.language || 'plaintext'}">${escapeHtml(section.content || '')}</code></pre>
         </div>`;
@@ -147,7 +148,7 @@ function renderSection(section) {
         <div class="workshop">
           <div class="workshop-header">
             <div class="workshop-meta">
-              <span class="workshop-label">Workshop</span>
+              <span class="workshop-label">${t('workshop.label')}</span>
               <span class="workshop-tag">${tagIcon} ${tag}</span>
             </div>
             <div class="workshop-title">${section.title || ''}</div>
@@ -214,11 +215,11 @@ function renderMisconceptions(section) {
   const cards = (section.items || []).map(item => `
     <div class="misconception-card">
       <div class="misconception-wrong">
-        <span class="misconception-badge">Myth</span>
+        <span class="misconception-badge">${t('diagram.myth')}</span>
         <span class="misconception-text">${escapeHtml(item.myth)}</span>
       </div>
       <div class="misconception-right">
-        <span class="misconception-badge">Reality</span>
+        <span class="misconception-badge">${t('diagram.reality')}</span>
         <span class="misconception-text">${escapeHtml(item.reality)}</span>
       </div>
     </div>`).join('');
@@ -253,15 +254,15 @@ function buildComingSoon(meta) {
     <div id="scroll-progress"></div>
     <div class="lesson-page">
       <nav class="breadcrumb">
-        <a href="#/">Home</a>
+        <a href="#/">${t('breadcrumb.home')}</a>
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
-        <span>Part ${meta.partNumber}</span>
+        <span>${t('part.label', { number: meta.partNumber })}</span>
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
         <span>${meta.title}</span>
       </nav>
       <header class="lesson-header">
         <div class="lesson-header-meta">
-          <span class="badge badge-accent">Part ${meta.partNumber}</span>
+          <span class="badge badge-accent">${t('part.label', { number: meta.partNumber })}</span>
           ${meta.estimatedMinutes ? `<span class="badge badge-muted">${icons.clock} ${formatMinutes(meta.estimatedMinutes)}</span>` : ''}
         </div>
         <h1 class="lesson-title">${meta.title}</h1>
@@ -269,8 +270,8 @@ function buildComingSoon(meta) {
       <div class="callout info">
         <span class="callout-icon">${icons.info}</span>
         <div class="callout-body">
-          <strong>Content coming soon</strong>
-          <p>This lesson's content is being written. Check back soon, or continue to the next lesson.</p>
+          <strong>${t('comingSoon.title')}</strong>
+          <p>${t('comingSoon.body')}</p>
         </div>
       </div>
     </div>
@@ -294,9 +295,9 @@ function setupCopyButtons() {
     btn.addEventListener('click', () => {
       const code = decodeURIComponent(btn.dataset.code || '');
       navigator.clipboard.writeText(code).then(() => {
-        btn.innerHTML = `${icons.check} Copied!`;
+        btn.innerHTML = `${icons.check} ${t('copy.copied')}`;
         btn.classList.add('copied');
-        setTimeout(() => { btn.innerHTML = `${icons.copy} Copy`; btn.classList.remove('copied'); }, 2000);
+        setTimeout(() => { btn.innerHTML = `${icons.copy} ${t('copy.button')}`; btn.classList.remove('copied'); }, 2000);
       });
     });
   });
@@ -326,10 +327,10 @@ function setupMarkComplete(id, meta) {
     const current = getLessonStatus(id);
     if (current === 'complete') {
       setLessonStatus(id, 'in-progress');
-      btn.innerHTML = `${icons.check} Mark Complete`;
+      btn.innerHTML = `${icons.check} ${t('button.markComplete')}`;
     } else {
       setLessonStatus(id, 'complete');
-      btn.innerHTML = `${icons.checkCircle} Completed`;
+      btn.innerHTML = `${icons.checkCircle} ${t('button.completed')}`;
       if (meta.nextLesson) {
         setTimeout(() => navigate(`/lesson/${meta.nextLesson}`), 800);
       }

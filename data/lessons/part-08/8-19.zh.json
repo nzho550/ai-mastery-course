@@ -1,0 +1,105 @@
+{
+  "id": "8-19",
+  "title": "Notion MCP——把你的知识库装进 Claude Code",
+  "part": 8,
+  "estimatedMinutes": 55,
+  "tags": [
+    "mcp",
+    "intermediate",
+    "notion",
+    "knowledge",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n第 2-12 课介绍了 Notion AI——内置在 Notion 应用里的原生 AI。这一课会通过 MCP 把 Notion 连接到 Claude Code，让你的页面、数据库和工作区知识成为任何 Claude Code 对话的一部分。你可以读取项目笔记、创建条目、查询数据库，并把 Notion 数据与邮件、日历和 Slack 的上下文结合起来。"
+    },
+    {
+      "type": "text",
+      "content": "## Notion MCP 能做什么\n\nNotion 拥有一套文档完善的公开 API，以及一个官方（或近乎官方）的 MCP 服务器。\n\n**读取：**\n- 按关键词或概念搜索你的整个 Notion 工作区\n- 读取你有权限访问的任意页面\n- 查询数据库（项目跟踪表、任务列表、CRM、内容日历）\n- 列出任意父页面的子页面\n- 检索页面属性和元数据\n\n**写入：**\n- 在任意位置创建新页面\n- 向现有页面追加内容\n- 创建新的数据库条目\n- 更新数据库属性（状态、负责人、日期等）\n\n**办公场景的典型用例：**\n- *“读取我关于 Henderson 客户账户的项目笔记，写一份可以发给新团队成员的一页简报。”*\n- *“检查我的任务数据库，找出本周到期、但仍标记为‘进行中’的所有事项。”*\n- *“给 [项目名称] 页面添加一条新的会议笔记，日期是今天，包含这些行动项。”*\n- *“搜索我的 Notion 工作区中关于我们定价模式的内容，总结我们已经决定的内容。”*"
+    },
+    {
+      "type": "text",
+      "content": "## 设置——Notion MCP\n\n**第 1 步 — 创建一个 Notion 集成**\n\n1. 前往 notion.com/my-integrations → **New integration（新建集成）**\n2. 名称：`claude-mcp` → 选择你的工作区 → 类型：**Internal（内部）** → 提交\n3. 复制 **Internal Integration Token（内部集成令牌）**（以 `secret_` 开头）——保存好\n4. **授予页面访问权限：** Notion 集成只能访问你明确共享给它的页面。对于每一个你想让 Claude 访问的页面或数据库：\n   - 在 Notion 中打开该页面\n   - 点击 **...**（菜单）→ **Add connections（添加连接）** → 选择 `claude-mcp`\n   - 或者共享你的顶层工作区页面，一次性授予对所有内容的访问权限\n\n**第 2 步 — 安装 MCP 服务器**\n\nNotion 维护着一个官方 MCP 服务器：\n```\nnpm install -g @modelcontextprotocol/server-notion\n```\n如果这个确切的包名已经变更，请查看 github.com/modelcontextprotocol/servers，或在 npm 上搜索 `notion-mcp`。\n\n**第 3 步 — 配置 Claude Code**\n\n在 `%APPDATA%\\Claude\\claude_desktop_config.json` 中：\n```json\n\"notion\": {\n  \"command\": \"npx\",\n  \"args\": [\"-y\", \"@modelcontextprotocol/server-notion\"],\n  \"env\": {\n    \"NOTION_API_KEY\": \"secret_your-token-here\"\n  }\n}\n```\n保存并重新启动 Claude Code。\n\n**第 4 步 — 验证**\n```\n启动 claude → /mcp → 确认 notion 已列出\n提问：\"Search my Notion workspace for any page about [topic you know exists].\"\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**有策略地授予访问权限。** 如果你只共享特定的数据库（你的任务列表、你的会议笔记数据库、你的项目跟踪表），Claude 就只能访问这些内容，别的都不行。这比共享整个工作区更安全，也能带来更聚焦的答案——Claude 不会被无关的页面搞混。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "查询并扩展你的 Notion 工作区",
+      "content": "在连接好 Notion MCP 后，运行以下任务。\n\n**任务 1 — 工作区搜索**\n```\n提问：\"Search my Notion workspace for pages about [your current main project].\nList what you find and give me a one-line summary of each page.\"\n```\n\n**任务 2 — 数据库查询**\n如果你在 Notion 中有一个任务数据库或项目跟踪表：\n```\n提问：\"Query my [Tasks / Projects / whatever your database is called] database.\nShow me everything with a status of 'In Progress' or 'Blocked'.\nList each item with its assignee and due date if those properties exist.\"\n```\n\n**任务 3 — 读取并综合一个页面**\n选一个较长的会议笔记页面或项目文档：\n```\n提问：\"Read the Notion page called [page title]. Summarize it in 5 bullet points\nfocused on: decisions made, open questions, and next actions.\"\n```\n\n**任务 4 — 创建一条会议笔记**\n在任何会议之后（即使是非正式的会议）：\n```\n提问：\"Create a new page in Notion as a child of [your meeting notes page].\nTitle: 'Meeting — [date] — [topic]'\nContent: Add these sections with the information I'll give you:\n- Attendees: [list names]\n- Decisions made: [list]\n- Action items: [list with owners]\n- Next meeting: [date if known]\"\n```\n这省去了手动打开 Notion、导航到正确的页面、创建新的子页面并从零开始输入结构的麻烦。\n\n**任务 5 — 跨工具综合（如果你已启用邮件或 Slack MCP）**\n```\n提问：\"I'm preparing for a client review meeting about [project].\nSearch my Notion workspace for project notes, check my email for recent\nclient messages, and check Slack for any recent discussion in #[project-channel].\nCombine everything into a one-page briefing I can review before the meeting.\"\n```\n这就是统一办公室工作流——一条命令、多个来源、一份综合输出。"
+    },
+    {
+      "type": "quiz",
+      "question": "你连接了 Notion MCP，但当你让 Claude 读取你的主要项目数据库时，它说找不到任何页面。最可能的原因是什么？",
+      "options": [
+        "Notion MCP 服务器有个 bug，无法读取数据库",
+        "你忘了把该特定数据库的访问权限授予你的 claude-mcp 集成",
+        "Notion 数据库需要一个你没有配置的特殊权限范围",
+        "Claude Code 只能读取 Notion 页面，不能读取数据库"
+      ],
+      "correct": 1,
+      "explanation": "Notion 集成需要在页面级别显式授予访问权限——仅有集成令牌是不够的。你必须在 Notion 中打开每一个页面或数据库，通过“Add connections”菜单添加该集成。这是 Notion 有意为之的安全设计：集成只能看到你明确共享给它的内容。解决方法很简单：在 Notion 中打开你的数据库，点击 ... 菜单，选择 Add connections，然后选中你的 claude-mcp 集成。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A — Notion MCP 首次操作",
+      "content": "让 Notion MCP 在你的真实工作区中运行起来。\n\n**第 1 步 — 用你的 Notion 集成令牌**配置 Notion MCP。\n\n**第 2 步 — 测试基本操作：**\n- \"List all databases in my Notion workspace\"\n- \"Show the pages in my [specific database] database\"\n- \"Read the content of my [page name] page\"\n\n**第 3 步 — 测试搜索：**\n\"Search my Notion for pages about [topic you work on]\"\n\n**第 4 步 — 在一个测试页面上测试写入操作：**\n\"Create a new page in my [database] database with title 'MCP Test' and content 'Created by Claude Code'\"\n\n**第 5 步 — 直接在 Notion 中验证**创建的页面。\n\n**第 6 步 — 问 Claude：** \"For a knowledge worker who uses Notion as their primary note-taking and project management tool, what are the 5 most valuable Notion MCP operations?\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — AI 驱动的 Notion 知识库",
+      "content": "使用 Notion MCP 在 AI 协助下构建并维护一个知识库。\n\n**第 1 步 — 找出一个你在 Notion 中管理的知识领域**（或想要开始在那里管理的领域）：文档、研究笔记、项目决策。\n\n**第 2 步 — 让 Claude Code 分析并改进已有的 Notion 内容：**\n```\nReview the pages in my [Notion database]. For each page:\n1. Does it have a clear, searchable title?\n2. Is the content structured with headings?\n3. Does it have any tags/properties filled in?\n4. Is there any content that appears duplicated in other pages?\n\nRecommend a prioritised list of improvements.\n```\n\n**第 3 步 — 对 3 个页面应用改进。**\n\n**第 4 步 — 通过 Claude Code 创建一篇新的知识文章：** “在 [database] 中创建一个关于 [topic] 的 Notion 页面。结构包括：概述、关键概念、操作方法、示例、相关页面。”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C — 把会议笔记转化为 Notion 页面",
+      "content": "构建一个把会议笔记自动转化为结构化 Notion 页面的工作流。\n\n**第 1 步 — 拿一份会议转录或笔记**（真实的或模拟的）。\n\n**第 2 步 — 让 Claude Code 把它们处理成一个 Notion 页面：**\n```\nConvert these meeting notes into a structured Notion page:\n[paste your notes]\n\nStructure:\n- Date and attendees\n- Background/context\n- Discussion points (with key perspectives)\n- Decisions made\n- Action items (with owner and deadline)\n- Next meeting date\n\nCreate this as a page in my [Meeting Notes database] in Notion.\n```\n\n**第 3 步 — 在 Notion 中审查创建的页面。** 结构对吗？内容准确吗？\n\n**第 4 步 — 与你目前的会议笔记流程做对比。** 这样更快吗？AI 遗漏或误传了什么？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — Notion 项目仪表盘",
+      "content": "使用 Notion MCP 在 Notion 中构建并维护一个项目仪表盘。\n\n**第 1 步 — 让 Claude Code 在 Notion 工作区中创建一套项目结构：**\n```\nCreate a project tracking setup in my Notion workspace for [project name]:\n1. A main project page with: overview, status, key dates, team\n2. A tasks database linked to the project\n3. A decisions log page\n4. A meeting notes database\n\nFor each, create the right properties and initial structure.\n```\n\n**第 2 步 — 在 Notion 中审查每一个创建出来的元素。**\n\n**第 3 步 — 填充最初的条目：** “根据这份项目描述在项目数据库中创建前 5 个任务：[你的描述]”\n\n**第 4 步 — 强制复查：** 问 Claude：*\"Review the Notion project structure you created. What important elements are missing that a project manager would include? What database relations or views would make this more useful?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "Notion MCP 可以创建和修改 Notion 页面。使用 Notion MCP 和使用 Notion AI（Notion 内置功能）之间的关键区别是什么？",
+      "options": [
+        "没有区别——它们用的是同一个 AI",
+        "Notion MCP 由你终端里的 Claude Code 控制，可以成为自动化工作流的一部分；Notion AI 是在 Notion 界面内手动触发的应用内功能",
+        "Notion AI 比 Notion MCP 更准确",
+        "Notion MCP 需要付费的 Notion 套餐；Notion AI 是免费的"
+      ],
+      "correct": 1,
+      "explanation": "关键区别在于集成能力和自动化潜力。Notion MCP 让 Notion 成为 Claude Code 可以在多步骤工作流中使用的工具——例如，读取一个 GitHub issue → 创建一个 Notion 任务 → 把会议笔记添加到正确的页面。Notion AI 是从 Notion 界面内部触发的，更适合上下文中的写作辅助。它们服务于不同的使用场景，是互补的关系。"
+    },
+    {
+      "type": "quiz",
+      "question": "你使用 Notion MCP 让 Claude Code 创建带有任务、时间线和相关方名单的项目页面。在把这个工作区分享给团队之前，你应该核实什么？",
+      "options": [
+        "所有页面的格式是否正确",
+        "所有内容是否准确——AI 可能捏造了听起来合理但错误的细节，比如时间线、虚构的相关方，或没有依据的成本估算",
+        "Notion 工作区是否设置为团队模式",
+        "页面是否有合适的表情符号图标"
+      ],
+      "correct": 1,
+      "explanation": "AI 生成的项目内容常常看起来专业、完整，但其中可能包含捏造的具体信息。要审查：时间线上的日期是否反映了真实的约束条件，还是 AI 编造的？列出的相关方是否真的参与了这个项目？成本或资源估算是否基于真实数据，还是 AI 的假设？发给整个团队的内容会变成团队共同的假设——错误的 AI 生成内容可能误导整个团队。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 8-19 课。** 你的 Notion 工作区现在已经可以从 Claude Code 访问了。你可以搜索页面、查询数据库、创建笔记，并把 Notion 知识与你的邮件、日历和 Slack 数据结合起来。"
+    }
+  ],
+  "nextLesson": "8-20",
+  "prevLesson": "8-18"
+}

@@ -1,0 +1,104 @@
+{
+  "id": "8-14",
+  "title": "寻找社区 MCP 服务器",
+  "part": 8,
+  "estimatedMinutes": 55,
+  "tags": [
+    "mcp",
+    "community",
+    "ecosystem",
+    "claude-code"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将知道去哪里寻找新的 MCP 服务器、如何评估一个服务器是否值得安装，并且你会至少添加一个能解决你实际问题的社区服务器。"
+    },
+    {
+      "type": "text",
+      "content": "## MCP 生态系统\n\nAnthropic 官方维护的 MCP 服务器（filesystem、GitHub、SQLite 等）只是一个起点。更广泛的 MCP 社区已经构建了数百个其他服务器。\n\n该生态系统主要由以下几个注册中心构成：\n\n**官方 MCP 注册中心（从这里开始）：**\nregistry.modelcontextprotocol.io\n官方的 MCP 服务器注册中心。数百个服务器在此经过验证并被收录，包括 GitHub、Slack、PostgreSQL、Stripe、Figma、Docker、Kubernetes 等。信任等级：经过筛选/高——这是权威来源。\n\n**Anthropic 官方参考服务器：**\ngithub.com/modelcontextprotocol/servers\n最初的参考实现。这里的服务器由 Anthropic 维护，包括 filesystem、GitHub、SQLite、sequential-thinking 等。信任等级：最高。\n\n**Awesome MCP Servers 列表：**\ngithub.com/punkpeye/awesome-mcp-servers\n一个由社区维护、按分类整理的列表。数百个服务器附带描述。适合按类别浏览来找到你需要的东西。信任等级：不一——需逐个评估每个服务器。\n\n**mcp.so 目录：**\nmcp.so\n一个可搜索的 MCP 服务器网络目录，附带评分和安装量。适合快速找到热门服务器。\n\n**Glama MCP 目录：**\nglama.ai/mcp/servers\n另一个可搜索的目录，带有额外的元数据和安全信息。"
+    },
+    {
+      "type": "text",
+      "content": "## 社区服务器的分类\n\n社区已经在各个主要类别中构建了 MCP 服务器：\n\n**开发工具：**\nJira、Linear、Sentry、Datadog、CircleCI、Docker、Kubernetes、AWS、Azure、GCP\n\n**沟通与生产力：**\nSlack、Discord、Telegram、Notion、Todoist、Obsidian、Joplin\n\n**搜索与研究：**\nBrave Search、Exa、Tavily、Arxiv、维基百科、YouTube\n\n**数据与分析：**\nPostgreSQL、MySQL、MongoDB、Redis、Supabase、Airtable\n\n**媒体与内容：**\nSpotify、Apple Music、YouTube、RSS 订阅源、Twitter/X\n\n**位置与地图：**\nGoogle 地图、OpenStreetMap、天气 API\n\n**金融：**\nStripe、PayPal、股票市场数据 API\n\n**消费者服务：**\n亚马逊、各类电商、Google 日历以外的其他日历集成"
+    },
+    {
+      "type": "text",
+      "content": "## 如何评估社区 MCP 服务器\n\n在安装任何社区服务器之前，请检查以下信号：\n\n**维护状态：**\n- 最近一次提交是什么时候？超过一年未维护的服务器可能存在损坏的依赖\n- 是否有未关闭的问题（issue）？它们是否得到了处理？\n- 是否有清晰的版本历史？\n\n**受欢迎程度：**\n- GitHub 星标数是一个大致的质量信号（越多说明有更多人验证过）\n- npm 下载量（对于 npm 包而言）\n- 检查它是否出现在多个可信列表中\n\n**所需访问权限：**\n- 它需要哪些账号或 API 密钥？\n- OAuth 流程请求了哪些权限？\n- 权限范围是否与该服务器的功能相匹配？（一个笔记类 MCP 却要求摄像头访问权限，这就是一个危险信号。）\n\n**安全模型：**\n- 代码是否开源、可审计？\n- 是否会不必要地把数据发送到第三方服务器？\n- 认证方式是否安全（OAuth 而非明文令牌）？\n\n**文档：**\n- 是否有一份说明清晰安装步骤的 README？\n- 工具及其参数是否有文档说明？\n- 是否列出了已知问题或限制？"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**MCP 服务器会在你的电脑上运行代码。** MCP 服务器是一个以你用户账户权限执行的程序。在安装任何社区服务器之前，务必检查其源代码（或至少检查 README）。对于需要 OAuth 的服务器，请确认授权页面所列的权限确实与该工具的功能相符。"
+    },
+    {
+      "type": "text",
+      "content": "## 安装模式始终相同\n\n无论你添加的是哪个社区服务器，流程始终是：\n\n1. 在注册中心找到该服务器\n2. 阅读其 README 了解安装命令和配置格式\n3. 将该条目加入你的 `settings.json`\n4. 重启 Claude Code\n5. 用 `/mcp` 验证\n6. 用一个真实任务测试\n\n具体的 `command` 和 `args` 值各不相同，但 `settings.json` 中的 JSON 结构始终遵循第 8-2 课中的相同模式。"
+    },
+    {
+      "type": "text",
+      "content": "## 保持你的 MCP 组合可管理\n\n你可能会想安装每一个看起来有趣的服务器。请克制这种冲动。\n\n每个正在运行的 MCP 服务器都会：\n- 占用内存\n- 可能产生让 Claude 感到困惑的工具调用错误\n- 增加 Claude Code 启动时的加载时间\n- 需要定期更新和维护\n\n一个好的经验法则是：只保留你实际会用到的服务器。如果你为某个特定任务安装了一个服务器，而一个月内都没有再用过，就把它从配置中移除。\n\n会永久留在你配置中的 MCP 服务器，是那些连接到你每天都在用的工具的——你的邮箱、你的日历、你的代码仓库、你当前项目的数据库。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "找到并安装一个社区服务器",
+      "content": "**任务 1 — 浏览注册中心：**\n在浏览器中打开 github.com/punkpeye/awesome-mcp-servers。\n\n浏览各个分类并阅读描述。寻找符合以下条件的服务器：\n- 连接到你实际会用到的工具\n- 有较新的提交记录和合理的星标数\n- 文档写得清楚易懂\n\n至少花 10 分钟浏览。不要安装你看到的第一个——多探索几个选项。\n\n**任务 2 — 评估你的候选者：**\n一旦你找到了想要的服务器，回答以下问题：\n- 最近一次提交是什么时候？\n- 它需要什么方式来认证（API 密钥、OAuth，还是不需要）？\n- 它暴露了哪些具体工具？你实际能用它做什么？\n- 是否存在令人担忧的权限要求？\n- README 中是否有明确的安装命令？\n\n**任务 3 — 安装并配置它：**\n按照该服务器的 README 说明：\n1. 获取所需的 API 密钥或令牌\n2. 将配置块加入你的 `settings.json`\n3. 重启 Claude Code\n4. 运行 `/mcp` 确认它已连接\n\n**任务 4 — 用它完成一个真实任务：**\n让 Claude 用新服务器做一些真实的事情。不是一个“hello world”测试——而是一个你真正关心的实际任务。\n\n**任务 5 — 记录下来：**\n在 `notes/my-mcp-stack.md` 中创建或更新以下内容：\n- 你添加的服务器名称\n- 它连接的是什么\n- 你选择它的原因\n- 一个你用它做过的有用示例\n\n随着你的 MCP 组合不断增长，这份文件会成为一个有用的参考。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A — MCP 注册中心探索",
+      "content": "探索 MCP 生态系统，找到符合你特定需求的服务器。\n\n**第 1 步 — 访问主要的 MCP 目录：**\n- modelcontextprotocol.io（官方）\n- GitHub：搜索 \"mcp-server\" 并按最近活跃度筛选\n- Awesome MCP 列表（在 GitHub 上搜索 \"awesome-mcp\"）\n\n**第 2 步 — 针对你日常使用的前 3 个工具**（Slack、Notion、Jira、Salesforce 等），搜索对应的 MCP 服务器。\n\n**第 3 步 — 对找到的每个服务器**，评估：\n- 星标数（受欢迎程度的参考）\n- 最近一次提交（是否在维护？）\n- 已关闭/未关闭问题的比例（是否有人积极支持？）\n- 许可证（在你的场景中能否使用？）\n\n**第 4 步 — 问 Claude：** *\"How do I evaluate the quality and safety of a community MCP server before installing it? What red flags should make me avoid a server?\"*\n\n**第 5 步 — 从候选中筛选出 2 个服务器**，作为下一步要尝试的对象。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — 评估并安装一个社区 MCP 服务器",
+      "content": "在安装社区 MCP 服务器之前，应用一套严谨的评估流程。\n\n**第 1 步 — 从你的候选列表中选择一个社区 MCP 服务器。**\n\n**第 2 步 — 安装前的安全评估：**\n- 阅读源代码（如果是开源的）——它访问哪些数据？把数据发送到哪里？\n- 检查 npm/pip 包是否存在已知漏洞\n- 验证发布者是否可信\n- 阅读它请求的所有权限\n\n**第 3 步 — 问 Claude：** *\"I found this MCP server: [describe it, paste its README]. What security risks should I evaluate before installing? What questions should I ask the maintainer?\"*\n\n**第 4 步 — 先在测试环境中安装**（而不是你的生产环境）。\n\n**第 5 步 — 先用最小权限进行测试**——首次运行时不要授予完全访问权限。确认可以正常工作后，再根据需要授予额外权限。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C — 建立个人 MCP 服务器目录",
+      "content": "维护一份经过筛选、对你的工作真正有用的 MCP 服务器目录。\n\n**第 1 步 — 创建一份文档**，命名为 `mcp-catalogue.md`，放在你的项目或个人笔记中。\n\n**第 2 步 — 为你使用或评估过的每个 MCP 服务器建立记录：**\n```\n## [Server Name]\n**Package**: [npm/pip name]\n**Purpose**: [what it does]\n**Tools**: [list of exposed tools]\n**Access required**: [what credentials/permissions it needs]\n**Risk level**: [low/medium/high] and why\n**Status**: [installed/evaluating/rejected] and why\n**Last verified**: [date]\n```\n\n**第 3 步 — 为你在本课程中使用或评估过的服务器**添加 5 条记录。\n\n**第 4 步 — 问 Claude：** *\"Review my MCP catalogue entries. What important information am I missing that would help me or a colleague make installation decisions?\"*\n\n**第 5 步 — 与同样使用 Claude Code 的同事**分享这份目录。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — 设计一份自定义 MCP 服务器规格说明",
+      "content": "为你自己的需求设计一个自定义 MCP 服务器规格说明。\n\n**第 1 步 — 找出你价值最高、目前尚无良好现有 MCP 服务器支持的集成需求**——即你使用但没有合适现成 MCP 服务器的工具或数据源。\n\n**第 2 步 — 设计服务器规格说明：**\n```\nServer name: [name]-mcp\nPurpose: [what problem it solves]\n\nTools (each with name, description, parameters, return format):\n1. [tool_name]: [what it does]\n   Parameters: [param: type, description]\n   Returns: [format]\n\n2. [tool_name]: ...\n\nAuthentication: [how it authenticates with the backing service]\nSecurity considerations: [what access it needs, what risks exist]\n```\n\n**第 3 步 — 让 Claude 审阅该规格说明：** *\"Review this MCP server specification. What tools are missing? What parameter designs are incorrect or could be improved? What security issues haven't I addressed?\"*\n\n**第 4 步 — 根据 Claude 的反馈**完善规格说明。\n\n**第 5 步 — 保存该规格说明**——你将在第 8-15 课中构建它的一个实现版本。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在 GitHub 上找到一个 MCP 服务器，5 个星标，最近一次提交是 2 年前，还有 15 个未关闭的问题。你应该安装它吗？",
+      "options": [
+        "应该——任何能用的 MCP 服务器都值得使用",
+        "谨慎处理：较低的活跃度和未解决的问题表明它可能缺乏维护，与当前版本的 Claude Code 存在潜在的不兼容风险，或缺少安全修复",
+        "不应该——你只应该使用官方 MCP 服务器",
+        "应该——老代码比新代码更稳定"
+      ],
+      "correct": 1,
+      "explanation": "较低的星标数、陈旧的提交记录以及未解决的问题是需要留意的黄色信号，而不是自动的否决理由。应进一步调查：是否有任何未关闭的问题涉及安全漏洞或功能损坏？这段两年前的代码是否仍与当前版本的 Claude Code 兼容？有时一个小型、稳定的服务器就是被有意维持原样。但这些信号意味着在安装前需要仔细评估，尤其是当该服务器需要敏感凭据时。"
+    },
+    {
+      "type": "quiz",
+      "question": "一个社区 MCP 服务器同时请求访问你的 GitHub 令牌、Slack 工作区和邮箱凭据。恰当的应对方式是什么？",
+      "options": [
+        "全部授权——MCP 服务器就是这样工作的",
+        "仅授予你实际用例所需的最小权限，评估它为何需要全部这三项，并考虑一个集成了如此多访问权限的服务器是否比使用各自独立的服务器风险更高",
+        "拒绝授权，只使用官方 MCP 服务器",
+        "先临时授予访问权限，每次会话结束后再撤销"
+      ],
+      "correct": 1,
+      "explanation": "一个拥有广泛跨服务访问权限的单一 MCP 服务器是一种更高风险的配置——如果它被攻破或存在漏洞，可能会影响多个服务。应评估：你的用例是否真的需要这三项服务集成在同一个服务器中？能否为每项服务使用更专注、独立的服务器？如果确实要授权，请使用最小权限的令牌（尽可能只读），并在最初几次会话中仔细监控该服务器的行为。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 8-14 课。** 你现在能够独立地寻找、评估并安装新的 MCP 服务器。第 8-15 课是第 8 部分的综合实战：从零开始构建你自己的自定义 MCP 服务器。"
+    }
+  ],
+  "nextLesson": "8-15",
+  "prevLesson": "8-13"
+}

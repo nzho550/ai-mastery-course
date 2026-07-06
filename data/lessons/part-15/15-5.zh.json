@@ -1,0 +1,120 @@
+{
+  "id": "15-5",
+  "title": "整理与综合研究成果",
+  "part": 15,
+  "estimatedMinutes": 63,
+  "tags": [
+    "research",
+    "beginner",
+    "synthesis",
+    "organization",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n收集研究资料是容易的部分。难的部分是理解它——把零散的笔记、摘要和来源，变成一份清晰、有条理的理解。这节课会介绍用 AI 整理你收集的资料、并将其综合为可以真正使用的结构化知识的技巧。你会学到五种综合技巧（脑暴整理法、对比框架、知识地图、论证图谱、缺口发现器）、各自适用的场景，以及如何为长期研究领域搭建一个持续积累的知识库。"
+    },
+    {
+      "type": "text",
+      "content": "## 综合难题\n\n研究完一个主题后，大多数人手里会有：\n- 来自多个来源、格式各异的笔记\n- 还没完全消化的书签和链接\n- 彼此之间没有联系的碎片化摘要\n- 一种“感觉自己懂得更多了”，但没有清晰结构的模糊印象\n\n综合意味着把这些内容变成：\n- 对这个主题连贯一致的心智模型\n- 一份记录了你所学内容的结构化文档\n- 清楚地知道哪些问题已经有了答案，哪些仍然悬而未决\n\nAI 特别擅长综合，因为它可以在工作记忆中容纳大量文本，并在几秒钟内找出其中的规律——这项任务对人类研究者来说往往要花上几个小时。\n\n**关键规则：** 始终把你实际的研究笔记提供给综合提示词。如果你让 AI 在不给它笔记的情况下综合一个主题，它会基于自己的通用训练知识来综合——而不是基于你的具体研究。输出结果看起来相似，但和你的资料来源是脱节的。"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧 1——脑暴整理法\n\n如果你的笔记很零散，不要先自己动手整理。直接把所有内容粘贴给 Claude，让它来整理：\n\n```\nHere are my research notes on [topic]. They're messy — different formats,\ndifferent sources, some overlap, some contradictions. Please:\n1. Identify the main themes or categories across all these notes (4–6 themes)\n2. Reorganise the content under those themes, keeping my original wording\n3. Within each theme, order points from most to least important\n4. Flag any contradictions between sources — quote both sides\n5. List what seems to be missing based on the themes — what questions remain unanswered?\n\n[paste all your notes]\n```\n\n这通常能把 30 分钟的手动整理压缩到 60 秒。输出结果会成为你写作文档的骨架。\n\n**处理特别长的笔记：** 如果你的笔记太长，没法一次性粘贴进去，就分批发送：*“这是我研究笔记的第 1 部分，一共 3 部分。请先提取主题，先不要总结——等我把三部分都发完再说。”*"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧 2——对比框架\n\n当你有多个来源说法不一，或者有多个选项需要评估时，让 AI 创建一个结构化的对比：\n\n```\nI have summaries from [X] sources on [topic]. Please create a comparison\ntable with these rows:\n- Main argument or position\n- Key evidence cited\n- Underlying assumptions\n- Limitations or caveats acknowledged\n- Who this perspective comes from and their likely bias\n- Date/source\n\n[paste your summaries]\n\nAfter the table:\n1. Identify the key dimension on which these sources most disagree\n2. Which position has the strongest evidence base?\n3. Are there any sources that seem to be outliers — saying something no other source supports?\n```\n\n这适用于对比：\n- 竞争对手的产品或服务\n- 不同的政策方案或监管框架\n- 关于一个有争议话题的学术观点\n- 预测结果不同的行业分析师报告\n- 供应商提案\n- 求职候选人（简历）\n\n**“潜在假设”这一列往往最能揭示问题。** 各个来源经常出现分歧，不是因为证据不同，而是因为它们从一开始就基于不同的假设，对“什么重要”或“目标应该是什么”有着不同的理解。"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧 3——知识地图\n\n对于需要理解全貌的复杂主题，让 AI 生成一份结构化地图：\n\n```\nBased on my research notes below, create a knowledge map for [topic].\nStructure it as:\n\n## Core concepts (what you must understand first — build the foundation)\n## Key players or stakeholders (who matters and what their interests are)\n## Main debates or tensions (where thoughtful people disagree and why)\n## What is well established (high confidence, strong evidence consensus)\n## What is contested or uncertain (active debate, weak evidence, expert disagreement)\n## What is emerging (recent developments that may change the established view)\n## Open questions I still need to answer before I can draw conclusions\n\n[paste notes]\n```\n\n这能给你一份结构性概览，可以用作：\n- 一份报告的目录\n- 向非专业受众呈现研究发现的框架\n- 一份下一步该读什么的研究地图\n- 一份检查你的分析是否完整的清单"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧 4——论证图谱\n\n论证图谱能把一个复杂主题的逻辑结构明确地呈现出来——提出了哪些论断、有哪些证据支持它们，以及有哪些反对意见在挑战它们。当你需要形成或捍卫一个立场时，这个方法尤其有用。\n\n```\nI'm researching [topic] and trying to form a view on [specific question/position].\n\nHere are my notes: [paste]\n\nPlease create an argument map:\n\n**Arguments FOR [position]:**\n- Claim 1: [claim]\n  - Evidence: [supporting evidence from my notes]\n  - Strength: [strong/moderate/weak] — why\n  \n**Arguments AGAINST [position]:**\n- Counter-claim 1: [counter-claim]\n  - Evidence: [supporting evidence from my notes]\n  - How to respond: [how proponents might address this]\n\n**Key uncertainties:**\n[What would need to be true for the 'for' case to be strong? What facts are critical?]\n\n**Overall assessment:**\n[Based only on my notes, which direction does the evidence lean and why?]\n```\n\n**什么时候用论证图谱：** 当你在写一份建议书、一份商业论证，或一份说服性文档时；或者当你准备陈述一个立场、需要预判反对意见时。它会迫使你区分哪些是你有把握的，哪些是真正存在争议的。"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧 5——缺口发现器\n\nAI 能告诉你，你的研究中缺了哪些你可能没想到要去查的内容——也就是你的盲点：\n\n```\nI've been researching [topic] for [purpose]. Here's what I've found so far:\n[paste notes]\n\nI need to produce [output: a report / recommendation / decision].\n\nIdentify:\n1. Important aspects of this topic I haven't covered yet\n2. Questions my audience would likely ask that I can't currently answer\n3. Claims I'm making that currently have thin or no evidence in my notes\n4. Perspectives or stakeholders I haven't represented at all\n5. What a well-rounded expert in this area would say I'm missing\n\nRank these gaps from most to least critical for my purpose.\n```\n\n这是研究工作流中最有价值的提示词之一——它能防止你在还没覆盖到必要的内容之前，就仓促定稿最终成果。\n\n**“专家审查”版本：** 对于高风险的研究，模拟专家的审视：\n```\nRead my research notes and pretend you are a senior expert in [field] reviewing them.\nWhat would you immediately identify as weak, missing, or questionable?\nWhat would make this research significantly stronger?\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 搭建个人知识库\n\n对于你会持续关注的研究领域（你会反复回来研究的主题），可以考虑搭建一个会不断成长的持续性知识库：\n\n**方案 1——Notion 数据库：**\n- 创建一个 Notion 数据库，列包括：主题 | 来源 | 关键洞见 | 日期 | 可信度 | 标签\n- 用 Notion AI 跨条目查询：*“关于 X，我在所有条目中都学到了什么？”*\n- 每条记录都链接到源文档或网址\n- 用筛选功能按主题、日期或标签查看条目\n\n**方案 2——Claude Projects 中的持续文档：**\n- 为每个研究领域创建一个 Claude Project（第 2-2 课）\n- 把你的研究文件上传作为项目上下文\n- 该项目中的每次对话都能访问你的知识库\n- Claude 会用你的具体文档来回答问题\n\n**方案 3——每个主题一个 NotebookLM 笔记本：**\n- 在 notebooklm.google.com 为每个持续研究的领域维护一个笔记本\n- 每次找到新文档就添加进去\n- 笔记本会随着你的研究一起成长\n- 所有答案都引用你的具体来源\n\n**该选哪个方案：**\n- 如果你想要结构化的元数据和交叉引用：**Notion**\n- 如果你的研究主要是文档和 PDF：**NotebookLM**\n- 如果你想针对你的知识库提出复杂的分析性问题：**Claude Projects**\n- 如果你的研究是零散的笔记和网页内容：从一份简单的 Markdown 文档开始，用 **Obsidian**（免费、本地存储）"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "综合你的研究笔记",
+      "content": "如果你已经有第 15-2 课或最近一次研究中留下的研究笔记，这个工作坊效果最好。如果没有，开始之前先花 10 分钟收集一个主题的笔记。\n\n**第 1 步——收集你的素材**\n\n把你关于某个主题的所有内容都收集到一个地方：\n- Perplexity 搜索的笔记\n- Claude 对话中的摘要\n- 从文章中复制的关键要点\n- 你自己的观察或问题\n\n把它们全部粘贴进一份文档里。乱一点没关系——这正是重点。\n\n**第 2 步——运行脑暴整理法（5 分钟）**\n\n打开 Claude.ai，粘贴所有内容：\n```\nHere are my research notes on [topic]. They're unorganised. Please:\n1. Group the content into 4–6 clear themes\n2. Under each theme, list the key points in order of importance\n3. Note any contradictions you find (quote both sides)\n4. List 5 questions I still haven't answered\n```\n\n查看结果：它有没有发现你自己没注意到的笔记之间的联系？\n\n**第 3 步——运行缺口发现器（5 分钟）**\n\n然后问：\n```\nI need to produce [your intended output — e.g., a briefing note / recommendation / report] on this topic.\nWhat important aspects have I not covered that I should research further?\nWhich gaps are critical vs. nice-to-have?\n```\n\n挑一个关键缺口。在动笔之前先计划好如何填补它。\n\n**第 4 步——搭建写作结构（5 分钟）**\n\n最后问：\n```\nBased on everything I've shared, create an outline for a\n[report / briefing / recommendation] on this topic.\nUse the themes you identified as main sections.\nUnder each section, note what content I already have and what I still need.\n```\n\n保存这份大纲。它会成为你在第 15-6 课写作输出的模板。\n\n**第 5 步——选一个综合技巧**\n\n根据你的主题，再试一种技巧：\n- 如果你有互相矛盾的来源：运行对比框架\n- 如果你需要表明立场：运行论证图谱\n- 如果主题复杂、涉及很多子领域：运行知识地图"
+    },
+    {
+      "type": "quiz",
+      "question": "你有 6 周积累下来的、关于一个复杂监管主题的零散研究笔记。你需要在周五前写出一份简报。最高效的第一步是什么？",
+      "options": [
+        "从头到尾重新读一遍所有笔记，重新熟悉内容",
+        "直接开始写，看看自己还记得多少",
+        "把所有笔记粘贴给 Claude，让它识别主题、标出矛盾之处、列出缺失内容，并为简报生成一份大纲",
+        "既然笔记可能已经过时，用 Perplexity 重新搜索这个主题"
+      ],
+      "correct": 2,
+      "explanation": "把所有笔记粘贴给 Claude，让它识别主题、矛盾之处、缺口，并生成一份大纲，是从零散笔记到结构化简报最快的路径。这只需要几秒钟，而不是手动重新阅读和整理所需的一个多小时。这样你会清楚知道哪些部分还需要更多研究（来自缺口发现器），并且已经有了现成的大纲可以直接写。重新阅读（A）很慢，也不会给你带来任何结构。盲目动笔（B）是在浪费时间重写笔记里已经有的内容。重新搜索（C）可能是填补具体缺口的一部分工作，但在你知道有哪些缺口之前就去做，可能会研究一些你已经知道的内容。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——研究综合练习",
+      "content": "练习把来自多个来源的研究综合成一幅连贯的图景。\n\n**第 1 步——收集你正在研究的主题的原始资料：** 粘贴 3-5 条搜索结果、文章摘录或文档提取内容。\n\n**第 2 步——让 Claude 进行综合：**\n```\nHere is my raw research on [topic]:\n[paste research]\n\nSynthesise this into:\n1. The 3 most important insights (well-supported by multiple sources)\n2. Areas of uncertainty or disagreement between sources\n3. The single most actionable takeaway\n4. What I still need to research to have a complete picture\n```\n\n**第 3 步——审阅这份综合结果。** 有没有什么地方是错的或缺失的？\n\n**第 4 步——问 Claude：** “这 3 条洞见中，哪一条最不确定？要对它更有把握，需要什么条件？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用 AI 做个人知识管理",
+      "content": "搭建一套长期存储和检索研究成果的系统。\n\n**第 1 步——让 Claude Code 设计一套知识管理系统：**\n```\nDesign a simple, file-based personal knowledge system:\n1. Store research notes as markdown files in organized folders\n2. Each note has: topic, date, sources, key insights, confidence level, tags\n3. Search across all notes using grep/ripgrep\n4. Generate a topic summary by combining all notes on a topic\n5. Weekly: Claude reads all new notes and identifies connections between topics\n\nKeep it simple — no database, no special software needed.\n```\n\n**第 2 步——搭建这套系统**，加入 5 个近期的研究主题。\n\n**第 3 步——测试主题摘要功能。** 它有用吗？\n\n**第 4 步——承诺维护它 30 天**，然后做一次评估。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——矛盾检测",
+      "content": "用 AI 识别你研究资料中的矛盾之处。\n\n**第 1 步——针对一个你怀疑不同来源可能观点不一的主题，汇总研究资料。**\n\n**第 2 步——让 Claude 主动寻找矛盾：**\n```\nReview this research collection for contradictions:\n[paste research]\n\nIdentify:\n1. Direct contradictions: sources that make opposite claims\n2. Subtle contradictions: sources that use different definitions for the same term\n3. False agreements: sources that appear to agree but are actually measuring different things\n4. Missing context: claims that are true in some contexts but not in others\n```\n\n**第 3 步——调查每一处矛盾。** 哪个来源更可信？它们衡量的是不是不同的东西？\n\n**第 4 步——更新你的综合结果**，准确反映这种不确定性。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——从研究到行动计划",
+      "content": "把研究发现转化为具体的行动计划。\n\n**第 1 步——拿出你最近工作中完成的一份研究简报。**\n\n**第 2 步——问 Claude：**\n```\nBased on this research [paste it], generate an action plan:\n\n1. Decision: What decision does this research inform?\n2. Recommendation: What does the evidence suggest I should do?\n3. Confidence level: How confident are you? (High/Medium/Low) and why?\n4. Key uncertainties: What could change this recommendation?\n5. Actions: Specific steps I can take this week\n6. Monitoring: How will I know if the recommended action is working?\n```\n\n**第 3 步——评估这份行动计划。** 它有没有正确反映你的研究？信心程度的判断是否合理？\n\n**第 4 步——执行第一项行动。** 有了这份基于研究的行动计划，你有没有变得更果断？"
+    },
+    {
+      "type": "quiz",
+      "question": "你有来自 10 个来源的研究资料，全都认同同一个结论。你应该相信这种共识吗？",
+      "options": [
+        "应该——10 个来源一致认同是很强的证据",
+        "先检查这些来源是否真正独立——如果它们都引用同一项研究，或者有共同的资助方，那么这种表面上的共识可能是人为制造出来的，而不是真正的共识",
+        "只有当 7 个以上的来源是经过同行评审的，才相信它",
+        "在做决策时可以相信它，但在发表言论时不要相信"
+      ],
+      "correct": 1,
+      "explanation": "当来源之间不是真正独立的时候，表面的共识可能会产生误导。常见的模式包括：所有来源都引用同一项里程碑式研究（这会让人觉得有 10 项研究达成一致，实际上是同一项研究被引用了 10 次）、由行业资助的研究主导了某个话题，或者一种基于薄弱原始证据、逐渐变成“常识”的叙事。真正的共识需要由方法不同、没有共同资助来源的独立团体加以复现。"
+    },
+    {
+      "type": "quiz",
+      "question": "在研究综合之后，Claude 说“证据强烈表明 X”。这在实际中到底意味着什么？",
+      "options": [
+        "X 一定是真的",
+        "Claude 是根据它拿到的研究资料评估后认为倾向于 X——这是对所提供证据的一种表述，而不是对 X 为真的保证",
+        "X 有 95% 的概率是真的",
+        "你应该直接依据 X 采取行动，不需要进一步核实"
+      ],
+      "correct": 1,
+      "explanation": "“强烈表明”反映的是 Claude 对所提供证据的评估，而不是一种客观的真理断言。局限性在于：Claude 看到的证据可能不完整（并非该主题的全部研究）、Claude 对来源的权重判断可能有误，而且 AI 语言中的“强烈表明”并不对应一个精确的概率。对于后果重大的决策，应把“强烈表明”当作进一步核实的起点，而不是结论本身。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 15-5 课。** 你现在掌握了五种综合技巧——脑暴整理法、对比框架、知识地图、论证图谱和缺口发现器——并且清楚了如何为持续性的研究领域搭建个人知识库。第 15-6 课会教你如何把综合好的笔记转化成一份打磨精良的书面成果。"
+    }
+  ],
+  "nextLesson": "15-6",
+  "prevLesson": "15-4"
+}

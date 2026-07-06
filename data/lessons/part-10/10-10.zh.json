@@ -1,0 +1,89 @@
+{
+  "id": "10-10",
+  "title": "Microsoft Copilot Studio 与无代码 AI 智能体构建工具",
+  "part": 10,
+  "estimatedMinutes": 55,
+  "tags": ["automation", "intermediate", "copilot-studio", "no-code", "agents", "microsoft", "gumloop", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你已经用 n8n、Zapier 和 Make 搭建过带 AI 操作的自动化工作流。但一个更新的类别已经出现：**无代码 AI 智能体构建工具**——这类平台专为创建对话式智能体、自定义聊天机器人和自主 AI 工作者而设计，远远超出了简单的“触发—操作”工作流。\n\nMicrosoft Copilot Studio 是这个类别中的企业级领导者，Gumloop 则是快速崛起的挑战者。学完本课后，你将理解智能体构建工具与工作流自动化工具的区别，知道何时该选哪一个，并且已经在 Copilot Studio 中搭建了你的第一个简单智能体。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 AI 智能体构建工具？\n\n在 Copilot Studio 和 Gumloop 出现之前，搭建一个自定义 AI 聊天机器人或智能体需要：\n- 租用服务器基础设施\n- 用 Python 或 JavaScript 写代码\n- 手动对接 AI API\n- 搭建对话管理逻辑\n- 部署到生产环境并持续维护\n\nAI 智能体构建工具把这一切都收敛到一个可视化的无代码界面中。你描述你想让智能体做什么，把它连接到你的数据源，然后发布——通常不到一个小时就能完成。\n\n**与 n8n/Zapier/Make 的关键区别：**\n\n| 工作流自动化（n8n/Zapier） | 智能体构建工具（Copilot Studio/Gumloop） |\n|---|---|\n| 触发 → 操作 → 操作 → 结束 | 与用户来回进行对话 |\n| 线性、可预测的流程 | 动态，响应用户输入 |\n| 按计划或事件运行 | 在用户与其对话时运行 |\n| 最适合幕后自动化 | 最适合面向用户的聊天机器人和助手 |\n| 不一定需要 AI | AI 是核心能力 |\n\n**什么时候需要智能体构建工具、什么时候需要工作流自动化：**\n- 需要一个能回答员工问题的聊天机器人？→ 智能体构建工具\n- 需要自动处理新的 Shopify 订单？→ n8n/Zapier\n- 需要为你的网站搭建一个客服机器人？→ 智能体构建工具\n- 需要在早上 9 点自动发布社交媒体内容？→ n8n/Zapier\n- 需要一个能回答关于你文档问题的 SharePoint 助手？→ 智能体构建工具"
+    },
+    {
+      "type": "text",
+      "content": "## Microsoft Copilot Studio——企业标准\n\nCopilot Studio 是微软推出的无代码/低代码平台，用于搭建自定义 AI 智能体、聊天机器人和自主 AI 工作者。它是 Microsoft 365 / Power Platform 生态系统的一部分，在 2026 年有了显著扩展。\n\n**Copilot Studio 能搭建什么：**\n- **自定义聊天机器人：** 把对话式 AI 部署到公司网站、Teams 频道、SharePoint 内网或移动应用\n- **SharePoint 知识智能体：** 把智能体连接到你的 SharePoint 文档库——员工可以提问，并获得带引用来源的答案\n- **人力资源与 IT 服务台机器人：** 搭建一个能回答常见 HR 问题（休假政策、福利）或 IT 问题（密码重置、软件安装）的机器人，无需人工介入\n- **客服智能体：** 部署到你网站的聊天窗口；智能体处理一级问题，需要时升级给人工\n- **计算机操作智能体（2026 年正式发布）：** 通过界面直接与网站和桌面应用交互的智能体——无需脆弱的脚本，就能自动化那些没有 API 的流程\n- **自主多步骤智能体：** 能够在 Microsoft 365 中串联多个操作（读取邮件、更新日历、创建任务、填写表单）而无需用户逐步提示的智能体\n\n**2026 年的核心能力：**\n- 自然语言智能体构建器：用大白话描述你想要的东西 → AI 生成名称、指令、建议的触发条件、知识来源和工具\n- 重新设计的可视化工作流设计器（2026 年公开预览）——用统一画布搭建端到端的智能体自动化\n- 工作流中的智能体节点：把现有智能体作为一个步骤嵌入到自动化工作流中\n- 与 SharePoint、Outlook、Teams、Dataverse 原生集成，并通过 Power Platform 支持 **1,400 多个连接器**\n- Agent 365：集中式治理控制面板——监控你整个环境中的智能体清单、权限、行为和活动\n- 企业级安全：数据留在你的 Microsoft 租户内；符合 SOC 2 标准\n- 一次搭建，发布到 Teams、网站、移动应用\n\n**定价：**\n- 包含在 Microsoft 365 Copilot 许可证中（企业版）\n- 独立版：**Copilot Credits** 按使用量计费模式（1 credit = 0.01 美元）——按使用付费而非按消息付费\n- 可通过 Microsoft Power Platform 试用获得免费试用\n- make.powerapps.com 提供开发者沙盒（免费，功能有限）\n\n**微软生态系统的优势：** 如果你的组织已经在使用 Microsoft 365（Outlook、Teams、SharePoint、OneDrive），Copilot Studio 智能体就可以安全地访问所有这些数据，而无需复杂的集成工作。"
+    },
+    {
+      "type": "text",
+      "content": "## Copilot Studio 的架构——它是如何工作的\n\n每一个 Copilot Studio 智能体都有四个核心组成部分：\n\n**1. 知识（Knowledge）**——智能体知道什么。你可以连接 SharePoint 站点、上传的文档、网站，或手动录入的问答对。智能体使用检索增强生成（RAG）技术，基于你的实际内容来回答问题，并附带引用来源。\n\n**2. 主题（Topics）**——对话流程。每个主题是一种特定的对话类型，有一个触发条件（用户可能会说什么）和一个流程（智能体如何响应）。主题可以包含条件、变量和分支逻辑。\n\n**3. 操作（Actions）**——智能体在对话之外能做的事情。调用 API、运行 Power Automate 流程、查询数据库、创建日历事件、发送邮件。\n\n**4. 渠道（Channels）**——智能体部署的位置。Teams、网站（聊天窗口）、SharePoint、移动应用，甚至电话（通过 Azure Communication Services）。\n\n一个简单的 HR 常见问题机器人：\n- 知识：SharePoint 中的 HR 政策文档\n- 主题：“请假申请”“福利问题”“升级给 HR 团队”\n- 操作：在 HR 系统中创建一条请假申请\n- 渠道：Microsoft Teams\n\n员工可以打开 Teams，问机器人“我今年还剩多少病假？”——机器人会从 HR 政策文档中检索答案并回答，并附上原始文档的链接。"
+    },
+    {
+      "type": "text",
+      "content": "## Gumloop——快速的无代码智能体构建工具\n\nGumloop 是一个较新的无代码 AI 工作流和智能体平台，凭借速度和灵活性获得了广泛关注。如果说 Copilot Studio 是企业优先，那么 Gumloop 就是开发者和创作者优先。\n\n**Gumloop 有何不同：**\n- **速度：** 团队普遍反映在 30-60 分钟内就能搭建出第一个可用的智能体，而更复杂的平台需要数小时\n- **不锁定在微软体系内：** Gumloop 可以配合任何 AI 提供商（Claude、OpenAI、Gemini）和任何数据源使用\n- **混合自动化 + 智能体：** Gumloop 在同一个界面中结合了工作流自动化（类似 n8n）和对话式智能体的创建——你不需要用两个独立的工具\n- **AI 原生设计：** 工作流中的每一个节点都可以是一次 AI 调用——而不仅仅是一个可选使用 AI 的步骤\n- **更适合小团队和初创公司：** 入门门槛比 Copilot Studio 更低\n\n**Gumloop 更胜一筹的使用场景：**\n- 搜索网页、总结发现并自动发送报告的研究智能体\n- 内容生成流水线（主题调研 → 草稿 → SEO 检查 → 排期）\n- 在线索进入销售流程前先做调研的线索资格评估智能体\n- 每天运行并呈现相关变化的竞品监控智能体\n\n**定价：** Gumloop 采用基于额度的计费模式。提供免费版供探索使用；生产环境使用的付费计划起价约为每月 49 美元。\n\n**何时选择 Gumloop、何时选择 Copilot Studio：**\n- Microsoft 365 组织、SharePoint 数据、需要部署到 Teams → Copilot Studio\n- 非微软技术栈、需要灵活性、小团队、快速实验 → Gumloop\n- 企业级安全/合规要求 → Copilot Studio\n- 创意内容工作流、研究自动化 → Gumloop"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**无代码智能体构建工具的格局正在快速演变。** 2026 年其他值得关注的平台还包括 Vertex AI Agent Builder（谷歌）、Amazon Bedrock Agents（AWS）、Voiceflow（语音优先智能体）和 Botpress（开源）。本课之所以聚焦 Copilot Studio 和 Gumloop，是因为它们分别代表了微软的企业标准和亲民的挑战者。企业级 vs. 灵活性的决策框架，同样适用于所有这些平台。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——用免费试用探索 Copilot Studio",
+      "content": "你将获得访问 Copilot Studio 的权限，并探索智能体是如何搭建的。\n\n**第 1 步——访问 Copilot Studio。** 根据你的情况有以下几种方式：\n- 如果你的组织有 Microsoft 365：前往 copilotstudio.microsoft.com，用工作账号登录\n- 如果你想要免费的个人试用：前往 make.powerapps.com，注册一个开发者账号（微软提供包含 Copilot Studio 访问权限的免费开发者沙盒）\n- 如果两者都不可用：跟着 learn.microsoft.com/copilot-studio 上的微软官方文档截图来学习\n\n**第 2 步——创建一个新智能体。** 点击“+ New agent”。给它起一个名字，并简要描述它的用途。使用：\n- 名称：'FAQ Helper'\n- 描述：'Answers frequently asked questions for visitors to our website'\n\n**第 3 步——探索 Knowledge 部分。** 点击左侧导航中的 'Knowledge'。查看连接知识来源的选项：SharePoint、上传文件、网站，或 Dataverse。如果你有 SharePoint 站点，试着连接它。如果没有，上传一份简单的 PDF 文档（任何文档都可以——公司政策、FAQ 文档，甚至一本书的第一章）。\n\n**第 4 步——探索 Topics。** 进入 'Topics'。查看每个新智能体默认自带的主题（问候、告别、升级给人工、无法识别的输入）。点击 'Greeting' 看看一个对话流程是如何搭建的：触发条件 → 消息 → 可选分支。\n\n**第 5 步——测试智能体。** 使用内置的测试面板（通常在屏幕右侧）。输入 'Hello'，看看问候主题如何响应。然后就你连接的任何知识来源提一个相关问题。\n\n**第 6 步——留意渠道选项。** 在不发布的情况下，探索 'Channels' 看看你可以把这个智能体部署到哪里：Teams、网站、移动应用等。\n\n**成果：** 亲手熟悉 Copilot Studio 界面以及任何 AI 智能体的四个核心组成部分。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 B——为你的组织设计一个智能体",
+      "content": "即使你今天还搭建不出来，在纸面上设计一个智能体也是很有价值的练习，也是找出智能体能带来真实投资回报的好方法。\n\n**第 1 步——在你的组织中找出一个好的智能体使用场景。** 寻找：\n- 一个被反复问到的问题（来自客户、员工或利益相关者）\n- 一个已经存在的知识来源（一份文档、一个网站、一份 FAQ 列表）\n- 一项耗时但遵循可预测步骤的任务\n\n**按行业举例：**\n- 政府：“办[某类许可]需要哪些表格？”→ 以监管文件为知识来源的智能体\n- 医疗：“[机构]的探视时间是什么时候？”或“我怎么查看我的病历？”\n- 教育：“[入学环节]的截止日期是什么时候？”→ 以学年日历为知识来源的智能体\n- 零售：“你们的退货政策是什么？”/“我的订单在哪里？”→ 以政策文档 + 订单 API 为知识来源的智能体\n- 企业：“我该怎么申请年假？”→ 以 HR 手册为知识来源的智能体\n\n**第 2 步——用这个模板设计你的智能体。提示 Claude：**\n```\nI want to design a Microsoft Copilot Studio agent for [your organisation/context].\n\nPrimary use case: [describe the main thing users will ask the agent]\nUser type: [employees / customers / students / citizens]\nKnowledge source: [what documents or data the agent would use]\nDesired actions: [what the agent should DO, not just say — e.g., submit a form, create a ticket, send an email]\nDeployment channel: [Teams / website / SharePoint]\n\nDesign:\n1. The 5 most common topics (conversation types) this agent should handle\n2. What knowledge sources are needed for each topic\n3. What actions the agent needs beyond answering questions\n4. What escalation path exists when the agent can't help\n5. Success metrics — how would you know this agent is delivering value?\n```\n\n**第 3 步——审阅这个设计。** 它是否覆盖了目前最消耗人力时间的场景？这个范围对无代码搭建来说是否现实？\n\n**成果：** 一份具体的智能体设计文档，你可以用它向管理者提案，或开始在 Copilot Studio 中搭建。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——探索 Gumloop 的免费版",
+      "content": "你将亲手体验 Gumloop 的可视化工作流构建器，理解它与 n8n 或 Zapier 处理 AI 自动化方式的不同之处。\n\n**第 1 步——注册 Gumloop。** 前往 gumloop.com 创建一个免费账号。免费版可以让你探索平台并运行有限数量的工作流。\n\n**第 2 步——浏览模板库。** Gumloop 为常见用例提供预制模板。浏览它们，找出哪些模板与你日常经常做的任务相匹配。常见模板包括：\n- 研究智能体（搜索网页、总结、发送邮件报告）\n- 内容再利用（把一篇博客文章转化为 5 条社交媒体帖子）\n- 线索丰富化（在线索进入销售流程前先做调研）\n- 会议纪要处理器（接收转录文本，提取行动项）\n\n**第 3 步——打开一个模板并研究它。** 点击一个你感兴趣的模板。查看工作流中的各个节点（独立的步骤）：\n- 什么触发了这个工作流？\n- 哪些步骤是 AI 调用？哪些是数据转换？\n- 最终输出是什么样的？\n\n**第 4 步——复刻这个模板并自定义。** 使用一个简单的模板（内容再利用或研究摘要那个效果不错），然后：\n- 更改使用的 AI 模型（如果有这个选项）\n- 修改系统提示词，改变语气或输出格式\n- 更改输出目的地（结果发送到哪里）\n\n**第 5 步——把这次体验和 n8n 对比。** 基于你之前搭建 n8n 工作流的经验：Gumloop 让哪些事情变得更容易？n8n 在哪些方面做得更好？对于一个新项目，你会先选哪一个？\n\n**成果：** 对 Gumloop 与 n8n 式自动化的第一手对比，帮助你为不同类型的项目选择合适的工具。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "工作坊 D——搭建你的智能体技术栈决策框架",
+      "content": "你现在已经对整个 AI 自动化格局有了全面认识：n8n（开源、代码可选、可自托管）、Zapier（云端、简单易用、规模化后成本高）、Make（可视化、中等复杂度）、Copilot Studio（微软企业级、对话式智能体）、Gumloop（灵活、AI 优先、快速）。这个工作坊帮你搭建一个个人决策框架。\n\n**第 1 步——从你自己的工作中列出 6 个自动化或智能体使用场景。** 要具体：\n- “每天早上自动总结新的新闻邮件”\n- “回答新员工的 HR 问题”\n- “在销售电话前调研一家公司”\n- “收到回复邮件时更新我的 CRM”\n- “创建一个能回答产品规格问题的 Teams 机器人”\n- “根据任务数据生成每周项目状态报告”\n\n**第 2 步——为每个用例分类：**\n- 用户是以对话方式与它交互，还是它在后台运行？\n- 它需要访问 Microsoft 365 数据吗？\n- 这是一次性搭建，还是你会搭建很多个类似的？\n- 它的成本需要控制在多少？\n\n**第 3 步——提示 Claude 为每一个推荐一个平台：**\n```\nI have these automation/agent use cases:\n[paste your list]\n\nFor each one, recommend the best platform from:\n- n8n (open-source, self-hostable, code-optional, full control)\n- Zapier (cloud, easiest setup, expensive at scale)\n- Make (visual automation, mid-complexity, good value)\n- Copilot Studio (Microsoft, conversational agents, enterprise security)\n- Gumloop (AI-first, flexible, faster to build agents)\n\nFor each recommendation, explain why in one sentence and name one alternative if the primary tool isn't available.\n```\n\n**第 4 步——保存你的决策框架。** 这会成为你评估未来自动化项目时的首选参考。\n\n**成果：** 一份个性化的决策框架，把自动化任务匹配到合适的工具，避免你在错误的地方浪费时间搭建错误的东西。"
+    },
+    {
+      "type": "quiz",
+      "question": "你所在的公司使用 Microsoft 365。HR 团队被大量重复的员工问题（关于休假政策、福利、入职流程）压得喘不过气。哪个工具最适合搭建一个自助服务方案？",
+      "options": [
+        "n8n——最灵活、能处理任何工作流的自动化工具",
+        "Microsoft Copilot Studio——搭建一个连接到 SharePoint HR 文档的对话式智能体，可直接部署在 Microsoft Teams 中",
+        "Zapier——连接 HR 系统最简单的集成平台",
+        "用 Claude API 写一个 Python 脚本——对 AI 响应的控制力最强"
+      ],
+      "correct": 1,
+      "explanation": "Microsoft Copilot Studio 是正确答案。这个场景描述的是一个对话式智能体的使用场景（员工提问并得到答案），使用已有的文档知识（SharePoint 中的 HR 政策文档），并部署在 Microsoft 365 中（Teams）。Copilot Studio 正是为此而生：把 SharePoint 连接为知识来源，为常见问题类型搭建几个主题，部署到 Teams，HR 员工就能从重复性问题中解放出来。n8n（选项 A）非常适合工作流自动化，但不是为对话式智能体设计的。Zapier（选项 C）是一个触发—操作的工作流工具，不是聊天机器人构建工具。Python API 方案（选项 D）需要大量的工程投入，而且没有对话式界面，而 Copilot Studio 正是为这个用例专门设计的，且无需任何代码。"
+    },
+    {
+      "type": "quiz",
+      "question": "工作流自动化工具（n8n、Zapier）和 AI 智能体构建工具（Copilot Studio、Gumloop）之间关键的架构差异是什么？",
+      "options": [
+        "智能体构建工具只能配合微软产品使用，而工作流工具是厂商中立的",
+        "工作流自动化运行的是线性的触发—操作序列，而智能体构建工具处理的是与用户之间动态的对话式往来",
+        "工作流自动化是免费的，而智能体构建工具总是需要企业许可证",
+        "智能体构建工具只在客服场景中有用；工作流自动化处理其他所有任务"
+      ],
+      "correct": 1,
+      "explanation": "选项 B 正确描述了这个根本性的架构差异。工作流自动化（n8n、Zapier、Make）执行的是线性序列：某件事触发 → 步骤按顺序运行 → 结束。这个流程是可预测的，在执行过程中不会动态响应用户输入。智能体构建工具（Copilot Studio、Gumloop）搭建的是能够进行对话的系统——用户说一句话，智能体决定如何回应，用户再说一句话，智能体做出调整。这种动态的、对话式的架构与线性自动化有着根本的不同。选项 A 不正确——Gumloop 等平台可以在微软体系之外工作。选项 C 不正确——所有平台都有免费或低成本版本。选项 D 过于狭隘——智能体构建工具被用于 HR、IT 服务台、销售支持、知识管理等等更多场景。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 10-10 课。** 你现在理解了工作流自动化（n8n、Zapier、Make）与 AI 智能体构建工具（Copilot Studio、Gumloop）之间的区别、各自应该在什么时候使用，以及 Copilot Studio 如何融入 Microsoft 365 生态系统。对于已经在微软基础设施上运行的组织来说，Copilot Studio 往往是从“我们需要一个 AI 助手”走向上线、安全、企业级部署最快的路径。对于想要在微软生态系统之外获得灵活性和速度的团队来说，Gumloop 及类似平台提供了一个颇具吸引力的替代方案。"
+    }
+  ],
+  "nextLesson": "11-1",
+  "prevLesson": "10-9"
+}

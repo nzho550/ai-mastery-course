@@ -1,0 +1,118 @@
+{
+  "id": "17-3",
+  "title": "研究与规划相结合",
+  "part": 17,
+  "estimatedMinutes": 65,
+  "tags": [
+    "projects",
+    "beginner",
+    "research",
+    "planning",
+    "workflow",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n研究与规划在相互结合时威力最强：最好的项目计划都建立在研究基础之上，而研究只有围绕具体的规划问题展开时才最有用。本课介绍如何把第 15 部分的研究技能与第 17 部分的规划技能，整合成一个高效的工作流程。你将学习如何把一个模糊的项目目标转化为有针对性的研究问题、如何把研究结果融入计划、当研究挑战你的假设时该怎么做，以及何时该停止研究、开始动手。"
+    },
+    {
+      "type": "text",
+      "content": "## 研究与规划何时重叠\n\n大多数真实项目都需要研究和规划两者——但如果顺序不对，二者会相互削弱。\n\n**没有规划框架的研究**会产生有趣的信息，却没有明确的应用方向。你学到了很多，却不知道这对你的项目意味着什么。\n\n**没有研究的规划**会产生一份建立在假设之上、过度自信的计划。它看起来很扎实，直到遇到那些假设没有考虑到的现实情况。\n\n整合式方法在两者之间交替进行：\n1. 明确目标，确定计划需要了解什么（先规划）\n2. 针对这些具体问题进行研究（有针对性的研究）\n3. 把研究发现纳入计划（再次规划）\n4. 找出计划引发的新问题（回到研究）\n5. 研究以填补关键缺口\n6. 最终确定计划，对其假设充满信心\n\n**这在什么情况下最重要：** 高风险决策（预算、招聘、自建还是外购）、不熟悉的领域（第一次做这类项目）、监管或合规要求（缺口无法弥补）、以及复杂的依赖关系（错误的假设会引发连锁反应）。"
+    },
+    {
+      "type": "text",
+      "content": "## 第一步——明确你的规划问题\n\n在研究之前，先明确你的计划究竟需要了解什么。模糊的研究只会产生模糊的计划。\n\n```\nI'm planning [project description].\n\nTo build a credible plan, I need to answer these questions:\n- What are the regulatory or compliance requirements I must meet?\n- What does this typically cost and what drives cost variation?\n- What are the technical constraints or dependencies?\n- How long does this type of project typically take?\n- What are the most common failure modes — what causes projects like this to go wrong?\n\nGiven this goal and context, what additional questions should I be able to answer\nbefore I can build a credible plan? I'm particularly interested in:\n- Things I might not know I don't know\n- Assumptions I'm currently making that might be wrong\n- Stakeholder or dependency questions I haven't considered\n```\n\n这会给你一份研究简报——一份有针对性的问题清单，而不是一个开放式的主题。你研究的质量取决于你问题的质量。\n\n**按以下两点为研究问题排定优先级：** （1）它们对计划的影响有多大，以及（2）你的不确定程度有多高。优先研究那些不确定性最高、影响最大的问题。不要去研究你已经知道的事情，或者不会实质性改变你计划的事情。"
+    },
+    {
+      "type": "text",
+      "content": "## 第二步——开展有针对性的研究\n\n明确问题后，高效运用第 15 部分的研究工具：\n\n**对于时效性强的事实类问题**（法规、成本、市场数据、最新进展）：\n使用 Perplexity AI——它会搜索时效性强的网络来源并注明出处：\n```\n[Your specific question]\n\nI need recent, credible information (2024–2026 if possible).\nCite your sources so I can verify.\nNote if the answer varies significantly by context (industry, size, region).\n```\n\n**对于概念性理解和权衡分析：**\n使用 Claude——解释全局、比较不同方案、分析利弊：\n```\nFor a project of this type: [describe project]\n\nExplain the main approaches to [topic] and the tradeoffs between them.\nWhat does the evidence say about which approach works best in which circumstances?\nWhat would you recommend for my context, and why?\n```\n\n**对于文档和现有报告：**\n把 PDF 上传或把报告粘贴到 Claude.ai 进行分析（第 15-4 课已介绍过）。\n\n**用结构化格式记录研究成果：**\n在研究过程中，维护一份持续更新的文档：\n```\nResearch Findings for [Project Name]\n\nQuestion 1: [question]\nAnswer: [key findings]\nSource: [URL or document name]\nConfidence: [high/medium/low — how confident are you in this answer?]\nImpact on plan: [how does this change what you'd planned to do?]\n\nQuestion 2: ...\n```\n\n“对计划的影响”这一栏至关重要——它迫使你把研究发现和规划决策连接起来。"
+    },
+    {
+      "type": "text",
+      "content": "## 第三步——把研究成果整合到计划中\n\n有了研究发现后，把它们反馈到你的规划中：\n\n```\nI'm planning [project]. Here is the research I've done:\n[paste your research findings document]\n\nMy current draft plan is:\n[paste your current plan, even if rough]\n\nUsing this research:\n1. What should change in the plan? Identify specific additions, removals, or modifications.\n2. Which risks does the research confirm? Which new risks does it reveal?\n3. Does the research suggest any tasks will take longer than I estimated? Why?\n4. Which assumptions in my plan does the research challenge?\n5. What dependencies (on other teams, vendors, approvals) does the research reveal?\n6. Are there regulatory or compliance requirements I need to add to the plan?\n```\n\n**更新计划后，闭环处理：**\n```\nLooking at this updated plan, what planning questions remain unanswered?\nWhich are critical to answer before work starts vs. which can be resolved during execution?\n```\n\n这些问题会成为你下一轮研究的对象——或者如果可以在执行过程中解决，就列入计划的“待定决策”清单。"
+    },
+    {
+      "type": "text",
+      "content": "## 当研究挑战你的计划时\n\n有时研究不仅仅是填补缺口——它会从根本上挑战你的方案。这令人不适，但很有价值：在规划阶段发现，总比在执行中途发现要好。\n\n**研究正在挑战你计划的迹象：**\n- 你原本不知道的法规使你的方案不合规\n- 你打算使用的技术实际做不到你以为的事\n- 你所在行业的类似项目在你以为很简单的那个环节上屡屡失败\n- 成本区间是你预算的 3 倍\n- 监管审批所需的时间比你整个项目的截止期限还长\n\n**遇到这种情况时：**\n```\nMy research has revealed that [finding], which challenges my current plan because [reason].\n\nHelp me think through my options:\n1. What are the main alternatives to my current approach given this constraint?\n2. For each alternative, what are the tradeoffs?\n3. Which alternative best preserves the core goal of the project?\n4. What would I need to know before committing to an alternative?\n```\n\n**忽视不利研究结果的冲动是很强烈的。** 你已经在一份计划上投入了时间，一个挑战它的发现感觉像是白费功夫。但事实并非如此——在规划阶段发现问题，远比在执行阶段发现问题便宜得多。把相矛盾的研究结果当作一份礼物，而不是障碍。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**研究的二八法则：** 研究存在收益递减。到了某个节点，再多的研究也不会改变你的计划。当不同来源反复给出相同的答案，你的规划问题都已在可接受的置信度上得到解答时，就停止研究、开始动手吧。信号是：你在阅读新来源，却没有给研究文档增添任何新内容。那就是该停下的时刻。目标是一份好的计划，而不是详尽无遗的研究。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "研究与规划相结合冲刺",
+      "content": "这个工作坊会针对一个真实的项目或决策，完整地运行一次“研究到规划”的循环。目标用时 30 分钟。\n\n**选择你的主题：**\n选一件你正在规划或决策、既需要研究又需要规划的事。示例：\n- 在工作中推行一个新工具或新流程\n- 评估一个供应商或服务商\n- 规划一个团队倡议或组织变革\n- 为你想获批的事情撰写商业提案\n\n**第 1–5 分钟：明确规划问题**\n\n用你的项目运行规划问题提示词。让 Claude 生成你的计划需要回答的问题。审阅这份清单，并：\n- 删除任何不会实质性改变你计划的问题\n- 添加 Claude 遗漏的、针对你情境的具体问题\n- 排序：哪 3–4 个是开始前最需要解答的？\n\n**第 5–20 分钟：研究关键问题**\n\n对每个关键问题：\n- 如果是关于当前事实/法规/成本的：用 Perplexity，并至少核实一个引用来源\n- 如果是概念性或分析性的：用 Claude\n\n把每个发现记录到你的持续文档中，包括：问题、关键答案、来源，以及对计划的影响。\n\n**第 20–28 分钟：把研究成果整合进计划**\n\n运行项目启动提示词（来自第 17-1 课），并粘贴你的研究发现：\n```\nI'm planning [project]. Here is what I know plus research findings:\n[paste goal, context, and your research findings document]\n\nBuild a project plan that incorporates these findings. Flag where the research\nhas changed what I'd otherwise have assumed.\n```\n\n**第 28–30 分钟：找出剩余的缺口**\n\n问：*“这份计划提出了哪些我们尚未回答的问题？哪些是开始前必须解答的，哪些可以在执行过程中解决？”*\n\n把这些记为后续研究项目，或计划中的待定决策。\n\n**产出：** 一份基于研究、你今天就可以分享给经理或利益相关方的项目计划，其中已知的缺口被明确列出，而不是被隐藏。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在规划一个新的职场倡议，已经研究了两天。你有大量信息，但计划仍然模糊。你应该怎么做？",
+      "options": [
+        "继续研究，直到你拥有所需的全部信息",
+        "停下来问自己：还有哪些具体的规划问题尚未解答？只研究这些问题，然后构建计划",
+        "先构建计划，之后再做研究来验证它",
+        "先把所有研究内容汇总成一份文档，再进行规划"
+      ],
+      "correct": 1,
+      "explanation": "两天的研究却仍得到一份模糊的计划，这正是无方向性研究的症状——收集信息却没有明确计划需要什么。解决办法是从开放式研究转向问题驱动的研究：明确计划还需要了解什么，只研究这些内容，然后构建计划。继续无方向地研究下去（A）会产生更多信息，却不能解决模糊的问题——你仍然缺少一个能告诉你哪些相关的结构。先构建再验证（C）在低风险项目上可行，但在风险较高时可能建立在错误的假设之上。先汇总（D）只会进一步推迟规划，却不能解决模糊问题——对无方向性研究的汇总仍然是无方向性的。“研究很多，计划却模糊”这种模式几乎总是意味着规划问题没有先被明确下来。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——研究驱动的规划",
+      "content": "把研究和规划结合成一个整合的工作流程。\n\n**第一步——选择一项需要先做研究的规划任务：** 技术选型、市场进入决策、流程变革。\n\n**第二步——用 Perplexity 和 Claude 进行快速研究**（最多 15 分钟）。\n\n**第三步——把研究成果直接输入规划：**\n“基于这项研究 [粘贴结果]，为 [规划任务] 制定一份计划。计划应体现 [技术/市场/领域] 的现状，避免采用研究表明已过时或存在问题的方式。”\n\n**第四步——找出如果没有这项研究，计划会有哪些不同。** 你原本会做出什么假设？\n\n**第五步——问 Claude：** “哪些尚未填补的研究缺口，如果补上会最大程度改善这份计划？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——基于证据的决策",
+      "content": "用 AI 研究收集到的证据来做出一项重要决策。\n\n**第一步——确定一个**值得做研究的真实决策。\n\n**第二步——设计研究方案：** 什么样的证据能帮你做决定？\n\n**第三步——用 AI 研究工具收集证据。**\n\n**第四步——让 Claude 梳理这个决策：**\n```\nHelp me make this decision: [describe it]\n\nBased on this evidence: [paste research]\n\nStructure as:\n1. Decision criteria: what factors matter most?\n2. Options: what are the realistic choices?\n3. Evidence for each option: what does the research support?\n4. Recommendation: which option does the evidence most support?\n5. Key uncertainty: what would change this recommendation?\n```\n\n**第五步——做出决定。** 记录你的推理过程，供未来参考。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——规划研究的质量把控",
+      "content": "确保你的规划研究质量足以支撑行动。\n\n**第一步——对于你已经创建的一份计划**，列出计划所依赖的每一个假设。\n\n**第二步——对每个假设**问：这是基于研究、基于经验，还是仅仅是假设？\n\n**第三步——找出风险最高的假设**（如果这个假设错了，计划就会失败）。\n\n**第四步——让 Claude 挑战你风险最高的假设：**\n“我正在基于这个假设做规划：[描述它]。什么样的证据会与这个假设相矛盾？什么样的情景会让这个假设不成立？”\n\n**第五步——要么找到支持该假设的证据**，要么调整计划，使其在假设不成立时依然稳健。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——计划压力测试",
+      "content": "系统性地针对现实的失败情景对计划进行压力测试。\n\n**第一步——取用一份已完成的项目或决策计划。**\n\n**第二步——让 Claude 生成失败情景：**\n```\nStress-test this plan [describe it] against realistic failure scenarios.\n\nFor each scenario:\n1. Describe what happens\n2. At what point in the plan does it cause problems?\n3. What is the impact?\n4. How would I detect it early?\n5. What is the contingency response?\n\nGenerate: 3 likely scenarios, 2 unlikely but plausible scenarios, 1 worst-case scenario.\n```\n\n**第三步——对每个失败情景**，判断：计划需要改变吗？还是应急响应方案已经足够？\n\n**第四步——根据压力测试的发现更新计划。**"
+    },
+    {
+      "type": "quiz",
+      "question": "你根据 AI 研究得出的市场数据（显示需求强劲）规划了一次产品发布。在投入预算之前，最重要的额外验证是什么？",
+      "options": [
+        "再做一些 AI 研究来确认这些发现",
+        "直接与潜在客户交谈：AI 研究汇总的是已有的信息，而客户访谈能揭示人们实际想要的东西，而不是他们在调查中所说的话",
+        "聘请一家市场研究公司",
+        "查看竞品的类似功能"
+      ],
+      "correct": 1,
+      "explanation": "AI 研究告诉你的是关于某个市场已被写下来的内容——文章、调查、报告。而客户访谈告诉你的是你目标市场中具体的人实际怎么想、愿意为什么付费。这两者往往有显著差异。投入预算前最有价值的验证：与符合你目标客户画像的人进行 5-10 次访谈。询问他们实际的行为和消费，而不是假设性的兴趣。“你会使用一个能做 X 的产品吗？”得到的答案不可靠；“你现在是怎么解决这个问题的，为此付了多少钱？”才能得到可行动的数据。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的研究表明一种方案最好，但你的经验表明另一种方案效果更好。你应该相信哪一个？",
+      "options": [
+        "永远相信研究，而不是经验",
+        "永远相信经验，而不是研究",
+        "调查这个差异：判断研究是否适用于你的具体情境，你的经验是否具有代表性，以及什么能帮助化解这个矛盾",
+        "两种方案并行使用，看哪个效果更好"
+      ],
+      "correct": 2,
+      "explanation": "研究与经验之间的差异是有价值的信号，而不是应被忽视的问题。调查以下几点：（1）这项研究是否适用于你的具体情境（公司规模、行业、地域）？（2）你的经验是基于足够多的案例可以推广，还是只是一两个样本？（3）你们衡量的是同一件事吗？（4）自研究开展以来，是否有什么发生了变化？弄清楚它们为什么冲突，往往比单独依赖任何一个来源能产生更好的洞见。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 17-3 课。** 现在你可以运行一个整合的“研究到规划”工作流程：明确规划问题 → 开展有针对性的研究 → 用研究成果构建计划 → 找出剩余缺口。你知道当研究挑战你的计划时该怎么做，也知道何时该停止研究、开始动手。第 17-4 课将介绍如何创建决策记录，以捕捉你做出选择的原因。"
+    }
+  ],
+  "nextLesson": "17-4",
+  "prevLesson": "17-2"
+}

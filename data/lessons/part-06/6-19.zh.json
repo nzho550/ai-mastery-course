@@ -1,0 +1,89 @@
+{
+  "id": "6-19",
+  "title": "Copilot 助力文档编写与职业写作",
+  "part": 6,
+  "estimatedMinutes": 50,
+  "tags": ["copilot", "documentation", "writing", "reports", "government", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n文档常常被当作事后补充——匆匆写完，从不更新，也没人在意。但在政府工作中，文档并不是可有可无的：审计追踪、技术规范、用户指南和政策文档都是正式要求。\n\nCopilot 在写作和维护文档方面异常出色——往往比它在复杂代码生成上的表现还要好。这节课涵盖：\n- 代码文档：JSDoc、docstring、行内注释（何时写、怎么写）\n- README 与技术规范文档生成\n- 作为永久记录的提交信息和 PR 描述\n- 报告与专业文档——政府场景下的应用\n- 让文档与代码变更保持同步\n- 专门为写作质量切换到 Claude 模型"
+    },
+    {
+      "type": "text",
+      "content": "## 用 Copilot 写代码文档\n\n### Docstring 与 JSDoc\n\n`/doc` 命令（在第 6-11 课中介绍过）会生成文档注释。但它生成内容的*质量*，很大程度上取决于你要求了什么。\n\n**基础做法（大多数人的做法）：**\n```\n/doc #selection\n```\n生成一个极简的 docstring。通常简短到没什么用。\n\n**全面的做法：**\n```\n/doc #selection\n生成一个 Google 风格的 docstring，包括：一句话摘要、解释“为什么”而不只是“做什么”的详细描述、\n带类型和说明的 Args、带类型和说明的 Returns、任何可能抛出的异常的 Raises，\n以及一个展示真实使用场景的 Example。\n```\n\n**一个政府数据函数的输出示例：**\n```python\ndef import_staff_records(file_path: str, dry_run: bool = False) -> ImportResult:\n    \"\"\"\n    Import staff records from a CSV file into the HR system.\n\n    Validates all records before committing any changes. If any record fails \n    validation, the entire import is rejected and no data is modified. This \n    all-or-nothing approach prevents partial imports that leave the database \n    in an inconsistent state.\n\n    Args:\n        file_path: Absolute path to the CSV file. Must be UTF-8 encoded.\n        dry_run: If True, validates but does not commit changes. Useful for \n                 pre-flight checking before a live import.\n\n    Returns:\n        ImportResult containing: success flag, count of records processed, \n        count imported, list of validation errors (empty on success).\n\n    Raises:\n        FileNotFoundError: If file_path does not exist.\n        PermissionError: If the file cannot be read.\n        ValueError: If the CSV is malformed or missing required headers.\n\n    Example:\n        >>> result = import_staff_records('/data/staff_2024_q4.csv', dry_run=True)\n        >>> if result.success:\n        ...     import_staff_records('/data/staff_2024_q4.csv')  # live import\n    \"\"\"\n```\n\n### 什么时候不该写文档\n\n让 Copilot 对以下情况跳过文档：\n- 名字已经说明一切的、不言自明的函数（`def get_user_id()`）\n- 只被一个函数调用、且那个函数已经有文档的私有辅助函数\n- 测试函数（测试名称本身就应该描述场景）\n\n文档写得太多，会产生让读者干脆不再读的噪音。"
+    },
+    {
+      "type": "text",
+      "content": "## README 与技术文档\n\n### 从代码生成 README\n\n```\n@workspace 为这个项目生成一份全面的 README.md。\n包括：项目目的、前置条件、安装步骤、配置说明、使用示例（使用代码中实际的命令），\n以及针对 3 个最可能出现的安装错误的排查部分。\n语气：专业但清晰。假设读者是一位从没见过这个项目的开发者。\n```\n\n**对于政府/内部工具，还要额外要求：**\n```\n添加这些部分：数据要求（需要哪些输入数据）、安全考量（这个工具需要哪些权限、能访问哪些数据）、\n审计信息（记录了什么、记录在哪里），以及支持联系人（占位符）。\n```\n\n### 架构文档\n\n```\n@workspace 为我们的 README 写一个架构概览部分。\n包括：系统组件及其职责、数据流描述、外部依赖及选择它们的原因，\n以及任何新开发者应该知道的重大设计决策或约束。控制在 500 字以内。\n```\n\n### 让文档保持同步\n\n代码变更后，文档会变得过时。Copilot 可以帮忙维持同步：\n\n```\n@workspace 对比 README 中的安装说明和项目实际的安装流程。\n所有步骤是否依然准确？README 里描述的步骤有没有已经不存在的？\nREADME 里有没有缺失的新步骤？\n```\n\n```\n@workspace 上个 sprint 里以下函数发生了变化：[列出函数]。\n找出任何引用了这些函数、可能需要更新的文档（README、docstring、注释）。\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 作为正式记录的提交信息与 PR 描述\n\n在政府工作中，提交信息和 PR 描述往往是可审计的记录——它们记录了谁在什么时候改了什么、为什么改。糟糕的提交信息会造成合规缺口。\n\n### 用 Copilot 写出更好的提交信息\n\n在 CLI 中：\n```\n/diff\n为这些改动写一条提交信息。使用 conventional commits 格式：\n- 第一行：type(scope): 简要描述（最多 72 个字符）\n- 空一行\n- 正文：改了什么、为什么改（不只是“什么”——“为什么”才是最重要的）\n- 页脚：任何相关的 issue 引用、破坏性变更说明\n\n对于政府场景：这条信息要写得足够清楚，让一个不了解我们代码库的审计人员也能看懂改了什么、为什么改。\n```\n\n**供参考的 conventional commits 类型：**\n- `feat:` 新功能\n- `fix:` bug 修复\n- `refactor:` 既不修复 bug 也不新增功能的代码改动\n- `docs:` 仅文档改动\n- `test:` 新增或更新测试\n- `chore:` 维护性工作、依赖更新\n- `security:` 与安全相关的改动\n\n### PR 描述模板\n\n为 PR 描述创建一个提示词文件（来自第 6-13 课）：\n\n`.github/prompts/pr-description.prompt.md`：\n```markdown\nGenerate a pull request description for the staged changes. Format:\n\n## What Changed\n[3 specific bullet points — what code changed, not vague 'improvements']\n\n## Why\n[Business/technical reason for the change — 1-2 sentences]\n\n## Risk Assessment\n- **Data impact:** [Does this change how data is read, written, or deleted?]\n- **User impact:** [Will any user-facing behavior change?]\n- **Rollback:** [Can this be reverted if needed? What would reverting require?]\n\n## Testing Done\n[List specific tests added or manually verified]\n\n## Reference\n[Jira/ADO ticket number if applicable]\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 报告与专业文档——政府场景下的应用\n\n政府工作者除了代码之外，还会产出大量书面成果：报告、简报、状态更新、政策分析和流程文档。Copilot——尤其是在切换到 Claude 之后——在这些任务上非常胜任。\n\n### 为写作切换到 Claude\n\n对于文档和职业写作，在 Copilot Chat 的模型选择器中把模型切换到 Claude（Sonnet 或 Opus）。相比默认模型，Claude 在以下方面写出的文字明显更好：\n- 执行摘要\n- 政策文档分析\n- 面向非技术读者的技术规范\n- 会议记录与行动项提取\n- 状态报告\n\n### 报告生成提示词\n\n**每周状态报告：**\n```\n/chronicle standup\n把这个转换成政府格式的专业状态报告：\n- 我这周完成了什么（3-5 条，要具体）\n- 我下周会做什么\n- 阻碍或依赖项\n- 任何风险或需要关注的点\n\n语气：客观、专业。读者：我的经理和团队负责人。\n长度：300 字以内。\n```\n\n**面向非技术利益相关者的技术摘要：**\n```\n把 #file:[技术文档] 解释给一位非技术读者听。\n背景：这份内容会发给一位有政策背景、没有技术背景的高级经理。\n避免：术语、没有解释的缩写、代码引用。\n包括：这个系统用大白话说是做什么的、它解决了什么业务问题、\n读者需要就此做出什么决定，以及他们应该了解哪些风险。\n长度：最多 1 页。\n```\n\n**从会议记录中提取行动项：**\n```\n从这些会议记录中提取所有的行动项：[粘贴记录]\n格式为表格：| 行动 | 负责人 | 截止日期 | 优先级 |\n如果没有指定负责人或截止日期，标记为 [待定]。\n每个行动项，加一句话说明它为什么重要。\n```\n\n**政策分析：**\n```\n我需要在我们的系统中落实 [新政策或要求]。\n总结：这项政策要求什么、我们现在的系统做了什么、存在哪些差距、\n为了合规需要做哪些改动。把这个结构化为一份需求差距分析。\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**写作类任务的模型选择：** 用 Copilot 做职业写作时，一定要切换到 Claude Sonnet 或 Claude Opus。相比默认模型，在文档、报告和结构化散文方面，质量差异非常明显。Claude 写出的主题句更清晰、段落结构更好，语域也更适合政府和专业场景的正式要求。做代码生成任务时切换回 GPT-4.1 或 Auto。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "为一个真实模块编写文档",
+      "content": "把全面的文档编写方法应用到你代码库中一个文档不足的真实模块上。\n\n**第 1 步——在 Copilot Chat 的模型选择器中切换到 Claude。**\n\n**第 2 步——选择一个模块**，它至少有 3 个几乎没有文档或完全没有文档的公开函数。\n\n**第 3 步——生成模块级文档：**\n```\n@workspace 为 #file:[你的文件] 写一个模块 docstring。包括：\n- 这个模块是做什么的、为什么存在\n- 什么时候该用这些函数，什么时候该用替代方案\n- 任何重要的假设或前置条件\n- 给维护者的说明（这段代码哪里比较棘手）\n```\n\n**第 4 步——为每个公开函数写文档：**\n```\n/doc #selection\n为这个函数生成全面的文档。包括：摘要、带类型的 Args、Returns、Raises，\n以及一个来自我们实际使用场景的真实 Example。\n不要记录实现细节——记录它的契约：它保证了什么。\n```\n对每个函数重复这个过程。\n\n**第 5 步——生成一份模块 README：**\n```\n为这个模块写一份简短的 README 部分，可以放进主项目 README 或 docs/ 文件夹。\n包括：目的、关键函数、使用示例和注意事项。\n```\n\n**第 6 步——审查准确性。** 阅读每一段生成的 docstring，确认它准确描述了对应函数。修正任何不准确之处——生成的文档如果是错的，比没有文档还糟糕。\n\n**成果：** 一个在 30 分钟内就生成完毕、拥有准确且有用文档的完整模块。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "实战 A——为非技术受众撰写技术文档",
+      "content": "把一份技术文档或代码说明转化成非技术经理或政策官员能据此行动的内容。\n\n**第 1 步——从你的工作中选一个技术主题：**\n- 你维护或搭建过的一个系统\n- 你最近做的一个技术决策\n- 你在代码中发现的一个风险或问题\n- 你实现的一个新工具或流程\n\n**第 2 步——在模型选择器中切换到 Claude。**\n\n**第 3 步——生成说明：**\n```\n我需要向我的部门主管解释 [你的技术主题]，对方有政策背景，没有技术培训经历。\n\n创建一份 1 页的简报，包含：\n- 这个系统/改动做了什么（大白话，不用术语）\n- 为什么这对部门的使命很重要\n- 需要哪些决策或批准\n- 存在哪些风险，是如何被管理的\n- 时间表或关键里程碑\n\n语气：正式的政府简报风格。\n不要使用：代码引用、技术缩写（除非做出解释）、实现细节。\n```\n\n**第 4 步——检查非技术层面的清晰度。**\n假设自己没有任何技术背景来阅读它。标记出任何需要技术知识才能理解的句子。让 Copilot 重写这些句子。\n\n**第 5 步——要求一个更短的版本：**\n```\n把这个缩短成 150 字以内的执行摘要。保留关键决策和风险。删掉所有实现细节。\n```\n\n**成果：** 一份你真的可以发给经理的简报。1 页版和 150 字版有没有抓住重点？"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "实战 B——提交信息质量升级",
+      "content": "在你最近的 git 历史中提升提交信息的质量。\n\n**第 1 步——回顾你最近的提交：**\n```\ngit log --oneline -20\n```\n\n**第 2 步——找出质量不高的提交。** 留意这些信息：\n- 含糊不清（'fix bug'、'update code'、'changes'）\n- 缺少背景（'add validation' —— 对什么加校验？为什么加？）\n- 只说了“做了什么”，没说“为什么”（'rename user to member' —— 为什么要改这个名字？）\n\n**第 3 步——为你的下一次提交使用 Copilot CLI：**\n在 CLI 会话中：\n```\n/diff\n为这些改动写一条 conventional commits 格式的提交信息。\n要求：第一行最多 72 个字符，在正文中解释“为什么”（不只是改了什么），\n如果适用，包含工单/issue 编号。\n读者：一个没写过这段代码的开发者，以及一个六个月后需要理解改了什么、为什么改的审计人员。\n```\n\n**第 4 步——搭建一个提交提示词文件。**\n用这节课的格式创建 `.github/prompts/commit-message.prompt.md`。\n\n**第 5 步——为你在第 2 步找出的 3 个最弱的提交，写 3 条改进后的信息。** 即使是针对过去的提交，也要练习这种以“为什么”为核心的写法——这能培养你的习惯。\n\n**养成的持久习惯：** 每次提交之前，都问自己：“六个月后有人读到这条信息，不看代码也能明白改了什么、为什么改吗？” 如果不能，就再改进它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "实战 C——政府报告生成器",
+      "content": "为你最常写的报告构建一个提示词库。\n\n**找出你最常写的 3 种文档。** 例如：\n- 给经理的每周状态报告\n- 技术交接文档\n- 数据处理运行日志摘要\n- 事件/问题报告\n- 会议行动项\n\n**为每种文档在 `.github/prompts/` 中创建一个提示词文件：**\n\n**示例：`status-report.prompt.md`**\n```markdown\nGenerate a weekly status report based on my recent work.\n\nFormat (strict):\n\nWeekly Status — [Week ending YYYY-MM-DD]\nProject: [Project name]\n\n**Completed this week:**\n[3-5 bullet points — specific accomplishments, not activities]\n\n**In progress:**\n[Items underway with % complete if estimatable]\n\n**Next week:**\n[Planned activities]\n\n**Issues / Blockers:**\n[Any blockers or risks — mark as NONE if clear]\n\n**Metrics:**\n[Any relevant numbers: tickets closed, records processed, test coverage, etc.]\n\nLength: under 300 words. Tone: factual, professional.\n```\n\n**用上周的真实数据测试每个提示词。** 它生成的内容你不用修改就能直接发出去吗？\n\n**编辑测试：** 如果你需要修改超过 20% 的输出内容，说明这个提示词还需要打磨。不断收紧它，直到输出内容基本可以直接使用（只需要小幅修改）。\n\n**成果：** 一个能大幅缩短你写文档时间的个人提示词库——输出质量足够好，基本不需要大改就能发送。"
+    },
+    {
+      "type": "quiz",
+      "question": "你用 Copilot 为一个函数生成了一份全面的 docstring。docstring 说这个函数对负数输入会抛出 ValueError。你检查代码——发现它实际上并没有抛出 ValueError，而是返回 -1。你应该怎么做？",
+      "options": [
+        "接受这份 docstring——它描述的是函数“应该”做的事，也就是抛出 ValueError",
+        "把 docstring 改成能准确描述函数实际行为的内容，然后再另外决定这个行为是否应该改变",
+        "删掉这份 docstring，重新开始——生成的文档从来都不准确",
+        "接受它——这个差异不算大，反正没人会仔细看 docstring"
+      ],
+      "correct": 1,
+      "explanation": "不准确的文档比没有文档更糟糕——开发者会相信这份 docstring，写出预期会抛出 ValueError 的代码，结果却意外收到 -1。先把 docstring 改成符合实际情况的描述：写成“对负数输入返回 -1”或“对非法输入返回 -1”。然后再单独决定这个行为是否应该改成抛出 ValueError（这可能确实更合理）。留着不改的错误文档，会造成真实的 bug。"
+    },
+    {
+      "type": "quiz",
+      "question": "对于哪种类型的任务，你应该把 Copilot 从默认模型切换到 Claude Sonnet 或 Opus？",
+      "options": [
+        "打字时生成代码补全建议",
+        "在终端中运行单元测试",
+        "撰写技术简报、执行摘要、政策差距分析，或任何篇幅较长的专业散文",
+        "用 @workspace 搜索代码库"
+      ],
+      "correct": 2,
+      "explanation": "Claude 模型（Sonnet 和 Opus）经过训练，擅长产出高质量、结构良好的散文，在正式写作、细腻的解释和专业文档格式方面尤其突出。对于既要让技术读者也要让非技术读者都能读懂的技术简报、状态报告、政策分析和文档，Claude 的表现始终优于默认模型。做代码生成任务、且 Claude 的写作优势派不上用场时，切换回 GPT-4.1 或 Auto。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-19 课完成。** 文档是 Copilot 写作能力最能体现出来的地方——也是切换到 Claude 后质量提升最明显的地方。通过把文档中机械性的部分（docstring 结构、README 章节、提交信息格式）自动化，你能腾出精力去关注只有你才能提供的部分：为什么这样做、业务背景，以及代码本身看不出来的那些知识。第 6-20 课将介绍安全、隐私与内容排除——如何在受监管、注重安全的环境中安全地使用 Copilot。"
+    }
+  ],
+  "nextLesson": "6-20",
+  "prevLesson": "6-18"
+}

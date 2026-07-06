@@ -1,0 +1,118 @@
+{
+  "id": "11-3",
+  "title": "获取你的第一个 API 密钥",
+  "part": 11,
+  "estimatedMinutes": 55,
+  "tags": [
+    "api",
+    "anthropic",
+    "setup",
+    "security"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将创建好一个 Anthropic API 密钥，安全地把它存储在一个环境变量和一个 `.env` 文件中，并确认它永远不会意外出现在 git 仓库里。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 API 密钥？\n\nAPI 密钥是一个用来向 Anthropic API 证明你身份的密钥字符串。你发起的每个请求都会在请求头中带上这个密钥——它告诉 Anthropic：『这个请求来自这个账户，把这些 token 计入这个账户的账单。』\n\nAPI 密钥长这样：`sk-ant-api03-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`\n\n它们又长又随机，而且是保密的。任何拿到你的 API 密钥的人都可以发起 API 调用，费用记在你的账户上。把它当作密码来对待——甚至更重要，因为一旦密钥泄露，就可能产生真实的费用。\n\n**黄金法则：** 永远不要把 API 密钥提交到 git。永远不要把它粘贴到聊天窗口中。永远不要把它放进可能会被分享出去的代码里。始终使用环境变量。"
+    },
+    {
+      "type": "text",
+      "content": "## 创建你的密钥\n\n1. 打开 `console.anthropic.com` 并登录（如果需要，先创建一个账户——新账户会获得试用额度）\n2. 在左侧边栏中，点击 **API Keys**\n3. 点击 **Create Key**\n4. 给它起一个好记的名字：`ai-course-learning`\n5. 点击 **Create Key**\n6. **立即复制这个密钥**——你只能看到完整密钥一次。如果你没复制就关闭了页面，就需要重新创建一个密钥。\n7. 在完成下面的设置步骤之前，先把它粘贴到一个临时的地方（比如记事本）"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**你只能看到完整密钥一次。** 关闭创建对话框之后，密钥在控制台中会被遮盖。如果你弄丢了它，就需要删除它并创建一个新的——没有办法恢复。在继续之前先复制好它。"
+    },
+    {
+      "type": "text",
+      "content": "## 安全地存储密钥：环境变量\n\n**环境变量**是一个存储在你操作系统环境中的命名值——与你的代码相互独立。程序在运行时读取它。它永远不会出现在你的代码文件中。\n\n这才是处理密钥的正确方式。\n\n**为当前终端会话设置变量（PowerShell）：**"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "$env:ANTHROPIC_API_KEY = \"sk-ant-api03-your-key-here\""
+    },
+    {
+      "type": "text",
+      "content": "这只对当前的 PowerShell 会话有效。当你关闭并重新打开 PowerShell 时，它就消失了。要让它在多个会话之间保持不变，你需要一个 `.env` 文件。\n\n**`.env` 文件的做法：**\n\n`.env` 文件是一个纯文本文件，用于存储一个项目的环境变量。像 `python-dotenv` 和 `dotenv`（Node.js）这样的库会自动读取它，并让这些变量在你的代码中可用。"
+    },
+    {
+      "type": "text",
+      "content": "## 为 API 配置你的项目\n\n在你的 `ai-course-projects` 文件夹中按以下步骤操作："
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "安全存储 API 密钥",
+      "content": "**第一步——创建 .env 文件**\n1. 在 VS Code 中，进入你的 `exercises/` 文件夹\n2. 新建一个文件：`exercises/.env`\n3. 添加一行：\n```\nANTHROPIC_API_KEY=sk-ant-api03-your-key-here\n```\n（替换成你自己的真实密钥——值的两侧不要加引号）\n4. 保存文件\n\n**第二步——用 .gitignore 保护它**\n1. 检查 `exercises/.gitignore` 是否存在。如果不存在，就创建它。\n2. 确保它至少包含以下几行：\n```\n.env\n*.env\n```\n3. 保存\n\n**第三步——验证密钥已被 gitignore 排除**\n在 VS Code 的源代码管理面板（分支图标）中，查看变更列表。`.env` 文件绝不能出现在列表中。如果它出现了，说明你的 `.gitignore` 没有生效——请再次检查该文件是否保存在与 `.env` 相同的文件夹中。\n\n**第四步——在 PowerShell 中设置环境变量**\n在 VS Code 中打开集成终端（`Ctrl+反引号`），运行：\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-api03-your-key-here\"\n```\n验证是否设置成功：\n```powershell\necho $env:ANTHROPIC_API_KEY\n```\n你应该会看到密钥被打印出来。（这是唯一一次在终端里看到你的密钥是可以接受的——你是在验证配置，而不是在分享它。）\n\n**第五步——从记事本中删除密钥**\n回到你临时存放密钥的地方，把它删除。现在它只存在于 `.env` 和你的环境变量中——其他地方都没有了。"
+    },
+    {
+      "type": "callout",
+      "variant": "danger",
+      "content": "**本课程中最常见的错误：** 不小心把 `.env` 文件提交到 git，并推送到公开的 GitHub 仓库。这样你的 API 密钥就公开了。机器人会持续扫描 GitHub 上暴露的 API 密钥，并在几分钟之内加以利用。\n\n如果发生了这种情况：立即前往 `console.anthropic.com` → API Keys → 删除泄露的密钥 → 创建一个新的密钥。然后从 git 历史记录中移除该密钥（搜索『remove secret from git history』——这是一个多步骤的过程）。"
+    },
+    {
+      "type": "text",
+      "content": "## 新账户的免费额度\n\n新的 Anthropic 账户会获得试用额度——足够让你舒舒服服地完成第 11 部分的所有工作坊。具体金额会变化，但预计在 5-10 美元之间。\n\n你可以在 `console.anthropic.com` → Settings → Billing 中查看你的额度余额。\n\n按 Haiku 的定价（每百万输入 token 1 美元），5 美元的额度大约能让你发起 500 万次输入 token 的调用。对于这一部分的学习练习，你只会用到其中的一小部分。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——API 密钥安全练习",
+      "content": "从第一天开始就练习安全的 API 密钥管理。\n\n**第一步——打开 console.anthropic.com** 并创建一个 API 密钥（或使用你已有的密钥）。\n\n**第二步——立即实践安全存储。** 不要把密钥粘贴到任何地方——把它存储在你操作系统的密钥链或密码管理器中：\n```powershell\n# Windows: Use environment variables\n[System.Environment]::SetEnvironmentVariable(\"ANTHROPIC_API_KEY\", \"your-key-here\", \"User\")\n\n# Then access it in your code:\nimport os\napi_key = os.environ.get(\"ANTHROPIC_API_KEY\")\n```\n\n**第三步——创建一个 .env 文件**用于本地开发：\n```\nANTHROPIC_API_KEY=your-key-here\n```\n立即把 `.env` 加入 `.gitignore`。\n\n**第四步——问 Claude：** *『API 密钥最常见的意外泄露方式有哪些？针对每一种，预防措施是什么？』*\n\n**第五步——审查你现有的项目**，看是否有硬编码的 API 密钥或被提交的 .env 文件。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——测试你的 API 密钥配置",
+      "content": "验证你的 API 密钥能正常工作，并且配置得安全。\n\n**第一步——编写一个最简测试脚本**，从环境变量中读取 API 密钥并发起一次简单的 API 调用：\n```python\nimport anthropic\nimport os\n\nclient = anthropic.Anthropic(api_key=os.environ.get(\"ANTHROPIC_API_KEY\"))\n\nmessage = client.messages.create(\n    model=\"claude-haiku-4-5-20251001\",\n    max_tokens=100,\n    messages=[{\"role\": \"user\", \"content\": \"Respond with 'API key works' and nothing else\"}]\n)\nprint(message.content[0].text)\n```\n\n**第二步——在环境变量已设置的情况下运行。** 它是否有响应？\n\n**第三步——测试失败场景：** 取消设置该变量，再次运行。会出现什么错误？错误信息是否有用？\n\n**第四步——为环境变量未设置的情况添加恰当的错误处理。**\n\n**第五步——必做的审查环节：** 问 Claude：*『审查这段 API 密钥配置代码。为了用于生产环境，你会做哪些安全性或可靠性方面的改进？』*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——理解 API 定价",
+      "content": "理解 Anthropic API 定价的运作方式，避免出现意外账单。\n\n**第一步——访问 Anthropic 定价页面**，记录以下模型的当前价格：\n- claude-haiku-4-5（每百万 token 的输入和输出价格）\n- claude-sonnet-4-6（每百万 token 的输入和输出价格）\n- 如果相关的话，claude-opus-4-8\n\n**第二步——问 Claude：** *『帮我估算这个使用场景的月度 API 成本：[描述你计划中的应用——它做什么、有多少用户、每个用户每天发起多少次请求、消息的大致长度]。在每个模型档位下，月度成本分别是多少？』*\n\n**第三步——建立一个简单的成本模型：**\n```\nRequests per day: X\nAverage input tokens: Y\nAverage output tokens: Z\nMonthly tokens: (Y + Z) × X × 30\nMonthly cost at Haiku: [calculate]\nMonthly cost at Sonnet: [calculate]\n```\n\n**第四步——在 console.anthropic.com 中设置一个账单提醒**，当支出达到某个阈值时通知你。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——为你的 API 添加支出监控",
+      "content": "从一开始就把支出监控构建进你的 API 使用当中。\n\n**第一步——让 Claude Code** 为你的 API 封装添加 token 计数：\n```\nModify the AnthropicClient class I built in Lesson 11-2 to:\n1. Count and log tokens used in each request\n2. Track cumulative tokens and estimated cost for the current session\n3. Warn when estimated cost for the session exceeds a configurable threshold\n4. After each request, print: \"Request: Xin/Yout tokens, ~$Z\"\n```\n\n**第二步——用多次 API 调用测试这个监控功能。** 成本估算是否准确？\n\n**第三步——问 Claude：** 『在一个多用户应用中，我该如何按用户或按功能追踪 API 成本？我应该存储哪些数据？』\n\n**第四步——为你计划中的应用设计一个成本归因系统**——你要如何知道哪些功能最耗费成本？"
+    },
+    {
+      "type": "quiz",
+      "question": "你不小心把 Anthropic API 密钥提交到了一个公开的 GitHub 仓库。正确的应急处理方式是什么？",
+      "options": [
+        "从 GitHub 上删除那次提交",
+        "立即前往 console.anthropic.com，吊销泄露的密钥并生成一个新的——假定该密钥已经被自动扫描工具访问过",
+        "把仓库设为私有",
+        "在你的 .env 文件中修改密钥"
+      ],
+      "correct": 1,
+      "explanation": "自动扫描工具会持续监视 GitHub 上暴露的 API 密钥，通常在几分钟之内就能发现它们。一旦提交到公开仓库，无论你能否在提交历史中看到它，都要假定这个密钥已经泄露。唯一正确的做法：立即在 Anthropic 控制台中吊销该密钥，生成一个新密钥，并用新密钥更新你的系统。删除提交记录或把仓库设为私有并不能撤销已经发生的泄露——密钥已经被抓取了。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在构建一个 Web 应用，每个用户都会发起 Anthropic API 调用。你给所有用户使用同一个 API 密钥。问题出在哪里？",
+      "options": [
+        "没有问题——共享密钥对 Web 应用来说没什么不妥",
+        "所有用户共享同一个速率限制，任何一个用户都可能耗尽所有人的配额，而且你无法按用户追踪或限制成本",
+        "使用多个用户会导致 API 密钥更快过期",
+        "用户可以看到彼此的对话"
+      ],
+      "correct": 1,
+      "explanation": "多用户应用共享同一个 API 密钥会带来若干问题：(1) 速率限制是共享的——一个重度使用的用户会限制所有其他人；(2) 无法按用户归因成本——你无法识别哪些用户花费最多；(3) 无法按用户设置限额——单个用户就可能花光你的全部预算；(4) 轮换密钥需要同时更新所有用户。更好的做法：让所有 API 调用都通过你的后端代理，在后端实现按用户的速率限制和成本追踪。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 11-3 课。** 你的 API 密钥已经创建、安全地存储在 `.env` 文件中、被 gitignore 排除，并设置为一个环境变量。你已经准备好在第 11-4 课发起你的第一次真实 API 调用了。"
+    }
+  ],
+  "nextLesson": "11-4",
+  "prevLesson": "11-2"
+}

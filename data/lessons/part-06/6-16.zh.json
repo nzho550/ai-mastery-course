@@ -1,0 +1,92 @@
+{
+  "id": "6-16",
+  "title": "Copilot 扩展与技能市场",
+  "part": 6,
+  "estimatedMinutes": 45,
+  "tags": [
+    "copilot",
+    "extensions",
+    "skills",
+    "marketplace",
+    "github",
+    "intermediate"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nCopilot 的内置能力已经覆盖了很多场景。但 Copilot 还有一套扩展系统——一个技能、工具和集成的市场，可以扩展 Copilot 在聊天、CLI 和代理工作流中的能力。\n\n你将学到：\n- 那些常被忽略的内置 `@` 参与者（participant）\n- 如何从 GitHub Marketplace 查找、安装和使用 Copilot 扩展\n- Agent Skills——面向 CLI 和云端代理的基于文件的技能系统\n- 如何创建自己的简单技能\n- 政府与企业用户应考虑哪些扩展"
+    },
+    {
+      "type": "text",
+      "content": "## 你可能错过的内置参与者\n\n除了 `@workspace`、`@terminal` 和 `@vscode`（在第 6-11 课中介绍过）之外，Copilot 还有几个其他内置参与者。\n\n### `@github` —— 深度 GitHub 集成\n\n`@github` 让 Copilot 能够访问 GitHub.com 上的数据——代码仓库、issue、PR、代码搜索和发布说明——直接在聊天中获取。你必须已登录 GitHub 才能使用它。\n\n**实际使用场景：**\n```\n@github React 仓库的更新日志中最新的变更是什么？\n@github 搜索处理 PDF 生成的开源 Python 库\n@github 这个仓库的 README 对安装要求是怎么说的？\n@github 找一些开发者在 Node.js 中实现 OAuth2 PKCE 流程的典型示例\n```\n\n### Copilot 的视觉能力——图像输入\n\nCopilot 在 Chat 中支持图像输入。你可以粘贴或拖入：\n- 一张错误信息的截图——让 Copilot 解释并修复\n- 一张 UI 原型图或线框图——让 Copilot 生成对应的 HTML/CSS\n- 一张图表或流程图——让 Copilot 将其实现为代码\n- 一张旧软件的截图——让 Copilot 用现代代码重新实现它\n\n使用方法：在 Copilot Chat 中点击回形针图标附加图片，或直接将图片拖入聊天输入框。"
+    },
+    {
+      "type": "text",
+      "content": "## Copilot 扩展——市场\n\nCopilot 扩展是与 Copilot Chat 集成的 GitHub Apps。安装后，它们会以 `@extension-name` 参与者的形式出现在聊天中。\n\n### 如何浏览与安装\n\n1. 前往 **github.com/marketplace**，按 **Copilot** 筛选\n2. 找到一个扩展，点击 **Install**\n3. 授权给你的个人账户或某个组织\n4. 在 Copilot Chat 中（任何地方——IDE、GitHub.com、移动端），输入 `@extension-name` 来调用它\n\n### 值得关注的 Copilot 扩展\n\n**`@docker`** —— Docker 官方扩展\n管理容器、生成 Dockerfile、排查容器问题：\n```\n@docker 为一个使用 PostgreSQL 的 Python FastAPI 应用创建 Dockerfile\n@docker 为什么我的容器启动失败？[粘贴 docker 日志输出]\n@docker 把我的 docker-compose.yml 转换为 Kubernetes 部署清单\n```\n\n**`@azure`** —— Microsoft Azure\n查询 Azure 资源、生成 ARM 模板、排查 Azure 服务问题：\n```\n@azure 我的订阅中正在运行哪些虚拟机？\n@azure 为一个带 SQL 数据库的 App Service 生成 bicep 模板\n@azure 为什么我的 Azure Function 超时了？\n```\n\n**`@atlassian`** —— Jira 与 Confluence（如果未安装 MCP 版本）\n直接在 Copilot Chat 中搜索和管理 Atlassian 工具：\n```\n@atlassian 搜索 MYPROJ 项目中所有未关闭的严重级别 bug\n@atlassian 总结我们部署流程的 Confluence 页面内容\n```\n\n**`@datadog`** —— 可观测性\n```\n@datadog 最近一小时内支付服务的错误率是多少？\n@datadog 按 P95 延迟给我看最慢的几个 API 端点\n```\n\n**`@sentry`** —— 错误追踪\n```\n@sentry 过去 7 天里最常见的错误是什么？\n@sentry 给我看看问题 [ID] 的堆栈跟踪\n```\n\n### 为政府工作查找扩展\n\n可从 GitHub Marketplace → Copilot 筛选项中搜索：\n- ServiceNow、Jira（Azure DevOps 的替代方案）\n- Microsoft 365 集成\n- 安全扫描工具\n- 文档生成工具"
+    },
+    {
+      "type": "text",
+      "content": "## Agent Skills——面向 CLI 的基于文件的扩展\n\nAgent Skills 是另一种扩展方式，专为 GitHub Copilot CLI 和云端代理设计。技能（Skill）不是 GitHub App，而是一个文件夹，其中包含：\n- 一个 `SKILL.md` 文件——描述这个技能做什么、何时使用\n- 该技能所需的可选脚本、模板或资源文件\n\n### 技能如何工作\n\n当你处于 CLI 会话中或使用云端代理时，Copilot 会扫描可用的技能，并判断哪些与当前任务相关。当它选择某个技能时，`SKILL.md` 的内容会被注入到代理的上下文中——为它提供所需的指令、脚本和示例。\n\n你不需要手动调用技能——它们会在相关时自动加载。\n\n### 用 `gh skill` 安装技能\n\n```bash\n# 发现可用的技能\ngh skill search [query]\n\n# 从 GitHub 安装一个技能\ngh skill install [owner/repo]\n\n# 列出你已安装的技能\ngh skill list\n\n# 更新一个技能\ngh skill update [skill-name]\n```\n\n### 编写你自己的技能\n\n为你的技能创建一个包含 `SKILL.md` 的文件夹：\n\n**示例：一个政府报告生成技能**\n\n创建 `~/.copilot/skills/gov-report/SKILL.md`：\n```markdown\n---\nname: gov-report\ndescription: Generates government-format reports from data files. Use when asked to create, format, or export administrative reports.\ntrigger_keywords:\n  - report\n  - generate summary\n  - export data\n  - administrative output\n---\n\n# Government Report Generation Skill\n\n## Standard Report Format\n\nAll reports must include:\n1. Header: Report title, generation date, department name\n2. Executive summary: 3-5 sentences, plain English\n3. Data section: tabular format, no more than 10 columns\n4. Findings: numbered list of key observations\n5. Footer: data source, processing timestamp, operator name\n\n## File Naming Convention\n\n`DEPT_REPORTTYPE_YYYYMMDD_vN.csv` where N increments if the file already exists.\n\n## Required Output Validation\n\nBefore finalizing any report:\n- Verify no PII columns are included (names, SSNs, addresses)\n- Verify all dates are in YYYY-MM-DD format\n- Verify total row count matches source file\n- Log the run to audit.log with: timestamp, source file, output file, row count\n```\n\n当你让 Copilot CLI「从 transactions.csv 生成一份月度报告」时，它会识别出 report 这个关键词，加载这个技能，并自动应用其中的所有规范。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**技能 vs. 自定义指令——分别在何时使用：**\n- **自定义指令**（`.github/copilot-instructions.md`）：适用于代码仓库中每一次交互的规则。最适合：编码规范、命名约定、错误处理模式。\n- **Agent Skills**：按需加载的领域专业知识，只有当任务匹配技能的触发关键词时才会加载。最适合：有特定步骤的复杂工作流、政府报告格式、专门的工具使用流程。\n\n可以把自定义指令看作始终生效的后台规则，把技能看作在特定情境下才会激活的专用参考卡片。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "探索扩展市场",
+      "content": "查找并评估与你的工作相关的 Copilot 扩展。\n\n**第 1 步——前往 GitHub Marketplace**\n在浏览器中打开 github.com/marketplace。使用筛选功能或搜索 “Copilot”。\n\n**第 2 步——有目的地浏览。** 你要找的是能连接到你实际使用的工具的扩展。浏览时回答以下问题：\n- 你使用任何云平台吗（Azure、AWS、GCP）？有对应的扩展吗？\n- 你使用 Jira、Linear 或其他项目跟踪工具吗？\n- 你使用 Datadog、Sentry 或其他监控工具吗？\n- 你使用 Docker 或 Kubernetes 吗？\n- 列表中有没有政府专用的工具？\n\n**第 3 步——安装一个**看起来对你实际工作有用的扩展。将其安装到你的个人账户。\n\n**第 4 步——使用它。** 打开 Copilot Chat（在 VS Code 或 GitHub.com 中），输入 `@[extension-name]`，接上一个来自你实际工作的真实问题。\n\n**第 5 步——评估：**\n- 它是否连接到了正确的数据？\n- 回答是否准确、有用？\n- 你会在实际工作流中使用它吗？\n- 你具体会用它来做什么？\n\n**记录：** 写一句话说明这个扩展做得好的地方，再写一句话说明它的局限。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "实战 A——构建你的第一个 Agent Skill",
+      "content": "为你经常重复做的任务创建一个自定义 agent skill。\n\n**第 1 步——找出一个重复性任务。** 想一想你在终端中经常做的、涉及多个步骤、特定格式或需要记住的规则的事情。例如：\n- 处理某种特定类型的数据文件\n- 以特定格式生成报告\n- 审查代码中某种特定类型的问题\n- 执行特定的部署检查清单\n\n**第 2 步——创建技能文件夹：**\n```\nmkdir -p ~/.copilot/skills/my-skill-name\n```\n\n**第 3 步——编写 SKILL.md：**\n```markdown\n---\nname: my-skill-name\ndescription: [One sentence describing what this skill does and when to use it]\ntrigger_keywords:\n  - [keyword1]\n  - [keyword2]\n---\n\n# [Skill Name]\n\n## When to Use This Skill\n[Describe the scenarios where this skill applies]\n\n## Steps\n1. [Step 1 with specific details]\n2. [Step 2]\n3. [Step 3]\n\n## Rules\n- [Specific rule 1]\n- [Specific rule 2]\n\n## Output Format\n[Describe what the output should look like]\n```\n\n**第 4 步——测试它。** 启动一个 Copilot CLI 会话，让它执行你的技能所覆盖的任务。观察它是否使用了你的技能（SKILL.md 的内容会出现在引用中）。\n\n**第 5 步——优化。** 如果技能没有被触发，调整 trigger_keywords。如果被触发了但规则应用得不正确，让规则更具体。\n\n**成果：** 一个持久化的 agent skill，能持续、自动地提升 Copilot 在你特定重复任务上的表现。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "实战 B——Copilot 的视觉能力：图像转代码",
+      "content": "使用 Copilot 的图像输入能力，将可视化内容转换为可运行的代码。\n\n**从以下真实场景中选择一个：**\n\n**场景 A——UI 截图转代码**\n从任意网站或应用中截取一个表单、仪表盘或表格的截图。在 Copilot Chat 中：\n- 粘贴图片（Ctrl+V 或拖入聊天框）\n- 提问：“把这个 UI 重新实现为简洁的 HTML 和 CSS，要求响应式布局。”\n- 评估：输出结果与截图布局是否一致？\n\n**场景 B——错误截图转修复方案**\n截取任意错误信息的截图——来自终端、浏览器、任意应用程序。在 Copilot Chat 中：\n- 粘贴截图\n- 提问：“这个错误是什么意思？我该如何修复？请具体说明文件和行号。”\n- 评估：在你没有输入错误文本的情况下，分析是否准确？\n\n**场景 C——政府表单/文档转数据结构**\n截取工作中任意表单、表格或结构化文档的截图（移除任何真实敏感数据）。在 Copilot Chat 中：\n- 粘贴截图\n- 提问：“生成一个 Python dataclass（或 JSON schema）来对这个数据结构建模。包括字段名、类型，以及表单中可见的任何校验规则。”\n- 评估：生成的结构是否与表单字段一致？\n\n**记录：** 哪个场景效果最好？图像转代码的质量如何？你会在实际工作中的哪些地方用到它？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "实战 C——政府工作流技能库",
+      "content": "为政府/行政工作构建一个由 3 个 agent skill 组成的库。\n\n**技能 1——数据质量检查器**\n创建一个在你要求校验或清理数据集时激活的技能。该技能应明确规定：\n- 如何检查重复行\n- 如何检查必填字段\n- 如何标记超出范围的值\n- 记录和报告什么内容\n- 校验报告输出的格式\n\n**技能 2——合规审查**\n创建一个在审查代码或脚本合规性时激活的技能。该技能应明确规定：\n- 需要查找哪些 PII 模式\n- 需要检查哪些审计日志要求\n- 需要核实哪些访问控制模式\n- 如何格式化合规发现报告\n\n**技能 3——报告标准化器**\n创建一个在生成报告时激活的技能。该技能应明确规定：\n- 必需的页眉页脚格式\n- 必需的列及其顺序\n- 日期格式要求\n- 命名约定\n- 需要记录到审计轨迹的内容\n\n在 Copilot CLI 会话中，通过给出应该触发每个技能的任务来**测试全部三个**技能。\n\n**成果：** 一个让 Copilot 成为你专属政府工作流助手的技能库——而不是一个通用的编码 AI。"
+    },
+    {
+      "type": "quiz",
+      "question": "你为自己的监控工具（例如 @datadog）安装了一个 Copilot 扩展。你可以在哪里使用它？",
+      "options": [
+        "只能在 VS Code 的 Copilot Chat 中",
+        "只能在 GitHub.com 的 Copilot Chat 中",
+        "可以在任何支持 Copilot Chat 的地方使用：VS Code、GitHub.com、GitHub Mobile 以及其他支持的平台",
+        "只能在 GitHub Copilot CLI 中"
+      ],
+      "correct": 2,
+      "explanation": "Copilot 扩展是 GitHub Apps——它们在 GitHub 账户层面集成，而不是在 IDE 层面。安装后，它们会在任何支持的平台上以 @extension-name 参与者的形式出现在 Copilot Chat 中：VS Code、GitHub.com、GitHub Mobile 以及其他 GitHub Copilot Chat 集成。调用方式在任何地方都一样——只需输入 @extension-name，接上你的请求即可。"
+    },
+    {
+      "type": "quiz",
+      "question": "Copilot 扩展和 Agent Skill 之间的主要区别是什么？",
+      "options": [
+        "扩展收费；技能免费",
+        "扩展是与 Copilot Chat 集成的 GitHub Apps，通过 @name 调用；技能是 Markdown 文件，当任务匹配其触发关键词时会自动加载到 CLI/云端代理中",
+        "扩展工作在 VS Code 中；技能只工作在终端中",
+        "扩展需要管理员批准；技能可以由任何用户安装"
+      ],
+      "correct": 1,
+      "explanation": "Copilot 扩展是从市场安装的 GitHub Apps——它们通过在聊天中输入 @extension-name 显式调用，让 Copilot 能够访问外部服务。Agent Skills 是存储在本地或你的代码仓库中的 Markdown 文件——当 CLI 或云端代理检测到任务匹配该技能的触发关键词时，会自动加载，无需你显式调用。扩展用于集成外部服务；技能用于将你自己的专业知识和流程固化下来。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-16 课完成。** Copilot 的扩展生态——面向外部工具的市场扩展、面向你自己流程的 agent skills，以及用于代码仓库搜索的内置 @github 参与者——极大地扩展了 Copilot 的能力边界。对专业工作而言，最强大的组合是：为你的核心工具（Azure、Jira、监控工具）安装扩展，并为团队的特定工作流编写技能。第 6-17 课将介绍高级 MCP——如何同时连接多个外部系统，并在同一个提示词中把它们的工具串联起来。"
+    }
+  ],
+  "nextLesson": "6-17",
+  "prevLesson": "6-15"
+}

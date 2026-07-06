@@ -1,0 +1,114 @@
+{
+  "id": "19-3",
+  "title": "AI 助力个人理财",
+  "part": 19,
+  "estimatedMinutes": 60,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "finance",
+    "budgeting",
+    "decisions",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n个人理财是 AI 能带来真正价值的领域——不是作为理财顾问，而是作为一个帮你理解自己财务状况、分析消费习惯、为重大决策做准备、解读那些让大多数人望而生畏的财务文件的工具。学完之后，你将拥有预算分析、重大购买决策、理解财务文件以及制定财务计划的具体提示词，并清楚知道什么时候该请专业人士介入。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**AI 不是受监管的理财顾问。** AI 可以帮你理解概念、分析你自己的数据，并为咨询专业人士做准备。它无法了解你的完整财务状况，没有资质给出具体的投资建议，也无法在重大决策上取代合格的理财顾问。用 AI 来理解和准备，涉及高风险的决策则要找专业人士核实。"
+    },
+    {
+      "type": "text",
+      "content": "## 预算管理——弄清楚钱花到哪里去了\n\nAI 对个人预算管理最大的贡献在于分析和发现规律。把你的银行、信用卡或记账应用中的交易记录导出来，让 AI 完成你原本要手动做的分类和分析工作。\n\n**消费分析提示词：**\n```\nHere is my transaction history for [month/quarter]: [paste or describe transactions]\n\nPlease:\n1. Categorise these transactions (food, transport, entertainment, utilities, subscriptions, etc.)\n2. Show me total spend per category\n3. Identify subscriptions or recurring charges I might have forgotten about\n4. Flag any unusual spikes compared to what seems typical\n5. Identify the top 3 categories where I could most easily reduce spending\n6. Calculate what percentage of my income (roughly £X/month) each category represents\n```\n\n**制定切实可行的预算：**\n```\nI want to create a monthly budget. My net monthly income is £[amount].\n\nMy fixed costs are:\n- [list: rent, loan payments, insurance, etc.]\n\nMy variable spending last month was roughly:\n- [categories and estimates]\n\nMy goals:\n- Save £X/month toward [goal: emergency fund / house deposit / holiday]\n- Pay off [debt] within [timeframe]\n\nCreate a realistic monthly budget that achieves these goals.\nTell me where the trade-offs are and what I'd have to give up to hit the savings target.\n```\n\n**订阅审查：**\n```\nHere are my bank statement entries for recurring charges: [paste list]\n\nIdentify each subscription, its approximate annual cost, and whether I've used it in\nthe context you can infer. Which ones look like they might be worth cancelling?\nGroup by: definitely using / uncertain / likely forgotten.\n```\n\n**调研工具：** YNAB（You Need A Budget）、Emma 和 Monzo 的消费分析功能等应用能自动完成部分这类工作。如果你想要更深入的分析，或者你的银行没有内置分类功能，就用 Claude。"
+    },
+    {
+      "type": "text",
+      "content": "## 重大购买决策——购买还是租赁、租房还是买房\n\n对于涉及多个变量相互影响的复杂财务决策，AI 尤其擅长帮你梳理结构。\n\n**租房与买房的对比分析：**\n```\nHelp me think through rent vs. buy for my situation.\n\nRenting: I currently pay £[X]/month for a property worth approximately £[Y]\nBuying: I'm looking at properties around £[Z]. I have £[deposit] as a deposit.\nInterest rate I'd likely get: approximately [X]% (I'll verify this with a lender)\nMy situation: I plan to stay in this city for approximately [X] years\n\nPlease:\n1. Calculate the approximate monthly cost of buying vs. renting (mortgage payment, stamp duty annualised, maintenance estimate)\n2. What is the break-even point — at what price appreciation would buying make more financial sense?\n3. What does this analysis not capture that I should be thinking about?\n4. What are the non-financial factors I should weigh?\n```\n\n**汽车：购买、租赁还是 PCP（个人购车合约）：**\n```\nI'm considering getting a new car. Help me compare:\n\nOption 1 — Buy outright: £[price] for [car details]\nOption 2 — PCP: £[deposit] + £[monthly] for [term] + £[balloon]\nOption 3 — Lease: £[monthly] for [term, mileage]\n\nI drive approximately [annual mileage].\nI typically keep cars for [years] before changing.\nI care most about: [monthly cash flow / total cost over 5 years / flexibility]\n\nWhich makes more sense financially for my situation? What am I missing?\n```\n\n**总拥有成本的问题：**\n```\nI'm buying [item: e.g., a new laptop, a car, a boiler].\nThe purchase price is £[X].\n\nWhat is the realistic total cost of ownership over [Y] years, including:\n- Maintenance, repairs, and service costs\n- Consumables and supplies\n- Insurance if relevant\n- Energy/running costs\n- Depreciation (resale value impact)\n- Any hidden costs commonly associated with this type of purchase\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 理解财务文件\n\n大多数财务文件是写给律师看的，不是写给普通人看的。AI 非常擅长把它们翻译成大白话。\n\n**房贷或贷款要约：**\n```\nI've received a [mortgage / loan / finance agreement] offer. Here are the key terms:\n[paste the key figures and terms — avoid including personal identification details]\n\nExplain in plain language:\n1. What I'm actually agreeing to (total amount, total repayable, monthly payments)\n2. What the APR means in practice — what will I pay over [X] years?\n3. Are there any terms I should be especially careful about (early repayment charges, rate change clauses, conditions)?\n4. What questions should I ask the lender before signing?\n```\n\n**养老金对账单：**\n```\nHere is my pension statement summary: [paste key figures]\n\nExplain:\n1. What my current projected retirement income would be at [target retirement age]\n2. Whether this seems on track for a reasonable retirement (I earn approximately £[X]/year now)\n3. What the most important lever is if I want to increase this\n4. What fees I'm paying and whether that's typical\n5. What I should ask my pension provider\n```\n\n**保险单：**\n```\nI have a [type] insurance policy. Here are the key terms: [paste]\n\nWhat does this actually cover and what does it exclude?\nAre there any gaps in cover I should know about?\nIs there anything surprising or non-standard about this policy?\n```\n\n**投资表现：**\n```\nHere is my investment portfolio summary: [describe or paste performance data — no account numbers]\n\nExplain:\n1. What these returns mean in real terms (after inflation)\n2. How this compares to typical market benchmarks\n3. What the fees are costing me in real money terms over time\n4. What questions I should ask my adviser or investment platform\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 制定财务计划——对话式方法\n\n对于长期财务规划，AI 最适合作为思考伙伴和教育者，而不是规划者本身。它能帮你理解概念、模拟场景，并为与专业人士的对话做准备。\n\n**退休规划基础：**\n```\nHelp me understand whether I'm on track for retirement.\n\nCurrent age: [X]\nTarget retirement age: [X]\nCurrent pension pot: £[X]\nCurrent contributions: £[X/month] from me + £[X] employer\nEstimated state pension: [I don't know / approximately £X/year based on my NI record]\n\nBased on rough industry estimates:\n1. What might my pot be worth at retirement, assuming 5% average growth?\n2. What would that generate as annual income?\n3. How does that compare to my current lifestyle (I spend approximately £[X]/year)\n4. What are the key things I could do to improve this trajectory?\n```\n\n**为与理财顾问的会谈做准备：**\n```\nI'm meeting with a financial adviser about [topic: retirement planning / investment strategy / mortgage advice].\n\nHelp me prepare:\n1. What questions should I definitely ask?\n2. What information should I bring to the meeting?\n3. What jargon will they likely use? Explain the key terms.\n4. What are the common mistakes people make in this type of meeting?\n5. How do I evaluate whether this adviser's advice is sound?\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "你的个人理财 AI 会谈",
+      "content": "本次工作坊包含三个独立任务——做与你目前情况最相关的那一个。\n\n**任务 A——消费分析（15 分钟）**\n\n从你的银行应用中导出或整理一个月的交易数据（只需要描述和金额——不需要账号）。粘贴到 Claude 中，运行消费分析提示词。查看结果后思考：\n- 什么让你感到意外？\n- 哪个类别是你最容易削减的？\n- 有没有你忘记的订阅？\n\n**任务 B——理解一份财务文件（10 分钟）**\n\n找一份你从未完全理解的财务文件——养老金对账单、保险单、房贷要约、贷款协议。粘贴或描述关键条款（不含个人身份信息），让 Claude 用大白话解释。阅读 Claude 的解释后：\n- 你对哪些方面理解得更清楚了？\n- 它引出了哪些你打算向机构询问的问题？\n\n**任务 C——重大决策梳理（15 分钟）**\n\n想一个你正在面对或即将面对的财务决策（租房还是买房、租赁还是购买、是否增加养老金缴款等）。用你真实的数字搭建提示词并运行。记下：\n- Claude 提出了哪些你没想到的方面？\n- 它明确说明了哪些它不了解你情况、会影响分析结果的地方？\n- 在做最终决定之前你应该找谁谈谈？\n\n**完成任何任务后：** 记下 AI 帮你理解了哪些之前感到困惑的事。这才是持久的价值所在——AI 是财务教育者，而不是决策者。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude 建议你是否应该投资某只具体股票。Claude 给出了详细的分析，包括具体的收益率预测。你应该如何看待这些信息？",
+      "options": [
+        "把它作为投资决策的主要依据——这份分析很详细",
+        "用 Perplexity 交叉核对一下，获取第二意见，然后再决定",
+        "用它来理解与这项决策相关的因素，然后在投资前咨询受监管的理财顾问或做进一步的尽职调查",
+        "忽略它——AI 无法理解金融市场"
+      ],
+      "correct": 2,
+      "explanation": "具体的投资建议——\"买这只股票，预期收益 X%\"——在大多数国家都需要受监管的理财顾问来提供，因为这涉及个人风险评估和监管责任。Claude 可以帮你理解影响股票表现的因素、该行业的风险，以及如何思考决策框架——但它无法为错误建议承担责任，不了解你的个人风险承受能力和财务状况，而且训练数据有截止日期，可能缺少当前的金融数据。用 AI 来理解和准备；用受监管的专业人士（以及经核实的当前信息来源）来做具体的投资决策。Perplexity（B）能补充当前的网络搜索，但仍然不能提供受监管的建议。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——个人理财 AI 审查",
+      "content": "用 AI 审查你的个人财务状况。\n\n**第一步——收集你的关键财务数字**（大致数字即可）：\n- 每月收入\n- 每月固定支出（房租、订阅等）\n- 每月可变支出（食物、娱乐）\n- 储蓄率（%）\n- 债务：类型、金额、利率\n- 应急基金（可覆盖几个月的支出）\n\n**第二步——问 Claude：**\n\"审查我的财务状况 [粘贴数字]。最重要的改进方向是什么？我哪些地方做得好？我面临哪些财务风险？\"\n\n**第三步——评估 Claude 的评估结果。** 它指出的优先事项是否正确？\n\n**第四步——问：**\"在接下来的 12 个月里，哪一项改变对我的财务状况影响最大？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用 AI 搭建预算",
+      "content": "借助 AI 搭建一份个人预算。\n\n**第一步——让 Claude 帮你搭建预算结构：**\n```\nHelp me build a monthly budget for someone with:\n- Take-home income: [amount]\n- Fixed expenses: [list with amounts]\n- Financial goals: [save for X, pay off Y, invest in Z]\n\nCreate a zero-based budget that:\n1. Covers all fixed expenses\n2. Allocates to goals\n3. Leaves realistic amounts for variable spending\n4. Identifies 2-3 expenses to reduce\n```\n\n**第二步——诚实地审视这份预算方案。** 它符合你实际的生活方式吗？\n\n**第三步——问 Claude：**\"如果我坚持这份预算 12 个月，我的财务状况会怎样？我会实现什么？\"\n\n**第四步——跟踪一周的实际消费**，与预算进行对比。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——财务概念讲解器",
+      "content": "用 AI 理解你一直回避的财务概念。\n\n**第一步——列出你一直想弄懂的财务概念：** 投资账户（ISA/401k/IRA）、复利、指数基金、税务效率、保险。\n\n**第二步——针对每个概念**，让 Claude 用适合你的水平来解释：\n\"用我了解基础个人理财知识、但没学过这个具体主题的水平来解释 [概念]。用一个带真实数字的具体例子。\"\n\n**第三步——追问：**\"理解 [概念] 会如何改变我在 [我的具体情况] 中应该采取的做法？\"\n\n**第四步——找出一项你因为不确定而一直回避的财务行动。** 理解了这个概念之后，你是否已经准备好采取这项行动？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——财务目标规划",
+      "content": "用 AI 为一个具体的财务目标制定切实可行的计划。\n\n**第一步——选择一个具体的财务目标：** 买房、在某个年龄退休、还清债务、建立应急基金。\n\n**第二步——让 Claude 给出目标计划：**\n```\nCreate a specific plan to [your goal].\n\nMy situation:\n- Current savings: [amount]\n- Monthly surplus (after expenses): [amount]\n- Timeline: [years]\n- Risk tolerance: [conservative/moderate/aggressive]\n\nProvide:\n1. Monthly savings target\n2. Investment approach for this goal\n3. Milestones to track progress\n4. What would delay or derail this goal\n5. One-year action plan with specific steps\n```\n\n**第三步——评估这份计划。** 每月储蓄目标是否可以实现？里程碑是否有激励作用？\n\n**第四步——重要提醒：** 在采取行动之前，请合格的理财顾问核实所有具体的投资建议。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude 给你具体的投资建议：\"把 60% 投入全球指数基金，40% 投入债券。\"你应该遵循这个建议吗？",
+      "options": [
+        "应该——这是标准的分散投资组合建议",
+        "把它作为调研的起点，而不是处方。AI 的理财建议没有考虑你的税务状况、风险承受能力、现有投资或当地法规——请咨询理财顾问获取个性化建议",
+        "不应该——所有 AI 理财建议都是错的",
+        "如果你 50 岁以下就应该遵循"
+      ],
+      "correct": 1,
+      "explanation": "AI 的理财建议是通用信息，而非个性化的理财建议。它无法考虑到：你所在国家可用的具体税务状况和税收优惠账户、你现有的投资组合和再平衡需求、你实际的风险承受能力（而非声明的偏好）、影响你财务时间线的人生事件，以及特定司法辖区的法规。用 AI 来理解概念、为理财顾问准备问题，而不是用来做具体的投资决策。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude 计算按不同还款金额还清债务需要多长时间。Claude 给出了计算结果。你应该核实什么？",
+      "options": [
+        "如果 Claude 展示了计算过程，那计算就是正确的",
+        "独立核实这些数学计算：AI 可能出现算术错误，尤其是在复利计算上。用银行或财经网站的债务偿还计算器来确认这些数字",
+        "只有当数字看起来意外时才需要核实",
+        "只需核实计算方法，不需要核实具体数字"
+      ],
+      "correct": 1,
+      "explanation": "涉及复利的财务计算相当复杂，AI 出错的可能性是实实在在的。使用的利率、假设的复利频率或计算公式中的任何一处错误，都可能导致结果偏差几个月甚至上千元。对于任何影响真实决策的财务计算：（1）让 Claude 解释它使用的公式；（2）用专门的财务计算器核实（大多数银行网站都有）；（3）对于重大决策，请会计师或理财顾问核实。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 19-3 课。** 你现在可以用 AI 来分析消费、梳理重大财务决策的结构、把令人困惑的财务文件翻译成大白话，并为与专业人士的财务对话做准备。AI 加速的是你的财务理解——决策依然由你自己做出，高风险的选择最好有专业指导。"
+    }
+  ],
+  "nextLesson": "19-4",
+  "prevLesson": "19-2"
+}

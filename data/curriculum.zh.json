@@ -1,0 +1,3428 @@
+{
+  "title": "AI 精通课程",
+  "version": "1.0",
+  "parts": [
+    {
+      "id": 1,
+      "number": 1,
+      "title": "AI 基础",
+      "lessons": [
+        {
+          "id": "1-1",
+          "title": "什么是人工智能？",
+          "estimatedMinutes": 55,
+          "tags": [
+            "foundations",
+            "beginner",
+            "concepts"
+          ],
+          "nextLesson": "1-2",
+          "prevLesson": null
+        },
+        {
+          "id": "1-2",
+          "title": "语言模型是如何工作的（通俗讲解）",
+          "estimatedMinutes": 60,
+          "tags": [
+            "foundations",
+            "beginner",
+            "llm",
+            "concepts"
+          ],
+          "nextLesson": "1-3",
+          "prevLesson": "1-1"
+        },
+        {
+          "id": "1-3",
+          "title": "AI 工具全景图（2026年）",
+          "estimatedMinutes": 65,
+          "tags": [
+            "foundations",
+            "beginner",
+            "tools",
+            "overview"
+          ],
+          "nextLesson": "1-4",
+          "prevLesson": "1-2"
+        },
+        {
+          "id": "1-4",
+          "title": "AI 幻觉（Hallucination）与局限性",
+          "estimatedMinutes": 60,
+          "tags": [
+            "foundations",
+            "beginner",
+            "safety",
+            "hallucinations"
+          ],
+          "nextLesson": "1-5",
+          "prevLesson": "1-3"
+        },
+        {
+          "id": "1-5",
+          "title": "隐私与安全——哪些内容不该告诉 AI",
+          "estimatedMinutes": 60,
+          "tags": [
+            "foundations",
+            "beginner",
+            "privacy",
+            "safety"
+          ],
+          "nextLesson": "1-6",
+          "prevLesson": "1-4"
+        },
+        {
+          "id": "1-6",
+          "title": "AI 与法律：你需要了解的法律边界",
+          "estimatedMinutes": 60,
+          "tags": [
+            "foundations",
+            "beginner",
+            "legal"
+          ],
+          "nextLesson": "1-7",
+          "prevLesson": "1-5"
+        },
+        {
+          "id": "1-7",
+          "title": "AI 技术栈：你的完整心智模型",
+          "estimatedMinutes": 25,
+          "tags": [
+            "foundations",
+            "beginner",
+            "concepts",
+            "mental-model"
+          ],
+          "nextLesson": "2-1",
+          "prevLesson": "1-6"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "number": 2,
+      "title": "你的第一批 AI 工具",
+      "lessons": [
+        {
+          "id": "2-1",
+          "title": "Claude.ai——你的第一次真实对话",
+          "estimatedMinutes": 60,
+          "tags": [
+            "tools",
+            "beginner",
+            "claude",
+            "hands-on"
+          ],
+          "nextLesson": "2-2",
+          "prevLesson": "1-7"
+        },
+        {
+          "id": "2-2",
+          "title": "Claude 项目（Projects）与记忆功能",
+          "estimatedMinutes": 60,
+          "tags": [
+            "tools",
+            "beginner",
+            "claude",
+            "projects",
+            "memory"
+          ],
+          "nextLesson": "2-3",
+          "prevLesson": "2-1"
+        },
+        {
+          "id": "2-3",
+          "title": "ChatGPT 与 OpenAI 的 AI 模型",
+          "estimatedMinutes": 60,
+          "tags": [
+            "tools",
+            "beginner",
+            "chatgpt",
+            "openai",
+            "hands-on"
+          ],
+          "nextLesson": "2-4",
+          "prevLesson": "2-2"
+        },
+        {
+          "id": "2-4",
+          "title": "Google Gemini",
+          "estimatedMinutes": 60,
+          "tags": [
+            "tools",
+            "beginner",
+            "gemini",
+            "google",
+            "hands-on"
+          ],
+          "nextLesson": "2-5",
+          "prevLesson": "2-3"
+        },
+        {
+          "id": "2-5",
+          "title": "Perplexity——AI 驱动的研究工具",
+          "estimatedMinutes": 55,
+          "tags": [
+            "tools",
+            "beginner",
+            "perplexity",
+            "search",
+            "hands-on"
+          ],
+          "nextLesson": "2-6",
+          "prevLesson": "2-4"
+        },
+        {
+          "id": "2-6",
+          "title": "Microsoft Copilot",
+          "estimatedMinutes": 55,
+          "tags": [
+            "tools",
+            "beginner",
+            "copilot",
+            "microsoft",
+            "hands-on"
+          ],
+          "nextLesson": "2-7",
+          "prevLesson": "2-5"
+        },
+        {
+          "id": "2-7",
+          "title": "AI 媒体生成——图像、音频与视频",
+          "estimatedMinutes": 60,
+          "tags": [
+            "tools",
+            "beginner",
+            "image-generation",
+            "media",
+            "hands-on"
+          ],
+          "nextLesson": "2-8",
+          "prevLesson": "2-6"
+        },
+        {
+          "id": "2-8",
+          "title": "选择合适的 AI 工具",
+          "estimatedMinutes": 55,
+          "tags": [
+            "tools",
+            "beginner",
+            "strategy",
+            "overview"
+          ],
+          "nextLesson": "2-9",
+          "prevLesson": "2-7"
+        },
+        {
+          "id": "2-9",
+          "title": "Microsoft 365 中的 Copilot——Outlook、Teams、Word 与 Excel 里的 AI",
+          "estimatedMinutes": 60,
+          "tags": [
+            "tools",
+            "beginner",
+            "microsoft",
+            "outlook",
+            "office",
+            "hands-on"
+          ],
+          "nextLesson": "2-10",
+          "prevLesson": "2-8"
+        },
+        {
+          "id": "2-10",
+          "title": "AI 会议工具——Zoom、Otter.ai 与 Teams 会议摘要",
+          "estimatedMinutes": 55,
+          "tags": [
+            "tools",
+            "beginner",
+            "meetings",
+            "productivity",
+            "hands-on"
+          ],
+          "nextLesson": "2-11",
+          "prevLesson": "2-9"
+        },
+        {
+          "id": "2-11",
+          "title": "浏览器 AI 扩展——让每个网页都有 AI",
+          "estimatedMinutes": 50,
+          "tags": [
+            "tools",
+            "beginner",
+            "browser",
+            "chrome",
+            "extensions",
+            "hands-on"
+          ],
+          "nextLesson": "2-12",
+          "prevLesson": "2-10"
+        },
+        {
+          "id": "2-12",
+          "title": "Slack AI 与 Notion AI——办公软件中的 AI",
+          "estimatedMinutes": 50,
+          "tags": [
+            "tools",
+            "beginner",
+            "slack",
+            "notion",
+            "productivity"
+          ],
+          "nextLesson": "2-13",
+          "prevLesson": "2-11"
+        },
+        {
+          "id": "2-13",
+          "title": "多模态 AI——处理图像、图表与文档",
+          "estimatedMinutes": 50,
+          "tags": [
+            "tools",
+            "beginner",
+            "multimodal",
+            "vision",
+            "images",
+            "hands-on"
+          ],
+          "nextLesson": "2-14",
+          "prevLesson": "2-12"
+        },
+        {
+          "id": "2-14",
+          "title": "自定义 GPT 与 Claude 项目——打造你自己的 AI 专家",
+          "estimatedMinutes": 50,
+          "tags": [
+            "tools",
+            "beginner",
+            "custom-gpt",
+            "claude-projects",
+            "customization",
+            "hands-on"
+          ],
+          "nextLesson": "2-15",
+          "prevLesson": "2-13"
+        },
+        {
+          "id": "2-15",
+          "title": "AI 图像生成深度解析",
+          "estimatedMinutes": 60,
+          "tags": [
+            "tools",
+            "intermediate",
+            "image-generation",
+            "midjourney",
+            "dall-e",
+            "stable-diffusion",
+            "prompting",
+            "hands-on"
+          ],
+          "nextLesson": "2-16",
+          "prevLesson": "2-14"
+        },
+        {
+          "id": "2-16",
+          "title": "Google Workspace + AI——Gmail、文档、表格与幻灯片中的 Gemini",
+          "estimatedMinutes": 55,
+          "tags": [
+            "tools",
+            "beginner",
+            "google",
+            "gemini",
+            "gmail",
+            "google-docs",
+            "google-sheets",
+            "workspace",
+            "hands-on"
+          ],
+          "nextLesson": "2-17",
+          "prevLesson": "2-15"
+        },
+        {
+          "id": "2-17",
+          "title": "Grok 与 DeepSeek——你错过的免费 AI 利器",
+          "estimatedMinutes": 55,
+          "tags": [
+            "tools",
+            "beginner",
+            "grok",
+            "deepseek",
+            "xai",
+            "open-source",
+            "hands-on"
+          ],
+          "nextLesson": "3-1",
+          "prevLesson": "2-16"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "number": 3,
+      "title": "提示词工程（Prompt Engineering）",
+      "lessons": [
+        {
+          "id": "3-1",
+          "title": "为什么提示词（Prompt）如此重要",
+          "estimatedMinutes": 55,
+          "tags": [
+            "prompting",
+            "intermediate",
+            "concepts"
+          ],
+          "nextLesson": "3-2",
+          "prevLesson": "2-17"
+        },
+        {
+          "id": "3-2",
+          "title": "一个好提示词的结构解析",
+          "estimatedMinutes": 60,
+          "tags": [
+            "prompting",
+            "intermediate",
+            "technique"
+          ],
+          "nextLesson": "3-3",
+          "prevLesson": "3-1"
+        },
+        {
+          "id": "3-3",
+          "title": "角色扮演式提示词（Role & Persona Prompting）",
+          "estimatedMinutes": 60,
+          "tags": [
+            "prompting",
+            "intermediate",
+            "technique",
+            "persona"
+          ],
+          "nextLesson": "3-4",
+          "prevLesson": "3-2"
+        },
+        {
+          "id": "3-4",
+          "title": "思维链提示法（Chain-of-Thought）",
+          "estimatedMinutes": 60,
+          "tags": [
+            "prompting",
+            "intermediate",
+            "technique",
+            "chain-of-thought"
+          ],
+          "nextLesson": "3-5",
+          "prevLesson": "3-3"
+        },
+        {
+          "id": "3-5",
+          "title": "少样本示例法（Few-Shot）",
+          "estimatedMinutes": 60,
+          "tags": [
+            "prompting",
+            "intermediate",
+            "technique",
+            "few-shot"
+          ],
+          "nextLesson": "3-6",
+          "prevLesson": "3-4"
+        },
+        {
+          "id": "3-6",
+          "title": "结构化输出——JSON、表格与数据提取",
+          "estimatedMinutes": 60,
+          "tags": [
+            "prompting",
+            "intermediate",
+            "technique",
+            "structured-output"
+          ],
+          "nextLesson": "3-7",
+          "prevLesson": "3-5"
+        },
+        {
+          "id": "3-7",
+          "title": "迭代式优化",
+          "estimatedMinutes": 60,
+          "tags": [
+            "prompting",
+            "intermediate",
+            "technique",
+            "iteration"
+          ],
+          "nextLesson": "3-8",
+          "prevLesson": "3-6"
+        },
+        {
+          "id": "3-8",
+          "title": "提示词模板与复用",
+          "estimatedMinutes": 60,
+          "tags": [
+            "prompting",
+            "intermediate",
+            "templates",
+            "workflow"
+          ],
+          "nextLesson": "13-1",
+          "prevLesson": "3-7"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "number": 4,
+      "title": "AI 安全、隐私与成本管理",
+      "lessons": [
+        {
+          "id": "13-1",
+          "title": "AI 幻觉深度解析",
+          "estimatedMinutes": 55,
+          "tags": [
+            "safety",
+            "intermediate",
+            "hallucinations",
+            "concepts"
+          ],
+          "nextLesson": "13-2",
+          "prevLesson": "3-8"
+        },
+        {
+          "id": "13-2",
+          "title": "哪些内容不该分享给云端 AI",
+          "estimatedMinutes": 50,
+          "tags": [
+            "safety",
+            "intermediate",
+            "privacy",
+            "security"
+          ],
+          "nextLesson": "13-3",
+          "prevLesson": "13-1"
+        },
+        {
+          "id": "13-3",
+          "title": "API 成本管理——预算、监控与架构设计",
+          "estimatedMinutes": 60,
+          "tags": [
+            "safety",
+            "intermediate",
+            "cost",
+            "budgeting",
+            "monitoring"
+          ],
+          "nextLesson": "13-4",
+          "prevLesson": "13-2"
+        },
+        {
+          "id": "13-4",
+          "title": "AI 与版权：你需要了解的知识",
+          "estimatedMinutes": 55,
+          "tags": [
+            "safety",
+            "intermediate",
+            "copyright",
+            "legal",
+            "ethics"
+          ],
+          "nextLesson": "13-5",
+          "prevLesson": "13-3"
+        },
+        {
+          "id": "13-5",
+          "title": "AI 工作流中的安全风险",
+          "estimatedMinutes": 55,
+          "tags": [
+            "safety",
+            "intermediate",
+            "security",
+            "risks"
+          ],
+          "nextLesson": "15-1",
+          "prevLesson": "13-4"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "number": 5,
+      "title": "AI 赋能研究与知识型工作",
+      "lessons": [
+        {
+          "id": "15-1",
+          "title": "把 AI 当作你的研究伙伴",
+          "estimatedMinutes": 60,
+          "tags": [
+            "research",
+            "beginner",
+            "workflow",
+            "knowledge-work"
+          ],
+          "nextLesson": "15-2",
+          "prevLesson": "13-5"
+        },
+        {
+          "id": "15-2",
+          "title": "用 Perplexity 与 Claude 做深度研究",
+          "estimatedMinutes": 65,
+          "tags": [
+            "research",
+            "beginner",
+            "perplexity",
+            "search",
+            "hands-on"
+          ],
+          "nextLesson": "15-3",
+          "prevLesson": "15-1"
+        },
+        {
+          "id": "15-3",
+          "title": "AI 网络搜索与网页抓取",
+          "estimatedMinutes": 63,
+          "tags": [
+            "research",
+            "intermediate",
+            "web",
+            "crawl",
+            "playwright",
+            "hands-on"
+          ],
+          "nextLesson": "15-4",
+          "prevLesson": "15-2"
+        },
+        {
+          "id": "15-4",
+          "title": "处理文档与 PDF 文件",
+          "estimatedMinutes": 65,
+          "tags": [
+            "research",
+            "beginner",
+            "pdf",
+            "notebooklm",
+            "documents",
+            "hands-on"
+          ],
+          "nextLesson": "15-5",
+          "prevLesson": "15-3"
+        },
+        {
+          "id": "15-5",
+          "title": "整理与综合研究成果",
+          "estimatedMinutes": 63,
+          "tags": [
+            "research",
+            "beginner",
+            "synthesis",
+            "organization",
+            "hands-on"
+          ],
+          "nextLesson": "15-6",
+          "prevLesson": "15-4"
+        },
+        {
+          "id": "15-6",
+          "title": "用 AI 撰写研究报告",
+          "estimatedMinutes": 70,
+          "tags": [
+            "research",
+            "beginner",
+            "writing",
+            "reports",
+            "hands-on"
+          ],
+          "nextLesson": "15-7",
+          "prevLesson": "15-5"
+        },
+        {
+          "id": "15-7",
+          "title": "研究综合实战——一次完整的研究冲刺",
+          "estimatedMinutes": 85,
+          "tags": [
+            "research",
+            "intermediate",
+            "capstone",
+            "hands-on"
+          ],
+          "nextLesson": "15-8",
+          "prevLesson": "15-6"
+        },
+        {
+          "id": "15-8",
+          "title": "NotebookLM——你的 AI 研究伴侣",
+          "estimatedMinutes": 55,
+          "tags": [
+            "research",
+            "beginner",
+            "notebooklm",
+            "google",
+            "knowledge",
+            "hands-on"
+          ],
+          "nextLesson": "16-1",
+          "prevLesson": "15-7"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "number": 6,
+      "title": "AI 赋能文档创作与办公工作",
+      "lessons": [
+        {
+          "id": "16-1",
+          "title": "AI 写作工作流",
+          "estimatedMinutes": 55,
+          "tags": [
+            "office",
+            "beginner",
+            "writing",
+            "workflow"
+          ],
+          "nextLesson": "16-2",
+          "prevLesson": "15-8"
+        },
+        {
+          "id": "16-2",
+          "title": "报告、提案与商务文档",
+          "estimatedMinutes": 60,
+          "tags": [
+            "office",
+            "beginner",
+            "reports",
+            "proposals",
+            "hands-on"
+          ],
+          "nextLesson": "16-3",
+          "prevLesson": "16-1"
+        },
+        {
+          "id": "16-3",
+          "title": "无需编程的数据分析",
+          "estimatedMinutes": 60,
+          "tags": [
+            "office",
+            "beginner",
+            "excel",
+            "data",
+            "analysis",
+            "hands-on"
+          ],
+          "nextLesson": "16-4",
+          "prevLesson": "16-2"
+        },
+        {
+          "id": "16-4",
+          "title": "AI 驱动的演示文稿",
+          "estimatedMinutes": 60,
+          "tags": [
+            "office",
+            "beginner",
+            "presentations",
+            "powerpoint",
+            "hands-on"
+          ],
+          "nextLesson": "16-5",
+          "prevLesson": "16-3"
+        },
+        {
+          "id": "16-5",
+          "title": "邮件与沟通模板",
+          "estimatedMinutes": 55,
+          "tags": [
+            "office",
+            "beginner",
+            "email",
+            "communication",
+            "hands-on"
+          ],
+          "nextLesson": "16-6",
+          "prevLesson": "16-4"
+        },
+        {
+          "id": "16-6",
+          "title": "端到端的会议工作流",
+          "estimatedMinutes": 55,
+          "tags": [
+            "office",
+            "beginner",
+            "meetings",
+            "workflow",
+            "hands-on"
+          ],
+          "nextLesson": "16-7",
+          "prevLesson": "16-5"
+        },
+        {
+          "id": "16-7",
+          "title": "编写流程文档与标准作业程序（SOP）",
+          "estimatedMinutes": 55,
+          "tags": [
+            "office",
+            "beginner",
+            "documentation",
+            "sop",
+            "hands-on"
+          ],
+          "nextLesson": "16-8",
+          "prevLesson": "16-6"
+        },
+        {
+          "id": "16-8",
+          "title": "AI 赋能市场营销与内容团队",
+          "estimatedMinutes": 55,
+          "tags": [
+            "document-work",
+            "intermediate",
+            "marketing",
+            "content",
+            "copywriting",
+            "hands-on"
+          ],
+          "nextLesson": "16-9",
+          "prevLesson": "16-7"
+        },
+        {
+          "id": "16-9",
+          "title": "AI 赋能人力资源与招聘",
+          "estimatedMinutes": 55,
+          "tags": [
+            "document-work",
+            "intermediate",
+            "hr",
+            "recruiting",
+            "people-management",
+            "hands-on"
+          ],
+          "nextLesson": "16-10",
+          "prevLesson": "16-8"
+        },
+        {
+          "id": "16-10",
+          "title": "AI 赋能销售与业务拓展",
+          "estimatedMinutes": 55,
+          "tags": [
+            "document-work",
+            "intermediate",
+            "sales",
+            "business-development",
+            "outreach",
+            "hands-on"
+          ],
+          "nextLesson": "17-1",
+          "prevLesson": "16-9"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "number": 7,
+      "title": "AI 赋能项目规划与管理",
+      "lessons": [
+        {
+          "id": "17-1",
+          "title": "用 AI 规划任何项目",
+          "estimatedMinutes": 65,
+          "tags": [
+            "project-management",
+            "beginner",
+            "planning",
+            "hands-on"
+          ],
+          "nextLesson": "17-2",
+          "prevLesson": "16-10"
+        },
+        {
+          "id": "17-2",
+          "title": "拆解复杂问题",
+          "estimatedMinutes": 60,
+          "tags": [
+            "project-management",
+            "beginner",
+            "problem-solving",
+            "hands-on"
+          ],
+          "nextLesson": "17-3",
+          "prevLesson": "17-1"
+        },
+        {
+          "id": "17-3",
+          "title": "研究与规划相结合",
+          "estimatedMinutes": 65,
+          "tags": [
+            "project-management",
+            "beginner",
+            "research",
+            "planning",
+            "hands-on"
+          ],
+          "nextLesson": "17-4",
+          "prevLesson": "17-2"
+        },
+        {
+          "id": "17-4",
+          "title": "在工作中同步记录文档与决策",
+          "estimatedMinutes": 60,
+          "tags": [
+            "project-management",
+            "beginner",
+            "documentation",
+            "decisions"
+          ],
+          "nextLesson": "17-5",
+          "prevLesson": "17-3"
+        },
+        {
+          "id": "17-5",
+          "title": "复核、质量检查与利益相关方沟通",
+          "estimatedMinutes": 63,
+          "tags": [
+            "project-management",
+            "beginner",
+            "review",
+            "communication",
+            "hands-on"
+          ],
+          "nextLesson": "17-6",
+          "prevLesson": "17-4"
+        },
+        {
+          "id": "17-6",
+          "title": "项目综合实战——AI 增强型工作冲刺",
+          "estimatedMinutes": 85,
+          "tags": [
+            "project-management",
+            "intermediate",
+            "capstone",
+            "hands-on"
+          ],
+          "nextLesson": "17-7",
+          "prevLesson": "17-5"
+        },
+        {
+          "id": "17-7",
+          "title": "AI 团队落地——政策、推广与治理",
+          "estimatedMinutes": 50,
+          "tags": [
+            "project-management",
+            "intermediate",
+            "team",
+            "ai-policy",
+            "governance",
+            "leadership"
+          ],
+          "nextLesson": "19-1",
+          "prevLesson": "17-6"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "number": 8,
+      "title": "AI 赋能个人生活",
+      "lessons": [
+        {
+          "id": "19-1",
+          "title": "AI 助力日常决策——饮食、购物与居家",
+          "estimatedMinutes": 60,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "everyday",
+            "meal-planning",
+            "shopping",
+            "hands-on"
+          ],
+          "nextLesson": "19-2",
+          "prevLesson": "17-7"
+        },
+        {
+          "id": "19-2",
+          "title": "AI 助力旅行规划",
+          "estimatedMinutes": 60,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "travel",
+            "planning",
+            "hands-on"
+          ],
+          "nextLesson": "19-3",
+          "prevLesson": "19-1"
+        },
+        {
+          "id": "19-3",
+          "title": "AI 助力个人理财",
+          "estimatedMinutes": 60,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "finance",
+            "budgeting",
+            "decisions",
+            "hands-on"
+          ],
+          "nextLesson": "19-4",
+          "prevLesson": "19-2"
+        },
+        {
+          "id": "19-4",
+          "title": "AI 助力健康与身心福祉",
+          "estimatedMinutes": 60,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "health",
+            "wellbeing",
+            "research",
+            "hands-on"
+          ],
+          "nextLesson": "19-5",
+          "prevLesson": "19-3"
+        },
+        {
+          "id": "19-5",
+          "title": "用 AI 学习任何知识",
+          "estimatedMinutes": 65,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "learning",
+            "education",
+            "skills",
+            "hands-on"
+          ],
+          "nextLesson": "19-6",
+          "prevLesson": "19-4"
+        },
+        {
+          "id": "19-6",
+          "title": "AI 日记与思考伙伴",
+          "estimatedMinutes": 60,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "journaling",
+            "decision-making",
+            "reflection",
+            "hands-on"
+          ],
+          "nextLesson": "19-7",
+          "prevLesson": "19-5"
+        },
+        {
+          "id": "19-7",
+          "title": "语音 AI——与你的 AI 对话",
+          "estimatedMinutes": 55,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "voice",
+            "hands-on",
+            "accessibility"
+          ],
+          "nextLesson": "19-8",
+          "prevLesson": "19-6"
+        },
+        {
+          "id": "19-8",
+          "title": "你的第二大脑——AI 驱动的个人管理系统",
+          "estimatedMinutes": 65,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "organisation",
+            "memory",
+            "productivity",
+            "pkm",
+            "hands-on"
+          ],
+          "nextLesson": "19-9",
+          "prevLesson": "19-7"
+        },
+        {
+          "id": "19-9",
+          "title": "AI 助力职业发展——简历、领英（LinkedIn）与面试准备",
+          "estimatedMinutes": 70,
+          "tags": [
+            "career",
+            "resume",
+            "linkedin",
+            "interviews",
+            "job-search",
+            "practical"
+          ],
+          "nextLesson": "19-10",
+          "prevLesson": "19-8"
+        },
+        {
+          "id": "19-10",
+          "title": "AI 助力内容创作——一小时搞定一周的帖子",
+          "estimatedMinutes": 65,
+          "tags": [
+            "content-creation",
+            "social-media",
+            "linkedin",
+            "writing",
+            "repurposing",
+            "productivity"
+          ],
+          "nextLesson": "19-11",
+          "prevLesson": "19-9"
+        },
+        {
+          "id": "19-11",
+          "title": "AI 助力视频创作",
+          "estimatedMinutes": 55,
+          "tags": [
+            "personal-life",
+            "intermediate",
+            "video",
+            "content-creation",
+            "sora",
+            "runway",
+            "hands-on"
+          ],
+          "nextLesson": "19-12",
+          "prevLesson": "19-10"
+        },
+        {
+          "id": "19-12",
+          "title": "实时语音 AI——ChatGPT 高级语音模式与 Gemini Live",
+          "estimatedMinutes": 50,
+          "tags": [
+            "personal-life",
+            "intermediate",
+            "voice",
+            "real-time",
+            "chatgpt-voice",
+            "gemini-live",
+            "accessibility",
+            "hands-on"
+          ],
+          "nextLesson": "4-1",
+          "prevLesson": "19-11"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "number": 9,
+      "title": "计算机与命令行基础",
+      "lessons": [
+        {
+          "id": "4-1",
+          "title": "计算机如何组织文件",
+          "estimatedMinutes": 50,
+          "tags": [
+            "computer-basics",
+            "beginner",
+            "filesystem",
+            "concepts"
+          ],
+          "nextLesson": "4-2",
+          "prevLesson": "19-12"
+        },
+        {
+          "id": "4-2",
+          "title": "Windows：文件资源管理器与路径",
+          "estimatedMinutes": 55,
+          "tags": [
+            "computer-basics",
+            "beginner",
+            "windows",
+            "filesystem",
+            "hands-on"
+          ],
+          "nextLesson": "4-3",
+          "prevLesson": "4-1"
+        },
+        {
+          "id": "4-3",
+          "title": "打开终端（PowerShell）",
+          "estimatedMinutes": 65,
+          "tags": [
+            "computer-basics",
+            "beginner",
+            "terminal",
+            "powershell",
+            "hands-on"
+          ],
+          "nextLesson": "4-4",
+          "prevLesson": "4-2"
+        },
+        {
+          "id": "4-4",
+          "title": "必备终端命令",
+          "estimatedMinutes": 65,
+          "tags": [
+            "computer-basics",
+            "beginner",
+            "terminal",
+            "commands",
+            "hands-on"
+          ],
+          "nextLesson": "4-5",
+          "prevLesson": "4-3"
+        },
+        {
+          "id": "4-5",
+          "title": "什么是代码？通俗易懂的入门介绍",
+          "estimatedMinutes": 55,
+          "tags": [
+            "computer-basics",
+            "beginner",
+            "programming",
+            "concepts"
+          ],
+          "nextLesson": "4-6",
+          "prevLesson": "4-4"
+        },
+        {
+          "id": "4-6",
+          "title": "你的第一个 HTML 文件（不用 VS Code）",
+          "estimatedMinutes": 65,
+          "tags": [
+            "computer-basics",
+            "beginner",
+            "html",
+            "hands-on"
+          ],
+          "nextLesson": "4-7",
+          "prevLesson": "4-5"
+        },
+        {
+          "id": "4-7",
+          "title": "借助 AI 编写你的第一个 Python 自动化脚本",
+          "estimatedMinutes": 90,
+          "tags": [
+            "python",
+            "automation",
+            "beginner",
+            "claude-code",
+            "scripting",
+            "hands-on"
+          ],
+          "nextLesson": "5-1",
+          "prevLesson": "4-6"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "number": 10,
+      "title": "VS Code 完全新手指南",
+      "lessons": [
+        {
+          "id": "5-1",
+          "title": "什么是 VS Code，为什么要用它",
+          "estimatedMinutes": 50,
+          "tags": [
+            "vscode",
+            "beginner",
+            "concepts",
+            "overview"
+          ],
+          "nextLesson": "5-2",
+          "prevLesson": "4-7"
+        },
+        {
+          "id": "5-2",
+          "title": "下载与安装 VS Code",
+          "estimatedMinutes": 60,
+          "tags": [
+            "vscode",
+            "beginner",
+            "install",
+            "setup"
+          ],
+          "nextLesson": "5-3",
+          "prevLesson": "5-1"
+        },
+        {
+          "id": "5-3",
+          "title": "界面导览：认识每个功能区",
+          "estimatedMinutes": 55,
+          "tags": [
+            "vscode",
+            "beginner",
+            "interface",
+            "tour"
+          ],
+          "nextLesson": "5-4",
+          "prevLesson": "5-2"
+        },
+        {
+          "id": "5-4",
+          "title": "打开文件夹/工作区",
+          "estimatedMinutes": 50,
+          "tags": [
+            "vscode",
+            "beginner",
+            "workspace",
+            "hands-on"
+          ],
+          "nextLesson": "5-5",
+          "prevLesson": "5-3"
+        },
+        {
+          "id": "5-5",
+          "title": "创建、重命名与删除文件",
+          "estimatedMinutes": 50,
+          "tags": [
+            "vscode",
+            "beginner",
+            "files",
+            "hands-on"
+          ],
+          "nextLesson": "5-6",
+          "prevLesson": "5-4"
+        },
+        {
+          "id": "5-6",
+          "title": "命令面板——VS Code 的超能力",
+          "estimatedMinutes": 50,
+          "tags": [
+            "vscode",
+            "beginner",
+            "command-palette",
+            "productivity"
+          ],
+          "nextLesson": "5-7",
+          "prevLesson": "5-5"
+        },
+        {
+          "id": "5-7",
+          "title": "集成终端",
+          "estimatedMinutes": 55,
+          "tags": [
+            "vscode",
+            "beginner",
+            "terminal",
+            "hands-on"
+          ],
+          "nextLesson": "5-8",
+          "prevLesson": "5-6"
+        },
+        {
+          "id": "5-8",
+          "title": "扩展——安装与管理",
+          "estimatedMinutes": 70,
+          "tags": [
+            "vscode",
+            "beginner",
+            "extensions",
+            "hands-on"
+          ],
+          "nextLesson": "5-9",
+          "prevLesson": "5-7"
+        },
+        {
+          "id": "5-9",
+          "title": "设置——界面模式与 JSON 模式",
+          "estimatedMinutes": 55,
+          "tags": [
+            "vscode",
+            "beginner",
+            "settings",
+            "configuration"
+          ],
+          "nextLesson": "5-10",
+          "prevLesson": "5-8"
+        },
+        {
+          "id": "5-10",
+          "title": "必备键盘快捷键",
+          "estimatedMinutes": 55,
+          "tags": [
+            "vscode",
+            "beginner",
+            "shortcuts",
+            "productivity"
+          ],
+          "nextLesson": "5-11",
+          "prevLesson": "5-9"
+        },
+        {
+          "id": "5-11",
+          "title": "分屏编辑与多文件协同工作",
+          "estimatedMinutes": 50,
+          "tags": [
+            "vscode",
+            "beginner",
+            "editor",
+            "productivity"
+          ],
+          "nextLesson": "5-12",
+          "prevLesson": "5-10"
+        },
+        {
+          "id": "5-12",
+          "title": "VS Code 的 Git 集成（源代码管理）",
+          "estimatedMinutes": 60,
+          "tags": [
+            "vscode",
+            "beginner",
+            "git",
+            "source-control"
+          ],
+          "nextLesson": "6-1",
+          "prevLesson": "5-11"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "number": 11,
+      "title": "VS Code 中的 AI",
+      "lessons": [
+        {
+          "id": "6-1",
+          "title": "GitHub Copilot——设置与第一次代码建议",
+          "estimatedMinutes": 60,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "setup",
+            "hands-on"
+          ],
+          "nextLesson": "6-2",
+          "prevLesson": "5-12"
+        },
+        {
+          "id": "6-2",
+          "title": "Copilot 自动补全实战",
+          "estimatedMinutes": 55,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "autocomplete",
+            "hands-on"
+          ],
+          "nextLesson": "6-3",
+          "prevLesson": "6-1"
+        },
+        {
+          "id": "6-3",
+          "title": "Copilot Chat——解释、重构与调试代码",
+          "estimatedMinutes": 60,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "chat",
+            "debugging"
+          ],
+          "nextLesson": "6-4",
+          "prevLesson": "6-2"
+        },
+        {
+          "id": "6-9",
+          "title": "Copilot 代理模式（Agent Mode）：MCP、Jira 与模型选择",
+          "estimatedMinutes": 60,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "mcp",
+            "jira",
+            "agent-mode",
+            "hands-on"
+          ],
+          "nextLesson": "6-10",
+          "prevLesson": "6-8"
+        },
+        {
+          "id": "6-10",
+          "title": "精通幽灵文本（Ghost Text）与下一步编辑建议",
+          "estimatedMinutes": 50,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "ghost-text",
+            "next-edit"
+          ],
+          "nextLesson": "6-11",
+          "prevLesson": "6-9"
+        },
+        {
+          "id": "6-11",
+          "title": "聊天参与者、变量与斜杠命令",
+          "estimatedMinutes": 50,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "chat",
+            "workspace",
+            "slash-commands"
+          ],
+          "nextLesson": "6-12",
+          "prevLesson": "6-10"
+        },
+        {
+          "id": "6-12",
+          "title": "Copilot Edits——多文件 AI 编辑会话",
+          "estimatedMinutes": 55,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "edits",
+            "multi-file",
+            "refactoring"
+          ],
+          "nextLesson": "6-13",
+          "prevLesson": "6-11"
+        },
+        {
+          "id": "6-13",
+          "title": "自定义指令——教会 Copilot 你的规则",
+          "estimatedMinutes": 50,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "copilot",
+            "custom-instructions",
+            "configuration"
+          ],
+          "nextLesson": "6-14",
+          "prevLesson": "6-12"
+        },
+        {
+          "id": "6-14",
+          "title": "GitHub Copilot CLI——原生终端 AI 代理",
+          "estimatedMinutes": 60,
+          "tags": [
+            "copilot",
+            "cli",
+            "terminal",
+            "agents",
+            "automation",
+            "intermediate"
+          ],
+          "nextLesson": "6-15",
+          "prevLesson": "6-13"
+        },
+        {
+          "id": "6-15",
+          "title": "Copilot 助力拉取请求（Pull Request）与代码审查",
+          "estimatedMinutes": 55,
+          "tags": [
+            "copilot",
+            "github",
+            "pull-requests",
+            "code-review",
+            "team",
+            "intermediate"
+          ],
+          "nextLesson": "6-16",
+          "prevLesson": "6-14"
+        },
+        {
+          "id": "6-16",
+          "title": "Copilot 扩展与技能市场",
+          "estimatedMinutes": 45,
+          "tags": [
+            "copilot",
+            "extensions",
+            "skills",
+            "marketplace",
+            "github",
+            "intermediate"
+          ],
+          "nextLesson": "6-17",
+          "prevLesson": "6-15"
+        },
+        {
+          "id": "6-17",
+          "title": "高级 MCP——多服务器与工具链",
+          "estimatedMinutes": 60,
+          "tags": [
+            "copilot",
+            "mcp",
+            "vscode",
+            "azure",
+            "agent-mode",
+            "advanced"
+          ],
+          "nextLesson": "6-18",
+          "prevLesson": "6-16"
+        },
+        {
+          "id": "6-18",
+          "title": "Copilot 助力测试——真正的覆盖率，而不只是测试通过",
+          "estimatedMinutes": 55,
+          "tags": [
+            "copilot",
+            "testing",
+            "vscode",
+            "pytest",
+            "tdd",
+            "quality",
+            "intermediate"
+          ],
+          "nextLesson": "6-19",
+          "prevLesson": "6-17"
+        },
+        {
+          "id": "6-19",
+          "title": "Copilot 助力文档编写与专业写作",
+          "estimatedMinutes": 50,
+          "tags": [
+            "copilot",
+            "documentation",
+            "writing",
+            "reports",
+            "government",
+            "intermediate"
+          ],
+          "nextLesson": "6-20",
+          "prevLesson": "6-18"
+        },
+        {
+          "id": "6-20",
+          "title": "安全、隐私与内容排除",
+          "estimatedMinutes": 55,
+          "tags": [
+            "copilot",
+            "security",
+            "privacy",
+            "enterprise",
+            "government",
+            "advanced"
+          ],
+          "nextLesson": "6-21",
+          "prevLesson": "6-19"
+        },
+        {
+          "id": "6-21",
+          "title": "Copilot 团队协作与企业治理",
+          "estimatedMinutes": 55,
+          "tags": [
+            "copilot",
+            "enterprise",
+            "governance",
+            "teams",
+            "knowledge-base",
+            "advanced"
+          ],
+          "nextLesson": "6-22",
+          "prevLesson": "6-20"
+        },
+        {
+          "id": "6-22",
+          "title": "模型优化与打造你的个人 Copilot 系统",
+          "estimatedMinutes": 55,
+          "tags": [
+            "copilot",
+            "models",
+            "optimization",
+            "workflow",
+            "system",
+            "advanced"
+          ],
+          "nextLesson": "6-23",
+          "prevLesson": "6-21"
+        },
+        {
+          "id": "6-23",
+          "title": "Copilot 助力邮件——收件箱管理与商务通信",
+          "estimatedMinutes": 60,
+          "tags": [
+            "copilot",
+            "email",
+            "outlook",
+            "gmail",
+            "mcp",
+            "productivity",
+            "government",
+            "intermediate"
+          ],
+          "nextLesson": "6-24",
+          "prevLesson": "6-22"
+        },
+        {
+          "id": "6-24",
+          "title": "用 Copilot 管理团队——任务、阻塞项与工作负荷",
+          "estimatedMinutes": 60,
+          "tags": [
+            "copilot",
+            "team-management",
+            "ado",
+            "jira",
+            "tasks",
+            "government",
+            "intermediate"
+          ],
+          "nextLesson": "6-25",
+          "prevLesson": "6-23"
+        },
+        {
+          "id": "6-25",
+          "title": "Copilot 助力会议——准备、记录与后续跟进",
+          "estimatedMinutes": 55,
+          "tags": [
+            "copilot",
+            "meetings",
+            "productivity",
+            "calendar",
+            "notes",
+            "action-items",
+            "government",
+            "intermediate"
+          ],
+          "nextLesson": "6-26",
+          "prevLesson": "6-24"
+        },
+        {
+          "id": "6-26",
+          "title": "收集与整合团队信息",
+          "estimatedMinutes": 55,
+          "tags": [
+            "copilot",
+            "team-communication",
+            "slack",
+            "teams",
+            "synthesis",
+            "reporting",
+            "government",
+            "intermediate"
+          ],
+          "nextLesson": "6-27",
+          "prevLesson": "6-25"
+        },
+        {
+          "id": "6-27",
+          "title": "利益相关方沟通——面向不同受众的写作",
+          "estimatedMinutes": 55,
+          "tags": [
+            "copilot",
+            "communication",
+            "stakeholders",
+            "writing",
+            "government",
+            "executive",
+            "reports",
+            "intermediate"
+          ],
+          "nextLesson": "6-28",
+          "prevLesson": "6-26"
+        },
+        {
+          "id": "6-28",
+          "title": "你的每日 AI 幕僚长——政府机构完整工作日实战",
+          "estimatedMinutes": 75,
+          "tags": [
+            "copilot",
+            "productivity",
+            "workflow",
+            "government",
+            "capstone",
+            "daily-system",
+            "advanced"
+          ],
+          "nextLesson": "6-29",
+          "prevLesson": "6-27"
+        },
+        {
+          "id": "6-29",
+          "title": "AI 助力创业者——验证并启动你的商业创意",
+          "estimatedMinutes": 90,
+          "tags": [
+            "entrepreneur",
+            "business",
+            "startup",
+            "market-research",
+            "strategy",
+            "no-code",
+            "advanced"
+          ],
+          "nextLesson": "6-30",
+          "prevLesson": "6-28"
+        },
+        {
+          "id": "6-30",
+          "title": "AI 助力管理者——绩效评估、招聘与 OKR",
+          "estimatedMinutes": 80,
+          "tags": [
+            "management",
+            "performance-review",
+            "hiring",
+            "okr",
+            "leadership",
+            "team",
+            "no-code",
+            "advanced"
+          ],
+          "nextLesson": "9-1",
+          "prevLesson": "6-29"
+        },
+        {
+          "id": "6-4",
+          "title": "Continue.dev——VS Code 中的免费开源 AI",
+          "estimatedMinutes": 60,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "continue-dev",
+            "open-source",
+            "setup"
+          ],
+          "nextLesson": "6-5",
+          "prevLesson": "6-3"
+        },
+        {
+          "id": "6-5",
+          "title": "VS Code 中的 AI 辅助调试",
+          "estimatedMinutes": 60,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "debugging",
+            "ai-assisted",
+            "hands-on"
+          ],
+          "nextLesson": "6-6",
+          "prevLesson": "6-4"
+        },
+        {
+          "id": "6-6",
+          "title": "Cursor IDE——AI 原生编辑器",
+          "estimatedMinutes": 60,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "cursor",
+            "ai-editor",
+            "setup"
+          ],
+          "nextLesson": "6-7",
+          "prevLesson": "6-5"
+        },
+        {
+          "id": "6-7",
+          "title": "Windsurf——另一款 AI 优先编辑器",
+          "estimatedMinutes": 60,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "windsurf",
+            "ai-editor",
+            "setup"
+          ],
+          "nextLesson": "6-8",
+          "prevLesson": "6-6"
+        },
+        {
+          "id": "6-8",
+          "title": "选择你的 AI 编辑器方案",
+          "estimatedMinutes": 50,
+          "tags": [
+            "vscode",
+            "intermediate",
+            "strategy",
+            "overview"
+          ],
+          "nextLesson": "6-9",
+          "prevLesson": "6-7"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "number": 12,
+      "title": "其他 AI 编程工具",
+      "lessons": [
+        {
+          "id": "9-1",
+          "title": "Aider——基于终端的 AI 编程",
+          "estimatedMinutes": 60,
+          "tags": [
+            "ai-coding",
+            "intermediate",
+            "aider",
+            "terminal",
+            "hands-on"
+          ],
+          "nextLesson": "9-2",
+          "prevLesson": "6-30"
+        },
+        {
+          "id": "9-2",
+          "title": "Sourcegraph Cody——企业级代码库 AI",
+          "estimatedMinutes": 60,
+          "tags": [
+            "ai-coding",
+            "intermediate",
+            "cody",
+            "sourcegraph",
+            "enterprise"
+          ],
+          "nextLesson": "9-3",
+          "prevLesson": "9-1"
+        },
+        {
+          "id": "9-3",
+          "title": "Tabnine——隐私优先的代码补全",
+          "estimatedMinutes": 55,
+          "tags": [
+            "ai-coding",
+            "intermediate",
+            "tabnine",
+            "privacy",
+            "autocomplete"
+          ],
+          "nextLesson": "9-4",
+          "prevLesson": "9-2"
+        },
+        {
+          "id": "9-4",
+          "title": "AI 编程工具全景图",
+          "estimatedMinutes": 55,
+          "tags": [
+            "ai-coding",
+            "intermediate",
+            "overview",
+            "strategy"
+          ],
+          "nextLesson": "9-5",
+          "prevLesson": "9-3"
+        },
+        {
+          "id": "9-5",
+          "title": "Bolt.new——用描述构建完整应用",
+          "estimatedMinutes": 65,
+          "tags": [
+            "bolt",
+            "vibe-coding",
+            "no-code",
+            "full-stack",
+            "deployment",
+            "beginner-friendly"
+          ],
+          "nextLesson": "9-6",
+          "prevLesson": "9-4"
+        },
+        {
+          "id": "9-6",
+          "title": "Vercel v0——以思维速度进行 UI 原型设计",
+          "estimatedMinutes": 50,
+          "tags": [
+            "v0",
+            "vercel",
+            "ui",
+            "react",
+            "components",
+            "prototyping",
+            "vibe-coding"
+          ],
+          "nextLesson": "9-7",
+          "prevLesson": "9-5"
+        },
+        {
+          "id": "9-7",
+          "title": "Lovable 与 Replit——从创意到部署上线",
+          "estimatedMinutes": 60,
+          "tags": [
+            "lovable",
+            "replit",
+            "vibe-coding",
+            "no-code",
+            "deployment",
+            "full-stack",
+            "beginner-friendly"
+          ],
+          "nextLesson": "7-1",
+          "prevLesson": "9-6"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "number": 13,
+      "title": "Claude Code 完全指南",
+      "lessons": [
+        {
+          "id": "7-1",
+          "title": "什么是 Claude Code？",
+          "estimatedMinutes": 55,
+          "tags": [
+            "claude-code",
+            "intermediate",
+            "concepts",
+            "overview"
+          ],
+          "nextLesson": "7-2",
+          "prevLesson": "9-7"
+        },
+        {
+          "id": "7-2",
+          "title": "安装 Claude Code",
+          "estimatedMinutes": 60,
+          "tags": [
+            "claude-code",
+            "intermediate",
+            "install",
+            "setup"
+          ],
+          "nextLesson": "7-3",
+          "prevLesson": "7-1"
+        },
+        {
+          "id": "7-3",
+          "title": "第一次会话——读取项目",
+          "estimatedMinutes": 70,
+          "tags": [
+            "claude-code",
+            "intermediate",
+            "hands-on",
+            "first-session"
+          ],
+          "nextLesson": "7-4",
+          "prevLesson": "7-2"
+        },
+        {
+          "id": "7-4",
+          "title": "让 Claude 编写文件",
+          "estimatedMinutes": 65,
+          "tags": [
+            "claude-code",
+            "intermediate",
+            "hands-on",
+            "file-writing"
+          ],
+          "nextLesson": "7-5",
+          "prevLesson": "7-3"
+        },
+        {
+          "id": "7-5",
+          "title": "审查与接受更改",
+          "estimatedMinutes": 55,
+          "tags": [
+            "claude-code",
+            "intermediate",
+            "workflow",
+            "review"
+          ],
+          "nextLesson": "7-6",
+          "prevLesson": "7-4"
+        },
+        {
+          "id": "7-6",
+          "title": "CLAUDE.md——你的项目指令文件",
+          "estimatedMinutes": 60,
+          "tags": [
+            "claude-code",
+            "intermediate",
+            "claude-md",
+            "configuration"
+          ],
+          "nextLesson": "7-7",
+          "prevLesson": "7-5"
+        },
+        {
+          "id": "7-7",
+          "title": "自定义斜杠命令",
+          "estimatedMinutes": 70,
+          "tags": [
+            "claude-code",
+            "intermediate",
+            "slash-commands",
+            "customization"
+          ],
+          "nextLesson": "7-8",
+          "prevLesson": "7-6"
+        },
+        {
+          "id": "7-8",
+          "title": "钩子（Hooks）——围绕 Claude 的工作自动执行操作",
+          "estimatedMinutes": 65,
+          "tags": [
+            "claude-code",
+            "intermediate",
+            "hooks",
+            "automation"
+          ],
+          "nextLesson": "7-9",
+          "prevLesson": "7-7"
+        },
+        {
+          "id": "7-9",
+          "title": "记忆系统",
+          "estimatedMinutes": 60,
+          "tags": [
+            "claude-code",
+            "intermediate",
+            "memory",
+            "configuration"
+          ],
+          "nextLesson": "7-10",
+          "prevLesson": "7-8"
+        },
+        {
+          "id": "7-10",
+          "title": "计划模式（Plan Mode）与权限管理",
+          "estimatedMinutes": 60,
+          "tags": [
+            "claude-code",
+            "intermediate",
+            "plan-mode",
+            "permissions"
+          ],
+          "nextLesson": "7-11",
+          "prevLesson": "7-9"
+        },
+        {
+          "id": "7-11",
+          "title": "子代理（Sub-Agents）与并行工作",
+          "estimatedMinutes": 65,
+          "tags": [
+            "claude-code",
+            "advanced",
+            "sub-agents",
+            "parallel"
+          ],
+          "nextLesson": "7-12",
+          "prevLesson": "7-10"
+        },
+        {
+          "id": "7-12",
+          "title": "Claude Code 设置深度解析",
+          "estimatedMinutes": 65,
+          "tags": [
+            "claude-code",
+            "advanced",
+            "settings",
+            "configuration"
+          ],
+          "nextLesson": "7-13",
+          "prevLesson": "7-11"
+        },
+        {
+          "id": "7-13",
+          "title": "7 种必备钩子模式——真实工作流实战",
+          "estimatedMinutes": 80,
+          "prevLesson": "7-12",
+          "nextLesson": "20-1"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "number": 14,
+      "title": "构建自定义 AI 技能",
+      "lessons": [
+        {
+          "id": "20-1",
+          "title": "自定义技能（Custom Skills）——它们是什么，为何能改变一切",
+          "estimatedMinutes": 35,
+          "tags": [
+            "skills",
+            "claude-code",
+            "slash-commands",
+            "automation",
+            "beginner"
+          ],
+          "nextLesson": "20-2",
+          "prevLesson": "7-13"
+        },
+        {
+          "id": "20-2",
+          "title": "技能设计原则——一个优秀技能的构成",
+          "estimatedMinutes": 40,
+          "tags": [
+            "skills",
+            "claude-code",
+            "prompt-engineering",
+            "design",
+            "intermediate"
+          ],
+          "nextLesson": "20-3",
+          "prevLesson": "20-1"
+        },
+        {
+          "id": "20-3",
+          "title": "邮件智能套件——构建 3 个邮件技能",
+          "estimatedMinutes": 75,
+          "tags": [
+            "skills",
+            "email",
+            "gmail",
+            "mcp",
+            "productivity",
+            "build",
+            "intermediate"
+          ],
+          "nextLesson": "20-4",
+          "prevLesson": "20-2"
+        },
+        {
+          "id": "20-4",
+          "title": "多子代理分析器——5 个代理战胜 AI 幻觉",
+          "estimatedMinutes": 80,
+          "tags": [
+            "skills",
+            "agents",
+            "subagents",
+            "hallucination",
+            "parallel",
+            "advanced",
+            "build"
+          ],
+          "nextLesson": "20-5",
+          "prevLesson": "20-3"
+        },
+        {
+          "id": "20-5",
+          "title": "文档智能——从任意文档中提取任意数据",
+          "estimatedMinutes": 70,
+          "tags": [
+            "skills",
+            "documents",
+            "extraction",
+            "pdf",
+            "contracts",
+            "build",
+            "intermediate"
+          ],
+          "nextLesson": "20-6",
+          "prevLesson": "20-4"
+        },
+        {
+          "id": "20-6",
+          "title": "效率套件——构建 4 个日常使用技能",
+          "estimatedMinutes": 80,
+          "tags": [
+            "skills",
+            "productivity",
+            "morning-brief",
+            "code-review",
+            "weekly-review",
+            "build",
+            "intermediate"
+          ],
+          "nextLesson": "20-7",
+          "prevLesson": "20-5"
+        },
+        {
+          "id": "20-7",
+          "title": "技能链——你的个人 AI 工作流系统",
+          "estimatedMinutes": 75,
+          "tags": [
+            "skills",
+            "chaining",
+            "workflow",
+            "system",
+            "advanced",
+            "build"
+          ],
+          "nextLesson": "20-8",
+          "prevLesson": "20-6"
+        },
+        {
+          "id": "20-8",
+          "title": "高级技能模式——子代理、参数与共享",
+          "estimatedMinutes": 85,
+          "tags": [
+            "skills",
+            "subagents",
+            "advanced",
+            "sharing",
+            "team",
+            "build"
+          ],
+          "nextLesson": "8-1",
+          "prevLesson": "20-7"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "number": 15,
+      "title": "MCP：模型上下文协议（Model Context Protocol）",
+      "lessons": [
+        {
+          "id": "8-1",
+          "title": "什么是 MCP，为什么它如此重要",
+          "estimatedMinutes": 60,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "concepts",
+            "overview"
+          ],
+          "nextLesson": "8-2",
+          "prevLesson": "20-8"
+        },
+        {
+          "id": "8-2",
+          "title": "MCP 架构——客户端、服务器与传输层",
+          "estimatedMinutes": 55,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "architecture",
+            "concepts"
+          ],
+          "nextLesson": "8-3",
+          "prevLesson": "8-1"
+        },
+        {
+          "id": "8-3",
+          "title": "安装你的第一个 MCP 服务器",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "install",
+            "setup",
+            "hands-on"
+          ],
+          "nextLesson": "8-4",
+          "prevLesson": "8-2"
+        },
+        {
+          "id": "8-4",
+          "title": "context7——任意代码库的实时文档",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "context7",
+            "documentation",
+            "hands-on"
+          ],
+          "nextLesson": "8-5",
+          "prevLesson": "8-3"
+        },
+        {
+          "id": "8-5",
+          "title": "sequential-thinking——结构化推理",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "sequential-thinking",
+            "reasoning",
+            "hands-on"
+          ],
+          "nextLesson": "8-6",
+          "prevLesson": "8-4"
+        },
+        {
+          "id": "8-6",
+          "title": "自我批判模式——演员-评论家思维（Actor-Critic）",
+          "estimatedMinutes": 60,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "actor-critic",
+            "self-critique",
+            "pattern"
+          ],
+          "nextLesson": "8-7",
+          "prevLesson": "8-5"
+        },
+        {
+          "id": "8-7",
+          "title": "task-master-ai——AI 项目管理",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "task-master",
+            "project-management",
+            "hands-on"
+          ],
+          "nextLesson": "8-8",
+          "prevLesson": "8-6"
+        },
+        {
+          "id": "8-8",
+          "title": "GitHub MCP——通过对话处理 Issue、PR 与代码",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "github",
+            "hands-on"
+          ],
+          "nextLesson": "8-9",
+          "prevLesson": "8-7"
+        },
+        {
+          "id": "8-9",
+          "title": "文件系统 MCP——让 AI 浏览你的文件",
+          "estimatedMinutes": 60,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "filesystem",
+            "hands-on"
+          ],
+          "nextLesson": "8-10",
+          "prevLesson": "8-8"
+        },
+        {
+          "id": "8-10",
+          "title": "浏览器/Playwright MCP——让 AI 操控真实浏览器",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "advanced",
+            "browser",
+            "playwright",
+            "automation"
+          ],
+          "nextLesson": "8-11",
+          "prevLesson": "8-9"
+        },
+        {
+          "id": "8-11",
+          "title": "Gmail MCP——真实收件箱清理实战",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "gmail",
+            "email",
+            "hands-on"
+          ],
+          "nextLesson": "8-12",
+          "prevLesson": "8-10"
+        },
+        {
+          "id": "8-12",
+          "title": "Google 云端硬盘与日历 MCP——真实工作空间整理",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "google-drive",
+            "google-calendar",
+            "hands-on"
+          ],
+          "nextLesson": "8-13",
+          "prevLesson": "8-11"
+        },
+        {
+          "id": "8-13",
+          "title": "数据库 MCP——SQLite",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "database",
+            "sqlite",
+            "hands-on"
+          ],
+          "nextLesson": "8-14",
+          "prevLesson": "8-12"
+        },
+        {
+          "id": "8-14",
+          "title": "寻找社区 MCP 服务器",
+          "estimatedMinutes": 55,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "community",
+            "discovery"
+          ],
+          "nextLesson": "8-15",
+          "prevLesson": "8-13"
+        },
+        {
+          "id": "8-15",
+          "title": "构建一个简单的自定义 MCP 服务器",
+          "estimatedMinutes": 100,
+          "tags": [
+            "mcp",
+            "advanced",
+            "build",
+            "custom",
+            "hands-on"
+          ],
+          "nextLesson": "8-16",
+          "prevLesson": "8-14"
+        },
+        {
+          "id": "8-16",
+          "title": "Outlook MCP——在 Claude Code 中管理你的收件箱",
+          "estimatedMinutes": 60,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "outlook",
+            "email",
+            "office",
+            "hands-on"
+          ],
+          "nextLesson": "8-17",
+          "prevLesson": "8-15"
+        },
+        {
+          "id": "8-17",
+          "title": "Microsoft Teams MCP——在 Claude Code 中管理频道与会议",
+          "estimatedMinutes": 60,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "teams",
+            "microsoft",
+            "meetings",
+            "hands-on"
+          ],
+          "nextLesson": "8-18",
+          "prevLesson": "8-16"
+        },
+        {
+          "id": "8-18",
+          "title": "Slack MCP——在 Claude Code 中管理频道、话题串与消息",
+          "estimatedMinutes": 60,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "slack",
+            "messaging",
+            "hands-on"
+          ],
+          "nextLesson": "8-19",
+          "prevLesson": "8-17"
+        },
+        {
+          "id": "8-19",
+          "title": "Notion MCP——在 Claude Code 中管理你的知识库",
+          "estimatedMinutes": 55,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "notion",
+            "knowledge",
+            "hands-on"
+          ],
+          "nextLesson": "8-20",
+          "prevLesson": "8-18"
+        },
+        {
+          "id": "8-20",
+          "title": "统一办公——串联你所有工具的 MCP",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "intermediate",
+            "workflow",
+            "integration",
+            "hands-on"
+          ],
+          "nextLesson": "8-21",
+          "prevLesson": "8-19"
+        },
+        {
+          "id": "8-21",
+          "title": "Memory MCP——赋予 Claude 持久记忆",
+          "estimatedMinutes": 65,
+          "tags": [
+            "mcp",
+            "memory",
+            "knowledge-graph",
+            "persistent-memory",
+            "claude-code",
+            "intermediate"
+          ],
+          "nextLesson": "8-22",
+          "prevLesson": "8-20"
+        },
+        {
+          "id": "8-22",
+          "title": "完整的 MCP 技术栈——6 个工具汇聚于一个真实工作流",
+          "estimatedMinutes": 90,
+          "tags": [
+            "mcp",
+            "advanced",
+            "filesystem",
+            "sequential-thinking",
+            "github",
+            "playwright",
+            "context7",
+            "memory",
+            "multi-mcp",
+            "capstone",
+            "hands-on"
+          ],
+          "nextLesson": "10-1",
+          "prevLesson": "8-21"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "number": 16,
+      "title": "AI 自动化与工作流",
+      "lessons": [
+        {
+          "id": "10-1",
+          "title": "什么是工作流自动化？",
+          "estimatedMinutes": 55,
+          "tags": [
+            "automation",
+            "intermediate",
+            "concepts",
+            "overview"
+          ],
+          "nextLesson": "10-2",
+          "prevLesson": "8-22"
+        },
+        {
+          "id": "10-2",
+          "title": "n8n——开源 AI 自动化工具",
+          "estimatedMinutes": 65,
+          "tags": [
+            "automation",
+            "intermediate",
+            "n8n",
+            "open-source",
+            "hands-on"
+          ],
+          "nextLesson": "10-3",
+          "prevLesson": "10-1"
+        },
+        {
+          "id": "10-3",
+          "title": "Zapier + AI 动作",
+          "estimatedMinutes": 60,
+          "tags": [
+            "automation",
+            "intermediate",
+            "zapier",
+            "hands-on"
+          ],
+          "nextLesson": "10-4",
+          "prevLesson": "10-2"
+        },
+        {
+          "id": "10-4",
+          "title": "Make（原 Integromat）——可视化自动化",
+          "estimatedMinutes": 60,
+          "tags": [
+            "automation",
+            "intermediate",
+            "make",
+            "integromat",
+            "hands-on"
+          ],
+          "nextLesson": "10-5",
+          "prevLesson": "10-3"
+        },
+        {
+          "id": "10-5",
+          "title": "AI 辅助的 Git 工作流",
+          "estimatedMinutes": 60,
+          "tags": [
+            "automation",
+            "intermediate",
+            "git",
+            "workflow"
+          ],
+          "nextLesson": "10-6",
+          "prevLesson": "10-4"
+        },
+        {
+          "id": "10-6",
+          "title": "GitHub Actions + AI",
+          "estimatedMinutes": 65,
+          "tags": [
+            "automation",
+            "intermediate",
+            "github-actions",
+            "ci-cd",
+            "hands-on"
+          ],
+          "nextLesson": "10-7",
+          "prevLesson": "10-5"
+        },
+        {
+          "id": "10-7",
+          "title": "设计你的个人 AI 工作流",
+          "estimatedMinutes": 55,
+          "tags": [
+            "automation",
+            "intermediate",
+            "workflow",
+            "strategy"
+          ],
+          "nextLesson": "10-8",
+          "prevLesson": "10-6"
+        },
+        {
+          "id": "10-8",
+          "title": "项目实战：构建、部署并自动更新一个上线网站",
+          "estimatedMinutes": 90,
+          "tags": [
+            "github",
+            "github-pages",
+            "github-actions",
+            "github-mcp",
+            "ci-cd",
+            "html",
+            "deployment",
+            "project"
+          ],
+          "nextLesson": "10-9",
+          "prevLesson": "10-7"
+        },
+        {
+          "id": "10-9",
+          "title": "Webhook 与事件驱动 AI——从任何事件触发自动化",
+          "estimatedMinutes": 60,
+          "tags": [
+            "webhooks",
+            "event-driven",
+            "automation",
+            "n8n",
+            "zapier",
+            "triggers"
+          ],
+          "nextLesson": "10-10",
+          "prevLesson": "10-8"
+        },
+        {
+          "id": "10-10",
+          "title": "Microsoft Copilot Studio 与无代码 AI 代理构建工具",
+          "estimatedMinutes": 55,
+          "tags": [
+            "automation",
+            "intermediate",
+            "copilot-studio",
+            "no-code",
+            "agents",
+            "microsoft",
+            "gumloop",
+            "hands-on"
+          ],
+          "nextLesson": "11-1",
+          "prevLesson": "10-9"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "number": 17,
+      "title": "AI API 与构建你的第一个 AI 工具",
+      "lessons": [
+        {
+          "id": "11-1",
+          "title": "什么是 API？（通俗讲解）",
+          "estimatedMinutes": 55,
+          "tags": [
+            "api",
+            "intermediate",
+            "concepts",
+            "overview"
+          ],
+          "nextLesson": "11-2",
+          "prevLesson": "10-10"
+        },
+        {
+          "id": "11-2",
+          "title": "Anthropic API 概览",
+          "estimatedMinutes": 55,
+          "tags": [
+            "api",
+            "intermediate",
+            "anthropic",
+            "claude",
+            "overview"
+          ],
+          "nextLesson": "11-3",
+          "prevLesson": "11-1"
+        },
+        {
+          "id": "11-3",
+          "title": "获取你的第一个 API 密钥",
+          "estimatedMinutes": 55,
+          "tags": [
+            "api",
+            "intermediate",
+            "anthropic",
+            "api-key",
+            "setup"
+          ],
+          "nextLesson": "11-4",
+          "prevLesson": "11-2"
+        },
+        {
+          "id": "11-4",
+          "title": "用 curl 发起第一次 API 调用",
+          "estimatedMinutes": 60,
+          "tags": [
+            "api",
+            "intermediate",
+            "curl",
+            "hands-on"
+          ],
+          "nextLesson": "11-5",
+          "prevLesson": "11-3"
+        },
+        {
+          "id": "11-5",
+          "title": "使用 Anthropic SDK",
+          "estimatedMinutes": 65,
+          "tags": [
+            "api",
+            "intermediate",
+            "sdk",
+            "python",
+            "hands-on"
+          ],
+          "nextLesson": "11-6",
+          "prevLesson": "11-4"
+        },
+        {
+          "id": "11-6",
+          "title": "理解 Token 与成本",
+          "estimatedMinutes": 55,
+          "tags": [
+            "api",
+            "intermediate",
+            "tokens",
+            "cost",
+            "concepts"
+          ],
+          "nextLesson": "11-7",
+          "prevLesson": "11-5"
+        },
+        {
+          "id": "11-7",
+          "title": "流式响应",
+          "estimatedMinutes": 60,
+          "tags": [
+            "api",
+            "intermediate",
+            "streaming",
+            "hands-on"
+          ],
+          "nextLesson": "11-8",
+          "prevLesson": "11-6"
+        },
+        {
+          "id": "11-8",
+          "title": "构建一个简单的 AI 工具——文本摘要命令行程序",
+          "estimatedMinutes": 90,
+          "tags": [
+            "api",
+            "intermediate",
+            "build",
+            "cli",
+            "project"
+          ],
+          "nextLesson": "11-9",
+          "prevLesson": "11-7"
+        },
+        {
+          "id": "11-9",
+          "title": "成本工程——Token 最小化、模型路由与提示词缓存",
+          "estimatedMinutes": 65,
+          "tags": [
+            "api",
+            "advanced",
+            "cost",
+            "optimization",
+            "caching"
+          ],
+          "nextLesson": "11-10",
+          "prevLesson": "11-8"
+        },
+        {
+          "id": "11-10",
+          "title": "把你的命令行工具变成可分享的网页应用",
+          "estimatedMinutes": 75,
+          "tags": [
+            "express",
+            "web-app",
+            "deployment",
+            "railway",
+            "anthropic-api",
+            "full-stack"
+          ],
+          "nextLesson": "12-1",
+          "prevLesson": "11-9"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "number": 18,
+      "title": "用 Ollama 运行本地 AI",
+      "lessons": [
+        {
+          "id": "12-1",
+          "title": "为什么要在本地运行 AI？",
+          "estimatedMinutes": 50,
+          "tags": [
+            "local-ai",
+            "intermediate",
+            "ollama",
+            "concepts",
+            "privacy"
+          ],
+          "nextLesson": "12-2",
+          "prevLesson": "11-10"
+        },
+        {
+          "id": "12-2",
+          "title": "安装 Ollama",
+          "estimatedMinutes": 60,
+          "tags": [
+            "local-ai",
+            "intermediate",
+            "ollama",
+            "install",
+            "setup"
+          ],
+          "nextLesson": "12-3",
+          "prevLesson": "12-1"
+        },
+        {
+          "id": "12-3",
+          "title": "运行你的第一个本地模型",
+          "estimatedMinutes": 60,
+          "tags": [
+            "local-ai",
+            "intermediate",
+            "ollama",
+            "hands-on"
+          ],
+          "nextLesson": "12-4",
+          "prevLesson": "12-2"
+        },
+        {
+          "id": "12-4",
+          "title": "LM Studio——本地模型的图形界面",
+          "estimatedMinutes": 60,
+          "tags": [
+            "local-ai",
+            "intermediate",
+            "lm-studio",
+            "gui",
+            "setup"
+          ],
+          "nextLesson": "12-5",
+          "prevLesson": "12-3"
+        },
+        {
+          "id": "12-5",
+          "title": "在 VS Code 中把本地模型连接到 Continue.dev",
+          "estimatedMinutes": 65,
+          "tags": [
+            "local-ai",
+            "intermediate",
+            "continue-dev",
+            "vscode",
+            "hands-on"
+          ],
+          "nextLesson": "12-6",
+          "prevLesson": "12-4"
+        },
+        {
+          "id": "12-6",
+          "title": "把本地模型连接到 Claude Code",
+          "estimatedMinutes": 65,
+          "tags": [
+            "local-ai",
+            "advanced",
+            "claude-code",
+            "configuration",
+            "hands-on"
+          ],
+          "nextLesson": "12-7",
+          "prevLesson": "12-5"
+        },
+        {
+          "id": "12-7",
+          "title": "选择合适的本地模型",
+          "estimatedMinutes": 55,
+          "tags": [
+            "local-ai",
+            "intermediate",
+            "strategy",
+            "overview"
+          ],
+          "nextLesson": "18-1",
+          "prevLesson": "12-6"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "number": 19,
+      "title": "AI 高级精通",
+      "lessons": [
+        {
+          "id": "18-1",
+          "title": "高级提示词技巧：CoT、ToT、ReAct 及更多",
+          "estimatedMinutes": 70,
+          "tags": [
+            "advanced",
+            "prompting",
+            "chain-of-thought",
+            "reasoning",
+            "hands-on"
+          ],
+          "nextLesson": "18-2",
+          "prevLesson": "12-7"
+        },
+        {
+          "id": "18-2",
+          "title": "模型选择智慧——为每项任务选对 AI",
+          "estimatedMinutes": 65,
+          "tags": [
+            "advanced",
+            "models",
+            "strategy",
+            "cost",
+            "comparison"
+          ],
+          "nextLesson": "18-3",
+          "prevLesson": "18-1"
+        },
+        {
+          "id": "18-3",
+          "title": "系统化 AI 研究——Perplexity、Elicit、Consensus 与 Scite",
+          "estimatedMinutes": 70,
+          "tags": [
+            "advanced",
+            "research",
+            "perplexity",
+            "elicit",
+            "consensus",
+            "hands-on"
+          ],
+          "nextLesson": "18-4",
+          "prevLesson": "18-2"
+        },
+        {
+          "id": "18-4",
+          "title": "检索增强生成（RAG）与个人知识系统",
+          "estimatedMinutes": 65,
+          "tags": [
+            "advanced",
+            "rag",
+            "knowledge-base",
+            "notebooklm",
+            "embeddings"
+          ],
+          "nextLesson": "18-5",
+          "prevLesson": "18-3"
+        },
+        {
+          "id": "18-5",
+          "title": "AI 代理实战",
+          "estimatedMinutes": 65,
+          "tags": [
+            "advanced",
+            "agents",
+            "multi-agent",
+            "automation",
+            "hands-on"
+          ],
+          "nextLesson": "18-6",
+          "prevLesson": "18-4"
+        },
+        {
+          "id": "18-6",
+          "title": "综合实战——构建你的个人 AI 知识引擎",
+          "estimatedMinutes": 115,
+          "tags": [
+            "advanced",
+            "capstone",
+            "build",
+            "knowledge-engine",
+            "hands-on"
+          ],
+          "nextLesson": "18-7",
+          "prevLesson": "18-5"
+        },
+        {
+          "id": "18-7",
+          "title": "构建一个 AI 研究工具——完整生命周期",
+          "estimatedMinutes": 145,
+          "prevLesson": "18-6",
+          "nextLesson": "18-8"
+        },
+        {
+          "id": "18-8",
+          "title": "你的前进之路：LLM 工程师成长路线图",
+          "estimatedMinutes": 30,
+          "tags": [
+            "advanced",
+            "career",
+            "roadmap",
+            "next-steps",
+            "llm-engineer"
+          ],
+          "nextLesson": "18-9",
+          "prevLesson": "18-7"
+        },
+        {
+          "id": "18-9",
+          "title": "微调（Fine-Tuning）与自定义模型——何时、为何、如何",
+          "estimatedMinutes": 60,
+          "tags": [
+            "advanced",
+            "intermediate",
+            "fine-tuning",
+            "custom-models",
+            "machine-learning",
+            "api",
+            "concepts"
+          ],
+          "nextLesson": "18-10",
+          "prevLesson": "18-8"
+        },
+        {
+          "id": "18-10",
+          "title": "推理模型——AI 在回答前先思考",
+          "estimatedMinutes": 60,
+          "tags": [
+            "advanced",
+            "reasoning-models",
+            "o3",
+            "extended-thinking",
+            "deepseek-r1",
+            "model-selection",
+            "concepts",
+            "hands-on"
+          ],
+          "nextLesson": "18-11",
+          "prevLesson": "18-9"
+        },
+        {
+          "id": "18-11",
+          "title": "AI 代理框架——LangGraph、CrewAI 与 AutoGen",
+          "estimatedMinutes": 65,
+          "tags": [
+            "advanced",
+            "agents",
+            "langchain",
+            "langgraph",
+            "crewai",
+            "autogen",
+            "multi-agent",
+            "frameworks",
+            "hands-on"
+          ],
+          "nextLesson": "21-1",
+          "prevLesson": "18-10"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "number": 20,
+      "title": "循环工程（Loop Engineering）",
+      "lessons": [
+        {
+          "id": "21-1",
+          "title": "什么是循环工程？",
+          "estimatedMinutes": 40,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "concepts",
+            "overview"
+          ],
+          "nextLesson": "21-2",
+          "prevLesson": "18-11"
+        },
+        {
+          "id": "21-2",
+          "title": "代理循环结构解析",
+          "estimatedMinutes": 45,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "agents",
+            "react"
+          ],
+          "nextLesson": "21-3",
+          "prevLesson": "21-1"
+        },
+        {
+          "id": "21-3",
+          "title": "ReAct 循环——推理与行动结合",
+          "estimatedMinutes": 50,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "react",
+            "reasoning",
+            "tools"
+          ],
+          "nextLesson": "21-4",
+          "prevLesson": "21-2"
+        },
+        {
+          "id": "21-4",
+          "title": "自我批判循环——AI 自查工作成果",
+          "estimatedMinutes": 50,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "self-critique",
+            "quality"
+          ],
+          "nextLesson": "21-5",
+          "prevLesson": "21-3"
+        },
+        {
+          "id": "21-5",
+          "title": "评估循环——以 LLM 为评判者",
+          "estimatedMinutes": 50,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "evaluation",
+            "llm-judge"
+          ],
+          "nextLesson": "21-6",
+          "prevLesson": "21-4"
+        },
+        {
+          "id": "21-6",
+          "title": "迭代优化循环",
+          "estimatedMinutes": 45,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "refinement",
+            "iteration"
+          ],
+          "nextLesson": "21-7",
+          "prevLesson": "21-5"
+        },
+        {
+          "id": "21-7",
+          "title": "人在回路（Human-in-the-Loop）设计",
+          "estimatedMinutes": 45,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "hitl",
+            "human-oversight"
+          ],
+          "nextLesson": "21-8",
+          "prevLesson": "21-6"
+        },
+        {
+          "id": "21-8",
+          "title": "多代理反馈循环",
+          "estimatedMinutes": 55,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "multi-agent",
+            "orchestration"
+          ],
+          "nextLesson": "21-9",
+          "prevLesson": "21-7"
+        },
+        {
+          "id": "21-9",
+          "title": "定时循环与持续循环",
+          "estimatedMinutes": 45,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "scheduled",
+            "continuous",
+            "automation"
+          ],
+          "nextLesson": "21-10",
+          "prevLesson": "21-8"
+        },
+        {
+          "id": "21-10",
+          "title": "错误恢复与重试循环",
+          "estimatedMinutes": 45,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "error-handling",
+            "resilience"
+          ],
+          "nextLesson": "21-11",
+          "prevLesson": "21-9"
+        },
+        {
+          "id": "21-11",
+          "title": "循环效率与成本控制",
+          "estimatedMinutes": 40,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "cost",
+            "efficiency",
+            "tokens"
+          ],
+          "nextLesson": "21-12",
+          "prevLesson": "21-10"
+        },
+        {
+          "id": "21-12",
+          "title": "循环调试与可观测性",
+          "estimatedMinutes": 45,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "debugging",
+            "observability"
+          ],
+          "nextLesson": "21-13",
+          "prevLesson": "21-11"
+        },
+        {
+          "id": "21-13",
+          "title": "收敛与终止模式",
+          "estimatedMinutes": 40,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "convergence",
+            "termination"
+          ],
+          "nextLesson": "21-14",
+          "prevLesson": "21-12"
+        },
+        {
+          "id": "21-14",
+          "title": "综合实战——构建一个自我改进的研究循环",
+          "estimatedMinutes": 90,
+          "tags": [
+            "loop-engineering",
+            "advanced",
+            "capstone",
+            "build",
+            "research"
+          ],
+          "nextLesson": "21-15",
+          "prevLesson": "21-13"
+        },
+        {
+          "id": "21-15",
+          "title": "循环的 6 个组成部分——自动化、工作树（Worktree）、技能、连接器、子代理与记忆",
+          "estimatedMinutes": 55,
+          "tags": [
+            "loop-engineering",
+            "architecture",
+            "components",
+            "systems-thinking"
+          ],
+          "prevLesson": "21-14",
+          "nextLesson": "21-16"
+        },
+        {
+          "id": "21-16",
+          "title": "循环的风险——认知退化、过度依赖与黑箱问题",
+          "estimatedMinutes": 50,
+          "tags": [
+            "loop-engineering",
+            "risk",
+            "responsible-ai",
+            "critical-thinking",
+            "metacognition"
+          ],
+          "prevLesson": "21-15",
+          "nextLesson": "21-17"
+        },
+        {
+          "id": "21-17",
+          "title": "战略跃升——循环如何让你走向设计层面",
+          "estimatedMinutes": 50,
+          "tags": [
+            "loop-engineering",
+            "strategy",
+            "design-thinking",
+            "leadership",
+            "career"
+          ],
+          "prevLesson": "21-16",
+          "nextLesson": "14-1"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "number": 21,
+      "title": "综合实战项目",
+      "lessons": [
+        {
+          "id": "14-1",
+          "title": "综合实战：个人作品集网站",
+          "estimatedMinutes": 85,
+          "tags": [
+            "capstone",
+            "advanced",
+            "project",
+            "html",
+            "build"
+          ],
+          "nextLesson": "14-2",
+          "prevLesson": "21-17"
+        },
+        {
+          "id": "14-2",
+          "title": "综合实战：AI 驱动的研究工具",
+          "estimatedMinutes": 85,
+          "tags": [
+            "capstone",
+            "advanced",
+            "project",
+            "api",
+            "build"
+          ],
+          "nextLesson": "14-3",
+          "prevLesson": "14-1"
+        },
+        {
+          "id": "14-3",
+          "title": "综合实战：自动化邮件工作流",
+          "estimatedMinutes": 85,
+          "tags": [
+            "capstone",
+            "advanced",
+            "project",
+            "automation",
+            "build"
+          ],
+          "nextLesson": "14-4",
+          "prevLesson": "14-2"
+        },
+        {
+          "id": "14-4",
+          "title": "综合实战：你的全 AI 驱动开发环境",
+          "estimatedMinutes": 85,
+          "tags": [
+            "capstone",
+            "advanced",
+            "project",
+            "dev-environment",
+            "build"
+          ],
+          "nextLesson": "14-5",
+          "prevLesson": "14-3"
+        },
+        {
+          "id": "14-5",
+          "title": "综合实战：你自己的项目",
+          "estimatedMinutes": 85,
+          "tags": [
+            "capstone",
+            "advanced",
+            "project",
+            "open-ended"
+          ],
+          "nextLesson": null,
+          "prevLesson": "14-4"
+        }
+      ]
+    }
+  ]
+}

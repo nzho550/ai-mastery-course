@@ -1,0 +1,84 @@
+{
+  "id": "19-9",
+  "title": "AI 助力你的职业发展——简历、LinkedIn 与面试准备",
+  "part": 19,
+  "estimatedMinutes": 70,
+  "tags": [
+    "career",
+    "resume",
+    "linkedin",
+    "interviews",
+    "job-search",
+    "practical"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将拥有一份针对特定职位优化过的 AI 简历、一份改进后的 LinkedIn 主页、一套几分钟内写出求职信的框架，以及一套用 AI 练习求职面试的系统。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**关于 AI 在求职中的诚实现实：** 招聘方现在会用 AI 筛选成百上千份申请。AI 驱动的 ATS（申请人跟踪系统）会在任何人看到你的简历之前先进行过滤。用 AI 优化你的申请材料不是在“钻空子”——而是在拉平竞争环境。目标始终是诚实地展示你自己。AI 帮你更有效地表达真实的事情。"
+    },
+    {
+      "type": "text",
+      "content": "## 简历优化——ATS 的现实\n\n大多数大公司会先让申请材料经过一套申请人跟踪系统（ATS），再由人来阅读。ATS 软件会根据职位描述给你的简历打分——寻找关键词匹配、格式兼容性和经验契合度。\n\n**核心技巧：定制化，而不是套模板。**\n\n一份泛泛的简历投给 50 个职位，效果不如为每个职位量身定制的简历。AI 让定制变得飞快——过去每份申请要花 30 分钟，现在只需要 5 分钟。\n\n**AI 简历优化流程：**\n1. 把你当前的简历粘贴给 Claude\n2. 粘贴职位描述\n3. 让 Claude：找出缺失的关键词、建议改写能更好匹配这个职位的要点、指出你没有强调但确实拥有的经验，并标记潜在的“红旗”问题\n4. 审阅每一条建议——只保留那些真实反映你经历的内容\n5. 绝不虚构经历——AI 可以帮你把话说得更好，而不能凭空发明没发生过的事情"
+    },
+    {
+      "type": "text",
+      "content": "## 写出真正有效的简历要点\n\n大多数简历要点描述的是职责，而有力的要点描述的是影响力。\n\n**弱（职责）：**\n> 管理社交媒体账号\n\n**强（影响力）：**\n> 通过持续输出视频内容，在 8 个月内把 Instagram 关注人数从 2,400 增长到 18,000，带来的咨询量增加了 34%\n\n**公式：动作动词 + 你做了什么 + 可量化的结果**\n\n问 Claude：\n> “这是我针对[职位]写的要点。把每一条改写成以影响力开头而不是职责开头。如果我没给你数字，请来问我——不要凭空编造。”\n\n“要求补充数字”这一点很重要。AI 永远不应该猜测指标。如果你让某件事有所增长，你一定知道增长了多少——把真实的数字给 Claude。"
+    },
+    {
+      "type": "text",
+      "content": "## LinkedIn 主页优化\n\nLinkedIn 有自己的算法。字段完整、关键词丰富的主页在招聘方搜索中排名更高。最重要的几个部分：\n\n**标题（Headline，140 字符，浏览量最高的字段）：**\n不要只写你的职位名称，要写出你的价值主张。\n- 弱：`Software Engineer at Acme Corp`\n- 强：`Full-Stack Engineer | React + Node.js | Building AI-powered products | Open to senior roles`\n\n**About（关于我）部分（可用 2,600 字符）：**\n大多数人写的是一份正式的简介。更好的做法是：像在向一个聪明的朋友解释你的职业生涯一样来写。你做什么、为什么做，以及你擅长什么？最后加一句行动号召。\n\n**Experience（经历）部分：**\n和简历一样的要点规则。LinkedIn 提供更多空间——好好利用。添加媒体内容（截图、PDF、你作品的链接）。\n\n**Skills（技能）部分：**\nLinkedIn 的算法会用这个部分来做招聘方搜索。添加所有相关技能。问 Claude：“根据我的经历和目标职位，我应该在 LinkedIn 上添加哪些技能？”\n\n**请求 AI 帮忙：**\n> “这是我 LinkedIn 的‘关于我’部分：[粘贴]。请把它改写得更有吸引力，突出我作为[角色]的核心优势，并以针对[机会类型]的明确行动号召结尾。保留我真实的语气。”"
+    },
+    {
+      "type": "text",
+      "content": "## 10 分钟写出求职信\n\n常见错误：写一封泛泛的求职信，然后针对每份申请稍作修改。\n\n更好的做法：为每份申请生成一封全新的、具体的求职信——反正 AI 起草的话，花的时间是一样的。\n\n**给 Claude 完整的背景：**\n> Here is the job description: [paste]\n> Here is my resume: [paste]\n> About the company: [paste their About page or 2-3 sentences about them]\n> The specific reason I want this role: [your genuine motivation in 2-3 sentences]\n> One specific thing about my experience that's most relevant: [the thing you most want them to notice]\n>\n> Write a cover letter that: opens with the specific role and a hook (not 'I am writing to apply for'), connects my experience to their specific needs, mentions the company specifically (not a template), and ends with confidence not desperation. Keep it to 3 paragraphs max.\n\n反复修改，直到它听起来像是你自己写的。目标是让 AI 帮你写得更快，而不是让 AI 替你写。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "针对一份真实职位优化你的简历",
+      "content": "选择一份真实的职位列表——你真的会去申请的职位，或者你正在瞄准的角色。\n\n**第 1 步——收集你的材料：**\n- 你当前的简历（复制文本）\n- 招聘列表中完整的职位描述\n- 任何你想突出的具体成就/项目\n\n**第 2 步——运行 ATS 分析：**\n问 Claude：\n```\nI'm applying for this role: [paste job description]\n\nHere is my resume: [paste resume]\n\nPlease:\n1. List keywords from the job description missing from my resume\n2. Identify experiences I have that are underemphasised for this role\n3. Suggest rewrites for my 3 weakest bullet points to better match the role\n4. Flag any potential red flags a recruiter might notice\n5. Rate the current match (1-10) and what score is achievable after optimisation\n\nOnly suggest changes that reflect things I've actually done.\n```\n\n**第 3 步——应用建议：** 根据 Claude 的反馈更新你的简历。对于每一条建议，都问自己：这是真的吗？这准确反映了我做过的事情吗？\n\n**第 4 步——重新运行：** 粘贴更新后的简历，问：“匹配度提升了多少？还有哪里需要改进？”\n\n**第 5 步——保存：** 同时保留原始版本和定制版本。搭建一个系统：每次申请，都从你的主简历出发进行定制。\n\n**最终结果：** 一份能通过 ATS 筛选、又准确反映你经历的简历。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "工作坊 A——AI 模拟面试",
+      "content": "让 Claude 担任面试官，练习求职面试。这是 AI 在职业发展中价值最高的用法之一——不限次数的练习、即时反馈、无需预约。\n\n**第 1 步——设置这场面试：**\n问 Claude：\n```\nYou are a senior hiring manager at [company type] interviewing me for [role].\nHere is the job description: [paste]\nHere is my background: [2-3 sentence summary]\n\nConduct a 30-minute mock interview. Ask me one question at a time, wait for my answer, then give me feedback (what worked, what to improve) before asking the next question.\n\nStart with a behavioural question, then mix in technical/role-specific questions. End with questions I might ask you.\n```\n\n**第 2 步——进行这场面试。** 把它当作真的——完整地回答，不要在回答过程中中途修改。\n\n**第 3 步——**在 5-6 个问题之后**请求总体反馈：**\n“现在停止面试。给我总体反馈：你注意到了什么模式？我最有力的回答是哪些？我最薄弱的地方在哪里？什么样的具体措辞或结构能改善我较弱的回答？”\n\n**第 4 步——再次练习薄弱环节。** 让 Claude 重新问你回答最差的那个问题，再给你一次机会。\n\n**第 5 步——建立你的答案库。** 对于每一种你答得不好的问题类型，用你自己的话写出一个有力的回答，保存到 `notes/interview-answers.md`。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——重写你的 LinkedIn“关于我”部分",
+      "content": "把你的 LinkedIn“关于我”部分重写成你职业故事最有力的版本。\n\n**第 1 步——复制你当前的“关于我”部分**（如果目前是空的，就写下你现在有的内容）。\n\n**第 2 步——收集背景信息：**\n- 你在瞄准哪些职位？\n- 你的三大职业优势是什么？\n- 你职业生涯中最令人印象深刻的一件事是什么？\n- 你在寻找什么类型的机会？\n\n**第 3 步——请 Claude 生成 3 个版本：**\n```\nHere is my current LinkedIn About section: [paste]\n\nI'm targeting: [role type]\nMy top strengths: [list]\nMost impressive achievement: [describe]\nLooking for: [type of role/company]\n\nWrite 3 different versions of my LinkedIn About section:\n1. Professional/formal tone\n2. Conversational/personable tone\n3. Achievement-focused tone\n\nEach should be 150-250 words, end with a call to action, and not start with 'I am a...'\n```\n\n**第 4 步——挑选最接近你本人语气的版本**，并和 Claude 一起打磨它。让它听起来像你自己，而不是套模板。\n\n**第 5 步——更新 LinkedIn。** 把你的新“关于我”部分直接复制上去。\n\n**第 6 步——搭建你的标题：** 问 Claude：“根据我的背景，给我建议 5 个 LinkedIn 标题选项。我想要一个诚实、关键词丰富，并且和泛泛的职位名称不一样的标题。”\n\n选出感觉最真实的那一个。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 C——薪资调研与谈判准备",
+      "content": "用 AI 来调研市场行情，为薪资谈话做准备。\n\n**第 1 步——市场行情调研：**\n问 Claude：\n```\nWhat is the market salary range for [role] in [city/country] with [X] years of experience? \nCover: base salary range, typical bonus structure, equity (if tech), and what factors move someone \nfrom the bottom to the top of the range.\n\nNote: I know you can't guarantee accuracy on current figures — I'll cross-reference with \nLevels.fyi, Glassdoor, and LinkedIn Salary.\n```\n\n然后真的去查这三个来源来验证。\n\n**第 2 步——确定你的定位：** 基于你的经验、技能和市场数据——你应该处在这个区间的哪个位置？\n\n**第 3 步——练习薪资对话：**\n让 Claude 扮演一位刚给了你一个低于市场行情报价的招聘方。\n练习：\n- 请求时间考虑\n- 用一个具体数字和理由进行反报价\n- 应对对方的反驳\n- 谈判非薪资条件（带薪休假、远程办公、股权、入职日期）\n\n**第 4 步——写下你的谈判脚本：**\n把薪资谈话的简短脚本保存到你的笔记中。事先准备好措辞，能让你在紧张的时候不容易接受一个比你应得的更低的数字。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude 建议你在一个要点中加入“40% 的营收增长”，而这是一个团队共同努力的项目，你参与了工作但并非唯一推动者。你应该怎么做？",
+      "options": [
+        "加上去——这个增长是在你在团队期间发生的",
+        "改写得更准确：“参与了一项团队计划，实现了 40% 的营收增长”或“作为团队的一员，交付了 40% 的营收增长”",
+        "完全不使用这个数字",
+        "为了保守起见，把数字调低到 30%"
+      ],
+      "correct": 1,
+      "explanation": "使用准确的措辞很重要——无论是从道德上还是实际效果上。如果你把一个团队成果全部归功于自己，而面试官问“具体说说你是如何推动那 40% 增长的”，你会很难令人信服地回答。“参与了”“协助了”或“作为团队一员”这样的措辞是诚实的，同时依然令人印象深刻——结果是真实的，只是你的角色需要被准确地表述。把数字调低并不能解决归因的问题。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 19-9 课完成。** 你现在拥有一份 ATS 优化过的简历、一个更强的 LinkedIn 主页、一套求职信框架、一套模拟面试系统，以及一套薪资调研流程。这些工具会持续复利——每一次申请都会变得更快、更好。接下来：用 AI 在一个小时内创作出一周的社交媒体内容。"
+    }
+  ],
+  "nextLesson": "19-10",
+  "prevLesson": "19-8"
+}

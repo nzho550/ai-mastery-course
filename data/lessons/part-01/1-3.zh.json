@@ -1,0 +1,111 @@
+{
+  "id": "1-3",
+  "title": "AI 工具全景图（2026年）",
+  "part": 1,
+  "estimatedMinutes": 65,
+  "tags": [
+    "foundations",
+    "beginner",
+    "tools",
+    "overview"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nAI 生态系统已经爆发式增长。现在有专门用于聊天、搜索、图片、音频、视频、写作、编程、研究，以及其他几十个类别的工具——而且每周都有新工具上线。学完本课后，你将能够说出主要的类别，理解为什么不同的工具是为不同的工作而生的，并知道该先尝试哪些工具。\n\n你不需要学会每一个工具。你需要对这个全景图有足够的了解，能在需要时选对工具——也能分辨出一个你没听说过的新工具，究竟是真正的创新，还是对已知事物的小幅变化。"
+    },
+    {
+      "type": "text",
+      "content": "## 2026 年全景速览\n\nAI 工具彼此之间并不是在争夺同一份工作——它们是为根本不同的任务而构建的。以下是当前的全景图：\n\n| 类别 | 用途 | 代表工具 |\n|----------|--------------|---------------|\n| **聊天 / 通用助手** | 对话、写作、分析、推理 | Claude、ChatGPT、Gemini |\n| **AI 搜索** | 带引用来源的网络搜索 | Perplexity、Bing Copilot |\n| **深度研究** | 系统性的多来源研究 | Perplexity Deep Research、ChatGPT Deep Research |\n| **学术研究** | 科学文献检索 | Elicit、Consensus、Scite |\n| **图像生成** | 从文本生成图像 | DALL-E、Midjourney、Stable Diffusion |\n| **音频与音乐** | 生成语音、音乐、转录文字 | ElevenLabs、Suno、Whisper |\n| **视频生成** | 从文本/图像生成短视频 | Sora、Google Veo 3、Runway、Kling |\n| **知识库 / RAG** | 与你自己的文档对话 | NotebookLM、Claude Projects |\n| **演示文稿** | 从提示词或文档生成幻灯片 | Gamma、Canva AI、PowerPoint Copilot |\n| **写作助手** | 改进草稿、语法、语气 | Grammarly AI、Notion AI、Jasper |\n| **编程助手** | 编写和解释代码 | Claude Code、GitHub Copilot、Cursor |\n| **自动化** | 连接应用、搭建无代码工作流 | Zapier、n8n、Make |\n| **AI 代理（agent）** | 自主完成多步骤任务 | Claude Research、Perplexity Deep Research |\n| **本地 AI** | 在自己的电脑上运行模型 | Ollama、LM Studio |\n| **会议 AI** | 转录、总结会议 | Otter.ai、Fireflies、Teams Copilot |\n| **企业级 AI 套件** | 在邮件、文档、电子表格、会议中融入 AI | Microsoft 365 Copilot、Google Workspace AI |\n\n随着你在课程中不断深入，这张表格会变得越来越有意义——你会用到这些类别中的大多数工具。现在，先把它当作一张参考地图。"
+    },
+    {
+      "type": "text",
+      "content": "## 三巨头——Claude、ChatGPT 和 Gemini\n\n三大主流通用 AI 助手各有不同的优势。理解这些差异有助于你为每个任务选择合适的那个。\n\n**Claude（Anthropic）**\n- 最擅长：遵循指令、长篇写作、复杂分析、编程（截至 2026 年，Sonnet 4.6 在 SWE-bench Verified 上以 79.6% 的成绩领先）\n- 上下文窗口：标准情况下为 200K token（Sonnet 4.6 / Opus 4.8）；1M token 上下文处于 beta 阶段——Claude Fable 5（能力最强的档位）始终开启自适应思考\n- 值得关注：面向开发者的 Claude Code（CLI 工具）；用于持久化上下文的 Projects 功能；多个模型档位（Haiku 4.5 / Sonnet 4.6 / Opus 4.8 / Fable 5）\n- 最适合：写作、编程、分析，以及任何需要精确遵循指令的场景\n\n**ChatGPT / GPT-5（OpenAI）**\n- 最擅长：多模态（图像 + 语音的输入/输出）、最广泛的第三方生态、用于数据分析的 Code Interpreter、DALL-E 图像生成\n- 上下文窗口：1M+ token（GPT-5）；模型家族涵盖 GPT-5（旗舰型号）、o3/o4-mini（推理模型），以及低至 GPT-4.1 nano 的经济型选项\n- 值得关注：GPT Store 拥有数千个自定义 AI 工具；用于生成综合报告的 Deep Research 模式；每月 20 美元的 ChatGPT Plus\n- 最适合：图像分析、语音交互、用 Code Interpreter 做数据分析、用 DALL-E 生成图像\n\n**Gemini（Google）**\n- 最擅长：内置的实时网络搜索（始终保持最新）、1M token 的上下文窗口、Google Workspace 集成（Gmail、Docs、Sheets）、原生的视频和音频理解能力\n- 上下文窗口：最高 1,000,000 个 token（Gemini 2.5 Pro）——足以在上下文中容纳一整本书；面向经济型/大批量任务的 Gemini 2.5 Flash-Lite\n- 值得关注：原生集成进 Google 各类应用；Gemini 2.5 Flash 内置思考/推理能力；具备闪速图像生成与编辑能力（Gemini 2.5 Flash Image）\n- 最适合：处理超大文档、实时性事实问题、Google Workspace 用户、视频/音频分析\n\n**实用结论：** 如果只用一个工具：从 Claude 开始，因为它在推理质量和写作方面表现出色。如果你在用 Google Workspace，再加上 Gemini。如果需要图像分析、数据分析或语音功能，再加上 ChatGPT。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么不同的工作要用不同的工具\n\n你可能会想：如果 Claude 能写文本，那 Perplexity 存在的意义是什么？如果 ChatGPT 能回答问题，为什么还要用 Elicit？答案是，这些工具是针对不同的约束条件被优化出来的。\n\n**通用聊天 AI**（Claude、ChatGPT、Gemini）是为灵活、开放式的对话而优化的。它几乎能用文本做任何事——但默认不会引用来源，而且它的知识存在训练截止日期。\n\n**AI 搜索**（Perplexity）是为带引用的事实性研究而优化的。每个答案都会链接回原始来源——你可以点击进去核实。对于任何时效性和可验证性都很重要的事情，正确的工具是 Perplexity，而不是 Claude。\n\n**学术研究工具**（Elicit、Consensus、Scite）专门在同行评审文献上进行检索。它们不搜索通用网络内容——它们搜索的是科学论文数据库。Elicit 能从论文中提取结构化数据（样本量、研究方法、研究结论）。Consensus 能显示有多少比例的研究支持某个论断。这些工具与通用 AI 搜索在性质上是不同的。\n\n**NotebookLM**（Google）自成一类。你上传自己的文档——PDF、YouTube 视频、网页链接、Google Docs——它会围绕*你的资料*构建一个交互式知识库。它不会凭空捏造事实，因为它只会根据你提供的内容来回答。\n\n**图像生成工具**（Midjourney、DALL-E、Stable Diffusion）是完全独立的、基于图像训练的神经网络。你可以让一个文本 AI 描述一张图片，但你不能让它*生成*一张——那是架构完全不同的另一类模型。\n\n**原则：** 始终使用为你实际工作而生的工具。用一个通用聊天 AI 来完成一切，就像拿一把瑞士军刀干所有的活——能用，但不是最优解。"
+    },
+    {
+      "type": "text",
+      "content": "## 推理模型——一个新兴类别\n\n2025 到 2026 年间，出现了一个新的类别：推理模型（也叫“思考型模型”）。这些模型在回答之前会花费额外的计算量来推敲问题——大幅提升在困难任务上的准确性。\n\n**它们的不同之处：** 标准模型是一次性生成回答。推理模型则有一个内部的“思考”阶段：它们会打草稿、检查、修正，然后才生成可见的答案。\n\n**目前可用的推理模型（2026 年）：**\n- **Claude Fable 5**——自适应思考始终开启，无法关闭；推理程度会根据任务难度自动调整\n- **带扩展思考功能的 Claude Sonnet 4.6 / Opus 4.8**——在 Claude.ai 中启用（Pro/Max 套餐）\n- **OpenAI o3**——以低 87% 的成本取代 o1 成为主力推理模型；o4-mini 用于经济型推理任务\n- **Google Gemini 2.5 Pro Deep Think**——在给出结论前探索多种假设\n- **DeepSeek R1**——独树一帜：把思考链实时流式输出，让你能看到它推理的过程（在 chat.deepseek.com 免费使用）\n\n**什么时候值得使用推理模型：**\n- 复杂的数学或逻辑问题\n- 错误会不断累积的多步骤分析\n- 涉及诸多约束条件的战略规划\n- 需要仔细推理的合同或法律审查\n\n**什么时候标准模型更合适：**\n- 简单直接的写作任务\n- 快速总结和格式转换\n- 大批量任务（推理模型每次调用的成本要高出 5 到 20 倍）\n\n你会在本课程第 13 部分中，为复杂的编程任务用到推理模式。"
+    },
+    {
+      "type": "text",
+      "content": "## 你在本课程中真正会用到的工具\n\n你不需要今天就为所有工具都注册账号。以下是你会用到的工具，以及使用时机：\n\n**现在就开始（第 2 部分）：**\n- **Claude.ai**——主力工具，从这里开始。\n- **Perplexity.ai**——第 2 部分。带引用来源的 AI 研究。\n- **ChatGPT**——第 2 部分。直接对比。\n\n**课程进行中：**\n- **NotebookLM**——今天的练习 + 之后任何需要从文档中学习的时候\n- **Elicit / Consensus**——第 15 部分（研究方向）\n- **Gemini**——第 2 部分 + 任何使用 Google Workspace 的时候\n- **Bing Image Creator**——第 2 部分。免费图像生成，在 Edge 中无需账号\n- **Gamma**——第 16 部分（演示文稿）\n\n**仅限开发者方向：**\n- **VS Code + GitHub Copilot / Cursor**——第 10–11 部分\n- **Claude Code**——第 13 部分。本课程中面向技术工作最强大的工具\n- **Ollama**——第 18 部分。本地 AI 模型\n\n**关于账号的说明：** 今天就注册 Claude.ai。其他工具可以等你上到对应的课时再创建账号——本课程的结构设计保证了你总是在需要用到某个工具之前，就已经准备好了它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工具巡礼——初次接触 4 款工具",
+      "content": "访问下面这四款工具，每款花 3-4 分钟体验一下。目标是*初次接触*——你不需要深入学习它们，只需要建立起对每款工具是什么、以及它们之间有何不同的感觉。\n\n**第一站——Claude.ai**（如果你还没用过）\n前往 [claude.ai](https://claude.ai)。输入：\n```\nWhat are three things you can do that a regular Google search can't?\nBe specific — give me real examples, not marketing language.\n```\n注意：它给出的是一个经过深思熟虑、对话式的回答，没有链接也没有广告。\n\n**第二站——Perplexity.ai**\n前往 [perplexity.ai](https://perplexity.ai)。搜索一件你真正想知道的事情——一个时事、一个事实性问题、你所在领域的一个话题。注意：\n- 每个答案都带有方括号里的编号引用\n- 点击其中一个引用——它会跳转到原始来源\n- “Pro Search”选项会为复杂问题运行更多次搜索\n\n这就是与 Claude 的根本区别：Perplexity 会实时展示它的信息来源。\n\n**第三站——Bing Image Creator**（免费，在 Edge 浏览器中无需账号）\n前往 [bing.com/images/create](https://bing.com/images/create)。输入：\n```\nA friendly robot reading a book in a cosy library, warm afternoon light,\ndigital art, detailed illustration\n```\n生成它。这不是文本——这是完全不同的一类 AI 模型，根据你的文字生成一幅视觉图像。\n\n**第四站——NotebookLM**\n前往 [notebooklm.google.com](https://notebooklm.google.com)（需要 Google 账号）。创建一个新的 notebook。点击“Add source”，粘贴一个你感兴趣的维基百科文章链接。处理完成后（30-60 秒），就文章中的某个细节提出一个具体问题。注意：\n- 它会引用它所使用的确切段落\n- 它不会凭空捏造——如果文章没有涉及某个内容，它会明确说明\n- 生成一个“Audio Overview”，听一段播客风格的资料总结\n\n**为每款工具写一句话**，描述它能做到、而其他工具做不到的事情。总共四句话。这是你个人 AI 工具箱的第一版草稿。\n\n**额外任务——Elicit.com**（面向对学术研究感兴趣的人）：\n前往 [elicit.com](https://elicit.com)。输入一个研究问题：“Does remote work increase productivity?”或“What interventions reduce employee burnout?”注意它是如何检索真实科学论文并提取结构化研究结论的——而不只是网络文章。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在写一份报告，需要引用可再生能源采用率的最新统计数据。哪种工具组合能给你最可靠、可验证的结果？",
+      "options": [
+        "直接问 Claude 要统计数据——它拥有全面的知识",
+        "用 Perplexity 获取统计数据（它会给出可点击验证的引用来源），再把核实过的数字带到 Claude 做分析和写作",
+        "用 Gemini，因为它集成了 Google 搜索",
+        "用 ChatGPT Deep Research——它生成的报告最全面"
+      ],
+      "correct": 1,
+      "explanation": "对于需要被引用且可验证的统计数据，Perplexity 是正确的第一步，因为每个数字都会带有一个可点击的来源引用——你可以核实这个数字确实来自一个真实、可信的机构。Claude 的知识来自训练数据（存在潜在的截止日期问题），而且默认不会引用来源。Gemini 的搜索集成也不错，但就研究用途而言，Perplexity 的引用展示方式更清晰。ChatGPT Deep Research 也是一个可行方案，但对于有针对性的事实查找来说速度较慢。关键工作流是：用一个原生支持引用的工具来获取事实，再把核实过的数据带到 Claude 中进行综合与写作。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 A——AI 工具全景图速练",
+      "content": "这个 8 分钟的小练习能帮你建立起对 AI 工具全景图的心智地图——让你能立刻回答“这个任务该用哪个 AI 工具？”\n\n**第一步——打开一个空白文档**（Google Docs、Word 或 Notion），画出四列：“对话型 AI”“搜索/研究型 AI”“创意型 AI”“效率型 AI”。\n\n**第二步——不查任何资料**，把你听说过的所有 AI 工具列在对应的列下。目标是总共列出 10 个以上的工具。\n\n**第三步——打开 Claude.ai**，粘贴你的清单。问：*“Review my AI tool landscape map. What important tools or categories have I missed? What have I misclassified? Be specific.”*\n\n**第四步——根据 Claude 的反馈更新你的地图。** 补充你遗漏的工具。\n\n**第五步——针对每一列**，确定如果有人给你一个该类别的任务，你会先用哪一个工具，把名字写在列标题旁边。\n\n**第六步——保存你的地图。** 这是你个人的 AI 工具参考——在整门课程中不断发现新工具时持续更新它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——搭建一个 AI 工具推荐系统",
+      "content": "你将构建一个可复用的提示词，帮助你（或任何人）为给定的任务选出合适的 AI 工具。这是一个真正有用的工具——你会在每次开始新的 AI 辅助任务时参考它。\n\n**第一步——打开 Claude.ai**，开始一个新对话。\n\n**第二步——描述 3 个真实的任务**，可以想象自己会用 AI 来完成这些来自工作或生活的任务。要具体：不是笼统的“写作”，而是“为经理写每周状态报告”；不是笼统的“研究”，而是“研究竞争对手的定价”。\n\n**第三步——问 Claude：** *“For each of these 3 tasks, recommend the best AI tool available in 2026 and explain: (1) why this tool is best for this specific task, (2) one alternative tool and when to use it instead, (3) one thing to watch out for with this tool. Be specific and practical.”*\n\n**第四步——审阅 Claude 的推荐。** 它们和你预期的一致吗？有什么让你意外？\n\n**第五步——必做的 AI 审查：** 把 Claude 的推荐粘贴回去，附上这条信息：*“Review your own tool recommendations above. Play devil's advocate — find 3 specific cases where your recommendation might be wrong or where a different tool would actually be better.”*\n\n**第六步——搭建你的个人工具选择指南：** 基于整个交流过程，写一份简短（一页）的指南：“我针对哪种类型的任务使用哪个 AI 工具。”保留它——它每周都能替你省下时间。\n\n**第七步——测试你的指南：** 从你今天的工作中挑一个任务，用你的指南来选择工具。指南给出的建议合理吗？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 C——工具正面对比",
+      "content": "理解每个 AI 工具真正差异所在的最好方法，就是让它们回答同一个问题，然后对比结果。这个练习揭示的是真实的差异——而不是营销话术。\n\n**第一步——从你的工作中选一个真实任务**，这周你反正要做的，而且输出质量很重要的那种。\n\n**第二步——为这个任务设计一个具体的提示词。** 清楚地写出来，附带上下文。\n\n**第三步——在以下工具中至少两个上运行完全相同的提示词：** Claude.ai、ChatGPT、Gemini。把标签页并排打开。\n\n**第四步——从以下维度比较输出：**\n- 长度和详细程度\n- 语气和风格\n- 具体事实的准确性（如果适用）\n- 对你实际任务的有用程度\n- 每个工具错在哪里或漏掉了什么\n\n**第五步——让 Claude** 比较这些方案：*“I ran the same prompt in multiple AI tools. Here are the outputs: [paste them]. What are the meaningful differences in their approaches? Which is most useful for [your task] and why?”*\n\n**第六步——写一段结论：** 对于这类任务，你今后会用哪个工具，为什么？把这个结论加进你在练习 B 中的工具指南里。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 D——你的个人 AI 工具精选清单",
+      "content": "大多数人最终会经常使用 2-3 个 AI 工具。这个练习会帮你决定对你自己来说应该是哪几个。\n\n**第一步——回想过去一个月**你的工作和生活。哪些任务最耗时或最繁琐？列出 5-8 个。\n\n**第二步——针对每个任务**，写下：(a) 你尝试过或想尝试的 AI 工具，(b) 你是否实际为这个任务用过 AI。\n\n**第三步——打开 Claude.ai**，粘贴你的任务清单。问：*“I want to build a minimal AI tools setup — ideally 2-3 tools that cover my main use cases. Based on this task list, which 2-3 AI tools would you recommend I start with? Explain why these cover my specific needs. What would I miss by not adding a fourth tool?”*\n\n**第四步——确定你的精选清单。** 挑出 2-3 个你从今天起会真正使用的工具。\n\n**第五步——创建账号**（如果还没有的话），为你选定的工具创建账号，把它们加入书签或浏览器工具栏。\n\n**第六步——投入一个为期 2 周的实验：** 接下来两周，只使用你精选清单里的工具（不再新增工具）。这会迫使你在扩展之前先把它们学扎实。"
+    },
+    {
+      "type": "quiz",
+      "question": "一位同事问，起草商业提案该用哪个 AI 工具。哪个回答最有帮助？",
+      "options": [
+        "用 ChatGPT——它最流行",
+        "视情况而定：Claude 擅长处理长文档和细腻的写作；如果需要集成网络搜索，ChatGPT 更合适",
+        "用你已经订阅的那个",
+        "AI 工具在写作任务上大致是等效的"
+      ],
+      "correct": 1,
+      "explanation": "不同的 AI 工具在不同任务上有真实的优势差异。Claude 在处理长篇、需要细腻把握的文档和审慎推理方面表现出色。ChatGPT 集成了网络搜索和图像生成。要推荐合适的工具，需要了解具体任务是什么，而不只是看什么工具最流行或最容易获取。"
+    },
+    {
+      "type": "quiz",
+      "question": "哪个 AI 工具类别是专门为带引用来源的研究而设计的？",
+      "options": [
+        "对话型 AI（Claude、ChatGPT）",
+        "创意型 AI（Midjourney、DALL-E）",
+        "搜索/研究型 AI（Perplexity、Consensus）",
+        "效率型 AI（Copilot for M365）"
+      ],
+      "correct": 2,
+      "explanation": "Perplexity、Consensus、Scite 及同类工具是专门为带引用的研究而构建的——它们检索实时网络来源，并把每个论断链接到其出处。通用对话型 AI（Claude、ChatGPT）可以讨论各种话题，但默认不会自动引用来源。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 1-3 课。** 你现在拥有了一张 2026 年 AI 工具全景地图：三大通用助手（Claude、ChatGPT、Gemini）、专业研究工具（Perplexity、Elicit、Consensus）、知识库工具（NotebookLM、Claude Projects）、推理模型，以及你之后会用到的开发者工具。本课程中的每一部分都会用到这些工具中的至少一个。"
+    }
+  ],
+  "nextLesson": "1-4",
+  "prevLesson": "1-2"
+}

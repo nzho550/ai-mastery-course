@@ -1,0 +1,116 @@
+{
+  "id": "1-1",
+  "title": "什么是人工智能？",
+  "part": 1,
+  "estimatedMinutes": 55,
+  "tags": ["foundations", "beginner", "concepts", "no-code"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将能够用大白话向任何人——包括从未听说过这些概念的人——解释清楚人工智能（AI）、机器学习、大语言模型（LLM）以及 transformer 架构。你还会理解为什么 AI 在过去几年里进步得如此惊人，以及这对你该如何使用它意味着什么。\n\n没有数学公式，没有术语堆砌，只有一套清晰的心智模型，你会在整个课程中反复用到它。"
+    },
+    {
+      "type": "text",
+      "content": "## AI 是大规模的模式识别\n\n从本质上讲，人工智能（AI）是一种能从数据中学习模式、并利用这些模式做出决策或生成输出的软件——而不需要为每一种情况单独编写规则。\n\n想想你是怎么学会认出一只猫的。没有人给过你一本规则手册说“如果它有尖耳朵，加上胡须，加上皮毛，还会喵喵叫，那它就是猫”。你在多年里见过成百上千只猫，你的大脑自动构建出了这种模式。\n\nAI 做的是同样的事情——只不过用的是数百万个例子而不是几百个，花的是几个小时而不是几年。\n\n**机器学习**是 AI 的一个分支，系统在其中从数据中学习。**深度学习**使用神经网络（大致受大脑启发）来学习非常复杂的模式。**大语言模型（LLM）**——比如 Claude、ChatGPT 和 Gemini——是在海量文本上训练出来的深度学习系统，用于理解和生成语言。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**一句话版本：** AI 是从例子中学习、而不是遵循人工编写规则的软件。"
+    },
+    {
+      "type": "text",
+      "content": "## 你会不断听到的三个术语\n\n**人工智能（AI）**——让计算机做通常需要人类智能才能完成的事情的这个广阔领域：理解语言、识别图像、做出决策。\n\n**机器学习（ML）**——AI 的一个子集。不是程序员编写规则，而是系统自动从数据中学习规则。\n\n**大语言模型（LLM）**——一种在文本上训练的特定类型的机器学习系统。它从数十亿份文档中学习语言的统计模式，从而具备阅读、写作、总结、翻译以及对文本进行推理的能力。Claude 是一个 LLM，ChatGPT 也是。\n\n这三个术语在日常对话中常被混用，但它们其实是层层嵌套的关系：LLM 是机器学习的一种，机器学习又是 AI 的一种。"
+    },
+    {
+      "type": "text",
+      "content": "## 神经网络是如何学习的——不谈数学\n\n神经网络是现代 AI 背后的引擎。用大白话来说，它是这样运作的：\n\n设想你想训练一个系统来判断一封邮件是不是垃圾邮件。你给它看 100 万封邮件，每封都标注了“垃圾邮件”或“非垃圾邮件”。神经网络最初只是一大堆随机设置的连接——就像一团乱麻般的电线，上面的旋钮全都被随意拨到了某个位置。\n\n每当它做出一次预测并且判断错误时，错误信息就会在网络中反向传播，把这些“旋钮”轻轻拨动一下。*这种模式（“立即购买，限时优惠”）是垃圾邮件——调整。*经过数百万个例子之后，这些旋钮逐渐稳定到能够可靠识别垃圾邮件的配置上。\n\n**这为什么对理解 AI 很重要：**\n- 没有人给系统编程告诉它“免费优惠”意味着垃圾邮件，它是从数据中自己发现了这个模式。\n- 它学到的模式往往比任何人写出来的规则都更复杂、更微妙。\n- 但它也会从训练数据中的任何内容里学习——包括偏见、错误和空白。\n\n**Transformer 的突破（2017 年）：** 让现代 AI 成为可能的架构创新叫做 transformer。在 transformer 出现之前，AI 在处理长序列时很吃力——模型会“忘记”文档前面说过什么。Transformer 引入了一种叫做**注意力（attention）**的机制：在处理输入的任何一部分时，都能关注到输入的其他任意部分。这就是为什么 Claude 能够读完一份 100 页的文档，一边引用第 94 页的上下文，一边回答关于第 7 页某个细节的问题。正是 transformer 让这种长程推理成为可能。"
+    },
+    {
+      "type": "text",
+      "content": "## AI 为什么进步得这么快\n\nAI 作为一个研究领域早在 1950 年代就已经存在。那为什么它偏偏在过去五年里进步得如此惊人？三件事同时发生了：\n\n**1. 规模（Scale）**——更多参数、更多数据、更多算力。语言模型的能力会随着训练数据量和网络规模的增长而提升。GPT-3（2020 年）有 1750 亿个参数，Claude 的模型也在类似的量级上。在这种规模下，一件有意思的事情发生了：**涌现能力（emergent capabilities）**出现了。一些在更小模型中不存在的能力——比如多步推理、代码生成、类比联想——在没有被专门编程的情况下涌现出来。没有人在训练目标里写“理解隐喻”，它是规模扩大之后的自然结果。\n\n**2. 基于人类反馈的强化学习（RLHF）**——未经处理的原始语言模型生成的输出在技术上很复杂，但往往没什么帮助、具有误导性，甚至不安全。RLHF 是把原始模型能力塑造成一个有帮助的助手的过程。人类评估员对模型的回答进行打分，模型再被训练去偏好那些人类评价更高的回答。这就是为什么 Claude 不仅*有能力*，而且*乐于助人*——这种“有帮助”是训练出来的。\n\n**3. 硬件**——现代 AI 芯片（GPU 和专用 AI 加速器）能够以五年前根本不可能达到的规模，执行神经网络所需的并行计算。没有硬件，算法和数据也无从发挥作用。\n\n理解这一点能说明一件重要的事：**AI 的进步并没有放缓。** 更多算力、更多数据和更好的训练技术仍在持续推动能力的边界。今天看起来令人惊叹的东西，18 个月之内就会变得稀松平常。"
+    },
+    {
+      "type": "text",
+      "content": "## AI 不是什么\n\n在继续深入之前，先澄清几个常见的误解：\n\n- **AI 不是魔法。** 它是运行在计算机上的软件，会出故障，会犯错，也会说错话。\n- **AI 没有意识。** 它没有感情、意图或意识。它非常擅长在文本中*模拟*这些东西。当 Claude 表达出好奇或说自己不确定时，那是训练的产物——而不是内在体验。\n- **AI 不是无所不知的。** 每个模型都有一个训练截止日期，它不知道那之后发生了什么，除非专门连接了互联网，否则也无法获取实时信息。\n- **AI 不是绝对可靠的。** LLM 会产生“幻觉（hallucination）”——生成听起来很自信但事实上是错误的文本。你会在 1-4 课学到如何应对这一点。\n- **AI 不像人类那样理解事物。** 它处理的是模式。当它说“我理解你的顾虑”时，它是在生成最可能出现的下一个 token——而不是在共情。这并不会降低它的实用性，但可以解释它出错的方式。\n- **AI 不等同于自动化。** 传统自动化遵循固定规则，而 AI 会用学到的模式去适应新的输入。这就是为什么 AI 能写一封邮件，而传统自动化做不到。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**能力鸿沟：** 在“知道 AI 存在”和“真正把 AI 用好”之间，存在一道大多数人从未跨越过的鸿沟。他们偶尔用 AI 做一些简单的任务，得到的也只是简单的结果。这门课程的目的，就是弥合这道鸿沟——不是靠塞给你更多关于 AI 的信息，而是靠培养真正改变你工作方式的习惯和工作流。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "镜子测试——受众适配实战",
+      "content": "这个实验揭示了现代 LLM 最了不起的特性之一：它们不只是回答问题，还会建模*提问的人是谁*，并据此做出调整。这之所以可能，是因为 transformer 的注意力机制——模型会关注你提示词（prompt）中的线索，来推断受众、语境和目的。\n\n**第一步——打开 [Claude.ai](https://claude.ai)，在同一个对话里连续依次运行这三个提示词：**\n\n```\nExplain artificial intelligence to me as if I'm a 10-year-old who loves cooking.\n```\n\n```\nNow explain the same concept as if I'm a retired accountant with no technical background.\n```\n\n```\nNow explain it as if I'm a computer science professor who already knows about neural networks, but wants a fresh analogy for teaching beginners.\n```\n\n**第二步——仔细阅读全部三个回答。** 注意：\n- 用词发生了怎样的变化？\n- 类比发生了怎样的变化？\n- 假定的知识水平发生了怎样的变化？\n- 变化的是*信息本身*，还是仅仅是*表达方式*？\n\n**第三步——在你的笔记中写下两句话：**\n1. 你观察到模型是如何调整其输出的？\n2. 一个实际应用：你能如何在自己的工作中利用这种适配能力？\n\n**为什么这很重要：** 在提示词中指定你的受众——并让 AI 真正做出调整——意味着你再也不用为同一份解释反复写不同的版本了。一份主文档，多个受众版本，全部由一次对话生成。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在向一位同事解释 AI，对方问：“但它真的‘理解’自己说的话吗？”最准确的答案是什么？",
+      "options": [
+        "是的——现代 AI 模型拥有类似人类的理解能力，只是速度更快",
+        "不是——它基于模式生成统计上可能出现的文本，这会产生看起来像理解的输出，但底层机制与人类的理解方式截然不同",
+        "我们不知道——AI 是否理解是一个没有共识的哲学问题",
+        "只有部分模型能理解——像 Claude 和 ChatGPT 这样的大模型可以，但小模型不行"
+      ],
+      "correct": 1,
+      "explanation": "LLM 并不像人类那样理解事物。它们是基于学到的模式来预测下一个 token。这会产生看起来相当像“理解”的输出——有用的类比、连贯的推理、恰当的共情——但底层机制是不同的。“我们不知道”（选项 C）是一种合理的哲学立场，但从工程角度看，模型*实际做的事*是很清楚的：基于模式的预测。这个区分很重要，因为它既能解释模型令人印象深刻的能力，也能解释它出错的方式（幻觉、面对新情况时的脆弱性）。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 A——AI 词汇快速训练",
+      "content": "这个 5 分钟的小练习能帮你牢记三个核心术语，并让你用 AI 检验自己的解释。\n\n**第一步——不查看任何笔记**，为以下每个术语写出你自己的一句话定义：\n- 人工智能（Artificial Intelligence）\n- 机器学习（Machine Learning）\n- 大语言模型（Large Language Model）\n\n用大白话写下来，就像你在向一个从事不相关行业（教学、护理、零售——选一个你认识的人）的朋友解释一样。\n\n**第二步——打开 [Claude.ai](https://claude.ai)，粘贴这个提示词：**\n```\nI'm going to share my plain-English definitions of three AI terms.\nFor each one, tell me: (1) what I got right, (2) what's missing or slightly\noff, and (3) how a beginner could improve it.\n\nHere are my definitions:\n- AI: [paste your AI definition]\n- Machine Learning: [paste your ML definition]\n- Large Language Model: [paste your LLM definition]\n```\n\n**第三步——阅读反馈。** 不要照单全收——如果你不同意 Claude 说的某个观点，可以让它进一步解释。你完全可以反驳它：“我不认为我的定义漏掉了那一点——这是我这样描述的原因。”\n\n**第四步——根据反馈修改你的定义**，把改进后的版本写进笔记里。\n\n**为什么这个练习有效：** 凭记忆写出定义，会迫使你找出自己理解中的空白。让 AI 来评审，能给你即时且具体的反馈——不是泛泛的解释，而是针对*你写的具体内容*的回应。这是 AI 对初学者最强大的用途之一：把 AI 变成一个能针对你实际说的话做出回应的私人导师。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——搭建你的 AI 讲解卡片",
+      "content": "你将制作一份单页讲解材料，用一种你生活中某个具体真实的人能听懂的方式回答“什么是 AI？”这个问题。这是一份真正有用的成果——你可以分享它、把它留作参考，或者下次有人问起 AI 时直接拿出来用。\n\n**第一步——确定你的目标读者。** 想一想你生活中一个对 AI 知之甚少但很好奇的具体的人：父母、兄弟姐妹、总是问你 AI 问题的经理、一个从事非技术工作的朋友。把他们的名字（或身份）写进笔记里。你接下来创建的一切都会为他们量身定制。\n\n**第二步——打开 [Claude.ai](https://claude.ai)。开始一个新对话，粘贴这个提示词：**\n```\nHelp me create a one-page explainer about AI for a specific person.\n\nAbout my reader: [describe the person — their job, age roughly, what they\nalready know about tech, and what confuses them about AI]\n\nWhat I want the explainer to cover:\n1. What AI actually is (no jargon)\n2. Why it got so much better recently\n3. What it CAN'T do (the misconceptions to clear up)\n4. One practical example of how it might help someone in their job\n\nFormat it as a friendly, one-page document — not a textbook entry.\nShort paragraphs. No bullet lists longer than 3 items. Use analogies,\nnot technical terms.\n```\n\n**第三步——阅读 Claude 给出的初稿。** 它听起来真的适合你的目标读者吗？如果不是，可以这样引导它：\n- “写得更随意一点——这个人会觉得这太像教科书了”\n- “关于烹饪的类比不太合适——他们是木匠，用木工的类比”\n- “‘AI 做不到什么’这部分需要写得更长一些——那正是他们最困惑的地方”\n\n**第四步——反复迭代，直到你满意为止。** 通常需要 2-3 轮往返。如果感觉不对，不要接受第一版。\n\n**第五步——必做的 AI 审查环节。** 把当前草稿粘贴回 Claude，说：\n```\nDon't validate this — find 3 specific problems or gaps in this explainer.\nThink about: accuracy (anything technically wrong?), clarity for a\nnon-technical reader (anything still confusing?), and missing information\n(what questions might this leave unanswered?).\n```\n\n**第六步——至少修复 Claude 指出的一个问题。** 如果反馈中有你不认同的地方，可以反驳并说明理由，但至少要修复一个真实存在的问题。\n\n**第七步——最终排版。** 把你的讲解材料复制到一个文档中（Google Docs、Word 或记事本）。加上标题，写上今天的日期，保存。\n\n**你的交付成果：** 一份为你生活中某个具体的人量身定制的单页 AI 讲解材料。这是你真正能用得上的东西——发邮件给他们、打印出来，或者留着等下次话题聊到 AI 时用。\n\n**额外一步：** 真正把它分享给你为之撰写的这个人，问问他们还有哪些问题没有得到解答。他们的问题就是你下次和 AI 对话的素材。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 C——对自己的解释进行 AI 审查",
+      "content": "找一段你之前已经写过或说过的、关于技术的解释，让它接受对抗性的 AI 审查。目标是练习用 AI 来发现问题，而不是验证自己已经做得很好。\n\n**第一步——找一段你已经写过的、涉及解释某个概念的内容。** 可以是：\n- 一封你向同事解释某项技术的邮件\n- 一条关于 AI 或科技的社交媒体帖子\n- 你为会议或报告写的总结\n- 甚至是一条你试图解释某个技术性内容的短信\n\n如果你实在找不到任何东西，现在就用你自己的话写 3-5 句话解释什么是 AI——这也算数。\n\n**第二步——打开 [Claude.ai](https://claude.ai)。用这个框架粘贴你的文本：**\n```\nI wrote this explanation of [topic] for [audience].\nI want you to find what's wrong with it — not what's good.\nSpecifically:\n1. What is technically inaccurate or misleading?\n2. What would confuse the intended audience?\n3. What important information is missing that would leave a reader with gaps?\n\nDo NOT tell me what I got right. Focus only on problems.\n```\n\n**第三步——不带防御心态地阅读回应。** 这是关键技能：用对抗性的 AI 审查来改进你的作品，而不是确认它已经很好了。AI 不在乎你的感受——这反而让它比大多数人更适合当一个批评者。\n\n**第四步——决定要采纳哪些意见。** 你不必修复所有问题，但要挑出 1-2 个最重要的问题，并记下你会如何处理它们。\n\n**第五步——核实一个说法。** 如果 AI 说你文本中的某个具体内容技术上有误，不要照单全收，去核实一下：自己查一查正确的信息。AI 在批评你的时候也可能出错。养成双向核实的习惯——既核实你自己的作品，也核实 AI 的批评——这才是关键技能。\n\n**为什么对抗性提示有效：** 当你让 AI 验证你的作品时，它往往会找出优点，稍微提一些小改进。而当你明确指示它去寻找问题时，它会切换到另一种模式，找出真正的漏洞。这是初学者使用 AI 最有用的方式之一：把它当作批评者，而不是啦啦队。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 D——真实场景应用：AI 讲解演练",
+      "content": "把本课的核心技能——解释什么是 AI 以及它能做什么——应用到你生活或工作中正在发生的真实场景中。\n\n**背景设定：** 想一想即将到来的某个场景，AI 在其中是（或可能是）相关的，会有人向你问起它。可能是：\n- 一场讨论 AI 工具的团队会议\n- 与一位对 AI 持怀疑态度的经理的对话\n- 一场与 AI 技能相关的求职面试\n- 一场家人担心 AI 会抢走工作的谈话\n- 一场你需要向客户解释某个 AI 工具作用的对话\n\n**第一步——用一句话定义你的具体场景：** 受众是谁？语境是什么？他们目前对 AI 抱有什么看法（怀疑？兴奋？困惑？担忧？）\n\n**第二步——打开 [Claude.ai](https://claude.ai)，粘贴：**\n```\nI need to explain AI to a specific person in a specific context.\n\nSituation: [describe the situation — the audience, the setting, their\ncurrent beliefs about AI, and what outcome I want from the conversation]\n\nHelp me prepare:\n1. A 2-3 sentence explanation of AI pitched exactly for this audience\n2. The 2 most likely objections or concerns this person will raise\n3. A clear, honest response to each objection\n4. One concrete example of how AI could be relevant to their specific\n   situation (not a generic example)\n```\n\n**第三步——大声练习这段解释。** 对着自己或身边的人大声说出那 2-3 句话的版本。留意哪里听起来别扭、不自然，调整措辞，直到它听起来像你真的会说的话——而不是 AI 写出来的东西。\n\n**第四步——为反驳做好准备。** 阅读关于反对意见的回应，挑出与你的场景最相关的一条，记住其中的核心要点（不必逐字背诵，只记住核心思路）。你应该能够在对话中自然地回应它，而不用照着笔记念。\n\n**你的交付成果：** 一份为即将到来的真实对话准备的个人简报。留着它——在那场对话发生之前再读一遍，对话结束后，记下哪些地方有效、哪些无效。\n\n**元技能：** 每当你必须向一个持怀疑态度的受众清楚地解释一件事时，你自己对它的理解也会加深。用 AI 来准备这些对话，既实用（让你更有准备），也有教育意义（准备的过程会迫使你直面自己理解上的空白）。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的经理问 AI 是“自主思考”还是仅仅“遵循规则”。在商业语境下，哪个答案最准确？",
+      "options": [
+        "它自主思考——它的训练没有用到明确规则，能够独立推理",
+        "它遵循规则——所有的规则都是程序员写好的",
+        "它从数据中学习模式，而不是遵循人工编写的规则，但它并不像人类那样“思考”——它是通过预测最可能有用的文本来生成输出",
+        "取决于具体的 AI——有些基于规则，有些能自主思考"
+      ],
+      "correct": 2,
+      "explanation": "这个答案同时抓住了 AI 能做和不能做的事情。“遵循规则 vs. 自主思考”是一种错误的二元对立——AI 是从数据中学习（而不是遵循人工编写的规则），但“自主思考”暗示了一种它并不具备的自主意图。准确的画面是：学到的模式产生的输出可能看起来像是在推理，但底层机制是统计预测，而不是有意图的思考。对商业受众而言，这个区分很重要，因为它既能解释 AI 擅长什么，也能解释它为什么会自信地犯错。"
+    },
+    {
+      "type": "quiz",
+      "question": "一位朋友说：“AI 现在肯定什么都能做对了——看它两年里变得多聪明。”最好的回应是什么？",
+      "options": [
+        "同意——进步这么快意味着 AI 的错误现在已经罕见到可以忽略",
+        "指出能力和可靠性是两码事：AI 的能力确实大幅提升了，但它仍然会自信满满地犯错，尤其是在具体事实、引用来源和近期事件上",
+        "不同意——AI 其实并没有真正进步，看起来进步只是因为营销宣传",
+        "部分同意——最大的模型现在已经可靠了，但较小的模型仍然会犯错"
+      ],
+      "correct": 1,
+      "explanation": "这是每个 AI 用户都需要掌握的关键区分。能力（模型能尝试做什么）的提升不等于可靠性（每次输出是否正确）的提升。一个模型可能写出一份很有说服力的法律论证，同时还编造了案例引用。由规模驱动的能力提升并不会消除幻觉——它们往往只会让输出听起来更有说服力。这就是为什么无论模型看起来有多“聪明”，核实的习惯（第 1-4 课）依然不可或缺。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 1-1 课。** 你现在对什么是 AI、AI 不是什么，以及它为什么能如此迅速地变得强大，有了清晰而诚实的心智模型。这门课程中的一切都建立在这个基础之上——尤其是要理解：AI 是一个模式补全系统，而不是一个无所不知的神谕。"
+    }
+  ],
+  "nextLesson": "1-2",
+  "prevLesson": null
+}

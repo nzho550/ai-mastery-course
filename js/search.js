@@ -1,6 +1,7 @@
 import { icons } from './icons.js';
 import { navigate } from './router.js';
 import { qs, debounce } from './utils.js';
+import { t } from './i18n.js';
 
 let fuse = null;
 
@@ -9,7 +10,7 @@ export function initSearch(curriculum) {
     part.lessons.map(lesson => ({
       id:    lesson.id,
       title: lesson.title,
-      part:  `Part ${part.number}: ${part.title}`,
+      part:  `${t('part.label', { number: part.number })}: ${part.title}`,
       tags:  (lesson.tags || []).join(' '),
     }))
   );
@@ -30,7 +31,7 @@ export function initSearch(curriculum) {
     if (!query.trim()) { results.classList.remove('open'); return; }
     const hits = fuse.search(query).slice(0, 8);
     if (!hits.length) {
-      results.innerHTML = `<div style="padding:var(--sp-4);color:var(--text-faint);font-size:var(--text-sm)">No results found</div>`;
+      results.innerHTML = `<div style="padding:var(--sp-4);color:var(--text-faint);font-size:var(--text-sm)">${t('search.noResults')}</div>`;
     } else {
       results.innerHTML = hits.map((h, i) => `
         <a class="search-item" href="#/lesson/${h.item.id}" data-idx="${i}">

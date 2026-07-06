@@ -1,0 +1,129 @@
+{
+  "id": "3-4",
+  "title": "思维链提示词",
+  "part": 3,
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "chain-of-thought",
+    "reasoning"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 本课你将学到什么\n\n你将学到为什么让 AI “一步一步思考”能显著提升推理任务的准确度——以及这为什么在机制层面上有效，而不只是一个小技巧。你还会学到四种不同的思维链变体、如何用结构化推理模板处理复杂分析，以及什么时候*不该*使用思维链。学完本课后，你将能够针对任何复杂问题，从 AI 那里获得可审计、可验证的推理过程。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**研究发现：** 有研究表明，思维链提示词能把标准化基准测试中数学与逻辑推理的准确率，从 17.7% 提升到 78.7%。这不是一个小效应——这是“在难题上不靠谱的 AI”和“真正有用的 AI”之间的差距。"
+    },
+    {
+      "type": "text",
+      "content": "## AI 为什么会推理出错（以及思维链如何解决这个问题）\n\n语言模型非常擅长模式匹配，但在多步推理上并不可靠——除非你强迫它放慢速度。\n\n原因是这样的：当你要求直接给出答案时，模型是逐词生成统计上最可能的回答。在多步推理——数学题、逻辑推演、决策树——上，模型常常会走捷径，直接给出一个听起来合理但跳过了实际推理链条的答案。这就是为什么你会得到“自信满满但是错的”答案。\n\n思维链提示词打破了这种模式。通过指示模型在回答之前逐步推理，你迫使它在输出中构建出逻辑结构。这里有一个关键的技术洞察：**推理过程本身就在上下文窗口里。** 当模型写出第 1 步时，这段文字就成了第 2 步的上下文的一部分。中间推理过程实实在在地成为了接下来要处理的内容的一部分——这就是为什么“展示推理过程”比“直接跳到结论”能产出更准确的结果。\n\n这不是一个提示词小技巧——这是针对模型一个已知局限的结构性修复。"
+    },
+    {
+      "type": "text",
+      "content": "## 变体一：零样本思维链——一句话触发\n\n最简单的激活方式：在任何提示词里加上一句话。\n\n**触发短语（效果都类似）：**\n```\nThink through this step by step before answering.\n```\n```\nLet's think about this carefully. Walk me through your reasoning before concluding.\n```\n```\nReason through this out loud, then give me your final answer.\n```\n```\nShow your work. I want to see each step.\n```\n\n**示例——不用思维链：**\n```\nIf a train leaves Station A at 2pm travelling at 60 mph, and another train leaves\nStation B at 3pm travelling at 90 mph toward Station A, and the stations are 300\nmiles apart, at what time do they meet?\n```\n→ 模型直接给出一个答案。可能是对的，也可能有一个你看不出来的计算错误。\n\n**示例——用思维链：**\n```\n[same question]\n\nThink through this step by step, showing each calculation.\n```\n→ 模型会展示：A 车在 B 车出发前走了多远、剩余距离、两车相向而行的合速度、相遇所需时间。每一步都可以核对。如果有错误，你能找出来并纠正。\n\n**可审计性的好处：** 这一点和准确度提升同样重要。你得到的不只是一个更好的答案——你得到的是一个可以验证的答案。这把你和 AI 的关系，从“信任一个神谕”变成了“与一个可见的推理过程协作”。"
+    },
+    {
+      "type": "text",
+      "content": "## 变体二：结构化思维链——命名步骤\n\n与其只说“一步一步来”，不如提供与你所需分析类型相匹配的、命名清晰的步骤。这会产出更加一致、更加有用的推理过程。\n\n**用于决策制定：**\n```\nBefore concluding, work through this structured analysis:\n1. What are the key facts we know for certain?\n2. What are we assuming (that might be wrong)?\n3. What are the main options?\n4. For each option: what's the best case, worst case, and most likely outcome?\n5. Which option has the best risk-adjusted outcome?\n6. My recommendation: [with your reasoning]\n```\n\n**用于分析一份文档或一个论点：**\n```\nAnalyse this piece using the following structure:\n1. Main claim: what is the author asserting?\n2. Evidence: what does the author use to support this?\n3. Hidden assumptions: what must be true for this argument to hold?\n4. Counter-evidence: what would challenge or disprove this claim?\n5. Verdict: how strong is the argument and what would make it stronger?\n```\n\n**用于调试或问题诊断：**\n```\nDiagnose this problem using systematic reasoning:\n1. Symptoms: what exactly is happening?\n2. Possible causes: list every plausible explanation\n3. Eliminate: which causes can we rule out based on the evidence?\n4. Most likely cause: which remaining cause best explains all symptoms?\n5. Verification: how would we confirm this is the cause?\n6. Fix: what's the specific solution?\n```\n\n这些结构化模板之所以有效，是因为它们迫使模型明确回应每一个维度，而不是只挑它觉得最相关的那个。"
+    },
+    {
+      "type": "text",
+      "content": "## 变体三：少样本思维链——提供示例推理过程\n\n对于专业化的推理任务，展示已完成的推理示例，比单纯描述推理过程更可靠。这把思维链和少样本提示词（下一课内容）结合了起来。\n\n**示例——法律推理：**\n```\nUse the same reasoning pattern as these examples to analyse the new scenario:\n\nScenario: A shop owner leaves a wet floor unmarked and a customer slips.\nReasoning:\n- Duty of care: shop owners owe a duty of care to customers on their premises\n- Breach: failing to mark a hazardous condition (wet floor) = breach of that duty\n- Causation: the unmarked wet floor directly caused the slip\n- Harm: customer suffered injury\nConclusion: Likely negligence — shop owner is liable for damages\n\nNew scenario: A software company ships an update without testing\nthat causes data loss for all users.\nReasoning: [let the model fill in each step]\n```\n\n少样本思维链对以下场景特别有用：\n- 法律或监管合规推理\n- 医学鉴别诊断式的思考方式\n- 财务风险分析\n- 任何存在专业推理框架可以遵循的领域"
+    },
+    {
+      "type": "text",
+      "content": "## 变体四：自我批判思维链——对自己的推理进行推理\n\n在得到初始回答之后，让模型批判自己的推理过程。这种“元推理”能捕捉到初始回答中遗漏的错误。\n\n**自我批判循环：**\n```\n[After getting Claude's first response]\n\nNow read the reasoning you just provided. Identify:\n1. The step in your reasoning that you're least confident about\n2. Any assumption you made that might not hold in this specific case\n3. An alternative conclusion that someone with different starting assumptions might reach\n\nThen tell me: given those caveats, does your conclusion still hold?\n```\n\n**为什么这样有效：** 模型在写出推理过程之后，现在可以把它当作输入来“阅读”。当被要求寻找自身弱点时，它常常能正确指出——一些如果没有这条明确提示，它本不会主动提出的弱点。\n\n**什么时候该用自我批判：**\n- 在基于 AI 推理做出重大决策之前\n- 每当 AI 的推理显得过于顺畅或过于自信时\n- 当你想确定分析中哪些部分需要独立核实时"
+    },
+    {
+      "type": "text",
+      "content": "## 思维链在数学之外：真实场景应用\n\n**职业决定：**\n```\nI'm deciding whether to accept a job offer that pays 20% more but requires\n2 hours of daily commuting. I have two young children and currently work from home.\n\nThink through this using this framework:\n1. Financial: calculate the real gain after commuting costs (transport, time value)\n2. Time: calculate hours per year lost to commuting vs. years of children's childhood remaining\n3. Career trajectory: what does this role offer beyond salary?\n4. Reversibility: can I return to remote work easily if this doesn't work?\n5. Personal priorities: rank the factors by what I've told you matters most\n6. Recommendation: your honest assessment\n```\n\n**战略分析：**\n```\nAnalyse this competitive situation step by step:\n[describe the situation]\n\n1. What does our competitor do better than us, and why?\n2. Where are we stronger, and is that strength sustainable?\n3. What would happen to our market position if we did nothing for 12 months?\n4. What's one bold move that would change the competitive dynamic?\n5. What's one safe move that would compound our existing advantage?\n6. Which of these two paths is more likely to succeed given our constraints?\n```\n\n**文档审阅：**\n```\nReview this contract clause using a structured legal reasoning process:\n[paste clause]\n\n1. What does this clause permit?\n2. What does it prohibit?\n3. What's ambiguous or could be interpreted multiple ways?\n4. Which interpretation is more favourable to each party?\n5. What risk does this clause create and for whom?\n6. Suggested change to make this fairer/clearer: [specific edit]\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**思维链无法解决幻觉问题。** 它能提升逻辑上的一致性，但不能阻止模型从一个错误的前提出发、却依然“正确地”推理下去。如果模型的起始事实是错的，它会基于错误信息进行正确的推理。思维链让错误变得更*容易被看见*——这一点很有价值——但你始终需要独立核实事实性主张。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么时候不该用思维链\n\n思维链会增加长度和延迟。在以下场景中，它没有必要——有时甚至适得其反：\n\n- **简单的事实性问题：** “法国大革命是哪一年开始的？”——思维链只会徒增无用的铺垫\n- **直接摘要：** “把这个总结成 3 个要点”——思维链会拖慢摘要的产出\n- **日常对话交流：** 在闲聊中用思维链，会让 Claude 显得很生硬\n- **大批量自动化：** 如果你要处理成千上万条数据，思维链会让 token 数量和成本翻三倍\n\n**原则：** 当任务涉及多步推理、决策制定或分析——你能从看到逻辑过程中获益——就用思维链。如果输出本身才是重点、推理过程不重要，就跳过它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "四种思维链变体——同一个真实问题",
+      "content": "这个练习把全部四种思维链变体应用到同一个真实问题上。选一个你目前正面对的真实、复杂的问题或决策。\n\n**第 1 轮——不用思维链（基线）**\n直接提出你的问题。给回答的有用程度打 1-10 分。\n\n**第 2 轮——零样本思维链**\n加上一句：“Think through this step by step before answering.”（在回答前一步步思考。）同样的问题。\n打 1-10 分。有什么变化？\n\n**第 3 轮——结构化思维链**\n为模型提供 4-6 个命名步骤：\n```\nBefore answering, work through this:\n1. [step relevant to your question]\n2. [step]\n3. [step]\n4. [step]\nThen give your conclusion.\n```\n打 1-10 分。这种结构揭示出了哪些前几轮遗漏的东西？\n\n**第 4 轮——自我批判**\n在第 3 轮的回答之后，运用自我批判循环：\n```\nNow review the reasoning you just gave. What's the weakest step?\nWhat assumption might not hold? Does your conclusion still stand?\n```\n打 1-10 分。自我批判揭示出了一个漏洞，还是印证了原来的推理？\n\n**写下：**\n- 你打的 4 个分数，以及每一轮之间发生了什么变化\n- 对你这个具体问题来说，哪种变体产出的结果最有用\n- 未来你会为哪一类决策或分析使用结构化思维链"
+    },
+    {
+      "type": "quiz",
+      "question": "你用 Claude 分析是否要推进一项重大业务计划。Claude 给出了一个自信满满的建议。哪种后续追问，最可能揭示出其推理中的弱点？",
+      "options": [
+        "让 Claude 给出同样答案的更简短版本",
+        "开一个新对话，再问一遍同样的问题",
+        "运用自我批判循环：让 Claude 指出自己推理中最没把握的一步、可能不成立的某个假设，以及一个持不同假设的人可能得出的另一种结论",
+        "让 Claude 把建议说得更强硬、更斩钉截铁"
+      ],
+      "correct": 2,
+      "explanation": "自我批判循环正是为了通过让模型把自己的输出当作输入来审视，从而揭示推理弱点而设计的。这常常能正确识别出过度自信的说法、隐含的假设，以及初始回答中被忽略的其他解读。更简短的版本（A）在没有提升质量的情况下移除了信息。开新对话（B）往往产出类似的推理。让建议更斩钉截铁（D）会让模型显得更自信，但不会更准确。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 A——思维链快速对比",
+      "content": "这个 8 分钟的练习，会精确展示推理指令能把 AI 的输出提升多少。\n\n**第 1 步——选一个需要分析的问题**——不是简单的事实性问题，而是有权衡取舍的事情：一个业务决策、一个技术选型，或一个有利有弊的建议。\n\n**第 2 步——向 Claude 提出同一个问题两次：**\n\n版本 1（不用思维链）：直接提问。\n\n版本 2（用思维链）：加上“Think through this step by step. First, identify the key factors. Then analyse each factor. Then consider trade-offs. Finally, give your recommendation with reasoning.”\n\n**第 3 步——对比这两个回答。** 在版本 2 中：\n- Claude 是否考虑到了版本 1 中遗漏的因素？\n- 推理过程是否可见、可以核对？\n- 结论是否更站得住脚？\n\n**第 4 步——找出提供了最多“版本 1 得不到的洞见”的那个具体推理步骤。**\n\n**第 5 步——给自己记下：** 对哪些类型的问题，你应该始终使用思维链指令？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——用思维链解决一个真实问题",
+      "content": "把思维链提示词应用到你当前正面对的一个真实、有意义的问题上——获得比直接提问更好的分析。\n\n**第 1 步——找出你目前在工作或生活中面对的一个真实问题或决策。** 它应该足够复杂，答案不是显而易见的。\n\n**第 2 步——写一条结构化思维链提示词：**\n```\nI need help thinking through [problem].\n\nContext: [explain the situation, constraints, what matters]\n\nPlease reason through this in the following order:\n1. What are the key factors I need to consider?\n2. What do I know for certain vs what is uncertain?\n3. What are 2-3 realistic options?\n4. For each option, what are the main benefits and risks?\n5. What is your recommendation, and why?\n6. What would need to be true for a different option to be better?\n```\n\n**第 3 步——运行这条提示词。** 逐步阅读 Claude 的推理过程。\n\n**第 4 步——质疑这个推理：** 在你不认同的那一步，提出反驳：“在第 3 步中，你说了 [X]。我认为这是错的，因为 [Y]。请从那一点重新推理。”\n\n**第 5 步——必做的最终审查：** 问 Claude：*“审阅一下你自己上面的推理。有哪些假设是我应该核实的？你的推理可能在哪里出错？”*\n\n**第 6 步——基于完整的推理过程做出决定。** 这个思维链过程是否改变了你原本会做的决定？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 C——搭建一个推理审计提示词",
+      "content": "反过来使用思维链：让 AI 解释一个已有决策或论断背后的推理过程，而不是生成一个新的结论。\n\n**第 1 步——找一份带有建议或结论的工作成果：** 一份报告、一个计划、一份备忘录，或任何带结论的分析。\n\n**第 2 步——让 Claude 反向推导出推理过程：**\n```\nHere is a conclusion: [paste the conclusion or recommendation]\n\nWork backwards from this conclusion:\n1. What assumptions must be true for this conclusion to be correct?\n2. What data or evidence would support each assumption?\n3. What would invalidate this conclusion?\n4. Is this a strong or weak conclusion? What would make it stronger?\n```\n\n**第 3 步——审阅反向推导出的推理过程。** 这个分析有没有揭示出你之前没有明确考虑到的假设？\n\n**第 4 步——改进原来的工作成果：** 根据反向推导的结果，怎样能让这个结论更有说服力、论证更充分？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 D——搭建你的思维链提示词模板库",
+      "content": "为你最常遇到的几类分析任务，创建一套思维链模板库。\n\n**第 1 步——列出你在工作中最常面对的 3-4 类分析问题：** 评估选项、根因分析、项目规划、撰写建议。\n\n**第 2 步——针对每一类问题**，设计一套具体的思维链推理顺序——AI 应该按照哪些步骤来推理，才能产出最好的分析？\n\n**第 3 步——问 Claude：** *“我想为以下几类问题创建思维链提示词模板：[列出]。针对每一类，写出一套推理框架——AI 应该按哪些具体步骤推理，才能产出最好的分析。让每个框架都符合 [你所在领域] 资深从业者实际会思考的方式。”*\n\n**第 4 步——用一个真实问题测试每个模板。**\n\n**第 5 步——根据测试结果打磨模板。** 把它们加入你的提示词库。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude 推荐一个项目管理工具。不用思维链时，它说“Notion 是最好的选择”。用了思维链之后，它在推荐 Notion 之前先推理了团队规模、集成需求和预算。思维链版本的关键优势是什么？",
+      "options": [
+        "思维链版本更可能是正确的，因为它考虑了更多因素",
+        "思维链版本读起来总是更快",
+        "思维链版本让你能准确找到自己不认同推理过程的地方，并加以纠正",
+        "思维链版本分享给别人时显得更厉害"
+      ],
+      "correct": 2,
+      "explanation": "可见推理过程的关键优势在于可调试性——你能检查每一步推理，准确找出逻辑在哪里偏离了你的实际情况。如果思维链版本说“假设团队规模为 5-10 人”，但你的团队有 50 人，你就可以纠正这个假设，得到更好的建议。而直接给出的答案没有可见的推理过程供你核对或质疑。"
+    },
+    {
+      "type": "quiz",
+      "question": "你用思维链来分析一项业务风险。看到 Claude 的第 3 步（风险评估）后，你觉得某项风险被明显低估了。你应该怎么做？",
+      "options": [
+        "接受 Claude 的评估——它处理的信息比你多",
+        "开一个新对话，再问一遍同样的问题",
+        "明确告诉 Claude 你认为哪里被低估了、为什么，并让它从那一点重新推理",
+        "让 Claude 在风险评估上“再努力一点”"
+      ],
+      "correct": 2,
+      "explanation": "思维链的设计初衷就是可交互的——你可以在任何一步介入。如果你不认同某一具体步骤，明确说出来并说明你的理由，并要求 Claude 从那一点开始修订。这比推倒重来或给出“再努力一点”这种模糊反馈有效得多。你对具体风险的领域知识，是 Claude 可能不具备的；交互式纠正正是让这些知识被纳入分析的方式。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 3-4 课。** 你现在掌握了四种不同的思维链变体：零样本触发、结构化命名步骤、少样本示例推理，以及自我批判。这些技巧能把复杂任务的推理准确率提升 20%-60%——更重要的是，它们给你的是一套你可以审计、可以质疑的推理过程。"
+    }
+  ],
+  "nextLesson": "3-5",
+  "prevLesson": "3-3"
+}

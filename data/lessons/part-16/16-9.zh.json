@@ -1,0 +1,81 @@
+{
+  "id": "16-9",
+  "title": "AI 用于人力资源与招聘",
+  "part": 16,
+  "estimatedMinutes": 55,
+  "tags": ["document-work", "intermediate", "hr", "recruiting", "people-management", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nHR 和人力运营涉及大量的写作、结构化整理和文档工作——职位描述、面试框架、入职指南、绩效评估、政策文档，以及与候选人和员工的沟通。AI 正在改变这一切能够完成的速度和一致性。\n\n学完本课后，你将拥有针对每一种主要 HR 文档类型的实用工作流，理解 AI 在招聘中的伦理护栏，并获得可以立即用于你所在组织招聘和人才管理需求的模板。"
+    },
+    {
+      "type": "text",
+      "content": "## AI-HR 的机遇\n\nHR 从业者通常把 60-70% 的时间花在文档和沟通任务上。AI 能极大地加速：\n\n**招聘流程：**\n- 职位描述的撰写与优化\n- 候选人接触与跟进邮件序列\n- 针对特定岗位定制的面试题库\n- 用于面试评估的结构化打分标准\n- 录用信草稿\n- 拒绝沟通模板（专业且友善）\n\n**入职：**\n- 欢迎邮件和第一天清单\n- 针对岗位的入职计划\n- 面向新员工的常见问题文档\n- 30/60/90 天计划框架\n\n**绩效管理：**\n- 绩效评估框架和问题库\n- 与公司 OKR 对齐的目标设定模板\n- 面向管理者的反馈对话指南\n- 绩效改进计划（PIP）结构\n\n**政策与文档：**\n- 员工手册章节\n- 政策文档与更新\n- 内部沟通草稿\n- 培训材料与指南\n\n**本课使用的 AI 工具：** Claude.ai 用于所有文档起草（不需要专门的 HR 工具——Claude 在这方面的表现优于大多数 HR 专用工具，而且不需要额外的订阅费用）。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**重要提示：AI 与招聘偏见。** 基于历史数据训练的 AI 工具可能延续或放大招聘中已经存在的偏见。在使用 AI 筛选候选人、给申请打分，或起草筛选标准时，请始终做到：\n1. 让不同背景的人共同审阅 AI 生成的岗位要求和筛选标准\n2. 永远不要让 AI 做出最终的招聘决定——用它来辅助人类判断，而不是取代它\n3. 审计 AI 建议的要求：每一项是否真的能预测工作表现，还是仅仅反映了历史模式？\n4. 遵守你所在司法辖区的就业法——AI 招聘工具在某些地区可能要求向候选人披露（例如欧盟 AI 法案）\n本课重点关注用 AI 进行文档撰写和起草——而不是自动化候选人筛选，后者在法律和伦理上的风险要高得多。"
+    },
+    {
+      "type": "text",
+      "content": "## 撰写能吸引合适候选人的职位描述\n\n职位描述既是营销文档，也是岗位规格说明。糟糕的职位描述会吸引到错误的人，也会用一些其实并非必需的要求吓退优秀的候选人。\n\n**AI 能做什么：**\n- 找出可能不必要地缩小候选人范围的要求（例如，对入门级任务要求“5 年经验”）\n- 把描述从一堆要点重组为一段引人入胜的叙述\n- 检查性别倾向语言（研究表明，即使女性符合资格，男性化措辞的用词也会让她们打退堂鼓）\n- 为可能被解读为歧视性的要求，建议替代表述\n- 确保“你将做什么”部分具体而准确，而不是含糊和夸大\n\n**行之有效的职位描述公式：**\n1. **一句话的公司概览**——你们做什么，为什么重要\n2. **一段话的岗位说明**——成功是什么样子，会和谁一起工作\n3. **你将做什么**——具体的成果，而不是泛泛的活动（不要写“管理项目”——要写“负责 X 路线图，向 Y 客户按季度交付版本”）\n4. **我们在寻找什么**——分两部分：必要条件（第一天就真正需要的）和加分项（可以在工作中学习的）\n5. **我们提供什么**——薪酬范围、福利、弹性、成长空间\n6. **关于我们**——使命、文化、团队，以及这个岗位为什么重要"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——撰写并审查一份职位描述",
+      "content": "你将用 AI 起草一份职位描述，然后审计它的质量和包容性。\n\n**第 1 步——选择一个岗位。** 使用一个你正在招聘的真实岗位、你目前工作中的一个岗位，或从招聘网站上选一个作为练习对象。\n\n**第 2 步——收集输入信息。** 在提示之前，先记录：\n- 这个人日常实际会做什么？\n- 6 个月后，成功是什么样子？\n- 他们会和谁一起工作，向谁汇报？\n- 他们第一天必须知道什么，什么可以在工作中学习？\n- 你的公司提供哪些真正有竞争力的东西？\n\n**第 3 步——提示 Claude：**\n```\nWrite a job description for the role of [Role Title] at [type of company].\n\nKey responsibilities:\n[list 4-6 specific outcomes, not activities]\n\nEssential requirements (needed on day 1):\n[list only genuinely essential requirements]\n\nNice to have:\n[things that would be a bonus]\n\nWhat we offer: [compensation, benefits, flexibility]\n\nOur culture: [2-3 sentences about what the team is like]\n\nWrite this as a compelling narrative job description, not a list of bullet points. Make it sound like a real person wrote it, not a legal document.\n```\n\n**第 4 步——审查偏见。** 在第一版草稿之后，问 Claude：\n“审查这份职位描述：\n1. 可能降低多样性的不必要要求（例如，对不需要学位的岗位要求学位）\n2. 可能让女性申请者打退堂鼓的性别倾向语言\n3. 年龄歧视性语言\n4. 描述的是偏好背景而非工作表现的要求\n针对发现的任何问题，提出具体的改写建议。”\n\n**第 5 步——打磨并保存。** 这份职位描述现在就是你针对这类岗位的模板。\n\n**成果：** 一份更具包容性、也更能吸引到合适候选人的职位描述。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 B——构建一个面试框架",
+      "content": "非结构化面试是预测性最差的招聘工具之一。采用一致的问题和打分标准的结构化面试，在预测工作表现方面明显更强。AI 让搭建结构化面试变得快速。\n\n**第 1 步——选择你在工作坊 A 中创建职位描述的那个岗位**（或选择另一个）。\n\n**第 2 步——定义你的面试阶段。** 一种常见的结构：\n- 阶段 1：30 分钟电话初筛（文化/动机匹配度）\n- 阶段 2：45 分钟能力面试（技能与经验）\n- 阶段 3：任务/案例研究（观察他们实际操作）\n- 阶段 4：终面（领导层/利益相关方）\n\n**第 3 步——提示 Claude：**\n```\nCreate a structured interview framework for a [Role Title] candidate. Include:\n\n1. A 30-minute phone screen guide:\n   - 5 questions to assess motivation and culture fit\n   - A scoring rubric (1-5 scale with descriptors for each score)\n   \n2. A 45-minute competency interview:\n   - 6 behavioral questions (using STAR format: Situation, Task, Action, Result)\n   - Each question should assess a specific competency for this role\n   - A scoring rubric for each competency\n   \n3. 3 red flag indicators at each stage (things that would rule a candidate out)\n\n4. Legal reminders: 5 questions interviewers must NEVER ask and why\n\nThe key competencies for this role are: [list 4-5 things that predict success in this role]\n```\n\n**第 4 步——审查相关性。** 这些问题真的在测试这个岗位所需的正确能力吗？调整任何感觉泛泛的问题。\n\n**第 5 步——自己回答一道题来测试它。** 假装自己是候选人，回答其中一道行为问题。这道题真的能揭示它想测试的能力吗？\n\n**成果：** 一套可以和招聘经理一起使用的结构化面试工具包。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——为新员工制定入职计划",
+      "content": "一个结构良好的第一个月，是让新员工自信地快速做出贡献、还是到第三个月还处于迷茫状态的关键区别。\n\n**第 1 步——选择一个岗位**为其创建入职计划。可以使用前面工作坊中的同一个岗位，或组织中的一个真实岗位。\n\n**第 2 步——提示 Claude：**\n```\nCreate a comprehensive 30/60/90-day onboarding plan for a new [Role Title].\n\nCompany context:\n- Type of company: [size, industry]\n- Team they're joining: [team name, size]\n- Who they report to: [manager title]\n- Tools and systems they'll use: [list the key software/tools]\n\nFor each phase (days 1-30, 31-60, 61-90), provide:\n- The overarching goal for this phase\n- Week-by-week priorities (what they should focus on each week)\n- Key people to meet (by role, not name)\n- Documents and resources to read\n- Skills to acquire or practice\n- Milestones that indicate they're on track\n- A simple check-in framework for their manager\n\nAlso provide:\n- A first-day checklist (practical items for day 1)\n- A welcome email template from their manager\n- 5 questions a new starter in this role typically has in week 1, with answers\n```\n\n**第 3 步——定制化。** 把任何通用条目替换成你团队实际使用的文档、工具和人员。\n\n**第 4 步——添加“文化”层面**——问 Claude：“加一节关于非正式入职的内容：如何真正融入团队、读懂氛围、理解不成文的规范，以及在前 30 天内建立人际关系。”\n\n**成果：** 一套完整的入职工具包，能缩短新员工达到高效产出所需的时间。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 D——绩效评估框架",
+      "content": "绩效评估常常是仓促、不一致，且令管理者感到畏惧的。AI 帮助创建更结构化、公平、有用的评估框架。\n\n**第 1 步——确定你的评估形式。** 常见类型：\n- 年度/半年度评估：全面评估\n- 360 度评估：来自多方的反馈\n- 定期沟通：更轻量、更频繁\n- OKR 评估：聚焦目标达成情况\n\n**第 2 步——提示 Claude：**\n```\nCreate a performance review framework for [review type] for a [role or job level].\n\nInclude:\n1. Rating categories (4-5 dimensions, e.g., Results, Collaboration, Growth, Leadership)\n   - For each: a description of what excellent / meets expectations / needs improvement looks like\n   - A 1-5 rating scale with behavioural anchors (specific examples for each score)\n\n2. Manager reflection questions (5-7 questions to help a manager think before writing):\n   - Questions about results delivered\n   - Questions about behaviours and how they worked\n   - Questions about growth and development\n\n3. Employee self-assessment template (questions for the employee to complete first):\n   - Reflect on your key achievements\n   - What has been your biggest challenge?\n   - Where do you want to grow?\n   - What support do you need from your manager?\n\n4. A guide for the conversation itself:\n   - How to open the review meeting\n   - How to give difficult feedback constructively\n   - How to close with agreed next steps\n```\n\n**第 3 步——为你的公司文化做调整。** 增加或删除能反映你所在组织真正重视之事的维度。\n\n**第 4 步——创建一份困难场景指南。** 问：“给我一份指南，说明该如何应对：（a）表现低于预期的人，（b）技术很强但难以共事的人，（c）自我评分远高于你评分的人。在每种情况下，管理者应该说什么？”\n\n**成果：** 一套完整的绩效管理工具包，让评估更具一致性和实用性。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在用 AI 帮忙筛选一个软件工程岗位的申请。AI 建议过滤掉所有没有计算机科学学位的候选人。你应该怎么做？",
+      "options": [
+        "应用这个过滤条件——计算机科学学位能预测工程质量",
+        "质疑这个要求：问一问计算机科学学位对这个岗位的日常职责来说是否真的必要，还是它只是一种可以通过其他方式证明的能力的替代指标。如果无法证明其合理性，就删除或软化这项要求",
+        "先应用这个过滤条件以节省时间，之后在流程中再纠正偏见",
+        "让 AI 来决定——它比人类的判断更客观"
+      ],
+      "correct": 1,
+      "explanation": "质疑不必要的要求（选项 B）才是正确的做法。许多工程岗位都曾被自学成才的工程师、训练营毕业生，或持有相关学位的人出色地胜任过。一项无法真正预测表现的学位要求，会缩小你的候选人池，还可能延续社会经济或人口层面的偏见。选项 A 假定相关性等同于必要性。选项 C 行不通——早期埋下的偏见会影响你究竟能看到谁。选项 D 误解了 AI：它会放大历史模式，包括其中的偏见，必须由具备当下背景认知的人类来监督。"
+    },
+    {
+      "type": "quiz",
+      "question": "一位招聘经理说结构化面试和打分标准太死板，他们更愿意凭直觉判断。基于证据的回应应该是什么？",
+      "options": [
+        "同意——经验丰富的经理有很好的直觉，结构化面试反而会限制他们",
+        "研究一致表明，结构化面试（同样的问题、打分标准）在预测工作表现方面明显优于非结构化对话。打分标准并没有消除判断——它只是把判断引导到正确的维度上，并让不同候选人之间可以进行比较",
+        "折中一下：一半结构化问题，一半非结构化问题",
+        "用 AI 代替经理做最终决定"
+      ],
+      "correct": 1,
+      "explanation": "研究结果很明确（选项 B）：结构化面试在预测工作表现上优于非结构化面试。非结构化面试深受融洽度、外表、共同背景以及无关对话因素的影响。打分标准并没有限制良好的判断——它只是把判断聚焦在相关能力上，并让不同候选人之间的评估可以比较。招聘经理所谓的“直觉”，往往反映的是无意识的偏见，而不是预测性的评估。选项 C 在遇到阻力时是一个合理的折中方案。选项 D 只是用一种偏见替代了另一种偏见。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 16-9 课。** 你现在拥有针对每一种主要 HR 文档类型的 AI 辅助工作流：带偏见审计的职位描述、结构化面试框架、入职计划，以及绩效评估体系。需要牢记的伦理护栏是：AI 能加速并改进 HR 文档工作——但招聘决策必须始终由能够解释自己判断依据的、负责任的人来做出。"
+    }
+  ],
+  "nextLesson": "16-10",
+  "prevLesson": "16-8"
+}

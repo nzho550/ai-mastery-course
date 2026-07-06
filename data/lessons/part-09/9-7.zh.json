@@ -1,0 +1,70 @@
+{
+  "id": "9-7",
+  "title": "Lovable 与 Replit——从想法到部署上线",
+  "part": 9,
+  "estimatedMinutes": 60,
+  "tags": [
+    "lovable",
+    "replit",
+    "vibe-coding",
+    "no-code",
+    "deployment",
+    "full-stack",
+    "beginner-friendly"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将用 Lovable 和 Replit 构建过完整的应用，理解它们各自适用的场景，并拥有一套清晰的决策框架，用于在 Bolt、v0、Lovable、Replit 和 Claude Code 之间做出选择。"
+    },
+    {
+      "type": "text",
+      "content": "## Lovable——完整的产品，而不只是原型\n\n**Lovable**（lovable.dev）是一个基于“GPT Engineer”理念打造的全栈 AI 开发平台。和 Bolt 一样，你描述一个应用，它就会把它构建出来——但 Lovable 还多了这些：\n\n- **开箱即用的 Supabase 集成**——真实的数据库、用户认证、文件存储，全部自动配置好\n- **GitHub 同步**——每个项目都有一个真实的 GitHub 仓库；你可以在 VS Code 里编辑并同步改动\n- **持久化的项目状态**——你的应用会在多次会话之间保留代码库；你是在构建一个真实的产品，而不是每次都从零开始\n- **设计打磨**——Lovable 默认就能产出格外好看的界面\n\n**什么时候选 Lovable 而不是 Bolt：**\n- 你需要用户账户（登录/注册）\n- 你需要一个有多张表的真实数据库\n- 你在构建一个打算持续使用的东西（而不是一次性的原型）\n- 你想在 VS Code 中和 AI 一起继续开发"
+    },
+    {
+      "type": "text",
+      "content": "## Replit——在浏览器里写代码、部署应用\n\n**Replit**（replit.com）是一个云端开发环境——一个运行在浏览器里的完整类 VS Code 编辑器。你什么都不用安装。你编写（或生成）代码，Replit 负责运行和托管。\n\n**Replit AI Agent** 把这一点又往前推进了一步：描述你想要什么，AI 就会在你的浏览器里编写、运行并调试代码。你可以看到终端输出，在对话中修复错误，不断迭代直到它能正常运行。\n\n**Replit 的优势：**\n- 支持几乎所有编程语言（Python、Node.js、Go、Rust，以及其他 50 多种）\n- 内置托管——应用一运行起来就已经上线\n- 内置数据库（Replit DB）——无需额外搭建\n- 非常适合 Python 应用（机器学习脚本、数据工具、机器人）——而 Bolt 和 Lovable 更偏向网页应用\n- 免费版确实很实用；需要应用始终在线的话，才需要付费版\n\n**什么时候选 Replit：**\n- 构建一个 Python 工具、脚本或机器人\n- 学习编程（这个环境对初学者很友好）\n- 想分享一段正在运行的代码，而不想另外单独部署\n- 需要一个没有前端的快速后端 API"
+    },
+    {
+      "type": "text",
+      "content": "## 完整的决策框架\n\n现在你有了多种选择。以下是每种情况下该用哪一款：\n\n| 场景 | 最佳工具 |\n|-----------|----------|\n| 快速的网页应用原型，不需要登录 | Bolt.new |\n| 应用需要用户账户 + 数据库 | Lovable |\n| 需要快速拿到美观的 React 组件 | v0.dev |\n| Python 工具、脚本或数据应用 | Replit |\n| 复杂的现有代码库 | Claude Code |\n| 深度代码质量、原生 git 工作流 | Aider |\n| 企业级代码库理解 | Cody |\n| 完全掌控、隐私优先 | 本地 Ollama + Continue.dev |\n\n对大多数人来说有效的工作流是：**从 Bolt 或 Lovable 开始 → 用 Claude Code 打磨 → 通过 GitHub Actions 部署**。当你需要特定的 UI 组件时用 v0。当你需要 Python 或纯后端工具时用 Replit。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "在 Lovable 中构建一个带用户认证的真实应用",
+      "content": "构建一个带用户账户的全栈应用——这是 Bolt 如果不额外花大力气就做不到的事情。\n\n**第 1 步——选择一个需要用户账户的项目：**\n- 个人日记（每个用户拥有私密的条目）\n- 书签管理器（每个用户拥有自己的链接）\n- 目标追踪器（个人目标和进度）\n- 团队任务看板（多个用户共享一个看板）\n\n**第 2 步——打开 Lovable**（lovable.dev），新建一个项目。\n\n**第 3 步——写出你的提示词：**\n```\nBuild a [your choice] app.\n\nAuthentication: email/password sign up and login. Each user sees only their own data.\n\nCore features:\n- [Feature 1]\n- [Feature 2]\n- [Feature 3]\n\nDesign: [dark/light], clean and minimal. Mobile responsive.\n\nDatabase: [describe the data you need to store]\n```\n\n**第 4 步——让 Lovable 进行构建。** 它会自动搭建好：\n- React 前端\n- 用于认证和数据库的 Supabase\n- 行级安全策略（row-level security），确保用户只能看到自己的数据\n\n**第 5 步——测试认证流程：**\n1. 以用户 A 的身份注册，创建一些数据\n2. 退出登录\n3. 以用户 B 的身份注册——确认用户 B 看不到用户 A 的任何数据\n4. 重新以用户 A 身份登录——你的数据还在\n\n**第 6 步——连接 GitHub：** 在 Lovable 的设置中连接你的 GitHub 账号。Lovable 会创建一个仓库——你现在可以在 VS Code 中编辑并推送改动。\n\n**第 7 步——分享链接。** 你的应用已经带着真实的认证功能上线了。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 A——Replit：构建一个 Python 工具",
+      "content": "用 Replit 构建一个 Python 自动化工具，无需在本地安装 Python。\n\n**第 1 步——在 replit.com 注册**（免费版就够用）。\n\n**第 2 步——新建一个 Repl：** 选择 Python 作为语言。\n\n**第 3 步——用 Replit AI 构建一个短链生成器或文本处理工具：**\n在 Replit AI 对话框中输入：\n```\nBuild a Python web app using Flask that:\n1. Has a form where I can paste a long piece of text\n2. Calls the Anthropic API to summarize it (use the ANTHROPIC_API_KEY secret)\n3. Shows the summary on the page\n4. Keeps a history of the last 5 summaries in memory\n\nMake it simple and functional — no database needed.\n```\n\n**第 4 步——添加你的 API 密钥：** 在 Replit 的 Secrets 标签页（挂锁图标）中，添加：\n- Key：`ANTHROPIC_API_KEY`\n- Value：你在第 11-3 课中获取的 Anthropic API 密钥\n\n**第 5 步——运行它。** 点击 Run 按钮——Replit 会安装依赖并启动你的服务器。预览面板会显示你正在运行的应用。\n\n**第 6 步——用真实文本测试。** 粘贴一篇较长的文章并对其进行总结。\n\n**第 7 步——分享网址。** 你的 Replit 应用网址对任何人都可用（只要这个 Repl 还在运行）。\n\n**说明：** 免费版的 Replit 应用在闲置时会休眠。Hacker 套餐（每月 7 美元）可以让应用保持始终在线。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——为你的使用场景选择正确的工具",
+      "content": "练习把这套决策框架应用到真实场景中。\n\n针对每个场景，决定哪款工具最合适并说明原因。然后构建你最感兴趣的那一个。\n\n**场景 1：** 你想构建一个预约工具，让客户可以预约你的时间。它需要检查你的日历空档、发送确认邮件，并让你查看即将到来的预约。会有多个客户使用它。\n→ *选哪款工具？为什么？*\n\n**场景 2：** 你有一个处理 CSV 文件并生成报告的 Python 脚本。你想把它变成一个网页应用，上传 CSV、下载报告——没有公开用户，只有你自己用。\n→ *选哪款工具？为什么？*\n\n**场景 3：** 你想给你正在用 Claude Code 构建的现有 React 应用加一个美观的价格表。你不想重建整个应用。\n→ *选哪款工具？为什么？*\n\n**场景 4：** 你想快速做一个社交应用想法的原型——用户发布简短的动态、互相关注、看到一个信息流。你想这个周末就演示给朋友看。\n→ *选哪款工具？为什么？*\n\n**动手构建：** 选出你最感兴趣的场景，应用正确的工具，构建一个可用的版本。\n\n**和 Claude Code 分享你的推理：** “针对 [场景]，我选择了 [工具]，因为 [原因]。这个判断对吗？换一个替代工具会有什么不同？”"
+    },
+    {
+      "type": "quiz",
+      "question": "你用 Lovable 构建了一个带用户认证功能的应用。一位安全研究员告诉你，你的应用存在 SQL 注入漏洞。修复它是谁的责任？",
+      "options": [
+        "Lovable——是他们生成了这段代码",
+        "Supabase——是他们托管数据库",
+        "你自己——这是你的应用，无论代码是怎么生成出来的，你都要对它负责",
+        "没有人的责任——AI 生成的应用不可能存在 SQL 注入"
+      ],
+      "correct": 2,
+      "explanation": "无论你是自己写的代码还是 AI 生成的代码，你都要对你部署的任何应用的安全性负责。AI 工具确实会、也已经产出过存在漏洞的代码。对于处理用户数据的应用，你需要：（1）理解安全模型（Lovable 使用 Supabase 的行级安全策略——学习它是如何运作的）；（2）在公开上线之前测试常见漏洞；（3）建立一套应对安全问题的流程。“是 AI 写的”不能成为借口——是你选择了把它部署上线。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 9-7 课完成。** 你现在拥有了一套完整的“氛围编程”工具箱：Bolt.new 用于快速原型，v0.dev 用于 UI 组件，Lovable 用于带用户账户的应用，Replit 用于 Python 工具。再搭配 Claude Code 负责深度开发、GitHub Actions 负责部署，你几乎可以构建并交付任何东西。接下来：AI 编程工具的完整格局对比。"
+    }
+  ],
+  "nextLesson": "7-1",
+  "prevLesson": "9-6"
+}

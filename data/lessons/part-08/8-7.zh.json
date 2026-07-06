@@ -1,0 +1,115 @@
+{
+  "id": "8-7",
+  "title": "task-master-ai——AI 项目管理",
+  "part": 8,
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "task-master",
+    "project-management",
+    "claude-code"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将安装好并跑通 task-master-ai——你会把一份真实的项目简介，转化成一份结构化的、带依赖关系的任务列表，并且 Claude Code 会在你逐项处理的过程中持续跟踪它。"
+    },
+    {
+      "type": "text",
+      "content": "## task-master-ai 解决的问题\n\nAI 非常擅长处理单个任务：写这个函数、修这个 bug、解释这个概念。但它不记得你已经做过什么，也不知道接下来该做什么。\n\n每次你开始一个新的 Claude Code 会话，Claude 都是从零开始的。它不知道：\n- 哪些功能已经完成、哪些还没有\n- 整个项目想要达成什么目标\n- 下一步合理的操作应该是什么\n- 你现在让它帮忙的这个任务，是否被某个未完成的事情卡住了\n\ntask-master-ai 给 Claude 提供了持久的项目上下文。你写一份简短的项目描述（PRD，产品需求文档），task-master 把它转化成带有依赖关系的结构化任务，Claude Code 就能在任何时刻准确知道项目进展到了哪一步。"
+    },
+    {
+      "type": "text",
+      "content": "## 安装\n\n把 task-master-ai 添加到你的全局 `settings.json` 中："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"context7\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@upstash/context7-mcp\"]\n    },\n    \"sequential-thinking\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-sequential-thinking\"]\n    },\n    \"task-master-ai\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"--package=task-master-ai\", \"task-master-ai\"]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**包名可能会变。** task-master-ai 这个包在持续维护中，安装命令可能会在不同版本之间发生变化。如果上面的命令不管用，请查阅 github.com/eyaltoledano/claude-task-master 获取当前的安装说明。"
+    },
+    {
+      "type": "text",
+      "content": "## 从 PRD 到任务的工作流\n\n下面是配置好 task-master 之后的完整工作流：\n\n**第 1 步——写一份 PRD**\nPRD（产品需求文档）不必写得很正式。它只是对你想构建的东西的一段描述：目标是什么、有哪些功能、有什么限制条件。\n\n哪怕只有 5 句话也够用。如果 task-master 需要更多信息，它会主动问澄清性的问题。\n\n**第 2 步——把它解析成任务**\n问 Claude：`\"用 task-master 把这份 PRD 解析成一份带依赖关系的结构化任务列表。\"`\n\ntask-master 会创建带编号的任务，识别出哪些任务依赖哪些任务，并估算复杂度。\n\n**第 3 步——逐一处理任务**\n问：`\"我接下来应该做哪个任务？\"`\n\ntask-master 会返回优先级最高、且没有未完成依赖项的任务。\n\n**第 4 步——把任务标记为完成**\n完成一个任务之后：`\"把任务 3 标记为已完成。\"`\n\ntask-master 会更新任务列表，并知道现在哪些任务已经解除了阻塞。\n\n**第 5 步——Claude 保持上下文连续**\n在任何会话开始时：`\"用 task-master 总结一下当前的项目状态。\"`\n\nClaude 会读取任务文件，立刻知道项目进展到了哪一步——不需要你手动重新解释一遍。"
+    },
+    {
+      "type": "text",
+      "content": "## 任务列表长什么样\n\ntask-master 会创建一个结构化文件（通常是 `tasks/tasks.json` 或类似路径），条目大概是这样的："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"tasks\": [\n    {\n      \"id\": 1,\n      \"title\": \"Set up project folder structure\",\n      \"description\": \"Create HTML, CSS, and JS files. Initialize Git repo.\",\n      \"status\": \"done\",\n      \"dependencies\": [],\n      \"priority\": \"high\"\n    },\n    {\n      \"id\": 2,\n      \"title\": \"Build the navigation bar\",\n      \"description\": \"Sticky nav with logo, links, and mobile hamburger menu.\",\n      \"status\": \"in-progress\",\n      \"dependencies\": [1],\n      \"priority\": \"high\"\n    },\n    {\n      \"id\": 3,\n      \"title\": \"Build the hero section\",\n      \"description\": \"Full-width banner with headline, subheading, and CTA button.\",\n      \"status\": \"pending\",\n      \"dependencies\": [1],\n      \"priority\": \"medium\"\n    }\n  ]\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**task-master 在需要跨多个会话的项目上最有价值。** 对于一个一小时就能搞定的小任务，用它是大材小用。但对于任何你会持续做好几天的事情——搭建一个网站、写一个脚本、做一个应用——它能彻底消除“我做到哪儿了？”这个问题。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "用 task-master-ai 规划一个小项目",
+      "content": "**准备工作：**\n1. 把 task-master-ai 的配置加到你的 `settings.json` 中\n2. 保存并重新启动 `claude`\n3. 输入 `/mcp` 确认 `task-master-ai` 出现\n\n**第 1 步——写你的 PRD：**\n想一个你想构建的小而真实的东西。可以是：\n- 一个个人作品集页面\n- 一个用 HTML/JS 写的简单测验或小游戏\n- 一个整理文件夹里文件的脚本\n- 一个从 API 展示数据的网页\n\n写 5 句话描述它是做什么的、给谁用的、需要什么功能。\n\n**第 2 步——把它解析成任务：**\n问：`\"用 task-master 为这个项目创建一份任务列表。把它拆成具体的、可执行的子任务，并标出依赖关系。\"`\n粘贴进你 5 句话的描述。\n\n检查一下输出：\n- 这些任务合理吗？\n- 有没有遗漏什么任务？\n- 依赖关系对吗？\n\n让 Claude 调整任何有问题的地方。\n\n**第 3 步——处理第一个任务：**\n问：`\"我应该先开始哪个任务？\"`\n让 Claude 确定第一个任务，然后实际去做——写代码、创建文件，做任务要求的任何事。\n\n**第 4 步——标记完成并推进：**\n完成第一个任务后：\n问：`\"把任务 1 标记为已完成。下一个是什么？\"`\n\n重复直到你至少完成了 2 个任务。\n\n**第 5 步——测试项目记忆：**\n输入 `/clear` 重置对话，然后问：`\"用 task-master，我项目现在的状态是什么？\"`\nClaude 应该会读取任务文件，给你一份准确的状态报告，而你不需要重新解释任何东西。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——task-master 搭建与第一个任务",
+      "content": "把 task-master-ai 跑起来，创建你的第一份 AI 管理的任务列表。\n\n**第 1 步——安装 task-master-ai**（查阅 task-master 的 GitHub 仓库获取当前的安装说明——包名可能已经变了）。\n\n**第 2 步——在你的 Claude Code MCP 设置中配置它。**\n\n**第 3 步——在 Claude Code 中**，用 task-master 为一个真实项目创建任务列表：\n```\n用 task-master，为 [你的项目] 创建一份任务列表。拆分为：本周要做的任务、下周要做的任务，以及待办池。为每个任务设定优先级（高/中/低）和预估耗时。\n```\n\n**第 4 步——查看创建出来的任务。** 这个结构合理吗？\n\n**第 5 步——把一个任务标记为进行中。** 让 Claude Code 只显示进行中的任务。\n\n**第 6 步——问 Claude：** *“把 task-master 和用笔记文件或 Notion 管理任务做个对比。task-master 提供了哪些那些工具做不到的东西？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——AI 驱动的项目规划",
+      "content": "用 task-master 在 AI 指导下把一个真实项目拆解成可管理的任务。\n\n**第 1 步——选一个你正在规划的真实项目：** 实现一个功能、进行一次研究项目、完成一份工作交付物。\n\n**第 2 步——让 Claude Code 把项目描述解析成任务：**\n```\n用 task-master，把这个项目解析成任务：\n\n项目：[用 2-3 段描述你的项目]\n\n对于每个任务：\n- 写一个清晰、可执行的标题（以动词开头）\n- 指定优先级\n- 估算小时数\n- 列出依赖关系（哪些其他任务必须先完成）\n- 归入一个类别（前端/后端/研究/文档/测试）\n```\n\n**第 3 步——检查生成的任务。** AI 哪里做对了？哪里遗漏了或估算过了头？\n\n**第 4 步——必做的复核：** 问：*“检查一下这份任务拆解。你遗漏了哪些重要任务？哪些任务估算过高或过低？哪些依赖关系没有被捕捉到？”*\n\n**第 5 步——更新并定稿**这份任务列表。把它用在你的实际项目上。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C——以任务驱动的开发会话",
+      "content": "运行一次完全由 task-master 驱动的完整开发会话。\n\n**第 1 步——打开配置了 task-master 的 Claude Code。**\n\n**第 2 步——问 Claude Code 接下来该做哪个任务：**\n```\n用 task-master，给我看看优先级最高的未完成任务。基于优先级、依赖关系（哪些已经完成）和预估耗时，推荐我现在应该做哪一个。\n```\n\n**第 3 步——接受这个建议**，开始处理那个任务。\n\n**第 4 步——在工作过程中**，让 Claude Code：把任务状态更新为进行中、添加你正在做什么的备注，并按需创建子任务。\n\n**第 5 步——完成后**，把任务标记为完成，问 Claude Code：“我接下来应该做哪个任务？”\n\n**第 6 步——反思：** 用 AI 管理的任务有没有提升你的专注度，相比你平时的工作方式？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——把 task-master 整合进你现有的工具",
+      "content": "把 task-master 连接到你现有的项目管理工作流中。\n\n**第 1 步——确定你目前是怎么跟踪任务的：** Notion、Jira、GitHub Issues、一份表格，或一个文本文件。\n\n**第 2 步——问 Claude：** *“我用 [你的工具] 来跟踪任务。我该如何在不产生重复的情况下，把 task-master 和它一起使用？哪些内容应该放在 task-master 里，哪些应该放在 [你的工具] 里？”*\n\n**第 3 步——设计你的整合方案：**\n- 哪些任务放进 task-master（AI 辅助的、在 Claude Code 会话中的）\n- 哪些任务放进你现有的工具（团队可见性、正式跟踪）\n- 你打算怎么在两者之间同步？\n\n**第 4 步——在你当前项目上测试这套工作流一周。**\n\n**第 5 步——评估：** 一周之后，使用 task-master 有没有提升你的 AI 辅助开发会话？你会保留什么，改变什么？"
+    },
+    {
+      "type": "quiz",
+      "question": "task-master-ai 在 Claude Code 中管理你的项目任务。相比在 Jira 这类独立工具中管理任务，它的主要优势是什么？",
+      "options": [
+        "task-master 总是比 Jira 更准确",
+        "Claude Code 能读取任务上下文并用它来指导自己的行动——它知道你在做哪个任务，并能据此做出决策",
+        "task-master 是免费的，而 Jira 很贵",
+        "task-master 能自动与所有效率工具同步"
+      ],
+      "correct": 1,
+      "explanation": "task-master 在 Claude Code 内部的关键优势是上下文整合——Claude Code 知道你在做哪个任务，能读取任务描述和依赖关系，并利用这些信息做出更好的决策。当你说“做优先级最高的下一个任务”时，Claude Code 知道那是什么，会读取它的描述并开始执行。外部工具（Jira、Notion）没有这种与 AI 代理决策过程的紧密整合。"
+    },
+    {
+      "type": "quiz",
+      "question": "你用 task-master 为一个项目创建了 25 个任务。Claude Code 总是推荐先做优先级最高的任务。这种做法总是对的吗？",
+      "options": [
+        "对——优先级最高的应该总是最先做",
+        "不总是对——有时选一个优先级较低的任务反而是对的：它能解除其他任务的阻塞、能在你现有的时间里完成，或者那个高优先级任务需要你还不掌握的信息",
+        "Claude Code 应该随机选择以避免偏见",
+        "永远按任务创建的顺序处理"
+      ],
+      "correct": 1,
+      "explanation": "优先级只是众多考虑因素之一，不是唯一的。好的任务选择还要考虑：依赖关系（我现在真的能开始这个吗？）、情境（我现在的状态适合做这个吗？）、可用时间（我有 5 分钟还是 2 小时？），以及势头（完成一个相关任务能带来心流）。如果你把完整的背景告诉 Claude Code，它可以帮你做这种更细致的选择：“我有 45 分钟，而且现在专注力不高——哪个任务合适？”"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 8-7 课。** task-master-ai 把 Claude Code 从一个基于会话的助手，变成了一个持久的项目协作者。第 8-8 课将添加 GitHub MCP——让 Claude 能与真实的代码仓库互动。"
+    }
+  ],
+  "nextLesson": "8-8",
+  "prevLesson": "8-6"
+}

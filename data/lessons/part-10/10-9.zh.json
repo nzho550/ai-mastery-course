@@ -1,0 +1,69 @@
+{
+  "id": "10-9",
+  "title": "Webhook 与事件驱动 AI——让任何事件触发自动化",
+  "part": 10,
+  "estimatedMinutes": 60,
+  "tags": [
+    "webhooks",
+    "event-driven",
+    "automation",
+    "n8n",
+    "zapier",
+    "triggers"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将理解 webhook 是什么，搭建一个由外部事件（而非定时计划）触发的自动化，并且知道如何把任何支持 webhook 的服务接入 AI 工作流。"
+    },
+    {
+      "type": "text",
+      "content": "## 定时自动化的局限\n\n在第 10-2 到 10-4 课中，你搭建的自动化都是按计划运行的——每天早上 7 点、每周一、每小时。定时自动化很强大，但它有一个根本性的局限：\n\n**它无法对刚刚发生的事情做出反应。**\n\n- 一位客户刚提交了表单 → 你想在 2 分钟内回应，而不是等到今晚的批处理\n- 有人刚完成付款 → 你想立刻发送收据\n- 一个 GitHub PR 刚 CI 失败 → 你想现在就收到 Slack 提醒\n- Google Sheet 中刚出现新的一行 → 你想立刻处理它\n\nWebhook 解决了这个问题。Webhook 是一种从一个服务推送到另一个服务的通知——“刚刚发生了某件事，这是相关数据。”你的自动化接收到这个 webhook 后立刻运行。"
+    },
+    {
+      "type": "text",
+      "content": "## Webhook 是如何工作的\n\nWebhook 本质上就是一个 HTTP POST 请求。当服务 A 中发生某个事件时，它会向你提供的一个 URL——也就是 webhook URL——发送一个带有 JSON 数据的 POST 请求，描述发生了什么。\n\n**流程：**\n```\n服务 A 中发生事件\n    ↓\n服务 A 向你的 webhook URL 发送 HTTP POST 请求\n    ↓\n你的自动化工具（n8n、Zapier、Make）接收到该请求\n    ↓\n你的工作流运行：AI 处理数据、发送响应、更新数据库\n```\n\n**谁能发送 webhook：** 几乎所有现代服务都可以——Stripe（支付事件）、GitHub（代码事件）、Typeform/Tally（表单提交）、Shopify（订单）、Calendly（预约）等等。如果一个服务有开发者板块，它几乎肯定支持 webhook。\n\n**创建 webhook URL：** 在 n8n、Zapier 或 Make 中——添加一个 webhook 触发节点/步骤。工具会给你一个唯一的 URL。复制这个 URL，粘贴到发送服务的 webhook 设置中。完成。"
+    },
+    {
+      "type": "text",
+      "content": "## 常见的 Webhook + AI 模式\n\n**表单提交 → AI 响应：**\n用户提交 Typeform/Tally 表单 → webhook 触发 n8n → Claude 分析回答内容 → 60 秒内发送一封个性化的跟进邮件\n\n**收到付款 → AI 引导入门：**\nStripe 收到付款 → webhook → Claude 根据购买的套餐生成个性化的入门引导邮件 → 通过 SendGrid 发送\n\n**GitHub PR → AI 代码审查：**\nGitHub 上打开了一个 PR → webhook → Claude 阅读 diff → 自动在 PR 上发布审查评论\n\n**新增线索 → AI 资格评估：**\nGoogle Sheet 中新增一行（来自获客表单）→ 通过 Zapier 触发 webhook → Claude 给线索打分 → 把资格评估摘要发送到 Slack\n\n**客服工单 → AI 分诊：**\n新的 Zendesk 工单 → webhook → Claude 对问题进行分类并给出建议回复草稿 → 用 AI 建议更新工单"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "搭建一个由 Webhook 触发的 AI 工作流",
+      "content": "你将搭建一个真实的事件驱动自动化：一次表单提交会触发一个 AI 工作流，几秒钟内发送一条个性化的回复。\n\n---\n\n## 第 1 步——设置你的表单（5 分钟）\n\n在 **Tally.so** 创建一个免费表单（或使用 Typeform 的免费版）：\n1. 前往 tally.so 并注册\n2. 创建一个新表单\n3. 添加以下字段：\n   - 姓名（短文本）\n   - 邮箱（Email）\n   - 问题：“你目前最大的挑战是什么？”（长文本）\n   - 问题：“你在寻求什么类型的帮助？”（多选：建议 / 资源 / 人脉连接 / 其他）\n4. 发布表单——你会得到一个可分享的链接\n\n---\n\n## 第 2 步——在 n8n 中创建 Webhook 触发器（10 分钟）\n\n打开你的 n8n 实例（来自第 10-2 课），或使用 n8n cloud 的免费试用：\n\n1. 创建一个新工作流\n2. 添加一个 **Webhook** 触发节点\n3. 设置 Method：POST\n4. 复制 **Webhook URL**（形如 `https://your-n8n.com/webhook/abc123`）\n5. 暂时设为 **Test** 模式\n\n---\n\n## 第 3 步——把表单连接到 Webhook（5 分钟）\n\n在 Tally 中：\n1. 前往你的表单 → Integrations\n2. 选择 **Webhooks**\n3. 粘贴你的 n8n webhook URL\n4. 保存\n\n现在，任何表单提交都会 POST 到你的 n8n 工作流。\n\n---\n\n## 第 4 步——添加 AI 处理步骤（15 分钟）\n\n在你的 n8n 工作流中，在 webhook 触发器之后添加：\n\n**节点：Anthropic Claude**\n- 模型：claude-haiku-4-5（对这个用例来说速度快、成本低）\n- 系统提示词：\n```\nYou are a helpful assistant that writes warm, personalised responses to people who submitted a contact form. \nBe genuine, specific to their situation, and concise (3-4 sentences max).\nNever sound like a template.\n```\n- 用户消息（使用 n8n 表达式提取表单数据）：\n```\nName: {{ $json.Name }}\nChallenge: {{ $json['What is your biggest challenge right now?'] }}\nType of help: {{ $json['What type of help are you looking for?'] }}\n\nWrite a personalised response acknowledging their specific challenge and confirming I'll follow up.\n```\n\n---\n\n## 第 5 步——添加邮件发送（10 分钟）\n\n在 Claude 节点之后，添加一个邮件节点：\n- **Gmail 节点**（如果你配置了 Gmail MCP）或\n- **Send Email 节点**，配置你的 SMTP 设置\n\n配置：\n- 收件人：`{{ $('Webhook').item.json.Email }}`\n- 主题：`Re: Your submission, {{ $('Webhook').item.json.Name }}`\n- 正文：`{{ $('Anthropic Claude').item.json.text }}`\n\n---\n\n## 第 6 步——测试完整流程（10 分钟）\n\n1. 在 n8n 中，点击 **Listen for test event**（把 webhook 设为测试模式）\n2. 在你的 Tally URL 上提交表单\n3. n8n 捕获到 webhook 数据——你可以看到原始 JSON\n4. 运行工作流——观察 Claude 节点处理它\n5. 检查邮件是否已发送\n\n如果一切正常，把工作流从 Test 切换到 **Production** 模式。\n\n**再次提交表单。** 你应该会在 30 秒内收到一封 AI 生成的个性化邮件。\n\n---\n\n## 你已经搭建了什么\n\n一个事件驱动的 AI 工作流：有人提交表单 → AI 生成个性化响应 → 自动发送邮件。没有定时批处理，没有人工操作——它在接收到数据的那一刻就做出响应。\n\n同样的模式可以扩展到：客服工单、支付确认、入门引导流程、线索资格评估，以及任何会发送 webhook 的服务。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——GitHub Webhook：AI PR 审查评论",
+      "content": "搭建一个自动化，每次打开一个 pull request 时自动发布一条 AI 生成的代码审查评论。\n\n**第 1 步——创建一个 GitHub webhook：**\n1. 前往你的 GitHub 仓库 → Settings → Webhooks\n2. 点击 **Add webhook**\n3. Payload URL：你的 n8n webhook URL（创建一个新的 webhook 触发节点）\n4. Content type：application/json\n5. Events：只选择 **Pull requests**\n6. 保存\n\n**第 2 步——搭建 n8n 工作流：**\n- 触发器：Webhook（接收 GitHub PR 事件）\n- 过滤器：只处理 `action: opened` 事件（忽略 closed/merged）\n- HTTP Request 节点：从 `{{ $json.pull_request.diff_url }}` 获取 PR 的 diff\n- Claude 节点：“Review this code diff. In 3-5 bullet points, note: the main changes made, any obvious issues or risks, and one specific improvement suggestion. Be constructive.”\n- GitHub 节点：把审查结果作为评论发布到 PR 上\n\n**第 3 步——在你的仓库中打开一个真实的 PR 来测试。**\n\n**第 4 步——检查这个 PR**——Claude 的审查应该会自动出现为一条评论。\n\n**第 5 步——优化提示词：** 这个 AI 审查真的有价值吗？怎么做能让它对你特定类型的代码更有用？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——设计属于你自己的事件驱动工作流",
+      "content": "找出你工作或生活中一个当前需要手动响应的真实事件，并把它自动化。\n\n**第 1 步——找出你的手动响应模式：**\n你有哪些事情符合这种模式：“当 X 发生时，我需要迅速做 Y”？\n\n举例：\n- 收到新预订时 → 我手动发送准备须知\n- 客户发邮件询问价格时 → 我每次都回复同样的信息\n- 有新订单进来时 → 我手动更新库存记录\n- 同事要每周报告时 → 我从多个来源手动整理\n\n**第 2 步——检查 X 是否支持 webhook：**\n搜索“[服务名] webhooks”来确认。几乎所有现代工具都支持。\n\n**第 3 步——在纸面上设计这个工作流：**\n```\nTrigger: [what event]\nWebhook source: [which service]\nAI processing: [what Claude does with the data]\nOutput: [what gets sent/created/updated]\n```\n\n**第 4 步——请 Claude Code 帮你搭建：**\n“I want to build this webhook automation: [describe]. I'm using n8n. Help me design the node structure and write the Claude prompt for the AI processing step.”\n\n**第 5 步——搭建并测试。** 第一次它完全自动运行、无需你插手就成功时，留意一下那种感觉。这就是事件驱动自动化的价值所在。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 webhook 工作流接收敏感的客户数据（姓名、邮箱、支付金额）。n8n 的 webhook URL 是公开可访问的。这带来了什么安全隐患？",
+      "options": [
+        "没有隐患——webhook URL 总是安全的",
+        "任何发现你 webhook URL 的人，都可以 POST 伪造数据来触发你的工作流——务必使用发送服务提供的密钥或签名来验证收到的 webhook 数据",
+        "该 URL 会自动只接受来自已配置服务的数据",
+        "n8n 默认会加密所有收到的 webhook 数据"
+      ],
+      "correct": 1,
+      "explanation": "Webhook URL 必须是公开可访问的——因为发送服务需要能够到达它。这意味着任何找到你 URL 的人都可以发送伪造的负载。为了防止这一点，大多数服务（Stripe、GitHub、Shopify）都会用一个密钥对它们的 webhook 负载进行签名——你可以验证这个哈希值，从而确认数据确实来自它们。在处理数据之前务必验证 webhook 签名，尤其是对于会发送邮件、更新数据库或触发资金操作的工作流。在 n8n 中，这可以在 webhook 节点的身份验证设置中处理。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 10-9 课完成。** 事件驱动自动化是这套工作流拼图的最后一块——你的自动化现在可以实时响应世界的变化，而不仅仅是按计划运行。结合你在前面课程中搭建的 AI 处理能力，你几乎可以把任何重复性的响应模式自动化。接下来：第 10-10 课介绍 Microsoft Copilot Studio 和无代码 AI 智能体构建工具——面向企业的自定义流水线替代方案。"
+    }
+  ],
+  "nextLesson": "10-10",
+  "prevLesson": "10-8"
+}

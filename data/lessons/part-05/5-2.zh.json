@@ -1,0 +1,101 @@
+{
+  "id": "5-2",
+  "title": "下载与安装 VS Code",
+  "part": 5,
+  "estimatedMinutes": 60,
+  "tags": [
+    "vscode",
+    "beginner",
+    "setup",
+    "install"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你的电脑上会安装好 VS Code，并打开到它的欢迎界面。你还会知道如何更改配色主题——这是几乎每个人都会做的第一件事之一。\n\n这一课从头到尾都是动手操作。请严格按照每一步的说明来做。"
+    },
+    {
+      "type": "text",
+      "content": "## 在 Windows 上安装 VS Code\n\n请仔细按照以下步骤操作，每一步都很重要。\n\n**第 1 步——下载安装程序**\n1. 打开你的网页浏览器（Edge、Chrome、Firefox——任意一个都可以）\n2. 访问 **code.visualstudio.com**\n3. 你会看到一个写着 **Download for Windows** 的大蓝色按钮——点击它\n4. 一个名为 `VSCodeSetup-x64-1.xx.x.exe` 之类的文件开始下载\n5. 等待下载完成（大约 100 MB——在大多数网络下需要 30–60 秒）\n\n**第 2 步——运行安装程序**\n1. 打开你的**下载**文件夹（Win+E → 点击左侧栏中的“下载”）\n2. 双击刚下载的 `VSCodeSetup-x64...exe` 文件\n3. 如果 Windows 询问“是否允许此应用对你的设备进行更改？”→ 点击**是**\n\n**第 3 步——完成安装程序界面**\n1. **第 1 屏**——信息：直接点击**下一步**\n2. **第 2 屏**——许可协议：点击**我同意此协议**→点击**下一步**\n3. **第 3 屏**——目标位置：保留默认路径不变→点击**下一步**\n4. **第 4 屏**——开始菜单文件夹：保留为“Visual Studio Code”→点击**下一步**\n5. **第 5 屏**——附加任务：这一屏很重要。勾选以下两个选项：\n   - **“将‘通过 Code 打开’操作添加到 Windows 资源管理器文件右键菜单”**（让你可以右键任意文件并用 VS Code 打开）\n   - **“添加到 PATH（需要重启 shell）”**（让你可以在终端中输入 `code .` 来打开 VS Code）\n   - 其余复选框保持原样→点击**下一步**\n6. **第 6 屏**——准备安装：点击**安装**\n7. 等待大约 60 秒，安装过程会自动完成\n8. **第 7 屏**——完成安装：保持勾选**“启动 Visual Studio Code”**→点击**完成**\n\nVS Code 会自动打开。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Mac 用户：** 访问 code.visualstudio.com，点击 **Download Mac Universal**。会下载一个 `.zip` 文件。打开它，会出现一个 VS Code 图标。把这个图标拖到你的**应用程序**文件夹中。首次启动时，右键点击它→选择**打开**（这样可以绕过 macOS 对非 App Store 应用的安全警告）。之后 VS Code 就能正常打开了。"
+    },
+    {
+      "type": "text",
+      "content": "## 初次一览：欢迎界面\n\n当 VS Code 首次打开时，你会看到一个**欢迎**（Welcome）标签页。这完全正常——它不是错误，也不是演示，而是 VS Code 的启动页面。\n\n你会注意到：\n- **界面默认是深色的**（深色主题对长时间编码的眼睛更友好）\n- 顶部有一个菜单栏：File、Edit、Selection、View、Go、Run、Terminal、Help\n- 左侧竖直排列着一些图标——这是**活动栏**（Activity Bar，你会在第 5-3 课学到全部内容）\n- 欢迎标签页有一些打开文件、教程和最近项目的链接——目前先忽略它们\n\n**如果窗口打开时没有报错，并且你能看到欢迎标签页，就说明你正确安装了 VS Code。**"
+    },
+    {
+      "type": "text",
+      "content": "## 更改配色主题\n\nVS Code 中最个性化的选择之一就是你的配色主题。默认是“Dark+”（深色背景、彩色文字）。我们先确认你的主题设置正确，再教你如何更改它。\n\n**如何更改主题：**\n1. 按下键盘上的 **Ctrl+Shift+P**（这会打开命令面板——VS Code 用于搜索所有命令的搜索框）\n2. 屏幕顶部出现一个搜索框，里面已经有一个 `>` 符号\n3. 在 `>` 后面输入单词 `theme`\n4. 你会看到一个建议出现：**Preferences: Color Theme**——点击它（或按 Enter）\n5. 出现一个主题列表。用方向键实时预览它们，或点击选中某个\n6. 试试：**Dark+**（推荐的默认主题）、**Monokai**（流行的暖色调）或 **Light+**（如果你更喜欢白色背景）\n\n你随时都可以更改主题——没有所谓的正确答案。大多数教程都使用 Dark+，所以用它来跟着操作最省心。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**什么是 Ctrl+Shift+P？** 你会一直用到这个组合键。它会打开**命令面板**——一个可以通过名称运行任意 VS Code 命令的搜索框。你不需要在菜单里翻找，只需输入你想要的内容即可。我们会在第 5-6 课详细讲解这个功能。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "安装与首次启动",
+      "content": "完成以下清单，逐项打勾：\n\n- [ ] VS Code 已在你的电脑上安装完成（按照上面的步骤操作）\n- [ ] VS Code 已打开，并显示欢迎界面\n- [ ] 界面加载时没有任何错误提示\n- [ ] 打开命令面板：按 **Ctrl+Shift+P**\n- [ ] 输入 `theme` → 选择 **Preferences: Color Theme**\n- [ ] 如果还没选中 **Dark+**，就选择它（或选择你更喜欢的其他主题）\n- [ ] 关闭命令面板（按 Esc 或点击其他地方）\n\n**可选——安装一款字体（让代码更易读）：**\n许多开发者会使用专为代码设计的“等宽”字体。一个流行的免费选择是 **JetBrains Mono**：\n1. 访问 jetbrains.com/lp/mono——点击**下载 JetBrains Mono**\n2. 打开压缩包，安装字体文件（右键→为所有用户安装）\n3. 在 VS Code 中：按 Ctrl+Shift+P → 输入 `Open User Settings JSON` → 按 Enter\n4. 在 `{}` 内添加：`\"editor.fontFamily\": \"JetBrains Mono, Consolas, monospace\"`\n5. 按 Ctrl+S 保存——编辑器字体会立即改变\n\n这一步是可选的——默认字体 Consolas 已经足够清晰易读。但良好的工具配置在使用数百个小时后会带来回报。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——安装并验证 VS Code",
+      "content": "如果你还没有安装 VS Code，这个训练会带你完成安装。如果已经安装了，你将验证安装是否完整。\n\n**第 1 步——从 code.visualstudio.com 下载 VS Code。** 选择适合你操作系统的安装程序。\n\n**第 2 步——在安装过程中**，确保勾选以下选项：\n- “Add to PATH”（允许在终端中运行 `code .`）\n- “Register Code as an editor for supported file types”\n- “Add Open with Code action to file/directory context menu”\n\n**第 3 步——验证安装：**\n```powershell\ncode --version\n```\n你应该会看到一个版本号，例如 `1.x.x`。如果没有，说明 VS Code 没有被加入 PATH。\n\n**第 4 步——测试 `code .` 快捷方式：**\n```powershell\nmkdir test-workspace\ncd test-workspace\ncode .\n```\nVS Code 应该会打开，并加载 test-workspace 文件夹。\n\n**第 5 步——如果 `code .` 不起作用**，向 Claude 提问：*“VS Code 已经安装好了，但在 PowerShell 中 `code .` 不起作用。在 Windows 上应该怎么修复？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——在 VS Code 旁安装 Python 和 Node.js",
+      "content": "VS Code 本身只是一个编辑器。要运行代码，你需要解释器。这个工作坊会同时安装 Python 和 Node.js。\n\n**第 1 步——检查已安装的内容：**\n```powershell\npython --version\nnode --version\nnpm --version\n```\n\n**第 2 步——安装 Python**（如果尚未安装）：访问 python.org →下载 Python 3.x。安装过程中，勾选“Add Python to PATH”。\n\n**第 3 步——安装 Node.js**（如果尚未安装）：访问 nodejs.org →下载 LTS 版本。安装程序也会一并安装 npm。\n\n**第 4 步——验证两者：**\n```powershell\npython --version\nnode --version\n```\n\n**第 5 步——在 VS Code 中**，打开命令面板（Ctrl+Shift+P），输入“Python: Select Interpreter”。选择你已安装的 Python 版本。\n\n**第 6 步——向 Claude 提问：** *“我已经安装了 VS Code、Python 和 Node.js。为了确保一切都为 [你的学习目标] 正确配置，我应该先验证哪 3 件事？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——面向 AI 开发的 VS Code 扩展",
+      "content": "合适的扩展能把 VS Code 变成一个 AI 驱动的开发环境。\n\n**第 1 步——打开扩展面板**（Ctrl+Shift+X）。\n\n**第 2 步——安装以下 AI 专用扩展：**\n- “GitHub Copilot”——AI 代码补全（提供免费套餐）\n- “Continue”（continue.dev）——开源 AI 助手，可与 Claude 配合使用\n- “Codeium”——免费的 AI 补全替代品\n\n**第 3 步——配置 Continue** 使用 Claude：安装后，打开它的设置，添加你的 Anthropic API 密钥（或使用免费套餐）。\n\n**第 4 步——测试 AI 辅助功能：** 打开一个 Python 文件，开始输入函数，看看 AI 是否会给出补全建议。\n\n**第 5 步——向 Claude 提问：** *“我已经在 VS Code 中安装了 AI 扩展。有效使用 AI 代码辅助的最佳方式是什么——不只是 Tab 补全，还包括解释代码、生成测试和重构等更大的任务？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——在 VS Code 中编写并运行你的第一个程序",
+      "content": "端到端体验：编写一个真实的程序、运行它、查看输出——全部在 VS Code 内完成。\n\n**第 1 步——打开 VS Code** 并打开一个项目文件夹。\n\n**第 2 步——创建一个新的 Python 文件**：在资源管理器中右键→New File→`hello.py`。\n\n**第 3 步——向 Claude 提问：** *“帮我写一个大约 20 行的、能做点有用事情的 Python 脚本：[描述你想要的东西——一个计算器、一个待办事项列表、一个文件整理工具、一个文本格式化工具]。请包含注释解释每一部分。”*\n\n**第 4 步——把代码粘贴**到 hello.py 中。\n\n**第 5 步——使用 VS Code 终端运行**（按 Ctrl+` 打开）：\n```powershell\npython hello.py\n```\n\n**第 6 步——如果出现错误**，把错误信息粘贴给 Claude，请它帮忙修复。\n\n**第 7 步——必做的代码审查：** 向 Claude 提问：*“审查一下你刚写的这段代码。为了让它更健壮、更易读或更实用，你会做哪 3 处改进？”* 至少应用一处改进。"
+    },
+    {
+      "type": "quiz",
+      "question": "安装完 VS Code 后，你在 PowerShell 中运行 `code .`，得到“命令未找到”的提示。最可能的原因是什么？",
+      "options": [
+        "VS Code 需要重启",
+        "安装时没有勾选“Add to PATH”选项，导致 shell 不知道到哪里去找 code 命令",
+        "PowerShell 不支持 VS Code 命令",
+        "你需要先安装一个 VS Code 扩展"
+      ],
+      "correct": 1,
+      "explanation": "“Add to PATH”会把 VS Code 添加到 Windows 在你输入命令时检查的位置列表中。如果你跳过了这个选项，PowerShell 就找不到 `code` 命令。解决方法：重新安装 VS Code 并勾选“Add to PATH”，或手动将 VS Code 添加到系统 PATH 中（设置 → 系统 → 高级系统设置 → 环境变量）。"
+    },
+    {
+      "type": "quiz",
+      "question": "你想运行刚在 VS Code 中写好的一个 Python 文件。哪种方法能运行这段代码？",
+      "options": [
+        "在资源管理器中双击这个 .py 文件",
+        "打开集成终端（Ctrl+`），运行 `python filename.py`",
+        "按 Ctrl+S 保存，它会自动运行",
+        "点击 File → Run"
+      ],
+      "correct": 1,
+      "explanation": "在 VS Code 中运行 Python 文件的标准方式是通过集成终端：Ctrl+` 打开终端，然后运行 `python filename.py`。你也可以按 F5（运行和调试），或者在安装了 Python 扩展后使用出现的运行按钮。双击 .py 文件通常只会在编辑器中打开它，而不会运行它。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 5-2 课。** VS Code 已经安装好、打开并设置好了主题。下一课你会学到界面中每个面板的名称和用途——从此再也不会迷失方向。"
+    }
+  ],
+  "nextLesson": "5-3",
+  "prevLesson": "5-1"
+}

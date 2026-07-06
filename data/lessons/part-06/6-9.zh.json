@@ -1,0 +1,124 @@
+{
+  "id": "6-9",
+  "title": "Copilot 智能体模式：MCP、Jira 与模型选择",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": [
+    "copilot",
+    "vscode",
+    "mcp",
+    "jira",
+    "agent-mode",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n第 6-1、6-2 和 6-3 课讲的是基础功能：代码建议、自动补全和聊天。这些都是**一问一答**式的工具——你提问，Copilot 回答，你自己决定如何处理这个结果。\n\n这节课讲的是**更进一层：Copilot 智能体模式（Agent Mode）**，在这个模式下，Copilot 可以代表你行动——不只是建议代码，还能读取文件、运行终端命令、调用外部工具，甚至在你不切换应用的情况下更新你的 Jira 看板。\n\n具体来说，你将学到：\n- Copilot 智能体模式是什么，如何开启它\n- 如何给 Copilot 连接 **MCP 服务器**（让它能与外部系统对话）\n- 如何把 Copilot 接入 **Jira**，让它能在 VS Code 内部读取和更新你的待办事项\n- 如何在 Copilot 内**切换 AI 模型**，为每个任务获得最好的结果"
+    },
+    {
+      "type": "text",
+      "content": "## 从聊天到智能体：区别在哪里？\n\n在普通的 Copilot Chat（第 6-3 课）中，工作流是这样的：\n\n1. 你提出一个问题\n2. Copilot 用文字和代码建议来回应\n3. 你自己去复制、应用或拒绝这些建议\n\n**智能体模式** 改变的是第 3 步。Copilot 不再只是给你文字，而是能够：\n- 打开并编辑多个文件\n- 运行终端命令并读取它们的输出\n- 调用通过 MCP 连接的工具\n- 把多个步骤串联起来，不需要你重新提示\n\n可以把它想象成这样的区别：问同事“你会怎么修这个 bug？”（聊天）和让他“去修这个 bug、跑一下测试、再更新一下 Jira 工单”（智能体）之间的区别。\n\n智能体模式更强大——也更需要你去监督。在确认之前，你应该始终审查它即将做的事情。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**开始之前的要求：**\n- VS Code 版本 **1.99 或更高**（通过 Help → About 查看）\n- 已安装并登录 GitHub Copilot 扩展（第 6-1 课）\n- 拥有 GitHub Copilot 订阅（Individual、Business 或 Enterprise）\n- 已安装 Node.js（用于使用 `npx` 的 MCP 服务器）\n\n查看你的 VS Code 版本：打开 VS Code，按 **Ctrl+Shift+P**，输入 `About`，选择 **Help: About**。如果版本低于 1.99，去 Help → Check for Updates 更新。"
+    },
+    {
+      "type": "text",
+      "content": "## 在 Copilot 中启用智能体模式\n\n智能体模式已经内置在最新版本的 Copilot 扩展中，但可能默认没有开启。\n\n**第 1 步——打开 VS Code 设置**\n按 **Ctrl+,**（逗号）打开设置。搜索 `chat agent`。\n\n**第 2 步——启用这个设置**\n找到 **GitHub Copilot Chat: Agent Enabled**，勾选这个复选框。\n\n**第 3 步——打开 Copilot Chat**\n按 **Ctrl+Alt+I** 打开 Copilot Chat 面板。\n\n**第 4 步——切换到智能体模式**\n在聊天面板顶部，你会看到一个模式选择器。它可能显示 **Ask** 或 **Edit**。点击它，选择 **Agent**。\n\n你现在处于智能体模式。Copilot 可以使用工具、运行命令，并在你的整个代码库中操作。你会注意到出现了一个新的 **Tools** 按钮——一旦你连接了 MCP 工具，它们就会显示在这里。\n\n> **智能体模式看起来有什么不同：** 当你在智能体模式下提问时，Copilot 会在给出最终答案之前，展示它的推理步骤——“Reading file...”“Running command...”“Calling tool...”。你可以在每一步进行批准或取消。"
+    },
+    {
+      "type": "text",
+      "content": "## MCP 是什么，为什么它在这里很重要？\n\n你第一次接触 MCP 是在本课程的第 8 部分。快速回顾一下：\n\n**MCP（Model Context Protocol，模型上下文协议）**是一个开放标准，让 AI 工具能够用统一的插件格式连接到外部系统——数据库、API、项目管理工具。与其让每一个 AI 工具都为 Jira 开发一套自己的定制集成，不如让任何兼容 MCP 的 AI 都能使用任何 MCP 服务器。\n\nCopilot 智能体模式在 VS Code 1.99+ 中原生**支持 MCP 服务器**。这意味着：\n- 你只需安装一次 MCP 服务器\n- 在 VS Code 中配置它\n- 之后每一次 Copilot 智能体模式会话都能调用它的工具\n\n在这节课中，你将连接 **Atlassian MCP 服务器**，它给 Copilot 提供了搜索 Jira 工单、读取工单详情、创建或更新工单的工具——全都在 VS Code 聊天内完成。"
+    },
+    {
+      "type": "text",
+      "content": "## 给 Copilot 连接一个 MCP 服务器\n\nVS Code 会从两个地方读取 MCP 服务器配置：\n\n**1. 工作区范围（仅限当前项目）：** 项目文件夹中的 `.vscode/mcp.json`\n**2. 用户范围（所有项目）：** 你的 VS Code `settings.json` 中的 `mcp.servers` 键\n\n对于大多数团队使用场景，推荐使用工作区范围的配置（`.vscode/mcp.json`）——它会把配置和你的项目一起纳入版本控制，每个队友都会自动获取到它。\n\n### 配置文件格式\n\n在你的项目中创建（或打开）`.vscode/mcp.json`，添加这样的结构：\n\n```json\n{\n  \"servers\": {\n    \"server-name\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"package-name\"],\n      \"env\": {\n        \"KEY\": \"value\"\n      }\n    }\n  }\n}\n```\n\n- **`command`** ——VS Code 用来启动 MCP 服务器的可执行程序（`npx`、`uvx`、`node`、`python` 等）\n- **`args`** ——传给该命令的参数\n- **`env`** ——服务器需要的环境变量（API 密钥、URL 等）\n\n当你打开智能体模式时，VS Code 会自动启动和停止 MCP 服务器。你不需要手动运行它。"
+    },
+    {
+      "type": "text",
+      "content": "## 通过 MCP 使用 Jira：分步设置\n\nAtlassian MCP 服务器（`@atlassian/mcp-atlassian`）是连接 Jira 和 Confluence 的官方软件包。设置方法如下。\n\n### 第 1 步——获取一个 Jira API 令牌\n\n1. 访问 **id.atlassian.com/manage-profile/security/api-tokens**\n2. 点击 **Create API token**\n3. 给它起个名字，比如 `VS Code Copilot`\n4. 复制这个令牌——你之后就再也看不到它了\n\n> **没有 Jira？** 你可以在 atlassian.com 上创建一个免费的 Atlassian Cloud 账号——它包含一个免费的 Jira 项目，可以用来练习。\n\n### 第 2 步——创建 MCP 配置文件\n\n在你的 VS Code 项目中，创建 `.vscode/mcp.json`：\n\n```json\n{\n  \"servers\": {\n    \"atlassian\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@atlassian/mcp-atlassian\"],\n      \"env\": {\n        \"JIRA_URL\": \"https://your-domain.atlassian.net\",\n        \"JIRA_USERNAME\": \"your@email.com\",\n        \"JIRA_API_TOKEN\": \"your-api-token-here\"\n      }\n    }\n  }\n}\n```\n\n把这三个值替换成你实际的 Jira URL、邮箱和 API 令牌。\n\n### 第 3 步——重新加载 VS Code\n\n按 **Ctrl+Shift+P** → **Developer: Reload Window**。VS Code 会检测到这个新的 MCP 配置。\n\n### 第 4 步——打开智能体模式，查看 Tools 列表\n\n按 **Ctrl+Alt+I**，切换到 **Agent** 模式，然后点击 **Tools** 图标（看起来像插头或扳手）。你应该能看到列出的 Atlassian 工具：\n- `jira_get_issue` ——按 key 读取一个特定工单\n- `jira_search` ——用 JQL 搜索工单\n- `jira_create_issue` ——创建一个新工单\n- `jira_update_issue` ——更新已有工单的字段\n- `confluence_search` ——搜索 Confluence 页面\n\n如果你看到了这些，说明 Copilot 现在已经连接到你的 Jira。\n\n### 第 5 步——用一个简单的提示词测试一下\n\n在智能体模式下，输入：\n```\nSearch my Jira for any open bugs. Show me the issue keys and summaries.\n```\n\nCopilot 会调用 `jira_search`，附上一个 JQL 查询，读取响应结果，并在聊天中总结出来。不需要切换应用，不需要复制粘贴工单编号。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**把 API 令牌排除在版本控制之外。** `.vscode/mcp.json` 文件包含你的 Jira API 令牌。如果你的项目托管在 GitHub 上，立刻把 `.vscode/mcp.json` 加入你的 `.gitignore`：\n```\necho \".vscode/mcp.json\" >> .gitignore\n```\n永远不要把凭据提交到仓库中，哪怕是私有仓库也不行。对于团队使用场景，请使用环境变量或密钥管理工具——你团队的 `.vscode/mcp.json` 应该引用 `${env:JIRA_API_TOKEN}`，而不是硬编码一个值。"
+    },
+    {
+      "type": "text",
+      "content": "## Copilot + Jira 能做什么\n\n连接之后，Copilot 智能体模式就能参与到你真实的工作流中：\n\n**开始工作前先阅读工单：**\n```\nI'm about to start ticket PROJ-142. Fetch that issue and summarise what needs to be done.\n```\n\n**把代码和工单联系起来：**\n```\nLook at the changes I just made (in git diff). Which open Jira tickets do these changes address? \nList the issue keys.\n```\n\n**从代码创建工单：**\n```\nI found a bug in auth.js line 47 — null check is missing on the user object before calling .getRole(). \nCreate a Jira bug ticket for this: severity Medium, component Backend Auth, with a clear description \nand steps to reproduce.\n```\n\n**更新工单状态：**\n```\nI just finished the implementation for PROJ-156. Update that ticket's status to In Review \nand add a comment: \"Implementation complete, PR #234 ready for review.\"\n```\n\n以上每一件事，过去都需要切换到浏览器、找到正确的项目、导航到对应工单、然后手动输入。有了 MCP，只需要一句提示词。"
+    },
+    {
+      "type": "text",
+      "content": "## 在 Copilot 中选择合适的模型\n\nCopilot 不只使用一个 AI 模型。Copilot Chat 提供了一个**模型选择器**——一个下拉菜单，让你选择由哪个模型来处理你的请求。2026 年新增的功能是 **Auto 模式**，它会智能地为每个任务选择最合适的可用模型——在你了解什么时候值得手动切换到特定模型之前，它是一个不错的默认选项。\n\n### 如何切换模型\n\n在 Copilot Chat 面板（无论是 Ask 还是 Agent 模式）中，在输入框的顶部或底部找到**模型选择器**。它会显示当前的模型名称（例如“GPT-4.1”）。点击它可以查看完整列表。\n\n### 可用模型（因订阅而异）\n\n| 模型 | 最适合 |\n|-------|-------|\n| **Auto** | 让 Copilot 为每个任务动态选择最合适的模型——2026 年正式发布，推荐作为起点 |\n| **GPT-4.1** | 通用编程、重构、解释——大多数任务的可靠默认选项 |\n| **GPT-4o** | 作为旧版/经济型选项提供；适合以更低的额度成本进行交互式聊天 |\n| **o3** | 复杂推理、算法设计、疑难 bug——较慢但更彻底 |\n| **o4-mini** | 快速推理任务；速度和推理质量之间的良好平衡 |\n| **Claude Sonnet 4.6** | 长上下文、文档撰写、细致入微的解释、高质量文字 |\n| **Claude Opus 4.8** | 处理复杂多步任务的能力最强；额度成本更高 |\n| **Gemini 2.5 Pro** | 擅长分析和多文件推理；100 万 token 上下文 |\n\n> **不是所有模型都对所有订阅层级开放。** Copilot Individual 可以使用主要模型。Business 和 Enterprise 层级（以及每月 39 美元、含 1,500 次高级请求的 Pro+ 方案）会增加更多选项和更高的速率限制。请查看 GitHub 的文档，了解你的方案当前可用的模型列表。GitHub 会随着新模型的发布定期添加新选项。\n\n### 什么时候切换模型\n\n**坚持使用默认模型（GPT-4.1）用于：**\n- 日常自动补全和快速修复\n- 解释代码\n- 编写测试\n\n**切换到推理模型（o3、o4-mini）用于：**\n- 调试一个棘手的多文件问题\n- 设计算法\n- 当默认模型给出错误或浅显的答案时\n\n**切换到 Claude 用于：**\n- 阅读并总结长文件或文档\n- 撰写提交信息、PR 描述或 Jira 工单摘要\n- 语气和措辞质量很重要的任务\n\n**切换到 Gemini 用于：**\n- 非常快速、需要频繁往返、要求快速响应的迭代\n- 当你在其他模型上遇到速率限制时\n\n### 模型与智能体模式\n\n你可以在智能体模式下切换模型。模型的选择会影响**推理质量**——复杂的多步智能体任务（比如“阅读代码库、找到相关 bug、修复它、写一个测试，并更新 Jira”）会从推理模型中受益。更简单的任务在 Gemini Flash 或 GPT-4.1 上运行得更快。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**Jira 任务的模型切换技巧：** 当你用 Copilot 智能体 + Jira MCP 来撰写工单描述或摘要时，切换到 **Claude Sonnet** 或 **Claude Opus**。这些模型产出的文字明显更好——描述更清晰，验收标准结构更合理，评论更有用。在实际做代码工作时，再切回 GPT-4.1 或 Gemini。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "搭建 MCP + Jira，解决一个真实工单",
+      "content": "在这个工作坊中，你将把 Copilot 连接到一个真实的 Jira 项目，并用它来结束一个真正的工单——不是演示，也不是虚构的任务。\n\n**准备工作（在开始计时前完成）：**\n- 一个你有访问权限的 Jira Cloud 项目（免费的 atlassian.com 账号即可）\n- 一个 Jira API 令牌（来自 id.atlassian.com/manage-profile/security/api-tokens）\n- 已启用 Copilot 智能体模式的 VS Code 1.99+\n\n**第 1 步——创建 MCP 配置**\n在你的项目文件夹（或 VS Code 中打开的任意文件夹）中，创建 `.vscode/mcp.json`：\n```json\n{\n  \"servers\": {\n    \"atlassian\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@atlassian/mcp-atlassian\"],\n      \"env\": {\n        \"JIRA_URL\": \"https://YOUR-DOMAIN.atlassian.net\",\n        \"JIRA_USERNAME\": \"your@email.com\",\n        \"JIRA_API_TOKEN\": \"your-token\"\n      }\n    }\n  }\n}\n```\n\n**第 2 步——重新加载并验证**\n重新加载 VS Code。打开 Copilot Chat → Agent 模式 → Tools。确认 Atlassian 工具出现在列表中。\n\n**第 3 步——挑选一个真实工单来处理**\n在 Jira 中，找一个开放的工单——bug、功能或任务都可以。记下它的工单编号（例如 `MYPROJ-23`）。\n\n**第 4 步——在 VS Code 中给自己做简报**\n在 Copilot 智能体模式中：\n```\nFetch Jira issue [YOUR-KEY] and give me a briefing: what needs to be done, what the acceptance criteria are, and any notes in the comments.\n```\nCopilot 会读取工单并总结出来。它抓住了重要的细节吗？\n\n**第 5 步——完成工作，然后从 VS Code 更新 Jira**\n完成工单要求的工作（哪怕只是为了练习做一个小改动）。然后在 Copilot 中：\n```\nI just completed [YOUR-KEY]. Please:\n1. Update the ticket status to Done (or In Review)\n2. Add a comment explaining what was done and referencing any relevant files changed\n```\n在浏览器中确认 Jira 是否真的被更新了。\n\n**你构建出的东西：** 一套从阅读工单到关闭工单、完全在 VS Code 内完成的端到端真实工作流。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 A——模型对比：同一任务，三个模型",
+      "content": "这个工作坊会揭示模型选择有多重要——以及什么时候它不重要。\n\n**准备工作：** 在你的代码库中打开一个文件（至少 50 行真实代码）。以 Ask 模式打开 Copilot Chat。\n\n**用 3 个不同的模型重复同一个任务：**\n提问：*“解释一下这个文件是做什么的，它的主要职责是什么，以及我在修改它时应该注意什么。”*\n\n**第 1 轮——默认模型（GPT-4.1）**\n提出这个问题。复制这个回答。\n\n**第 2 轮——Claude Sonnet 或 Claude Opus**\n用模型选择器切换模型。提出完全相同的问题。复制这个回答。\n\n**第 3 轮——Gemini Flash 或 o4-mini**\n再次切换。同样的问题。复制这个回答。\n\n**评估（写下你的答案）：**\n1. 哪个回答对代码功能的描述最准确？\n2. 哪个回答最易读、写得最好？\n3. 哪个最快？\n4. 质量差异是有意义的，还是对这个任务来说大致相当？\n\n**结论：** 对于大多数代码解释任务，质量差异很小。但对于更长的文件或更细致的分析，Claude 和 o3 在全面性上往往优于 GPT-4.1。如果速度比深度更重要，Gemini Flash 是最快的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 B——Jira 工作流：简报 → 构建 → 关闭",
+      "content": "用 Copilot + Jira MCP 构建一个完整的工单生命周期。\n\n**前提条件：** 主工作坊中的 MCP 配置已经完成。\n\n**第 1 步——搜索待办工作**\n在 Copilot 智能体模式中：\n```\nSearch my Jira project for open tickets assigned to me, or unassigned tickets in the To Do column. \nList the top 5 by priority.\n```\n\n**第 2 步——挑一个并认真阅读**\n从列表中挑选优先级最高的工单。然后：\n```\nFetch [ISSUE-KEY] in full. Include: description, acceptance criteria, attachments mentioned, \ncomments from other team members, and the current status.\n```\n\n**第 3 步——让 Copilot 规划实现方案**\n加载工单后：\n```\nBased on this Jira ticket, suggest an implementation plan. What files in my project would need to \nchange? What's the right order of changes? What edge cases should I handle?\n```\nCopilot 会同时利用 Jira 数据*和*你的代码库（如果你已启用工作区访问权限）来回答。\n\n**第 4 步——做出至少一处真实改动**\n哪怕很小。要是真实的代码更改，而不仅仅是一条笔记。\n\n**第 5 步——闭环**\n```\nI've completed [ISSUE-KEY]. Transition it to Done. Add a comment: what I changed, which file, \nand why it addresses the original problem. Keep the comment professional.\n```\n\n**成果：** 你在没有打开过一次浏览器版 Jira 的情况下，从 IDE 中完整跑完了一个 sprint 工单的流程。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 C——智能体模式的多步任务",
+      "content": "用一条复杂的多步指令，测试 Copilot 智能体模式能做到什么。\n\n**准备工作：** 在 VS Code 中打开一个至少有几个源文件的项目。\n\n**这条提示词（一次性交给 Copilot 智能体模式）：**\n```\nDo the following in sequence:\n1. Search my Jira for any open bug tickets\n2. Pick the highest-priority one and read its full details\n3. Search my codebase for the code most likely related to that bug\n4. Suggest a fix\n5. Apply the fix to the file\n6. Update the Jira ticket with a comment describing what you found and changed\n\nAt each step, show me what you're doing before doing it.\n```\n\n**需要留意的地方：**\n- Copilot 在执行每个工具调用之前都会先展示出来\n- 你可以在任何一步批准或取消\n- 观察它是如何在 Jira 数据和代码库之间进行推理的——它连对了正确的线索吗？\n\n**评估：**\n- 智能体完成了全部 6 个步骤吗？\n- 它找出的 bug 真的和这个 Jira 工单相关吗？\n- 它应用的修复方案合理吗？\n- 你会在真实工作中使用这套工作流，还是觉得它还不够可靠？\n\n**关键收获：** 智能体模式在处理定义清晰的任务时很强大，但需要监督。复杂的任务链有时会在第 4 步或第 5 步出错。你是审查者，而不仅仅是提出请求的人。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——构建你的个人 Copilot + Jira 工作流文档",
+      "content": "把你学到的东西变成一份你真正会用到的工作流文档。\n\n**在你的项目中创建一个文件**，命名为 `ai-workflow.md`（或添加到已有的团队 wiki 中）。\n\n**包含以下几个部分：**\n\n**第 1 部分——我的 MCP 设置**\n记录你的 `.vscode/mcp.json` 配置（把 API 令牌替换成占位符）。写明你连接了哪些服务器，为什么。\n\n**第 2 部分——我的 Jira 提示词**\n写下你会经常使用的 5 条具体提示词：\n- 一条用于阅读你早晨的待办事项\n- 一条用于在开始一个工单之前给自己做简报\n- 一条用于把你刚发现的代码问题变成一份 bug 报告\n- 一条用于撰写 sprint 结束时的进展更新\n- 一条针对你团队工作流特有场景的自定义提示词\n\n**第 3 部分——我的模型选择规则**\n根据工作坊 A 的结果，补全这些句子：\n- “对于代码解释，我使用 [模型]，因为……”\n- “对于复杂调试，我使用 [模型]，因为……”\n- “对于撰写 Jira 工单描述，我使用 [模型]，因为……”\n- “对于快速迭代提问，我使用 [模型]，因为……”\n\n**第 4 部分——我发现的局限**\n写 2-3 件在智能体模式或 Jira 集成中没有达到预期效果的事情。这部分和其余部分同样有价值——了解一个工具的局限，就是了解这个工具。\n\n**成果：** 一份参考文档，当队友问“你是怎么把 Copilot 和 Jira 结合起来用的？”时，你可以直接给他们看。"
+    },
+    {
+      "type": "quiz",
+      "question": "你打开 Copilot 智能体模式，让它获取一个 Jira 工单，但 Tools 列表里没有出现任何 Atlassian 工具。最有可能的原因是什么？",
+      "options": [
+        "你的 Jira API 令牌是错的",
+        "VS Code 没有加载 .vscode/mcp.json 文件，可能是因为你创建它之后没有重新加载窗口，或者 JSON 语法有误",
+        "Copilot 还不支持 MCP",
+        "你需要重启电脑"
+      ],
+      "correct": 1,
+      "explanation": "VS Code 会在窗口加载时读取 MCP 配置。如果你创建或编辑了 .vscode/mcp.json 却没有重新加载，MCP 服务器就不会出现。同时也要检查 JSON 是否有效——一个缺失的逗号或括号会悄无声息地破坏整个文件。任何对 mcp.json 的更改之后，使用 Ctrl+Shift+P → Developer: Reload Window。如果重新加载后工具仍未出现，检查 Output 面板（View → Output → MCP）中的错误信息。"
+    },
+    {
+      "type": "quiz",
+      "question": "你想让 Copilot 智能体模式根据你刚完成的代码审查撰写一份详细的 Jira 工单描述。哪种模型切换最合理，为什么？",
+      "options": [
+        "切换到 GPT-4.1——它在所有任务上都是最快的",
+        "切换到 Gemini Flash——它原生支持 Jira 集成",
+        "切换到 Claude Sonnet 或 Opus——相比默认模型，Claude 产出的文字明显更清晰、结构更好",
+        "不需要切换——模型选择不影响工单撰写的质量"
+      ],
+      "correct": 2,
+      "explanation": "模型选择对写作类任务影响最大。Claude 系列模型经过训练，能产出高质量、结构清晰的文字——而 Jira 工单描述、验收标准和评论恰恰都是写作任务，而不是代码任务。在让 Copilot 起草工单内容之前切换到 Claude Sonnet（或者追求最彻底的输出时用 Opus），通常会比 GPT-4.1 默认模型产出明显更干净的结果。回到实际编码工作时再切回默认模型。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-9 课完成。** 你现在可以把 MCP 服务器连接到 Copilot 智能体模式，接入 Jira 以便在不离开 VS Code 的情况下读取和更新工单，并为每种任务挑选合适的模型。这三项能力合在一起——智能体自主性、通过 MCP 实现的外部工具访问，以及有意识的模型选择——正是区分一个普通 Copilot 用户和一个真正比不用 AI 更快的人的关键所在。第 6-4 课介绍了 Continue.dev，这个免费开源的替代方案，用你选择的任意 AI 后端，遵循类似的智能体 + MCP 模式。"
+    }
+  ],
+  "nextLesson": "6-10",
+  "prevLesson": "6-3"
+}

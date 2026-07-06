@@ -1,0 +1,120 @@
+{
+  "id": "17-2",
+  "title": "拆解复杂问题",
+  "part": 17,
+  "estimatedMinutes": 60,
+  "tags": [
+    "projects",
+    "beginner",
+    "problem-solving",
+    "thinking",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n复杂问题一旦被当作单一整体来处理，就会让人感到无从下手。关键技能是拆解（decomposition）：把一个庞大、模糊的问题拆分成更小、更具体、可解决的部分。AI 在这方面表现出色——它能拆解任何问题、揭示隐藏的子问题、在你确定方案之前理清思路，并运用经验丰富的顾问所使用的框架。本课介绍拆解原则、四种结构化框架（MECE、五个为什么、鱼骨图和帕累托分析），以及如何确定先解决哪个问题。"
+    },
+    {
+      "type": "text",
+      "content": "## 拆解原则\n\n每个复杂问题都是一叠更简单问题的堆叠。拆解的目标是找到问题小到可以直接采取行动的那个层级。\n\n**示例：** “我们的客户满意度正在下降”\n- ↳ 产品问题 / 服务问题 / 沟通问题 / 期望问题\n  - ↳ 服务问题：等待时间过长 / 解决方案不对 / 员工态度\n    - ↳ 等待时间过长：人手不足 / 分流效率低 / 咨询量大\n      - ↳ 咨询量大：已知的季节性高峰 / 可避免的重复联系 / 新产品的问题\n\n在最底层，每个问题都足够具体，可以调查和解决——“通过改进新产品的常见问题解答来减少重复联系”是可行动的。“我们的客户满意度正在下降”则不是。\n\nAI 帮你拆解问题的速度比你独自完成更快——尤其是当你太身处其中而看不清问题的组成部分时。而且由于它在组织中没有任何政治利益，它能说出你自己可能不敢说出口的令人不适的可能性。"
+    },
+    {
+      "type": "text",
+      "content": "## MECE 原则——构建完整的问题地图\n\n**MECE**（相互独立、完全穷尽，Mutually Exclusive, Collectively Exhaustive）是一个源自管理咨询——最初由麦肯锡开发——的框架，用于确保你的拆解不遗漏任何内容，也不重复计算。\n\n- **相互独立：** 任何两个类别都不重叠。如果“人手不足”和“等待时间过长”指的是同一件事，就把它们合并。\n- **完全穷尽：** 所有类别加在一起，覆盖了每一个可能的原因。如果有某个原因不属于任何类别，你就需要一个新类别。\n\nMECE 拆解之所以强大，是因为当你解决了清单上的所有问题，你就解决了整个问题——不存在隐藏的缺口。\n\n**用于 MECE 拆解的 AI 提示词：**\n```\nI'm trying to decompose this problem using the MECE principle:\n[describe problem]\n\nPlease:\n1. Suggest 4–6 mutually exclusive categories that together cover all possible causes\n2. Check your own list: does any cause fit multiple categories? If so, how should the categories be redrawn?\n3. Does any category leave a significant cause type unaccounted for? What's missing?\n4. For each category, list 2–4 specific sub-causes\n\nAfter the decomposition, state which categories are most likely to be productive\nto investigate first, based on the problem description.\n```\n\n**MECE 应用示例：**\n问题：“我们的项目交付时间变长了。”\n\nMECE 类别：\n1. **流程：** 交接延误、职责不清、返工循环\n2. **人员：** 技能缺口、产能问题、人员流动\n3. **工具：** 工具不足、本应自动化的手动步骤\n4. **外部依赖：** 等待供应商、客户审批、法务审查\n5. **范围：** 工作复杂度在增加，不只是量在增加\n\n这些类别互不重叠（一次延误要么是流程、人员、工具、外部依赖，要么是范围问题——不会同时属于两类），而且加在一起覆盖了所有可能的原因。"
+    },
+    {
+      "type": "text",
+      "content": "## 问题拆解提示词\n\n对于不受 MECE 约束的一般性拆解，以下提示词几乎适用于任何问题：\n\n```\nI'm trying to solve this problem: [describe problem clearly]\n\nPlease:\n1. Restate the problem in one sentence — confirm I've described it accurately\n2. Break it into 3–5 main categories or root causes\n3. For each category, break it down one level further into specific sub-problems\n4. Identify which sub-problems are most likely to be root causes vs. symptoms\n   (A symptom is something you can see; a root cause is what's causing the symptom)\n5. Suggest which 1–2 sub-problems should be investigated first, and why\n```\n\n**在分析中加入数据：**\n如果你有数据（指标、反馈、事件日志），把它们加进去：\n```\nHere is the data I have about this problem:\n[paste data, customer feedback, error logs, survey results]\n\nGiven this data, which sub-problems does it point to most strongly?\nAre there any obvious explanations I should rule out first?\n```\n\n**当你不知道原因时：**\n```\nI don't know why [problem] is happening.\nHelp me generate a set of diagnostic questions — things I should investigate\nto narrow down the cause. What data would I need to collect?\nWhat would tell me it's cause A vs. cause B?\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 鱼骨图（石川图）\n\n鱼骨图（也称石川图或因果图）是一种用于组织问题原因的可视化框架。它把原因归入标准类别，让你一目了然地看出哪些方面已经探究过，哪些还没有。\n\n业务问题的标准类别：\n- **人员**——技能、行为、培训、可用性\n- **流程**——步骤、程序、交接、顺序安排\n- **工具/技术**——系统、设备、软件、数据质量\n- **环境**——物理或组织层面的背景、文化、外部压力\n- **度量**——你如何定义和跟踪该问题（有时度量方式本身就是错的）\n- **物料/输入**——输入、数据或资源的质量或可用性\n\n**用于鱼骨图分析的 AI 提示词：**\n```\nApply a fishbone (Ishikawa) analysis to this problem: [problem statement]\n\nFor each of the six standard categories (People, Process, Tools/Technology,\nEnvironment, Measurement, Materials/Inputs):\n1. List 2–4 specific potential causes in that category\n2. For the most likely cause in each category, suggest one diagnostic question\n   that would confirm or rule it out\n\nAfter completing the fishbone, identify the 2–3 causes that appear most\nfrequently or seem most likely based on the context I've given you.\n```\n\n鱼骨图在需要团队参与问题分析时尤其有用——它提供了一个每个人都能参与贡献的共享结构，而不是由一个人来决定哪些原因重要。"
+    },
+    {
+      "type": "text",
+      "content": "## 五个为什么——寻找根本原因\n\n五个为什么（Five Whys）是源自丰田生产方式的经典根因分析技术：连续问五次“为什么”，直到找到根本原因。\n\n**AI 可以帮你严谨地应用这一技术：**\n\n```\nApply the Five Whys technique to this problem: [problem]\n\nFor each \"why\", suggest the most likely answers based on what I've told you.\nIf there are multiple plausible causes at a given level, branch the analysis\nand explore both paths.\nAfter 5 levels, state the likely root cause and what it would mean to address\nit at that level vs. at a surface level.\n```\n\n**经典示例：**\n- 问题：我们每个月的报告都迟交\n- 为什么？→ 数据从源头团队那边就来晚了\n- 为什么？→ 他们不知道截止日期\n- 为什么？→ 我们从没正式告知过他们\n- 为什么？→ 没有 SLA 或书面约定的期望\n- 为什么？→ 没有人负责这个端到端的流程\n- **根本原因：流程责任归属缺失——根本不是数据问题**\n\n如果没有五个为什么，团队可能会去修“数据”，但报告依旧会迟交。根本原因是组织层面的，而不是技术层面的。\n\n**何时用五个为什么、MECE 还是鱼骨图：**\n- **MECE：** 当你需要确保覆盖了所有可能的原因时（审计、合规）\n- **鱼骨图：** 当与团队协作、需要一个共享的可视化结构时\n- **五个为什么：** 当你已经有一个强有力的假设，想快速找到根本原因时"
+    },
+    {
+      "type": "text",
+      "content": "## 帕累托分析——问题的二八法则\n\n帕累托原则指出，大约 80% 的结果来自 20% 的原因。用解决问题的语言来说：少数几个根本原因通常造成了问题的大部分影响。\n\n在投入精力修复清单上的每一个子问题之前，先找出那关键的少数：\n\n```\nI have this list of sub-problems and their measured impact: [list with data or estimates]\n\nApply Pareto analysis:\n1. Rank the sub-problems by impact (which ones, if fixed, would reduce the overall problem most?)\n2. Identify the top 20% of causes that likely account for 80% of the problem\n3. For the top 2–3 causes, what would it cost to fix them vs. the impact of fixing them?\n4. What's the recommended sequence: what should we fix first for maximum impact with minimum effort?\n```\n\n**没有数据时：** 如果你没有实测的影响数据，仍然可以应用这个原则：\n```\nI don't have quantitative data. Based on the context I've described,\nwhich 2–3 causes do you estimate are driving the most impact?\nWhat would be the evidence to confirm or deny this hypothesis?\n```\n\n**帕累托 + MECE 组合使用：** MECE 确保你没有遗漏任何类别。帕累托确保你不会对不同重要程度的问题投入相同的精力。两者结合，能得出一幅完整的图景以及一份有优先级的行动清单。"
+    },
+    {
+      "type": "text",
+      "content": "## 确定先解决哪个问题\n\n一旦你拆解完一个问题，通常会得到一份包含 8–12 个子问题的清单。它们不可能同时解决。用 AI 来帮你排定优先级：\n\n```\nHere is a list of sub-problems I've identified: [list]\n\nHelp me prioritise them using these four criteria:\n- Impact: which ones, if solved, would most improve the overall situation?\n- Effort: which are relatively quick to address vs. requiring major work?\n- Dependencies: which must be solved before others can be attempted?\n- Urgency: which will get worse fastest if left unaddressed?\n\nSuggest a prioritised order and explain your reasoning.\n```\n\n**影响/工作量 2x2 矩阵：**\n对偏好可视化思考的人，让 Claude 对每个子问题分类：\n```\nPlace each sub-problem in an Impact vs. Effort matrix:\n- High impact, low effort → Do first (quick wins)\n- High impact, high effort → Plan carefully, resource properly\n- Low impact, low effort → Do if time allows\n- Low impact, high effort → Avoid or deprioritise\n\nFor each quadrant, list the relevant sub-problems.\nThen give me a recommended action sequence.\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "拆解你正面临的一个问题",
+      "content": "把这些框架应用到你工作中一个真实的、当下的问题上。\n\n**第一步——选择问题（2 分钟）**\n\n找出一个你目前正在处理、感觉过大或过于模糊的问题。好的候选对象包括：\n- 团队似乎无法解决的反复出现的问题\n- 持续落后的项目\n- 大家都认同有问题但没人修复的流程\n- 一个你不确定问题原因的情况\n\n**第二步——运行 MECE 拆解（5 分钟）**\n\n用 MECE 提示词向 Claude 描述这个问题。要坦诚——把你能看到的所有症状都包括进去。\n\nClaude 回应后：\n- 这些类别适合你的情境吗？如果不适合，让 Claude 修改它们。\n- 是否有原因同时属于多个类别（意味着拆解不完全是相互独立的）？\n- 是否有某类原因没有被覆盖（意味着拆解不完全是穷尽的）？\n\n**第三步——对最可能的根本原因运用五个为什么（5 分钟）**\n\n取用 Claude 认为最可能是根本原因的子问题。运行五个为什么：\n```\nApply Five Whys to: [root cause from step 2]\n```\n\n第五层的根本原因指向的是流程问题、人员问题还是结构性问题？这一点很重要——每种问题需要不同类型的干预方式。\n\n**第四步——用 2x2 矩阵排定优先级（5 分钟）**\n\n拆解完成后，运行影响/工作量优先级排序提示词。得到一份有优先级的行动顺序。\n\n**第五步——选择一个行动**\n\n从“高影响、低工作量”象限中，找出一个你下周就能采取的具体行动。写下来，并定一个目标日期。\n\n拆解的价值不在于分析本身——而在于比独自思考更快地得出一个具体、可行动的下一步。"
+    },
+    {
+      "type": "quiz",
+      "question": "你团队的项目交付时间在上个季度增加了 40%。你还不知道原因。此时使用 AI 最有效的方式是什么？",
+      "options": [
+        "让 AI 直接告诉你交付时间增加的原因",
+        "让 AI 用更激进的截止日期制作一份甘特图",
+        "用 AI 把问题拆解成潜在原因，并生成诊断性问题——然后收集数据来缩小根本原因的范围",
+        "让 AI 立即生成一份流程改进计划"
+      ],
+      "correct": 2,
+      "explanation": "当你不知道根本原因时，正确的第一步是使用一个框架（MECE、鱼骨图、五个为什么）生成一份结构化的可能原因清单，以及能够区分这些原因的诊断性问题。这能引导你的数据收集工作聚焦于正确的方向。AI 无法直接告诉你原因（A），因为它没有你内部的数据。更激进的截止日期（B）如果根本原因是产能或流程问题，只会让情况恶化——你只是在没有解决根本原因的情况下增加了压力。流程改进计划（D）只有在你知道问题原因之后才有效——改进错误的流程可能会让情况更糟。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——问题拆解训练",
+      "content": "练习把复杂问题拆解成可解决的部分。\n\n**第一步——选择一个你正面临的真正复杂的问题：** 技术挑战、战略决策、运营问题。\n\n**第二步——让 Claude 拆解它：**\n```\nHelp me break down this complex problem:\n[describe the problem]\n\nDecompose it into:\n1. Sub-problems (what are the distinct components?)\n2. Dependencies (which sub-problems depend on solving others first?)\n3. Knowns vs unknowns (what do we know? what do we need to discover?)\n4. Quick wins (what can be solved immediately with high confidence?)\n5. Long-pole items (what will take the most time/resources?)\n```\n\n**第三步——审阅这份拆解结果。** 它符合你的理解吗？\n\n**第四步——确定要先处理的第一个子问题**并开始着手解决。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——根因分析",
+      "content": "用 AI 进行一次严谨的根因分析。\n\n**第一步——选择最近发生的一个问题或失败案例。**\n\n**第二步——用 AI 应用五个为什么：**\n```\nConduct a root cause analysis using the 5 Whys method.\n\nProblem: [describe what happened]\n\nFor each \"why,\" don't accept the first answer — dig one level deeper:\nWhy 1: Why did [problem] happen?\nWhy 2: Why did [answer to why 1] happen?\n...continue 5 levels deep.\n\nAt the end, identify: what is the true root cause? Is it a system problem or a people problem?\n```\n\n**第三步——验证根本原因。** 它能解释这个问题的所有出现情形吗？\n\n**第四步——为根本原因设计一个修复方案**（而不是给症状打补丁）。\n\n**第五步——必做审阅：** 问 Claude：*“你确定的这个根本原因真的可以解决吗？还是它会引出另一个无法解决的问题？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——决策树构建",
+      "content": "为一个复杂的多步骤决策构建决策树。\n\n**第一步——确定一个**有多个分支和条件路径的决策。\n\n**第二步——让 Claude 构建决策树：**\n```\nCreate a decision tree for this situation:\n[describe the decision context]\n\nFor each decision point:\n- What question determines the branch?\n- What are the possible answers?\n- What action does each answer lead to?\n- What are the terminal states (final outcomes)?\n\nFormat as a text-based decision tree I can follow.\n```\n\n**第三步——在 3 个不同场景中测试这棵决策树。** 它是否能得出正确的决策？\n\n**第四步——找出任何缺失的分支**——这棵树没有覆盖的场景。\n\n**第五步——与同事分享**，作为共享的决策框架。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——降低复杂度",
+      "content": "用 AI 识别问题中哪些复杂性可以被消除。\n\n**第一步——描述**你正在处理的一个复杂问题。\n\n**第二步——问 Claude：**\n```\nI'm dealing with this complex problem: [describe it]\n\nHelp me reduce unnecessary complexity:\n1. What aspects of this problem are complex because they need to be vs complex because of how we've approached them?\n2. What constraints are real vs assumed?\n3. What would a simple, direct solution look like? (Even if it seems too simple)\n4. What is the minimum viable solution that addresses the core problem?\n5. What am I overcomplicating?\n```\n\n**第三步——评估“简单方案”。** 它真的过于简单，还是其实可行？\n\n**第四步——先尝试最简单的方案**，之后再考虑加回复杂性。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在解决一个复杂的技术问题时，Claude 给出了一份非常详细的拆解，包含 15 个子问题。你应该怎么做？",
+      "options": [
+        "为了最大化效率，同时解决全部 15 个子问题",
+        "排定优先级：找出那 2-3 个阻碍了其他一切、或不解决就影响最大的子问题——先解决它们",
+        "把每个子问题分配给不同的团队成员",
+        "让 Claude 把子问题精简到最多 5 个"
+      ],
+      "correct": 1,
+      "explanation": "并非所有子问题都同等重要。关键路径原则：有些子问题会阻碍其他一切（必须先解决），有些具有高影响力，还有些只是边缘情况，只有在核心方案有效时才重要。先确定阻塞性依赖关系，再确定影响最大的项目。同时解决 15 个子问题通常是不可能的，往往也效率低下——依赖关系意味着你终究会因等待前置子问题而被阻塞。"
+    },
+    {
+      "type": "quiz",
+      "question": "五个为什么根因分析得出的结论是“企业文化不重视质量”。这个根本原因有多大用处，你应该怎么做？",
+      "options": [
+        "非常有用——文化是最重要的因素",
+        "不太可行动：“文化”太宽泛，无法直接处理。应该问：是哪些具体行为或激励机制造就了这种文化？哪一项行为改变或流程改变最能提升质量？",
+        "这意味着这个问题无法解决",
+        "立即上报给高层管理"
+      ],
+      "correct": 1,
+      "explanation": "“文化”作为根本原因，几乎总是一个中间原因，而不是真正的根本原因。文化是特定行为、激励机制和系统的结果。再往下追问一层：“为什么这种文化不重视质量？是因为质量没有被衡量吗？是因为速度受到奖励而质量没有吗？是因为质量出问题时没有反馈机制吗？”这些问题中的每一个，都比“改变文化”有更具体、更可行动的解决方案。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 17-2 课。** 现在你可以用四种结构化框架——MECE 拆解、鱼骨图分析、五个为什么和帕累托优先级排序——把任何复杂问题拆解成可管理的部分，找出根本原因而非表面症状，并决定先处理哪些子问题以获得最大影响。"
+    }
+  ],
+  "nextLesson": "17-3",
+  "prevLesson": "17-1"
+}

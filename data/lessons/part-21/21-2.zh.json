@@ -1,0 +1,93 @@
+{
+  "id": "21-2",
+  "title": "代理循环的解剖学",
+  "part": 21,
+  "estimatedMinutes": 45,
+  "tags": ["loop-engineering", "advanced", "agents", "claude-code"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n在你能够工程化循环之前，你需要在机械层面上准确理解 AI 代理循环是如何运作的。本课将解剖 Claude Code 的内部循环：每一步发生了什么、工具调用如何反馈进下一次决策、上下文如何累积，以及循环可能在哪里出问题。理解这套解剖学，能让你成为更好的循环设计者。"
+    },
+    {
+      "type": "text",
+      "content": "## Claude Code 代理循环内部\n\n当你给 Claude Code 一个任务时，它不会一次性执行完。它会运行一个循环，反复进行，直到任务完成（或者放弃）。以下是每一轮迭代的样子：\n\n**第 1 步——读取任务与当前状态**\nClaude 读取你的指令、CLAUDE.md 的上下文，以及对话中已有的任何先前工具调用结果。这是每一轮循环迭代开始时的完整上下文窗口。\n\n**第 2 步——规划下一步行动**\nClaude 决定接下来要采取哪一个单独的行动。可能是：读取文件、写入文件、运行命令、搜索某个模式，或提出一个澄清性问题。它不会预先规划所有行动——只规划下一个。\n\n**第 3 步——执行工具调用**\nClaude 发出一个结构化的工具调用（例如 `Read file: src/app.js`）。工具运行并返回一个结果（文件内容、命令输出、错误信息等）。\n\n**第 4 步——观察结果**\n工具结果被追加到上下文窗口中。此时 Claude 能看到原始任务、所有先前的工具调用，以及这个新结果。\n\n**第 5 步——决定：继续还是停止？**\nClaude 评估任务是否已完成。如果是，它会给出最终回应。如果不是，它会回到第 2 步，规划下一个行动。\n\n这个循环会反复进行——常常是几十次——直到任务完成，或者触发了某个停止条件。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**为什么一次只做一个动作？** Claude Code 不会预先规划所有步骤，因为后面的步骤取决于前面的结果。你没法在检查一个文件是否已经存在之前，就知道自己是否需要创建它。一次一个动作让循环具备适应性——每一次决策都建立在它之前发生的一切之上。"
+    },
+    {
+      "type": "text",
+      "content": "## 上下文在各次迭代中的累积\n\n每一次工具调用的结果都会被追加到上下文窗口中。经过 10 轮循环迭代之后，上下文里就包含了：你最初的任务 + 10 组工具调用请求 + 10 个工具调用结果。经过 50 轮迭代之后，它会大得多。\n\n**这会带来一些重要的后果：**\n\n**1. 在长循环中，上下文窗口的限制很重要。** 如果一个循环运行得足够久，早期的内容会被挤出去，或者上下文会被完全填满。对于非常长的任务，Claude Code 会定期对之前的工作做总结，以保持上下文窗口可控。\n\n**2. 早期的结果会影响后面的决策。** Claude 可以引用它在之前迭代中读过或写过的任何内容。这很强大——它能对代码库或任务建立起不断增长的理解——但也意味着，如果早期的错误没有被发现，它会一直传播下去。\n\n**3. Token 成本会随循环长度扩大。** 每一轮迭代的成本，都与当前上下文的大小成正比。一个上下文有 10,000 个 token 的 50 轮循环，所消耗的 token 会远远多于一个 5 轮的循环。要据此做好预算。\n\n**上下文效率小贴士：** 让你的 CLAUDE.md 保持聚焦，让你最初的任务描述保持简洁。起始上下文里多余的 token，会在每一轮迭代中不断累积放大。"
+    },
+    {
+      "type": "text",
+      "content": "## 上下文溢出问题——以及 Ralph 循环\n\n上下文累积是长循环的隐形杀手。随着每一轮迭代把结果追加到上下文窗口，有两件事会变差：\n\n1. **质量**——模型的“注意力”被分散到更多内容上；最近的观察结果得到的关注变少了\n2. **成本**——每一轮迭代的花费都与完整的上下文成正比，并随着每一步不断累积\n\n**标准的解决办法：中间总结**\n每 5-10 轮迭代，暂停并压缩一次：\n```\nSummarise everything learned so far in 3 concise bullet points.\nDiscard the raw tool call history — continue with only the summary.\n```\n这样能限制上下文的增长，同时保留已经获得的知识。\n\n**Ralph 循环（每轮重置上下文）**\n一种更激进的模式：在*每一轮*迭代开始时都重置上下文窗口。代理从一个文件中读取当前状态，采取下一步行动，把结果写回该文件，然后终止这个上下文——下一轮迭代重新开始。\n\n```\nIteration 1: [Start fresh] → Read loop-state.json → Take action → Write result to loop-state.json → Done\nIteration 2: [Start fresh] → Read loop-state.json → Take action → Write result to loop-state.json → Done\n...\nIteration N: [Start fresh] → Read loop-state.json → Task complete? → Yes → Output final result\n```\n\n**loop-state.json 大致是这样的：**\n```json\n{\n  \"task\": \"Summarize all 50 files in /reports\",\n  \"completed\": [\"report-01.md\", \"report-02.md\", \"report-03.md\"],\n  \"remaining\": [\"report-04.md\", \"...\"],\n  \"summaries\": {\n    \"report-01.md\": \"Q1 sales up 12%...\",\n    \"report-02.md\": \"Marketing spend flat...\"\n  },\n  \"iteration\": 3,\n  \"status\": \"in-progress\"\n}\n```\n每一轮迭代都会读取这个文件，以知道该从哪里继续，加入自己的结果，然后把文件写回去。\n\n优点：无论循环有多长，每一轮迭代所消耗的 token 都是一样的；长时间运行也不会出现质量下降；这个状态文件本身就是检查点和审计轨迹。\n\n缺点：代理无法在多轮迭代之间使用“上下文内推理”——所有状态都必须被显式地写入文件。\n\n**该用哪一种：**\n- 短循环（少于 10 轮）：标准的累积方式就够用了\n- 中等循环（10-30 轮）：使用中间总结\n- 长循环（30 轮以上，或批处理任务）：使用 Ralph 循环模式"
+    },
+    {
+      "type": "text",
+      "content": "## 循环的停止条件\n\n一个永不停止的循环，和一个停得太早的循环一样糟糕。Claude Code 内置了几种停止条件：\n\n**自然完成**——Claude 判断任务已经完成，给出最终回应。这是最理想的路径。\n\n**Token 预算耗尽**——如果循环运行得足够久，耗尽了配置的 token 预算，Claude 会停下来，报告目前为止完成了什么。\n\n**权限暂停**——如果 Claude 需要执行一个它没有权限做的操作（删除文件、运行破坏性命令），它会暂停并询问你。\n\n**错误循环检测**——如果 Claude 反复犯同一个错误却没有任何进展，它会把错误呈现出来，而不是无限循环下去。\n\n**你的中断**——你可以在任何时候中断任何循环。已完成的部分工作会被保留下来。\n\n**设计明确的停止条件**是循环工程中最重要的技能之一。对于你构建的每一个循环，都要预先定义好：成功是什么样子？最多允许多少轮迭代？哪些失败状态应该提前中止循环？"
+    },
+    {
+      "type": "text",
+      "content": "## 工具调用：循环的执行器\n\n工具调用是代理循环触及并改变外部世界的方式。在 Claude Code 中，内置的工具包括：\n\n- **Read**——读取一个文件\n- **Write**——创建或覆盖一个文件\n- **Edit**——对文件进行有针对性的编辑\n- **Bash**——运行一条 shell 命令\n- **Glob**——查找匹配某个模式的文件\n- **Grep**——搜索文件内容\n- **WebFetch**——获取一个 URL\n- **Agent**——为某个子任务派生一个子代理\n\n每一次工具调用都是：Claude 发出一个请求 → 由执行环境（harness）执行 → 结果返回给 Claude。这个结果可能是成功的数据、一个错误，或者是部分输出。Claude 会看到这一切，并用它来规划下一轮迭代。\n\n**关键洞见：** 工具调用是代理循环与外部世界交互的唯一方式。其他的一切——规划、推理、决策——都发生在模型内部。这意味着，如果一次工具调用失败了，循环必须优雅地处理它。如果一个工具返回了意料之外的数据，循环必须做出适应。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "实时观察代理循环",
+      "content": "实时观察 Claude Code 的循环机制。需要 20 分钟。\n\n**准备工作：** 在任意一个包含源代码文件的项目中打开 Claude Code。如果你手头没有自己的项目，可以用本课程自己的文件夹（C:\\\\Projects\\\\Learning）——里面有 JSON、JS 和 CSS 文件可供搜索。\n\n**第一步——给出一个多步骤任务。** 输入一个需要多次工具调用才能完成的任务：\n```\nFind every TODO comment in this project, list them in a file called TODO-report.md \nwith: the file name, line number, and the TODO text. Sort them by file name.\n```\n\n**第二步——观察循环。** 在 Claude 工作的过程中，观察：\n- 它一共进行了多少次单独的 Read/Grep/Write 工具调用？\n- 它是在写报告之前先读取了文件吗？\n- 它有没有在某个时刻自我修正（比如运行 grep、看到意料之外的结果、然后做出调整）？\n\n**第三步——统计迭代次数。** 完成之后，数一数一共进行了多少次工具调用。这就是循环的迭代次数。\n\n**第四步——分析上下文的增长。** 打开 TODO-report.md 文件。它准确吗？循环有没有漏掉某些 TODO，或者包含了误报？\n\n**第五步——给出一个更难的后续任务。** 加上一个依赖上下文的要求：\n```\nNow prioritise the TODOs in the report: put critical/security-related ones \nfirst, then performance, then general cleanup. Add a priority label to each entry.\n```\n\n观察 Claude 是如何读取它刚刚创建的文件的（上一轮循环的输出，成为了这一轮循环的输入）。\n\n**反思：** 用两句话描述一下，代理循环的观察-思考-行动周期在实际操作中是什么样子的——不是理论上的，而是你实际观察到的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "绘制一个循环的上下文增长图",
+      "content": "理解上下文是如何在各次迭代中累积的——以及这对成本和质量为什么重要。\n\n**第一步——开始一个新会话。** 用一个中等规模的项目（10 个以上文件）打开 Claude Code。\n\n**第二步——运行一个综合性任务：**\n```\nAudit this codebase for potential security issues. Check: input validation, \nhardcoded secrets, SQL injection risks, insecure dependencies. Produce a \nsecurity-audit.md report with findings and recommended fixes.\n```\n\n**第三步——在执行过程中，留意：**\n- Claude 大概读取了多少个文件？\n- Claude 在评估后面的文件时，有没有引用之前的发现？\n- 它对最先检查的文件和最后检查的文件，分析质量看起来是否一致？\n\n**第四步——完成之后，检查报告。** 后面分析的文件，是否得到了和前面文件一样的分析深度？如果你注意到后读的文件分析得更浅，这就是上下文累积效应——早期内容占满了窗口，留给新观察结果的容量就更少了。\n\n**第五步——用一个聚焦指令重新运行一次。** 重新开始：\n```\nAudit ONLY the authentication-related files in this project for security issues. \nFocus on: token handling, session management, and permission checks.\n```\n\n把这次聚焦运行和之前那次宽泛运行做对比——范围更窄时质量是否更高？为什么？\n\n**关键要点：** 循环的范围直接影响循环的质量。聚焦的循环比不聚焦的循环产生更好的结果，因为上下文是一种有限的资源。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude Code 执行一个需要读取 80 个文件并生成综合报告的任务。做到一半时，你注意到 Claude 对文件 40-80 的分析比文件 1-40 更浅。最可能的原因是什么？",
+      "options": [
+        "Claude 在长任务中会“疲劳”",
+        "上下文窗口正被早期的工具调用结果填满，留给新文件深入分析的容量变少了",
+        "后面的文件不那么重要",
+        "需要提高 token 预算"
+      ],
+      "correct": 1,
+      "explanation": "上下文累积是核心问题所在。每一次工具调用和结果被追加到上下文窗口，都会占用 token。到第 40-80 个文件时，上下文里已经包含了几十次之前的读取，留给新内容深入分析的“注意力容量”就变少了。解决办法：把循环的范围划得更窄（只处理相关文件），或者把循环设计为分批处理文件，中间穿插总结以释放上下文空间。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code 在任务进行到一半时停下来，说“在继续之前，我需要获得删除文件 old-config.json 的权限。”这属于哪种类型的循环停止条件？",
+      "options": [
+        "自然完成——任务已经完成",
+        "Token 预算耗尽",
+        "权限暂停——由于所需的操作超出了当前的权限范围，循环暂停了",
+        "错误循环检测"
+      ],
+      "correct": 2,
+      "explanation": "这是一次权限暂停——一种安全机制，代理循环会暂停下来，而不是去执行一个未经授权、可能具有破坏性的操作。这是有意设计的：执行环境层（CLAUDE.md 设置和权限）决定了代理循环可以自主执行哪些操作，以及哪些操作需要人类的明确批准。你可以在设置中预先授权某些破坏性操作，也可以在被提示时当场授予权限。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code 一次只执行一个动作，而不是在任务开始时就预先规划所有动作，其主要原因是什么？",
+      "options": [
+        "这是一种技术限制——模型无法规划多个步骤",
+        "后面的动作依赖于前面动作的结果；预先规划所有步骤，就意味着要假设一些你还没有掌握的结果",
+        "这样更省钱——预先规划一切会用掉更多 token",
+        "按顺序执行的动作更容易调试"
+      ],
+      "correct": 1,
+      "explanation": "逐步自适应的规划是一个特性，而不是一种限制。你没读过已有的代码，就没法知道该写什么代码。你没检查过一个文件是否存在，就没法知道该不该创建它。预先规划所有动作，会产生一个僵化的脚本，一旦现实和假设不符就会失效。一次执行一步并观察结果，才能让循环真正具备适应性。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 21-2 课。** 你已经在机械层面理解了 Claude Code 的观察 → 思考 → 行动周期：工具调用是如何运作的、上下文是如何累积的，以及什么会让循环停下来。这个基础会让本 Part 后续的一切都变得顺理成章。"
+    }
+  ],
+  "nextLesson": "21-3",
+  "prevLesson": "21-1"
+}

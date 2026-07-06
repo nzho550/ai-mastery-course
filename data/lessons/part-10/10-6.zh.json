@@ -1,0 +1,115 @@
+{
+  "id": "10-6",
+  "title": "GitHub Actions + AI",
+  "part": 10,
+  "estimatedMinutes": 65,
+  "tags": [
+    "github-actions",
+    "ci-cd",
+    "automation",
+    "developer-workflow"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将理解 GitHub Actions 的作用、如何阅读一份 YAML 工作流文件，以及如何使用 Claude 为你的项目生成工作流。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 GitHub Actions？\n\nGitHub Actions 是一套直接内置在 GitHub 中的 CI/CD（持续集成 / 持续交付）系统。它会响应 git 事件——推送代码、开启一个 pull request、合并一个分支、创建一个标签——运行自动化任务。\n\n当你推送代码时，GitHub Actions 可以自动：\n- 运行你的测试，如果测试没通过就让 PR 失败\n- 检查代码风格和格式\n- 部署到服务器\n- 发送通知\n- 如果出了问题就创建一个 issue\n- 运行一次 AI 代码审查\n\n配置存放在你仓库的 `.github/workflows/` 中，是一些 YAML 文件。这个文件夹中的每个文件都是一个独立的工作流。"
+    },
+    {
+      "type": "text",
+      "content": "## 阅读一份工作流文件\n\n下面是一份最简的 GitHub Actions 工作流，在每次推送时运行："
+    },
+    {
+      "type": "code",
+      "language": "yaml",
+      "content": "name: Run Tests\n\non:\n  push:\n    branches: [main]\n  pull_request:\n    branches: [main]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Check out code\n        uses: actions/checkout@v4\n\n      - name: Set up Node.js\n        uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n\n      - name: Install dependencies\n        run: npm install\n\n      - name: Run tests\n        run: npm test"
+    },
+    {
+      "type": "text",
+      "content": "让我们拆解一下这几个关键部分：\n\n- `name`——这个工作流叫什么（会出现在 GitHub 界面中）\n- `on`——什么会触发这个工作流。`push` 表示每次推送到 main。`pull_request` 表示每次针对 main 的 PR。\n- `jobs`——要运行的任务列表。你可以有多个并行或按顺序运行的任务。\n- `runs-on: ubuntu-latest`——每个任务都在一台全新的虚拟机上运行。该虚拟机是临时的，任务结束后就会被销毁。\n- `steps`——一个任务内的步骤列表。步骤按顺序运行。\n- `uses: actions/checkout@v4`——这会运行一个预构建的 action，把你的代码检出到虚拟机上\n- `run: npm test`——运行一条 shell 命令\n\n你不需要记住这些语法。Claude 可以为你生成任何你需要的工作流文件——你只需要能够阅读并理解它生成的内容。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**AI 与 GitHub Actions 结合的最佳用法：** 用平实的语言描述你想要什么，从 Claude 那里获取 YAML，然后让 Claude 解释每一部分，确保你理解自己正在提交的内容。绝不要提交一份你无法解释的 Actions 工作流——一个配置错误的工作流可能会泄露密钥或运行意料之外的命令。"
+    },
+    {
+      "type": "text",
+      "content": "## 一个 AI 驱动的代码审查工作流\n\n下面是一个在每次 pull request 被开启或更新时运行 AI 代码审查的工作流："
+    },
+    {
+      "type": "code",
+      "language": "yaml",
+      "content": "name: AI Code Review\n\non:\n  pull_request:\n    types: [opened, synchronize]\n\njobs:\n  review:\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Check out code\n        uses: actions/checkout@v4\n        with:\n          fetch-depth: 0\n\n      - name: AI Code Review\n        uses: anc95/ChatGPT-CodeReview@main\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**关于 API 密钥的说明：** 这个特定的工作流使用了 OpenAI API 密钥（`OPENAI_API_KEY`）——这是本课程中使用 OpenAI 的少数几个地方之一。如果你没有 OpenAI 账户，可以在 GitHub Actions Marketplace 中搜索 “Claude code review”，寻找一个原生支持 Anthropic 的替代方案。（无论用哪个模型来运行）在每次 PR 上进行 AI 审查这个概念本身是相同的。\n\n要向 GitHub 添加密钥：仓库 Settings → Secrets and variables → Actions → New repository secret。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "生成一份 GitHub Actions 工作流",
+      "content": "你将使用 Claude Code 为你的项目生成一份自定义的 GitHub Actions 工作流，然后把它推送到你的 GitHub 仓库。\n\n**第 1 步——描述你想要什么**\n1. 在你的 `ai-course-projects` 文件夹中启动 `claude`\n2. 问：`为我的项目生成一份 GitHub Actions 工作流 YAML 文件。这个工作流应该：\n- 在每次推送到 main、以及每次 pull request 时运行\n- 检出代码\n- 设置 Node.js 20\n- 运行 'npm install'\n- 用 node 运行 exercises/ 文件夹中的所有 .js 文件，检查它们不会崩溃\n- 在 pull request 上发表评论，总结运行了什么`\n3. 审阅 Claude 提出的内容\n\n**第 2 步——理解输出内容**\n在接受之前，问 Claude：`解释一下这份工作流文件的每个部分。'runs-on: ubuntu-latest' 是什么意思？GITHUB_TOKEN 是什么，它从哪里来？`\n\n确保你理解：\n- 什么事件触发它\n- 虚拟机做了什么\n- 需要什么密钥（如果有的话）\n- 预期的输出是什么\n\n**第 3 步——创建文件**\n1. 让 Claude 创建文件：`用这份工作流创建 .github/workflows/ci.yml`\n2. Claude 会创建目录和文件\n3. 在 VS Code 中打开这份文件，逐行阅读\n\n**第 4 步——推送并测试**\n1. 暂存并提交：`git add .github/`，然后用类似 `ci: add GitHub Actions workflow` 的提交信息提交\n2. 推送到你的 GitHub 仓库\n3. 前往 github.com → 你的仓库 → **Actions** 标签页\n4. 观看你的工作流运行（首次运行大约在 30-60 秒内出现）\n5. 点击这次工作流运行，查看逐步的输出\n\n**需要观察的地方：** 之后每一次推送到这个仓库都会自动运行这个工作流。每次提交和 PR 上的绿色对勾或红色叉号，就是 CI 系统给你的即时反馈。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——第一个 GitHub Actions 工作流",
+      "content": "创建一个使用 Claude 进行代码审查的 GitHub Actions 工作流。\n\n**第 1 步——创建一个 GitHub 仓库**（或使用现有的仓库）。\n\n**第 2 步——创建 `.github/workflows/ai-review.yml`：**\n```yaml\nname: AI Code Quality Check\non:\n  pull_request:\n    types: [opened, synchronize]\njobs:\n  lint:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Run linter\n        run: |\n          npm install --save-dev eslint\n          npx eslint . --ext .js,.ts || true\n```\n\n**第 3 步——提交并推送。** 创建一个 PR 来触发这个工作流。\n\n**第 4 步——在 GitHub Actions 中查看这次工作流运行。** 它报告了什么？\n\n**第 5 步——让 Claude Code** 改进这个工作流：“让这个工作流也运行测试，并以 PR 评论的形式报告结果。”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——AI 驱动的 CI 流水线",
+      "content": "搭建一套包含 AI 质量关卡的 CI 流水线。\n\n**第 1 步——让 Claude Code** 为你的项目类型设计一套完整的 CI 流水线：\n```\n为一个 [Python/Node.js/等] 项目设计一份 GitHub Actions CI 流水线，要求：\n1. 在每次 PR 上运行\n2. 检查：linting、测试、安全扫描\n3. 在 PR 上发表一份摘要评论\n4. 如果测试失败就阻止合并\n5. 速度要快（目标：3 分钟以内）\n\n写出完整的工作流 YAML 文件。\n```\n\n**第 2 步——在使用之前仔细审阅**生成的 YAML——理解每一步。\n\n**第 3 步——在一个真实仓库中实现**这份工作流。\n\n**第 4 步——创建一个 PR 来触发它。** 所有检查都通过了吗？\n\n**第 5 步——强制审查：** 问：*“审查这份 GitHub Actions 工作流。存在哪些安全风险？哪些步骤可以更快？缺少哪些重要的检查？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——GitHub Actions 安全",
+      "content": "学习编写安全的 GitHub Actions 工作流。\n\n**第 1 步——问 Claude：** *“GitHub Actions 工作流中最常见的安全漏洞是什么？针对每一种，展示一个有漏洞的模式和一个安全的替代方案。”*\n\n**第 2 步——审计你在工作坊 B 中的工作流：**\n- 你是否按哈希值锁定了 action 的版本？（不是 @v3 而是 @sha256:...）\n- 密钥是否通过环境变量传递，而不是命令参数？\n- GITHUB_TOKEN 的权限是否被限定为最小需求？\n- 你是否安全地处理了来自 fork PR 的代码运行？\n\n**第 3 步——修复至少一个安全问题**在你的工作流中。\n\n**第 4 步——让 Claude Code** 撰写一个应用了所有安全最佳实践的更安全版本的工作流。\n\n**第 5 步——比较这两份工作流。** 有什么变化？安全实践是否明显更复杂？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——自动化部署流水线",
+      "content": "搭建一套使用 AI 进行部署安全检查的部署流水线。\n\n**第 1 步——让 Claude Code** 设计一份部署工作流：\n```\n为 [描述你的项目和托管方式] 设计一份 GitHub Actions 部署工作流：\n1. 在合并到 main 时触发\n2. 运行完整的测试套件\n3. 构建生产版制品\n4. 部署到 [预发布/生产环境]\n5. 部署后运行一次冒烟测试\n6. 如果冒烟测试失败就回滚\n7. 在成功或失败时通知 [Slack/邮件]\n```\n\n**第 2 步——实现预发布部署步骤**（即使你没有真实的预发布环境，也要创建 YAML 结构）。\n\n**第 3 步——添加一个冒烟测试任务**，检查已部署的应用是否正确响应。\n\n**第 4 步——强制审查：** 问 Claude：*“审查这份部署流水线。回滚步骤中可能出什么问题？如果部署部分成功后才失败会怎样？我们该如何处理一次失败的部署状态？”*"
+    },
+    {
+      "type": "quiz",
+      "question": "一份 GitHub Actions 工作流在每次 PR 上运行 `npm install && npm test`。一个恶意贡献者提交了一个 PR，在 package.json 的 postinstall 脚本中添加了代码。风险是什么？",
+      "options": [
+        "没有风险——GitHub Actions 是沙箱化的",
+        "postinstall 脚本会在 npm install 期间运行，可能在你的 CI 环境中执行恶意代码，进而窃取密钥",
+        "该 PR 会被自动拒绝",
+        "npm install 在 CI 中从不运行自定义脚本"
+      ],
+      "correct": 1,
+      "explanation": "在 CI 中运行不受信任的代码（来自外部 PR）是一个真实的攻击面。postinstall 钩子会在 npm install 期间运行——如果一个恶意 PR 修改了包脚本，这些脚本就会在你的 CI 环境中执行，而该环境拥有仓库密钥和部署凭证的访问权限。缓解措施：对于不受信任的 PR，绝不要用 pull_request_target 触发具有写权限或密钥访问权限的工作流；仔细审查工作流触发器。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 CI 工作流运行需要 15 分钟。每个 PR 都会触发完整的流水线。让它更快最有影响力的改动是什么？",
+      "options": [
+        "购买更贵的 GitHub Actions 运行器",
+        "把相互独立的任务（linting、测试、构建）并行化，并为依赖项（node_modules、pip 包）添加缓存",
+        "在小的 PR 上跳过测试",
+        "只运行与改动文件相关的测试"
+      ],
+      "correct": 1,
+      "explanation": "两项投资回报率最高的 CI 优化措施：（1）并行化——把 lint、test 和 build 作为独立任务同时运行，而不是按顺序依次运行；（2）缓存——对 node_modules、pip 包、Go 模块等使用 actions/cache，这样依赖项就不需要在每次运行时重新安装。两者结合，可以把一个 15 分钟的流水线缩短到 4-5 分钟，而不需要跳过任何检查。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 10-6 课。** 你现在可以使用 AI 生成、阅读和部署 GitHub Actions 工作流。CI/CD 不再只是大型团队的专属——为任何项目添加自动化只需要 10 分钟。接下来：设计你的个人 AI 工作流系统。"
+    }
+  ],
+  "nextLesson": "10-7",
+  "prevLesson": "10-5"
+}

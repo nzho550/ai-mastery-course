@@ -1,0 +1,101 @@
+{
+  "id": "5-6",
+  "title": "命令面板——VS Code 的超能力",
+  "part": 5,
+  "estimatedMinutes": 50,
+  "tags": [
+    "vscode",
+    "beginner",
+    "command-palette",
+    "shortcuts"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将能熟练使用命令面板——这意味着你可以通过输入名称访问 VS Code 的任何功能，而不用在菜单里到处翻找。\n\n这是你在 VS Code 中能养成的最有价值的习惯之一。专业开发者每天都会用到它几十次。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是命令面板？\n\nVS Code 有数百项功能。其中很多都藏在菜单、设置面板，或者你还没记住的键盘快捷键里。命令面板用一个可搜索的输入框解决了这个问题——它能通过名称运行 VS Code 中的*任何*命令。\n\n**如何打开它：** 在 Windows 上按 **Ctrl+Shift+P**（Mac 上按 **Cmd+Shift+P**）。\n\n窗口顶部会出现一个悬浮搜索框，里面已经有一个 `>` 字符。这个 `>` 告诉 VS Code 你想运行一个命令。在它后面输入任何内容，VS Code 就会显示匹配的命令。\n\n例如：\n- 输入 `theme` → VS Code 显示“Preferences: Color Theme”\n- 输入 `format` → VS Code 显示“Format Document”“Format Selection”等\n- 输入 `terminal` → VS Code 显示“Terminal: New Terminal”“View: Toggle Terminal”等\n\n你不需要输入完整的命令名称。只要输入其中一两个词，VS Code 就能找到它。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**`>` 前缀已经自动帮你输好了。** 当你按下 Ctrl+Shift+P 时，`>` 会自动出现在输入框里。你只需要在它后面输入命令名称。如果文档里写着 `>Format Document`，意思是：打开命令面板，然后输入 `Format Document`。`>` 已经在那里了——你不需要自己输入它。"
+    },
+    {
+      "type": "text",
+      "content": "## Ctrl+P 与 Ctrl+Shift+P 的区别\n\n有两个相似的快捷键，作用却截然不同：\n\n**Ctrl+Shift+P**——打开带有 `>` 前缀的命令面板。意思是：*运行一个 VS Code 命令*。\n\n**Ctrl+P**——打开一个*没有* `>` 的快速打开文件输入框。意思是：*按名称查找并打开一个文件*。输入文件名的一部分，VS Code 会列出项目中匹配的文件。按 Enter 打开其中一个。\n\n两者都会在窗口顶部打开一个悬浮框——区别就在于那个 `>`。你可以在这两种模式之间切换：\n- 如果你在 Ctrl+Shift+P（命令模式）下，想改成搜索文件，删掉 `>` 字符即可\n- 如果你在 Ctrl+P（文件模式）下，想运行一个命令，在开头输入 `>` 即可\n\n现在只需记住：**Ctrl+Shift+P = 命令，Ctrl+P = 文件。**"
+    },
+    {
+      "type": "text",
+      "content": "## 值得了解的常用命令\n\n下面是一些从命令面板运行时最有用的命令。表格中显示的文字就是你在 `>` 后面要输入的内容：\n\n| 输入这个… | 作用 |\n|---|---|\n| `Theme` | 更改编辑器的配色主题 |\n| `Format Document` | 自动格式化当前文件（需要一个格式化扩展） |\n| `Toggle Word Wrap` | 让长行自动换行，这样就不用向右滚动了 |\n| `Open Settings` | 打开设置界面 |\n| `Open User Settings JSON` | 直接打开 settings.json |\n| `New File` | 创建一个新文件 |\n| `New Terminal` | 打开一个新的集成终端 |\n| `Toggle Terminal` | 显示或隐藏终端面板 |\n| `Reload Window` | 在不关闭 VS Code 的情况下重启它（安装扩展后很有用） |\n| `Extensions: Install Extensions` | 打开扩展应用市场 |\n| `Git: Initialize Repository` | 为当前文件夹设置 Git 跟踪 |\n\n你现在不需要把这些全部记下来。规律是：当你想在 VS Code 里做某件事、又不确定它在哪里时，按 Ctrl+Shift+P，然后输入你想要的东西。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**命令面板也会显示键盘快捷键。** 当某个命令有对应的键盘快捷键时，快捷键会显示在结果的右侧。随着时间推移，你会注意到自己最常用命令的快捷键，并开始直接使用它们。这正是开发者自然学会键盘快捷键的方式——在实际使用场景中发现它们，而不是死记硬背一张表。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "5 项任务命令面板挑战",
+      "content": "只使用命令面板（Ctrl+Shift+P）完成以下五项任务——不要通过菜单点击。目标是养成优先按 Ctrl+Shift+P 的肌肉记忆。\n\n**任务 1——更改配色主题：**\n1. 按 Ctrl+Shift+P\n2. 输入 `theme`\n3. 选择 **Preferences: Color Theme**\n4. 浏览列表——用方向键试几个，看看实时预览效果\n5. 按 Enter 确认你喜欢的那个（推荐 Dark+）\n\n**任务 2——切换自动换行：**\n1. 如果 `README.md` 还没打开，打开它（在资源管理器中点击它）\n2. 给 `# My AI Course Projects` 这一行加一些额外的文字，让它变长\n3. 按 Ctrl+Shift+P → 输入 `word wrap`\n4. 选择 **View: Toggle Word Wrap**\n5. 注意长行是否换行了——切换一次前后对比感受一下区别\n\n**任务 3——打开设置：**\n1. 按 Ctrl+Shift+P → 输入 `open settings`\n2. 选择 **Preferences: Open User Settings**（先别选 JSON 版本）\n3. 你现在进入了设置界面——我们会在第 5-9 课详细探索它\n4. 关闭设置标签页（Ctrl+W）\n\n**任务 4——打开设置 JSON：**\n1. 按 Ctrl+Shift+P → 输入 `settings json`\n2. 选择 **Preferences: Open User Settings (JSON)**\n3. 你会看到存储所有设置的原始 JSON 文件\n4. 关闭它（Ctrl+W）\n\n**任务 5——打开一个新终端：**\n1. 按 Ctrl+Shift+P → 输入 `new terminal`\n2. 选择 **Terminal: New Terminal**\n3. 终端面板打开——输入 `pwd` 确认所在位置\n4. 关闭终端面板（Ctrl+J，或点击终端面板中的 X）\n\n**检查：**\n- [ ] 你没有使用菜单栏就完成了全部 5 项任务\n- [ ] 你想要的配色主题现在已经设置好了\n- [ ] 你注意到了命令面板结果右侧的键盘快捷键提示"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——命令面板探索训练",
+      "content": "命令面板是 VS Code 最强大的功能。这个训练会系统性地探索它。\n\n**第 1 步——打开命令面板**（Ctrl+Shift+P）。\n\n**第 2 步——尝试以下搜索**，记下每个命令的作用：\n- “format”——查找格式化相关命令\n- “git”——查看所有可用的 git 命令\n- “theme”——更改配色主题\n- “json”——格式化 JSON\n- “terminal”——终端相关命令\n- “fold”——代码折叠命令\n- “markdown”——Markdown 预览和相关工具\n\n**第 3 步——查找你常用命令的键盘快捷键：** 在命令面板中把鼠标悬停在它上面——快捷键会显示在右侧。\n\n**第 4 步——使用 Ctrl+P**（不是 Ctrl+Shift+P）。这是“Go to File”面板——输入任意文件名即可立即跳转到它。\n\n**第 5 步——使用 Ctrl+G**（跳转到指定行）。输入行号即可跳转到那里。\n\n**第 6 步——向 Claude 提问：** *“我能从 VS Code 命令面板做的、大多数人都不知道的 10 件最有效率的事情是什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——搭建个性化任务运行器",
+      "content": "VS Code 的 Tasks（任务）功能让你可以用一个键盘快捷键运行命令（比如运行测试、构建、格式化）。这个工作坊会帮你搭建自己的任务。\n\n**第 1 步——向 Claude 提问：** *“我想为一个 [Python / Node.js] 项目搭建 VS Code Tasks。我需要以下任务：运行主脚本、运行测试、格式化代码。为我的 .vscode 文件夹创建 tasks.json 文件。”*\n\n**第 2 步——创建 `.vscode/tasks.json`**，粘贴 Claude 给出的内容。\n\n**第 3 步——运行一个任务：** Ctrl+Shift+P →“Tasks: Run Task”→ 选择你的任务。\n\n**第 4 步——为你最常用的任务设置一个键盘快捷键：** Ctrl+Shift+P →“Open Keyboard Shortcuts”→ 搜索“Run Task”→ 添加你的快捷键。\n\n**第 5 步——必做的复核：** 向 Claude 提问：*“复核一下你创建的这份 tasks.json。当我运行这些任务时可能出什么问题？你做了哪些在我的机器上可能不成立的环境假设？”* 修复任何发现的问题。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——跨项目搜索与替换",
+      "content": "VS Code 的全局搜索（Ctrl+Shift+F）是编辑器中最强大的工具之一。\n\n**第 1 步——打开 Find in Files（在文件中查找）**（Ctrl+Shift+F）。\n\n**第 2 步——练习以下强大的搜索功能：**\n\n**基础搜索：** 搜索一个在多个文件中出现的常见单词，留意结果面板。\n\n**正则表达式搜索：** 点击 .* 按钮启用正则表达式。搜索 `def \\w+\\(` 来查找 Python 中所有的函数定义。\n\n**跨文件替换：** 查找一个函数名，切换到 Replace（替换）模式（展开左侧面板），一次性在所有文件中替换它。\n\n**包含/排除：** 使用“Files to Include”框，只在 `*.py` 文件中搜索，或排除 `node_modules`。\n\n**第 3 步——实际应用：** 在你的项目中搜索任何本应放在配置文件中的硬编码值（比如一个 URL 或配置项）。\n\n**第 4 步——向 Claude 提问：** *“搜索代码时最有用的正则表达式模式有哪些？给我 5 个模式，说明它们能找到什么，以及什么时候有用。”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——命令面板高效工作流",
+      "content": "这个工作坊会为你最常见的任务搭建一套命令面板工作流。\n\n**第 1 步——列出你最常做的 5 项 VS Code 任务**——你在编码过程中经常要做的事情。\n\n**第 2 步——针对每一项任务**，找到对应的命令面板命令及其键盘快捷键。\n\n**第 3 步——为任何还没有快捷键的常用任务设置快捷键：** Ctrl+Shift+P →“Open Keyboard Shortcuts (JSON)”→ 添加自定义绑定。\n\n**第 4 步——向 Claude 提问：** *“我用 VS Code 做 [你的工作流]。我应该自定义或添加哪些键盘快捷键？请给出确切的 JSON，供我添加到 keybindings.json 中，用于这些快捷键：[你的主要任务]。”*\n\n**第 5 步——创建一份“键盘快捷键”速查表**——在你的项目里建一个文本文件，列出你的自定义快捷键及其作用。打印出来或让它保持可见，直到这些快捷键成为肌肉记忆。"
+    },
+    {
+      "type": "quiz",
+      "question": "你想在不离开编辑器的情况下从 VS Code 内部运行一个 shell 命令。最快的方法是什么？",
+      "options": [
+        "退出 VS Code，运行命令，然后重新打开 VS Code",
+        "打开命令面板，直接输入 shell 命令",
+        "按 Ctrl+` 打开集成终端，然后运行该命令",
+        "使用 File → Execute Command"
+      ],
+      "correct": 2,
+      "explanation": "Ctrl+`（反引号）会打开 VS Code 的集成终端——一个运行在 VS Code 内部的完整终端。你可以在这里运行任何 shell 命令而无需离开编辑器，而且它会自动在项目的根文件夹中打开。这是运行 Python 脚本、npm 命令、git 操作以及其他任何命令行任务的核心工作流，同时还能保持代码可见。"
+    },
+    {
+      "type": "quiz",
+      "question": "你打开命令面板，输入“format”。你看到了“Format Document”，但它旁边没有显示键盘快捷键。这意味着什么？",
+      "options": [
+        "这个命令对你的文件类型不可用",
+        "目前没有为这个命令分配键盘快捷键——你可以点击齿轮图标来分配一个",
+        "你需要先安装一个格式化扩展",
+        "快捷键被隐藏了——你需要悬停才能看到它"
+      ],
+      "correct": 1,
+      "explanation": "当命令面板中某个命令旁边没有显示键盘快捷键时，说明目前没有分配任何快捷键。你可以自己分配一个：把鼠标悬停在该命令上，点击出现的齿轮图标，或者前往 File → Preferences → Keyboard Shortcuts。许多有用的命令都没有默认快捷键——为你经常使用的命令分配自己的快捷键，是一项显著的效率提升。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 5-6 课。** 命令面板现在是你在 VS Code 中查找功能的默认方式。下一课：集成终端——一个完整的命令行，就活在你的编辑器里。"
+    }
+  ],
+  "nextLesson": "5-7",
+  "prevLesson": "5-5"
+}

@@ -1,0 +1,83 @@
+{
+  "id": "21-11",
+  "title": "循环效率与成本控制",
+  "part": 21,
+  "estimatedMinutes": 40,
+  "tags": ["loop-engineering", "advanced", "cost", "efficiency", "tokens"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n一个用 20,000 token 上下文运行 50 次迭代的循环，成本是一个用 10,000 token 上下文运行 5 次迭代的循环的 10 倍。在个人使用的规模上，这只是零头。但在生产规模上——每天处理成千上万份文档——这就是预算表上一笔可观的开支。本课将介绍如何分析循环成本、可以在哪些地方削减成本而不牺牲质量、缓存策略、短路条件，以及如何设计出\"够了就停\"的预算感知型循环。"
+    },
+    {
+      "type": "text",
+      "content": "## 循环成本是如何复合增长的\n\n循环中的 token 成本不是线性的——它会随着上下文的累积而复合增长。\n\n**举例：一个处理 2,000 token 文档的 10 轮迭代循环：**\n\n| 迭代轮次 | 上下文大小 | 本轮迭代使用的 token |\n|---|---|---|\n| 1 | 2,000 + 指令 | 约 3,000 token |\n| 2 | + 工具结果 1 | 约 4,000 token |\n| 3 | + 工具结果 2 | 约 5,000 token |\n| ... | ... | ... |\n| 10 | + 工具结果 1-9 | 约 12,000 token |\n\n总计：一次 10 轮迭代的循环大约需要 75,000 token。\n\n**按照 Claude Sonnet 4.6 的定价（输入约 3 美元/百万 token，输出约 15 美元/百万 token——由于价格会变动，请查阅 [anthropic.com/pricing](https://www.anthropic.com/pricing) 获取当前费率）：**\n- 这一次循环大约花费 0.25-0.40 美元\n- 每天处理 100 份文档：25-40 美元/天\n- 每天处理 1,000 份文档：250-400 美元/天\n\n上下文累积是 AI 循环中最主要的成本驱动因素。控制它是最主要的效率杠杆。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**按影响力排序的 3 个最大成本杠杆：** (1) 迭代次数——更少的迭代次数 = 显著更低的成本。(2) 每次迭代的上下文大小——更小的上下文 = 每次迭代成本更低。(3) 模型选择——评估环节用更小的模型，只在关键的生成环节用更大的模型，能在不成比例损失质量的情况下大幅削减成本。"
+    },
+    {
+      "type": "text",
+      "content": "## 成本削减模式\n\n**1. 总结中间结果**\n与其在各次迭代中不断累积原始的工具调用结果，不如把它们总结起来：\n```\nAfter each batch of 5 tool calls:\n'Summarise everything learned so far in 3 bullet points.'\nDiscard the raw tool call history; continue with the summary.\n```\n这能在保留已获得知识的同时，重置上下文大小。\n\n**2. 前置信息**\n与其通过工具调用逐步发现所需的信息，不如提前提供所有需要的上下文：\n```\nBefore starting: read CLAUDE.md, the project structure, and relevant files.\nProvide all of this as context in the initial prompt.\n```\n这能减少那些只消耗 token 却不产生输出的\"发现型\"迭代。\n\n**3. 在筛选环节使用更小的模型**\n如果一个循环包含一个\"筛选\"步骤（决定处理什么）和一个\"处理\"步骤（实际完成工作），那就在筛选环节使用更小、更便宜的模型，只在处理环节使用主力模型：\n- Haiku 4.5 用于分类/筛选：比 Sonnet 便宜约 3 倍\n- Sonnet 4.6 用于生成/分析：在真正重要的地方保证全量质量\n\n**4. 批量处理**\n每次迭代处理多个条目，而不是一次一个：\n```\nProcess these 10 emails in this iteration: [batch of 10]\nClassify each as: urgent / informational / action-required\n```\n这样一次迭代就能产生 10 个结果，而不需要 10 次单独的迭代。\n\n**5. 缓存确定性的结果**\n如果一个循环反复调用同一个查询（同样的搜索关键词、同样的文件读取），就缓存这个结果，而不是重新运行这次工具调用：\n```\nSave all search results to a temporary cache. Before running a search, \ncheck if the same query was already run and use the cached result.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 短路条件\n\n短路条件会在目标已经达成时提前停止循环。这是最直接的成本削减手段。\n\n**举例场景：**\n\n*找 bug 的循环：* 一旦找到 3 个 bug 就停止——不要在达到配额之后还继续搜索。\n\n*质量提升循环：* 一旦质量得分超过 8/10 就停止——不要仅仅因为预算允许，就多跑几轮迭代。\n\n*研究循环：* 一旦找到 5 篇高质量的资料就停止——不要在信息已经足够之后还继续搜索。\n\n**如何实现：**\n```\nAfter each iteration, evaluate:\n- Has the success condition been met? [specific criterion]\n- If yes: compile results and stop.\n- If no: continue (up to maximum iterations).\n```\n\n**停止条件分类法：**\n- **质量门槛：** 输出在评估标准上得分超过 X\n- **数量门槛：** 已找到/产出 N 个符合要求质量的条目\n- **收敛：** 最近 2 次迭代没有产生有意义的变化\n- **置信度门槛：** 模型给出的置信度超过 X%\n- **时间/预算限制：** 达到最大迭代次数或 token 预算"
+    },
+    {
+      "type": "text",
+      "content": "## 预算感知型循环设计\n\n对于生产环境中的循环，应该明确设计一个 token 预算，以及当预算接近上限时的行为：\n\n**预算区间 1（0-60% 的预算）：** 正常运行\n**预算区间 2（60-80% 的预算）：** 开始优先排序——聚焦于剩余工作中价值最高的部分\n**预算区间 3（80-95% 的预算）：** 综合模式——停止发现新信息，开始整理已有内容\n**预算区间 4（95-100% 的预算）：** 紧急停止——用当前状态产出尽可能好的输出\n\n**提示词示例：**\n```\nYou have a token budget for this task. Manage it wisely:\n- Use the first 60% for exploration and discovery\n- At 60% budget: assess what you've found and prioritise remaining work\n- At 80% budget: stop discovering, start writing the final output from what you have\n- Never exceed the budget; produce the best output possible within it\n```\n\n当这种预算指导被写入任务指令或 CLAUDE.md 中时，Claude Code 会遵循它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "优化一个高成本循环",
+      "content": "拿一个你已经构建的循环，在不降低质量的前提下削减它的成本。需要 30 分钟。\n\n**第一步——挑选一个要优化的循环。** 使用本 Part 中的任意一个循环（每日简报、供应商评估、批量摘要器等），或者你自己构建的循环。\n\n**第二步——测量基线成本。** 运行一次循环，然后向 Claude Code 提问：\n```\nLook back at the task you just completed. How many tool calls did you make? \nWhich steps involved the largest tool call outputs (file reads, command results)?\nWhich single step do you think added the most tokens to the context?\n```\n注意：Claude Code 不会在聊天界面中显示精确的 token 计数。你可以根据观察来估算：数一数工具调用次数（每次 Read/Write/Bash 都会增加 token），并留意哪些调用返回了大量输出。冗长的文件读取和啰嗦的命令输出通常是最大的\"贡献者\"。\n\n**第三步——套用这份成本削减清单：**\n\n[ ] 我能否通过在每次迭代中批量处理多个条目来减少迭代次数？\n[ ] 我是否在累积原始的工具调用输出，而这些其实可以在每一批之后被总结？\n[ ] 有没有什么信息是我通过工具调用逐步发现的，其实可以提前提供？\n[ ] 有没有筛选/分类步骤可以交给更小的模型来完成？\n[ ] 是否存在一个短路条件——也就是循环已经做得足够好、再多迭代也几乎不增加价值的那个点？\n\n**第四步——实施一项优化。** 从你的清单中选出影响力最大的一项改动，并更新对应的技能或工作流。\n\n**第五步——再次测量。** 在同一个任务上运行优化后的循环。token 数量是否下降了？输出的质量有没有变化？\n\n**第六步——添加一个短路条件。** 修改你的循环，在每次迭代后加入一个明确的停止检查：\n```\nAfter each step, assess: has the goal been achieved well enough to stop?\nIf yes, compile results and stop early.\nIf no, continue to next iteration.\n```\n\n**目标：** 在保持输出质量不变或更好的前提下，把循环的 token 成本至少降低 30%。"
+    },
+    {
+      "type": "quiz",
+      "question": "一个 15 轮迭代的研究循环，正在把工具调用结果不断累积到上下文窗口里。到第 15 轮时，上下文已经达到 40,000 token，成本很高。最有效的结构性修复方案是什么？",
+      "options": [
+        "在所有迭代中都使用更便宜的模型",
+        "把最大迭代次数减少到 10 次",
+        "每经过 3-5 次迭代，就把累积的工具调用结果总结成 3 个要点，并丢弃原始历史记录——这样能在保留已获得知识的同时，限制上下文的增长",
+        "增大 token 预算，以容纳这个庞大的上下文"
+      ],
+      "correct": 2,
+      "explanation": "上下文总结是应对复合增长的上下文成本最有效的修复方案。与其把每次工具调用的结果原封不动地不断累积，不如定期进行总结，把已经了解到的信息压缩成紧凑的形式，并丢弃冗长的原始输出。这能防止上下文随着迭代次数线性增长。更换模型有一定帮助，但没有解决根本原因。减少迭代次数可能会削减结果。增大预算只是接受了这种低效。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在运行一个循环，为一份研究报告寻找 5 篇高质量资料。这个循环在第 8 轮迭代后就已经找到了 5 篇优质资料，但被设置为要运行 20 轮迭代。你应该加上什么？",
+      "options": [
+        "让它跑完全部 20 轮——资料越多总是越好",
+        "一个短路条件，一旦找到 5 篇优质资料就停止循环，而不是无论如何都跑完全部 20 轮",
+        "既然循环还有预算剩余，就把目标提高到 10 篇资料",
+        "在第 10 轮迭代处加一个人工检查点"
+      ],
+      "correct": 1,
+      "explanation": "短路条件在这里是完全正确的做法。一旦目标已经达成（5 篇高质量资料），继续运行循环只会浪费 token，却没有相应的收益。超出所需数量的更多资料只会增加噪音和成本。短路条件会在每次迭代后加入一次检查：'我们是否已经找到 5 篇优质资料？如果是，就停止并进行综合。'这是最简单、也是影响力最大的效率模式之一——够了就停。"
+    },
+    {
+      "type": "quiz",
+      "question": "一个循环包含一个筛选步骤（把 1,000 个条目分类为相关/不相关）和一个处理步骤（对相关条目进行深入分析）。最具成本效益的模型分配方式是什么？",
+      "options": [
+        "两个步骤都使用能力最强的模型",
+        "筛选环节使用更便宜、更快的模型（比如 Haiku），主力模型（Sonnet）只用于深入分析——分类是一项复杂度较低的任务，小模型也能胜任",
+        "用同一个模型的两个实例并行运行",
+        "在引入任何 AI 之前，先用基于规则的系统完成筛选"
+      ],
+      "correct": 1,
+      "explanation": "模型分层是 AI 系统中最有效的成本策略之一。分类和筛选正是那种大模型和小模型之间性能差距很小、但成本差距很大的任务——Haiku 4.5 每 token 的价格比 Sonnet 4.6 便宜约 3 倍。让 1,000 个条目先经过 Haiku 筛选，再让其中 100 个相关条目经过 Sonnet 做深入分析，其质量几乎与全部 1,000 个条目都用 Sonnet 处理相当，但成本却只是后者的一小部分。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 21-11 课。** 你已经理解了 token 成本是如何随着循环迭代和上下文累积而复合增长的、五种成本削减模式（总结、前置信息、模型分层、批量处理、缓存）、如何设计短路条件，以及预算感知型循环设计。你现在能够构建出既高质量又注重成本的循环了。"
+    }
+  ],
+  "nextLesson": "21-12",
+  "prevLesson": "21-10"
+}

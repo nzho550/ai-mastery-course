@@ -2,6 +2,7 @@ import { icons } from './icons.js';
 import { getLessonStatus } from './progress.js';
 import { navigate } from './router.js';
 import { qs } from './utils.js';
+import { t } from './i18n.js';
 
 let curriculum = null;
 let currentId  = null;
@@ -36,9 +37,9 @@ export function setActiveLesson(id) {
 }
 
 function statusIcon(status) {
-  if (status === 'complete')    return `<span class="lesson-status complete" title="Complete">${icons.check}</span>`;
-  if (status === 'in-progress') return `<span class="lesson-status progress" title="In progress">${icons.halfCircle}</span>`;
-  return `<span class="lesson-status" title="Not started">${icons.circle}</span>`;
+  if (status === 'complete')    return `<span class="lesson-status complete" title="${t('lessonStatus.complete')}">${icons.check}</span>`;
+  if (status === 'in-progress') return `<span class="lesson-status progress" title="${t('lessonStatus.inProgress')}">${icons.halfCircle}</span>`;
+  return `<span class="lesson-status" title="${t('lessonStatus.notStarted')}">${icons.circle}</span>`;
 }
 
 function updateLessonIcon(id, status) {
@@ -62,7 +63,7 @@ function render() {
     const header = document.createElement('div');
     header.className = 'part-header';
     header.innerHTML = `
-      <span>Part ${part.number} — ${part.title}</span>
+      <span>${t('part.label', { number: part.number })} — ${part.title}</span>
       <span class="chevron">${icons.chevronDown}</span>
     `;
     header.addEventListener('click', () => {

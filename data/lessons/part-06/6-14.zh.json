@@ -1,0 +1,99 @@
+{
+  "id": "6-14",
+  "title": "GitHub Copilot CLI —— 终端原生的 AI Agent",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": ["copilot", "cli", "terminal", "agents", "automation", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nVS Code 并不是 Copilot 唯一的栖身之地。**GitHub Copilot CLI** 是一个完全自主的、原生运行在终端中的编码 agent，你可以直接从命令行运行它——不需要任何 IDE。\n\n这个 CLI 已经发展成一个完整的独立开发环境：它会规划、构建、审阅，并跨会话保持记忆。它可以把工作委托给后台的云端 agent，而你在终端中继续做别的事情。它拥有持久化记忆，会随着时间推移逐渐建立起对你代码库的理解。\n\n对于大量工作在终端、脚本和自动化流水线中的政府工作人员和分析师来说，这个 CLI 往往比每次为了 AI 任务切换到 VS Code 更快。你将学到：\n- 如何安装和设置 Copilot CLI\n- 所有关键的斜杠命令及其作用\n- 专门的内置 agent\n- 会话上下文管理与记忆功能\n- 工具权限与安全控制"
+    },
+    {
+      "type": "text",
+      "content": "## 安装 GitHub Copilot CLI\n\nCopilot CLI 现已对所有付费 Copilot 订阅用户开放（Individual、Business、Enterprise）。\n\n### 安装方式\n\n**Windows（WinGet —— 推荐，自动更新）：**\n```\nwinget install GitHub.CopilotCLI\n```\n\n**Windows（npm）：**\n```\nnpm install -g @github/copilot-cli\n```\n\n**Mac（GitHub CLI + 扩展 —— 推荐）：**\n```\nbrew install gh\ngh extension install github/gh-copilot\n```\n\n**通用（shell 安装脚本）：**\n```\ncurl -fsSL https://cli.github.com/copilot/install.sh | sh\n```\n\n### 首次设置\n\n安装完成后，进行身份验证：\n```\ngh auth login\n```\n按照提示用你的 GitHub 账号登录。Copilot CLI 使用你现有的 GitHub Copilot 订阅——不需要单独计费。\n\n启动一个会话：\n```\ngh copilot\n```\n或者，如果你的安装设置了更短的别名，使用 `copilot`。\n\n你会看到一个提示符。你现在正在与一个拥有完整 shell 访问权限的、原生运行在终端中的 AI agent 对话。"
+    },
+    {
+      "type": "text",
+      "content": "## 核心斜杠命令\n\nCopilot CLI 有一套斜杠命令，用于控制会话、管理上下文并触发特定行为。\n\n### 会话管理命令\n\n**`/diff`**\n以带语法高亮的行内差异形式，展示当前会话中所做的全部代码改动。你可以针对具体行添加注释，并把它们作为结构化反馈提交。可以在“会话改动”和“分支差异”之间切换，查看相对于 main 分支的变化。\n```\n/diff\n```\n\n**`/review`**\n直接在 CLI 中分析已暂存或未暂存的改动，在提交前做一次快速的合理性检查。它给出的审阅质量与 GitHub.com 上的 PR 审阅相当，但针对的是尚未提交的本地改动。\n```\n/review\n```\n\n**`/compact`**\n手动压缩会话上下文。Copilot CLI 会在上下文使用达到 80% 时自动压缩，但你也可以在开始一项新的主要任务之前手动触发——清除旧的上下文，给新任务腾出最大空间。\n```\n/compact\n```\n\n**`/resume`**\n恢复之前的会话。Copilot CLI 会保存会话历史——你可以列出之前的会话，并从中断的地方精确地继续下去，哪怕已经过去了好几天。\n```\n/resume\n```\n\n**`/model`**\n在会话中途切换 AI 模型。\n```\n/model\n```\n显示可用的模型。选择一个即可切换。从那一刻起，会话会以新模型继续。\n\n### `/chronicle` 命令 —— 你的 AI 工作日志\n\nChronicle 会分析你过去多个会话的历史，提取有用的模式和摘要。\n\n**`/chronicle standup`** —— 生成一份站会报告：总结你最近在 CLI 会话中做了什么。适合早晨站会或每周汇报使用。\n\n**`/chronicle tips`** —— 审阅你的会话，基于你实际使用中的模式，给出更高效使用 Copilot CLI 的个性化建议。\n\n**`/chronicle improve`** —— 分析那些 Copilot 误解了你意图的会话，生成自定义指令建议，以防止未来再次出现同样的误解。\n\n**`/chronicle search [query]`** —— 在你的会话历史中搜索与某个查询相关的会话。适合用来找到你之前解决某个特定问题的那次对话。"
+    },
+    {
+      "type": "text",
+      "content": "## 专门的内置 Agent\n\n当任务匹配某个专业能力时，Copilot CLI 会自动委托给专门的子 agent。你不需要手动召唤它们——Copilot 会根据你提出的问题自动路由。\n\n### Explore Agent\n快速代码库分析。当你询问关于代码的问题时（“X 定义在哪里？”“Y 是如何运作的？”“哪些文件处理身份验证？”），Copilot 会委托 Explore 快速分析代码库，而不占用主上下文窗口的空间。\n\nExplore agent 会快速阅读代码并汇报发现。就像有一位资深开发者帮你快速阅读代码，并总结他们的发现。\n\n### Task Agent\n运行构建和测试。当你让 Copilot 验证某件事、运行测试套件，或检查构建是否成功时，Task 会负责执行，并把结果汇报给主 agent。\n\n### Code Review Agent\n高信号量的改动审阅。当你要求 Copilot 审阅代码时会被调用——无论是通过 `/review`，还是直接要求它评估一份差异。它专注于可操作的问题，而不是表面的风格评论。\n\n### Plan Agent\n实现规划。当你问“我该如何实现 X？”或“Y 的最佳方案是什么？”时，Plan 会在写任何代码之前先创建一份结构化的实现计划。适合在动手实现之前先对齐方案。\n\n### 使用 `&` 进行后台委托\n在任何提示词前加上 `&` 前缀，即可把任务委托给后台的 Copilot 云端 agent。你的终端会保持空闲。使用 `/resume` 来查看或继续这个后台会话。\n\n```\n& 修复身份验证模块中所有失败的测试并创建一个 PR\n```\nCopilot 会启动云端 agent，你立即拿回终端的控制权，agent 会在云端继续工作。"
+    },
+    {
+      "type": "text",
+      "content": "## 上下文管理与记忆\n\n### 上下文窗口\n你会话中的每一条消息、每一次回应、每一次工具调用，以及每一条系统指令，都会占用 Copilot 上下文窗口中的空间。当它被填满时，较早的上下文会丢失，这可能导致 Copilot 忘记对话中较早的部分。\n\nCopilot CLI 会自动管理这个问题：\n- **上下文使用达到 80%：** 自动压缩会在后台开始。会话不会中断。\n- **上下文使用达到 95%：** CLI 会短暂暂停，等待压缩完成后再继续。\n- **手动压缩：** 随时运行 `/compact`，在开始一项新的主要任务之前预先清理空间。\n\n### Copilot Memory —— 持久化理解\nCopilot Memory 是一项功能，让 Copilot 跨会话地为你的仓库建立持久化理解。它会在工作过程中存储记忆——编码约定、架构决策、命名模式、反复出现的问题。\n\n这些记忆会在未来的会话中自动加载，所以你不需要每次都重新解释你的项目。可以把它想象成 Copilot 通过观察你的工作，逐渐建立起属于它自己的 `copilot-instructions.md`。\n\n你可以用以下命令查看和管理记忆：\n```\n/memory list\n/memory forget [memory-id]\n```\n\n### 工具权限与安全\n\n你可以精确控制 Copilot 能使用哪些工具。这对安全敏感的环境至关重要。\n\n```bash\n# 只允许特定工具\ncopilot --allow-tool='shell(grep)' --allow-tool='shell(cat)'\n\n# 禁止特定的危险命令\ncopilot --deny-tool='shell(rm)'\ncopilot --deny-tool='shell(git push)'\n\n# 允许特定的 git 子命令\ncopilot --allow-tool='shell(git add)' --deny-tool='shell(git push)'\n```\n\nWeb 抓取权限在 `~/.copilot/config` 中控制：\n```yaml\nallowed_urls:\n  - \"https://docs.github.com/*\"\ndenied_urls:\n  - \"*\"\n```\n\n这样设置允许 Copilot 抓取 GitHub 文档，但不能抓取其他任何内容——在需要控制外部数据访问的政府环境中很有用。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**政府环境的安全提示：** Copilot CLI 可以执行 shell 命令。在政府系统上使用它之前，请检查你所在组织关于以下事项的政策：\n1. 在政府管理的硬件上使用 AI 工具\n2. 哪些数据可以发送给外部 AI 服务（即使是企业版）\n3. AI 执行命令是否需要额外的审批\n\n使用 `--deny-tool` 标志来限制 Copilot 执行破坏性操作（rm、git push --force、数据库写入），直到你对它在某个具体任务上的判断力有信心为止。"
+    },
+    {
+      "type": "text",
+      "content": "## 自定义 Agent\n\n你可以把自己的专属 agent 定义为 Markdown 文件。自定义 agent 拥有特定的专长、有限的工具集，以及特定的指令。\n\n**示例：一个合规检查 agent**\n\n创建 `~/.copilot/agents/compliance-check.md`（或者放在你仓库的 `.copilot/agents/` 中）：\n```markdown\n---\nname: compliance-check\ndescription: 检查代码改动是否符合政府合规要求\ntools:\n  - read_file\n  - list_files\n  - search_files\n---\n\n你是一名政府合规检查员。审阅代码时，检查以下内容：\n1. PII 暴露：变量、日志或输出中是否包含个人数据\n2. 审计日志：所有数据修改都必须记录用户 ID 和时间戳\n3. 错误信息安全性：错误信息不得暴露系统内部细节\n4. 访问控制：所有数据访问必须先检查用户权限\n\n对于发现的每个问题：写明文件、行号、具体的顾虑，以及建议的修复方式。\n不要建议代码改动——只识别和解释问题。\n```\n\n调用它：`copilot use compliance-check`\n\n然后让它审阅你的改动。它使用只读工具和合规专属指令运作，与你的主编码 agent 是分开的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "安装 Copilot CLI 并运行你的第一次会话",
+      "content": "设置好 Copilot CLI，从头到尾完成一个真实的任务。\n\n**第 1 步 —— 安装**\n从本课上文中选择你的安装方式。对 Windows 用户来说：`winget install GitHub.CopilotCLI` 最简单。\n\n**第 2 步 —— 身份验证**\n```\ngh auth login\n```\n用拥有你的 Copilot 订阅的 GitHub 账号登录。\n\n**第 3 步 —— 导航到一个项目文件夹**\n```\ncd path/to/your/project\n```\n\n**第 4 步 —— 启动一个会话**\n```\ngh copilot\n```\n\n**第 5 步 —— 运行以下探索性提示词：**\n```\n用 3 句话解释这个项目是做什么的。\n```\n```\n列出这个项目中最重要的 5 个文件，以及每个文件的作用。\n```\n```\n一个新开发者需要做哪些准备才能在本地运行这个项目？\n```\n\n**第 6 步 —— 运行 `/diff`**\n```\n/diff\n```\n如果你做过任何改动，会看到它们以高亮差异的形式展示。如果没有，输出为空。\n\n**第 7 步 —— 查看会话 chronicle**\n```\n/chronicle standup\n```\n在你第一次会话中，可能没有什么可总结的，但运行一下以确认它能正常工作。\n\n**第 8 步 —— 切换模型**\n```\n/model\n```\n选择一个不同的模型（如果有的话，选 Claude Sonnet）。问同样的探索性问题。对比输出质量。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A —— 用 CLI 修复真实 bug",
+      "content": "使用 Copilot CLI 在不打开 VS Code 的情况下找到并修复一个真实 bug。\n\n**第 1 步 —— 在你的项目中找一个真实的失败测试或已知 bug。** 如果没有现成的，就故意引入一个 bug：循环中的差一错误、缺少空值检查、错误的条件判断。\n\n**第 2 步 —— 在你的项目目录中启动一个 CLI 会话。**\n\n**第 3 步 —— 描述这个 bug：**\n```\n测试 test_[name] 失败了。找出原因并修复它。\n```\nCopilot 会读取这个测试，找到被测试的代码，分析失败原因。\n\n**第 4 步 —— 让它应用修复。** 审阅它提出的方案。输入 `yes` 允许它编辑文件。\n\n**第 5 步 —— 验证：**\n```\n运行测试，确认修复有效。\n```\n\n**第 6 步 —— 审阅改动：**\n```\n/review\n```\n查看 Copilot 对它所做改动的分析，以及看起来是否干净。\n\n**第 7 步 —— 为这次会话生成 chronicle：**\n```\n/chronicle standup\n```\n它是否准确地总结了你刚才做的事情？\n\n**衡量：** 相比在 VS Code 中做同样的任务，这次用了多长时间？对于这类 bug，CLI 工作流更快还是更慢？"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 B —— 后台委托",
+      "content": "使用 `&` 前缀把任务运行在后台的云端 agent 中，同时你继续工作。\n\n**第 1 步 —— 在你的项目中启动一个 Copilot CLI 会话。**\n\n**第 2 步 —— 给出一个后台任务**（需要花一些时间的事情）：\n```\n& 在整个代码库中搜索所有对数据库操作没有错误处理的函数。\n创建一个名为 missing-error-handling.md 的文件，列出：文件名、函数名、行号，以及为什么这是一个风险。\n```\n\n`&` 前缀会把这个任务委托到云端。你会立即拿回终端的控制权。\n\n**第 3 步 —— 在它运行期间继续做其他工作。** 这正是要点所在——你不需要等待。\n\n**第 4 步 —— 查看后台会话：**\n```\n/resume\n```\n选择这个后台会话。查看云端 agent 发现和产出了什么。\n\n**第 5 步 —— 审阅 `missing-error-handling.md`**\n这份文件准确吗？被识别出的函数是否真的缺少错误处理？\n\n**关键洞察：** 后台委托对于长时间的分析任务（扫描整个代码库、生成全面的文档、带分析的测试运行）最有价值，这些任务原本会让你的终端阻塞好几分钟。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C —— 高压下的上下文管理",
+      "content": "刻意对上下文管理进行压力测试，以理解何时以及如何使用 /compact。\n\n**第 1 步 —— 在一个大型项目（或你手头最大的项目）中启动一个全新的 CLI 会话。**\n\n**第 2 步 —— 进行一次长对话。** 就代码库提出 8-10 个问题，做一些代码改动，运行一些工具。持续下去，直到 Copilot 看起来开始“忘记”较早的上下文。\n\n**第 3 步 —— 测试上下文保留情况：**\n询问你在第 1 步中讨论过的某个具体内容：\n```\n我之前问过关于 [某个主题] 的问题。你当时发现了什么？\n```\n它还记得吗？如果不记得，说明部分上下文可能已经丢失。\n\n**第 4 步 —— 手动运行 /compact：**\n```\n/compact\n```\n\n**第 5 步 —— 开始新的一段工作。** 注意 Copilot 保留了关于你项目的关键事实，但对话历史被总结压缩了。\n\n**第 6 步 —— 测试记忆：**\n做一个涉及 Copilot 之前见过的模式的任务。压缩之后，它是否还记得你在会话早期的编码约定？\n\n**需要记录的洞察：** 一次会话大概进行到什么程度，上下文退化会变得明显？把这个记下来——它能帮你判断什么时候该主动运行 /compact。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 D —— 为安全使用配置工具权限",
+      "content": "为一个注重安全的环境配置 Copilot CLI。\n\n**场景：** 你想用 Copilot CLI 来协助代码分析和编写，但不希望它能够：删除文件、推送到远程 git，或访问已批准文档站点之外的网络。\n\n**第 1 步 —— 创建一个受限的启动别名。**\n在你的 shell 配置文件中（`.bashrc`、`.zshrc`，或 PowerShell profile）：\n```bash\nalias safe-copilot='gh copilot --deny-tool=\"shell(rm)\" --deny-tool=\"shell(git push)\" --deny-tool=\"shell(curl)\" --deny-tool=\"shell(wget)\"'\n```\n\n**第 2 步 —— 在 `~/.copilot/config` 中配置允许的 URL：**\n```yaml\nallowed_urls:\n  - \"https://docs.github.com/*\"\n  - \"https://docs.python.org/*\"\n  - \"https://docs.microsoft.com/*\"\ndenied_urls:\n  - \"*\"\n```\n这样设置允许 Copilot 抓取官方文档，但不能抓取其他任何内容。\n\n**第 3 步 —— 测试这些限制。**\n用 `safe-copilot` 启动一个会话。让它删除一个测试文件：\n```\n删除文件 test_temp.txt\n```\nCopilot 应该会拒绝，或报告 rm 工具被禁止使用。\n\n**第 4 步 —— 测试网络抓取限制。**\n让它抓取一个未被批准的 URL 的内容。它应该会失败，或报告该 URL 被禁止。\n\n**第 5 步 —— 在团队 README 中记录你的配置**，让每个人都使用相同的安全设置。\n\n**成果：** 一套能协助编码任务、但被锁定在破坏性或未授权操作之外的 Copilot CLI 设置——适用于受监管的环境。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 Copilot CLI 会话正在运行一次长时间的代码库分析，而你需要立即开始处理另一个完全不相关的任务。你应该怎么做？",
+      "options": [
+        "等分析完成——一次会话只能做一件事",
+        "打开第二个终端窗口，在那里启动一个新的 Copilot CLI 会话",
+        "在新任务提示词前输入 &，把这次分析委托给后台的云端 agent，从而释放当前终端来处理新任务",
+        "用 /compact 取消这次分析，用新任务重新开始"
+      ],
+      "correct": 2,
+      "explanation": "& 前缀会把当前任务委托给 Copilot 的后台云端 agent，并立即归还你的终端。云端 agent 会继续进行分析，而你可以在同一个终端会话中处理别的事情。之后用 /resume 来查看后台 agent 的进度或结果。打开第二个终端也可行，但集成度较低——你会失去当前会话的上下文。"
+    },
+    {
+      "type": "quiz",
+      "question": "在项目上使用了两周 Copilot CLI 后，你运行了 /chronicle improve。它会生成什么？",
+      "options": [
+        "过去两周你写的所有代码的摘要",
+        "关于 Copilot 完成任务速度的性能报告",
+        "基于 Copilot 误解你意图的模式而生成的自定义指令建议，以防止未来的会话中再出现同样的问题",
+        "按使用频率排序的、你用过的所有斜杠命令列表"
+      ],
+      "correct": 2,
+      "explanation": "/chronicle improve 会分析你会话历史中的模式，找出 Copilot 生成了需要修正的内容的地方——你说过“不，不是这样”、重写了它生成的内容，或拒绝了它的方案。基于这些模式，它会生成具体的自定义指令建议，如果加入你的配置中，就能防止 Copilot 在未来再犯同样的错误。这是一个学习循环，让 Copilot 随着时间推移，越来越擅长处理你的具体工作。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-14 课完成。** GitHub Copilot CLI 让你无需打开 VS Code 就能拥有一个完整的 agentic AI 开发环境。会话管理、持久化记忆、后台委托，以及工具权限控制，让它成为一个严肃的工具——而不是一个玩具。对于生活在终端里的分析师和开发者来说，CLI 结合 `&` 后台模式，往往比任何基于 IDE 的工作流都更快。第 6-15 课讲的是 Copilot 在 Pull Request 和自动代码审阅方面的应用——Copilot 如何参与你团队在 GitHub.com 上的审阅流程。"
+    }
+  ],
+  "nextLesson": "6-15",
+  "prevLesson": "6-13"
+}

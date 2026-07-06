@@ -1,0 +1,125 @@
+{
+  "id": "9-1",
+  "title": "Aider——基于终端的 AI 编程",
+  "part": 9,
+  "estimatedMinutes": 60,
+  "tags": [
+    "aider",
+    "ai-coding",
+    "terminal",
+    "git"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将安装并运行 Aider，理解它为什么会与 Claude Code 这样的工具并存，并亲眼见证它最核心的特点：每一次 AI 编辑都会自动变成一次 git 提交（commit）。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 Aider？\n\nAider 是一款开源的、基于终端的 AI 编程助手（agent）。和 Claude Code 一样，你在终端里运行它，用简单的英语（或中文）给它下达指令。但与 Claude Code 不同的是，它对一件事有着近乎执着的坚持：**git**。\n\nAider 对你代码所做的每一次改动，都会自动提交（commit）到你的 git 历史记录中，并附上有意义的提交信息。你始终能拥有一份完整、可回溯的记录，清楚地知道 AI 做了什么、为什么这么做。\n\nAider 由 Paul Gauthier 创建，完全免费且开源。它支持大多数主流 AI 模型——Claude、GPT-5、Gemini，以及通过 Ollama 运行的本地模型。本课中我们将搭配 Claude 使用它。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**前置条件：** 你的电脑上必须安装 Python。在 PowerShell 中运行 `python --version` 来检查。如果看到 `Python 3.x.x`，就说明你已经准备好了。如果没有，请从 python.org 下载 Python，安装时使用默认设置，并确保在安装过程中勾选 **“Add Python to PATH”**。"
+    },
+    {
+      "type": "text",
+      "content": "## 安装 Aider\n\n使用 pip（Python 的包管理器）来安装 Aider：\n\n```bash\npip install aider-chat\n```\n\n安装完成后，验证是否成功：\n\n```bash\naider --version\n```\n\n你应该会看到类似 `aider 0.x.x` 的版本号。\n\nAider 需要访问某个 AI 模型。由于你在第 11 部分的设置中已经拥有了 Anthropic API 密钥，可以在启动前设置它：\n\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\n```\n\n或者在你的项目文件夹中创建一个 `.env` 文件，内容如下：\n\n```plaintext\nANTHROPIC_API_KEY=sk-ant-your-key-here\n```\n\nAider 会自动读取 `.env` 文件，这样你就不用每次会话都重新设置这个变量了。"
+    },
+    {
+      "type": "text",
+      "content": "## 启动 Aider\n\nAider 必须在一个 **git 代码仓库** 内运行。进入你的项目文件夹并启动它：\n\n```bash\ncd Documents\\ai-course-projects\naider --model claude-sonnet-4-6\n```\n\n`--model` 参数告诉 Aider 使用哪个 AI 模型。`claude-sonnet-4-6` 是当前的 Claude Sonnet 模型——对大多数编程任务来说既快又强大。\n\n你会看到类似这样的提示：\n\n```plaintext\nAider v0.x.x\nModel: claude-sonnet-4-6\nGit repo: .git\nRepo-map: using 1024 tokens\n> \n```\n\n那个 `>` 就是你输入指令的地方。"
+    },
+    {
+      "type": "text",
+      "content": "## /add 命令——把文件放入上下文\n\nAider 不会自动读取项目中的每一个文件。你需要用 `/add` 命令告诉它该处理哪些文件：\n\n```plaintext\n/add exercises/about-me.html\n/add exercises/practice.js\n```\n\n现在 Aider 就知道了这两个文件，可以在一条指令中同时编辑它们。这是有意为之的设计——它能让上下文保持聚焦，让 AI 的编辑更加精准。\n\n你可以按需添加任意多个文件。用 `/ls` 列出已加载的文件。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**为什么要指定文件？** Aider 会构建一份“代码仓库地图”（repo map）——对项目中每个文件的概要总结——但只会深入读取你用 `/add` 添加的文件。这样能保持较低的 token 用量和较快的响应速度。只添加与当前任务相关的文件即可。"
+    },
+    {
+      "type": "text",
+      "content": "## Git 原生工作流\n\n这正是 Aider 与本课程中所有其他工具的不同之处。\n\n当你请求 Aider 做出改动并批准后，Aider 会：\n1. 编辑文件\n2. 暂存（stage）改动\n3. 自动提交（commit），并附上描述性的提交信息\n\n你永远不需要自己写提交信息。一次会话结束后，你可以运行 `git log`，看到一份清晰的历史记录，记录着 AI 所做的每一次改动：\n\n```plaintext\ncommit a3f1b2c\nAuthor: Aider <aider@example.com>\nDate:   ...\n\n    Add navigation bar to about-me.html and date formatter to practice.js\n```\n\n当出现问题时，这一点非常有用。你可以像对待人类写的代码一样，用 `git diff`、`git revert` 或 `git bisect` 来回溯 AI 的每一次编辑。"
+    },
+    {
+      "type": "text",
+      "content": "## Aider 与 Claude Code——如何选择\n\n两款工具都很强大。正确的选择取决于你的工作流：\n\n| | Aider | Claude Code |\n|---|---|---|\n| 界面 | 仅终端 | 终端（并集成 VS Code） |\n| Git 提交 | 每次改动自动提交 | 手动——你自行决定何时 commit |\n| 文件选择 | 你用 /add 指定 | Claude 会读取整个项目 |\n| 模型支持 | 支持多个厂商 | 仅支持 Claude |\n| 成本 | 免费（开源） | 订阅制（Claude Pro / API） |\n| 最适合 | 聚焦式编辑、干净的 git 历史 | 全项目任务、代理式（agentic）工作 |\n\n许多开发者两者兼用：用 Aider 进行快速的针对性编辑并自动留存提交历史，用 Claude Code 处理更大规模的探索性工作。\n\nAider 会自动提交一切，这既是它最大的优点，也是需要谨慎对待的地方——开始之前，务必确认你身处一个状态干净的 git 仓库中。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "安装 Aider 并见证它自动提交",
+      "content": "**目标：** 安装 Aider，在你的项目中运行它，让它创建一个 Python 脚本，并观察自动生成的 git 提交。\n\n**第 1 步——安装：**\n```bash\npip install aider-chat\naider --version\n```\n\n**第 2 步——设置 API 密钥：**\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-your-key-here\"\n```\n或者在项目中创建一个包含密钥的 `.env` 文件。\n\n**第 3 步——进入你的项目并确认它是一个 git 仓库：**\n```bash\ncd Documents\\ai-course-projects\ngit status\n```\n你应该会看到类似 `On branch main, nothing to commit` 的输出。如果该文件夹不是 git 仓库，先运行 `git init`。\n\n**第 4 步——启动 Aider：**\n```bash\naider --model claude-sonnet-4-6\n```\n\n**第 5 步——添加目标文件并下达指令：**\n```plaintext\n/add exercises/practice.js\nAdd a function called formatDate that takes a JavaScript Date object and returns a nicely formatted string like \"Tuesday, June 10 2025\"\n```\n\nAider 会展示提议的改动。审阅之后，输入 `y` 接受。\n\n**第 6 步——查看 git log：**\n```bash\n/exit\ngit log --oneline -5\n```\n\n你应该会看到一条 Aider 自动创建的提交——类似 `\"Add formatDate function to practice.js\"`。\n\n**需要观察的重点：** 代码变了，git 历史也更新了，而你没有输入过一条 git 命令。这就是 Aider 的工作流。\n\n**加分项：** 运行 `git show HEAD`，查看 Aider 提交的完整 diff。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "练习 A——快速演练：Aider 多文件编辑",
+      "content": "**目标：** 用 Aider 在一条指令中编辑两个文件，并在一次原子提交（atomic commit）中同时看到两处改动。（5-10 分钟）\n\n1. 在你的项目文件夹中启动 Aider：\n```bash\naider --model claude-sonnet-4-6\n```\n2. 将两个文件加入上下文：\n```plaintext\n/add exercises/practice.js\n/add README.md\n```\n3. 用 `/ls` 确认两个文件都已加载\n4. 下达一条同时影响两个文件的指令：\n```plaintext\nAdd a JSDoc comment to the top of practice.js describing the file's purpose. Also add a line to README.md under a new section called \"Exercises\" listing practice.js and what it does.\n```\n5. 审阅提议的 diff——接受之前仔细阅读\n6. 输入 `y` 接受\n7. 退出 Aider：`/exit`\n8. 运行 `git log --oneline -3`——观察到两处文件改动只生成了一次提交\n9. 运行 `git show HEAD`——阅读完整的 diff 和 AI 生成的提交信息\n\n**需要注意的地方：** Aider 写的提交信息描述的是具体改了什么，而不是含糊的占位文字。一条指令 → 一次覆盖多个文件的干净提交。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——用 AI 实战构建：Aider 重构冲刺",
+      "content": "**目标：** 用 Aider 在多个聚焦的会话中重构一个真实的 JavaScript 文件，逐步建立起清晰的 git 历史。（25-35 分钟）\n\n1. 在 VS Code 中打开 `exercises/practice.js`，了解当前内容\n2. 启动 Aider：\n```bash\naider --model claude-sonnet-4-6\n```\n3. 添加文件：`/add exercises/practice.js`\n4. **重构第 1 步——添加输入校验：**\n```plaintext\nFor every function in practice.js, add input validation at the top of the function. If an argument is the wrong type or missing, throw a descriptive TypeError. Example: if formatDate receives a non-Date, throw TypeError('formatDate expects a Date object').\n```\n审阅 diff → 接受 → 观察提交\n\n5. **重构第 2 步——添加错误处理：**\n```plaintext\nWrap the body of each function in a try/catch. On error, log the error with console.error and return null rather than letting the error propagate.\n```\n审阅 diff → 接受 → 观察提交\n\n6. **重构第 3 步——添加模块导出：**\n```plaintext\nAdd a module.exports at the bottom of practice.js that exports all functions as named exports.\n```\n审阅 diff → 接受 → 观察提交\n\n7. **重构第 4 步——创建测试文件：**\n```plaintext\nCreate a new file exercises/practice.test.js. Write a simple test for each exported function using plain Node.js (no framework). Each test should call the function with valid input and log PASS or FAIL.\n```\n审阅 diff → 接受\n\n8. 退出 Aider 并运行：`git log --oneline -6`\n\n9. **AI 审查步骤：** 打开 Claude Code 或 Claude.ai，粘贴完整的 `practice.js`。说：“审查这段代码——找出 3 个失败场景或低效之处。不要一味认可它，要找出问题。”至少修复一个 Aider 遗漏的问题。\n\n10. 手动提交这个修复：\n```bash\ngit add exercises/practice.js\ngit commit -m \"fix: address AI review finding — [describe what you fixed]\"\n```\n\n**保留成果：** 现在你有了一个重构后的文件，具备完整的错误处理、导出、测试，以及一份记录每一步的清晰多提交 git 历史。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "练习 C——失败场景测试：Aider 出错时会发生什么？",
+      "content": "**目标：** 主动触发 Aider 的错误和边界情况，这样你就知道该如何应对。（10-15 分钟）\n\n1. 开始一个全新的 Aider 会话\n2. **失败场景 1——未提交改动的冲突：**\n在 VS Code 中手动编辑 `practice.js`，但不通过 Aider 保存。然后运行 Aider，尝试编辑同一个文件。观察 Aider 给出的关于未提交改动的警告。该如何恢复？（答案：先用 `git add` + `git commit` 提交手动改动，再启动 Aider）\n\n3. **失败场景 2——模糊的指令：**\n给 Aider 一条模糊的指令：\n```plaintext\nMake the code better\n```\n观察会发生什么——Aider 是要求澄清，还是自己猜测？仔细阅读提议的 diff。这个改动真的是你想要的吗？\n\n4. **失败场景 3——脱离上下文的文件：**\n不要用 `/add` 添加文件。而是在指令中直接按名字引用某个文件：\n```plaintext\nAdd error handling to the formatDate function in practice.js\n```\nAider 只能依靠它的代码仓库地图来工作。将这次改动的质量与练习 A 中在上下文内完成的版本做对比。\n\n5. **让 AI 诊断：**\n打开 Claude Code，说：“我在用 Aider 做 AI 辅助编程。开发者使用 Aider 时最常见的、意外破坏 git 历史的 3 种方式是什么？我该如何一一预防？”\n\n6. 将你总结的 3 条恢复方案写入 `notes/aider-recovery.md`：\n- Aider 提交了错误内容时该怎么办\n- Aider 与你的手动改动发生冲突时该怎么办\n- 会话在编辑过程中崩溃时该怎么办"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 D——真实工作流：你的个人代码质量脚本",
+      "content": "**目标：** 用 Aider 构建一个你会真正经常运行的代码质量检查脚本。（15-25 分钟）\n\n1. 想一个你在自己代码中反复需要清理的文件或模式。例如：\n   - 没有 JSDoc 注释的函数\n   - 缺少错误处理\n   - 遗留在生产代码中的 console.log 语句\n   - 命名为 `x`、`y`、`temp`、`foo` 的变量\n\n2. 启动 Aider：\n```bash\naider --model claude-sonnet-4-6\n```\n\n3. 让 Aider 创建一个质量检查脚本：\n```plaintext\nCreate a new file called scripts/check-quality.js. This script should:\n- Read all .js files in the exercises/ folder\n- Check each file for: functions without JSDoc, console.log statements, and variables shorter than 2 characters\n- Print a report: file name, issue type, line number\n- Exit with code 1 if any issues are found (so it can be used in CI)\n```\n\n4. 审阅提议的文件 → 接受\n\n5. 测试它：\n```bash\nnode scripts/check-quality.js\n```\n\n6. 根据测试输出，让 Aider 修复脚本中的问题：\n```plaintext\nThe script reported [describe the issue]. Fix it.\n```\n\n7. 脚本可以正常工作后，把它加入你在第 10-6 课中建立的 GitHub Actions 工作流（如果还没到第 10-6 课，届时再做）：\n```yaml\n- name: Run code quality check\n  run: node scripts/check-quality.js\n```\n\n8. 提交这个可用的脚本——照常让 Aider 编写提交信息\n\n9. 观察你最终的 git log——你已经构建了一个真正有用的工具，并留下了清晰、可读的历史记录"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在一个 git 仓库中工作，想用 Aider 对不同文件做三处独立的改动。会话结束后，你运行 'git log --oneline'，看到三次提交，每处改动对应一次。这种行为该如何正确解读？",
+      "options": [
+        "这是一个 bug——Aider 应该把所有改动打包成一次提交",
+        "这是预期行为——Aider 会为每一处被接受的改动进行原子提交，让你拥有细粒度、可回退的历史记录",
+        "这是一个警示信号——提交太多会拖慢你的 git 仓库",
+        "这是可选的——你可以配置 Aider 完全跳过提交"
+      ],
+      "correct": 1,
+      "explanation": "Aider 的“每次改动自动提交”行为是有意为之的设计，也是它的核心原则之一。每一处被接受的改动都会成为一次带有描述性信息的原子提交。这种细粒度非常有价值：如果三处改动中第 2 处引入了 bug，你可以精确地回退那一次提交，而不影响其他改动。这远比把三处改动都塞进一次大提交要有用得多。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Aider 编辑 'src/auth.js'，但你还没有用 /add 加载这个文件。最可能的结果是什么？",
+      "options": [
+        "Aider 会报错拒绝——它只能编辑明确添加过的文件",
+        "Aider 会完美地编辑这个文件，因为它会自动扫描整个代码仓库",
+        "Aider 会依据它的代码仓库地图摘要来工作，相比拥有完整上下文，这可能产生质量较低或不完整的改动",
+        "Aider 会创建一个名为 src/auth.js 的新空文件"
+      ],
+      "correct": 2,
+      "explanation": "Aider 会构建一份代码仓库地图——对所有文件的概要总结——但只会深入读取你明确 `/add` 的文件。如果上下文中没有完整的文件内容，Aider 可能会遗漏变量名、现有函数签名或导入路径等细节。为了获得最佳效果，在下达指令之前，务必先 `/add` 你想让 Aider 修改的具体文件。"
+    },
+    {
+      "type": "quiz",
+      "question": "一位同事说他不用 Aider，因为“自动提交很烦人——我想自己控制什么时候提交。”最准确的回应是什么？",
+      "options": [
+        "他说得不对——自动提交是强制性的，无法关闭",
+        "Aider 可以用 --no-auto-commits 参数启动来关闭自动提交，不过这样会失去按改动分组的审计记录",
+        "自动提交无法撤销，这让 Aider 在生产代码库中并不安全",
+        "这位同事应该改用 Cursor，它同样会自动提交，但提交信息写得更好"
+      ],
+      "correct": 1,
+      "explanation": "Aider 支持 `--no-auto-commits`（或等效的配置项），供那些更希望手动提交的开发者使用。这会关闭每次接受改动后的自动提交。代价是失去了 Aider 最核心的差异化优势——按改动分组的细粒度历史记录。许多开发者一开始就启用自动提交，逐渐体会到清晰历史记录的好处，之后就再也没有关闭过它。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**本课完成。** 你已经安装了 Aider，用它编辑了一个文件，并亲眼见证了它自动生成 git 提交的过程。Aider 的定位很明确：当你想要一份干净、可审计的 AI 编辑历史，而且不想多做一步操作时，它就是最佳工具。"
+    }
+  ],
+  "nextLesson": "9-2",
+  "prevLesson": "6-8"
+}

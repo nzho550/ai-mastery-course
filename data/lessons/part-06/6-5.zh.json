@@ -1,0 +1,92 @@
+{
+  "id": "6-5",
+  "title": "在 VS Code 中进行 AI 辅助调试",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": [
+    "debugging",
+    "vscode",
+    "copilot",
+    "ai-coding"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n调试——找出并修复代码中的错误——传统上是编程中最让人抓狂的部分。AI 极大地改变了这一点。在这节课中，你将搭建一套系统化的工作流：出现错误 → AI 诊断 → 你理解修复方案 → 应用它。目标不只是修好这个 bug，而是理解修复方案*为什么*有效，这样同一类错误就不会再次绊倒你。"
+    },
+    {
+      "type": "text",
+      "content": "## 三类 bug（以及 AI 如何应对每一类）\n\n**语法错误**——违反语言规则的代码（比如把 `console.log` 写成 `consol.log`，或者少了一个右括号）。VS Code 甚至在你运行代码之前就会用红色标出这些错误。AI 修复这类错误几乎是完美的——它们有确定性的正确答案。\n\n**逻辑错误**——代码能运行、不会崩溃，但结果不对。比如一个循环多跑了一次，或者一个函数返回了 `undefined` 而不是一个值。这类错误更难处理。AI 通常能发现它们，但你需要告诉它*期望*的行为是什么，而不仅仅是*实际*的行为。\n\n**环境错误**——缺少软件包、Node.js 版本不对、权限问题、路径问题等。AI 可以帮你处理常见的问题（它见过数百万条错误信息），但有时它帮不上忙，因为问题是你机器特有的配置问题。当 AI 在环境错误上卡住时，把完整的错误信息粘贴到 Perplexity 里——网页搜索的上下文常常能找到确切的解决方案。\n\n知道你面对的是哪一类问题，能帮你在向 AI 提问之前就设定好合理的预期。"
+    },
+    {
+      "type": "text",
+      "content": "## 调试工作流\n\n这是一个可重复使用的流程：\n\n**1. 阅读错误信息。** 不要立刻把它粘贴给 AI。错误信息通常会告诉你文件名和行号。先自己导航过去看看。\n\n**2. 查看 Problems 面板。** 在 VS Code 中，打开 **View → Problems**（或者点状态栏中的红色/黄色指示器）。这会把所有代码检查（linting）错误和 TypeScript 问题汇总在一个列表里，甚至在你运行代码之前。\n\n**3. 使用 Copilot Chat 的 `/fix` 命令。** 选中出问题的代码（或错误高亮的那一行），用 `Ctrl+Alt+I` 打开 Copilot Chat，输入 `/fix`。Copilot 会读取代码和错误上下文，提出修复方案。\n\n**4. 为运行时错误粘贴堆栈跟踪。** 如果错误是在你*运行*代码时出现的（而不仅仅是打开文件时），把终端里完整的堆栈跟踪复制粘贴到 Copilot Chat 或 Claude 中。同时也附上周围的代码。\n\n**5. 让 AI 在给出修复方案的同时给出解释。** 不要只问“修好这个”。要问“修好这个，并解释哪里出了问题、为什么你的修复方案有效”。这就是解决今天的 bug 和学会避免明天的 bug 之间的区别。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**用 AI 做橡皮鸭调试。** 经典的橡皮鸭调试法：向一个没有生命的物体（传统上是一只橡皮鸭）解释你的代码。这种“解释”的行为会迫使你更清楚地看到问题所在。用 AI 的话，这只“鸭子”会说话。告诉 Copilot Chat：“我想做 X。这是我的代码。我期望它返回 Y，但它返回了 Z。带我梳理一下实际发生了什么。”通常，把问题这样清楚地写出来，往往在 AI 回答之前你自己就已经发现了 bug。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "调试一个有问题的文件",
+      "content": "**第 1 步——创建有问题的文件**\n1. 在 VS Code 资源管理器中，右键点击 `exercises/` → **New File** → 命名为 `broken.js`\n2. 粘贴以下这段故意写错的代码（它有两个 bug）：\n\n```javascript\nfunction greetUser(name) {\n  console.log(\"Hello, \" + nme + \"!\");\n}\n\nfunction calculateTotal(items) {\n  let total = 0;\n  for (let i = 0; i <= items.length; i++) {\n    total += items[i].price;\n  }\n  return total;\n}\n```\n\n**第 2 步——让 VS Code 找出第一个 bug**\n1. 从顶部菜单栏打开 **View → Problems**\n2. Problems 面板会出现在底部——它应该会显示至少一个错误\n3. 点击这条错误——VS Code 会跳转到确切的那一行\n4. 在问 AI 之前，你能自己发现这个 bug 吗？（提示：看看 `console.log` 里面的变量名）\n\n**第 3 步——使用 Copilot Chat 的 /fix**\n1. 选中整个 `greetUser` 函数（第 1-3 行）\n2. 按 `Ctrl+Alt+I` 打开 Copilot Chat\n3. 输入：`/fix`\n4. 阅读 Copilot 的诊断——它应该能找出这个拼写错误：`nme` 应该是 `name`\n5. 应用修复\n\n**第 4 步——找出逻辑 bug**\n第二个 bug 在 `calculateTotal` 里。这段代码没有语法错误，能运行，但当 `i` 到达 `items.length` 时会在运行时崩溃。\n1. 选中 `calculateTotal` 函数\n2. 在 Copilot Chat 中输入：“找出这个函数里的逻辑 bug。解释一下循环运行时哪里出了问题，以及怎么修复。”\n3. Copilot 应该会解释：`i <= items.length` 会导致循环访问 `items[items.length]`，而这是 `undefined`。修复方法：把 `<=` 改成 `<`。\n4. 应用修复，并理解原因：JavaScript 中的数组是从零开始索引的，所以最后一个有效索引是 `items.length - 1`。\n\n**第 5 步——验证你的理解**\n在你的笔记中写下两句话：\n- bug #1 是什么？它为什么会发生？\n- bug #2 是什么？它属于哪种类型的错误（语法、逻辑还是环境）？\n\n如果你能用大白话解释清楚这两个 bug，说明你是真正从中学到了东西——而不仅仅是应用了一个修复方案。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——用 AI 调试一个真实错误",
+      "content": "这个练习让你完整走一遍 AI 辅助调试的循环，处理一个真实的错误。\n\n**第 1 步——找到或制造一个 bug。** 要么在你的代码中找一个真实的 bug，要么自己制造一个：拿一个能正常运行的 20 行 Python 脚本，故意引入一个 bug（错误的变量名、差一错误、缺少 return 语句）。\n\n**第 2 步——运行代码**，复制完整的错误信息和堆栈跟踪。\n\n**第 3 步——在问 AI 之前**——自己先阅读错误信息并形成一个假设。写下：“我认为错误在第 X 行，因为 Y。”\n\n**第 4 步——粘贴给 Claude.ai 或你的 VS Code AI：**\n```\nI have this error:\n[paste full error and stack trace]\n\nHere is the relevant code:\n[paste the function/class where the error occurs]\n\nMy hypothesis: [your guess]\n\nIs my hypothesis right? What is the actual cause? Give me the specific line to fix and the fix.\n```\n\n**第 5 步——应用修复。** 再次运行。\n\n**第 6 步——写一条笔记：** 这是哪种类型的错误？下次遇到同样的模式，你要怎么识别出来？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——在 AI 指导下使用 VS Code 调试器",
+      "content": "VS Code 调试器（断点、单步执行）比打印语句更强大。这个工作坊会用 AI 引导你走一遍它的用法。\n\n**第 1 步——问 Claude：** *“我想在 Python 中使用 VS Code 调试器。请解释：（1）什么是断点，怎么设置断点，（2）逐过程（step over）和逐语句（step into）有什么区别，（3）调试过程中如何查看变量的值，（4）什么时候调试器比打印语句更有用。”*\n\n**第 2 步——在你的代码中设置一个断点：** 点击行号左侧的空白区域（gutter），设置一个红色圆点。\n\n**第 3 步——开始调试：** 按 F5（Run and Debug）。程序会在你的断点处暂停。\n\n**第 4 步——查看变量**（在左侧的 Variables 面板中）。把鼠标悬停在变量上查看它们当前的值。\n\n**第 5 步——单步执行：** 按 F10（Step Over）逐行前进。观察变量的变化。\n\n**第 6 步——请 Claude 帮你解读你看到的内容：** *“调试器显示在这一行，变量 X 的值是 Y。我原本期望是 Z。这说明 bug 可能出在哪里？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——调试模式与反模式",
+      "content": "学习区分熟练开发者和新手的调试模式——以及 AI 如何加速每一种。\n\n**第 1 步——问 Claude：** *“描述经验丰富的开发者最常用的 5 种调试策略。对每一种，解释：什么时候用它、基本步骤，以及 AI 辅助如何改进它。”*\n\n**第 2 步——了解这些策略：**\n- 二分法调试（把问题一分为二）\n- 橡皮鸭调试（向 AI 解释）\n- 最小复现（找到能触发这个 bug 的最小代码）\n- 检查假设（你的变量真的是你以为的那样吗？）\n- 阅读错误信息（完整的信息，而不只是最后一行）\n\n**第 3 步——把其中一种策略应用**到你正在处理的一个真实 bug 上。\n\n**第 4 步——问 Claude：** *“我正在用 [策略] 调试 [描述你的 bug]。到目前为止我发现了：[描述]。接下来我该检查什么？”*\n\n**第 5 步——写一份 3 句话的调试清单**，供你下次遇到 bug 时使用。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——在 AI 帮助下写一份 bug 报告",
+      "content": "如果你在一个团队里工作，写清楚的 bug 报告至关重要。AI 能帮你更快地写出更好的 bug 报告。\n\n**第 1 步——找一个真实的 bug**，或者用一个假设的。\n\n**第 2 步——请 Claude 帮你整理 bug 报告的结构：**\n```\nI found a bug and need to write a clear bug report. Here are my notes:\n[describe what happened, what you did, what you expected, what occurred instead]\n\nWrite a structured bug report with:\n- Summary (one sentence)\n- Environment (OS, language version, relevant package versions)\n- Steps to reproduce (numbered, specific)\n- Expected behaviour\n- Actual behaviour\n- Error output\n- Possible cause (if known)\n- Severity assessment\n```\n\n**第 3 步——审查这份 bug 报告。** 它完整吗？仅凭这些步骤，别人能复现这个问题吗？\n\n**第 4 步——强制复审：** 问 Claude：*“审查这份 bug 报告。缺少了哪些信息会让诊断和修复变得更困难？一位资深开发者会想知道哪些这里没有的信息？”*\n\n**第 5 步——把这份 bug 报告模板保存**到你的提示词库中。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 Python 脚本崩溃并报出 IndexError。错误指向第 43 行。在向 AI 求助之前，你应该做什么？",
+      "options": [
+        "立刻问 AI——它的诊断速度比你自己快",
+        "查看第 43 行，找出被索引的那个列表或数组，检查崩溃时索引变量的值是多少",
+        "在第 43 行之前的每一行都加上打印语句",
+        "重启 Python 再试一次"
+      ],
+      "correct": 1,
+      "explanation": "IndexError 意味着你在尝试访问一个列表中不存在的索引。在问 AI 之前，先读懂错误：访问的是哪个变量，它的值是多少？往往快速看一眼第 43 行就能发现问题——你在一个只有 5 个元素的列表上用了索引 10。这样的理解会让你向 AI 提出的问题更具体：“我有一个包含 5 个元素的列表，我在访问索引 X，因为 [原因]——我该如何修复这个边界条件？”"
+    },
+    {
+      "type": "quiz",
+      "question": "相比在代码中添加 print() 语句，使用 VS Code 调试器的断点最主要的优势是什么？",
+      "options": [
+        "设置断点比敲打印语句更快",
+        "断点会暂停程序执行，让你一次性查看所有变量，而不需要修改代码——你可以交互式地探索程序状态",
+        "断点只对 Python 有效",
+        "断点会自动修复 bug"
+      ],
+      "correct": 1,
+      "explanation": "断点能让你暂停执行，查看完整的程序状态——所有变量、调用栈、内存中的值——而不需要修改你的源代码。打印语句只能显示你事先想到要看的内容，需要修改代码，而且如果忘记删除还会留下调试痕迹。对于复杂的 bug，调试器能揭示你根本想不到要打印的意外状态。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-5 课完成。** 你现在有了一套可重复使用的调试工作流：阅读错误信息、查看 Problems 面板、对语法错误用 /fix、对逻辑错误做出解释，并且在继续之前始终理解修复方案。在第 6-6 课中，你将完全走出 VS Code，尝试 Cursor——一款从不同角度切入 AI 辅助编程的 AI 原生编辑器。"
+    }
+  ],
+  "nextLesson": "6-6",
+  "prevLesson": "6-4"
+}

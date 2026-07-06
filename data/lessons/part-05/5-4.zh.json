@@ -1,0 +1,96 @@
+{
+  "id": "5-4",
+  "title": "打开文件夹/工作区",
+  "part": 5,
+  "estimatedMinutes": 50,
+  "tags": [
+    "vscode",
+    "beginner",
+    "workspace",
+    "folders"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你会理解在 VS Code 中打开单个文件和打开一个文件夹之间的区别——以及为什么打开文件夹几乎总是你应该做的事。\n\n你还会打开你实际的课程项目文件夹，让 VS Code 了解你工作的完整背景。"
+    },
+    {
+      "type": "text",
+      "content": "## 文件与文件夹：为什么这很重要\n\n大多数文本编辑器一次只处理一个文件：打开文件、编辑、保存，结束。VS Code *可以*这样用——但这并不是它的设计初衷。\n\nVS Code 的设计初衷是处理**文件夹**（也叫工作区）。当你打开一个文件夹时，VS Code 能够：\n- 在资源管理器面板中显示该文件夹内的所有文件和子文件夹\n- 一次性在文件夹内的每个文件中搜索文本\n- 对整个项目运行 Git 命令\n- 让 GitHub Copilot 这样的 AI 工具理解你项目的完整上下文\n- 让集成终端从正确的位置启动\n\n这里有一个关键区别：\n\n- **File > Open File**——打开单个文件。VS Code 对周围的其他文件一无所知，资源管理器面板保持为空。\n- **File > Open Folder**——打开整个文件夹。VS Code 会把这个文件夹当作你的项目。资源管理器面板会填满你的文件。这几乎总是你想要的操作。\n\n可以这样理解：打开一个文件，就像把一本书中的某一页递给别人。打开一个文件夹，就像把整本书都递给他们——他们能理解完整的上下文。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**快速快捷方式：`code .`**\n如果你打开了一个终端，并且正处于想要处理的文件夹中，可以输入 `code .` 并按 Enter。VS Code 会立即打开这个文件夹。`.` 表示“当前目录”。只有在安装时（第 5-2 课）勾选了“Add to PATH”，这个方法才有效。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是工作区（Workspace）？\n\n你会听到“工作区”这个词以两种略有不同的方式被使用：\n\n1. **非正式说法**——就是你目前在 VS Code 中打开的文件夹。大多数时候人们指的就是这个意思。\n\n2. **VS Code 多根工作区（Multi-root Workspace）**——一种特殊的 `.code-workspace` 文件，能让你同时把多个独立的文件夹添加到 VS Code 中。例如，你可能会同时打开一个前端文件夹和一个后端文件夹，两者都显示在资源管理器侧边栏中。\n\n在本课程中，我们只使用简单的版本：一次打开一个文件夹。你现在不需要多根工作区。\n\n**信任提示：** 第一次打开一个文件夹时，VS Code 可能会问：*“你信任此文件夹中文件的作者吗？”* 点击**是的，我信任作者**。VS Code 提出这个问题是出于安全考虑——对于一个装满你自己文件的文件夹，永远点击“是”。"
+    },
+    {
+      "type": "text",
+      "content": "## 如何打开一个文件夹\n\n**方法 1——从菜单打开：**\n1. 点击菜单栏中的 **File**\n2. 点击 **Open Folder...**\n3. 弹出一个文件浏览窗口\n4. 导航到你想打开的文件夹\n5. 点击**选择文件夹**（Windows）或 **Open**（Mac）\n\n**方法 2——拖放：**\n把文件资源管理器中的一个文件夹直接拖到 VS Code 窗口上。VS Code 会打开它。\n\n**方法 3——从终端打开：**\n1. 打开任意终端（PowerShell、命令提示符，或 VS Code 的集成终端）\n2. 用 `cd` 导航到该文件夹\n3. 输入 `code .` 并按 Enter\n\n**方法 4——最近打开的文件夹：**\nFile > Open Recent 显示你之前打开过的文件夹。点击其中任意一个即可快速重新打开。\n\n这四种方法效果相同。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "打开你的课程项目",
+      "content": "你在第 4.2 课创建了 `ai-course-projects` 文件夹。现在把它作为工作区在 VS Code 中打开。\n\n**第 1 步——打开该文件夹：**\n1. 在 VS Code 中，点击菜单栏中的 **File**\n2. 点击 **Open Folder...**\n3. 在文件浏览器中，导航到：`C:\\Users\\[你的名字]\\Documents\\ai-course-projects`\n   （将 `[你的名字]` 替换成你实际的 Windows 用户名——也就是文件资源管理器中 C:\\Users 下显示的名字）\n4. 点击**选择文件夹**\n5. 如果 VS Code 询问是否信任该文件夹 → 点击**是的，我信任作者**\n\n**第 2 步——确认操作成功：**\n- [ ] 左侧的资源管理器面板显示出你的文件夹结构\n- [ ] 你能看到 `exercises`、`notes` 和 `prompts` 子文件夹\n- [ ] 点击 `exercises` 展开它——第 4.6 课的 `hello.html` 应该在这里\n- [ ] 点击 `hello.html`——它会在编辑区打开\n- [ ] 查看底部的状态栏——确认它显示 `HTML` 作为语言模式\n\n**第 3 步——尝试 `code .`（可选，确认 PATH 设置正确）：**\n1. 按 Ctrl+` 打开 VS Code 内的集成终端\n2. 终端应该已经指向你的 `ai-course-projects` 文件夹\n3. 输入 `pwd` 确认你的位置\n4. 输入 `ls` 查看文件夹内容列表\n\n如果终端显示的是正确的文件夹，说明你在安装程序中设置的 PATH 生效了。\n\n这个文件夹——`ai-course-projects`——就是你在第 5 部分乃至之后所使用的工作区。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——打开并浏览一个真实项目",
+      "content": "这个训练练习最常见的 VS Code 打开工作流。\n\n**第 1 步——从你的电脑上选择一个现有文件夹**——你的文档文件夹、一个代码项目，或者新建一个并放入一些文件。\n\n**第 2 步——用三种不同方式在 VS Code 中打开它：**\n- 把文件夹拖到 VS Code 图标上\n- File → Open Folder\n- 终端：`cd [你的文件夹路径]` 然后 `code .`\n\n**第 3 步——在资源管理器中**展开文件夹树。留意不同文件类型有不同的图标。\n\n**第 4 步——打开多个文件**，用 Ctrl+Tab 在它们之间切换。\n\n**第 5 步——探索“在文件中查找”功能：** Ctrl+Shift+F。搜索你的文件中出现的任意单词。留意 VS Code 是如何在文件夹内的所有文件中搜索的。\n\n**第 6 步——向 Claude 提问：** *“我刚在 VS Code 中打开了一个文件夹。在一个陌生的项目中，我应该先做哪些事来熟悉环境？给我一个 5 步的探索流程。”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——从零搭建一个 VS Code 项目",
+      "content": "大多数真实项目都需要一个标准的文件夹结构。这个工作坊会用 VS Code 和 Claude 创建一个。\n\n**第 1 步——决定一个你会真正动手做的项目**：Python 脚本集合、一个简单的网站、一个数据分析项目、一个写作项目。\n\n**第 2 步——向 Claude 提问：** *“我正在开始一个 [描述你的项目] 项目。我应该创建什么样的文件夹结构？给出确切的文件夹和文件名，并说明每一个的用途。”*\n\n**第 3 步——用 VS Code 的资源管理器面板创建**这个结构（右键→新建文件夹、新建文件）。\n\n**第 4 步——添加一个 README 文件：** 在根目录创建 `README.md`。向 Claude 提问：*“为一个 [你的项目] 项目写一份简短的 README。包括：它是做什么的、如何设置、如何使用。”*\n\n**第 5 步——将其保存为工作区**（File → Save Workspace As），以便返回到这个确切的设置。\n\n**第 6 步——提交到 git：**\n```powershell\ngit init\ngit add .\ngit commit -m \"Initial project structure\"\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——工作区设置与 .vscode 文件夹",
+      "content": "VS Code 允许针对每个项目设置专属配置，覆盖全局设置——当不同项目需要不同配置时非常有用。\n\n**第 1 步——在 VS Code 中打开一个项目文件夹。**\n\n**第 2 步——打开工作区设置：** Ctrl+Shift+P → “Open Workspace Settings (JSON)”。这会创建一个 `.vscode/settings.json` 文件。\n\n**第 3 步——添加一个项目专属设置：**\n```json\n{\n    \"editor.tabSize\": 4,\n    \"python.defaultInterpreterPath\": \"./venv/bin/python\",\n    \"files.exclude\": {\n        \"**/__pycache__\": true,\n        \"**/.pytest_cache\": true\n    }\n}\n```\n\n**第 4 步——向 Claude 提问：** *“我正在做一个 [项目类型] 项目。为了让 VS Code 最适合这个项目，我的 .vscode/settings.json 里应该放什么？另外，为了向团队成员推荐扩展，.vscode/extensions.json 里应该放什么？”*\n\n**第 5 步——根据 Claude 的建议创建一个 .vscode/extensions.json。** 这样，打开这个项目的团队成员就会被提示安装相同的扩展。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——多根工作区",
+      "content": "多根工作区（Multi-Root Workspace）能让你同时处理多个相关文件夹——在构建一个前后端代码库分离的项目时很常见。\n\n**第 1 步——创建两个相关的文件夹：**\n```powershell\nmkdir my-project\ncd my-project\nmkdir frontend\nmkdir backend\n```\n\n**第 2 步——在 VS Code 中**打开 `my-project` 文件夹。然后添加子文件夹：File → Add Folder to Workspace → 选择 `frontend`，再添加 `backend`。\n\n**第 3 步——保存为多根工作区：** File → Save Workspace As。命名为 `my-project.code-workspace`。\n\n**第 4 步——留意**资源管理器现在同时显示两个文件夹。你可以在它们之间无缝导航。\n\n**第 5 步——在 .code-workspace 文件中添加特定于工作区的设置：**\n```json\n{\n    \"folders\": [\n        { \"path\": \"frontend\" },\n        { \"path\": \"backend\" }\n    ],\n    \"settings\": {\n        \"editor.fontSize\": 14\n    }\n}\n```\n\n**第 6 步——向 Claude 提问：** *“我有一个包含 frontend 和 backend 文件夹的多根 VS Code 工作区。我应该添加哪些任务（tasks）、启动配置（launch configurations）和设置来让开发更轻松？”*"
+    },
+    {
+      "type": "quiz",
+      "question": "当你在终端中已经处于某个文件夹内时，在 VS Code 中打开该文件夹最快的方式是什么？",
+      "options": [
+        "在终端中输入 `vscode .`",
+        "在终端中输入 `code .`",
+        "在 VS Code 中使用 File → Open Folder",
+        "把文件夹拖到 VS Code 的任务栏图标上"
+      ],
+      "correct": 1,
+      "explanation": "`code .` 是用命令行在 VS Code 中打开当前目录的标准快捷方式。这个点号表示“当前目录”。这需要在安装时已经把 VS Code 添加到 PATH 中。这是最快的工作流：在终端中导航到你的项目文件夹，然后 `code .` 就能在 VS Code 中打开它，无需离开终端。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的项目中有一个 .vscode/settings.json，设置了 `\"editor.tabSize\": 2`。而你的全局 VS Code 设置里是 `\"editor.tabSize\": 4`。在这个项目中工作时，哪个设置会生效？",
+      "options": [
+        "全局设置——它会覆盖工作区设置",
+        "工作区设置——工作区设置在该项目中会覆盖全局设置",
+        "两者都生效——数字更大的那个胜出",
+        "每次打开项目时，VS Code 都会让你选择"
+      ],
+      "correct": 1,
+      "explanation": "VS Code 使用一种设置层级：工作区设置会在该特定项目中覆盖全局（用户）设置。这是有意为之的——不同项目有不同的约定（Python 通常使用 4 个空格缩进；JavaScript/JSON 常用 2 个空格）。你可以维持一致的全局默认值，同时在不影响其他项目的情况下允许项目专属的覆盖设置。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 5-4 课。** 现在 VS Code 已经打开了你的课程项目文件夹。资源管理器面板显示你的文件，VS Code 也理解了你项目的完整上下文。接下来：不离开 VS Code 就能创建和管理文件。"
+    }
+  ],
+  "nextLesson": "5-5",
+  "prevLesson": "5-3"
+}

@@ -1,0 +1,90 @@
+{
+  "id": "14-3",
+  "title": "综合实战：自动化邮件工作流",
+  "part": 14,
+  "estimatedMinutes": 85,
+  "tags": [
+    "capstone",
+    "n8n",
+    "gmail",
+    "automation",
+    "workflow",
+    "build"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将构建什么\n\n一套自动化流程：监控某个 Gmail 标签，用 Claude 为每封邮件起草一份回复，并把草稿创建在 Gmail 里——等着你审阅并发送。这套工作流会持续运行，不需要你参与。你负责审阅草稿，AI 负责撰写它们。\n\n本次综合实战会用到：n8n、Gmail MCP（用于测试）、Gmail API（通过 n8n 调用）、n8n 中的 Claude API 节点。\n\n**最终效果：** 只要有邮件被打上「Needs Reply」标签，几秒钟内你的草稿箱里就会出现一份 AI 起草的回复。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**重要提示：这套工作流只会创建草稿，不会自动发送。** 每一封回复在发出之前，仍然要经过你的审阅。你始终掌控着最终从你的收件箱发出去的内容。"
+    },
+    {
+      "type": "text",
+      "content": "## 前置条件\n\n- 一个 n8n 账号（第 10-2 课）——n8n Cloud 免费版或本地安装均可\n- 一个 Gmail 账号\n- 一个 Anthropic API 密钥\n- 对第 10-2 课中 n8n 画布的基本熟悉程度\n\n如果你之前没用过 n8n，先花 15 分钟回顾一下第 10-2 课——这次综合实战默认你已经会添加节点、连接节点，以及配置凭证。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "自动化邮件工作流",
+      "content": "## 第 1 步 — 在 n8n 中设置 Gmail（10 分钟）\n\n**创建 Gmail 标签：**\n1. 在浏览器中打开 Gmail\n2. 创建一个名为 `Needs Reply` 的新标签（Settings → Labels → Create new label）\n3. 把它应用到一封测试邮件上，方便你后面用来测试\n\n**把 Gmail 连接到 n8n：**\n1. 在 n8n 中，前往 Settings → Credentials → Add Credential → Gmail OAuth2\n2. 按照 OAuth 流程连接你的 Gmail 账号\n3. 给它起个名字，比如「My Gmail」，然后保存\n\nn8n 会请求你允许它访问 Gmail。审阅一下它请求的权限——对于这个工作流，它需要读取和撰写权限。\n\n---\n\n## 第 2 步 — 搭建核心工作流（20 分钟）\n\n在 n8n 中创建一个新的工作流，按顺序添加以下节点：\n\n**节点 1 — Gmail Trigger：监控标签**\n- 节点类型：Gmail Trigger\n- 凭证：你的 Gmail 连接\n- 事件：Message Received\n- 按标签过滤：`Needs Reply`\n- 轮询频率：每 1 分钟\n\n每当有新邮件出现在你的 `Needs Reply` 标签下，这个节点就会被触发。\n\n**节点 2 — Set：提取邮件数据**\n- 节点类型：Set\n- 从 Gmail trigger 的输出中创建以下变量：\n  - `emailFrom`：发件人的姓名和邮箱地址\n  - `emailSubject`：邮件主题\n  - `emailBody`：邮件正文内容\n\n这种整洁的数据结构能让下一个节点更容易配置。\n\n**节点 3 — Anthropic：起草回复**\n- 节点类型：HTTP Request（如果你的 n8n 版本有 Anthropic 节点，也可以用它）\n- 配置一个 POST 请求，目标为 `https://api.anthropic.com/v1/messages`\n- 请求头：`x-api-key`、`anthropic-version: 2023-06-01`、`content-type: application/json`\n- 请求体：\n```json\n{\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 300,\n  \"system\": \"You are a professional email assistant. Draft a brief, friendly reply to the email below. Be concise — 2-4 sentences unless more is needed. Sign off with just the first name placeholder [Your Name].\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"From: {{$node.Set.json.emailFrom}}\\nSubject: {{$node.Set.json.emailSubject}}\\n\\n{{$node.Set.json.emailBody}}\\n\\nDraft a reply:\"\n    }\n  ]\n}\n```\n\n**节点 4 — Gmail：创建草稿**\n- 节点类型：Gmail → Create Draft\n- 收件人：`{{$node.Set.json.emailFrom}}`\n- 主题：`Re: {{$node.Set.json.emailSubject}}`\n- 正文：从 Anthropic 的响应中提取出的回复文本（`$node[\"HTTP Request\"].json.content[0].text`）\n\n**节点 5 — Gmail：添加标签**\n- 节点类型：Gmail → Modify Message\n- 应用标签：`Draft Created`（先在 Gmail 中创建好这个标签）\n- 这样可以标记原邮件，让你知道已经有草稿存在\n\n---\n\n## 第 3 步 — 测试这条流水线（15 分钟）\n\n**先做手动测试：**\n1. 点击 Gmail Trigger 节点，选择 **Fetch Test Event**——这会拉取你 `Needs Reply` 标签下最近的一封邮件\n2. 在工作流上点击 **Execute**\n3. 在画布上查看每个节点的输出\n4. 检查 Gmail 草稿箱——你的 AI 起草的回复应该已经在那里了\n5. 读一读这份草稿：这是一个合理的回复吗？语气对吗？需要改进吗？\n\n**如有需要，完善系统提示词：**\n如果草稿太正式、太随意、太长，或者缺少上下文——调整 HTTP Request 节点里的系统提示词。可以试试：\n- “……写一个简短、直接的回复。收件人已经认识我。”\n- “……除非明显需要详细回复，否则把回复控制在 3 句话以内。”\n- “……使用专业但亲切的语气。”\n\n用同一封邮件再测一次。重复这个过程，直到草稿变得有用为止。\n\n---\n\n## 第 4 步 — 激活并监控（5 分钟）\n\n一旦手动测试产生的草稿让你满意：\n\n1. 点击工作流画布右上角的 **Activate**\n2. 这个工作流现在会每分钟运行一次，检查是否有带 `Needs Reply` 标签的新邮件\n\n**把标签应用到几封真实邮件上：**\n- 在你的收件箱里找 3–5 封真正需要回复的邮件\n- 给每一封都打上 `Needs Reply` 标签\n- 等几分钟\n- 检查你的草稿箱——AI 起草的回复应该会出现\n\n**在发送之前审阅每一份草稿。** 这就是整套工作流：AI 起草，你审阅，你发送。\n\n---\n\n## 第 5 步 — 记录这套工作流（5 分钟）\n\n创建 `notes/email-workflow.md`：\n\n```markdown\n# Automated Email Draft Workflow\n\n## What It Does\nWatches Gmail for emails labeled \"Needs Reply\".\nUses Claude Haiku to draft a reply.\nCreates the draft in Gmail and adds \"Draft Created\" label.\n\n## How to Use\n1. Apply \"Needs Reply\" label to any email needing a response\n2. Wait 1-2 minutes\n3. Find the AI draft in Gmail Drafts\n4. Edit if needed, then send\n\n## Configuration\n- n8n: [URL of your n8n instance]\n- Workflow name: Email Reply Drafting\n- Runs: every 1 minute when active\n- Model: claude-haiku-4-5-20251001\n\n## What I Changed From the Default\n[note any system prompt customizations you made]\n\n## How to Turn Off\nGo to n8n → Workflows → Email Reply Drafting → Deactivate\n```\n\n保存这个文件。3 个月后你回来看这套工作流、已经想不起它是怎么运作的时候，会庆幸自己写了这份文档。\n\n---\n\n## 遇到困难时怎么办\n\n**问题：Gmail Trigger 没有触发**\n确认触发器里的标签名称和 Gmail 中的完全一致（区分大小写）。手动点击「Fetch Test Event」测试一下——如果那个能正常工作，实时触发也应该没问题。\n\n**问题：Anthropic API 返回错误**\n检查：API 密钥是否正确并且有可用额度；`anthropic-version` 请求头是否存在；JSON 请求体是否合法（没有多余的逗号）。用 n8n 的节点输出面板查看具体的错误响应。\n\n**问题：Gmail 里没有创建草稿**\n单独测试 Gmail Create Draft 节点——用测试数据点击「Execute Node」。检查 `To` 字段是否有效邮箱地址，正文字段是否有内容。\n\n**问题：草稿被创建了，但邮件没有被打上标签**\nGmail Modify Message 节点需要邮件的 message ID。确认它从触发器节点的输出中拿到了正确的 ID——查看触发器的输出数据，找到正确的字段名。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A — 邮件工作流设计",
+      "content": "在动手搭建之前，先设计好你的自动化邮件工作流。\n\n**第 1 步 — 明确你要自动化的具体工作流。** 问 Claude Code：\n```\n帮我设计一个邮件自动化工作流。\n\n我目前的手动处理流程：\n[描述你目前手动处理邮件的方式]\n\n我想自动化的部分：\n[描述你希望自动化的内容]\n\n请就以下几点给出设计建议：\n1. 什么事件会触发这个自动化流程？\n2. 它需要做出哪些判断？\n3. 哪些部分可以完全自动化，哪些需要人工审批？\n4. 可能导致问题的失败模式有哪些？\n```\n\n**第 2 步 — 明确「人工介入」的节点。** 哪些判断需要你审批之后才能采取行动？\n\n**第 3 步 — 画出工作流图**：触发 → 处理 → 判断 → 行动。\n\n**第 4 步 — 问 Claude Code：**“审查我的工作流设计。这套自动化最可能在哪里出错？我需要哪些防护机制？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — 实现邮件自动化核心逻辑",
+      "content": "构建带有恰当安全检查的核心邮件自动化逻辑。\n\n**第 1 步 — 让 Claude Code 实现这套自动化：**\n```\n按以下安全要求，构建核心邮件自动化：\n1. 未经人工明确批准，绝不发送任何邮件（只生成草稿）\n2. 把每一次决策及其理由记录到 decisions.log 中\n3. 对任何涉及金钱、法律问题或敏感话题的邮件，标记为需要人工审核\n4. 如果分类的置信度低于 80%，转交人工审核\n5. 速率限制：每小时最多执行 10 次自动化操作\n\n用 Python 和 Anthropic SDK 来实现。\n```\n\n**第 2 步 — 用一批真实邮件的样本进行测试**（用你自己的测试邮件，不要用真实邮件）。\n\n**第 3 步 — 审查决策日志。** AI 的分类判断是否正确？\n\n**第 4 步 — 必做的审查环节：** 问 Claude：*“审查一下这套自动化的安全性。如果它出错，可能会采取哪些造成损害或让人尴尬的操作？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C — 测试自动化的可靠性",
+      "content": "系统性地测试你的邮件自动化，确保它的可靠性。\n\n**第 1 步 — 创建一套测试用例**，覆盖以下邮件场景：\n- 标准情况（应该被自动化处理）\n- 敏感情况（应该转交人工审核）\n- 模糊情况（分类结果不明确）\n- 格式错误的输入（不完整或不寻常的邮件格式）\n- 来自你实际邮件模式的边界情况\n\n**第 2 步 — 让 Claude Code** 编写自动化测试：\n“为我的邮件自动化编写 pytest 测试。针对我测试用例中的每一种场景进行测试，并验证：分类是否正确、路由是否正确（自动化处理还是人工审核）、采取的行动是否正确。”\n\n**第 3 步 — 运行测试：** `pytest tests/ -v`\n\n**第 4 步 — 对任何失败的测试**：调查一下自动化为什么做出了错误判断。是提示词的问题、代码逻辑的问题，还是 AI 本身的局限性？\n\n**第 5 步 — 在接入真实邮件之前，达到至少 90% 的测试通过率。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — 监控并迭代这套自动化",
+      "content": "为你的自动化建立监控机制，并根据实际表现进行迭代。\n\n**第 1 步 — 为你的邮件自动化定义监控指标：**\n- 自动化率：由自动化处理的邮件占比\n- 准确率：自动化决策中正确的占比\n- 人工审核率：转交给你处理的邮件占比\n- 误报/漏报率\n\n**第 2 步 — 用你上个月的邮件运行这套自动化**（使用测试模式——只生成草稿，不发送）。\n\n**第 3 步 — 根据这次测试运行，计算出实际的各项指标。**\n\n**第 4 步 — 找出最大的改进空间：**\n- 如果准确率低：改进分类提示词\n- 如果人工审核率过高：调整置信度阈值\n- 如果自动化率低：扩大自动化能处理的范围\n\n**第 5 步 — 做出一项有针对性的改进**，然后重新测试。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的邮件自动化错误地自动回复了一位客户，说「你的发票已获批准」，但实际上并没有获批。你本应该如何预防这种情况？",
+      "options": [
+        "使用能力更强的 AI 模型",
+        "永远不要对涉及财务决策的邮件自动发送——所有涉及财务行动的邮件在发送前都应该要求明确的人工批准",
+        "增加更好的邮件分类训练",
+        "对财务类邮件使用基于规则的过滤器，而不是 AI"
+      ],
+      "correct": 1,
+      "explanation": "核心问题在于：这套自动化被允许在未经人工批准的情况下，就发送关于不可逆财务决策的邮件。预防措施：把「对[敏感类别]绝不自动发送」实现为代码层面的硬性约束，而不仅仅是一条 AI 指令。AI 指令可能出错，但代码层面的约束不会因为分类错误而被绕过。需要强制人工批准的类别包括：财务承诺、法律声明、面向客户的承诺，以及任何包含「已批准」「已确认」「已同意」「会去做」等字眼的内容。"
+    },
+    {
+      "type": "quiz",
+      "question": "你发现你的邮件自动化在 3 个月里准确率下降了——它误分类的邮件越来越多。最可能的原因是什么？",
+      "options": [
+        "AI 模型被更新了，变得更差了",
+        "邮件模式发生了变化——出现了新的发件人、新的话题，以及与自动化调优时的模式不匹配的季节性内容",
+        "自动化的代码存在会随时间恶化的 bug",
+        "邮件量增加，压垮了系统"
+      ],
+      "correct": 1,
+      "explanation": "当现实世界的模式偏离了自动化最初设计所依据的模式时，自动化的准确率就会下降。邮件自动化尤其容易受到以下因素影响：季节性变化（节日邮件不符合平时的模式）、新的供应商或项目（新类型的邮件），以及组织变化（新的沟通模式）。解决办法：定期抽查一批自动化决策，找出导致误分类的新模式，并相应地更新你的分类提示词或示例。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**综合实战 14-3 完成。** 你现在有一套在后台实时运行的 AI 自动化流程。你打上标签的每一封邮件，都会自动获得一份草稿回复，完全不需要你再做任何操作。这就是 AI 在为你工作，而不只是和你一起工作。下一个综合实战，会把你完整的 AI 开发环境整合成一份文档化的配置。"
+    }
+  ],
+  "nextLesson": "14-4",
+  "prevLesson": "14-2"
+}

@@ -1,0 +1,96 @@
+{
+  "id": "6-7",
+  "title": "Windsurf——另一款 AI 优先编辑器",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": [
+    "windsurf",
+    "ai-coding",
+    "ide",
+    "codeium"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nCursor 并不是市面上唯一的 AI 原生编辑器。由 Codeium 打造的 **Windsurf**，采用了类似的思路——基于 VS Code、深度集成 AI——但在 AI 智能体的工作方式上，遵循着不同的理念。这节课会让你获得足够的实际体验，从而在第 6-8 课中在 Cursor 和 Windsurf 之间做出明智的选择。"
+    },
+    {
+      "type": "text",
+      "content": "## Windsurf 是什么\n\nWindsurf 是 Codeium 出品的代码编辑器——这家公司早在 Cursor 出现之前就已经在打造 AI 编程工具了。他们免费的 VS Code 扩展（同样叫 Codeium）被数百万开发者使用，而 Windsurf 是他们把这些能力进一步延伸出的编辑器产品。\n\n**下载地址：** codeium.com/windsurf——提供免费版。\n\n和 Cursor 一样，Windsurf 也是 VS Code 的一个分支。它看起来和 VS Code 几乎一模一样，首次启动时会导入你的设置，并支持相同的扩展。真正的区别在于 AI 与编辑工作流的集成方式。"
+    },
+    {
+      "type": "text",
+      "content": "## Cascade——Windsurf 的 AI 智能体\n\nWindsurf 的招牌功能是 **Cascade**——它的 AI 智能体系统。Cascade 是围绕 Codeium 所称的“智能体感知（agentic awareness）”这一理念设计的：这个 AI 不只是响应单次请求，它会跟踪你做了哪些更改、出现了什么错误、文件当前的状态是什么——在你工作的过程中持续更新自己的理解。\n\n**如何使用 Cascade：**\n1. 按 **Ctrl+L** 打开编辑器右侧的 Cascade 面板\n2. 在 **Write** 模式（Cascade 会对你的文件做出更改）和 **Chat** 模式（它只做解释和建议，不编辑文件）之间选择\n3. 在 Write 模式下，描述你想要的：“给表单添加输入校验”——Cascade 会编辑相关文件，并展示它改动了什么\n4. 你可以实时观看它工作：Windsurf 会以一种实时动画的形式展示编辑正在生效\n\n这种实时的可视化反馈是 Windsurf 体验中最具代表性的部分之一。它给人的感觉不像是提交了一个请求，更像是在看一位同事打字。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**AI 编辑器这个领域变化很快——连所有权也不例外。** 2025 年，OpenAI 宣布计划收购 Codeium（Windsurf 的母公司）。Windsurf 的长期发展方向可能会转向 OpenAI 的生态系统。产品本身仍在持续运行和改进，但了解这个所有权背景是值得的。Cursor、Windsurf 以及这个类别中的其他工具，每隔几周就会更新一次。曾经是某一款编辑器独有的功能，往往几个月内就会出现在另一款上。第 6-6 课和第 6-7 课的目的不是评出一个赢家——而是让你亲自体验这两种方法，理解它们在设计理念上的根本差异，这样当工具不断演进时，你也能随之调整。"
+    },
+    {
+      "type": "text",
+      "content": "## Cursor 与 Windsurf——快速对比\n\n| | Cursor | Windsurf |\n|--|--------|----------|\n| AI 智能体名称 | Composer | Cascade |\n| 代码库感知能力 | 强——通过 @ 文件引用 | 强——持续跟踪上下文 |\n| 免费版 | 慷慨（每月 fast 请求额度） | 慷慨（基于积分） |\n| AI 模型 | Claude + GPT-5（可自选） | Codeium 自有模型 + Claude |\n| 可视化反馈 | 应用前的差异视图 | 编辑过程中的实时动画 |\n| 隐私模式 | 有（设置中） | 有（设置中） |\n\n没有哪一个明显更优。开发者社区的看法也是两极分化。正确的选择取决于哪一个*用起来*让你感觉更好——这正是为什么你需要两个都试一试。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "探索 Windsurf 并使用 Cascade",
+      "content": "**第 1 步——下载并安装 Windsurf**\n1. 打开浏览器，访问 codeium.com/windsurf\n2. 点击 **Download Windsurf**——选择 Windows 安装程序\n3. 运行安装程序，保留所有默认设置\n4. 首次启动时，创建一个免费的 Codeium 账号（如果已有账号则直接登录）\n5. 当被问及是否从 VS Code 导入时，接受——你的扩展和设置会随之迁移\n\n**第 2 步——打开你的项目**\n1. 点击 **File → Open Folder**，打开 `ai-course-projects`\n2. 花 2 分钟熟悉环境：布局几乎和 VS Code 完全一样。在活动栏（Activity Bar）中找到 Cascade 图标（可能标着一个波浪符号或 “Windsurf” 字样）\n\n**第 3 步——用 Cascade 修改一个已有文件**\n1. 按 **Ctrl+L** 打开 Cascade 面板\n2. 确认你处在 **Write** 模式（而不是 Chat）\n3. 输入这个请求：\n```\nOpen contact-form.html (created in lesson 6-6). Add a character counter below the message textarea that shows how many characters have been typed out of a 500-character limit. Use plain JavaScript — no libraries.\n```\n4. 观察 Cascade 工作——留意文件中实时出现的编辑\n5. 完成后，在 Live Server 中打开这个文件，测试字符计数器\n\n**第 4 步——把这次体验和 Cursor 做对比**\n花 5 分钟，用这个清单来检查：\n- [ ] Cascade 是在应用之前还是之后展示更改的？\n- [ ] Cascade 面板比 Cursor 的 Composer 更好用还是更难用？\n- [ ] 完成这个任务时，Windsurf 感觉比 Cursor 更快、更慢，还是差不多？\n- [ ] 输出的代码质量看起来相似吗？\n\n**第 5 步——写下你的对比**\n在你的笔记中，根据第 6-6 课和第 6-7 课中你自己的实际体验，写 3 句话对比 Windsurf 和 Cursor。这没有标准答案——你是在形成自己的看法。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——Windsurf 首次会话",
+      "content": "Windsurf（来自 Codeium）是一款采用“心流（flow）”式人机协作理念的 AI 优先编辑器。这个练习会探索它有什么不同之处。\n\n**第 1 步——下载并打开 Windsurf**（codeium.com/windsurf）。\n\n**第 2 步——打开 Cascade**（Windsurf 的 AI 面板）——按 Ctrl+L，或点击 AI 图标。\n\n**第 3 步——打开一个真实项目。** 问 Cascade：“这个项目是做什么的？”——Windsurf 的 AI 会为你的代码库建立索引。\n\n**第 4 步——测试 Cascade 的“心流”模式：** 让它添加一个功能。留意它是如何：提出澄清性问题、展示它的计划、进行更改，并解释每一步的。\n\n**第 5 步——测试上下文窗口：** 问一个关于特定函数的问题。Windsurf 能正确引用你实际的代码吗？\n\n**第 6 步——比较第一印象：** 和 Cursor 以及 VS Code 相比——哪一个对你的工作流来说感觉最自然？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用 Windsurf 改进一个真实代码库",
+      "content": "使用 Windsurf 的 Cascade 对真实代码做出有意义的改进。\n\n**第 1 步——在 Windsurf 中打开一个真实项目。**\n\n**第 2 步——让 Cascade 做一次代码健康度评估：**\n```\nReview this codebase and identify the top 3 improvements I should make. For each improvement:\n- Describe the current problem\n- Show which files/functions are affected\n- Describe the proposed solution\n- Estimate the risk of making the change\n```\n\n**第 3 步——选择**风险收益比最好的那项改进，让 Cascade 去实现它。\n\n**第 4 步——观察实现过程。** 审查 Cascade 更改的每一个文件。\n\n**第 5 步——强制复审：** 问 Cascade：*“审查你刚才做的更改。哪些边界情况可能被破坏了？我应该运行哪些测试？有什么你考虑过但没有做的事情？”*\n\n**第 6 步——运行测试**，如果实现看起来正确，就提交它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——Windsurf 与 Cursor 对比",
+      "content": "Windsurf 和 Cursor 都是 AI 优先编辑器。这个工作坊会帮你确定哪一个更适合你的具体工作流。\n\n**第 1 步——选择一个中等复杂度的编程任务**——涉及 2-3 个文件，并且需要理解已有代码。\n\n**第 2 步——在 Cursor 中完成这个任务。** 记录：\n- 花费的时间\n- 交流的轮数\n- 第一次输出的质量\n- 你需要解释多少上下文\n\n**第 3 步——在 Windsurf 中完成同一个任务。** 记录同样的指标。\n\n**第 4 步——比较用户体验：**\n- 哪个感觉更自然？\n- 哪个生成的代码更准确？\n- 哪个在展示它正在做什么方面更透明？\n- 哪个更好地处理了不确定性？\n\n**第 5 步——问 Claude：** *“根据这些对比笔记 [描述你的发现]，你会向 [描述你的工作特点] 的人推荐哪款编辑器？在这个选择中，哪些因素最重要？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——AI 编辑器决策矩阵",
+      "content": "构建一个个性化的决策矩阵，为不同场景选择合适的 AI 编辑器。\n\n**第 1 步——列出你最常见的 5 类编程任务。** 要具体：“从零开始编写 Python 函数”“审查 AI 生成的代码”“调试运行时错误”等等。\n\n**第 2 步——针对每种任务**，根据你的实际经验，给这几款编辑器打 1-5 分：VS Code + Copilot、Cursor、Windsurf。\n\n**第 3 步——问 Claude：** *“根据这些评分 [粘贴你的矩阵]，这说明了我在工作流方面有哪些偏好？我应该留意哪些规律？”*\n\n**第 4 步——在你的矩阵中再加两行：** “成本”和“学习曲线”——为每款编辑器估算这两项。\n\n**第 5 步——做出决定：** 你以后会使用哪 1-2 款编辑器？分别用在什么场景？\n\n**第 6 步——设定一个 30 天试用期：** 承诺在重新评估之前，先坚持使用你选定的方案 30 天。"
+    },
+    {
+      "type": "quiz",
+      "question": "Windsurf 的 Cascade AI 同时对 4 个文件做出了更改。你审查后发现，一个文件看起来正确，两个看起来合理，还有一个看起来可疑。你应该怎么做？",
+      "options": [
+        "全部接受——AI 比你更了解这个代码库",
+        "接受那个正确的文件，更仔细地审查那两个看起来合理的文件，并在接受或拒绝那个可疑文件之前，让 Cascade 解释一下它的思路",
+        "拒绝所有更改，重新开始",
+        "全部接受，然后运行测试——测试会捕捉到任何错误"
+      ],
+      "correct": 1,
+      "explanation": "要根据每一处更改本身的价值来审查——不要因为有些看起来对就全部接受。对于那处可疑的更改：让 AI 解释它的推理过程，把它和它正在更改的现有代码做对比，并考虑这处更改在原始请求的语境下是否说得通。对于你将要发布的代码，“看起来合理”是不够的。最危险的 AI 更改，往往是那些自信满满、却微妙地出了错的更改。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在为日常开发在 Cursor 和 Windsurf 之间做选择。两者都是 AI 优先编辑器。选择时最重要的因素是什么？",
+      "options": [
+        "哪个的 GitHub star 数更多",
+        "哪个的 AI 模型在技术上更强",
+        "哪个的工作流更符合你天然的思考和工作方式——最好的编辑器是你能有效使用的那一个",
+        "哪个存在的时间更久"
+      ],
+      "correct": 2,
+      "explanation": "技术能力固然重要，但对日常生产力而言，工作流的契合度更重要。如果 Cursor 的模型稍微更强一些，但 Windsurf 的心流方式更符合你的思考方式，那么 Windsurf 会让你更有生产力。在真实任务（而非玩具示例）上两者都试一试，留意哪一个让你感觉更少地在和工具较劲。最好的 AI 编辑器，是你真正能用好的那一个，而不是基准测试分数最高的那一个。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-7 课完成。** 你现在已经尝试过两款主流的 AI 原生编辑器。你对 Cursor 的 Composer、Windsurf 的 Cascade、Copilot Chat 以及 Continue.dev 都有了亲身体验。在第 6-8 课中，你将把这个部分学到的一切综合起来，做出一个关于你在本课程剩余部分要使用哪种搭配的个人决定。"
+    }
+  ],
+  "nextLesson": "6-8",
+  "prevLesson": "6-6"
+}

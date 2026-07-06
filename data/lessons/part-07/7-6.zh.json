@@ -1,0 +1,102 @@
+{
+  "id": "7-6",
+  "title": "CLAUDE.md —— 你的项目指令文件",
+  "part": 7,
+  "estimatedMinutes": 60,
+  "tags": [
+    "claude-code",
+    "claude-md",
+    "context",
+    "configuration"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将为你的项目创建一个 CLAUDE.md 文件，理解它应该包含什么内容，并亲眼看到 Claude 在一个全新的会话中自动应用你的指令——而无需你自己重复。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 CLAUDE.md？\n\n每次你开始一个新的 Claude Code 会话时，Claude 都是从零开始，不记得你之前的任何对话。如果没有帮助，你每一次会话都需要重新解释你的项目、你的约定和你的偏好。\n\nCLAUDE.md 解决了这个问题。它是项目根目录下的一个 Markdown 文件，Claude 会在每次会话开始时自动读取它。可以把它想象成一份常设简报——那些你会在新人入职第一天告诉他们的项目相关事项。\n\nClaude 读取它，把这些指令加载进自己的上下文，并在整个会话中应用它们。你再也不用不止一次地说\"不要用 TypeScript\"或\"给每个函数都加上注释\"了。"
+    },
+    {
+      "type": "text",
+      "content": "## CLAUDE.md 里应该放什么\n\n一份好的 CLAUDE.md 涵盖五个类别：\n\n**1. 项目描述**\n这个项目是什么、面向谁、做什么。通常一段话就够了。\n\n**2. 技术栈**\n正在使用的语言、框架和库。这能防止 Claude 建议一些需要你并未使用的工具的解决方案。\n\n**3. 约定**\n命名模式、代码风格、格式规则。\"使用 2 个空格缩进\"、\"优先用 const 而不是 let\"、\"CSS 类名用 kebab-case\"。\n\n**4. 命令**\n构建、测试和 lint 命令。\"用 `npm test` 运行测试\"、\"用 `npm run lint` 进行 lint\"。Claude 会在合适的时候自动运行这些命令。\n\n**5. 规则与限制**\n明确的该做和不该做。\"永远不要使用外部 CDN\"、\"总是给新函数加上 JSDoc 注释\"、\"不要修改 `dist/` 文件夹\"。\n\n保持简洁。CLAUDE.md 是一份简报，不是一部小说。一份 100 行以内的文件通常比一份 300 行以上的文件更好。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**CLAUDE.md 的层级结构：**\nClaude Code 会从多个位置加载 CLAUDE.md 文件，越具体的文件优先级越高：\n\n1. `~/.claude/CLAUDE.md`——你的用户级指令（适用于所有项目）\n2. 从你的主目录到项目之间任何父文件夹中的 `CLAUDE.md`\n3. 项目根目录下的 `CLAUDE.md`——项目级指令\n4. 子目录中的 `CLAUDE.md`——当 Claude 在该目录下工作时生效\n\n用户级 CLAUDE.md 会在 7-9 课（记忆系统）中讲解。现在先专注于项目级文件。"
+    },
+    {
+      "type": "code",
+      "language": "markdown",
+      "content": "# AI Course Projects\n\n## About This Project\nThis is a learning project for an AI skills course. The student is a beginner\nbuilding their first HTML/CSS/JS projects while learning AI-assisted development.\n\n## Tech Stack\n- HTML5, CSS3, vanilla JavaScript only\n- No frameworks (no React, Vue, Angular)\n- No build tools (no Webpack, Vite, etc.)\n- No package.json / npm dependencies\n\n## Coding Style\n- Use 2-space indentation\n- Add a comment explaining every function\n- Use semantic HTML5 elements (header, main, section, etc.)\n- Name CSS classes in kebab-case (e.g., .hero-section, .nav-link)\n- Prefer const over let; avoid var\n\n## File Structure\n- exercises/  — hands-on lesson exercises (HTML, CSS, JS files)\n- notes/      — personal notes and reflections (Markdown)\n- prompts/    — saved prompt templates (Markdown)\n\n## Rules\n- Never use external CDNs unless explicitly asked\n- Never add dependencies that require npm install\n- Always use inline styles or a linked local CSS file\n- Keep files small and readable — under 200 lines when possible\n- When creating HTML, include a proper <!DOCTYPE html> and meta charset"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**测试你的 CLAUDE.md：** 创建它之后，启动一个全新的 Claude Code 会话（先 `/exit`，然后再次 `claude`）。问 Claude：*\"总结一下你正在处理的这个项目。\"* 如果它准确反映了你的 CLAUDE.md 内容，说明这个文件被正确读取了。如果 Claude 说的很笼统，检查一下文件名是否恰好是 `CLAUDE.md`（大写），并且位于项目根目录。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "编写你的第一份 CLAUDE.md",
+      "content": "为 `ai-course-projects` 文件夹创建一份 CLAUDE.md，然后验证 Claude 在新会话中读取了它。\n\n**第 1 步——在 VS Code 中创建文件：**\n在 VS Code 资源管理器中，点击 `ai-course-projects`（根目录），创建一个新文件叫 `CLAUDE.md`。确保它在根目录层级，而不是在某个子文件夹里。\n\n**第 2 步——写下你的指令：**\n以上面的示例作为起点。根据你实际的工作方式定制这些部分：\n- 调整技术栈部分，使其匹配你一直在构建的内容\n- 添加你在意的任何约定（tab 还是空格等）\n- 在规则部分至少添加 3 条规则\n\n保存文件。\n\n**第 3 步——启动 Claude Code 并验证：**\n在终端中：\n```\nclaude\n```\n留意欢迎界面——Claude Code 应该会提到它读取了你的 CLAUDE.md。\n\n现在问：\n```\nSummarize the project you're working in and tell me your instructions for it.\n```\nClaude 应该能准确描述你在 CLAUDE.md 里写的内容。\n\n**第 4 步——测试这些指令：**\n请 Claude 创建一个新的小文件：\n```\nCreate exercises/test-card.html — a simple product card component.\n```\n在你没有给出任何额外指令的情况下，Claude 应该会：\n- 使用语义化 HTML5\n- 用内联方式或 `<style>` 标签添加 CSS（不用外部文件）\n- 给代码加上注释\n- 遵循你定义的约定\n\n如果它没有遵循你的规则，回顾一下你的 CLAUDE.md 措辞，把它写得更明确一些。\n\n**第 5 步——退出并重启以确认持久性：**\n```\n/exit\nclaude\n```\n再问一次同样的总结问题。Claude 应该仍然了解你的项目背景——它每次都是重新读取 CLAUDE.md，而不是依赖对话记忆。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A —— 编写你的第一份 CLAUDE.md",
+      "content": "CLAUDE.md 是你 AI 编码工作流中最重要的文件。这个练习会帮你建立第一份。\n\n**第 1 步——在一个真实项目中打开 Claude Code。**\n\n**第 2 步——请求 Claude Code 帮你编写 CLAUDE.md：**\n```\nHelp me write a CLAUDE.md for this project. Read the project files and generate a CLAUDE.md that includes:\n1. Project purpose (1 paragraph)\n2. Architecture overview (key components and how they interact)\n3. Tech stack (languages, frameworks, major dependencies)\n4. Development commands (how to install, run, test)\n5. Code conventions I should follow\n6. Files/directories you should NOT modify without explicit instruction\n7. Common tasks and how to do them\n```\n\n**第 3 步——审查生成的 CLAUDE.md。** Claude Code 说对了什么？哪些是错的或者遗漏了？\n\n**第 4 步——编辑 CLAUDE.md**，修正错误，加入你具体的偏好和限制条件。\n\n**第 5 步——测试它：** 启动一个新的 Claude Code 会话。Claude Code 在最初的理解中是否引用了 CLAUDE.md？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 为新项目编写 CLAUDE.md",
+      "content": "以先写好 CLAUDE.md 的方式开始一个新项目——在写任何代码之前先定义好你的约定。\n\n**第 1 步——规划一个你打算构建的小项目。** 写两段话描述它是什么、做什么。\n\n**第 2 步——请 Claude.ai（在浏览器中，还不是 Claude Code）帮你设计项目：**\n```\nI'm building [describe your project]. Help me define:\n1. The tech stack (recommend the right tools for this type of project)\n2. The folder structure\n3. The key architectural decisions\n4. Code style conventions I should follow\n5. Testing strategy\n```\n\n**第 3 步——根据设计决策，创建项目文件夹和一份 CLAUDE.md。**\n\n**第 4 步——然后创建文件夹结构**和占位文件（带有描述其用途的注释的空文件）。\n\n**第 5 步——在项目中打开 Claude Code。** 问：\"阅读 CLAUDE.md 和项目结构。在我们开始构建之前，你有什么问题吗？\"——这能发现你 CLAUDE.md 里的空缺。\n\n**第 6 步——用 Claude Code 提出的问题的答案更新 CLAUDE.md。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C —— CLAUDE.md 最佳实践研究",
+      "content": "研究并应用来自开发者社区的 CLAUDE.md 最佳实践。\n\n**第 1 步——问 Claude：** *\"编写 CLAUDE.md 文件有哪些最佳实践？经验丰富的 Claude Code 用户发现哪些是最重要的内容？我应该避免哪些常见错误？\"*\n\n**第 2 步——审查这些最佳实践。** 你目前的 CLAUDE.md 遵循了哪些？还缺少哪些？\n\n**第 3 步——从建议中寻找规律：**\n- Claude Code 需要哪些无法从代码中推断出来的信息？\n- 哪些限制条件能防止 Claude Code 做出糟糕的决定？\n- 应该记录哪些工作流？\n\n**第 4 步——用你缺失的最佳实践更新 CLAUDE.md。**\n\n**第 5 步——必做的审查：** 问 Claude：*\"审查这份 CLAUDE.md。即使读了这份文件，什么情况仍会导致 Claude Code 误解这个项目或做出糟糕的决定？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 为你的真实项目编写 CLAUDE.md",
+      "content": "为你实际在用的项目产出一份生产级质量的 CLAUDE.md。\n\n**第 1 步——在 Claude Code 中打开你最重要的项目。**\n\n**第 2 步——运行完整的 CLAUDE.md 生成流程：**\n```\nI need to create a comprehensive CLAUDE.md for this project. Please:\n1. Read all the key files (README, main source files, config files, tests)\n2. Generate a CLAUDE.md that would allow another AI agent to work on this project effectively with minimal additional guidance\n3. Include: project context, architecture, conventions, forbidden actions, testing requirements, and deployment considerations\n4. Be specific to what you actually see in the code — don't add generic advice\n```\n\n**第 3 步——审查**生成的 CLAUDE.md 中的每一个部分。\n\n**第 4 步——添加一个\"绝对不要做\"的部分：** 列出 Claude Code 在你的项目中绝对不应该做的具体事情（例如，\"永远不要直接修改数据库模式——始终使用迁移\"）。\n\n**第 5 步——将 CLAUDE.md 提交**到你的仓库，让整个团队都能受益。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在 CLAUDE.md 中加入指令\"提交之前总是先运行测试\"。会发生什么？",
+      "options": [
+        "Claude Code 会拒绝在没有运行测试的情况下提交",
+        "Claude Code 会读取这条指令，并在会话中遵循它——把运行测试作为建议提交之前的工作流程的一部分",
+        "CLAUDE.md 只有人类会读，Claude Code 不会读",
+        "Claude Code 每次都会请求许可才能运行测试"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code 会在每次会话开始时读取 CLAUDE.md，并用其中的指令来指导整个会话中的行为。像\"提交之前总是先运行测试\"这样的指令，会成为它在这个项目里的操作流程的一部分。它不会从程序上强制拒绝提交（这不是编程实现的强制机制），但它会把运行测试纳入自己的流程。CLAUDE.md 中清晰、具体的指令，是塑造 Claude Code 默认行为的主要手段。"
+    },
+    {
+      "type": "quiz",
+      "question": "对于一个 Web 应用的 CLAUDE.md，\"绝对不要做\"这部分最重要的内容应该是什么？",
+      "options": [
+        "项目中存在的所有文件的清单",
+        "诸如\"未经明确指示不要修改身份验证代码\"或\"永远不要删除数据库迁移文件\"这样的指令——那些如果自主执行可能造成严重损害的高风险操作",
+        "提醒要写好提交信息",
+        "项目的 git 仓库地址"
+      ],
+      "correct": 1,
+      "explanation": "\"绝对不要做\"部分的价值在于防止高风险的错误。对一个 Web 应用来说，危险的自主操作包括：修改身份验证/安全代码、删除迁移文件、更改会破坏客户端的 API 契约、修改生产环境配置。这些操作一旦被自主 AI 做错，就可能导致数据丢失、安全漏洞或服务中断。明确的禁止性指令，是你能放进 CLAUDE.md 里最有力的一类指令。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成 7-6 课。** 你的项目现在有了一份 Claude 每次会话都会读取的常设简报文件。你再也不用重新解释你的约定了。下一课：创建自定义斜杠命令，把你最常见的 Claude Code 请求自动化。"
+    }
+  ],
+  "nextLesson": "7-7",
+  "prevLesson": "7-5"
+}

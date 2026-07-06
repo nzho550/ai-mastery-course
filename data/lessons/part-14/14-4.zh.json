@@ -1,0 +1,92 @@
+{
+  "id": "14-4",
+  "title": "综合实战：你的完整 AI 驱动开发环境",
+  "part": 14,
+  "estimatedMinutes": 85,
+  "tags": [
+    "capstone",
+    "setup",
+    "claude-code",
+    "mcp",
+    "vscode",
+    "documentation",
+    "build"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将构建什么\n\n一份完整、文档化的个人 AI 开发环境说明——所有东西都能正常工作，所有东西都经过验证，所有东西都写清楚了，让你（或者其他任何人）可以从零把它重建出来。\n\n这不只是写文档。逐一检查每个组件是否正常工作的过程，很可能会揭示出一些在过程中被半途配置、没弄完整的地方。趁现在专注的时候，把它们修好。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**这次综合实战的产出是 `notes/my-ai-dev-environment.md`**——一份代表着这 14 个部分累积成果的配置文档。如果哪天你要在一台新机器上从头开始，这份文件会准确告诉你该安装什么、该怎么配置。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "审查并记录你完整的 AI 配置",
+      "content": "## 检查清单\n\n逐个检查每个组件。对每一个：先测试它是否能正常工作，然后记录下来。\n\n---\n\n**组件 1 — VS Code 设置**\n\n打开 VS Code，确认以下几点：\n- [ ] VS Code 已安装并更新到最新版本（Help → Check for Updates）\n- [ ] 以下扩展已安装并正常工作：Live Server、Prettier、GitLens、GitHub Copilot（或 Continue.dev）、至少一个 AI 编程助手\n- [ ] 你的 settings.json 里有你偏好的字体大小、自动保存、自动换行、保存时自动格式化等设置\n- [ ] 你知道如何打开命令面板（`Ctrl+Shift+P`）\n\n对每一个已安装的扩展，在你的文档里写一句话：它是做什么的，你为什么用它。\n\n---\n\n**组件 2 — Claude Code 配置**\n\n打开终端，输入 `claude --version`，确认 Claude Code 已安装。\n\n然后确认以下几点：\n- [ ] `claude` 能成功启动\n- [ ] `/mcp` 显示至少 3 个已连接的 MCP 服务器\n- [ ] 你的 CLAUDE.md 文件存在于 `ai-course-projects/` 中，且包含有用的指令\n- [ ] `.claude/commands/` 中至少有 2 个自定义斜杠命令\n- [ ] 你在 `~/.claude/memory/` 中的记忆文件包含你的偏好设置\n- [ ] 你在 `~/.claude/settings.json` 中的用户级设置配置正确\n\n对 `/mcp` 列出的每一个 MCP 服务器，写一句话：它是做什么的，你什么时候会用它。\n\n---\n\n**组件 3 — 本地 AI**\n\n确认以下几点：\n- [ ] Ollama 已安装：`ollama --version`\n- [ ] 至少下载了一个模型：`ollama list`\n- [ ] Ollama 的 API 有响应：在浏览器中打开 `http://localhost:11434`\n- [ ] VS Code 中的 Continue.dev 已配置为使用本地模型\n- [ ] 或者：LM Studio 已安装并加载了一个模型\n\n记下你有哪些模型，以及每个模型你分别用来做什么。\n\n---\n\n**组件 4 — Git 和 GitHub**\n\n确认以下几点：\n- [ ] `git --version` 能正常运行\n- [ ] `git config --global user.name` 返回你的名字\n- [ ] `git config --global user.email` 返回你的邮箱\n- [ ] 你的 `ai-course-projects` 文件夹的历史记录中至少有一次提交\n- [ ] Claude Code 中的 GitHub MCP 服务器能列出你账号下的代码仓库\n\n---\n\n**组件 5 — 正在运行的自动化流程**\n\n确认以下几点：\n- [ ] 至少有一个 n8n 工作流处于激活状态（第 14-3 课的邮件起草工作流，或第 10-2 课中的自动化流程）\n- [ ] 你知道去哪里找到你的 n8n 实例，以及必要时如何停用工作流\n\n列出每一个活跃的自动化流程：它做什么，什么时候运行。\n\n---\n\n**组件 6 — API 访问**\n\n确认以下几点：\n- [ ] Anthropic API 密钥在 `exercises/.env` 里\n- [ ] `.env` 已加入 `.gitignore`\n- [ ] `python exercises/hello-claude.py` 仍然能正常运行\n- [ ] 已在 Anthropic Console 中设置了消费限额\n\n列出你拥有 API 访问权限的每一项服务（只列服务名，不要列密钥）。\n\n---\n\n## 撰写环境文档\n\n创建 `notes/my-ai-dev-environment.md`，使用以下结构：\n\n```markdown\n# My AI Development Environment\n\nLast updated: [today's date]\n\n## VS Code\n\n### Version\n[VS Code version number]\n\n### Extensions\n| Extension | Purpose |\n|-----------|----------|\n| Live Server | Preview HTML with auto-reload |\n| Prettier | Auto-format code on save |\n| GitLens | Git blame and history inline |\n| [your AI extension] | [what it does for you] |\n| [continue the list] | |\n\n### Key Settings\nSettings.json lives at: [path]\nKey customizations: [describe what you changed from defaults]\n\n---\n\n## Claude Code\n\n### Version\n[claude --version output]\n\n### Active MCP Servers\n| Server | What It Does | When I Use It |\n|--------|-------------|---------------|\n| filesystem | Read/write project files | All coding sessions |\n| github | Issues, PRs, repo navigation | When working with GitHub |\n| [your others] | | |\n\n### Custom Slash Commands\n| Command | What It Does |\n|---------|-------------|\n| /review | Reviews file for bugs and readability |\n| [others] | |\n\n### CLAUDE.md Approach\n[Describe what you put in your project CLAUDE.md files]\n\n### Memory File Location\n[Path to your preferences file]\n\n---\n\n## Local AI\n\n### Ollama\nInstalled: yes/no\nModels: [list with what you use each for]\nConnected to: Continue.dev / Claude Code / both\n\n### LM Studio\nInstalled: yes/no\nPrimary use: [when you open it]\n\n---\n\n## Automations\n\n### Active n8n Workflows\n| Workflow | What It Does | Schedule |\n|----------|-------------|----------|\n| Email Reply Drafting | Drafts replies to labeled emails | Every 1 min |\n| [others from lesson 10-2] | | |\n\n---\n\n## APIs and Credentials\n\n### Services with API Access\n- Anthropic (Claude API)\n- GitHub\n- [others]\n\nKeys are stored in: [.env files / environment variables / etc.]\nSpending limit set: yes/no\n\n---\n\n## My Daily AI Workflow\n\n[Paste your workflow from notes/my-ai-workflow.md — or write it fresh]\n\n---\n\n## Prompt Library\n\nLocation: [path to your prompt library from lesson 3-8]\n\n---\n\n## Live Projects\n\n- Portfolio: https://[yourusername].github.io\n- [Other things you built]\n\n---\n\n## What I'd Set Up First on a New Machine\n\n1. Install VS Code with these extensions: [list]\n2. Install Node.js, then Claude Code\n3. Install Git and configure user.name/email\n4. Install Ollama and pull [model]\n5. Copy .claude/settings.json with MCP configs\n6. Set up .env with API keys\n7. Activate n8n workflows\n```\n\n---\n\n## 修复出问题的地方\n\n在过一遍这份检查清单的过程中，你很可能会发现至少一处配置不对的地方——某个 MCP 服务器不再能连接、某个工作流被停用了、某个扩展需要更新了。\n\n现在就把这些问题修好。用 Claude Code 来帮忙：\n\n```\nclaude\n```\n\n然后说：“我在审查我的配置。当我运行 `/mcp` 时，[服务器名称] 这个服务器连接不上。这是错误信息：[粘贴错误信息]。哪里出问题了？”\n\n这正是 Claude Code 擅长的事情。它可以读取你的 settings.json，提出修复建议，并进行测试。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**分享这份文档。** 如果你以后加入某个团队、和其他开发者协作，或者想向雇主展示你的配置——这份文档能说明的能力，远比简历上一行「熟悉 AI 工具」要多得多。它具体、可验证，还能证明你真的动手搭建过东西。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A — 开发环境审查",
+      "content": "审查你当前的开发环境，找出其中的缺口。\n\n**第 1 步 — 列出**你当前开发工作流中的每一个工具：\n- 编辑器/IDE\n- 终端和 shell\n- Git 工作流工具\n- AI 助手\n- 测试工具\n- 构建/部署\n\n**第 2 步 — 问 Claude：** *“我有这样一套开发环境 [列出来]。我还缺少哪些重要的 AI 驱动工具，能显著提升我的生产力？针对每一个，具体说明它是做什么的，以及它解决了什么痛点。”*\n\n**第 3 步 — 为你当前的配置打分：**\n| 类别 | 目前使用的工具 | 缺口 | 填补优先级 |\n|---|---|---|---|\n| 代码生成 | | | |\n| 代码审查 | | | |\n| 测试 | | | |\n| 文档 | | | |\n| 部署 | | | |\n\n**第 4 步 — 找出价值最高的那个缺口，优先解决**——你会在这次综合实战里把它填上。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — 构建你的自定义开发助手",
+      "content": "构建一个专为你的开发环境量身定制的助手。\n\n**第 1 步 — 设计一份 CLAUDE.md**，让 Claude Code 完美契合你的工作流：\n- 你的技术栈及版本\n- 你的编码规范和约定\n- 你的项目结构\n- 你常做的任务，以及你希望它们被如何处理\n- 你在某些操作之后总会做的事情\n\n**第 2 步 — 为你最常用的 3 个工作流创建自定义斜杠命令：**\n```markdown\n# .claude/commands/daily-review.md\nRun through this checklist for my daily code review:\n1. Check for any TODO comments that should be tickets\n2. Run linting and fix auto-fixable issues\n3. Review the last 3 commits for quality\n4. Check test coverage hasn't dropped\n5. Summarise what was done and what needs attention\n```\n\n**第 3 步 — 在真实会话中测试每一个命令。**\n\n**第 4 步 — 必做的审查环节：** 问 Claude Code：*“用一下我创建的这些命令，评估它们：哪些效果好，哪些不清楚，怎样能让每个命令更实用？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C — 自动化你的开发工作流",
+      "content": "为你最重复的开发任务创建自动化。\n\n**第 1 步 — 列出 5 个任务**，是你每周会做好几次、并且遵循可预测模式的任务。\n\n**第 2 步 — 针对排名前 2 的任务**，让 Claude Code 创建 shell 脚本或 Claude Code 命令：\n```\n创建一个名为 dev-start 的 shell 函数，它应该：\n1. 从 main 分支拉取最新改动\n2. 安装任何新增的依赖\n3. 如果有 schema 文件发生了变化，运行迁移\n4. 启动开发服务器\n5. 在浏览器中打开 localhost:3000\n\n让它能在 Windows/PowerShell 上运行。\n```\n\n**第 3 步 — 在真实的开发会话中测试每一个自动化。**\n\n**第 4 步 — 把它们安装**到你的 shell 配置文件里，让它们始终可用。\n\n**第 5 步 — 承诺使用它们两周**，然后评估：它们真的有帮助，还是你已经忘了它们的存在？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — 记录并分享你的 AI 开发环境",
+      "content": "记录你完整的 AI 驱动开发环境，以便重建或分享它。\n\n**第 1 步 — 在 GitHub 上创建一个 dotfiles 或配置仓库**（公开或私有均可）。\n\n**第 2 步 — 让 Claude Code 帮你撰写配置文档：**\n“记录我完整的开发环境配置。包括：所有工具及其安装命令、需要设置的配置文件、所需的环境变量，以及安装步骤的顺序。格式为一份新开发者可以照着操作的分步配置指南。”\n\n**第 3 步 — 测试这份文档**，从零照着它操作一遍（或者让别人来测试）。\n\n**第 4 步 — 把这份文档加入你的作品集**——「我的 AI 驱动开发环境」是一个很有吸引力的作品集内容。\n\n**第 5 步 — 分享给你的团队或社区。** 其他人会因此受益，也可能贡献改进意见。"
+    },
+    {
+      "type": "quiz",
+      "question": "你搭建了一套完善的 AI 开发环境，里面有很多自定义命令和自动化。一位新同事加入了你的团队。你应该如何分享你的配置？",
+      "options": [
+        "把你整个 dotfiles 仓库都给他们，让他们直接照抄",
+        "有选择地分享：解释这些工具是什么、你为什么用它们，让他们逐一试用，并帮助他们把你的配置改造成适合自己工作流的版本——不是每个人的工作方式都一样",
+        "留给自己——这是你的竞争优势",
+        "等他们在公司待满 3 个月之后再分享"
+      ],
+      "correct": 1,
+      "explanation": "开发环境的配置带有很强的个人色彩——你为自己工作流设计的自动化，未必符合同事的思维方式和工作方式。强行照搬别人的完整环境，往往会导致困惑并最终被弃用。更好的做法是：分享背后的理念（为什么用这些 AI 工具、哪些类别的工具有价值），在你的指导下让他们体验具体的工具，再帮助他们搭建出适合自己工作流的配置。把你配置中的「是什么、为什么」记录下来，这样他们就能采纳其中适合自己的部分。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的开发环境里安装了 8 种不同的 AI 工具。工具太多会带来什么风险？",
+      "options": [
+        "没有风险——工具越多意味着能力越强",
+        "工具过载：在相似工具之间做选择的认知负担、维护所有工具配置和更新的负担，以及决策疲劳导致每个工具都用不到位",
+        "只有当这些工具互相冲突时才有风险",
+        "只有新手才会遇到这种风险"
+      ],
+      "correct": 1,
+      "explanation": "工具泛滥是一个真实存在的生产力问题：每多一个工具，就多一份决策成本（什么时候用这个、什么时候用那个？）、一份维护成本（保持它更新、配置正确、能正常运行），以及一份学习成本（培养熟练度）。熟练使用 3 个工具的开发者，表现往往会超过偶尔使用 10 个工具的开发者。目标应该是一小套整合良好、你能条件反射般使用并且深入理解的工具——而不是尽可能覆盖每一种可能的能力。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**综合实战 14-4 完成。** 你的 AI 开发环境现在已经完整地文档化了。还剩下最后一个综合实战——一个开放式的实战，由你自己选择要构建什么。"
+    }
+  ],
+  "nextLesson": "14-5",
+  "prevLesson": "14-3"
+}

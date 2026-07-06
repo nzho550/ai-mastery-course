@@ -1,0 +1,86 @@
+{
+  "id": "10-8",
+  "title": "项目：搭建、部署并自动更新一个上线网站",
+  "part": 10,
+  "estimatedMinutes": 90,
+  "tags": [
+    "github",
+    "github-pages",
+    "github-actions",
+    "github-mcp",
+    "ci-cd",
+    "html",
+    "deployment",
+    "project"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将搭建什么\n\n学完本课后，你将拥有：\n- 一个真正上线的网站，地址是 `https://yourusername.github.io`\n- 一个从 Claude Code 内部创建的 GitHub 仓库——搭建仓库全程不需要打开浏览器\n- 一条 AI 生成的自动部署流水线——每次推送到 main 分支都会自动校验并部署你的网站\n\n这一课是 Git、GitHub MCP 和 GitHub Actions 不再是各自独立的概念、而是融合成一套完整工作流的地方。你之前分别搭建了每一块，现在要在一个真实项目中把它们组合起来使用。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**本课把这些内容串联在一起：**\n- **Claude Code** — 搭建网站文件\n- **GitHub MCP**（第 8-8 课） — 创建仓库并推送文件，全程不离开 Claude\n- **GitHub Actions**（第 10-6 课） — 由 AI 生成自动部署流水线\n- **GitHub Pages** — 永久免费托管你的网站\n\n你将在一次学习中，从一个空文件夹走到一个持续自动部署的上线网站。"
+    },
+    {
+      "type": "text",
+      "content": "## 第 0 步——创建你的 GitHub 账号（如果已有账号可跳过）\n\n如果你在第 6-1 课中已经设置好了 GitHub，可以直接跳到主工作坊。\n\n**创建一个免费的 GitHub 账号：**\n1. 前往 **github.com**，点击 **Sign up**\n2. 输入你的邮箱地址\n3. 设置密码\n4. **谨慎选择你的用户名**——它会成为你网站网址的一部分（`yourusername.github.io`）。使用你的真实姓名，或者一个你愿意公开分享的专业名称\n5. 按提示验证你的邮箱\n6. 选择 **Free** 计划\n\n**为 GitHub MCP 设置个人访问令牌：**\n1. GitHub.com → 点击你的头像 → **Settings**\n2. 滚动到底部 → **Developer settings**\n3. **Personal access tokens** → **Tokens (classic)**\n4. **Generate new token (classic)**\n5. 名称填：`claude-mcp`，有效期：90 天，权限范围：勾选 `repo` 和 `workflow`\n6. 点击 **Generate token**——立刻复制它，之后就再也看不到了\n7. 把它添加到你的 Claude Code MCP 配置中（准确的配置路径见第 8-8 课）\n\n完成之后，Claude Code 就可以直接在对话中创建仓库、推送文件、管理 GitHub 上的一切。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "项目——搭建、部署并自动更新一个上线网站",
+      "content": "五个阶段，一次会话。最终得到一个带自动部署功能的上线网站。\n\n---\n\n## 阶段 1——搭建网站（15 分钟）\n\n**创建一个项目文件夹并打开它：**\n```\nmkdir C:\\Users\\YourName\\Documents\\my-website\ncd C:\\Users\\YourName\\Documents\\my-website\ncode .\n```\n\n在 VS Code 终端中启动 Claude Code：\n```\nclaude\n```\n\n**给 Claude Code 一份完整的需求说明：**\n```\nBuild a clean, professional one-page website for me.\n\nName: [your name]\nTagline: [one sentence — who you are or what you're learning]\nAbout: [2-3 sentences]\nLinks: GitHub (https://github.com/yourusername)\n\nRequirements:\n- Single index.html file, all CSS in a <style> block — no external files\n- Dark background (#0d1117), white text, indigo (#6366f1) accents\n- Minimal modern design — centered content, clean typography\n- Mobile responsive\n- No JavaScript, no CDN dependencies\n- Under 50kb total\n```\n\n用 Live Server 预览它（右键点击 index.html → Open with Live Server）。在继续下一步之前先做好任何你想要的修改。\n\n---\n\n## 阶段 2——通过 GitHub MCP 创建仓库并推送（10 分钟）\n\n你已经在第 8-8 课学过 GitHub MCP。现在把它用在一个真实任务上——在不离开 Claude 的情况下创建并填充一个上线仓库。\n\n**创建仓库：**\n```\nUsing the GitHub MCP, create a new public repository named exactly:\nyourusername.github.io\n\n(Replace yourusername with my actual GitHub username: [your username])\nDo not initialize it with a README.\n```\n\nClaude 会调用 `create_repository`，仓库立刻就会出现在 GitHub 上。\n\n**推送你的文件：**\n```\nNow push my index.html file to the main branch of that repository.\nCommit message: \"Launch: built with Claude Code\"\n```\n\nClaude 会调用 `push_files`，你的代码就上传到了 GitHub。\n\n**验证：** 在浏览器中打开 `github.com/yourusername/yourusername.github.io`——你应该能在仓库中看到你的文件。\n\n---\n\n## 阶段 3——启用 GitHub Pages（5 分钟）\n\n这一部分需要你简单打开一次浏览器：\n\n1. 在 github.com 上打开你的仓库，点击 **Settings**\n2. 侧边栏 → **Pages**\n3. Source：**Deploy from a branch**\n4. Branch：**main** / 文件夹：**/ (root)**\n5. 点击 **Save**\n\nGitHub 会开始构建。2-3 分钟后，访问：`https://yourusername.github.io`\n\n你的网站已经上线了。\n\n---\n\n## 阶段 4——AI 生成的自动部署流水线（15 分钟）\n\n目前网站在你每次推送到 main 分支时都会自动部署——这是 GitHub Pages 的默认行为。但目前没有任何校验，你完全可能推送错误的 HTML，而全世界都会看到。\n\n我们来添加一条流水线，在网站上线前先做检查。\n\n**让 Claude Code 生成这个工作流：**\n```\nGenerate a GitHub Actions workflow for my website repository.\nThe workflow should:\n1. Trigger on every push to main\n2. Check the HTML is valid using htmlhint\n3. Verify index.html is under 500kb\n4. Output a deployment summary: file size, any warnings, and a link to the live site\n5. Fail the pipeline (and block deployment notification) if HTML errors are found\n\nSave it to .github/workflows/validate.yml\nExplain what each section does as you write it.\n```\n\n在接受之前，仔细阅读 Claude 生成的每一部分。如果有什么不清楚的，问它：“这一步具体做了什么？”\n\n**推送工作流文件：**\n```\nPush the .github/workflows/validate.yml file to the repository.\nCommit message: \"ci: add HTML validation pipeline\"\n```\n\n**观察它运行：**\n1. 打开 github.com 上的你的仓库\n2. 点击 **Actions** 标签页\n3. 你的流水线正在运行\n4. 点击运行记录 → 展开每一步\n\n---\n\n## 阶段 5——做一次改动，看它自动部署（10 分钟）\n\n**通过 Claude Code 更新网站：**\n```\nChange my website tagline to: [write something new]\nThen push the updated index.html to GitHub.\nCommit message: \"content: update tagline\"\n```\n\n**回到 Actions 标签页：** 一次新的流水线运行会自动开始。看着它校验你的 HTML，并报告通过。\n\n**等待 2-3 分钟后刷新 `https://yourusername.github.io`。**\n\n你的改动已经上线了。这就是完整的循环：编辑 → 推送 → 校验 → 部署。未来每一次更新都会自动走这个流程。\n\n---\n\n## 你已经搭建了什么\n\n| 内容 | 方式 |\n|------|------|\n| 上线网站 | GitHub Pages |\n| 仓库创建 | 从 Claude Code 通过 GitHub MCP |\n| 文件推送 | GitHub MCP——无需 git 命令 |\n| 自动校验流水线 | Claude Code 生成的 YAML |\n| 未来更新 | 编辑 → 让 Claude 推送 → 流水线运行 → 网站更新 |\n\n保存好你的网址：`https://yourusername.github.io`——你会在第 14 部分的顶点项目中再次用到这个仓库。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "工作坊 A——GitHub MCP 仓库操作",
+      "content": "练习 GitHub MCP 的完整操作范围——全部在 Claude Code 聊天中完成。\n\n**第 1 步——创建一个测试仓库：**\n问 Claude Code：“Using GitHub MCP, create a private repository called 'mcp-practice' with the description 'Learning GitHub MCP from Claude Code'.”\n\n**第 2 步——通过 MCP 添加文件：**\n问：“Add a file called NOTES.md to mcp-practice. The content should be today's date as a heading, and three bullet points about what I've learned in Part 10.”\n\n**第 3 步——更新一个已有文件：**\n问：“Add a fourth bullet point to NOTES.md: what I still want to learn.”\n\n**第 4 步——创建一个 issue：**\n问：“Create a GitHub issue in mcp-practice titled 'Add a projects section' with a description asking: what 3 fields should a projects section on a portfolio include?”\n\n**第 5 步——读取状态：**\n问：“List the open issues in mcp-practice and read me the content of NOTES.md.”\n\n**反思：** 你创建了一个仓库、添加并更新了文件、创建了 issue、读取了内容——全部都是在 Claude 聊天中完成的，没有碰过浏览器或终端。你实际工作中的哪些任务可以用这种方式替代？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——强化你的部署流水线",
+      "content": "为你的校验流水线添加更适合你网站的额外检查项。\n\n**第 1 步——问 Claude Code 还能做哪些事：**\n```\nFor a static HTML website hosted on GitHub Pages, what are the most useful\nadditional checks I could add to a GitHub Actions validation pipeline?\nList them ranked by value, with notes on whether each is free and how\ncomplex it is to add.\n```\n\n**第 2 步——从列表中挑选 2 项**适合你网站的额外检查。\n\n**第 3 步——请 Claude Code 添加它们：**\n“Add [check 1] and [check 2] to my .github/workflows/validate.yml. Push the updated file.”\n\n**第 4 步——**通过推送一个小改动到 index.html 来**触发一次运行**。\n\n**第 5 步——安全审查：**\n问 Claude Code：“Review my validate.yml pipeline for security issues. Are there any steps where a malicious PR could abuse the workflow? Is GITHUB_TOKEN scoped correctly?”\n\n在继续之前，修复它指出的任何问题。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 C——通过 GitHub Issues 实现部署通知",
+      "content": "扩展你的流水线，让每次部署成功或失败时自动创建一个 GitHub issue——不需要任何外部服务。\n\n**第 1 步——请 Claude Code 添加通知步骤：**\n```\nExtend my validate.yml to:\n- On success: create a GitHub issue titled 'Deploy #[run_number] succeeded'\n  with body showing: timestamp, file size, and the live site URL\n- On failure: create an issue titled 'Deploy #[run_number] FAILED'\n  with the error details and a link to the failed run\n\nUse GITHUB_TOKEN only — no third-party services. Push the updated file.\n```\n\n**第 2 步——**通过推送一个改动来**触发一次测试运行**。\n\n**第 3 步——检查仓库的 Issues 标签页**——issue 出现了吗？\n\n**第 4 步——问 Claude Code：** “Is creating a GitHub issue for every deployment a good long-term practice? What are the drawbacks, and what are the alternatives?”\n\n**第 5 步——做出决定：** 保留 issue 通知、换成 Claude 建议的其他方式，或者完全移除它。实施你的决定。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 GitHub Actions 流水线失败了：“htmlhint: 3 errors found”。正确的下一步是什么？",
+      "options": [
+        "从流水线中移除 htmlhint——它阻碍了部署",
+        "打开失败步骤的日志，看看哪些行有错误，在本地修复它们，然后重新推送",
+        "忽略它——GitHub Pages 无论 Actions 是否失败都会部署",
+        "回退到上一个提交"
+      ],
+      "correct": 1,
+      "explanation": "流水线失败意味着它捕捉到了 HTML 中一个真实的问题。正确的做法是：点击 Actions 日志中失败的那一步，读出具体的错误行，在本地文件中修复这些问题，然后再次推送——流水线会重新运行并通过。移除这个检查项等于拆掉了你的安全网。GitHub Pages 确实会无论 Actions 是否失败都进行部署（它们是两套独立的系统），这正是校验之所以重要的原因——没有它，出错的 HTML 就会悄无声息地上线。"
+    },
+    {
+      "type": "quiz",
+      "question": "通过 GitHub MCP 推送文件与在终端中使用“git push”相比，关键区别是什么？",
+      "options": [
+        "MCP 推送更快",
+        "MCP 使用 GitHub API 直接更新文件——没有本地 git 历史或分支。git push 会创建带有完整历史、作者信息的正式提交，并支持分支和回滚",
+        "两者完全相同——MCP 只是 git 的一层封装",
+        "MCP 只能处理 1MB 以下的文件"
+      ],
+      "correct": 1,
+      "explanation": "GitHub MCP 的 push_files 调用的是 GitHub Contents API——它会在 GitHub 上创建或替换文件，并带有一次提交记录，但你没有本地的 git 仓库来追踪历史。而使用 git push，你拥有完整的本地历史（git log、git diff、git revert、分支）。对于一个真实项目，你应该用本地 git 来做版本控制和分支管理，用 MCP 来做快速操作或自动化。用哪个工具取决于任务：本地 git 适合开发工作流，MCP 适合从 Claude 进行程序化的文件管理。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 10-8 课完成。** 你现在有一个上线的网站，一个通过 Claude Code 借助 MCP 管理的 GitHub 仓库，以及一条会在每次推送时进行校验的 AI 生成流水线。这就是完整的现代部署工作流——和专业团队使用的模式一样，只不过现在一个人靠免费工具就能用上。第 14 部分的顶点项目会回到这个网站，加入作品集深度内容、自定义域名设置和数据分析。"
+    }
+  ],
+  "nextLesson": "10-9",
+  "prevLesson": "10-7"
+}

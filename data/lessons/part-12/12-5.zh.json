@@ -1,0 +1,106 @@
+{
+  "id": "12-5",
+  "title": "把本地模型连接到 VS Code 中的 Continue.dev",
+  "part": 12,
+  "estimatedMinutes": 65,
+  "tags": [
+    "local-ai",
+    "continue-dev",
+    "vscode",
+    "ollama",
+    "lm-studio"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nContinue.dev（在第 6-4 课中安装的）开箱即支持本地模型。学完本课后，你会在 VS Code 中拥有一个完全运行在你自己机器上的 AI 代码助手——不需要 API 密钥，没有成本，也不会有数据离开你的电脑。"
+    },
+    {
+      "type": "text",
+      "content": "## Continue.dev 如何连接本地模型\n\nContinue.dev 把它的配置存储在这个文件中：\n- **Windows：** `C:\\Users\\YourName\\.continue\\config.json`\n- **macOS：** `~/.continue/config.json`\n\n你可以直接编辑这个文件，也可以在 VS Code 中用 `Ctrl+Shift+P` → `Continue: Open Config` 打开它。\n\n这个配置文件是一个 JSON 文件，包含一个 `models` 数组。数组中的每一项都是一个模型提供方——你可以配置多个，并在 Continue 侧边栏中切换它们。\n\n对于本地模型，你需要把 Continue 指向 Ollama 的 API（1234 端口）或 LM Studio 的 API（1234 端口）。两者使用相同的 JSON 格式，只是具体值略有不同。"
+    },
+    {
+      "type": "text",
+      "content": "## 配置：Ollama 提供方\n\n如果你用的是 Ollama，把下面这段加到你 `config.json` 的 `models` 数组中：\n\n```json\n{\n  \"title\": \"Local Phi-4 (Ollama)\",\n  \"provider\": \"ollama\",\n  \"model\": \"phi4\"\n}\n```\n\nContinue.dev 知道 Ollama 的默认端口（11434）——你不需要指定 URL。只要确保 Ollama 正在运行（检查一下系统托盘）就行。\n\n如果你想使用别的模型，把 `\"model\": \"phi4\"` 改成你已经拉取的任意模型名（比如 `\"llama3.2:3b\"`、`\"mistral\"`）。\n\n如果要使用自定义端口或远程的 Ollama 实例，加上 `\"apiBase\"`：\n```json\n{\n  \"title\": \"Local Phi-4 (Ollama)\",\n  \"provider\": \"ollama\",\n  \"model\": \"phi4\",\n  \"apiBase\": \"http://localhost:11434\"\n}\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 配置：LM Studio 提供方\n\nLM Studio 提供一个兼容 OpenAI 的 API。因为它不是 Ollama，你需要使用 `\"openai\"` 提供方，并把它指向 localhost:1234：\n\n```json\n{\n  \"title\": \"Local Phi-4 (LM Studio)\",\n  \"provider\": \"openai\",\n  \"model\": \"phi4\",\n  \"apiBase\": \"http://localhost:1234/v1\",\n  \"apiKey\": \"local\"\n}\n```\n\n`\"apiKey\": \"local\"` 是 OpenAI 提供方格式所要求的，但 LM Studio 会忽略这个值——你可以随便填什么。真正重要的是 `apiBase` 这个 URL，以及模型名要与你在 LM Studio 服务器中加载的模型一致。\n\n**重要提示：** 要让这个配置生效，LM Studio 的本地服务器必须正在运行，并且已经加载了一个模型。测试之前先检查 LM Studio 中的 Developer 标签页。"
+    },
+    {
+      "type": "text",
+      "content": "## 一个完整的 config.json 示例\n\n下面是一个同时配置了云端模型和本地模型的 config.json：\n\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Claude Sonnet (Cloud)\",\n      \"provider\": \"anthropic\",\n      \"model\": \"claude-sonnet-4-6\",\n      \"apiKey\": \"sk-ant-your-key\"\n    },\n    {\n      \"title\": \"Local Phi-4 (Ollama)\",\n      \"provider\": \"ollama\",\n      \"model\": \"phi4\"\n    }\n  ],\n  \"tabAutocompleteModel\": {\n    \"title\": \"Tab Autocomplete (Ollama)\",\n    \"provider\": \"ollama\",\n    \"model\": \"phi4\"\n  }\n}\n```\n\n有了这份配置，你可以用 Continue 侧边栏顶部的模型选择器，在 Claude 和你的本地模型之间切换。复杂的重构任务用 Claude，快速的私密代码问题用本地模型。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**用本地模型做 Tab 自动补全：** Continue.dev 还支持 AI 驱动的 Tab 自动补全（类似 Copilot 的内联建议）。你可以用 `tabAutocompleteModel` 这个键专门为自动补全配置一个本地模型。更小、更快的模型更适合做自动补全，因为它们需要在 200 毫秒内响应。`llama3.2:3b` 是个不错的选择。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**排查问题：模型没有响应？** 按顺序检查这几点：\n1. Ollama 在运行吗？看看系统托盘图标。如果没有，打开 PowerShell 输入 `ollama serve`。\n2. 模型下载好了吗？运行 `ollama list` 确认。\n3. config.json 中的模型名和 `ollama list` 里显示的名字完全一致吗？\n4. 对于 LM Studio：Developer 标签页中的服务器启动了吗？加载了模型吗？\n\n在 VS Code 中，打开输出面板（`Ctrl+Shift+U`），在下拉菜单中选择 \"Continue\"，查看错误信息。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "把 Continue.dev 连接到你的本地模型",
+      "content": "**前置条件：** 已安装 Ollama 并至少有一个模型（第 12-2 课），或者 LM Studio 正在运行且已加载模型（第 12-4 课）。\n\n**第 1 步——打开 Continue 设置：**\n1. 在 VS Code 中按 `Ctrl+Shift+P`\n2. 输入 `Continue: Open Config` → 按回车\n3. `config.json` 文件会在编辑器中打开\n\n**第 2 步——添加你的本地模型：**\n找到 `\"models\"` 数组。添加相应的条目：\n\n**如果用 Ollama：**\n```json\n{\n  \"title\": \"Local Model (Ollama)\",\n  \"provider\": \"ollama\",\n  \"model\": \"phi4\"\n}\n```\n把 `\"phi4\"` 改成你已安装的模型（用 `ollama list` 查看）。\n\n**如果用 LM Studio（服务器已运行）：**\n```json\n{\n  \"title\": \"Local Model (LM Studio)\",\n  \"provider\": \"openai\",\n  \"model\": \"phi4\",\n  \"apiBase\": \"http://localhost:1234/v1\",\n  \"apiKey\": \"local\"\n}\n```\n\n如果数组里已经有其他模型，注意在条目之间加上逗号。保存文件（`Ctrl+S`）。\n\n**第 3 步——选择你的本地模型：**\n1. 打开 Continue 侧边栏（点击活动栏中的 Continue 图标）\n2. 在对话面板顶部，点击模型名下拉菜单\n3. 从列表中选择你的本地模型\n\n**第 4 步——测试一下：**\n1. 从你的 `ai-course-projects` 文件夹中打开任意代码文件\n2. 选中一个函数或几行代码\n3. 按 `Ctrl+L` 把选中内容发给 Continue\n4. 问它：\"这段代码是做什么的？\"\n5. 观察响应是从你本机产生的\n\n**第 5 步——离线测试：**\n断开 WiFi（或开启飞行模式）。问 Continue 一个问题。如果它仍然能响应，说明你的本地模型正常工作——不需要联网。\n\n**测试完毕后重新连接 WiFi。**\n\n在你的 `notes/my-ai-workflow.md` 中记下你配置了哪个本地模型，以及你打算在什么情况下用它、什么情况下用云端模型。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——Continue.dev + Ollama 配置",
+      "content": "把 Continue.dev 连接到你的本地 Ollama 模型。\n\n**第 1 步——确保 Ollama 正在运行**，并且至少有一个模型：\n```powershell\nollama list\n```\n\n**第 2 步——配置 Continue.dev**（`.continue/config.json`）：\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Local Code Model\",\n      \"provider\": \"ollama\",\n      \"model\": \"qwen2.5-coder:7b\"\n    },\n    {\n      \"title\": \"Claude Sonnet (Cloud)\",\n      \"provider\": \"anthropic\",\n      \"model\": \"claude-sonnet-4-6\",\n      \"apiKey\": \"your-key-here\"\n    }\n  ]\n}\n```\n\n**第 3 步——打开 VS Code**，在 Continue.dev 中切换模型。\n\n**第 4 步——在一个真实任务上测试本地模型的代码补全能力。**\n\n**第 5 步——问 Claude：** \"我怎样才能配置 Continue.dev，让它根据文件类型或任务类型自动在本地模型和云端模型之间选择？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——本地 + 云端的混合工作流",
+      "content": "搭建一套混合工作流：日常任务用本地 AI，复杂任务用云端 AI。\n\n**第 1 步——定义你的任务分级：**\n- **本地模型任务：** 快速补全、样板代码生成、简单讲解、私密/敏感代码\n- **云端模型任务：** 复杂的架构问题、大型重构、业务逻辑推理、任何需要广博知识的任务\n\n**第 2 步——花 30 分钟按这种混合方式有意识地编码：**\n- 简单任务：用本地模型\n- 复杂任务：切换到 Continue.dev 中的 Claude Sonnet\n\n**第 3 步——记录使用情况：**\n- 你用本地模型和云端模型各多少次？\n- 分别在什么任务上选择了哪一种？\n\n**第 4 步——问 Claude：** *\"基于我的混合使用模式 [描述一下]，我在哪些地方过度使用或使用不足本地模型？如果所有任务都用云端 AI，我本地使用节省了多少成本？\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——用本地模型做自动补全",
+      "content": "配置使用本地模型的代码自动补全。\n\n**第 1 步——配置 Continue.dev 的自动补全**，使用本地模型：\n```json\n{\n  \"tabAutocompleteModel\": {\n    \"title\": \"Local Autocomplete\",\n    \"provider\": \"ollama\",\n    \"model\": \"qwen2.5-coder:1.5b\"\n  }\n}\n```\n\n注意：自动补全要用最小的模型——它会在每次按键时运行。\n\n**第 2 步——在 VS Code 设置中启用自动补全：** 搜索 \"Continue autocomplete\" 并启用。\n\n**第 3 步——开启本地自动补全，写 15 分钟真实代码。** 衡量：\n- 建议有用的频率如何？（采纳率）\n- 延迟感觉能接受吗？\n- 哪类补全效果最好？\n\n**第 4 步——与没有自动补全时对比**——估算每小时编码节省的时间。\n\n**第 5 步——根据你的体验调整配置。** 如果延迟成问题，用更小的模型可能更好。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——注重隐私的开发环境",
+      "content": "为敏感项目配置一个隐私最大化的开发环境。\n\n**第 1 步——为敏感项目定义一个\"隐私优先\"的 VS Code 工作区：**\n- 只用本地 AI（不连接云端）\n- 不向任何厂商发送遥测数据\n- 针对项目领域调优的本地模型\n\n**第 2 步——请 Claude Code 协助配置：**\n```\nCreate a VS Code workspace settings file (.vscode/settings.json) that:\n1. Disables all telemetry\n2. Disables GitHub Copilot if installed\n3. Configures Continue.dev to use only local models\n4. Disables any extension that makes external network requests\n\nAlso create a .continue/config.json that uses only Ollama models.\n```\n\n**第 3 步——测试这份配置：** 验证编码过程中没有任何网络请求离开你的机器（可以用 Wireshark 或 Windows 资源监视器这类网络监控工具）。\n\n**第 4 步——把这套隐私优先的工作区配置记录下来**，供你最敏感的项目使用。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在 Continue.dev 中同时配置了本地 Ollama 模型和云端 Claude 模型。在 VS Code 中提问时，Continue.dev 是怎么决定用哪个模型的？",
+      "options": [
+        "它会自动为每个任务选择最合适的模型",
+        "你需要在 Continue.dev 侧边栏的模型选择器中手动选择模型——它不会自动选择",
+        "它总是先用本地模型，本地失败后再回退到云端",
+        "它会使用响应最快的模型"
+      ],
+      "correct": 1,
+      "explanation": "Continue.dev 不会在模型之间自动路由——你需要从模型选择器中手动选择当前使用的模型。这是刻意设计的：自动路由可能在你本意是使用本地模型时，意外把敏感数据发送给云端模型。手动选择模型能确保你清楚知道自己的数据流向了哪里。如果想要基于任务类型的自动路由，你需要自己搭建相应逻辑，或者使用明确支持智能路由的工具。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的本地模型生成的代码补全经常包含你的变量名和编码习惯。这是否值得担心隐私问题？",
+      "options": [
+        "是的——模型已经从你的代码中学习了，可能会分享出去",
+        "不用担心——模型只是在适应当前会话中你编辑器里的代码上下文，并没有用你的代码进行训练，也没有分享出去",
+        "是的——你应该在每次会话后重置模型",
+        "不用担心——但你应该给模型文件加密"
+      ],
+      "correct": 1,
+      "explanation": "你观察到的其实是上下文学习（in-context learning）——模型读取你编辑器中当前的代码（也就是提示词/上下文的一部分），并据此给出相关建议。这不是训练；模型的权重并没有被更新。使用本地模型时，没有任何数据被发送到任何地方。除非你显式地把之前的代码放进提示词中，否则模型在会话之间不会记住你的代码。正是这种基于上下文的适应能力，让本地模型能够为你的特定代码库生成相关的补全内容。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 12-5 课。** Continue.dev 现在已经连接到你的本地模型。你在 VS Code 中拥有了一个完全私密、可离线使用的 AI 编码助手。接下来：对 Claude Code 做同样的配置。"
+    }
+  ],
+  "nextLesson": "12-6",
+  "prevLesson": "12-4"
+}

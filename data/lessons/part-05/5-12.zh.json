@@ -1,0 +1,111 @@
+{
+  "id": "5-12",
+  "title": "VS Code 的 Git 集成（Source Control）",
+  "part": 5,
+  "estimatedMinutes": 60,
+  "tags": [
+    "vscode",
+    "beginner",
+    "git",
+    "source-control",
+    "version-control"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将理解什么是版本控制，安装好 Git，并能够初始化一个仓库、暂存文件、编写提交信息，完成你的第一次提交——这一切全部在 VS Code 内完成，不需要输入一条 Git 命令。\n\n这是具有里程碑意义的一课。版本控制是每一个正经项目的基石。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是版本控制？\n\n想象一下写一份重要文档，并把它保存为多个版本：\n- `report-v1.docx`\n- `report-v2.docx`\n- `report-final.docx`\n- `report-final-REAL.docx`\n- `report-final-REAL-2.docx`\n\n这种方式很快就会失控。而且如果你想知道 v1 和 v3 之间到底改变了什么，你得手动打开两个文件逐一对比。\n\n**版本控制**用一套系统取代了这种混乱：\n- 自动追踪你所做的每一次修改\n- 让你用一句话给每个快照打上标签（“添加了引言部分”）\n- 让你随时回到任何一个快照\n- 精确展示任意两个快照之间的差异\n- 让多人协作同一个项目，而不会互相覆盖对方的工作\n\n**Git** 就是在你自己电脑上完成这种追踪的工具。它免费、开源，几乎被地球上所有专业开发者使用。\n\n**GitHub** 是一个独立的网站，你可以在上面存储由 Git 追踪的项目——用于备份、分享或协作。Git 和 GitHub 不是一回事。Git 是本地的；GitHub 是云端的。你可以只用 Git 而不用 GitHub。\n\n本课我们只使用 Git。GitHub 会在课程后面出现。"
+    },
+    {
+      "type": "text",
+      "content": "## 必须掌握的四个词\n\n**仓库（Repository / repo）** —— Git 正在追踪的一个文件夹。当你初始化一个仓库时，Git 会在项目文件夹内创建一个隐藏的 `.git` 文件夹。这就是 Git 存储全部版本历史的地方。不要删除 `.git` 文件夹。\n\n**提交（Commit）** —— 在某个时间点保存下来的项目快照。每一次提交都有你写的一条信息（例如 `Added README file`），方便你日后了解这段历史。提交是永久性的——一旦完成，它就永远留在历史记录里（除非你刻意将其移除）。\n\n**暂存（Stage）** —— 决定哪些改动要包含在下一次提交中。你可能改动了三个文件，但只想提交其中两个的改动。暂存让你可以选择哪些文件进入这次快照。\n\n**分支（Branch）** —— 项目的一个并行版本，你可以在其中工作而不影响主版本。分支是本课程后面会讲到的进阶主题。目前，你会在名为 `main` 的默认分支上工作。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**前置条件 —— 必须先安装 Git。** 打开集成终端（Ctrl+`），输入 `git --version`。如果你看到 `git version 2.x.x`，说明你已经准备好了——可以直接跳到本课的工作坊。如果你看到类似 `'git' is not recognized` 的错误提示：前往 **git-scm.com/downloads**，点击 **Download for Windows**，用全部默认设置运行安装程序，点击 Finish，然后关闭并重新打开终端，再次尝试 `git --version`。\n\n**安装 Git 后需要做的一次性必要设置** —— 告诉 Git 你是谁。运行以下两条命令（把值替换成你自己的姓名和邮箱）：\n```\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"you@example.com\"\n```\nGit 会用这些信息为你的提交打上标签。每台电脑上你只需要做一次这个设置。"
+    },
+    {
+      "type": "text",
+      "content": "## VS Code 中的 Source Control 面板\n\nVS Code 内置了 Git。你可以通过 **Source Control** 面板访问它：\n- 点击 Activity Bar 中的**分支图标**（看起来像一根带圆圈的树枝）\n- 或者：按 **Ctrl+Shift+G**\n\n一旦初始化了 Git 仓库，这个面板会显示：\n\n**Changes（更改）** —— 自上次提交以来你修改过的文件。每个文件都有一个字母标注其状态：\n- `U` —— 未跟踪（Git 从未见过的新文件）\n- `M` —— 已修改（Git 已知晓、发生了变化的文件）\n- `A` —— 已添加/已暂存（你已标记要包含进下次提交的文件）\n- `D` —— 已删除\n\n**Staged Changes（已暂存的更改）** —— 你已明确标记要包含进下次提交的文件（通过点击 `+` 按钮）。\n\n**提交信息输入框** —— 位于顶部，用来输入你的提交说明。\n\n**对勾按钮**（✓）—— 点击它（或按 Ctrl+Enter）即可用已暂存的文件完成提交。"
+    },
+    {
+      "type": "text",
+      "content": "## 提交时会发生什么\n\n下面是完整的流程，逐步说明：\n\n1. 你对项目中的文件进行了修改（编辑、创建、删除）\n2. 这些文件会出现在 Source Control 面板的 **Changes** 部分，带有 `U` 或 `M` 标记\n3. 你点击文件旁边的 `+` 按钮来**暂存**它（将其移到 Staged Changes）\n4. 你在顶部的输入框中输入一条提交信息\n5. 你按 Ctrl+Enter 或点击 ✓ 按钮\n6. VS Code（通过 Git）保存一个带有你的信息的永久快照——也就是一次提交\n7. Changes 列表清空——你回到了干净的状态\n\n每一次提交都会被永久保存在历史记录中。你可以随时通过 GitLens（在第 5-8 课中安装的）或在终端运行 `git log` 来查看历史。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**好的提交信息很重要。** 一条提交信息应该能够补全这句话：“这次提交……”。好的提交信息示例：`Add README with project description`、`Fix typo in lesson notes`、`Create exercises folder structure`。避免使用像 `update` 或 `changes` 这样含糊的说法。六个月后再回头看这段历史时，你会感谢现在的自己。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "你的第一次 Git 提交",
+      "content": "你将为你的课程项目初始化一个 Git 仓库，并完成你的第一次提交——全程只用 VS Code 的 Source Control 面板。\n\n**第 1 步 —— 验证 Git 已安装：**\n1. 按 Ctrl+` 打开集成终端\n2. 输入 `git --version` 并按 Enter\n3. 你应该会看到类似 `git version 2.44.0.windows.1` 的内容\n4. 如果出现错误，先安装 Git（参见本工作坊上方的提示框）\n\n**第 2 步 —— 设置你的 Git 身份（仅第一次需要）：**\n在终端中，用你自己的信息运行以下两条命令：\n```\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"you@example.com\"\n```\n每条命令后按 Enter。没有确认提示是正常的。\n\n**第 3 步 —— 初始化仓库：**\n1. 点击 Activity Bar 中的**分支图标**（或按 Ctrl+Shift+G）\n2. 你会看到一个写着 **Initialize Repository** 的按钮——点击它\n3. VS Code 会为你的 `ai-course-projects` 文件夹初始化 Git\n4. 你现有的所有文件会立即出现在 Changes 部分，带有 `U`（未跟踪）标记——Git 第一次看到它们\n\n**第 4 步 —— 暂存你的文件：**\n1. 在 Source Control 面板中，你会看到所有文件被列在 “Changes” 下\n2. 把鼠标悬停在 `README.md` 文件上——它右侧会出现一个 `+` 按钮\n3. 点击 `+` 暂存它——它会移到 “Staged Changes” 部分\n4. 现在点击整个 “Changes” 标题旁边的 `+`，一次性暂存全部剩余文件\n5. 此时所有文件都应该出现在 “Staged Changes” 下\n\n**第 5 步 —— 写你的提交信息：**\n1. 点击 Source Control 面板最顶部的文本框（上面写着 “Message (Ctrl+Enter to commit)”）\n2. 输入：`Initial commit - set up AI course project structure`\n\n**第 6 步 —— 完成提交：**\n1. 按 **Ctrl+Enter**——或者点击 ✓（对勾）按钮\n2. VS Code 完成这次提交\n3. Staged Changes 和 Changes 两个部分都会清空——你现在有 0 处更改\n4. 看一下底部的状态栏——你会看到一个分支图标和 `main`（或 `master`）\n\n**第 7 步 —— 做一次修改，再提交一次：**\n1. 在编辑器中打开 `README.md`\n2. 添加第二行：`This project contains my AI course exercises.`\n3. 保存（Ctrl+S）\n4. 前往 Source Control——README.md 会带着 `M`（已修改）标记出现\n5. 暂存它（点击 `+`）\n6. 输入提交信息：`Update README with project description`\n7. 按 Ctrl+Enter 完成提交\n8. Changes 再次清空——回到干净状态\n\n**如果做到以下几点，就说明成功了：**\n- [ ] `git --version` 返回了一个版本号\n- [ ] Source Control 面板显示了你的文件\n- [ ] 所有文件都已暂存并提交\n- [ ] 提交完成后，Changes 列表为空\n- [ ] 状态栏底部显示了一个分支名称\n\n没有任何内容被推送到 GitHub。这一切都只保存在你自己电脑上，存在 `ai-course-projects` 内隐藏的 `.git` 文件夹里。你的快照是安全的。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**GitLens 现在被激活了。** 既然你已经有了一个 Git 仓库，第 5-8 课中安装的 GitLens 扩展就会开始工作。打开任意一个文件，把鼠标悬停在某一行上——你会看到一段淡淡的注释，显示是谁在何时做了这次修改。在单人项目中，它只会显示你自己的名字和提交时间，但在团队项目中，这种模式会变得极其有价值。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A —— VS Code Git 工作流练习",
+      "content": "这个 8 分钟的练习能让你熟悉把 VS Code 的 Source Control 面板作为主要的 git 界面来使用。\n\n**第 1 步 —— 在 VS Code 中打开一个 git 仓库**（或初始化一个：Ctrl+Shift+P → \"Git: Initialize Repository\"）。\n\n**第 2 步 —— 对任意文件做一次修改**——加一行，改点什么。\n\n**第 3 步 —— 打开 Source Control**（Ctrl+Shift+G）。注意被修改的文件出现在 “Changes” 下。\n\n**第 4 步 —— 暂存这次改动：** 点击文件旁边的 + 图标。它会移到 “Staged Changes”。\n\n**第 5 步 —— 在顶部的信息框中写一条提交信息。** 点击对勾完成提交。\n\n**第 6 步 —— 查看 git 历史：** 点击 “...” 菜单 → “View Git History”（或安装 GitLens 获得更丰富的历史视图）。\n\n**第 7 步 —— 问 Claude：** *“我正在学习使用 VS Code 的 Source Control 面板。哪些 git 操作应该从 VS Code 图形界面来做？什么时候应该改用终端？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 针对真实功能的分支工作流",
+      "content": "为你正在搭建的一个真实功能，练习标准的 git 分支工作流。\n\n**第 1 步 —— 为你正在开发的功能创建一个新分支：**\n- Ctrl+Shift+P → \"Git: Create Branch\"\n- 命名为：`feature/[你正在搭建的内容]`\n\n**第 2 步 —— 在该分支上做出修改：** 在这个分支上搭建一些小东西——加一个文件，写一点代码。\n\n**第 3 步 —— 将改动提交**到这个功能分支（Source Control 面板 → 暂存 → 提交）。\n\n**第 4 步 —— 切回 main：** 点击左下角状态栏的分支名称 → 选择 main。\n\n**第 5 步 —— 合并你的功能：** Ctrl+Shift+P → \"Git: Merge Branch\" → 选择你的功能分支。\n\n**第 6 步 —— 解决冲突**（如果有的话）：VS Code 会用合并标记展示冲突。选择 “Accept Current Change”、“Accept Incoming Change”，或 “Accept Both”。\n\n**第 7 步 —— 问 Claude：** *“解释一下我刚才练习的 git 分支工作流。为什么开发者会使用功能分支，而不是直接提交到 main？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C —— GitLens 强大功能",
+      "content": "GitLens 是最受欢迎的 VS Code git 扩展。这个工作坊会探索它最好用的一些功能。\n\n**第 1 步 —— 安装 GitLens**（Ctrl+Shift+X → 搜索 “GitLens”）。\n\n**第 2 步 —— 探索 Git Blame：** 打开一个代码文件。GitLens 会以行内、淡化的方式显示每一行最后是谁修改的、何时修改的。把鼠标悬停在任意一行上即可查看完整的提交详情。\n\n**第 3 步 —— 探索 Git History：** 右键点击 Explorer 中的一个文件 → “Open Changes with Previous Revision”。精确查看发生了什么变化。\n\n**第 4 步 —— 使用 Repository View：** Ctrl+Shift+P → \"GitLens: Show Repository\"——查看所有分支、提交、stash。\n\n**第 5 步 —— 使用交互式变基**（GitLens 会把它可视化）：Ctrl+Shift+P → \"GitLens: Git Interactive Rebase\"——重新排序或压缩提交。\n\n**第 6 步 —— 问 Claude：** *“我安装了 GitLens。对于一个使用 AI 生成代码、想追踪什么发生了变化、何时发生、为什么发生的人来说，最有用的 5 个功能是什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— AI 辅助的 Git 提交信息",
+      "content": "提交信息很重要——它们是代码为什么会改变的文档记录。用 AI 来写出更好的提交信息。\n\n**第 1 步 —— 打开 Source Control**（Ctrl+Shift+G）。\n\n**第 2 步 —— 暂存你的改动。** 查看差异面板，了解具体改变了什么。\n\n**第 3 步 —— 请 Claude 帮你写提交信息：**\n```\n我做了以下代码改动：\n[描述或粘贴 diff]\n\n请按照以下惯例写一条提交信息：\n- 第一行：使用祈使语气，不超过 72 个字符（例如 \"Add validation for empty input\"）\n- 可选正文：改变了什么，以及为什么改变（不只是“做了什么”）\n- 如果适用，引用相关的 issue 编号\n\n请给出 3 个选项，从最详尽到最简洁排列。\n```\n\n**第 4 步 —— 选出最好的信息**，粘贴到 VS Code 的提交信息输入框中。\n\n**第 5 步 —— 必备的习惯：** 每次提交之前，花 30 秒确保提交信息回答的是“为什么”，而不只是“做了什么”。一份充满“fix bug”这类信息的 git log 毫无用处；而“Fix validation that rejected valid email addresses with plus signs”本身就是一份文档。"
+    },
+    {
+      "type": "quiz",
+      "question": "你对一个文件做了修改，但不小心把它改得更糟了。你想撤销所有改动，让文件恢复到最后一次提交时的状态。在 VS Code 中最安全的做法是什么？",
+      "options": [
+        "反复按 Ctrl+Z 直到改动消失",
+        "在 Source Control 中右键点击该文件 → “Discard Changes”——这会把文件还原到最后一次提交时的状态",
+        "删除该文件，再从 git 中恢复它",
+        "不保存，直接关闭 VS Code"
+      ],
+      "correct": 1,
+      "explanation": "在 VS Code 的 Source Control 面板中，右键点击一个已更改的文件会显示 “Discard Changes”——这会把文件精确还原到最后一次提交时的样子。Ctrl+Z 只能撤销当前会话内的编辑，可能撤销不到足够早的位置。如果你还没保存，直接不保存关闭确实可行；但如果你已经保存了那个糟糕的版本，Discard Changes（或在终端中运行 `git checkout -- filename`）才是正确的做法。"
+    },
+    {
+      "type": "quiz",
+      "question": "你有两次提交，想在推送到团队仓库之前把它们合并成一次。这是哪种 git 操作？",
+      "options": [
+        "git merge",
+        "git rebase -i（交互式变基）—— squash（压缩）可以把多次提交合并成一次",
+        "git reset --hard",
+        "git stash"
+      ],
+      "correct": 1,
+      "explanation": "交互式变基（`git rebase -i HEAD~2` 可以处理最近的 2 次提交）能让你压缩提交、重新排序，或改写提交信息。压缩（squash）会把多次提交合并成一次，保持历史记录干净。重要提示：只压缩尚未推送到共享远程仓库的提交——改写共享历史会给其他人带来麻烦。如果你不想用命令行，VS Code 中的 GitLens 提供了交互式变基的图形界面。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 5-12 课，也完成了整个 Part 5。** 你现在拥有了一套完整配置好的 VS Code 环境：一个工作区、一套文件结构、一个配色主题、若干扩展、自动格式化、你正在逐渐记住的键盘快捷键、一个分屏编辑器，以及你的第一个带有提交历史的 Git 仓库。这就是全世界开发者都在使用的专业配置。Part 6 会建立在你刚学到的这一切之上：在 VS Code 内部直接使用 AI。"
+    }
+  ],
+  "nextLesson": "6-1",
+  "prevLesson": "5-11"
+}

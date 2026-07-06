@@ -1,0 +1,114 @@
+{
+  "id": "11-4",
+  "title": "用 curl 发起第一次 API 调用",
+  "part": 11,
+  "estimatedMinutes": 60,
+  "tags": [
+    "api",
+    "anthropic",
+    "terminal",
+    "curl"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将从终端发起一次真实的 API 调用，看到 Claude 的实时响应以原始 JSON 的形式呈现，并理解请求的每一部分都在做什么。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么要从终端开始？\n\n在使用 SDK 之前，先亲眼看一次原始请求是很有价值的。SDK 是一层抽象——它把 HTTP 的细节隐藏了起来。先发起一次原始调用，意味着你日后能清楚地理解 SDK 到底在替你做什么。当出问题时，你可以退回到原始请求来进行诊断。\n\n在本课中，你会用到 PowerShell 的 `Invoke-RestMethod` 命令，它是 Mac/Linux 上 `curl` 在 PowerShell 中的对应物。它会发送 HTTP 请求，并自动解析 JSON 响应。"
+    },
+    {
+      "type": "text",
+      "content": "## 逐部分拆解请求\n\n下面是调用 Anthropic API 的完整 PowerShell 命令："
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "$response = Invoke-RestMethod `\n  -Uri \"https://api.anthropic.com/v1/messages\" `\n  -Method POST `\n  -Headers @{\n    \"x-api-key\"         = $env:ANTHROPIC_API_KEY\n    \"anthropic-version\" = \"2023-06-01\"\n    \"content-type\"      = \"application/json\"\n  } `\n  -Body '{\n    \"model\": \"claude-haiku-4-5-20251001\",\n    \"max_tokens\": 100,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Say hello in exactly 10 words.\"}\n    ]\n  }'\n\n$response.content[0].text"
+    },
+    {
+      "type": "text",
+      "content": "逐部分拆解：\n\n**`-Uri`**——端点 URL。所有 messages 调用都使用这一个 URL。\n\n**`-Method POST`**——我们在向服务器发送数据，所以使用 POST（而不是 GET）。\n\n**`-Headers`**——三个必需的请求头：\n- `x-api-key`：你的 API 密钥（从环境变量中读取，永远不要硬编码）\n- `anthropic-version`：始终是 `2023-06-01`——它固定了 API 版本，这样即使 Anthropic 改变了响应格式，你的代码也不会失效\n- `content-type`：告诉服务器请求体是 JSON 格式\n\n**`-Body`**——包含 model、max_tokens 和 messages 的 JSON 请求体。\n\n**`$response.content[0].text`**——从嵌套的响应对象中提取出 Claude 的回复。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**每行末尾的反引号（`）**是 PowerShell 的续行符——表示『命令在下一行继续』。这只是为了可读性。你完全可以把整个命令写在一行里。"
+    },
+    {
+      "type": "text",
+      "content": "## 完整响应长什么样\n\n如果你打印 `$response` 而不是 `$response.content[0].text`，你会看到完整的响应对象："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"id\": \"msg_01XFDUDYJgAACzvnptvVoYEL\",\n  \"type\": \"message\",\n  \"role\": \"assistant\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"Hello there! Greetings to you on this fine day.\"\n    }\n  ],\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"stop_reason\": \"end_turn\",\n  \"stop_sequence\": null,\n  \"usage\": {\n    \"input_tokens\": 17,\n    \"output_tokens\": 10\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "## 常见错误及其含义\n\n**401 Unauthorized：**\n```\nInvoke-RestMethod: Response status code does not indicate success: 401 (Unauthorized).\n```\n你的 API 密钥是错误的、缺失的，或已过期。检查：`$env:ANTHROPIC_API_KEY` 是否已设置？运行 `echo $env:ANTHROPIC_API_KEY` 来验证。\n\n**429 Too Many Requests：**\n```\nInvoke-RestMethod: Response status code does not indicate success: 429 (Too Many Requests).\n```\n你达到了速率限制。等待 30-60 秒后重试。新的 API 密钥速率限制较低，会随着使用量增加而提高。\n\n**400 Bad Request：**\n```\nInvoke-RestMethod: Response status code does not indicate success: 400 (Bad Request).\n```\nJSON 请求体格式有误。检查是否缺少引号、多了逗号，或者模型名称无效。如有需要，可以使用 JSON 校验工具。\n\n**Model not found：**\n如果你收到 404 或模型相关的错误，可能是模型 ID 已经变化。查阅 `docs.anthropic.com/en/docs/about-claude/models` 获取当前的 Haiku 模型 ID。"
+    },
+    {
+      "type": "workshop",
+      "tag": "API",
+      "title": "发起一次真实的 API 调用",
+      "content": "你将运行上面的命令，从 Claude 获得一个实时响应。\n\n**第一步——设置你的 API 密钥**\n在 VS Code 集成终端中：\n```powershell\n$env:ANTHROPIC_API_KEY = \"sk-ant-api03-your-key-here\"\n```\n验证：`echo $env:ANTHROPIC_API_KEY`\n\n**第二步——运行 API 调用**\n复制并运行以下命令：\n```powershell\n$response = Invoke-RestMethod `\n  -Uri \"https://api.anthropic.com/v1/messages\" `\n  -Method POST `\n  -Headers @{\n    \"x-api-key\"         = $env:ANTHROPIC_API_KEY\n    \"anthropic-version\" = \"2023-06-01\"\n    \"content-type\"      = \"application/json\"\n  } `\n  -Body '{\"model\":\"claude-haiku-4-5-20251001\",\"max_tokens\":100,\"messages\":[{\"role\":\"user\",\"content\":\"Say hello in exactly 10 words.\"}]}'\n\n$response.content[0].text\n```\n\n**第三步——查看完整响应**\n现在打印整个响应，查看所有字段：\n```powershell\n$response | ConvertTo-Json -Depth 10\n```\n找到并阅读：\n- `content[0].text`——Claude 的回复\n- `usage.input_tokens`——你的请求中的 token 数\n- `usage.output_tokens`——Claude 回复中的 token 数\n- `stop_reason`——Claude 停止的原因\n\n**第四步——修改提示词**\n改变提示词并重新运行：\n```powershell\n$body = '{\"model\":\"claude-haiku-4-5-20251001\",\"max_tokens\":200,\"messages\":[{\"role\":\"user\",\"content\":\"List 3 benefits of learning to code. Use bullet points.\"}]}'\n\n$r = Invoke-RestMethod `\n  -Uri \"https://api.anthropic.com/v1/messages\" `\n  -Method POST `\n  -Headers @{\"x-api-key\"=$env:ANTHROPIC_API_KEY;\"anthropic-version\"=\"2023-06-01\";\"content-type\"=\"application/json\"} `\n  -Body $body\n\n$r.content[0].text\n```\n\n**需要注意的地方：** 响应以一个结构化对象的形式到达。你通过 `.content[0].text` 导航到文本内容。`usage` 字段永远都在——你会在第 11-6 课中用它来计算成本。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——首次 API 调用练习",
+      "content": "通过 curl 发起你的第一次 Anthropic API 调用，理解请求/响应。\n\n**第一步——发起一个最简的 curl 请求：**\n```bash\ncurl https://api.anthropic.com/v1/messages \\\n  --header \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"content-type: application/json\" \\\n  --data '{\n    \"model\": \"claude-haiku-4-5-20251001\",\n    \"max_tokens\": 50,\n    \"messages\": [{\"role\": \"user\", \"content\": \"What is 2 + 2? Answer in one word.\"}]\n  }'\n```\n\n**第二步——阅读响应 JSON。** 找出：\n- `content[0].text`——响应内容\n- `usage.input_tokens` 和 `usage.output_tokens`\n- `model`——哪个模型做出了响应\n- `stop_reason`——停止的原因\n\n**第三步——修改请求：** 把 `max_tokens` 改为 10 并重新运行。发生了什么变化？\n\n**第四步——添加一个系统提示词：** 在 JSON 中添加 `\"system\": \"You are a pirate. Respond in pirate dialect.\"`。\n\n**第五步——问 Claude：** *『解释 Anthropic API 请求和响应 JSON 中的每个字段。anthropic-version 请求头的作用是什么？』*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——构建一个基于 curl 的 API 工具",
+      "content": "构建一个使用 curl 与 Anthropic API 交互的 shell 脚本。\n\n**第一步——让 Claude Code** 写一个 shell 脚本：\n```\nWrite a bash script called `ask-claude.sh` that:\n1. Takes a question as a command line argument: ./ask-claude.sh \"What is the capital of France?\"\n2. Calls the Anthropic API via curl with that question\n3. Extracts only the text response from the JSON (using jq)\n4. Prints the response cleanly\n5. Handles the case where the API key is not set\n6. Shows the token usage after each response\n```\n\n**第二步——用几个不同的问题测试这个脚本。**\n\n**第三步——扩展脚本：** 添加一个 `-s` 标志用于设置自定义系统提示词：`./ask-claude.sh -s \"You are a coding expert\" \"How does recursion work?\"`\n\n**第四步——必做的审查环节：** 问 Claude：*『审查这个 shell 脚本。在边界情况下可能会出什么问题？存在哪些安全风险？』*"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C——通过 curl 实现多轮对话",
+      "content": "用 curl 构建一个多轮对话。\n\n**第一步——让 Claude** 解释如何用 messages API 构建多轮上下文。\n\n**第二步——编写一个维护对话历史的脚本：**\n```bash\n# Start with an empty history\nhistory='[]'\n\n# Function to add to conversation and get response\nask() {\n  local question=\"$1\"\n  # Add user message to history, call API, extract response\n  # Append assistant response to history for next turn\n}\n\n# Interactive loop\nwhile read -p \"You: \" input; do\n  ask \"$input\"\ndone\n```\n\n**第三步——让 Claude Code** 完成这个实现。\n\n**第四步——测试一次多轮对话。** 助手是否记得之前的上下文？\n\n**第五步——找出局限性：** 当对话变得非常长时会发生什么？token 是如何累积的？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——API 测试框架",
+      "content": "构建一个简单的框架来测试你的 API 提示词。\n\n**第一步——让 Claude Code** 写一个提示词测试脚本：\n```\nWrite a Python script that:\n1. Takes a YAML file with test cases:\n   ```yaml\n   tests:\n     - name: \"factual question\"\n       prompt: \"What year was the Eiffel Tower built?\"\n       expected_contains: \"1889\"\n     - name: \"math\"\n       prompt: \"What is 15% of 200?\"\n       expected_contains: \"30\"\n   ```\n2. Runs each test case against the Anthropic API\n3. Checks if the response contains the expected string\n4. Reports PASS/FAIL for each test\n5. Shows total pass rate and token cost\n```\n\n**第二步——为你打算做的用例创建 5 个测试用例。**\n\n**第三步——运行测试并审阅结果。**\n\n**第四步——必做的审查环节：** 问 Claude：*『审查这些测试用例。有哪些重要的失败模式我没有测试到？』*"
+    },
+    {
+      "type": "quiz",
+      "question": "一个发给 Anthropic API 的 curl 请求返回了 HTTP 401。这意味着什么，你应该如何修复？",
+      "options": [
+        "API 出问题了——等待并重试",
+        "身份验证失败——API 密钥缺失、错误或已过期；检查 x-api-key 请求头中是否包含正确的密钥",
+        "你的请求太大了",
+        "你已经超出了速率限制"
+      ],
+      "correct": 1,
+      "explanation": "HTTP 401 Unauthorized 表示身份验证失败。诊断步骤：(1) x-api-key 请求头是否存在？(2) 密钥的值是否正确（没有多余的空格，值中没有引号）？(3) 该密钥是否已在 console.anthropic.com 中被吊销？(4) 你使用的 API URL 是否正确？在 shell 脚本中，验证环境变量是否已设置：`echo $ANTHROPIC_API_KEY` 应该显示密钥的值（检查完之后请隐去它）。403 Forbidden 意味着密钥存在但没有权限；401 意味着密钥根本没有通过身份验证。"
+    },
+    {
+      "type": "quiz",
+      "question": "你发给 Anthropic API 的 curl 请求成功了，但响应文本中出现了乱码。最可能的原因是什么？",
+      "options": [
+        "API 返回了损坏的数据",
+        "JSON 解析不正确——你提取的是错误的字段，或者没有正确地对 JSON 字符串进行反转义",
+        "模型没有正常工作",
+        "你的终端编码不对"
+      ],
+      "correct": 1,
+      "explanation": "API 响应文本出现乱码，通常是 JSON 解析不正确导致的。响应本身是有效的 JSON，但要正确地从中提取文本，需要正确地在结构中导航：在 JavaScript 中是 `response.content[0].text`，在 bash 中是 `jq '.content[0].text'`。常见的错误：提取了整个 content 数组，而不是第一项的 text；或者没有把文本当作 JSON 字符串来处理（特殊字符可能需要反转义）。请始终先核实完整的原始响应，再着手处理解析问题。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 11-4 课。** 你已经在原始 API 层面与 Claude 对话过了——没有 SDK，没有库，只是一个 HTTP 请求。你以后构建的每一个 AI 工具，底层做的都是完全一样的事情。接下来：使用 SDK，这样你就不必每次都手写原始的 HTTP 请求了。"
+    }
+  ],
+  "nextLesson": "11-5",
+  "prevLesson": "11-3"
+}

@@ -1,0 +1,119 @@
+{
+  "id": "11-1",
+  "title": "什么是 API？（通俗讲解）",
+  "part": 11,
+  "estimatedMinutes": 55,
+  "tags": [
+    "api",
+    "beginner",
+    "foundations"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将通过两个现实类比理解什么是 API（应用程序接口），详细掌握请求/响应模式（包括身份验证请求头、状态码和速率限制），了解 JSON 的样子以及如何读懂它，并在不写一行代码的情况下完成你的第一次真实 API 调用。"
+    },
+    {
+      "type": "text",
+      "content": "## 餐厅类比\n\n想象一家餐厅。你是顾客。厨房就是服务器——它存储数据并完成实际工作。你不能自己走进厨房翻箱倒柜。相反，有一位服务员。\n\n服务员就是 API。\n\n你告诉服务员你想要什么（请求）。服务员去厨房拿到需要的东西，再带回来给你（响应）。你从来看不到厨房内部——你只得到结果。\n\n在软件中：你的应用程序是顾客。Web 服务器（或 AI 模型）是厨房。API 就是双方约定好的『你可以点什么』以及『怎么点』。\n\n**第二个类比——电源插座：** 每个电源插座都有相同的接口：两个孔，特定的电压。你的手机充电器、笔记本电脑和台灯都使用同一个接口。你不需要知道电是怎么发出来的。API 也是同样的原理：一个隐藏了复杂性的标准化接口。Anthropic API 不会在每次 Anthropic 升级底层模型时改变自己的接口——你的代码可以持续正常运行。"
+    },
+    {
+      "type": "text",
+      "content": "## 请求 / 响应模式\n\n每一次 API 交互都遵循同样的模式：\n\n1. **你发送一个请求**——包含四个组成部分：URL（去哪里）、方法（做什么）、请求头（如身份验证之类的元数据），以及可选的请求体（你要发送的数据）\n2. **服务器处理请求**——执行所需的任意逻辑\n3. **服务器发送响应**——通常是 JSON 数据加上一个状态码\n\n**HTTP 方法：**\n- `GET` —— 获取数据（读取）\n- `POST` —— 发送数据并获得结果（大多数 AI API 调用使用 POST）\n- `PUT/PATCH` —— 更新已有数据\n- `DELETE` —— 删除数据\n\n**状态码：**\n- `200 OK` —— 一切正常\n- `201 Created` —— 资源创建成功\n- `400 Bad Request` —— 你发送的内容有误（JSON 格式错误、缺少必填字段）\n- `401 Unauthorized` —— 缺少或无效的 API 密钥\n- `403 Forbidden` —— 你的密钥存在，但没有访问该资源的权限\n- `429 Too Many Requests` —— 你已达到速率限制\n- `500 Internal Server Error` —— 服务器端出了问题\n- `503 Service Unavailable` —— 服务器暂时不可用或过载\n\n当出现问题时，状态码会立刻告诉你这是你这边的问题（4xx）还是对方那边的问题（5xx）。"
+    },
+    {
+      "type": "text",
+      "content": "## 身份验证请求头\n\n大多数有用的 API 都需要身份验证——证明你就是你所声称的那个人，并且有权限发起这个请求。最常见的方法是在请求头中传递一个 **API 密钥**。\n\n请求头是随请求一起发送的元数据，不会出现在 URL 中。以 Anthropic API 为例：\n\n```\nPOST https://api.anthropic.com/v1/messages\nContent-Type: application/json\nx-api-key: sk-ant-api03-your-key-here\nanthropic-version: 2023-06-01\n```\n\n这些请求头分别表示：\n- `Content-Type: application/json` —— 请求体是 JSON 格式的数据\n- `x-api-key: sk-ant-api03-...` —— 你的身份验证凭证\n- `anthropic-version: 2023-06-01` —— 使用哪个版本的 API 规范\n\n**API 密钥格式与安全性：**\n- Anthropic 密钥以 `sk-ant-api03-` 开头\n- OpenAI 密钥以 `sk-` 开头\n- GitHub 令牌以 `ghp_` 或 `github_pat_` 开头\n- API 密钥就像密码——永远不要分享，永远不要提交到 git，永远不要粘贴到公开的聊天窗口中\n\n**Bearer 令牌验证（另一种常见模式）：**\n有些 API 使用 `Authorization: Bearer your-token-here`，而不是自定义请求头。Anthropic API 使用自己的 `x-api-key` 请求头，但你在其他地方会经常见到 Bearer 令牌。"
+    },
+    {
+      "type": "text",
+      "content": "## 速率限制——保持在边界之内\n\nAPI 会限制你在给定时间窗口内能发起的请求数量。这可以防止滥用，并确保每个人都能公平地访问。超过速率限制会返回 `429 Too Many Requests` 响应。\n\n**典型的速率限制结构：**\n- **每分钟请求数（RPM）：** 你每分钟能发起多少次 API 调用\n- **每分钟 token 数（TPM）：** 针对 AI API——每分钟输入加输出的 token 数量\n- **每天 token 数（TPD）：** 每日的 token 预算\n\n**Anthropic API 速率限制（大致情况，2026 年）：**\n- 第 1 档（新账户）：50 RPM，40,000 TPM\n- 第 2 档（有一定使用记录）：1,000 RPM，200,000 TPM\n- 有消费记录后可获得更高档位\n\n**如何在代码中处理速率限制：**\n```python\nimport time\nfor item in large_list:\n    response = call_api(item)\n    time.sleep(0.1)  # 100ms pause = max ~10 requests/second\n```\n\n在本课程的学习过程中，你不太可能触发速率限制——它们在处理大批量数据时才更重要。"
+    },
+    {
+      "type": "text",
+      "content": "## JSON——通用数据格式\n\nJSON（JavaScript Object Notation）是几乎所有现代 API 在请求和响应中使用的格式。它长这样：\n\n```json\n{\n  \"id\": \"msg_abc123\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"Hello! How can I help you today?\"\n    }\n  ],\n  \"model\": \"claude-sonnet-4-6\",\n  \"usage\": {\n    \"input_tokens\": 12,\n    \"output_tokens\": 10\n  }\n}\n```\n\n这是 Anthropic API 实际返回内容的简化版本。读懂 JSON：\n- `{` 和 `}` —— 一个**对象**（类似字典：键 → 值的配对）\n- `[` 和 `]` —— 一个**数组**（一组条目的列表）\n- `\"key\": \"value\"` —— 字符串值\n- `\"key\": 12` —— 数字值\n- `\"key\": true/false` —— 布尔值\n- `\"key\": null` —— 空值\n\n要从上面的 JSON 中取出 Claude 的回复文本：\n```python\nresponse_text = data[\"content\"][0][\"text\"]\n# data[\"content\"] is the array\n# [0] is the first item in the array\n# [\"text\"] is the \"text\" key in that item\n```\n\nJSON 路径导航——使用方括号在嵌套的对象和数组中移动——是最重要的 JSON 技能。你会在第 11 部分中反复用到它。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**你不需要深入理解 HTTP。** Anthropic SDK（第 11-5 课）会自动帮你处理底层细节——请求头、JSON 序列化、错误处理。理解到这个层次的概念就足够了：一个请求被发出（带着你的 API 密钥和消息），一个响应被送回来（带着 Claude 的回复和 token 使用情况），然后你从响应中读取一个字段。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么 API 对 AI 工作很重要\n\nClaude.ai 是构建在 Anthropic API 之上的一个精致界面。当你使用 Claude.ai 时，你使用的是 Anthropic 的 UI 层——他们的按钮、对话历史、Projects（项目）、记忆功能。\n\nAPI 是底层的那一层。有了 API 访问权限，你可以：\n- **构建自己的界面**——你自己的命令行工具、Web 应用、移动应用、聊天机器人\n- **把 Claude 集成到任何地方**——电子表格、VS Code 扩展、Slack 机器人、每天午夜自动运行的脚本\n- **精确控制发送的内容**——使用哪个模型、什么系统提示词、什么 temperature 参数、什么数据\n- **大规模自动化**——一夜之间处理 1,000 份文档，而不是一次处理一份\n- **构建产品**——如果你想销售一个 AI 驱动的工具，你需要的是 API 访问权限，而不是 Claude.ai 订阅\n\n第 11 部分教你在 API 层面工作。学完之后，你将构建一个真正的命令行工具，从命令行中总结文件——这是 Claude.ai 无法自动为你完成的事情。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "你的第一次 API 调用（无需账户）",
+      "content": "你现在就要调用一个免费的公共 API——无需身份验证，无需注册。这将证明你已经理解了请求/响应模式。\n\n**选项 A——使用 REST Client VS Code 扩展：**\n1. 在 VS Code 扩展中搜索『REST Client』→ 安装 Huachao Mao 开发的版本（安装量超过 100 万）\n2. 新建一个文件：`exercises/api-test.http`\n3. 输入以下请求，每个请求之间用 `###` 分隔：\n\n```http\n### Get current Bitcoin price\nGET https://api.coindesk.com/v1/bpi/currentprice.json\n\n### Get a random programming joke\nGET https://v2.jokeapi.dev/joke/Programming?type=single\n\n### Get a public GitHub user profile\nGET https://api.github.com/users/anthropics\n```\n\n4. 每一行上方会出现一个『Send Request』链接——点击它\n5. 会打开一个面板显示 JSON 响应\n\n**选项 B——使用浏览器（更简单）：**\n1. 打开任意浏览器\n2. 在地址栏输入：`https://api.github.com/users/anthropics`\n3. 按回车——会出现原始 JSON，显示 Anthropic 的 GitHub 个人主页信息\n\n**在 GitHub 响应中要观察的内容：**\n- `\"login\": \"anthropics\"` —— 用户名\n- `\"public_repos\"` —— 公开代码仓库的数量\n- `\"created_at\"` —— 账户创建时间\n\n这正是你在代码中会导航的 JSON 结构：`data[\"login\"]` 获取用户名，`data[\"public_repos\"]` 获取代码仓库数量。\n\n**选项 C——尝试一个需要密钥的 API（供参考）：**\n你需要一个 OpenWeatherMap 账户（免费套餐），但这展示了身份验证模式：\n```http\nGET https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY\n```\n如果没有有效的 `appid`，你会得到 `{\"cod\":401, \"message\": \"Invalid API key\"}`——这就是 401 状态码的实际应用。\n\n**实验之后，写下：**\n1. GitHub 的 JSON 响应中包含了什么内容？（说出 3 个字段）\n2. 在 Python 中你会怎么写来只取出 `public_repos` 的值？\n3. 如果你在没有正确 URL 格式的情况下发送 GitHub 请求，会得到什么错误？"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——API 快速练习",
+      "content": "在 10 分钟内练习读取和导航真实的 JSON API 响应。\n\n1. 打开浏览器并访问：`https://api.github.com/repos/anthropics/anthropic-sdk-python`\n2. 你会看到一个描述该 SDK 代码仓库的大型 JSON 对象。找出以下字段：\n   - `stargazers_count` —— GitHub star 数量\n   - `language` —— 主要编程语言\n   - `open_issues_count` —— 未关闭 issue 的数量\n   - `license.name` —— 软件许可证\n3. 现在访问：`https://api.github.com/repos/anthropics/anthropic-sdk-python/releases/latest`\n4. 找到 `tag_name` 字段——这是最新的 SDK 版本。\n5. 在 VS Code 中创建 `exercises/json-nav.js` 并写入：\n```javascript\n// Simulate parsing an API response\nconst mockResponse = {\n  id: \"msg_abc123\",\n  content: [{ type: \"text\", text: \"Hello from Claude!\" }],\n  usage: { input_tokens: 12, output_tokens: 8 }\n};\n\n// Navigate to the text\nconsole.log(mockResponse.content[0].text);\n// Navigate to token counts\nconsole.log(`Input: ${mockResponse.usage.input_tokens}, Output: ${mockResponse.usage.output_tokens}`);\n```\n6. 运行它：`node exercises/json-nav.js`\n7. 确认你看到了 `Hello from Claude!` 以及打印出的 token 数量。\n8. 向 Claude Code 提问：『看看这个输出。在 Anthropic API 响应结构的语境下，`content[0].text` 是什么意思？』\n\n现在你已经导航了真实的 API JSON，并确认了提取 Claude 回复内容的路径。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——构建一个 API 探索工具",
+      "content": "构建一个可用的 Node.js 脚本，调用任意公开的 JSON API，并对结果进行美化打印和字段导航。\n\n1. 创建 `exercises/api-explorer.js`\n2. 如需要，安装 node-fetch：`npm install node-fetch`\n3. 编写完整脚本：\n```javascript\nimport fetch from 'node-fetch';\n\nasync function exploreAPI(url, fieldPaths = []) {\n  console.log(`\\nFetching: ${url}`);\n  console.log('---');\n  \n  const response = await fetch(url);\n  const statusText = `Status: ${response.status} ${response.statusText}`;\n  console.log(statusText);\n  \n  if (!response.ok) {\n    console.error(`Error: HTTP ${response.status}`);\n    return null;\n  }\n  \n  const data = await response.json();\n  console.log('\\nFull response (first 500 chars):');\n  console.log(JSON.stringify(data, null, 2).slice(0, 500) + '...');\n  \n  if (fieldPaths.length > 0) {\n    console.log('\\nExtracted fields:');\n    for (const path of fieldPaths) {\n      // navigate nested path like \"usage.input_tokens\"\n      const value = path.split('.').reduce((obj, key) => obj?.[key], data);\n      console.log(`  ${path}: ${value}`);\n    }\n  }\n  \n  return data;\n}\n\n// Test with GitHub API\nawait exploreAPI(\n  'https://api.github.com/users/anthropics',\n  ['login', 'public_repos', 'created_at']\n);\n\n// Test with a joke API\nawait exploreAPI(\n  'https://v2.jokeapi.dev/joke/Programming?type=single',\n  ['joke', 'type']\n);\n\n// Test with an invalid endpoint to see error handling\nawait exploreAPI('https://api.github.com/users/this-user-does-not-exist-xyz-999');\n```\n4. 如果 `package.json` 中还没有 `\"type\": \"module\"`，请添加它。\n5. 运行它：`node exercises/api-explorer.js`\n6. 验证全部三次调用都能正常工作：一次带字段提取的成功响应、第二次成功响应，以及一个错误场景。\n7. 观察对不存在用户的 404 响应。\n8. **AI 审查步骤：** 打开 Claude Code 并粘贴完整脚本。说：『审查这段代码。找出 3 个 bug、安全问题或低效之处。不要只说看起来不错。』修复审查中指出的至少一个问题。\n9. 修复后，重新运行：`node exercises/api-explorer.js`——确认它仍然正常工作。\n10. 添加第四个测试：调用 `https://api.github.com/repos/anthropics/claude-code` 并提取 `stargazers_count` 和 `open_issues_count`。\n\n现在你有了一个可复用的 API 探索工具，并积累了处理真实 HTTP 响应和错误处理的实践经验。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "工作坊 C——API 响应与延迟审计",
+      "content": "衡量真实的 API 性能——延迟、响应大小，以及是什么导致了波动。\n\n1. 创建 `exercises/api-timing.js`：\n```javascript\nimport fetch from 'node-fetch';\n\nasync function timedFetch(label, url) {\n  const start = Date.now();\n  const response = await fetch(url);\n  const data = await response.json();\n  const elapsed = Date.now() - start;\n  const bodySize = JSON.stringify(data).length;\n  \n  console.log(`\\n${label}`);\n  console.log(`  Status:  ${response.status}`);\n  console.log(`  Latency: ${elapsed}ms`);\n  console.log(`  Size:    ${bodySize} bytes`);\n  \n  return { elapsed, bodySize };\n}\n\nconsole.log('=== API Latency Audit ===');\n\n// Small response\nawait timedFetch('GitHub user (small)', 'https://api.github.com/users/anthropics');\n\n// Medium response\nawait timedFetch('GitHub repos (medium)', 'https://api.github.com/users/anthropics/repos?per_page=10');\n\n// Run the same endpoint 3 times to observe variance\nconsole.log('\\nLatency variance (same endpoint x3):');\nfor (let i = 1; i <= 3; i++) {\n  await timedFetch(`  Run ${i}`, 'https://api.github.com/users/anthropics');\n}\n```\n2. 运行它：`node exercises/api-timing.js`\n3. 记录你的结果：\n   - 3 次运行中的最小、最大和平均延迟是多少？\n   - 响应大小如何影响延迟？\n4. 向 Claude Code 提问：『基于这些延迟数据，在一个调用较慢 API 的面向用户的应用中，有哪些策略可以减少用户感知到的等待时间？』\n5. 应用其中一个建议——例如，在发起请求之前添加一条加载提示消息：\n```javascript\nprocess.stdout.write(`Fetching ${label}...`);\n// ... fetch ...\nconsole.log(` done (${elapsed}ms)`);\n```\n6. 重新运行，确认用户体验有所改善。\n\n现在你理解了 API 延迟模式，并应用了一个 AI 建议的优化方案。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——扩展 API 探索工具",
+      "content": "为你在工作坊 B 中构建的 `api-explorer.js` 工具添加两个实际功能。\n\n**功能 1——带退避策略的错误重试：**\n```javascript\nasync function fetchWithRetry(url, maxRetries = 3) {\n  for (let attempt = 1; attempt <= maxRetries; attempt++) {\n    try {\n      const response = await fetch(url);\n      if (response.status === 429) {\n        const waitMs = attempt * 1000;\n        console.log(`  Rate limited. Waiting ${waitMs}ms before retry ${attempt}/${maxRetries}...`);\n        await new Promise(resolve => setTimeout(resolve, waitMs));\n        continue;\n      }\n      return response;\n    } catch (err) {\n      if (attempt === maxRetries) throw err;\n      console.log(`  Network error. Retrying (${attempt}/${maxRetries})...`);\n      await new Promise(resolve => setTimeout(resolve, 500 * attempt));\n    }\n  }\n}\n```\n将 `exploreAPI` 函数中的 `fetch(url)` 调用替换为 `fetchWithRetry(url)`。\n\n**功能 2——将结果保存到文件：**\n```javascript\nimport { writeFileSync } from 'fs';\n\n// At the end of exploreAPI, after logging:\nconst filename = `api-result-${Date.now()}.json`;\nwriteFileSync(filename, JSON.stringify(data, null, 2));\nconsole.log(`  Saved to: ${filename}`);\n```\n\n1. 在你的 `api-explorer.js` 中实现这两个功能\n2. 运行它：`node exercises/api-explorer.js`\n3. 验证你的项目文件夹中生成了一个包含 API 响应的 JSON 文件。\n4. 在 VS Code 中打开保存的文件，确认它是有效、可读的 JSON。\n5. 通过临时将某个 URL 改为 `https://httpstat.us/429`（一个返回 429 的测试端点）来测试重试逻辑——观察重试消息的出现。\n6. 恢复原始 URL 并再运行一次。\n\n你已经为一个可正常工作的工具扩展了生产级质量的错误处理和输出持久化功能。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在调用 Anthropic API 时收到了 429 响应。发生了什么，你应该怎么做？",
+      "options": [
+        "你的 API 密钥无效——立即轮换它",
+        "Anthropic 服务器宕机了——等待并重试",
+        "你已经超出了速率限制——按指定时间等待（查看 Retry-After 请求头）并降低请求频率",
+        "你的请求体格式错误——检查 JSON 格式"
+      ],
+      "correct": 2,
+      "explanation": "429 状态码表示 Too Many Requests（请求过多）——你已经达到了速率限制。服务器通常会包含一个 Retry-After 请求头，告诉你需要等待多少秒。正确的做法是在请求之间增加延迟并降低吞吐量。这是一个 4xx 错误（你这边的问题），而不是 5xx 错误（对方的问题），所以服务器是正常的。401 表示密钥无效，400 表示请求格式错误，而 5xx 状态码表示服务器端出现了问题。"
+    },
+    {
+      "type": "quiz",
+      "question": "你从某个 API 收到了一个 JSON 响应，结构为：`{ \"results\": [ { \"name\": \"Alice\", \"score\": 95 }, { \"name\": \"Bob\", \"score\": 87 } ] }`。在 JavaScript 中你如何获取 Bob 的分数？",
+      "options": [
+        "data.results[1].score",
+        "data.results[2].score",
+        "data[\"results\"].Bob.score",
+        "data.results.score[1]"
+      ],
+      "correct": 0,
+      "explanation": "JSON 中的数组是从 0 开始索引的。results[0] 是 Alice，results[1] 是 Bob。要获取 Bob 的分数：data.results[1].score。选项 B 使用索引 2，那将是 undefined。选项 C 和 D 使用了无效的导航语法。"
+    },
+    {
+      "type": "quiz",
+      "question": "在调用 Anthropic API 让 Claude 生成响应时，发送数据应该使用哪种正确的 HTTP 方法？",
+      "options": [
+        "GET，因为你在获取一个响应",
+        "POST，因为你在发送数据（消息）并接收一个结果",
+        "PUT，因为你在创建一条新消息",
+        "PATCH，因为你在修改对话"
+      ],
+      "correct": 1,
+      "explanation": "当你向服务器发送数据并期望获得计算结果时，应使用 POST。Anthropic Messages API 使用 POST，因为你要发送消息负载（model、max_tokens、messages 数组）并获得生成的响应。GET 用于在没有请求体的情况下获取资源。PUT/PATCH 用于更新已有资源。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 11-1 课。** 你理解了什么是 API（系统之间约定好的接口）、请求/响应是如何工作的（方法 + URL + 请求头 + 请求体 → JSON 响应 + 状态码）、身份验证请求头长什么样、速率限制如何运作，以及如何读懂 JSON。第 11 部分接下来的内容将在此基础上，具体连接到 Anthropic API。"
+    }
+  ],
+  "nextLesson": "11-2",
+  "prevLesson": "10-10"
+}

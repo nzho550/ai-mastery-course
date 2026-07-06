@@ -1,0 +1,125 @@
+{
+  "id": "4-3",
+  "title": "打开终端（PowerShell）",
+  "part": 4,
+  "estimatedMinutes": 65,
+  "tags": [
+    "computer-basics",
+    "beginner",
+    "terminal",
+    "powershell"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n终端（terminal）是访问计算机的文本界面——本课程中几乎每一个工具（Claude Code、Git、Node.js、Python）都要在这里运行。学完本课后，你会打开 PowerShell，清楚地理解你看到的是什么，并能自如地在文件系统中导航、创建文件夹、运行基本命令。你还会掌握让终端操作更高效的快捷方式。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是终端？\n\n平时使用 Windows 时，你用的是**图形用户界面（GUI）**——可以看到并点击的文件夹、按钮、图标、窗口。这是为日常用户设计的界面。\n\n**终端（terminal）**（也叫命令行或 shell）是同一台计算机的**文本界面**。你不再点击一个文件夹打开它，而是输入 `cd Documents` 然后按回车。你不再右键创建文件夹，而是输入 `mkdir my-folder`。\n\n**为什么有人会用它而不是点击呢？**\n- **访问权限：** 有些工具只能从终端使用——Claude Code、Git、Node.js、Python 都需要它\n- **速度：** 一旦你熟悉了某个命令，它会比在菜单里导航更快（对开发者来说尤其如此）\n- **自动化：** 你可以把 50 个命令串联在一起，一次性全部运行\n- **精确性：** 命令是精确的、可复现的、可编写脚本的；点击操作做不到这些\n- **远程工作：** 服务器没有图形界面——任何管理服务器的人都要用终端\n\n对本课程而言，你会用终端来运行工具。你不需要成为专家——你只需要不再害怕那个一闪一闪的光标。"
+    },
+    {
+      "type": "text",
+      "content": "## Windows 上的终端选择\n\nWindows 有好几种终端程序。下面介绍每一种是什么，以及该用哪一个：\n\n**PowerShell**——现代的、推荐使用的 Windows 终端。由微软打造，功能强大、文档完善，既能处理 Windows 专属命令，也能处理许多 Unix 风格的命令（比如 `ls`、`pwd`、`mkdir`）。**本课程从头到尾都使用它。**\n\n**命令提示符（Command Prompt / cmd.exe）**——诞生于上世纪 80 年代的老旧终端。它能处理基本任务，但缺少现代功能。如果你看到的教程用的是它，命令会略有不同。你不需要用它。\n\n**Windows 终端（Windows Terminal）**——一个现代的*宿主应用*，可以在带标签页的界面中运行 PowerShell、命令提示符或其他 shell。如果你有它（Windows 11 自带），很好——用它就行。它默认运行 PowerShell。\n\n**适用于 Linux 的 Windows 子系统（WSL）**——一个运行在 Windows 内部的完整 Linux 环境。对进阶开发有用，但本课程不需要。\n\n**答案是：** 使用 PowerShell。当教程说“打开终端”时，就打开 PowerShell。"
+    },
+    {
+      "type": "text",
+      "content": "## 如何打开 PowerShell\n\n把三种方法都学会——不同情况适用不同方法：\n\n**方法 1——Win + X 菜单（最快）：**\n按 `Windows 键 + X`。左下角会出现一个菜单。点击：\n- **“终端”**（Windows 11）——用 PowerShell 打开 Windows 终端\n- **“Windows PowerShell”**（Windows 10）——直接打开 PowerShell\n\n**方法 2——开始菜单搜索：**\n1. 按 Windows 键\n2. 输入 `powershell`\n3. 在结果中点击**“Windows PowerShell”**\n\n要以管理员身份打开（安装某些工具时有时需要）：在结果上右键 →“以管理员身份运行”\n\n**方法 3——在文件夹上右键（对编程最有用）：**\n在文件资源管理器中，按住 `Shift` 并右键点击任意文件夹。找到：\n- **“在终端中打开”**（Windows 11）\n- **“在此处打开 PowerShell 窗口”**（Windows 10）\n\n这样打开的 PowerShell 会*已经指向该文件夹*——当你想在某个具体的项目目录里工作时，这是最有用的方法。\n\n**方法 4——VS Code 内置终端：**\n在 VS Code 中，按 `Ctrl+\\`` （反引号），或前往“终端” → “新建终端”。这会在 VS Code 内部打开 PowerShell，并指向你当前的项目。你会在第 5 到 7 部分中一直用到这个方法——它让你的终端和代码保持在同一个窗口里。"
+    },
+    {
+      "type": "text",
+      "content": "## 读懂提示符\n\n当 PowerShell 打开时，你会看到：\n\n```\nPS C:\\Users\\Alice>\n```\n\n拆解一下：\n- **`PS`**——PowerShell 标识符（命令提示符只会显示 `C:\\Users\\Alice>`）\n- **`C:\\Users\\Alice`**——你在文件系统中当前所在的位置\n- **`>`**——提示符字符：表示 PowerShell 已经就绪、等待输入\n\n当前目录会随着你移动而更新。它始终准确地告诉你你在哪里。\n\n**如果你看到的只是不带 `PS` 的 `C:\\Users\\Alice>`，说明你打开的是命令提示符而不是 PowerShell。** 关掉它，重新打开 PowerShell。\n\n**如果你看到 `PS C:\\WINDOWS\\system32>`，说明你以管理员身份打开了 PowerShell**，它默认停留在系统文件夹里。输入 `cd ~` 即可回到你的主目录。"
+    },
+    {
+      "type": "text",
+      "content": "## 必备命令\n\n以下 10 个命令覆盖了本课程中你在终端里要做的事情的 90%：\n\n**导航：**\n```powershell\npwd                     # 打印工作目录——我在哪里？\ncd Documents            # 进入 Documents 文件夹\ncd ..                   # 向上返回一级（到父文件夹）\ncd \\                    # 回到驱动器的根目录（C:\\）\ncd ~                    # 回到你的主目录（C:\\Users\\YourName）\ncd C:\\Projects\\myapp    # 用完整的绝对路径导航\n```\n\n**列出文件：**\n```powershell\nls                      # 列出文件和文件夹（简写形式）\ndir                     # 和 ls 一样（Windows 风格）\nls -la                  # 连同隐藏文件一起列出，并显示详细信息\nGet-ChildItem           # ls 是这条完整 PowerShell 命令的简写\n```\n\n**创建与管理：**\n```powershell\nmkdir my-project        # 创建一个名为 my-project 的新文件夹\nnew-item file.txt       # 创建一个新的空文件\ncp source.txt dest.txt  # 复制文件\nmv old.txt new.txt      # 重命名或移动文件\nrm file.txt             # 删除文件（永久删除——不进回收站！）\nrm -Recurse folder      # 删除一个文件夹及其全部内容\n```\n\n**查看文件内容：**\n```powershell\ncat filename.txt        # 打印文件的内容\nGet-Content file.txt    # 一样——完整的 PowerShell 命令\n```\n\n**运行程序：**\n```powershell\nnode --version          # 检查是否安装了 Node.js\npython --version        # 检查是否安装了 Python\ngit --version           # 检查是否安装了 Git\nnpm install             # 安装 Node 包\nclaude                  # 启动 Claude Code\n```\n\n**获取帮助：**\n```powershell\nGet-Help cd             # cd 命令的 PowerShell 帮助\nGet-Help mkdir          # mkdir 的帮助\ncode .                  # 在 VS Code 中打开当前文件夹\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 提升效率的快捷方式\n\n这些快捷方式能让终端操作显著提速：\n\n**Tab 自动补全——最重要的一个习惯：**\n不用把文件夹名完整地打出来，只输入前几个字母，然后按 **Tab**。PowerShell 会自动补全名称。如果有多个匹配项，持续按 Tab 就能在它们之间切换。\n\n```\ncd Doc[Tab]    →    cd Documents\ncd C:\\Pro[Tab]  →   cd C:\\Projects\n```\n\n始终使用 Tab 自动补全。它能避免打错字，并大幅加快导航速度。\n\n**命令历史：**\n- 按 **↑（上箭头）** 在之前的命令之间循环——无需重新输入\n- 按 **↓（下箭头）** 在历史记录中向前移动\n- 按 **Ctrl+R** 并输入关键词来搜索历史记录\n\n**其他快捷方式：**\n- **Ctrl+C**——取消正在运行的命令（立即停止）\n- **Ctrl+L**——清空终端屏幕（也可以输入 `clear`）\n- **Home/End**——跳转到当前行的开头/结尾\n- **Ctrl+A**——选中当前行的全部内容\n- **右键点击**——粘贴（在大多数 PowerShell 窗口中）\n\n**路径小技巧：**\n- 把文件资源管理器中的文件或文件夹拖到 PowerShell 窗口中——会粘贴出完整路径\n- 在任意文件夹中输入 `code .`，即可在 VS Code 中打开该文件夹"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**终端中的 `rm` 是永久性的。** 与在文件资源管理器中删除文件（会移到回收站）不同，PowerShell 中的 `rm file.txt` 会立即删除文件，且无法撤销。运行任何 `rm` 命令之前请务必三思——尤其是 `rm -Recurse folder`，它会删除文件夹里的所有内容。如果拿不准，在学习阶段可以用文件资源管理器来删除文件。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**关于颜色：** PowerShell 窗口可以是蓝色、黑色，或者根据你的 Windows 版本和设置显示成任何颜色。颜色本身无关紧要——`PS` 前缀才是识别 PowerShell 的依据。有些公司会有自定义的 PowerShell 主题，看起来不一样——但无论外观如何，命令都是一样的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "终端导航与文件操作",
+      "content": "把下面每条命令都运行一遍。不要跳过——打字带来的肌肉记忆和理解概念一样重要。\n\n**第 1 部分——熟悉环境**\n\n**第 1 步——打开 PowerShell：**\n使用 Win+X → 终端（或 Windows PowerShell）。你应该会看到 `PS C:\\Users\\YourName>`。\n\n**第 2 步——确认你在哪里：**\n```powershell\npwd\n```\n你应该会看到你的用户文件夹路径。\n\n**第 3 步——列出这里有什么：**\n```powershell\nls\n```\n你会看到 Documents、Desktop、Downloads 等。\n\n**第 2 部分——导航**\n\n**第 4 步——使用 cd 导航：**\n```powershell\ncd Documents\npwd\n```\n确认你现在已经在 Documents 里面。\n\n**第 5 步——导航到你的课程文件夹：**\n```powershell\ncd ai-course-projects\npwd\nls\n```\n（如果这个文件夹还不存在，先创建它：`cd ..` 回退，然后 `mkdir ai-course-projects`，再 `cd ai-course-projects`）\n\n**第 6 步——练习向上返回：**\n```powershell\ncd ..\npwd\ncd ..\npwd\n```\n执行两次 `cd ..` 之后，你应该回到了 C:\\Users\\YourName。\n\n**第 7 步——直接导航到主目录：**\n```powershell\ncd ~\npwd\n```\n`~` 是你主目录的简写——无论你在哪里都始终有效。\n\n**第 3 部分——文件和文件夹操作**\n\n**第 8 步——导航到你的课程文件夹：**\n```powershell\ncd ~\\Documents\\ai-course-projects\n```\n\n**第 9 步——创建一个子文件夹：**\n```powershell\nmkdir terminal-practice\ncd terminal-practice\npwd\n```\n\n**第 10 步——创建一个文件：**\n```powershell\nnew-item hello.txt\nls\n```\n你应该会在列表中看到 `hello.txt`。\n\n**第 11 步——查看文件内容（它是空的）：**\n```powershell\ncat hello.txt\n```\n没有输出——因为文件是空的。这是正常的。\n\n**第 4 部分——Tab 自动补全与历史记录**\n\n**第 12 步——使用 Tab 自动补全：**\n回到 `C:\\Users\\YourName`，输入：\n```\ncd Doc\n```\n然后按 **Tab**（先别按回车）。PowerShell 应该会把它补全成 `cd Documents`。按回车。\n\n**第 13 步——使用历史记录：**\n按几次 **↑（上箭头）** 来滚动浏览你最近的命令。找到 `pwd` 这条命令，按回车再次运行它。\n\n**第 5 部分——从终端打开 VS Code**\n\n**第 14 步——导航到你的课程文件夹并打开 VS Code：**\n```powershell\ncd ~\\Documents\\ai-course-projects\ncode .\n```\nVS Code 应该会打开，并以 `ai-course-projects` 作为项目文件夹。\n\n**你已经练习过的内容：** 用 cd 导航，用 ls 列出内容，用 mkdir/new-item 创建，用 cat 读取，使用 Tab 自动补全和历史记录，以及从终端打开 VS Code。这些覆盖了你在本课程剩余部分所需要的一切。"
+    },
+    {
+      "type": "quiz",
+      "question": "你现在位于 `C:\\Users\\Alice\\Documents\\ai-course-projects\\exercises`，想要前往 `C:\\Users\\Alice\\Documents\\notes`。最高效的命令是什么？",
+      "options": [
+        "cd C:\\Users\\Alice\\Documents\\notes",
+        "cd ..\\..\\notes（错误——向上返回的级数太多）",
+        "cd ..\\notes",
+        "cd notes"
+      ],
+      "correct": 2,
+      "explanation": "从 `exercises` 出发，你需要先向上一级到 `ai-course-projects`（cd ..），然后进入 `notes`——所以 `cd ..\\notes` 就是这条相对路径。`cd C:\\Users\\Alice\\Documents\\notes` 也可以用，但更长（绝对路径）。`cd ..\\..\\notes` 会向上两级到 `Documents`，然后在那里找 `notes`——如果 `notes` 在 `ai-course-projects` 里面，这就是错的。`cd notes` 只有在 `notes` 是 `exercises` 的子文件夹时才有效。理解像 `..\\notes` 这样的相对路径，能在日常终端使用中省下大量打字。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "小练习 A——终端入门命令训练",
+      "content": "这是一个 8 分钟的训练，通过运行真实命令让你在终端中变得自如——而不是照本宣科的教程。\n\n**第 1 步——打开 PowerShell**（Windows：在开始菜单中搜索“PowerShell”）。\n\n**第 2 步——查看你在哪里：**\n```powershell\nGet-Location\n# 或简写：\npwd\n```\n\n**第 3 步——列出这里有什么：**\n```powershell\nGet-ChildItem\n# 或简写：\nls\n```\n\n**第 4 步——导航到你的桌面：**\n```powershell\ncd ~/Desktop\n```\n再次运行 `ls`。你看到你桌面上的文件了吗？\n\n**第 5 步——创建一个测试文件夹：**\n```powershell\nmkdir ai-experiments\ncd ai-experiments\npwd\n```\n\n**第 6 步——问 Claude.ai：** *“我刚第一次打开了 PowerShell。我最常用到的 5 个命令是什么？给我每个命令的一行说明和一个真实的例子。”*\n\n**第 7 步——清理（可选）：**\n```powershell\ncd ..\nRemove-Item ai-experiments\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "小练习 B——用 AI 引导完成一个真实的终端任务",
+      "content": "AI 是你的终端副驾驶。这个练习展示了这样的模式：描述你想做什么，得到命令，运行它，反馈结果。\n\n**第 1 步——确定一个真实任务**，是你在终端里真的会做的事：安装一个程序、查找文件、检查正在运行的东西、搭建一个项目文件夹。\n\n**第 2 步——打开 Claude.ai**，用你自己的话问：*“我想在 Windows 11 上用 PowerShell 完成 [描述你的任务]。给我确切的命令、每条命令的作用，以及输出结果大概会是什么样子，好让我知道它成功了。”*\n\n**第 3 步——逐条运行这些命令。** 对每条命令：\n- 在运行前先阅读 Claude 的解释\n- 运行它\n- 如果输出结果和 Claude 预测的不一样，把实际输出粘贴回去，问问原因\n\n**第 4 步——如果遇到错误**，把完整的错误信息粘贴给 Claude，并问：“我遇到了这个错误。它是什么意思，我该怎么修复？”\n\n**第 5 步——完成你的真实任务。** 请注意：AI 加终端的组合，比单独使用任何一个都强大得多。你不需要死记硬背命令——你需要的是知道如何描述你想要什么。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "小练习 C——文件导航挑战",
+      "content": "这个练习通过终端建立起对文件系统的熟练度——这项技能在你每次使用 Claude Code 时都会有回报。\n\n**第 1 步——打开 PowerShell**，导航到你的 Documents 文件夹：\n```powershell\ncd ~/Documents\n```\n\n**第 2 步——探索结构：**\n```powershell\nls                      # 查看文件和文件夹\nls -Name               # 只显示名称\nls *.pdf               # 只显示 PDF 文件\n```\n\n**第 3 步——查找某个特定文件：**\n```powershell\nGet-ChildItem -Recurse -Filter \"*.txt\"   # 所有 txt 文件，包括所有子文件夹\n```\n\n**第 4 步——创建一套项目结构：**\n```powershell\nmkdir my-first-project\ncd my-first-project\nmkdir src docs tests\nls\n```\n\n**第 5 步——问 Claude：** *“这是我刚创建的文件夹结构：[粘贴 `ls` 的输出]。我打算构建 [描述你的项目]。我还应该创建哪些其他的文件夹或文件？给我确切的 PowerShell 命令。”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "小练习 D——构建一张终端命令参考卡",
+      "content": "为你实际会用到的终端命令创建一张个人参考卡。\n\n**第 1 步——问 Claude：** *“为一个正在 Windows 上搭建第一套开发环境的初学者创建一张 PowerShell 命令参考卡。请包含：导航、文件操作、检查已安装的内容、用 winget 安装软件包，以及基础 git 命令。以表格形式呈现：命令 | 作用 | 示例输出。”*\n\n**第 2 步——审视这张参考卡。** 删掉与你的工作无关的命令。补充你需要的命令。\n\n**第 3 步——测试卡片上的每一条命令**，确认它们在你的系统上都能正常工作。\n\n**第 4 步——把这张参考卡保存**成一个你能快速查阅的格式：桌面上的一个文本文件、手机里的一条笔记、一个固定的标签页。\n\n**第 5 步——强制审查：** 问 Claude：*“审查一下这张参考卡。对于一个正在搭建 [你具体的开发场景] 的人来说，还缺少哪些重要命令？卡片上有哪些命令如果用错了可能会造成问题？”*"
+    },
+    {
+      "type": "quiz",
+      "question": "你在 PowerShell 中运行一个命令，得到一个错误，提示“the term 'npm' is not recognized”。你首先应该做什么？",
+      "options": [
+        "重启 PowerShell 再试一次",
+        "检查是否安装了 Node.js——npm 是随 Node.js 一起提供的，如果没安装 Node，npm 就无法被识别",
+        "重新安装 PowerShell",
+        "改用命令提示符而不是 PowerShell"
+      ],
+      "correct": 1,
+      "explanation": "PowerShell 中“term is not recognized”（无法识别该术语）这个错误意味着这条命令不存在于你系统的 PATH 中——要么没有安装，要么无法访问。npm 是 Node.js 的一部分，所以这个错误意味着 Node.js 没有安装。解决办法是从 nodejs.org 安装 Node.js。PowerShell 和 CMD 都不是问题所在——问题在于缺少某个软件的安装。"
+    },
+    {
+      "type": "quiz",
+      "question": "你即将运行一个在网上找到的命令。运行之前，你应该始终做什么？",
+      "options": [
+        "先运行看看，然后检查有没有发生什么不好的事",
+        "理解这条命令的作用——问问 Claude 或查阅文档——尤其是当它带有像 -rf 或 --force 这样具有破坏性的参数时",
+        "原封不动地照抄下来，不做任何修改",
+        "只要来源网站看起来正规，就可以运行"
+      ],
+      "correct": 1,
+      "explanation": "永远不要运行你不理解的终端命令，尤其是带有 -rf（递归强制删除）、--force，或数据库命令中 DROP 之类参数的命令。这些可能造成不可逆的数据丢失。在运行任何不熟悉的命令之前，把它粘贴到 Claude 中问：“这条命令是做什么的？运行它安全吗？有什么风险？”这只需要 30 秒，却能省下数小时的恢复工作。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了课程 4-3。** 你能用四种不同的方式打开 PowerShell，用 cd 在文件系统中导航，列出并创建文件，还能用 Tab 自动补全和历史记录高效地工作。终端不再是一个谜——它是完成文件资源管理器能做的事情的更快方式，还能让你用上所有没有图形界面的工具。"
+    }
+  ],
+  "nextLesson": "4-4",
+  "prevLesson": "4-2"
+}

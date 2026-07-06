@@ -1,0 +1,102 @@
+{
+  "id": "14-1",
+  "title": "综合实战：个人作品集网站",
+  "part": 14,
+  "estimatedMinutes": 85,
+  "tags": [
+    "capstone",
+    "portfolio",
+    "html",
+    "claude-code",
+    "github-pages",
+    "build"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将构建什么\n\n一个完整的个人作品集网站——在本节课结束前，它就会以你自己的 GitHub Pages URL 上线到互联网。这不是你随便填一填的模板，也不是演示，而是一个真实的网站：包含你的姓名、简介、项目和技能，使用 Claude Code 构建并公开部署。\n\n本次综合实战（capstone）会用到：Claude Code、VS Code、Live Server、Git、GitHub Pages。\n\n**本节课结束时，你将拥有一个可以发给别人看的 URL。**"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**完成标准：** 当你打开浏览器、输入你的 GitHub Pages URL、看到自己的作品集时，这次综合实战才算完成——不是代码写完的时候，也不是本地看起来不错的时候，而是网站真正上线的时候。开始之前，把这个定为你的目标。"
+    },
+    {
+      "type": "text",
+      "content": "## 前置条件\n\n开始之前，请确认你已具备：\n- 已安装并完成身份验证的 Claude Code（第 7-2 课）\n- 安装了 Live Server 扩展的 VS Code（第 5-8 课）\n- 已安装 Git（第 5-12 课）\n- 一个 GitHub 账号（第 6-1 课）\n- 第 3-7 课中打磨过的个人简介（或者现在就写一份——用 3 句话介绍你是谁、正在学什么）"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "个人作品集网站",
+      "content": "## 第 1 步 — 创建项目文件夹（5 分钟）\n\n打开 PowerShell，为作品集创建一个新文件夹：\n\n```\nmkdir C:\\Users\\YourName\\Documents\\portfolio\ncd C:\\Users\\YourName\\Documents\\portfolio\n```\n\n在 VS Code 中打开这个文件夹：\n```\ncode .\n```\n\n然后打开 VS Code 终端（`Ctrl+\\``），并在作品集文件夹中启动 Claude Code：\n```\nclaude\n```\n\n---\n\n## 第 2 步 — 给 Claude Code 一份完整简报（10 分钟）\n\n给 Claude 一份完整的简报，而不是模糊的指令，效果会好得多。把下面内容粘贴给它，并填入你的真实信息：\n\n```\n帮我构建一个个人作品集网站。以下是关于我的所有信息：\n\n姓名：[你的名字]\n简介：[粘贴你在第 3-7 课打磨过的简介，或写 3 句话]\n背景：[你的职业或专业，如果愿意可以写上你所在的城市]\n我正在学习的技能：[列出本课程中你用过的 5-8 个 AI 工具]\n我想突出展示的一个项目：[描述你做过的一件事——即使是本课程中的作业也可以]\n\n要求：\n- 现代、简洁的设计——深色背景配蓝色或靛蓝色点缀\n- 单个 HTML 文件，使用内联 CSS（不使用外部框架或 CDN）\n- 板块：主视觉区（姓名 + 标语）、关于我、技能、项目、联系方式\n- 完全响应式——在手机和电脑上都能正常显示\n- 加载迅速——不依赖 JavaScript\n- 一个「我使用的工具」板块，列出我学过的 AI 工具\n- 主视觉区带有一个低调的动态渐变效果\n- 页脚包含 GitHub 链接占位符\n```\n\n在接受之前，先审阅 Claude Code 提出的方案。如果计划中有任何看起来不对的地方，在它写文件之前就提出来。\n\n---\n\n## 第 3 步 — 在浏览器中检查并完善（15 分钟）\n\n**在本地打开网站：**\n1. 在 VS Code 资源管理器中右键点击 `index.html`\n2. 选择 **Open with Live Server**\n3. 浏览器会自动打开你的作品集\n\n**诚实地审视它。** 问自己：\n- 主视觉区看起来像我，还是像个模板？\n- 这个配色方案是我真的会选的吗？\n- 有没有需要填写的占位文字？\n- 在窄窗口下（模拟手机）看起来正常吗？\n\n**向 Claude Code 提出具体的修改请求。** 不要说「做得更好一点」——要具体：\n- 「把强调色从蓝色改成 #6366F1（靛蓝色）」\n- 「把占位项目替换成这段描述：[你的真实项目]」\n- 「关于我这部分感觉太正式了——按这段文字的语气重写：[你的简介]」\n- 「为我在[本课程中做的某件事]上的工作再加一张项目卡片」\n\n对生成的文件运行你的 `/review` 自定义命令（来自第 7-7 课），检查是否存在问题。\n\n---\n\n## 第 4 步 — 加入你的个人特色（10 分钟）\n\n用同一份提示词构建出来的每个作品集，都有变得千篇一律的风险。问 Claude Code：\n\n```\n根据我告诉过你的关于我自己的一切，建议一个独特的板块或设计元素，\n让这个作品集感觉特别属于我——而不是那种你会加到通用模板里的东西。\n```\n\n审阅这个建议。如果你觉得有共鸣，就实现它；如果不喜欢，就再要一个不同的想法。这就是「只是出现在浏览器里的作品集」和「你真的会拿去分享的作品集」之间的区别。\n\n---\n\n## 第 5 步 — 部署到 GitHub Pages（10 分钟）\n\n**创建代码仓库：**\n1. 前往 `github.com` 并登录\n2. 点击 **New repository**\n3. 名称必须完全是：`yourusername.github.io`（把 `yourusername` 替换成你真实的 GitHub 用户名）\n4. 设置为 Public（公开）\n5. 不要用 README 初始化——保持为空\n6. 点击 **Create repository**\n\n**推送你的代码：**\n\n回到 VS Code 终端（确保你在 `portfolio` 文件夹中）：\n\n```\ngit init\ngit add .\ngit commit -m \"Launch portfolio — built with Claude Code\"\ngit branch -M main\ngit remote add origin https://github.com/yourusername/yourusername.github.io.git\ngit push -u origin main\n```\n\n把两处 `yourusername` 都替换成你真实的 GitHub 用户名。\n\n**启用 GitHub Pages：**\n1. 前往你在 github.com 上的代码仓库\n2. Settings → Pages\n3. 在 Source 下，选择 **Deploy from a branch**\n4. Branch：`main`，folder：`/ (root)`\n5. 点击 **Save**\n\n**等待 2–3 分钟**，然后访问：`https://yourusername.github.io`\n\n---\n\n> **注意：** 再等 2 分钟并刷新页面。GitHub Pages 首次部署需要几分钟来构建。如果 5 分钟后仍显示 404，请检查：Settings → Pages 中确认 source 设置为 main 分支；你的代码仓库名称完全是 `yourusername.github.io`（小写）。\n\n---\n\n## 第 6 步 — 分享出去（5 分钟）\n\n网站上线后：\n\n1. 复制这个 URL：`https://yourusername.github.io`\n2. 发给某个人——朋友、同事，任何人都行。这会让它变得真实。\n3. 把这个 URL 添加到 `notes/my-ai-dev-environment.md` 的一个新板块下：**Live Projects**\n4. 在 Claude Code 中问：「为这个代码仓库创建一个 README.md，描述这个作品集，并注明它是用 Claude Code 构建的」\n\n你构建了一个网站，它已经上线在互联网上，而你没有从零手写一行代码。\n\n---\n\n## 遇到困难时怎么办\n\n**问题：Claude Code 生成的 HTML/CSS 有问题**\n让 Claude Code 打开浏览器控制台（右键 → 检查 → Console），修复它在那里看到的任何错误。\n\n**问题：GitHub 推送时出现身份验证错误**\nGitHub 不再接受用密码进行推送的身份验证。你需要一个 Personal Access Token：GitHub Settings → Developer settings → Personal access tokens → Generate new token (classic) → 勾选 `repo` 权限范围。当 git 提示输入密码时，用这个 token 代替。\n\n**问题：GitHub Pages 部署成功但显示空白页面**\n确认你的主文件名为 `index.html`（不是 `portfolio.html` 或类似名称）。GitHub Pages 会从根目录提供 `index.html`。\n\n**问题：样式看起来不对**\n打开浏览器开发者工具（F12），找到 Elements 面板，查看是否有 CSS 错误。问 Claude Code：「我在浏览器里看到这个问题：[描述问题]。请修复它。」"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A — AI 加速的作品集构建",
+      "content": "使用 Claude Code，把作品集网站的构建速度提升 5 倍。\n\n**第 1 步 — 在写任何代码之前**，先让 Claude Code 帮你做规划：\n```\n我要构建一个作品集网站，帮我规划一下：\n1. 对于[你的角色]的作品集来说，哪些板块是必不可少的？\n2. 根据我目前的技能水平和目标，我应该用什么技术？\n3. 什么因素会让作品集显得出色，而不是千篇一律？\n4. 有哪些常见但效果不好的做法应该避免？\n```\n\n**第 2 步 — 生成初始结构**，让 Claude Code：\n「创建完整的文件结构，以及作品集的初始 HTML/CSS，包含：主视觉区、关于我、项目（附带在线演示和 GitHub 链接）、技能、联系表单。」\n\n**第 3 步 — 借助 AI 迭代设计**：「主视觉区感觉太普通了。有哪 3 种不同的方案，能让它对[你的角色]来说更令人印象深刻？」\n\n**第 4 步 — 必做的审查环节：** 每完成一个主要板块后，问 Claude Code：*「审查这个板块的视觉设计质量和技术正确性。怎么做能让它显得更专业？」*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — 作品集项目板块",
+      "content": "借助 AI 打造一个引人注目的项目板块。\n\n**第 1 步 — 列出你想展示的 3 个真实项目**。对每个项目，收集：它做什么、技术栈、遇到过的有趣技术挑战。\n\n**第 2 步 — 让 Claude Code** 撰写有吸引力的项目描述：\n「为我的作品集撰写项目描述。对每个项目，写出：一句话解释它是什么、为什么重要的 2 句钩子文案，然后是技术细节。语气：专业但易懂。\n\n项目 1：[描述]\n项目 2：[描述]\n项目 3：[描述]」\n\n**第 3 步 — 审阅并个性化**这些描述——加入一些只有你自己才知道的、关于你在该项目中真实经历的独特细节，这些是 AI 无法知道的。\n\n**第 4 步 — 让 Claude Code 用写好的描述作为内容**，实现具体的项目卡片。\n\n**第 5 步 — 获取同伴反馈：** 把项目板块给一个人看。他们的第一印象是什么？他们最先点击的是哪里？"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C — 作品集自动化测试",
+      "content": "使用 Claude Code 为你的作品集网站编写并运行测试。\n\n**第 1 步 — 让 Claude Code** 为你的作品集编写自动化测试：\n```\n用 Playwright 为我的作品集网站编写自动化测试。\n测试内容：\n1. 所有导航链接都能正常工作（没有 404）\n2. 联系表单可以正常提交，没有报错\n3. 所有图片都能正常加载\n4. 页面加载时间在 3 秒以内\n5. 移动端视口显示正常（响应式检查）\n```\n\n**第 2 步 — 运行测试：**\n```bash\nnpx playwright test\n```\n\n**第 3 步 — 修复任何失败的测试。** 这些是你作品集中真实存在的问题吗？\n\n**第 4 步 — 再添加一个测试**，针对你作品集中重要的内容（例如 GitHub 链接是否正确、项目演示是否能加载）。\n\n**第 5 步 — 在每次重大改动后、部署之前，都运行一遍全部测试。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — 部署并根据反馈迭代",
+      "content": "部署你的作品集，并根据反馈用 AI 改进它。\n\n**第 1 步 — 把作品集部署**到 Vercel、Netlify 或 GitHub Pages。\n\n**第 2 步 — 分享给目标受众中的 3 个人**（潜在雇主、合作者、客户）。请他们给出具体反馈：\n- 你的第一印象是什么？\n- 有没有什么地方不清楚或缺失？\n- 你会点击其中哪些项目链接？为什么？\n\n**第 3 步 — 汇总反馈**，并分享给 Claude Code：\n「我收到了关于我作品集的这些反馈 [粘贴反馈]。按影响程度排出优先级，并帮我解决排名前 3 的问题。」\n\n**第 4 步 — 在 Claude Code 的帮助下，实现优先级最高的修复。**\n\n**第 5 步 — 必做的审查环节：** 问 Claude Code：*「对照原始反馈，审查更新后的作品集。这些改动是否解决了每一条意见？还有哪些反馈驱动的改进仍然需要做？」*"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "工作坊 E — 通过 GitHub MCP 推送你的作品集",
+      "content": "在主工作坊中，你是用手动 git 命令来推送的。这里展示的是完全通过 Claude Code、借助 GitHub MCP 完成同样任务的方法——不用终端，不用 git 命令。\n\n**什么时候用这种方法：** 快速更新、自动化，或者当你想在不切出 Claude 的情况下管理 GitHub 时。\n\n**第 1 步 — 确保 GitHub MCP 在你的 Claude Code 会话中处于激活状态。** 如果你还没设置过，配置方法见第 8-8 课。\n\n**第 2 步 — 通过 MCP 创建（或确认）代码仓库：**\n问 Claude Code：「用 GitHub MCP 检查我账号下是否已经存在一个名为 'yourusername.github.io' 的公开代码仓库。如果没有，现在就创建它。」\n\n**第 3 步 — 推送你的作品集文件：**\n问 Claude Code：「把我的 index.html 推送到 yourusername.github.io 的 main 分支。提交信息：'Portfolio update via MCP'。」\n\n如果你有多个文件（CSS、图片），可以问：「把这个文件夹里的所有文件都推送到这个代码仓库。」\n\n**第 4 步 — 验证：**\n问 Claude Code：「用 GitHub MCP 读取我 yourusername.github.io 代码仓库中 index.html 的内容给我看。」\n\nClaude 应该会返回文件内容——这就证明推送成功了。\n\n**第 5 步 — 创建一个部署 issue：**\n问 Claude Code：「在我的 yourusername.github.io 代码仓库中创建一个标题为 'Portfolio v1 live' 的 GitHub issue，正文列出网站上有什么内容：各个板块、使用的技术，以及在线访问的 URL。」\n\n**反思：** 你完全通过 Claude 的聊天界面管理了一个 GitHub 代码仓库——推送了文件、验证了内容、创建了一个 issue。这就是 MCP 的工作方式：Claude 成为你在每个已连接服务中的「手」。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 F — 为你的作品集生成自动部署流水线",
+      "content": "为你的作品集添加一个 AI 生成的 GitHub Actions 流水线，让以后每次更新都能自动部署，并在上线前经过验证。\n\n**这对作品集为什么重要：** 你会不断更新它——添加项目、更新简介、优化设计。没有流水线，每次更新都是一次没有安全检查的手动推送；有了流水线，你只需推送，自动化会负责验证和部署。\n\n**第 1 步 — 让 Claude Code 生成这个流水线：**\n```\n为我在 yourusername.github.io 的作品集生成一个 GitHub Actions 工作流。\n\n这个流水线应该：\n1. 在每次推送到 main 分支时触发\n2. 用 htmlhint 验证 HTML\n3. 检查 index.html 是否小于 500kb\n4. 确认线上网站 URL 有响应（HTTP 200 检查）\n5. 输出一份摘要：文件大小、验证结果，以及线上 URL\n\n保存到 .github/workflows/deploy-check.yml\n解释 YAML 中每一部分的作用。\n```\n\n逐行阅读 Claude 生成的内容。对任何看不懂的地方都要提问。\n\n**第 2 步 — 推送这个工作流：**\n问 Claude Code：「把 .github/workflows/deploy-check.yml 推送到我的 yourusername.github.io 代码仓库。提交信息：'ci: add portfolio validation pipeline'。」\n\n**第 3 步 — 触发你的第一次自动化运行：**\n对作品集做一个小改动——更新一下标语，或加一句话。让 Claude Code 帮你推送。然后：\n1. 前往 github.com/yourusername/yourusername.github.io\n2. 点击 **Actions** 标签页\n3. 逐步观察你的流水线运行\n\n**第 4 步 — 故意让流水线失败：**\n让 Claude Code 临时在 index.html 中加入一个损坏的 HTML 标签并推送。流水线能捕获到这个问题吗？\n\n修复 HTML，再次推送，确认流水线通过。\n\n**第 5 步 — 添加一个 Lighthouse 评分步骤（可选）：**\n问 Claude Code：「我能免费在 GitHub Actions 流水线里加一个 Lighthouse 性能审计吗？如果可以，加上它并推送更新后的工作流。」\n\n这会让你在每次部署时都获得自动化的性能评分——和 Google 用来衡量网页性能的是同一个工具。\n\n**最终状态：** 你的作品集现在拥有一套完整的 CI/CD 流水线。每次推送都会触发：HTML 验证 → 大小检查 → 线上 URL 检查 →（可选）性能评分。有问题的代码永远不会悄悄地上线。"
+    },
+    {
+      "type": "quiz",
+      "question": "你用 Claude Code 构建作品集，它生成了 500 行 CSS。你看不懂其中大部分内容，但它看起来是对的。这样可以吗？",
+      "options": [
+        "可以——视觉效果才是最重要的",
+        "不可以——你应该理解你发布的代码；至少应该让 Claude Code 解释关键的 CSS 模式，并确保生成的代码没有安全隐患",
+        "可以——CSS 只是样式，不涉及安全问题",
+        "不可以——你必须自己手写所有代码才能放进作品集"
+      ],
+      "correct": 1,
+      "explanation": "理解你发布的代码很重要，原因有几点：（1）你需要维护和更新它——如果你不理解，每次修改都需要 AI 协助；（2）在面试中，你可能会被问到作品集的代码；（3）它代表着你的能力。正确的做法是：借助 AI 构建，然后让 Claude Code 解释每一个重要的模式，从而让你理解你正在展示为自己作品的代码库。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的作品集已经完成，但没有数据分析功能。为什么你可能需要数据分析，最重要的指标是什么？",
+      "options": [
+        "没有理由——作品集不需要数据分析",
+        "数据分析能显示潜在雇主/客户如何发现并使用你的网站——在项目板块停留的时间、以及他们点击了哪些项目，能告诉你什么内容最有效",
+        "数据分析只对电商网站有用",
+        "你应该主要追踪社交媒体的分享次数"
+      ],
+      "correct": 1,
+      "explanation": "作品集的数据分析能帮你根据实际受众的行为进行优化。关键指标包括：哪些项目获得最多浏览量（显示目标受众的兴趣所在）、每个板块的停留时间（越短通常代表吸引力越低）、访客来源（LinkedIn、GitHub、直接访问 = 人们是怎么找到你的），以及跳出率（人们是不是立刻就离开了）。这些数据能让你基于证据而不是猜测来迭代优化，从而打造一个有效的作品集。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**综合实战 14-1 完成。** 你拥有了一个带自动部署流水线的在线作品集网站。你学过的每一个工具——Claude Code、VS Code、Git、GitHub MCP、GitHub Actions——都在这一节课中汇聚到了一起。你的作品集现在会在每次推送时自动验证并部署。下一个综合实战将使用 Anthropic API 构建一个命令行研究工具。"
+    }
+  ],
+  "nextLesson": "14-2",
+  "prevLesson": "21-17"
+}

@@ -1,0 +1,95 @@
+{
+  "id": "6-11",
+  "title": "Chat Participants、Variables 与斜杠命令",
+  "part": 6,
+  "estimatedMinutes": 50,
+  "tags": ["copilot", "vscode", "chat", "workspace", "slash-commands", "intermediate"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n大多数人把 Copilot Chat 当作一个通用的问答工具来用。他们输入一个问题，得到一个答案，然后继续下一步。这样用确实有效——但它错过了 Copilot Chat 最强大的一层能力：**上下文控制**。\n\nCopilot Chat 内置了一套精确的定位系统：\n- **Participants（参与者，以 `@` 开头）**——把你的问题路由给某个了解你工作区、终端，或 GitHub 本身的专家\n- **Variables（变量，以 `#` 开头）**——把特定的文件、选中内容或代码库上下文附加到你的消息中\n- **Slash commands（斜杠命令，以 `/` 开头）**——触发预定义的行为，而不需要用文字描述它们\n\n借助这些工具，你可以提出精确聚焦于恰当上下文的问题，并得到真正可用的答案——而不是那种需要你自己再翻译成具体情境的通用回答。"
+    },
+    {
+      "type": "text",
+      "content": "## Chat Participants：@ 系统\n\nParticipants 是你用 `@` 调用的内置专家。每一个都对你的环境有不同的理解方式。\n\n### `@workspace`\n最重要的一个 participant。`@workspace` 能让 Copilot 搜索你整个项目——不仅仅是编辑器中打开的那个文件。它会为你的代码库建立索引，并使用语义搜索来查找相关上下文。\n\n用它来提出跨越多个文件的问题：\n```\n@workspace 用户认证逻辑在哪里？给我看看涉及的所有文件。\n@workspace 这个应用用了哪些数据库表，各自由哪些文件负责查询？\n@workspace 我需要加限流功能。这个代码库中有哪些现成的模式可以参考？\n```\n\n### `@terminal`\n让 Copilot 能够访问你 VS Code 的集成终端——它最近一次命令的输出、当前目录，以及 shell 类型。用它来调试终端错误，不需要复制粘贴：\n```\n@terminal 这条命令为什么失败了？我该怎么修复？\n@terminal 解释一下这个错误是什么意思，接下来我该做什么。\n```\n\n### `@vscode`\n让 Copilot 具备关于 VS Code 本身的知识——设置、扩展、按键绑定、界面元素。当你的问题是关于 VS Code 配置而不是你的代码时使用它：\n```\n@vscode 我该如何配置 launch.json 来调试一个 Node.js 应用？\n@vscode 多光标选择的按键绑定是什么？\n@vscode 我该如何把 node_modules 从文件浏览器中排除？\n```\n\n### `@github`\n让 Copilot 能够访问 GitHub——issue、pull request、代码搜索，以及 GitHub.com 上的发布说明。需要先登录 GitHub：\n```\n@github 搜索一下其他项目是如何实现 OAuth2 刷新令牌的\n@github 这个仓库的 PR #234 改动了什么？\n@github 有没有和登录 bug 相关的开放 issue？\n```"
+    },
+    {
+      "type": "text",
+      "content": "## Chat Variables：# 系统\n\nVariables 让你可以把特定的上下文附加到单条消息上，而不改变整体的 participant 范围。\n\n| Variable | 附加的内容 |\n|----------|------------------|\n| `#file` | 一个特定文件——打开文件选择器或直接输入路径 |\n| `#selection` | 你当前在编辑器中高亮选中的内容 |\n| `#editor` | 当前活动文件的全部内容 |\n| `#codebase` | 整个工作区索引（类似于 @workspace） |\n| `#terminalLastCommand` | 上一次运行的终端命令的输出 |\n| `#terminalSelection` | 你在终端面板中选中的文本 |\n\n**示例 —— 同时询问两个特定文件：**\n```\n对比一下 #file:services/auth.js 和 #file:services/payments.js 中的错误处理方式。\n它们是否一致？哪种做法更好，为什么？\n```\n\n**示例 —— 解释选中的代码块：**\n在编辑器中选中一段 20 行、令人困惑的代码，然后在聊天中：\n```\n逐行解释一下 #selection。重点关注可能出问题的地方。\n```\n\n**示例 —— 诊断终端错误：**\n```\n#terminalLastCommand —— 这条命令为什么失败了？正确的命令应该是什么？\n```\n\n**组合使用 participants 和 variables：**\n```\n@workspace 以 #file:docs/api-spec.yaml 作为权威依据，找出代码库中\n任何与该规范不一致的路由。\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**工作区索引需要一点时间来构建。** 你在一次会话中第一次使用 `@workspace` 时，Copilot 会扫描并索引你的项目。在大型项目中，这可能需要 30-60 秒。索引完成后，响应速度会很快。如果 `@workspace` 似乎遗漏了一些明显的文件，可以再问一次——索引可能还在构建中。对于非常大的单体仓库，结果是采样的，而不是穷尽式的。"
+    },
+    {
+      "type": "text",
+      "content": "## 斜杠命令：触发行为，而不是描述行为\n\n斜杠命令用精确的、预定义的指令取代了冗长的自然语言描述，这些指令 Copilot 会可靠地执行。\n\n### 可用的斜杠命令\n\n| 命令 | 作用 | 最适合搭配 |\n|---------|-------------|-------------------|\n| `/explain` | 用通俗英语解释代码 | `#selection` 或 `#file` |\n| `/fix` | 分析并为 bug 或错误提出修复建议 | 针对错误使用 `#terminalLastCommand` |\n| `/doc` | 生成文档注释（JSDoc、docstring 等） | 针对函数的 `#selection` |\n| `/tests` | 生成单元测试 | `#selection` 或 `#file` |\n| `/simplify` | 建议一个更简洁的版本 | `#selection` |\n| `/new` | 搭建一个新文件或项目结构 | 告诉它要创建什么 |\n| `/newNotebook` | 创建一个 Jupyter notebook | 描述分析任务 |\n\n### 真实使用示例\n\n**生成全面的测试：**\n```\n/tests #file:utils/date-formatter.js\n重点关注边界情况：空输入、无效日期字符串、时区处理、闰年。\n```\n\n**修复终端中的一个错误：**\n```\n/fix #terminalLastCommand\n这是一个 Python 类型错误。给我看具体是哪一行出了问题，以及修正后的版本。\n```\n\n**为一个复杂函数写文档：**\n```\n/doc #selection\n写 JSDoc 注释。包括 @param 类型、@returns、任何异常的 @throws，\n以及一个使用示例。\n```\n\n**创建一个带结构的新文件：**\n```\n/new 创建一个用于用户管理的 Python FastAPI 路由文件。包含以下端点：\nGET /users、GET /users/{id}、POST /users、PATCH /users/{id}、DELETE /users/{id}。\n遵循 #file:routers/auth.py 中的模式\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 综合运用：强力提示词\n\n真正的技巧在于组合使用 participants、variables 和斜杠命令，创造出高度具体、高度有效的提示词。\n\n**模式：具备工作区感知能力的代码生成**\n```\n@workspace /new 创建一个用于将用户数据导出为 CSV 的新 API 端点。\n遵循 #file:routes/export.js 中的现有模式，并使用我在\n#file:middleware/auth.js 中看到的同一个认证中间件。\n```\n\n**模式：多文件调试**\n```\n@workspace 我在处理支付时遇到了一个空引用错误。\n错误堆栈指向 payments.js 第 47 行，但我认为根本原因在于\n订单是如何创建的。搜索代码库，追踪从订单创建到支付处理的数据流。\n```\n\n**模式：跨文件一致性检查**\n```\n@workspace 对比 /services/ 目录下所有服务文件中错误处理的方式。\n列出任何不一致之处，并提出一个统一的错误处理方案。\n```\n\n**模式：测试覆盖差距分析**\n```\n@workspace /tests #file:services/auth.js\n列出这个文件中所有的公共函数。对于每一个，检查测试目录中是否\n存在对应的测试。为任何没有测试的函数生成测试。\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作区探索 —— 了解你的代码库",
+      "content": "使用 `@workspace` 为你正在参与的项目建立一幅完整的图景。\n\n**在 VS Code 中打开你的项目。** 可以是任意项目——工作代码、一个教程，或任何包含多个文件的文件夹。\n\n**按顺序运行以下提示词：**\n\n1. `@workspace 给我这个项目的概览。它是做什么的？文件夹结构是怎样的？主要组件有哪些？`\n\n2. `@workspace 这个项目使用了哪些外部依赖？按类别列出（数据库、API、测试等）`\n\n3. `@workspace 入口点在哪里？带我走一遍这个应用启动时会发生什么。`\n\n4. `@workspace 在对这个代码库做改动之前，我需要了解什么？列出新开发者应该理解的 5 件事。`\n\n**验证准确性：** 每次得到回答后，打开被引用的文件，检查 Copilot 描述的内容是否真的存在。记下任何事实性错误或遗漏——这能教会你 `@workspace` 索引的局限性。\n\n**成果：** 5 分钟内建立起对项目的心智地图，而不是花上数小时手动阅读。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 A —— # 变量练习",
+      "content": "在一个 10 分钟的练习中练习每一种聊天变量。\n\n**在打开了项目的 VS Code 中：**\n\n**第一轮 —— #file**\n打开任意两个文件。在聊天中：\n```\n#file:[文件1] 和 #file:[文件2] 之间是什么关系？\n它们是如何交互的？\n```\n\n**第二轮 —— #selection**\n在任意文件中选中最令人困惑的 10 行。在聊天中：\n```\n/explain #selection\n把这段代码解释给一个从未见过这个代码库的人听。它在做什么，为什么这么做？\n```\n\n**第三轮 —— #editor**\n确保打开了一个较大的文件。在聊天中：\n```\n审阅 #editor。这段代码中最脆弱或最有风险的部分是什么？\n遇到意料之外的输入时，最容易出问题的地方是哪里？\n```\n\n**第四轮 —— #terminalLastCommand**\n运行任意一条终端命令（哪怕只是 `ls` 或 `dir`）。在聊天中：\n```\n#terminalLastCommand —— 用通俗英语描述一下这个输出的含义。\n```\n\n**结论：** 哪个变量给了你最有用的结果？哪个用起来感觉别扭？每个都写一句话。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 B —— 斜杠命令试驾",
+      "content": "在你项目中的真实代码上测试每一个斜杠命令。\n\n**针对每个命令，使用一个真实的文件或函数——而不是玩具示例：**\n\n**`/explain`**\n选中一个你一周多以前写的函数。运行 `/explain #selection`。Copilot 的解释是否符合你对它作用的记忆？它的解释中是否遗漏了什么？\n\n**`/fix`**\n在一个函数中引入一个明显的 bug（例如差一错误、缺少空值检查）。运行 `/fix #selection`。它是否识别出了正确的问题？它的修复是否保持了原本的意图？\n\n**`/doc`**\n选中一个没有文档的函数。运行 `/doc #selection`。如果没有特别说明，就要求使用 JSDoc 格式。文档是否准确、完整？它能帮助一个新团队成员吗？\n\n**`/tests`**\n选中一个没有测试的函数。运行 `/tests #selection`。要求它包含：正常路径、空值/空输入、边界值，以及一个意料之外的输入。生成的测试是否有意义？\n\n**`/simplify`**\n选中一个复杂的条件语句或循环。运行 `/simplify #selection`。简化后的版本是否真的更易读？它是否保持了完全相同的行为？\n\n**统计：** 哪个命令产生的输出质量最高？哪个之后需要最多的人工修正？"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "工作坊 C —— 强力提示词：跨文件分析",
+      "content": "综合使用 participants 和 variables，搭建一次真实的跨文件分析。\n\n**从以下适用于你项目的任务中选择一个：**\n\n**选项 A —— API + 实现对照检查**\n```\n@workspace 我有一份已归档的 API 规范或 README。对比一下\n文档记录的内容和实际实现的内容。列出任何有文档但没实现，\n或已实现但没有文档的路由、函数或功能。\n```\n\n**选项 B —— 错误处理审计**\n```\n@workspace 审计这个代码库中的错误处理情况。列出每一处\n捕获、记录或返回错误的位置。有没有可能出现错误被悄悄吞掉的地方？\n给我具体的文件和行号。\n```\n\n**选项 C —— 依赖分析**\n```\n@workspace 如果我移除 [某个模块或函数的名称]，这个代码库的哪些部分会崩溃？\n追踪所有的 import/require 链，列出每一个直接或间接依赖它的文件。\n```\n\n**得到回答之后：**\n1. 打开 Copilot 引用的其中两三个文件\n2. 验证 Copilot 提到的具体内容确实存在于那些位置\n3. 找出一处 Copilot 说错或遗漏的地方\n\n**这一步验证是必须做的。** 它能培养你判断何时该信任 `@workspace`、何时该再三核实的直觉。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 搭建政府文档处理工作流",
+      "content": "面向政府工作人员：使用带有 participants 和 variables 的 Copilot Chat 来处理真实的工作文档——政策分析、报告撰写，或数据处理自动化。\n\n**选择你的任务：**\n\n**路线 A —— 政策/文档审阅**\n如果你手头有政策、流程或技术文档（哪怕是一长串邮件往来）：\n1. 把它保存为 VS Code 中的 `.md` 或 `.txt` 文件\n2. 在聊天中：`@workspace 把 #file:[你的文档] 总结成 5 个要点。然后列出：需要采取哪些行动、由谁负责、截止到什么时候。`\n3. 追问：`@workspace 一位政府雇员读完这份文档后，应该向上级提出哪些问题？`\n\n**路线 B —— 自动化脚本**\n如果你有一项重复的手动数据任务（从电子表格复制、整理报告）：\n1. 在一个新的 .py 文件里用注释块描述这个任务\n2. `@workspace /new 写一个 Python 脚本，完成 [你的任务描述]。参考 #file:[项目中任何现有脚本] 的模式。`\n\n**路线 C —— 报告结构**\n```\n@workspace /new 创建一个 Python 脚本，读取一个 CSV 文件，验证它\n包含必要的列 [列出列名]，去除重复行，按 [某个分类列] 输出\n汇总计数，并把清理后的文件以文件名中带时间戳的形式保存。\n输出格式应与 #file:[任何示例报告] 保持一致。\n```\n\n**交付成果：** 一个能减少你实际手动工作量的、可运行的脚本或结构化文档摘要。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在调试一个在 VS Code 集成终端中出现的错误。向 Copilot 询问这个问题最高效的方式是什么？",
+      "options": [
+        "复制错误文本，粘贴到 Copilot Chat 中，并描述你运行了什么命令",
+        "在 Copilot Chat 中使用 @terminal——这能让 Copilot 直接访问你上一条命令及其输出，不需要你复制任何内容",
+        "给终端截图，然后把截图附加到聊天消息中",
+        "让 @workspace 在你的代码库中搜索这条错误信息"
+      ],
+      "correct": 1,
+      "explanation": "@terminal 这个 participant 能让 Copilot 直接访问终端上下文——上一次运行的命令、其输出、你当前的目录，以及你的 shell 类型。这省去了复制粘贴的步骤，并让 Copilot 获得完整的上下文（而不仅仅是你想到要复制的那一部分）。只需打开聊天，输入 @terminal，加上你的问题，Copilot 就能看到整个终端状态。"
+    },
+    {
+      "type": "quiz",
+      "question": "使用 #file 附加一个文件和使用 @workspace 询问它，两者之间有什么区别？",
+      "options": [
+        "没有区别——两者提供的文件内容是一样的",
+        "#file 会把特定文件的完整内容附加到你当前的消息中；@workspace 会搜索你整个项目的索引，并调入与你的问题最相关的上下文",
+        "#file 只能用于读取；@workspace 可以编辑文件",
+        "@workspace 更快，因为它一次只读取一个文件"
+      ],
+      "correct": 1,
+      "explanation": "#file 会明确地把某个特定文件的完整内容附加到你的消息中。@workspace 会搜索整个已建立索引的代码库，并检索出最相关的片段——你不指定它读什么，由它自己决定。当你确切知道哪个文件相关时，使用 #file。当你不确定哪些文件重要，或答案可能涉及项目中的多个文件时，使用 @workspace。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-11 课完成。** 你现在已经完全掌控了 Copilot Chat 的上下文系统：用 participants 把问题路由给合适的专家，用 variables 附加精确的文件和选区上下文，用斜杠命令可靠地触发特定行为。大多数 Copilot 用户从未用过这些功能——这意味着你的问题现在会精确得多，你得到的答案也会有用得多。第 6-12 课讲的是 Copilot Edits，它把同样的精确性应用到了多文件编辑会话中。"
+    }
+  ],
+  "nextLesson": "6-12",
+  "prevLesson": "6-10"
+}

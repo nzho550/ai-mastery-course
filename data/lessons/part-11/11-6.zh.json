@@ -1,0 +1,115 @@
+{
+  "id": "11-6",
+  "title": "理解 Token 与成本",
+  "part": 11,
+  "estimatedMinutes": 55,
+  "tags": [
+    "api",
+    "tokens",
+    "cost",
+    "anthropic"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将理解什么是 token（词元）、如何在发送请求前对其进行计数，以及如何计算任意一次 API 调用的确切成本。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 Token？\n\nLLM 并不是逐字母或逐单词地阅读文本——它们以 **token（词元）** 为单位阅读，token 大致相当于音节或较短的词语片段。\n\n一个有用的经验法则：\n- **1 个 token ≈ 0.75 个单词**（所以 100 个单词 ≈ 133 个 token）\n- **1,000 个 token ≈ 750 个单词**（略多于一页标准文档）\n\n一些例子：\n- `hello` → 1 个 token\n- `Hello, world!` → 4 个 token\n- `antidisestablishmentarianism` → 6 个 token\n- 一段典型的段落 → 50-100 个 token\n- 一个标准网页 → 1,000-3,000 个 token\n- 一整本小说 → 100,000-200,000 个 token\n\n分词（tokenization）并不是完全可预测的——代码、生僻词、以及非英语文本的分词方式可能不同。唯一准确的方法就是实际计数。"
+    },
+    {
+      "type": "text",
+      "content": "## 定价结构\n\nAnthropic 对输入 token（你发送的内容）和输出 token（Claude 生成的内容）分别计费。输出 token 的价格总是高于输入 token——生成文本在计算上比阅读文本更昂贵。\n\n以下是每百万 token 的大致当前价格：\n\n| 模型 | 输入（$/1M） | 输出（$/1M） |\n|-------|------------|---------------|\n| Haiku 4.5 | $1.00 | $5.00 |\n| Sonnet 4.6 | $3.00 | $15.00 |\n| Opus 4.8 | $5.00 | $25.00 |\n\n请查阅 `anthropic.com/pricing` 获取当前价格——这些价格会随模型更新而变化。\n\n**成本计算公式：**\n```\ncost = (input_tokens / 1,000,000 × input_price)\n     + (output_tokens / 1,000,000 × output_price)\n```\n\n以 Haiku 的一次典型调用为例（500 个输入 + 200 个输出 token）：\n```\ncost = (500 / 1,000,000 × $1.00) + (200 / 1,000,000 × $5.00)\n     = $0.0005 + $0.0010\n     = $0.0015 每次调用\n```\n\n也就是每 100 次调用 $0.12。用于实验非常便宜。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**usage 字段始终存在。** 每一次 API 响应都包含 `usage.input_tokens` 和 `usage.output_tokens`。你永远不需要猜测——调用完成后，随时可以查看确切的用量。"
+    },
+    {
+      "type": "text",
+      "content": "## 在调用前计数 Token\n\nSDK 提供了一个 `count_tokens` 方法，可以在你真正发送请求之前，告诉你这次请求会用掉多少输入 token。这在以下场景中很有用：\n- 在大批量任务前估算成本\n- 检查某份文档是否能放入上下文窗口\n- 比较不同提示词的长度\n\n**Node.js 中的 token 计数：**"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\nconst prompt = 'Explain the difference between machine learning and deep learning.';\n\nconst countResult = await client.messages.countTokens({\n  model: 'claude-haiku-4-5-20251001',\n  messages: [{ role: 'user', content: prompt }]\n});\n\nconsole.log(`Input tokens: ${countResult.input_tokens}`);\n\n// Estimate cost\nconst inputPrice = 1.00 / 1_000_000;  // $1.00 per million\nconst estimatedCost = countResult.input_tokens * inputPrice;\nconsole.log(`Estimated input cost: $${estimatedCost.toFixed(6)}`);"
+    },
+    {
+      "type": "text",
+      "content": "**Python 中的 token 计数：**"
+    },
+    {
+      "type": "code",
+      "language": "python",
+      "content": "import anthropic\nfrom dotenv import load_dotenv\n\nload_dotenv()\nclient = anthropic.Anthropic()\n\nprompt = \"Explain the difference between machine learning and deep learning.\"\n\ncount = client.messages.count_tokens(\n    model=\"claude-haiku-4-5-20251001\",\n    messages=[{\"role\": \"user\", \"content\": prompt}]\n)\n\nprint(f\"Input tokens: {count.input_tokens}\")\n\ninput_price = 1.00 / 1_000_000\nestimated_cost = count.input_tokens * input_price\nprint(f\"Estimated input cost: ${estimated_cost:.6f}\")"
+    },
+    {
+      "type": "workshop",
+      "tag": "API",
+      "title": "Token 计数与成本计算器",
+      "content": "你将编写一个脚本，对三个不同的提示词分别计数 token、发起真实的 API 调用，并根据响应中的 usage 字段计算实际成本。\n\n创建 `exercises/token-demo.js`（或 `.py`），运行以下内容：\n\n**Node.js 版本：**\n```javascript\nimport Anthropic from '@anthropic-ai/sdk';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\n// Haiku pricing\nconst INPUT_PRICE  = 1.00 / 1_000_000;\nconst OUTPUT_PRICE = 5.00 / 1_000_000;\n\nconst prompts = [\n  'What is 2 + 2?',\n  'Explain the concept of recursion in programming.',\n  'Write a detailed comparison of Python and JavaScript for a beginner who wants to learn their first programming language, covering syntax, use cases, learning resources, and career prospects.'\n];\n\nfor (const prompt of prompts) {\n  // Count tokens first\n  const count = await client.messages.countTokens({\n    model: 'claude-haiku-4-5-20251001',\n    messages: [{ role: 'user', content: prompt }]\n  });\n\n  // Make the real call\n  const response = await client.messages.create({\n    model: 'claude-haiku-4-5-20251001',\n    max_tokens: 500,\n    messages: [{ role: 'user', content: prompt }]\n  });\n\n  const inputTokens  = response.usage.input_tokens;\n  const outputTokens = response.usage.output_tokens;\n  const cost = (inputTokens * INPUT_PRICE) + (outputTokens * OUTPUT_PRICE);\n\n  console.log(`\\nPrompt: \"${prompt.slice(0, 60)}...\"`);\n  console.log(`  Pre-call estimate: ${count.input_tokens} input tokens`);\n  console.log(`  Actual input: ${inputTokens} tokens, output: ${outputTokens} tokens`);\n  console.log(`  Cost: $${cost.toFixed(6)}`);\n}\n```\n\n运行它：`node token-demo.js`\n\n**需要观察的地方：**\n- 简短的问题所使用的 token 数量明显少于长篇文章的请求\n- 输出 token 数量会随着回答的复杂程度变化\n- 即使是最长、最详细的回答，用 Haiku 计算下来也不到一分钱\n- 调用前的预估值与实际的 input_tokens 非常接近"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**为什么输出 token 更贵：** 阅读提示词是 O(n) 复杂度——模型只需处理每个 token 一次。而生成输出是 O(n²) 复杂度——每生成一个新 token，都需要关注（attend to）之前的所有 token。计算成本的增长方式不同，这就是输入和输出之间存在 5 倍价格差异的原因。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——Token 计数练习",
+      "content": "通过对 token 进行计数，建立对 token 工作方式的直觉。\n\n**第 1 步——使用 Anthropic 的分词器**（或让 Claude Code 帮你计数 token）：让 Claude 估算几段文本的 token 数量：\n- 一个单词：“Hello”\n- 一条推文长度的文本：“Just finished my first Claude API integration!”\n- 一个段落：[粘贴本课中的一段文字]\n- 一段代码：[粘贴 10 行 Python 代码]\n\n**第 2 步——问 Claude：** “常见内容大致会用掉多少 token，有没有一般规律？比如：每个 token 平均对应多少字符、多少单词、代码与散文的差异、不同语言的差异。”\n\n**第 3 步——在 Claude 告诉你之前，先自己估算：**\n- 一个包含 5 个字符串字段的 JSON 对象\n- 一个完整的 URL\n- 一篇 200 词的短文\n然后验证你的估算结果。\n\n**第 4 步——计算成本**：用 claude-haiku-4-5-20251001（按当前定价）处理每一段文本各需要多少钱。\n\n**第 5 步——总结出一条经验法则**，用于在动手构建之前估算你的 API 成本。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——构建具备 Token 感知能力的代码",
+      "content": "修改你的 API 封装代码，使其具备 token 感知能力。\n\n**第 1 步——让 Claude Code** 为你现有的 API 封装添加 token 感知功能：\n```\nAdd these token-aware features to the AnthropicClient class:\n1. Before each API call, estimate the token count and warn if it exceeds a configurable threshold\n2. After each API call, track running totals: input tokens, output tokens, estimated cost\n3. Implement a `token_budget` parameter — if the conversation history grows beyond this budget, automatically truncate oldest messages while keeping the system prompt\n4. Add a `get_usage_summary()` method that returns current session stats\n```\n\n**第 2 步——用一段非常长的对话**测试 token 预算功能。它能正确地截断内容吗？\n\n**第 3 步——在测试会话后**，对照 Anthropic 控制台核实成本追踪的结果。\n\n**第 4 步——必做审阅：** 问 Claude：“审阅一下这段截断逻辑。哪些对话场景可能会处理得不好？哪些上下文可能会被不恰当地丢弃？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——模型选择策略",
+      "content": "构建一套选择使用哪个 Claude 模型的策略。\n\n**第 1 步——问 Claude：** “比较一下 Claude Haiku、Sonnet 和 Opus 在以下场景中的表现：（1）对客服邮件进行分类，（2）撰写详细的技术文档，（3）回答简单的事实性问题，（4）复杂的推理任务。针对每一种场景，推荐一个模型并解释成本与质量之间的权衡。”\n\n**第 2 步——构建一个决策矩阵：**\n| 任务类型 | 推荐模型 | 原因 |\n|---|---|---|\n| 简单分类 | | |\n| 简短问答 | | |\n| 复杂分析 | | |\n| 创意生成 | | |\n| 代码审查 | | |\n\n**第 3 步——根据 Claude 的建议**填写这张矩阵。\n\n**第 4 步——计算你最主要的使用场景**分别用 Haiku、Sonnet 和 Opus 的成本差异。选择 Haiku 而非 Sonnet 每月能节省多少？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——成本优化实验",
+      "content": "通过优化，降低一个真实使用场景的 API 成本。\n\n**第 1 步——找一个你经常使用的真实提示词。**\n\n**第 2 步——建立基线成本：** 运行它，记录 token 数量。\n\n**第 3 步——应用以下优化措施**，并测量 token 减少量：\n1. 移除多余的上下文（模型不需要的信息）\n2. 精简冗长的指令（更简洁）\n3. 使用结构化的输出格式，减少输出 token\n4. 先用一个更小的模型测试\n\n**第 4 步——针对每一项优化**，验证输出质量是否没有下降。只有在质量不受影响的前提下，降低成本才有价值。\n\n**第 5 步——计算最终的优化效果：** 你实现了百分之多少的成本降低？在什么样的规模下，这才真正重要？"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在开发一款应用，每天处理 1000 份文档，平均每份 2000 个 token。你应该使用 Claude Haiku 还是 Sonnet？",
+      "options": [
+        "始终使用 Sonnet 以获得更好的质量",
+        "先在你的具体任务上对两个模型都进行测试——如果 Haiku 的质量已经足够，在这个量级下它的成本会明显更低",
+        "始终使用 Haiku 以最小化成本",
+        "根据内容复杂度，为不同文档使用不同的模型"
+      ],
+      "correct": 1,
+      "explanation": "模型选择应该基于实证，而不是想当然。用多样化的样本在你实际的任务上测试 Haiku 并评估质量。如果 Haiku 达到了你的质量标准，在这个规模下节省的成本将会非常可观。如果质量不够，那么 Sonnet 的成本就是合理的。错误的做法是：在不测试更便宜模型是否够用的情况下，直接使用能力最强的模型。以每天 1000 份文档 × 2000 个 token 计算，即便只是 5 倍的价格差异，也会转化为可观的月度节省。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 API 成本意外偏高。最有效的排查步骤是什么？",
+      "options": [
+        "立即切换到更便宜的模型",
+        "记录一整天内每次 API 调用的 token 数量，找出哪些调用消耗的 token 最多——花费最高的那些就是优化目标",
+        "把所有 API 调用的 max_tokens 都调低",
+        "查看 Anthropic 控制台的账单详情"
+      ],
+      "correct": 1,
+      "explanation": "意外偏高的 API 成本通常有具体的原因——往往是少数几种昂贵的调用模式，而不是整体用量普遍偏高。没有日志，你只能靠猜。记录内容应包括：每次请求是哪个接口/功能发起的、输入 token 数、输出 token 数，以及所用的模型。记录一天之后，按成本排序，找出花费最高的 3 种调用模式。优化这些（更短的提示词、更小的模型、缓存）通常能带来 70% 以上的潜在节省。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 11-6 课。** 你现在可以在运行任何 API 调用之前估算其成本，也能根据响应计算出精确的成本。这项知识在第 11-9 课优化真实工作负载时会变得至关重要。接下来：让回答通过流式传输实现“即时”的体验。"
+    }
+  ],
+  "nextLesson": "11-7",
+  "prevLesson": "11-5"
+}

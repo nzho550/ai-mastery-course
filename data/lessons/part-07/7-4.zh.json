@@ -1,0 +1,101 @@
+{
+  "id": "7-4",
+  "title": "让 Claude 帮你写一个文件",
+  "part": 7,
+  "estimatedMinutes": 65,
+  "tags": [
+    "claude-code",
+    "file-creation",
+    "diff",
+    "workflow"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将用 Claude Code 根据自然语言描述创建一个真实的文件，在接受之前审查它提议的内容，并亲眼看到文件出现在磁盘上。"
+    },
+    {
+      "type": "text",
+      "content": "## 用自然语言创建文件\n\nClaude Code 最立竿见影的能力之一，就是根据一句大白话描述来创建文件。你不需要知道语法——你描述你想要什么，Claude 来写。\n\n实际用起来大概是这样：\n\n- *\"创建一个叫 `calculator.py` 的文件，接收两个数字，支持加、减、乘、除\"*\n- *\"创建 `styles/main.css`，做一个干净、现代的深色主题——深色背景、白色文字、一种易读的无衬线字体\"*\n- *\"创建 `utils/date-helpers.js`，包含三个函数：一个把日期格式化为 YYYY-MM-DD，一个计算两个日期之间相差的天数，一个检查某个日期是否已经过去\"*\n\n你的描述越具体，输出就越好。提到文件名、格式、应该包含什么内容，以及任何限制条件（不用外部库、加上注释、用 ES6 语法等等）。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**具体化是一种技能：** 模糊的请求：*\"做一个网页\"*。具体的请求：*\"创建 `exercises/about-me.html`——一个单页的个人介绍网站，包含一个头部、一段带 [姓名] 占位符的简介，以及一份技能清单。用内联 CSS 保持简洁美观。不用框架，不用外部文件。\"* 第二种请求第一次就能产出可用的结果。"
+    },
+    {
+      "type": "text",
+      "content": "## 先审查、再接受的工作流\n\nClaude Code 从不会悄无声息地写文件。在对你的文件系统做出任何改动之前，它会准确展示它打算做什么，并等待你批准。\n\n对于新文件，你会在终端里看到提议内容的完整展示。对于对现有文件的改动，你会看到一个 diff（在 7-5 课中讲解）。\n\n在批准提示处，你有三个选项：\n\n1. **输入 `yes`（或直接按回车）**——Claude 会完全按照展示的内容创建文件\n2. **输入 `no`**——Claude 放弃这次改动，等待新的指令\n3. **输入反馈**——不用 yes/no，而是描述要改什么：*\"把 CSS 弄得简单一点——去掉动画效果\"*。Claude 会修改，并在再次询问之前给你展示更新后的版本。\n\n这个循环——提议 → 审查 → 接受/修改——是整个 Part 7 的核心工作流。永远不要跳过审查这一步。"
+    },
+    {
+      "type": "text",
+      "content": "## 一次请求多个文件\n\n你可以在一条消息里请求多个文件。Claude 会依次提议每一个，并逐一征求批准：\n\n*\"创建三个文件：`index.html`（主页）、`about.html`（关于页面）和 `styles.css`（两者共用的样式）。使用统一的蓝白配色方案。\"*\n\nClaude 会在创建每个文件之前展示给你看。逐个审查后再接受——很容易出现认真审查了第一个文件，之后就匆匆掠过其余文件的情况。\n\n对于复杂的多文件请求，可以考虑使用计划模式（Plan Mode，7-10 课），它会在写入任何文件之前向你展示完整的计划。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**接受之前一定要先读。** Claude 很擅长生成看起来很像那么回事的代码，但它可能会犯一些不易察觉的错误——变量名用错、逻辑出错、遗漏边界情况。审查这一步不是走个形式。像审查一份准备合并的 pull request 那样去阅读它提议的文件。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "生成你的第一个文件",
+      "content": "用 Claude Code 从零创建一个真实的文件，仔细审查它，并验证它能正常工作。\n\n**第 1 步——启动：**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**第 2 步——提出一个具体的请求：**\n在提示符中输入以下内容（可以按自己的需要调整细节）：\n```\nCreate a new file called exercises/about-me.html.\nIt should be a clean, styled about-me page with:\n- A header with [Your Name] as a placeholder\n- A short bio paragraph mentioning that I'm learning AI tools\n- A list of 3 things I'm currently learning\n- Simple, readable CSS inline in the file (no external stylesheets)\n- No JavaScript, no frameworks\n```\n\n**第 3 步——审查提议的文件：**\nClaude 会在创建文件之前展示完整的文件内容。从头到尾读一遍：\n- HTML 结构合理吗？\n- CSS 看起来还行吗？\n- 有没有你想要填写的占位符？\n\n**第 4 步——接受或调整：**\n- 如果看起来不错：输入 `yes` 并按回车\n- 如果有些地方不对：输入你的反馈——比如 *\"把字体调大一点，换成蓝色系配色\"*——Claude 会修改\n\n**第 5 步——在 VS Code 中打开文件：**\n接受之后，切换到 VS Code。文件应该会出现在资源管理器面板的 `exercises/` 目录下。\n\n**第 6 步——在浏览器中查看：**\n在 VS Code 中右键点击 `about-me.html` → **Open with Live Server**。你应该能在浏览器里看到你的页面。\n\n**第 7 步——请求第二个文件：**\n回到 Claude Code，试试：\n```\nNow create exercises/contact.html — a simple contact page\nwith a form containing Name, Email, and Message fields.\nMatch the style of about-me.html.\n```\n接受之前同样仔细审查这一个。\n\n**需要注意的地方：** 你用大白话描述了你想要什么，得到了可用的 HTML。审查这一步让你在任何内容写入磁盘之前掌控了输出结果。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A —— 文件写作训练",
+      "content": "练习请求 Claude Code 写不同类型的文件——这是最基础的 Claude Code 工作流。\n\n**第 1 步——在项目中打开 Claude Code：**\n```powershell\nclaude\n```\n\n**第 2 步——请求 Claude Code 编写 3 种不同类型的文件：**\n\n类型 1——Python 工具文件：\n\"Write a Python utility file called `utils.py` that contains: a function to validate email addresses, a function to format dates as YYYY-MM-DD, and a function to clean text (remove extra whitespace, strip HTML tags). Include docstrings and basic error handling.\"\n\n类型 2——配置文件：\n\"Write a `config.yaml` file for a web application with sections for: database settings, API keys (use placeholder values), logging level, and feature flags.\"\n\n类型 3——测试文件：\n\"Write a test file `test_utils.py` for the utils.py you just created. Include tests for valid and invalid inputs for each function.\"\n\n**第 3 步——阅读每个文件。** 每一个都做到了你要求的事情吗？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 用 Claude Code 构建一个完整功能",
+      "content": "用 Claude Code 实现一个完整的功能——从规格说明到可运行、经过测试的代码。\n\n**第 1 步——写一份功能规格说明**（1-2 段，描述你想构建什么以及它应该如何运作）。\n\n**第 2 步——启动 Claude Code 并提供规格说明：**\n```\nI want to implement the following feature: [your specification]\n\nBefore writing any code:\n1. Describe your implementation plan\n2. List the files you will create or modify\n3. Identify any risks or questions\n\nOnly start coding after I approve the plan.\n```\n\n**第 3 步——审查这份计划。** 方案对吗？有没有遗漏的文件？在实现之前先批准或调整方向。\n\n**第 4 步——让 Claude Code 实现。** 观察它创建/修改了哪些文件。\n\n**第 5 步——测试实现：**\"运行这个功能的测试。如果测试失败，修复它们。\"\n\n**第 6 步——必做的代码审查：**\"审查你刚写的代码。找出 3 个代码审查者可能会提出的潜在问题。\""
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C —— 审查并对比 AI 写的文件",
+      "content": "养成在 Claude Code 编写或修改代码之后仔细审查的习惯。\n\n**第 1 步——请求 Claude Code 编写一个函数：**\n\"Write a Python function that reads a CSV file, filters rows where a specified column value exceeds a threshold, and writes the filtered results to a new CSV file. Include error handling for file not found and invalid column names.\"\n\n**第 2 步——逐字逐句地阅读生成的文件**（至少前 30 行）。\n\n**第 3 步——回答这些问题：**\n- 它是否导入了所有用到的东西？\n- 它是否处理了文件找不到的情况？\n- 它是否处理了列名无效的情况？\n- 如果 CSV 是空的会怎样？\n- 如果阈值不是数字会怎样？\n- 即使出错，输出文件是否也会被正确关闭？\n\n**第 4 步——把你的发现反馈给 Claude Code：**\"我审查了代码，发现了这些问题：[列出问题]。逐一修复它们。\"\n\n**第 5 步——重新阅读修复后的版本。** 所有问题都解决了吗？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 结合 git 进行有版本的文件写作",
+      "content": "把 Claude Code 写文件和立即 git 提交结合起来——建立一份清晰的记录，区分哪些是 AI 写的，哪些是你写的。\n\n**第 1 步——从一个干净的 git 状态开始：**\n```powershell\ngit status   # should show \"nothing to commit\"\n```\n\n**第 2 步——请求 Claude Code 编写一个文件：**\n\"Write a logging configuration module `logger.py` that sets up structured logging with different handlers for development (console) and production (file) environments.\"\n\n**第 3 步——仔细审查这个文件。**\n\n**第 4 步——立即提交：**\n```powershell\ngit add logger.py\ngit commit -m \"Add logging module (AI-generated, reviewed 2026-06-11)\"\n```\n\n**第 5 步——根据你的审查做出改进。** 再次提交：\n```powershell\ngit commit -m \"Improve logging module: add rotation, fix missing handlers\"\n```\n\n**第 6 步——这样就建立了一份清晰的记录：** 哪些代码是 AI 生成的，哪些经过了人工审查。这是 AI 辅助开发中的专业实践。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code 写了一个 100 行的 Python 文件。你运行它，它正确运行了。这样的审查够充分吗？",
+      "options": [
+        "够了——如果它运行时没有报错，那代码就是对的",
+        "不够——程序可以在没有报错的情况下依然存在逻辑错误、安全问题，或缺少边界情况处理",
+        "够了——但只有在输出看起来正确时才能用到生产环境",
+        "取决于这段代码的重要程度"
+      ],
+      "correct": 1,
+      "explanation": "能无错运行的代码，仍然可能在重要方面出错：它可能对边界情况（空输入、意外格式）产生错误的结果，可能存在安全漏洞（SQL 注入、路径穿越），可能在规模变大时出现性能问题，也可能缺少会导致生产环境故障的错误处理。\"它跑起来了\"是正确代码的必要条件，但不是充分条件。始终要阅读 AI 生成的代码。"
+    },
+    {
+      "type": "quiz",
+      "question": "当 Claude Code 说\"我要创建一个叫 database.py 的新文件\"时，你应该怎么做？",
+      "options": [
+        "让它创建文件，之后再审查",
+        "请 Claude Code 在创建文件之前先展示它打算写的代码，这样你可以在文件写入之前先审查",
+        "自动接受所有创建文件的请求",
+        "只允许 Claude Code 修改已有文件，永远不允许创建新文件"
+      ],
+      "correct": 1,
+      "explanation": "你可以请求 Claude Code 在写文件之前先给你看一份计划或草稿。这对于重要文件（比如数据库模块、身份验证代码，或任何涉及生产数据的内容）尤其有价值。可以说\"在创建文件之前，先给我看你打算写的内容\"，或者\"在实现之前，先给我一份文件设计的概述\"。这样你就能在代码写入之前而不是之后进入审查循环。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成 7-4 课。** 你已经根据自然语言描述生成了真实的文件，并练习了先审查、再接受的工作流。下一课：修改现有文件并阅读 diff。"
+    }
+  ],
+  "nextLesson": "7-5",
+  "prevLesson": "7-3"
+}

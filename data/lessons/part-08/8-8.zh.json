@@ -1,0 +1,118 @@
+{
+  "id": "8-8",
+  "title": "GitHub MCP——通过对话管理 Issues、PR 与代码",
+  "part": 8,
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "github",
+    "claude-code",
+    "version-control"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将用 Personal Access Token 配置好 GitHub MCP，并使用 Claude Code 与一个真实的 GitHub 仓库交互——列出 issues、阅读代码、创建新 issue——全部通过对话完成。"
+    },
+    {
+      "type": "text",
+      "content": "## GitHub MCP 能带来什么\n\n有了 GitHub MCP，Claude Code 可以：\n\n- 列出并阅读 issues 和 pull requests\n- 创建带有完整描述的新 issue\n- 在一个或多个仓库中搜索代码\n- 直接从 GitHub 读取文件内容\n- 创建并管理分支\n- 在 issues 和 PR 上发表评论\n- 获取提交历史\n\n这意味着你的工作流程可以从：\n1. 打开浏览器\n2. 导航到 GitHub\n3. 找到仓库\n4. 找到 issue\n5. 复制文本\n6. 粘贴到 Claude 中\n\n变成：\n1. 问 Claude “我有哪些未解决的 issue？”\n\n经过 GitHub 的这个来回过程会在幕后无形地完成。"
+    },
+    {
+      "type": "text",
+      "content": "## 第 1 步——创建一个 GitHub 仓库\n\n如果你还没有一个可以连接的仓库，创建一个：\n\n1. 前往 github.com 并登录\n2. 点击右上角的 `+` 图标 → **New repository**\n3. 命名为 `ai-course-exercises`\n4. 设置为 Private（推荐用于学习项目）\n5. 勾选 **Add a README file**\n6. 点击 **Create repository**\n\n现在你有了一个仓库。GitHub MCP 会在这个仓库以及你账户中的其他任何仓库上生效。"
+    },
+    {
+      "type": "text",
+      "content": "## 第 2 步——生成一个 Personal Access Token\n\nGitHub MCP 需要一个令牌来代表你进行身份验证。\n\n1. 在 GitHub 中，点击你的头像 → **Settings**\n2. 向下滚动左侧边栏 → **Developer settings**\n3. 点击 **Personal access tokens** → **Tokens (classic)**\n4. 点击 **Generate new token (classic)**\n5. 给它起个名字：`claude-code-mcp`\n6. 设置有效期为 90 天（或你想要的任意时长）\n7. 在 **Select scopes** 下，勾选：`repo`（这会赋予完整的仓库访问权限）\n8. 点击 **Generate token**\n9. **立即复制这个令牌**——GitHub 只会展示一次\n\n在关闭页面之前，把这个令牌存放在安全的地方（密码管理器）。"
+    },
+    {
+      "type": "text",
+      "content": "## 第 3 步——把 GitHub MCP 添加到你的配置中\n\n把 GitHub 服务器添加到你的全局 `settings.json`："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\",\n               \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"]\n    },\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"ghp_your-token-here\"\n      }\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**安全提示：把令牌放在 git 之外。** 你位于 `C:\\Users\\YourName\\.claude\\settings.json` 的 `settings.json` 在你的主目录中，而不在某个 git 仓库内——所以这个位置是安全的。但如果你曾经把这份配置复制到一个*是* git 仓库的项目文件夹中，请立即把 `settings.json` 加入 `.gitignore`。一个被提交的令牌会让任何发现它的人完全访问你的 GitHub 账户。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**环境变量替代方案：** 如果你不想把令牌直接放进文件，可以把它设置为 Windows 环境变量：\n```powershell\n[System.Environment]::SetEnvironmentVariable('GITHUB_PERSONAL_ACCESS_TOKEN', 'ghp_your-token', 'User')\n```\n然后在你的配置中完全省略 `env` 块——服务器会自动找到这个变量。"
+    },
+    {
+      "type": "text",
+      "content": "## 第 4 步——重启并测试\n\n1. 保存 `settings.json` 并重新启动 `claude`\n2. 输入 `/mcp`——确认 `github` 已出现\n3. 试试：`\"列出我 GitHub 账户中的所有仓库\"`\n4. 试试：`\"列出我 ai-course-exercises 仓库中未解决的 issue\"`\n5. 试试：`\"我 ai-course-exercises 仓库的 README 里写了什么？\"`"
+    },
+    {
+      "type": "text",
+      "content": "## 实际使用中的 GitHub MCP 能力\n\n以下是使用 GitHub MCP 最实用的一些做法：\n\n**Issue 管理：**\n- `\"在 ai-course-exercises 中创建一个标题为 'Add contact form to about-me page' 的 issue\"`\n- `\"给我看看所有未解决的 issue，并总结哪些需要关注\"`\n- `\"哪些 issue 已经开了超过一周？\"`\n\n**代码搜索：**\n- `\"在我的仓库中搜索任何包含 TODO 注释的文件\"`\n- `\"找出 ai-course-exercises 中所有的 JavaScript 文件\"`\n\n**PR 审查：**\n- `\"列出 [仓库] 中未解决的 pull request\"`\n- `\"总结一下 PR #5 中改动了什么\"`\n\n**跨仓库工作：**\n- `\"我的哪个仓库最近一个月没有任何提交？\"`（有助于识别被搁置的项目）"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "通过对话管理 GitHub",
+      "content": "**准备工作：**\n1. 完成上面的第 1-4 步：创建仓库、获取令牌、更新 settings.json、重启\n2. 输入 `/mcp` 确认 `github` 已列出\n\n**任务 1——获取仓库概览：**\n问：`\"列出我所有的 GitHub 仓库及其描述，以及最后更新时间。\"`\n\n**任务 2——创建一个真实的 issue：**\n想一件针对你任意仓库（或 `ai-course-exercises`）的真实改进或任务。\n问：`\"在 ai-course-exercises 中创建一个标题为 '[你的标题]' 的 issue，描述为 [你想要追踪的内容]。\"`\n前往 github.com 确认这个 issue 已经存在。\n\n**任务 3——跨代码搜索：**\n问：`\"在我所有的仓库中搜索任何包含 TODO 注释的文件。列出文件路径和 TODO 文本。\"`\n\n**任务 4——从 GitHub 读取文件：**\n问：`\"读取我 ai-course-exercises 仓库的 README，告诉我它目前写了什么。\"`\n\n**附加任务——issue 分类：**\n如果你的仓库中有未解决的 issue：\n问：`\"查看我所有仓库中未解决的 issue，按类型分组：bug、功能需求、问题，以及其他。建议我应该先处理哪一个。\"`\n\n把你完成的内容记录在 `notes/github-mcp-session.md` 中。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——GitHub MCP 初次操作",
+      "content": "亲自动手体验 GitHub MCP 最实用的操作。\n\n**第 1 步——安装并配置 GitHub MCP**（如果第 8-3 课还没做完的话）。你需要一个 GitHub 个人访问令牌。\n\n**第 2 步——在 Claude Code 中**，在你拥有的一个真实 GitHub 仓库上测试这些操作：\n- “列出 [你的仓库] 中最近的 5 个未解决 issue”\n- “给我看看所有等待审核的 pull request”\n- “最后一次提交的信息是什么，是谁写的？”\n\n**第 3 步——通过 Claude Code 创建一个 issue：**\n“在 [你的仓库] 中创建一个新的 GitHub issue，标题为 '[标题]'，描述为：[描述]。给它加上 bug 标签。”\n\n**第 4 步——通过浏览器访问 GitHub，验证这个 issue 已经创建。**\n\n**第 5 步——让 Claude Code** 给你刚创建的 issue 添加一条评论：“给我刚创建的这个 issue 添加一条评论，内容是 'Being investigated.'”\n\n**第 6 步——评价这次体验：** 这比使用 GitHub 网页界面更快吗？哪些操作通过 MCP 效果最好？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——AI 辅助的 PR 审查工作流程",
+      "content": "使用 GitHub MCP 在 AI 的协助下审查 pull request。\n\n**第 1 步——在一个 GitHub 仓库中找到一个未解决的 pull request**（你自己的仓库，或你参与贡献的仓库）。\n\n**第 2 步——让 Claude Code 审查它：**\n```\n审查 [owner/repo] 中未解决的 pull request #[编号]。我需要：\n1. 这个 PR 改动内容的摘要\n2. 差异中明显的 bug 或逻辑错误\n3. 应该有但缺失的测试\n4. 有没有不符合项目约定的地方（查阅 CLAUDE.md 或 README 作为参考）\n5. 针对发现的最重要问题，给出一条建议发表的评审评论\n```\n\n**第 3 步——阅读 Claude Code 的分析。** 你同意吗？有没有遗漏的地方？\n\n**第 4 步——通过 Claude Code 发表一条评审评论：** “给 [PR 编号] 添加一条评审评论，内容是：[你的评论]。”\n\n**第 5 步——强制审查这次审查：** 问 Claude：*“审查你自己的 PR 分析。有哪些资深工程师会关注的重要方面，你没有检查到？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——从 GitHub Issue 到实现的工作流程",
+      "content": "使用 Claude Code 和 GitHub MCP 搭建“GitHub issue → 实现 → PR”这一完整工作流程。\n\n**第 1 步——找到或创建一个描述小型功能或 bug 修复的 GitHub issue。**\n\n**第 2 步——让 Claude Code 阅读这个 issue：**\n“阅读 [仓库] 中的 issue #[编号]。总结需求，在我们开始实现之前，问我任何需要澄清的问题。”\n\n**第 3 步——回答 Claude Code 的问题**（如果没有问题就说明一下）。\n\n**第 4 步——让 Claude Code 实现这个修复：**\n“为 issue #[编号] 实现修复方案。为这项工作创建一个新的 git 分支。实现完成后，运行测试。”\n\n**第 5 步——审查实现。** 如果看起来没问题：“为这个实现创建一个草稿 PR。使用 issue 描述来撰写 PR 正文。关联这个 issue。”\n\n**第 6 步——在 GitHub 上验证** PR 是否正确创建。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——通过 Claude Code 进行 GitHub 项目管理",
+      "content": "使用 GitHub MCP 管理你仓库的 issue 和项目看板，无需离开 Claude Code。\n\n**第 1 步——让 Claude Code 审计你的 GitHub issue：**\n```\n审计 [仓库] 中未解决的 issue：\n1. 列出已经开了超过 30 天的 issue\n2. 列出没有标签的 issue\n3. 列出阻塞了其他 issue 的 issue\n4. 这周我应该优先处理哪些 issue？（考虑：影响力、工作量、依赖关系）\n```\n\n**第 2 步——对建议采取行动：**\n- 给没有标签的 issue 添加标签\n- 关闭任何已经不再有效的 issue\n- 给推荐的 issue 添加优先级评论\n\n**第 3 步——创建一个冲刺计划：** “根据我们的待办事项，为下一个冲刺创建 5 个 issue，优先考虑 [你的重点领域]。”\n\n**第 4 步——评估这个工作流程：** 与使用 GitHub 网页界面相比，哪个更快？哪个更难？"
+    },
+    {
+      "type": "quiz",
+      "question": "你用 GitHub MCP 让 Claude Code 在一次 Claude Code 会话中创建一个 GitHub issue、添加标签，并将其分配到一个里程碑。需要验证的关键风险是什么？",
+      "options": [
+        "Claude Code 使用了正确的 API 版本",
+        "所有操作都被正确应用了——Claude Code 可以确认操作，但 GitHub 才是权威来源；请在 GitHub 界面中验证",
+        "issue 是在正确的时区创建的",
+        "MCP 服务器仍然处于连接状态"
+      ],
+      "correct": 1,
+      "explanation": "当 AI 系统通过 API 对外部服务进行更改时，务必在权威来源中进行验证。GitHub MCP 可能报告成功，但操作可能部分失败、应用到了错误的仓库，或设置了错误的值（例如错误的里程碑 ID）。在完成一批 GitHub 操作后，打开浏览器中的 GitHub，验证更改是否符合预期。这只需要 30 秒，却能发现无声的失败。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code 使用 GitHub MCP 在一位同事的 pull request 上发表评审评论。在允许这样做之前，你应该始终做什么？",
+      "options": [
+        "确保 Claude Code 拥有对该仓库的写权限",
+        "在 Claude Code 发布之前，阅读并批准评论的确切文本——对他人工作的评论是可见的，代表着你的专业形象",
+        "先征求同事的同意",
+        "将其作为草稿评论发布，之后可以删除"
+      ],
+      "correct": 1,
+      "explanation": "任何以你的名义创建公开可见内容的操作，都需要在发布前经过人工审阅。代码评审评论是专业沟通——一条不得体、不准确或不清晰的评论反映的是你，而不是 AI。在 Claude Code 发布之前，务必先阅读它将要发布的确切内容。具体到 GitHub 评论：让 Claude Code 先起草评论，审阅草稿，批准或修改，然后再发布。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 8-8 课。** Claude Code 现在可以访问你的 GitHub 账户了。第 8-9 课将深入介绍文件系统 MCP——探索它的完整能力和安全模型。"
+    }
+  ],
+  "nextLesson": "8-9",
+  "prevLesson": "8-7"
+}

@@ -1,0 +1,102 @@
+{
+  "id": "7-9",
+  "title": "记忆系统",
+  "part": 7,
+  "estimatedMinutes": 60,
+  "tags": [
+    "claude-code",
+    "memory",
+    "claude-md",
+    "preferences",
+    "user-level"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将拥有一份记录你个人编码偏好的用户级 CLAUDE.md，理解完整的 CLAUDE.md 层级结构是如何运作的，并知道该把不同类型的指令放在哪里。"
+    },
+    {
+      "type": "text",
+      "content": "## Claude Code 没有持久记忆\n\n按照设计，每次 Claude Code 会话都是完全从零开始的。Claude 不记得你昨天说了什么、上周写了什么代码，或者在之前的会话中表达过什么偏好。这是有意为之的——它能防止一个项目的上下文渗透到另一个项目中——但这也带来了一个实际问题：你每次都得重新建立自己的偏好。\n\nCLAUDE.md 系统正是解决这个问题的方案。与其依赖会话记忆（它会重置），不如把你的偏好写进文件，Claude 会在每次会话开始时读取这些文件。文件是永久的，而 Claude 的记忆不是。"
+    },
+    {
+      "type": "text",
+      "content": "## CLAUDE.md 层级结构\n\nClaude Code 会从多个位置加载 CLAUDE.md 文件，按照从宽泛到具体的顺序层层叠加：\n\n**1. 用户级：`~/.claude/CLAUDE.md`**\n在每一次 Claude Code 会话中都会被加载，无论你在哪个项目中。这里放的是关于*你*的通用信息——你的名字、你偏好的语言、你的编码理念、Claude 应该始终做或永远不做的事情。\n\n**2. 父文件夹中的 CLAUDE.md 文件**\n如果你的项目位于一个含有 CLAUDE.md 的文件夹内（例如某个 monorepo 的根目录），Claude 也会加载它。这对于多个相关项目之间共享约定很有用。\n\n**3. 项目级：`./CLAUDE.md`**\n针对这个特定项目加载。你在第 7-6 课中创建过它。它会覆盖或扩展用户级指令，以适应这个项目的具体上下文。\n\n**4. 子目录中的 CLAUDE.md 文件**\n如果你有一个 `src/CLAUDE.md` 或 `backend/CLAUDE.md`，Claude 会在它实际在该目录中工作时加载它们。这对于微服务、monorepo，或不同子系统有不同规则的项目很有用。\n\n可以把它想象成同心圆：用户级设置适用于任何地方，项目级设置进一步收窄范围，子目录设置再进一步收窄。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**该把什么放在哪里的经验法则：**\n- 用户级 `~/.claude/CLAUDE.md`：你的名字、偏好的编码风格、你会的语言、你总是想要／从不想要的东西\n- 项目 `CLAUDE.md`：技术栈、文件结构、项目特有的约定、构建命令\n- 子目录 `CLAUDE.md`：该特定子系统的规则（例如“这个文件夹是遗留代码——未经询问不要重构”）"
+    },
+    {
+      "type": "text",
+      "content": "## 用户级 CLAUDE.md 中该放什么\n\n你的用户级文件会跟着你到每一个项目。适合放进这份文件的内容包括：\n\n- **你的背景：** *“我是一个正在学习编程的初学者。请解释我可能不了解的概念。”*\n- **你的名字：** *“我的名字是 [姓名]。”* 这有助于 Claude 恰当地处理代码注释和文件名。\n- **偏好的语言：** *“我偏好 JavaScript 和 Python。除非我特别要求，否则不要建议 Rust 或 Go。”*\n- **代码风格偏好：** *“使用 2 空格缩进。优先使用 const 而不是 let。为函数添加 JSDoc 注释。”*\n- **沟通风格：** *“解释建议背后的原因，而不只是内容本身。保持解释对初学者友好。”*\n- **硬性规则：** *“未经询问，绝不删除文件。未经确认，绝不推送到 git。做出更改前，始终先展示差异。”*\n\n随着你的偏好变化，更新这份文件。它是一份活文档。"
+    },
+    {
+      "type": "code",
+      "language": "markdown",
+      "content": "# My Developer Preferences\n\n## About Me\nI am learning to code and working through an AI skills course.\nI have limited prior coding experience.\nPlease explain concepts I may not know — don't assume background knowledge.\n\n## My Name\nMy name is [Your Name].\n\n## Preferred Languages & Tools\n- JavaScript (vanilla) and Python for new projects\n- HTML5 + CSS3 for web work\n- Avoid TypeScript, Rust, or Go unless I specifically ask\n- Avoid build tools (Webpack, Vite) for simple projects\n\n## Code Style\n- 2-space indentation\n- Add a comment explaining every function\n- Prefer const over let; never use var\n- Meaningful variable names — no single-letter names except loop counters\n\n## How I Want Claude to Communicate\n- Explain the why behind every significant suggestion\n- When you introduce a pattern I might not know, briefly explain it\n- Keep language plain and beginner-friendly\n- If I'm about to do something risky, tell me before doing it\n\n## Hard Rules\n- Never delete files without asking me first\n- Never push to git without my confirmation\n- Always show what you're going to change before changing it"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "创建你的用户级记忆文件",
+      "content": "创建一个 `~/.claude/CLAUDE.md`，写入你的个人偏好，然后验证 Claude 在一次全新会话中读取到了它。\n\n**第 1 步——导航到你的 .claude 文件夹：**\n在 PowerShell 中：\n```\ncd ~\nls .claude\n```\n如果 `.claude` 文件夹不存在，创建它：\n```\nNew-Item -ItemType Directory -Path ~/.claude\n```\n\n**第 2 步——创建 CLAUDE.md：**\n在 VS Code 中，打开文件夹 `C:\\Users\\YourName\\.claude\\`（将 YourName 替换为你实际的 Windows 用户名）。创建一个名为 `CLAUDE.md` 的新文件。\n\n写下 3-5 条真正符合你实际情况的偏好。以上面的模板为起点，但要写成属于你自己的内容。考虑以下几点：\n- 你实际的技能水平和背景\n- 你已经掌握的语言 vs 正在学习的语言\n- 你真正在意的代码风格偏好\n- 沟通偏好（你希望解释更多还是更少？）\n- 你希望在所有项目中都强制执行的任何硬性规则\n\n保存文件。\n\n**第 3 步——在全新会话中测试：**\n打开任意项目文件夹（甚至只是你的主目录），启动 Claude Code：\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n问：\n```\n你了解我个人的编码偏好有哪些？\n```\n\nClaude 应该会回复你用户级 CLAUDE.md 中的内容。\n\n**第 4 步——验证分层：**\n问：\n```\n你对这个特定项目有什么指令？\n```\n\n此时 Claude 应该会同时描述用户级偏好（来自 `~/.claude/CLAUDE.md`）和项目级指令（来自你在第 7-6 课中创建的项目 CLAUDE.md）。两个层级应该同时生效。\n\n**第 5 步——完善并保存：**\n根据 Claude 读回给你的内容，调整任何措辞与你本意不符的地方。你的用户 CLAUDE.md 是一份活文档——每当你发现一个值得记录的偏好，就更新它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——记忆系统探索",
+      "content": "通过实践探索来理解 Claude Code 的记忆系统。\n\n**第 1 步——在一个项目中打开 Claude Code。**\n\n**第 2 步——问 Claude Code 关于它的记忆：**\n“你目前了解这个项目的哪些信息，你会在未来的会话中记住？”\n\n**第 3 步——测试添加记忆：**\n“请记住，在这个项目中，我们创建或更新任何数据库记录时，总是会添加一个 'last_modified' 时间戳。”\n\n**第 4 步——开始一次新会话**（在同一个项目中关闭并重新打开 Claude Code）。\n\n**第 5 步——测试保留情况：**\n“关于这个项目中数据库记录的约定，你记得什么？”\n它是否保留了这条指令？\n\n**第 6 步——询问 Claude.ai（浏览器）：** *“Claude Code 的记忆系统是如何工作的？会话之间什么会保留，什么不会？CLAUDE.md 和记忆系统有什么区别？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——为项目填充记忆",
+      "content": "系统性地用 Claude Code 在你的项目中高效工作所需的一切来填充其记忆。\n\n**第 1 步——在一个真实项目中打开 Claude Code。**\n\n**第 2 步——添加 5-7 条记忆内容**，覆盖关键的项目知识：\n- 一个从代码中不明显的决策：“我们使用基于令牌的认证而不是基于会话的认证，因为 [原因]”\n- 一个重要的约定：“所有 API 端点都返回一个标准信封：{success, data, error}”\n- 一个需要遵守的约束：“不要在文件解析器中使用递归——处理大文件时曾导致栈溢出”\n- 一个测试要求：“集成测试需要运行中的数据库——先运行 `docker-compose up`”\n- 一个部署细节：“预发布服务器使用位于 /etc/app/.env 的不同 .env 文件”\n\n**第 3 步——测试每一条记忆内容**，方法是开始一次新会话，并提出需要该知识才能回答的问题。\n\n**第 4 步——同时将你添加到记忆中的内容记录到 CLAUDE.md 中**，这样即使记忆被清除，内容也不会丢失。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——记忆 vs CLAUDE.md 策略",
+      "content": "理解何时使用记忆、何时使用 CLAUDE.md，并搭建一套连贯的策略。\n\n**第 1 步——问 Claude：** *“我应该在什么情况下使用 Claude Code 的记忆，什么情况下使用 CLAUDE.md 来存储项目信息？它们在以下方面有什么区别：持久性、对其他开发者的可见性、在会话中如何被使用，以及各自最适合什么场景？”*\n\n**第 2 步——建立一个决策框架：**\n| 信息类型 | 记忆还是 CLAUDE.md | 原因 |\n|---|---|---|\n| 团队共享约定 | | |\n| 个人偏好 | | |\n| 临时任务笔记 | | |\n| 架构决策 | | |\n| 一次性调试上下文 | | |\n\n**第 3 步——根据 Claude 的解释填写表格。**\n\n**第 4 步——审视你当前的项目：** 每种信息目前都放在哪里？应该移动哪些？\n\n**第 5 步——将你的框架应用**到决定把你实际项目中的 3 条信息存放在哪里。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——记忆重置与恢复流程",
+      "content": "为记忆被清除或变得过时的情况建立一套流程。\n\n**第 1 步——模拟一次记忆重置：** 让 Claude Code 忘记或忽略它存储的关于该项目的记忆。\n\n**第 2 步——设计一条恢复提示词**——一条你可以在任何新会话开始时运行的消息：\n```\n项目上手：阅读 CLAUDE.md 以及以下关键文件：[列出清单]。\n阅读之后，请确认：\n1. 这是一个什么样的项目？\n2. 我应该遵循的最重要的约定是什么？\n3. 我应该避免什么？\n4. 我该如何运行测试？\n```\n\n**第 3 步——在清除记忆后测试这条恢复提示词。** 它能否让 Claude Code 快速恢复到可用状态？\n\n**第 4 步——将恢复提示词添加**到 CLAUDE.md 的“新会话启动”部分。\n\n**第 5 步——问 Claude：** *“这个项目中有没有什么重要信息是无法仅从 CLAUDE.md 和源文件中恢复的——如果记忆被清除，这些信息会永久丢失？”* 如果有，把这些内容加入 CLAUDE.md。"
+    },
+    {
+      "type": "quiz",
+      "question": "你告诉 Claude Code“记住我们下个月要从 PostgreSQL 迁移到 MongoDB。”一周后你开始了一次新的 Claude Code 会话。它会记得这件事吗？",
+      "options": [
+        "会——Claude Code 的记忆会无限期地跨会话保留",
+        "取决于 Claude Code 的记忆是如何配置的，以及该会话是否与同一个项目相关联",
+        "不会——Claude Code 从不在会话之间保留任何内容",
+        "会——但只保留 7 天，之后就会过期"
+      ],
+      "correct": 1,
+      "explanation": "Claude Code 记忆的持久性取决于具体实现和配置。Claude Code 可以存储持久化的项目级记忆，但这一行为因情况而异。最稳妥的做法是：把任何重要的东西都当作可能丢失来对待，并把它记录在 CLAUDE.md 或项目中的某个持久化文件里。对于像“从 X 迁移到 Y”这样的关键架构上下文，不要只依赖记忆——把它放进 CLAUDE.md。"
+    },
+    {
+      "type": "quiz",
+      "question": "CLAUDE.md 中的信息和 Claude Code 记忆系统中的信息有什么区别？",
+      "options": [
+        "两者完全相同——CLAUDE.md 只是记忆系统的人类可读版本",
+        "CLAUDE.md 是你 git 仓库中的一个文件（对所有人可见、受版本控制、持久存在）；记忆是特定于会话的存储，可能跨会话保留也可能不保留，且不受 git 追踪",
+        "对于重要信息来说，记忆比 CLAUDE.md 更可靠",
+        "CLAUDE.md 在会话开始前被读取；记忆在会话过程中被查阅"
+      ],
+      "correct": 1,
+      "explanation": "CLAUDE.md 是一个被提交的文件——它在 git 历史中，对所有协作者可见，即使 Claude Code 重新安装也能保留下来，是项目上下文的主要真相来源。记忆则是由 AI 管理的存储，更加短暂，可能不会跨机器或更新后保留。对于任何必须在每次会话中都可靠地被知晓的信息，CLAUDE.md 才是权威来源。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 7-9 课。** 你拥有了一份会跟随你到每个项目的用户级记忆文件，并理解了完整的 CLAUDE.md 层级结构。接下来：Plan Mode 与权限——在 Claude 采取行动之前控制它能做什么、不能做什么。"
+    }
+  ],
+  "nextLesson": "7-10",
+  "prevLesson": "7-8"
+}

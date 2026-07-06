@@ -1,0 +1,115 @@
+{
+  "id": "1-2",
+  "title": "语言模型是如何工作的（通俗讲解）",
+  "part": 1,
+  "estimatedMinutes": 60,
+  "tags": ["foundations", "beginner", "llm", "concepts"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你将为五个概念建立心智模型，这些概念会让你在余生中都成为更出色的 AI 使用者：**token**、**上下文窗口**、**预测**、**temperature 参数**，以及**训练与运行时的区别**。理解这些不是可有可无的——它们几乎能解释你今后用到的每一个 AI 工具的所有怪癖、局限和能力。\n\n没有数学公式，没有代码，只有准确的心智模型。"
+    },
+    {
+      "type": "text",
+      "content": "## 核心理念：下一个 token 预测\n\n从最根本的层面来说，语言模型只做一件事：**根据前面出现过的所有内容，预测最可能出现的下一个 token**。\n\n**Token** 大致相当于一个词或词的一个片段。句子*“The cat sat on the mat”*大约是 7 个 token。Claude 会把一切——你的问题、对话历史、它接收到的指令——都当作一串 token 来处理。\n\n当你给 Claude 发消息时，它并不像人类那样“思考”。它反复运行同一个计算：*根据目前为止的所有 token，接下来应该是哪个 token？*它每秒会做出成千上万次这样的计算，来生成一个回答。\n\n这听起来简单得不像能产生智能输出的方法。但在足够多的数据上训练之后，“预测下一个 token”这件事出人意料地成了一项深刻的技能。要预测物理学、医学、代码或诗歌相关文本中接下来会出现什么，你就必须隐式地学会大量关于物理学、医学、代码和诗歌的知识。\n\n**关键的推论：** Claude 并不像你知道自己的名字那样“知道”事情。它生成的回应，是根据训练数据在统计上最可能出现的内容。大多数情况下这是对的。但有时它会自信满满地说错——这就是所谓的幻觉（hallucination）。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**烹饪类比：** 语言模型就像一位吃过上百万家餐厅的厨师。他们并没有一本涵盖每种菜系的规则手册——而是吸收了如此多的模式，以至于能在任何风格下都做出味道地道的菜。他们不是在*照搬*菜谱，而是内化了背后的逻辑——他们能通过组合见过的模式，做出一道自己从未做过的菜。"
+    },
+    {
+      "type": "text",
+      "content": "## Token——AI 世界的通用货币\n\nToken 是 AI 模型衡量和计价一切的方式。理解 token 能让你成为更好的 AI 使用者，也有助于你理解将来用 API 构建东西时的成本。\n\n**Token 的大致换算：**\n- 1 个 token ≈ 英文中的 4 个字符\n- 1 个 token ≈ ¾ 个单词\n- 100 个 token ≈ 75 个单词\n- 1,000 个 token ≈ 750 个单词 ≈ 1.5 页\n\n**哪些内容会被 token 化：**\n- 你的问题：token\n- 对话中之前的消息：token\n- 系统提示词（Claude 收到的指令）：token\n- Claude 的回答：token\n\n所有这些加在一起，必须容纳在上下文窗口之内（见下文）。\n\n**为什么 token 边界很重要：**\n有些单词会被拆分成多个 token。“Unbelievable”可能会被拆成：“Un”+“believ”+“able”。数字和代码的 token 化方式通常与普通英文散文不同。这就是为什么 AI 有时会在单词中间出现奇怪的错误——模型的预测可能恰好在一个 token 边界上出了差错。\n\n**Token 与成本：**\n当你使用 API（构建自己的工具）时，是按每百万 token 计费的。一个 1,000 token 的提示词反复发送，成本是一个 250 token 提示词的 4 倍。这就是为什么专业的 AI 用户会仔细考虑提示词的长度——不只是为了质量，也是为了成本。"
+    },
+    {
+      "type": "text",
+      "content": "## 上下文窗口——工作记忆\n\n每个 LLM 都有一个**上下文窗口**——它一次能“看到”并进行推理的最大文本量。可以把它想象成模型的工作记忆。\n\n上下文窗口内的一切，模型都知道；窗口之外的一切，模型完全接触不到。\n\n这就是为什么：\n- Claude 不记得你昨天的对话（那次对话已经消失——在窗口之外）\n- 很长的文档可能会触及上限（文档可能装不进窗口）\n- 开始一个新对话会“重置”Claude（空的上下文 = 对之前对话没有任何记忆）\n\n**2026 年的上下文窗口：**\n- Claude Sonnet 4.6：标准情况下最高 200,000 个 token；1M 上下文正在 beta 阶段开放\n- GPT-5 系列（OpenAI）：最高 1,000,000 个 token（旗舰模型）；GPT-4.1 mini 和 nano 档位使用更小的窗口\n- Gemini 2.5 Pro：约 1,000,000 个 token（相当于一整年的密集阅读量）\n\n**上下文窗口里都装了什么：**\n在对话的任意时刻，上下文包含：系统提示词 + 之前所有的消息 + 当前消息。长对话会不断吃掉上下文，这就是为什么非常长的聊天有时会产生不那么精准的回答——模型的工作记忆快要被填满了。\n\n**实际影响：** 如果你希望 Claude 在多个会话之间记住某些信息，你必须自己再次提供这些信息——粘贴进去、上传一个文件，或者使用 Claude 的 Projects 功能来持久保存上下文。\n\n**信息顺序效应：** Claude（以及所有 LLM）往往更关注上下文窗口开头和结尾的信息。如果你有一份很长的文档和一个具体的问题，把你的问题放在文档*之前*，而不是之后。这有点反直觉（人类通常是先读上下文再提问），但却能产生更好的 AI 结果。"
+    },
+    {
+      "type": "text",
+      "content": "## Temperature 参数——在创造力与一致性之间调节\n\n当 AI 模型预测下一个 token 时，它会为所有可能的 token 生成一个概率分布。Temperature 参数控制着模型如何从这个分布中采样。\n\n**低 temperature（接近 0）：**\n- 模型几乎总是选择概率最高的下一个 token\n- 输出一致、可预测、聚焦\n- 适用场景：事实性问题、代码生成、正式写作，以及你希望每次都得到相同答案的任务\n\n**高 temperature（接近 1 或更高）：**\n- 模型采样的范围更广，偶尔会选择概率较低的 token\n- 输出更多样、更有创意、更出人意料——但可靠性更低\n- 适用场景：头脑风暴、创意写作、生成多个方案\n\n在 Claude.ai（面向普通用户的界面）中，你不能直接控制 temperature——Anthropic 会为你设定一个合理的默认值。但如果你使用 Claude API，就可以显式设置它。理解 temperature 有助于解释以下现象：\n- 同一个问题在不同对话中可能得到略有不同的答案（采样带来的差异）\n- AI 有时会做出出人意料的措辞选择（temperature 让概率较低的 token 偶尔“胜出”）\n- 有些 AI 输出非常一致，而有些则明显有波动\n\n**确定性的误解：** 很多人以为 AI 是确定性的——相同输入，相同输出。但通常并非如此。基于 temperature 的采样意味着同一个提示词会生成略有不同的回答。有些开发者会把 temperature 设为 0 以获得完全确定的输出（对自动化测试很有用），但这会让输出显得更机械。"
+    },
+    {
+      "type": "text",
+      "content": "## 训练与运行时——两件完全不同的事\n\nAI 模型的生命周期分为两个不同的阶段：\n\n**训练**——模型通过处理数十亿份文档并调整其内部参数来学习，从而更擅长预测下一个 token。这个过程只发生一次（或以极高的成本周期性地发生）。你无法控制这个过程。\n\n**运行时（推理）**——当你发送一条消息时，训练好的模型会用它学到的参数生成一个回答。这就是你每次使用 Claude 时发生的事情。它比训练要便宜得多、快得多。\n\n**为什么这个区分很重要：**\n- 模型的*知识*来自训练（有一个截止日期）\n- 模型在对话中的*行为*取决于运行时上下文窗口里的内容\n- 你可以在不改变模型本身的情况下，通过上下文窗口极大地改变模型的行为\n- 这正是“提示词工程”的本质：一种在运行时层面塑造行为、而不改变训练本身的指令方式\n\n**什么是 RLHF（以及为什么 Claude 不只是一个原始的语言模型）：**\n原始语言模型有能力，但也很“狂野”——它们会生成任何东西，无论有没有帮助。Anthropic 用**基于人类反馈的强化学习（RLHF）**来训练 Claude：人类评估员对回答进行评估，从有用性、准确性和安全性等方面打分，模型再被训练去偏好那些人类评价更高的回答。\n\n这就是为什么 Claude 是*有帮助的*（而不只是有能力）、会拒绝有害请求，并且在不确定时会恰当地表达保留意见。核心模型是一样的，是 RLHF 塑造了它如何使用这种核心能力。"
+    },
+    {
+      "type": "text",
+      "content": "## 系统提示词——看不见的指令\n\n每一次与 Claude 的对话都有三层：\n1. **系统提示词**——由部署 Claude 的一方（Anthropic、某个应用、某家公司）在你发送任何消息之前设定好的指令，对你不可见。\n2. **你的消息**——你输入的内容。\n3. **Claude 的回应**——Claude 生成的内容。\n\n系统提示词的力量很大：它可以让 Claude 采用某种人格设定、限制它可以讨论的话题、指定回答格式、提供背景信息，或改变它的行为方式。当你直接使用 Claude.ai 时，是 Anthropic 设定系统提示词。当一家公司把 Claude 集成进自己的产品时，是*他们*设定系统提示词——这就是为什么同一个底层模型在不同的应用中表现不同。\n\n**这对你作为用户意味着什么：**\n- 如果 Claude 在某个特定应用中表现得很奇怪，它可能正在遵循一个你看不见的系统提示词\n- 当你在本课程后面用 Claude API 进行开发时，你会自己编写系统提示词\n- 理解系统提示词的存在，有助于解释为什么同一个问题在不同的 Claude 产品中会得到不同的答案\n\n**你可以在 Claude.ai 中模拟一个系统提示词**，做法是把指令放在对话中第一条消息的开头。这不如真正的系统提示词那么可靠，但对大多数使用场景来说已经够用了。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "上下文窗口实验 + Temperature 探索",
+      "content": "两个实验合二为一——都能让概念变得直观且难忘。\n\n**实验 1——上下文窗口（10 分钟）**\n\n1. 打开 [Claude.ai](https://claude.ai)，粘贴一篇较长的维基百科文章（3,000 字以上——可以试试“第二次世界大战”或“气候变化”的词条）。\n2. 让 Claude 用三个要点总结它。它会做得很完美——整篇文章都在它的上下文窗口里。\n3. 就文章中提到的某个细节（一个日期、一个名字、一个具体事件）提出一个具体问题。它会正确回答。\n4. 开始一个**全新的对话**（点击“New Chat”）。不粘贴任何内容，直接问 Claude 同样的具体问题。\n5. 注意 Claude 要么不知道答案，要么给出一个泛泛的回答。那篇文章从未出现在*这个*对话的上下文窗口里。\n\n**写下两句话：**\n1. 用你自己的话说说什么是上下文窗口\n2. 这对你今后使用 AI 有什么实际影响\n\n**实验 2——Temperature 的作用（5 分钟）**\n\n在实验 1 的同一个对话里，把下面这个提示词连续发送三次（只需连续点三次发送按钮，内容不变）：\n```\nGive me a single creative metaphor for the concept of a 'context window'.\n```\n\n三次回答一样吗？不一样吗？差异有多大？\n\n**写下一句话：** 回答之间的差异说明了 AI 生成过程的什么特点？\n\n**实验 3——系统提示词模拟（5 分钟）**\n\n开一个新对话。作为你的*第一条消息*（在问任何问题之前），写下：\n```\nFor this conversation: You are a blunt, direct expert who gives opinions not options. You never hedge. When I ask a question, give me your clearest recommendation, not a list of considerations.\n```\n\n然后问一个通常会得到充满模棱两可措辞的回答的问题：*“Should I learn Python or JavaScript first?”*\n\n把这个回答和你平时不加指令时得到的回答做对比。这种系统提示词风格的指令改变输出了吗？"
+    },
+    {
+      "type": "quiz",
+      "question": "你把一篇 5,000 词的文档粘贴给 Claude，围绕它进行了长达 30 轮的对话。在对话接近尾声时，你发现 Claude 关于这份文档的回答似乎变得不那么精确，有时还会漏掉它之前答对过的细节。最可能的解释是什么？",
+      "options": [
+        "Claude 在长对话中会变得疲惫、准确性下降",
+        "对话历史已经变得足够长，把部分原始文档内容挤到了上下文窗口的边缘，而模型对这些位置的关注度较低",
+        "文档已损坏，Claude 无法再正确读取它",
+        "长对话需要升级到 Claude Pro 才能正常处理"
+      ],
+      "correct": 1,
+      "explanation": "随着对话不断变长，之前所有的消息都会不断累积并填满上下文窗口。原始文档依然在那里，但现在可能已经被埋在了几十轮对话之下。LLM 往往更关注近期的上下文，而对现在已经远离活动位置、埋在窗口深处的早期内容关注较少。解决办法：用文档重新开始一个新对话，或者先总结迄今为止的对话内容，再把这份总结和文档一起放进新对话里。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 A——Token 直觉训练",
+      "content": "在 10 分钟内建立起对 token 的直觉，理解它为什么重要。\n\n**第一步——先估算，再测量。** 看看下面这三段文本，猜猜每段各包含多少个 token：\n- “Hello, how are you today?”（你的猜测：___）\n- 一段 100 词、关于气候变化的段落（你的猜测：___）\n- 一封 500 词的邮件（你的猜测：___）\n\n使用这个经验法则：1 个 token ≈ ¾ 个单词。\n\n**第二步——打开 [Claude.ai](https://claude.ai)，检验你的直觉。** 粘贴这个提示词：\n```\nI want to understand how tokens work. Please tell me:\n1. Roughly how many tokens are in the sentence: \"Hello, how are you today?\"\n2. How does the word 'unbelievable' get tokenised — is it one token or multiple?\n3. Why might numbers and code get tokenised differently from normal English words?\n```\n\n**第三步——上下文窗口的实际影响。** 现在问：\n```\nIf a context window holds 200,000 tokens, roughly how many pages of a\ntypical novel would that fit? And how many back-and-forth exchanges in\na conversation before you start approaching that limit?\n```\n\n**第四步——检查你的估算。** 你在第一步的猜测有多接近？\n\n**第五步——让 Claude 检验你的理解：**\n```\nI think I understand tokens now. Here's my mental model: [write 2-3 sentences\nexplaining what tokens are and why they matter]. What did I get right,\nand what would you correct or add?\n```\n\n**收获：** 你现在对 AI 交互的“成本”有了直观的感受。每个提示词都有 token 价格。长对话有工作记忆的成本。这正是提示词效率的基础——你会在整个课程中反复练习这一点。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——搭建你的个人 AI 速查表",
+      "content": "你将创建一份名为“AI 究竟是怎么运作的”的单页参考文档——这是你针对本课五个核心概念的个人速查表。这是一份你真正会用到的东西：当你不明白 AI 为什么表现异常时，当你向别人解释 AI 时，或者当你休息一段时间后回到这门课程时。\n\n**第一步——打开 [Claude.ai](https://claude.ai)。开始一个新对话，粘贴这个提示词：**\n```\nI want to create a personal reference cheat sheet for how language models\nwork. Help me draft a one-page document that covers these five concepts in\nplain English — as if explaining to someone smart but non-technical:\n\n1. Next-token prediction (what the model is actually doing)\n2. Tokens (what they are and why they matter)\n3. Context window (what it is and the key practical implications)\n4. Temperature (what it controls and when high/low matters)\n5. Training vs. runtime (the difference and why it matters)\n\nFor each concept:\n- One clear explanation (2-3 sentences)\n- One practical implication for how I use AI day-to-day\n- One common misconception to avoid\n\nFormat: clear headings, short paragraphs, no jargon. This should take under\n2 minutes to read.\n```\n\n**第二步——批判性地阅读初稿。** 对这五个部分中的每一个都问自己：这和我在本课中实际学到的内容一致吗？如果有什么地方看起来不对或太笼统，记下来。\n\n**第三步——提出具体的改进要求。** 对每一个需要改进的部分：\n```\nThe section on [concept] isn't quite right. Specifically: [what's wrong or\nmissing]. Please revise that section.\n```\n\n**第四步——加入你自己的例子。** AI 给出的例子是通用的。至少针对五个部分中的两个，让 Claude 帮你加入一个来自*你自己场景*的例子：\n```\nFor the context window section, add an example relevant to someone who\n[describe your job or main use case for AI]. Make it concrete and specific.\n```\n\n**第五步——必做的 AI 审查环节。** 粘贴你当前的草稿并说：\n```\nDon't validate this — find 3 specific problems or gaps in this cheat\nsheet. Consider: accuracy (anything technically wrong or oversimplified to\nthe point of being misleading?), usefulness (anything too vague to actually\nhelp someone?), and completeness (what important nuance is missing?).\n```\n\n**第六步——至少修复 Claude 指出的一个问题。** 如果你不同意某项批评，说明理由——但要认真对待它。\n\n**第七步——排版并保存。** 打开一个新文档（Google Docs、Word 或记事本）。标题写“语言模型是如何工作的——我的参考资料”，加上今天的日期，把最终的速查表复制进去，保存在一个你能再次找到的地方。\n\n**第八步——快速自测。** 关闭文档。不看笔记，你能用一句话分别解释这五个概念吗？如果不能，重新阅读你无法概括的部分。目标不是死记硬背——而是理解得足够扎实，能讲得出来。\n\n**你的交付成果：** 一份个性化的单页参考文档，每当 AI 出现意料之外的表现时你都可以查阅。你会在整门课程中反复参考它。\n\n**为什么这个方法有效：** 自己动手写速查表（即便有 AI 帮助）会迫使你主动理解这些概念。光是阅读是不够的——你必须决定哪些内容重要，并用自己的话表达出来。对抗性审查环节则确保它真正准确，而不只是听起来对。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 C——审查一次出问题的对话",
+      "content": "回想一次 AI 给你的回答让人困惑、没有帮助，或者出乎意料地糟糕的经历。如果你想不出来，就故意运行下面的某个提示词，然后用 AI 来诊断出了什么问题——这能培养理解 AI 失误、而不只是被动经历失误的能力。\n\n**方案 A——使用一次真实的过往经历。** 回想一次 AI 给出奇怪、没有帮助或明显错误回答的经历。简要写下发生了什么：你问了什么，得到了什么，以及它为什么是错的或令人困惑。\n\n**方案 B——故意制造一次失误。** 在一个新的 Claude.ai 对话中尝试以下某个提示词并观察结果：\n- 询问一件非常近期（上周）的新闻事件——看看当训练截止日期相关时会发生什么\n- 让 Claude 在不给出文档的情况下告诉你文档里有什么内容——看看它会不会产生幻觉或拒绝回答\n- 连续三次问同一个复杂问题——注意回答之间的差异\n\n**第一步——记录这次失误。** 写 2-3 句话：发生了什么，回答中有什么让你感到意外。\n\n**第二步——打开一个全新的 Claude.ai 对话，粘贴这个提示词：**\n```\nI want to understand why an AI interaction went wrong.\n\nHere is what happened: [describe the failure — what you asked, what you got,\nwhat was wrong or surprising]\n\nUsing what you know about how language models work — tokens, context windows,\ntraining cutoffs, temperature, next-token prediction — what is the most likely\nexplanation for this behaviour? And what could I have done differently to get\na better result?\n```\n\n**第三步——评估这个诊断。** Claude 的解释是否符合你在本课中学到的内容？它使用的概念是否准确？\n\n**第四步——追问一句：** “有没有一种提示词技巧，能减少将来出现这类问题的可能性？”\n\n**第五步——记下这个解决办法。** 在笔记里写一句话：下次遇到这类失误时你会尝试的技巧。\n\n**为什么这个练习有效：** 大多数初学者是通过反复试错来学习 AI 的——得到糟糕的结果，再试一次。这个练习打破了这种模式，帮你建立一个因果模型。当你理解了失误*为什么*发生，你就能在下次预防它，而不只是随机地换个提示词再试一次。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 D——真实场景应用：重新设计一个真实的提示词",
+      "content": "选一个你最近用 AI 完成过的真实任务——或者一件你一直想尝试的事——用本课学到的概念，让你的提示词大幅提升。\n\n**第一步——选择你的真实任务。** 应该是你真正需要或最近尝试过的事情。例如：\n- 让 AI 帮你写一封邮件\n- 获取一份长文档的摘要\n- 让 AI 帮你理解你所在领域的某个概念\n- 为一个项目或演示获取创意\n- 让 AI 对你写的东西给出反馈\n\n把你原来的提示词（或你使用过的提示词的最佳猜测）写在笔记里。\n\n**第二步——用本课学到的内容诊断你原来的提示词。** 问问自己：\n- 是否存在上下文窗口的问题？（我给的上下文是否足够？会不会太多？）\n- 是否存在训练/运行时的问题？（我是不是在问训练截止日期之后的事？）\n- Temperature 的问题是否相关？（我想要一致的输出，还是有创意的输出？）\n- 我有没有用系统提示词的技巧来塑造回答？\n\n**第三步——打开 [Claude.ai](https://claude.ai)，粘贴：**\n```\nI have a task I want to use AI for, and I want to understand how to write\na much better prompt for it.\n\nMy task: [describe the task in plain terms]\nMy original prompt (or what I would have written): [paste your original prompt]\n\nUsing principles of how language models work — context window, token\nefficiency, the role of upfront instructions — help me redesign this prompt\nto get significantly better results. Explain what you changed and why.\n```\n\n**第四步——测试两个版本。** 在两个独立的对话中分别运行你原来的提示词和重新设计后的提示词，比较输出结果。哪个更有用？为什么？\n\n**第五步——记下你的收获。** 写一句话，说明重新设计后的提示词中影响最大的改动是什么。这就是需要记住的技巧。\n\n**你的交付成果：** 一个你今后还会用到的、更好版本的真实提示词，以及对它为什么更有效的理解。这是应用层面的知识——不是抽象的理解，而是对你实际在做的事情的具体改进。\n\n**元原则：** 理解工具的运作方式，总会带来对工具更好的使用。本课中的每一个概念，都对应着一种具体的提示词改进方式。对 token 的意识 = 简洁、聚焦的提示词。对上下文窗口的意识 = 知道什么时候该重新开始、什么时候该继续。对训练/运行时的意识 = 知道该提供哪些信息，哪些信息 AI 本来就已经知道。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在两个独立的对话里连续问了 Claude 同一个问题，得到的答案却明显不同。哪个解释最准确？",
+      "options": [
+        "Claude 不一致、不可靠——这是一个 bug",
+        "一定是其中一个对话有不同的上下文，影响了回答",
+        "基于 temperature 的采样意味着同一个提示词在不同对话中可能产生不同的输出——这是设计使然",
+        "你每次提问时互联网上的信息不一样"
+      ],
+      "correct": 2,
+      "explanation": "基于 temperature 的采样是有意为之的——它引入了受控的随机性，使模型不会总是选择唯一那个概率最高的 token。正是这一点让 AI 富有创意、丰富多样，而不是显得机械死板。同一个提示词完全可能合理地产生不同的输出。这不是一个 bug，而是一个特性：对创意类任务（头脑风暴、写作）来说是好事，对一致性要求高的任务来说则是一个需要考虑的因素（重要的输出务必逐一审查，不要假定同一个提示词每次都会给出相同的答案）。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在帮一位同事，他想用 Claude 起草 50 封相似的邮件，每次只做少量修改。他问：Claude 在写第 50 封邮件时，是否还会“记得”第一封邮件里给出的指令？你该怎么回答？",
+      "options": [
+        "会——指令一旦给出，Claude 就会永久保存",
+        "不会——每个对话都是从零开始的。要让 50 封邮件都遵循一致的指令，需要在每次对话开头都重新包含这些指令，或者使用 Claude 的 Projects 功能来持久保存它们",
+        "这取决于他们用的是 Claude Free 还是 Claude Pro",
+        "会——Claude 的 RLHF 训练意味着它会适应并记住用户偏好"
+      ],
+      "correct": 1,
+      "explanation": "Claude 在不同对话之间没有记忆。每个新对话都从一个空的上下文窗口开始——对之前的对话一无所知。对于带有固定指令的重复性任务，解决办法是：每次都重新包含这些指令（在开头粘贴一遍）、使用 Claude Projects（它会在同一个项目内的多个对话之间持久保存指令），或者如果使用 API，就构建一个系统提示词。RLHF 塑造的是模型在训练阶段的整体乐于助人程度——它并不会让 Claude 在运行时记住你的具体指令。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 1-2 课。** 你现在理解了 token、上下文窗口、下一个 token 预测、temperature 参数、训练与运行时的区别、RLHF，以及系统提示词。这五个概念几乎能解释你在 AI 工具中观察到的所有行为——无论是令人印象深刻的能力，还是令人沮丧的局限。"
+    }
+  ],
+  "nextLesson": "1-3",
+  "prevLesson": "1-1"
+}

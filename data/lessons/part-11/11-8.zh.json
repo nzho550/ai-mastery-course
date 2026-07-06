@@ -1,0 +1,93 @@
+{
+  "id": "11-8",
+  "title": "构建一个简单的 AI 工具——文本摘要 CLI",
+  "part": 11,
+  "estimatedMinutes": 90,
+  "tags": [
+    "build",
+    "api",
+    "cli",
+    "javascript",
+    "project"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将构建什么\n\n一个命令行工具，接收任意文本文件，并用 Claude 对其进行摘要。学完本课后，你将拥有一个真正能用的工具：\n\n```\nnode summarize.js notes/meeting-notes.txt\nnode summarize.js report.txt --bullets\n```\n\n这是一个真实的工具——不是一个演示。学完本课后，你就能在自己的文件上运行它。"
+    },
+    {
+      "type": "text",
+      "content": "## 你将逐步构建的内容\n\n1. 创建项目并安装依赖\n2. 从命令行参数中读取文件\n3. 将文件内容连同摘要提示词发送给 Claude\n4. 打印摘要\n5. 添加流式传输，让输出逐步呈现\n6. 添加一个 `--bullets` 标志，用于生成要点式摘要\n\n每一步都会产出可运行的代码。如果在任何一步卡住，都可以让 Claude Code 帮忙。"
+    },
+    {
+      "type": "text",
+      "content": "## 完整的最终工具\n\n下面是完整的 `summarize.js`——在动手构建之前先通读一遍，了解你的目标是什么："
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "content": "import Anthropic from '@anthropic-ai/sdk';\nimport { readFileSync } from 'fs';\nimport { resolve } from 'path';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\n\n// Parse command-line arguments\nconst args = process.argv.slice(2);\nif (args.length === 0) {\n  console.error('Usage: node summarize.js <file> [--bullets]');\n  console.error('Example: node summarize.js notes.txt --bullets');\n  process.exit(1);\n}\n\nconst filePath   = args[0];\nconst bulletsMode = args.includes('--bullets');\n\n// Read the file\nlet fileContent;\ntry {\n  fileContent = readFileSync(resolve(filePath), 'utf-8');\n} catch (err) {\n  console.error(`Error reading file: ${err.message}`);\n  process.exit(1);\n}\n\nif (fileContent.trim().length === 0) {\n  console.error('Error: File is empty.');\n  process.exit(1);\n}\n\n// Build the prompt based on mode\nconst instruction = bulletsMode\n  ? 'Summarize the following text as exactly 5 concise bullet points. Each bullet should capture one key idea. Start each bullet with a dash (-).'\n  : 'Summarize the following text in 2-3 clear sentences. Be concise and capture the most important points.';\n\nconsole.log(`Summarizing: ${filePath}`);\nconsole.log(bulletsMode ? '(bullet point mode)' : '(paragraph mode)');\nconsole.log('---');\n\n// Stream the response\nconst stream = client.messages.stream({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 400,\n  system: 'You are a precise summarizer. Follow the format instructions exactly.',\n  messages: [\n    {\n      role: 'user',\n      content: `${instruction}\\n\\nText to summarize:\\n\\n${fileContent}`\n    }\n  ]\n});\n\nfor await (const event of stream) {\n  if (\n    event.type === 'content_block_delta' &&\n    event.delta.type === 'text_delta'\n  ) {\n    process.stdout.write(event.delta.text);\n  }\n}\n\nprocess.stdout.write('\\n');\n\nconst final = await stream.finalMessage();\nconsole.log(`\\n--- ${final.usage.input_tokens} in / ${final.usage.output_tokens} out tokens`);"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "构建文本摘要工具",
+      "content": "按顺序完成每一步。每一步都会产出可运行的代码。\n\n---\n\n**第 1 步——项目搭建（2 分钟）**\n\n在 VS Code 终端中：\n```powershell\n# You should already be in ai-course-projects/exercises\n# Verify dependencies are installed\nnpm list @anthropic-ai/sdk dotenv\n```\n如果尚未安装：`npm install @anthropic-ai/sdk dotenv`\n\n确认 `package.json` 中有 `\"type\": \"module\"`（来自第 11-5 课）。\n\n确认 `.env` 文件存在，且包含 `ANTHROPIC_API_KEY=sk-ant-...`\n\n---\n\n**第 2 步——读取文件参数（5 分钟）**\n\n创建 `exercises/summarize.js`，先只写参数解析部分：\n```javascript\nimport { readFileSync } from 'fs';\nimport { resolve } from 'path';\n\nconst args = process.argv.slice(2);\nif (args.length === 0) {\n  console.error('Usage: node summarize.js <file>');\n  process.exit(1);\n}\n\nconst filePath = args[0];\nconst fileContent = readFileSync(resolve(filePath), 'utf-8');\nconsole.log(`File length: ${fileContent.length} characters`);\nconsole.log('First 200 chars:', fileContent.slice(0, 200));\n```\n\n在你的 README 上测试：\n```powershell\nnode summarize.js ../README.md\n```\n你应该会看到字符数以及前 200 个字符。文件读取功能正常。\n\n---\n\n**第 3 步——添加 API 调用（10 分钟）**\n\n把 Claude 调用添加到你的文件中：\n```javascript\nimport Anthropic from '@anthropic-ai/sdk';\nimport { readFileSync } from 'fs';\nimport { resolve } from 'path';\nimport 'dotenv/config';\n\nconst client = new Anthropic();\nconst args = process.argv.slice(2);\nif (args.length === 0) { console.error('Usage: node summarize.js <file>'); process.exit(1); }\n\nconst fileContent = readFileSync(resolve(args[0]), 'utf-8');\n\nconst message = await client.messages.create({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 300,\n  messages: [{\n    role: 'user',\n    content: `Summarize the following text in 2-3 sentences:\\n\\n${fileContent}`\n  }]\n});\n\nconsole.log(message.content[0].text);\n```\n\n测试：`node summarize.js ../README.md`\n\n你应该会看到 README 的摘要。核心功能已经跑通。\n\n---\n\n**第 4 步——添加流式传输（5 分钟）**\n\n把 `messages.create` 调用替换成流式版本：\n```javascript\nconst stream = client.messages.stream({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 300,\n  messages: [{\n    role: 'user',\n    content: `Summarize the following text in 2-3 sentences:\\n\\n${fileContent}`\n  }]\n});\n\nfor await (const event of stream) {\n  if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {\n    process.stdout.write(event.delta.text);\n  }\n}\nprocess.stdout.write('\\n');\n```\n\n再次测试：`node summarize.js ../README.md`\n\n现在摘要会逐词流式呈现。\n\n---\n\n**第 5 步——添加 --bullets 标志（10 分钟）**\n\n添加标志检查和条件提示词：\n```javascript\nconst bulletsMode = process.argv.includes('--bullets');\n\nconst instruction = bulletsMode\n  ? 'Summarize the following text as exactly 5 concise bullet points. Start each with a dash (-).'\n  : 'Summarize the following text in 2-3 clear sentences.';\n\n// Use instruction in the messages array content\n```\n\n测试两种模式：\n```powershell\nnode summarize.js ../README.md\nnode summarize.js ../README.md --bullets\n```\n\n---\n\n**第 6 步——添加错误处理并完善细节（10 分钟）**\n\n用本课上面展示的完整最终代码替换你的文件。它增加了：\n- 文件读取错误的 try/catch 处理\n- 空文件检查\n- 一行显示正在摘要的内容的状态行\n- 结尾处的 token 用量\n\n---\n\n**第 7 步——在真实文件上测试（10 分钟）**\n\n在几个真实文件上测试你的工具：\n```powershell\n# Summarize your notes\nnode summarize.js ../notes/my-ai-workflow.md\nnode summarize.js ../notes/my-ai-workflow.md --bullets\n\n# Summarize your prompt library\nnode summarize.js ../prompts/my-prompt-library.md\n\n# Try a longer file if you have one\nnode summarize.js some-article.txt\n```\n\n**需要留意的地方：**\n- 这个工具适用于任何纯文本文件\n- 要点模式会给出不同的结构\n- token 用量展示了成本如何随文件长度变化"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——构建摘要工具 CLI",
+      "content": "构建本课中描述的文本摘要工具。\n\n**第 1 步——让 Claude Code 搭建完整项目：**\n```\nBuild a production-ready CLI tool called summarise.py that:\n1. Accepts a file path or stdin as input\n2. Calls the Anthropic API to summarise the content\n3. Supports flags:\n   --length short/medium/long (controls summary detail)\n   --format bullet/prose/structured\n   --model haiku/sonnet (default: haiku for cost)\n4. Handles large files by chunking if needed (over 50k tokens)\n5. Shows a progress spinner during processing\n6. Outputs the summary cleanly, then shows token usage and cost\n\nWrite the complete implementation.\n```\n\n**第 2 步——在运行前**仔细审阅这段代码。\n\n**第 3 步——在真实文件上测试：** 一个代码文件、一份文档、一封长邮件。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 B——为你的 CLI 添加新功能",
+      "content": "基于真实使用体验，扩展你的摘要工具。\n\n**第 1 步——用摘要工具处理你工作中的 5 份真实文档。**\n\n**第 2 步——找出当前形式下最令人不满的局限性。**\n\n**第 3 步——让 Claude Code 添加这项功能：**\n- 批量处理：`summarise.py *.txt > summaries.md`\n- 输出到文件：`--output summary.md`\n- 比较模式：对两份文件进行摘要并高亮它们的差异\n- 追问功能：完成摘要后，进入一个交互模式，可以就该文档提问\n\n**第 4 步——用真实输入**测试这项新功能。\n\n**第 5 步——必做审阅：** 问 Claude：“审阅 [新功能] 的实现。我遗漏了哪些边界情况？在遇到异常输入时会出什么问题？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 C——端到端测试你的工具",
+      "content": "为你的 CLI 工具编写测试。\n\n**第 1 步——让 Claude Code 编写一套测试：**\n```\nWrite a pytest test suite for summarise.py that:\n1. Tests each --length option produces different output lengths\n2. Tests --format produces correctly formatted output\n3. Tests that file-not-found is handled gracefully\n4. Tests that very short input (under 10 words) is handled gracefully\n5. Tests that the token count in output is a positive integer\n\nUse pytest-vcr or mock the Anthropic API calls so tests don't cost real money.\n```\n\n**第 2 步——运行测试：** `pytest tests/ -v`\n\n**第 3 步——修复任何失败的测试。** 这些失败是真正的 bug，还是测试本身有问题？\n\n**第 4 步——检查覆盖率：** `pytest --cov=summarise`"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——部署并分享你的工具",
+      "content": "把你的 CLI 工具打包用于分发。\n\n**第 1 步——让 Claude Code** 帮你打包这个工具：\n```\nHelp me package summarise.py for distribution:\n1. Create a pyproject.toml so it can be installed with pip install\n2. Create a requirements.txt\n3. Write a README.md with installation instructions and usage examples\n4. Add a --version flag\n5. Make it available as a global command: `summarise` after installation\n```\n\n**第 2 步——安装你自己的工具：** `pip install -e .`\n\n**第 3 步——测试全局命令是否可用：** `summarise README.md`\n\n**第 4 步——分享给一位同事**，观察他们如何使用它。哪些地方让他们感到困惑？他们希望有但缺失的功能是什么？"
+    },
+    {
+      "type": "quiz",
+      "question": "你的摘要 CLI 在 5 页的文档上表现良好，但在一份 200 页的 PDF 上卡住了。这是怎么回事，你该如何解决？",
+      "options": [
+        "API 不支持 PDF",
+        "该文档超出了上下文窗口——你需要把文档拆分成若干段落，分别摘要，再对这些摘要进行二次摘要",
+        "API 有 200 页的限制",
+        "你需要一台性能更强的电脑"
+      ],
+      "correct": 1,
+      "explanation": "每个模型都有上下文窗口的限制。一份 200 页的文档可能有 100,000+ 个 token——超出了任何单次 API 调用能处理的范围。解决方案是分层摘要：（1）把文档拆分成能放进上下文窗口的若干片段（保留一定重叠以维持上下文连贯性），（2）对每个片段分别摘要，（3）把各片段的摘要合并成一个元摘要。这被称为“map-reduce”摘要模式，是处理任意长度文档的必要手段。"
+    },
+    {
+      "type": "quiz",
+      "question": "你构建的摘要工具在处理英文文本时表现良好，但对法语文档的效果很差。最可能的原因和解决办法是什么？",
+      "options": [
+        "API 不支持法语",
+        "你的系统提示词没有指定目标语言——在系统提示词中加入“Respond in the same language as the document”，或明确写“Respond in French”",
+        "法语用的 token 更多，你需要提高 max_tokens",
+        "非英语文本需要使用不同的模型"
+      ],
+      "correct": 1,
+      "explanation": "Claude 支持多种语言，但在未指定语言的情况下，默认会用英语回答。对于多语言应用，应在系统提示词中加入明确的语言指令：“Summarise the document in the same language it was written in.” 你也可以动态检测输入内容的语言，并添加相应的具体指令。如果不这样做，即便源文档是其他语言，Claude 也可能用英语回答。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 11-8 课。** 你从零开始构建了一个真实的 AI 工具——不是照抄教程，而是一个今天就能用在自己文件上的实用工具。你运用了：SDK、文件 I/O、流式传输、CLI 参数解析和错误处理。接下来：让这个工具在大规模运行时的成本大幅降低。"
+    }
+  ],
+  "nextLesson": "11-9",
+  "prevLesson": "11-7"
+}

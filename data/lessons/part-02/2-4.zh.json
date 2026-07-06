@@ -1,0 +1,116 @@
+{
+  "id": "2-4",
+  "title": "Google Gemini",
+  "part": 2,
+  "estimatedMinutes": 60,
+  "tags": [
+    "gemini",
+    "beginner",
+    "tools"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你将了解什么是 Google Gemini，它与 Claude、ChatGPT 有何区别，为什么它 100 万 token 的上下文窗口确实重要，Google Workspace 集成如何让它在日常工作中格外好用，以及如何使用 Gemini 的实时搜索和多模态能力。你还会了解 NotebookLM——Google 旗下另一款工具，解决的是一个完全不同但同样有价值的问题。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Gemini 免费版 vs. 付费版——你需要知道的：**\n- **免费（仅需 Google 账号）：** Gemini 2.5 Flash、实时网络搜索、图片上传、基础 Google Workspace 集成\n- **Google One AI Premium（约每月 20 美元）：** Gemini 2.5 Pro（105 万 token 上下文）或更新的 Gemini 2.5 Pro、Deep Research、Gmail/Docs/Sheets/Slides 中的 Gemini、NotebookLM Plus\n- **NotebookLM：** 对所有人免费——不需要付费档位\n\n图像分析、网络搜索和基础聊天在免费版中都可用。完整的上下文窗口和 Workspace 集成需要 Google One AI Premium。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 Google Gemini？（2026 年现状）\n\nGemini 是 Google 旗下由 Google DeepMind 开发的大语言模型系列。可以在 **gemini.google.com** 使用，只需要一个 Google 账号——无需单独注册。\n\n**模型阵容（2026 年）：**\n- **Gemini 2.5 Flash**——免费档位；速度快、能力强，适合日常任务\n- **Gemini 2.5 Pro**——Google One AI Premium；105 万 token 上下文窗口，每 100 万 token 1.25/10 美元（API 定价）\n- **Gemini 2.5 Pro**——Google 最新的模型（2026 年）；每 100 万 token 2/12 美元；使 2.5 Pro 成为经济型选项\n- **Gemini Nano**——运行在 Pixel 手机及部分 Android 设备上的端侧模型；无需联网即可本地运行\n\n**历史背景：** Google 的研究人员撰写了发明 transformer 架构（现代所有大语言模型的基础）的论文《Attention Is All You Need》（2017 年）。尽管做出了这一根本性贡献，Google 仍然被 2022 年 ChatGPT 的发布打了个措手不及，并在 2023 年初仓促发布了 Bard。在最初反响不佳之后，Google 将其 AI 业务重组到 Google DeepMind 旗下，并发布了 Gemini 系列——如今在大多数基准测试中已能与 Claude 和 ChatGPT 真正一较高下。"
+    },
+    {
+      "type": "text",
+      "content": "## Gemini 的独特优势\n\n**1. 100 万 token 的上下文窗口**\n\n这是 Gemini 2.5 Pro 最具特色的能力——也是一个真正的差异化优势。\n\n要理解 100 万 token 意味着什么：\n- 一本普通小说：约 10 万 token（100 万相当于 10 本小说）\n- 一个中型应用的完整代码库：约 20-40 万 token\n- 完整的 HR 手册加上所有政策和流程：通常能塞进 100 万 token 以内\n- 数小时的转录文字：也能塞进 100 万 token 以内\n\n**这对实际工作为什么重要：**\n```\n\"Here's the complete source code for our app (350,000 tokens).\nAudit it for security vulnerabilities.\"\n\n\"Here are all 47 research papers on this topic (uploaded as PDFs).\nSynthesise the findings across all of them.\"\n\n\"Here's the complete transcript from our 6-month customer feedback programme.\nWhat are the recurring themes and the most important insights?\"\n```\n\n**上下文窗口对比（2026 年）：** Gemini 2.5 Pro 和 GPT-5.5 都提供约 105 万 token 的上下文。Claude Fable 5 顶级档位也达到了 100 万 token。对于上一代和标准档位而言：Claude Sonnet/Opus 是 20 万 token；GPT-5.4 是 105 万 token；标准版 ChatGPT 免费档位更为有限。顶级档位的上下文窗口之争已经趋于持平——Gemini 的优势在对比中低档位或免费选项时最为明显，因为 Gemini 2.5 Flash 仍然提供相当慷慨的上下文长度。\n\n**2. 实时搜索集成**\n\nGemini 在每一次对话中都原生接入了 Google 搜索——这不是一个附加功能。当你问到最近发生的事、当前的价格，或任何时效性内容时，Gemini 会运行一次实时搜索，并把当前结果整合进回答中。\n\n```\n\"What are the current interest rates from the Bank of England?\"\n\"What happened in the news this morning?\"\n\"What's the current pricing for AWS Lambda?\"\n```\n\nClaude 和 ChatGPT 都有训练截止日期，在标准模式下不会实时搜索网络。Perplexity 是专为带引用的搜索而生的。而 Gemini 在同一个工具中同时提供了实时搜索和 AI 推理能力。\n\n**3. Google Workspace 集成**\n\nGemini 直接嵌入在 Google 的办公套件内部——你不需要离开自己常用的工具就能使用它：\n\n| 工具 | Gemini 在其中做什么 |\n|------|----------------------------|\n| **Gmail** | 总结邮件串、起草回复、识别待办事项、标记出需要回复的内容 |\n| **Google Docs** | 撰写初稿、编辑并改进文字、总结文档、创建结构化大纲 |\n| **Google Sheets** | 解释数据、生成公式、根据表格内容生成摘要、分析趋势 |\n| **Google Slides** | 生成演示大纲、撰写演讲者备注、建议幻灯片结构 |\n| **Google Meet** | 记笔记、生成会议摘要、建议后续行动 |\n| **Google Drive** | 搜索并总结你 Drive 中的文档 |\n\n如果你的工作生活就发生在 Google Workspace 里，这项功能是颠覆性的。你不需要把邮件内容复制到另一个标签页——Gemini 会直接读取你实际的 Gmail 邮件串，并在上下文中帮你起草回复。\n\n**4. 多模态：视频与音频**\n\nGemini 2.5 Pro 能原生处理视频和音频——不仅仅是图像：\n- 上传一个 YouTube 链接 → Gemini 可以总结视频、回答关于视频的问题，或提取其中的关键片段\n- 上传一段录音 → 会被转录并分析\n- 上传一张图片 → 会被描述并进行推理"
+    },
+    {
+      "type": "text",
+      "content": "## NotebookLM——你应该了解的 Google 配套工具\n\nNotebookLM（notebooklm.google.com）是 Google 旗下另一款工具，它做的事情与 Gemini 有本质区别，并在 2026 年迎来了重大升级。\n\n**NotebookLM 是什么：** 一个由你自己的资料构建的私人知识库。你上传文档、粘贴网址、添加 YouTube 视频、Google Sheets、EPUB 电子书、Word 文件——NotebookLM 会创建一个只了解你所提供内容的 AI 助手，每一个回答都会引用具体的原文段落，并且拒绝编造你的资料中不存在的信息。\n\n**2026 年的重大升级（2026 年 6 月 8 日发布——由最新的 Gemini 驱动）：**\n1. **带推理透明度的溯源答案**——每个回答都会引用具体段落。NotebookLM 现在还会展示它是如何一步步推理得出结论的。\n2. **代码执行**——每个笔记本都配有一台安全的云端计算机。NotebookLM 可以编写并运行代码来进行分析、生成图表、处理表格数据，并产出结构化输出。\n3. **主动式资料发现**——从一个问题开始，NotebookLM 就能利用 Google 搜索来推荐相关资料供你添加——你不再需要在开始之前就准备好一整套完整的资料。\n4. **新的输出格式**——图表、PDF、电子表格、PowerPoint 幻灯片，以及结构化数据，作为对现有文本和音频输出的补充。\n5. **音频概览（Audio Overviews）**——由两位 AI 主持人以播客式对话的形式讨论你的资料。自然、口语化，并会引用文档内容。非常适合在通勤路上学习复杂的材料。\n6. **电影级视频概览（Cinematic Video Overviews）**——由 Gemini 3 + Veo 3 驱动，具有纪录片质感的动画视频摘要。可从 10 种视觉风格中选择。\n7. **保存对话历史**——可以关闭一次调研会话，之后再继续；在共享的笔记本中，你的对话内容仅对你自己私密可见。\n\n**2026 年新支持的文件类型：** EPUB/电子书文件、Word 文档（.docx）、Google Sheets——在原有的 PDF、Google Docs、YouTube、网页链接和音频之外新增。\n\n**何时用 NotebookLM，何时用 Gemini：**\n\n| 使用 NotebookLM 的场景…… | 使用 Gemini 的场景…… |\n|---|---|\n| 你需要根据特定文档核实过的答案 | 你需要通用知识或实时网络搜索 |\n| 来源可追溯性很重要（研究、学习） | 你正在 Google 应用内部工作（Gmail、Docs） |\n| 你想用自己的文件搭建一个私人知识库 | 你需要大上下文来处理开放式任务 |\n| 你想要资料的音频或视频概览 | 你需要实时的当前信息 |\n| 你想根据文档运行分析或生成图表 | 你需要图像生成功能（Flash Image 模型） |\n\n**典型的 NotebookLM 工作流：**\n- 上传所有学习笔记 + 教材 PDF → 提出模拟考试式的问题，并获得带来源引用的答案\n- 上传公司的产品文档 → 一个只根据官方文档回答问题的问答工具\n- 上传 10 篇研究论文 → 综合并对比各篇论文的发现，并附上引用证据\n- 上传一本书 + 你的划线笔记 → 生成摘要、测验、音频/视频概览\n- 从零开始一个调研项目 → 让 NotebookLM 通过 Google 搜索推荐资料来源，添加它们，然后进行分析"
+    },
+    {
+      "type": "text",
+      "content": "## Gemini 在你的工具箱中处于什么位置\n\nGemini 的价值高度取决于你现有的工作流程：\n\n**以下情况价值最高：**\n- 你的工作生活离不开 Gmail 和 Google Docs——Gemini 能大幅减少摩擦\n- 你需要处理非常长的文档（100 万上下文无人能及）\n- 你经常需要提出需要当前信息的问题\n- 你经常需要总结你所观看/收听的视频或音频内容\n\n**以下情况增值较低：**\n- 你主要在 Microsoft Office 中工作（改用 Copilot）\n- 你不使用 Google Workspace\n- 你不需要实时搜索（对于大多数没有时效性的任务，Claude 或 ChatGPT 已经足够）\n\n**对于三工具组合（大多数人实用的 AI 配置）：**\n- Claude：主力写作、分析、编程、复杂提示词工程\n- ChatGPT：借助 Code Interpreter 进行数据分析、图像生成\n- Gemini：实时搜索、Google Workspace 集成、超长文档\n- 免费工具：Perplexity（带引用的调研）、NotebookLM（知识库）\n\n这些工具的付费档位没有一个超过每月 20 美元。加上免费工具，三者全部一起使用，一套专业的 AI 工具箱总计约每月 40 美元。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Gemini vs. Google 搜索：** Gemini 并不是快速事实查询用的 Google 搜索的替代品。Google 搜索针对查找特定页面进行了优化；Gemini 则针对综合与推理进行了优化。对于“法国的首都是哪里？”这类问题——用 Google。对于“对比三个主要政党的经济政策，以及它们对房贷利率可能产生的影响”这类问题——Gemini 才能真正带来价值。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Gemini + NotebookLM 探索",
+      "content": "这个工作坊分为两部分：探索 Gemini 的实时搜索能力，以及搭建你的第一个 NotebookLM 笔记本。\n\n**第一部分——Gemini 实时搜索（10 分钟）**\n\n打开 [gemini.google.com](https://gemini.google.com)（使用你的 Google 账号登录）。\n\n运行以下提示词，并观察每次回答中出现的“使用的搜索结果”部分：\n\n```\nWhat's the current state of interest rates in [your country]?\n```\n注意：Gemini 会运行一次实时搜索，并展示它找到了哪些来源。\n\n```\nWhat happened in AI news in the last week?\n```\n把这次回答的时效性和 Claude 或 ChatGPT 基于训练数据给出的回答做个对比。\n\n```\nSummarise this YouTube video: [paste any YouTube URL of a topic you're interested in]\n```\n注意：Gemini 是直接处理这段视频的内容——而不只是标题或简介。\n\n**第二部分——你的第一个 NotebookLM 知识库（15 分钟）**\n\n前往 [notebooklm.google.com](https://notebooklm.google.com)（需要 Google 账号）。\n\n1. 点击 **New Notebook**。起一个有意义的名字：“AI 课程笔记”或“[你的主题]调研”。\n\n2. 点击 **+ Add source**。添加 2-3 个与你正在学习或从事的工作相关的资料来源：\n   - 你手头的一份 PDF（学习笔记、工作文档、研究论文）\n   - 某个相关主题的维基百科页面链接\n   - 该主题的一个 YouTube 视频链接\n\n3. 等待 30-60 秒进行处理。然后问 3 个问题：\n   - 一个应该能在你的资料中找到答案的具体事实性问题\n   - 一个综合性问题（“这些资料有什么共同点？”）\n   - 一个不在你资料范围内的问题\n   \n   观察：NotebookLM 是如何处理第三个问题的？\n\n4. 点击音频概览（Audio Overview）板块中的 **Generate**（位于右下方面板）。等待 2-3 分钟生成完成。听前一分钟——你会听到两个 AI 声音就你的资料进行一场自然的对话。\n\n**写下来：**\n- 相比一般的 AI 聊天，NotebookLM 最让你意外的地方是什么？\n- 对于哪种类型的任务，你会选择 NotebookLM，而不是 Gemini 或 Claude？\n- 有没有一个真实的项目或学习领域，是你会为它搭建一个永久性笔记本的？"
+    },
+    {
+      "type": "quiz",
+      "question": "一位研究人员需要综合 45 篇学术论文的研究发现，每篇 15-25 页。他们已经把全部 45 篇论文收集为 PDF 文件。哪个工具最适合完成这个任务？",
+      "options": [
+        "带 Code Interpreter 的 ChatGPT——它能对文本进行统计分析",
+        "Claude——它的推理质量最好",
+        "Gemini 2.5 Pro——它 100 万 token 的上下文窗口能同时容纳全部 45 篇论文，并能对它们进行综合分析",
+        "Perplexity——它会自动搜索学术数据库"
+      ],
+      "correct": 2,
+      "explanation": "Gemini 2.5 Pro 是正确的选择，因为它 100 万 token 的上下文窗口是唯一足够大、能同时容纳 45 篇论文（大约 700-1000 页）的窗口。同时把所有论文都放进上下文中，意味着 Gemini 可以在全部 45 篇论文之间进行比较、对照和综合，而不需要你把任务拆分成一小块一小块。Claude 20 万 token 的窗口最多能容纳 10-12 篇论文。ChatGPT 12.8 万 token 的窗口能容纳的就更少了。对于这个具体任务——综合已经收集好的大量文本——上下文窗口是决定性因素。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——Gemini 多模态快速测试",
+      "content": "Gemini 最大的差异化优势是深度的 Google 集成和多模态能力。这个练习在 8 分钟内测试这两点。\n\n**第 1 步——打开 Gemini**（gemini.google.com），在浏览器标签页中打开。\n\n**第 2 步——测试图像分析：** 上传一张工作文档的截图、一张照片，或工作中的一张图片。问：“分析这张图片，告诉我你注意到的 3 件最重要的事情。”\n\n**第 3 步——测试 Google 集成：** 让 Gemini 检查你明天的 Google 日历，或查找一封关于某个主题的最近邮件（需要连接 Google 账号）。\n\n**第 4 步——测试长文本内容：** 粘贴一份你正在写的文档（1000 字以上），要求生成结构化摘要。Gemini 的上下文窗口非常大。\n\n**第 5 步——与 Claude 对比：** 在 Claude.ai 中问同样的问题。哪个回答更有用？\n\n**第 6 步——找出 Gemini 对你个人而言最合适的使用场景。** Google 生态系统集成在哪个方面帮到了你的工作流？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用 Gemini 完成真实的调研任务",
+      "content": "用 Gemini 完成一个真实的调研或分析任务——然后审阅并改进输出结果。\n\n**第 1 步——从你的工作中选择一个真实的调研任务：** 一个需要调查的主题、一个需要参考信息的决策、一份需要准备的背景简报。\n\n**第 2 步——用 Gemini 运行这个调研任务。** 如果你有 Google Workspace 集成，用它来引入相关文档或数据。\n\n**第 3 步——评估 Gemini 的输出：** 信息是最新的吗？有没有引用来源？分析是否与你实际的问题相关？\n\n**第 4 步——必做的 AI 审阅：** 把输出粘贴回去，说：*“批判性地审阅一下你上面的调研内容。我应该独立核实哪些来源？你的信心最低的地方是哪里？你遗漏了哪些重要角度？”*\n\n**第 5 步——独立核实 Gemini 输出中的一个具体论断**，对照一个独立来源。它准确吗？\n\n**第 6 步——做出决定：** 对于这类调研任务，Gemini、Claude 还是 Perplexity 最合适？把你的决定加入你的 AI 工具指南。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——Gemini vs. Claude 分析能力对比",
+      "content": "在一个分析类任务上进行直接对比，能揭示每个 AI 真正擅长的地方。\n\n**第 1 步——选择一个分析类任务：** 分析一段文字、比较两个选项、评估一个计划、找出某份文档中的风险。\n\n**第 2 步——先在 Gemini 中运行。** 记录下回答。\n\n**第 3 步——在 Claude 中运行完全相同的提示词。** 记录下回答。\n\n**第 4 步——逐项对比：**\n- 哪个更全面？\n- 哪个更好地理解了其中的细微差别？\n- 哪个把回答组织得更有条理？\n- 哪个出现了事实性错误？\n\n**第 5 步——让 Claude 对比这两种方法：** *“这里有两个 AI 对同一个分析型提示词的回答[粘贴两者]。它们之间有什么有意义的区别？哪种分析方法更强，为什么？”*\n\n**第 6 步——写下你的结论：** 对于你工作中的分析类任务，你更喜欢哪个工具？为什么？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——Google Workspace AI 集成设置",
+      "content": "如果你使用 Google Docs、Gmail 或 Google Drive，Gemini 可以直接集成进你的工作流。\n\n**第 1 步——检查你的 Gemini 访问权限：** 在 Google Workspace（如果你的组织提供了这项服务）或 Google One AI Premium 中，查看 Google Docs 或 Gmail 的侧边栏是否有 Gemini。\n\n**第 2 步——在 Google Docs 中：** 打开一份你正在处理的文档。打开 Gemini 侧边栏。让它：(a) 总结这份文档，(b) 为某个具体部分建议改进，(c) 根据已有内容起草一个新的部分。\n\n**第 3 步——在 Gmail 中：** 找一封你需要回复的邮件串。让 Gemini：(a) 总结这个邮件串，(b) 起草一份回复，(c) 找出别人要求你完成的行动事项。\n\n**第 4 步——评估这次集成：** Gemini 内嵌在你的 Google 应用中，比切换到单独的 AI 标签页更快、更方便吗？在这个场景下，它哪些方面做得好，哪些方面做得不好？\n\n**第 5 步——确定一个具体的工作流**，今后你会在 Google 应用中使用 Gemini。"
+    },
+    {
+      "type": "quiz",
+      "question": "在哪个场景中，Gemini 相对 Claude 的优势最明显？",
+      "options": [
+        "撰写一份详细的法律分析文档",
+        "总结一篇复杂的研究论文",
+        "自动从你的 Gmail 和 Google 日历中提取数据，帮你规划这一周的安排",
+        "生成创意故事概念"
+      ],
+      "correct": 2,
+      "explanation": "Gemini 最强的差异化优势是与 Google Workspace 的深度集成——它能直接读取你的 Gmail、日历、Drive 文档以及其他 Google 应用，不需要你手动复制粘贴。这让它在处理跨越你 Google 数据的任务时格外强大。而对于纯粹的写作、分析或创意任务，两者的能力更为接近。"
+    },
+    {
+      "type": "quiz",
+      "question": "Gemini 被描述为拥有非常大的“上下文窗口”。这在实际使用中意味着什么？",
+      "options": [
+        "它可以生成非常长的回答",
+        "它能比其他 AI 工具记住更长时间的对话",
+        "它能在单次对话中处理并推理非常大量的输入文本",
+        "它比其他 AI 工具需要更多的计算能力"
+      ],
+      "correct": 2,
+      "explanation": "大的上下文窗口意味着你可以提供大量的输入内容——整本书、庞大的代码库、大量文档——AI 能在单次会话中对全部内容进行推理。这在实际工作中非常有用，比如“总结这份 200 页的报告”或“分析我们第一季度的所有客户反馈”这类需要一次性处理大量文本的任务。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 2-4 课。** 你现在了解了 Gemini 的关键差异化优势——100 万 token 的上下文窗口、实时搜索、Google Workspace 集成和多模态能力——以及 NotebookLM 解决的一个不同但同样重要的问题：搭建一个私人的、有溯源引用能力的知识库。这些恰好填补了 Claude + ChatGPT 组合中的真实空白。"
+    }
+  ],
+  "nextLesson": "2-5",
+  "prevLesson": "2-3"
+}

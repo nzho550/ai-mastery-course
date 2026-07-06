@@ -1,0 +1,109 @@
+{
+  "id": "16-5",
+  "title": "邮件与沟通模板",
+  "part": 16,
+  "estimatedMinutes": 55,
+  "tags": [
+    "office",
+    "beginner",
+    "email",
+    "communication",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n对大多数职场人士来说，邮件是最耗时的写作任务。本课将介绍如何用 AI 更快地处理最常见的邮件场景、如何构建一个个人模板库让你不必每次从零开始，以及如何清晰、专业地传达困难的信息。"
+    },
+    {
+      "type": "text",
+      "content": "## 邮件模板库\n\n大多数职场人士反复写的其实是同样 8-12 种邮件的变体：跟进、请求、更新、介绍、拒绝、投诉。构建一个由 AI 生成的个人模板库是一次性的投入，此后每周都能得到回报。\n\n**如何构建你的模板库：**\n\n1. 列出你最常见的邮件场景（花 5 分钟做这件事）\n2. 针对每一种场景，让 Claude 写一份灵活的模板\n3. 打磨语气，直到它听起来像你自己\n4. 保存在一个名为 `email-templates.md` 的文档或 Notion 页面中\n\n**模板提示词：**\n```\nWrite a professional email template for the following situation:\n[describe the situation]\n\nI want the tone to be: [professional / warm / direct / formal]\nMy typical audience: [colleagues / clients / management / external partners]\n\nUse [PLACEHOLDER] markers for the parts I'll fill in each time\n(e.g., [RECIPIENT NAME], [PROJECT NAME], [SPECIFIC DATE]).\nThe template should work with minimal editing.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 常见邮件场景与模板\n\n**跟进一封未回复的邮件：**\n```\nSubject: Following up — [original subject]\nHi [Name],\n\nI wanted to follow up on my email from [DATE] regarding [TOPIC].\nI'd appreciate a response by [DATE] so we can [NEXT STEP].\n\nPlease let me know if you need any additional information.\n\n[Your name]\n```\n\n**拒绝一个请求：**\n这是最难写的一种邮件——AI 能帮你在不过度解释的情况下，写出一封礼貌、清晰的拒绝邮件：\n```\nWrite an email declining [request] from [person/organisation].\nReason for declining: [brief reason]\nI want to: [leave the door open / end this cleanly / offer an alternative]\nTone: professional, direct, warm\n```\n\n**升级上报一个问题：**\n```\nWrite an email to my manager escalating [problem].\nBackground: [what the problem is]\nWhat I've tried: [steps taken]\nWhat I need: [what I'm asking for]\nUrgency: [by when]\nTone: factual, professional, not blaming anyone\n```\n\n**介绍两个人认识：**\n```\nWrite a short email introducing [Person A] to [Person B].\n[Person A's relevant background]\n[Person B's relevant background]\nReason for introduction: [why they should connect]\nTone: warm, brief\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 困难的邮件场景\n\nAI 对于那些情绪化或职业上比较敏感的邮件尤其有用——那些很难找到合适措辞的场景。\n\n**给出批评性反馈：**\n```\nI need to send an email giving critical feedback about [work/behaviour]\nto [role/relationship].\n\nThe specific issue: [what went wrong]\nThe impact: [what effect it had]\nWhat I want to change: [desired outcome]\n\nWrite this feedback in a way that is:\n- Specific and factual (not personal)\n- Clear about the impact\n- Forward-focused on improvement\n- Professional and respectful\n```\n\n**对上级说“不”：**\n```\nMy manager has asked me to [task/request].\nI can't do this because [genuine reason — capacity / wrong role / conflict of interest].\n\nWrite a professional email that:\n- Acknowledges the request\n- Explains clearly why I can't take it on\n- Offers an alternative where possible\n- Doesn't sound defensive or like I'm making excuses\n```\n\n**向供应商投诉：**\n```\nWrite a professional complaint email to [vendor/service provider].\nIssue: [what happened]\nImpact: [what it cost us — time / money / reputation]\nWhat I want: [resolution]\nTone: firm, professional, not hostile — I still need to work with them\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**发送前先审阅。** AI 写的邮件很流畅，但可能显得过于圆滑——加上一句明显带有你个人风格的话。把邮件读出声。如果你实际上永远不会这么说，就重写那部分。目标是一封听起来像你在最专业状态下会写的邮件，而不是像一封 AI 写的邮件。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "构建你的个人邮件模板库",
+      "content": "这个工作坊会产出一个你未来几个月都会用到的模板库。\n\n**第 1 步——找出你最常见的 5 种邮件场景（5 分钟）**\n\n想想你反复写的那些邮件。例如：\n- 向某人索要信息或文件\n- 对方没有回应时的跟进\n- 向客户或利益相关方简报项目状态\n- 拒绝一个会议邀请\n- 请求延期或调整截止日期\n- 把一位同事介绍给外部人士\n- 感谢某人的帮助\n\n写下你的 5 个（或者你能想到的所有场景）。\n\n**第 2 步——为每一种场景生成模板（15 分钟）**\n\n针对每种场景，使用模板提示词：\n```\nWrite a professional email template for: [your situation]\nMy tone: [how you naturally write — formal, direct, warm, casual-professional]\nAudience: [who typically receives this]\nUse [PLACEHOLDER] for variable parts.\n```\n\n对于任何听起来不像你的模板，问：\n```\nThis is a bit too formal/casual/stiff. Rewrite it to be more [adjective].\nHere's an example of how I actually write: [paste an email you've sent before]\n```\n\n**第 3 步——保存你的模板库**\n\n创建一个名为 `email-templates.md` 的文档或 Notion 页面。\n把这 5 份模板粘贴进去，每份加一个简短的标题。\n\n下次需要写这些邮件中的一封时：\n1. 打开你的模板\n2. 替换 [PLACEHOLDER]\n3. 读一遍，调整任何感觉不对的句子\n4. 发送\n\n这个模板库会在一周内就为自己“回本”。"
+    },
+    {
+      "type": "quiz",
+      "question": "你需要拒绝一位资深同事提出的新项目请求。你希望态度明确，但又不想损害这段关系。用 AI 的最佳做法是什么？",
+      "options": [
+        "让 AI 在不提供任何背景的情况下写这封拒绝邮件——它会知道该说什么",
+        "为 AI 提供具体的请求内容、你拒绝的真实原因，以及你是否想保留后续沟通的可能，然后再打磨语气",
+        "自己动手写，以保持真实性，不冒 AI 把语气写错的风险",
+        "简单地回复“谢谢，但我没有空”，保持简短"
+      ],
+      "correct": 1,
+      "explanation": "在获得具体背景的情况下，AI 能写出最好的困难邮件：请求是什么、拒绝的真实原因，以及你希望达到的关系层面的结果。没有背景（A），AI 只会写出听起来空洞的泛泛拒绝。自己写（C）是可行的，但错过了快速迭代语气和措辞的机会。一行式回复（D）有显得敷衍的风险，可能损害与资深同事的关系。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——邮件模板审计",
+      "content": "审计你目前的邮件模板，找出改进机会。\n\n**第 1 步——列出你写得最频繁的 5 种邮件类型。**\n\n**第 2 步——从你的已发送邮件文件夹中**找到或重建每种类型的一个范例。\n\n**第 3 步——让 Claude 逐一审阅：**\n“审阅这封邮件 [粘贴它]，关注：清晰度、对这段关系而言语气是否合适、诉求是否清楚、长度（是否太长）、以及任何可能被误解的措辞。”\n\n**第 4 步——针对最薄弱的邮件类型**，让 Claude 写一份改进后的模板：\n“把这封邮件改写得更 [清晰/简洁/直接/温暖]。保留 [有效的具体元素]。修复 [已发现的具体问题]。”\n\n**第 5 步——比较原始版本和改进版本。** 改变了什么？为什么？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——构建一个沟通模板库",
+      "content": "为你最常见的沟通类型创建一个个性化模板库。\n\n**第 1 步——为你最常见的 5 种沟通类型设计模板：**\n- 向利益相关方汇报状态\n- 会议邀请（外部）\n- 无回应后的跟进\n- 传达坏消息\n- 请求反馈或意见\n\n**第 2 步——针对每一份模板**，问 Claude：\n```\nCreate a template for [email type]. The template should:\n- Have [PLACEHOLDERS] for variable content\n- Match this tone: [your typical tone]\n- Be [X] sentences maximum\n- Lead with [key information type]\n- Include a clear, specific call to action\n```\n\n**第 3 步——用真实内容**填写每一份模板，测试一封你需要发送的邮件。\n\n**第 4 步——把模板保存**在你能快速访问的地方（Notion、Claude Project、文本片段工具）。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C——沟通语气校准",
+      "content": "练习把 AI 生成的沟通内容调整到适合不同关系的正确语气。\n\n**第 1 步——让 Claude 用 4 种不同的语气**写同一条消息：\n- 正式（面向一位新的外部客户）\n- 专业（面向一位同事）\n- 温暖专业（面向一位长期合作伙伴）\n- 直接（面向你自己的团队）\n\n消息内容：“The project deadline has moved from Friday to Wednesday and we need your review input by Tuesday EOD.”\n\n**第 2 步——阅读全部 4 个版本。** 你能感受到语气上的差异吗？\n\n**第 3 步——针对你最重要的一种关系类型**，定义你想要的确切语气：\n- 哪些词语或措辞能体现这种语气？\n- 它会避免什么？\n- 典型的开头和结尾是什么？\n\n**第 4 步——把你的语气定义**加入你在第 16-1 课中建立的个人风格指南。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——敏感沟通草稿",
+      "content": "用 AI 帮助起草需要特别谨慎处理的沟通内容。\n\n**第 1 步——找出一次你需要撰写的敏感沟通：** 传达批评、解释一个错误、拒绝一个请求、沟通一次延迟。\n\n**第 2 步——让 Claude 起草：**\n```\nDraft a [email/message] that:\n- Delivers this message: [what you need to communicate]\n- To: [recipient and your relationship with them]\n- Maintaining: [the relationship/professional standing]\n- Tone: honest but [kind/professional/direct]\n- Length: [maximum sentences]\n\nAvoid: blame, vagueness about the problem, and false optimism.\n```\n\n**第 3 步——仔细审阅。** 它是否传达了必须传达的内容？传达的方式是否维护了这段关系？\n\n**第 4 步——按你的语气**和具体的关系背景进行编辑。\n\n**第 5 步——必做检查：** 发送前，从收件人的角度阅读一遍。他们可能会如何解读它？"
+    },
+    {
+      "type": "quiz",
+      "question": "你用 AI 起草了一条消息，告诉团队成员他们的工作需要大幅修改。AI 的草稿礼貌，但很含糊。问题出在哪里？",
+      "options": [
+        "语气太严厉了——需要再软化一些",
+        "含糊其实是不厚道的：收到含糊批评的人无法改进，因为他们不知道具体要改什么——应该具体说明需要改什么，为什么",
+        "这条消息应该当面传达，而不是用书面形式",
+        "AI 正确地软化了这条消息"
+      ],
+      "correct": 1,
+      "explanation": "含糊的反馈（“这项工作需要改进”）没有帮助，而且不厚道——收件人只能靠猜测。具体的反馈（“执行摘要应该以财务论证开头，而不是技术背景；第 3 节的时间线和我们讨论过的限制条件不一致”）能让对方采取行动。AI 起草的内容常常默认走向含糊，以避免冲突。你的编辑应该加入具体细节：到底需要改什么，为什么。"
+    },
+    {
+      "type": "quiz",
+      "question": "你使用邮件模板，每周节省了 30 分钟。两个月后，一位同事说你的邮件“最近感觉很没人情味”。发生了什么？",
+      "options": [
+        "模板总是显得没人情味——应该停止使用它们",
+        "你一直在使用模板但没有个性化——需要加入具体的个人化内容（提及他们的处境、在正文中写他们的名字、一些针对他们的具体内容）来维持温度",
+        "把模板缩短，减少“模板感”",
+        "在模板中使用不同的语气"
+      ],
+      "correct": 1,
+      "explanation": "当模板被原样使用而不是作为起点时，就会出问题。一份好的模板提供结构；一份差的模板提供了整条消息。有人情味的邮件会提及收件人的具体处境：“我知道你一直在处理 Q3 审计……”模板应该在需要个性化的地方留有清晰的 [PLACEHOLDER]。如果你发送模板时没有填上个人化的部分，收件人会察觉到——正是这些个人化的细节，让沟通显得有人情味。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 16-5 课。** 你已经拥有一个个人邮件模板库，也知道如何用 AI 处理最难写的邮件——拒绝、升级上报和批评性反馈。这些模板每周都会为你节省数小时。"
+    }
+  ],
+  "nextLesson": "16-6",
+  "prevLesson": "16-4"
+}

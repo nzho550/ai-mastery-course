@@ -1,0 +1,106 @@
+{
+  "id": "8-12",
+  "title": "Google 云端硬盘与日历 MCP——真实工作空间整理",
+  "part": 8,
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "google-drive",
+    "google-calendar",
+    "claude-code",
+    "productivity"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你的日历上将预留出受保护的学习时间，你的 Google 云端硬盘将拥有课程文件夹结构，你还会有一份主笔记文档，可以在本课程剩余部分持续使用。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**达标标准：** 完成本课后，你的实际日历和云端硬盘会发生真实、持久的改变——而不只是一次演示。未来 8 周的学习时间将被预留出来。你的云端硬盘会有一套你真正会用到的文件夹结构。"
+    },
+    {
+      "type": "text",
+      "content": "## Google 云端硬盘 MCP 能做什么\n\nGoogle 云端硬盘 MCP 让 Claude 能够：\n\n- **列出文件** — 浏览你的云端硬盘，按类型或文件夹筛选\n- **搜索文件** — 按名称、内容或日期查找文档\n- **读取文档** — 获取 Google 文档的文本内容\n- **创建文件夹** — 整理你的云端硬盘结构\n- **创建文档** — 创建带有内容的新 Google 文档\n- **移动文件** — 将文件重新整理到文件夹中\n\n它适用于 Google 文档、表格、幻灯片、PDF 以及你云端硬盘中的其他文件类型。"
+    },
+    {
+      "type": "text",
+      "content": "## Google 日历 MCP 能做什么\n\nGoogle 日历 MCP 让 Claude 能够：\n\n- **列出事件** — 显示任意日期范围内的日程安排\n- **搜索事件** — 按标题、参与者或描述查找事件\n- **创建事件** — 向日历添加新事件\n- **创建重复事件** — 预留重复的时间段\n- **检查可用时间** — 在日程中找出空闲时间\n- **描述日程** — 总结即将到来的安排\n\n它适用于你的主 Google 日历以及你有权访问的任何共享日历。"
+    },
+    {
+      "type": "text",
+      "content": "## 设置——OAuth 认证\n\nGoogle 云端硬盘和日历都使用 Google OAuth，这与 Gmail 的认证系统相同。检查你的 MCP 状态：\n\n1. 启动 `claude`，输入 `/mcp`\n2. 查找 Google Drive 和 Google Calendar 的条目（根据你的配置，它们可能显示为 `claude_ai_Google_Drive` 和 `claude_ai_Google_Calendar`）\n3. 如果显示未认证，请让 Claude Code：`\"Authenticate the Google Drive MCP\"`——它会引导你完成 OAuth 流程\n\n认证流程如下：\n- Claude 生成一个授权 URL\n- 你在浏览器中打开它\n- 你用 Google 账号登录并授予所需权限\n- Google 携带授权码跳转回来\n- Claude 完成 OAuth 握手\n\n你可以随时在 myaccount.google.com/permissions 撤销访问权限。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**你正在授予的权限：** Drive MCP 请求对你 Google 云端硬盘的读写权限。Calendar MCP 请求对你日历的读写权限。在批准之前，请仔细查看 OAuth 流程中显示的具体权限范围。你也可以通过不确认 Claude 提出的任何写操作，来以只读模式使用该 MCP。"
+    },
+    {
+      "type": "text",
+      "content": "## 日历策略：保护你的学习时间\n\n完成一门在线课程最大的障碍不是难度——而是时间安排。事情总会填满没有被保护起来的时间。\n\n最有效的方法是：\n1. 找出真正空闲的重复性时间段\n2. 创建标注为“AI 课程 — 学习时段”的每周日历块\n3. 把这些时间块当作不可更改的承诺来对待\n\n借助 Calendar MCP，Claude 可以扫描你的日程，找出最合适的时间段，并在一次对话中创建所有重复事件。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "为课程整理你的日历和云端硬盘",
+      "content": "**预检查：** 输入 `/mcp` 确认 Google Drive 和 Google Calendar MCP 已列出并已完成认证。如果显示未认证，请立即完成认证。\n\n---\n\n**日历 — 阶段 1：审查你的日程**\n```\n提问：\"Show me everything I have scheduled in the next 14 days.\nIdentify:\n1. Days that look completely free\n2. Recurring events (meetings, commitments)\n3. Any scheduling conflicts or double-bookings\"\n```\n阅读输出结果，清楚了解你目前的时间都花在了哪里。\n\n**日历 — 阶段 2：找出学习时段**\n```\n提问：\"Based on my schedule, find 3 recurring weekly time slots\nwhere I consistently have nothing scheduled — ideally morning\nor early afternoon, at least 1 hour each. Suggest specific\ndays and times.\"\n```\n查看建议。选择你觉得最切实可行的时段。\n\n**日历 — 阶段 3：预留学习时段**\n```\n提问：\"Create a recurring weekly calendar event for each of the\nslots we identified:\nTitle: 'AI Course — Study Session'\nDuration: 1 hour\nRecurrence: weekly for 8 weeks\nDescription: 'Dedicated time for the AI Mastery Course.'\"\n```\n在浏览器中打开 Google 日历，确认这些事件已经存在。\n\n**日历 — 阶段 4：添加课程里程碑**\n```\n提问：\"Create calendar events for these course milestones,\nspacing them 1 week apart starting from next Monday:\n1. Complete Parts 1-3 (AI Foundations + Prompting)\n2. Complete Parts 4-5 (VS Code mastery)\n3. Complete Parts 6-7 (Claude Code)\n4. Complete Part 8 (MCP servers)\n5. Complete Parts 9-11 (Tools + APIs)\n6. Complete Parts 12-13 (Local AI + Safety)\n7. Complete all Capstone Projects\"\n```\n\n---\n\n**云端硬盘 — 阶段 1：审查你当前的云端硬盘**\n```\n提问：\"List the 20 most recently modified files in my Google Drive.\nGroup them by likely category: work, personal, learning, other.\"\n```\n了解你云端硬盘中都有些什么内容。\n\n**云端硬盘 — 阶段 2：创建课程文件夹结构**\n```\n提问：\"Create a folder in my Google Drive called 'AI Mastery Course'\nwith these subfolders:\n- Resources\n- Notes\n- Projects\n- References\"\n```\n在 Google 云端硬盘中确认这些文件夹已经存在。\n\n**云端硬盘 — 阶段 3：查找相关的现有文档**\n```\n提问：\"Search my Drive for any documents related to learning,\ntechnology, programming, or AI. List them so I can decide\nwhich to move into the AI Mastery Course folder.\"\n```\n对于任何相关文档，让 Claude 将其移动过去。\n\n**云端硬盘 — 阶段 4：创建你的课程主笔记文档**\n```\n提问：\"Create a new Google Doc in the 'AI Mastery Course/Notes'\nfolder with this structure:\nTitle: 'AI Course Master Notes'\n\n- Table of Contents with all 14 parts listed\n- Under each part: a section header with space for notes\n- A 'Key Prompts I Use Daily' section at the end\n- A 'My AI Tool Stack' section at the end\"\n```\n在 Google 云端硬盘中打开该文档，确认它已存在。\n\n---\n\n**最终验证：**\n- 打开 Google 日历——你未来 8 周的学习时段应该已经被预留出来\n- 打开 Google 云端硬盘——你的 AI 课程文件夹结构应该已经存在\n- 你的主笔记文档应该位于 Drive/AI Mastery Course/Notes 中\n\n将你所设置内容的摘要保存到 `notes/workspace-setup.md`。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A — Google 云端硬盘 MCP 操作",
+      "content": "在 8 分钟内动手实践 Google 云端硬盘 MCP。\n\n**第 1 步 — 配置 Google Drive MCP**，使用合适的 OAuth 凭据。\n\n**第 2 步 — 测试以下操作：**\n- \"List the 10 most recently modified files in my Google Drive\"\n- \"Search for files with 'budget' in the name\"\n- \"Read the contents of [specific document name]\"\n\n**第 3 步 — 测试带上下文的搜索：** \"Find all Google Docs that mention [a specific topic related to your work] and list their titles and last modified dates.\"\n\n**第 4 步 — 测试日历：** \"What meetings do I have tomorrow? For each, show the title and time.\"\n\n**第 5 步 — 评估：** 对你的工作流来说，最立竿见影有用的操作是什么？哪些比预想的更难？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — 从日历自动准备会议",
+      "content": "使用 Google Calendar MCP 自动为即将到来的会议做准备。\n\n**第 1 步 — 打开** 已连接 Google Calendar MCP 的 Claude Code。\n\n**第 2 步 — 运行会议准备工作流：**\n```\nCheck my Google Calendar for today and tomorrow. For each meeting:\n1. Identify the topic/purpose from the event title\n2. Note who the attendees are\n3. Suggest 3 preparation questions I should be able to answer\n4. If there's a document or email about this topic in my Drive, find it\n```\n\n**第 3 步 — 查看准备简报。** 有用吗？还缺少哪些背景信息？\n\n**第 4 步 — 在你下一场真实会议前**，实际使用这份准备简报。它有帮助吗？\n\n**第 5 步 — 强制复查：** 问 Claude：*\"Review the meeting prep brief. What important preparation is missing? What questions should I ask myself that you didn't generate?\"*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C — 云端硬盘文档分析",
+      "content": "使用 Google 云端硬盘 MCP 分析你云端硬盘中的文档。\n\n**第 1 步 — 让 Claude Code** 找出需要关注的文档：\n```\nSearch my Google Drive for:\n1. Documents that haven't been modified in over 6 months but have \"current\" or \"active\" in their name\n2. Duplicate or similar document names that might represent redundant files\n3. Large folders that might be disorganised\n```\n\n**第 2 步 — 查看发现结果。** 它们是否揭示了真实的组织管理问题？\n\n**第 3 步 — 选择一项发现**并采取行动：归档一份过时文档、重命名一个有误导性的文档，或整理一个文件夹。\n\n**第 4 步 — 问 Claude：** *\"Based on what you found in my Drive, what organisational principles would you recommend I adopt for naming and organising documents going forward?\"*\n\n**第 5 步 — 为自己写一份一页纸的云端硬盘整理指南。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — 每周复盘工作流",
+      "content": "使用 Calendar 和 Drive MCP 构建一个自动化的每周复盘。\n\n**第 1 步 — 设计你的每周复盘：**\n- 这周我完成了什么？（来自日历和云端硬盘活动）\n- 下周我有哪些会议？（来自日历）\n- 哪些文档需要关注？（来自云端硬盘搜索）\n- 下周的优先事项是什么？\n\n**第 2 步 — 在你的 `.claude/commands/` 文件夹中创建一个自定义斜杠命令** `review-week.md`，用于执行这个工作流。\n\n**第 3 步 — 在你当前工作周结束时**测试该命令。\n\n**第 4 步 — 评估：** 与手动完成相比，AI 辅助的每周复盘能节省多少时间？AI 遗漏了哪些需要你个人知识才能补上的内容？\n\n**第 5 步 — 根据你觉得最有用和最没用的部分**，优化该命令。"
+    },
+    {
+      "type": "quiz",
+      "question": "Google Drive MCP 可以读取你的 Google 文档。你让 Claude Code 汇总“Projects”文件夹中的所有文档。这里有什么重要风险？",
+      "options": [
+        "Claude Code 可能无法正确处理 Google 文档格式",
+        "汇总内容会将所有文档内容纳入 Claude Code 的上下文——如果任何文档包含敏感信息，都会被 Anthropic 的系统处理",
+        "汇总操作会删除原始文档",
+        "Claude Code 无法访问共享文档"
+      ],
+      "correct": 1,
+      "explanation": "当 Claude Code 读取你的 Google 云端硬盘文档时，内容会通过 Anthropic 的 API 进行处理。如果你的文档包含敏感商业信息、客户数据、个人信息或机密内容，这些内容都会被发送到 Anthropic 的云端。在对敏感文档使用 Drive MCP 之前，请查看你所在组织的数据政策以及 Claude 的数据保留政策。可以考虑只为特定的非敏感文件夹配置访问权限。"
+    },
+    {
+      "type": "quiz",
+      "question": "你使用 Calendar MCP，Claude Code 代你创建了一个新的日历事件。谁负责验证事件详情是否正确？",
+      "options": [
+        "MCP 服务器，它会验证所有日历条目",
+        "你——Claude Code 可能会创建时间错误、参与者错误或描述不准确的事件；一定要在事件生效前进行验证",
+        "Google 日历，它会自动纠正 AI 创建的事件",
+        "Claude Code 在创建任何事件前都会先与你确认"
+      ],
+      "correct": 1,
+      "explanation": "任何由 AI 创建的日历事件都需要你进行验证。常见的失败模式包括：时区错误（对远程参与者尤其重要）、包含错误的参与者（相似的姓名、相似的邮箱地址）、会议描述不准确、设置了错误的会议时长。通过 MCP 创建任何日历事件后，在其他参与者收到邀请之前，打开 Google 日历核对事件详情。错误的会议邀请会造成真实的职业尴尬。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 8-12 课。** 你的工作空间现在已经为本课程整理就绪。第 8-13 课将把 Claude 连接到本地数据库，使用 SQLite MCP。"
+    }
+  ],
+  "nextLesson": "8-13",
+  "prevLesson": "8-11"
+}

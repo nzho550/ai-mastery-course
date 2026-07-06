@@ -1,0 +1,78 @@
+{
+  "id": "20-4",
+  "title": "多子代理分析器——用 5 个代理战胜幻觉",
+  "part": 20,
+  "estimatedMinutes": 80,
+  "tags": ["skills", "agents", "subagents", "hallucination", "parallel", "advanced", "build"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将构建什么\n\n学完本课后，你会拥有整个课程中最强大的两个技能：\n\n1. **`/deep-analyze $ARGUMENTS`** ——对同一份文档运行 5 个独立的 AI 分析师，每一个都带着不同的视角，然后按共识对发现进行综合。所有分析师都同意的地方，几乎可以确定是真的；出现分歧的地方，则说明存在真正的不确定性。\n\n2. **`/research-consensus $ARGUMENTS`** ——针对某个问题启动 5 个并行的研究代理，每一个都从不同角度进行搜索，然后合并发现并标出分歧。\n\n这些技能不只是产出更好的分析结果——它们通过应用科学的一项基本原则：独立重复验证，从根本上改变了 AI 输出的可靠性。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么单代理分析容易产生幻觉\n\n当你让 Claude 分析一份文档时，会发生一件微妙的事情：模型在最初的几个 token 里就会确定一种框架式的理解，随后的分析都会受到这个初始框架的影响。这在 AI 语境下被称为**锚定偏差（anchoring bias）**。\n\n如果文档的第一段强调风险，Claude 就会锚定在风险上，可能会低估其中的机会。如果 Claude 一开始很自信地提出了某个论断，它往往会倾向于生成支持这个论断、而不是挑战它的后续内容。\n\n这不是 Claude 在故意不诚实。这是语言模型的运作方式决定的：每一个 token 都是根据之前的 token 预测出来的。一个自信的早期论断，会形成一种“先验”，从而影响接下来生成的内容。\n\n**支持这一点的证据：**\n- 关于 LLM 自洽性（self-consistency）的研究表明，单代理在复杂分析任务上的输出方差很大——把同一个问题问两遍，得到的分析结果可能有明显差异\n- 2023 年的论文《大语言模型并非稳健的多选题选择器》（\"Large Language Models are not Robust Multiple Choice Selectors\"）发现，LLM 的答案会随着选项顺序、措辞和上下文框架的变化而改变\n- 针对 AI 合同审查的研究发现，单代理系统在处理复杂文档时，会遗漏 15% 到 30% 的重要条款\n\n**解决办法：** 不要只让一个代理去分析所有内容。让五个代理各自独立分析，用不同的指令和框架，然后找出它们的共识所在。"
+    },
+    {
+      "type": "text",
+      "content": "## 多子代理模式——它是如何运作的\n\nClaude Code 的 `Agent` 工具（可在技能文件中使用）让一个技能能够派生出独立运行的 AI 代理。每个代理都拥有自己的上下文、自己的指令，并产出自己的输出。技能随后会综合这全部五份输出。\n\n**5 代理分析框架：**\n\n```\nAgent 1 — The Skeptic\nFocus: What's wrong, risky, or missing? What red flags exist?\nBias: Assume something is wrong until proven otherwise.\n\nAgent 2 — The Opportunity Finder  \nFocus: What's positive, valuable, or worth acting on?\nBias: Look for what's working or could work.\n\nAgent 3 — The Detail Inspector\nFocus: Specific facts, numbers, dates, names, commitments.\nBias: Factual accuracy only — no interpretation.\n\nAgent 4 — The Context Mapper\nFocus: What's implied but not stated? What context is assumed?\nBias: Read between the lines.\n\nAgent 5 — The Action Extractor\nFocus: What decisions need to be made? What actions are required? By whom?\nBias: Operational, not analytical.\n```\n\n**综合步骤：**\n在全部 5 个代理都完成之后，主技能会比较各自的输出：\n- **共识发现**（被 3 个以上代理提及）→ 高置信度\n- **少数发现**（1-2 个代理提及）→ 值得记录，但置信度较低\n- **相互矛盾**（代理之间直接产生分歧）→ 真正存在的不确定性，需要交给人来判断\n\n这就是把科学方法应用到 AI 分析上。"
+    },
+    {
+      "type": "text",
+      "content": "## 技能 1：/deep-analyze —— 5 代理文档分析\n\n这个技能需要 Claude Code 的扩展思考或并行执行能力。在标准的 Claude Code 会话中，它通过用不同框架依次运行分析来实现同样的效果。\n\n```markdown\n# /deep-analyze — Multi-Perspective Document Analysis\n\n<role>\nYou are an analysis coordinator. Your job is to run 5 distinct analyses\nof the same document with different lenses, then synthesise findings by\nconsensus. You do not add your own analysis — you coordinate and synthesise.\n</role>\n\n<context>\n$ARGUMENTS is the document or topic to analyse. It may be:\n- A file path (read the file)\n- A URL (fetch and read the page)\n- Pasted text (analyse directly)\n- A topic (search for and read relevant sources)\n</context>\n\n<steps>\n\nStep 1 — Load the content:\nRead/fetch $ARGUMENTS. Confirm you have the full content before proceeding.\n\nStep 2 — Run Analysis 1 (The Skeptic):\nAnalyse with this framing ONLY: 'What is wrong, risky, missing, or concerning\nabout this document? Assume there is a problem — find it.'\nProduce: 3-5 specific findings with evidence from the text.\n\nStep 3 — Run Analysis 2 (The Opportunity Finder):\nAnalyse with this framing ONLY: 'What is valuable, promising, or well-done\nabout this? What opportunities does it create or reveal?'\nProduce: 3-5 specific findings with evidence from the text.\n\nStep 4 — Run Analysis 3 (The Detail Inspector):\nAnalyse with this framing ONLY: 'Extract all specific facts: numbers, dates,\nnames, commitments, metrics, claims that can be verified.'\nProduce: A structured list of facts only — no interpretation.\n\nStep 5 — Run Analysis 4 (The Context Mapper):\nAnalyse with this framing ONLY: 'What does this document assume but not state?\nWhat context is required to understand it? What is implied?'\nProduce: 3-5 implied assumptions or missing context items.\n\nStep 6 — Run Analysis 5 (The Action Extractor):\nAnalyse with this framing ONLY: 'What actions does this require? Who needs to\ndo what, by when? What decisions need to be made?'\nProduce: A specific action list with owners and deadlines where mentioned.\n\nStep 7 — Synthesise:\nCompare all 5 analyses. Identify:\n- What appears in 3+ analyses (consensus — high confidence)\n- What appears in only 1-2 analyses (minority finding)\n- Where analyses directly contradict each other (genuine uncertainty)\n\n</steps>\n\n<output>\n**🔍 Deep Analysis: [Document Title/Topic]**\n\n**Consensus Findings** *(mentioned by 3+ independent analyses — high confidence)*\n- [Finding 1]\n- [Finding 2]\n- [Finding 3]\n\n**Key Facts** *(from Detail Inspector — verified)*\n- [Fact 1]\n- [Fact 2]\n\n**Opportunities** *(from Opportunity Finder)*\n- [Opportunity 1]\n- [Opportunity 2]\n\n**Actions Required** *(from Action Extractor)*\n- [ ] [Action] — Owner: [who] — By: [when]\n\n**Uncertainties** *(where analyses disagreed)*\n- [Topic]: [what Skeptic found] vs. [what Opportunity Finder found]\n  → Recommend: [human judgment needed / verify with source / low priority]\n\n**Confidence Rating:** [High/Medium/Low] — [1-sentence rationale]\n</output>\n\n<constraints>\n- Each analysis MUST use only its assigned framing — do not blend perspectives\n- Do not skip any analysis even if the document seems simple\n- Consensus findings are only those explicitly supported by 3+ analyses\n- Be direct about contradictions — do not paper over disagreements\n- Total output: 400-600 words unless the document is very complex\n</constraints>\n\n<fallback>\nIf $ARGUMENTS is empty: ask 'What document or topic should I analyse?'\nIf the file/URL cannot be read: explain the error and ask for an alternative.\n</fallback>\n```\n\n把它保存为 `~/.claude/commands/deep-analyze.md`。"
+    },
+    {
+      "type": "text",
+      "content": "## 技能 2：/research-consensus —— 5 代理研究综合\n\n这个技能处理的是另一类问题：当你需要研究某个话题时，单代理网络搜索会锚定在第一个相关结果上，围绕它来构建答案。`/research-consensus` 技能会派出 5 个代理，从 5 个不同角度进行研究，然后合并各自的发现。\n\n```markdown\n# /research-consensus — Multi-Angle Research Synthesis\n\n<role>\nYou are a research coordinator. You run 5 parallel research threads on\nthe same question from different angles, then synthesise findings by\nconsensus. Your goal: find what's well-established vs. contested vs.\nmissing from public knowledge on this topic.\n</role>\n\n<context>\n$ARGUMENTS is the research question or topic. Use available web search\nMCP tools for each research thread. If web search is not available,\nuse your training knowledge for each thread but explicitly note that\nfindings come from training data rather than current web search.\n</context>\n\n<steps>\n\nStep 1 — Define the question:\nRephrase $ARGUMENTS as a clear research question.\n\nStep 2 — Research Thread 1 (The Direct Answer):\nSearch for: direct answers to the question. What do authoritative sources say?\nFocus: consensus expert opinion, official sources, well-cited research.\n\nStep 3 — Research Thread 2 (The Contrarian View):\nSearch for: challenges, criticisms, or alternative perspectives on the mainstream answer.\nFocus: minority expert views, documented counterexamples, ongoing debates.\n\nStep 4 — Research Thread 3 (The Recent Developments):\nSearch for: news, papers, or developments from the last 12 months on this topic.\nFocus: what has changed recently? What's new that older sources miss?\n\nStep 5 — Research Thread 4 (The Practical Application):\nSearch for: how people actually apply or experience this in practice.\nFocus: case studies, real-world examples, practical guidance vs. theory.\n\nStep 6 — Research Thread 5 (The Numbers):\nSearch for: statistics, data, studies, and quantitative evidence on this topic.\nFocus: figures that can ground the analysis in facts.\n\nStep 7 — Synthesise:\nFor each major finding across all 5 threads:\n- Supported by 4-5 threads: well-established fact\n- Supported by 2-3 threads: likely true, moderate confidence\n- Supported by 1 thread: possible, low confidence — note source\n- Contradicted across threads: contested, flag for user\n\n</steps>\n\n<output>\n**🔬 Research Consensus: [Research Question]**\n\n**Well-Established** *(4-5 thread agreement)*\n- [Finding with source type]\n\n**Likely True** *(2-3 thread agreement)*\n- [Finding]\n\n**Contested** *(threads disagree)*\n- [Topic]: [Thread 1 finding] vs. [Thread 2 finding]\n  → Verdict: [which evidence is stronger, or 'genuinely unresolved']\n\n**Recent Developments** *(last 12 months)*\n- [What's changed]\n\n**Key Numbers**\n- [Statistic]: [source type]\n\n**What's Missing From Public Knowledge**\n- [Gaps in available research or evidence]\n\n**Recommended Next Step:** [Most useful thing to research further or verify]\n</output>\n\n<constraints>\n- Clearly distinguish between 'established research shows' and 'some sources suggest'\n- Flag when findings come from training knowledge vs. live web search\n- Do not present contested findings as settled\n- Total output: 400-500 words\n</constraints>\n```\n\n把它保存为 `~/.claude/commands/research-consensus.md`。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "在一份真实文档上运行 /deep-analyze",
+      "content": "在你正在处理的真实文档上，测试这个 5 代理分析技能。\n\n**第 1 步——创建技能文件：**\n```\nCreate ~/.claude/commands/deep-analyze.md with the /deep-analyze skill content.\n```\n\n**第 2 步——选一份真实的文档来分析：**\n不错的选择包括：\n- 你需要审查的合同或协议\n- 一份商业提案或报告\n- 一条需要理清脉络的长邮件线程\n- 一篇你一直想读却没读的研究论文或文章\n- 一份项目计划或规格文档\n\n**第 3 步——运行分析：**\n```\n/deep-analyze [文件路径，或直接粘贴文档文本]\n```\n\n看着 Claude 有条不紊地依次走完全部 5 个分析视角。\n\n**第 4 步——评估共识发现：**\n查看“共识发现（Consensus Findings）”部分——这些是 3 个以上独立分析都认同的内容。问问自己：\n- 这些你之前就知道吗？\n- 有没有让你意外的？\n- 有没有哪一条是错的？（如果有，说明这个技能的框架可能需要调整）\n\n**第 5 步——检查不确定性部分：**\n哪些地方出现了分歧？这些是文档本身真实存在的模糊之处，还是技能理解错了什么？\n\n**第 6 步——和你自己手动阅读的结果对比：**\n问问自己：“如果我自己花 5 分钟读这份文档，相比这份分析，我会遗漏什么？”\n\n**第 7 步——落实一条发现：**\n从“需要执行的行动（Actions Required）”部分挑出最具可执行性的一项，趁着上下文还新鲜，现在就去做。\n\n**完成检查：** 你在一份真实文档上运行了 5 视角分析，得到了带置信度评级的综合结果。“共识发现”和“不确定性”部分应该让你感觉明显比单次通读总结更可靠。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A —— 构建一个合同审查专家技能",
+      "content": "把 /deep-analyze 模式改造成一个专门用于审查合同和法律协议的专家技能。\n\n**为什么要做一个专家版？** 通用分析已经不错了。带有领域专属视角的专家分析会更出色。审查合同需要问的问题，和商业分析师所需要的问题是不一样的。\n\n**第 1 步——设计 5 个合同专属视角：**\n在写技能之前，先明确对合同来说哪 5 个具体角度最重要：\n- 律师首先会关注什么？\n- 商业人士会关注什么？\n- 风险管理人员会关注什么？\n- 保护自身利益的人会关注什么？\n- 需要执行合同的人（implementer）会关注什么？\n\n**第 2 步——编写这个技能：**\n```\nCreate ~/.claude/commands/contract-review.md as a specialist version of /deep-analyze\ntailored for contracts and legal agreements.\n\nThe 5 lenses should be:\n1. Obligations: what am I required to do, by when, under what conditions?\n2. Rights: what am I entitled to? What can I refuse?\n3. Risks: what exposes me to liability, penalty, or loss?\n4. Escape clauses: under what conditions can either party exit?\n5. Ambiguities: what is unclear or undefined in a way that could be disputed?\n\nOutput: a contract brief with: summary, my obligations (with dates), my rights,\ntop 3 risks, termination conditions, and the 2 clauses I should most carefully\nnegotiate or clarify before signing.\n```\n\n**第 3 步——在一份真实协议上测试：**\n用一份真实的合同（雇佣合同、服务合同、租赁合同、软件用户协议 EULA）——一份你真正牵涉其中的合同。\n\n```\n/contract-review [粘贴合同文本，或提供文件路径]\n```\n\n**第 4 步——验证输出结果：**\n如果你能联系到有法律或合同经验的人，把结果给他们看看。它抓住了他们会关注的要点吗？\n\n**成果：** 一个能对任意协议应用 5 个专家视角、在你签字之前把最重要信息呈现出来的合同审查技能。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— 构建一个研究工具，并用维基百科检验它",
+      "content": "构建 /research-consensus 技能，并测试它和单次通过式回答相比效果如何。\n\n**第 1 步——创建这个技能：**\n```\nCreate ~/.claude/commands/research-consensus.md with the /research-consensus skill content.\n```\n\n**第 2 步——选一个你真正关心的研究问题：**\n适合这次测试的问题包括：\n- 一个健康或医学话题（“研究对 [某种补充剂/治疗方法] 怎么说？”）\n- 一个技术选型问题（“[方案 A] 和 [方案 B] 之间真正的取舍是什么？”）\n- 一个商业问题（“是什么让 [某个行业/方法] 成功或失败？”）\n- 一个有细微差别的历史或事实性问题（“为什么会发生 [某个事件]？”）\n\n**第 3 步——先索要一个单次通过式的答案：**\n```\nGive me a 200-word summary of: [你的问题]\n```\n保存这个回答。\n\n**第 4 步——针对同一个问题运行 /research-consensus：**\n```\n/research-consensus [你的问题]\n```\n\n**第 5 步——对比这两份回答：**\n- 共识方式发现了哪些单次通过没发现的东西？\n- 它们在哪里一致？在哪里不同？\n- “存在争议（Contested）”部分列出了什么——这种争议是真实的还是人为制造出来的？\n- 共识回答中的“关键数字（Key Numbers）”和单次通过答案中的说法是否一致？\n\n**第 6 步——核实一条存在争议的发现：**\n针对“存在争议”部分中最有意思的一条分歧，自己再做一些研究，核实到底哪一方更准确。\n\n**成果：** 关于多代理方式在一个你真正关心的话题上，是否比单次分析产出更可靠、更细致的研究结果的直接证据。"
+    },
+    {
+      "type": "quiz",
+      "question": "/deep-analyze 技能会产出“共识发现（Consensus Findings）”和“不确定性（Uncertainties）”。为什么不确定性部分和共识部分一样有价值？",
+      "options": [
+        "并不一样——不确定性只意味着这个技能没有正常运作",
+        "不确定性揭示了文档本身真正存在模糊或矛盾的地方——这正是你需要提出澄清性问题、进行谈判或进一步调查的关键信息",
+        "包含不确定性只是为了让输出看起来更全面",
+        "不确定性代表了 AI 在这个话题上训练不足"
+      ],
+      "correct": 1,
+      "explanation": "在文档分析中，独立视角之间出现分歧本身就是一个信号——它意味着文档本身是模糊的、内部存在矛盾，或者可以有多种解读。这正是最具可执行性的信息：如果 5 个分析师读同一条条款的理解都不一样，那这条条款在实践中很可能会引发争议。不确定性部分把 AI 之间的分歧转化为一份需要澄清、协商或核实的优先事项清单——这往往比共识发现本身更有价值。"
+    },
+    {
+      "type": "quiz",
+      "question": "在 /research-consensus 技能中，一条发现只被 5 个研究线索中的 1 个支持。你在做决策时该如何看待它？",
+      "options": [
+        "忽略它——5 个里只有 1 个支持，说明它多半是错的",
+        "把它当作一个低置信度的可能考虑因素——记下来源类型，如果这条论断对你的决策很重要，就进一步调查",
+        "把它和被全部 5 个线索都支持的发现同等对待",
+        "把它标记为幻觉并直接丢弃"
+      ],
+      "correct": 1,
+      "explanation": "只有 1 个线索支持的发现，并不代表它是错的——它可能是一种真实存在的少数专家观点，一个其他线索还没跟上的新近发展，或者一个小众但有价值的实践洞见。正确的做法是：记下它、记下来源类型（官方研究 vs. 观点 vs. 轶事），把它当作一条线索而不是结论来对待。如果它对你的决策很重要，就独立地去调查它。共识框架不会丢弃少数发现——它只是帮你校准恰当的置信程度。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 20-4 课。** 你已经构建了本课程中最精妙的两个技能：`/deep-analyze`（5 视角文档分析）和 `/research-consensus`（5 线索研究综合）。它们通过应用独立重复验证——这一让科学发现值得信赖的同一原则——从根本上改变了 AI 辅助分析的可靠性。下一课：用于结构化数据提取的文档智能技能。"
+    }
+  ],
+  "nextLesson": "20-5",
+  "prevLesson": "20-3"
+}

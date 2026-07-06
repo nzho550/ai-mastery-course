@@ -1,0 +1,130 @@
+{
+  "id": "18-1",
+  "title": "高级提示词技巧：CoT、ToT、ReAct 及更多",
+  "part": 18,
+  "estimatedMinutes": 70,
+  "tags": [
+    "advanced",
+    "prompting",
+    "chain-of-thought",
+    "reasoning",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n基础提示词技巧能让你用到 AI 能力的 60%。高级提示词技巧则能帮你拿到剩下的 40%——而这 40% 正是最令人惊艳的成果所在。本课涵盖专业 AI 用户依赖的核心技巧：思维链（Chain-of-Thought）、思维树（Tree-of-Thought）、ReAct、自洽性（Self-Consistency）、XML 结构，以及元提示（meta-prompting）。学完之后，你写出的提示词将在难题上产生可衡量的更好结果。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**为什么现在这很重要：** 研究表明，仅思维链提示这一项技巧，就能将数学和逻辑推理任务的准确率从 17.7% 提升到 78.7%。这些不是边际改进——而是决定 AI 在难题上是否有用的分水岭。"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧一：思维链（CoT）——让模型展示其思考过程\n\n思维链提示强制 AI 在给出答案前一步步推理，而不是直接跳到结论。在任何涉及逻辑、数学、规划或多步分析的任务上，效果都非常显著。\n\n**为什么有效：** 大语言模型（LLM）本质上是下一个 token 的预测器。当它们直接跳到答案时，答案中的每个 token 都是在有限处理下生成的。而当你让它们先推理时，每一个推理步骤都会成为下一步的额外上下文——模型确实会思考得更好，因为在得出最终答案之前发生了更多的计算。\n\n**基础 CoT 触发短语：**\n```\nThink through this step by step before answering.\n```\n```\nLet's think about this carefully. Walk me through your reasoning before giving your final answer.\n```\n```\nBreak this down into steps, then give me your conclusion.\n```\n\n**完整的 CoT 提示词结构：**\n```\n[你的问题或任务]\n\nBefore you answer:\n1. Identify the key factors involved\n2. Consider what could go wrong or what assumptions you're making\n3. Work through the problem step by step\n4. Then give your final answer\n```\n\n**何时使用 CoT：**\n- 任何数学或计算任务（即使是简单算术，用 CoT 也更可靠）\n- 逻辑谜题或推理挑战\n- 规划与决策\n- 调试：让 Claude 先推理代码可能出错的原因，再给出修复建议\n- 任何你怀疑答案不只是靠模式匹配能得出的问题\n\n**零样本 CoT 与少样本 CoT：**\n- **零样本（zero-shot）：** 只需加一句“一步步思考”——在 Claude 和现代大语言模型上，不给例子也能很好地工作\n- **少样本（few-shot）：** 提供 2-3 个展示你想要的推理格式的示范例子，再提出问题——在专业领域更可靠\n\n```\nExample of few-shot CoT for legal reasoning:\n\nQuestion: Can I use a photo I found on Google for my business website?\nReasoning:\n- Photos on Google are not free to use — they're indexed from other sites, not released\n- Copyright law protects photos automatically from the moment of creation\n- Using it without license = copyright infringement regardless of whether you paid\n- Businesses are higher-risk targets than individuals because there's potential financial gain\nAnswer: No. Find stock photos with commercial licenses (Unsplash, Pexels free tier, Getty paid).\n\nNow answer this question using the same reasoning format:\nQuestion: [your question]\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧二：思维树（ToT）——探索多条路径\n\n思维链只沿着一条推理路径前进，而思维树会同时探索多条路径，并从中挑选最优解。这在处理创造性问题、战略决策，以及没有明显正确做法的情况时，尤其强大。\n\n**心理模型：** 想象你请三位专家顾问各自独立地攻克同一个问题，然后让他们讨论并收敛到最佳答案。\n\n**ToT 提示词模板：**\n```\nI want you to explore this problem from multiple angles before answering.\n\nProblem: [your problem]\n\nGenerate 3 distinct approaches or framings for this problem. For each approach:\n- State the key assumption it makes\n- Outline how it would work\n- Identify its biggest weakness\n\nAfter exploring all three, recommend the approach (or combination) that seems strongest, and explain why.\n```\n\n**示例——用 ToT 做战略决策：**\n```\nI need to decide whether to launch our new product in Q3 or wait for Q1 next year.\n\nExplore this decision from 3 distinct strategic perspectives:\n1. Market timing perspective (seasonal patterns, competitive landscape)\n2. Internal readiness perspective (team capacity, product quality, support)\n3. Financial perspective (cash flow, sales targets, investor expectations)\n\nFor each perspective, argue both for Q3 and Q1. Then synthesise a recommendation.\n```\n\n**何时使用 ToT：**\n- 存在真正权衡的重大决策\n- 想在下定决心前看到多个方案的创意项目\n- 想对方案进行压力测试的复杂计划\n- 你的第一直觉可能是错的任何情况"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧三：ReAct——先推理，再行动\n\nReAct（Reason + Act，推理 + 行动）是驱动 AI 代理（agent）的提示模式。模型不再一次性给出答案，而是在推理（“我知道什么？我需要什么？”）和行动（“搜索 X、计算 Y、检索 Z”）之间交替进行。\n\n在 Claude 的场景中，当你需要 Claude 使用工具（通过 MCP 进行网页搜索、文档检索、代码执行）并且希望它在执行前先规划工具使用方式时，ReAct 最为有用。\n\n**ReAct 提示词结构：**\n```\nWork on this task using the following approach:\n1. THINK: What do I know? What do I need to find out? What's my plan?\n2. ACT: Execute one step (search, calculate, write)\n3. OBSERVE: What did I learn? What changed?\n4. Repeat THINK → ACT → OBSERVE until complete\n5. ANSWER: Give the final result\n\nTask: [your task]\n```\n\n**实用 ReAct 示例（配合 Claude Code + MCP 工具）：**\n```\nI need a briefing on [company] before my meeting tomorrow.\n\nThink through what information would be most valuable, then use your tools to gather it:\n- Start with what I need: recent news, key products, leadership, financial state\n- Search for each category\n- After each search, assess what's still missing\n- Compile a structured briefing document\n\nFormat: 1-page executive briefing, headers only, bullet points\n```\n\n**为什么这比直接提问更好：**\n没有 ReAct 结构时，Claude 常常仅凭记忆和训练数据作答。使用 ReAct 后，它会主动规划工具使用，从而产出更新、更具体、更可靠的结果。"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧四：自洽性（Self-Consistency）——多条路径，最佳答案\n\n自洽性是一种技巧：让模型用不同的推理方式多次回答同一个问题，然后综合出最一致的答案。对于希望获得高置信度的重要决策或复杂分析而言，这一技巧尤为强大。\n\n**手动自洽性（适用于任何 AI 工具）：**\n```\nAnswer this question three separate times, each time using a different reasoning approach or starting assumption. Label each answer Approach A, B, and C.\n\nAfter giving all three answers, identify:\n- Where the approaches agree (high confidence)\n- Where they disagree (areas of genuine uncertainty)\n- Your most defensible final answer\n\nQuestion: [your question]\n```\n\n**最有价值的场景：**\n- 想对答案进行压力测试的高风险决策\n- 存在多种有效方法的技术分析\n- 任何你注意到 Claude 似乎不确定或过度模糊其词的情况"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧五：XML 结构——Claude 思考的最佳方式\n\nClaude 经过专门训练，能够将 XML 标签解析为结构信号。在提示词中使用 XML，是提升响应质量最可靠的方式之一，尤其适用于复杂的多部分提示。\n\n**为什么 XML 对 Claude 有效：** Anthropic 的官方指南指出，XML 标签有助于 Claude 解析复杂的多部分提示，并作为不同类型内容之间清晰的分隔符。Claude 的训练专门针对这一点做了优化。\n\n**XML 提示词模板：**\n\n*用于提供上下文和任务：*\n```xml\n<context>\nI'm a marketing manager at a B2B SaaS company. We have 50 employees and target mid-market manufacturing companies. Our main product is inventory management software.\n</context>\n\n<task>\nWrite a LinkedIn post announcing our new AI-powered forecasting feature.\nRequirements: 150-200 words, professional but approachable, end with a question to drive engagement.\n</task>\n```\n\n*用于文档分析：*\n```xml\n<document>\n[paste the document here]\n</document>\n\n<instructions>\nAnalyse the document above and produce:\n1. A 3-sentence executive summary\n2. A list of action items with owners if named\n3. Any decisions that need to be made before next steps can proceed\n4. Three questions I should ask in my follow-up meeting\n</instructions>\n```\n\n*用于带示例的多步任务：*\n```xml\n<examples>\n<example>\n<input>Invoice #1234, dated 2026-03-15, $4,500, NET30</input>\n<output>Due: 2026-04-14, Amount: $4,500, Status: pending</output>\n</example>\n</examples>\n\n<task>\nExtract the same fields from these invoices:\n<invoices>\n[paste invoices here]\n</invoices>\n</task>\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 技巧六：元提示（Meta-Prompting）——让 AI 帮你写提示词\n\n元提示是指用 AI 为 AI 生成更好的提示词。这听起来有点循环论证，但确实非常强大：Claude 知道什么样的提示词能产出好结果，所以让它为你的目标设计提示词，往往比你自己写出来的更好。\n\n**元提示模板：**\n```\nI want to achieve the following goal: [describe what you want to accomplish]\n\nBefore I send a prompt to get this done, I want you to:\n1. Identify what information the AI would need to do this well\n2. Suggest 3-5 clarifying questions I should answer\n3. Write an optimised prompt I could use, incorporating those answers\n\nFor context: [any constraints — tool, audience, format, tone]\n```\n\n**提示词优化模板：**\n```\nHere is a prompt I've been using: [your current prompt]\n\nThe output isn't quite right. Here's what I want but aren't getting: [describe the gap]\n\nRewrite my prompt to produce the output I'm looking for. Explain what you changed and why.\n```\n\n**专家人设元提示：**\n元提示最有效的用法之一，是让 Claude 在处理任务前先扮演某个领域专家：\n```\nBefore answering my question, adopt the perspective of a [specific expert — e.g., 'experienced CFO reviewing a startup's P&L for the first time'].\n\nAs that expert:\n- What would you look for immediately?\n- What red flags might a non-expert miss?\n- What assumptions would you verify before drawing conclusions?\n\nNow, with that expert lens, answer: [your question]\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 组合技巧：专家分析师模式\n\n最强大的提示词往往是多种技巧的组合。以下是一个完整的模式，同时运用了 CoT + XML + 专家人设——这一“专家分析师”模式能产出接近咨询水平的分析：\n\n```xml\n<role>\nYou are a senior management consultant with 20 years of experience advising technology companies. You are known for clear thinking, intellectual honesty, and identifying problems others miss.\n</role>\n\n<context>\n[paste your document, situation, or data here]\n</context>\n\n<task>\nAnalyse the above using the following structured approach:\n\nStep 1 — First impressions (what stands out immediately?)\nStep 2 — Key strengths (what's genuinely working?)\nStep 3 — Critical risks (what's the biggest threat, and why?)\nStep 4 — Hidden assumptions (what is this assuming that might not be true?)\nStep 5 — Recommendations (prioritised, with rationale)\n\nBe direct. If something is weak, say so. Don't soften the analysis.\n</task>\n\n<format>\nUse headers for each step. Use bullet points within steps. Total length: 400-600 words.\n</format>\n```\n\n这个模式适用于分析商业计划、研究论文、项目计划、营销策略、财务预测，或任何其他复杂文档。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "高级提示词对比实战——同一问题的 4 种技巧",
+      "content": "本次工作坊将在同一个真实问题上测试全部四种主要技巧，让你直观看到每种技巧带来的差异。\n\n**你的问题：** 选一个你眼下正在面对的真实决策、分析或任务。它必须是答案并不明显的——一个真正需要思考的问题。\n\n好的例子：\n- 是否要做出某项具体的职业或商业决策\n- 分析一个存在多方考量的工作情境\n- 一个你正在制定、但对其风险不太确定的计划\n- 任何你已经问过 AI、但感觉答案很浅薄的问题\n\n**第一步——基线（3 分钟）**\n\n用没有任何特殊技巧的方式向 Claude 提问——就像你平常那样直接问。阅读答案，并对其有用性打 1-10 分。\n\n**第二步——CoT（3 分钟）**\n\n提出同样的问题，但在前面加上：\n```\nBefore answering, think through this step by step: identify the key factors, consider what you might be missing, then give me your reasoned conclusion.\n```\n阅读答案。打 1-10 分。\n\n**第三步——ToT（5 分钟）**\n\n用思维树模板提出同样的问题：3 种不同的方法，各自附上关键假设和最大弱点，然后给出综合建议。打 1-10 分。\n\n**第四步——专家分析师模式（5 分钟）**\n\n使用专家分析师 XML 模式。填入一个相关的专家人设（例如，如果你的问题是关于工作决策，用“经验丰富的招聘经理”；如果是商业问题，用“战略顾问”）。打 1-10 分。\n\n**第五步——反思（5 分钟）**\n\n查看你的 4 个答案和 4 个评分。\n- 哪种技巧产出了最有用的结果？\n- 哪种技巧揭示了你之前没考虑到的方面？\n- 普通提问的答案在哪些方面其实表现不错，在哪些方面明显不足？\n\n写 3 句话，说明你以后会在哪些类型的问题上使用哪种技巧。\n\n**关键洞见：** 这些技巧并非魔法——它们之所以有效，是因为它们改变了模型在给出答案前所进行的计算。同一个模型，在更结构化的提示下，会产出显著更好的输出。你只是改变了提示词；AI 的能力本身并没有变。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**何时不该用高级技巧：** CoT 和 ToT 会增加篇幅和延迟。对于简单的事实性问题、快速草稿或常规任务，简单的提示词反而更好。在以下情况使用高级技巧：（1）任务确实复杂，（2）准确性比速度更重要，或（3）你已经尝试过更简单的提示词，但结果不理想。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude 帮你决定是否接受一家新公司的工作邀约。你得到的是一个笼统的答案，没有针对你的具体情况。哪种技巧最能直接改善这个回答？",
+      "options": [
+        "在你原本的问题前加上“一步步思考”",
+        "使用思维树：让 Claude 从 3 个不同角度（职业发展、财务、文化契合度）探索这个决定，各自附上关键假设和弱点，然后综合出一条建议",
+        "让 Claude 写一个更短的答案",
+        "开一个新对话，再问一遍同样的问题"
+      ],
+      "correct": 1,
+      "explanation": "思维树在这里是正确的技巧，因为这个工作决策涉及多个真正相互竞争的考量因素（职业发展、金钱、文化、机会成本），每个都可以独立分析。明确探索 3 个角度再综合，会迫使模型考虑那些原本可能被随意加权的方面。CoT（A）有助于顺序推理，但不会强制进行多角度探索。更短的答案（C）会降低深度。重新开始（D）只会产出同样笼统的结果。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——高级提示词技巧演练",
+      "content": "在同一个问题上测试 CoT、ToT 和 ReAct。\n\n**第一步——选择一个复杂的推理问题：** 一个逻辑谜题、一次复杂的分析，或一个多步计算。\n\n**第二步——测试思维链（CoT）：**\n\"Think step by step: [your problem]\"\n\n**第三步——测试思维树（ToT）：**\n\"Explore multiple solution paths for [problem]. For each path: describe the approach, take 3 steps, then evaluate whether it's promising. After exploring 3 paths, synthesise the best solution.\"\n\n**第四步——测试 ReAct（推理 + 行动）：**\n\"For [problem], use the ReAct pattern: Thought → Action → Observation, repeating until you reach a conclusion. Be explicit about each thought and what information you're seeking.\"\n\n**第五步——比较结果。** 对于这类问题，哪种技巧产出了最好的结果？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——构建一个按技巧匹配的提示词库",
+      "content": "创建一个按技巧组织的提示词库，将技巧与问题类型相匹配。\n\n**第一步——为每种高级技巧**创建一个可复用的模板：\n\n**CoT 模板：**\n\"[Problem]. Let's think through this step by step. First... Then... Finally...\"\n\n**ToT 模板：**\n\"Explore 3 different approaches to [problem]. For each: take 2 steps of reasoning, then rate its promise (1-5). After exploring all 3, select the best and continue to completion.\"\n\n**ReAct 模板：**\n\"Solve [problem] using the ReAct pattern. Format each cycle as: Thought: [reasoning], Action: [what to do], Observation: [result]. Continue until you reach a conclusion.\"\n\n**第二步——在适合的问题类型上测试每个模板。**\n\n**第三步——将模板加入你的提示词库**，并注明各自的适用场景。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——技巧选择框架",
+      "content": "构建一个用于选择正确高级提示词技巧的框架。\n\n**第一步——问 Claude：** \"For these problem types, which advanced prompting technique works best and why? (1) Multi-step math, (2) Open-ended creative generation, (3) Complex decision-making with trade-offs, (4) Debugging code, (5) Research synthesis.\"\n\n**第二步——构建决策指南：**\n| 问题类型 | 最佳技巧 | 原因 |\n|---|---|---|\n| 多步推理 | CoT | |\n| 探索多种方案 | ToT | |\n| 研究与验证 | ReAct | |\n\n**第三步——将该指南应用**到你常写的 3 个提示词上。你原本应该使用但一直没用的技巧是哪一种？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——实现一个 ReAct 推理循环",
+      "content": "构建 ReAct 模式的代码实现。\n\n**第一步——让 Claude Code** 实现一个 ReAct 循环：\n```\nImplement a Python function that uses the ReAct pattern with the Anthropic API:\n1. Takes a problem/question as input\n2. Runs a loop: get a Thought+Action from Claude, execute the action (use web search or calculation), feed back the Observation\n3. Continue until Claude says \"I have reached a conclusion\"\n4. Return the final answer and the full reasoning chain\n\nFor available actions: web_search(query), calculate(expression), retrieve_document(url)\n(You can mock the action implementations for now)\n```\n\n**第二步——在一个多步骤研究问题上测试** ReAct 循环。\n\n**第三步——强制审查：** 问 Claude：*\"Review this ReAct implementation. What failure modes exist? How do I prevent infinite loops?\"*"
+    },
+    {
+      "type": "quiz",
+      "question": "你使用了思维链提示，Claude 展示了它的推理过程，但得出了错误的结论。即使答案错了，CoT 的优势是什么？",
+      "options": [
+        "没有任何优势——错误答案就是错误答案",
+        "推理链能显示错误出在哪一步——你可以定位到具体出错的那一步并加以纠正，而不只是知道输出是错的",
+        "CoT 的答案总是比直接给出的答案更准确",
+        "这条思维链可以被用来训练一个更好的模型"
+      ],
+      "correct": 1,
+      "explanation": "CoT 让错误变得可检查、可纠正。没有 CoT 时：“答案是 47”——错了，但你不知道为什么。有 CoT 时：“步骤 1：[正确]，步骤 2：[正确]，步骤 3：[错误假设]，因此：47”——你能准确看到推理在哪一步出了问题并加以纠正。这正是透明推理相对于黑盒输出的根本优势，即便最终答案是错的。"
+    },
+    {
+      "type": "quiz",
+      "question": "思维树会在选出最佳路径之前探索多条推理路径。这种技巧在什么情况下反而没有价值？",
+      "options": [
+        "ToT 相比 CoT 从来都没有额外价值",
+        "对于只有一种明确正确做法、探索其他方案纯属浪费时间的问题——比如简单的事实性问题、标准计算，或路径本来就很明显的任务",
+        "只在创意类任务中没有价值",
+        "对于需要超过 5 步推理的问题"
+      ],
+      "correct": 1,
+      "explanation": "当存在多种有效方法、且探索它们可能揭示比第一直觉更好的路径时，ToT 才有价值。而在以下情况中它没有价值：有唯一正确算法的清晰定义问题（改用 CoT）、简单的事实查询（直接问就好），或探索开销超过收益的时间敏感任务。一个有用的经验法则：“人类专家在下定决心前会不会考虑多种方法？”如果会，用 ToT；如果不会，用 CoT 或直接提问。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 18-1 课。** 你现在掌握了 6 种高级提示词技巧：思维链、思维树、ReAct、自洽性、XML 结构，以及元提示。综合运用这些技巧，在复杂任务上能持续产出比标准提示准确、有用 20%-60% 的结果。"
+    }
+  ],
+  "nextLesson": "18-2",
+  "prevLesson": "12-7"
+}

@@ -1,0 +1,107 @@
+{
+  "id": "7-10",
+  "title": "Plan Mode 与权限",
+  "part": 7,
+  "estimatedMinutes": 60,
+  "tags": [
+    "claude-code",
+    "plan-mode",
+    "permissions",
+    "settings-json",
+    "safety"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将知道如何使用 Plan Mode 在 Claude 执行之前查看它的预期操作，以及如何在 `settings.json` 中配置权限，精确控制 Claude 在你的项目中被允许做什么。"
+    },
+    {
+      "type": "text",
+      "content": "## Plan Mode：先提案，后行动\n\n在正常模式下，当你给 Claude 一个任务时，它会立即开始执行——读取文件、写入更改、运行命令。对于简单、低风险的任务，这没有问题。对于更大或更有风险的更改，你可能希望在任何事情发生之前先看到*计划*。\n\n**Plan Mode**（有时称为“先思考”模式）会改变这一行为：Claude 会分析你的请求，生成一份详细的行动计划——列出它将触及的所有文件、将采取的所有步骤——然后*暂停并等待*。在你批准这份计划之前，磁盘上不会发生任何变化。\n\n要激活 Plan Mode：在 Claude Code 提示符处按 **Shift+Tab**。提示符指示器会变化，表明你处于计划模式。提出你的问题，Claude 会给出一份计划。你审阅后可以批准（Claude 执行）或拒绝（Claude 尝试另一种方法）。\n\n你也可以不切换模式，直接用文字要求一份计划：*“在做任何更改之前，告诉我你打算如何重构这个文件。”* Claude 会先描述它的意图。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**何时使用 Plan Mode：**\n- 任何涉及 2-3 个以上文件的请求\n- 重构任务（重新组织代码、重命名东西）\n- 对不熟悉的代码库进行更改\n- 任何时候你的直觉告诉你“这可能会以有趣的方式出岔子”\n- 在运行数据库迁移、构建脚本或部署步骤之前"
+    },
+    {
+      "type": "text",
+      "content": "## 权限：允许与拒绝\n\nClaude Code 可以读取文件、写入文件、运行 bash 命令，以及使用 MCP 工具。这是相当大的权力。权限系统让你精确定义 Claude 被允许执行哪些操作——哪些操作需要提示确认、被静默阻止，或需要显式覆盖。\n\n权限在 `.claude/settings.json` 的 `permissions` 键下配置。`allow` 列表指定 Claude 无需询问就能做的事情。`deny` 列表指定 Claude 永远不能做的事情——即使你要求它这样做。\n\n权限字符串使用 `Tool(pattern)` 语法：\n- `Read(**)`——读取任何位置的任何文件\n- `Write(exercises/**)`——只能在 `exercises/` 文件夹内写入文件\n- `Bash(echo *)`——运行以 `echo` 开头的 bash 命令\n- `Bash(rm *)`——运行 `rm` 命令（把这个放进 `deny` 列表来防止意外删除）"
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"permissions\": {\n    \"allow\": [\n      \"Read(**)\",\n      \"Write(exercises/**)\",\n      \"Write(notes/**)\",\n      \"Bash(echo *)\",\n      \"Bash(ls *)\",\n      \"Bash(node *)\",\n      \"Bash(npm run *)\"\n    ],\n    \"deny\": [\n      \"Bash(rm *)\",\n      \"Bash(del *)\",\n      \"Bash(rmdir *)\",\n      \"Write(.env)\",\n      \"Write(**/*.env)\"\n    ]\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**`--dangerously-skip-permissions` 标志：** 这个标志会禁用所有权限检查和批准提示。它是为没有人工审阅者参与的自动化 CI/CD 流水线设计的。请不要在正常的开发会话中使用它。如果你因为权限提示太烦而想使用它，正确的做法是更新你的 `allow` 列表——而不是彻底关闭安全检查。"
+    },
+    {
+      "type": "text",
+      "content": "## 最小权限原则\n\n权限模型遵循一个称为**最小权限（least privilege）**的安全原则：只给 Claude 当前任务所需的权限，不多不少。\n\n对于一个你只处理 HTML/CSS 文件的项目：\n- 允许在任何地方读取（让 Claude 能理解上下文）\n- 只允许写入 `exercises/` 和 `notes/`\n- 拒绝所有破坏性的 bash 命令\n- 拒绝写入配置文件和密钥\n\n这能保护你免受两种失败模式的影响：\n1. **你的失误：** 你不小心让 Claude 删除了重要的东西\n2. **Claude 的失误：** Claude 误解了一个任务，尝试做出你不打算做的更改\n\n权限系统能同时防住这两种情况。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "先计划，再行动",
+      "content": "用一次多文件更改练习 Plan Mode，然后在你的 settings.json 中配置权限。\n\n**第一部分——Plan Mode**\n\n**第 1 步——启动 Claude Code：**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**第 2 步——进入 Plan Mode：**\n在提示符处按 **Shift+Tab**。你应该会看到提示符指示器发生变化，表明计划模式已激活。\n\n**第 3 步——请求一次多文件更改：**\n```\n重构 exercises 文件夹：创建一个共享的 styles.css 文件，\n包含所有 HTML 文件中共有的 CSS。更新每个 HTML 文件，\n使其链接到 styles.css，而不是使用重复的内联样式。\n```\n\n**第 4 步——审阅计划：**\nClaude 会列出它打算触及的每一个文件，以及对每个文件的操作计划。问自己：\n- 这份计划是否符合我的要求？\n- 有没有让我意外的文件出现在列表中？\n- 操作顺序是否合理？\n- 有没有哪一步我希望 Claude 跳过或换种方式做？\n\n**第 5 步——批准或修改：**\n如果计划看起来不错，批准它，观看 Claude 逐步执行。\n如果有什么地方不对劲，输入你的担忧——Claude 会修订这份计划。\n\n**第二部分——配置权限**\n\n**第 6 步——打开 settings.json：**\n在 VS Code 中打开 `.claude/settings.json`。你应该已经从第 7-8 课那里有一个 `hooks` 部分。添加一个 `permissions` 部分：\n\n```json\n{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude just edited a file\"\n          }\n        ]\n      }\n    ]\n  },\n  \"permissions\": {\n    \"allow\": [\n      \"Read(**)\",\n      \"Write(exercises/**)\",\n      \"Write(notes/**)\",\n      \"Bash(echo *)\",\n      \"Bash(ls *)\"\n    ],\n    \"deny\": [\n      \"Bash(rm *)\",\n      \"Bash(del *)\"\n    ]\n  }\n}\n```\n\n**第 7 步——测试拒绝规则：**\n重新启动 Claude Code（先 `/exit` 再 `claude`），然后问：\n```\n删除文件 exercises/test-card.html\n```\nClaude 应该会拒绝，因为 `Bash(rm *)` 和 `Bash(del *)` 都在拒绝列表中。\n\n**第 8 步——测试允许规则：**\n现在问：\n```\n在 exercises/ 中创建一个名为 sandbox.html 的新文件，\n内容是最简单的 HTML 样板\n```\n这应该能成功，因为 `Write(exercises/**)` 在允许列表中。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——Plan Mode 练习",
+      "content": "这个练习让你练习在 Claude Code 执行之前，用 Plan Mode 审查它的做法。\n\n**第 1 步——以 Plan Mode 启动 Claude Code：**\n```powershell\nclaude --plan-mode\n```\n或者在会话中，要求 Claude Code “在采取任何行动之前描述你的计划”。\n\n**第 2 步——给出一个需要多个步骤的复杂任务：**\n“为这个 Flask 应用添加用户认证。它应该支持注册、登录，以及通过邮件重置密码。”\n\n**第 3 步——仔细阅读这份计划。** 问自己：\n- 这一系列步骤是否合理？\n- 有没有哪一步会改变你不希望被改变的东西？\n- 有没有遗漏了重要的步骤？\n- 这份计划带来了哪些风险？\n\n**第 4 步——在批准之前对计划提出反馈：**\n“在实现之前，我想修改第 3 步——使用 JWT 而不是会话 cookie。另外在实现之前加一步，先更新测试。”\n\n**第 5 步——批准修改后的计划**，观看 Claude Code 执行它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——为真实工作配置权限",
+      "content": "针对你具体的工作场景，恰当地配置 Claude Code 的权限。\n\n**第 1 步——理解各个权限级别**（问 Claude Code：“解释每个权限级别以及它分别允许什么”）。\n\n**第 2 步——评估你的风险承受度：**\n- 高信任环境（个人项目、可随意丢弃的代码）：更多自主权\n- 中等信任（团队项目、预发布环境）：中等自主权，写文件时需要确认\n- 低信任（生产系统、敏感数据）：最小自主权，一切都需要确认\n\n**第 3 步——为你最常见的使用场景配置权限。** 查阅 Claude Code 的文档或设置，了解当前的权限配置选项。\n\n**第 4 步——测试你的配置：** 让 Claude Code 做一件之前会自动运行的事。它现在会请求确认吗？\n\n**第 5 步——在 CLAUDE.md 中记录你的权限策略：** “在这个项目中工作时，始终以 [模式] 运行——我们要求在 [某些类型的操作] 之前进行确认。”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——何时使用 Plan Mode vs 直接执行",
+      "content": "培养关于何时要求计划、何时让 Claude Code 直接工作的判断力。\n\n**第 1 步——问 Claude：** *“描述 5 种在让 Claude Code 执行之前必须使用 Plan Mode 的情况，以及 5 种可以直接执行、Plan Mode 只会增加不必要摩擦的情况。”*\n\n**第 2 步——建立你个人的决策规则：**\n\n以下情况需要 Plan Mode：\n- [ ]（你的标准）\n- [ ]（你的标准）\n\n以下情况直接执行没问题：\n- [ ]（你的标准）\n- [ ]（你的标准）\n\n**第 3 步——把这条规则应用到**你最近完成的 3 个 Claude Code 任务上。其中有哪些本应使用 Plan Mode？\n\n**第 4 步——问 Claude：** *“考虑到我从事 [描述你的项目及其重要程度]，对于我的具体情况来说，计划与执行之间正确的平衡是什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——搭建一份权限政策文档",
+      "content": "为你的项目上的 Claude Code 使用创建一份正式政策——它可以自主做什么，什么需要人工批准。\n\n**第 1 步——请 Claude 帮你设计这份政策：**\n```\n帮我为一个 [项目类型] 撰写一份 Claude Code 权限政策。该政策应说明：\n1. Claude Code 可以自动执行的操作（无需确认）\n2. 需要我明确批准才能执行的操作\n3. Claude Code 完全不能碰的操作\n4. 需要在任何操作之前进行 Plan Mode 审阅的情况\n```\n\n**第 2 步——审阅并调整**这份政策，使其适应你项目的具体风险级别。\n\n**第 3 步——将这份政策添加到 CLAUDE.md** 中的一个“权限与自主权”部分。\n\n**第 4 步——强制审查：** 问 Claude：*“审查这份权限政策。存在哪些漏洞？隐含允许了哪些应该被明确限制的危险操作？”*\n\n**第 5 步——如果有协作者，与团队分享。**"
+    },
+    {
+      "type": "quiz",
+      "question": "你使用 Plan Mode，Claude Code 的计划写着“第 4 步：删除旧的认证模块。”你不想删除它——你想保留它以便回滚。你该怎么做？",
+      "options": [
+        "接受这份计划，等它运行完之后手动撤销第 4 步",
+        "在计划审阅阶段，在批准之前让 Claude Code 把第 4 步从“删除”改为“移动到 archive/ 目录”",
+        "接受这份计划——反正总是可以从 git 恢复",
+        "拒绝整份计划，从头再来"
+      ],
+      "correct": 1,
+      "explanation": "Plan Mode 正是为这种场景而存在的：你可以在执行之前修改计划。准确告诉 Claude Code 要改什么：“修改第 4 步——不要删除旧模块，而是把它移动到 archive/auth-old.py。这样可以保留它以便回滚。”这比接受计划、寄希望于能从 git 中恢复要好得多，后者虽然可行，但增加了不必要的风险和恢复成本。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code 以默认权限模式运行。它尝试运行 `pip install flask` 来添加一个依赖项。这应该需要确认吗？",
+      "options": [
+        "不需要——安装依赖是一项常规任务",
+        "需要——Claude Code 应该始终在安装包之前进行确认，因为包可能引入安全漏洞或版本冲突",
+        "只有当项目有虚拟环境时才需要",
+        "取决于这个包是否知名"
+      ],
+      "correct": 1,
+      "explanation": "安装包存在实际风险：包可能包含恶意代码、引入版本冲突，在某些环境中还需要提升权限。即使是知名的包也应该被确认——你想审查正在安装的是什么、为什么要安装。在像 CI 这样的自动化环境中，预先批准的包是可以的，但在交互式开发会话中，确认包安装是一道合理的安全关卡。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 7-10 课。** 你可以使用 Plan Mode 处理复杂更改，并配置细粒度的权限。这两项功能结合在一起，让你完全掌控 Claude 做什么、何时做。接下来：子代理与并行工作。"
+    }
+  ],
+  "nextLesson": "7-11",
+  "prevLesson": "7-9"
+}

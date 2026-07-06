@@ -1,0 +1,106 @@
+{
+  "id": "7-5",
+  "title": "审查并接受改动",
+  "part": 7,
+  "estimatedMinutes": 55,
+  "tags": [
+    "claude-code",
+    "diff",
+    "review",
+    "git",
+    "workflow"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将能够读懂一份 diff、就是否接受改动做出明智的判断、请 Claude 解释它的推理过程，并在处理较大的改动时用 Git 作为安全网。"
+    },
+    {
+      "type": "text",
+      "content": "## 阅读 Diff 视图\n\n当 Claude Code 修改一个*已有*文件时，它会向你展示一份 diff——一种并排或内联的视图，准确显示改动了什么。这与专业软件开发中一直使用的格式相同。\n\n这些符号很直白：\n- 以 `+` 开头的行（显示为绿色）是**新增内容**——被插入的新内容\n- 以 `-` 开头的行（显示为红色）是**删除内容**——被删掉的内容\n- 没有这两种符号的行是**未改动的上下文**——展示出来是为了让你知道改动发生在文件的什么位置\n\n一个简单 diff 的例子：\n```\n- <h1>Hello World</h1>\n+ <h1>Hello, Jane</h1>\n\n  <p>Welcome to my site.</p>\n```\n\n这告诉你：旧的标题是 \"Hello World\"，现在被替换成了 \"Hello, Jane\"。下面的段落没有被改动。\n\n对于较大的改动，Claude 会展示多个由 `@@` 标记分隔的 diff 片段（hunk）——每个片段展示文件中发生改动的一个不同位置。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**要读完整个 diff，不能只看绿色的行。** 新增内容很容易发现，但同样重要的是要检查被*删除*了什么。如果一个改动在新增一个函数的同时删掉了一个原本能用的函数，你需要同时核实两边。"
+    },
+    {
+      "type": "text",
+      "content": "## 每次审查时你的三个选项\n\n在 Claude 向你展示一个提议的改动之后，你始终有三条路可走：\n\n**1. 接受——输入 `yes`**\n改动会完全按照展示的内容被应用。磁盘上的文件会立即更新。\n\n**2. 拒绝——输入 `no`**\nClaude 放弃这次改动。文件保持不变。Claude 等待新的指令。\n\n**3. 调整——描述要改什么**\n不用 yes/no，而是给出反馈：*\"接受标题的改动，但不要加渐变——用原来纯色的背景。\"* Claude 会修改这次改动，并在再次询问之前展示新的 diff。\n\n第 3 个选项最强大，也最少被使用。你不必全盘接受或全盘拒绝——你可以协商。把它当作和一位擅长执行、但需要你来判断*应该*做什么的协作者之间的对话。"
+    },
+    {
+      "type": "text",
+      "content": "## 在接受之前请 Claude 解释\n\n如果一个改动看起来陌生——一个你不认识的函数、一种你没见过的写法——你可以在决定是否接受之前，请 Claude 先解释一下：\n\n*\"在我接受之前，解释一下第 12 行的 `reduce` 调用在做什么，以及为什么你用它而不是用 for 循环。\"*\n\nClaude 会解释。然后你再做决定。这不仅是良好的安全习惯——也是你学习的方式。只要你去问，Claude 做的每一次代码改动都可能是一次学习的机会。"
+    },
+    {
+      "type": "text",
+      "content": "## 把 Git 当作你的安全网\n\nClaude Code 很强大，而强大伴随着做出不想要的改动的风险。专业的习惯很简单：**在请 Claude 做重大改动之前，先提交你的工作。**\n\n如果你的项目里已经初始化了 Git（在 5-12 课中讲过），工作流是这样的：\n\n1. 确保你的工作树是干净的（一切都已提交）\n2. 请 Claude 做出改动\n3. 仔细审查 diff\n4. 如果结果不对或坏掉了：运行 `git checkout -- .` 把所有改动还原到上一次提交的状态\n\n你也可以使用 VS Code 的源代码管理面板——对任何文件点击\"放弃更改\"，效果和 `git checkout` 是一样的。\n\n对于非常大的重构，先创建一个新的 Git 分支：\n```\ngit checkout -b claude-refactor\n```\n这样如果结果不是你想要的，你可以用 `git branch -D claude-refactor` 直接丢弃整个分支。"
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "content": "# Before a big Claude Code session — commit your current state\ngit add -A\ngit commit -m \"Checkpoint before Claude refactor\"\n\n# If something goes wrong — revert all uncommitted changes\ngit checkout -- .\n\n# Or create a branch for experimental changes\ngit checkout -b claude-experiment\n# (discard with: git checkout main && git branch -D claude-experiment)"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "审查的习惯",
+      "content": "练习完整的审查工作流——不只是接受，而是阅读、质疑并调整。\n\n**第 1 步——启动：**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**第 2 步——请求一次修改：**\n请 Claude 修改你在 7-4 课中创建的 `about-me.html`：\n```\nImprove the CSS in about-me.html to make it look more modern:\n- Add a gradient background (dark blue to purple)\n- Make the typography cleaner — increase line height and font size\n- Add a subtle box shadow to the main content area\n```\n\n**第 3 步——仔细阅读 diff：**\n当 Claude 展示 diff 时，逐行看过去：\n- 新增了哪些 CSS 属性？（绿色 `+` 行）\n- 有没有被删除的内容？（红色 `-` 行）\n- 你理解每一处改动的作用吗？\n\n**第 4 步——请求解释：**\n在接受之前，挑一个你好奇的改动问一下：\n```\nBefore I accept this, explain what the gradient syntax on the background-image line does.\n```\n阅读它的解释。\n\n**第 5 步——部分接受：**\n现在练习调整这条路径。输入：\n```\nAccept the typography and box shadow changes, but instead of the gradient I want\na solid dark blue background (#1a1a2e). Revise the diff.\n```\nClaude 应该会给你展示一份更新后的 diff，只改动渐变那一行。\n\n**第 6 步——接受修改后的版本：**\n如果修改后的 diff 看起来没问题，输入 `yes`。\n\n**第 7 步——在浏览器中打开：**\n在 VS Code 中右键 → Open with Live Server。验证改动看起来符合预期。\n\n**需要注意的地方：** 你不必全盘接受或全盘拒绝。你协商出了一次具体的修改。这种协商能力，正是优秀的 AI 辅助开发与鲁莽接受之间的分水岭。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A —— 接受/拒绝工作流训练",
+      "content": "熟练掌握接受/拒绝的工作流——这是你对 Claude Code 最主要的安全控制手段。\n\n**第 1 步——在项目中打开 Claude Code：**\n```powershell\nclaude\n```\n\n**第 2 步——请求一次改动：**\"为 [文件名] 中的每一个函数添加类型注解。\"\n\n**第 3 步——当 Claude Code 展示 diff 时**，练习系统性地审查：\n- 每一处改动看起来都对吗？\n- 有没有遗漏的函数？\n- 有没有添加任何意料之外的改动？\n\n**第 4 步——练习拒绝：** 如果某处改动看起来不对，拒绝它并说明原因：\"不要对 `__init__` 函数应用这个改动——按照这个项目的风格，这是一个特殊方法，不需要类型注解。\"\n\n**第 5 步——接受其余部分**，并核实文件的最终状态。\n\n**第 6 步——问 Claude：**\"你在什么情况下会不展示 diff 就直接做出改动，什么情况下会展示给我看？你的一般规则是什么？\"——了解它的默认行为。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B —— AI 辅助的代码审查环节",
+      "content": "把 Claude Code 当作代码审查者来用——审查你自己的代码，或者同事的代码。\n\n**第 1 步——确定要审查的代码：** 一个 pull request、一个你最近写的模块，或一段你不太有把握的代码。\n\n**第 2 步——请求 Claude Code 进行结构化审查：**\n```\nReview the code in [filename or directory]. I want:\n1. An overall assessment: is this code well-written?\n2. Specific issues found (with line numbers where applicable)\n3. Priority ranking: which issues should I fix first?\n4. Any patterns you notice across multiple issues\n\nBe critical — I'm trying to improve the code, not feel good about it.\n```\n\n**第 3 步——对 Claude Code 找出的每一个问题**，决定：现在修、以后修，或者不认同并说明理由。\n\n**第 4 步——请 Claude Code 修复优先级最高的问题：**\"修复你审查结果中的第 1、3、5 项。\"\n\n**第 5 步——在接受之前审查每一处修复。** 这次修复是否解决了问题，同时没有引入新问题？\n\n**第 6 步——用一条包含审查摘要的提交信息进行提交。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 C —— 在接受之前测试改动",
+      "content": "Claude Code 审查的黄金标准：在接受改动之前先测试它们。\n\n**第 1 步——请求 Claude Code 实现一个小功能。** 例如：\"给 `get_user_data` 函数加一个缓存层，让它把结果缓存 60 秒。\"\n\n**第 2 步——审查** Claude Code 展示的 diff。\n\n**第 3 步——在接受之前，请求 Claude Code 测试它：**\n\"在我接受这些改动之前，运行现有的测试，确认它们仍然通过。另外专门为缓存行为编写并运行一个测试。\"\n\n**第 4 步——观察 Claude Code 运行测试。** 如果测试失败，它应该在你接受之前先修复问题。\n\n**第 5 步——只有测试通过之后才接受。** 这是理想的工作流：AI 编写 → 测试确认 → 你接受。\n\n**第 6 步——问 Claude Code：**\"缓存行为中有哪些边界情况没有被你写的测试覆盖到？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D —— 为 Claude Code 的改动建立审查清单",
+      "content": "创建一份系统性的清单，每次 Claude Code 做出改动时都过一遍。\n\n**第 1 步——问 Claude：** *\"专门为 AI 生成的代码创建一份代码审查清单。AI 在写代码时最常见的、人类会发现的错误是什么？按照以下几类来组织：逻辑错误、安全问题、错误处理缺口，以及风格/可维护性问题。\"*\n\n**第 2 步——把清单调整**为适合你具体的语言和项目类型。\n\n**第 3 步——把清单应用**到你项目里最近一次 Claude Code 的改动上。如果没有这份清单，你会不会漏掉些什么？\n\n**第 4 步——必做的元审查：** 问 Claude：*\"审查这份清单。有哪些重要的项目遗漏了，安全专家或资深工程师会补充哪些内容？\"*\n\n**第 5 步——保存这份清单**，此后每次审查 Claude Code 的改动时都用它。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code 对 5 个文件做出了改动。其中 4 个看起来正确，但有 1 个看起来可疑。正确的做法是什么？",
+      "options": [
+        "接受全部 5 个——AI 生成的内容通常是正确的",
+        "接受那 4 个正确的，请 Claude Code 解释并重做那个可疑的",
+        "拒绝全部 5 个，用更具体的任务描述重新开始",
+        "接受全部 5 个，运行测试来捕捉任何错误"
+      ],
+      "correct": 1,
+      "explanation": "接受看起来正确的部分，针对具体的疑虑逐一处理。拒绝所有改动会浪费掉正确的工作成果；接受可疑的改动则等于把你的审查责任转交给了测试（而测试可能捕捉不到逻辑错误）。可以说：\"我接受这 4 处改动。对于 [文件] 里的那处改动，解释一下你的推理过程和它想要实现什么——我想在接受之前先核实一下。\"这是精确、有针对性的审查。"
+    },
+    {
+      "type": "quiz",
+      "question": "接受了 Claude Code 的改动之后，你发现其中一处引入了一个 bug。你该如何恢复？",
+      "options": [
+        "在一个新会话中请 Claude Code 修复这个 bug",
+        "用 `git revert` 撤销那次提交，或者用 `git checkout` 恢复特定文件，然后正确地修复它",
+        "请 Claude Code 撤销它之前的改动",
+        "手动修复这个 bug——这对 git 操作来说太复杂了"
+      ],
+      "correct": 1,
+      "explanation": "这正是版本控制存在的意义。如果你已经提交了 Claude Code 的改动：`git revert HEAD` 会创建一个新的提交来撤销上一次提交（对共享仓库来说是安全的）。如果你还没有提交：`git checkout -- filename` 会把文件恢复到上一次提交时的状态。如果改动跨越了多个提交：可以用 `git rebase` 或者逐个 cherry-pick 撤销。始终在审查之后立即提交 Claude Code 的改动，这样你就有一个干净的回退点。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成 7-5 课。** 你能够阅读 diff、有选择地接受、请求解释，并用 Git 作为安全网。下一课：用 CLAUDE.md 永久地教会 Claude 关于你的项目的知识。"
+    }
+  ],
+  "nextLesson": "7-6",
+  "prevLesson": "7-4"
+}

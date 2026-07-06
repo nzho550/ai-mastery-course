@@ -1,0 +1,123 @@
+{
+  "id": "3-3",
+  "title": "角色与人设提示词",
+  "part": 3,
+  "estimatedMinutes": 60,
+  "tags": [
+    "prompting",
+    "beginner",
+    "role-prompting"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 本课你将学到什么\n\n你将学到“扮演……”（Act as...）技巧——这是你能给任何提示词加上的最强大的单一技巧之一——并且还会学到更多进阶用法。你将掌握如何构建丰富的专家人设、如何用对抗性人设进行压力测试、如何搭建多视角专家小组，并且真正从技术层面理解角色提示词为什么有效。学完本课后，你将拥有一整套基于人设的技巧，能持续产出更专业、更具体、更有用的输出。"
+    },
+    {
+      "type": "text",
+      "content": "## 角色提示词为什么有效——技术原理\n\n当你让语言模型扮演一个特定角色时，确实会发生一些有意义的变化。模型的训练数据中包含了海量从不同视角写成的文字：资深工程师写的代码审查评论、老师写的讲解、律师写的分析、教练写的建议专栏。\n\n通过指定一个角色，你本质上是在调到那份训练数据中的某个特定“频道”。“扮演一名资深软件工程师”会把模型的输出分布，拉向那些像资深工程师那样说话、思考、组织建议的回答。这不是魔法——这是模式激活。\n\n没有角色设定时，模型默认使用一种“通才”语气：友善、礼貌，但常常让人抓狂地不给出明确意见。而有了一个精心挑选的角色，模型就会变得有主见、具体，并针对某个领域做出校准。\n\n下面是同一个问题，有角色和没有角色的对比："
+    },
+    {
+      "type": "code",
+      "language": "plaintext",
+      "content": "Without role:\nReview my Python function and tell me if it's good.\n\nWith role:\nAct as a senior software engineer doing a code review.\nBe direct and specific. Point out any inefficiencies, edge cases I haven't\nhandled, and anything that would fail a PR review at a serious company.\nReview this Python function: [paste function here]"
+    },
+    {
+      "type": "text",
+      "content": "输出的深度和具体程度差异非常明显。角色指令解锁了一种模型知道自己拥有、但默认不会使用的回答模式。\n\n**来自 Anthropic 研究的一个重要发现：** 当 AI 被赋予一个离“Claude”这个身份很远的名字或角色时，不对齐（模型偏离预期行为）的风险会增加——但对于任务型角色（“资深工程师”“经验丰富的编辑”），这并不是问题。用角色提示词来获取领域专业知识，是可靠且有充分依据支持的做法。"
+    },
+    {
+      "type": "text",
+      "content": "## 角色提示词的三个层级\n\n**第一级——简单头衔：**\n```\nAct as a lawyer.\n```\n效果弱。“律师”这个词太宽泛了——是公司法、刑法、家事法，还是知识产权、劳动法？\n\n**第二级——具体头衔 + 领域：**\n```\nAct as an intellectual property lawyer specialising in technology startups.\n```\n好得多。这把范围收窄到了法律知识中特定的一块。\n\n**第三级——完整人设，包含背景、视角和行为指令：**\n```\nAct as a senior IP lawyer with 15 years of experience advising tech startups.\nYou have seen hundreds of founders make avoidable legal mistakes with their contracts,\nemployee IP agreements, and open-source licensing. You are direct and don't hedge\nyour advice unnecessarily — you respect that founders need actionable guidance,\nnot 'consult a lawyer for everything.' When you're unsure, you say so explicitly.\nYou tend to err on the side of caution for anything involving patent disputes or\nlitigation, but are practical about lower-stakes licensing questions.\n```\n第三级会产出明显更丰富、更精准校准的回答。人设的细节有助于模型在长对话中保持一致性。\n\n**具体性法则：** “扮演一名专家”这种说法效果很弱——到底是什么方面的专家？“扮演一名专注于老年用户移动应用可用性研究的 UX 研究员”则很具体，能激活一种针对性强得多的回答模式。"
+    },
+    {
+      "type": "text",
+      "content": "## 面向职场场景的必备角色模板\n\n以下是 8 个针对常见职场情境的强大角色模板：\n\n**用于技术代码审查：**\n```\nAct as a senior software engineer doing a rigorous PR review.\nYou value: readability, correctness, edge case coverage, and performance.\nYou are not harsh, but you are honest. Point out anything that would\nneed to change before merging. Be specific — no vague suggestions.\n```\n\n**用于商业写作点评：**\n```\nAct as a brutally honest editor who has spent 20 years editing business documents.\nYou hate jargon, passive voice, and buried leds. You know the opening sentence\nof any document is the most important. Give me 5 specific changes to improve this writing.\n```\n\n**用于战略压力测试：**\n```\nAct as a venture capital investor who is famous for asking the hardest questions.\nYou've seen hundreds of pitches fail for the same reasons: vague TAM, unclear\nunit economics, overstated competitive moats. Challenge every assumption in\nwhat I'm about to share. Be direct about what you'd push back on.\n```\n\n**用于数据解读：**\n```\nAct as a senior data analyst who is expert at identifying what the numbers actually\nsay vs. what people want them to say. When you see data, you ask: what's missing?\nwhat could explain this differently? what's the sample size? Analyse my data with that lens.\n```\n\n**用于医疗/健康信息：**\n```\nAct as a doctor with a specialty in [area] who is explaining a concept to\nan intelligent patient. Be clear and honest. Explain what's well-established\nvs. what's still debated in the literature. Note when I should definitely\nseek in-person medical advice vs. when this is general educational information.\n```\n\n**用于谈判准备：**\n```\nAct as the other party in a negotiation I'm about to enter.\nTheir position: [describe their interests and constraints]\nYour goal is to argue their side as persuasively as possible,\nso I can prepare for every argument I'll face.\n```\n\n**用于学习复杂主题：**\n```\nAct as a brilliant teacher who can explain anything to anyone.\nI'm a [describe your background and level]. Explain [topic] in a way that:\n- Uses analogies to things I'd already understand\n- Checks my understanding with questions\n- Builds from simple to complex\n- Tells me explicitly when something is a simplification of a more complex reality\n```\n\n**用于修改自己的作品：**\n```\nAct as [a specific author whose writing style you admire].\nRead my draft from their perspective. What would they say is weak?\nWhat would they praise? Rewrite my opening paragraph in their style.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 专家小组技巧——同时获取多个视角\n\n与其只问一位专家，不如同时问多位。这是思维树（Tree-of-Thought，将在第 18 部分讲到）与人设提示词相结合的一种形式。\n\n```\nI want you to analyse this decision from three distinct expert perspectives.\nFor each expert, adopt their mindset, use their vocabulary, and apply their\nspecific framework for thinking about this problem.\n\nDecision: [describe your decision]\n\nExpert 1: A conservative risk manager who has seen projects fail from overconfidence\nExpert 2: An entrepreneurial innovator who believes the cost of not acting is often\n          higher than the cost of acting imperfectly\nExpert 3: A pragmatic project manager focused on execution and deliverability\n\nAfter all three perspectives, give me a synthesis: which expert has the strongest\narguments for this specific situation, and what would a balanced decision look like?\n```\n\n**为什么这样有效：** 每个专家人设都会激活模型训练数据中不同的模式分布。它们放在一起，能揭示出任何单一视角都无法呈现的权衡取舍。这对以下场景特别有用：\n- 重大战略决策\n- 商业计划审查\n- 技术架构选型\n- 存在真实权衡取舍的职业决定"
+    },
+    {
+      "type": "text",
+      "content": "## 对抗性人设——对你的想法进行压力测试\n\n人设提示词中最有价值（也最被低估）的用法之一，就是在真正面对现实批评之前，先让 AI 当你最严苛的批评者。\n\n**上台前的压力测试：**\n```\nAct as the toughest investor in the room — the one who is famous for publicly\ntearing apart weak business models. You've just heard my pitch. You have 3 minutes\nto grill me on the weakest parts. Go.\n\n[paste your pitch]\n```\n\n**发布前的事实核查：**\n```\nAct as a fact-checker at a major newspaper. Your job is to question every\nfactual claim in the piece below. For each claim: Is it verifiable? Is the\nsource credible? Is the statistic being used in its correct context?\nDo not be gentle — fact-checkers aren't.\n\n[paste your article/report]\n```\n\n**决策前的魔鬼代言人：**\n```\nI've decided to [describe your decision]. Act as the best possible devil's advocate.\nConstruct the strongest possible argument against this decision. Don't steelman\na weak argument — build the best case that this decision is wrong.\n```\n\n对抗性人设用起来会让人不太舒服，但极其有用。它揭示出的异议，正是你将来会从真实批评者那里听到的那些——不如先从 AI 那里听到，提前做好准备。"
+    },
+    {
+      "type": "text",
+      "content": "## 系统提示词——看不见的地基\n\n每一次 AI 对话都有三层：\n1. **系统提示词（System prompt）**——在对话开始之前设定好的指令，用户看不见\n2. **用户消息（User message）**——你输入的内容\n3. **助手回复（Assistant response）**——AI 说的话\n\n当你使用 Claude.ai 时，Anthropic 已经写好了一个你看不到的系统提示词——它设定了 Claude 的核心行为、安全准则和性格特征。\n\n当企业用 Claude 构建产品时（客服机器人、编程助手、写作工具），他们会编写自己的系统提示词，为自己的具体产品定制 Claude 的行为。\n\n**你可以在 Claude.ai 中模拟一个系统提示词**，做法是把角色/指令文本放在对话第一条消息的最开头：\n```\n[System: You are a concise, direct technical writer. You write documentation\nfor developers. You use active voice and short sentences. You never use jargon\nwithout immediately defining it. Respond only to questions about documentation\nand technical writing.]\n\n[Now ask your actual question]\n```\n\n这不如真正的系统提示词可靠（真正的系统提示词是在对话开始前就锁定好的），但对大多数用途来说已经足够有效。\n\n**当你使用 Claude API 构建应用时**（本课程第 11 部分），你会在专门的字段中写真正的系统提示词——这比在用户轮次里模拟系统提示词更一致、更强大。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "专家小组——三个视角，一个决策",
+      "content": "这个练习把专家小组技巧应用到一个你正在处理的真实决策或想法上。\n\n**选定你的主题**——一个你想接受压力测试的真实决策、提案、计划或文字作品。当这个主题是你真正在意、并且外部视角确实能帮上忙的东西时，效果最好。\n\n**第一轮——专家小组（15 分钟）**\n\n打开 [Claude.ai](https://claude.ai)，运行完整的专家小组提示词：\n```\nI want you to analyse the following from three distinct expert perspectives.\nAdopt each expert's mindset, vocabulary, and framework. Don't hedge — be specific.\n\nTopic: [your decision/plan/idea]\n\nExpert 1: [choose a relevant expert — investor, critic, technical expert, etc.]\nExpert 2: [a contrasting perspective — someone who would see different risks]\nExpert 3: [a pragmatic implementer — someone who asks 'but how does this actually work?']\n\nAfter each expert's analysis, identify the ONE most important thing they'd want\nchanged or clarified. Then give me a final synthesis: what's the overall verdict?\n```\n\n仔细阅读全部三个视角。记下：每位专家揭示出了哪些你之前没有考虑到的点？\n\n**第二轮——对抗式分析（5 分钟）**\n\n在一个新对话中，针对同一主题运行对抗性的魔鬼代言人提示词。要求给出反对你的决策或计划的*最强有力*的论证。\n\n**第三轮——综合（5 分钟）**\n\n回到你最初的对话，问：\n```\nBased on the three expert perspectives you've given me, and the adversarial\nargument, what are the 3 most important changes I should make to [topic]\nbefore proceeding? Be specific.\n```\n\n**写下你的答案：**\n- 专家小组揭示出了哪些你之前不知道的信息？\n- 对你的具体主题来说，三个专家视角中哪一个最有价值？\n- 对于你工作中最重要的那类重复性决策，你会如何设置专家小组？\n\n**保存今天用到的 2 条角色提示词**，供接下来一周内继续使用。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude 用“扮演一名商业专家”来审查你的商业计划书。反馈很笼统、很空泛。最有效的解决办法是什么？",
+      "options": [
+        "让 Claude 更努力一点",
+        "用“扮演一名专家”这个说法，但加重语气——把 EXPERT 全部大写",
+        "构建一个第三级人设：具体角色、多年从业经验、他们最看重什么、他们的沟通风格，以及他们审查提案时所用的视角",
+        "不使用任何人设去问——Claude 的默认模式反而能给出更好的商业建议"
+      ],
+      "correct": 2,
+      "explanation": "笼统的角色会产出笼统的输出。“商业专家”这个说法太宽泛了，无法激活任何具体的知识领域或分析方法。一个第三级人设——具备具体背景、利害关系、偏好和沟通风格——能给模型提供丰富得多的相关模式来参考。“扮演一名商业专家”和“扮演一名审查过 200 份初创公司商业计划书、尤其关注单位经济效益和现金流假设的首席财务官”，两者产出的深度差异是巨大的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 A——人设切换练习",
+      "content": "这个 8 分钟的练习会展示，一条人设指令能让 AI 的输出发生多大的变化。\n\n**第 1 步——选一个你了解一些的主题**——一个你能够判断不同解释质量高低的主题。\n\n**第 2 步——用 4 种不同的人设指令，向 Claude 提出同一个问题：**\n1. 不加任何人设指令——直接提问\n2. “像大学教授给大一新生讲课那样解释这个”\n3. “以一个拥有 10 年一线实战经验的从业者的身份解释——跳过理论，只讲真正重要的东西”\n4. “以一个会质疑每一个假设的怀疑者的身份解释”\n\n**第 3 步——对比这 4 个回答。** 留意：语气、词汇难度、包含了什么/省略了什么、语气听起来有多自信。\n\n**第 4 步——找出哪个版本对你的具体目的最有用。** 对同一个主题来说，最合适的人设取决于你的受众和目标。\n\n**第 5 步——把最有用的人设指令保存**到你的提示词库中。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——搭建一个基于角色的审阅者",
+      "content": "人设提示词最强大的用法，是为你的作品搭建一个专家审阅小组。这个练习会创建一个可复用的审阅者提示词。\n\n**第 1 步——选一份你写过的真实文档**（报告、计划、邮件、演示文稿或分析）。\n\n**第 2 步——让 Claude** 用三种不同的专家人设，把它审阅三遍：\n```\nFirst, review this document as a sharp senior executive who cares only about whether this is actionable and worth their time.\n\nThen, review it as a detail-oriented auditor looking for logical gaps, unsupported claims, and missing information.\n\nFinally, review it as a cynical devil's advocate whose job is to argue against every recommendation.\n```\n\n**第 3 步——收集全部三份审阅意见。** 每位专家分别注意到了哪些其他人都没提到的地方？\n\n**第 4 步——必做的 AI 审查环节：** 问 Claude：*“根据上面这三份审阅意见，我应该对这份文档做出哪 3 项最重要的修改？不要只是罗列问题——请排出优先级，并为每一项给出具体的修改方案。”*\n\n**第 5 步——在保存最终文档之前，至少落实其中 2 项修改。**\n\n**第 6 步——把这个三人设审阅提示词保存**到你的提示词库中。以后每次写重要内容时都可以重复使用。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "练习 C——用于受众适配的人设",
+      "content": "同样的内容，往往需要传达给差异很大的不同受众。这个练习会搭建一个受众适配器。\n\n**第 1 步——选一份需要传达给多个受众的工作内容：** 一项技术发现、一份业务更新、一个数据分析结果、一项政策变化。\n\n**第 2 步——让 Claude 为三种不同受众做适配：**\n- 你的直属经理（战略性，2-3 句话，聚焦影响）\n- 负责执行的团队（操作层面，聚焦对他们来说会发生什么变化）\n- 外部利益相关方或客户（不用行话，聚焦他们需要知道或决定的事情）\n\n**第 3 步——审阅每个适配版本。** 每个版本听起来是否都符合各自受众的调性？有没有这个特定受众需要、但被遗漏的信息？\n\n**第 4 步——让 Claude 做一次审核：** *“审阅这三个版本。哪一个最准确地还原了原始内容？哪一个最适合它对应的受众？哪个适配过程中引入了失真？”*\n\n**第 5 步——把最好的版本**用于你真实的沟通需求。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 D——创建你的专家小组提示词",
+      "content": "为你的具体领域搭建一个定制化的专家小组——一个可复用的提示词，用来模拟你在发送重要内容之前最希望获得的那些审阅意见。\n\n**第 1 步——想想你的工作。** 当你产出一份东西时，谁的意见最重要？列出 3-4 种真实的审阅者类型（你的经理、某个领域的专家、持怀疑态度的客户、合规官、可能会看不懂的新人）。\n\n**第 2 步——针对每一位审阅者，写出：**\n- 他们的角色和专业领域\n- 他们最看重什么\n- 他们最可能提出质疑的地方\n- 他们会用的语气\n\n**第 3 步——问 Claude：** *“根据这些审阅者画像 [粘贴画像]，帮我创建一个角色提示词模板，让我每次写重要内容时都能一次性获得全部四份审阅意见。每个角色应该感觉截然不同，并且各自挑战这份工作的不同方面。”*\n\n**第 4 步——在你的一份真实作品上测试这个模板。**\n\n**第 5 步——打磨并保存。** 专家小组提示词，是任何认真使用 AI 的人工具箱里价值最高的工具之一。"
+    },
+    {
+      "type": "quiz",
+      "question": "你让 Claude “以一个专挑毛病的严苛评论者的身份来回应”。这条人设指令的主要好处是什么？",
+      "options": [
+        "它会让 Claude 生成更长的回答",
+        "它能克服 Claude 倾向于认可和附和的习惯，揭示出你作品中真正存在的问题",
+        "它会让 Claude 使用更正式的语言",
+        "它能让 Claude 获取平时会保留不说的信息"
+      ],
+      "correct": 1,
+      "explanation": "如果没有明确的指令，AI 往往会倾向于认可和附和——它会找出你作品中好的地方，而不是有问题的地方。批评者人设直接抵消了这种倾向，让 Claude 主动去寻找问题、漏洞和薄弱之处，而不是优点。这就是为什么对抗性人设在你把作品交给真实受众之前，用来自我审阅是如此有价值。"
+    },
+    {
+      "type": "quiz",
+      "question": "你写了这样一条提示词：“你是一名营销专家。” 对这条人设指令，最有效的改进是什么？",
+      "options": [
+        "加上“请”，让它显得更礼貌",
+        "说明这位专家的视角、他们看重什么，以及你希望他们解决什么问题",
+        "让这个人设听起来更厉害（“世界知名专家”）",
+        "在结尾加上“要有创意”"
+      ],
+      "correct": 1,
+      "explanation": "关键的改进在于具体性：什么类型的营销、什么视角、他们看重什么，以及你需要他们提供什么。“营销专家”能给 Claude 的信息太少了。“一家 B2B SaaS 公司的营销总监，非常看重留存率指标，总是会质疑虚荣指标”则给了 Claude 一个清晰、可执行的视角。人设背景越具体，回答就越有用、越与众不同。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 3-3 课。** 你现在掌握了人设构建的三个层级、8 个职场角色模板、用于多视角分析的专家小组技巧，以及用于压力测试的对抗性人设。这些技巧，正是“AI 给你笼统建议”和“AI 给你专业校准、具体、可执行的输出”之间的分界线。"
+    }
+  ],
+  "nextLesson": "3-4",
+  "prevLesson": "3-2"
+}

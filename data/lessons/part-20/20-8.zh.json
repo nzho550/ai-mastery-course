@@ -1,0 +1,81 @@
+{
+  "id": "20-8",
+  "title": "高级技能模式——子智能体、参数与分享",
+  "part": 20,
+  "estimatedMinutes": 85,
+  "tags": [
+    "skills",
+    "subagents",
+    "advanced",
+    "sharing",
+    "team",
+    "build"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n这是第 20 部分的压轴课。你将学习三种高级技能模式，它们解锁了最复杂、最强大的 AI 工作流：\n\n1. **从技能中生成子智能体**——一项技能启动多个 AI 智能体并行工作，每个智能体处理同一任务的不同方面\n2. **参数化技能模式**——设计能根据你传入内容调整行为的技能，而不是只做一件固定的事\n3. **分享与分发技能**——发布你的技能库，让同事、团队成员，或全世界都能使用它\n\n学完本课后，你将搭建一个融合了这三种模式的复杂技能，并把你的技能库发布到 GitHub。"
+    },
+    {
+      "type": "text",
+      "content": "## 模式 1：从技能中生成子智能体\n\nClaude Code 有一个 `Agent` 工具，技能可以调用它来生成独立的智能体会话。正是这一点让 `/deep-analyze` 模式成为可能——它也解锁了远比这更复杂的工作流。\n\n**什么时候在技能中使用子智能体：**\n- 可以并行化的任务（每个智能体独立处理一个切片）\n- 需要独立视角的任务（如 /deep-analyze 中那样）\n- 需要分离关注点的长时间任务（一个智能体做调研，一个负责撰写）\n- 需要不同工具访问权限的不同领域任务\n\n**如何指示一项技能使用子智能体：**\n```markdown\n<steps>\n...\nStep N — 生成并行子智能体：\n  同时启动 3 个智能体，每个都读取 $ARGUMENTS：\n  \n  Agent A — 市场分析：\n  “分析 [主题] 的市场背景。搜索：市场规模、\n  增长率、主要竞争对手、近期动态。返回一份带有具体数字的\n  结构化简报。”\n  \n  Agent B — 技术分析：\n  “分析 [主题] 的技术实现。搜索：常见的架构方案、\n  已知的挑战、工具生态。返回一份带有具体工具和权衡取舍的\n  结构化简报。”\n  \n  Agent C — 用户/人的因素分析：\n  “分析 [主题] 的人的因素。搜索：用户痛点、采用模式、\n  成功与失败的案例研究。返回一份带有具体案例的\n  结构化简报。”\n  \nStep N+1 — 综合：\n  当三个智能体都返回结果后，整合它们的简报。找出它们一致的地方\n  （高置信度）和分歧的地方（需要标记）。\n</steps>\n```\n\n**实用提示：** 并非所有 Claude Code 配置都启用并行智能体生成。在可用的配置中，`Agent` 工具会出现在工具列表里。如果不可用，技能可以通过按顺序运行分析、并做好清晰的框架区分来模拟并行——你仍然能获得独立视角带来的好处，只是没有速度上的好处。\n\n**智能体简报模式：**\n当一项技能生成一个子智能体时，智能体简报应该：\n1. 自成一体——除了你给它的信息，该智能体没有来自父级的任何上下文\n2. 明确输出格式——这样父级才能解析结果\n3. 范围明确——一个智能体，一项职责"
+    },
+    {
+      "type": "text",
+      "content": "## 模式 2：参数化技能设计\n\n本课程中大多数技能都把 `$ARGUMENTS` 当作一个简单的字符串使用——传入一个文件路径、一个主题、一个名称。参数化技能则把 `$ARGUMENTS` 当作一个能改变技能行为的结构化输入。\n\n**简单的参数路由：**\n```markdown\n<steps>\n1. 解析 $ARGUMENTS：\n   - 如果以 'file:' 开头 → 当作文件路径处理\n   - 如果以 'url:' 开头 → 抓取该 URL\n   - 如果以 'search:' 开头 → 搜索网络\n   - 否则 → 当作一个需要根据训练知识进行推理的主题\n</steps>\n```\n\n**命名参数模式：**\n```markdown\n# 带命名参数的 /analyze 技能\n\n<steps>\n1. 解析 $ARGUMENTS 中的命名标志：\n   - --depth [quick/deep/exhaustive] — 默认为 'deep'\n   - --format [brief/detailed/table] — 默认为 'detailed'\n   - --focus [risk/opportunity/both] — 默认为 'both'\n   标志之后剩余的文本就是要分析的文档或主题。\n\n示例：\n/analyze --depth quick --format brief proposal.pdf\n/analyze --focus risk contract.txt\n/analyze market trends in AI assistants\n</steps>\n```\n\n**模式切换模式：**\n```markdown\n<steps>\n1. 如果 $ARGUMENTS 为空或为 'help'：显示可用的模式\n2. 如果 $ARGUMENTS 以 'quick' 开头：运行简化版本（5 个步骤）\n3. 如果 $ARGUMENTS 以 'deep' 开头：运行完整版本（全部步骤）\n4. 否则：运行标准版本（8 个步骤）\n</steps>\n```\n\n**为什么参数化很重要：**\n一项参数化技能可以取代 3-4 个独立的技能。与其分别拥有 `/analyze-quick`、`/analyze-deep` 和 `/analyze-risk-only`，不如拥有 `/analyze --depth quick`、`/analyze --depth deep` 和 `/analyze --focus risk`。更易维护，更易记忆，使用起来也更强大。"
+    },
+    {
+      "type": "text",
+      "content": "## 模式 3：分享技能——你在 GitHub 上的技能库\n\n技能本质上就是文件。文件可以放到 GitHub 上。一个公开的技能仓库就是一个任何人都可以克隆并使用——或参与贡献——的库。\n\n**可分享技能库的结构：**\n```\nskill-library/\n  README.md              ← 如何安装和使用\n  install.sh             ← 把技能复制到 ~/.claude/commands/\n  install.ps1             ← Windows 版本\n  email/\n    email-sort.md\n    email-report.md\n    email-draft.md\n    email-unsubscribe.md\n  productivity/\n    morning-brief.md\n    standup.md\n    weekly-review.md\n    code-review.md\n  analysis/\n    deep-analyze.md\n    research-consensus.md\n    contract-review.md\n  documents/\n    extract-data.md\n    meeting-minutes.md\n    compare-docs.md\n  workflow/\n    start-day.md\n    project-wrap.md\n    onboard.md\n  SKILLS.md              ← 附带使用示例的所有技能索引\n```\n\n**安装脚本（Windows 的 PowerShell 版本）：**\n```powershell\n# install.ps1\n$source = $PSScriptRoot\n$target = \"$HOME\\.claude\\commands\"\n\nNew-Item -ItemType Directory -Force -Path $target\n\nGet-ChildItem -Path $source -Recurse -Filter '*.md' |\n  Where-Object { $_.Name -ne 'README.md' -and $_.Name -ne 'SKILLS.md' } |\n  ForEach-Object {\n    Copy-Item -Path $_.FullName -Destination \"$target\\$($_.Name)\" -Force\n    Write-Host \"Installed: $($_.Name)\"\n  }\n\nWrite-Host \"`n✅ Skills installed to $target\"\nWrite-Host \"Available commands:\"\nGet-ChildItem $target -Filter '*.md' | ForEach-Object { Write-Host \"  /$($_.BaseName)\" }\n```\n\n**安装脚本（Mac/Linux 的 bash 版本）：**\n```bash\n#!/bin/bash\nSOURCE=\"$(cd \"$(dirname \"$0\")\" && pwd)\"\nTARGET=\"$HOME/.claude/commands\"\n\nmkdir -p \"$TARGET\"\n\nfind \"$SOURCE\" -name '*.md' \\\n  ! -name 'README.md' ! -name 'SKILLS.md' | while read f; do\n  cp \"$f\" \"$TARGET/$(basename $f)\"\n  echo \"Installed: $(basename $f)\"\ndone\n\necho \"\\n✅ Skills installed to $TARGET\"\n```\n\n**README 中应该包含什么：**\n- 这个库是什么\n- 前置条件（需要连接哪些 MCP）\n- 安装说明（复制上面的脚本）\n- 最常用技能的快速参考\n- 如何贡献（PR 规范）\n\n**团队分发：**\n如果要在团队或组织内部分享：\n1. 创建一个包含你的技能库的私有 GitHub 仓库\n2. 添加到团队的入职文档中：“克隆 X 并运行 install.sh”\n3. 当你改进某项技能时：推送到仓库，团队拉取更新\n\n这样，你的个人技能库就变成了团队基础设施。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "搭建终极技能——/analyze-anything",
+      "content": "搭建一个完全参数化、由子智能体驱动的分析技能，能适应任何文档或主题。\n\n**目标：** 一个单一的 `/analyze-anything` 命令，能够：\n- 接受任何文档、URL 或主题作为输入\n- 根据 --depth 标志调整深度（quick/standard/deep）\n- 根据深度生成相应数量的分析智能体\n- 生成与深度级别相匹配的格式\n\n**第 1 步——设计参数系统：**\n写出这项技能应该如何处理以下调用方式：\n```\n/analyze-anything --depth quick proposal.pdf\n/analyze-anything --depth deep https://company.com/annual-report\n/analyze-anything AI adoption trends in healthcare\n/analyze-anything --format table contract.pdf\n```\n\n**第 2 步——请求 Claude 搭建该技能：**\n```\n搭建 ~/.claude/commands/analyze-anything.md：\n\n这项技能把 /deep-analyze 的多智能体模式与参数化结合起来。\n\n--depth quick：2 个智能体（怀疑者 + 机会挖掘者），简要输出（100 字）\n--depth standard：3 个智能体（怀疑者 + 机会挖掘者 + 行动提取器），标准输出（250 字）\n--depth deep：5 个智能体（完整的 /deep-analyze 模式），完整输出（400 字以上）\n\n--format brief：段落式输出\n--format detailed：结构化章节（默认）\n--format table：以表格呈现关键发现\n\n默认：--depth standard --format detailed\n\n如果 $ARGUMENTS 没有标志：运行标准深度、detailed 格式。\n在提取文档/主题之前，先解析 $ARGUMENTS 开头的标志。\n\n为每个深度级别定义智能体集合，以及每个智能体的关注点。\n包含智能体无法读取源材料时的合理回退方案。\n```\n\n**第 3 步——测试全部三个深度级别：**\n```\n/analyze-anything --depth quick [一份简短文档]\n/analyze-anything [同一份文档]\n/analyze-anything --depth deep [同一份文档]\n```\n\n记录每个级别的输出长度和详细程度。\n\n**第 4 步——与 /deep-analyze 对比：**\n对同一份文档运行两者：\n```\n/deep-analyze [文档]\n/analyze-anything --depth deep [文档]\n```\n\n哪个输出更好？为什么？相应地更新 analyze-anything。\n\n**完成检查：** 你拥有了一个单一的参数化、多智能体技能，取代了三个独立的分析技能。这是你技能库中最复杂的技能。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——把你的技能库发布到 GitHub",
+      "content": "整理你在本部分搭建的所有技能，并将它们发布为一个可分享的 GitHub 仓库。\n\n**第 1 步——把你的技能整理成分类：**\n```\n列出 ~/.claude/commands/ 中的所有文件\n```\n\n将它们分组到以下文件夹中：\n- email/ — email-sort、email-report、email-draft、email-unsubscribe\n- productivity/ — morning-brief（或 daily-brief）、standup、code-review、weekly-review\n- analysis/ — deep-analyze、research-consensus、contract-review、analyze-anything\n- documents/ — extract-data、meeting-minutes、compare-docs\n- workflow/ — start-day、project-wrap、onboard\n\n**第 2 步——创建仓库结构：**\n```\n创建一个文件夹：C:/Projects/skill-library\n在其中创建上面的分类文件夹。\n把每个技能文件复制到它对应的分类文件夹中。\n```\n\n**第 3 步——创建安装脚本：**\n请求 Claude：\n```\n在 C:/Projects/skill-library 中创建两个安装脚本：\n\n1. install.ps1（用于 Windows 的 PowerShell），把所有 .md 文件\n   从子目录复制到 ~/.claude/commands/ 中——排除 README.md 和 SKILLS.md\n\n2. install.sh（用于 Mac/Linux 的 bash），执行相同的操作\n\n两个脚本都应该：如果 ~/.claude/commands 不存在则创建它，\n打印正在安装的内容，用成功消息确认，\n并在最后列出所有已安装的命令名称。\n```\n\n**第 4 步——创建 SKILLS.md——技能索引：**\n请求 Claude：\n```\n在 C:/Projects/skill-library/SKILLS.md 中创建一份完整的技能索引，\n按分类分组。对每项技能：列出命令、一句话描述、\n任何前置条件（需要的 MCP），以及一个使用示例。\n```\n\n**第 5 步——创建 README.md：**\n请求 Claude：\n```\n创建 C:/Projects/skill-library/README.md：\n- 这个仓库是什么（一个 Claude Code 自定义技能库）\n- 前置条件（已安装 Claude Code，需要配置哪些 MCP）\n- 安装方式（运行 install.ps1 或 install.sh）\n- 快速参考（最常用的 5 项技能）\n- 贡献方式（如何通过 PR 提交一项新技能）\n```\n\n**第 6 步——初始化 git 并推送：**\n```\ngit init\ngit add .\ngit commit -m 'Initial skill library — 15 custom Claude Code skills'\n```\n\n然后推送到一个新的 GitHub 仓库，命名为 `claude-skills` 或 `ai-skill-library`。\n\n**第 7 步——分享一项技能：**\n挑选你最引以为豪的一项技能。把它（或你仓库的链接）发布到社区：\n- Claude Discord：discord.gg/anthropic\n- Reddit 上的 r/ClaudeAI\n- 你公司的内部 Slack\n- 你的专业人脉网络\n\n**成果：** 你的技能库已发布到 GitHub，可以一条命令安装，并与全世界分享。从现在起你搭建的技能都可以添加到这个仓库中，立即分享出去。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——课程压轴：构建全新的东西",
+      "content": "整个课程的最后一个工作坊。为你生活或工作中一个真实的问题构建一项完全全新、原创的技能——一个本课程没有任何一课具体教过的问题。\n\n**挑战：** 想一想你生活中最繁琐、最重复、最耗时的事情——它很可能可以借助 AI 做得更好。是本课程赋予了你自动化它的工具，但没有具体教过它。\n\n**学员们搭建过的原创压轴技能示例：**\n- /client-brief — 读取客户的网站、LinkedIn 和过往邮件，生成一份首次会面简报\n- /code-debt — 扫描代码库，生成一份按“影响力 vs 修复成本”排序的技术债务报告\n- /job-apply — 给定一份招聘启事，读取它和你的简历，撰写一封定制的求职信，并标出你的经历与要求之间的差距\n- /content-calendar — 读取近期发布的内容和博客文章，找出哪些主题表现好，并建议接下来 30 天的内容规划\n- /invoice-chase — 从 Gmail 中找出未付款的发票，计算哪些已经逾期，并起草礼貌的催款邮件\n- /competitor-watch — 调研 3 个竞争对手近期的动态（新品发布、定价变化、新闻），生成一份每周简报\n- /learning-review — 处理一门课程或一本书的笔记，创建一份间隔重复学习指南\n\n**构建过程：**\n1. 清楚地定义问题（这项技能解决了什么痛点？）\n2. 梳理输入（这项技能从什么开始？）\n3. 设计步骤（它做什么？）\n4. 明确输出（它产出什么？）\n5. 用 6 部分架构编写这项技能\n6. 在真实数据上测试它\n7. 把它加入你在 GitHub 上的技能库\n\n**分享你搭建的成果：**\n发布一份关于你的压轴技能的简要描述，并附上你 GitHub 仓库的链接。包括：它做什么，搭建花了多长时间，它解决了什么问题。\n\n**成果：** 你在这里搭建的技能是属于你自己的。它解决了你实际生活中的一个问题。它会在你的电脑上无限期地运行下去。这正是本课程一直在通往的成就——不仅仅是学习关于 AI 的知识，而是用 AI 构建让你永久变得更强大的工具。"
+    },
+    {
+      "type": "quiz",
+      "question": "一项技能生成了 5 个子智能体来分析一份文档。智能体 4 失败了，因为文档中包含它无法读取的加密内容。一项设计良好的技能应该如何处理这种情况？",
+      "options": [
+        "只要任何一个子智能体失败，整项技能就应该失败",
+        "智能体 4 的失败应该在综合步骤中被记录下来，其余 4 个智能体的发现仍应被综合起来——并注明分析 4 不可用",
+        "该技能应该自动用不同的指令重试智能体 4",
+        "智能体 4 应该被静默跳过，输出中不作任何说明"
+      ],
+      "correct": 1,
+      "explanation": "健壮的多智能体技能在某个智能体失败时应该优雅降级。5 个智能体中有 4 个成功完成，仍然能产出有价值的输出——而知道哪个分析失败了（以及为什么）本身也是有用的信息。综合部分应该注明“智能体 4 [背景绘制者] 无法读取该文档——本结论基于 5 项分析中的 4 项”。这样既保持了对置信水平的透明度，又不会丢弃大部分成功完成的工作。"
+    },
+    {
+      "type": "quiz",
+      "question": "你把技能库发布到了 GitHub。一位使用 Mac 的同事克隆了它并运行了 install.sh。以下哪一项会导致安装失败？",
+      "options": [
+        "技能文件使用了 Windows 风格的换行符（CRLF）",
+        "他们机器上的技能文件夹路径不同（~/.claude 与 C:/Users/... 不同）",
+        "安装脚本使用了 PowerShell 语法而不是 bash 语法",
+        "技能中引用了 Mac 上不存在的 Windows 路径，例如 C:/Users/[名称]/"
+      ],
+      "correct": 3,
+      "explanation": "以上四个选项都可能造成问题，但硬编码的 Windows 路径写在技能文件里，是跨平台分享中最常见、也是最容易导致彻底失败的情形。引用了特定路径（C:/Users/username/、C:/Projects/）的技能，在另一台机器上根本无法运行。可移植的技能应该使用相对路径、环境变量（$HOME、~），或者通过 $ARGUMENTS 请求路径。install.sh 与 install.ps1 的问题（C）确实是个真实问题，但只要两个脚本都有就能解决——技能内容本身仍然必须是路径可移植的。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 20 部分：构建自定义 AI 技能。** 你现在拥有一套完整的技能库，涵盖邮件智能、多智能体分析、文档提取、生产力routine，以及串联工作流——全部永久保存下来，全部在你的真实数据上运行，随时可以分享。你在这一部分搭建的技能，代表了作为一名 AI 用户你能培养的最实用的能力之一：亲手构建自己的工具，而不是等别人为你构建。"
+    }
+  ],
+  "nextLesson": "8-1",
+  "prevLesson": "20-7"
+}

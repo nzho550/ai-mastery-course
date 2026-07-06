@@ -1,0 +1,123 @@
+{
+  "id": "8-3",
+  "title": "安装你的第一个 MCP 服务器",
+  "part": 8,
+  "estimatedMinutes": 65,
+  "tags": [
+    "mcp",
+    "filesystem",
+    "claude-code",
+    "setup"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课后，你将安装好文件系统 MCP 服务器，把它添加到 Claude Code 的配置中，并验证 Claude 能够读取你电脑上某个目录中的文件。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么从文件系统 MCP 开始？\n\n可供选择的 MCP 服务器有数百个。我们从文件系统服务器开始，是因为：\n\n- **不需要账号**——无需 API 密钥，无需 OAuth，无需注册\n- **立刻就有用**——Claude 可以读取你真实的项目文件\n- **可以放心实验**——你可以精确控制它能访问哪些文件夹\n- **安装模式与其他所有基于 npm 的 MCP 服务器完全相同**\n\n一旦你完成一次这样的安装，你就学会了如何安装任何使用 npx 的 MCP 服务器。"
+    },
+    {
+      "type": "text",
+      "content": "## 第 1 步——打开你的全局设置文件\n\n在全局设置文件中配置的 MCP 服务器，无论你当前在哪个项目文件夹里，都会在每个 Claude Code 会话中可用。这正是我们想把文件系统服务器放在这里的原因。\n\n全局设置文件位于：\n`C:\\Users\\YourName\\.claude\\settings.json`\n\n把 `YourName` 替换成你实际的 Windows 用户名（在文件资源管理器的 `C:\\Users\\` 下能看到的那个名字）。\n\n如果这个文件还不存在，你需要创建它。如果它已经有内容了（来自之前的课程），你就在此基础上添加。"
+    },
+    {
+      "type": "text",
+      "content": "## 第 2 步——添加文件系统服务器配置\n\n在 VS Code 中打开 `settings.json`，添加 `mcpServers` 代码块。把路径中的 `YourName` 替换成你实际的 Windows 用户名："
+    },
+    {
+      "type": "code",
+      "language": "json",
+      "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@modelcontextprotocol/server-filesystem\",\n        \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"\n      ]\n    }\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Windows 路径转义：** 在 JSON 中，反斜杠必须写两遍。`C:\\Users\\YourName` 在 JSON 字符串里要写成 `C:\\\\Users\\\\YourName`。这是标准的 JSON 规则——与 MCP 本身无关。"
+    },
+    {
+      "type": "text",
+      "content": "## 这段配置做了什么\n\n拆解一下这条配置：\n\n- `\"command\": \"npx\"`——使用 npx 来运行这个包，而不需要永久安装它\n- `\"-y\"`——自动接受所有 npx 提示（这样它就不会卡在等你输入确认上）\n- `\"@modelcontextprotocol/server-filesystem\"`——官方的文件系统 MCP 服务器包\n- `\"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"`——**允许访问的目录**。Claude 只能访问这个文件夹内的文件，无法读取它之外的任何内容。\n\n你可以在 `args` 数组中添加更多路径参数，从而允许访问多个目录。"
+    },
+    {
+      "type": "text",
+      "content": "## 第 3 步——重启 Claude Code\n\nMCP 服务器只会在 Claude Code 启动时加载。保存 `settings.json` 之后，你必须退出并重新启动：\n\n1. 如果 Claude Code 正在运行，输入 `/exit`\n2. 用 `claude` 重新启动\n3. 输入 `/mcp`——你现在应该能看到 `filesystem` 显示出来，带有绿色的状态指示"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**故障排查——服务器没有出现？**\n- 仔细检查 `settings.json` 里的路径（路径写错是最常见的失误）\n- 确认 JSON 是有效的——少一个逗号或括号就会破坏整个文件。可以把内容粘贴到 jsonlint.com 上检查\n- 确认 Node.js 已安装：在 PowerShell 中运行 `node --version`\n- 尝试手动运行这个服务器：`npx -y @modelcontextprotocol/server-filesystem C:\\\\Users\\\\YourName\\\\Documents`——如果它打印出错误信息，那正好能告诉你问题出在哪里"
+    },
+    {
+      "type": "text",
+      "content": "## 第 4 步——测试一下\n\n在 Claude Code 运行、文件系统服务器已连接的情况下，试试这些提示词：\n\n- `\"列出我 ai-course-projects 文件夹里的所有文件\"`\n- `\"读取 exercises/hello.html 的内容\"`\n- `\"exercises 文件夹里有哪些文件？\"`\n\nClaude 应该会根据你真实的文件给出真实的信息——你无需粘贴任何内容。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**变化在哪里？** 在有文件系统 MCP 之前，问 Claude 关于你文件的问题，得到的只会是关于 HTML 文件的泛泛回答。现在它会读取你真实的文件，具体告诉你里面有什么。这正是 MCP 带来的根本性转变。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "安装、配置并验证文件系统 MCP",
+      "content": "按顺序完成以下步骤：\n\n**第 1 步——验证 Node.js 已安装：**\n打开 PowerShell 并运行：\n```\nnode --version\nnpm --version\n```\n两者都应该打印出版本号。如果没有，请从 nodejs.org 安装 Node.js（第 7.2 课已讲过）。\n\n**第 2 步——编辑你的全局设置：**\n在 VS Code 中打开 `C:\\Users\\YourName\\.claude\\settings.json`。\n添加上面展示的文件系统服务器条目，把 `YourName` 替换成你实际的用户名。\n保存文件。\n\n**第 3 步——重新启动并验证：**\n在 PowerShell 中：\n```\nclaude\n```\nClaude Code 启动后：\n```\n/mcp\n```\n确认列表中出现了 `filesystem`。\n\n**第 4 步——运行一个真实任务：**\n问：`\"列出我 ai-course-projects 文件夹里的每一个文件，包括子文件夹，并根据文件名和内容告诉我每个文件是做什么的。\"`\n\nClaude 应该会给出你项目的完整清单。如果它做到了，说明文件系统 MCP 工作正常。\n\n把输出保存到 `notes/project-inventory.md`——随着你的项目不断增长，这会是一份有用的参考。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A——安装你的第一个 MCP 服务器",
+      "content": "这个练习能让你在 8 分钟内安装并验证一个 MCP 服务器。\n\n**第 1 步——选择一个要安装的 MCP 服务器。** 首次安装推荐：\n- 文件系统 MCP（从 Claude Code 读写文件）\n- GitHub MCP（如果你使用 GitHub）\n- SQLite MCP（如果你经常打交道的是数据库）\n\n**第 2 步——按照你选择的服务器的安装步骤操作：**\n\n对于文件系统 MCP：\n```powershell\nnpm install -g @modelcontextprotocol/server-filesystem\n```\n\n**第 3 步——在 Claude Code 的设置中配置它**（claude_desktop_config.json 或 Claude Code 配置文件）：\n```json\n{\n    \"mcpServers\": {\n        \"filesystem\": {\n            \"command\": \"npx\",\n            \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\", \"/path/to/your/project\"]\n        }\n    }\n}\n```\n\n**第 4 步——重启 Claude Code** 以加载新服务器。\n\n**第 5 步——验证：** 问 Claude Code：“你现在有哪些可用的 MCP 工具？”——你新安装的服务器的工具应该会出现在列表中。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用你的 MCP 服务器完成真实工作",
+      "content": "用你新安装的 MCP 服务器完成一项真实任务。\n\n**第 1 步——打开 Claude Code**，确保你的 MCP 服务器处于激活状态。\n\n**第 2 步——给 Claude Code 一个需要用到 MCP 服务器工具的任务：**\n\n对于文件系统 MCP：\n“在我项目中的所有 Python 文件里搜索任何参数超过 4 个的函数。列出每个函数名、文件路径以及参数个数。”\n\n对于 GitHub MCP：\n“列出 [你的仓库] 中所有分配给我的未关闭 issue。针对每一个，总结一下需要做什么。”\n\n对于 SQLite MCP：\n“我数据库中最大的 5 张表是什么？显示行数和列名。”\n\n**第 3 步——观察 Claude Code 如何使用这些 MCP 工具。** 记下它调用了哪些工具，传入了什么参数。\n\n**第 4 步——评估结果。** 结果准确吗？如果没有 MCP，这个任务会更难吗？\n\n**第 5 步——必做的复核环节：** 问 Claude Code：*“你刚才做的这些 MCP 工具调用可能会出什么问题？哪些数据可能是错误的或缺失的？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——MCP 服务器故障排查",
+      "content": "MCP 服务器往往会以一些可预见的方式出问题。这个工作坊教你如何诊断。\n\n**第 1 步——问 Claude：** *“一个 MCP 服务器连接失败或返回错误结果，最常见的原因有哪些？针对每一个，请描述：（1）症状，（2）可能的原因，（3）如何诊断，（4）如何修复。”*\n\n**第 2 步——找出你在自己的 MCP 设置中见过的（或可能会遇到的）症状。**\n\n**第 3 步——练习诊断：** 如果你的 MCP 服务器工作正常：让 Claude Code 以一种可能失败的方式使用某个工具（错误的路径、不存在的文件、无效的查询）。它返回了什么错误？\n\n**第 4 步——问 Claude Code：** “我该如何查看 MCP 服务器连接的日志？错误会出现在哪里？”\n\n**第 5 步——创建一份故障排查参考：** 针对你安装的具体 MCP 服务器，列出最可能出现的 3 种故障模式及其修复方法。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——为你最需要的集成安装 MCP 服务器",
+      "content": "安装并配置能为你的具体工作流带来最大价值的 MCP 服务器。\n\n**第 1 步——从你的 MCP 生态地图文档**（8-2 课工作坊 D 的成果）**中，选出优先级最高的服务器。**\n\n**第 2 步——按照官方文档安装它。**\n\n**第 3 步——配置访问控制。** 大多数 MCP 服务器需要访问凭据（API 密钥、OAuth 令牌、文件路径）。只配置所需的最小访问权限——不要给出超出需要的权限。\n\n**第 4 步——用你实际工作中的一项真实任务来测试。**\n\n**第 5 步——必做的安全复核：** 问 Claude：*“我刚刚用这些访问凭据配置了这个 MCP 服务器：[描述你授予的权限]。有哪些安全风险？我实际需要的最小权限是什么？”*\n\n**第 6 步——记录这次搭建过程**在你的项目或个人笔记中——如果需要，该如何重新配置。"
+    },
+    {
+      "type": "quiz",
+      "question": "你安装了一个 MCP 服务器，Claude Code 却说“我没有任何可用的 MCP 工具”。最可能的原因是什么？",
+      "options": [
+        "你的 Claude Code 版本不支持 MCP",
+        "MCP 服务器配置没有保存到正确的配置文件中，或者添加配置后没有重启 Claude Code",
+        "使用 MCP 需要付费订阅",
+        "MCP 服务器需要在 Claude Code 启动之前单独运行"
+      ],
+      "correct": 1,
+      "explanation": "最常见的 MCP 搭建失败原因：配置添加到了错误的文件里，或者配置更改后没有重启 Claude Code。Claude Code 是在启动时读取 MCP 服务器配置的。检查：（1）配置文件路径对你的操作系统来说是否正确，（2）JSON 语法是否有效（用 JSON 校验工具检查），（3）Claude Code 是否被完整重启过（不只是新建一个会话，而是真正重启进程）。也要验证配置中的命令能否在终端里独立运行。"
+    },
+    {
+      "type": "quiz",
+      "question": "一个 MCP 文件系统服务器能访问你整个用户主目录。配置它时你应该运用什么原则？",
+      "options": [
+        "给它完全访问权限——Claude Code 不会访问它不需要的文件",
+        "运用最小权限原则：将 MCP 服务器限制在 Claude Code 完成你的任务实际需要访问的目录内",
+        "对所有内容都给只读访问权限，只对你的项目文件夹给写入权限",
+        "为不同的访问级别使用不同的 MCP 服务器"
+      ],
+      "correct": 1,
+      "explanation": "最小权限原则：只授予所需的最小访问权限。对于一个 MCP 文件系统服务器，与其配置 `/home/user/`（一切内容），不如配置具体需要的项目路径：`/home/user/my-project/`。这能在 Claude Code 误解某个任务或某个 bug 导致意外文件操作时，限制影响范围。大多数 MCP 服务器都支持在配置中限制路径。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 8-3 课。** 你已经安装了你的第一个 MCP 服务器，配置好了它，并验证了它能正常工作。这个模式——编辑 settings.json、添加一条配置、重启 Claude——正是本课程中每一个 MCP 服务器的安装方式。第 8-4 课将添加 context7 用于实时文档查询。"
+    }
+  ],
+  "nextLesson": "8-4",
+  "prevLesson": "8-2"
+}

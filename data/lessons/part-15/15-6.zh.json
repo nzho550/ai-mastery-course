@@ -1,0 +1,121 @@
+{
+  "id": "15-6",
+  "title": "用 AI 撰写研究报告",
+  "part": 15,
+  "estimatedMinutes": 70,
+  "tags": [
+    "research",
+    "beginner",
+    "writing",
+    "reports",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你已经研究了一个主题，整理好了笔记，并且有了一份结构化的大纲。现在你需要把它转化为一份精炼的书面成果——一份报告、简报、摘要或建议书。本课涵盖了针对研究成果的完整 AI 辅助写作流程：如何让 AI 撰写的内容立足于你的具体研究、如何针对不同受众校准写作方式、“草稿 → 打磨 → 抛光”循环、如何让 AI 生成的文字听起来像你自己写的，以及在专业文档中何时以及如何注明 AI 协助。"
+    },
+    {
+      "type": "text",
+      "content": "## 关键法则：从“你的”笔记出发写作\n\n用 AI 撰写研究报告时最常见的错误，是在没有提供你的研究内容的情况下，直接让 AI 写报告。结果就是一份基于 AI 通用知识的泛泛输出——而不是你具体的研究、你具体的来源，或你具体的背景。\n\n**错误的做法：**\n```\nWrite me a 1,000-word report on climate policy in Australia.\n```\n这只会给你一份 AI 可以写给任何人的泛泛报告。它可能在事实上是错误的，而且完全不包含你自己的研究内容。\n\n**正确的做法：**\n```\nHere are my research notes on climate policy in Australia: [paste all your notes].\nHere is the outline I've developed: [paste outline].\nWrite a 1,000-word report following this outline, using only the information\nin my notes. Where my notes are thin, mark [NEEDS MORE RESEARCH] in brackets\nrather than filling in with general knowledge.\n```\n\n这样产出的报告会：\n- 基于你实际的研究和已核实的来源\n- 与你的来源实际所说的内容保持一致\n- 对信息缺口保持诚实（之后你可以在定稿前补齐）\n- 比泛泛的输出更接近你自己的语气和视角\n\n**[NEEDS MORE RESEARCH] 这条指令至关重要。** 没有它，AI 会悄无声息地用听起来合理但未经验证的内容填补空白。有了它，这些空白就会变得可见、可修复。"
+    },
+    {
+      "type": "text",
+      "content": "## 为你的受众写作\n\n同样的研究内容，根据读者的不同，可以产出截然不同的文档。在动笔之前，先明确你的读者是谁——这会影响用词、深度、结构和语气的方方面面。\n\n**用于校准受众的写作提示词：**\n```\nI need to write about [topic] for [describe audience — e.g., non-technical executives, \nfrontline staff, academic peers, general public, regulatory body].\n\nBased on this audience:\n1. What level of technical vocabulary is appropriate?\n2. What do they care about most (implications, evidence, actionability, compliance)?\n3. What should I assume they already know vs. need to explain?\n4. What tone is most appropriate (formal/analytical, plain English, persuasive)?\n5. What structure would they find easiest to navigate?\n```\n\n**同样的研究，不同的文档：**\n\n| 受众 | 合适的格式 | 语气 | 侧重点 |\n|----------|-------------------|------|-------|\n| 董事会或高管 | 一页执行摘要 + 附录 | 正式、直接 | 影响与决策 |\n| 你的团队或同事 | 带细节的简报 | 同事间的、专业性的 | 证据与方法论 |\n| 大众读者或客户 | 通俗易懂的说明文档 | 平易近人、具体 | 对他们意味着什么 |\n| 监管机构或法务团队 | 带引用来源的正式报告 | 精确、谨慎 | 合规与风险 |\n| 学术受众 | 带文献综述的论文格式 | 学术性、以证据为基础 | 方法论与贡献 |\n\n一个常见的错误：为你自己（做研究的专家）而写，而不是为读者（没有做过这项研究的人）而写。"
+    },
+    {
+      "type": "text",
+      "content": "## 标准报告结构\n\n对于大多数专业的研究成果，如果你给 AI 一套结构去遵循，它的表现最好。常见的结构有：\n\n**执行简报（1-2 页）：**\n- 背景（是什么促成了这项研究，为什么现在重要）\n- 关键发现（3-5 条要点，最重要的排在最前）\n- 影响（这对我们意味着什么）\n- 建议（该做什么——要具体、可执行）\n- 来源\n\n**完整研究报告：**\n- 执行摘要（独立成篇——只读这部分的人也应该能理解全文）\n- 引言与范围（这份报告要回答什么问题？）\n- 方法（你是如何研究的——这让发现更可信）\n- 按主题划分的发现\n- 分析与解读\n- 结论\n- 建议\n- 附录（来源、数据、方法论细节）\n\n**比较报告：**\n- 比较对象与标准的概览\n- 逐个方案的分析（每个方案用一致的结构）\n- 比较结果汇总表\n- 带理由的建议\n\n**文献综述：**\n- 引言与研究问题\n- 综述的范围与来源\n- 文献中的主题\n- 关键的争论与立场\n- 空白与未解答的问题\n- 结论\n\n告诉 AI 该用哪种结构，或者直接把结构粘贴进提示词。AI 能可靠地遵循给定的结构——这是它最擅长的格式化能力之一。"
+    },
+    {
+      "type": "text",
+      "content": "## “草稿 → 打磨 → 抛光”循环\n\n**第 1 步——生成第一版草稿：**\n提供你的笔记 + 大纲 + 受众 + 目标篇幅：\n```\nAudience: [who will read this — e.g., non-technical executives, academic peers, general public]\nLength: [e.g., 500 words, 1,500 words]\nTone: [e.g., formal and analytical, plain English, persuasive]\nStructure: [paste your outline]\nNotes: [paste your research notes]\n\nWrite the first draft of this report. Use [NEEDS MORE RESEARCH] wherever\nmy notes don't have enough detail. Do not add general knowledge not in my notes.\n```\n\n**第 2 步——逐节打磨：**\n不要试图一次性打磨整份文档——那会变得难以驾驭。逐节推进：\n```\nHere is the Introduction section from the draft: [paste]\nProblems with it:\n- Second paragraph is too vague — it makes a claim without a supporting example. Add one from my notes.\n- Third sentence is jargon — rewrite in plain English for a non-specialist reader.\n- Missing: why does this matter now? Add a sentence about the urgency/relevance.\n```\n\n**第 3 步——全文一致性检查：**\n各节都打磨完成后：\n```\nRead this full draft. Report on:\n1. Consistency — do section conclusions support each other? Any contradictions?\n2. Tone — is it consistent throughout, or does it shift in places?\n3. Evidence gaps — are there claims without supporting evidence from my notes?\n4. Length — which sections could be cut by 20% without losing meaning?\n5. Does the executive summary accurately reflect the body?\n```\n\n**第 4 步——最终抛光：**\n对于专业文档：\n```\nPerform a final edit on this document:\n- Fix any grammatical errors\n- Ensure active voice throughout (flag passive constructions)\n- Ensure headings are parallel in structure\n- Remove any filler phrases ('it is important to note that', 'in conclusion')\n- Ensure the executive summary is complete as a standalone read\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**让它听起来像你。** AI 生成的文字有一些可识别的模式——过于圆滑顺畅、略显泛泛，偏爱使用“delve”“crucial”“it is worth noting”之类的措辞。当 AI 产出一份草稿后，把它读出声来。任何听起来不像你在会议中实际会说的话的地方，就自己动手重写那句话。通常每一节重写两三处就足够让文档感觉真实可信。你的受众很可能认识你——如果写作风格和你不符，他们会察觉到。让这份文档属于你自己。"
+    },
+    {
+      "type": "text",
+      "content": "## 归属说明：什么时候需要注明 AI？\n\n随着 AI 写作辅助变得越来越普遍，何时披露这一点变得越来越重要。目前还没有统一的标准，但以下几条原则正在逐渐形成：\n\n**在以下情况下始终要披露 AI 协助：**\n- 你所投递的机构或出版方有 AI 披露政策\n- 你所处的学术环境有明确的 AI 使用规定\n- 该文档将被用作证词、证据或正式提交材料\n- 如果读者知情，会实质性地在意（例如，他们是基于你的写作能力来雇用你的）\n\n**在以下情况下，披露通常不那么关键：**\n- AI 被用于起草草稿，而你已经对输出内容做了实质性的修订和核实\n- 你把 AI 当作语法和润色工具使用（类似 Grammarly）\n- 这是一份内部文档，所有相关方都知道使用了 AI 工具\n\n**一份实用的披露说明（在需要时使用）：**\n*“本文档由 AI 辅助起草，并经 [作者] 审阅和核实，以确保内容的准确性、完整性，以及对研究内容的恰当呈现。”*\n\n关键原则是：**你仍然对内容负责。** 如果 AI 生成了一个错误的统计数据，这个错误由你承担。这使得对具体主张的核实成为一项专业义务，而不仅仅是锦上添花。"
+    },
+    {
+      "type": "text",
+      "content": "## 针对不同输出形式的格式化\n\n**Word 文档：** 把定稿文字复制到 Word 中。如果可用，用 Copilot 应用一致的格式，或手动排版。保存为 PDF 用于分发。\n\n**Google 文档：** 把 AI 起草的内容直接粘贴进去。如果你的 Workspace 套餐支持，可以用 Gemini 在上下文中进行润色。版本历史是你的安全网——在编辑前先启用它。\n\n**Notion 页面：** 粘贴进 Notion，用 Notion AI 逐节润色。Notion 的斜杠命令能让排版快速完成。\n\n**演示文稿：** 把你的报告作为第 16-4 课（AI 驱动的演示文稿）的源材料。一份 1,000 字的简报，通常用一条提示词就能转换成 8-10 张幻灯片。\n\n**邮件：** 把执行摘要粘贴到 Claude 中，问：“把这个转换成一封邮件。控制在 200 字以内。以结论开头，而不是背景。”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "撰写一份真实的研究简报",
+      "content": "使用你在第 15-2 到 15-5 课中开发的研究和大纲，或者用一个和你工作相关的话题重新开始。\n\n**第 1 步——准备你的输入内容（5 分钟）**\n\n在打开 Claude 之前，准备好：\n- 你的研究笔记（乱一点没关系——全部粘贴过去）\n- 你的目标结构（从本课中选一种：执行简报、完整报告，或比较报告）\n- 你的受众：谁会读这个，他们最关心什么？\n- 你的篇幅目标：简报 500 字，报告 1,000-1,500 字\n- 你的目的：读完之后，读者应该理解或做些什么？\n\n**第 2 步——生成草稿（5 分钟）**\n\n在 Claude.ai 中，发送完整的写作提示词：\n```\nI need to write a [type of document] on [topic].\n\nAudience: [describe your reader]\nLength: [word count]\nTone: [professional / plain English / formal]\nPurpose: [what should they understand or do after reading?]\n\nOutline:\n[paste your 4–6 section headings]\n\nMy research notes (please use only what's here):\n[paste your notes]\n\nWrite the full draft. Use [NEEDS MORE RESEARCH] wherever my notes\ndon't have enough detail. Do not add general knowledge not in my notes.\n```\n\n**第 3 步——运行受众检查（3 分钟）**\n\n在打磨之前，先问：\n```\nIs this draft calibrated correctly for [describe your audience]?\nIs any language too technical / too simple?\nIs there anything a [audience] would immediately ask that the draft doesn't address?\n```\n\n**第 4 步——打磨一节内容（5 分钟）**\n\n阅读草稿。挑出最薄弱的一节，让 Claude 针对具体原因进行改进：\n```\nThe [section name] section isn't working because [specific reason].\nRewrite it to [specific improvement].\nKeep everything else the same.\n```\n\n**第 5 步——最终质量检查（5 分钟）**\n\n问：\n```\nDoes the executive summary accurately reflect the body?\nIs the tone consistent throughout?\nWhat is the single most important thing a reader would take away?\nIs that stated clearly and early enough?\n```\n\n做最后的修改。把最终版本读出声——重写任何听起来不像你的句子。\n\n你现在拥有了一份真实的、基于研究的简报，今天就可以发给同事或经理。"
+    },
+    {
+      "type": "quiz",
+      "question": "你对一个主题做了详尽的研究，想让 AI 撰写报告。为了得到最好的结果，你的写作提示词中应该始终包含什么？",
+      "options": [
+        "只写主题名称——AI 知道得足够多，能写出一份好报告",
+        "你实际的研究笔记、一份目标大纲、目标受众，以及期望的篇幅",
+        "报告标题和一份章节列表——AI 会填充内容",
+        "几篇你读过的、同类主题的优秀报告范例"
+      ],
+      "correct": 1,
+      "explanation": "当 AI 拥有你实际的研究笔记（这样输出才立足于你具体的来源，而不是 AI 的通用知识）、一份目标大纲（这样它会遵循你的结构，而不是靠猜测）、目标受众（这样它能校准词汇和深度），以及期望的篇幅（这样它不会写多或写少）时，它才能写出最好的研究报告。只提供主题（A）会产出一份可能事实有误、且完全不含你研究内容的泛泛输出。只有章节标题（C）而没有研究内容，会产生同样的泛泛问题——AI 会用通用知识而不是你验证过的发现来填充。范例报告（D）有助于把握风格，但没有解决核心问题：让输出立足于你的研究。“对空白使用 [NEEDS MORE RESEARCH]”这条指令也很重要——没有它，AI 会不动声色地填补空白。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——报告结构设计",
+      "content": "在动笔之前，设计研究报告的结构。\n\n**第 1 步——问 Claude：** “我需要为 [你的受众：高管、技术同行、大众读者] 撰写一份关于 [你的主题] 的研究报告。最佳结构是什么？每一节应该有多长？执行摘要应该包含什么？”\n\n**第 2 步——审阅提出的结构。** 它符合你的受众思考这个话题的方式吗？\n\n**第 3 步——让 Claude 设计数据可视化方案：**\n“对于这份报告的每一节，应该可视化哪些数据？什么类型的图表或表格能最有效地传达每一项发现？”\n\n**第 4 步——将你计划的结构与一个优秀范例进行比较：** 让 Claude 描述你所在领域中一份受到好评的报告的结构。\n\n**第 5 步——最终确定你的结构**，从执行摘要开始动笔。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——起草一份完整的研究报告",
+      "content": "在 AI 的协助下撰写一份完整的研究报告。\n\n**第 1 步——选择一个你需要撰写报告的真实研究主题。**\n\n**第 2 步——把你的研究提供给 Claude**，让它逐节起草：\n```\nWrite the [Executive Summary / Introduction / Findings / Conclusion] of a research report on [topic].\n\nAudience: [who will read this]\nKey findings to cover: [list them from your research]\nTone: [formal/professional/accessible]\nLength: [target word count for this section]\n\nBase the content on this research: [paste your research notes]\n```\n\n**第 3 步——在接受之前**仔细审阅每一节——你才是那个做研究的人，不是 AI。\n\n**第 4 步——为准确性进行编辑：** 任何来自你研究的事实都应该是可验证的。任何你无法溯源的说法，都应该要么补上来源，要么删除。\n\n**第 5 步——必做审阅：** 问 Claude：“审阅这份草稿报告。哪些说法缺乏充分支持？草稿遗漏了哪些重要的细微之处？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——用 AI 编辑报告",
+      "content": "用 AI 提升你草稿报告的质量。\n\n**第 1 步——拿出工作坊 B 中的草稿。**\n\n**第 2 步——用 Claude 进行三轮独立的编辑：**\n\n**第一轮——清晰度：** “编辑这份报告章节以提升清晰度。找出任何不必要地复杂的句子、未加定义就使用的术语，或可能被非专业读者误解的地方。”\n\n**第二轮——逻辑：** “审查这份报告的逻辑脉络。每一段是否都承接了上一段？结论是否得到了所呈现证据的支持？标记出任何逻辑跳跃。”\n\n**第三轮——完整性：** “审查这份报告的完整性。读者会有哪些重要问题是这份报告没有回答的？缺少了什么？”\n\n**第 3 步——应用**这三轮的改进意见。\n\n**第 4 步——请一位真人读者**审阅其中一节。他们发现了哪些 AI 没有察觉到的不清楚或缺失之处？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——报告模板库",
+      "content": "为你最常见的报告类型构建一个模板库。\n\n**第 1 步——找出你最常见的 3 种报告类型：** 执行简报、技术规格说明、项目状态报告、竞争分析。\n\n**第 2 步——针对每一种类型**，让 Claude 创建一个模板：\n```\nCreate a template for a [report type] that I can reuse. Include:\n- Document structure with section headings\n- Guidance on what to include in each section\n- Word count targets for each section\n- Formatting standards (headers, tables, bullet points)\n- A cover page template\n- Example executive summary for this report type\n```\n\n**第 3 步——用真实内容**填写其中一节来测试每个模板。\n\n**第 4 步——保存到你的 Claude Projects**或一个共享文件夹中，这样这些模板随时可以用。\n\n**第 5 步——分享给**撰写类似报告的同事——标准化的模板能提升团队沟通质量。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude 起草的执行摘要在事实上是准确的，但把最重要的发现埋在了第三段。你应该怎么做？",
+      "options": [
+        "接受它——即使不够突出，这个发现毕竟已经写在里面了",
+        "重新组织执行摘要：以最关键的发现开头，采用“倒金字塔”方法——最重要的信息放在最前面",
+        "让 Claude 把它写得更长，这样这个发现出现的次数会更多",
+        "给被埋没的发现加粗"
+      ],
+      "correct": 1,
+      "explanation": "AI 起草的文稿常常结构良好、逻辑有序，但却把重点埋没了。高管和忙碌的读者会根据前两句话形成看法。倒金字塔原则：先给出最重要的发现/建议，然后提供支持证据，最后是背景信息。让 Claude：“重新组织这份执行摘要，让最重要的发现出现在前两句话里。”然后核实这次重组没有损失准确性。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在 AI 的协助下撰写了一份研究报告。一位同事指出，你的一个主要结论与他们了解的一篇最新论文相矛盾。最好的回应是什么？",
+      "options": [
+        "坚持你的结论——你的研究支持它",
+        "感谢他们，拿到这篇论文，诚实地评估它，如果新证据改变了你的结论，就更新报告——这才是好的研究应有的样子",
+        "在脚注中提及这个分歧，但不改变结论",
+        "让 Claude 反驳这位同事提到的论文"
+      ],
+      "correct": 1,
+      "explanation": "好的研究是自我修正的。当一位同事指出一个相矛盾的来源时：拿到它，评估它的质量和相关性，并诚实地评估它是否改变了你的结论。如果是，就更新你的报告——这才是学术上的正直。如果不是（该研究质量较低、衡量的是不同的东西等），在报告中记录原因：“一项研究（作者，2024）提出了 X 观点，但我们评估认为该研究 [不改变结论的原因]。”最糟糕的回应是压制或忽略相矛盾的证据。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 15-6 课。** 你现在能够用 AI 撰写基于研究的报告——从笔记和大纲，到经过打磨的定稿——运用“草稿 → 打磨 → 抛光”循环。你知道如何针对不同受众校准写作、如何让 AI 生成的文字听起来像你自己，以及何时需要注明 AI 协助。第 15-7 课将把这一切整合到一次 60 分钟的研究冲刺中。"
+    }
+  ],
+  "nextLesson": "15-7",
+  "prevLesson": "15-5"
+}

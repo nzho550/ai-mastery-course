@@ -1,0 +1,104 @@
+{
+  "id": "6-1",
+  "title": "GitHub Copilot——设置与第一次代码建议",
+  "part": 6,
+  "estimatedMinutes": 60,
+  "tags": ["copilot", "vscode", "ai-coding"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，GitHub Copilot 将在你的 VS Code 中处于激活状态，你也会接受你的第一条 AI 生成的代码建议。你将理解 Copilot 的工作原理、免费版能提供什么，以及核心交互模式：输入时出现的幽灵文本（ghost text）。"
+    },
+    {
+      "type": "text",
+      "content": "## GitHub Copilot 是什么\n\nGitHub Copilot 是一款直接内置于 VS Code（及其他编辑器）中的 AI 编程助手。它会关注你输入的内容——文件名、已有代码，尤其是你写的注释——并预测你接下来可能想写什么。这个预测会以变暗的“幽灵文本”形式出现在编辑器中。按 **Tab** 接受它，或者继续输入以忽略它。\n\n在底层，Copilot 会把你当前文件的上下文发送给一个大语言模型（大语言模型，最初是 OpenAI Codex，现在是 GitHub 自研模型），并返回一个补全结果。与聊天式 AI 的关键区别在于：Copilot 是*内联*工作的，就在你实际的代码文件里，无需切换到浏览器标签页。\n\n**定价（截至 2026 年）：**\n- **免费版**——所有 GitHub 账号均可使用。每月有补全次数和 Copilot Chat 消息数的限制，足够支撑你完成本课程。\n- **Copilot Pro**——每月 10 美元（通过 GitHub Education 验证的学生可免费使用）。无限次补全、更高的 Chat 额度、在 Chat 中可使用 Claude 和 GPT-5 模型。注意：从 2026 年 6 月起，高级代理请求会在订阅费之外使用 AI Credits（每积分 0.01 美元）。\n\n对于本课以及第 6 部分的其余课程，免费版已经足够。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**需要 GitHub 账号。** Copilot 是 GitHub 的产品——你需要用 GitHub 账号登录，而不是 Anthropic 或 Microsoft 账号。如果你还没有账号，请先在 github.com 免费注册，再继续本课。注册过程不到两分钟。"
+    },
+    {
+      "type": "text",
+      "content": "## 幽灵文本是如何运作的\n\n幽灵文本的交互分为三步：\n\n1. **你输入**——一段注释、一个函数签名，甚至只是一个文件名，都能为 Copilot 提供上下文。\n2. **Copilot 给出建议**——变暗的灰色文本出现在光标之后，这就是建议内容。\n3. **你做出决定：**\n   - **Tab**——接受完整建议\n   - **Ctrl+Right**——逐词接受\n   - **Alt+]**——查看下一条建议（Copilot 通常会有多个备选方案）\n   - **Alt+[**——查看上一条建议\n   - **Ctrl+Enter**——打开一个面板，并排显示最多 10 条建议\n   - **Esc** 或直接继续输入——关闭该建议\n\n最重要的习惯是：**接受前先阅读。** 幽灵文本是一个提案，不是命令。决策者始终是你。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**注释驱动开发：** Copilot 的建议质量完全取决于你提供的上下文。像 `// helper function` 这样含糊的注释只会得到一个通用的建议。而像 `// returns the longest word in a string, ignoring punctuation` 这样具体的注释，会得到更有针对性的结果。写清晰的注释不只是好习惯——这是你引导 AI 的方式。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "激活 Copilot 并接受你的第一条建议",
+      "content": "**第 1 步——创建 GitHub 账号并启用 Copilot（如果还没有）**\n1. 前往 github.com 登录（或免费注册）\n2. 前往 github.com/features/copilot，点击 **Start using Copilot for free**\n3. 按提示操作——免费版无需信用卡\n\n**第 2 步——在 VS Code 中安装 GitHub Copilot 扩展**\n1. 打开 VS Code\n2. 点击活动栏中的拼图图标（扩展面板）\n3. 在搜索框中输入：`GitHub Copilot`\n4. 点击名为 **GitHub Copilot**（发布者：GitHub）的结果——不是 “GitHub Copilot Chat”（两个都要装，但先从这个开始）\n5. 点击 **安装**\n6. 出现提示：**登录以使用 GitHub Copilot**——点击它\n7. 完成基于浏览器的登录流程（会在浏览器中打开 GitHub）\n8. 回到 VS Code——状态栏底部会出现 Copilot 图标（一个小圆圈）\n\n**第 3 步——同时安装 GitHub Copilot Chat**\n1. 回到扩展面板，搜索 `GitHub Copilot Chat`\n2. 安装由 GitHub 发布的那个\n3. 这会添加聊天面板（第 6-3 课会用到）——现在就顺便装好\n\n**第 4 步——你的第一条建议**\n1. 在资源管理器面板中，进入 `exercises/`\n2. 新建文件：`practice.js`\n3. 在第 1 行，一字不差地输入这段注释：\n```\n// Function to calculate the average of an array of numbers\n```\n4. 按回车，等待 1-2 秒\n5. Copilot 的幽灵文本出现了——一个完整的函数，以变暗的灰色显示\n6. 按 **Tab** 接受它\n7. 现在按 **Ctrl+Enter**——一个 Copilot 补全面板会打开，显示备选建议\n8. 浏览这些建议——同一个提示，不同的实现方式\n\n**你已经用 AI 写出了代码。** 这个函数之所以出现，是因为你的注释足够具体。现在试着把注释改得更模糊一些——看看建议会有什么变化。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "工作坊 A——快速技能训练：幽灵文本精通",
+      "content": "在 10 分钟内练习完整的幽灵文本键盘操作。在 VS Code 中打开 `exercises/practice.js`。\n\n**1. 接受完整建议（Tab）**\n输入：`// Check if a string is a valid email address`\n按回车，等待幽灵文本出现，按 Tab。检查结果。\n\n**2. 逐词接受（Ctrl+Right）**\n输入：`// Reverse the words in a sentence`\n按回车，等待幽灵文本出现。按 Ctrl+Right 五次——只接受前五个词。其余部分手动输入。\n\n**3. 在备选方案间切换（Alt+] 和 Alt+[）**\n输入：`// Convert a hex color code to RGB values`\n按回车，然后按三次 Alt+] 查看三种不同实现。选一个你最喜欢的，按 Tab。\n\n**4. 打开补全面板（Ctrl+Enter）**\n输入：`// Format a number as currency with dollar sign and two decimal places`\n按回车，然后按 Ctrl+Enter。补全面板打开，最多显示 10 个选项。比较它们——哪个最简短？哪个错误处理最好？\n\n**5. AI 审查步骤**\n选中你刚才接受的全部四个函数。打开 Copilot Chat（Ctrl+Alt+I）。输入：\n`审查我们刚写的代码。不要一味认可它——找出 3 个 bug、边界情况或可改进之处。`\n仔细阅读它的回复，并至少修复其中一个问题。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用 AI 构建：字符串工具库",
+      "content": "使用 Copilot 构建一个包含 8 个函数的、真正可用的字符串工具库。这就是注释驱动开发的实践。\n\n**1.** 创建 `exercises/string-utils.js`。在顶部添加一条文件级注释：\n```javascript\n// String utility library — helper functions for common string operations\n```\n\n**2.** 在新的一行写下面的每条注释，按回车，接受 Copilot 的建议。接受前先阅读每条建议：\n```javascript\n// Truncate a string to maxLength characters, adding '...' if truncated\n\n// Capitalize the first letter of each word in a string (title case)\n\n// Count how many times a substring appears in a string (case-insensitive)\n\n// Remove all HTML tags from a string, returning plain text\n\n// Pad a string on the left with a character until it reaches a target length\n\n// Convert a camelCase string to kebab-case (e.g. 'myFunctionName' -> 'my-function-name')\n\n// Extract all URLs from a string and return them as an array\n\n// Check if a string is a palindrome, ignoring spaces and punctuation\n```\n\n**3.** 写完全部 8 个函数后，在底部添加：\n```javascript\n// Export all functions for use in other files\n```\n接受 module.exports 的建议。\n\n**4.** 创建 `exercises/string-utils-test.js`。写下：\n```javascript\n// Test all string utility functions with simple examples and log results\n```\n接受 Copilot 的测试脚手架。运行它：`node exercises/string-utils-test.js`\n\n**5.** 修复所有错误，直到测试通过。\n\n**6. AI 审查步骤**\n选中 `string-utils.js` 的全部内容。在 Copilot Chat 中输入：\n`审查我们刚写的代码。不要一味认可它——找出 3 个 bug、边界情况或可改进之处。`\n至少修复其中一个问题——编辑函数，重新运行测试文件。\n\n**7.** 保留 `string-utils.js`——你会在之后的工作坊中用到它。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "工作坊 C——AI 辅助调试：修复损坏的工具函数",
+      "content": "下面是一个字符串工具的、故意写坏的版本。使用 Copilot 诊断并修复所有 bug，然后通过测试验证。\n\n**1.** 创建 `exercises/buggy-utils.js` 并粘贴以下代码：\n```javascript\nfunction truncateString(str, maxLength) {\n  if (str.length > maxLength) {\n    return str.slice(0, maxLength) + '...';\n  }\n  return str\n}\n\nfunction titleCase(str) {\n  return str.split(' ').map(word => {\n    return word[0].toUpperCase() + word.slice(0);\n  }).join(' ');\n}\n\nfunction countOccurrences(str, sub) {\n  let count = 0;\n  let pos = str.indexOf(sub);\n  while (pos != -1) {\n    count++;\n    pos = str.indexOf(sub, pos);\n  }\n  return count;\n}\n\nfunction isPalindrome(str) {\n  const clean = str.replace(/[^a-z0-9]/g, '').toLowerCase();\n  return clean == clean.split('').reverse().join('');\n}\n```\n\n**2.** 选中整个文件。在 Copilot Chat（`Ctrl+Alt+I`）中输入：\n`找出这段代码里的所有 bug。对每个 bug：指出所在行、说明问题所在、并给出修复方法。`\n\n**3.** 将每个修复应用到文件中。\n\n**4.** 在文件底部，写一条注释：\n```javascript\n// Quick test: run all four functions and log the output\n```\n接受 Copilot 的测试代码，用 `node exercises/buggy-utils.js` 运行，并验证输出是否正确。\n\n**要找出的 bug：** `truncateString`——return 后缺少分号（次要问题）；`titleCase`——`word.slice(0)` 应该是 `word.slice(1)`；`countOccurrences`——由于 `pos` 从未前进而造成死循环（应改为 `pos + 1`）；`isPalindrome`——应同时去除空格并处理大写输入（`toLowerCase` 已经处理了大小写，但正则里少了空格——`[^a-z0-9]` 本身已经排除了空格，所以这一处其实是对的——自行验证一下）。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——真实项目实践：在你自己的代码上使用 Copilot",
+      "content": "打开一个你正在做的真实项目文件（或使用工作坊 B 中的 `exercises/string-utils.js`）。\n\n**1.** 在 VS Code 中打开该文件。\n\n**2.** 找一个可以改进的函数——比如有重复逻辑、命名不佳，或缺少错误处理的函数。\n\n**3.** 把光标放在该函数末尾。写一条注释描述你想添加的内容：\n```javascript\n// TODO: Add input validation — throw TypeError if argument is not a string\n```\n接受 Copilot 的实现。\n\n**4.** 找一段重复的代码（同样的模式被写了多次）。在它前面写一条注释：\n```javascript\n// Refactor: extract repeated logic into a reusable helper function\n```\n接受建议。删除重复的代码。\n\n**5.** 在文件底部，写下：\n```javascript\n// Generate JSDoc comments for all functions in this file\n```\n接受 Copilot 生成的文档。\n\n**6.** 保存并验证文件仍然正常工作（运行它或在浏览器中打开）。\n\n**结果：** 你已经把 Copilot 应用到了对你而言真正重要的代码上——而不是玩具示例。"
+    },
+    {
+      "type": "quiz",
+      "question": "一位开发者在 JavaScript 文件中输入 `// sort` 并按下回车。Copilot 给出了一个通用的冒泡排序实现建议。随后开发者把注释改写为 `// Sort an array of product objects by price ascending, then by name alphabetically if prices are equal`，再次按下回车。最可能出现的结果是什么？",
+      "options": [
+        "Copilot 给出同样通用的冒泡排序，因为它会忽略注释",
+        "Copilot 给出更有针对性的实现，使用一个能处理两种排序条件的比较函数",
+        "Copilot 拒绝为复杂的排序需求生成代码",
+        "Copilot 会生成排序函数，但总是使用外部库"
+      ],
+      "correct": 1,
+      "explanation": "更具体的注释会产生更有针对性的建议。详细的注释给了 Copilot 两个明确的排序条件（价格升序，价格相同时按名称字母序作为次要排序条件），它可以直接把这两点转化为一个比较函数。而最初含糊的注释因为没有任何约束条件，导致生成了通用的实现。"
+    },
+    {
+      "type": "quiz",
+      "question": "你按 Tab 接受了一条 Copilot 建议，随即发现它引入了一个 bug——该函数返回的是 undefined 而不是计算结果。你应该首先做什么？",
+      "options": [
+        "用 Ctrl+Z 撤销这次接受操作，然后更仔细地查看幽灵文本再重新接受",
+        "让 Copilot Chat 用 /fix 来修复它",
+        "删除文件重新开始",
+        "先接受这个 bug，之后再计划修复"
+      ],
+      "correct": 0,
+      "explanation": "Ctrl+Z 会撤销 Tab 的接受操作，让你回到幽灵文本的状态。之后你可以更仔细地阅读建议，用 Ctrl+Right 逐词接受到出现 bug 的位置，或者按 Esc 关闭建议并手动写返回语句。撤销这一模式是最快的补救方式——远比事后修复 bug 更快。"
+    },
+    {
+      "type": "quiz",
+      "question": "哪个键盘快捷键会打开一个面板，显示同一条注释最多 10 条备选的 Copilot 建议？",
+      "options": [
+        "反复按 Alt+]",
+        "Ctrl+Enter",
+        "Ctrl+Shift+P 然后输入 Copilot",
+        "Tab 然后 Ctrl+Z"
+      ],
+      "correct": 1,
+      "explanation": "Ctrl+Enter 会打开 Copilot 补全面板，并排显示最多 10 条备选建议。这是在最终选定某个方案之前，比较 Copilot 针对同一提示所生成的不同方案的最佳方式。而 Alt+] 只能在内联幽灵文本视图中一次切换一条建议。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 6-1 课完成。** GitHub Copilot 已经在你的编辑器中激活。你已经了解幽灵文本的工作原理、如何浏览多条建议，以及为什么注释质量很重要。在第 6-2 课中，你将练习如何精确引导 Copilot，并学习何时该信任它的输出——何时该去验证。"
+    }
+  ],
+  "nextLesson": "6-2",
+  "prevLesson": "5-12"
+}

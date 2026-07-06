@@ -1,0 +1,116 @@
+{
+  "id": "2-6",
+  "title": "Microsoft Copilot",
+  "part": 2,
+  "estimatedMinutes": 55,
+  "tags": [
+    "tools",
+    "beginner",
+    "microsoft"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你将了解完整的 Microsoft Copilot 生态系统——它存在于哪些地方、在每个场景下能做什么，以及在日常办公任务中它与 Claude、Gemini 相比如何。你还会明白为什么 Microsoft Copilot 是大多数企业环境的默认 AI 层，即便个人在私人使用时更偏好其他工具。"
+    },
+    {
+      "type": "text",
+      "content": "## Copilot 生态系统——一张地图\n\nMicrosoft Copilot 并不是单一产品——它是一个品牌名称，被应用在整个 Microsoft 生态系统的各种 AI 功能上。理解这一点可以避免混淆：\n\n| Copilot | 所在位置 | 适合谁 | 费用 |\n|---------|-------|-------------|------|\n| **Copilot.microsoft.com** | 独立网页聊天 | 任何人 | 免费 |\n| **Copilot in Edge** | 浏览器侧边栏 | Edge 用户 | 免费 |\n| **Copilot in Windows** | Win+C 快捷键 | Windows 11 用户 | 免费 |\n| **Microsoft 365 Copilot** | Word、Excel、Outlook、Teams、PowerPoint | 企业 M365 订阅用户 | 每用户每月 25-30 英镑附加费用 |\n| **Copilot Studio** | 用于构建自定义 AI 的网页应用 | 构建内部工具的企业 | 付费 |\n| **GitHub Copilot** | VS Code、JetBrains、Eclipse、Xcode | 开发者 | 约每月 10 美元（自 2026 年 6 月起按 AI Credits 计费） |\n\n以上所有产品都由 OpenAI 模型（GPT-5 和 o 系列）驱动，并经过 Microsoft 定制。理解其中一个，就为理解其余所有产品打下了基础。\n\n**Microsoft 与 OpenAI 的关系：** Microsoft 向 OpenAI 投资超过 130 亿美元，并将 OpenAI 模型整合到其整个产品线中。这就是为什么 Bing 搜索使用了 AI、为什么 Edge 内置了 AI 侧边栏，以及为什么 Microsoft 365 工具内置了 AI 功能。对企业用户来说，Microsoft 通常是默认的 AI 提供方——不是因为它是最好的独立工具，而是因为它已经内置在企业已经付费使用的工具中。"
+    },
+    {
+      "type": "text",
+      "content": "## Copilot in Edge——伴随每一个网页的 AI\n\nCopilot in Edge 位于 Microsoft Edge 浏览器（每台 Windows 电脑都预装）的侧边栏中。点击右上角的 Copilot 图标，或按 **Ctrl+Shift+.** 即可打开。\n\n**核心能力：** 侧边栏能感知上下文——它可以查看并读取你当前浏览的页面。你不需要复制粘贴任何内容。\n\n**在任何页面上最实用的操作：**\n```\n“用 5 个要点总结这个页面”\n“这篇文章中有哪些说法应该核实一下？”\n“用简单的英语解释一下页面中的[某个术语]”\n“这篇文章还留下了哪些没有回答的问题？”\n“把这里说的内容和我了解的[相关话题]对比一下”\n“提取这个页面中所有的行动项或建议”\n```\n\n**针对浏览器中的长文档：**\n```\n“列出这份报告中所有的数字/统计数据”\n“这份法律文件要求我做什么？”\n“为非专业读者总结关键发现”\n```\n\n**撰写面板：** 侧边栏中有一个独立的标签页，可以帮你为任何平台起草内容——邮件、LinkedIn 帖子、博客、文档。你指定格式、长度和语气，然后把结果复制到你正在撰写的地方。\n\n**实际工作流示例：**\n你正在阅读一份竞争对手的长篇案例研究。打开 Copilot 侧边栏：\n1. “总结这份案例研究中的关键论点”\n2. “他们为每个论点提供了什么证据？”\n3. “你觉得他们的论证有哪些薄弱之处或漏洞？”\n4. 切换到撰写标签页：“为我们的销售团队起草一份针对这些论点的反驳意见”\n\n全程不需要离开当前页面或打开另一个标签页。"
+    },
+    {
+      "type": "text",
+      "content": "## Microsoft 365 Copilot——嵌入工作工具内部的 AI\n\n对于付费使用 Microsoft 365 Copilot 的组织来说，AI 被直接编织进每一个 Office 应用中。这一点非常重要，因为它能在人们已经工作的地方与他们相遇——他们不需要离开文档或邮件就能使用 AI。\n\n**Word 中的 Copilot：**\n- “根据这些要点起草这份报告的初稿” → 生成一份完整的草稿供你编辑\n- “把这部分改写得更正式一些”\n- “把这份 40 页的文档总结成一页的执行摘要”\n- “这份提案里有没有遗漏什么重要内容？”\n- 打开 Copilot 侧边栏，就你自己的文档提问\n\n**Excel 中的 Copilot：**\n- “你在这些数据中看到了什么趋势？”\n- “创建一个能计算[描述]的公式”\n- “生成一个展示[特定关系]的图表”\n- “哪些行是异常值？为什么？”\n- “用简单的语言总结这份表格展示的内容”\n\n注意：与 ChatGPT 的 Code Interpreter（运行 Python）不同，Excel Copilot 是在 Excel 原生的公式和图表系统内工作的。它对自定义分析的灵活性较低，但集成度更高。\n\n**Outlook 中的 Copilot：**\n- “总结这封邮件的对话串，并告诉我需要回复什么”\n- “起草一封回复邮件，要求是：[你的要求]”\n- “今天的邮件里有哪些行动项是我需要负责的？”\n- “为这些收件人安排一次关于[主题]的会议，起草邀请函”\n\n**Teams 中的 Copilot：**\n- 会议进行中：实时记录笔记\n- 会议结束后：“做了哪些关键决定？我的行动项是什么？”\n- 补看你错过的会议：AI 生成的摘要和录音转录\n- 聊天总结：“总结一下上周这个频道里讨论了什么”\n\n**PowerPoint 中的 Copilot：**\n- “为[受众]创建一份关于[主题]的演示文稿，共[N]页幻灯片”\n- “添加一页幻灯片总结[关键点]”\n- “改进这页幻灯片的设计”\n- “为这页幻灯片写演讲者备注”"
+    },
+    {
+      "type": "text",
+      "content": "## Copilot 与 Gemini 在 Workspace 集成上的对比\n\n如果你使用 Google Workspace，Gemini 更好。如果你使用 Microsoft 365，Copilot 更好。这是整个 AI 领域中最清晰的工具选择原则。\n\n| 功能 | Microsoft 365 Copilot | Gemini for Google Workspace |\n|---------|----------------------|-----------------------------|\n| 邮件 | Outlook 集成 | Gmail 集成 |\n| 文档 | Word 集成 | Google Docs 集成 |\n| 电子表格 | Excel 集成 | Google Sheets 集成 |\n| 演示文稿 | PowerPoint 集成 | Google Slides 集成 |\n| 会议 | Teams 集成 | Google Meet 集成 |\n| 费用 | 每用户每月约 25-30 英镑附加费用 | 包含在 Google One AI Premium 中 |\n| 模型 | GPT-5 | Gemini 2.5 Pro |\n| 网页搜索 | Bing 集成 | Google Search 集成 |\n\n**正确的建议：** 不要跟这个规律对着干。如果你的公司使用 Microsoft 365，就学 Copilot——这是你的数据已经存在、你的同事已经在工作的地方。如果你在个人或工作中使用 Google Workspace，就学 Gemini。两个工具之间 10% 的能力差异，远不如在你现有的技术栈内工作来得重要。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Copilot in Edge 免费，现在就能用。** 每台 Windows 电脑都预装了 Edge，而 Copilot in Edge 不需要账号，也不需要付费。如果你还没试过，打开 Edge，浏览一篇长文章，点击 Copilot 图标。你就拥有了一个伴随你访问的每个网页的 AI 研究助手——完全免费。这是任何 Windows 用户都能轻松拿下的 AI 工具胜利。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**不在 Windows 上或不用 Edge？** 大多数 Copilot 功能可以在任何平台的任何浏览器上通过 [copilot.microsoft.com](https://copilot.microsoft.com) 使用——Mac、Linux、Chrome、Firefox 都可以。下面描述的侧边栏集成是 Edge/Windows 专属的，但你可以在 copilot.microsoft.com 上把文章文字粘贴进聊天框来完成这个工作坊，而不是使用侧边栏。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Copilot in Edge——研究 + 写作工作流",
+      "content": "这个工作坊将展示仅使用 Copilot in Edge 完成从研究到写作的完整工作流。\n\n**第 1 步——打开 Edge，找一篇长文章**\n打开 Microsoft Edge，浏览一篇内容充实的新闻文章或网页——字数在 500 字以上的真实内容。（做这个练习，维基百科的效果就很好。）\n\n**第 2 步——打开 Copilot 侧边栏**\n点击 Copilot 图标（Edge 窗口右上角），或按 **Ctrl+Shift+.**。侧边栏会在页面旁边打开。\n\n**第 3 步——研究模式：审问这个页面**\n在侧边栏中逐条输入以下提示：\n```\n用 5 个要点总结这个页面。\n```\n```\n这个页面中有哪些说法应该核实一下？列出来。\n```\n```\n这个页面留下了哪些重要的、没有回答的问题？\n```\n\n观察：Copilot 会自动读取页面内容。你没有复制任何东西。\n\n**第 4 步——撰写模式：从中产出一些内容**\n点击 Copilot 侧边栏顶部的 **Compose**（撰写）标签（在 Chat 旁边）。\n\n选择：\n- 格式：邮件\n- 长度：简短\n- 语气：专业\n\n在“你想写什么内容？”框中输入：\n```\n把这篇文章的关键要点分享给我的团队，并解释为什么它和[你的话题/工作]相关\n```\n\n点击生成。把结果复制到你的邮件客户端或笔记应用中。\n\n**第 5 步——与 Claude 对比**\n在新标签页中打开 [Claude.ai](https://claude.ai)。粘贴文章中的 3-4 段内容，问同样的总结性问题。\n\n写下：\n- 在浏览器内完成任务和切换到 Claude 相比，有什么不同？\n- 哪种体验对这类任务来说感觉更自然？\n- 在什么工作场景下你会选择 Copilot in Edge 而不是 Claude？\n\n**额外加分：如果你有 Microsoft 365**\n打开 Word、Excel 或 Outlook，在功能区中找到 Copilot 图标。试着让它总结你正在处理的文档，或起草一封你一直拖着没回的邮件。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的公司使用 Microsoft 365，正在考虑是否要为 Microsoft 365 Copilot 附加功能付费。相比让员工直接使用免费的 Claude 或 ChatGPT，为它付费最有力的理由是什么？",
+      "options": [
+        "Microsoft 365 Copilot 产出的质量比 Claude 更高",
+        "Microsoft 365 Copilot 比 Claude Pro 更便宜",
+        "Microsoft 365 Copilot 能在实际工作发生的工具内部工作（Outlook、Word、Teams），并能访问这些文档中的公司数据——Claude 和 ChatGPT 做不到这一点，除非靠复制粘贴",
+        "Microsoft 365 Copilot 是唯一能总结邮件的工具"
+      ],
+      "correct": 2,
+      "explanation": "决定性的优势在于与公司数据和现有工作流的原生集成。Microsoft 365 Copilot 可以读取你在 Outlook 中真实的邮件对话串、Word 中真实的文档，以及 Teams 中的会议录音——而员工无需把敏感内容复制粘贴到第三方服务中。这种数据留存和工作流集成的论点，正是企业采购的核心理由。Claude 和 ChatGPT 也能完成类似任务，但前提是员工必须手动把内容复制过去——这更慢，会带来数据风险，而且无法在整个组织中规模化。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——Microsoft Copilot 初次任务",
+      "content": "Microsoft Copilot 运行在 Windows、Edge 和 Bing 中。这个练习会在你的实际环境中测试它。\n\n**第 1 步——打开 Microsoft Copilot**，选择对你来说最方便的方式：Windows 11 中的 Copilot 按钮、Edge 浏览器中的 Copilot 侧边栏，或 copilot.microsoft.com。\n\n**第 2 步——测试 Edge 侧边栏中的 Copilot：** 浏览一个和你工作相关的网页。打开 Copilot 侧边栏，问：“用 5 个要点总结这个页面”和“这个页面没有回答的、但我需要知道的问题有哪些？”\n\n**第 3 步——测试联网回答：** 问 Copilot 一些你所在行业的最新情况。它有没有引用来源？信息有多新？\n\n**第 4 步——测试图像生成：** 让 Copilot 生成一张图片（它使用 DALL-E 3）。要求生成一些与工作相关的内容。\n\n**第 5 步——与 Claude 对比：** 在 Claude.ai 中问第 2 步中同样的问题。哪个给出的分析更有用？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用 Copilot 完成一项真实的工作任务",
+      "content": "使用 Microsoft Copilot 完成一项你本周确实需要做的任务。\n\n**第 1 步——选择一项任务**，要适合 Copilot：能从联网回答中受益的任务、涉及浏览网页的任务，或者是 Microsoft 生态系统内的任务。\n\n**第 2 步——用 Copilot 完成这项任务。** 通过对话推进，直到得到一个可用的输出。\n\n**第 3 步——评估输出：** 准确吗？格式是否方便使用？有没有遗漏重要内容？\n\n**第 4 步——必做的审阅环节：** 把输出粘贴到 Claude.ai，说：*“审阅这份输出。我打算用它来[描述你的任务]。找出 3 个我在使用前应该修复的具体问题、缺漏或不准确之处。”* 至少落实一个修复。\n\n**第 5 步——记录你的对比结果：** 对于这类任务，Microsoft Copilot 是否比 Claude 或 ChatGPT 更好？在什么条件下你会选择 Copilot 而不是其他工具？\n\n**第 6 步——更新你的 AI 工具指南**，加入你对 Copilot 的发现。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——Copilot 与 Claude 在商务写作任务上的对比",
+      "content": "对比 Microsoft Copilot 和 Claude 在专业写作上的处理方式。\n\n**第 1 步——选择一项真实的商务写作任务：** 起草一封邮件、写一份总结、写一份报告的某个部分、创建一份会议议程。\n\n**第 2 步——先在 Microsoft Copilot 中完成这项任务。** 记录回答的质量、长度、语气以及任何格式设定。\n\n**第 3 步——在 Claude 中完成同样的任务。** 记录方式上的差异。\n\n**第 4 步——用以下标准评估两份输出：**\n- 哪一份更接近你实际的专业语气？\n- 哪一份使用前需要的修改更少？\n- 哪一份对任务的理解出现的偏差更多？\n- 哪一份更适合分享给你实际的受众？\n\n**第 5 步——请 Claude** 对比这两份输出：*“这是针对一项商务写作任务的两份 AI 回答[粘贴两份内容]。它们在方式和质量上有哪些关键差异？对于[你的场景]中的专业商务写作，哪种方式更合适？为什么？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——把 Copilot 加入你的日常 Windows 工作流",
+      "content": "如果你在 Windows 11 上工作，Copilot 可以嵌入你的日常流程，而不需要切换应用。\n\n**第 1 步——设置 Copilot 访问方式：** 在任务栏中启用它（如果还没显示）。把 Edge 的 Copilot 侧边栏固定到你的浏览器上。\n\n**第 2 步——找出 2-3 项日常任务**，你可以在不切换应用的情况下通过 Copilot 完成：总结你正在阅读的网页、起草一封简短邮件、在浏览器内搜索信息。\n\n**第 3 步——分别测试每项任务**，使用侧边栏或 Windows 面板中的 Copilot，而不是打开单独的 AI 标签页。\n\n**第 4 步——评估便利性：** 上下文内的 Copilot 是否比切换到专门的 AI 标签页更快？在哪些任务上更快？\n\n**第 5 步——做出决定：** 你是否会把嵌入式 Copilot 当作快速的、上下文内的 AI，而把 Claude 或 ChatGPT 留给更重的任务？写下你的个人工作流规则。"
+    },
+    {
+      "type": "quiz",
+      "question": "对许多 Microsoft 365 用户来说，Microsoft Copilot 相比 Claude 的主要优势是什么？",
+      "options": [
+        "它写作质量比 Claude 更高",
+        "它更准确，更不容易产生幻觉",
+        "它可以直接集成到 Windows、Edge 和 Microsoft 365 应用中，无需切换应用",
+        "它响应速度比其他 AI 工具更快"
+      ],
+      "correct": 2,
+      "explanation": "Copilot 的主要优势是与 Microsoft 生态系统的无缝集成——它可以在 Windows、Edge 浏览器、Outlook、Teams、Word、Excel 等 M365 应用内部工作。这减少了应用切换。它在写作质量或准确性上未必优于 Claude；它的优势在于面向重度使用 Microsoft 的用户的工作流集成。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在 Edge 浏览器中阅读一份重要的 20 页报告，想快速获得一份摘要。最快的方法是什么？",
+      "options": [
+        "把整份报告复制粘贴到 Claude.ai",
+        "打开 Edge 中的 Copilot 侧边栏，让它总结当前页面",
+        "下载 PDF，上传到 ChatGPT",
+        "手动阅读——AI 摘要可能会漏掉关键细节"
+      ],
+      "correct": 1,
+      "explanation": "Edge 的 Copilot 侧边栏可以在不复制或下载任何内容的情况下读取并总结当前页面——对于基于网页的文档来说，这是最快的选项。一旦你有了内容，Claude 非常适合深入分析，但它需要你粘贴或上传文本。对于日常阅读页面这类任务，Copilot 的浏览器内集成是它最大的实际优势。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 2-6 课。** 你已经了解了完整的 Copilot 地图——从免费的浏览器侧边栏到企业级的 M365 集成——以及何时该用 Copilot、Gemini 还是 Claude。对 Windows 用户来说：Copilot in Edge 是免费的、现在就能用，而且在你用它读的第一篇长文章上就能证明它的价值。"
+    }
+  ],
+  "nextLesson": "2-7",
+  "prevLesson": "2-5"
+}

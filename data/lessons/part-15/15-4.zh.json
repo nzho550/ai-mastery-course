@@ -1,0 +1,129 @@
+{
+  "id": "15-4",
+  "title": "处理文档与 PDF",
+  "part": 15,
+  "estimatedMinutes": 65,
+  "tags": [
+    "research",
+    "beginner",
+    "pdf",
+    "notebooklm",
+    "documents",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n在现实世界中，知识大多存在于文档里——PDF、Word 文件、报告、合同、研究论文、操作手册。这节课讲的是如何用 AI 阅读、提问、总结并提取任意长度文档中的信息——而不用自己逐字逐句地读完。你会学到不同文档任务该用哪种工具、如何处理扫描件或低质量的 PDF、如何用 NotebookLM 同时处理多份文档，以及如何核实 AI 摘要是否准确反映了文档的实际内容。"
+    },
+    {
+      "type": "text",
+      "content": "## Claude.ai——上传并询问任何文档\n\nClaude.ai 支持在聊天界面里直接上传文件。你可以上传 PDF、Word 文档、文本文件、电子表格和图片。\n\n**如何上传：**\n1. 在 Claude.ai 中，点击回形针图标（或者把文件拖进对话框）\n2. 选择你的文档\n3. 提出你的问题\n\n**实用的文档提示词：**\n\n*快速了解概况：*\n```\nI've uploaded a [report/contract/paper]. I have 5 minutes.\nGive me: the main purpose of this document, the 3–5 key claims or decisions,\nthe most important number or statistic, and anything I'd want to read in full.\n```\n\n*提取具体信息：*\n```\nExtract every date, deadline, and obligation from this contract.\nFormat as a table: Party | Obligation | Deadline | Consequence if missed.\n```\n\n*寻找答案：*\n```\nDoes this document say anything about [specific topic]?\nQuote the relevant passage and note the section or page number if visible.\n```\n\n*批判性审阅：*\n```\nRead this report. What assumptions does it make?\nWhat evidence is provided vs. asserted without evidence?\nWhat would a sceptical reader immediately question?\nWhat does this document NOT say that would be important to know?\n```\n\n*对比两份文档：*\n在同一个对话里上传两个文件，然后：\n```\nI've uploaded two versions of this policy document.\nWhat has changed between them? List additions, removals, and modifications.\nHighlight any changes that affect obligations, deadlines, or rights.\n```\n\n**长度限制：** Claude 可以处理非常长的文档（最多约 20 万个 token——大约 15 万字，或几百页）。对于大多数商业文档来说，实际上没有限制。"
+    },
+    {
+      "type": "text",
+      "content": "## 核实 AI 的文档摘要\n\nAI 生成文档摘要的速度很快，但可能会遗漏细微差别，把带有保留意见的表述误当成确定的结论，或者忽略藏在脚注里的重要说明。\n\n**对于高风险文档，务必核实摘要：**\n\n```\nYou summarised this document as saying [paste the summary].\nIs that an accurate representation of what the document says?\nIn particular:\n1. Are there any important caveats or qualifications I should know about?\n2. Did you miss anything significant?\n3. Are there any sections you weren't able to read clearly?\n```\n\n**抽查法：** 对摘要中的每个关键论断，问：\n```\nYou stated that [specific claim]. Please quote the exact passage from the\ndocument that supports this. If you can't find an exact quote, tell me.\n```\n\n如果 Claude 很难为某个具体论断给出准确引文，这就是一个信号——它可能是在文档实际内容之外做了推断或概括。\n\n**需要留意：** 文字质量差的扫描件（Claude 读的是文字而不是图像——如果 PDF 是低质量扫描件，它可能会遗漏内容或读错字），以及含有复杂表格或图表的文档（表格数据和视觉元素对 AI 来说更难准确地转换成纯文本）。"
+    },
+    {
+      "type": "text",
+      "content": "## NotebookLM——跨多份文档的 AI 研究\n\nNotebookLM（来自 Google，在 notebooklm.google.com 免费使用）是专为跨文档集合做研究而设计的。你上传所有的来源资料，它就会创建一个只用这些来源回答问题的 AI——并且每次都会引用回具体段落。\n\n**为什么 NotebookLM 和带文件功能的 Claude 不一样：**\n- **多文档：** 创建一个“笔记本”，最多可容纳 50 个来源（PDF、Google 文档、网页链接、YouTube 视频、音频文件）\n- **始终有引用：** 每个答案都链接到具体的原文段落——这对研究的严谨性至关重要\n- **音频概览：** NotebookLM 可以生成一段播客风格的音频对话，总结你的来源资料——适合在通勤路上快速了解一个新领域\n- **只基于你的来源资料：** 它只根据你上传的内容回答——不会凭通用训练知识产生幻觉\n\n**如何有效使用 NotebookLM：**\n1. 前往 notebooklm.google.com（使用 Google 账号免费使用）\n2. 创建一个新笔记本，按研究主题命名\n3. 添加来源：上传 PDF、粘贴网址，或连接 Google 文档\n4. 先问宽泛的定向问题：*“所有这些来源中的主要主题是什么？”*\n5. 然后问具体问题：*“这些来源对 [具体论断] 是怎么说的？”*\n6. 对每个答案，点击引用查看原文段落——使用前先核实\n7. 使用笔记本指南（自动生成）来了解所有来源资料的整体结构\n\n**在 NotebookLM 中效果不错的提示词：**\n```\nDo any of these sources contradict each other on [topic]?\nIf so, quote both sides.\n```\n\n```\nWhat is the most important finding from [specific source]?\nHow does it compare to what [other source] says on the same point?\n```\n\n```\nBased only on these sources, what would a researcher conclude about [your question]?\nWhat questions remain unanswered?\n```\n\n**最适合用于：** 跨多篇学术论文的研究、理解一组政策文件、对一家公司做尽职调查（上传所有相关文件）、备考或备考认证、分析一组会议纪要或项目文档。"
+    },
+    {
+      "type": "text",
+      "content": "## ChatGPT 和 Gemini——文件分析与数据提取\n\n对于电子表格和数据密集型文档，ChatGPT 和 Gemini 相比 Claude 有明显优势。\n\n**ChatGPT（GPT-5，付费版）：**\n- **Excel 和 CSV 文件：** ChatGPT 可以在内部执行 Python 代码来分析电子表格数据、进行计算并生成图表——你不需要写任何代码\n- **图片较多的 PDF：** GPT-5 能很好地读取 PDF 中的图像（图表、图示、以图片形式呈现的表格）\n\n*示例：分析一份电子表格*\n1. 上传一份 CSV 或 Excel 文件\n2. 提问：*“这份数据里有什么趋势？做一张图表展示 [列名] 随时间的变化。标出任何异常值或离群值。”*\nChatGPT 会运行代码、生成图表，并以你可以下载的图片形式返回结果。\n\n**Google Gemini（免费/付费）：**\n- 原生读取 Google Docs 和 Sheets 的能力很强（它们属于同一个生态系统）\n- Gemini Advanced 可以分析文件并生成结构化提取结果\n- 与 Claude 或 ChatGPT 相比，与 Google Workspace 文档的集成更好\n\n*示例：从扫描件 PDF 中提取表格*\n1. 把一份扫描文档（基于图像的 PDF）上传到 ChatGPT\n2. 提问：*“把这份文档中的所有表格提取成文本格式。标出任何内容不清晰的单元格。”*"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**隐私与保密：** 在把文档上传到任何 AI 工具之前，先想一想它是否包含敏感信息——个人数据、财务细节、机密的商业策略、法律意见，或任何你的组织不希望外泄的内容。大多数 AI 工具会把你的文档发送到它们的服务器进行处理。在上传机密文档之前，先查看你所在组织的 AI 使用政策。对于高度敏感的文档，使用本地运行的 AI 方案，或者在上传前先做脱敏处理。"
+    },
+    {
+      "type": "text",
+      "content": "## 处理低质量文档\n\n不是所有文档都一样。扫描件 PDF、手写笔记和纯图像文档，对 AI 来说都是挑战。\n\n**扫描件 PDF（基于图像，没有可选中的文字）：**\nClaude 和大多数 AI 工具仍然能读取这类文件，但效果取决于扫描的清晰度。如果摘要看起来不完整：\n```\nThis is a scanned document. Some text may have been unclear.\nPlease note any sections where you were uncertain about the content,\nand flag any words or numbers that may be misread.\n```\n\n**质量很差的扫描件：**\n对于质量很低的扫描件，先用 Adobe Acrobat（免费版）或 Google Drive 做一次 OCR（光学字符识别）再上传——这会把图像转换成可搜索的文本，AI 就能准确读取了。\n\n**手写笔记：**\n把手写笔记的图片上传到 Claude.ai 或 ChatGPT，让它转录成文字。效果取决于字迹的清晰度——印刷体比草书更容易被识别。\n\n**PDF 中的表格：**\nPDF 中的表格在转换成文本时经常会丢失结构。如果提取出来的表格看起来乱七八糟：\n```\nThe table in this document didn't extract cleanly. Based on what you can read,\nreconstruct the table as best you can and flag any cells you're uncertain about.\n```\n对于 PDF 中表格的干净提取，ChatGPT 或 Adobe Acrobat 的提取功能往往效果更好。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**不同文档任务该用哪个工具：**\n- 单份文档，需要深入分析或回答复杂问题 → **Claude.ai**\n- 多份文档，需要从你的具体来源中得到带引用的答案 → **NotebookLM**\n- 电子表格、数据文件，或生成图表 → **ChatGPT**（配合文件分析）\n- Google 文档或表格 → **Gemini**\n- 浏览网页时想快速获取摘要 → **浏览器 AI 插件**（Sider、Edge Copilot）\n- 扫描件或手写文档 → **Claude.ai 或 ChatGPT（GPT-5）**（先检查质量；如果质量差，先做 OCR）"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "向一份真实的文档提问",
+      "content": "从你的工作或个人生活中选一份真实的文档——一份你一直想读但没时间读的文档，或者一份你需要从中提取具体信息的文档。\n\n好的候选项：\n- 一份长篇报告或白皮书\n- 一份合同或协议（非机密的）\n- 一篇研究论文\n- 一份政策文件或一套指南\n- 一场长会议的会议纪要\n- 一份用户手册或技术规格说明\n\n**如果你只有一份文档——使用 Claude.ai（15 分钟）：**\n\n1. 前往 Claude.ai → 上传你的文档\n2. 先问定向提示词：*“给我一份 5 条要点的文档摘要。它的目的、主要结论和关键行动项是什么？”*\n3. 然后针对你真正关心的内容，问 2–3 个具体问题\n4. 提问：*“这份文档里有没有什么我应该关注、跟进，或在依赖它之前需要核实的地方？”*\n5. **抽查：** 从 Claude 的摘要中挑出一个具体论断，问：*“请引用支持 [该论断] 的原文段落。”* 引文和论断是否匹配？\n\n**如果你有多份同一主题的文档——使用 NotebookLM（15 分钟）：**\n\n1. 前往 notebooklm.google.com → 新建笔记本\n2. 上传 2–5 份相关文档（PDF、文档，或网址）\n3. 提问：*“所有这些文档中的主要主题或结论是什么？”*\n4. 提问：*“这些文档中有没有哪个观点是互相矛盾的？”*\n5. 至少点开一个引用来源，核实答案确实来自正确的段落\n6. 提问：*“这些文档提出了哪些没有被充分回答的问题？”*\n\n**在笔记中记录：**\n- 手动阅读并提取这些信息需要花多长时间？\n- AI 摘要准确吗？你的抽查有没有发现任何错误或过度简化的地方？\n- 你会在工作中经常用这项能力做什么？"
+    },
+    {
+      "type": "quiz",
+      "question": "你有 12 篇研究论文需要为一篇文献综述做审阅。你需要的答案必须始终引用它来自哪篇论文和哪个段落。哪个工具最适合？",
+      "options": [
+        "Claude.ai——上传全部 12 篇论文并提问",
+        "NotebookLM——上传所有来源，从你的具体文档中获得带引用的答案",
+        "Perplexity——它会自动在网上搜索研究论文",
+        "ChatGPT——它的文件分析在处理大量文件时最强"
+      ],
+      "correct": 1,
+      "explanation": "NotebookLM 就是专为这种使用场景设计的：多份文档，答案完全基于你上传的来源，并引用回具体段落。这对文献综述来说很重要，因为你需要能够核实每个论断都能追溯到某篇具体论文。Claude.ai 可以接收多个文件，但不一定总能精确地按论文和段落引用。Perplexity 搜索的是网络——它不使用你上传的具体论文。ChatGPT 的代码解释器更擅长处理数据和电子表格，而不是带段落级引用的多文档文献分析。NotebookLM 只基于你的具体来源（而非通用训练知识）这一点，也意味着它不会添加你没有纳入的论文中的信息。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——文档提取练习",
+      "content": "从一份复杂文档中提取结构化信息。\n\n**第 1 步——找一份与你工作相关的密集型文档：** 一篇研究论文、一份技术规格说明、一份冗长的报告。\n\n**第 2 步——上传给 Claude**，要求做结构化提取：\n```\nExtract the following from this document:\n1. Main thesis or conclusion (1-2 sentences)\n2. Key findings (bullet points, with page/section reference)\n3. Methodology (how was this research/analysis conducted?)\n4. Data sources used\n5. Limitations acknowledged by the authors\n6. Recommendations made\n7. What this document does NOT address that I might expect it to\n```\n\n**第 3 步——对照原始文档核实 3 处具体的提取内容。**\n\n**第 4 步——问 Claude：** “你在提取这份文档时，哪些内容感到吃力？有哪些信息含糊不清或缺失？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——多文档综合",
+      "content": "跨多份文档综合信息。\n\n**第 1 步——收集 3-5 份**关于同一主题的文档（研究论文、报告、文章）。\n\n**第 2 步——用 Claude 处理每一份文档**，以统一的格式提取关键要点。\n\n**第 3 步——让 Claude 跨文档综合：**\n```\nI have extracted key points from [N] documents on [topic]:\n\nDocument 1: [paste extraction]\nDocument 2: [paste extraction]\n...\n\nSynthesise these sources:\n1. What do all documents agree on? (consensus findings)\n2. Where do they disagree? (conflicting findings)\n3. What does each source add that others don't cover?\n4. What is the overall weight of evidence for the key claims?\n5. What questions do these documents collectively fail to answer?\n```\n\n**第 4 步——必做的审查：** 问 Claude：*“在你的综合结果中，哪些结论最有证据支持？哪些最具推测性？”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——认识 PDF 处理的局限",
+      "content": "理解 AI 处理 PDF 时会在哪些情况下失败，以及如何发现这些问题。\n\n**第 1 步——用一份有挑战性的文档测试 AI 的 PDF 提取能力：**\n- 一份扫描件 PDF（基于图像，不是文字）\n- 一份包含复杂表格或图表的文档\n- 一份带脚注或尾注的文档\n- 一篇多栏排版的学术论文\n\n**第 2 步——针对每种类型，评估：**\n- 表格提取得对不对？\n- 脚注是否被保留，还是丢失了？\n- 多栏文字有没有被打乱顺序？\n- 图表和插图是被描述了，还是被忽略了？\n\n**第 3 步——问 Claude：** “哪些类型的 PDF 内容最容易被误提取？对于这些有难度的类型，我该如何核实提取的准确性？”\n\n**第 4 步——为你常用的每种文档类型，制定你的核实流程。**"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——文档分析流水线",
+      "content": "搭建一套可重复使用的文档分析流水线。\n\n**第 1 步——让 Claude Code** 创建一个文档分析流水线脚本：\n```\nWrite a Python script that creates a document analysis pipeline:\n1. Accepts a folder of PDFs as input\n2. For each PDF:\n   a. Extract text (using PyPDF2 or pdfplumber)\n   b. Send to Anthropic API for structured analysis\n   c. Save the structured output as a JSON file\n3. After all PDFs: generate a synthesis report combining key findings\n4. Create an index file listing all documents and their key themes\n\nHandle errors gracefully: skip unreadable PDFs, log failures.\n```\n\n**第 2 步——在一个真实研究项目的文档文件夹上测试。**\n\n**第 3 步——对照一份你手动读过的文档，核实输出质量。**\n\n**第 4 步——必做的审查：** 问 Claude：*“这些文档中的哪些内容类型，流水线会提取错误？还需要哪些人工审核？”*"
+    },
+    {
+      "type": "quiz",
+      "question": "你上传一份 50 页的 PDF 给 Claude，询问一个具体的统计数字。Claude 给出的数字看起来不对。最有可能的原因是什么？",
+      "options": [
+        "Claude 编造了这个数字",
+        "PDF 提取可能读错了数字（尤其是表格或图表中的数字），或者 Claude 把不同章节的相似统计数据搞混了——请直接在文档中核实",
+        "这份 PDF 是加密的",
+        "Claude 无法正确处理 PDF"
+      ],
+      "correct": 1,
+      "explanation": "PDF 数字提取错误很常见：表格对数字的格式化方式会让解析器产生混淆，脚注引用会和数字混在一起，位置相近的相似统计数据也容易被搞混。始终要对照原始文档核实从 PDF 提取出来的具体数字。对于关键统计数据，记下 Claude 引用的页码并直接查证。绝不要在没有核实的情况下引用 AI 从文档处理中得到的数字。"
+    },
+    {
+      "type": "quiz",
+      "question": "你需要从 100 篇研究 PDF 中提取数据。在你的流水线中，最重要的质量检查是什么？",
+      "options": [
+        "手动核实全部 100 份文档",
+        "随机抽取 10% 的输出结果，对照源 PDF 核实——这样能在不需要 100% 人工审核的情况下获得统计学上的信心",
+        "只处理 10 页以下的文档",
+        "把每份文档处理两遍，比较两次的输出结果"
+      ],
+      "correct": 1,
+      "explanation": "统计抽样能在规模化处理时提供质量保证。随机核实 10-15% 的输出结果，对照源文档核对。如果抽样结果显示准确率达到 95% 以上，你就可以放心使用整批数据。如果发现系统性错误（比如所有表格数据都错了），你可以在使用数据之前先修复流水线并重新处理。这是任何自动化数据处理流水线的标准质量保证做法。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "工作坊 E——用 AI 审查合同或法律文件",
+      "content": "AI 最被低估的实用场景之一：在签署法律文件之前，用它来理解文件内容。这个工作坊教你一套安全、有效的流程。\n\n**先说明一个重要前提：** AI 能帮你理解文件写了什么——但在涉及大额金钱或权利的场合，它不能替代律师。AI 非常擅长：用大白话解释条款的含义、标出值得质疑的异常条款，以及生成签署前应该问的问题。\n\n**第 1 步——选一份要审查的文档。** 好的候选项：\n- 一份劳动合同或录用意向书\n- 一份租赁协议（住房或办公）\n- 一份你实际在用的软件服务条款\n- 一份自由职业客户合同\n- 一份健身房或订阅会员协议\n- 任何一份别人递给你、让你“直接签了就行”的文档\n\n**第 2 步——上传或粘贴它。** 在 Claude.ai 中（它能很好地处理长 PDF）：\n- 点击回形针上传 PDF，或者\n- 直接复制粘贴文本\n\n**第 3 步——运行文档审查提示词：**\n```\nI need to understand this document before deciding whether to sign it.\nPlease:\n\n1. Summarise what this document is and what I'm agreeing to in plain English (3-5 sentences)\n2. List any clauses that are unusual, one-sided, or worth questioning — explain why each is notable\n3. Identify what I'm giving up or committing to (rights, exclusivity, payments, time commitments, penalties)\n4. Flag anything that could be problematic if circumstances change (e.g. termination clauses, auto-renewals, non-competes)\n5. List the 5 most important questions I should ask before signing\n\nNote: I understand you're not providing legal advice. I want to understand what this says, not what I should do.\n```\n\n**第 4 步——针对具体条款追问。** 对于任何你不理解的条款，只粘贴那一条，问：“用大白话解释这条条款。它要求我做什么？它允许对方做什么？”\n\n**第 5 步——生成谈判问题。** 如果这是一份条款可以协商的合同（劳动合同、自由职业合同、商业租约）：\n```\nBased on the clauses you identified as unusual or one-sided, what specific changes could I reasonably ask for? For each suggested change, give me the exact wording I could propose.\n```\n\n**AI 审查之后该怎么做：**\n- 对于低风险文档（健身房会员、App 服务条款）：AI 审查大概就够了\n- 对于中等风险（劳动合同、公寓租约）：用 AI 审查来准备你的问题，然后再和对方澄清\n- 对于高风险（商业合同、房产、重大财务承诺）：AI 审查 + 真正的律师\n\n**这能省下多少时间：** 大多数人不读文档就签字，是因为读密密麻麻的法律文字太痛苦了。有了 AI，一份 20 页的合同变成了一场 10 分钟的对话。你会发现更多问题，理解得更透彻，谈判也会更有底气。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 15-4 课。** 你现在可以用 Claude.ai 做单文档深度分析，用 NotebookLM 做多文档带引用研究，用 ChatGPT 处理电子表格和数据文件，并且知道如何处理扫描件或低质量文档。以前你没时间读的文档，现在几分钟就能读懂——而且你有了一套核实方法，能确认 AI 摘要是准确的。"
+    }
+  ],
+  "nextLesson": "15-5",
+  "prevLesson": "15-3"
+}

@@ -1,0 +1,119 @@
+{
+  "id": "19-4",
+  "title": "AI 助力健康与身心福祉",
+  "part": 19,
+  "estimatedMinutes": 60,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "health",
+    "wellbeing",
+    "research",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nAI 在健康领域的用途越来越广——不是作为医生，而是作为一个研究工具、文件翻译器和就诊准备助手。学完之后，你将知道如何用 AI 理解医疗信息、为就诊做准备、解读健康文件、规划健身和营养，并支持自己的心理健康——同时清楚地知道界限在哪里，什么时候该停止使用 AI，转而联系专业人士。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**AI 不是医疗专业人员。** AI 可以帮你研究、理解和准备——它无法给你做检查，不了解你的完整病史，也绝不应成为医疗决策的最终依据。研究一致表明，AI 在医学事实上的幻觉率为 3%–18%，而且模型往往在犯错时听起来最自信。用 AI 获取信息、做准备；诊断、治疗和建议要交给合格的医疗专业人员。"
+    },
+    {
+      "type": "text",
+      "content": "## 就诊前调研——充分利用与医生相处的时间\n\nAI 在健康领域最具价值的用途之一，就是为就诊做准备。就诊时间通常很短，提前准备能让它更有成效。\n\n**就诊准备提示词：**\n```\nI have a GP / specialist / consultant appointment for [reason] in [timeframe].\n\nMy symptoms / situation: [describe in detail — when it started, what it feels like, what makes it better or worse, what you've already tried]\nMy relevant medical history: [key conditions, medications, allergies]\nMy main concerns: [what you're most worried about or want to understand]\n\nHelp me prepare by:\n1. Suggesting the key questions I should ask in this appointment\n2. Explaining what tests or referrals the doctor might typically consider for this presentation\n3. Medical terms I might hear — and what they mean in plain English\n4. Things I should tell the doctor proactively that patients often forget to mention\n5. What to bring or have ready (test results, list of current medications, etc.)\n```\n\n**翻译医生说的话：**\n```\nMy doctor told me [describe what they said] and prescribed [medication/treatment].\n\nIn plain language:\n1. What is this diagnosis (if any) — what is actually happening in my body?\n2. How does this treatment work?\n3. What should I expect during recovery or treatment?\n4. What side effects should I watch for?\n5. What questions should I have asked that I forgot to?\n```\n\n**理解处方：**\n```\nI've been prescribed [medication name, dose, frequency].\n\nExplain:\n1. What this medication does\n2. Common side effects and what to watch for\n3. Any interactions with food, drink, or other medications I should know about\n4. How long before I should notice it working\n5. What to do if I miss a dose\n\nNote: I'll verify these details with the pharmacist.\n```"
+    },
+    {
+      "type": "text",
+      "content": "## 理解健康文件和检验结果\n\n医疗文件——血液检验结果、放射科报告、出院小结——都是写给临床医生看的。AI 能在保留重要细节的同时，把它们翻译成大白话。\n\n**血液检验结果：**\n```\nHere are my recent blood test results: [paste the values and reference ranges]\n\nPlease:\n1. Explain what each test measures in plain language\n2. Flag any values that are outside the normal range and explain what that typically means\n3. Which results should I ask my doctor about specifically?\n4. Are there any results that, taken together, suggest something I should raise with my GP?\n\nNote: I'll discuss interpretation with my doctor — I want to understand what I'm looking at.\n```\n\n**放射科或病理科报告：**\n```\nI've received this report: [paste or describe key findings]\n\nTranslate the medical terminology into plain language.\nWhat does this report actually say in simple terms?\nAre there any terms that suggest something concerning I should ask about?\n```\n\n**出院小结或诊所信函：**\n```\nHere is a summary from my recent [hospital / clinic] visit: [paste]\n\nWhat did they find? What are they recommending I do? What follow-up is expected?\nAre there any terms or recommendations I should make sure I understand before my next appointment?\n```\n\n**重要提示：** AI 能很好地把医学术语翻译成大白话，但对于复杂或罕见病症，它可能会误解临床上的细微差别。务必把 AI 翻译的摘要拿回去给医生确认——\"我理解这是指 X——对吗？\""
+    },
+    {
+      "type": "text",
+      "content": "## 症状研究——正确的使用方式\n\n在网上搜索症状素有\"灾难化\"的坏名声——\"头痛+疲劳=脑瘤\"就是典型的结果。AI 在这方面比传统搜索更好，因为它能提供背景信息和概率判断，而不只是罗列一堆最坏情况的诊断。\n\n**结构化症状提示词：**\n```\nI have the following symptoms: [describe each symptom with timing, severity, location, and what makes it better or worse]\n\nMy relevant medical history: [existing conditions, recent illnesses, current medications]\nI am [age, general health context if relevant]\n\nI'm not seeking a diagnosis — I want to understand:\n1. What are the most likely explanations for this combination of symptoms? (Most common first)\n2. What are the red flags — symptoms that, if I develop them, mean I should seek urgent care?\n3. Is this the kind of thing that typically resolves on its own, or should I see a doctor?\n4. What self-care measures are generally recommended while monitoring this?\n5. What information should I bring when I do see a doctor?\n```\n\n**专门的症状检查工具：** Doctronic 和 Docus.ai 等工具专门用于症状评估，能提供结构化的分诊建议（\"自我护理\"、\"本周去看全科医生\"、\"寻求紧急护理\"）。它们不能替代专业评估，但比通用 AI 更专门针对这项任务而设计。\n\n**症状研究的准则：** 如果 AI 的研究（或症状本身）告诉你要寻求紧急护理——那就照做。不要用 AI 来说服自己在有真正担忧时不去看医生。"
+    },
+    {
+      "type": "text",
+      "content": "## 健身、营养与身心健康规划\n\n对于日常的健康目标，AI 是一个实用且灵活的规划工具——不需要订阅，也能根据你的限制条件无限调整。\n\n**制定健身计划：**\n```\nCreate a [duration: 4-week / 8-week / ongoing] fitness plan for me.\n\nCurrent fitness level: [honest description: sedentary / lightly active / some exercise history]\nGoal: [e.g., general fitness and energy / lose weight / build strength / run 5km / rehabilitation after injury]\nTime available: [e.g., 30 minutes, 3 times per week]\nEquipment and access: [gym with weights / home with no equipment / outdoor running only]\nConstraints: [e.g., bad knees / lower back issues / can't jump due to neighbours below]\n\nFor each week, provide:\n- Session plan with exercises, sets, reps, and rest\n- What to notice — how should I feel? How do I know I'm progressing?\n- What to do if a session feels too hard or too easy\n```\n\n**营养指导：**\n```\nI want to eat better for [goal: more energy / weight management / supporting training / managing [condition]].\n\nCurrent eating patterns: [honest description of what you typically eat]\nDietary requirements: [any restrictions or preferences]\nTime for cooking: [e.g., 30 minutes on weekdays, more at weekends]\n\nGive me:\n1. The 3-4 most impactful changes I could make (not an overhaul — sustainable changes)\n2. Specific foods to add more of and why\n3. One meal per day I could make healthier without it feeling like a sacrifice\n4. A realistic approach to the food I enjoy that I shouldn't give up entirely\n```\n\n**心理健康与压力：**\n```\nI've been [describe situation: stressed / struggling to sleep / feeling anxious about X].\n\nI'm not in crisis — I'm looking for practical strategies.\nWhat evidence-based approaches are most commonly recommended for this?\nWhat can I try today, and what requires longer-term habit change?\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**每日 10 分钟身心状态检查：** AI 在心理健康方面一个有效的用法，就是简单的每日自我核查。打开一个与 Claude 的对话，写下 5-10 句话，说说你现在的状态、心里在想什么、觉得哪里困难。然后问：\"你从我描述的内容中注意到了什么？有没有我可能忽略的地方，或者值得留意的规律？\"这不是心理治疗——而是一个结构化的自我反思提示词。很多人觉得这有助于在压力大的一天开始前或睡前整理思绪。Rosebud、Mindsera 和 Life Note 等专门应用把这一过程做成了结构化的日记流程（第 19-6 课会详细介绍）。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "你的健康 AI 会谈",
+      "content": "根据目前对你最相关的情况，选择以下任务之一：\n\n**选项 A——为一次就诊做准备**\n\n如果你有即将到来的预约（或者一直拖延的预约），运行就诊准备提示词。查看 Claude 的输出后：\n- 哪些问题是你之前没想到要问的？\n- 哪些医学术语你现在理解得更清楚了？\n- 你会带上哪些原本可能忘记带的东西？\n\n**选项 B——理解一份健康文件**\n\n找一份你从未完全理解过的医疗文件——血液检验结果、处方说明单、出院小结。运行翻译提示词。读完 Claude 的解释后，你对哪些内容理解得更清楚了？\n\n**选项 C——制定一份简单的健康计划**\n\n针对你的一个真实目标运行健身计划或营养提示词。查看结果后：\n- 这是你真的能坚持下去的吗？\n- 哪里需要根据你的真实生活做调整？\n- 基于这个结果，你会做出的最重要的一项改变是什么？\n\n**反思：** 无论选哪个选项，在没有 AI 帮忙的时候，你会怎么处理这件事？你会去做研究，还是干脆就不管了？"
+    },
+    {
+      "type": "quiz",
+      "question": "你向 Claude 描述你的症状，它说这\"最可能是轻微的肌肉拉伤，通常 1-2 周内会自愈\"。你还注意到它列出的其中一个症状被标记为需要紧急护理的危险信号。你应该怎么做？",
+      "options": [
+        "遵循 Claude 给出的最可能的解释——轻微拉伤——因为它说这是最可能的原因",
+        "寻求紧急护理，因为 Claude 明确标记该症状需要紧急护理",
+        "等几天看症状是否好转，再决定",
+        "向 Claude 提出更详细的问题，以获得更清晰的答案后再决定"
+      ],
+      "correct": 1,
+      "explanation": "当 AI 识别出一个危险信号症状——意味着可能存在需要及时评估的严重病理——这个警示应当凌驾于\"最可能\"的措辞之上。AI 无法给你做检查，不了解你的完整病史，\"最可能\"的解释是一种统计学表述，而不是保证。出现在紧急护理清单上的症状意味着：寻求紧急护理，让专业人员排除风险。一次不必要的急诊就诊代价很低；而忽视一个真正紧急的症状，代价可能非常高。当出现危险信号时，绝不要用 AI 来说服自己不用去就医。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——健康信息调研",
+      "content": "在保持适度怀疑的前提下用 AI 做健康调研。\n\n**第一步——问 Claude：**\"使用 AI 获取健康信息的恰当方式是什么？在哪些情况下 AI 提供的健康信息是危险的？我该如何验证 AI 的健康信息？\"\n\n**第二步——测试 AI 健康信息的质量：** 向 Claude 提出一个你真实关心的具体健康问题。\n\n**第三步——评估回复：**\n- Claude 是否建议咨询医疗服务提供者？\n- 不确定性和局限性是否说明清楚了？\n- 这些信息是否与权威健康信息来源（Mayo Clinic、NHS、医学期刊）一致？\n\n**第四步——问 Claude：**\"针对这个健康问题，我应该查阅哪些权威来源来核实这些信息？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——健康与身心福祉习惯追踪",
+      "content": "搭建一套 AI 辅助的健康习惯追踪系统。\n\n**第一步——确定你想养成或改善的 3 个健康习惯。**\n\n**第二步——让 Claude 设计一套追踪系统：**\n```\nDesign a health habit tracking system for:\nHabits: [list them]\nMy current baseline: [where I am now]\nGoal: [where I want to be in 90 days]\n\nCreate:\n1. Daily tracking template (simple, under 2 minutes to complete)\n2. Weekly review questions\n3. How to identify if I'm making progress\n4. What to do when I break the habit chain\n```\n\n**第三步——搭建这套追踪系统**（简单的文本文件、电子表格或应用均可）。\n\n**第四步——两周后**，借助 Claude 做每周复盘：\"这是我两周的追踪数据 [粘贴数据]。你看到了什么规律？我应该做哪些调整？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——身心福祉评估",
+      "content": "用 AI 评估并改善你整体的身心福祉。\n\n**第一步——让 Claude 引导一次身心福祉核查：**\n\"引导我完成一次全面的身心福祉核查。问我关于：身体健康习惯、心理健康、社交联系、工作满意度和生活平衡的问题。针对每个方面，评估我目前的状态并给出 1-2 条改进建议。\"\n\n**第二步——诚实地回答每个问题**——这是为了你自己，不是为了给别人看。\n\n**第三步——找出一个方面**，一点小改进就能对你整体的身心福祉产生最大影响。\n\n**第四步——针对这个方面设计一个具体的习惯。**\n\n**第五步——重要提示：** 如果任何身心福祉方面引发了严重担忧（心理健康、身体症状），请优先寻求专业支持，而不是依赖 AI 辅助。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——AI 健康信息使用流程",
+      "content": "为在健康决策中使用 AI 建立一套负责任的流程。\n\n**第一步——为自己制定一份健康 AI 使用政策：**\n```\n## My Health AI Policy\n\n### When AI is appropriate\n- General health education\n- Understanding medical terms\n- Research before a doctor's appointment\n- Habit and lifestyle planning\n\n### When to always consult a professional\n- Symptoms that could indicate serious conditions\n- Medication dosages or interactions\n- Mental health concerns\n- Any decision with significant health consequences\n\n### How I verify AI health information\n1. Check reputable health sources (NHS, Mayo Clinic, etc.)\n2. Bring questions to my next medical appointment\n3. Never self-diagnose based on AI information alone\n```\n\n**第二步——和 Claude 一起审查这份政策：**\"审查这份健康 AI 使用政策。我是不是太保守了？还是太宽松了？我遗漏了哪些重要情况？\""
+    },
+    {
+      "type": "quiz",
+      "question": "你向 Claude 描述了症状，它说\"这可能是 X 病症\"。你感到担心，想要确认。正确的下一步是什么？",
+      "options": [
+        "继续追问 Claude 更详细的问题，直到得到确切的诊断",
+        "去看医疗服务提供者：AI 的症状分析明确说明不构成医疗建议，无法对你进行体格检查，不了解你的病史，绝不应该取代专业的医疗诊断",
+        "在网上搜索更多关于 X 病症的信息",
+        "等等看，观察症状是否加重"
+      ],
+      "correct": 1,
+      "explanation": "AI 无法诊断医疗病症。当 Claude 说\"这可能是 X 病症\"时，意思是：根据描述的症状，X 病症是一种可能性，应该由能够对你进行体格检查、安排相应检验、查阅你完整病史并运用临床判断的专业人员来评估。用 AI 的症状描述来自我诊断，然后要么自行治疗，要么在不寻求护理的情况下持续担心——这两种结果都不理想。AI 可以帮你理解症状、为看医生做准备提问——但不能取代医生。"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude 针对某个健康目标推荐了一种特定的补充剂。购买之前你应该做什么？",
+      "options": [
+        "直接购买——Claude 有很好的健康信息",
+        "独立研究该补充剂的证据基础（查看系统性综述，而不仅仅是厂商的宣称），如果你正在服用任何药物，应与医疗服务提供者讨论",
+        "让 Claude 再确认一次这个推荐",
+        "只需核对价格和品牌"
+      ],
+      "correct": 1,
+      "explanation": "补充剂推荐需要独立核实，原因在于：（1）证据基础差异巨大——有些补充剂证据充分，大多数证据薄弱，有些甚至有害；（2）补充剂可能与药物相互作用；（3）\"天然\"不等于安全或有效；（4）补充剂行业受到的监管审查比药物少得多。请查阅关于该具体补充剂的权威健康信息来源，如果你正在服用任何药物或有健康状况，请与医生讨论。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 19-4 课。** 你现在可以用 AI 进行就诊前准备、理解医疗文件、结构化的症状研究、健身和营养规划，以及日常的身心福祉支持。贯穿始终的核心原则是：AI 加速你的理解和准备；诊断和治疗决策由合格的医疗专业人员来做。"
+    }
+  ],
+  "nextLesson": "19-5",
+  "prevLesson": "19-3"
+}

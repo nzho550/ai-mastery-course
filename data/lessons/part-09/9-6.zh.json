@@ -1,0 +1,70 @@
+{
+  "id": "9-6",
+  "title": "Vercel 出品的 v0——以思考的速度做 UI 原型",
+  "part": 9,
+  "estimatedMinutes": 50,
+  "tags": [
+    "v0",
+    "vercel",
+    "ui",
+    "react",
+    "components",
+    "prototyping",
+    "vibe-coding"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将能够用 v0.dev 根据文字描述生成生产级质量的 UI 组件和完整页面布局，并将它们集成到一个项目中。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 v0.dev？\n\nv0.dev 是 Vercel 出品的 AI UI 生成工具。你用简单的语言描述一个组件或页面，它就会用 **shadcn/ui** 和 **Tailwind CSS**——也就是现代生产应用普遍使用的那套组件——生成干净的 React 代码。\n\n**v0 与 Bolt 的区别：**\n- **Bolt** 构建完整的应用——后端、路由、数据，一应俱全\n- **v0** 专注于 UI——它生成美观的组件和布局，可以直接放进任何 React 项目里使用\n\n以下情况使用 v0：\n- 你需要快速拿到一个特定的 UI 组件（价格表、导航栏、数据表格）\n- 你在构建一个 React 应用，想要生产级质量的组件，却不想自己写 CSS\n- 你想在写真正的代码之前，先把页面布局原型做出来\n- 你在探索设计方案，想快速看到 3 种不同的变体"
+    },
+    {
+      "type": "text",
+      "content": "## 如何使用 v0.dev\n\n**访问方式：** 打开 **v0.dev**——用你的 Vercel 或 GitHub 账号登录。免费版每月提供相当可观的生成次数。\n\n**基本流程：**\n1. 描述你想要的组件或页面\n2. v0 生成 3 个变体\n3. 选出最接近你需求的那个\n4. 通过对话来打磨：“把按钮改成红色”“加一个深色模式切换开关”“把图表换成表格”\n5. 复制代码——它是干净的、可直接导入的 React 代码\n\n**v0 能生成什么：**\n- 带 TypeScript 的 React 组件\n- 用于样式设计的 Tailwind CSS 类\n- shadcn/ui 组件（预构建的无障碍可访问组件）\n- 在手机和桌面上都能正常显示的响应式布局\n- 代码是生产级质量的——不是演示用的临时代码"
+    },
+    {
+      "type": "text",
+      "content": "## 如何有效地向 v0 提问\n\nv0 对那些能描述出视觉效果、展示的数据以及用户交互方式的提示词反应最好。\n\n**较弱的提示词：**\n> A dashboard\n\n**较强的提示词：**\n> A SaaS analytics dashboard. Left sidebar with navigation (Overview, Users, Revenue, Settings). Main content area shows: a top stat row with 4 KPI cards (total revenue, active users, conversion rate, churn). Below that, a line chart (revenue over 30 days) and a data table (recent signups: name, email, plan, date, status). Dark theme.\n\n**一条优秀 v0 提示词应包含的要素：**\n- 布局结构（侧边栏、标签页、网格、分区）\n- 展示了什么数据、放在哪里\n- 交互状态（悬停、选中、空状态）\n- 视觉风格（深色/浅色、简约/详细）\n- 具体的组件类型（卡片、表格、图表、表单、弹窗）"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "用 v0 构建一个落地页",
+      "content": "用 v0 为一个真实的产品或项目生成一个完整的落地页（landing page）。\n\n**第 1 步——确定你要为什么做落地页：**\n- 你的作品集网站\n- 你构建的一个副业项目或工具\n- 一个虚构的产品（练习也算数）\n- 你的自由职业服务\n\n**第 2 步——写出你的 v0 提示词：**\n```\nA landing page for [product name]. \n\nHero section: headline \"[your main value proposition]\", subheadline, \nprimary CTA button \"[action]\" and secondary \"[action]\". \n\nFeatures section: 3 features with icons, title, description.\nPricing section: 3 tiers (Free, Pro $29/mo, Team $99/mo) with feature lists.\nFooter: links to Features, Pricing, Blog, Contact.\n\n[Light/dark] theme. Clean, modern, professional.\n```\n\n**第 3 步——生成并选出最好的那个变体。**\n\n**第 4 步——针对细节进行迭代：**\n- “把主色从蓝色改成靛蓝色”\n- “把 hero 图片占位区替换成一个代码编辑器截图的模拟图”\n- “让价格卡片突出显示 Pro 档为推荐选项”\n\n**第 5 步——复制代码。** 点击 code 标签页，全部复制。\n\n**第 6 步——放进 Bolt：** 把这个组件粘贴进一个新的 Bolt 项目，作为一个完整可用网站的起点。让 Bolt 添加一个可用的联系表单并部署它。\n\n**最终成果：** 一个专业的落地页，在 30 分钟以内生成完毕。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 A——组件冲刺：25 分钟生成 5 个组件",
+      "content": "通过快速生成 5 种不同类型的组件，培养你对 v0 的直觉。\n\n每一个都写一条具体的提示词并生成组件。记录下哪些效果好，哪些还需要打磨。\n\n**组件 1（5 分钟）：数据表格**\n提示词：“A data table showing employees: name, department, role, start date, status (active/inactive). Sortable columns, search input, pagination, row actions (edit, delete). Clean, minimal.”\n\n**组件 2（5 分钟）：导航栏**\n提示词：“A top navigation bar for a SaaS app. Left: logo + product name. Centre: nav links (Dashboard, Projects, Team, Reports). Right: notifications bell, avatar with dropdown (Profile, Settings, Log out). Sticky on scroll. Light theme.”\n\n**组件 3（5 分钟）：设置页面**\n提示词：“An account settings page. Left sidebar nav (Profile, Security, Notifications, Billing, Team). Main content shows Profile section: avatar upload, name, email, bio fields, save button. Clean form layout.”\n\n**组件 4（5 分钟）：统计卡片**\n提示词：“4 KPI stat cards in a row. Each has: icon (top left), metric name, large number, trend (% up/down with arrow), sparkline chart. Cards for: Revenue, New Users, Conversion Rate, Churn. Dark background cards.”\n\n**组件 5（5 分钟）：空状态**\n提示词：“An empty state for a projects list. Illustration area (abstract shapes), heading 'No projects yet', subtext 'Create your first project to get started', primary button 'New Project'. Centered, friendly.”\n\n**复盘：** 哪种组件类型 v0 处理得最好？哪种需要最多次迭代？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——v0 + Bolt：从 UI 优先出发的全栈开发",
+      "content": "用 v0 负责 UI，用 Bolt 添加功能——这是一种 UI 优先的开发工作流。\n\n**第 1 步——在 v0 中设计：** 为第 9-5 课中的应用想法（或重新选一个）构建 UI。专注于把布局和组件做对。生成：主界面、一个空状态，以及一个弹窗或表单。\n\n**第 2 步——导出到 Bolt：** 复制 v0 的代码。打开 bolt.new，把你的 v0 代码粘贴进去作为起点，然后告诉 Bolt：“这是我应用的 UI。现在添加：[这个应用需要的数据和逻辑]。”\n\n**第 3 步——连接数据：** 让 Bolt 把 UI 与真实数据连接起来——先用本地存储，需要的话再上数据库。\n\n**第 4 步——测试完整流程：** 数据有没有出现在 UI 里？按钮有没有起作用？你能不能从头到尾完成核心的用户流程？\n\n**第 5 步——部署并分享。** 获取一个可访问的在线网址。\n\n**反思：** 这和直接在 Bolt 里开始相比如何？哪种方式感觉更可控？"
+    },
+    {
+      "type": "quiz",
+      "question": "v0 生成了一个使用 shadcn/ui 和 Tailwind CSS 的组件。你想把它用在一个纯 HTML 项目里（没有 React，没有构建步骤）。问题出在哪里？",
+      "options": [
+        "没有任何问题——React 代码可以在任何浏览器中运行",
+        "v0 生成的代码需要一个 React 环境和构建步骤（比如 Vite 或 Next.js）——直接粘贴进纯 HTML 文件是无法运行的。你需要搭建一个 React 项目、用 Bolt 来运行它，或者让 v0 生成一份纯 HTML/CSS 版本",
+        "你需要付费才能让 v0 输出纯 HTML",
+        "shadcn/ui 组件会自动转换成纯 HTML"
+      ],
+      "correct": 1,
+      "explanation": "v0 生成的是 React 组件——JSX 语法加 Tailwind 工具类。这些没法粘贴进一个纯 HTML 文件然后在浏览器中打开。要使用 v0 的输出，你需要一个配置好 Tailwind 的 React 项目（Next.js、Vite + React、Create React App）。针对纯 HTML 项目的变通做法：让 v0 “生成一份不依赖任何框架的纯 HTML 和 CSS 版本”，或者用 Bolt，它会替你处理好环境搭建。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 9-6 课完成。** v0.dev 现在已经加入了你的工具箱——描述一个 UI，得到生产级质量的 React 代码，在对话中不断迭代。搭配 Bolt 负责功能实现、Claude Code 负责深度开发，你已经拥有一整套完整的快速开发工具组合。接下来：Lovable，用于从一个想法出发进行完整的产品开发。"
+    }
+  ],
+  "nextLesson": "9-7",
+  "prevLesson": "9-5"
+}

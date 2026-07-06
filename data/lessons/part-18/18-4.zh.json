@@ -1,0 +1,117 @@
+{
+  "id": "18-4",
+  "title": "RAG 与个人知识系统",
+  "part": 18,
+  "estimatedMinutes": 65,
+  "tags": [
+    "advanced",
+    "rag",
+    "knowledge-base",
+    "notebooklm",
+    "embeddings"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\nRAG——检索增强生成（Retrieval-Augmented Generation）——是 2020 年代最重要的 AI 架构概念之一。正是这项技术，让 AI 能够回答关于*你自己*文档的问题，而不仅仅是互联网上的信息。这节课将解释它是如何运作的（不涉及代码）、为什么它很重要，以及如何用任何人都能上手的 RAG 驱动工具，搭建一个个人知识系统。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 RAG？\n\nRAG 解决了一个根本问题：AI 模型有知识截止日期，不了解你的私人文档，还可能编造事实。它们无法回答关于你公司政策、你的研究笔记，或者你收藏的那 47 篇论文的问题。\n\n**类比：** 想象你雇了一位才华横溢的顾问。没有 RAG 时，他们只能依靠大学所学和一般经验来工作。有了 RAG 之后，在回答你的问题之前，他们会先走到一个装满*你的*文档的图书馆，找到相关的页面，读完之后再回答——回答的内容立足于你的实际材料。\n\n**RAG 的工作原理（大白话）：**\n\n1. **摄取（Ingest）：** 你的文档被处理并拆分成若干片段（段落或章节）\n2. **嵌入（Embed）：** 每个片段被转换成一种能捕捉其含义的数学表示（“嵌入向量”）\n3. **存储（Store）：** 这些嵌入向量被保存在一个向量数据库中——一种专为相似度搜索设计的数据库\n4. **查询（Query）：** 当你提出问题时，你的问题也会被转换成一个嵌入向量\n5. **检索（Retrieve）：** 系统找出那些嵌入向量与你的问题最相似的文档片段——也就是最相关的段落\n6. **生成（Generate）：** AI 阅读这些被检索出的片段，回答你的问题，答案立足于你实际的文档\n\n**为什么这很重要：**\n- AI 是基于你的文档来回答的，而不是凭空编造的记忆\n- 每个答案都能追溯到一个来源\n- 它是可扩展的：知识库里可以放上成千上万份文档"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**关键洞见：** 大多数 RAG 失败发生在检索阶段，而不是生成阶段。如果检索到的片段不对，AI 就无法给出好的回答。这就是为什么你组织和格式化文档的方式很重要——结构更清晰的文档会带来更好的 RAG 效果。"
+    },
+    {
+      "type": "text",
+      "content": "## 无需写代码就能使用的 RAG 工具\n\n你不需要自己搭建一套 RAG 系统——已经有好几款强大的工具替你实现了它：\n\n**NotebookLM（谷歌，免费）**\n- 每个笔记本最多可上传 50 个来源：PDF、Google 文档、Google 表格、YouTube 视频、网站、音频文件、EPUB、Word .docx\n- NotebookLM 会为一切内容建立索引，让你能与整个收藏对话；对话历史现在也会跨会话保存\n- 2026 年 6 月升级到了最新的 Gemini 模型——推理更深入，并原生支持代码理解\n- 每个答案都会引用回具体的原文段落\n- 关键功能：**音频概览（Audio Overview）**（关于你的资料的 AI 播客）；**电影级视频概览（Cinematic Video Overview）**（由 Veo 3 驱动，10 种视觉风格，2026 年 6 月新增）；**PPTX 导出**，可将研究内容转换为演示文稿\n\n最适合：研究项目、文献综述、研读大量文档集、从研究内容制作演示文稿\n\n**Claude Projects（Claude Pro，每月 20 美元）**\n- 把文档上传到一个 Project；Claude 会在该项目下的所有对话中记住这些文档\n- 整个项目的上下文在每一次新对话中都可用——你再也不用重新粘贴文档\n- 每个项目都有一条自定义指令，为每次对话设定上下文\n- 最适合：需要持续处理同一套文档的工作（公司政策、研究语料库、客户资料）\n\n**ChatGPT with Files（GPT-5）**\n- 直接在对话中上传文件；GPT-5 会读取并分析它们\n- MyGPTs：创建一个带有你自己文档知识库的自定义 GPT\n- 最适合：一次性的文档分析，或为特定领域创建一个自定义助手\n\n**Notion AI**\n- Notion AI 可以在你所有的 Notion 页面中搜索和综合信息\n- 问“我关于 X 都写过些什么？”，它就能找到相关笔记\n- 最适合：已经在用 Notion 存储知识的人\n\n**私密/安全的 RAG（适用于敏感文档）：**\n- **LM Studio + 本地嵌入模型**——一切都留在你自己的机器上\n- **AnythingLLM**——用于构建本地 RAG 知识库的开源桌面应用\n- 数据不会离开你的设备；适合保密的商业材料"
+    },
+    {
+      "type": "text",
+      "content": "## 搭建 NotebookLM 知识库——分步指南\n\n对非程序员来说，NotebookLM 是最容易上手的 RAG 工具。以下是如何搭建一个真正能用的知识库：\n\n**第一步——创建笔记本**\n1. 前往 notebooklm.google.com\n2. 点击“新建笔记本”→ 起一个清晰的名字（例如“Q3 市场研究”或“AI 课程笔记”）\n3. 你会看到左侧的来源面板、中间的聊天区，以及右侧的笔记区\n\n**第二步——添加来源**\n点击“+”添加来源：\n- 直接上传 PDF、Word .docx、EPUB 或 Google 表格\n- 粘贴一个网站链接（NotebookLM 会读取该页面）\n- 链接一个 Google 文档或 Google 幻灯片\n- 直接粘贴文本\n- 添加一个 YouTube 链接（NotebookLM 会读取转录文本）\n\n关于来源的最佳实践：\n- 结构越清晰 = 检索效果越好（使用带有清晰标题的 PDF）\n- 上传前给来源起清楚的名字（文件名会出现在引用中）\n- 让每个笔记本聚焦于一个主题——不要混合不相关的文档\n\n**第三步——与你的来源对话**\n添加好来源之后，开始提问：\n```\nWhat are the main themes across all these documents?\n```\n```\nWhat do these sources say about [specific topic]?\n```\n```\nAre there any contradictions between what Source A and Source B say about [topic]?\n```\n```\nCreate a structured outline of all the key concepts covered across these sources\n```\n\n每个答案都带有引用——点击它们可以跳转到具体段落。\n\n**第四步——生成笔记**\nNotebookLM 可以自动生成：\n- 所有来源的摘要\n- 一份常见问题（FAQ）文档\n- 一份学习指南\n- 一份简报文档\n- 一段音频概览（双人对谈式播客）\n- 一段电影级视频概览（由 Veo 3 驱动的短视频，10 种视觉风格）\n- 一个 PowerPoint 导出（PPTX）\n\n点击顶部栏的“生成”即可使用这些功能。\n\n**第五步——保存洞见**\n用笔记面板在会话中保存重要的洞见。笔记会随笔记本一起保存，之后可以搜索。"
+    },
+    {
+      "type": "text",
+      "content": "## 搭建 Claude Projects 知识系统\n\n对于持续性的专业工作，Claude Projects 比 NotebookLM 更实用，因为它已经融入了你日常的 Claude 工作流程。\n\n**创建一个 Project：**\n1. 在 Claude.ai 中，点击侧边栏的“Projects”→“New Project”\n2. 用具体的工作场景来命名：“客户——ACME 公司”“合规研究”“产品知识库”\n3. 上传你的文档：公司政策、研究论文、客户简报、风格指南\n4. 写一条 Project Instruction（Claude 在每次对话中都会读取的自定义上下文）\n\n**强有力的 Project Instruction：**\n\n弱指令：\n```\nYou are a helpful assistant.\n```\n\n强指令：\n```\nYou are an AI assistant helping me with [specific domain].\n\nContext about me: [your role, company, key responsibilities]\nDocuments in this project: [list what's uploaded and what each contains]\nHow I work: [your preferences — tone, format, level of detail]\nAlways: [key rules — e.g., \"always cite the specific policy document when referencing company policy\"]\nNever: [things to avoid — e.g., \"never recommend actions outside our compliance framework\"]\n```\n\n**在 Claude Projects 中的有效提问：**\n```\nBased on our policy documents, what is the correct process for [situation]?\n```\n```\nA client is asking about [topic]. Based on the documents in this project, what should I tell them?\n```\n```\nCompare what the documents say about [topic] — are there any inconsistencies?\n```\n```\nCreate a FAQ for a new team member based on the documents in this project\n```"
+    },
+    {
+      "type": "text",
+      "content": "## RAG 最佳实践——如何最大化利用你的知识库\n\n**文档质量至关重要：**\n- 有清晰标题的 PDF → 检索效果远好于扫描图片或格式糟糕的 PDF\n- 命名规范统一 → 用“Market_Research_2026_Q2.pdf”，而不是“scan001.pdf”\n- 每份文档只讲一个主题 → 混杂多个主题会干扰检索\n- 文档开头放摘要 → 即使查询的是某个具体章节，这些摘要往往也会被检索到\n\n**提升检索效果的提问策略：**\n- 要具体：问“我们的退款政策对在澳大利亚以外购买的数字产品是怎么规定的？”，而不是笼统地问“退款政策”\n- 指名具体文档：“根据合规手册，……？”\n- 要求引用：“给我出处的确切段落——不要转述”\n- 探索矛盾之处：“有没有文档在这一点上意见不一致？”\n\n**RAG 工具会出的错（以及如何发现它们）：**\n- **检索失误：** 工具返回看似合理但错误的段落——务必始终核查引用\n- **过时文档：** 如果你更新了一份来源文档，要重新上传——旧版本会被缓存\n- **跨文档综合：** RAG 更擅长找信息，而不太擅长跨文档推理——对于复杂的综合任务，先拿到检索出的段落，再单独用 Claude 做一步分析\n- **含糊的片段：** 如果一段话脱离上下文就说不通，检索系统返回它时可能显得令人困惑——确保每段文字在其所在段落中都有足够的上下文"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "围绕一个真实话题搭建 NotebookLM 知识库",
+      "content": "本次工作坊将使用 NotebookLM 的 RAG 能力，围绕一个你真正关心的话题，搭建一个可运行、可查询的知识库。\n\n**选择你的话题（2 分钟）**\n\n选一个你已有、或能够收集到 4-8 份文档的话题。好的选项：\n- 你所在的行业或领域（行业报告、关键论文、参考指南）\n- 一个你正在做的项目（相关研究、会议记录、背景资料）\n- 一个你正在学习的话题（教材章节、网络文章、教程）\n- 你公司的政策和流程（如果不涉密）\n\n**第一部分——收集来源（10 分钟）**\n\n收集 4-8 个来源：\n- 找 3-4 份关于你话题的 PDF 报告或文章（在谷歌上搜索 site:*.pdf [你的话题]）\n- 保存 1-2 个相关的网站链接\n- 为你自己的背景写一段 200-300 字的摘要（作为来源粘贴进去）\n\n**第二部分——搭建笔记本（10 分钟）**\n\n1. 在 notebooklm.google.com 创建一个新笔记本\n2. 上传所有来源\n3. 等待索引完成（通常 30-60 秒）\n4. 确认来源已加载：点击每个来源，检查是否显示了内容\n\n**第三部分——探索和查询（15 分钟）**\n\n依次运行以下查询：\n\n1. *概览：*“Give me a structured summary of the key themes across all my sources”\n2. *具体问题：* 问一个你平常会用谷歌搜索的具体问题——但这次是针对你实际的来源来问\n3. *对比：*“Do any of my sources disagree on [specific point]?”\n4. *找空白：*“Based on these sources, what important questions are NOT answered here?”\n5. *综合：*“Write a 300-word briefing document on [topic] based on these sources”\n\n对每个答案，至少点击一个引用来验证它是否正确对应了原文段落。\n\n**第四部分——生成概览（5 分钟）**\n\n点击 NotebookLM 中的“生成”。试试**音频概览**（一段 5-10 分钟、关于你的来源的 AI 播客）或全新的**电影级视频概览**（由 Veo 3 驱动的短视频，你可以选择视觉风格，2026 年 6 月新增）。这两种格式都是目前任何 AI 工具中最令人惊叹的功能之一。\n\n**反思：**\n- NotebookLM 在你的来源中发现的最令人惊讶的事情是什么？\n- 哪些内容如果靠人工查找会花费你最长的时间？\n- 你以后会如何继续使用这个笔记本来研究这个话题？\n\n保存这个笔记本——它会一直保持可查询状态。"
+    },
+    {
+      "type": "quiz",
+      "question": "你为团队向 NotebookLM 上传了 40 份政策文档。一位同事提问，NotebookLM 给出的答案引用了一份 2022 年的政策——但你知道这份政策在 2024 年已经更新过。发生了什么，该怎么解决？",
+      "options": [
+        "NotebookLM 坏了——它应该总是使用最新的文档",
+        "2022 年的文档仍然留在笔记本里，NotebookLM 因为查询匹配到它而检索了它；重新上传 2024 年版本，并从笔记本中删除 2022 年的文档",
+        "让 NotebookLM 只使用 2024 年以后的文档",
+        "这个答案大概率还是对的——政策不会变化太大"
+      ],
+      "correct": 1,
+      "explanation": "RAG 系统会检索最匹配查询的文档片段——它们不会自动优先选择更新的文档。如果 2022 年的政策仍然留在笔记本里，只要相关就会被检索出来。解决办法是移除过时的来源文档，重新上传当前版本。这是 RAG 知识库的一项关键维护任务：当来源文档更新时，知识库也必须随之更新。选项 C 行不通——RAG 工具并没有内置的检索日期过滤功能。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——RAG 概念深度剖析",
+      "content": "从实用层面理解检索增强生成（RAG）。\n\n**第一步——问 Claude：** “Explain RAG to someone who has never heard of it. What problem does it solve? How does it work at a high level? What are the most common use cases? What are its limitations?”\n\n**第二步——追问：** “Compare RAG to: (1) fine-tuning a model on your data, (2) prompt engineering with pasted context, (3) a vector database. When is each approach better?”\n\n**第三步——将 RAG 映射到你的使用场景：** 你有没有一个知识管理问题，是 RAG 能解决的？你会索引什么数据？\n\n**第四步——问 Claude：** “For [your use case], would RAG be the right approach or would one of the alternatives be simpler and adequate?”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——搭建一个简单的 RAG 系统",
+      "content": "在你自己的文档上搭建一个基础的 RAG 系统。\n\n**第一步——让 Claude Code** 搭建一个简单的 RAG 系统：\n```\nBuild a simple RAG system in Python:\n1. Document ingestion: read markdown/text files from a folder, split into chunks\n2. Embedding: use the Anthropic API (or sentence-transformers for free local embeddings) to create embeddings\n3. Storage: save embeddings in a simple FAISS index\n4. Query: embed the user's question, find the 3 most similar chunks, pass them as context to Claude for answer generation\n5. CLI interface: query the system from the command line\n```\n\n**第二步——把你自己的文档**（笔记、文档资料、报告）输入到这个系统中。\n\n**第三步——用 5 个问题测试**，这些问题应该能从你的文档中找到答案。\n\n**第四步——强制审查：** 问 Claude：*“Review this RAG implementation. What are the 3 most common failure modes in simple RAG systems that I should test for?”*"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——RAG 质量评估",
+      "content": "评估并改进你的 RAG 系统的检索质量。\n\n**第一步——问 Claude：** “What are the most common ways RAG systems fail to retrieve the right context? For each failure mode, what improvement would fix it?”\n\n**第二步——在你的 RAG 系统中测试这些失败模式：**\n- 语义不匹配：问题用词与文档不同\n- 分块问题：答案横跨了两个片段\n- 无关检索：检索到听起来相似但实际无关的内容\n\n**第三步——针对每种失败**，实施一项改进：\n- 语义不匹配：尝试查询扩展（让 Claude 在嵌入之前先改写问题）\n- 分块问题：增加片段之间的重叠部分\n- 无关检索：加入元数据过滤\n\n**第四步——衡量改进效果**——这个修复有帮助吗？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——个人知识引擎",
+      "content": "在你积累的笔记和文档之上，搭建一个个人知识引擎。\n\n**第一步——识别你所有的知识来源：**\n- 个人笔记（Obsidian、Notion、markdown 文件）\n- 保存的文章或文档\n- 会议记录\n- 研究简报\n\n**第二步——搭建一个摄取流水线**，将这些来源全部索引：\n```\n1. Collect all documents from configured folders\n2. Convert non-markdown formats to text\n3. Chunk with appropriate sizes for each document type\n4. Embed and store in FAISS\n5. Update index when new documents are added\n```\n\n**第三步——创建一个用起来自然顺手的查询界面。**\n\n**第四步——测试这个知识引擎**，就你过去研究过的话题提问。它能否找出你已经遗忘的相关材料？"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 RAG 系统针对一个查询检索出了 3 个文档片段，但真正的答案其实在它遗漏的第 4 个片段里。最可能的原因是什么？",
+      "options": [
+        "嵌入模型坏了",
+        "相关的片段虽然包含答案，但可能与查询的词汇在语义相似度上偏低——试试混合搜索（语义 + 关键词匹配），或增大 k 值（检索更多片段）",
+        "这个片段太长了，无法嵌入",
+        "FAISS 索引损坏了"
+      ],
+      "correct": 1,
+      "explanation": "检索失败往往是词汇不匹配的问题。“微服务有哪些权衡取舍？”这个问题可能会漏掉一个写着“面向服务架构的缺点”的片段，因为它们的嵌入空间相似但不完全相同。解决办法：(1) 检索更多片段（用前 10 而不是前 3），交给大语言模型去筛选；(2) 混合搜索，把语义相似度和 BM25 关键词匹配结合起来；(3) 查询扩展——让大语言模型在检索前生成问题的其他表述方式。"
+    },
+    {
+      "type": "quiz",
+      "question": "你围绕公司文档搭建了一个 RAG 系统。一位员工提问，得到的是一份已被取代的过时文档给出的答案。哪里出了问题，该如何预防？",
+      "options": [
+        "RAG 无法处理文档更新",
+        "过时的文档仍留在索引中——实施文档版本管理：文档更新时，删除旧的嵌入向量并添加新的；加入文档日期元数据，让大语言模型能够优先选用较新的来源",
+        "用户应该手动核查文档日期",
+        "使用更小的分块尺寸来避免存储过时内容"
+      ],
+      "correct": 1,
+      "explanation": "对文档静态快照建立索引的 RAG 系统很快就会变得陈旧。预防措施：(1) 实施一套更新流水线，检测发生变化的文件并刷新其嵌入向量；(2) 存储文档元数据（日期、版本、被哪份文档取代），并传给大语言模型；(3) 指示大语言模型在日期不同时优先选用较新的来源；(4) 在你的文档存储中加入“最后更新”字段，并在答案旁一并显示，方便用户判断相关性。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 18-4 课。** 你理解了 RAG 的工作原理，能够搭建一个 NotebookLM 知识库，也知道如何为持续性的专业工作搭建 Claude Projects。你还了解了需要留意的失败模式。RAG 驱动的知识系统，正是“了解世界的 AI”与“了解*你的*世界的 AI”之间的区别所在。"
+    }
+  ],
+  "nextLesson": "18-5",
+  "prevLesson": "18-3"
+}

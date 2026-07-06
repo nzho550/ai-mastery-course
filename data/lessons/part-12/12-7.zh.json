@@ -1,0 +1,100 @@
+{
+  "id": "12-7",
+  "title": "选择合适的本地模型",
+  "part": 12,
+  "estimatedMinutes": 55,
+  "tags": [
+    "local-ai",
+    "models",
+    "ollama",
+    "model-selection"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你已经安装了 Ollama，交互式地运行过模型，并把它们连接到了你的工具上。现在来到一个实际的问题：你到底应该用哪个模型？本课会给你一套选择框架——以及一个基准测试练习，让你根据自己实际的硬件和使用场景，得出一份个人化的推荐结果。"
+    },
+    {
+      "type": "text",
+      "content": "## 各个模型家族\n\n本地模型来自几个主要的开源家族。以下是关于每个家族你需要了解的信息：\n\n**Llama（Meta）**\n支持最广泛的家族。`llama3.2:3b` 是对速度敏感的任务的首选。`llama3.3:70b` 接近前沿水平的质量，但需要 64GB 以上内存或一块专用 GPU。**Llama 4 Scout**（17B MoE 架构）是 2025/2026 年的新成员，提供高达 1000 万 token 的巨大上下文窗口——非常适合上下文长度比原始能力更重要的长文档任务。3B 和 8B 版本仍然是很好的入门选择。\n\n**Phi（Microsoft）**\nMicrosoft 出品的紧凑型研究模型。以相对于自身体量在代码和推理任务上的出色表现而闻名。`phi4`（约 9GB）是目前性价比（每 GB 质量）最好的模型之一。`phi4-mini`（约 2.5GB）速度更快但能力较弱——适合 8GB 内存的机器。如果你有 12GB 以上内存，这是一个不错的默认选择。\n\n**Mistral / Mixtral（Mistral AI）**\n法国 AI 实验室出品。`mistral:7b` 是一个可靠的主力模型，指令遵循能力强。`mixtral:8x7b`（一个混合专家模型）质量出色，但需要约 48GB 内存。\n\n**Gemma（Google）**\n擅长精确地遵循指令。`gemma2:9b` 在同体量模型中口碑很好。适合需要模型精确地照做、不多不少的任务。\n\n**Qwen（阿里巴巴）**\n强大的多语言表现，尤其是中文。`qwen2.5:7b` 在同等体量下能与 Mistral 竞争，且编码能力不错。\n\n**DeepSeek-R1**\n专注推理能力的模型。`deepseek-r1:7b` 在数学和逻辑问题上，以其体量而言表现出人意料地强。如果你的本地使用场景涉及推理任务，这是个不错的选择。"
+    },
+    {
+      "type": "text",
+      "content": "## 选择决策树\n\n按顺序回答以下问题：\n\n**1. 你的机器有多少内存？**\n- 8GB → 只用 3B 模型：`llama3.2:3b`、`phi4-mini`\n- 16GB → 7B–9B 模型表现良好：`phi4`、`mistral:7b`、`llama3.1:8b`\n- 32GB+ → 可以使用 13B 模型：`llama3.1:13b`、`qwen2.5:14b`\n- 64GB+ → 70B 模型变得可行：`llama3.3:70b`、`qwen2.5:72b`\n\n**2. 你会运行什么类型的任务？**\n- 代码编写/讲解 → `phi4` 或 `deepseek-r1`\n- 通用问答和摘要 → `llama3.2` 或 `mistral`\n- 精确遵循指令 → `gemma2`\n- 多语言工作 → `qwen2.5`\n- 快速、简单的任务 → 能完成任务的最小模型\n\n**3. 响应速度有多重要？**\n- 2 秒以内 → 使用 3B 模型\n- 2-10 秒可以接受 → 7B 是你的甜蜜点\n- 愿意为质量多等一会儿 → 13B 以上\n\n**4. 你有 GPU 吗？**\n一块支持 CUDA 的 NVIDIA GPU（8GB 显存以上）能大幅加速推理。Ollama 会自动检测并使用它。有了 GPU 加速，一个 7B 模型的响应时间能缩短到 1 秒以内。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**大多数人的实用起点：** 如果你有 16GB 以上内存，从 `phi4` 开始。它是一个强大的通用模型，能很好地处理代码、摘要和问答。如果它对快速任务来说感觉太慢，可以留着 `llama3.2:3b`，用于对速度要求高、对质量要求较低的工作。"
+    },
+    {
+      "type": "text",
+      "content": "## 如何拉取更多模型\n\n从 `ollama.ai/library` 上使用模型名称，从 Ollama 库中拉取模型：\n\n```\nollama pull mistral\nollama pull llama3.2:3b\nollama pull gemma2:9b\nollama pull qwen2.5:7b\nollama pull deepseek-r1:7b\n```\n\n查看已安装的模型：`ollama list`\n\n移除一个模型以释放磁盘空间：`ollama rm modelname`\n\n你不需要把所有模型都装一遍。两三个覆盖不同使用场景的模型（一个追求速度，一个追求质量）就足够了。"
+    },
+    {
+      "type": "text",
+      "content": "## 基准测试矩阵\n\n网上的基准测试结果虽然有用，但比较缺乏针对性——它们衡量的是在很多任务上的平均表现，而不是你在自己硬件上执行的具体任务。自己动手做一次基准测试只需要 20 分钟，却能得到一份你真正会信赖的指南。\n\n在以下四项任务上测试每个模型，各打 1-5 分：\n\n| 任务 | 测试内容 |\n|------|--------------|\n| 技术讲解 | “Explain what a REST API is to a beginner using a real-world analogy” |\n| 代码编写 | “Write a JavaScript function that validates an email address format” |\n| 摘要 | 粘贴 3 段文本，要求给出 2 句话的摘要 |\n| 事实性问答 | 问一个你知道确切答案、可验证的问题 |\n\n同时记录每个模型的响应时间（大致即可——快 / 中 / 慢）。\n\n在你最常见任务类型上得分最高的模型，就是你的主力本地模型。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "构建你的个人本地模型指南",
+      "content": "本次工作坊分为两部分：一次基准测试和一份书面推荐。\n\n**第 1 部分——运行基准测试（如果你有多个模型）：**\n\n如果你只安装了一个模型，就运行下面的四个测试提示词，并记录质量和速度。\n\n对每个已安装的模型，运行这四条提示词（替换成你的模型名）：\n```\nollama run phi4 \"Explain what a REST API is to a beginner using a real-world analogy.\"\n```\n```\nollama run phi4 \"Write a JavaScript function that checks if a string is a valid email address.\"\n```\n```\nollama run phi4 \"Summarize the following in 2 sentences: [paste 2-3 paragraphs from any article]\"\n```\n```\nollama run phi4 \"What year was the Python programming language first released?\"\n```\n对你有的每个模型重复这个过程。为每个响应打分（1-5），并记录速度。\n\n**第 2 部分——撰写你的个人指南：**\n\n在 VS Code 中，打开 `notes/my-ai-workflow.md`，添加一节：\n```\n## Local AI Setup\n\n### Hardware\n- RAM: [your amount]\n- GPU: [yes/no, and model if yes]\n\n### Installed Models\n- [model name]: [what I use it for]\n- [model name]: [what I use it for]\n\n### My Routing Rules\n- For fast, simple tasks: [model name]\n- For quality work on private code: [model name]\n- For offline coding assistance: [model name] via Continue.dev\n\n### When I use local vs cloud\n- Local: [your specific criteria]\n- Cloud: [your specific criteria]\n```\n\n随着新模型不断发布，这部分工作流文档值得持续更新。如果有一个更好的 7B 模型适合你的内存条件，值得切换过去——所需的配置改动很小。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——模型评估框架",
+      "content": "构建一套系统性的本地模型选择框架。\n\n**第 1 步——问 Claude：** “在为代码任务选择本地模型时，我应该检查哪些基准测试？对于通用任务呢？解释一下每个基准测试衡量的是什么，以及对一个非专业开发者来说，多少分才算“足够好”。”\n\n**第 2 步——为你的使用场景构建一套评估打分表：**\n| 标准 | 权重 | 模型 A | 模型 B |\n|---|---|---|---|\n| 代码质量 | 40% | | |\n| 速度（tokens/sec） | 25% | | |\n| 指令遵循 | 20% | | |\n| 上下文窗口 | 15% | | |\n\n**第 3 步——用真实测试**在你的打分表上评估 2 个模型。\n\n**第 4 步——问 Claude：** “我正在为 [用例] 在 [模型 A] 和 [模型 B] 之间做选择。根据它们已知的特点，你会推荐哪一个？为什么？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——构建你的模型比较工具",
+      "content": "创建一个脚本，系统性地比较本地模型。\n\n**第 1 步——让 Claude Code** 编写一个模型比较工具：\n```\nWrite a Python script that:\n1. Takes a list of test prompts from a YAML file\n2. Runs each prompt against a list of Ollama models\n3. Records: response, response time, estimated quality score\n4. Outputs a comparison table to a markdown file\n\nFor quality scoring: compare each response to a \"gold standard\" response you provide using simple string similarity\n```\n\n**第 2 步——为你的具体使用场景创建测试提示词**（5 个编码任务、3 个讲解任务、2 个分析任务）。\n\n**第 3 步——在你已安装的模型上**运行这个比较工具。\n\n**第 4 步——分析结果。** 哪个模型在哪种类型的提示词上表现最好？\n\n**第 5 步——必做审阅：** 问 Claude：“审阅我的比较方法。用字符串相似度做质量打分有什么问题？有什么更好的方法？”"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——模型更新策略",
+      "content": "构建一套让本地模型保持最新的策略。\n\n**第 1 步——问 Claude：** “本地 AI 模型经常会更新出更好的版本。我应该如何决定何时更新本地模型？更新与停留在旧版本相比，各有什么风险？”\n\n**第 2 步——制定一套更新策略：**\n- 你会多久检查一次新模型版本？（每月一次？）\n- 什么条件会触发更新？（大版本升级？质量显著提升？）\n- 在完全切换之前，你会如何测试新版本？\n- 什么情况下会保留旧版本作为后备？\n\n**第 3 步——查看你主力本地模型的当前版本**，看看是否有更新版本：\n```powershell\nollama list\n# Visit ollama.com/library/[modelname] to check latest version\n```\n\n**第 4 步——把你的更新策略记录下来**，作为本地 AI 维护的参考。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——我的本地 AI 设置文档",
+      "content": "为你的本地 AI 配置创建一份完整的参考文档。\n\n**第 1 步——记录你最终的本地 AI 配置：**\n```markdown\n# My Local AI Setup\n\n## Hardware\n- RAM: X GB\n- GPU: [model or none]\n- Storage: X GB available\n\n## Installed Models\n| Model | Use Case | Speed | Quality | Notes |\n|---|---|---|---|---|\n| [model] | [use case] | [tps] | [1-10] | |\n\n## Tools Configured\n- Ollama: [installed/not installed]\n- LM Studio: [installed/not installed]\n- Continue.dev integration: [configured/not]\n- Claude Code integration: [configured/not]\n\n## Decision Rules\n- Use local AI when: [your criteria]\n- Use cloud AI when: [your criteria]\n\n## Monthly Maintenance\n- [ ] Check for model updates\n- [ ] Evaluate if new models outperform current ones\n- [ ] Review disk space\n```\n\n**第 2 步——分享给 Claude：** “审阅我的本地 AI 设置文档。我遗漏了哪些重要方面？”\n\n**第 3 步——完成并保存**这份文档。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的本地模型发布了一个“改进了代码生成能力”的新版本。在更新之前，你应该怎么做？",
+      "options": [
+        "立即更新——新版本总是更好的",
+        "在你的标准提示词上测试新版本，并与当前版本对比之后再完全切换——通用基准测试中的改进，未必适用于你的具体使用场景",
+        "等 6 个月，直到模型完全稳定",
+        "先更新，出问题再回滚"
+      ],
+      "correct": 1,
+      "explanation": "模型的改进是在基准测试上衡量的，但基准测试不一定能反映你的具体使用场景。一个新版本可能在 HumanEval 上得分更高，但在你实际编写的那类代码上表现更差，或者可能有不同的指令遵循特点，从而破坏你的工作流。在更新之前：下载新版本，运行你的标准测试用例，比较输出结果，只有在新版本对你的任务明显更好时才切换过去。"
+    },
+    {
+      "type": "quiz",
+      "question": "你有 32GB 内存和一块 8GB 显存的 GPU。要运行一个 13B 代码模型，哪种配置的性能会更好？",
+      "options": [
+        "只用 CPU，占用全部 32GB 内存",
+        "GPU 承担部分，模型层分摊在 8GB 显存和内存之间（部分 GPU 卸载）",
+        "两者性能相同",
+        "GPU 上跑更小的模型总是比 CPU 上跑更大的模型更好"
+      ],
+      "correct": 1,
+      "explanation": "对于无法完全放入显存的模型，部分 GPU 卸载（GPU + CPU）通常比纯 CPU 更快。对于 8GB 显存和一个 4-bit 量化的 13B 模型（约 8GB），你可以把大部分层放在 GPU 上，其余部分放在 CPU 上。GPU 以 GPU 的速度处理大部分计算；只有少数层会回落到较慢的 CPU 推理上。像 Ollama 这样的工具通过 `--num-gpu` 或 `num_gpu_layers` 参数支持这一点。用不同的层数分配进行测试，找到适合你硬件的最佳分割方式。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 12 部分——本地 AI。** 你现在可以安装、运行本地模型，并把它们连接到你的开发工具上。第 13 部分将从工具转向智慧：幻觉、隐私、成本、版权和安全——这些是你专业、安全地使用 AI 所需要了解的内容。"
+    }
+  ],
+  "nextLesson": "18-1",
+  "prevLesson": "12-6"
+}

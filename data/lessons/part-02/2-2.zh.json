@@ -1,0 +1,127 @@
+{
+  "id": "2-2",
+  "title": "Claude Projects 与记忆功能",
+  "part": 2,
+  "estimatedMinutes": 60,
+  "tags": ["claude", "beginner", "tools"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n你将掌握 Claude Projects——Anthropic 的持久化工作区功能——包括如何写出能大幅改善 Claude 表现的指令、如何上传并整理文件作为知识库、不同的 Project 如何服务于你生活中的不同领域，以及专业 Claude 用户使用的进阶指令写作技巧。学完本课后，你会为这门课程配置好一个完整的 Project，每周为你节省 10 分钟以上。"
+    },
+    {
+      "type": "text",
+      "content": "## Projects 解决的核心问题\n\n默认情况下，每一次 Claude 对话都是从零开始。关掉标签页，Claude 就不记得你们讨论过什么了。打开一个新对话，你又得从头解释一遍你的背景——再来一次。\n\n这种摩擦会不断累积。如果你每天都用 Claude，可能每次对话开始时都要花 2-3 分钟重新说明你是谁、在做什么、想要什么。这样算下来，光是建立上下文，每天就要花 10-15 分钟。\n\n**Claude Projects 能消除这种摩擦。** Project 是一个持久化的工作区，在其中：\n- 你写下的**自定义指令**会在该 Project 内的每一次对话开始前自动发送给 Claude\n- **上传的文件**（文档、代码、PDF、笔记）会作为知识库，供 Claude 在该 Project 的所有对话中随时引用\n- Project 内的**对话历史**会被保留——你可以翻看之前所有的对话\n- **一致性**得到保证——同样的人设、语气和限制条件每次都会生效\n\n可以把它想象成给 Claude 一份永久性的简报，它每次和你说话之前都会自动读一遍。"
+    },
+    {
+      "type": "text",
+      "content": "## 写出优秀的 Project 指令\n\n指令字段是 Project 中最强大的部分。你在这里写的每一句话都会影响每一次对话——所以值得花时间把它写好。\n\n**优秀 Project 指令的 6 个要素：**\n\n**1. 你是谁（1-3 句话）：**\n```\nI'm a UX designer at a mid-size software company. I primarily work on mobile\napp interfaces. I have 4 years of design experience and some basic HTML/CSS knowledge.\n```\n\n**2. 你目前在做什么：**\n```\nCurrently focused on: redesigning our onboarding flow for new users and preparing\na presentation for our product roadmap review in Q3.\n```\n\n**3. 期望的回答格式：**\n```\nPreferences:\n- Use bullet points for lists, not numbered lists (easier to add items)\n- Keep responses to 3-5 paragraphs unless I ask for more\n- When I ask a yes/no question, answer it first, then explain\n- Use plain English — avoid UX jargon unless I use it first\n```\n\n**4. 需要避免的事情：**\n```\nDo not:\n- Suggest solutions that require a development team of more than 2 people\n- Add lengthy disclaimers or caveats at the end of every response\n- Recommend tools we don't already use (Figma, Linear, Slack, Notion)\n- Use phrases like 'Great question!' or 'Certainly!'\n```\n\n**5. 可以假定你已具备的领域知识：**\n```\nAssume I know:\n- Basic design principles (hierarchy, contrast, affordance)\n- How mobile app development timelines work\n- Our product is a B2B SaaS tool for project managers\n```\n\n**6. 默认任务或模式：**\n```\nWhen I paste a design critique or user feedback, your first response should always:\n1. Summarise the key issues in 3 bullets\n2. Rate overall severity (Minor / Moderate / Significant)\n3. Suggest one quick win and one bigger fix\n```\n\n你不需要一次性写全这 6 个要素。先从最重要的开始，之后再逐步补充。"
+    },
+    {
+      "type": "text",
+      "content": "## 上传文件：搭建知识库\n\n你上传到 Project 的文件会成为 Claude 在任何对话中都能引用的知识——不需要你再重新粘贴一遍。对于你会反复用到的参考资料来说，这特别强大。\n\n**该上传什么：**\n\n| 文件类型 | 示例 | 为什么强大 |\n|-----------|----------|-------------------|\n| 风格指南 | 品牌语调文档、写作规范 | Claude 会自动套用你真实的标准 |\n| 参考文档 | 技术规格、API 文档、公司简介 | 针对你的具体文档提问，而不是泛泛的信息 |\n| 个人背景 | 简介、简历、目标文档 | Claude 了解你的背景，无需重新解释 |\n| 模板 | 你的报告格式、邮件模板 | Claude 遵循你实际使用的格式，而不是它的默认格式 |\n| 规则 | 隐私政策、第 1-5 课创建的 AI 规则 | 每次对话都会强制执行这些限制条件 |\n| 进行中的项目 | 当前草稿、代码文件、数据文件 | Claude 可以直接读取、改进、分析，无需重新粘贴 |\n\n**支持的文件类型：** PDF、TXT、MD、CSV、DOCX、Python、JavaScript，以及大多数常见代码文件。图片也可以。\n\n**文件上限：** Project 支持跨所有文件累计最多 200,000 tokens 的上传内容（大约相当于 15 万字或 500 页）。大多数用户只有在使用非常庞大的代码库或大量长文档时才会碰到这个上限。\n\n**明确引用某个文件：** 你可以要求 Claude 使用指定文件：\n```\nUsing the brand voice guide I've uploaded, rewrite this marketing copy.\nUsing my CV, help me tailor my experience to this job posting.\nBased on the technical spec I've attached, generate acceptance test cases.\n```\n\n也可以让 Claude 隐式地引用文件——当你问到某个已上传文件涵盖的主题时，Claude 会自动从中提取信息。"
+    },
+    {
+      "type": "text",
+      "content": "## 设计一套多 Project 体系\n\n你工作和生活中的不同部分需要不同的上下文。专业的 Claude 用户通常会维护 3-6 个配置各异的 Project：\n\n**工作 Project——你的主要专业工作区：**\n- 指令：你的角色、公司背景、当前优先事项\n- 文件：公司风格指南、组织架构图、当前项目规格\n- 用途：所有工作任务、草稿、分析\n\n**个人学习 Project——用于本课程及未来的学习：**\n- 指令：你的背景、你想学什么、你最适合的学习方式\n- 文件：你的笔记、提示词库、AI 规则文件\n- 用途：课程练习、调研、学习新主题\n\n**写作 Project——用于任何重要的写作项目：**\n- 指令：该项目的风格、受众、目前已经确定的内容\n- 文件：调研笔记、现有草稿、风格参考\n- 用途：起草、编辑、一致性检查\n\n**技术 Project——用于编码和技术任务：**\n- 指令：你的技术栈、编码规范、你的经验水平\n- 文件：关键代码文件、架构文档、需求文档\n- 用途：代码审查、调试、架构决策\n\n**关键原则：** 不同的 Project = 不同的 Claude。Project 的指令和文件会创建出一个专门针对该工作领域、完全贴合你需求的上下文特定 AI 助手。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**最快见效的改进：** 给你的 Project 加上一条“避免”指令。想一想你觉得 Claude 最烦人或最没用的回答方式——冗长的免责声明？泛泛的提醒？总以“当然可以！”开头？在指令里加上“不要[那件事]”。你就再也不会看到它了。"
+    },
+    {
+      "type": "text",
+      "content": "## Claude 的跨对话记忆功能（2025 年上线）\n\nProjects 是你主动搭建的工作区。Claude 还有一个独立的**记忆（memory）**功能——一个能自动学习并存储关于你的信息的系统，作用范围是所有对话，而不仅限于某个特定 Project。\n\n**它是如何运作的：**\n- 当你使用 Claude 时，它会识别出值得记住的持久性事实：你的角色、偏好、正在进行的项目、沟通风格\n- 这些信息会作为记忆条目存储起来，你可以在 设置 → Memory 中查看和管理\n- 记忆会自动注入到未来所有的对话中——你还没开口解释，Claude 就已经知道你是谁\n- 你也可以明确要求 Claude 记住某件事：*“记住我在医疗行业工作，我所做的一切都受 GDPR 约束。”*\n- 你可以随时删除、编辑或清空任何已存储的记忆\n\n**记忆 vs. Projects——区别是什么：**\n\n| 功能 | Projects | 记忆 |\n|---------|----------|--------|\n| 作用范围 | 该 Project 内的对话 | 所有 Claude 对话 |\n| 如何设置 | 你手动编写指令 | Claude 自动学习 + 你也可以明确添加 |\n| 最适合 | 特定于某个领域或项目的上下文 | 通用偏好和持久性身份信息 |\n| 控制权 | 完全手动 | 你可以查看和编辑 Claude 存储的内容 |\n\n**实际用途：** 有了记忆功能，你在 Project 之外开启新对话时，就不用每次都重新解释自己是谁。Projects 则能在某个工作区内给你更深入、更贴合特定领域的上下文。两者结合使用，几乎能消除所有重复建立上下文的开销。\n\n**配置你的记忆：**\n开始一段对话，说：*“我想设置我的记忆。请记住以下关于我的信息：”* 然后描述你的角色、偏好、正在进行的工作，以及任何限制条件。Claude 会存储这些信息，并应用到未来的对话中。"
+    },
+    {
+      "type": "text",
+      "content": "## 进阶技巧：Projects 中的系统提示词层\n\n当你编写 Project 指令时，你实际上是在写一段系统提示词（system prompt）——每次对话中那个看不见的第一层，塑造着后续所有的回答。\n\n专业的指令撰写者会用到一些具体技巧：\n\n**“我是”框架：** 清晰地描述你自己，让 Claude 校准到你的水平。\n```\nI am a non-technical marketing manager. I understand business concepts but\nnot programming. Explain technical topics in business terms.\n```\n\n**任务类型触发器：** 告诉 Claude 针对不同类型的任务采取不同的行为方式。\n```\nWhen I send you a URL, summarise the page in 5 bullets before answering any questions.\nWhen I paste a document, first identify its type and purpose before working on it.\nWhen I ask 'what do you think?', give me your honest opinion, not a balanced both-sides response.\n```\n\n**质量关卡：** 设定一个明确的质量标准。\n```\nBefore completing any writing task, review your output for: (1) jargon I didn't use\nfirst, (2) vague claims without specific examples, (3) conclusions that don't follow\nfrom the evidence. Fix any you find before responding.\n```\n\n**专业水平信号：** 告诉 Claude 哪些内容你不需要解释、哪些需要。\n```\nAssume I understand: marketing analytics, A/B testing, and SaaS metrics.\nDo not explain these unless I specifically ask. Do explain: technical concepts\nabove basic HTML/CSS level, legal or accounting concepts.\n```"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "搭建你的完整课程 Project",
+      "content": "你将为这门课程创建一个完整配置好的 Claude Project。从现在起，它将是你每一课的大本营。\n\n**第 1 步——创建 Project**\n在 [Claude.ai](https://claude.ai) 中，找到左侧边栏的 **Projects**。点击 **New Project**。命名为：`AI Course Learning`。\n\n**第 2 步——写出丰富的 Project 指令**\n\n打开指令编辑器，写出你自己版本的以下模板：\n```\nI'm working through an AI skills course. Here's my context:\n\nBackground: [2-3 sentences about your work/study background]\nAI experience: [Complete beginner / Some experience / Intermediate]\nPrimary goals: [What you want to get from this course]\n\nPreferences:\n- Give practical examples alongside theory\n- Define technical jargon when you use it\n- [Add 2-3 more preferences that matter to you]\n\nDo not:\n- Open with 'Great question!' or 'Certainly!'\n- Add lengthy caveats unless I specifically ask for them\n- [Add 1-2 behaviours you want to avoid]\n\nWhen I say 'explain that differently': try a completely different analogy.\nWhen I say 'practical?': give me one specific action I can take today.\nWhen I paste code: review it for correctness before anything else.\n```\n\n把每一部分都个性化。你写得越贴合自己的真实情况，这个 Project 就越有用。\n\n**第 3 步——上传你的文件**\n- 上传你在第 1-5 课中创建的 `my-ai-rules.md` 文件\n  *（跳过了第 1-5 课？现在花 5 分钟：打开一个文本文件，写下 3-5 条关于你希望 Claude 如何回应的规则——比如“简明扼要”“不要加免责声明”“使用英式英语”。保存为 `my-ai-rules.md`。）*\n- 如果你已经创建了 `my-prompt-library.md`（第 3-8 课），也上传它\n- 上传任何个人背景文档：简短的自我介绍、你的工作角色描述，或你使用 AI 的目标\n\n**第 4 步——测试你的指令**\n\n在 Project 内开始一段新对话。问：\n```\nI'm confused about the difference between few-shot and zero-shot prompting.\nCan you explain it?\n```\n\nClaude 的回答体现了你的指令吗？是否贴合你的背景？如果没有，编辑指令再试一次。\n\n然后问：\n```\nWhat should I focus on first after completing this course's foundations?\n```\n\n评估一下：Claude 是否足够了解你，能给出个性化的答案？\n\n**第 5 步——创建第二个 Project**\n\n针对你工作或生活中真实存在的另一个领域，再创建一个 Project。写出适合那个场景的指令。这样你就有 2 个可以切换使用的 Project——你的学习 Project 和你真实工作用的 Project。\n\n**留存记录：** 在你的笔记或提示词库中，复制保存最终版本的 Project 指令。如果之后需要重建这个 Project 或分享给别人，你就有现成的指令可用。"
+    },
+    {
+      "type": "quiz",
+      "question": "你为 Claude Project 设置了详细的指令，并上传了公司的风格指南。三个月后，风格指南更新了。你需要做什么？",
+      "options": [
+        "什么都不用做——源文档变化时，Project 指令会自动更新",
+        "删除整个 Project，用新文件从头重建",
+        "从 Project 中移除旧的风格指南文件，上传新版本，然后检查并更新指令中引用了旧指南具体规则的部分",
+        "为新的风格指南创建一个新 Project，同时保留旧的那个继续运行"
+      ],
+      "correct": 2,
+      "explanation": "Project 不会与外部文件自动同步——内容需要你手动管理。正确的做法是：从 Project 的知识库中删除旧文件，上传更新后的版本，并检查你的指令中是否有引用了旧指南某些具体规则的地方是否已经改变。这样能让你的 Project 保持最新，且干扰最小。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 A——快速练习：指令精确度测试",
+      "content": "这个练习测试 Claude 遵循书面指令的精确程度——同时教你写出更严谨的指令。预计花费 8-10 分钟。\n\n**第 1 步——搭建一个测试对话（1 分钟）**\n打开一个全新的 Claude 对话（暂时不在任何 Project 内）。问：\n```\nExplain what a project management Gantt chart is and when to use one.\n```\n记下这次回答的长度、格式、语气。\n\n**第 2 步——给出格式指令（2 分钟）**\n在同一个对话中：\n```\nNow answer the same question again, but follow these rules exactly:\n- Maximum 80 words total\n- No bullet points — only prose\n- End with a one-sentence question that makes me think\n- Do not use the word 'project'\n```\n数一下字数。Claude 是否遵守了全部四条规则？如果有违反的，记下是哪一条。\n\n**第 3 步——针对失败点收紧要求（2 分钟）**\n如果 Claude 违反了某条规则，具体指出来：\n```\nYou [describe what it got wrong]. Try again with all 4 rules satisfied.\n```\n\n**第 4 步——测试一条触发型指令（3 分钟）**\n开始一段新对话。想象你正在编写 Project 指令。测试这条触发规则：\n```\nFor this conversation, use this rule: whenever I start a message with 'QUICK:', give me a response of 3 sentences maximum.\n\nQUICK: What's the difference between a goal and a KPI?\n```\n触发器起作用了吗？再试一次：\n```\nQUICK: What's the most common mistake new managers make?\n```\n\n**第 5 步——用 AI 检查你的成果（2 分钟）**\n问 Claude：\n```\nI'm about to add this instruction to a Claude Project:\n'When I paste text, identify the document type and main purpose before doing anything else.'\nIs this instruction clear enough, or could Claude interpret it in multiple ways?\nSuggest a more precise version.\n```\n\n**收获：** 指令的精确度是一项技能。这个练习让你看清“差不多能用的指令”和“可靠有效的指令”之间的区别。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B——用 AI 搭建实物：你的主 Project 指令集",
+      "content": "你将为你的主 Claude Project 搭建一套全面、个性化的指令集——它将塑造未来数百次对话。这需要 30-35 分钟，最终会产出一套真实可用的配置。\n\n**第 1 步——盘点你当前的情况（3 分钟）**\n打开 Claude.ai。开始一段新对话，输入：\n```\nI'm building instructions for a persistent AI assistant that will help me with\n[your primary use case — work tasks / learning / writing / job search / other].\nAsk me 6 questions to understand my situation, goals, and preferences well enough\nto write highly personalised instructions.\n```\n详细回答每一个问题。你的回答越具体，最终的指令就越好。\n\n**第 2 步——生成指令初稿（3 分钟）**\n```\nBased on my answers, write a complete Claude Project instruction set.\nInclude all 6 elements: who I am, what I'm working on, response format preferences,\nthings to avoid, domain knowledge to assume, and 2-3 task-type triggers.\nWrite it ready to paste directly into the Claude Project instruction field.\n```\n\n**第 3 步——打磨“避免”部分（3 分钟）**\n```\nThe 'Do not' section is the most practically useful part. Brainstorm 6 specific\nClaude behaviours I should ban based on my preferences — things that would\nactually waste my time or reduce output quality for my use case.\nBe specific: 'Do not add a disclaimer at the end of writing tasks' is better\nthan 'Do not add unnecessary text'.\n```\n从中挑出最适合你指令集的 3-4 条。\n\n**第 4 步——添加智能触发器（3 分钟）**\n```\nWrite 4 task-type triggers specific to what I actually do:\n- When I [do X], you should [behave Y]\nBase these on the tasks I described. Make the triggers recognisable from real inputs,\nnot hypothetical ones.\n```\n\n**第 5 步——添加一个专业水平校准部分（2 分钟）**\n```\nWrite an 'Assume I know / Do explain' section based on my background.\nList 4-5 things you should not explain (I already know them) and 3-4 types\nof topics where you should explain from basics.\n```\n\n**第 6 步——写一个质量关卡（2 分钟）**\n```\nWrite a quality gate instruction — a self-check Claude should run before\ndelivering any substantial output. Base it on the 3 most common failures\nfor the type of work I described.\n```\n\n**第 7 步——组装最终指令集（2 分钟）**\n```\nAssemble everything into one clean, final instruction set.\nFormat it clearly with section headers.\nTarget length: 300-400 words — detailed enough to be useful, short enough to be readable.\n```\n\n**第 8 步——落地实施（3 分钟）**\n复制这套指令集。进入你的主 Claude Project（或者现在就创建一个）。把指令粘贴进指令字段。保存。\n\n**第 9 步——用真实任务测试（3 分钟）**\n在 Project 内开始一段对话。给它一个你这周真实需要完成的任务。评估一下：这次回答和普通对话相比感觉不同吗？是否贴合你的上下文？\n\n**第 10 步——AI 审阅（必做）（3 分钟）**\n把你的指令集粘贴回 Claude，问：\n```\nDon't tell me what's good. Find 3 specific problems with these instructions:\n- Any instruction that's ambiguous and could be interpreted two different ways\n- Any important context about me that's missing\n- Any instruction that will create annoying behaviour rather than helpful behaviour\nSuggest fixes for each.\n```\n至少修复 Claude 指出的一个问题。\n\n**第 11 步——保存备份（1 分钟）**\n把最终指令保存到一个文本文件中，标注“Claude Project Instructions — [日期]”。有了这份备份，你之后就能重建这个 Project，或分享给其他人。\n\n**你已经建成了：** 一套完整、个性化、贴合你实际使用场景的指令集。这是 Claude 中投入产出比最高的单项配置改动——而且你是认真做出来的，而不是套用一段泛泛的文字。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C——AI 审阅环节：测试你现有的指令",
+      "content": "如果你已经有一个 Claude Project，这个工作坊会帮你找出指令中的薄弱环节。如果你刚在工作坊 B 中创建了一个，就用那套指令。无论哪种情况，都只需要 10-15 分钟。\n\n**第 1 步——粘贴你当前的指令进行分析（2 分钟）**\n打开一段新的 Claude 对话（在任何 Project 之外）。粘贴你当前的指令集，说：\n```\nThese are instructions for a Claude Project. Don't tell me what's good.\nOnly identify problems:\n1. Instructions that are vague enough that Claude might interpret differently each time\n2. Important context that's probably missing\n3. Instructions that could accidentally produce worse outputs\n4. Trigger phrases that might fire at the wrong time\n```\n\n**第 2 步——对某条具体触发器进行压力测试（3 分钟）**\n挑出你的一条触发短语。问 Claude：\n```\nI have this trigger instruction: '[paste your trigger]'\nWrite 3 messages I might send where this trigger would fire incorrectly —\nwhere the instruction would produce unhelpful behaviour.\n```\n这能揭示你触发逻辑中的误报情况。\n\n**第 3 步——找出缺失的上下文（3 分钟）**\n```\nBased on my instructions, what would Claude not know about me that could matter?\nList 5 pieces of context that are probably missing.\n```\n把最重要的缺失上下文补充进你实际使用的指令集中。\n\n**第 4 步——测试指令之间是否有冲突（2 分钟）**\n```\nAre there any instructions that contradict each other, or that together might\nproduce confused behaviour? For example, 'be concise' + 'always give 3 examples'\ncould conflict. List any conflicts you spot.\n```\n\n**第 5 步——立刻改进一件事（3 分钟）**\n根据分析结果，选出影响力最大的一项改进。把这个修改真正应用到你的 Project 指令中。\n\n**反思：** 指令是在使用中逐渐改进的，而不是靠一开始就写得完美无缺。这种对抗式审阅——刻意寻找失败模式——正是专业 AI 用户维护高质量 Project 配置的方法。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D——实战应用：为一个真实需求搭建专属 Project",
+      "content": "把 Projects 应用到你当前面对的一个具体、真实的挑战上。你将创建一个带有上传文件的、专门定制的 Project——不是一个泛泛的通用 Project，而是针对某个具体目标量身打造的。\n\n**第 1 步——确定一个具体的真实挑战（2 分钟）**\n从下面选一个：\n- 你即将有一场求职面试，想要做准备\n- 你正在学习一项新技能或新学科，需要一个辅导老师\n- 你有一份项目提案或报告需要撰写\n- 你管理一个团队，希望在沟通和决策上获得帮助\n- 你正在规划一场大型活动或旅行\n- 你正在进行一个个人创意项目\n\n要具体：不要说“写作帮助”，而要说“帮我为我的社区艺术项目撰写一份资助申请”。\n\n**第 2 步——借助 Claude 定义这个 Project（5 分钟）**\n打开 Claude.ai。问：\n```\nI want to create a Claude Project for: [your specific challenge].\nHelp me design the ideal configuration by asking me what you'd need to know\nto write instructions that would make this Project genuinely useful.\n```\n回答 Claude 的问题。\n\n**第 3 步——撰写指令并收集文件（5 分钟）**\n让 Claude 根据你的回答生成指令。然后确定 2-3 份要上传的文件：\n- 面试准备：你的简历、职位描述、公司的关于我们页面\n- 学习：课程笔记、教材章节、教学大纲\n- 报告写作：一份以往的报告、风格指南、相关数据\n- 团队管理：你的团队章程、最近的绩效评估、你的管理理念文档\n\n**第 4 步——创建 Project 并配置（3 分钟）**\n在 Claude.ai 中用生成的指令创建 Project。上传文件。给 Project 起一个针对这个挑战的具体名字：“面试准备 — [公司名称]”或“资助申请 — [项目名称]”。\n\n**第 5 步——运行一个真实任务（5 分钟）**\n在 Project 内开始一段对话，直接给出你目前针对这个挑战最重要的任务。使用这些文件。评估回答。\n\n**第 6 步——完善并迭代（5 分钟）**\n根据第一次的回答，针对没有命中要点的地方调整你的指令。加入一条具体的指令，说明哪里不对。再运行一次任务。\n\n**你已经建成了：** 一个针对某个真实挑战、目的明确的 AI 工作区——不是一个演示，而是真正能为一件重要任务节省时间、提升产出质量的东西。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在编写 Claude Project 指令，希望 Claude 根据你发送的内容不同而表现不同。哪种指令写法最有效？",
+      "options": [
+        "“始终保持灵活，适应我的需求”",
+        "“当我粘贴一份文档时，先总结它。当我提出一个问题时，直接回答。当我说 REVIEW 时，只给我批判性反馈。”",
+        "“在回答之前，先尝试理解我这条消息的语境”",
+        "“用你的判断力来决定什么类型的回答最合适”"
+      ],
+      "correct": 1,
+      "explanation": "明确的、基于触发条件的指令（“当我[做 X]时，你应该[做 Y]”）远比关于灵活性或判断力的模糊指导更可靠。选项 A、C、D 都是让 Claude 自行判断——但 Claude 默认就会这样做。选项 B 给了 Claude 清晰、可识别的信号，用来触发特定的行为。结果是一致、可预测的回答，而不是取决于 Claude 对你想法的猜测而产生的不稳定输出。"
+    },
+    {
+      "type": "quiz",
+      "question": "你在工作中使用 Claude Projects，同时 Claude 的记忆功能也处于开启状态。一位同事问你为什么每次开始新对话时都不用重新解释自己的工作内容。正确的解释是什么？",
+      "options": [
+        "Claude 会自动记住所有过去的对话",
+        "Project 存储的指令会在该 Project 内每次对话开始时加载，而 Claude 的记忆功能会跨所有对话存储持久性事实——两者结合，消除了大部分建立上下文的开销",
+        "你一定是付费订阅了 Claude Pro，它提供无限记忆",
+        "Claude 使用你的邮箱地址来查找你是谁"
+      ],
+      "correct": 1,
+      "explanation": "Projects 和记忆功能在不同的层面上运作。Project 指令是你手动编写的上下文，会在该特定 Project 内的每一次对话中加载。Claude 的记忆是一个独立的系统，会跨所有对话（不仅仅是 Project 内的对话）学习并存储持久性事实。两者结合，既覆盖了特定上下文（Projects），也覆盖了通用身份信息（记忆）。基础使用都不需要 Pro，也都不是靠查找个人数据来运作的——两者都依赖你直接提供给 Claude 的上下文。"
+    },
+    {
+      "type": "quiz",
+      "question": "你的 Claude Project 指令写着“回答请控制在 3-5 个要点以内”。你问了一个真正需要更长回答的复杂问题。你应该预期会发生什么？",
+      "options": [
+        "即使回答质量会因此受损，Claude 也会始终遵守 3-5 个要点的限制",
+        "如果 Claude 认为更长的回答更好，它会完全无视你的指令",
+        "Claude 通常会遵循这条指令，但如果你在对话中直接提出要求（“这个需要更完整的解释”），这次回答会覆盖 Project 指令",
+        "Project 指令只是一种建议——最终由 Claude 自行决定"
+      ],
+      "correct": 2,
+      "explanation": "Project 指令塑造的是 Claude 的默认行为，但可以在对话中被覆盖。当出现冲突时，Claude 被设计为优先遵循对话中明确给出的指令，而不是后台的 Project 指令。所以“回答控制在 3-5 个要点”是一个强默认规则，但如果你说“这个问题需要完整的解释——不用管要点数量的限制”，Claude 会相应地调整回答。这正是 Projects 的实用之处：你设定适用于大多数情况的合理默认值，需要不同行为时再随时覆盖。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 2-2 课。** 你现在已经让 Claude Projects 真正为你所用——自定义指令能自动校准 Claude 使其贴合你的上下文，上传的文件构成了一个知识库，还有一套管理多个 Project 以服务不同工作领域的体系。这是你能做出的、能持续获得更好 Claude 输出效果的单项投入产出比最高的设置改动。"
+    }
+  ],
+  "nextLesson": "2-3",
+  "prevLesson": "2-1"
+}

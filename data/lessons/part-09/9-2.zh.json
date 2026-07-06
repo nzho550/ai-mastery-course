@@ -1,0 +1,104 @@
+{
+  "id": "9-2",
+  "title": "Sourcegraph Cody——企业级代码库 AI",
+  "part": 9,
+  "estimatedMinutes": 60,
+  "tags": ["cody", "sourcegraph", "enterprise", "ai-coding", "vscode"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n完成本课后，你将在 VS Code 中安装好 Cody，理解它与 GitHub Copilot 的不同之处，并用它询问过项目中各文件之间的关联。"
+    },
+    {
+      "type": "text",
+      "content": "## 什么是 Cody？\n\nCody 是 Sourcegraph——这家专注于企业级代码搜索的公司——打造的 AI 编程助手（agent）。GitHub Copilot 擅长的是行内自动补全——帮你续写正在输入的那一行代码——而 Cody 则围绕着一个不同的问题构建：**“这个代码库到底是怎么运作的？”**\n\n它最核心的能力是**代码图谱理解**。Cody 不只是读取你当前打开的文件，它还能理解各文件之间是如何相互引用的——哪些函数调用了哪些函数、模块之间是如何相互导入的、一个类是在哪里定义的、又在哪里被使用。当你加入一个有几百个文件的新项目、需要快速摸清情况时，这正是你需要的理解能力。\n\nCody 作为免费的 VS Code 扩展提供。此外还有面向团队的企业版，支持私有代码托管平台和自定义模型。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**免费版：** Cody 的免费方案让你可以使用 Claude Sonnet 等模型进行对话和行内补全。企业版（撰写本文时为每用户每月 19 美元）新增了大型私有代码库的代码图谱索引、SSO 单点登录以及管理员控制等功能。对于本课来说，免费版就足够了。"
+    },
+    {
+      "type": "text",
+      "content": "## 在 VS Code 中安装 Cody\n\n1. 打开 VS Code\n2. 点击活动栏中的 **扩展** 图标（或按 `Ctrl+Shift+X`）\n3. 搜索 **“Cody AI”**\n4. 安装由 **Sourcegraph** 发布的扩展——注意查看已验证发布者的徽章\n5. 安装完成后，活动栏左侧会出现一个 Cody 图标\n\n首次启动时，Cody 会要求你登录。你可以在 sourcegraph.com 免费注册一个 Sourcegraph 账户——只需要一个邮箱地址。也可以用 GitHub 或 Google 账号登录。"
+    },
+    {
+      "type": "text",
+      "content": "## 打开 Cody 对话\n\n安装并登录 Cody 之后：\n\n- 点击活动栏中的 Cody 图标以打开侧边栏\n- 或直接按 `Ctrl+Shift+C` 打开 Cody 对话\n\n这个对话界面和 Claude 或 Copilot Chat 类似。你可以提问、请求修改代码，或请求解释。区别在于 Cody 回答问题时**知道些什么**。\n\n当你就代码库提出问题时，Cody 会利用代码图谱自动检索相关上下文——你不需要粘贴代码，也不需要手动指定文件。"
+    },
+    {
+      "type": "text",
+      "content": "## Cody 的行内补全\n\nCody 也会在你输入时提供行内自动补全建议，类似 GitHub Copilot。你会看到灰色的建议文字出现——按 `Tab` 接受，按 `Escape` 取消。\n\n你可以同时安装 Copilot 和 Cody。它们在补全上可能会发生冲突，所以大多数开发者会选定其中一个作为主要的补全工具，另一个则用于对话/导航。\n\n**小提示：** 如果两个工具同时给出建议让你感到困扰，可以在其中一个里关闭行内补全。在 Cody 的设置中，你可以把 `cody.autocomplete.enabled` 切换为 `false`，让 Cody 只用于对话，同时保留 Copilot 用于补全。"
+    },
+    {
+      "type": "text",
+      "content": "## Cody 与 Copilot——诚实的对比\n\n两款工具都很好。问题在于你想做什么。\n\n| | Cody | GitHub Copilot |\n|---|---|---|\n| 行内自动补全 | 良好 | 出色 |\n| 单文件对话 | 良好 | 良好 |\n| 跨文件理解 | 出色 | 有限 |\n| 大型代码库导航 | 出色 | 有限 |\n| 解释两个文件如何交互 | 可以 | 不太可靠 |\n| 免费版 | 有 | 有（有限） |\n| 企业版定价 | 每用户每月 19 美元 | 每用户每月 19 美元 |\n\n**Cody 胜出的场景：** 你要接手一个已经存在的大型代码库。你想问“支付逻辑在哪里处理？”或“认证中间件做了什么，哪些路由用到了它？”——这类跨越多个文件的问题。\n\n**Copilot 胜出的场景：** 你在从零开始写新代码。你想要快速、准确的行内补全。你大多数时候只专注于单个文件。\n\n对于像 `ai-course-projects` 这样的个人学习项目而言，Copilot 的补全会让人感觉更实用。而 Cody 的优势会随着代码库规模的增长而同步增长。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**大型项目的最佳实践：** 在动手修改之前，先用 Cody 对话来理解代码库。动认证相关的代码之前，先问一句“AuthService 做了什么，哪些地方依赖它？”这能避免一个经典错误：在不知情的情况下破坏了某个你没意识到与之相连的东西。"
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "安装 Cody 并探索一个代码库",
+      "content": "**目标：** 安装 Cody、登录，并用它来理解项目中各文件之间的关联。\n\n**第 1 步——安装扩展：**\n1. 打开 VS Code 扩展面板（`Ctrl+Shift+X`）\n2. 搜索 `Cody AI`\n3. 安装 Sourcegraph 发布的那一款\n4. 点击活动栏中的 Cody 图标，用免费的 Sourcegraph 账户登录\n\n**第 2 步——打开你的项目：**\n确保 `ai-course-projects` 已在 VS Code 中打开（`文件 → 打开文件夹`）。\n\n**第 3 步——提出一个关于代码库的问题：**\n打开 Cody 对话（`Ctrl+Shift+C`），提问：\n```\nExplain the overall structure of this project. What files exist and what does each one do?\n```\n阅读回答。Cody 会读取你的项目结构并加以描述。\n\n**第 4 步——询问文件之间的关系：**\n```\nHow do about-me.html and practice.js relate to each other? Do they share any logic?\n```\n这正是 Cody 擅长回答的问题类型。将它答案的深度与你逐个文件阅读所能获得的信息做对比。\n\n**第 5 步——测试行内对话：**\n1. 打开 `exercises/practice.js`\n2. 选中 `formatDate` 函数（或文件中的任意函数）\n3. 右键点击 → **Cody: Explain Selected Code**\n4. 阅读侧边栏中 Cody 的解释\n\n**第 6 步——反思：**\n在笔记中写下 3 句话：在什么样的项目中，Cody 的跨文件理解能力会带来最大的差异？在你自己的工作中，有哪个场景能用它节省时间？\n\n**需要观察的重点：** Cody 回答了关于整个项目的问题，而你不需要指定该看哪些文件。这正是它与 Copilot 那种文件级感知能力的区别所在。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "练习 A——快速演练：Cody 跨文件提问冲刺",
+      "content": "**目标：** 向 Cody 提出 5 个难度递增的、关于项目代码库的问题，并将答案质量与单文件工具能给出的答案做对比。（5-10 分钟）\n\n1. 在 VS Code 中打开已加载 `ai-course-projects` 的项目\n2. 打开 Cody 对话（Ctrl+Shift+C）\n3. 提问 1——单文件基准问题：\n```\nWhat does practice.js do?\n```\n注意：任何工具都能回答这个问题。\n\n4. 提问 2——跨文件关系：\n```\nWhich HTML files in this project load JavaScript, and what scripts do they reference?\n```\n注意 Cody 是如何自动跨文件导航的。\n\n5. 提问 3——依赖链：\n```\nIf I delete the formatDate function from practice.js, what else in the project would break?\n```\n\n6. 提问 4——模式扫描：\n```\nAre there any functions defined in one file but never called anywhere in the project?\n```\n\n7. 提问 5——重构规划：\n```\nIf I wanted to add a shared utilities module that both about-me.html and practice.js could use, what would be the cleanest way to restructure the project?\n```\n\n8. 在笔记中，为每个问题的 Cody 回答质量打 1-5 分。哪种类型的问题从跨文件上下文中受益最多？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——用 AI 实战构建：Cody 辅助添加功能",
+      "content": "**目标：** 把 Cody 当作你的编程搭档，为项目添加一个真实功能——一个会涉及多个文件的功能。（25-35 分钟）\n\n1. 打开 Cody 对话面板。先请 Cody 帮你了解全局：\n```\nGive me an overview of this project's architecture. What files exist, what does each one do, and what patterns does the project follow for adding new functionality?\n```\n在继续之前，读完完整的回答。\n\n2. 和 Cody 一起规划这个功能：\n```\nI want to add a 'dark mode' toggle to about-me.html. It should: (1) add a button in the HTML, (2) add CSS for dark mode variables, (3) add JavaScript to toggle a class on the body and save the preference to localStorage. Before writing any code, tell me which files will need to change and in what order.\n```\n\n3. 逐步实现——针对每个文件，在 VS Code 中选中它，然后在 Cody 的行内对话中提问（右键 → Cody → Edit Code）：\n   - 对于 HTML：`Add a dark mode toggle button in the nav area. Use a sun/moon icon (Unicode: ☀️/🌙). The button should have id='theme-toggle'.`\n   - 对于 CSS：`Add CSS custom properties for a dark color scheme. Include --bg-color, --text-color, --accent-color. Apply them when body has class 'dark-mode'.`\n   - 对于 JS：`Add a theme toggle function. On button click, toggle 'dark-mode' on document.body and save 'theme' to localStorage. On page load, read localStorage and apply saved theme.`\n\n4. 每完成一步，就打开浏览器测试，再进行下一步\n\n5. 三个部分都能正常工作后，请 Cody 做最后的审查：\n```\nReview the dark mode implementation across all three files. Check for: missing edge cases, accessibility issues (aria-label on the button?), and any inconsistency between the HTML, CSS, and JS.\n```\n\n6. **AI 审查步骤：** 把你的完整实现复制到 Claude Code 或 Claude.ai 中，说：“审查这个深色模式的实现——找出 3 个失败场景或低效之处。不要一味认可它，要找出问题。”至少修复一个发现的问题。\n\n7. 提交这个可用的功能：\n```bash\ngit add .\ngit commit -m \"feat(ui): add dark mode toggle with localStorage persistence\"\n```\n\n**保留成果：** 一个可正常运行的深色模式功能，由 Cody 的跨文件感知能力指导了实现顺序，并发现了不一致之处。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CODE",
+      "title": "练习 C——失败场景测试：Cody 的上下文理解在哪里会失效？",
+      "content": "**目标：** 找出 Cody 跨文件理解能力的边界，这样你就知道什么时候该相信它、什么时候该独立核实。（10-15 分钟）\n\n1. **测试 1——询问一个不存在的文件：**\n```\nWhat does the authentication module do in this project?\n```\n这个项目根本没有认证模块。Cody 是会编造一个出来（幻觉），还是会说它不存在，或是要求澄清？\n\n2. **测试 2——询问未来的改动：**\n```\nIf we added a backend API server, what would need to change in the existing files to support fetching data from it?\n```\n评估 Cody 的回答是基于真实项目内容，还是泛泛而谈的通用建议。\n\n3. **测试 3——矛盾的上下文：**\n打开 `practice.js`，临时在文件顶部加一条注释：`// THIS FILE IS DEPRECATED — do not use formatDate`。然后问 Cody：\n```\nShould I call formatDate from about-me.html for date rendering?\n```\nCody 会注意到这条弃用注释吗，还是会忽略它？\n\n4. **测试 4——陈旧性检查：**\n在 VS Code 中修改 `practice.js` 中某个函数（重命名它），但不保存。然后问 Cody：\n```\nWhat is the current signature of the formatDate function?\n```\n它反映的是未保存的改动，还是上一次保存的版本？\n\n5. **让 AI 诊断模式：**\n打开 Claude Code，问：“像 Cody 这样的企业级 AI 编程助手，关于代码库给出自信但错误答案的 3 种常见方式是什么？开发者在采纳答案行动之前应该如何验证？”\n\n6. 把你的发现记录在 `notes/cody-limitations.md` 中——这会成为你判断何时该相信 Cody、何时该手动复查的个人指南。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 D——真实工作流：Cody 作为入职引导",
+      "content": "**目标：** 用 Cody 为你的项目创建一份真实的入职文档——那种你会分享给新团队成员或协作者的文档。（15-25 分钟）\n\n1. 打开 Cody 对话，告诉它目标：\n```\nI want you to act as a technical writer who has just read this entire codebase. Generate a ONBOARDING.md file for a new developer joining this project. Include: project purpose, file structure explanation, how to run the project locally, the coding patterns used, and 5 common tasks a new developer would do with file references for each.\n```\n\n2. 审阅 Cody 生成的草稿。找出其中含糊、缺失或错误的部分。\n\n3. 用后续提问来迭代：\n```\nThe 'how to run locally' section is missing the step about the .env file. Add that. Also, add a 'Common Errors' section covering the 3 most likely errors a new developer would hit.\n```\n\n4. 文档满意后，让 Cody 再生成一份 `CONTRIBUTING.md`：\n```\nUsing the same codebase context, write a CONTRIBUTING.md. Cover: commit message format, branch naming, how to add a new exercise file, and the code quality checks that run in CI.\n```\n\n5. 把两份文件都保存到你的项目中：\n```bash\n# （把 Cody 的输出通过 VS Code 粘贴到这两个文件中）\ngit add ONBOARDING.md CONTRIBUTING.md\ngit commit -m \"docs: add onboarding and contributing guides via Cody\"\n```\n\n6. 真实的工作流：下次加入一个陌生项目时，在最初的 30 分钟内就用这种方式使用 Cody。它生成的入职文档，会成为你了解这个代码库的个人参考资料。"
+    },
+    {
+      "type": "quiz",
+      "question": "在一个拥有 500 个文件的代码库中，一位开发者说：“我问 Cody 哪些路由用到了 AuthMiddleware，它给了我一份 8 个路由的清单。但我原本只预期有 3 个。”他接下来应该怎么做？",
+      "options": [
+        "相信 Cody 的答案——它拥有完整的代码库访问权限和跨文件理解能力",
+        "丢弃 Cody 的答案——它显然出现了幻觉",
+        "手动搜索代码库进行核实（grep 搜索 'AuthMiddleware'）——Cody 的答案应被当作起点，而不是最终答案",
+        "用全新的上下文窗口重启 Cody——这个答案很可能是缓存问题"
+      ],
+      "correct": 2,
+      "explanation": "Cody 的跨文件理解能力很强大，但并非万无一失——尤其是在大型代码库中，上下文窗口可能会截断部分文件内容。应把 Cody 的答案当作有依据的起点来看待。花 30 秒用 grep 或文件搜索核实一下，就能避免根据错误答案采取行动的失误。这个价值依然存在：Cody 把搜索范围从 500 个文件缩小到了 8 个候选项，相比从零开始已经是巨大的进步。"
+    },
+    {
+      "type": "quiz",
+      "question": "你正在为一个新项目评估 Cody 和 GitHub Copilot——这是一个包含 200 个文件、依赖关系图复杂的 TypeScript monorepo。哪个工具更可能在浏览这个代码库时提供更大价值？",
+      "options": [
+        "GitHub Copilot——它的行内补全更好，整体上能让你写代码更快",
+        "Cody——它的跨文件代码图谱理解能力正是为大型复杂代码库而设计的",
+        "都不是——对于 200 个文件的规模，你需要的是像 Sourcegraph 本体这样的企业级搜索工具，而不是一个 AI 扩展",
+        "Tabnine——它的本地模型能处理这种复杂度，而不用把专有代码发送到云端"
+      ],
+      "correct": 1,
+      "explanation": "Cody 由代码搜索公司 Sourcegraph 打造，它的核心差异化优势正是针对这种场景：理解大型复杂代码库中各文件之间的关系。这个包含 200 个文件、依赖关系图复杂的 TypeScript monorepo，正是 Cody 代码图谱理解能力大显身手的环境。Copilot 在单文件上下文的行内补全方面表现出色，但在跨文件导航和理解方面，Cody 更胜一筹。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**本课完成。** 你已经安装了 Cody，并亲身体验了它对代码库层面的理解能力。这款工具在大型代码库场景中值得占有一席之地——保持安装状态，下次需要快速理解陌生代码时就用它。"
+    }
+  ],
+  "nextLesson": "9-3",
+  "prevLesson": "9-1"
+}

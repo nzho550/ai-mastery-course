@@ -1,0 +1,101 @@
+{
+  "id": "10-5",
+  "title": "AI 辅助的 Git 工作流",
+  "part": 10,
+  "estimatedMinutes": 60,
+  "tags": [
+    "git",
+    "automation",
+    "claude-code",
+    "developer-workflow"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 学习目标\n\n学完本课后，你将能用 AI 写出更好的提交信息（commit message）、生成变更日志（changelog）、创建 PR 描述，并给出分支命名建议——把 git 历史从一件事后才想起的杂事，变成一份自我说明的记录。"
+    },
+    {
+      "type": "text",
+      "content": "## 手写 Git 信息的问题\n\nGit 本应讲述你项目的故事。但实际上，大多数 git 历史看起来是这样的：\n\n- `fixed bug`\n- `update`\n- `more changes`\n- `final`\n- `FINAL REAL`\n- `ok now it works`\n\n这些信息毫无用处。六个月后出问题时，你完全看不出历史记录里到底改了什么、为什么改。\n\n解决办法不是靠自律——而是靠自动化。AI 可以准确查看你到底改了什么，为你写出精确、符合规范的提交信息。质量提升了，摩擦却减少了。"
+    },
+    {
+      "type": "text",
+      "content": "## Conventional Commits 规范\n\n在 AI 能帮上忙之前，先了解一下它应该遵循的标准会很有帮助。**Conventional Commits** 是一种广泛使用的格式：\n\n```\n<type>(<scope>): <description>\n\n[optional body]\n\n[optional footer]\n```\n\n类型（type）：\n- `feat`：新功能\n- `fix`：修复 bug\n- `docs`：仅文档改动\n- `style`：格式调整，不涉及逻辑改动\n- `refactor`：既不修 bug 也不加功能的代码改动\n- `test`：新增测试\n- `chore`：维护性工作、依赖更新\n\n示例：\n- `feat(auth): add OAuth2 login with Google`\n- `fix(api): handle null response from messages endpoint`\n- `docs(readme): add installation instructions for Windows`\n\n当你请 Claude 写提交信息时，它知道这种格式，并默认使用它。"
+    },
+    {
+      "type": "text",
+      "content": "## 四种 AI Git 工作流模式\n\n**模式 1 —— 从 diff 生成提交信息**\n\n暂存（stage）你的改动，然后请 Claude 描述改动了什么。\n\n在终端中：\n```\ngit add -A\ngit diff --cached | claude \"Write a conventional commit message for these staged changes. Format: type(scope): description. Max 72 characters for the title line.\"\n```\n\n或者在 Claude Code 内部：\n```\nLook at my staged git changes and write a conventional commit message for them.\n```\n\n**模式 2 —— 从 diff 生成 PR 描述**\n\n当你的改动跨越多个文件和多次提交时，一份 PR 描述能为审查者节省时间。\n\n```\ngit diff main...HEAD | claude \"Write a GitHub pull request description. Include: what changed, why, and how to test it. Use markdown headers.\"\n```\n\n**模式 3 —— 从 git log 生成变更日志**\n\n用于发布说明：\n\n```\ngit log --oneline v1.0.0..HEAD | claude \"Convert these git commits into a user-facing changelog section. Group by: New Features, Bug Fixes, Other Changes. Use plain English — not technical jargon.\"\n```\n\n**模式 4 —— 从任务描述生成分支名称**\n\n当你有一个任务、需要一个分支名称时：\n```\nclaude \"Suggest 3 git branch names for this task: 'Add ability for users to export their data as CSV'. Use kebab-case.\"\n```"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**最重要的习惯：** 每次提交前，花 10 秒钟让 Claude 审查一下你的 diff 并写出提交信息。你会自动获得更好的 git 历史，偶尔还能发现自己提交前忘记清理的东西。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "AI 撰写的提交信息",
+      "content": "你将暂存一个真实的改动，并使用 Claude Code 写出提交信息。\n\n**第 1 步——做一个值得提交的改动**\n1. 在 VS Code 中打开你的 `ai-course-projects` 文件夹\n2. 对任意文件做一个有意义的改动——给 `README.md` 加一个小节、改进 `about-me.html`，或者创建一个新的练习文件\n3. 保存文件\n\n**第 2 步——暂存这个改动**\n在 VS Code 的 Source Control 面板中，点击改动文件旁边的 `+` 来暂存它。\n\n或者在集成终端中：`git add -A`\n\n**第 3 步——请 Claude Code 写提交信息**\n1. 在你的项目文件夹中启动 `claude`\n2. 输入：`Look at my staged git changes and write a conventional commit message for them. Format it as type(scope): description. Keep the title under 72 characters.`\n3. Claude 会运行 `git diff --cached`，读取改动内容，写出一条精确的信息\n\n**第 4 步——使用这条信息**\n1. 复制 Claude 建议的信息\n2. 在 VS Code 的 Source Control 面板中，把它粘贴到提交信息框里\n3. 按 `Ctrl+Enter` 提交\n\n**额外任务：写一份 PR 描述**\n如果你有一个分支，包含多个和 main 不同的提交：\n```\nLook at the commits since main and write a GitHub PR description. Include what changed, why, and how to test it.\n```\n\n**需要注意的点：** 这条信息具体且信息量充足——不像 \"update README\" 那样含糊。它描述了实际的改动，让你 6 个月后依然能看懂。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**进一步自动化的工具：** Git 钩子（hooks）可以让 Claude 在每次提交时自动运行。第 7-8 课讲过钩子——你可以添加一个 `prepare-commit-msg` 钩子，让它对你的暂存 diff 运行 Claude，并预先填好提交信息框。这就是你刚才手动做的事情的全自动版本。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "工作坊 A — AI Git 工作流练习",
+      "content": "在接下来的 8 分钟内，用 Claude Code 改进你的 git 工作流。\n\n**第 1 步——在一个真实的 git 仓库中**，运行：\n```bash\ngit log --oneline -20\n```\n询问 Claude Code：\"审查一下这 20 条提交信息。哪些清晰、有描述性？哪些太含糊？我应该遵循什么模式来写出好的提交信息？\"\n\n**第 2 步——在这个仓库中做一个真实的代码改动。**\n\n**第 3 步——请 Claude Code**写出提交信息：\n\"我刚做了这些改动：[描述它们]。按照 conventional commits 格式（type(scope): description）写一条提交信息。让描述部分解释为什么这样改，而不只是改了什么。\"\n\n**第 4 步——审查这条信息。** 它准确吗？直接使用，或者进一步完善它。\n\n**第 5 步——询问 Claude Code：** \"对于一个从事 [描述你的项目类型] 工作的开发者来说，哪些其他 git 工作流改进最能减少摩擦？\""
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 B — AI 辅助的 PR 工作流",
+      "content": "构建一个完整的 AI 辅助 pull request 工作流。\n\n**第 1 步——在一个真实的仓库中**实现一个小功能或修复一个 bug。\n\n**第 2 步——在提交前，请 Claude Code 审查你的改动：**\n\"审查我暂存的改动。检查：有没有明显的 bug、缺失的错误处理，或代码风格问题？这个实现是否符合测试的预期？\"\n\n**第 3 步——修复** Claude Code 指出的问题。暂存这些修复。\n\n**第 4 步——请 Claude Code 写出 PR 描述：**\n```\nWrite a pull request description for these changes.\n\nBased on the diff, include:\n- What was the problem? (or what feature was requested?)\n- What did I change and why?\n- How can a reviewer test this change?\n- Are there any concerns or trade-offs in this implementation?\n```\n\n**第 5 步——创建这个 PR。** AI 辅助的描述相比你平时写的 PR 描述，是否节省了时间、提升了质量？\n\n**第 6 步——强制审查环节：** 发布前仔细阅读这份 PR 描述——每一句话都准确吗？"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊 C — 使用 AI 的 Git 钩子",
+      "content": "设置使用 AI 进行自动化质量检查的 git 钩子。\n\n**第 1 步——询问 Claude：** *\"对于使用 AI 编码工具的开发者来说，最有用的 git 钩子有哪些？对于每个钩子（pre-commit、commit-msg、pre-push），我可以运行哪些自动化检查？\"*\n\n**第 2 步——创建一个 commit-msg 钩子**来校验提交信息格式：\n```bash\n# .git/hooks/commit-msg\n#!/bin/bash\ncommit_msg=$(cat \"$1\")\nif [[ ${#commit_msg} -lt 10 ]]; then\n    echo \"Error: Commit message too short\"\n    exit 1\nfi\n```\n\n**第 3 步——测试这个钩子：** 尝试用一条过短的信息提交。\n\n**第 4 步——请 Claude Code** 设计一个更完善的 pre-commit 钩子，检查常见问题（代码中的密钥泄露、大文件、语法错误）。\n\n**第 5 步——基于你最常犯的提交错误**，再实现一个额外的钩子。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 D — AI Git 别名",
+      "content": "创建使用 Claude Code 实现常见 AI 增强操作的 git 别名。\n\n**第 1 步——询问 Claude：** *\"设计一些集成了 Claude Code 辅助能力的 git 别名。比如，一个执行 git diff、将其传给 Claude Code 审查、并在提交前等待批准的别名。还有哪些 git + Claude Code 的工作流会有用？\"*\n\n**第 2 步——创建一个 shell 函数**（不是 git 别名，因为这需要多步逻辑），用于\"智能提交\"：\n```bash\n# Add to your .bashrc or .zshrc\nsmartcommit() {\n  git diff --staged | claude --print \"Write a conventional commits message for this diff. One line only.\" | xargs git commit -m\n}\n```\n\n**第 3 步——在一个真实的暂存改动上测试**这个函数。\n\n**第 4 步——针对一个工作流痛点**再创建一个函数（智能 PR 描述、自动生成变更日志条目等）。\n\n**第 5 步——一周后评估：** 这些函数是否真的变成了你实际工作流的一部分，还是你忘了它们？"
+    },
+    {
+      "type": "quiz",
+      "question": "Claude Code 审查了你的代码改动并说\"这看起来不错\"。在合并到 main 之前，还应该发生什么？",
+      "options": [
+        "什么都不用做——Claude Code 的审查已经足够了",
+        "还需要人工代码审查——AI 审查能发现很多问题，但会漏掉业务逻辑错误、架构方面的顾虑，以及需要组织内部背景知识的问题",
+        "只需运行自动化测试即可",
+        "检查代码能否编译通过即可"
+      ],
+      "correct": 1,
+      "explanation": "AI 代码审查只是第一道关卡，不能替代人工审查。AI 能发现的：语法错误、常见的反模式、明显的逻辑 bug、风格问题。AI 会漏掉的：这项改动是否符合团队的架构方向、是否正确实现了业务需求（理解业务规则需要 AI 不具备的背景知识）、需要深层领域知识才能发现的安全问题，以及对其他团队成员正在进行中的工作的影响。"
+    },
+    {
+      "type": "quiz",
+      "question": "你使用 Claude Code 撰写所有的提交信息。一位同事查看你的提交历史，问是谁写了这些用心的提交信息。你应该告诉他们吗？",
+      "options": [
+        "不用——既然你批准了这些信息，它们就是你的",
+        "这取决于你团队的规范，但总体而言透明更好——可以说\"我用 Claude Code 起草提交信息，然后再自己审查修改\"",
+        "应该——把每一条提交都标注为 AI 生成",
+        "只有在他们直接问起你是怎么生成提交信息时才告诉他们"
+      ],
+      "correct": 1,
+      "explanation": "在职场环境中，对 AI 工具使用保持透明总体上是更好的策略。大多数团队对 AI 辅助撰写提交信息没有意见（这只是一个便利工具，不涉及专业判断），但隐瞒工具使用一旦被发现，可能会损害信任。诚实的做法是：\"我用 Claude Code 起草提交信息，然后自己审查\"——大多数同事会对你的工作流感到好奇，而不是批评。越来越多的团队会明确制定关于 AI 工具披露的政策；你的坦诚有助于让这种做法正常化。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 10-5 课。** 你的 git 历史现在是自我说明的——不需要额外的心力。以后每一次提交都是练习的机会。接下来：把 AI 融入 GitHub Actions 的 CI/CD 流水线。"
+    }
+  ],
+  "nextLesson": "10-6",
+  "prevLesson": "10-4"
+}
