@@ -1,5 +1,7 @@
 # AI Learning Course — Implementation Plan
 
+> **Historical planning document.** Written before/during the initial build; part/lesson counts and phase status below reflect the plan at that time, not the current live site. See the repository root `README.md` for current curriculum size and status.
+
 ## Overview
 
 A fully self-contained, locally-served website that takes a complete beginner from

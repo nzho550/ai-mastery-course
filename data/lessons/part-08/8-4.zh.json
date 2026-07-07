@@ -24,7 +24,7 @@
     },
     {
       "type": "text",
-      "content": "## 安装\n\n把 context7 添加到你的全局 `settings.json`（`C:\\Users\\YourName\\.claude\\settings.json`）中："
+      "content": "## 安装\n\n运行 `claude mcp add context7 -s user -- npx -y @upstash/context7-mcp`，或者把它加到 `~/.claude.json`（用户作用域）的 `mcpServers` 代码块中，和你的文件系统服务器放在一起："
     },
     {
       "type": "code",
@@ -53,7 +53,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "在编码时查询实时文档",
-      "content": "**准备工作：**\n1. 把 context7 配置块（如上所示）添加到你的 `settings.json`\n2. 保存文件，重新启动 `claude`\n3. 输入 `/mcp`——确认 `context7` 出现在列表中\n\n**任务 1——获取实时文档：**\n问：`\"用 context7，帮我拿到 HTML5 dialog 元素当前的文档——特别是如何用 JavaScript 打开和关闭它。\"`\n\n阅读 Claude 返回的内容。注意它引用的是真实的最新规范，而不是模糊的印象。\n\n**任务 2——把文档应用到你的项目中：**\n问：`\"用刚才那份文档，给 exercises/about-me.html 加一个模态对话框。点击‘Contact Me’按钮时打开对话框，点击‘Close’时关闭。\"`\n\n用 Live Server 打开这个文件——对话框应该能正常工作。\n\n**任务 3——对比有无 context7 的差异：**\n开始一个新的 Claude Code 会话（输入 `/clear` 清空对话）。\n不提及 context7，问同样的模态对话框问题。\n对比两次回答：\n- Claude 用的是同一套 API 吗？\n- 哪一个听起来更自信，或者更贴近当前情况？\n- 有没有哪个用了过时的写法？\n\n把你的观察记在 `notes/context7-experiment.md` 中。\n\n**加分项——查询一个你实际会用的库：**\n如果你正在学习或使用某个具体的库（Python、Vue、Svelte、Express，随便什么），就某个你好奇的话题问 context7 一下它当前的文档。"
+      "content": "**准备工作：**\n1. 用 `claude mcp add`（如上所示）或直接编辑 `~/.claude.json` 来添加 context7\n2. 重新启动 `claude`\n3. 输入 `/mcp`——确认 `context7` 出现在列表中\n\n**任务 1——获取实时文档：**\n问：`\"用 context7，帮我拿到 HTML5 dialog 元素当前的文档——特别是如何用 JavaScript 打开和关闭它。\"`\n\n阅读 Claude 返回的内容。注意它引用的是真实的最新规范，而不是模糊的印象。\n\n**任务 2——把文档应用到你的项目中：**\n问：`\"用刚才那份文档，给 exercises/about-me.html 加一个模态对话框。点击‘Contact Me’按钮时打开对话框，点击‘Close’时关闭。\"`\n\n用 Live Server 打开这个文件——对话框应该能正常工作。\n\n**任务 3——对比有无 context7 的差异：**\n开始一个新的 Claude Code 会话（输入 `/clear` 清空对话）。\n不提及 context7，问同样的模态对话框问题。\n对比两次回答：\n- Claude 用的是同一套 API 吗？\n- 哪一个听起来更自信，或者更贴近当前情况？\n- 有没有哪个用了过时的写法？\n\n把你的观察记在 `notes/context7-experiment.md` 中。\n\n**加分项——查询一个你实际会用的库：**\n如果你正在学习或使用某个具体的库（Python、Vue、Svelte、Express，随便什么），就某个你好奇的话题问 context7 一下它当前的文档。"
     },
     {
       "type": "workshop",

@@ -1,5 +1,7 @@
 # Resource & Dependency Strategy
 
+> **Historical planning document.** Describes the intended vendoring strategy prior to build; the live site follows this approach (see `vendor/` and the "Tech Stack" section of the root `README.md`) but exact library versions there are authoritative if they differ from what's listed below.
+
 ## Philosophy
 
 The site ships with all vendor files **bundled in the repo** (`vendor/` folder).

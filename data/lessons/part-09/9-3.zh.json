@@ -26,11 +26,11 @@
     },
     {
       "type": "text",
-      "content": "## Tabnine 的隐私模型是如何运作的\n\nTabnine 有三种部署模式：\n\n**1. 云端模式（免费版和 Pro 版）**\n建议由 Tabnine 的云服务器生成。代码片段会被发送去处理。速度快、能力强，使用大模型。\n\n**2. 本地模式（Pro 版）**\n一个较小的 AI 模型（约 1-2 GB）完全运行在你的电脑上。任何代码都不会被传输出去。建议的智能程度可能略逊于云端模式，但它能离线运行，也能在隔离网络（air-gapped）环境中使用。\n\n**3. 企业版（自托管）**\nTabnine 的服务器运行在你所在机构的基础设施内部。完全可控，符合最严格的企业安全策略。\n\n本课中，你将安装免费版，并了解一下它的设置界面。"
+      "content": "## Tabnine 的隐私模型是如何运作的\n\nTabnine 有三种部署模式：\n\n**1. 云端模式**\n建议由 Tabnine 的云服务器生成。代码片段会被发送去处理。速度快、能力强，使用大模型。\n\n**2. 本地模式**\n一个较小的 AI 模型（约 1-2 GB）完全运行在你的电脑上。任何代码都不会被传输出去。建议的智能程度可能略逊于云端模式，但它能离线运行，也能在隔离网络（air-gapped）环境中使用。\n\n**3. 企业版（自托管）**\nTabnine 的服务器运行在你所在机构的基础设施内部。完全可控，符合最严格的企业安全策略，包括完全隔离网络（air-gapped）部署。\n\n**状态更新：** Tabnine 已转向仅面向企业的定价模式。截至 2026 年，其官网定价页面只列出两档付费方案——Code Assistant 方案（约每用户每月 39 美元）和包含 Context Engine 的 Agentic Platform 方案（约每用户每月 59 美元）——不再宣传个人免费版或低价 Pro 版。如果你没有付费版 Tabnine 账户，可以先安装扩展来了解界面、查看设置；下文描述的部分功能可能需要试用资格或企业席位。"
     },
     {
       "type": "text",
-      "content": "## 在 VS Code 中安装 Tabnine\n\n1. 打开 VS Code 扩展面板（`Ctrl+Shift+X`）\n2. 搜索 **“Tabnine”**\n3. 安装 **Tabnine: AI Autocomplete & Chat for Javascript, Python, Typescript, PHP, Go, Java & more**——由 Tabnine 发布的那一款\n4. 点击 Tabnine 侧边栏中的 **Sign up**，在 tabnine.com 上创建一个免费账户\n\n登录后，Tabnine 会自动激活。你会看到输入时出现行内建议——灰色文字，和 Copilot 类似。按 `Tab` 接受。"
+      "content": "## 在 VS Code 中安装 Tabnine\n\n1. 打开 VS Code 扩展面板（`Ctrl+Shift+X`）\n2. 搜索 **“Tabnine”**\n3. 安装 **Tabnine: AI Autocomplete & Chat for Javascript, Python, Typescript, PHP, Go, Java & more**——由 Tabnine 发布的那一款\n4. 点击 Tabnine 侧边栏中的 **Sign up**。注意：截至 2026 年，Tabnine 只销售付费企业版方案（不再提供个人免费版），这一步可能需要试用资格或已有的付费席位——请到 tabnine.com 查看当前的注册选项\n\n登录后，Tabnine 会自动激活。你会看到输入时出现行内建议——灰色文字，和 Copilot 类似。按 `Tab` 接受。"
     },
     {
       "type": "text",
@@ -38,7 +38,7 @@
     },
     {
       "type": "text",
-      "content": "## Tabnine 与 Copilot——诚实的对比\n\n这里需要直言不讳。对于一般的编程场景，GitHub Copilot 目前的建议质量更强。Tabnine 的优势不在于能力，而在于隐私保证。\n\n| | Tabnine | GitHub Copilot |\n|---|---|---|\n| 建议质量 | 良好 | 出色 |\n| 本地 / 离线模式 | 有（Pro 版） | 无 |\n| 代码留在本地 | 是（本地模式） | 否 |\n| 团队模式学习 | 有（企业版） | 有限 |\n| 免费版 | 有 | 有 |\n| 价格（Pro 版） | 每用户每月 12 美元 | 每用户每月 10 美元 |\n| 支持隔离网络环境 | 是 | 否 |\n\n**选择 Tabnine 的场景：** 隐私是硬性要求，而不是可有可无的偏好。你的代码不能离开你的网络。你身处受监管行业，或受到严格知识产权协议的约束。\n\n**选择 Copilot 的场景：** 你想在一般编程任务上获得最佳建议，且隐私不是阻碍因素。\n\n关键洞察：Tabnine 和 Copilot 并不是在同一个维度上竞争。Tabnine 回答的是一个不同的问题。"
+      "content": "## Tabnine 与 Copilot——诚实的对比\n\n这里需要直言不讳。对于一般的编程场景，GitHub Copilot 目前的建议质量更强。Tabnine 的优势不在于能力，而在于隐私保证。\n\n| | Tabnine | GitHub Copilot |\n|---|---|---|\n| 建议质量 | 良好 | 出色 |\n| 本地 / 离线模式 | 有（Pro 版） | 无 |\n| 代码留在本地 | 是（本地模式） | 否 |\n| 团队模式学习 | 有（企业版） | 有限 |\n| 免费版 | 无（2026 年起仅限企业版） | 有 |\n| 价格（入门付费档） | 约每用户每月 39 美元（Code Assistant） | 每用户每月 10 美元 |\n| 支持隔离网络环境 | 是 | 否 |\n\n**选择 Tabnine 的场景：** 隐私是硬性要求，而不是可有可无的偏好。你的代码不能离开你的网络。你身处受监管行业，或受到严格知识产权协议的约束。\n\n**选择 Copilot 的场景：** 你想在一般编程任务上获得最佳建议，且隐私不是阻碍因素。\n\n关键洞察：Tabnine 和 Copilot 并不是在同一个维度上竞争。Tabnine 回答的是一个不同的问题。"
     },
     {
       "type": "callout",
@@ -49,7 +49,7 @@
       "type": "workshop",
       "tag": "VSCODE",
       "title": "安装 Tabnine 并探索其隐私设置",
-      "content": "**目标：** 安装 Tabnine，激活它，将其补全效果与 Copilot 做对比，并找到它的隐私配置选项。\n\n**第 1 步——安装：**\n1. 打开 VS Code 扩展面板（`Ctrl+Shift+X`）\n2. 搜索 `Tabnine` → 安装该扩展\n3. 出现提示时注册一个免费账户\n\n**第 2 步——测试补全：**\n1. 打开 `exercises/practice.js`\n2. 转到文件底部，开始输入一个新函数：\n```\n// Function to check if a string is a valid email address\nfunction isValidEmail(\n```\n3. 在开括号后暂停——等待 Tabnine 灰色的建议出现\n4. 按 `Tab` 接受\n5. 现在对比一下：这与 Copilot 相比感觉如何？更保守？风格不同？\n\n**第 3 步——探索隐私设置：**\n1. 点击 VS Code 状态栏中的 Tabnine 图标（底部，通常显示一个小写 T 图标）\n2. 选择 **Settings**，或通过 `Ctrl+,` 打开扩展设置并搜索 `Tabnine`\n3. 找到与隐私相关的设置项——留意像 `Keep my code private` 这样的选项和遥测控制\n4. 你不需要修改任何东西——只需了解有哪些内容是可配置的\n\n**第 4 步——反思：**\n用 3 句话回答：在什么情况下，你会为一个真实项目选择 Tabnine 而不是 Copilot？\n\n回答提示：想一想受监管行业、有严格知识产权条款的客户项目，或任何“代码不离开机器”是硬性要求而非加分项的场景。\n\n**需要观察的重点：** Tabnine 能用，而且用得不错。它的建议是称职的。隐私设置确实存在且易于访问。对于它所面向的特定用例而言，它不是一种妥协——而是正确的工具。"
+      "content": "**目标：** 安装 Tabnine，激活它，将其补全效果与 Copilot 做对比，并找到它的隐私配置选项。\n\n**第 1 步——安装：**\n1. 打开 VS Code 扩展面板（`Ctrl+Shift+X`）\n2. 搜索 `Tabnine` → 安装该扩展\n3. 出现提示时完成注册（注意：Tabnine 于 2026 年转向仅面向企业的定价模式，可能需要试用资格或付费席位——请到 tabnine.com 查看当前选项）\n\n**第 2 步——测试补全：**\n1. 打开 `exercises/practice.js`\n2. 转到文件底部，开始输入一个新函数：\n```\n// Function to check if a string is a valid email address\nfunction isValidEmail(\n```\n3. 在开括号后暂停——等待 Tabnine 灰色的建议出现\n4. 按 `Tab` 接受\n5. 现在对比一下：这与 Copilot 相比感觉如何？更保守？风格不同？\n\n**第 3 步——探索隐私设置：**\n1. 点击 VS Code 状态栏中的 Tabnine 图标（底部，通常显示一个小写 T 图标）\n2. 选择 **Settings**，或通过 `Ctrl+,` 打开扩展设置并搜索 `Tabnine`\n3. 找到与隐私相关的设置项——留意像 `Keep my code private` 这样的选项和遥测控制\n4. 你不需要修改任何东西——只需了解有哪些内容是可配置的\n\n**第 4 步——反思：**\n用 3 句话回答：在什么情况下，你会为一个真实项目选择 Tabnine 而不是 Copilot？\n\n回答提示：想一想受监管行业、有严格知识产权条款的客户项目，或任何“代码不离开机器”是硬性要求而非加分项的场景。\n\n**需要观察的重点：** Tabnine 能用，而且用得不错。它的建议是称职的。隐私设置确实存在且易于访问。对于它所面向的特定用例而言，它不是一种妥协——而是正确的工具。"
     },
     {
       "type": "workshop",

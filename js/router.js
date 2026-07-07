@@ -17,9 +17,3 @@ window.addEventListener('hashchange', () => {
   const route = getRoute();
   listeners.forEach(fn => fn(route));
 });
-
-// Fire on initial load
-window.addEventListener('DOMContentLoaded', () => {
-  const route = getRoute();
-  listeners.forEach(fn => fn(route));
-});

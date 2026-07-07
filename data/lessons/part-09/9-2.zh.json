@@ -11,16 +11,16 @@
     },
     {
       "type": "text",
-      "content": "## 什么是 Cody？\n\nCody 是 Sourcegraph——这家专注于企业级代码搜索的公司——打造的 AI 编程助手（agent）。GitHub Copilot 擅长的是行内自动补全——帮你续写正在输入的那一行代码——而 Cody 则围绕着一个不同的问题构建：**“这个代码库到底是怎么运作的？”**\n\n它最核心的能力是**代码图谱理解**。Cody 不只是读取你当前打开的文件，它还能理解各文件之间是如何相互引用的——哪些函数调用了哪些函数、模块之间是如何相互导入的、一个类是在哪里定义的、又在哪里被使用。当你加入一个有几百个文件的新项目、需要快速摸清情况时，这正是你需要的理解能力。\n\nCody 作为免费的 VS Code 扩展提供。此外还有面向团队的企业版，支持私有代码托管平台和自定义模型。"
+      "content": "## 什么是 Cody？\n\nCody 是 Sourcegraph——这家专注于企业级代码搜索的公司——打造的 AI 编程助手（agent）。GitHub Copilot 擅长的是行内自动补全——帮你续写正在输入的那一行代码——而 Cody 则围绕着一个不同的问题构建：**“这个代码库到底是怎么运作的？”**\n\n它最核心的能力是**代码图谱理解**。Cody 不只是读取你当前打开的文件，它还能理解各文件之间是如何相互引用的——哪些函数调用了哪些函数、模块之间是如何相互导入的、一个类是在哪里定义的、又在哪里被使用。当你加入一个有几百个文件的新项目、需要快速摸清情况时，这正是你需要的理解能力。\n\n**状态更新：** Sourcegraph 已于 2025 年停止面向个人开发者提供 Cody 的免费版和 Pro 版（2025 年 6 月 25 日起停止新用户注册，2025 年 7 月 23 日现有用户的访问权限也被终止）。如今 Cody 仅作为 Sourcegraph 企业版的一部分提供。想要类似的免费、具备代码库感知能力的助手的个人开发者，现在被引导使用 **Amp**——Sourcegraph 更新的智能体式编程工具，已于 2025 年 12 月拆分为独立公司。下文的代码图谱理解概念依然适用——你只需要一个 Cody 企业版席位，或者用 Amp 来完成动手练习。"
     },
     {
       "type": "callout",
-      "variant": "info",
-      "content": "**免费版：** Cody 的免费方案让你可以使用 Claude Sonnet 等模型进行对话和行内补全。企业版（撰写本文时为每用户每月 19 美元）新增了大型私有代码库的代码图谱索引、SSO 单点登录以及管理员控制等功能。对于本课来说，免费版就足够了。"
+      "variant": "warning",
+      "content": "**不再有免费版。** 截至 2026 年，Cody 仅面向企业提供，按组织通过 Sourcegraph 销售团队的定制报价收费，而非简单的每席位标价。如果你没有 Cody 企业版工作区的访问权限，仍然可以从概念上完成本课，或者用 **Amp**（ampcode.com）来替代动手练习——Amp 是 Sourcegraph 目前面向个人开发者的产品，采用了同样的核心理念：让 AI 助手拥有对整个代码库的深度理解，而不只是当前打开的文件。"
     },
     {
       "type": "text",
-      "content": "## 在 VS Code 中安装 Cody\n\n1. 打开 VS Code\n2. 点击活动栏中的 **扩展** 图标（或按 `Ctrl+Shift+X`）\n3. 搜索 **“Cody AI”**\n4. 安装由 **Sourcegraph** 发布的扩展——注意查看已验证发布者的徽章\n5. 安装完成后，活动栏左侧会出现一个 Cody 图标\n\n首次启动时，Cody 会要求你登录。你可以在 sourcegraph.com 免费注册一个 Sourcegraph 账户——只需要一个邮箱地址。也可以用 GitHub 或 Google 账号登录。"
+      "content": "## 在 VS Code 中安装 Cody\n\n1. 打开 VS Code\n2. 点击活动栏中的 **扩展** 图标（或按 `Ctrl+Shift+X`）\n3. 搜索 **“Cody AI”**\n4. 安装由 **Sourcegraph** 发布的扩展——注意查看已验证发布者的徽章\n5. 安装完成后，活动栏左侧会出现一个 Cody 图标\n\n首次启动时，Cody 会要求你登录。由于 Cody 免费版已于 2025 年停止提供，登录现在需要一个现有的 Sourcegraph 企业版工作区账户（通过你所在组织的 SSO、GitHub 或 Google 登录）。如果你没有企业版访问权限，可以改用 **Amp** 来完成本课的动手练习——在 ampcode.com 注册，它仍提供免费/个人版。"
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "text",
-      "content": "## Cody 与 Copilot——诚实的对比\n\n两款工具都很好。问题在于你想做什么。\n\n| | Cody | GitHub Copilot |\n|---|---|---|\n| 行内自动补全 | 良好 | 出色 |\n| 单文件对话 | 良好 | 良好 |\n| 跨文件理解 | 出色 | 有限 |\n| 大型代码库导航 | 出色 | 有限 |\n| 解释两个文件如何交互 | 可以 | 不太可靠 |\n| 免费版 | 有 | 有（有限） |\n| 企业版定价 | 每用户每月 19 美元 | 每用户每月 19 美元 |\n\n**Cody 胜出的场景：** 你要接手一个已经存在的大型代码库。你想问“支付逻辑在哪里处理？”或“认证中间件做了什么，哪些路由用到了它？”——这类跨越多个文件的问题。\n\n**Copilot 胜出的场景：** 你在从零开始写新代码。你想要快速、准确的行内补全。你大多数时候只专注于单个文件。\n\n对于像 `ai-course-projects` 这样的个人学习项目而言，Copilot 的补全会让人感觉更实用。而 Cody 的优势会随着代码库规模的增长而同步增长。"
+      "content": "## Cody 与 Copilot——诚实的对比\n\n两款工具都很好。问题在于你想做什么。\n\n| | Cody | GitHub Copilot |\n|---|---|---|\n| 行内自动补全 | 良好 | 出色 |\n| 单文件对话 | 良好 | 良好 |\n| 跨文件理解 | 出色 | 有限 |\n| 大型代码库导航 | 出色 | 有限 |\n| 解释两个文件如何交互 | 可以 | 不太可靠 |\n| 免费版 | 无（2025 年起仅限企业版） | 有（有限） |\n| 企业版定价 | 定制报价（需联系销售） | 每用户每月 19 美元（Business） |\n\n**Cody 胜出的场景：** 你要接手一个已经存在的大型代码库。你想问“支付逻辑在哪里处理？”或“认证中间件做了什么，哪些路由用到了它？”——这类跨越多个文件的问题。\n\n**Copilot 胜出的场景：** 你在从零开始写新代码。你想要快速、准确的行内补全。你大多数时候只专注于单个文件。\n\n对于像 `ai-course-projects` 这样的个人学习项目而言，Copilot 的补全会让人感觉更实用。而 Cody 的优势会随着代码库规模的增长而同步增长。"
     },
     {
       "type": "callout",
@@ -43,7 +43,7 @@
       "type": "workshop",
       "tag": "VSCODE",
       "title": "安装 Cody 并探索一个代码库",
-      "content": "**目标：** 安装 Cody、登录，并用它来理解项目中各文件之间的关联。\n\n**第 1 步——安装扩展：**\n1. 打开 VS Code 扩展面板（`Ctrl+Shift+X`）\n2. 搜索 `Cody AI`\n3. 安装 Sourcegraph 发布的那一款\n4. 点击活动栏中的 Cody 图标，用免费的 Sourcegraph 账户登录\n\n**第 2 步——打开你的项目：**\n确保 `ai-course-projects` 已在 VS Code 中打开（`文件 → 打开文件夹`）。\n\n**第 3 步——提出一个关于代码库的问题：**\n打开 Cody 对话（`Ctrl+Shift+C`），提问：\n```\nExplain the overall structure of this project. What files exist and what does each one do?\n```\n阅读回答。Cody 会读取你的项目结构并加以描述。\n\n**第 4 步——询问文件之间的关系：**\n```\nHow do about-me.html and practice.js relate to each other? Do they share any logic?\n```\n这正是 Cody 擅长回答的问题类型。将它答案的深度与你逐个文件阅读所能获得的信息做对比。\n\n**第 5 步——测试行内对话：**\n1. 打开 `exercises/practice.js`\n2. 选中 `formatDate` 函数（或文件中的任意函数）\n3. 右键点击 → **Cody: Explain Selected Code**\n4. 阅读侧边栏中 Cody 的解释\n\n**第 6 步——反思：**\n在笔记中写下 3 句话：在什么样的项目中，Cody 的跨文件理解能力会带来最大的差异？在你自己的工作中，有哪个场景能用它节省时间？\n\n**需要观察的重点：** Cody 回答了关于整个项目的问题，而你不需要指定该看哪些文件。这正是它与 Copilot 那种文件级感知能力的区别所在。"
+      "content": "**目标：** 安装 Cody、登录，并用它来理解项目中各文件之间的关联。\n\n**第 1 步——安装扩展：**\n1. 打开 VS Code 扩展面板（`Ctrl+Shift+X`）\n2. 搜索 `Cody AI`\n3. 安装 Sourcegraph 发布的那一款\n4. 点击活动栏中的 Cody 图标，用你的 Sourcegraph 企业版工作区登录（如果没有企业版访问权限，可以改用 ampcode.com 上的 **Amp** 来跟着练习——Cody 的免费版/Pro 版已于 2025 年停止提供）\n\n**第 2 步——打开你的项目：**\n确保 `ai-course-projects` 已在 VS Code 中打开（`文件 → 打开文件夹`）。\n\n**第 3 步——提出一个关于代码库的问题：**\n打开 Cody 对话（`Ctrl+Shift+C`），提问：\n```\nExplain the overall structure of this project. What files exist and what does each one do?\n```\n阅读回答。Cody 会读取你的项目结构并加以描述。\n\n**第 4 步——询问文件之间的关系：**\n```\nHow do about-me.html and practice.js relate to each other? Do they share any logic?\n```\n这正是 Cody 擅长回答的问题类型。将它答案的深度与你逐个文件阅读所能获得的信息做对比。\n\n**第 5 步——测试行内对话：**\n1. 打开 `exercises/practice.js`\n2. 选中 `formatDate` 函数（或文件中的任意函数）\n3. 右键点击 → **Cody: Explain Selected Code**\n4. 阅读侧边栏中 Cody 的解释\n\n**第 6 步——反思：**\n在笔记中写下 3 句话：在什么样的项目中，Cody 的跨文件理解能力会带来最大的差异？在你自己的工作中，有哪个场景能用它节省时间？\n\n**需要观察的重点：** Cody 回答了关于整个项目的问题，而你不需要指定该看哪些文件。这正是它与 Copilot 那种文件级感知能力的区别所在。"
     },
     {
       "type": "workshop",

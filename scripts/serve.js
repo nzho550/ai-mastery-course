@@ -15,8 +15,14 @@ const MIME = {
 const ROOT = path.join(__dirname, '..');
 
 http.createServer((req, res) => {
-  const urlPath = req.url.split('?')[0];
+  const urlPath = decodeURIComponent(req.url.split('?')[0]);
   const filePath = path.join(ROOT, urlPath === '/' ? 'index.html' : urlPath);
+
+  if (filePath !== ROOT && !filePath.startsWith(ROOT + path.sep)) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.end('Forbidden');
+    return;
+  }
 
   fs.readFile(filePath, (err, data) => {
     if (err) {

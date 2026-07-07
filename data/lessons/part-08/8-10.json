@@ -34,7 +34,7 @@
     },
     {
       "type": "text",
-      "content": "Then add it to your global `settings.json`:"
+      "content": "Then register it — `claude mcp add playwright -s user -- npx @playwright/mcp` — or add it to `~/.claude.json` directly:"
     },
     {
       "type": "code",
@@ -62,7 +62,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "Web Automation and Information Extraction",
-      "content": "**Setup:**\n1. Run `npm install -g @playwright/mcp@latest` in PowerShell\n2. Add the playwright entry to your `settings.json`\n3. Relaunch `claude`, type `/mcp` to confirm `playwright` is listed\n\n**Task 1 — Screenshot and describe:**\nAsk: `\"Using Playwright, navigate to code.visualstudio.com and take a screenshot. Describe what's on the homepage — what are they currently featuring?\"`\n\nWatch the browser window open, navigate, and capture the page.\n\n**Task 2 — Extract live information:**\nAsk: `\"Go to news.ycombinator.com and list the top 5 story titles, their URLs, and how many points each has.\"`\n\n**Task 3 — Documentation scraping:**\nAsk: `\"Navigate to modelcontextprotocol.io and tell me what MCP servers are listed on the homepage or documentation page.\"`\n\n**Task 4 — Multi-site comparison:**\nAsk: `\"Visit the free tier pages for both Vercel (vercel.com/pricing) and Netlify (netlify.com/pricing) and compare: bandwidth limits, build minutes, and number of sites allowed on the free tier.\"`\n\nWatch Claude visit both pages and extract the comparison data.\n\n**Task 5 — Test your own work:**\nAsk: `\"Use Playwright to open my exercises/about-me.html file in the browser. Take a screenshot, then tell me what it looks like and suggest one visual improvement.\"`\n\nNote: to open a local file, give the full path: `file:///C:/Users/YourName/Documents/ai-course-projects/exercises/about-me.html`\n\nSave a summary of what Playwright can do to `notes/playwright-capabilities.md`."
+      "content": "**Setup:**\n1. Run `npm install -g @playwright/mcp@latest` in PowerShell\n2. Register it with `claude mcp add playwright -s user -- npx @playwright/mcp`\n3. Relaunch `claude`, type `/mcp` to confirm `playwright` is listed\n\n**Task 1 — Screenshot and describe:**\nAsk: `\"Using Playwright, navigate to code.visualstudio.com and take a screenshot. Describe what's on the homepage — what are they currently featuring?\"`\n\nWatch the browser window open, navigate, and capture the page.\n\n**Task 2 — Extract live information:**\nAsk: `\"Go to news.ycombinator.com and list the top 5 story titles, their URLs, and how many points each has.\"`\n\n**Task 3 — Documentation scraping:**\nAsk: `\"Navigate to modelcontextprotocol.io and tell me what MCP servers are listed on the homepage or documentation page.\"`\n\n**Task 4 — Multi-site comparison:**\nAsk: `\"Visit the free tier pages for both Vercel (vercel.com/pricing) and Netlify (netlify.com/pricing) and compare: bandwidth limits, build minutes, and number of sites allowed on the free tier.\"`\n\nWatch Claude visit both pages and extract the comparison data.\n\n**Task 5 — Test your own work:**\nAsk: `\"Use Playwright to open my exercises/about-me.html file in the browser. Take a screenshot, then tell me what it looks like and suggest one visual improvement.\"`\n\nNote: to open a local file, give the full path: `file:///C:/Users/YourName/Documents/ai-course-projects/exercises/about-me.html`\n\nSave a summary of what Playwright can do to `notes/playwright-capabilities.md`."
     },
     {
       "type": "workshop",

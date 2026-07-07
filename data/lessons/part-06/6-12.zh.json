@@ -11,7 +11,7 @@
     },
     {
       "type": "text",
-      "content": "## 打开 Copilot Edits\n\nCopilot Edits 可以从 Copilot Chat 面板中访问：\n\n1. 按 **Ctrl+Alt+I** 打开 Copilot Chat\n2. 在面板顶部，点击模式下拉菜单（可能显示为 **Ask** 或 **Agent**）\n3. 选择 **Edit**\n\n现在你就进入了 Copilot Edits 模式。界面中有两个重要的新元素：\n- **Working Set（工作集）**——一个显示哪些文件在本次编辑会话范围内的面板\n- **编辑控制按钮**——Accept All（全部接受）、Reject All（全部拒绝），以及逐文件导航按钮\n\n### 把文件添加到 Working Set\n\n默认情况下，Copilot Edits 开始时范围内没有任何文件。你需要明确添加你希望它考虑并可能编辑的文件。\n\n**添加文件的方法：**\n- 在 Working Set 面板中点击 **Add Files** 并浏览\n- 从 Explorer 侧边栏中把文件拖到 Working Set\n- 在你的第一条消息中输入 `#file:filename`\n- 使用 **Add Open Files** 添加当前所有打开的编辑器标签页\n\n> **最佳实践：** 对添加什么内容要有意为之。添加无关的文件会浪费 token，并让 Copilot 的改动变得不够聚焦。先从完成任务所需的最小文件集开始。"
+      "content": "## 打开 Copilot Edits\n\nCopilot Edits 可以从 Copilot Chat 面板中访问：\n\n1. 按 **Ctrl+Alt+I** 打开 Copilot Chat\n2. 在面板顶部，点击模式下拉菜单（可能显示为 **Ask** 或 **Agent**）\n3. 如果有单独的 **Edit** 选项，选择它\n\n现在你就进入了 Copilot Edits 模式。界面中有两个重要的新元素：\n- **Working Set（工作集）**——一个显示哪些文件在本次编辑会话范围内的面板\n- **编辑控制按钮**——Accept All（全部接受）、Reject All（全部拒绝），以及逐文件导航按钮\n\n> **命名说明：** VS Code 的 Copilot Chat 一直在把“Ask / Edit / Agent”这种三分模式选择器，逐步整合成更简单的“Ask / Agent”两分模式，本课描述的这套工作集 + 差异审阅的多文件工作流，也越来越多地发生在 Agent 模式内部，而不是一个单独命名的“Edit”模式里。如果你的 VS Code 版本没有显示独立的 Edit 选项，就到 Agent 模式里寻找同样的工作集／差异审阅控件——无论这个模式眼下叫什么名字，背后的技能（限定文件范围、审阅差异、逐块接受或拒绝）都是一样的。\n\n### 把文件添加到 Working Set\n\n默认情况下，Copilot Edits 开始时范围内没有任何文件。你需要明确添加你希望它考虑并可能编辑的文件。\n\n**添加文件的方法：**\n- 在 Working Set 面板中点击 **Add Files** 并浏览\n- 从 Explorer 侧边栏中把文件拖到 Working Set\n- 在你的第一条消息中输入 `#file:filename`\n- 使用 **Add Open Files** 添加当前所有打开的编辑器标签页\n\n> **最佳实践：** 对添加什么内容要有意为之。添加无关的文件会浪费 token，并让 Copilot 的改动变得不够聚焦。先从完成任务所需的最小文件集开始。"
     },
     {
       "type": "text",

@@ -20,11 +20,21 @@
     },
     {
       "type": "text",
-      "content": "## 第 1 步——打开你的全局设置文件\n\n在全局设置文件中配置的 MCP 服务器，无论你当前在哪个项目文件夹里，都会在每个 Claude Code 会话中可用。这正是我们想把文件系统服务器放在这里的原因。\n\n全局设置文件位于：\n`C:\\Users\\YourName\\.claude\\settings.json`\n\n把 `YourName` 替换成你实际的 Windows 用户名（在文件资源管理器的 `C:\\Users\\` 下能看到的那个名字）。\n\n如果这个文件还不存在，你需要创建它。如果它已经有内容了（来自之前的课程），你就在此基础上添加。"
+      "content": "## 第 1 步——决定作用域\n\n我们希望文件系统服务器在每个项目中都可用，所以要把它加到**用户作用域**——Claude Code 会把这类配置存放在 `~/.claude.json` 中。你不需要手动编辑这个文件：`claude mcp add` 命令会替你完成，并在过程中校验 JSON 是否有效，从而避免初学者最常见的错误（一个逗号或括号写错，导致整个文件损坏）。"
     },
     {
       "type": "text",
-      "content": "## 第 2 步——添加文件系统服务器配置\n\n在 VS Code 中打开 `settings.json`，添加 `mcpServers` 代码块。把路径中的 `YourName` 替换成你实际的 Windows 用户名："
+      "content": "## 第 2 步——添加文件系统服务器配置\n\n在终端中运行："
+    },
+    {
+      "type": "code",
+      "language": "powershell",
+      "content": "claude mcp add filesystem -s user -- npx -y @modelcontextprotocol/server-filesystem \"C:\\Users\\YourName\\Documents\\ai-course-projects\""
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**把 `YourName` 替换**成你实际的 Windows 用户名（在文件资源管理器的 `C:\\Users\\` 下能看到的那个名字）。`-s user` 设置了作用域，让这个服务器在每个项目中都可用。如果你更想手动编辑配置，`~/.claude.json` 中对应的 JSON 代码块如下所示——但对初学者来说，用 `claude mcp add` 命令更安全。"
     },
     {
       "type": "code",
@@ -32,22 +42,17 @@
       "content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@modelcontextprotocol/server-filesystem\",\n        \"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"\n      ]\n    }\n  }\n}"
     },
     {
-      "type": "callout",
-      "variant": "warning",
-      "content": "**Windows 路径转义：** 在 JSON 中，反斜杠必须写两遍。`C:\\Users\\YourName` 在 JSON 字符串里要写成 `C:\\\\Users\\\\YourName`。这是标准的 JSON 规则——与 MCP 本身无关。"
-    },
-    {
       "type": "text",
       "content": "## 这段配置做了什么\n\n拆解一下这条配置：\n\n- `\"command\": \"npx\"`——使用 npx 来运行这个包，而不需要永久安装它\n- `\"-y\"`——自动接受所有 npx 提示（这样它就不会卡在等你输入确认上）\n- `\"@modelcontextprotocol/server-filesystem\"`——官方的文件系统 MCP 服务器包\n- `\"C:\\\\Users\\\\YourName\\\\Documents\\\\ai-course-projects\"`——**允许访问的目录**。Claude 只能访问这个文件夹内的文件，无法读取它之外的任何内容。\n\n你可以在 `args` 数组中添加更多路径参数，从而允许访问多个目录。"
     },
     {
       "type": "text",
-      "content": "## 第 3 步——重启 Claude Code\n\nMCP 服务器只会在 Claude Code 启动时加载。保存 `settings.json` 之后，你必须退出并重新启动：\n\n1. 如果 Claude Code 正在运行，输入 `/exit`\n2. 用 `claude` 重新启动\n3. 输入 `/mcp`——你现在应该能看到 `filesystem` 显示出来，带有绿色的状态指示"
+      "content": "## 第 3 步——重启 Claude Code\n\nMCP 服务器只会在 Claude Code 启动时加载。运行 `claude mcp add` 之后，你必须退出并重新启动：\n\n1. 如果 Claude Code 正在运行，输入 `/exit`\n2. 用 `claude` 重新启动\n3. 输入 `/mcp`——你现在应该能看到 `filesystem` 显示为已连接"
     },
     {
       "type": "callout",
       "variant": "tip",
-      "content": "**故障排查——服务器没有出现？**\n- 仔细检查 `settings.json` 里的路径（路径写错是最常见的失误）\n- 确认 JSON 是有效的——少一个逗号或括号就会破坏整个文件。可以把内容粘贴到 jsonlint.com 上检查\n- 确认 Node.js 已安装：在 PowerShell 中运行 `node --version`\n- 尝试手动运行这个服务器：`npx -y @modelcontextprotocol/server-filesystem C:\\\\Users\\\\YourName\\\\Documents`——如果它打印出错误信息，那正好能告诉你问题出在哪里"
+      "content": "**故障排查——服务器没有出现？**\n- 运行 `claude mcp list`，确认服务器确实注册成功，并检查它属于哪个作用域\n- 确认 Node.js 已安装：在 PowerShell 中运行 `node --version`\n- 尝试手动运行这个服务器：`npx -y @modelcontextprotocol/server-filesystem C:\\Users\\YourName\\Documents`——如果它打印出错误信息，那正好能告诉你问题出在哪里\n- 如果你是手动编辑 `~/.claude.json` 而不是用 `claude mcp add`，确认 JSON 是有效的——少一个逗号或括号就会破坏整个文件。可以把内容粘贴到 jsonlint.com 上检查"
     },
     {
       "type": "text",
@@ -62,13 +67,13 @@
       "type": "workshop",
       "tag": "TERMINAL",
       "title": "安装、配置并验证文件系统 MCP",
-      "content": "按顺序完成以下步骤：\n\n**第 1 步——验证 Node.js 已安装：**\n打开 PowerShell 并运行：\n```\nnode --version\nnpm --version\n```\n两者都应该打印出版本号。如果没有，请从 nodejs.org 安装 Node.js（第 7.2 课已讲过）。\n\n**第 2 步——编辑你的全局设置：**\n在 VS Code 中打开 `C:\\Users\\YourName\\.claude\\settings.json`。\n添加上面展示的文件系统服务器条目，把 `YourName` 替换成你实际的用户名。\n保存文件。\n\n**第 3 步——重新启动并验证：**\n在 PowerShell 中：\n```\nclaude\n```\nClaude Code 启动后：\n```\n/mcp\n```\n确认列表中出现了 `filesystem`。\n\n**第 4 步——运行一个真实任务：**\n问：`\"列出我 ai-course-projects 文件夹里的每一个文件，包括子文件夹，并根据文件名和内容告诉我每个文件是做什么的。\"`\n\nClaude 应该会给出你项目的完整清单。如果它做到了，说明文件系统 MCP 工作正常。\n\n把输出保存到 `notes/project-inventory.md`——随着你的项目不断增长，这会是一份有用的参考。"
+      "content": "按顺序完成以下步骤：\n\n**第 1 步——验证 Node.js 已安装：**\n打开 PowerShell 并运行：\n```\nnode --version\nnpm --version\n```\n两者都应该打印出版本号。如果没有，请从 nodejs.org 安装 Node.js（第 7.2 课已讲过）。\n\n**第 2 步——注册服务器：**\n运行 `claude mcp add filesystem -s user -- npx -y @modelcontextprotocol/server-filesystem \"C:\\Users\\YourName\\Documents\\ai-course-projects\"`，把 `YourName` 替换成你实际的用户名。\n\n**第 3 步——重新启动并验证：**\n在 PowerShell 中：\n```\nclaude\n```\nClaude Code 启动后：\n```\n/mcp\n```\n确认列表中出现了 `filesystem`。\n\n**第 4 步——运行一个真实任务：**\n问：`\"列出我 ai-course-projects 文件夹里的每一个文件，包括子文件夹，并根据文件名和内容告诉我每个文件是做什么的。\"`\n\nClaude 应该会给出你项目的完整清单。如果它做到了，说明文件系统 MCP 工作正常。\n\n把输出保存到 `notes/project-inventory.md`——随着你的项目不断增长，这会是一份有用的参考。"
     },
     {
       "type": "workshop",
       "tag": "TERMINAL",
       "title": "工作坊 A——安装你的第一个 MCP 服务器",
-      "content": "这个练习能让你在 8 分钟内安装并验证一个 MCP 服务器。\n\n**第 1 步——选择一个要安装的 MCP 服务器。** 首次安装推荐：\n- 文件系统 MCP（从 Claude Code 读写文件）\n- GitHub MCP（如果你使用 GitHub）\n- SQLite MCP（如果你经常打交道的是数据库）\n\n**第 2 步——按照你选择的服务器的安装步骤操作：**\n\n对于文件系统 MCP：\n```powershell\nnpm install -g @modelcontextprotocol/server-filesystem\n```\n\n**第 3 步——在 Claude Code 的设置中配置它**（claude_desktop_config.json 或 Claude Code 配置文件）：\n```json\n{\n    \"mcpServers\": {\n        \"filesystem\": {\n            \"command\": \"npx\",\n            \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\", \"/path/to/your/project\"]\n        }\n    }\n}\n```\n\n**第 4 步——重启 Claude Code** 以加载新服务器。\n\n**第 5 步——验证：** 问 Claude Code：“你现在有哪些可用的 MCP 工具？”——你新安装的服务器的工具应该会出现在列表中。"
+      "content": "这个练习能让你在 8 分钟内安装并验证一个 MCP 服务器。\n\n**第 1 步——选择一个要安装的 MCP 服务器。** 首次安装推荐：\n- 文件系统 MCP（从 Claude Code 读写文件）\n- GitHub MCP（如果你使用 GitHub）\n- SQLite MCP（如果你经常打交道的是数据库）\n\n**第 2 步——用 `claude mcp add` 注册它：**\n\n对于文件系统 MCP：\n```powershell\nclaude mcp add filesystem -s user -- npx -y @modelcontextprotocol/server-filesystem \"C:\\path\\to\\your\\project\"\n```\n\n这会直接把配置写入你的 Claude Code 配置——不需要手动编辑 JSON。（注意：`claude_desktop_config.json` 是另一个独立应用 Claude Desktop 的配置文件，不是 Claude Code 的——不要把两者搞混。）\n\n**第 3 步——重启 Claude Code** 以加载新服务器。\n\n**第 4 步——验证：** 问 Claude Code：“你现在有哪些可用的 MCP 工具？”——你新安装的服务器的工具应该会出现在列表中。"
     },
     {
       "type": "workshop",
@@ -115,7 +120,7 @@
     {
       "type": "callout",
       "variant": "success",
-      "content": "**你已完成第 8-3 课。** 你已经安装了你的第一个 MCP 服务器，配置好了它，并验证了它能正常工作。这个模式——编辑 settings.json、添加一条配置、重启 Claude——正是本课程中每一个 MCP 服务器的安装方式。第 8-4 课将添加 context7 用于实时文档查询。"
+      "content": "**你已完成第 8-3 课。** 你已经安装了你的第一个 MCP 服务器，配置好了它，并验证了它能正常工作。这个模式——`claude mcp add`、重启 Claude——正是本课程中每一个 MCP 服务器的安装方式。第 8-4 课将添加 context7 用于实时文档查询。"
     }
   ],
   "nextLesson": "8-4",

@@ -2,7 +2,7 @@ import { icons } from './icons.js';
 import { getLessonStatus, setLessonStatus, setLastVisited } from './progress.js';
 import { setActiveLesson } from './sidebar.js';
 import { navigate } from './router.js';
-import { qs, formatMinutes } from './utils.js';
+import { qs, formatMinutes, escapeHtml } from './utils.js';
 import { t, lessonPath } from './i18n.js';
 
 let curriculum = null;
@@ -41,7 +41,7 @@ export async function renderLesson(id) {
   setupCopyButtons();
   setupQuiz();
   setupMarkComplete(id, meta);
-  hljs.highlightAll();
+  try { hljs.highlightAll(); } catch { /* vendor script unavailable, code blocks stay unhighlighted */ }
   window.scrollTo(0, 0);
 }
 
@@ -68,7 +68,7 @@ function buildLesson(meta, data) {
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
         <a href="#/">${t('part.label', { number: meta.partNumber })}</a>
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
-        <span>${meta.title}</span>
+        <span>${escapeHtml(meta.title || '')}</span>
       </nav>
 
       <header class="lesson-header">
@@ -77,7 +77,7 @@ function buildLesson(meta, data) {
           ${meta.estimatedMinutes ? `<span class="badge badge-muted">${icons.clock} ${formatMinutes(meta.estimatedMinutes)}</span>` : ''}
           ${status === 'complete' ? `<span class="badge badge-success">${icons.checkCircle} ${t('badge.complete')}</span>` : ''}
         </div>
-        <h1 class="lesson-title">${data.title || meta.title}</h1>
+        <h1 class="lesson-title">${escapeHtml(data.title || meta.title || '')}</h1>
       </header>
 
       <div class="lesson-content">
@@ -89,14 +89,14 @@ function buildLesson(meta, data) {
           <div class="lesson-nav-prev">
             <a href="#/lesson/${prevMeta.id}">
               <span class="lesson-nav-label">${icons.arrowLeft} ${t('nav.previous')}</span>
-              <span class="lesson-nav-title">${prevMeta.id} ${prevMeta.title}</span>
+              <span class="lesson-nav-title">${prevMeta.id} ${escapeHtml(prevMeta.title || '')}</span>
             </a>
           </div>` : '<div></div>'}
         ${nextMeta ? `
           <div class="lesson-nav-next">
             <a href="#/lesson/${nextMeta.id}">
               <span class="lesson-nav-label">${t('nav.next')} ${icons.arrowRight}</span>
-              <span class="lesson-nav-title">${nextMeta.id} ${nextMeta.title}</span>
+              <span class="lesson-nav-title">${nextMeta.id} ${escapeHtml(nextMeta.title || '')}</span>
             </a>
           </div>` : ''}
       </nav>
@@ -160,22 +160,22 @@ function renderSection(section) {
     case 'quiz':
       return `
         <div class="quiz" data-correct="${section.correct}">
-          <p class="quiz-question">${section.question}</p>
+          <p class="quiz-question">${escapeHtml(section.question || '')}</p>
           <div class="quiz-options">
             ${(section.options || []).map((opt, i) => `
-              <button class="quiz-option" data-idx="${i}">${String.fromCharCode(65+i)}. ${opt}</button>
+              <button class="quiz-option" data-idx="${i}">${String.fromCharCode(65+i)}. ${escapeHtml(opt || '')}</button>
             `).join('')}
           </div>
-          <div class="quiz-explanation">${section.explanation || ''}</div>
+          <div class="quiz-explanation">${escapeHtml(section.explanation || '')}</div>
         </div>`;
 
     case 'video':
       return `
         <div style="margin:var(--sp-6) 0">
           <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border)">
-            <iframe src="${section.url}" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allowfullscreen loading="lazy"></iframe>
+            <iframe src="${escapeHtml(section.url || '')}" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allowfullscreen loading="lazy"></iframe>
           </div>
-          ${section.caption ? `<p style="margin-top:var(--sp-2);font-size:var(--text-sm);color:var(--text-faint);text-align:center">${section.caption}</p>` : ''}
+          ${section.caption ? `<p style="margin-top:var(--sp-2);font-size:var(--text-sm);color:var(--text-faint);text-align:center">${escapeHtml(section.caption)}</p>` : ''}
         </div>`;
 
     case 'diagram': {
@@ -258,14 +258,14 @@ function buildComingSoon(meta) {
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
         <span>${t('part.label', { number: meta.partNumber })}</span>
         <span class="breadcrumb-sep">${icons.chevronRight}</span>
-        <span>${meta.title}</span>
+        <span>${escapeHtml(meta.title || '')}</span>
       </nav>
       <header class="lesson-header">
         <div class="lesson-header-meta">
           <span class="badge badge-accent">${t('part.label', { number: meta.partNumber })}</span>
           ${meta.estimatedMinutes ? `<span class="badge badge-muted">${icons.clock} ${formatMinutes(meta.estimatedMinutes)}</span>` : ''}
         </div>
-        <h1 class="lesson-title">${meta.title}</h1>
+        <h1 class="lesson-title">${escapeHtml(meta.title || '')}</h1>
       </header>
       <div class="callout info">
         <span class="callout-icon">${icons.info}</span>
@@ -336,8 +336,4 @@ function setupMarkComplete(id, meta) {
       }
     }
   });
-}
-
-function escapeHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }

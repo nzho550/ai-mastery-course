@@ -3,6 +3,8 @@
 **Date:** 2026-06-10  
 **Status:** Pre-build design review
 
+> **Historical planning document.** Written pre-build; the site has since been built and deployed. Most design decisions here match the live site, but treat this as a historical reference rather than current spec — see the repository root `README.md` for current status.
+
 ---
 
 ## 1. Design Philosophy

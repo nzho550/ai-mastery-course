@@ -66,7 +66,7 @@
     },
     {
       "type": "text",
-      "content": "## 将其连接到 Claude Code\n\n把你的服务器加入你全局的 `settings.json`。把 `YourName` 替换为你实际的 Windows 用户名："
+      "content": "## 将其连接到 Claude Code\n\n注册它——`claude mcp add my-motivation-server -s user -- python \"C:\\Users\\YourName\\Documents\\ai-course-projects\\exercises\\my-mcp-server.py\"`——或者直接把它加到 `~/.claude.json` 中。把 `YourName` 替换为你实际的 Windows 用户名："
     },
     {
       "type": "code",
@@ -80,7 +80,7 @@
     },
     {
       "type": "text",
-      "content": "## 验证并使用你的服务器\n\n1. 保存 `settings.json`\n2. 重新启动 `claude`\n3. 输入 `/mcp`——你应该能看到 `my-motivation-server` 已列出\n4. 提问：`\"Get me some motivation\"`\n\nClaude 会调用你的 `get_motivation` 工具，并从你的 Python 服务器返回一句语录。\n\n你刚刚创建了一个 Claude 可以使用的工具。就是这么简单。"
+      "content": "## 验证并使用你的服务器\n\n1. 重新启动 `claude`\n2. 输入 `/mcp`——你应该能看到 `my-motivation-server` 已列出\n3. 提问：`\"Get me some motivation\"`\n\nClaude 会调用你的 `get_motivation` 工具，并从你的 Python 服务器返回一句语录。\n\n你刚刚创建了一个 Claude 可以使用的工具。就是这么简单。"
     },
     {
       "type": "text",
@@ -99,7 +99,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "构建、配置并扩展你的 MCP 服务器",
-      "content": "**第 1 步 — 安装与创建：**\n1. 在 PowerShell 中运行 `pip install mcp`\n2. 在 VS Code 中创建 `exercises/my-mcp-server.py`，写入上面展示的完整代码\n3. 测试一下：`python exercises/my-mcp-server.py`——确认它能启动，按 Ctrl+C 停止\n\n**第 2 步 — 连接到 Claude Code：**\n1. 把 `my-motivation-server` 条目加入你的 `settings.json`\n2. 重新启动 `claude`\n3. 输入 `/mcp`——确认 `my-motivation-server` 已列出\n4. 提问：`\"Get me some motivation\"`——确认能从你的服务器返回一句语录\n\n**第 3 步 — 添加一个日期工具：**\n把 `get_todays_date` 函数（上面展示过）加入你的服务器。\n重启 Claude Code（重启时服务器会重新加载）。\n提问：`\"What day is it today?\"`\n确认它返回的是今天真实的日期。\n\n**第 4 步 — 添加你自己的工具：**\n这是最有创造性的部分。再添加一个你真正会觉得有用的工具。想法：\n\n- `get_word_of_the_day()` — 从一份写死的列表中返回一个单词及其释义\n- `flip_coin()` — 随机返回“正面”或“反面”\n- `get_pomodoro_reminder()` — 返回一条关于休息的提醒消息\n- `get_project_checklist()` — 返回一份提交代码前要做的检查清单\n\n编写函数，加上 `@mcp.tool()` 装饰器，写一段清晰的文档字符串，重启 Claude Code，测试它。\n\n**第 5 步 — 反思：**\n问 Claude Code：`\"What tools does my-motivation-server expose? Describe each one based on its documentation.\"`\n\nClaude 会读取你的文档字符串，准确地描述你的工具。这就是文档字符串很重要的原因——它们是 Claude 用来理解每个工具作用的接口。\n\n保存服务器的最终版本，并在 `notes/my-mcp-stack.md` 中记录下来。\n\n---\n\n**你刚刚构建了一个 MCP 服务器。** 第 8 部分之前的一切都是在使用别人的服务器。现在你造了一个属于自己的。使用者和构建者之间的距离，比看起来要小得多。"
+      "content": "**第 1 步 — 安装与创建：**\n1. 在 PowerShell 中运行 `pip install mcp`\n2. 在 VS Code 中创建 `exercises/my-mcp-server.py`，写入上面展示的完整代码\n3. 测试一下：`python exercises/my-mcp-server.py`——确认它能启动，按 Ctrl+C 停止\n\n**第 2 步 — 连接到 Claude Code：**\n1. 用 `claude mcp add`（如上所示）注册 `my-motivation-server`\n2. 重新启动 `claude`\n3. 输入 `/mcp`——确认 `my-motivation-server` 已列出\n4. 提问：`\"Get me some motivation\"`——确认能从你的服务器返回一句语录\n\n**第 3 步 — 添加一个日期工具：**\n把 `get_todays_date` 函数（上面展示过）加入你的服务器。\n重启 Claude Code（重启时服务器会重新加载）。\n提问：`\"What day is it today?\"`\n确认它返回的是今天真实的日期。\n\n**第 4 步 — 添加你自己的工具：**\n这是最有创造性的部分。再添加一个你真正会觉得有用的工具。想法：\n\n- `get_word_of_the_day()` — 从一份写死的列表中返回一个单词及其释义\n- `flip_coin()` — 随机返回“正面”或“反面”\n- `get_pomodoro_reminder()` — 返回一条关于休息的提醒消息\n- `get_project_checklist()` — 返回一份提交代码前要做的检查清单\n\n编写函数，加上 `@mcp.tool()` 装饰器，写一段清晰的文档字符串，重启 Claude Code，测试它。\n\n**第 5 步 — 反思：**\n问 Claude Code：`\"What tools does my-motivation-server expose? Describe each one based on its documentation.\"`\n\nClaude 会读取你的文档字符串，准确地描述你的工具。这就是文档字符串很重要的原因——它们是 Claude 用来理解每个工具作用的接口。\n\n保存服务器的最终版本，并在 `notes/my-mcp-stack.md` 中记录下来。\n\n---\n\n**你刚刚构建了一个 MCP 服务器。** 第 8 部分之前的一切都是在使用别人的服务器。现在你造了一个属于自己的。使用者和构建者之间的距离，比看起来要小得多。"
     },
     {
       "type": "workshop",

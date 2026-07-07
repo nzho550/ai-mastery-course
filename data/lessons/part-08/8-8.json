@@ -28,7 +28,7 @@
     },
     {
       "type": "text",
-      "content": "## Step 3 — Add the GitHub MCP to Your Configuration\n\nAdd the GitHub server to your global `settings.json`:"
+      "content": "## Step 3 — Add the GitHub MCP to Your Configuration\n\nRun `claude mcp add github -s user -- npx -y @modelcontextprotocol/server-github`, then set your token as shown below, or add the block directly to `~/.claude.json`:"
     },
     {
       "type": "code",
@@ -38,7 +38,7 @@
     {
       "type": "callout",
       "variant": "warning",
-      "content": "**Security: Keep your token out of git.** Your `settings.json` at `C:\\Users\\YourName\\.claude\\settings.json` is in your home directory, not inside a git repository — so this location is safe. But if you ever copy this config into a project folder that IS a git repo, add `settings.json` to `.gitignore` immediately. A committed token gives anyone who finds it full access to your GitHub account."
+      "content": "**Security: Keep your token out of git.** User-scope config lives in `~/.claude.json`, in your home directory, not inside a git repository — so this location is safe. But if you ever add this server at **project scope** (`.mcp.json`, which gets committed to git), don't hardcode the token there — use the environment-variable approach below instead. A committed token gives anyone who finds it full access to your GitHub account."
     },
     {
       "type": "callout",
@@ -47,7 +47,7 @@
     },
     {
       "type": "text",
-      "content": "## Step 4 — Restart and Test\n\n1. Save `settings.json` and relaunch `claude`\n2. Type `/mcp` — confirm `github` appears\n3. Try: `\"List all repositories in my GitHub account\"`\n4. Try: `\"List open issues in my ai-course-exercises repo\"`\n5. Try: `\"What's in the README of my ai-course-exercises repo?\"`"
+      "content": "## Step 4 — Restart and Test\n\n1. Relaunch `claude`\n2. Type `/mcp` — confirm `github` appears\n3. Try: `\"List all repositories in my GitHub account\"`\n4. Try: `\"List open issues in my ai-course-exercises repo\"`\n5. Try: `\"What's in the README of my ai-course-exercises repo?\"`"
     },
     {
       "type": "text",
@@ -57,7 +57,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "Manage GitHub Through Conversation",
-      "content": "**Setup:**\n1. Complete steps 1–4 above: create a repo, get a token, update settings.json, restart\n2. Type `/mcp` to confirm `github` is listed\n\n**Task 1 — Get a repo overview:**\nAsk: `\"List all my GitHub repositories with their descriptions and when they were last updated.\"`\n\n**Task 2 — Create a real issue:**\nThink of one genuine improvement or task for any of your repos (or for `ai-course-exercises`).\nAsk: `\"Create an issue in ai-course-exercises titled '[your title]' with a description of [what you want to track].\"`\nGo to github.com and confirm the issue is there.\n\n**Task 3 — Search across your code:**\nAsk: `\"Search all my repositories for any file containing a TODO comment. List the file paths and the TODO text.\"`\n\n**Task 4 — Read a file from GitHub:**\nAsk: `\"Read the README from my ai-course-exercises repository and tell me what it currently says.\"`\n\n**Bonus — issue triage:**\nIf you have repos with open issues:\nAsk: `\"Look at all open issues across my repos and group them by type: bugs, features, questions, and other. Suggest which one I should tackle first.\"`\n\nDocument what you accomplished in `notes/github-mcp-session.md`."
+      "content": "**Setup:**\n1. Complete steps 1–4 above: create a repo, get a token, register the server, restart\n2. Type `/mcp` to confirm `github` is listed\n\n**Task 1 — Get a repo overview:**\nAsk: `\"List all my GitHub repositories with their descriptions and when they were last updated.\"`\n\n**Task 2 — Create a real issue:**\nThink of one genuine improvement or task for any of your repos (or for `ai-course-exercises`).\nAsk: `\"Create an issue in ai-course-exercises titled '[your title]' with a description of [what you want to track].\"`\nGo to github.com and confirm the issue is there.\n\n**Task 3 — Search across your code:**\nAsk: `\"Search all my repositories for any file containing a TODO comment. List the file paths and the TODO text.\"`\n\n**Task 4 — Read a file from GitHub:**\nAsk: `\"Read the README from my ai-course-exercises repository and tell me what it currently says.\"`\n\n**Bonus — issue triage:**\nIf you have repos with open issues:\nAsk: `\"Look at all open issues across my repos and group them by type: bugs, features, questions, and other. Suggest which one I should tackle first.\"`\n\nDocument what you accomplished in `notes/github-mcp-session.md`."
     },
     {
       "type": "workshop",

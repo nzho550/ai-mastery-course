@@ -66,7 +66,7 @@
     },
     {
       "type": "text",
-      "content": "## Connect It to Claude Code\n\nAdd your server to your global `settings.json`. Replace `YourName` with your actual Windows username:"
+      "content": "## Connect It to Claude Code\n\nRegister it — `claude mcp add my-motivation-server -s user -- python \"C:\\Users\\YourName\\Documents\\ai-course-projects\\exercises\\my-mcp-server.py\"` — or add it directly to `~/.claude.json`. Replace `YourName` with your actual Windows username:"
     },
     {
       "type": "code",
@@ -80,7 +80,7 @@
     },
     {
       "type": "text",
-      "content": "## Verify and Use Your Server\n\n1. Save `settings.json`\n2. Relaunch `claude`\n3. Type `/mcp` — you should see `my-motivation-server` listed\n4. Ask: `\"Get me some motivation\"`\n\nClaude calls your `get_motivation` tool and returns a quote from your Python server.\n\nYou just created a tool that Claude can use. That's all it takes."
+      "content": "## Verify and Use Your Server\n\n1. Relaunch `claude`\n2. Type `/mcp` — you should see `my-motivation-server` listed\n3. Ask: `\"Get me some motivation\"`\n\nClaude calls your `get_motivation` tool and returns a quote from your Python server.\n\nYou just created a tool that Claude can use. That's all it takes."
     },
     {
       "type": "text",
@@ -99,7 +99,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "Build, Configure, and Extend Your MCP Server",
-      "content": "**Step 1 — Install and create:**\n1. Run `pip install mcp` in PowerShell\n2. In VS Code, create `exercises/my-mcp-server.py` with the complete code shown above\n3. Test it: `python exercises/my-mcp-server.py` — confirm it starts, press Ctrl+C to stop\n\n**Step 2 — Connect to Claude Code:**\n1. Add the `my-motivation-server` entry to your `settings.json`\n2. Relaunch `claude`\n3. Type `/mcp` — confirm `my-motivation-server` is listed\n4. Ask: `\"Get me some motivation\"` — confirm a quote comes back from your server\n\n**Step 3 — Add a date tool:**\nAdd the `get_todays_date` function (shown above) to your server.\nRestart Claude Code (the server reloads when you restart).\nAsk: `\"What day is it today?\"`\nConfirm it returns today's actual date.\n\n**Step 4 — Add your own tool:**\nThis is the creative part. Add one more tool that does something you'd actually find useful. Ideas:\n\n- `get_word_of_the_day()` — returns a word and definition from a hardcoded list\n- `flip_coin()` — returns 'Heads' or 'Tails' randomly\n- `get_pomodoro_reminder()` — returns a reminder message about taking breaks\n- `get_project_checklist()` — returns a checklist of things to do before committing code\n\nWrite the function, add the `@mcp.tool()` decorator, write a clear docstring, restart Claude Code, and test it.\n\n**Step 5 — Reflect:**\nAsk Claude Code: `\"What tools does my-motivation-server expose? Describe each one based on its documentation.\"`\n\nClaude reads your docstrings and describes your tools accurately. This is why docstrings matter — they're the interface Claude uses to understand what each tool does.\n\nSave the final version of your server and document it in `notes/my-mcp-stack.md`.\n\n---\n\n**You just built an MCP server.** Everything in Part 8 was about using other people's servers. Now you've made one. The gap between user and builder is smaller than it looks."
+      "content": "**Step 1 — Install and create:**\n1. Run `pip install mcp` in PowerShell\n2. In VS Code, create `exercises/my-mcp-server.py` with the complete code shown above\n3. Test it: `python exercises/my-mcp-server.py` — confirm it starts, press Ctrl+C to stop\n\n**Step 2 — Connect to Claude Code:**\n1. Register `my-motivation-server` with `claude mcp add` (shown above)\n2. Relaunch `claude`\n3. Type `/mcp` — confirm `my-motivation-server` is listed\n4. Ask: `\"Get me some motivation\"` — confirm a quote comes back from your server\n\n**Step 3 — Add a date tool:**\nAdd the `get_todays_date` function (shown above) to your server.\nRestart Claude Code (the server reloads when you restart).\nAsk: `\"What day is it today?\"`\nConfirm it returns today's actual date.\n\n**Step 4 — Add your own tool:**\nThis is the creative part. Add one more tool that does something you'd actually find useful. Ideas:\n\n- `get_word_of_the_day()` — returns a word and definition from a hardcoded list\n- `flip_coin()` — returns 'Heads' or 'Tails' randomly\n- `get_pomodoro_reminder()` — returns a reminder message about taking breaks\n- `get_project_checklist()` — returns a checklist of things to do before committing code\n\nWrite the function, add the `@mcp.tool()` decorator, write a clear docstring, restart Claude Code, and test it.\n\n**Step 5 — Reflect:**\nAsk Claude Code: `\"What tools does my-motivation-server expose? Describe each one based on its documentation.\"`\n\nClaude reads your docstrings and describes your tools accurately. This is why docstrings matter — they're the interface Claude uses to understand what each tool does.\n\nSave the final version of your server and document it in `notes/my-mcp-stack.md`.\n\n---\n\n**You just built an MCP server.** Everything in Part 8 was about using other people's servers. Now you've made one. The gap between user and builder is smaller than it looks."
     },
     {
       "type": "workshop",

@@ -28,7 +28,7 @@
     },
     {
       "type": "text",
-      "content": "## 第 3 步——把 GitHub MCP 添加到你的配置中\n\n把 GitHub 服务器添加到你的全局 `settings.json`："
+      "content": "## 第 3 步——把 GitHub MCP 添加到你的配置中\n\n运行 `claude mcp add github -s user -- npx -y @modelcontextprotocol/server-github`，然后按下面的方法设置你的令牌，或者直接把配置块加到 `~/.claude.json` 中："
     },
     {
       "type": "code",
@@ -38,7 +38,7 @@
     {
       "type": "callout",
       "variant": "warning",
-      "content": "**安全提示：把令牌放在 git 之外。** 你位于 `C:\\Users\\YourName\\.claude\\settings.json` 的 `settings.json` 在你的主目录中，而不在某个 git 仓库内——所以这个位置是安全的。但如果你曾经把这份配置复制到一个*是* git 仓库的项目文件夹中，请立即把 `settings.json` 加入 `.gitignore`。一个被提交的令牌会让任何发现它的人完全访问你的 GitHub 账户。"
+      "content": "**安全提示：把令牌放在 git 之外。** 用户作用域的配置保存在你主目录下的 `~/.claude.json` 中，不在任何 git 仓库内——所以这个位置是安全的。但如果你把这个服务器加到**项目作用域**（会被提交到 git 的 `.mcp.json`）中，就不要把令牌硬编码在那里——改用下面的环境变量方案。一个被提交的令牌会让任何发现它的人完全访问你的 GitHub 账户。"
     },
     {
       "type": "callout",
@@ -47,7 +47,7 @@
     },
     {
       "type": "text",
-      "content": "## 第 4 步——重启并测试\n\n1. 保存 `settings.json` 并重新启动 `claude`\n2. 输入 `/mcp`——确认 `github` 已出现\n3. 试试：`\"列出我 GitHub 账户中的所有仓库\"`\n4. 试试：`\"列出我 ai-course-exercises 仓库中未解决的 issue\"`\n5. 试试：`\"我 ai-course-exercises 仓库的 README 里写了什么？\"`"
+      "content": "## 第 4 步——重启并测试\n\n1. 重新启动 `claude`\n2. 输入 `/mcp`——确认 `github` 已出现\n3. 试试：`\"列出我 GitHub 账户中的所有仓库\"`\n4. 试试：`\"列出我 ai-course-exercises 仓库中未解决的 issue\"`\n5. 试试：`\"我 ai-course-exercises 仓库的 README 里写了什么？\"`"
     },
     {
       "type": "text",
@@ -57,7 +57,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "通过对话管理 GitHub",
-      "content": "**准备工作：**\n1. 完成上面的第 1-4 步：创建仓库、获取令牌、更新 settings.json、重启\n2. 输入 `/mcp` 确认 `github` 已列出\n\n**任务 1——获取仓库概览：**\n问：`\"列出我所有的 GitHub 仓库及其描述，以及最后更新时间。\"`\n\n**任务 2——创建一个真实的 issue：**\n想一件针对你任意仓库（或 `ai-course-exercises`）的真实改进或任务。\n问：`\"在 ai-course-exercises 中创建一个标题为 '[你的标题]' 的 issue，描述为 [你想要追踪的内容]。\"`\n前往 github.com 确认这个 issue 已经存在。\n\n**任务 3——跨代码搜索：**\n问：`\"在我所有的仓库中搜索任何包含 TODO 注释的文件。列出文件路径和 TODO 文本。\"`\n\n**任务 4——从 GitHub 读取文件：**\n问：`\"读取我 ai-course-exercises 仓库的 README，告诉我它目前写了什么。\"`\n\n**附加任务——issue 分类：**\n如果你的仓库中有未解决的 issue：\n问：`\"查看我所有仓库中未解决的 issue，按类型分组：bug、功能需求、问题，以及其他。建议我应该先处理哪一个。\"`\n\n把你完成的内容记录在 `notes/github-mcp-session.md` 中。"
+      "content": "**准备工作：**\n1. 完成上面的第 1-4 步：创建仓库、获取令牌、注册服务器、重启\n2. 输入 `/mcp` 确认 `github` 已列出\n\n**任务 1——获取仓库概览：**\n问：`\"列出我所有的 GitHub 仓库及其描述，以及最后更新时间。\"`\n\n**任务 2——创建一个真实的 issue：**\n想一件针对你任意仓库（或 `ai-course-exercises`）的真实改进或任务。\n问：`\"在 ai-course-exercises 中创建一个标题为 '[你的标题]' 的 issue，描述为 [你想要追踪的内容]。\"`\n前往 github.com 确认这个 issue 已经存在。\n\n**任务 3——跨代码搜索：**\n问：`\"在我所有的仓库中搜索任何包含 TODO 注释的文件。列出文件路径和 TODO 文本。\"`\n\n**任务 4——从 GitHub 读取文件：**\n问：`\"读取我 ai-course-exercises 仓库的 README，告诉我它目前写了什么。\"`\n\n**附加任务——issue 分类：**\n如果你的仓库中有未解决的 issue：\n问：`\"查看我所有仓库中未解决的 issue，按类型分组：bug、功能需求、问题，以及其他。建议我应该先处理哪一个。\"`\n\n把你完成的内容记录在 `notes/github-mcp-session.md` 中。"
     },
     {
       "type": "workshop",

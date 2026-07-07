@@ -24,7 +24,7 @@
     },
     {
       "type": "text",
-      "content": "## 安装\n\n把 sequential-thinking 添加到你的全局 `settings.json` 中："
+      "content": "## 安装\n\n运行 `claude mcp add sequential-thinking -s user -- npx -y @modelcontextprotocol/server-sequential-thinking`，或者把它加到 `~/.claude.json` 的 `mcpServers` 代码块中："
     },
     {
       "type": "code",
@@ -34,7 +34,7 @@
     {
       "type": "callout",
       "variant": "info",
-      "content": "**已经配置好了？** 如果你在第 7.12 课或在课程更早的时候就配置过 Claude Code 的 MCP 设置，sequential-thinking 可能已经在你的 settings.json 里了。输入 `/mcp` 检查一下——如果它已经列在其中，可以跳过安装这一步。"
+      "content": "**已经配置好了？** 如果你在 Part 8 更早的课程中已经配置过 MCP，sequential-thinking 可能已经注册过了。输入 `/mcp` 检查一下——如果它已经列在其中，可以跳过安装这一步。"
     },
     {
       "type": "text",
@@ -53,7 +53,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "用结构化推理解决一个复杂决策",
-      "content": "**准备工作：**\n1. 把 sequential-thinking 添加到你的 `settings.json`（如上所示）\n2. 重新启动 `claude`，输入 `/mcp` 确认它已列出\n\n**任务 1——在一个技术决策上测试它：**\n问：`\"用 sequential-thinking 帮我决定，作为第一门编程语言，我应该学 Python 还是 JavaScript。我想从事 AI 工具相关的工作，也可能想做一些网页项目。\"`\n\n观察 Claude 逐步推理的过程。注意：\n- 它识别出了多少个不同的考虑因素？\n- 它有没有在某一步修正自己的想法？\n- 结论和你预期的一样吗？\n\n**任务 2——带来一个真实的决策：**\n这是更有价值的练习。想一个你目前正在纠结的真实决策。可以是：\n- 某个项目的技术选型\n- 职业方向的问题\n- 如何处理一个棘手的技术问题\n- 学习计划的决定\n\n问：`\"用 sequential-thinking 帮我决定 [你的真实决策]。这是相关背景：[相关信息]。\"`\n\n仔细读完 Claude 的推理过程。它完成后：\n- 你同意它的每一步吗？\n- 它有没有提出一个你没想到的考虑因素？\n- 你想质疑其中的哪一步吗？\n\n**任务 3——对比没有 sequential-thinking 的情况：**\n再问一次同样的问题，这次不提 sequential-thinking（用 `/clear` 重新开始）。对比两次回答的深度和结构。\n\n把两份答案都保存到 `notes/sequential-thinking-comparison.md` 中。"
+      "content": "**准备工作：**\n1. 用 `claude mcp add` 添加 sequential-thinking（如上所示）\n2. 重新启动 `claude`，输入 `/mcp` 确认它已列出\n\n**任务 1——在一个技术决策上测试它：**\n问：`\"用 sequential-thinking 帮我决定，作为第一门编程语言，我应该学 Python 还是 JavaScript。我想从事 AI 工具相关的工作，也可能想做一些网页项目。\"`\n\n观察 Claude 逐步推理的过程。注意：\n- 它识别出了多少个不同的考虑因素？\n- 它有没有在某一步修正自己的想法？\n- 结论和你预期的一样吗？\n\n**任务 2——带来一个真实的决策：**\n这是更有价值的练习。想一个你目前正在纠结的真实决策。可以是：\n- 某个项目的技术选型\n- 职业方向的问题\n- 如何处理一个棘手的技术问题\n- 学习计划的决定\n\n问：`\"用 sequential-thinking 帮我决定 [你的真实决策]。这是相关背景：[相关信息]。\"`\n\n仔细读完 Claude 的推理过程。它完成后：\n- 你同意它的每一步吗？\n- 它有没有提出一个你没想到的考虑因素？\n- 你想质疑其中的哪一步吗？\n\n**任务 3——对比没有 sequential-thinking 的情况：**\n再问一次同样的问题，这次不提 sequential-thinking（用 `/clear` 重新开始）。对比两次回答的深度和结构。\n\n把两份答案都保存到 `notes/sequential-thinking-comparison.md` 中。"
     },
     {
       "type": "workshop",

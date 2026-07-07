@@ -12,7 +12,7 @@
   "sections": [
     {
       "type": "text",
-      "content": "## 你将学到什么\n\n学完本课后，你将理解 hooks（钩子）是什么、了解三种主要的钩子类型，并拥有一个在 Claude Code 修改文件时自动触发的可用钩子。"
+      "content": "## 你将学到什么\n\n学完本课后，你将理解 hooks（钩子）是什么、了解 Claude Code 五种核心钩子事件类型，并拥有一个在 Claude Code 修改文件时自动触发的可用钩子。"
     },
     {
       "type": "text",
@@ -20,7 +20,7 @@
     },
     {
       "type": "text",
-      "content": "## 五种钩子事件类型\n\n**`PreToolUse`**\n在 Claude 使用工具*之前*运行。使用场景：确认你处于正确的目录、向 Claude 的上下文中注入提醒、记录 Claude 即将做的事情、阻止危险操作。\n\n**`PostToolUse`**\n在 Claude 使用工具*之后*运行。这是最常用的钩子。使用场景：对刚刚编辑的文件进行 lint 检查、在代码更改后运行测试、记录修改内容、将上下文保存到记忆文件中。\n\n**`Stop`**\n在 Claude 完成生成一次完整回答、等待你输入时运行。使用场景：播放提示音表示 Claude 已完成、发送桌面通知、总结这次会话。\n\n**`SubagentStop`**\n在子代理（由编排者生成）完成其工作时运行。使用场景：收集子代理的输出、触发汇总步骤、记录并行代理的结果。仅在多代理工作流中相关（第 7-11 课）。\n\n**`PreCompact`**\n在 Claude 压缩一段长对话以释放上下文空间之前运行。使用场景：在重要上下文被压缩掉之前将其保存到文件中、在对话摘要取代完整历史记录之前提取关键决策。\n\n每种钩子类型都接受一个匹配器列表。`matcher` 字段是一个匹配工具名称的正则表达式——因此你可以只在 `Write` 调用、只在 `Bash` 调用，或它们的任意组合上触发钩子。"
+      "content": "## 五种核心钩子事件类型\n\nClaude Code 实际支持的钩子事件列表要长得多（SessionStart、Notification、UserPromptSubmit 等）。以下五种是你最常会用到的：\n\n**`PreToolUse`**\n在 Claude 使用工具*之前*运行。使用场景：确认你处于正确的目录、向 Claude 的上下文中注入提醒、记录 Claude 即将做的事情、阻止危险操作。\n\n**`PostToolUse`**\n在 Claude 使用工具*之后*运行。这是最常用的钩子。使用场景：对刚刚编辑的文件进行 lint 检查、在代码更改后运行测试、记录修改内容、将上下文保存到记忆文件中。\n\n**`Stop`**\n在 Claude 完成生成一次完整回答、等待你输入时运行。使用场景：播放提示音表示 Claude 已完成、发送桌面通知、总结这次会话。\n\n**`SubagentStop`**\n在子代理（由编排者生成）完成其工作时运行。使用场景：收集子代理的输出、触发汇总步骤、记录并行代理的结果。仅在多代理工作流中相关（第 7-11 课）。\n\n**`PreCompact`**\n在 Claude 压缩一段长对话以释放上下文空间之前运行。使用场景：在重要上下文被压缩掉之前将其保存到文件中、在对话摘要取代完整历史记录之前提取关键决策。\n\n每种钩子类型都接受一个匹配器列表。`matcher` 字段是一个匹配工具名称的正则表达式——因此你可以只在 `Write` 调用、只在 `Bash` 调用，或它们的任意组合上触发钩子。"
     },
     {
       "type": "callout",
@@ -30,7 +30,7 @@
     {
       "type": "callout",
       "variant": "tip",
-      "content": "**钩子环境变量——你的钩子命令可以读取什么：**\n\n| 变量 | 内容 | 可用范围 |\n|----------|----------|-------------|\n| `CLAUDE_TOOL_NAME` | 正在使用的工具名称（例如 `Write`、`Bash`） | PreToolUse、PostToolUse |\n| `CLAUDE_TOOL_INPUT` | 传给工具的完整 JSON 输入 | PreToolUse、PostToolUse |\n| `CLAUDE_TOOL_RESULT` | 工具返回的结果 | 仅 PostToolUse |\n| `CLAUDE_SESSION_ID` | 本次会话的唯一 ID | 所有类型 |\n| `CLAUDE_PROJECT_DIR` | 项目文件夹的绝对路径 | 所有类型 |\n\n你的钩子脚本可以读取这些变量来做出符合上下文的判断——例如，检查 `CLAUDE_TOOL_NAME` 以只在 `Write` 操作上运行你的格式化工具，或者记录 `CLAUDE_TOOL_INPUT` 来捕获被编辑的文件。\n\n**将反馈注回给 Claude：** 如果你的钩子写入了标准输出（stdout），Claude Code 会读取该输出，并将其作为下一步行动的上下文。这意味着一个钩子可以主动告知 Claude：写入 `echo 'WARNING: this function is deprecated'`，Claude 就会在继续之前考虑到这一点。"
+      "content": "**你的钩子命令是如何接收数据的：** Claude Code 并不会把工具细节作为独立的环境变量传入。相反，它会把一个 JSON 对象写入你的钩子命令的**标准输入（stdin）**。你的脚本需要读取并解析这段 JSON。典型的负载大致是这样：\n\n```json\n{\n  \"session_id\": \"abc123\",\n  \"cwd\": \"/current/working/directory\",\n  \"hook_event_name\": \"PreToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": { \"file_path\": \"src/app.js\", \"content\": \"...\" }\n}\n```\n对于 `PostToolUse`，同一份 JSON 中还会包含一个 `tool_response` 字段，存放工具的执行结果。\n\n| 字段（位于 stdin 的 JSON 中） | 内容 | 可用范围 |\n|----------|----------|-------------|\n| `tool_name` | 正在使用的工具名称（例如 `Write`、`Bash`） | PreToolUse、PostToolUse |\n| `tool_input` | 传给工具的参数 | PreToolUse、PostToolUse |\n| `tool_response` | 工具返回的结果 | 仅 PostToolUse |\n| `session_id` | 本次会话的唯一 ID | 所有类型 |\n\n唯一一个真正的环境变量是 **`CLAUDE_PROJECT_DIR`**——你项目根目录的绝对路径——在所有钩子类型中都可用。可以用它来引用存放在 `.claude/hooks/` 中的脚本，而不必写死路径。\n\n**将反馈注回给 Claude：** 如果你的钩子以退出代码 `0` 结束，Claude Code 会读取它的标准输出，并将其作为下一步行动的上下文。这意味着一个钩子可以主动告知 Claude：写入 `echo 'WARNING: this function is deprecated'`，Claude 就会在继续之前考虑到这一点。"
     },
     {
       "type": "code",
@@ -60,7 +60,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "搭建一个文件编辑钩子",
-      "content": "添加一个 PostToolUse 钩子，每次 Claude 修改文件时在终端中打印一条消息。验证它是否触发。\n\n**第 1 步——创建或打开 `.claude/settings.json`：**\n在 VS Code 资源管理器中，查找项目根目录下的 `.claude/settings.json`。如果不存在，就创建它。（`.claude/` 文件夹应该在第 7-7 课创建 `commands/` 子文件夹时就已经存在了。）\n\n**第 2 步——添加钩子：**\n将以下内容粘贴到 `.claude/settings.json`：\n```json\n{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude just edited a file\"\n          }\n        ]\n      }\n    ]\n  }\n}\n```\n保存文件。\n\n**第 3 步——启动 Claude Code：**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**第 4 步——触发钩子：**\n让 Claude 对任意文件做一个小修改：\n```\n在 exercises/about-me.html 的顶部添加一条 HTML 注释，内容为\n\"Last updated by Claude Code\"\n```\n审阅差异并接受它。\n\n**第 5 步——观察钩子输出：**\nClaude 应用更改后，你应该会看到：\n```\nClaude just edited a file\n```\n打印在终端中。这就是你的钩子被触发了。\n\n**第 6 步——升级钩子（可选）：**\n把钩子改成信息量更大的内容。在 Windows（PowerShell）上，把命令更新为：\n```\necho File modified at %TIME%\n```\n这会打印每次编辑的时间，给你一份轻量级的审计日志。\n\n**真实场景延伸：** 如果你安装了 Prettier（`npm install -g prettier`），把 echo 命令替换为：\n```\nprettier --write %CLAUDE_TOOL_INPUT_PATH%\n```\n这会自动格式化 Claude 触及的每个文件。仅这一行钩子就能消除一整类手动格式化工作。"
+      "content": "添加一个 PostToolUse 钩子，每次 Claude 修改文件时在终端中打印一条消息。验证它是否触发。\n\n**第 1 步——创建或打开 `.claude/settings.json`：**\n在 VS Code 资源管理器中，查找项目根目录下的 `.claude/settings.json`。如果不存在，就创建它。（`.claude/` 文件夹应该在第 7-7 课创建 `commands/` 子文件夹时就已经存在了。）\n\n**第 2 步——添加钩子：**\n将以下内容粘贴到 `.claude/settings.json`：\n```json\n{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo Claude just edited a file\"\n          }\n        ]\n      }\n    ]\n  }\n}\n```\n保存文件。\n\n**第 3 步——启动 Claude Code：**\n```\ncd Documents\\ai-course-projects\nclaude\n```\n\n**第 4 步——触发钩子：**\n让 Claude 对任意文件做一个小修改：\n```\n在 exercises/about-me.html 的顶部添加一条 HTML 注释，内容为\n\"Last updated by Claude Code\"\n```\n审阅差异并接受它。\n\n**第 5 步——观察钩子输出：**\nClaude 应用更改后，你应该会看到：\n```\nClaude just edited a file\n```\n打印在终端中。这就是你的钩子被触发了。\n\n**第 6 步——升级钩子（可选）：**\n把钩子改成信息量更大的内容。在 Windows（PowerShell）上，把命令更新为：\n```\necho File modified at %TIME%\n```\n这会打印每次编辑的时间，给你一份轻量级的审计日志。\n\n**真实场景延伸：** 如果你安装了 Prettier（`npm install -g prettier`），文件路径并不是一个环境变量——你需要从 stdin 的 JSON 中读取它。把 `command` 换成一小段 PowerShell：\n```powershell\npowershell -Command \"$j = [Console]::In.ReadToEnd() | ConvertFrom-Json; prettier --write $j.tool_input.file_path\"\n```\n这会自动格式化 Claude 触及的每个文件。仅这一个钩子就能消除一整类手动格式化工作。"
     },
     {
       "type": "workshop",

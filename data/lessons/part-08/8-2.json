@@ -11,7 +11,7 @@
   "sections": [
     {
       "type": "text",
-      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand the three components of the MCP architecture, what each one does, and how they fit together. You'll also see what an MCP configuration actually looks like in your settings file."
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll understand the three components of the MCP architecture, what each one does, and how they fit together. You'll also see what an MCP configuration actually looks like in Claude Code's config files."
     },
     {
       "type": "text",
@@ -28,11 +28,11 @@
     },
     {
       "type": "text",
-      "content": "## Where Configuration Lives\n\nAll MCP servers are configured in a single JSON file:\n\n**Global (works in every project):**\n`C:\\Users\\YourName\\.claude\\settings.json`\n\n**Project-level (only active in one project):**\n`.claude/settings.json` inside your project folder\n\nThe global file is where you want most of your MCP servers — Gmail, GitHub, calendar. The project-level file is for servers that are only relevant to a specific codebase, like a database server pointed at that project's database.\n\nClaude Code merges both files, so servers from both locations are available simultaneously."
+      "content": "## Where Configuration Lives\n\nMCP servers are NOT configured in `settings.json` — that file is for other Claude Code settings (permissions, themes). MCP servers live in one of three scopes, each with its own file:\n\n**User scope (works in every project):**\nThe top-level `mcpServers` block in `~/.claude.json`\n\n**Project scope (shared with your team via git):**\n`.mcp.json` in your project's root folder\n\n**Local scope (this machine, this project only):**\nA per-project entry inside `~/.claude.json`\n\nUser-scope servers are where you want most of your personal MCP servers — Gmail, GitHub, calendar. Project scope is for servers the whole team should get automatically when they clone the repo, like a database server pointed at that project's database. You can manage all of this with the `claude mcp add` command instead of hand-editing JSON — see the workshop below."
     },
     {
       "type": "text",
-      "content": "## The mcpServers Configuration Block\n\nEvery MCP server entry follows the same pattern inside `settings.json`:"
+      "content": "## The mcpServers Configuration Block\n\nEvery MCP server entry follows the same pattern, whichever scope's file it lives in:"
     },
     {
       "type": "code",
@@ -46,11 +46,11 @@
     {
       "type": "callout",
       "variant": "warning",
-      "content": "**Never commit tokens into a public repository.** If your `settings.json` lives inside a git repo, add it to `.gitignore` or use environment variables instead of hardcoding tokens in the `env` block. Lesson 8-8 (GitHub MCP) covers this in detail."
+      "content": "**Never commit tokens into a public repository.** If you're using project scope (`.mcp.json`, checked into git), use environment variables instead of hardcoding tokens in the `env` block, or keep secrets in local/user scope instead. Lesson 8-8 (GitHub MCP) covers this in detail."
     },
     {
       "type": "text",
-      "content": "## MCP Servers Are Just Programs\n\nThis is worth emphasizing: an MCP server is just a regular program that implements the MCP protocol. There is nothing magical about it.\n\nWhen Claude Code starts, it reads your `settings.json` and launches each configured MCP server as a subprocess. Claude Code and each server are completely separate processes on your computer. If a server crashes, Claude Code keeps running — it just loses access to that server's tools.\n\nYou can verify this: open Task Manager while Claude Code is running with several MCP servers configured. You'll see multiple `node` or `python` processes — one for each active server."
+      "content": "## MCP Servers Are Just Programs\n\nThis is worth emphasizing: an MCP server is just a regular program that implements the MCP protocol. There is nothing magical about it.\n\nWhen Claude Code starts, it reads your MCP configuration and launches each configured server as a subprocess. Claude Code and each server are completely separate processes on your computer. If a server crashes, Claude Code keeps running — it just loses access to that server's tools.\n\nYou can verify this: open Task Manager while Claude Code is running with several MCP servers configured. You'll see multiple `node` or `python` processes — one for each active server."
     },
     {
       "type": "quiz",

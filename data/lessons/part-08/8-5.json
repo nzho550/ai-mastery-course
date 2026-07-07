@@ -24,7 +24,7 @@
     },
     {
       "type": "text",
-      "content": "## Installation\n\nAdd sequential-thinking to your global `settings.json`:"
+      "content": "## Installation\n\nRun `claude mcp add sequential-thinking -s user -- npx -y @modelcontextprotocol/server-sequential-thinking`, or add it to the `mcpServers` block in `~/.claude.json`:"
     },
     {
       "type": "code",
@@ -34,7 +34,7 @@
     {
       "type": "callout",
       "variant": "info",
-      "content": "**Already configured?** If you followed the MCP setup in lesson 7.12 or configured Claude Code early in the course, sequential-thinking may already be in your settings. Type `/mcp` to check — if it's listed, skip the installation step."
+      "content": "**Already configured?** If you followed the MCP setup earlier in Part 8, sequential-thinking may already be registered. Type `/mcp` to check — if it's listed, skip the installation step."
     },
     {
       "type": "text",
@@ -53,7 +53,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "Solve a Complex Decision With Structured Reasoning",
-      "content": "**Setup:**\n1. Add sequential-thinking to your `settings.json` (shown above)\n2. Relaunch `claude`, type `/mcp` to confirm it's listed\n\n**Task 1 — Test it on a tech decision:**\nAsk: `\"Use sequential-thinking to help me decide whether I should learn Python or JavaScript as my first programming language. I want to work with AI tools and potentially build web projects.\"`\n\nWatch Claude work through each step. Notice:\n- How many distinct considerations does it identify?\n- Does it revise its thinking at any step?\n- Is the conclusion different from what you expected?\n\n**Task 2 — Bring a real decision:**\nThis is the more valuable exercise. Think of a real decision you are currently wrestling with. It could be:\n- A technology choice for a project\n- A career direction question\n- How to approach a difficult technical problem\n- A learning plan decision\n\nAsk: `\"Use sequential-thinking to help me decide [your real decision]. Here's the context: [relevant background].\"` \n\nRead through Claude's reasoning carefully. After it finishes:\n- Do you agree with each step?\n- Did it surface a consideration you hadn't thought of?\n- Do you want to challenge any of the steps?\n\n**Task 3 — Compare without sequential-thinking:**\nAsk the same question again without mentioning sequential-thinking (use `/clear` to start fresh). Compare the depth and structure of the two responses.\n\nSave both answers to `notes/sequential-thinking-comparison.md`."
+      "content": "**Setup:**\n1. Add sequential-thinking with `claude mcp add` (shown above)\n2. Relaunch `claude`, type `/mcp` to confirm it's listed\n\n**Task 1 — Test it on a tech decision:**\nAsk: `\"Use sequential-thinking to help me decide whether I should learn Python or JavaScript as my first programming language. I want to work with AI tools and potentially build web projects.\"`\n\nWatch Claude work through each step. Notice:\n- How many distinct considerations does it identify?\n- Does it revise its thinking at any step?\n- Is the conclusion different from what you expected?\n\n**Task 2 — Bring a real decision:**\nThis is the more valuable exercise. Think of a real decision you are currently wrestling with. It could be:\n- A technology choice for a project\n- A career direction question\n- How to approach a difficult technical problem\n- A learning plan decision\n\nAsk: `\"Use sequential-thinking to help me decide [your real decision]. Here's the context: [relevant background].\"` \n\nRead through Claude's reasoning carefully. After it finishes:\n- Do you agree with each step?\n- Did it surface a consideration you hadn't thought of?\n- Do you want to challenge any of the steps?\n\n**Task 3 — Compare without sequential-thinking:**\nAsk the same question again without mentioning sequential-thinking (use `/clear` to start fresh). Compare the depth and structure of the two responses.\n\nSave both answers to `notes/sequential-thinking-comparison.md`."
     },
     {
       "type": "workshop",

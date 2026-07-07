@@ -24,7 +24,7 @@
     },
     {
       "type": "text",
-      "content": "## Configuring Multiple Allowed Directories\n\nYou can give Claude access to multiple directories by adding multiple path arguments. Update your `settings.json`:"
+      "content": "## Configuring Multiple Allowed Directories\n\nYou can give Claude access to multiple directories by adding multiple path arguments. Update the filesystem entry in `~/.claude.json` (or re-run `claude mcp add` with all the paths):"
     },
     {
       "type": "code",
@@ -53,7 +53,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "Full Project Analysis With the Filesystem MCP",
-      "content": "**Setup:**\nIf not already done, update your `settings.json` to include your Documents folder in the filesystem MCP's allowed paths (shown above). Restart `claude`.\n\n**Task 1 — Full project inventory:**\nAsk: `\"Use the filesystem MCP to show me the complete folder structure of my ai-course-projects folder as a tree. Then read each file and give me a one-sentence description of what it does.\"`\n\nSave the output to `notes/project-inventory.md`.\n\n**Task 2 — Find all Markdown files:**\nAsk: `\"Search my Documents folder for all .md files and list their paths. Then tell me what each one is about based on its content.\"`\n\n**Task 3 — Cross-file analysis:**\nAsk: `\"Read all .html files in exercises/ and check each one for these common problems:\n- Missing meta charset tag\n- Missing viewport meta tag\n- Images without alt attributes\n- Links without meaningful text (e.g., 'click here')\nReport what you find for each file.\"`\n\n**Task 4 — Create a summary document:**\nAsk: `\"Based on everything you've read in this project, create notes/project-summary.md with:\n- A table of contents of all project files\n- A brief description of each one\n- A 'status' field for each: complete, in-progress, or empty\"`\n\nOpen `notes/project-summary.md` in VS Code — it should be a useful reference document you'll actually keep."
+      "content": "**Setup:**\nIf not already done, update your filesystem MCP entry in `~/.claude.json` to include your Documents folder in its allowed paths (shown above). Restart `claude`.\n\n**Task 1 — Full project inventory:**\nAsk: `\"Use the filesystem MCP to show me the complete folder structure of my ai-course-projects folder as a tree. Then read each file and give me a one-sentence description of what it does.\"`\n\nSave the output to `notes/project-inventory.md`.\n\n**Task 2 — Find all Markdown files:**\nAsk: `\"Search my Documents folder for all .md files and list their paths. Then tell me what each one is about based on its content.\"`\n\n**Task 3 — Cross-file analysis:**\nAsk: `\"Read all .html files in exercises/ and check each one for these common problems:\n- Missing meta charset tag\n- Missing viewport meta tag\n- Images without alt attributes\n- Links without meaningful text (e.g., 'click here')\nReport what you find for each file.\"`\n\n**Task 4 — Create a summary document:**\nAsk: `\"Based on everything you've read in this project, create notes/project-summary.md with:\n- A table of contents of all project files\n- A brief description of each one\n- A 'status' field for each: complete, in-progress, or empty\"`\n\nOpen `notes/project-summary.md` in VS Code — it should be a useful reference document you'll actually keep."
     },
     {
       "type": "workshop",

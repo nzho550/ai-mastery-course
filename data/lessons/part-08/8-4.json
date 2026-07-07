@@ -24,7 +24,7 @@
     },
     {
       "type": "text",
-      "content": "## Installation\n\nAdd context7 to your global `settings.json` (`C:\\Users\\YourName\\.claude\\settings.json`):"
+      "content": "## Installation\n\nRun `claude mcp add context7 -s user -- npx -y @upstash/context7-mcp`, or add it to the `mcpServers` block in `~/.claude.json` (user scope) alongside your filesystem server:"
     },
     {
       "type": "code",
@@ -53,7 +53,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "Query Live Docs While Coding",
-      "content": "**Setup:**\n1. Add the context7 config block to your `settings.json` (shown above)\n2. Save the file, relaunch `claude`\n3. Type `/mcp` — confirm `context7` appears\n\n**Task 1 — Fetch live docs:**\nAsk: `\"Using context7, get me the current documentation for the HTML5 dialog element — specifically how to open and close it with JavaScript.\"`\n\nRead what Claude returns. Notice it's citing the actual current spec, not a vague recollection.\n\n**Task 2 — Apply the docs to your project:**\nAsk: `\"Using those docs, add a modal dialog to exercises/about-me.html. The dialog should open when a 'Contact Me' button is clicked and close when the user clicks 'Close'.\"`\n\nOpen the file with Live Server — the dialog should work correctly.\n\n**Task 3 — Compare with and without context7:**\nStart a new Claude Code session (type `/clear` to clear the conversation).\nAsk the same dialog question WITHOUT mentioning context7.\nCompare the two answers:\n- Did Claude use the same API?\n- Was one more confident or more current-sounding?\n- Did either have outdated patterns?\n\nNote your observations in `notes/context7-experiment.md`.\n\n**Bonus — query a library you actually use:**\nIf you're learning or using any specific library (Python, Vue, Svelte, Express, anything), ask context7 for its current docs on one topic you're curious about."
+      "content": "**Setup:**\n1. Add context7 with `claude mcp add` (shown above) or by editing `~/.claude.json` directly\n2. Relaunch `claude`\n3. Type `/mcp` — confirm `context7` appears\n\n**Task 1 — Fetch live docs:**\nAsk: `\"Using context7, get me the current documentation for the HTML5 dialog element — specifically how to open and close it with JavaScript.\"`\n\nRead what Claude returns. Notice it's citing the actual current spec, not a vague recollection.\n\n**Task 2 — Apply the docs to your project:**\nAsk: `\"Using those docs, add a modal dialog to exercises/about-me.html. The dialog should open when a 'Contact Me' button is clicked and close when the user clicks 'Close'.\"`\n\nOpen the file with Live Server — the dialog should work correctly.\n\n**Task 3 — Compare with and without context7:**\nStart a new Claude Code session (type `/clear` to clear the conversation).\nAsk the same dialog question WITHOUT mentioning context7.\nCompare the two answers:\n- Did Claude use the same API?\n- Was one more confident or more current-sounding?\n- Did either have outdated patterns?\n\nNote your observations in `notes/context7-experiment.md`.\n\n**Bonus — query a library you actually use:**\nIf you're learning or using any specific library (Python, Vue, Svelte, Express, anything), ask context7 for its current docs on one topic you're curious about."
     },
     {
       "type": "workshop",

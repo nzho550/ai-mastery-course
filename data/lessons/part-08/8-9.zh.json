@@ -24,7 +24,7 @@
     },
     {
       "type": "text",
-      "content": "## 配置多个允许访问的目录\n\n你可以通过添加多个路径参数，让 Claude 访问多个目录。更新你的 `settings.json`："
+      "content": "## 配置多个允许访问的目录\n\n你可以通过添加多个路径参数，让 Claude 访问多个目录。更新 `~/.claude.json` 中的文件系统条目（或者带上所有路径重新运行一次 `claude mcp add`）："
     },
     {
       "type": "code",
@@ -53,7 +53,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "用文件系统 MCP 进行完整的项目分析",
-      "content": "**准备工作：**\n如果还没做过，更新你的 `settings.json`，把你的 Documents 文件夹加入文件系统 MCP 的允许路径（如上所示）。重启 `claude`。\n\n**任务 1——完整的项目盘点：**\n问：`\"使用文件系统 MCP，以树状结构展示我 ai-course-projects 文件夹的完整目录结构。然后读取每个文件，给我一句话描述它的作用。\"`\n\n把输出保存到 `notes/project-inventory.md`。\n\n**任务 2——查找所有 Markdown 文件：**\n问：`\"在我的 Documents 文件夹中搜索所有 .md 文件，列出它们的路径。然后根据每个文件的内容告诉我它讲的是什么。\"`\n\n**任务 3——跨文件分析：**\n问：`\"读取 exercises/ 中所有的 .html 文件，检查每个文件是否存在以下常见问题：\n- 缺少 meta charset 标签\n- 缺少 viewport meta 标签\n- 图片没有 alt 属性\n- 没有有意义文字的链接（例如 'click here'）\n报告你在每个文件中发现的问题。\"`\n\n**任务 4——创建一份摘要文档：**\n问：`\"根据你在这个项目中读到的一切，创建 notes/project-summary.md，内容包括：\n- 所有项目文件的目录\n- 每个文件的简要描述\n- 每个文件的 'status' 字段：完成、进行中，或空白\"`\n\n在 VS Code 中打开 `notes/project-summary.md`——它应该是一份你会真正保留下来的有用参考文档。"
+      "content": "**准备工作：**\n如果还没做过，更新 `~/.claude.json` 中的文件系统 MCP 条目，把你的 Documents 文件夹加入允许路径（如上所示）。重启 `claude`。\n\n**任务 1——完整的项目盘点：**\n问：`\"使用文件系统 MCP，以树状结构展示我 ai-course-projects 文件夹的完整目录结构。然后读取每个文件，给我一句话描述它的作用。\"`\n\n把输出保存到 `notes/project-inventory.md`。\n\n**任务 2——查找所有 Markdown 文件：**\n问：`\"在我的 Documents 文件夹中搜索所有 .md 文件，列出它们的路径。然后根据每个文件的内容告诉我它讲的是什么。\"`\n\n**任务 3——跨文件分析：**\n问：`\"读取 exercises/ 中所有的 .html 文件，检查每个文件是否存在以下常见问题：\n- 缺少 meta charset 标签\n- 缺少 viewport meta 标签\n- 图片没有 alt 属性\n- 没有有意义文字的链接（例如 'click here'）\n报告你在每个文件中发现的问题。\"`\n\n**任务 4——创建一份摘要文档：**\n问：`\"根据你在这个项目中读到的一切，创建 notes/project-summary.md，内容包括：\n- 所有项目文件的目录\n- 每个文件的简要描述\n- 每个文件的 'status' 字段：完成、进行中，或空白\"`\n\n在 VS Code 中打开 `notes/project-summary.md`——它应该是一份你会真正保留下来的有用参考文档。"
     },
     {
       "type": "workshop",

@@ -11,7 +11,7 @@
   "sections": [
     {
       "type": "text",
-      "content": "## 你将学到什么\n\n学完本课后，你将理解 MCP 架构的三个组成部分、每个部分的作用，以及它们是如何协同工作的。你还会看到，一份 MCP 配置在你的设置文件中实际长什么样。"
+      "content": "## 你将学到什么\n\n学完本课后，你将理解 MCP 架构的三个组成部分、每个部分的作用，以及它们是如何协同工作的。你还会看到，一份 MCP 配置在 Claude Code 的配置文件中实际长什么样。"
     },
     {
       "type": "text",
@@ -28,11 +28,11 @@
     },
     {
       "type": "text",
-      "content": "## 配置文件存放在哪里\n\n所有 MCP 服务器都配置在同一个 JSON 文件中：\n\n**全局配置（在每个项目中都生效）：**\n`C:\\Users\\YourName\\.claude\\settings.json`\n\n**项目级配置（只在某一个项目中生效）：**\n项目文件夹内的 `.claude/settings.json`\n\n全局文件适合放你大部分的 MCP 服务器——Gmail、GitHub、日历。项目级文件适合只与某个特定代码库相关的服务器，比如指向该项目数据库的数据库服务器。\n\nClaude Code 会合并这两个文件，因此两处的服务器都能同时使用。"
+      "content": "## 配置文件存放在哪里\n\nMCP 服务器并不是配置在 `settings.json` 里——那个文件是给其他 Claude Code 设置（权限、主题等）用的。MCP 服务器分为三种作用域，各自对应不同的文件：\n\n**用户作用域（在每个项目中都生效）：**\n`~/.claude.json` 中顶层的 `mcpServers` 配置块\n\n**项目作用域（通过 git 与团队共享）：**\n项目根目录下的 `.mcp.json`\n\n**本地作用域（仅本机、仅当前项目）：**\n`~/.claude.json` 内针对该项目的一条记录\n\n用户作用域适合放你大部分的个人 MCP 服务器——Gmail、GitHub、日历。项目作用域适合团队克隆仓库后应自动获得的服务器，比如指向该项目数据库的数据库服务器。你也可以用 `claude mcp add` 命令来管理这些配置，而不必手动编辑 JSON——见下方工作坊。"
     },
     {
       "type": "text",
-      "content": "## mcpServers 配置块\n\n`settings.json` 中每一条 MCP 服务器配置都遵循同样的模式："
+      "content": "## mcpServers 配置块\n\n无论存放在哪个作用域对应的文件中，每一条 MCP 服务器配置都遵循同样的模式："
     },
     {
       "type": "code",
@@ -46,11 +46,11 @@
     {
       "type": "callout",
       "variant": "warning",
-      "content": "**永远不要把 token 提交到公开代码仓库中。** 如果你的 `settings.json` 位于一个 git 仓库内，把它加入 `.gitignore`，或者改用环境变量而不是在 `env` 块中硬编码 token。第 8-8 课（GitHub MCP）会详细讲解这一点。"
+      "content": "**永远不要把 token 提交到公开代码仓库中。** 如果你使用的是项目作用域（`.mcp.json`，会被提交到 git），请改用环境变量，而不是在 `env` 块中硬编码 token；或者把包含密钥的服务器放在本地/用户作用域中。第 8-8 课（GitHub MCP）会详细讲解这一点。"
     },
     {
       "type": "text",
-      "content": "## MCP 服务器只是普通程序\n\n这一点值得强调：MCP 服务器只是一个实现了 MCP 协议的普通程序。它没有任何神奇之处。\n\nClaude Code 启动时，会读取你的 `settings.json`，并将每个已配置的 MCP 服务器作为子进程启动。Claude Code 和每个服务器在你的电脑上都是完全独立的进程。如果某个服务器崩溃，Claude Code 会继续运行——只是失去了对该服务器工具的访问。\n\n你可以自己验证这一点：在 Claude Code 运行、且配置了多个 MCP 服务器的情况下打开任务管理器。你会看到多个 `node` 或 `python` 进程——每个活跃的服务器对应一个。"
+      "content": "## MCP 服务器只是普通程序\n\n这一点值得强调：MCP 服务器只是一个实现了 MCP 协议的普通程序。它没有任何神奇之处。\n\nClaude Code 启动时，会读取你的 MCP 配置，并将每个已配置的服务器作为子进程启动。Claude Code 和每个服务器在你的电脑上都是完全独立的进程。如果某个服务器崩溃，Claude Code 会继续运行——只是失去了对该服务器工具的访问。\n\n你可以自己验证这一点：在 Claude Code 运行、且配置了多个 MCP 服务器的情况下打开任务管理器。你会看到多个 `node` 或 `python` 进程——每个活跃的服务器对应一个。"
     },
     {
       "type": "quiz",

@@ -1,7 +1,7 @@
 import { icons } from './icons.js';
 import { getLessonStatus } from './progress.js';
 import { navigate } from './router.js';
-import { qs } from './utils.js';
+import { qs, escapeHtml } from './utils.js';
 import { t } from './i18n.js';
 
 let curriculum = null;
@@ -63,7 +63,7 @@ function render() {
     const header = document.createElement('div');
     header.className = 'part-header';
     header.innerHTML = `
-      <span>${t('part.label', { number: part.number })} — ${part.title}</span>
+      <span>${t('part.label', { number: part.number })} — ${escapeHtml(part.title || '')}</span>
       <span class="chevron">${icons.chevronDown}</span>
     `;
     header.addEventListener('click', () => {
@@ -87,7 +87,7 @@ function render() {
       link.dataset.id = lesson.id;
       link.innerHTML = `
         ${statusIcon(status)}
-        <span>${lesson.id} ${lesson.title}</span>
+        <span>${lesson.id} ${escapeHtml(lesson.title || '')}</span>
       `;
       link.addEventListener('click', e => {
         e.preventDefault();

@@ -3,6 +3,8 @@
 **Date:** 2026-06-10  
 **Status:** Final — all 5 open questions closed
 
+> **Historical planning document.** Records design decisions made on the date above; still generally accurate for the built site's visual/architectural choices, but doesn't reflect later additions (i18n, Part 20/21, etc.). See the repository root `README.md` for current status.
+
 ---
 
 ## Decision 1 — Logo Mark

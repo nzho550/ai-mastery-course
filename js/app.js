@@ -4,7 +4,7 @@ import { initSidebar, setActiveLesson } from './sidebar.js';
 import { initLesson, renderLesson } from './lesson.js';
 import { initSearch } from './search.js';
 import { getProgress, getTotalStats, getPartStats, getLastVisited, getTheme, setTheme } from './progress.js';
-import { qs } from './utils.js';
+import { qs, escapeHtml } from './utils.js';
 import { t, getLang, setLang, otherLang, curriculumPath } from './i18n.js';
 
 let curriculum = null;
@@ -25,6 +25,7 @@ async function boot() {
   // Load curriculum
   try {
     const res = await fetch(curriculumPath());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     curriculum = await res.json();
   } catch (e) {
     document.body.innerHTML = `<div style="padding:2rem;color:#f87171">Failed to load curriculum: ${e.message}</div>`;
@@ -115,7 +116,7 @@ function renderDashboard() {
 
   const resumeHtml = lastMeta ? `
     <a href="#/lesson/${lastMeta.id}" class="btn btn-primary">
-      ${icons.arrowRight} ${t('action.resume')}: ${lastMeta.id} ${lastMeta.title}
+      ${icons.arrowRight} ${t('action.resume')}: ${lastMeta.id} ${escapeHtml(lastMeta.title || '')}
     </a>` : `
     <a href="#/lesson/1-1" class="btn btn-primary">
       ${icons.zap} ${t('action.startLearning')}
@@ -155,7 +156,7 @@ function renderDashboard() {
             <a class="part-card" href="#/lesson/${part.lessons[0].id}">
               <div class="part-card-header">
                 <span class="part-number">${t('part.label', { number: part.number })}</span>
-                <h3>${part.title}</h3>
+                <h3>${escapeHtml(part.title || '')}</h3>
               </div>
               <div class="progress-bar">
                 <div class="progress-bar-fill" style="width:${stats.pct}%"></div>

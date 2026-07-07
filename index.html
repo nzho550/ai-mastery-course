@@ -48,7 +48,8 @@
   <script src="vendor/highlight/highlight.min.js"></script>
   <script src="vendor/highlight/languages/powershell.min.js"></script>
   <script>
-    // Apply theme before first paint to prevent flash
+    // Apply theme before first paint to prevent flash.
+    // Keys below must stay in sync with KEY in js/progress.js and LANG_KEY in js/i18n.js.
     (function() {
       try {
         const d = JSON.parse(localStorage.getItem('ai-mastery-progress') || '{}');

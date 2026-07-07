@@ -34,7 +34,7 @@
     },
     {
       "type": "text",
-      "content": "然后把它添加到你的全局 `settings.json`："
+      "content": "然后注册它——`claude mcp add playwright -s user -- npx @playwright/mcp`——或者直接把它加到 `~/.claude.json` 中："
     },
     {
       "type": "code",
@@ -62,7 +62,7 @@
       "type": "workshop",
       "tag": "CLAUDECODE",
       "title": "网页自动化与信息提取",
-      "content": "**准备工作：**\n1. 在 PowerShell 中运行 `npm install -g @playwright/mcp@latest`\n2. 把 playwright 条目添加到你的 `settings.json`\n3. 重新启动 `claude`，输入 `/mcp` 确认 `playwright` 已列出\n\n**任务 1——截图并描述：**\n问：`\"使用 Playwright，导航到 code.visualstudio.com 并截图。描述首页上有什么——他们目前在展示什么？\"`\n\n观看浏览器窗口打开、导航，并捕获页面。\n\n**任务 2——提取实时信息：**\n问：`\"访问 news.ycombinator.com，列出排名前 5 的文章标题、它们的 URL，以及各自的点数。\"`\n\n**任务 3——文档抓取：**\n问：`\"导航到 modelcontextprotocol.io，告诉我首页或文档页面上列出了哪些 MCP 服务器。\"`\n\n**任务 4——多站点对比：**\n问：`\"访问 Vercel（vercel.com/pricing）和 Netlify（netlify.com/pricing）的免费套餐页面，比较：带宽限制、构建分钟数，以及免费套餐允许的网站数量。\"`\n\n观看 Claude 访问这两个页面并提取对比数据。\n\n**任务 5——测试你自己的作品：**\n问：`\"用 Playwright 在浏览器中打开我的 exercises/about-me.html 文件。截图，然后告诉我它看起来怎么样，并建议一个视觉上的改进。\"`\n\n注意：要打开一个本地文件，需要提供完整路径：`file:///C:/Users/YourName/Documents/ai-course-projects/exercises/about-me.html`\n\n把 Playwright 能做什么的摘要保存到 `notes/playwright-capabilities.md`。"
+      "content": "**准备工作：**\n1. 在 PowerShell 中运行 `npm install -g @playwright/mcp@latest`\n2. 用 `claude mcp add playwright -s user -- npx @playwright/mcp` 注册它\n3. 重新启动 `claude`，输入 `/mcp` 确认 `playwright` 已列出\n\n**任务 1——截图并描述：**\n问：`\"使用 Playwright，导航到 code.visualstudio.com 并截图。描述首页上有什么——他们目前在展示什么？\"`\n\n观看浏览器窗口打开、导航，并捕获页面。\n\n**任务 2——提取实时信息：**\n问：`\"访问 news.ycombinator.com，列出排名前 5 的文章标题、它们的 URL，以及各自的点数。\"`\n\n**任务 3——文档抓取：**\n问：`\"导航到 modelcontextprotocol.io，告诉我首页或文档页面上列出了哪些 MCP 服务器。\"`\n\n**任务 4——多站点对比：**\n问：`\"访问 Vercel（vercel.com/pricing）和 Netlify（netlify.com/pricing）的免费套餐页面，比较：带宽限制、构建分钟数，以及免费套餐允许的网站数量。\"`\n\n观看 Claude 访问这两个页面并提取对比数据。\n\n**任务 5——测试你自己的作品：**\n问：`\"用 Playwright 在浏览器中打开我的 exercises/about-me.html 文件。截图，然后告诉我它看起来怎么样，并建议一个视觉上的改进。\"`\n\n注意：要打开一个本地文件，需要提供完整路径：`file:///C:/Users/YourName/Documents/ai-course-projects/exercises/about-me.html`\n\n把 Playwright 能做什么的摘要保存到 `notes/playwright-capabilities.md`。"
     },
     {
       "type": "workshop",

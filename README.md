@@ -1,12 +1,12 @@
 # AI Mastery Course
 
-> A comprehensive, self-paced AI teaching course — from complete beginner to VS Code, Claude Code, MCP workflows, advanced AI mastery, and personal AI productivity.
+> A comprehensive, self-paced AI teaching course — from complete beginner to VS Code, Claude Code, MCP workflows, custom AI skills, and personal/business AI productivity.
 
 ---
 
 ## What Is This?
 
-This is the build repository for the **AI Mastery Course** — a locally-served, offline-capable website that takes someone with zero AI or coding experience all the way to:
+This is the **AI Mastery Course** — a built, deployed, offline-capable website that takes someone with zero AI or coding experience all the way to:
 
 - Writing effective prompts and using AI tools for everyday work
 - Working in VS Code with AI-powered code completion
@@ -14,12 +14,16 @@ This is the build repository for the **AI Mastery Course** — a locally-served,
 - Configuring MCP (Model Context Protocol) servers to connect AI to real tools
 - Running local AI models with Ollama
 - Building their own AI-powered tools via the Anthropic API
-- Automating workflows with n8n, Zapier, and GitHub Actions
+- Automating workflows with n8n, Zapier, GitHub Actions, and recurring/scheduled ("loop") automations
 - Conducting deep research and managing personal knowledge with AI
 - Applying AI to documents, projects, and personal productivity
+- Applying AI to running a business and managing a team (entrepreneurship, performance reviews, hiring, OKRs, tracking team output)
 - Advanced techniques: RAG, agents, model selection, custom knowledge engines
+- Building custom AI skills/commands for Claude Code
 
-**Course structure:** 19 parts, 156 lessons, ~162 hours total learning time.
+**Course structure:** 21 parts, 233 lessons, ~236 hours total learning time. Available in English and Chinese (language toggle in the header).
+
+**Status:** Live at GitHub Pages ([nzho550/ai-mastery-course](https://github.com/nzho550/ai-mastery-course)). All content authored, site built, i18n complete.
 
 ---
 
@@ -28,55 +32,62 @@ This is the build repository for the **AI Mastery Course** — a locally-served,
 ```
 ai-mastery-course/
 ├── README.md
+├── index.html / 404.html
+├── css/                             ← design tokens + component styles
+├── js/                              ← app.js, router.js, lesson.js, sidebar.js,
+│                                       search.js, progress.js, i18n.js, icons.js, utils.js
+├── vendor/                          ← bundled marked.js, DOMPurify, highlight.js, Fuse.js
 ├── data/
-│   ├── curriculum.json             ← part/lesson index
+│   ├── curriculum.json              ← part/lesson index (drives navigation, prev/next)
+│   ├── curriculum.zh.json           ← Chinese curriculum labels
 │   └── lessons/
-│       ├── part-01/                ← lesson JSON files (one per lesson)
-│       ├── part-02/
-│       └── ...part-19/
+│       ├── part-01/ ... part-21/    ← one {lessonId}.json + {lessonId}.zh.json per lesson
 ├── scripts/
-│   └── enhance_batch*.js           ← one-shot workshop/quiz enhancement scripts
-└── .docs/                          ← planning and architecture documents
-    ├── ai-course-implementation-plan.md
-    ├── architectural-review.md
-    ├── resource-strategy.md
-    ├── site-design-plan.md
-    ├── design-decisions.md
-    └── lesson-content-guide.md
+│   ├── serve.js                     ← local static dev server
+│   ├── audit-lessons.js             ← structural QA (missing/empty lesson files)
+│   ├── fix-json.js, fix-capstones.js
+│   └── enhance_batch*.js            ← one-shot content-authoring scripts (historical)
+└── .docs/                           ← historical planning/design docs (see note below)
 ```
+
+**Note on `part.id` vs `part.number`:** each part in `curriculum.json` has an `id` (used for its `data/lessons/part-{id}/` folder name — stable, don't rename) and a `number` (display/study order, 1–21 — used for reordering the curriculum without touching folders or lesson IDs).
 
 ---
 
 ## Curriculum Overview
 
-| Part | Title | Lessons |
-|------|-------|---------|
-| 1 | AI Foundations | 6 |
-| 2 | Your First AI Tools | 12 |
+| # | Title | Lessons |
+|---|-------|---------|
+| 1 | AI Foundations | 7 |
+| 2 | Your First AI Tools | 17 |
 | 3 | Prompt Engineering | 8 |
-| 4 | Computer & Command Line Basics | 6 |
-| 5 | VS Code: Complete Beginner Guide | 12 |
-| 6 | AI Inside VS Code | 8 |
-| 7 | Claude Code: Complete Guide | 12 |
-| 8 | MCP: Model Context Protocol | 20 |
-| 9 | Other AI Coding Tools | 4 |
-| 10 | AI Automation & Workflow | 7 |
-| 11 | AI APIs & Building Your First AI Tool | 9 |
-| 12 | Local AI with Ollama | 7 |
-| 13 | AI Safety, Privacy & Cost Management | 5 |
-| 14 | Capstone Projects | 5 |
-| 15 | AI for Research & Knowledge Work | 7 |
-| 16 | AI for Document Creation & Office Work | 7 |
-| 17 | AI for Project Planning & Management | 6 |
-| 18 | Advanced AI Mastery | 7 |
-| 19 | AI for Personal Life | 8 |
-| **Total** | | **156 lessons** |
+| 4 | AI Safety, Privacy & Cost Management | 5 |
+| 5 | AI for Research & Knowledge Work | 8 |
+| 6 | AI for Document Creation & Office Work | 10 |
+| 7 | AI for Project Planning & Management | 7 |
+| 8 | AI for Personal Life | 12 |
+| 9 | Computer & Command Line Basics | 7 |
+| 10 | VS Code: Complete Beginner Guide | 12 |
+| 11 | AI Inside VS Code | 30 |
+| 12 | Other AI Coding Tools | 7 |
+| 13 | Claude Code: Complete Guide | 13 |
+| 14 | Building Custom AI Skills | 8 |
+| 15 | MCP: Model Context Protocol | 22 |
+| 16 | AI Automation & Workflow | 10 |
+| 17 | AI APIs & Building Your First AI Tool | 10 |
+| 18 | Local AI with Ollama | 7 |
+| 19 | Advanced AI Mastery | 11 |
+| 20 | Loop Engineering | 17 |
+| 21 | Capstone Projects | 5 |
+| **Total** | | **233 lessons** |
+
+Business-owner and people-management content (validating/launching a business, performance reviews, hiring, OKRs, keeping tabs on a team's work without micromanaging) lives in Part 11 ("AI Inside VS Code"), lessons 6-24/6-29/6-30, with cross-links from Part 7 ("AI for Project Planning & Management").
 
 ---
 
 ## Lesson Format
 
-Every lesson is a JSON file (`data/lessons/part-XX/X-Y.json`) with the schema:
+Every lesson is a JSON file (`data/lessons/part-{id}/{lessonId}.json`) with a matching `{lessonId}.zh.json` sibling for the Chinese translation (identical structure/tags/`nextLesson`/`prevLesson`/quiz `correct`; only prose and `title` are translated):
 
 ```json
 {
@@ -91,20 +102,20 @@ Every lesson is a JSON file (`data/lessons/part-XX/X-Y.json`) with the schema:
 }
 ```
 
-Each section is one of: `text`, `callout` (tip/warning/info/success), `workshop`, or `quiz`.
+Each section is one of: `text`, `callout` (tip/warning/info/success), `code`, `workshop`, `quiz`, `video`, or `diagram`.
 
-### Workshop pattern (every lesson has 5)
+### Workshop pattern
 
 | Tag | Label | Duration |
 |-----|-------|----------|
-| BROWSER | Workshop A — Quick Drill | 8–10 min |
-| BUILD | Workshop B — Build It With AI | 25–35 min |
-| BROWSER | Workshop C — AI Review/Comparison | 10–15 min |
-| BUILD | Workshop D — Real-World Application | 15–25 min |
+| BROWSER | Quick drill | 8–10 min |
+| BUILD | Build it with AI | 25–35 min |
+| BROWSER | AI review/comparison | 10–15 min |
+| BUILD | Real-world application | 15–25 min |
 
-Workshop B always includes a mandatory adversarial review step: *"Ask Claude to find 3 specific problems or gaps, then fix at least one."*
+Workshop steps typically include a mandatory adversarial review step: *"Ask [the AI tool] to find 3 specific problems or gaps, then fix at least one."*
 
-Every lesson also has 2–3 quizzes with 4 options, a `correct` index, and a detailed `explanation`.
+Most lessons also have 2–3 quizzes with 4 options, a `correct` index, and a detailed `explanation`.
 
 ---
 
@@ -113,14 +124,14 @@ Every lesson also has 2–3 quizzes with 4 options, a `correct` index, and a det
 | Principle | Expression |
 |-----------|-----------|
 | **The Accomplishment Principle** | Every workshop uses real user data and produces a lasting artifact |
-| **Offline-first** | Runs on `file://` with no internet — vendor libs bundled in repo |
+| **Offline-first** | Runs on `file://` or a static server, no build step, no external calls required |
 | **No build tools** | Vanilla HTML/CSS/ES6+ — double-click and it works |
 | **Beginner precision** | Every click, every pane, every shortcut spelled out explicitly |
 | **Dark mode default** | Deep navy backgrounds, indigo accent, system font stack |
 
 ---
 
-## Tech Stack (When Built)
+## Tech Stack
 
 | Layer | Choice |
 |-------|--------|
@@ -129,44 +140,30 @@ Every lesson also has 2–3 quizzes with 4 options, a `correct` index, and a det
 | Logic | Vanilla ES6+ (modules) |
 | Content | JSON lesson files |
 | Progress | `localStorage` API |
-| Markdown | marked.js v15.0.12 (vendored) |
-| Sanitization | DOMPurify v3.2.6 (vendored) |
-| Highlighting | highlight.js v11.11.1 (vendored) |
-| Search | Fuse.js v7.1.0 (vendored) |
+| i18n | `localStorage`-backed language toggle (`js/i18n.js`), English + Chinese |
+| Markdown | marked.js (vendored) |
+| Sanitization | DOMPurify (vendored) |
+| Highlighting | highlight.js (vendored) |
+| Search | Fuse.js (vendored) |
 | Icons | Inline SVGs from Lucide |
 | Fonts | System stack + optional Inter + JetBrains Mono |
 
 ---
 
-## Current Status
+## Running Locally
 
-**Phase:** All 156 lesson JSON files authored and fully enhanced.
+```
+node scripts/serve.js
+```
 
-Every lesson has:
-- Full text content with callouts
-- 5 workshops (A–D pattern) including at least 1 real AI build activity
-- 2–3 quizzes with explanations
-- Estimated time: 55–145 min per lesson (~162 hours total)
+Then open `http://localhost:8080`. No `npm install` needed — there is no `package.json`; everything runs on vendored, bundled dependencies.
 
-**Next:** Site build — HTML/CSS/JS rendering engine for lesson content.
+To check for structural issues in lesson content (missing files, empty sections):
 
----
-
-## Build Phases
-
-1. Design System Foundation (CSS tokens)
-2. Static Layout Shell (HTML structure)
-3. Component Library (HTML + CSS, no JS)
-4. Design Polish Pass (QA gate)
-5. JavaScript Core (routing, progress, sidebar)
-6. Lesson Rendering Engine (marked.js, highlight.js)
-7. Interactivity & Progress (quizzes, mark complete, animations)
-8. Search (Fuse.js overlay)
-9. Final Polish & QA
-10. ~~Content Authoring~~ ✅ Complete — 156 lessons done
-
-See [site-design-plan.md](.docs/site-design-plan.md) for full details on each phase.
+```
+node scripts/audit-lessons.js
+```
 
 ---
 
-*Course content completed 2026-06-11. Architecture designed 2026-06-10.*
+*Last updated 2026-07-06.*

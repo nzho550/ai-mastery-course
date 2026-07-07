@@ -3,6 +3,8 @@
 **All 14 parts · 112 lessons**  
 Every lesson specifies: learning outcome, references, workshop type, and exact workshop task.
 
+> **Historical planning document.** The "14 parts · 112 lessons" figure above reflects an earlier stage of authoring — the live course has since grown to 21 parts / 233 lessons. The workshop/reference *pattern* described here still applies; see the repository root `README.md` for current counts.
+
 ---
 
 ## The Accomplishment Principle

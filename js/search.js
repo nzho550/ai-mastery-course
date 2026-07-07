@@ -1,6 +1,6 @@
 import { icons } from './icons.js';
 import { navigate } from './router.js';
-import { qs, debounce } from './utils.js';
+import { qs, debounce, escapeHtml } from './utils.js';
 import { t } from './i18n.js';
 
 let fuse = null;
@@ -35,8 +35,8 @@ export function initSearch(curriculum) {
     } else {
       results.innerHTML = hits.map((h, i) => `
         <a class="search-item" href="#/lesson/${h.item.id}" data-idx="${i}">
-          <div class="search-item-title">${h.item.id} — ${h.item.title}</div>
-          <div class="search-item-meta">${h.item.part}</div>
+          <div class="search-item-title">${h.item.id} — ${escapeHtml(h.item.title || '')}</div>
+          <div class="search-item-meta">${escapeHtml(h.item.part || '')}</div>
         </a>
       `).join('');
       results.querySelectorAll('.search-item').forEach(a => {
