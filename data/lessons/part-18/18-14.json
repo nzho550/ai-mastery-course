@@ -1,0 +1,78 @@
+{
+  "id": "18-14",
+  "title": "Agentic Browsers — The New Browser Wars",
+  "part": 18,
+  "estimatedMinutes": 55,
+  "tags": [
+    "advanced",
+    "agentic-browsers",
+    "chatgpt-atlas",
+    "perplexity-comet",
+    "browser-automation",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 2-11 covered browser AI extensions — add-ons like Sider or Monica that sit on top of your existing browser. Since then, a much bigger shift has happened: entire browsers rebuilt around an AI that can act, not just answer. **Agentic browsers** — ChatGPT Atlas, Perplexity Comet, Dia, and Chrome's built-in auto-browse — went from research demo to mass-market product in about fifteen months, and by 2026 a meaningful share of web traffic is these agents browsing on people's behalf rather than humans clicking directly. This lesson covers what they do, which one fits your workflow, and what changes about how you should think about the web now that some of your \"visitors\" aren't human."
+    },
+    {
+      "type": "text",
+      "content": "## The Major Agentic Browsers (2026)\n\n**ChatGPT Atlas (OpenAI)** — A Chromium-based browser with ChatGPT built into every tab: it can see what you're viewing, remember context across sessions, and take actions — filling forms, comparing products across open tabs, booking things — through an \"Agent Mode.\" Mac-only as of mid-2026.\n\n**Perplexity Comet** — Free, cross-platform (desktop, Android, iOS), and built around Perplexity's search engine rather than bolted onto a general browser. Comet Assistant can do in-page research and summarisation, plus autonomous multi-step tasks like booking flights or managing email. It's the most accessible entry point if you want to try agentic browsing without a subscription. Comet also has an enterprise deployment path via MDM for organisations.\n\n**Dia** — Originally from The Browser Company, now an Atlassian product, positioned toward knowledge workers living in SaaS tools (Jira, email, design tools). Mac-only, in beta, with a paid Pro tier.\n\n**Chrome auto-browse (Google)** — Rather than a separate browser, Google is adding agentic capability directly into Chrome for Google AI Pro/Ultra subscribers — if you already live in Chrome, you get much of the same capability without switching browsers, though it's subscription-gated and still rolling out.\n\n**Other notable entries:** Opera's Aria, Brave Leo (privacy-first, on-device), Arc Max, and several others — the space is genuinely crowded, and no single browser has \"won.\""
+    },
+    {
+      "type": "text",
+      "content": "## What They're Actually For\n\nThe common thread across all of them: instead of you clicking through a multi-step process — comparing prices across five tabs, filling out the same form on three job-listing sites, researching a topic and synthesising the results — you describe the outcome you want and the agent operates the browser to get there.\n\n**Where they genuinely save time right now:**\n- Repetitive multi-site tasks (comparing prices, filling similar forms across sites)\n- In-page research and summarisation while you keep browsing\n- Basic transactional tasks with well-understood websites (this course's lesson 8-10 already covered the underlying browser-automation building block — Playwright MCP — which is conceptually the same idea, just packaged as a consumer product here)\n\n**Where to still be careful:**\n- Anything transactional involving payment or an account you care about — verify the outcome yourself, the same caution from lesson 18-13 on computer-use agents applies here\n- Unfamiliar or low-quality websites, where the agent is more likely to misinterpret the page\n- Tasks where you haven't yet built calibrated trust in a specific tool's judgment"
+    },
+    {
+      "type": "text",
+      "content": "## Choosing One\n\nThere isn't a single winner — the right choice depends on what you already use:\n\n| Your situation | Best fit |\n|---|---|\n| Want to try agentic browsing for free | Perplexity Comet |\n| Already deep in ChatGPT for everything else | ChatGPT Atlas |\n| Live in Jira, Confluence, and SaaS tools all day | Dia |\n| Don't want to switch browsers at all | Chrome auto-browse (if you pay for Google AI) |\n| Privacy is the top priority | Brave Leo (on-device, privacy-first) |\n\nMost people don't need to switch their daily browser to benefit — Chrome's built-in path and browser extensions (lesson 2-11) already cover a lot of ground. Switching browsers entirely makes the most sense if a large share of your work is genuinely repetitive, multi-step, browser-based tasks."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The same rules from lesson 18-13 apply here.** An agentic browser acting on your behalf is logged into your actual accounts, can navigate anywhere, and can take real-world actions (submitting forms, making purchases, sending messages). Watch its first several actions on any new type of task before trusting it unsupervised. Verify consequential outcomes yourself rather than accepting the agent's own \"done\" signal. And be specifically cautious with financial transactions — treat an agentic browser buying something on your behalf the same way you'd treat handing your card to someone you just met."
+    },
+    {
+      "type": "text",
+      "content": "## The Other Side: Your Website Now Has AI Visitors\n\nIf you build or manage a website — your portfolio (lesson 14-1), a business site, a blog — this shift matters from the other direction too. A growing share of \"visitors\" to any website are AI agents (browsing on a user's behalf) or AI crawlers (indexing content for chat answers), not humans directly clicking through. Two practical implications:\n\n**Make sure your content is actually readable by agents.** Content hidden behind heavy client-side JavaScript, aggressive paywalls, or login walls is invisible to most browsing agents and AI crawlers — the same content that's bad for accessibility is often bad for agent-readability too.\n\n**Check whether you're accidentally blocking AI traffic.** Some hosting and CDN providers (Cloudflare among them) have shifted to blocking AI bots by default at some point in their configuration history — if you want AI agents and crawlers to be able to read and cite your site, check your `robots.txt` and CDN bot-management settings rather than assuming the default is what you want. Lesson 16-11 covers this from the content-strategy side in depth."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Try One Agentic Browser on a Real Task",
+      "content": "Hands-on comparison in about 15 minutes.\n\n**Step 1 — Pick one agentic browser to try** based on the table above and what you already have access to. Perplexity Comet is the lowest-friction starting point since it's free and cross-platform.\n\n**Step 2 — Pick a real, low-stakes, multi-step browsing task** you'd normally do by hand: comparing a product across 3-4 retailer sites, researching and summarising a topic across several sources, or filling in the same information on multiple similar web forms (job applications, waitlists, newsletter signups with a throwaway email).\n\n**Step 3 — Give the agent the task in plain language** and watch its first several actions closely. Does it correctly interpret each page? Does it ask for clarification when something is ambiguous, or does it guess?\n\n**Step 4 — Compare against doing it yourself.** How much time did it actually save? Where did it get something wrong or need correction?\n\n**Step 5 — Write a one-paragraph verdict**: for this specific type of task, is this tool trustworthy enough to use unsupervised next time, or does it still need close watching?\n\n**Outcome:** A real, calibrated data point on agentic browsing for your own use cases — not a marketing claim."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague says \"I don't need an agentic browser — my browser extension from lesson 2-11 already does AI stuff.\" What's the most accurate response?",
+      "options": [
+        "They're right — browser extensions and agentic browsers are the same thing with different names",
+        "Browser extensions typically add AI assistance (summarizing, chatting about the current page) on top of your existing browser; agentic browsers are built to autonomously take multi-step actions across tabs and sites — a meaningfully bigger capability, not just a repackaging",
+        "Agentic browsers are strictly worse because they require switching browsers entirely",
+        "Browser extensions will be discontinued once agentic browsers become popular"
+      ],
+      "correct": 1,
+      "explanation": "These solve different problems. A browser extension (lesson 2-11) typically adds an AI layer to your existing browsing — summarizing a page, answering questions about what you're looking at. Agentic browsers are architecturally different: they're built to take autonomous, multi-step actions across multiple tabs and websites (comparing prices, filling forms, completing a booking) on your behalf. The colleague's extension may be genuinely useful, but it's not doing what Atlas, Comet, or Dia are built to do."
+    },
+    {
+      "type": "quiz",
+      "question": "You manage a small business website and want AI chat tools like ChatGPT and Perplexity to be able to find and cite your content. What should you check first?",
+      "options": [
+        "Nothing — AI tools can already read any website automatically with no configuration needed",
+        "Your robots.txt and CDN bot-management settings — some providers block AI crawlers by default, and content hidden behind heavy client-side JavaScript or login walls is often invisible to both AI crawlers and browsing agents",
+        "You need to manually submit your website URL to each AI company individually",
+        "This only matters for very large companies, not small businesses"
+      ],
+      "correct": 1,
+      "explanation": "AI crawlers and browsing agents can only find and cite content they can actually access and parse. Two common, fixable blockers: (1) some CDN and hosting providers now block AI bots by default at the infrastructure level, which silently cuts off all AI visibility even if the content itself is fine; (2) content that's hidden behind heavy client-side JavaScript rendering, paywalls, or login requirements is frequently invisible to crawlers and agents the same way it's often bad for accessibility. Checking robots.txt and bot-management settings is the first, lowest-effort step — lesson 16-11 goes deeper on the content-strategy side of this."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 18-14 — and Part 19: Advanced AI Mastery is complete.** You now understand the two newest categories of autonomous AI — computer-use agents and agentic browsers — how they differ from the API-based tools you've built throughout this course, and how to use both without letting them do something you'll regret. Part 20 (Loop Engineering) goes deeper into the perception-action loop pattern that powers all of these agents, and teaches you to design your own."
+    }
+  ],
+  "nextLesson": "21-1",
+  "prevLesson": "18-13"
+}

@@ -79,7 +79,7 @@
       "type": "workshop",
       "tag": "BUILD",
       "title": "工作坊 D —— 为你的环境配置 Claude Code",
-      "content": "配置 Claude Code，使其在你特定的开发环境中发挥最佳效果。\n\n**第 1 步 —— 检查你的 Claude Code 版本和设置：**\n```powershell\nclaude --version\nclaude config\n```\n\n**第 2 步 —— 配置你的模型偏好：**\n```powershell\nclaude config set model claude-sonnet-4-6\n```\n\n**第 3 步 —— 在你的主项目中设置一个 CLAUDE.md**（我们会在第 7-6 课中深入讲解这个，但现在先开始）：\n- 在项目根目录创建 `CLAUDE.md`\n- 添加 3 条基本内容：这个项目是什么、主要的语言/框架，以及 Claude Code 应该始终做的一件事（例如\"每次改动后都运行测试\"）\n\n**第 4 步 —— 测试配置：** 启动一个 Claude Code 会话，让它做一个任务。它遵循了你的 CLAUDE.md 指令吗？\n\n**第 5 步 —— 强制设置审查：** 向 Claude 提问：*\"Review my Claude Code setup. What configuration or CLAUDE.md instructions should I add to make Claude Code more reliable for [your project type]?\"*"
+      "content": "配置 Claude Code，使其在你特定的开发环境中发挥最佳效果。\n\n**第 1 步 —— 检查你的 Claude Code 版本和设置：**\n```powershell\nclaude --version\nclaude config\n```\n\n**第 2 步 —— 配置你的模型偏好：**\n```powershell\nclaude config set model claude-sonnet-5\n```\n\n**第 3 步 —— 在你的主项目中设置一个 CLAUDE.md**（我们会在第 7-6 课中深入讲解这个，但现在先开始）：\n- 在项目根目录创建 `CLAUDE.md`\n- 添加 3 条基本内容：这个项目是什么、主要的语言/框架，以及 Claude Code 应该始终做的一件事（例如\"每次改动后都运行测试\"）\n\n**第 4 步 —— 测试配置：** 启动一个 Claude Code 会话，让它做一个任务。它遵循了你的 CLAUDE.md 指令吗？\n\n**第 5 步 —— 强制设置审查：** 向 Claude 提问：*\"Review my Claude Code setup. What configuration or CLAUDE.md instructions should I add to make Claude Code more reliable for [your project type]?\"*"
     },
     {
       "type": "quiz",

@@ -21,7 +21,7 @@ This is the **AI Mastery Course** — a built, deployed, offline-capable website
 - Advanced techniques: RAG, agents, model selection, custom knowledge engines
 - Building custom AI skills/commands for Claude Code
 
-**Course structure:** 21 parts, 233 lessons, ~236 hours total learning time. Available in English and Chinese (language toggle in the header).
+**Course structure:** 21 parts, 238 lessons, ~240 hours total learning time. Available in English and Chinese (language toggle in the header).
 
 **Status:** Live at GitHub Pages ([nzho550/ai-mastery-course](https://github.com/nzho550/ai-mastery-course)). All content authored, site built, i18n complete.
 
@@ -63,7 +63,7 @@ ai-mastery-course/
 | 3 | Prompt Engineering | 8 |
 | 4 | AI Safety, Privacy & Cost Management | 5 |
 | 5 | AI for Research & Knowledge Work | 8 |
-| 6 | AI for Document Creation & Office Work | 10 |
+| 6 | AI for Document Creation & Office Work | 11 |
 | 7 | AI for Project Planning & Management | 7 |
 | 8 | AI for Personal Life | 12 |
 | 9 | Computer & Command Line Basics | 7 |
@@ -72,14 +72,14 @@ ai-mastery-course/
 | 12 | Other AI Coding Tools | 7 |
 | 13 | Claude Code: Complete Guide | 13 |
 | 14 | Building Custom AI Skills | 8 |
-| 15 | MCP: Model Context Protocol | 22 |
+| 15 | MCP: Model Context Protocol | 23 |
 | 16 | AI Automation & Workflow | 10 |
 | 17 | AI APIs & Building Your First AI Tool | 10 |
 | 18 | Local AI with Ollama | 7 |
-| 19 | Advanced AI Mastery | 11 |
+| 19 | Advanced AI Mastery | 14 |
 | 20 | Loop Engineering | 17 |
 | 21 | Capstone Projects | 5 |
-| **Total** | | **233 lessons** |
+| **Total** | | **238 lessons** |
 
 Business-owner and people-management content (validating/launching a business, performance reviews, hiring, OKRs, keeping tabs on a team's work without micromanaging) lives in Part 11 ("AI Inside VS Code"), lessons 6-24/6-29/6-30, with cross-links from Part 7 ("AI for Project Planning & Management").
 
@@ -166,4 +166,4 @@ node scripts/audit-lessons.js
 
 ---
 
-*Last updated 2026-07-06.*
+*Last updated 2026-07-08.*

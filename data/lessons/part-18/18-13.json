@@ -1,0 +1,86 @@
+{
+  "id": "18-13",
+  "title": "Computer-Use Agents — AI That Controls Your Desktop",
+  "part": 18,
+  "estimatedMinutes": 65,
+  "tags": [
+    "advanced",
+    "computer-use",
+    "agents",
+    "desktop-automation",
+    "claude-computer-use",
+    "safety",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nEverything you've built so far in this course — Claude Code, MCP servers, custom skills, loops — works by calling APIs and tools with defined inputs and outputs. **Computer-use agents** are a different category entirely: AI that operates a computer the way a human does — taking screenshots, moving a mouse, clicking buttons, typing into whatever application is open — without any API integration at all. This lesson covers what these agents can actually do in 2026, the major players, and — most importantly — how to use them without letting them do something you'll regret."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Why this is a genuinely new category, not a rebrand.** Everything else in this course connects AI to a specific, defined interface: an API, an MCP tool, a file. A computer-use agent instead looks at a screenshot of your actual screen, decides what a human would click next, and does it — through the same window manager, the same applications, the same permission system a human uses. This means it can operate *any* application, including ones with no API at all — but it also means its safety net is whatever your operating system's permissions allow, not a narrow, auditable tool definition."
+    },
+    {
+      "type": "text",
+      "content": "## The Current Landscape (2026)\n\n**Claude Computer Use** (Anthropic) — Available to Claude Pro and Max subscribers through Claude Code and Claude's desktop apps. It works by taking a screenshot, deciding on an action (move mouse, click, type, scroll), executing it, taking another screenshot, and repeating — a perception-action loop, exactly like the agent loops you'll study in Part 20. Anthropic has built in hard-coded safety blocks: it will not interact with banking sites, cryptocurrency exchanges, trading platforms, or adult content, and these blocks cannot be disabled by the user or by a prompt. It's explicitly labelled a *research preview* — meaning Anthropic itself considers the permission and safety model still under active development, not finished.\n\n**ChatGPT Agent** (OpenAI) — OpenAI's earlier standalone product, Operator, was folded into ChatGPT Agent, which is bundled into paid ChatGPT plans. It operates in two modes: a remote sandboxed browser (nothing touches your actual machine — safer, but limited to web tasks) and more capable local automation on some platforms.\n\n**Manus** and **Manus My Computer** — An independent product built specifically for long-running, multi-step autonomous tasks, with a distinct \"give it a goal, walk away\" design philosophy.\n\n**Amazon Nova Act** — An SDK (not a consumer product) for developers building their own browser-automation agents, positioned as infrastructure rather than an end-user tool.\n\n**Two architectural models exist, and they trade off very differently:**\n- **Remote sandbox** (ChatGPT Agent's default mode): the agent operates a browser on the provider's servers. Nothing touches your machine. Maximum isolation, but limited to what a browser can do.\n- **Local machine control** (Claude Computer Use, Manus My Computer): the agent operates your actual desktop — any application, any file, your actual logged-in accounts. Far more capable, and far higher stakes if something goes wrong."
+    },
+    {
+      "type": "text",
+      "content": "## What They're Actually Good For Right Now\n\nBe realistic about where this technology is. Independent benchmarks (OSWorld, WebArena, WebVoyager) show the best systems succeeding on roughly 60-85% of test tasks depending on the benchmark and system — meaning even the strongest computer-use agent fails a meaningful fraction of realistic desktop tasks. Researchers have also shown that some of the headline benchmark numbers can be gamed, so treat leaderboard scores as directional, not definitive.\n\n**Good current use cases:**\n- Multi-step data entry into a legacy application with no API (the exact scenario computer-use agents were built for)\n- Filling out repetitive web forms across many similar sites\n- Testing your own application's UI by having the agent click through it like a user would\n- Bridging two applications that don't talk to each other — reading data from one, entering it into another\n\n**Bad current use cases:**\n- Anything involving money movement, account credentials, or irreversible actions, unattended\n- Long unsupervised runs on unfamiliar websites — an agent operating your actual desktop can misclick, misinterpret a page, or take an action you didn't intend, and won't always recognise that it has gone wrong\n- Anything where a mistake would be expensive, embarrassing, or hard to undo"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The core safety issue: this is your actual computer.** Every MCP server and Claude Code permission you've configured elsewhere in this course operates through a narrow, defined tool — you know exactly what \"send an email\" or \"write a file\" can do. A computer-use agent can, in principle, do anything a mouse and keyboard can do on your machine: open other applications, navigate to other websites, act while logged into whatever accounts happen to be open. Treat computer-use agents the way you'd treat handing your literal keyboard to a very fast, very literal-minded new employee on their first day: watch closely, start with low-stakes tasks, and never leave one running unattended on anything that touches money, credentials, or irreversible actions. This is precisely why Anthropic ships this as a *research preview* with hard safety blocks that can't be turned off — even the maker of the tool doesn't consider the permission model solved yet."
+    },
+    {
+      "type": "text",
+      "content": "## How to Actually Use One Safely\n\n**Start narrow.** Give it one clearly bounded task on one application, not an open-ended goal across your whole desktop.\n\n**Watch the first several actions.** Don't tab away the moment you start a computer-use session. The first few actions tell you whether it has correctly understood the task and the screen.\n\n**Prefer the remote-sandbox mode for anything web-based** unless you specifically need it to touch local files or desktop applications — you get most of the benefit with a much smaller blast radius.\n\n**Never pair it with logged-in financial, healthcare, or admin-level accounts** unless you are watching every single action and are prepared to stop it instantly.\n\n**Treat its \"done\" signal with skepticism.** Computer-use agents can report success on a task they only partially completed, or misjudge whether a form submission actually went through — verify the actual end state (did the email really send? did the order really place?) rather than trusting the agent's own summary."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Understand the Computer-Use Landscape Before You Try One",
+      "content": "An 8-minute research drill to understand what's currently available to you specifically, before granting any tool control of your desktop.\n\n**Step 1 — Check what you already have access to.** If you have Claude Pro or Max, computer-use features may already be available through Claude Code or Claude's desktop app — check platform.claude.com/docs for the current computer-use tool documentation and availability for your plan and OS. If you use ChatGPT Plus/Pro, check whether ChatGPT Agent is enabled on your plan.\n\n**Step 2 — Ask Claude (in a normal chat, no computer-use needed):**\n```\nI'm considering trying a computer-use agent (Claude Computer Use, ChatGPT Agent,\nor similar) for the first time. Given what these tools can currently do and\ntheir known limitations in 2026, what is a genuinely low-stakes first task\nI could give one to build calibrated trust before using it for anything\nthat matters?\n```\n\n**Step 3 — Read the safety documentation** for whichever tool you're considering before your first session — specifically what it will refuse to do by default, and whether that list can be changed.\n\n**Step 4 — Write down, in your own words, one task you would trust a computer-use agent with unsupervised, and one task you would never let it do unsupervised even with the best tool available.** This distinction is the actual skill this lesson is teaching.\n\n**Outcome:** A calibrated, specific understanding of what's currently safe to delegate to a computer-use agent — before you've handed one control of anything."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Run a Supervised, Low-Stakes Computer-Use Session",
+      "content": "If you have access to a computer-use feature (Claude Pro/Max with Claude Computer Use, or ChatGPT Agent), run one real, low-stakes, closely supervised session.\n\n**Step 1 — Pick a genuinely low-stakes task.** Good candidates: filling in a form on a non-critical site with test data, navigating a settings menu to check a configuration, extracting a list of items from a web page into a document. Bad candidates for a first try: anything with a real account, real payment information, or real correspondence going out under your name.\n\n**Step 2 — Give the task with a clear, bounded scope:**\n```\nOn [specific site/application], do exactly this: [narrow, specific task].\nDo not navigate anywhere else. Stop and ask me if the page doesn't match\nwhat you expect.\n```\n\n**Step 3 — Watch every action in real time.** Do not do something else while it runs. Note: did it correctly interpret the screen? Did it take any action you wouldn't have expected?\n\n**Step 4 — Verify the actual outcome yourself** — don't just accept the agent's report that it succeeded. Check the real end state.\n\n**Step 5 — Write a short debrief:**\n```\nTask: [what you asked]\nWhat it actually did: [what happened]\nWhere it succeeded / where it struggled:\nWould I trust it with this same task unsupervised next time? Why or why not?\n```\n\n**Outcome:** First-hand, calibrated experience with what a computer-use agent gets right and wrong — the only reliable way to know how much to trust one for your specific use cases."
+    },
+    {
+      "type": "quiz",
+      "question": "A computer-use agent is asked to log into a company's expense system and submit three receipts. It reports success, but you later find only two receipts were actually submitted. What does this reveal about how to use these tools?",
+      "options": [
+        "This means computer-use agents are not usable at all and should be avoided entirely",
+        "The agent's self-reported success should never be the only verification — for anything with a real-world consequence, you must independently verify the actual end state, because computer-use agents can misjudge whether an action fully completed",
+        "This is a sign the agent needs a more powerful underlying model",
+        "This only happens with free-tier access and would not happen on a paid plan"
+      ],
+      "correct": 1,
+      "explanation": "Computer-use agents operate via a perception-action loop — they interpret a screenshot, take an action, and interpret the next screenshot to judge whether it worked. That judgment can be wrong: a page might look similar to what the agent expected without the action actually having completed. This is exactly why the lesson's core safety guidance is to verify real end states yourself for anything consequential, rather than trusting the agent's own summary. The tools are genuinely useful (option A is too extreme), but 'it said it worked' is not sufficient verification for anything that matters."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the single biggest structural difference between a computer-use agent and the MCP-based tools you've used throughout this course?",
+      "options": [
+        "Computer-use agents are always slower",
+        "MCP tools are narrow, defined interfaces with known inputs/outputs and auditable permission boundaries; a computer-use agent can in principle do anything a mouse and keyboard can do on your actual desktop, which means its effective permission boundary is your whole operating system, not one function",
+        "Computer-use agents only work with Anthropic's models",
+        "There is no meaningful difference — they solve the same problem in the same way"
+      ],
+      "correct": 1,
+      "explanation": "An MCP tool like 'send_email' or 'read_file' has a defined, narrow scope — you know exactly what it can and can't do, and you approve it at that granularity. A computer-use agent instead operates through the same screen and input devices a human uses, which means it can navigate to any application or website your desktop has access to. This is what makes it powerful (no API required, works with any legacy application) and also what makes it the highest-risk category of AI tool covered in this course — the effective blast radius of a mistake is bounded by your OS permissions and logged-in accounts, not by a specific tool's defined scope."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 18-13.** You understand what computer-use agents are, how they differ structurally from the MCP tools and skills you've built throughout this course, what they're currently good and bad at, and — most importantly — how to try one without regretting it. Next: agentic browsers, the browser-specific cousin of this same category."
+    }
+  ],
+  "nextLesson": "18-14",
+  "prevLesson": "18-11"
+}

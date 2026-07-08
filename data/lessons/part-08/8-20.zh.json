@@ -30,7 +30,7 @@
     {
       "type": "callout",
       "variant": "info",
-      "content": "**你已经连接的 MCP 服务器（来自第 8 部分）：** 查看你的 `claude_desktop_config.json` 以及 Claude Code 中 `/mcp` 的输出。列出每一个处于活跃状态的服务器。这就是你当前的工具库。上面的统一办公室工作流程只有在相关 MCP 已连接的情况下才能生效——如果 Teams 没有连接，Claude 就完全无法读取 Teams 数据。你的配置文件是 Claude 能访问什么的真相来源。"
+      "content": "**你已经连接的 MCP 服务器（来自第 8 部分）：** 查看你的 `~/.claude.json`（若是项目作用域的服务器，则是 `.mcp.json`）以及 Claude Code 中 `/mcp` 的输出。列出每一个处于活跃状态的服务器。这就是你当前的工具库。上面的统一办公室工作流程只有在相关 MCP 已连接的情况下才能生效——如果 Teams 没有连接，Claude 就完全无法读取 Teams 数据。你的配置文件是 Claude 能访问什么的真相来源。"
     },
     {
       "type": "workshop",

@@ -29,7 +29,7 @@
     },
     {
       "type": "text",
-      "content": "## 一个完整的 config.json 示例\n\n下面是一个同时配置了云端模型和本地模型的 config.json：\n\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Claude Sonnet (Cloud)\",\n      \"provider\": \"anthropic\",\n      \"model\": \"claude-sonnet-4-6\",\n      \"apiKey\": \"sk-ant-your-key\"\n    },\n    {\n      \"title\": \"Local Phi-4 (Ollama)\",\n      \"provider\": \"ollama\",\n      \"model\": \"phi4\"\n    }\n  ],\n  \"tabAutocompleteModel\": {\n    \"title\": \"Tab Autocomplete (Ollama)\",\n    \"provider\": \"ollama\",\n    \"model\": \"phi4\"\n  }\n}\n```\n\n有了这份配置，你可以用 Continue 侧边栏顶部的模型选择器，在 Claude 和你的本地模型之间切换。复杂的重构任务用 Claude，快速的私密代码问题用本地模型。"
+      "content": "## 一个完整的 config.json 示例\n\n下面是一个同时配置了云端模型和本地模型的 config.json：\n\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Claude Sonnet (Cloud)\",\n      \"provider\": \"anthropic\",\n      \"model\": \"claude-sonnet-5\",\n      \"apiKey\": \"sk-ant-your-key\"\n    },\n    {\n      \"title\": \"Local Phi-4 (Ollama)\",\n      \"provider\": \"ollama\",\n      \"model\": \"phi4\"\n    }\n  ],\n  \"tabAutocompleteModel\": {\n    \"title\": \"Tab Autocomplete (Ollama)\",\n    \"provider\": \"ollama\",\n    \"model\": \"phi4\"\n  }\n}\n```\n\n有了这份配置，你可以用 Continue 侧边栏顶部的模型选择器，在 Claude 和你的本地模型之间切换。复杂的重构任务用 Claude，快速的私密代码问题用本地模型。"
     },
     {
       "type": "callout",
@@ -51,7 +51,7 @@
       "type": "workshop",
       "tag": "TERMINAL",
       "title": "工作坊 A——Continue.dev + Ollama 配置",
-      "content": "把 Continue.dev 连接到你的本地 Ollama 模型。\n\n**第 1 步——确保 Ollama 正在运行**，并且至少有一个模型：\n```powershell\nollama list\n```\n\n**第 2 步——配置 Continue.dev**（`.continue/config.json`）：\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Local Code Model\",\n      \"provider\": \"ollama\",\n      \"model\": \"qwen2.5-coder:7b\"\n    },\n    {\n      \"title\": \"Claude Sonnet (Cloud)\",\n      \"provider\": \"anthropic\",\n      \"model\": \"claude-sonnet-4-6\",\n      \"apiKey\": \"your-key-here\"\n    }\n  ]\n}\n```\n\n**第 3 步——打开 VS Code**，在 Continue.dev 中切换模型。\n\n**第 4 步——在一个真实任务上测试本地模型的代码补全能力。**\n\n**第 5 步——问 Claude：** \"我怎样才能配置 Continue.dev，让它根据文件类型或任务类型自动在本地模型和云端模型之间选择？\""
+      "content": "把 Continue.dev 连接到你的本地 Ollama 模型。\n\n**第 1 步——确保 Ollama 正在运行**，并且至少有一个模型：\n```powershell\nollama list\n```\n\n**第 2 步——配置 Continue.dev**（`.continue/config.json`）：\n```json\n{\n  \"models\": [\n    {\n      \"title\": \"Local Code Model\",\n      \"provider\": \"ollama\",\n      \"model\": \"qwen2.5-coder:7b\"\n    },\n    {\n      \"title\": \"Claude Sonnet (Cloud)\",\n      \"provider\": \"anthropic\",\n      \"model\": \"claude-sonnet-5\",\n      \"apiKey\": \"your-key-here\"\n    }\n  ]\n}\n```\n\n**第 3 步——打开 VS Code**，在 Continue.dev 中切换模型。\n\n**第 4 步——在一个真实任务上测试本地模型的代码补全能力。**\n\n**第 5 步——问 Claude：** \"我怎样才能配置 Continue.dev，让它根据文件类型或任务类型自动在本地模型和云端模型之间选择？\""
     },
     {
       "type": "workshop",

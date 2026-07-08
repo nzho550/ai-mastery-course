@@ -30,7 +30,7 @@
     {
       "type": "callout",
       "variant": "info",
-      "content": "**MCP servers you have connected (from Part 8):** Review your `claude_desktop_config.json` and the `/mcp` output in Claude Code. Make a list of every server that is active. This is your current tool palette. The unified office workflows above only work if the relevant MCPs are connected — if Teams isn't connected, Claude cannot read Teams data, period. Your config file is the source of truth for what Claude can access."
+      "content": "**MCP servers you have connected (from Part 8):** Review your `~/.claude.json` (or `.mcp.json` for project-scope servers) and the `/mcp` output in Claude Code. Make a list of every server that is active. This is your current tool palette. The unified office workflows above only work if the relevant MCPs are connected — if Teams isn't connected, Claude cannot read Teams data, period. Your config file is the source of truth for what Claude can access."
     },
     {
       "type": "workshop",

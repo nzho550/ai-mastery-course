@@ -1,0 +1,80 @@
+{
+  "id": "8-23",
+  "title": "Beyond MCP — A2A, Agent Protocols & Where Governance Is Headed",
+  "part": 8,
+  "estimatedMinutes": 55,
+  "tags": [
+    "mcp",
+    "a2a",
+    "agent-protocols",
+    "interoperability",
+    "governance",
+    "advanced",
+    "concepts"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nEverything so far in Part 15 has been about MCP: connecting one AI to many tools. This lesson covers the complementary problem MCP was never designed to solve — how one AI *agent* talks to a *different* agent, potentially built by a different company on a different framework. By the end you'll understand Agent2Agent (A2A), how it relates to MCP, who governs both protocols now, and what this means practically for the skills and MCP servers you've already built."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The one-sentence distinction:** MCP connects an agent to **tools and data**. A2A connects an agent to **other agents**. You've been using MCP throughout this part to give Claude access to Gmail, GitHub, your filesystem, and databases — that's agent-to-tool. A2A solves a different problem: how does *your* Claude Code agent hand off part of a task to a completely different company's agent, built on a different framework, without either side needing to know the other's internals?"
+    },
+    {
+      "type": "text",
+      "content": "## Why This Protocol Exists\n\nAs of 2026, the \"protocol wars\" narrative around MCP has largely resolved — not because one protocol won and the others lost, but because the industry converged on a **layered stack** where different protocols solve different problems at different layers:\n\n- **MCP (Model Context Protocol)** — the agent-to-tool layer. An MCP server exposes a defined set of tools, resources, and prompts; any compliant client (Claude Code, Copilot, a custom app) can call them. This is what Part 15 has been teaching you.\n- **A2A (Agent2Agent)** — the agent-to-agent layer. Created by Google and donated to the Linux Foundation, A2A standardises how independent AI agents discover each other, describe their capabilities, and collaborate — regardless of what framework built them.\n- **Commerce protocols (UCP, AP2)** — an emerging layer above both, for agent-driven purchasing: what gets ordered, from whom, and who authorised the payment.\n\nThe practical guidance that's emerged: **use MCP for connecting your agent to tools and data** (which is most of what you'll ever need) **and add A2A only when you need agents built by different organisations, on different frameworks, to coordinate directly with each other** — cross-vendor or cross-company agent collaboration, not just cross-tool access."
+    },
+    {
+      "type": "text",
+      "content": "## How A2A Actually Works\n\nAn A2A-compatible agent publishes an **Agent Card** — a small file at a well-known URL describing the agent's name, what it's capable of, and how to reach it. Any other A2A-compatible agent can read this card, understand what the agent offers, and start a structured conversation with it to delegate work, without either agent needing custom integration code written specifically for the other.\n\nThe practical effect: imagine your company's Claude Code-based research agent needs to hand off a scheduling task to a completely separate scheduling agent built by a different vendor on a different framework (say, one built with Google's Agent Development Kit). Without A2A, someone has to write custom glue code for that specific pair of agents. With A2A, both agents speak the same discovery-and-handoff protocol, so the integration is generic rather than bespoke — the same benefit MCP gave you for tools, now applied to agents talking to agents.\n\nBy 2026, A2A has crossed 150 supporting organisations and is integrated into major platforms including Microsoft Azure AI Foundry, Copilot Studio, AWS Bedrock AgentCore, and Google Cloud — meaning if you ever work with enterprise agent platforms beyond Claude Code, you're likely to encounter it."
+    },
+    {
+      "type": "text",
+      "content": "## Governance: Why MCP and A2A Now Share a Home\n\nA significant 2026 development that changes how you should think about MCP's long-term stability: **Anthropic donated MCP to the Linux Foundation**, and the Linux Foundation launched the **Agentic AI Foundation (AAIF)** as the permanent, vendor-neutral home for both MCP and A2A — co-founded by Anthropic, OpenAI, Google, Microsoft, AWS, and Block.\n\nWhy this matters practically:\n- MCP is no longer \"Anthropic's protocol that other companies also support\" — it's neutral infrastructure governed jointly by the companies that would otherwise be competing to replace it. That's a strong signal it will remain the standard rather than get displaced by a competitor's alternative.\n- The same governance body now oversees both the agent-to-tool layer (MCP) and the agent-to-agent layer (A2A), which is why joint MCP/A2A specification work — making the two protocols interoperate more directly — is an active 2026 priority rather than two committees working in isolation.\n- IBM's competing Agent Communication Protocol (ACP) merged into A2A in 2025 rather than continuing as a third standard — a sign the ecosystem is actively consolidating rather than fragmenting further."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**What this means for the MCP skills you've already built.** Nothing you've learned in Part 15 becomes obsolete — if anything, the governance consolidation makes it a safer long-term investment. You don't need to learn A2A to keep using MCP servers effectively for personal or small-team work. A2A becomes relevant when you're operating in a context with genuinely separate agents from different organisations that need to coordinate — most individual and small-business use cases (everything this course has built so far) stay entirely within MCP's agent-to-tool model."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Map Your MCP Stack Against the Protocol Layers",
+      "content": "A short exercise to solidify the distinction between the agent-to-tool and agent-to-agent layers using your own setup.\n\n**Step 1 — List every MCP server you've connected** across this course (Gmail, filesystem, GitHub, Slack, Notion, Memory, etc. — check `/mcp` in Claude Code for your current list).\n\n**Step 2 — For each one, confirm it fits the agent-to-tool pattern**: your single AI agent (Claude Code) is calling a defined tool to read or write data. This is the layer MCP solves, and it's almost certainly 100% of what you've built so far.\n\n**Step 3 — Now imagine a genuine agent-to-agent scenario** relevant to your work: a case where a *separate*, independently-operating AI agent — not just a tool — would need to receive a task from your agent and report back. Examples: a vendor's dedicated support-ticket agent, a partner company's scheduling agent, a specialised research agent built by a different team on a different framework.\n\n**Step 4 — Ask Claude:**\n```\nI use MCP for [list your servers]. I'm trying to understand when A2A\n(agent-to-agent) would actually become relevant for someone in my\nposition versus when MCP alone continues to be sufficient. Given my\nsetup, is there a realistic near-term scenario where I'd need\ncross-agent coordination rather than just more MCP tools?\n```\n\n**Step 5 — Write one sentence** distinguishing, in your own words, when you'd reach for \"add another MCP server\" versus \"this needs actual agent-to-agent coordination.\"\n\n**Outcome:** A concrete, personally-anchored understanding of where MCP's job ends and A2A's job begins — useful the moment you encounter an enterprise agent platform that mentions A2A, Agent Cards, or agent discovery."
+    },
+    {
+      "type": "quiz",
+      "question": "A company has a Claude Code-based agent that needs to hand off a task to a completely separate scheduling agent built by a different vendor on a different framework. What's the most accurate way to describe this problem?",
+      "options": [
+        "This is exactly what MCP was designed for — just add the scheduling vendor's MCP server",
+        "This is an agent-to-agent coordination problem, which is what A2A (not MCP) is designed to standardise — MCP connects an agent to tools and data, while A2A connects independent agents to each other regardless of their underlying framework",
+        "This is impossible without both companies rewriting their agents to share the same framework",
+        "This requires the two companies to build fully custom, one-off integration code with no standard to rely on"
+      ],
+      "correct": 1,
+      "explanation": "This is the precise distinction the lesson establishes. MCP is the agent-to-tool layer — it's for connecting one agent to defined tools and data sources (which is what all 22 other MCP lessons in this part cover). When the need is for two independent, separately-built AI agents to discover each other's capabilities and coordinate on a task, that's the agent-to-agent layer, which A2A was specifically created to standardise via Agent Cards and a shared discovery/handoff protocol — avoiding the need for fully custom, one-off integration code between every pair of agents."
+    },
+    {
+      "type": "quiz",
+      "question": "Why does it matter that MCP was donated to the Linux Foundation's Agentic AI Foundation, co-governed by Anthropic, OpenAI, Google, Microsoft, AWS, and Block, rather than remaining solely under Anthropic's control?",
+      "options": [
+        "It doesn't matter — governance structure has no practical effect on a protocol's adoption or stability",
+        "It signals MCP is now neutral, shared infrastructure rather than one company's product that competitors might route around — when the biggest potential competitors co-govern the standard, it's a much stronger signal of long-term stability than any single vendor's roadmap promise",
+        "It means MCP will be replaced by a new protocol within the year",
+        "It means Anthropic no longer supports or uses MCP"
+      ],
+      "correct": 1,
+      "explanation": "Shared, neutral governance is a meaningfully stronger signal of a standard's staying power than any single company's commitment. When Anthropic's biggest competitors (OpenAI, Google, Microsoft, AWS) are co-founders of the body governing MCP, they have a direct stake in the protocol succeeding rather than an incentive to build a rival standard — which is exactly why IBM merged its competing ACP protocol into A2A instead of continuing to compete. This doesn't mean Anthropic stopped using or building MCP; it means the protocol's future no longer depends on one company's decisions alone."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 8-23.** You now understand where MCP's job ends and A2A's begins, why the governance move to the Linux Foundation's Agentic AI Foundation makes MCP a safer long-term bet rather than a smaller one, and when (rarely, for most individual users) you'd actually need agent-to-agent coordination on top of what you've already built. Lesson 8-15 continues Part 15's hands-on track: building your own custom MCP server from scratch."
+    }
+  ],
+  "nextLesson": "8-15",
+  "prevLesson": "8-14"
+}

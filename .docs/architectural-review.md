@@ -4,7 +4,7 @@
 **Review date:** 2026-06-10  
 **Scope:** Content completeness, instructional precision, AI tool coverage, VS Code onboarding
 
-> **Historical planning document.** Reflects the course's structure and content as of the review date above, not the current live site (which has since grown to 21 parts / 233 lessons with i18n). See the repository root `README.md` for current status.
+> **Historical planning document.** Reflects the course's structure and content as of the review date above, not the current live site (which has since grown to 21 parts / 238 lessons with i18n). See the repository root `README.md` for current status.
 
 ---
 

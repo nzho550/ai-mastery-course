@@ -151,7 +151,7 @@ function renderSection(section) {
               <span class="workshop-label">${t('workshop.label')}</span>
               <span class="workshop-tag">${tagIcon} ${tag}</span>
             </div>
-            <div class="workshop-title">${section.title || ''}</div>
+            <div class="workshop-title">${escapeHtml(section.title || '')}</div>
           </div>
           <div>${DOMPurify.sanitize(marked.parse(section.content || ''))}</div>
         </div>`;

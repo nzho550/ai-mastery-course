@@ -8,12 +8,13 @@
     "security",
     "prompt-injection",
     "mcp",
-    "api-keys"
+    "api-keys",
+    "agentic-security"
   ],
   "sections": [
     {
       "type": "text",
-      "content": "## 你将学到什么\n\n在工作流中使用 AI，会引入一些以前不存在的攻击面。这不是什么离奇罕见的场景——这些都是安全研究人员和开发者正在实实在在遇到的真实风险。学完这节课后，你会得到一份五点安全检查清单，并把它应用到你自己的设置上。"
+      "content": "## 你将学到什么\n\n在工作流中使用 AI，会引入一些以前不存在的攻击面。这不是什么离奇罕见的场景——这些都是安全研究人员和开发者正在实实在在遇到的真实风险。学完这节课后，你会得到一份六点安全检查清单，并把它应用到你自己的设置上。"
     },
     {
       "type": "text",
@@ -38,13 +39,22 @@
     },
     {
       "type": "text",
-      "content": "## 五点安全检查清单\n\n以下是这份检查清单。你目前的设置应该在这五项上都为“是”：\n\n```\n[ ] 1. API 密钥都放在 .env 文件里，从不出现在代码或聊天记录中\n[ ] 2. .env 文件已加入 .gitignore——通过检查 Source Control 面板确认\n[ ] 3. GitHub/OAuth 令牌以环境变量形式存储，而不是写在 settings.json 里\n[ ] 4. MCP 服务器的访问范围被限定为所需的最小权限\n[ ] 5. 我会在确认之前审查每一个 AI 提议的操作——没有自动执行的工作流\n```\n\n如果其中有任何一项没做到，这节课会告诉你如何修复它。"
+      "content": "## 风险五：2026 年 Agent 化特有的风险\n\n以上内容适用于任何 AI 系统。当你进入 MCP（第 15 部分）、自定义技能（第 14 部分）和循环工程（第 20 部分）之后，你构建的将是真正的**Agent**——具备真实工具访问权限、能采取多步骤行动的 AI，而且往往每一步得到的人工审查比单次聊天交互更少。截至 2026 年的行业安全研究，已经针对这类系统收敛出了一套明确的威胁模型，在你构建更多这类系统之前，值得把它说清楚：\n\n**权限过度授予（Over-permissioning）。** 一个 Agent 拥有超出其实际任务所需的访问权限，是 Agent 化安全事件最常见的根本原因。解决办法并不玄乎——就是风险三中讲到的最小权限原则，只是当你的 Agent 获得更多工具、运行得更自主时，需要更严格地执行它。\n\n**利用合法凭证的工具滥用。** 这正是让 Agent 化风险区别于传统安全问题的模式：攻击者不需要窃取凭证，只需要通过一条被注入的指令，让你的 Agent 滥用它本就合法拥有的访问权限。标准的访问控制抓不住这一点，因为这次工具调用看起来是被授权的——因为它确实是被授权的。唯一可靠的防御是行为层面的：这个动作是否符合这个 Agent 平常的行为模式？\n\n**MCP 特有的供应链风险。** 由于 MCP 是你在本课程中构建的大部分内容的连接组织，它本身也已经成为一个有据可查的攻击面：被投毒的服务器配置文件、社区应用市场中列出的恶意“技能”或服务器，以及未经身份验证就在运行的 MCP 服务器。这正是为什么第 8-14 课的评估标准（是否有维护？作者是否可信？权限是否限定范围？）比乍看之下更重要——也是为什么你应该定期重新检查几个月前安装的服务器，而不是想当然地认为它们依然可信。\n\n**多 Agent 系统中的级联故障。** 一旦你开始串联子 Agent（第 7-11 课）或构建多 Agent 循环（第 20 部分），一个 Agent 中的漏洞或错误就可能传播到它下游的每一个 Agent。应该在交接环节设计审查关卡，而不只是在整个流水线的最末端。"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**这不是一个假想中的未来威胁模型。** 截至 2026 年的行业安全报告，已经把真实的、有据可查的事件——CVE 漏洞、供应商公告、数据泄露报告——与上面几乎每一个类别关联了起来，而编程类 Agent（Claude Code、Aider 及类似工具）在被追踪到的事件中占据了不成比例的高份额，正是因为它们把真实的工具访问权限，和 Agent 会读取、也可能被操纵的内容结合在了一起。这是一个直接的理由，要求你把风险三的最小权限原则和风险一的人工审查原则，严格应用到你在本课程剩余部分构建的每一个 Agent、技能和 MCP 服务器上——而不只是那些看起来明显高风险的。"
+    },
+    {
+      "type": "text",
+      "content": "## 六点安全检查清单\n\n以下是这份检查清单。你目前的设置应该在这六项上都为“是”：\n\n```\n[ ] 1. API 密钥都放在 .env 文件里，从不出现在代码或聊天记录中\n[ ] 2. .env 文件已加入 .gitignore——通过检查 Source Control 面板确认\n[ ] 3. GitHub/OAuth 令牌以环境变量形式存储，而不是写在 settings.json 里\n[ ] 4. MCP 服务器的访问范围被限定为所需的最小权限\n[ ] 5. 我会在确认之前审查每一个 AI 提议的操作——没有自动执行的工作流\n[ ] 6. 我运行的每一个 Agent/技能/MCP 服务器都只拥有其实际任务所需的权限——并且我会定期重新检查几个月前安装的服务器\n```\n\n如果其中有任何一项没做到，这节课会告诉你如何修复它。"
     },
     {
       "type": "workshop",
       "tag": "REFLECT",
       "title": "审查你的 AI 安全设置",
-      "content": "对照这五点检查清单，逐项检查你的实际设置。对每一项，要么确认它已经做到了，要么现在就修复它。\n\n**检查 1 — API 密钥：**\n打开你的 `exercises/.env` 文件，它里面应该有你的 API 密钥。再打开 `exercises/hello-claude.py` 或 `exercises/summarize.py`。代码里有没有出现任何硬编码的 `sk-ant-...` 字符串？如果有，把它替换成 `os.environ.get(\"ANTHROPIC_API_KEY\")`，并把密钥移到 `.env` 里。\n\n**检查 2 — .gitignore：**\n打开 VS Code 的 Source Control 面板（活动栏里的分支图标）。查看 Changes 列表，`.env` 有没有出现在其中？如果出现了，说明你的 `.gitignore` 没有生效——确认 `.gitignore` 文件里包含 `.env`，并且 `.gitignore` 文件和 `.env` 在同一个目录下。\n\n**检查 3 — GitHub 令牌：**\n打开 `C:\\Users\\YourName\\.claude\\settings.json`，找到 GitHub MCP 的配置项。里面有没有硬编码的 `ghp_...` 令牌？如果有，把它替换成环境变量引用：\n```json\n\"env\": { \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"${env:GITHUB_PERSONAL_ACCESS_TOKEN}\" }\n```\n然后改为在你终端的启动配置文件里设置这个变量。\n\n**检查 4 — MCP 的权限范围：**\n检查你的文件系统 MCP 配置。它的范围是限定在某个具体文件夹，还是能访问你整个系统？如果它指向的是 `C:\\\\Users\\\\YourName`（你的整个用户主目录），把它收紧到只包含你的项目文件夹。\n\n**检查 5 — 自动执行：**\n检查你所有正在运行的 n8n 工作流或 Zapier 自动化流程。有没有哪个步骤是不经过你审核就自动执行的？为任何会修改文件、发送消息或运行命令的自动化流程，加上一个审核步骤或通知。\n\n**写下你的评估结果：**\n在 `notes/my-ai-workflow.md` 中新增一个安全部分：\n```\n## Security Status\n\n### Checklist\n- [x or ] 1. API keys in .env\n- [x or ] 2. .env in .gitignore\n- [x or ] 3. GitHub token in env var\n- [x or ] 4. MCP servers scoped appropriately\n- [x or ] 5. No auto-execute automations\n\n### Issues fixed in this audit:\n- [list anything you fixed]\n\n### Last reviewed: [today's date]\n```\n\n每隔几个月就回来重新过一遍这份清单，尤其是在你新增了 MCP 服务器或自动化流程之后。"
+      "content": "对照这六点检查清单，逐项检查你的实际设置。对每一项，要么确认它已经做到了，要么现在就修复它。\n\n**检查 1 — API 密钥：**\n打开你的 `exercises/.env` 文件，它里面应该有你的 API 密钥。再打开 `exercises/hello-claude.py` 或 `exercises/summarize.py`。代码里有没有出现任何硬编码的 `sk-ant-...` 字符串？如果有，把它替换成 `os.environ.get(\"ANTHROPIC_API_KEY\")`，并把密钥移到 `.env` 里。\n\n**检查 2 — .gitignore：**\n打开 VS Code 的 Source Control 面板（活动栏里的分支图标）。查看 Changes 列表，`.env` 有没有出现在其中？如果出现了，说明你的 `.gitignore` 没有生效——确认 `.gitignore` 文件里包含 `.env`，并且 `.gitignore` 文件和 `.env` 在同一个目录下。\n\n**检查 3 — GitHub 令牌：**\n打开 `C:\\Users\\YourName\\.claude\\settings.json`，找到 GitHub MCP 的配置项。里面有没有硬编码的 `ghp_...` 令牌？如果有，把它替换成环境变量引用：\n```json\n\"env\": { \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"${env:GITHUB_PERSONAL_ACCESS_TOKEN}\" }\n```\n然后改为在你终端的启动配置文件里设置这个变量。\n\n**检查 4 — MCP 的权限范围：**\n检查你的文件系统 MCP 配置。它的范围是限定在某个具体文件夹，还是能访问你整个系统？如果它指向的是 `C:\\\\Users\\\\YourName`（你的整个用户主目录），把它收紧到只包含你的项目文件夹。\n\n**检查 5 — 自动执行：**\n检查你所有正在运行的 n8n 工作流或 Zapier 自动化流程。有没有哪个步骤是不经过你审核就自动执行的？为任何会修改文件、发送消息或运行命令的自动化流程，加上一个审核步骤或通知。\n\n**检查 6 — Agent/技能权限审查：**\n列出你在本课程中构建或安装过的每一个 MCP 服务器、自定义技能和自动化流程。对每一个都问：它是否拥有任何超出其声明用途所需的访问权限？对于安装超过几个月的任何东西，重新确认它是否仍在维护，权限是否被悄悄扩大过。\n\n**写下你的评估结果：**\n在 `notes/my-ai-workflow.md` 中新增一个安全部分：\n```\n## Security Status\n\n### Checklist\n- [x or ] 1. API keys in .env\n- [x or ] 2. .env in .gitignore\n- [x or ] 3. GitHub token in env var\n- [x or ] 4. MCP servers scoped appropriately\n- [x or ] 5. No auto-execute automations\n- [x or ] 6. Agent/skill permissions re-verified as minimal and current\n\n### Issues fixed in this audit:\n- [list anything you fixed]\n\n### Last reviewed: [today's date]\n```\n\n每隔几个月就回来重新过一遍这份清单，尤其是在你新增了 MCP 服务器或自动化流程之后。"
     },
     {
       "type": "workshop",

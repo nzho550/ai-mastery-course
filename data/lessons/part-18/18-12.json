@@ -1,0 +1,91 @@
+{
+  "id": "18-12",
+  "title": "Context Engineering — Beyond the Prompt",
+  "part": 18,
+  "estimatedMinutes": 65,
+  "tags": [
+    "advanced",
+    "context-engineering",
+    "prompting",
+    "rag",
+    "memory",
+    "concepts"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 18-1 taught you advanced prompting techniques — Chain-of-Thought, Tree-of-Thought, ReAct. Those techniques are about *how you ask*. This lesson is about something that has become the bigger lever in 2026: *what the model has access to* when it answers. That discipline is called **context engineering**, and understanding it will change how you think about every AI interaction you build from here on — including the RAG systems, MCP servers, memory files, and agents in the rest of this course."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Why this matters now, specifically.** Models have gotten dramatically better at understanding *what you want* even when your wording is clumsy, brief, or ambiguous — the models you've been using throughout this course (Claude Sonnet 5, GPT-5.5, Gemini 3) rarely misunderstand a reasonably clear instruction. The bottleneck moved. It's no longer \"can I phrase this well enough?\" It's \"does the model actually have the information it needs to be right?\" A perfectly worded prompt is still useless if the model doesn't have your company's data, your project's file structure, your past decisions, or the output of the last tool call. That's context. Engineering it well is now the higher-leverage skill."
+    },
+    {
+      "type": "text",
+      "content": "## Prompt Engineering vs. Context Engineering\n\nThese are related but distinct disciplines, and the difference is worth being precise about:\n\n**Prompt engineering** focuses on the one-time textual instruction you give a model: how you phrase a request, what examples you include, what format you ask for. It's about a single turn of communication.\n\n**Context engineering** focuses on the full information environment the model operates in, across an entire task or session: what it remembers, what it can retrieve, what tool outputs it has seen, what constraints and policies apply, and what history is visible to it at the moment it acts.\n\nPut differently: **a prompt is an instruction. Context is the environment the instruction executes in.**\n\nYou've already been doing context engineering throughout this course without necessarily calling it that:\n- A **CLAUDE.md** file (lesson 7-6) is context engineering — it's persistent project context that doesn't need to be re-typed every session.\n- **RAG** (lesson 18-4) is context engineering — it retrieves the right external information at the right moment.\n- **Memory MCP** and session-memory hook patterns (lessons 8-21, 7-13) are context engineering — they carry state across sessions.\n- **MCP servers** themselves (Part 15) are context engineering infrastructure — they're the mechanism by which a model gets access to your actual files, calendar, or database instead of just its training data.\n\nWhat's new in 2026 is that this collection of practices has been named, studied, and recognised as the primary place where professional AI effort should go — not as a replacement for prompting, but as the layer built on top of it."
+    },
+    {
+      "type": "text",
+      "content": "## The Four Layers of Context\n\nWhen you're engineering context for a task, you're really assembling four distinct layers. Missing or getting any one of these wrong produces a worse result than a bad prompt would:\n\n**1. Instructions** — the prompt itself, plus any system-level rules (a CLAUDE.md file, a Claude Project's custom instructions, a Copilot custom-instructions file). This is the only layer classic prompt engineering covers.\n\n**2. Knowledge** — retrieved or provided information the model needs to answer correctly: RAG results, an uploaded document, a database query result, a web search result. Without this layer, the model is guessing from training data — which is exactly how hallucinations happen on anything specific to your situation.\n\n**3. Tools and their outputs** — what the model can *do* (via MCP, function calling, agent tools) and what it has already learned from doing those things earlier in the same task. A model that just ran a search and got results needs those results to remain visible; losing them mid-task is a context failure, not a prompting failure.\n\n**4. Memory and history** — what happened in previous turns, previous sessions, or previous related tasks. This is CLAUDE.md, session-memory files, Memory MCP's knowledge graph, or a Claude Project's uploaded reference documents. Without this layer, every session starts from zero, and you re-explain the same things forever.\n\nA well-engineered AI workflow deliberately assembles all four layers *before* worrying about clever phrasing. A brilliantly worded prompt sitting on top of missing knowledge, missing tool context, or missing memory will still produce a mediocre or wrong answer."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**More context is not automatically better context.** This is the failure mode people hit once they learn context engineering matters: they start stuffing everything — entire documents, entire chat histories, every tool output — into every request. This backfires two ways. First, it's expensive: you're paying for tokens the model doesn't need. Second, and more importantly, irrelevant context measurably degrades output quality — the model has to work harder to find the signal in the noise, and it can get confused by contradictory or outdated information sitting in the context. Good context engineering is about *curation*, not maximisation: give the model exactly what's relevant to the current step, and nothing else. This is precisely why /compact exists in Claude Code (lesson 7-9) and why hook-based memory patterns (lesson 7-13) write *summaries*, not full transcripts, to persistent files."
+    },
+    {
+      "type": "text",
+      "content": "## Practical Context Engineering Patterns\n\n**Pattern 1 — Layered instruction files.** Don't put everything in one giant CLAUDE.md. Use project-level instructions for what's true about this codebase, and reference separate files for things that change less often (style guides, architecture decisions). Claude Code reads what it needs when it needs it, rather than holding a bloated instruction file in context for every single request.\n\n**Pattern 2 — Just-in-time retrieval over bulk loading.** Instead of pasting an entire 50-page document into a prompt, use RAG (lesson 18-4) or a filesystem/database MCP (lessons 8-9, 8-13) so the model retrieves only the relevant passage for the current question. This is cheaper and more accurate than bulk-loading — the retrieval step acts as a relevance filter.\n\n**Pattern 3 — Explicit context budgets.** For any recurring AI task, decide in advance what belongs in context: \"this workflow always includes the last 3 support tickets from this customer, the product spec, and nothing else.\" Being explicit about the budget prevents both under-context (missing something important) and over-context (drowning the model in noise).\n\n**Pattern 4 — Summarise, don't accumulate.** Session-memory hooks, /compact, and PreCompact hooks (lesson 7-13) all follow the same principle: when context gets long, replace the raw history with a distilled summary of what matters, rather than either keeping everything or losing everything.\n\n**Pattern 5 — Make tool outputs first-class context.** In agentic workflows (Part 20, Loop Engineering), the output of one tool call is often the most important context for the next step. Design your loops so tool results are captured cleanly and stay visible for as long as they're relevant — this is the difference between an agent that builds on its own findings and one that repeats work or contradicts itself."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Diagnose: Is It a Prompt Problem or a Context Problem?",
+      "content": "Pick a real AI task you do repeatedly where the output quality isn't quite what you want. For example: a weekly report, a customer email draft, a code review, a research summary.\n\n**Step 1 — Write down the current prompt** you use for this task, exactly as you type it.\n\n**Step 2 — Diagnose the gap.** Ask yourself honestly:\n- Is the model misunderstanding what I'm asking? (→ a prompting problem — clarify the instruction, add an example)\n- Or does the model understand the request perfectly, but lack information it needs to answer well? (→ a context problem — it needs data, a document, a tool result, or memory of a past decision)\n\n**Step 3 — For a context problem, identify the specific missing layer** using the four-layer framework:\n- Missing instructions/rules? (add to CLAUDE.md, a Claude Project's instructions, or a custom-instructions file)\n- Missing knowledge? (needs RAG, a document upload, or a live data lookup)\n- Missing tool access? (needs an MCP server connected — Gmail, filesystem, database, calendar)\n- Missing memory? (needs a memory file, Memory MCP, or a Claude Project to persist what you told it last time)\n\n**Step 4 — Fix the actual gap**, not a generic one. If it's context, don't just add more words to the prompt — connect the missing data source or memory mechanism instead.\n\n**Step 5 — Re-run the task** and compare. Write one sentence: was this a prompting problem or a context problem, and how do you know?\n\n**Outcome:** A repeatable diagnostic habit — before you spend 10 minutes rewording a prompt, first ask whether the model actually has what it needs to succeed."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Build a Context Assembly Checklist for a Real Workflow",
+      "content": "Design an explicit context budget for one real, recurring AI workflow in your work — turning the four-layer framework into a concrete, reusable checklist.\n\n**Step 1 — Choose the workflow.** Pick something you do often enough that getting the context right pays off repeatedly: drafting client emails, triaging a specific type of ticket, writing a recurring report, reviewing a specific kind of code change.\n\n**Step 2 — Fill in the four layers for this specific workflow:**\n```\nWorkflow: [name]\n\n1. INSTRUCTIONS — what rules should always apply?\n   [e.g., tone, format, things to never say, required sections]\n\n2. KNOWLEDGE — what information does the model need access to?\n   [e.g., specific documents, a knowledge base, recent data — and where does\n   it come from: RAG? A Claude Project upload? A live MCP query?]\n\n3. TOOLS — what should the model be able to DO as part of this workflow?\n   [e.g., search email, query a database, check a calendar — which MCP\n   servers or connectors does this require?]\n\n4. MEMORY — what should persist between runs of this workflow?\n   [e.g., past decisions, previous drafts, what worked last time — where\n   does this live: a memory file, Memory MCP, session-memory.md?]\n```\n\n**Step 3 — Ask Claude to stress-test your checklist:**\n```\nHere is my context assembly checklist for [workflow]: [paste it]\n\nReview it: what's missing from each layer? What would cause this workflow\nto produce a wrong or generic-sounding output despite a good prompt?\n```\n\n**Step 4 — Implement the fixes.** For any missing piece, connect the actual mechanism (an MCP server, a memory file, a Claude Project upload) rather than just adding more text to a prompt.\n\n**Step 5 — Save this checklist** alongside your prompt library from earlier lessons. You now have two complementary artifacts: prompts (how to ask) and context checklists (what the model needs to know to answer well).\n\n**Outcome:** A reusable context-engineering template for your highest-value recurring AI task, and a pattern you can repeat for every other workflow."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Audit a Project's Context Architecture",
+      "content": "Use Claude Code itself to evaluate how well an existing project's context is engineered — not its code, its *information architecture*.\n\n**Step 1 — Open Claude Code in a real project** (yours or one from earlier in this course).\n\n**Step 2 — Ask Claude Code to audit its own context sources:**\n```\nReview this project's context architecture:\n1. What's in CLAUDE.md? Is it current, or does it reference things that\n   have changed?\n2. Are there memory files (session-memory.md, decisions logs) that are\n   stale or contradict each other?\n3. What MCP servers are connected (check /mcp), and does each one still\n   serve a real purpose for this project?\n4. If I asked you a question about this project right now, what important\n   context would you be missing?\n```\n\n**Step 3 — Read the findings carefully.** Stale CLAUDE.md instructions and contradictory memory files are extremely common — they accumulate as a project evolves and nobody prunes them.\n\n**Step 4 — Fix the highest-impact issue.** Update or trim CLAUDE.md, resolve a contradiction in a memory file, or disconnect an MCP server that's no longer relevant (fewer, more relevant tools beats more tools — see lesson 6-22's model-optimization framework for the same principle applied to model choice).\n\n**Step 5 — Ask Claude Code to re-run the audit** after your fix and confirm the gap is closed.\n\n**Outcome:** Applied practice treating a project's context — not just its code — as something that needs deliberate maintenance."
+    },
+    {
+      "type": "quiz",
+      "question": "A team has a beautifully crafted system prompt for their customer support bot, with clear tone instructions and formatting rules. Customers still complain that answers are generic and don't reflect their account history. What is most likely wrong?",
+      "options": [
+        "The prompt needs more chain-of-thought instructions",
+        "This is a context problem, not a prompt problem — the model has good instructions but lacks knowledge (the customer's account history) and likely needs that connected via RAG or a live database/MCP lookup, not better wording",
+        "The model itself is too weak and needs to be upgraded to a more expensive tier",
+        "The prompt needs more few-shot examples of ideal responses"
+      ],
+      "correct": 1,
+      "explanation": "This is the textbook context-engineering diagnosis. The prompt (instructions layer) is already well-crafted — the model clearly knows *how* to respond, given that tone and formatting are fine. What's missing is the knowledge layer: the model has no access to this specific customer's account history, so it can only produce generic, non-personalized answers. No amount of prompt refinement fixes this — the fix is architectural: connect a data source (RAG over account records, or a live CRM/database MCP query) so the model has the actual information it needs at the moment it answers."
+    },
+    {
+      "type": "quiz",
+      "question": "Why does adding an entire 80-page document to a prompt, when only one page is actually relevant, often produce a worse answer than adding just that one relevant page?",
+      "options": [
+        "It doesn't — more context is always strictly better, regardless of relevance",
+        "Because the model has to work harder to separate signal from noise, and irrelevant or contradictory content in the context can measurably degrade the quality and focus of the response — curated context outperforms maximised context",
+        "Because models have a hard token limit that 80 pages would exceed",
+        "Because longer prompts always cost more, which is a financial problem but not a quality problem"
+      ],
+      "correct": 1,
+      "explanation": "This is the core lesson of context curation. Context engineering is not about maximizing the amount of information a model has access to — it's about giving it exactly what's relevant to the task at hand. Irrelevant content in the context window adds noise the model has to filter through, can introduce distracting or contradictory signals, and increases the chance the model's attention lands on the wrong material. This is precisely why retrieval (RAG) — fetching only the relevant passage — consistently outperforms bulk-pasting whole documents, and why techniques like /compact and summarizing memory hooks exist: to keep context lean and relevant rather than exhaustive."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 18-12.** You now have a name and a framework for something you've been doing throughout this course: context engineering — the discipline of curating instructions, knowledge, tools, and memory so a model can actually succeed, rather than just phrasing requests cleverly. Keep the four-layer framework in mind for the rest of Part 19: model selection (18-2), research (18-3), RAG (18-4), and agents (18-5) are all, at their core, different ways of engineering better context."
+    }
+  ],
+  "nextLesson": "18-2",
+  "prevLesson": "18-1"
+}

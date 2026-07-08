@@ -34,7 +34,7 @@
     {
       "type": "callout",
       "variant": "warning",
-      "content": "**Claude's knowledge has a cutoff date.** For anything that may have changed in the last year or two — regulations, market conditions, research findings, product capabilities, pricing — verify with Perplexity or another live-search tool before relying on it. Claude will answer confidently even when the information it has is outdated. This isn't dishonesty — it simply doesn't know what it doesn't know about recent events. The rule: use Claude for concepts and analysis; use Perplexity for anything that might have changed recently."
+      "content": "**Claude's knowledge has a cutoff date, and it moves with each new model.** For anything that may have changed since that cutoff — regulations, market conditions, research findings, product capabilities, pricing — verify with Perplexity or another live-search tool before relying on it. Claude will answer confidently even when the information it has is outdated. This isn't dishonesty — it simply doesn't know what it doesn't know about recent events. The rule: use Claude for concepts and analysis; use Perplexity for anything that might have changed recently."
     },
     {
       "type": "text",
@@ -101,7 +101,7 @@
     },
     {
       "type": "quiz",
-      "question": "Claude's training data has a cutoff in August 2025 and it's now June 2026. You ask Claude about the latest AI models. What is the risk and how do you mitigate it?",
+      "question": "Claude's training data has a cutoff several months in the past. You ask Claude about the latest AI models. What is the risk and how do you mitigate it?",
       "options": [
         "No risk — Claude knows it should be humble about recent events",
         "Claude may confidently describe models from before its cutoff as \"the latest\" without knowing about more recent releases — use Perplexity for current AI news, then Claude for analysis",

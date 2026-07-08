@@ -15,6 +15,11 @@
       "content": "**What SkillShare-style AI skills actually are:** You've probably seen demos of AI doing impressive things — sorting thousands of emails, extracting structured data from contracts, running parallel research agents. What makes that possible isn't a special AI — it's a *skill*: a carefully designed instruction file that tells Claude exactly what to do, step by step, with access to your tools. You're about to learn to build those."
     },
     {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**A naming note before you start.** This part uses \"skill\" the way most working developers use it colloquially: a saved, reusable prompt you invoke with a slash command from `.claude/commands/*.md`. That's a real, current Claude Code feature and everything in this part works. It's a different thing from Claude Code's built-in **Agent Skills** feature (lesson 6-16) — folders containing a `SKILL.md` at `.claude/skills/` or `~/.claude/skills/`, which Claude loads automatically based on task match rather than you typing a slash command. Both are useful; they're just not the same mechanism. If you go looking for `SKILL.md` files after this part, that's why you won't find them here — revisit lesson 6-16 for that format."
+    },
+    {
       "type": "text",
       "content": "## The Core Idea: A Skill Is a Saved, Reusable Prompt With Superpowers\n\nA **custom skill** in Claude Code is a Markdown file that lives in your `.claude/commands/` folder. When you type `/skill-name` in Claude Code, Claude reads that file and executes it as a complete, sophisticated task.\n\nThat's it. One file. One command. But the power comes from what's inside:\n\n- **Role and context** — you tell Claude what it is and what data it has access to\n- **Step-by-step instructions** — a structured sequence Claude follows reliably\n- **Tool access** — skills can use every MCP server you have connected (Gmail, Calendar, GitHub, databases, the web)\n- **Dynamic arguments** — pass different inputs each time via `$ARGUMENTS`\n- **File writing** — skills can create and update files on your disk\n- **Subagent spawning** — advanced skills can launch multiple AI agents in parallel\n\n**The result:** things that would take you 20–45 minutes manually take 30 seconds to kick off, and 2–5 minutes to complete while you do something else."
     },
