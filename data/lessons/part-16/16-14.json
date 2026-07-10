@@ -1,0 +1,90 @@
+{
+  "id": "16-14",
+  "title": "AI for Contracts & PDFs — DocuSign Iris & Adobe Acrobat AI Assistant",
+  "part": 16,
+  "estimatedMinutes": 50,
+  "tags": [
+    "enterprise",
+    "intermediate",
+    "documents",
+    "contracts",
+    "docusign",
+    "adobe-acrobat",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 16-13 covered Harvey, Spellbook, and CoCounsel — AI built for licensed lawyers doing legal research and contract review as their actual job. Most people reading this course are not lawyers, but almost everyone still has to *deal* with contracts and long PDFs: a lease you're about to sign, a vendor statement of work your manager asked you to skim, a syllabus, a benefits summary, a 40-page vendor security questionnaire. This lesson is about the AI tools built for exactly that — DocuSign's Iris and Agent Studio, which live inside the agreement lifecycle you already use to send and sign documents, and Adobe Acrobat's AI Assistant, which works on any PDF you already have sitting on your laptop. Neither replaces a lawyer for anything that matters legally. Both can save you from reading 40 pages to find the three sentences you actually need."
+    },
+    {
+      "type": "text",
+      "content": "## DocuSign Iris: Turning Agreements Into a Queryable, Actionable Record\n\nAt its Momentum 2026 conference in May, DocuSign unveiled **Iris**, its AI engine for agreements, alongside a new **Agent Studio**. Iris sits across DocuSign's IAM platform — the intake, negotiation, signing, and post-signature stages of an agreement's life — and lets anyone ask plain-English questions about a contract: *\"What's the termination notice period?\"* or *\"What did we agree to on payment terms?\"* rather than searching a PDF by eye. During signing itself, Iris now generates a plain-English summary of key terms so a signer understands what they're agreeing to before they click, and lets them ask follow-up questions right in the signing flow.\n\n**AI-assisted field placement** is the less flashy but genuinely time-saving half of this: DocuSign's **Smart Field Placement** automatically finds where signature and date fields belong in a document and places them, and detects the agreement type (NDA, MSA, offer letter) to suggest the right standard fields — work that used to mean manually dragging fields onto a PDF template one by one.\n\n**Agent Studio** is where this becomes autonomous rather than just assistive. DocuSign ships three ready-made agent patterns — intake and triage (an agent that captures a contract request, summarizes what's being asked, and routes it to the right owner), smart redlining (an agent that checks incoming agreements against a company's playbook and proposes edits), and relationship intelligence — and lets teams build custom agents on top. Critically, some of these agents don't just draft once: they **monitor contracts in the background** after signature, watching for renewal dates, obligation deadlines, and risk triggers, and pinging a human when action is needed, rather than waiting to be asked."
+    },
+    {
+      "type": "text",
+      "content": "## Adobe Acrobat AI Assistant: Multi-File Q&A, Audio Overviews, and Firefly Edits\n\nAdobe's angle is different: instead of living inside an agreement workflow, Acrobat AI Assistant works on whatever PDFs (and Word, PowerPoint, Excel files, and even meeting transcripts) you already have. Its **PDF Spaces** feature lets you combine up to **100 files** — capped at 100MB and 600 pages each — into one workspace, then ask questions across all of them at once: *\"Which of these five vendor contracts has the shortest cancellation window?\"* is a question no single-document summary could answer.\n\nTwo features are worth knowing by name. **Audio Overviews** convert a dense PDF into a podcast-style, chaptered audio summary you can listen to on a commute instead of reading at a desk — genuinely useful for a long report or a policy document you'd otherwise skim under time pressure. And **Firefly-powered edits** bring Adobe's generative image tools (Generative Fill, Remove Background, Erase, Crop) directly into PDF editing, so you can clean up a scanned document or fix an image embedded in a contract without exporting it to Photoshop first.\n\nAdobe is explicit that AI Assistant answers are always cited back to the source document — click a citation and it jumps to the exact page and passage — and that your content isn't used to train Adobe's models. Full AI Assistant access requires either the Acrobat Studio plan (~$24.99/month, AI bundled in) or a separate add-on (~$5–8/month) on top of a standard Acrobat Pro subscription; free-tier users get a limited number of AI Assistant requests."
+    },
+    {
+      "type": "text",
+      "content": "## Why This Matters If You're Not a Lawyer\n\nMost employees who touch a contract in a given week aren't reviewing it as a legal specialist — they're a manager skimming a vendor SOW before approving it, an employee reading their own lease or offer letter, a small-business owner checking a supplier agreement. For that huge, non-specialist audience, the value of Iris and AI Assistant isn't legal judgment — it's **speed and structure**: turning a 40-page PDF into an obligations list, a deadline calendar, or a one-paragraph plain-English summary you can actually act on. That's a meaningfully different job than what Harvey or CoCounsel do for a law firm associate, and it's why these tools are priced and positioned for every knowledge worker, not a legal department."
+    },
+    {
+      "type": "text",
+      "content": "## Choosing Between Them — They're Not Really Competitors\n\nIn practice these two tools solve different halves of the same problem, and many people will touch both in the same week. **DocuSign Iris** is for documents that live inside your organization's own send-for-signature workflow — contracts your company originates, negotiates, and tracks through their full lifecycle. **Adobe Acrobat AI Assistant** is for any PDF you already have sitting around, regardless of where it came from — a lease your landlord emailed you, a report a vendor sent, a syllabus a professor posted. If your company already uses DocuSign for contracts, Iris is likely the tool already available to you for anything your own org originates. For everything else that lands in your inbox as a PDF, Acrobat AI Assistant (or a comparable tool) is the more universally applicable one."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Rollout is uneven, and that's normal for a 2026 AI feature.** DocuSign's new eSignature AI capabilities — agreement-type detection, automated field placement — were rolling out to the US, UK, and Australia first as of mid-2026, with the Iris assistant, agents, and Agent Studio in early access in the US starting in July. If a feature described here isn't visible in your account yet, check your region and plan tier before assuming it doesn't exist — enterprise AI features frequently ship to a subset of markets and plans before general availability."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**A structured obligations summary is a draft, not a verified fact.** The same hallucination and grounding risks from Lesson 13-1 and the legal-AI caution from 16-13 apply here at consumer scale: if Iris or AI Assistant tells you a lease renews automatically in 60 days, or that a contract's liability cap is $50,000, that is a claim extracted by a model — not a guarantee. Before you act on any deadline, dollar figure, or obligation an AI summarized for you (paying a fee, missing a cancellation window, signing something), open the cited page and read the actual clause yourself. The tool's job is to get you to the right page fast, not to replace reading it."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Extract Obligations & Deadlines From a Real Multi-Page PDF",
+      "content": "You will run Adobe Acrobat AI Assistant (or a comparable tool you already have access to, such as DocuSign Iris if your company uses it, ChatGPT/Claude file upload, or NotebookLM) on a real multi-page document you actually have, and produce a structured summary you could genuinely use.\n\n**Step 1 — Pick a real document.** Choose something with actual obligations and dates in it: a lease, an employment offer letter, a vendor contract or SOW, a course syllabus, a long insurance policy, or a multi-page report with deadlines. It must be a real document you have legitimate access to — not a hypothetical.\n\n**Step 2 — Choose your tool.** If you have Acrobat AI Assistant access (Acrobat Studio, or the add-on), open the PDF and use AI Assistant directly. If not, use Claude.ai or ChatGPT's file upload feature, or Google's NotebookLM — upload the document and treat it the same way.\n\n**Step 3 — Ask for a structured extraction**, not just a summary. Use a prompt like: *\"Extract every obligation, deadline, dollar amount, and renewal/cancellation date from this document. Present it as a table: [Item | What it requires | Date or deadline | Page/section reference].\"*\n\n**Step 4 — Verify at least three entries against the source.** Pick the three items that matter most to you (the biggest dollar figure, the nearest deadline, the strictest obligation) and click through to the cited page — or manually find it — to confirm the AI got it right. Note any error, however small.\n\n**Step 5 — Save the table** somewhere you'll actually use it — a note, a calendar entry for the real deadline, or a shared doc if this affects your team. This is the artifact: a real, verified obligations list from a document you actually needed to understand.\n\n**Outcome:** a structured, spot-checked obligations/deadline table from a real document — plus first-hand evidence of how accurate (or not) the extraction was for your specific document."
+    },
+    {
+      "type": "quiz",
+      "question": "You use Adobe Acrobat AI Assistant to extract a table of obligations from a 60-page vendor contract. It lists a renewal-notice deadline as 'March 1.' What is the correct next step before you rely on that date?",
+      "options": [
+        "Trust the date as-is — AI Assistant always cites the exact source page, so citation alone is proof of accuracy",
+        "Open the cited page and read the actual renewal clause yourself to confirm the date, since an extracted date is a claim the model made, not a verified fact",
+        "Ignore the AI's table entirely and re-read all 60 pages manually, since AI extraction of dates can never be trusted for anything",
+        "Ask a second AI tool the same question and go with whichever date sounds more confident"
+      ],
+      "correct": 1,
+      "explanation": "Citation is a pointer to check, not proof of correctness — the model can still misread or misextract a date even while citing a real page. The correct workflow is exactly what the workshop practiced: use the AI to get to the right page fast, then verify the specific, consequential detail yourself. Re-reading all 60 pages manually (C) throws away the tool's real time-saving value, and comparing two AI tools' confidence (D) doesn't verify anything — confidence is not the same as accuracy."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Build Your Personal 'Before I Rely On This' Checklist",
+      "content": "This workshop produces a short, reusable checklist you'll actually consult before acting on an AI-summarized contract or document detail in real life — not a one-time exercise.\n\n**Step 1 — Recall Workshop 1's verification step.** Did the AI get all three of your spot-checked items exactly right? If it made any error, however minor, note specifically what kind of error it was (wrong date, wrong dollar amount, missed a conditional clause, oversimplified a nuance).\n\n**Step 2 — Categorize the stakes.** Not every AI-summarized detail deserves the same scrutiny. Write down, for your own use, three tiers: (a) low-stakes — a general sense of what a document says, fine to trust loosely; (b) medium-stakes — a deadline or number you'll act on but that's correctable if wrong; (c) high-stakes — anything binding, financial, or hard to undo (signing something, missing a cancellation window, a legal obligation).\n\n**Step 3 — Write your checklist**, one line per tier, answering: for this tier, do I verify against the source before acting — always, sometimes, or never? Be specific about *what* you'd check (the exact clause, the exact page, a second source) for medium- and high-stakes items.\n\n**Step 4 — Add one line about tool choice**: which tool would you reach for next time for a document like the one you used in Workshop 1 — DocuSign Iris, Acrobat AI Assistant, a general chatbot, or a human (lawyer, HR, a colleague) — and why.\n\n**Step 5 — Save this checklist** somewhere you'll find it again (notes app, a pinned doc). The point isn't to distrust these tools — it's to have already decided, calmly and in advance, how much scrutiny each type of AI-summarized detail deserves, instead of deciding in the moment when you're rushed to sign something.\n\n**Outcome:** a short, personally-calibrated verification checklist — grounded in what you actually observed in Workshop 1 — that you'll use the next time an AI tool hands you a contract summary."
+    },
+    {
+      "type": "quiz",
+      "question": "Following the tiered checklist from Workshop 2, which of these AI-summarized details should sit in the 'high-stakes — always verify against the source' tier, rather than the low- or medium-stakes tiers?",
+      "options": [
+        "A rough summary of what general topic a 40-page report covers, before deciding whether to read further",
+        "The exact early-termination penalty amount in a contract you are about to sign, as extracted by an AI tool",
+        "A podcast-style audio overview you're listening to just to get a general sense of a document before a meeting",
+        "The general tone or sentiment an AI tool detects in a long document"
+      ],
+      "correct": 1,
+      "explanation": "A binding financial figure in a document you're about to sign is exactly the high-stakes, hard-to-undo category from Workshop 2 — being wrong about it has real, difficult-to-reverse consequences, so it always warrants opening the source clause yourself. The other options (a general topic summary, an audio overview for orientation, a sentiment read) are lower-stakes uses where an imperfect AI read is easily corrected later and carries little real cost if slightly off."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-14.** You now know how DocuSign's Iris and Agent Studio bring plain-English summaries, AI-assisted field placement, and autonomous contract-monitoring agents into the agreement lifecycle, and how Adobe Acrobat's AI Assistant answers questions across up to 100 PDFs at once, generates audio overviews, and brings Firefly-powered edits into PDF editing. You've extracted and spot-checked a real obligations/deadline table from a document you actually needed to understand, and built a personal checklist for how much verification different types of AI-summarized details deserve before you act on them."
+    }
+  ],
+  "nextLesson": "16-15",
+  "prevLesson": "16-13"
+}

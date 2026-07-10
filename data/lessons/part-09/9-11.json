@@ -1,0 +1,86 @@
+{
+  "id": "9-11",
+  "title": "AI PR-Review Bots — CodeRabbit, Graphite & Greptile",
+  "part": 9,
+  "estimatedMinutes": 50,
+  "tags": ["ai-coding", "advanced", "code-review", "coderabbit", "greptile", "graphite", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 6-15 covered GitHub Copilot's own pull-request review feature — Copilot commenting on and improving code that (often) Copilot itself, or a human using Copilot, helped write. This lesson covers a genuinely different category: independent, third-party bots — **CodeRabbit**, **Graphite**, and **Greptile** — that review a pull request regardless of which tool or person wrote the code. By the end you'll have installed one on a real or test repository, reviewed one real pull request with it, and written down what it caught that a quick human skim might have missed."
+    },
+    {
+      "type": "text",
+      "content": "## A Different Layer: Reviewer-of-Record vs. Author's Assistant\n\nRecall lesson 6-15: GitHub Copilot can generate your PR description, act as a requested reviewer, suggest one-click fixes, and even spin up a child PR implementing its own suggestion. That's genuinely useful — but it's fundamentally the *author's own assistant* checking work that assistant (or a human working with it) helped produce.\n\nCodeRabbit, Greptile, and Graphite's reviewer occupy a different, additional role. They don't care whether GitHub Copilot, Claude Code, Cursor, Cline (lesson 9-12), or a human with no AI assistance at all wrote the diff — they review it the same way regardless. That independence is the whole point: a third-party bot functions closer to an external reviewer-of-record than an internal assistant double-checking its own family's output. Plenty of teams run both layers at once, specifically because they check for different things, and neither replaces a human's final judgment on intent and business context."
+    },
+    {
+      "type": "text",
+      "content": "## CodeRabbit — The Volume Leader\n\nCodeRabbit is the most widely installed AI code review app on GitHub and GitLab — **over 2 million repositories connected, 13 million-plus pull requests processed**. It works primarily from the diff — what changed in this PR — rather than deep whole-codebase indexing, which shows up in benchmark results as fewer deep cross-file bugs caught but generally lower noise.\n\nIt's the broadest in platform support of the three: **GitHub, GitLab, Bitbucket, and Azure DevOps**, with 40-plus linters and SAST scanners integrated, plus a self-hosted deployment option for enterprises with 500-plus seats. At roughly **$24 per developer per month**, it's the cheapest of the three dedicated tools — a reasonable default for teams of 5-50 developers who want clean integration and consistently low false-positive rates."
+    },
+    {
+      "type": "text",
+      "content": "## Greptile — The Deep Indexer\n\nGreptile takes the opposite approach: it indexes your **entire repository into a code graph** and uses multi-hop investigation — tracing dependencies, checking git history, following a change's effects across files — rather than reading only the diff in front of it.\n\nBenchmark results genuinely disagree depending on methodology. One test found Greptile caught 82% of injected bugs versus CodeRabbit's 44%, at the cost of more false positives (11 versus 2 per run). A separate, independent three-week test across 146 real PRs found Greptile logged zero false positives across 120 findings, with the highest precision of the tools tested. Read conflicting benchmarks like these as a reason to trial tools on your own codebase, not as a final verdict either way.\n\nGreptile launched a free tier on **June 24, 2026** (50 reviews per month, unlimited authors), with a paid tier around **$30 per developer per month** including a review cap and per-review overage. It supports GitHub and GitLab only — no Bitbucket or Azure DevOps."
+    },
+    {
+      "type": "text",
+      "content": "## Graphite — The Stacked-PR Specialist (Now Part of Cursor)\n\nGraphite's core product is **stacked diffs** — breaking a large change into small, dependent pull requests that merge in sequence — with AI review woven into that workflow rather than being a standalone offering. Graphite was **acquired by Cursor in December 2025**, tying it closer to the AI-native-editor world than the other two tools in this lesson.\n\nIn one benchmark, Graphite had the highest fix rate of the three — 82% of flagged issues led to an actual code change — and a low negative-feedback rate on its comments (developers rejected fewer than 5% of them). But that value is tightly coupled to the stacked-PR workflow itself: if your team isn't already breaking changes into small sequential PRs, Graphite's AI review provides comparatively little standalone value. At roughly **$40 per developer per month**, it's also the most expensive of the three, and GitHub-only."
+    },
+    {
+      "type": "text",
+      "content": "## Layering These Tools With Your AI Coding Assistant\n\nNone of these bots replace whichever tool wrote the code — Copilot, Claude Code, Cursor, or Cline. They're a second, independent check that runs automatically on every PR regardless of authorship. A practical, common pattern: keep using your coding assistant to write and edit, keep requiring a human reviewer as always, and add one of these bots for automatic first-pass coverage — especially valuable on large or unfamiliar diffs where a fast human skim is most likely to miss something.\n\nWatch for review fatigue: a bot with a high false-positive rate trains developers to skim past or ignore its comments entirely, which quietly defeats the purpose of adding it (the same pattern flagged in lessons 2-18 and 6-15 for auto-filed action items and Copilot review, respectively). Tune sensitivity and rules rather than accepting a tool's defaults unexamined."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Benchmarks in this space genuinely conflict, and some are vendor-published.** Greptile's own comparisons claim it catches over 50% more bugs than CodeRabbit on head-to-head tests; independent third-party tests sometimes agree with the direction but disagree sharply on the false-positive cost. The only reliable answer is trialing two or three of these tools directly on your own codebase for a few weeks — the same 'evaluate, don't just read a comparison' discipline from lesson 9-4's meta-skill callout applies here."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**None of these bots substitutes for required human review on high-stakes code** — authentication, financial calculations, anything touching regulated data — the same rule from your team's AI use policy (lesson 17-7) applies to third-party review bots exactly as it applies to any other AI tool. Also worth checking before you connect one: what does this bot actually do with your code once it has repository access — is it cached, used for further model training, retained after the review? Granting a third-party tool read access to a private repository is a data-classification decision, not a convenience toggle."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Install a PR Review Bot and Review a Real Pull Request",
+      "content": "**Goal:** install one of these three bots on a real repository you control, and review one real pull request with it.\n\n**Step 1 — Choose CodeRabbit, Greptile, or Graphite** based on what fits your repo host and budget from the comparison above. As of mid-2026, at least one (Greptile) has a genuine free tier worth starting with if you're unsure.\n\n**Step 2 — Install it on a real repo you control** — your own project, or a small test repo you create specifically for this exercise — connecting it via the tool's GitHub/GitLab onboarding flow.\n\n**Step 3 — Open (or reopen) one real pull request with a meaningful diff** — at least 20-30 lines of genuine code change, not a trivial one-line fix.\n\n**Step 4 — Let the bot run its automatic review** and read every comment it leaves, not just the ones that look important at a glance.\n\n**Step 5 — For each comment, judge:** genuine issue, false positive, or a matter of style/taste? Note anything you're confident a fast human skim would have missed.\n\n**Step 6 — Apply at least one suggested fix**, if it's genuinely correct, using the tool's one-click apply if available.\n\n**Outcome:** one real PR reviewed by an independent third-party bot, plus a written note on what it caught that a quick human pass likely wouldn't have."
+    },
+    {
+      "type": "quiz",
+      "question": "A team already has GitHub Copilot's automatic PR review enabled (lesson 6-15). A developer asks why they'd also install CodeRabbit or Greptile — isn't that redundant? What's the most accurate answer based on this lesson?",
+      "options": [
+        "It is redundant — running two AI review tools on the same PR provides no additional value over one",
+        "No — Copilot's review is the author's own assistant checking work it (or its user) helped produce, while a third-party bot like CodeRabbit or Greptile functions as an independent reviewer-of-record that reviews the code the same way regardless of what wrote it, which is why many teams run both layered together",
+        "Yes, but only because Copilot's review is unreliable and needs to be replaced entirely",
+        "CodeRabbit and Greptile should replace human reviewers entirely once installed, making Copilot review unnecessary"
+      ],
+      "correct": 1,
+      "explanation": "The core distinction this lesson draws is reviewer-of-record versus author's-assistant: Copilot's review comes from the same lineage as the tool that may have helped write the code, while CodeRabbit and Greptile are independent of authorship entirely. That's a genuine, non-redundant layer — not a replacement for Copilot's review (A, C) and not a replacement for human review either (D), since no tool in this lesson substitutes for a human's judgment on intent and business context for high-stakes code."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Layer the Bot With Copilot's Review and Write Your Team's Policy",
+      "content": "**Goal:** compare what an independent PR bot flags against what GitHub Copilot's own review flags on the same diff, then write a short policy your team could actually use.\n\n**Step 1 — On the same PR (or a new one)**, also request a GitHub Copilot review if you have access, so both an author's-assistant reviewer and a reviewer-of-record bot comment on the identical diff.\n\n**Step 2 — Compare the two sets of comments.** Did they flag the same issues, different issues, or give contradictory advice on the same line?\n\n**Step 3 — Ask Claude.ai:** *\"Here's what [bot name] flagged and here's what Copilot flagged on the same pull request: [paste both sets of comments]. What does the difference reveal about what each tool is actually checking for?\"*\n\n**Step 4 — Write a short `REVIEW-POLICY.md`** with three sections: which review bot(s) your team runs and why, what a human reviewer must still check regardless of bot approval, and how you'll handle it when two bots (or a bot and a human) disagree.\n\n**Step 5 — Save it somewhere your team would actually find and use it** — not a one-off note that gets lost.\n\n**Outcome:** a real, evidence-based comparison of two review layers on the same code, plus a written policy document ready to hand to your team."
+    },
+    {
+      "type": "quiz",
+      "question": "A team installs Greptile because independent tests showed it catches more deep, cross-file bugs than CodeRabbit. After a month, developers start ignoring most of its PR comments. What does this scenario most likely illustrate?",
+      "options": [
+        "Greptile is a fundamentally broken tool and should be uninstalled immediately",
+        "A high false-positive rate can train developers to tune out a review bot's comments entirely, defeating the purpose of adding it — the fix is tuning sensitivity and rules, not simply accepting defaults or abandoning the tool outright",
+        "Developers should never read AI-generated review comments, since ignoring them is the expected and correct behavior",
+        "This proves CodeRabbit is objectively the better tool in all situations"
+      ],
+      "correct": 1,
+      "explanation": "This is the review-fatigue pattern flagged in this lesson (and echoed from lessons 2-18 and 6-15 for other AI-output-at-scale scenarios): a tool that catches more real bugs but also generates more noise can, in practice, deliver less value if developers stop reading its comments at all. The fix is tuning the tool's sensitivity and rules to your codebase, not concluding the tool is broken (A) or that ignoring AI review is generally correct (C). Benchmark results are also genuinely mixed across methodologies (as this lesson noted), so declaring one tool objectively better in all situations (D) overstates what the evidence supports."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 9-11.** You understand the distinct category third-party PR review bots occupy — CodeRabbit's broad platform support and lower noise, Greptile's deep repository indexing and higher bug-catch rate, and Graphite's stacked-PR specialization now under Cursor's ownership — and how this reviewer-of-record layer differs from GitHub Copilot's own author's-assistant review from lesson 6-15. You've installed one, reviewed a real PR, and written a review policy. Next: lesson 9-12 covers Cline and Roo Code — open-source, fully agentic VS Code extensions, and a real 2026 case study in how fast this space consolidates."
+    }
+  ],
+  "nextLesson": "9-12",
+  "prevLesson": "9-10"
+}

@@ -1,0 +1,93 @@
+{
+  "id": "19-14",
+  "title": "AI Photo & Video Editing in Everyday Apps — Google Photos, Photoshop & CapCut",
+  "part": 19,
+  "estimatedMinutes": 45,
+  "tags": [
+    "personal-life",
+    "intermediate",
+    "photo-editing",
+    "video-editing",
+    "tools",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 19-11 covered building AI video from a blank page — text-to-video with Sora or Runway, ElevenLabs voiceovers, HeyGen talking heads. Most people never touch that pipeline. What they actually touch, almost daily, is something narrower: the AI editing tools already sitting inside apps they already use, to fix or reshape a photo or clip they already have. Google Photos, Adobe Photoshop and Premiere, Canva, and CapCut have all shipped major generative-editing upgrades through 2025-2026, and the gap between 'casual photo touch-up' and 'generative AI' has essentially closed. By the end of this lesson you'll know what each tool actually does — Google Photos' Magic Eraser, Move, and Reimagine; Photoshop's Generative Fill and Premiere's Generative Extend; Canva Magic Studio's video tools; CapCut's background removal, script-to-video, and AI B-roll beyond the auto-captions covered in 19-11 — and you'll have thought through the one question every one of these tools eventually raises: once you've meaningfully changed what a real photo or clip shows, what do you owe the person looking at it?"
+    },
+    {
+      "type": "text",
+      "content": "## Google Photos: Editing Baked Into the App You Already Use\n\nFor Google Photos' 10th anniversary in 2026, Google gave its editor a significant redesign: the old single 'Magic Editor' button split into distinct tools. **Magic Eraser** removes an unwanted object or person with a tap or circle — the successor to Magic Editor's basic object removal. **Move** repositions a subject within the frame. **Reimagine** is the generative one: you circle an area and type a prompt — 'make it nighttime,' 'add snow,' 'put flowers in the background' — and the model fills in the rest. Google has also expanded access: Magic Eraser, Photo Unblur, Portrait Light, and other AI editing tools that used to require a Pixel phone or a paid Google One/AI Pro plan are now available to any Google Photos user, on any device, for free — though Pixel 10 owners still get first access to the newest features.\n\nTwo more worth knowing: **Remix** restyles a photo into a different artistic look, and **Best Take** fixes group photos where someone blinked by combining faces from a burst of shots automatically. Since early 2026, Reimagine edits carry an invisible **SynthID** watermark, and you can check any photo's 'About this image' panel to see whether that watermark and related edit metadata are present — though Google is upfront that very small edits (recoloring one flower in the background) may be too subtle for SynthID to reliably flag."
+    },
+    {
+      "type": "text",
+      "content": "## Photoshop's Generative Fill and Premiere's Generative Extend\n\nAdobe's January 2026 Creative Cloud update pushed Generative Fill in Photoshop well past its 2023 debut. It's now powered by the Firefly Fill & Expand model and a new Remove Tool 3, producing sharper 2K output with fewer artifacts. The bigger change is **Reference Image**: you can feed Generative Fill a photo of a specific object, and it preserves that object's actual identity while compositing it into the scene — correcting scale, rotation, lighting, and perspective automatically, rather than inventing a generic stand-in. Photoshop also now lets you pick the underlying model per edit — Adobe's own Firefly Image 5, or partner models including Google's Gemini 3 (marketed as 'Nano Banana Pro') and Black Forest Labs' FLUX.2 — so different edits can use whichever model handles that particular scene best.\n\nPremiere's equivalent for video is **Generative Extend**: drag the edge of a clip and Firefly generates extra frames to lengthen it — useful for holding a reaction a beat longer, smoothing a transition, or covering an unwanted camera wobble. The limits matter: video can only be extended by up to 2 seconds at a time (audio up to 10 seconds), it cannot generate new spoken dialogue — existing dialogue is muted through the extension instead — and clips containing music aren't eligible at all, for copyright reasons. Both tools are accessible well beyond studio professionals: a free Adobe account gives limited monthly generative credits in Photoshop (web or desktop) and Adobe Express, enough to try Generative Fill on a real photo without a subscription."
+    },
+    {
+      "type": "text",
+      "content": "## Canva Magic Studio's Video Tools\n\nCanva's Magic Studio bundles its AI features under one roof, and by 2026 its video tools have grown well past a filter. **Magic Media** generates a short video clip from a text prompt or a still image — it runs on Google's Veo 3 model, but the output is a 4-second silent clip, meant to drop into a larger design rather than stand alone. **Magic Video** goes further: upload your own clips and photos, add a prompt, and it auto-assembles cuts, transitions, and a matched soundtrack. Beyond generation, Canva's video toolkit includes a one-click **Background Remover**, a video **Magic Eraser** for removing objects from footage, **Magic Resize** to reformat one video for every platform's aspect ratio, **Beat Sync** to align cuts to music automatically, and an AI voiceover generator covering 25+ languages.\n\nWorth knowing before you rely on it: the free plan gives just 5 lifetime video credits, and even Canva Pro shares roughly 50 AI credits a month across the whole Magic Studio suite — clips cap at 4 seconds and resolution can be inconsistent. Canva's video AI is best understood as a design-surface accelerant — quick B-roll or a polish pass on footage you already have — not a substitute for the dedicated script-to-voice-to-video pipeline from Lesson 19-11."
+    },
+    {
+      "type": "text",
+      "content": "## CapCut Beyond Auto-Captions\n\nLesson 19-11 covered CapCut's auto-captioning and filler-word removal. Three more of its AI features get daily use and go further than captions:\n\n**Background removal (Cutout).** CapCut separates a subject from its background frame-by-frame — no green screen needed — so you can delete the background entirely or swap in a new image or video. It's reliable for a talking-head shot against a plain wall; hair and fast movement still produce soft, imperfect edges, and the free tier's detection is noticeably weaker than Pro's.\n\n**Script-to-video.** Paste a script and CapCut assembles a draft timeline: stock and AI-generated footage, an AI voiceover, and captions, all auto-matched to your text. Treat the result as a rough skeleton, not a finished video — every reviewer of this feature makes the same point, that it needs a manual polish pass before it looks intentional rather than generic.\n\n**AI B-roll.** CapCut can generate or pull in contextual supporting footage to fill gaps in your timeline automatically — the same idea as Workshop C's Runway clips in Lesson 19-11, but generated inline inside your existing edit rather than as a separate step. Like all AI-generated video, it holds up best in short bursts as filler, not as the main subject of a shot."
+    },
+    {
+      "type": "text",
+      "content": "## Authenticity and the Disclosure Question\n\nEvery tool in this lesson can change what a photo or video actually documents, not just how it looks — and those changes aren't all the same kind of thing. Removing a stranger from the background of your own vacation photo is a different act from using Reimagine to add a sunset that wasn't there, and both are different again from using Generative Extend to manufacture two seconds of footage that were never filmed. None of that makes any of it wrong by default — but it does mean the honest question isn't 'is AI editing allowed,' it's 'how is this image being read by the person looking at it.'\n\nA cosmetic tweak on a casual social post carries different stakes than a photo presented as an unedited record of what happened — a news photo, a piece of evidence, a 'here's exactly what I saw' claim. The industry is building infrastructure for this: SynthID (Google) and Content Credentials under the C2PA standard (Adobe and others) embed a durable, checkable marker into AI-edited files, and 'About this image' or a file's Content Credentials panel will tell you if one is present. Use that as a genuine tool, not a complete answer — see the warning below on its limits."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Provenance tools are becoming standard, not niche.** Google's SynthID, Adobe's Content Credentials (built on the open C2PA standard), and similar watermarking are now embedded by default across most major generative editing tools — Google Photos' Reimagine, Adobe Firefly-powered edits, and increasingly others across the industry. If you're ever unsure whether an image has been AI-edited, checking for this metadata (via 'About this image' in Google Photos, or a file's Content Credentials panel from Adobe tools) is a real, growing option — not just theoretical."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**A watermark you can't find doesn't mean an edit didn't happen.** Google is explicit that very subtle Reimagine edits may be too small for SynthID to reliably flag, and metadata like Content Credentials is commonly stripped the moment an image is screenshotted, re-compressed, or re-uploaded through a platform that doesn't preserve it — which is most social media platforms, most of the time. Treat provenance watermarks as a helpful signal when they're present, not as proof of authenticity when they're absent."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Meaningfully Edit a Real Photo or Video Clip",
+      "content": "Pick something real you actually have — not a stock demo — and make one substantive AI edit to it, keeping the result.\n\n**Step 1 — Choose a real photo or short clip** you'd actually want to improve: a photo with a stranger or object in the background you'd rather not have there, a photo you'd like to place in a different lighting or season, or a short clip that could use a beat or two more at the start or end.\n\n**Step 2 — Pick the matching tool:**\n- **Removing something from a photo:** Google Photos app → open the photo → Edit → circle the object → **Erase**.\n- **Changing a setting or generating a variation of a photo:** Google Photos → Edit → circle an area → **Reimagine** → type a specific prompt (e.g., 'add warm golden-hour light,' 'add falling snow'). No Reimagine on your account yet? Try Photoshop's free web Generative Fill at photoshop.adobe.com using a free Adobe account's introductory credits instead.\n- **Extending a video clip by a second or two:** if you have Premiere access, select the clip edge and drag with **Generative Extend**. No Premiere? Use Canva's Magic Media or video Magic Eraser on a free account instead, or CapCut's background removal to swap a clip's background.\n\n**Step 3 — Make the edit and export or save the result.** Don't discard it — this is the artifact you're keeping.\n\n**Step 4 — Check for provenance metadata.** In Google Photos, open 'About this image' on your edited photo. In Adobe tools, check the file's Content Credentials panel. Note whether a watermark or edit history is present.\n\n**Step 5 — Write one sentence** describing what you changed and whether the edit looks convincing or shows visible artifacts (soft edges, odd hands, warped text).\n\n**Outcome:** one real, kept, AI-edited photo or clip, plus a firsthand check of whether the tool's provenance labeling actually shows up."
+    },
+    {
+      "type": "quiz",
+      "question": "You want to use Premiere's Generative Extend to add two extra seconds to a clip where an actor is speaking, so their line doesn't feel cut off. Based on how the feature actually works, what should you expect?",
+      "options": [
+        "Generative Extend will generate new, matching spoken dialogue to fill the extended seconds seamlessly",
+        "Generative Extend cannot generate new spoken dialogue — the extended portion will have existing dialogue muted, and clips containing music aren't eligible for extension at all",
+        "Generative Extend works identically on any clip, including music, generating up to 30 seconds of new footage",
+        "Generative Extend only works on audio, not video, so the visual portion of the clip would need a separate tool"
+      ],
+      "correct": 1,
+      "explanation": "Generative Extend can add up to 2 seconds of video (or 10 seconds of audio) by generating new frames, but it explicitly cannot create or extend spoken dialogue — any existing dialogue is muted during the generated extension instead — and clips containing music aren't eligible for extension at all due to copyright. Options A and C misstate these real limits, and D is wrong because Generative Extend works on both video and audio."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Decide Your Disclosure Line",
+      "content": "Using the edit you made in Workshop 1 (or one you're considering making), work out where your own personal line is for disclosing an AI edit.\n\n**Step 1 — Place your edit on a spectrum.** Roughly rank these from 'nobody expects disclosure' to 'disclosure clearly matters': a brightness/color adjustment; removing a stranger from the background; adding weather or lighting that wasn't there (Reimagine); generating a few extra seconds of footage that were never filmed (Generative Extend); replacing what someone is holding or wearing.\n\n**Step 2 — Consider the context, not just the edit.** The same Reimagine edit — adding a sunset — carries different stakes on a casual Instagram story versus a photo submitted as a 'here's what I actually saw' account, a professional portfolio piece, or anything treated as documentary evidence. Write down one example from your own life where context would change your answer.\n\n**Step 3 — Write your own 3-4 sentence disclosure policy.** Be specific: under what circumstances would you mention an edit at all, and how (a caption note, a verbal mention, nothing) — versus when you'd consider it unnecessary?\n\n**Step 4 — Optional gut check:** would your policy survive someone finding out about the edit after the fact without your having mentioned it? If not, that's useful information about where your actual line is.\n\n**Outcome:** a short, honest, personally-written disclosure policy you can actually apply the next time you share an AI-edited photo or clip — not a hypothetical rule borrowed from someone else."
+    },
+    {
+      "type": "quiz",
+      "question": "A friend uses Google Photos' Reimagine to add a sunset that wasn't in the original photo, then posts it to their personal Instagram story captioned 'sunset walk tonight.' What's the most accurate way to think about the ethics here, based on this lesson's framework?",
+      "options": [
+        "Any AI edit to a photo is inherently dishonest and should never be shared without a disclaimer, regardless of context",
+        "AI-edited photos never need disclosure since everyone assumes photos are edited now",
+        "The stakes depend on context and how the image is being read — a personal, casual social post reads differently than a claim presented as an unedited record of what actually happened, so this specific case is lower-stakes than, say, a photo submitted as evidence of an event",
+        "This is only an ethical problem if the friend used a paid tool instead of a free one"
+      ],
+      "correct": 2,
+      "explanation": "This lesson's framework isn't 'AI editing is wrong' (A) or 'nothing needs disclosure' (B) — both are too absolute. The actual question is what the image is claiming to represent and to whom: a casual personal caption about a subjective mood ('sunset walk tonight') is read very differently than a photo presented as unedited proof of a specific fact. That doesn't mean disclosure norms never apply to casual posts, but the stakes here are clearly lower than a journalistic or evidentiary use of the same edit. Option D is irrelevant — the tool's price has nothing to do with the ethics of the edit."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-14.** You now know what Google Photos' Magic Eraser, Move, and Reimagine actually do, how Photoshop's Generative Fill and Premiere's Generative Extend work (and their real limits — 2-second video extensions, no generated dialogue, no music clips), what Canva Magic Studio's video tools add beyond a filter, and which CapCut AI features go beyond the auto-captions from Lesson 19-11. You've made a real AI edit to a photo or clip you're keeping, checked whether provenance watermarking actually shows up, and written your own disclosure policy for when an AI edit is worth mentioning."
+    }
+  ],
+  "nextLesson": "19-15",
+  "prevLesson": "19-13"
+}

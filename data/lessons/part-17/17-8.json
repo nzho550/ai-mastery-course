@@ -1,0 +1,86 @@
+{
+  "id": "17-8",
+  "title": "Atlassian Intelligence & Rovo — AI Across Jira & Confluence",
+  "part": 17,
+  "estimatedMinutes": 50,
+  "tags": ["project-management", "intermediate", "atlassian", "jira", "confluence", "rovo", "ai-agents", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nIf your team runs on Jira and Confluence, Atlassian has spent the last two years building a single AI layer across both — plus Bitbucket, Loom, and whatever third-party tools you've connected. That layer is called **Rovo**. This lesson covers what Rovo actually does in mid-2026: natural-language Q&A across your whole connected workspace, AI agents that don't just answer questions but take ownership of tasks, a coding-agent beta called Rovo Dev, and a feature called Remix that turns static Confluence pages into charts, prototypes, and slide decks. By the end, you'll have used Rovo (or drafted the exact prompts you'd use) to turn a messy real status update into a properly structured Jira ticket, and to ask one question that spans both Confluence and Jira at once."
+    },
+    {
+      "type": "text",
+      "content": "## Rovo: One AI Layer Across the Atlassian Suite\n\nRovo indexes Jira, Confluence, Bitbucket, Loom, and connected third-party tools (Slack, Google Drive, GitHub, and others) into what Atlassian calls the **Teamwork Graph** — a single map of who's working on what, referenced in which documents, discussed in which threads. Rovo reached general availability at Team '24 Europe in October 2024, opened to all customers at Team '25 in April 2025, and by Atlassian's Q2 FY26 shareholder letter had passed **5 million monthly active users**.\n\nRovo has three cost tiers that matter in practice: **Rovo Search** is free and uses no AI credits — it's enterprise search across everything indexed. **Rovo Chat and Agents** cost 10 credits per request, included in paid Cloud plans on Standard, Premium, and Enterprise tiers. **Deep Research** — for genuinely multi-step investigative queries — costs 100 credits per request. The practical implication: quick lookups are free, but asking Rovo to reason across many documents costs real budget your admin is tracking."
+    },
+    {
+      "type": "text",
+      "content": "## Agents in Jira: From Answering Questions to Owning Tasks\n\nAt **Team '26 Anaheim** (May 2026), Atlassian made **Agents in Jira** generally available. These aren't chat-based Q&A — they take ownership of tasks directly: drafting and updating issues, pulling context from work items whether they're assigned to the agent, @mentioned in a comment, or automatically triggered when work moves into a designated status.\n\n**Rovo Studio**, also GA at Team '26, extends this to anyone on the team, not just developers: describe a problem in natural language, and Studio assembles a working agent, no-code automation, or custom Forge app from existing platform components. A new **Rovo Max** reasoning mode (early access) handles harder, multi-step queries, alongside stronger admin controls over what agents can access and how much AI credit they can spend — the same fleet-governance instinct covered in lesson 17-7's discussion of Microsoft Agent 365 and Google Gemini Enterprise, just implemented inside one specific vendor's suite."
+    },
+    {
+      "type": "text",
+      "content": "## Rovo Dev: A Coding Agent Beta Inside the Atlassian Stack\n\n**Rovo Dev** is a separately-billed add-on aimed specifically at engineers. It plans code changes starting from a Jira issue, reviews pull requests against the issue's stated acceptance criteria, runs as a terminal-based CLI agent, and surfaces inside Bitbucket, GitHub, VS Code, and Jira itself. At Team '26, Atlassian added **Code Intelligence** in early access — letting dev teams run intent-based queries across multiple repositories using code, Jira, and Confluence context together, rather than searching each system separately.\n\nA newer Loom integration lets you record a walkthrough of a bug or requirement — device info, console logs, and network data captured on video — and hand that recording to Rovo Dev as a structured prompt it can act on. It's still explicitly a **beta**: treat anything Rovo Dev drafts the way you'd treat output from any AI coding tool covered elsewhere in this course — read the diff, don't merge on trust alone."
+    },
+    {
+      "type": "text",
+      "content": "## Remix: Turning Confluence Pages Into Something Else Entirely\n\n**Remix with Rovo** lets you select any text, table, or section on a Confluence page and instantly convert it into a chart, infographic, or diagram — recommended by Rovo based on the content, rendered inside the editor, with your existing permissions and context intact. Atlassian's own data is the reason this feature exists: Confluence pages with one or more visual elements are read **18% more often** by a wider audience than plain-text pages.\n\nRemix goes further than static visuals through **partner agents**: from inside a Confluence page, Rovo Chat can hand content to a connected partner tool — a product spec becomes a working **Lovable** app a designer can click through in minutes, a technical doc becomes a **Replit** starter project an engineer can fork, and meeting notes become a **Gamma** slide deck a team lead can walk into a room with. None of this requires manual copy-pasting between tools — it's the same content, re-expressed in whatever format the next conversation actually needs."
+    },
+    {
+      "type": "text",
+      "content": "## Where This Fits Next to What You Already Know\n\nThe Teamwork Graph now exposes a command-line interface and an **MCP server**, meaning Jira and Confluence context can flow into any MCP-compatible client — the exact portability argument you'll see again in Part 9's coverage of coding agents, where the same MCP protocol connects Claude Code, Codex CLI, and open-source tools to the servers you build once. Compare Rovo's model — one AI woven through an entire suite you already use daily, acting across tool boundaries — to the single-purpose meeting and task tools covered earlier in this course. The throughline for 2026 workplace AI isn't any single feature; it's software that reads everything it's connected to and then acts across the boundaries between those tools, rather than staying fenced inside one app."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Credits are a budget, not an afterthought.** Rovo Search costs nothing and is safe to use constantly. Rovo Chat, Agents, and especially Deep Research draw down a shared credit pool your admin monitors — the same governance instinct from lesson 17-7's discussion of agent fleets applies here at the tool level: know what your organization's Rovo credit allocation is before you build a habit of asking Deep Research questions for things a quick Search would answer just as well."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Rovo answers only as well as what's actually indexed — and it answers with full confidence either way.** A stale Confluence page, a duplicate spec nobody archived, or an out-of-date runbook gets surfaced with the same authority as the current, correct version. Before an AI-drafted Jira ticket goes live — assignee, priority, description — read it the way you'd read any auto-filed action item (lesson 2-18's approval-gate discipline applies exactly here): drafted, not published, until a human checks it."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Turn a Messy Status Update Into a Real Jira Ticket",
+      "content": "**Goal:** take genuinely messy, real text and turn it into a properly structured Jira ticket — either using Rovo directly, or by writing the exact prompt you'd use.\n\n**Step 1 — Find real messy text.** Pull an actual Slack message, meeting note, or rambling status email you or a colleague wrote recently about something blocked, half-done, or unclear. Don't write a clean example for this exercise — the point is testing against real mess.\n\n**Step 2 — If you have Rovo access:** open Rovo Chat from within Jira and paste the text with a prompt like: *\"Turn this into a Jira ticket: give it an appropriate title, a clear description, acceptance criteria, and a suggested priority. Ask me anything you can't infer from the text.\"*\n\n**Step 3 — If you don't have Rovo access:** write out, word for word, the exact prompt you would give Rovo Chat to do this. Be specific about which fields you want filled in and what tone/format you expect back.\n\n**Step 4 — Compare the drafted ticket (or your prompt's expected output) against the raw text.** What did the AI have to infer or guess? What was actually explicit in the original message?\n\n**Step 5 — Correct anything wrong before treating it as real.** This is your approval gate — the same discipline from lesson 2-18's auto-filing workshop, applied to Rovo specifically.\n\n**Outcome:** one real, usable Jira ticket built from genuinely messy input — or a battle-tested prompt ready for the next time you have Rovo access."
+    },
+    {
+      "type": "quiz",
+      "question": "Rovo drafts a Jira ticket from a messy Slack message, correctly picking up the task description but assigning it to the wrong team member (the message mentioned two people, and Rovo guessed which one owned the follow-up). What does this scenario best illustrate?",
+      "options": [
+        "Rovo tickets should never be reviewed since AI drafting is inherently more accurate than a human writing the ticket from scratch",
+        "AI-drafted tickets still need a human approval step before going live — the same discipline from lesson 2-18's auto-filing workshop — because the model can infer confidently and still be wrong on details like assignment",
+        "This proves Rovo is unreliable and manual ticket creation should be used instead going forward",
+        "The problem only happens with Slack-sourced input, so drafting tickets from Confluence pages instead would avoid this failure mode"
+      ],
+      "correct": 1,
+      "explanation": "This is exactly the accuracy/trust pattern that runs through this whole course: an AI tool can produce a confident, plausible-looking answer that's still wrong on a specific detail — here, who the ticket should be assigned to. The fix isn't abandoning the tool (C) or assuming the failure is source-specific (D) — it's keeping the human approval gate from lesson 2-18 in place for any AI-drafted ticket before it's treated as final, regardless of how good the draft looks."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 2 — Ask a Cross-Tool Question That Spans Confluence and Jira",
+      "content": "**Goal:** test the Teamwork Graph's actual value proposition — answering a question that requires connecting a Confluence document with live Jira data, something no single-tool search can do.\n\n**Step 1 — Think of a real question** that needs both sources — for example: *\"Which open bugs relate to the requirements described in our Q3 planning spec?\"* or *\"Does this runbook's incident process still match what's actually in our current sprint board?\"*\n\n**Step 2 — If you have Rovo access:** ask Rovo Chat this exact cross-tool question and note which parts of the answer came from Confluence versus Jira.\n\n**Step 3 — If you don't have access:** write the precise prompt you'd use, then answer the question manually — open the Confluence doc, then separately search Jira — and count how many steps and tool-switches it took without an AI layer connecting them.\n\n**Step 4 — Note one thing you'd verify before trusting the answer** — for example, does the ticket data Rovo cited actually match what's live on the sprint board right now, or could it be citing something stale?\n\n**Outcome:** a documented, real example of the \"ask across tool boundaries\" pattern — and a clear sense of how much manual tool-switching it replaces."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the core capability the Teamwork Graph adds that a normal per-tool search (searching only inside Jira, or only inside Confluence) cannot provide on its own?",
+      "options": [
+        "Faster search results within a single tool, since the Teamwork Graph caches queries",
+        "The ability to connect and reason across information that lives in different tools — a Confluence spec and related Jira tickets, for instance — in a single query, rather than requiring separate searches stitched together manually",
+        "Automatic translation of ticket titles into multiple languages",
+        "Free unlimited AI credits for any Atlassian customer"
+      ],
+      "correct": 1,
+      "explanation": "The whole point of indexing Jira, Confluence, Bitbucket, and connected third-party tools into one Teamwork Graph is cross-tool reasoning: a single query like 'which open bugs relate to this spec' requires connecting a Confluence document to live Jira data, which a search scoped to just one tool structurally cannot do. Speed within one tool (A), translation (C), and free unlimited credits (D) aren't what distinguishes this capability — cross-boundary reasoning is."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 17-8.** You understand Rovo's role as one AI layer across Jira, Confluence, Bitbucket, and connected tools — 5 million-plus monthly active users, free Search versus credited Chat/Agents/Deep Research, and Agents in Jira taking real ownership of tasks. You've seen Rovo Dev's coding-agent beta and Remix's ability to turn Confluence content into charts, dashboards, and working prototypes via partner agents. You've turned a real messy status update into a structured Jira ticket and asked a real question that spans Confluence and Jira at once. Next: 17-9 looks at the same shift — AI taking ownership of real work — across Asana, Monday.com, ClickUp, and Linear."
+    }
+  ],
+  "nextLesson": "17-9",
+  "prevLesson": "17-7"
+}

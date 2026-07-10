@@ -364,8 +364,39 @@
             "open-source",
             "hands-on"
           ],
-          "nextLesson": "3-1",
+          "nextLesson": "2-19",
           "prevLesson": "2-16"
+        },
+        {
+          "id": "2-19",
+          "title": "AI Design Tools for Non-Designers — Canva Magic Studio, Figma Make & Miro/Whimsical AI",
+          "estimatedMinutes": 50,
+          "tags": [
+            "tools",
+            "beginner",
+            "design",
+            "canva",
+            "figma",
+            "miro",
+            "hands-on"
+          ],
+          "nextLesson": "2-20",
+          "prevLesson": "2-17"
+        },
+        {
+          "id": "2-20",
+          "title": "Grammarly's AI Agents — From Grammar Checker to Writing Coach",
+          "estimatedMinutes": 45,
+          "tags": [
+            "tools",
+            "beginner",
+            "writing",
+            "grammarly",
+            "agents",
+            "hands-on"
+          ],
+          "nextLesson": "3-1",
+          "prevLesson": "2-19"
         }
       ]
     },
@@ -384,7 +415,7 @@
             "concepts"
           ],
           "nextLesson": "3-2",
-          "prevLesson": "2-17"
+          "prevLesson": "2-20"
         },
         {
           "id": "3-2",
@@ -547,8 +578,22 @@
             "security",
             "risks"
           ],
-          "nextLesson": "15-1",
+          "nextLesson": "13-6",
           "prevLesson": "13-4"
+        },
+        {
+          "id": "13-6",
+          "title": "AI Policy & Tools for Government Workers",
+          "estimatedMinutes": 50,
+          "tags": [
+            "safety",
+            "intermediate",
+            "government",
+            "policy",
+            "compliance"
+          ],
+          "nextLesson": "15-1",
+          "prevLesson": "13-5"
         }
       ]
     },
@@ -568,7 +613,7 @@
             "knowledge-work"
           ],
           "nextLesson": "15-2",
-          "prevLesson": "13-5"
+          "prevLesson": "13-6"
         },
         {
           "id": "15-2",
@@ -866,8 +911,74 @@
             "clinical-ai",
             "hands-on"
           ],
-          "nextLesson": "17-1",
+          "nextLesson": "16-14",
           "prevLesson": "16-12"
+        },
+        {
+          "id": "16-14",
+          "title": "AI for Contracts & PDFs — DocuSign Iris & Adobe Acrobat AI Assistant",
+          "estimatedMinutes": 50,
+          "tags": [
+            "enterprise",
+            "intermediate",
+            "documents",
+            "contracts",
+            "docusign",
+            "adobe-acrobat",
+            "hands-on"
+          ],
+          "nextLesson": "16-15",
+          "prevLesson": "16-13"
+        },
+        {
+          "id": "16-15",
+          "title": "ERP/ITSM AI for Employees — ServiceNow Now Assist & SAP Joule",
+          "estimatedMinutes": 50,
+          "tags": [
+            "enterprise",
+            "intermediate",
+            "itsm",
+            "erp",
+            "servicenow",
+            "sap-joule",
+            "hands-on"
+          ],
+          "nextLesson": "16-16",
+          "prevLesson": "16-14"
+        },
+        {
+          "id": "16-16",
+          "title": "Enterprise AI Search & Knowledge Answering — Glean, M365 Copilot Search & Gemini Enterprise",
+          "estimatedMinutes": 50,
+          "tags": [
+            "enterprise",
+            "intermediate",
+            "search",
+            "knowledge",
+            "glean",
+            "copilot",
+            "gemini-enterprise",
+            "hands-on"
+          ],
+          "nextLesson": "16-17",
+          "prevLesson": "16-15"
+        },
+        {
+          "id": "16-17",
+          "title": "Using Your Company's Internal AI Agent Platform — Bedrock, Vertex & Foundry From an Employee's Seat",
+          "estimatedMinutes": 50,
+          "tags": [
+            "enterprise",
+            "intermediate",
+            "agents",
+            "governance",
+            "bedrock",
+            "vertex-ai",
+            "azure-ai-foundry",
+            "hands-on"
+          ],
+          "nextLesson": "17-1",
+          "prevLesson": "16-16"
         }
       ]
     },
@@ -888,7 +999,7 @@
             "management"
           ],
           "nextLesson": "17-2",
-          "prevLesson": "16-13"
+          "prevLesson": "16-17"
         },
         {
           "id": "17-2",
@@ -970,8 +1081,43 @@
             "leadership",
             "management"
           ],
-          "nextLesson": "19-1",
+          "nextLesson": "17-8",
           "prevLesson": "17-6"
+        },
+        {
+          "id": "17-8",
+          "title": "Atlassian Intelligence & Rovo — AI Across Jira & Confluence",
+          "estimatedMinutes": 50,
+          "tags": [
+            "project-management",
+            "intermediate",
+            "atlassian",
+            "jira",
+            "confluence",
+            "rovo",
+            "ai-agents",
+            "hands-on"
+          ],
+          "nextLesson": "17-9",
+          "prevLesson": "17-7"
+        },
+        {
+          "id": "17-9",
+          "title": "AI Teammates in Work Management Tools — Asana, Monday.com, ClickUp Brain & Linear",
+          "estimatedMinutes": 50,
+          "tags": [
+            "project-management",
+            "intermediate",
+            "ai-teammates",
+            "asana",
+            "monday",
+            "clickup",
+            "linear",
+            "agent-governance",
+            "hands-on"
+          ],
+          "nextLesson": "19-1",
+          "prevLesson": "17-8"
         }
       ]
     },
@@ -993,7 +1139,7 @@
             "hands-on"
           ],
           "nextLesson": "19-2",
-          "prevLesson": "17-7"
+          "prevLesson": "17-9"
         },
         {
           "id": "19-2",
@@ -1174,8 +1320,38 @@
             "windows-copilot",
             "hands-on"
           ],
-          "nextLesson": "4-1",
+          "nextLesson": "19-14",
           "prevLesson": "19-12"
+        },
+        {
+          "id": "19-14",
+          "title": "AI Photo & Video Editing in Everyday Apps — Google Photos, Photoshop & CapCut",
+          "estimatedMinutes": 45,
+          "tags": [
+            "personal-life",
+            "intermediate",
+            "photo-editing",
+            "video-editing",
+            "tools",
+            "hands-on"
+          ],
+          "nextLesson": "19-15",
+          "prevLesson": "19-13"
+        },
+        {
+          "id": "19-15",
+          "title": "AI Companions & Character AI — Replika, Character.AI & the Parasocial Risk",
+          "estimatedMinutes": 45,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "ai-companions",
+            "mental-health",
+            "ethics",
+            "reflection"
+          ],
+          "nextLesson": "4-1",
+          "prevLesson": "19-14"
         }
       ]
     },
@@ -1195,7 +1371,7 @@
             "concepts"
           ],
           "nextLesson": "4-2",
-          "prevLesson": "19-13"
+          "prevLesson": "19-15"
         },
         {
           "id": "4-2",
@@ -2054,8 +2230,40 @@
             "google",
             "hands-on"
           ],
-          "nextLesson": "7-1",
+          "nextLesson": "9-11",
           "prevLesson": "9-9"
+        },
+        {
+          "id": "9-11",
+          "title": "AI PR-Review Bots — CodeRabbit, Graphite & Greptile",
+          "estimatedMinutes": 50,
+          "tags": [
+            "ai-coding",
+            "advanced",
+            "code-review",
+            "coderabbit",
+            "greptile",
+            "graphite",
+            "hands-on"
+          ],
+          "nextLesson": "9-12",
+          "prevLesson": "9-10"
+        },
+        {
+          "id": "9-12",
+          "title": "Cline & Roo Code — Open-Source Agentic Coding in VS Code",
+          "estimatedMinutes": 50,
+          "tags": [
+            "ai-coding",
+            "advanced",
+            "cline",
+            "roo-code",
+            "open-source",
+            "vscode",
+            "hands-on"
+          ],
+          "nextLesson": "7-1",
+          "prevLesson": "9-11"
         }
       ]
     },
@@ -2075,7 +2283,7 @@
             "overview"
           ],
           "nextLesson": "7-2",
-          "prevLesson": "9-10"
+          "prevLesson": "9-12"
         },
         {
           "id": "7-2",

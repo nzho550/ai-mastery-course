@@ -1,0 +1,90 @@
+{
+  "id": "17-9",
+  "title": "AI Teammates in Work Management Tools — Asana, Monday.com, ClickUp Brain & Linear",
+  "part": 17,
+  "estimatedMinutes": 50,
+  "tags": ["project-management", "intermediate", "ai-teammates", "asana", "monday", "clickup", "linear", "agent-governance", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nEvery major work-management tool has spent 2025-2026 shipping the same basic idea in its own flavor: instead of AI that helps you write a task faster, AI you can *assign* the task to — a \"teammate\" with its own scope of work, permissions, and (allegedly) judgment. This lesson tours four of the biggest examples — Asana's AI Teammates, Monday.com's Vibe and Sidekick, ClickUp's Brain 2 and Super Agents, and Linear's Agent feature, launched alongside the blunt claim that \"issue tracking is dead.\" It ends with the harder question underneath all the marketing: what does \"assigning work to an AI\" actually mean in practice, and where does human accountability have to sit no matter how capable the agent gets. You'll finish having set up one real automated workflow or agent-assigned task in a tool you actually use, with the oversight you built into it written down."
+    },
+    {
+      "type": "text",
+      "content": "## From Copilot Features to \"AI Teammates\" — What Changed\n\nLesson 17-7 covered governing *fleets* of agents at the IT/platform level — Microsoft Agent 365, Google Gemini Enterprise, an agent registry and audit trail for every autonomous agent in an organization. This lesson is the layer underneath that: the actual products where a manager assigns a real piece of work directly to an agent, the same way they'd assign it to a person on the team.\n\n17-7 also flagged a vocabulary shift worth remembering here: some vendors market these agents as \"AI employees\" or \"digital labor\" — Salesforce's Agentforce, Cognition's Devin, and Anthropic's Claude Cowork were the examples given there. Asana, Monday.com, ClickUp, and Linear are four more concrete, named products following exactly that pattern — worth studying because they're where most teams will first encounter \"assign this to an agent\" as a literal button in software they already use daily."
+    },
+    {
+      "type": "text",
+      "content": "## Asana: AI Studio (Rules) vs. AI Teammates (Judgment)\n\nAsana ships two distinct, complementary products worth telling apart. **AI Studio** is a no-code rules engine for deterministic, clearly defined processes — if this field changes, do that action, with predictable, repeatable logic. **AI Teammates** are a different animal: autonomous agents that interpret a task, decide how to approach it, and adapt based on context, which means they need review and course-correction the way a rules engine never does.\n\nAI Teammates launched at Asana's Work Innovation Summit in November 2025 with 12 out-of-the-box agents; by 2026 that had grown to roughly 21-30 pre-built agents — a Campaign Brief Writer, a Bug Investigator, a Sprint Coach, a Compliance Specialist, among others — plus a no-code builder for custom ones. The trust signal worth noting: after beta testing with 200+ organizations, **93% of AI Teammates were granted full edit access**, not just view or comment — real evidence of trust building once agents are coordinating toward a shared goal rather than just chatting. A cited case study: nonprofit Human-I-T reports an AI Teammate running 14+ hours a day autonomously processing device volume, with a manager noting the real impact isn't the time saved — it's the consistency of quality. Asana's CEO Dan Rogers has argued publicly that \"autonomy is the wrong goal\" for enterprise workflows — agents need Asana's Work Graph data model as operational context to collaborate well, rather than being set loose with no structure."
+    },
+    {
+      "type": "text",
+      "content": "## Monday.com: Vibe, Sidekick, and Meeting AI\n\nIn May 2026, monday.com announced what it called the biggest change in its history: rebuilding the platform from the ground up as an \"AI Work Platform\" rather than a work-management tool with AI features bolted on.\n\n**Vibe** is monday's AI app builder — describe what you want in plain language, and it generates a working custom app on the platform, refined through further chat rather than code. It reached $1 million in annual recurring revenue in just 10 weeks after launch. A May 2026 pricing overhaul folded Vibe into the AI Credits system, with every build prompt costing credits based on the model used.\n\n**Sidekick**, monday's general AI assistant, came out of beta in the same wave. On the meeting side, **AI Notetaker** joins calls on Zoom, Teams, and Google Meet, auto-generates transcriptions and action items directly onto monday boards, and — through monday AI in CRM — can auto-fill CRM fields, draft follow-up emails, and recommend next steps right after a sales call ends."
+    },
+    {
+      "type": "text",
+      "content": "## ClickUp Brain 2 & Super Agents: Agents That Build Themselves\n\nClickUp's **Brain 2**, its biggest release of 2026, launched in June 2026 as a full rebuild: an AI layer aware of every task, doc, decision, and conversation in a workspace, routing each query to whichever underlying model (Claude, GPT, or Gemini) fits the job.\n\n**Super Agents** — which followed ClickUp's acquisition of Codegen in November 2025 — are AI teammates that live inside the workspace: mention one in a comment, assign it directly to a task, or message it, and it can handle end-to-end work like email management, meeting scheduling, reporting, and image generation. All actions log to a real-time audit trail, with granular admin permissions controlling exactly what each agent can touch.\n\nThe standout feature, and a genuinely new idea in this category: Brain 2 notices when a task is repetitive enough to be worth delegating and **proposes building a dedicated Super Agent itself** — already configured with triggers, rules, and scope — without a human manually programming it. ClickUp claims its platform now hosts more than 11 million agents; founder Zeb Evans has publicly described running 2,000+ Super Agents himself in what he calls \"Founder Mode.\""
+    },
+    {
+      "type": "text",
+      "content": "## Linear: \"Issue Tracking Is Dead\" and Agent-Native Work\n\nIn March 2026, Linear CEO Karri Saarinen published an essay bluntly titled \"Issue tracking is dead,\" arguing that as coding agents take over more procedural work, Linear needs to become less of a ticket queue and more of \"the shared product system that turns context into execution.\"\n\nThe numbers behind the claim are striking: coding agents are now installed in **more than 75% of Linear's enterprise workspaces**; in the three months before the announcement, work completed by agents grew **5x**, and agents authored nearly **25% of new issues** — up from essentially zero in 2024. Alongside the essay, Linear shipped **Linear Agent** (a native agent working within full product context), **Skills** (teams codify workflows worth repeating, triggered manually or automatically), and **Automations** (agent workflows triggered the instant an issue enters triage). Coinbase is a cited early \"agent-first\" adopter.\n\nWorth noting honestly: coverage from The Register and DevClass flagged that Linear's announcement said almost nothing about security beyond \"the agent operates within your existing permissions\" — a real gap given that prompt injection risk grows exactly as an agent gains more code-writing and MCP-server capability, which Linear's roadmap explicitly includes."
+    },
+    {
+      "type": "text",
+      "content": "## What \"Assigning Work to an AI\" Actually Means — Beyond the Marketing\n\nHere's the clear-eyed version, stripped of vendor framing: \"assigning\" a task to an AI teammate is not equivalent to assigning it to a person. A person brings implicit judgment, an instinct for when to escalate, and their own stake in the outcome. An AI teammate, however capable, is closer to configuring a highly literal, extremely fast intern who has no independent stake in getting it right and will confidently do the wrong thing if the scope or context is even slightly off.\n\nThis is exactly why Asana pairs its Teammates with Work Graph context and review checkpoints rather than raw autonomy — the industry's own research on agentic reliability (cited by Asana itself) shows autonomous agents fail at roughly 70% of open-ended tasks without that kind of structure. \"AI employee\" and \"digital labor\" are useful shorthand for how independently these tools can operate, but treat them as marketing framing, not a literal transfer of accountability.\n\nWhere human accountability has to sit, regardless of which of these four tools you're using: **(1)** a human approves before anything customer-facing or high-stakes ships, **(2)** a specific person reviews the agent's audit trail on a set cadence — not just when something visibly breaks, **(3)** one named human owns the outcome, not \"the team\" and not \"the agent.\" This is the same accountable-owner principle from lesson 17-7's research on why most AI rollouts stall — it applies with more force, not less, once the thing you're rolling out can act on its own."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**This is a category maturing all at once, not a coincidence.** Asana, Monday.com, ClickUp, and Linear — plus Atlassian's Rovo from the previous lesson — all shipped a version of \"assign real work directly to an agent\" within roughly the same twelve-month window in 2025-2026. That's the same underlying maturity curve driving the fleet-governance platforms (Microsoft Agent 365, Google Gemini Enterprise) from lesson 17-7: once every major vendor in a category ships agentic delegation at the same time, the tooling to govern it becomes the next necessary layer, not an optional add-on."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Vendor announcements tend to lead with adoption numbers and skip the governance questions.** Linear's \"issue tracking is dead\" essay is a concrete example: strong statistics on agent adoption, almost nothing on how prompt injection or permission misuse gets caught before it causes damage. Whichever of these four tools you pick, don't accept a vendor's own success metrics as your safety assessment — build the review cadence and named ownership from the previous section yourself, the same discipline lesson 2-18 applied to auto-filed meeting action items."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 1 — Set Up One Real Agent-Assigned Task",
+      "content": "**Goal:** configure one real, working automated task or agent using whichever of these tools (or an equivalent) your team actually has access to — not a hypothetical.\n\n**Step 1 — Pick your tool.** Use whichever of Asana, Monday.com, ClickUp, or Linear you or your team already has access to. If none apply, use the closest equivalent tool you actually use daily.\n\n**Step 2 — Identify one real, recurring, low-risk task** you could hand to an agent/teammate feature rather than a simple rule-based automation — a weekly status report draft, a first-pass bug triage, a competitive research brief, a meeting recap with drafted next steps.\n\n**Step 3 — Configure it for real:**\n- **Asana:** add or build an AI Teammate scoped to that task\n- **Monday.com:** set up a Vibe app or a Sidekick-driven automation\n- **ClickUp:** accept (or manually create) a Super Agent for that workflow\n- **Linear:** enable Linear Agent on a project and give it one scoped task\n\n**Step 4 — Before letting it run unattended, write down:** what permissions does it actually have? What can it explicitly not touch? What's the maximum time or spend before you check in on it?\n\n**Step 5 — Run it for real** and compare the output to what you'd expect from a competent junior colleague doing the same task for the first time.\n\n**Outcome:** one real automated workflow or agent-assigned task, running in a tool you actually use, with its permission scope written down before you turned it loose."
+    },
+    {
+      "type": "quiz",
+      "question": "A manager is choosing the first task to hand off to an AI teammate feature in Asana, Monday.com, ClickUp, or Linear. Which candidate task best fits how these tools are actually designed to be used, based on what you've read in this lesson?",
+      "options": [
+        "Final sign-off on a customer-facing legal contract, since AI teammates are designed for high-stakes decisions",
+        "A recurring, well-scoped, low-risk task like a first-pass bug triage or a weekly status draft — reviewed by a named human on a set cadence before anything goes further",
+        "An entirely open-ended task with no defined scope, since more autonomy produces better results",
+        "Nothing — none of these tools are mature enough to be trusted with any real task yet"
+      ],
+      "correct": 1,
+      "explanation": "Every example in this lesson — Asana's Work Graph-scoped Teammates, ClickUp's permission-gated Super Agents, Linear's triage-triggered Automations — pairs agent delegation with a defined scope and a review checkpoint, not open-ended autonomy. Handing a legal sign-off to an agent (A) ignores exactly the accountability point this lesson makes about high-stakes work. Maximum openendedness (C) is the opposite of what the research Asana itself cites recommends — unstructured autonomy is where agents fail most often. Refusing to use any of these tools (D) ignores the real, documented adoption already happening (75%+ of Linear's enterprise workspaces, 93% of Asana's beta Teammates granted full edit access) — the tools are usable now, provided the scope and review discipline from this lesson are in place."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Document Your Accountability Line",
+      "content": "**Goal:** write down, concretely, who is accountable for the agent-assigned task you just set up in Workshop 1 — not as a hypothetical, but as a document you'd actually hand to a manager.\n\n**Step 1 — Write one paragraph answering:** \"If this agent does something wrong, who finds out, how, and how fast?\" Be specific — not \"the team will notice,\" but the actual mechanism (a daily audit-log check, a weekly review meeting, an alert on a specific condition).\n\n**Step 2 — Name a specific human owner** — not \"the team\" and not the agent itself — responsible for reviewing this agent's output on a set cadence.\n\n**Step 3 — Ask Claude.ai or Claude Code:** *\"Here's my agent-assigned task and my accountability plan: [paste your Steps 1-2 answers]. Stress-test this — what happens if this agent runs unattended for a month? What's the worst plausible failure, and would my plan actually catch it before real damage happens?\"*\n\n**Step 4 — Revise your plan** based on what surfaces — don't skip a gap just because fixing it is inconvenient.\n\n**Step 5 — Save this as a real document** you'd actually show a manager or team lead before turning the automation fully loose.\n\n**Outcome:** a written, stress-tested accountability plan for a real agent-assigned task — the concrete answer to \"where does human accountability sit\" from this lesson, applied to your own work rather than left abstract."
+    },
+    {
+      "type": "quiz",
+      "question": "Vendors increasingly market autonomous work-management agents as \"AI employees\" or \"digital labor.\" What is the most accurate way to understand this framing, based on this lesson?",
+      "options": [
+        "It's a literal HR category — AI employees can be held accountable the same way a human employee can",
+        "It's useful shorthand for how independently these agents can operate, but it's marketing framing, not a literal transfer of accountability — a named human still has to own the outcome, approve high-stakes output, and review the audit trail on a set cadence",
+        "It means these tools no longer need any human oversight once configured correctly",
+        "It's a meaningless term that has no bearing on how the tools should actually be used"
+      ],
+      "correct": 1,
+      "explanation": "This lesson (echoing lesson 17-7's original note on the same vocabulary) is explicit: 'AI employee' and 'digital labor' describe real operational independence, but accountability doesn't transfer to software. Someone still has to approve high-stakes output, review what the agent actually did, and be the named owner if something goes wrong — regardless of how autonomously the tool operates. Treating the label as literal (A) or as a license to skip oversight (C) both ignore the governance discipline this lesson and 17-7 build toward. It isn't meaningless either (D) — it's a real signal about capability, just not about who's accountable."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 17-9 — and Part 17.** You've now covered the full arc of AI-augmented professional work: project planning, problem-solving, documentation, quality review, and stakeholder communication earlier in this part, team AI adoption and governance in lesson 17-7, Atlassian's Rovo across Jira and Confluence in 17-8, and — in this lesson — the shift from AI-assisted tools to AI \"teammates\" across Asana, Monday.com, ClickUp, and Linear, plus the accountability line that has to hold no matter how capable any of them get. Part 19 turns AI toward everyday personal life — meals, shopping, and home."
+    }
+  ],
+  "nextLesson": "19-1",
+  "prevLesson": "17-8"
+}

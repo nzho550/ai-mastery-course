@@ -21,7 +21,7 @@ This is the **AI Mastery Course** — a built, deployed, offline-capable website
 - Advanced techniques: RAG, agents, model selection, custom knowledge engines
 - Building custom AI skills/commands for Claude Code
 
-**Course structure:** 21 parts, 246 lessons, ~245 hours total learning time. Available in English and Chinese (language toggle in the header).
+**Course structure:** 21 parts, 259 lessons, ~259 hours total learning time. Available in English and Chinese (language toggle in the header).
 
 **Status:** Live at GitHub Pages ([nzho550/ai-mastery-course](https://github.com/nzho550/ai-mastery-course)). All content authored, site built, i18n complete.
 
@@ -59,17 +59,17 @@ ai-mastery-course/
 | # | Title | Lessons |
 |---|-------|---------|
 | 1 | AI Foundations | 7 |
-| 2 | Your First AI Tools | 18 |
+| 2 | Your First AI Tools | 20 |
 | 3 | Prompt Engineering | 8 |
-| 4 | AI Safety, Privacy & Cost Management | 5 |
+| 4 | AI Safety, Privacy & Cost Management | 6 |
 | 5 | AI for Research & Knowledge Work | 8 |
-| 6 | AI for Document Creation & Office Work | 13 |
-| 7 | AI for Project Planning & Management | 7 |
-| 8 | AI for Personal Life | 13 |
+| 6 | AI for Document Creation & Office Work | 17 |
+| 7 | AI for Project Planning & Management | 9 |
+| 8 | AI for Personal Life | 15 |
 | 9 | Computer & Command Line Basics | 7 |
 | 10 | VS Code: Complete Beginner Guide | 12 |
 | 11 | AI Inside VS Code | 30 |
-| 12 | Other AI Coding Tools | 10 |
+| 12 | Other AI Coding Tools | 12 |
 | 13 | Claude Code: Complete Guide | 14 |
 | 14 | Building Custom AI Skills | 8 |
 | 15 | MCP: Model Context Protocol | 23 |
@@ -79,7 +79,7 @@ ai-mastery-course/
 | 19 | Advanced AI Mastery | 14 |
 | 20 | Loop Engineering | 17 |
 | 21 | Capstone Projects | 5 |
-| **Total** | | **246 lessons** |
+| **Total** | | **259 lessons** |
 
 Business-owner and people-management content (validating/launching a business, performance reviews, hiring, OKRs, keeping tabs on a team's work without micromanaging) lives in Part 11 ("AI Inside VS Code"), lessons 6-24/6-29/6-30, with cross-links from Part 7 ("AI for Project Planning & Management").
 

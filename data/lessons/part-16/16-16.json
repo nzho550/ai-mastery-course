@@ -1,0 +1,91 @@
+{
+  "id": "16-16",
+  "title": "Enterprise AI Search & Knowledge Answering — Glean, M365 Copilot Search & Gemini Enterprise",
+  "part": 16,
+  "estimatedMinutes": 50,
+  "tags": [
+    "enterprise",
+    "intermediate",
+    "search",
+    "knowledge",
+    "glean",
+    "copilot",
+    "gemini-enterprise",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nPart 8 of this course taught you to connect your own Claude Code setup to your own Gmail, Drive, or Slack via MCP — a personal, self-configured integration you control end to end. This lesson is about the version almost every employee at a mid-size or large company will actually encounter instead: a company-provided, IT-deployed enterprise search tool that answers questions across *the company's* documents, chat history, and knowledge base — Glean, Microsoft 365 Copilot's enterprise search, and Google's Gemini Enterprise. Same underlying idea — ask a natural-language question, get an answer grounded in your organization's own content — but built, governed, and access-controlled by your IT department, not by you."
+    },
+    {
+      "type": "text",
+      "content": "## Glean: The Dedicated Enterprise Search Player\n\nGlean is built specifically around one core promise: connect every workplace tool your company uses — Google Workspace, Slack, Jira, Salesforce, Confluence, SharePoint, ServiceNow, email, and 100+ other connectors — into a single search box, then answer questions using semantic understanding rather than exact keyword matching. Ask something like *\"What did we decide about the Q3 pricing change?\"* and Glean can synthesize an answer from a Slack thread, a Confluence page, and an email, with citations back to each source.\n\nGlean's enterprise positioning rests heavily on its **permission model**: it respects each connected system's existing access controls (ACLs), so if you don't have permission to see a document in SharePoint, Glean won't surface it in your search results either — and access changes propagate without lag. As of its 2026 expansion, Glean has moved well beyond pure search into **agentic territory**: new write tools let it edit data across Microsoft 365, Outlook, Teams, Gmail, Drive, and Slack simultaneously (with a preview before anything executes), and new real-time voice capabilities let you converse with it like a coworker, drawing on your account history, Slack threads, emails, and documents."
+    },
+    {
+      "type": "text",
+      "content": "## Microsoft 365 Copilot Search and Google Gemini Enterprise\n\nIf your company is a Microsoft or Google shop, you may already have an equivalent tool without a separate product name to learn.\n\n**Microsoft 365 Copilot** increasingly treats **SharePoint as the authoritative content backbone** for enterprise search: admins can now designate specific SharePoint sites as \"authoritative,\" boosting their ranking in Copilot search results, and by mid-2026 Copilot capabilities in SharePoint moved to an **opt-out preview** — meaning for licensed users, AI-powered search and chat over SharePoint content appears by default unless an admin explicitly turns it off. Underneath, **Microsoft Graph** ties emails, Teams chats, files, and calendar events together as the index Copilot queries at answer time, and Copilot Chat in Teams now pulls from Graph signals, CRM data, and conversation history simultaneously.\n\n**Google's Gemini Enterprise** (the evolution of what was Workspace's AI search) has added semantic search across chat history (finding relevant content by meaning, not just keyword) and new data-store connectors (Asana, PagerDuty, and more) that let it search and act across an expanding set of company tools. Its most significant 2026 addition, **Gemini Spark**, is a 24/7 autonomous agent that can take action on your behalf across connected tools like SharePoint, OneDrive, and ServiceNow — while still requiring explicit approval for high-risk actions like sending an email."
+    },
+    {
+      "type": "text",
+      "content": "## The Governance Difference From Part 8's MCP Setup\n\nThis is the distinction worth internalizing: when you connect your own Claude Code instance to your own Gmail or Drive via MCP (Part 8), *you* decide what's connected, *you* hold the credentials, and *you* can disconnect it any time — it's a personal tool under your control, answerable to no one but you. Glean, Copilot Search, and Gemini Enterprise are the opposite: your IT or security team decides what's connected, configures the permission model, sets retention policies, and can see (or restrict) what you search for. That's not necessarily worse — a company-wide deployment gets governance, audit logging, and consistent access control that a hundred individual MCP setups never would — but it means the tool answers to your employer's policies, not your own preferences. If you wouldn't want a question logged and potentially reviewable by IT or a manager, a company enterprise-search tool is the wrong place to ask it — that's exactly what a personal MCP setup is for instead."
+    },
+    {
+      "type": "text",
+      "content": "## The Real Failure Mode: Confident Answers From Stale or Over-Shared Sources\n\nBecause these tools crawl broadly across years of company content, two problems show up repeatedly in practice. First, **staleness**: a search for \"remote work policy\" can surface a 2021 document ranked alongside the current 2026 version, and an AI-generated summary can blend outdated and current information in ways that are hard to detect just by reading the answer. Second, **over-sharing**: Microsoft has flagged that opt-out Copilot search can surface content from SharePoint sites \"never tidied up for AI use\" — stale documents or libraries with looser sharing settings than anyone intended, since Copilot only respects whatever permissions already exist, good or bad. Both problems mean the same practical habit matters: treat the citation, not the summary, as the actual answer, and check the source document's date and permissions before trusting what an enterprise search tool tells you."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Governance and IT-deployment status vary a lot by company, even on the same underlying platform.** Whether your organization's Copilot search, Gemini Enterprise, or Glean deployment is fully rolled out, in limited pilot, or not enabled at all depends entirely on your own IT department's licensing and configuration choices — not on what's technically available from the vendor. Don't assume a feature described here is live at your company; check your own admin center, IT help page, or ask whoever manages your workplace's AI tools."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**An enterprise search answer with no traceable citation is not a fact — it's a summary you haven't checked.** The single most important habit with any of these tools: when you get an answer, click through to the actual source document, Slack thread, or email it claims to be based on, and confirm the answer matches what's really there. If a tool gives you a confident answer with no citation at all, or a citation that doesn't actually support the claim when you check it, treat that as a signal to verify further before repeating the answer to a colleague or acting on it — exactly the same discipline this course has applied to AI answers since Lesson 13-1."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Ask a Real Cross-Document Question and Check Its Sources",
+      "content": "You will ask a genuine question against whatever enterprise search tool your workplace provides, then rigorously check whether the answer actually traces back to a real source — the core skill this lesson is built around.\n\n**Step 1 — Identify what's available to you.** Check whether your employer has Glean, Microsoft 365 Copilot (the Copilot button in Outlook, Teams, or SharePoint search), or Gemini Enterprise/Workspace search enabled. If you're a student or don't have access to a workplace deployment, use Microsoft 365 Copilot Chat's web grounding, Google Workspace search, or even a personal example: search your own email + a shared drive for something you know spans multiple documents.\n\n**Step 2 — Ask a genuine cross-document question** — something that would require synthesizing information from more than one source, not a single-document lookup. Examples: \"What's our current policy on X, and has it changed recently?\" or \"What did the team decide about Y across our last few discussions?\" Use a real question you actually want answered, not a test question with a known answer.\n\n**Step 3 — Get the answer, then find every citation it provides.** Click through to each cited source (document, thread, email). Note: is there a citation at all? Does each one actually exist and actually support the specific claim it's attached to, or does it just vaguely relate to the topic?\n\n**Step 4 — Check staleness on at least one source.** For any document cited, check its last-modified date. Is there a chance a newer version exists that the tool didn't surface, or that it blended an old and current version together in its summary?\n\n**Step 5 — Write a short verdict**: was this answer traceable to real, current sources, or did you find gaps (missing citations, stale documents, claims not actually supported by the linked source)? Would you repeat this answer to a colleague as-is, or would you caveat it?\n\n**Outcome:** a real tested question against your actual (or best-available) enterprise search tool, with a documented judgment on whether its answer was genuinely traceable — not just confident-sounding."
+    },
+    {
+      "type": "quiz",
+      "question": "You ask your company's enterprise search tool a cross-document question and get a confident, well-written answer with two citations. When you click through, one citation is a Slack message that doesn't actually mention the topic, and the other links to a document with no last-modified date visible. What should you do?",
+      "options": [
+        "Trust the answer anyway — a confident, well-written response from an enterprise AI tool is inherently more reliable than a general chatbot's answer",
+        "Treat this as a signal to verify further before relying on or repeating the answer — a citation that doesn't support its claim, or one you can't date-check, means the summary hasn't actually been confirmed against a real source yet",
+        "Assume the tool is broken and stop using enterprise search entirely going forward",
+        "Ignore the citations entirely since checking them defeats the purpose of using an AI search tool in the first place"
+      ],
+      "correct": 1,
+      "explanation": "Confidence and polish in the answer say nothing about accuracy (A is the same mistake this course has flagged since Lesson 13-1, just in an enterprise-search wrapper). A citation that doesn't actually support its claim, or one you can't verify the currency of, is a concrete red flag that the underlying answer may be stale or fabricated-sounding-but-wrong — the correct response is more verification, not abandoning the tool (C) or skipping verification altogether (D), which defeats the entire point of citations existing."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Map the Governance Difference at Your Own Workplace",
+      "content": "This workshop makes the Part 8 vs. this-lesson distinction concrete by having you investigate how your own (or a familiar) workplace actually governs its enterprise search tool.\n\n**Step 1 — Identify who controls the tool.** For whatever enterprise search your workplace uses (or the one you researched in Workshop 1), find out: who in your organization decided to deploy it — IT, a specific department, security/compliance? Is there a written policy about what it can access?\n\n**Step 2 — Investigate the access-control model.** Does the tool respect existing permissions (so you only see what you already have access to), or does it have broader reach? Is there a way to know what got indexed — could a document you thought was private to a small team actually be surfaced by company-wide search?\n\n**Step 3 — Ask about retention and visibility.** Is there a policy on whether your search queries themselves are logged, and who (IT, your manager, security) could see what you searched for? If you don't know, this is a legitimate question to ask your IT or security team — and the fact that you had to ask is itself informative.\n\n**Step 4 — Contrast with Part 8's personal MCP setup.** Write two or three sentences comparing: what would you feel comfortable asking your company's enterprise search tool, versus what you'd only ever ask a personal AI tool connected via your own MCP setup? Be concrete — e.g., \"I'd ask about a public policy document either way, but I'd only ask about a personal career question or a sensitive draft using my own tools.\"\n\n**Step 5 — Save this as a short reference note.** The goal is to walk away with a clear, personally-relevant mental line between \"company-governed tool, answerable to IT policy\" and \"personal tool, answerable only to me\" — so you make that choice deliberately each time, not by default.\n\n**Outcome:** a concrete understanding of your own workplace's (or a researched company's) governance model for enterprise AI search, and a clear personal rule for when to use a company tool versus a personal one."
+    },
+    {
+      "type": "quiz",
+      "question": "An employee wants AI help drafting a sensitive question about their own upcoming performance review, and separately wants to find their company's official expense policy. Which is the more appropriate tool choice for each, given the governance distinction this lesson draws?",
+      "options": [
+        "Use the company's enterprise search tool (Glean, Copilot Search, or Gemini Enterprise) for both — company tools are always the more secure choice for any question",
+        "Use a personal AI tool (like a private MCP-connected Claude setup, or a personal chat account) for the performance-review question, since it may be logged or reviewable in a company tool, and use the company's enterprise search tool for the expense policy question, since that's exactly the kind of company-content lookup it's built and governed for",
+        "Use the company's enterprise search tool for both, since IT-deployed tools never log or review individual employee queries",
+        "Avoid AI tools entirely for both questions, since any AI tool at a company carries the same governance risk"
+      ],
+      "correct": 1,
+      "explanation": "This is the practical payoff of the Part 8 vs. company-tool distinction: a company-governed search tool is exactly right for looking up official, shared company content like an expense policy — that's its purpose, and it's built with citations back to the authoritative source. A personal, sensitive question about your own performance review is better kept in a tool you control, precisely because company tools may log queries or be reviewable per IT/security policy (contradicting C's blanket claim of no logging). Avoiding AI entirely (D) throws away real value for a problem that's solved by choosing the right tool, not avoiding the category."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-16.** You now know the major enterprise AI search and knowledge-answering tools most employees will actually encounter — Glean, Microsoft 365 Copilot Search (with SharePoint as its authoritative backbone and Microsoft Graph underneath), and Google Gemini Enterprise (including the new autonomous Gemini Spark agent) — and how they differ from Part 8's personally-configured MCP connections in governance, access control, and who's accountable for what gets logged. You've tested a real cross-document question against an enterprise search tool and rigorously checked whether its answer was actually traceable to a real source, and you've mapped out your own workplace's governance model for these tools."
+    }
+  ],
+  "nextLesson": "16-17",
+  "prevLesson": "16-15"
+}

@@ -1,0 +1,82 @@
+{
+  "id": "2-20",
+  "title": "Grammarly's AI Agents — From Grammar Checker to Writing Coach",
+  "part": 2,
+  "estimatedMinutes": 45,
+  "tags": ["tools", "beginner", "writing", "grammarly", "agents", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nGrammarly started as a red-squiggly-line grammar checker. By mid-2026 it's something else entirely: a suite of specialized AI agents — each built for a distinct writing job — sitting inside a new AI-native document editor called Docs, and following you across the roughly one million other apps and websites where Grammarly's extension already runs, through a layer called Grammarly Go. This lesson walks through the agents that actually matter, then has you run them on something you're genuinely writing."
+    },
+    {
+      "type": "text",
+      "content": "## Reader Reactions and AI Grader — Agents That Model Your Audience\n\n**Reader Reactions** is built around a genuinely different question than \"is this correct\" — it asks \"how will this land?\" You can build a profile for a specific, recurring reader (your manager, a professor, a particular client) and Reader Reactions gives personalized predictions of what they'll take away from your draft, what might confuse them, and where the tone might miss. This matters precisely because correct grammar and spelling say nothing about whether your actual message gets across.\n\n**AI Grader** targets students specifically: give it your assignment and the grading rubric, and it estimates the score your draft would receive, with feedback tied to exactly which rubric criteria you're meeting or missing. One detail worth remembering because it's easy to assume otherwise: **AI Grader does not check for plagiarism** — that's a separate, dedicated agent (below). A high AI Grader estimate says nothing about originality."
+    },
+    {
+      "type": "text",
+      "content": "## Citation Finder, Plagiarism Checker, and AI Detector — The Integrity Layer\n\n**Citation Finder** acts like an embedded research assistant: it flags statements in your draft that look like they need a source, recommends credible sources for them, and then formats and inserts the citation in APA, MLA, or Chicago style automatically. It removes the most tedious part of academic and professional writing — hunting down a properly formatted citation — but the sources it recommends still need the same scrutiny you'd apply to any source you didn't personally vet: is it actually credible, and does it actually say what your sentence claims it says?\n\n**Plagiarism Checker** and **AI Detector** are bundled as Pro-only tools even though the rest of the agent suite is free. Both exist because the writing landscape Grammarly's users work in now assumes AI involvement is common, and institutions increasingly want a way to check both originality and AI-authorship. Treat both as useful signals, not verdicts — false positives and false negatives happen with plagiarism-similarity tools and AI-detection tools industry-wide, and no responsible policy treats either as automatically final."
+    },
+    {
+      "type": "text",
+      "content": "## Paraphraser, Proofreader, Expert Review, and Docs\n\n**Proofreader** is the modernized, agent-based descendant of Grammarly's original grammar and spelling checker — still the foundation, now folded into the same agent framework as everything else. **Paraphraser** rewrites a passage for a different tone, audience, or length without you starting from a blank page — useful for turning a rough internal note into a client-ready message, or condensing a long paragraph. **Expert Review** functions closer to a domain-specific second opinion — a check calibrated to the norms of a specific field or document type rather than general grammar rules.\n\nAll of these now live inside **Docs**, Grammarly's new AI-native writing surface, described by Grammarly as supporting the whole arc from first thought to final draft, with the relevant agents available inline as you write rather than as a separate pass at the end. This launch arrives alongside Grammarly's 2025–2026 acquisitions of Coda and Superhuman, which signal the company's ambition to become a broader productivity suite, not just a proofreading plug-in — expect deeper integration across documents, email, and scheduling over the next year."
+    },
+    {
+      "type": "text",
+      "content": "## Grammarly Go — the Agentic Layer That Follows You Everywhere\n\nThe agents above aren't confined to Docs. **Grammarly Go** is the cross-app layer that carries the same context-aware agents into whatever you're already using — the browser extension, Gmail, Outlook, Slack, Google Docs, and the rest of the roughly one million sites and apps where Grammarly's extension already runs. The practical effect: you don't have to copy a draft into a separate AI tool and back again — Reader Reactions, Paraphraser, and Proofreader are available inline wherever you're actually typing.\n\nAll eight agents — Reader Reactions, AI Grader, Citation Finder, Paraphraser, Proofreader, Expert Review, Plagiarism Checker, and AI Detector — are available at no extra cost on both Grammarly Free and Grammarly Pro, with only Plagiarism Checker and AI Detector gated behind Pro; the full suite is rolling out further to Enterprise and Education customers."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**You don't need a paid upgrade to try the core suite.** All eight agents launched simultaneously across Grammarly Free and Pro in 2026 — only Plagiarism Checker and AI Detector are gated behind Pro. If you're on the free tier, Reader Reactions, AI Grader, Citation Finder, Paraphraser, Proofreader, and Expert Review are already available to you today."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**None of these agents replace your own judgment about integrity or accuracy.** AI Grader's score is an estimate against a rubric, not your actual grade — a professor grades the submission, not Grammarly's prediction. Citation Finder can recommend a source that doesn't actually say what your sentence claims; verify anything it inserts before you submit or publish. Plagiarism Checker and AI Detector both produce probabilistic signals with real false-positive and false-negative rates — a flagged passage deserves a second look, not an automatic rewrite, and an unflagged passage isn't automatically guaranteed original or human-written. Treat every agent in this lesson as a fast first pass, not a final authority."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Run Grammarly's Agents on Something You're Actually Writing",
+      "content": "You'll produce a real, documented before/after comparison on a piece of writing you actually need to finish — not a sample paragraph.\n\n**Step 1 — Open a real piece of writing you're actively working on**: a work email you haven't sent yet, a report draft, or a school paper. Use either Grammarly's Docs (app.grammarly.com) or the Grammarly browser extension wherever you're already writing it.\n\n**Step 2 — Save a \"before\" copy** somewhere separate (a plain-text note) so you have a genuine before/after to compare later — not just a memory of what it used to say.\n\n**Step 3 — Run Proofreader first.** Go through its suggestions deliberately — accept or reject each one rather than blanket-accepting everything.\n\n**Step 4 — Run Reader Reactions.** Build a quick profile for the actual person who will read this — your manager, professor, or client — and review what it predicts they'll take away, and where they might get confused or misread your tone.\n\n**Step 5 — Run the agent that fits your document:** AI Grader if this is a school paper (compare its estimate to your own honest sense of the work), or Citation Finder if your draft makes factual claims that need a source. If Citation Finder inserts a citation, verify that at least one recommended source actually says what your sentence claims.\n\n**Step 6 — Run Paraphraser on one paragraph you're not happy with**, and compare its rewrite to your original — did it actually improve, or just change wording without adding clarity?\n\n**Step 7 — Write your before/after comparison.** In a note, paste the original and the final version side by side, and write 3 sentences on what genuinely improved versus anything you changed back to your own version.\n\n**Outcome:** a real piece of writing, improved with a documented before/after comparison, plus a working sense of which of these agents earns a permanent place in your writing process."
+    },
+    {
+      "type": "quiz",
+      "question": "You run AI Grader on your paper and it estimates a strong grade, so you submit the paper without running Plagiarism Checker. What's the problem with this reasoning?",
+      "options": [
+        "There's no problem — AI Grader's rubric-based estimate already accounts for originality",
+        "AI Grader only estimates rubric alignment; it does not check for plagiarism, so a strong AI Grader score says nothing about whether the paper would pass a separate originality check",
+        "AI Grader is only available to Pro users, so a free-tier estimate can't be trusted at all",
+        "Plagiarism Checker is redundant with AI Grader and skipping it is fine for any assignment"
+      ],
+      "correct": 1,
+      "explanation": "AI Grader and Plagiarism Checker are deliberately separate agents doing different jobs: AI Grader estimates how well your draft meets the specific rubric you gave it, while Plagiarism Checker evaluates originality against a much broader corpus. A high AI Grader score reflects rubric alignment only — it has no bearing on whether passages were copied or too closely paraphrased from another source. Treating a good AI Grader estimate as covering originality as well is exactly the mistake this lesson's integrity-layer agents are designed to prevent."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Design Your Personal 'Which Agent, When' Rule",
+      "content": "Running every agent on every document wastes time, and blindly trusting every agent's output creates real risk. This workshop produces a saved policy you'll actually consult.\n\n**Step 1 — List the 4-5 types of writing you do most often**: work emails, status reports, school papers, social posts, client proposals — whatever's actually true for you.\n\n**Step 2 — For each type, decide which agents genuinely add value and which are irrelevant.** Be specific: AI Grader is useless for a work email; Reader Reactions is arguably the single most valuable agent for an email to your manager; Citation Finder matters for a report with factual claims but not for a quick Slack message.\n\n**Step 3 — For each writing type, decide explicitly whether Citation Finder, Plagiarism Checker, or AI Detector recommendations require a mandatory human verification step before you submit or publish** — write the rule down rather than leaving it as an assumption.\n\n**Step 4 — Ask Claude.ai:** *\"Here is my per-document-type Grammarly agent policy: [paste your Step 1-3 answers]. Stress-test it — where would over-trusting one of these agents get me into real trouble?\"* Incorporate anything it surfaces that you'd missed.\n\n**Step 5 — Save the finished policy as a real file** (e.g., `notes/my-grammarly-agent-policy.md`) — this is the document you'll actually refer back to the next time you sit down to write something that matters.\n\n**Outcome:** a personally-designed policy for when each Grammarly agent is trustworthy on its own versus when it needs a human check — not a hypothetical, something you'll actually use."
+    },
+    {
+      "type": "quiz",
+      "question": "Citation Finder recommends and auto-inserts a source for a factual claim in your report. What should you do before submitting the report?",
+      "options": [
+        "Nothing — Citation Finder only recommends sources it has already verified are credible and accurate",
+        "Open the recommended source and confirm it actually supports the specific claim your sentence makes, not just that it's topically related",
+        "Remove the citation entirely, since AI-recommended citations are never acceptable in professional or academic writing",
+        "Replace it with a citation from Wikipedia, which is always considered more reliable"
+      ],
+      "correct": 1,
+      "explanation": "Citation Finder removes the tedious part of citing sources — finding a plausible, credible-looking source and formatting it correctly — but it doesn't replace the judgment call of whether that source actually supports your specific claim. A source can be generally credible and topically related while still not saying precisely what your sentence asserts. The correct habit is the same one used for any source you didn't personally research first: open it and confirm the match before you submit or publish."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-20.** You now understand Grammarly's shift from a single grammar checker to a suite of specialized agents — Reader Reactions and AI Grader modeling your audience, Citation Finder/Plagiarism Checker/AI Detector forming an integrity layer, Paraphraser/Proofreader/Expert Review handling drafting inside the new Docs surface — all carried across your other apps by Grammarly Go. You've run these agents on a real piece of your own writing with a documented before/after, and written your own policy for when to trust an agent versus when it needs a human check."
+    }
+  ],
+  "nextLesson": "3-1",
+  "prevLesson": "2-19"
+}

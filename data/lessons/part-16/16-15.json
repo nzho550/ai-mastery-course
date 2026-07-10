@@ -1,0 +1,85 @@
+{
+  "id": "16-15",
+  "title": "ERP/ITSM AI for Employees — ServiceNow Now Assist & SAP Joule",
+  "part": 16,
+  "estimatedMinutes": 50,
+  "tags": [
+    "enterprise",
+    "intermediate",
+    "itsm",
+    "erp",
+    "servicenow",
+    "sap-joule",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 16-12 covered CRM and customer-support agents like Agentforce, Breeze, and Zendesk AI Agents — tools built to help a company serve its *customers*. This lesson is about a category most office workers touch far more often without ever thinking of it as \"AI\": the internal, back-office systems that handle your own IT tickets, expense reports, and HR requests. If you've ever reset a password through a chat window, filed an expense report by typing a sentence instead of clicking through a form, or asked a company portal a plain-English question about your benefits, you've likely already used ServiceNow's Now Assist or SAP's Joule — you just might not have registered it as an AI agent doing the work."
+    },
+    {
+      "type": "text",
+      "content": "## ServiceNow Now Assist: The AI Layer Inside Your Company's IT and HR Portal\n\nServiceNow is the platform behind the ticketing system most large companies use for IT support, HR case management, and internal workflow requests — the tool behind that \"submit a ticket\" button you've clicked a hundred times. **Now Assist** is ServiceNow's generative AI layer built directly into that platform, and as of 2026 it's no longer an optional add-on: ServiceNow now bundles Now Assist into every tier of the Now Platform, meaning if your employer runs ServiceNow at all, some AI capability is very likely already active.\n\nOn the **IT side**, Now Assist's virtual agent handles password resets, software access requests, and status checks conversationally — often resolving them without a ticket ever reaching a human. As it resolves incidents, it also generates resolution notes and drafts new knowledge-base articles, which feed back into future self-service, deflecting more tickets over time. ServiceNow's published numbers for 2026 are striking, if you take vendor figures with appropriate caution: the company reports AI specialists across its customer base resolve **91% of cases without reassignment**, and case studies like the City of Raleigh cite a **98% deflection rate** on employee requests. Independent analysts are more measured — some note that Now Assist's real-world deflection often lags dedicated conversational-AI specialists by 10-20 percentage points, and that ServiceNow's 2025 acquisition of **Moveworks** (for roughly $2.85 billion) is now the more capable first-party conversational layer underneath some of these numbers.\n\nOn the **HR side**, Now Assist summarizes case information, drafts resolution notes, and helps route employee questions to the right next step — the same deflection logic applied to HR case management instead of IT tickets."
+    },
+    {
+      "type": "text",
+      "content": "## SAP Joule: Natural-Language Requests Across Expenses, Purchase Orders, and HR\n\nIf your company runs its finance, procurement, or HR systems on SAP, **Joule** is the equivalent layer — and it has grown fast. Joule now covers over **2,400 prebuilt skills** across more than a dozen SAP applications (up from roughly 1,300 in mid-2024), live across 35+ SAP solutions, with skills covering an estimated 80% of commonly used transactions in finance, HR, and supply chain out of the box.\n\nThree concrete places employees encounter it:\n\n- **Expenses (Concur):** Joule lets you create, view, edit, submit, recall, and even delete expense reports through natural-language conversation — \"add this receipt to my March report and submit it\" — instead of clicking through form fields. A **policy navigator** answers plain-English questions about expense policy *before* you file something non-compliant, rather than rejecting it after the fact.\n- **Purchase orders (S/4HANA Cloud):** an employee can type something like *\"Create a purchase requisition for 25 standard office chairs from our preferred supplier, Office Supreme,\"* and Joule drafts the requisition, calculates cost, and asks for approval — turning a multi-click, multi-screen procurement task into one sentence.\n- **HR (SuccessFactors):** a growing suite of **Joule Assistants** — Core HR, Payroll, Time, Compensation, Recruiting, Onboarding, and more — orchestrate agents behind an **HR Service Assistant** that resolves common HR questions instantly and directs employees to the right next step, aiming to cut HR service-center call volume."
+    },
+    {
+      "type": "text",
+      "content": "## The Key Distinction From Lesson 16-12: Internal, Not Customer-Facing\n\nIt's worth being explicit about the line between this lesson and 16-12, because the underlying technology pattern — a conversational agent wired into a system of record, with configurable autonomy — looks similar from the outside. **Agentforce, Breeze, and Zendesk AI Agents (16-12)** act on records that affect *customers*: a support ticket a paying client filed, a lead in a sales pipeline, a case tied to revenue. **Now Assist and Joule (this lesson)** act on records that affect *employees*: your own IT ticket, your own expense report, your own HR case. The stakes, governance requirements, and audience are different — a wrong customer-facing action can damage a business relationship or a deal; a wrong internal action mostly costs you (or a colleague) time and frustration, though HR and payroll cases can carry real personal consequences too. Recognizing which category a tool falls into tells you how much scrutiny to apply and who to escalate to when it gets something wrong."
+    },
+    {
+      "type": "text",
+      "content": "## Why You Might Not Have Noticed You're Already Using This\n\nA striking data point from ServiceNow: **23 million employees** use its portal monthly, generating an estimated 40 million-plus IT and HR cases a year. The vast majority of those interactions now touch an AI layer at some point — a chat-based virtual agent handling the request, an AI-drafted knowledge article answering it before a ticket is even filed, an AI-summarized case note a human reviews later. Because these tools are branded as \"the IT portal\" or \"the expense system\" rather than as a named AI product, most employees never think to ask which parts of that day-to-day interaction were AI-driven — which is exactly the gap this lesson is meant to close."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Vendor-reported resolution and deflection rates deserve the same skepticism you'd apply to any marketing statistic.** ServiceNow's 91% case-resolution figure and SAP's cited efficiency gains (like a 40% improvement in HR self-service completion, or a 50% faster procurement cycle) come from the vendors themselves or hand-picked case studies, and independent analysts note real-world results vary widely by how well an organization has configured its flows. Treat these as a ceiling to aim for, not a number your own employer's deployment is guaranteed to hit."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 1 — Identify and Test Your Employer's ITSM/ERP AI Tool",
+      "content": "This workshop asks you to find out what's actually running at your own workplace (or one you're familiar with) and, if possible, use it on a real task.\n\n**Step 1 — Identify your platform.** Does your employer use ServiceNow (look for a \"submit a ticket\" portal, often just called the IT or HR portal), SAP (look for Concur for expenses, or SuccessFactors for HR), or something else entirely (Workday, a custom system, a different ITSM tool)? If you're not sure, check the login page footer, ask IT, or check your company's intranet/help-desk page.\n\n**Step 2 — If you have access, find the AI feature and use it on a real task.** Look for a chat icon, a \"virtual agent,\" or a natural-language search box inside the portal (often labeled Now Assist, Joule, or just \"Ask a question\"). Try a real self-service task you actually need done: check the status of an existing ticket, ask a policy question you genuinely have, or draft part of a real expense report using natural language instead of clicking through fields.\n\n**Step 3 — If you don't have access** (you're a student, between jobs, or your employer doesn't use these tools), instead draft the exact natural-language request you'd make if you did — e.g., *\"Reset my VPN access, it's been failing since this morning\"* or *\"Submit my March expense report and flag the hotel receipt that's missing an itemization\"* — and write down, in your own words, what a good AI response would look like versus a bad one.\n\n**Step 4 — Write a 3-4 sentence verdict**: Was the interaction faster than the old click-through-forms way? Did it resolve your request, or did it just redirect you to a human/article? Would you trust it with something higher-stakes (an HR case involving pay or leave, for instance)?\n\n**Outcome:** either a real, completed self-service interaction with your employer's actual ITSM/ERP AI tool, or a concrete, well-specified request you're ready to test the moment you do have access — plus a personal verdict on whether it's actually saving you time."
+    },
+    {
+      "type": "quiz",
+      "question": "An employee wants to check the status of an IT ticket they filed last week. Their company's portal has a chat box labeled 'Now Assist' at the top. What's the most accurate way to understand what's happening when they type their question there?",
+      "options": [
+        "It's just a search bar with a fancy name — no AI is actually involved unless the company specifically enabled a separate 'AI mode'",
+        "It's ServiceNow's generative AI layer, built into the Now Platform and bundled into every tier as of 2026, conversationally handling the request and potentially resolving it without a human touching the ticket",
+        "It only works for HR cases, not IT tickets, since ServiceNow's AI is HR-specific",
+        "It's identical in capability to Salesforce Agentforce, since all enterprise AI agents from different vendors work the same way"
+      ],
+      "correct": 1,
+      "explanation": "Now Assist is ServiceNow's actual generative AI layer, and as of 2026 it's bundled into every platform tier rather than being a separate opt-in — so an employee interacting with a 'Now Assist' labeled chat box on a ServiceNow-based portal is very likely talking to a real AI agent, not just a search bar. It works across both IT and HR case types (B beats C), and it is a distinct product from Salesforce's customer-facing Agentforce (D) — different vendor, different platform, different intended audience (employees vs. customers), even though the underlying agent pattern looks similar."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Draft Your 'When AI Gets My Case Wrong' Escalation Plan",
+      "content": "Because these tools act on records that affect you personally — your ticket, your expense report, your HR case — it's worth deciding in advance what you'll do if one gets something wrong, rather than figuring it out in a moment of frustration.\n\n**Step 1 — Recall (or imagine, from Workshop 1) a specific self-service interaction.** What was the request, and what did the AI do with it?\n\n**Step 2 — Identify the failure modes that matter for that specific task.** For an IT ticket: could it close the ticket as 'resolved' when it isn't? For an expense report: could it submit something with an error, or misapply a policy? For an HR case: could it misroute something sensitive (a leave request, a pay dispute) to the wrong channel?\n\n**Step 3 — Write down your actual escalation path** for each failure mode you identified: Who do you contact if a virtual agent closes your ticket incorrectly — do you reopen it yourself, or is there a specific escalation button/contact? Is there a human HR contact you'd go to directly for anything involving pay, leave, or a sensitive personal matter, bypassing the AI layer entirely? Does your company publish this escalation path anywhere (an intranet page, an onboarding doc), or would you have to ask?\n\n**Step 4 — Ask Claude or ChatGPT**: *\"Here's my company's self-service escalation plan for when an ITSM/ERP AI tool gets something wrong: [paste Step 3]. What's missing? What would you add for a case involving [pick one: a security-sensitive IT issue / a pay-affecting HR matter]?\"*\n\n**Step 5 — Save this as a short personal reference note.** The goal is that the first time Now Assist, Joule, or an equivalent tool mishandles something that actually matters to you, you already know exactly who to contact instead of starting from zero.\n\n**Outcome:** a concrete, personally-relevant escalation plan for when internal AI tools get your own case wrong — the internal-tooling equivalent of the audit-trail/escalation-path habit from Lesson 16-12."
+    },
+    {
+      "type": "quiz",
+      "question": "Why does this lesson draw a sharp distinction between Now Assist/Joule (internal, employee-facing) and Agentforce/Breeze/Zendesk AI Agents from Lesson 16-12 (customer-facing), even though both are built on the same underlying pattern of a conversational AI agent acting on records in a system of record?",
+      "options": [
+        "There's no real distinction — they're functionally identical products marketed to different departments",
+        "The audience, stakes, and escalation paths differ: a wrong customer-facing action can damage a business relationship or deal, while a wrong internal action affects an employee's own ticket, expense, or HR case — different consequences call for different scrutiny and different people to escalate to",
+        "Internal tools like Now Assist and Joule never take real actions, only customer-facing tools like Agentforce do",
+        "Customer-facing tools are always more accurate because companies invest more in getting customer interactions right"
+      ],
+      "correct": 1,
+      "explanation": "Both categories are agents that act on real records, but who is affected and what's at stake differs meaningfully: a botched customer-facing action can cost a deal or damage trust with a paying client, while a botched internal action mostly affects the employee whose ticket, expense, or case it touched — though HR/payroll cases can still carry real personal weight. This is exactly why the lesson built a separate escalation-plan workshop rather than reusing 16-12's audit-trail framing verbatim: the right response and right person to escalate to differ by audience, not because one category is inherently more accurate or more 'real' than the other."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-15.** You now know that ServiceNow's Now Assist and SAP's Joule are the internal, employee-facing AI layers most corporate workers already touch daily inside their IT ticketing, HR case management, expense, and procurement systems — distinct from the customer-facing CRM/support agents in Lesson 16-12 in audience, stakes, and escalation path. You've identified (or planned to test) your own employer's ITSM/ERP AI tool on a real self-service task, and built a personal escalation plan for when one of these tools gets your own case wrong."
+    }
+  ],
+  "nextLesson": "16-16",
+  "prevLesson": "16-14"
+}

@@ -1,0 +1,86 @@
+{
+  "id": "9-12",
+  "title": "Cline & Roo Code — Open-Source Agentic Coding in VS Code",
+  "part": 9,
+  "estimatedMinutes": 50,
+  "tags": ["ai-coding", "advanced", "cline", "roo-code", "open-source", "vscode", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThis lesson covers **Cline** and **Roo Code** — two open-source, fully agentic VS Code extensions that go well beyond the autocomplete-and-chat model of Continue.dev (lesson 6-4). Cline is the one you'll actually install and use today; Roo Code is a real, current example of how fast this space consolidates — it shut down in mid-2026, and its story is worth understanding on its own merits, not just as trivia. By the end you'll have installed Cline, connected your own API key, had it autonomously complete one real small multi-file task in a toy project, and reviewed the resulting diff and checkpoint trail before accepting anything."
+    },
+    {
+      "type": "text",
+      "content": "## A Genuinely Different Execution Model\n\nRecall Continue.dev from lesson 6-4: an in-editor autocomplete-plus-chat tool where you still drive one file or selection at a time — highlight code, press Ctrl+L to bring it into context, ask a question, get an answer or a suggested edit. You're doing the steering throughout.\n\nCline (and, until recently, Roo Code) work differently: you give a task, and the tool independently reads the relevant files across your project, forms a plan, edits multiple files, runs terminal commands, and iterates — checking in with you at defined points rather than after every keystroke. The practical difference: Continue.dev is *\"AI at my side while I type,\"* Cline is *\"AI takes the wheel for a bounded task and shows me the full trail afterward.\"* That second model is much closer to Claude Code's own approach (the tool this course turns to fully starting next lesson) than to Copilot's inline completions."
+    },
+    {
+      "type": "text",
+      "content": "## Cline — Open-Source, Bring-Your-Own-Key, Checkpointed\n\nCline is Apache 2.0 licensed, has passed **5 million installs and 60,000-plus GitHub stars**, and runs not just in VS Code but also JetBrains, Cursor, Windsurf, Zed, Neovim, and a preview CLI for macOS and Linux. It reads your codebase, creates and edits files, runs terminal commands, and can even drive a real browser (Computer Use, via Puppeteer) to verify that a UI change actually works rather than just compiles.\n\n**Checkpoints** snapshot every change the agent makes, so you can step back to an earlier point in its work without touching git at all — a second, finer-grained undo system layered on top of your normal git history. **Plan/Act mode** separates \"let's think this through together\" from \"now go execute it,\" giving you a natural checkpoint of your own before any files actually change. Cline is **bring-your-own-API-key** across 30-plus providers (Anthropic, OpenAI, and others) — no bundled subscription, you pay only for the tokens you actually use. An **MCP Marketplace** plus manual stdio/SSE configuration connects Cline to the same MCP servers you may have already built in Part 15. `.clinerules` turns your team's coding standards into version-controlled instructions the agent actually follows, while spend limits and an opt-in \"YOLO mode\" let you tune exactly how much it does without asking permission first."
+    },
+    {
+      "type": "text",
+      "content": "## Roo Code's Rise, Fork, and 2026 Shutdown\n\nRoo Code (originally \"Roo Cline\") started life as a fork of Cline and built a genuine following on its own terms — **24,000-plus GitHub stars at its peak, 3 million-plus extension downloads** — largely on the strength of its distinctive **mode system**: Code, Architect, Ask, and Debug modes, each with its own tool permissions (Architect was read-only; Code had full edit, terminal, and MCP access) and its own assignable model via \"sticky models\" — a reasoning model for Architect, Claude for Code execution, persisting across restarts.\n\nOn **April 21, 2026**, Roo Code's CEO announced the company was shutting down every Roo Code product — the VS Code extension, Roo Code Cloud, and Roo Code Router — explaining that the team no longer believed IDEs were the future of coding and was redirecting its effort toward **Roomote**, a Slack-based cloud agent priced at $899 per month per parallel instance. The extension's GitHub repository was archived on **May 15, 2026**. Roo Code's own shutdown post pointed departing users back to Cline, noting the Cline team \"have incorporated much of what we built,\" and flagged **Kilo Code** — an actively maintained fork that reads existing `.roomodes` and `.roo/rules/` configuration — as the option for anyone who specifically wanted Roo Code's mode system to live on.\n\nThis is worth sitting with as a real data point, not just trivia: it's exactly the \"expect consolidation, acquisitions, and shutdowns\" pattern flagged back in lesson 9-4's honest-prediction section. A tool with millions of downloads and a genuinely loyal following disappeared inside a single quarter once a well-funded team decided the underlying product bet was wrong."
+    },
+    {
+      "type": "text",
+      "content": "## MCP-Native by Design\n\nBoth tools shipped meaningful MCP support early — the same open protocol you built servers for in Part 15, and saw work identically inside OpenAI's Codex CLI back in lesson 9-9. The practical payoff repeats here: an MCP server you already built for Claude Code — a GitHub server, a filesystem server, a database server — can, in principle, be pointed at Cline too. Configuration lives in a tool-specific file (`cline_mcp_settings.json` for Cline), but the protocol underneath doesn't care which agent is speaking it. This is the same portability argument from lesson 9-9, now confirmed across a third tool: MCP servers are infrastructure you build once, not a Claude-only or Codex-only investment."
+    },
+    {
+      "type": "text",
+      "content": "## Choosing Your Autonomy Level\n\nCline's Plan/Act split, spend limits, and YOLO mode are really one underlying knob: how much do you let the agent do before it has to stop and ask you? Start conservative on any new project — Plan mode, a low spend limit, per-step approval — and loosen it only once you've built real trust in the pattern of tasks you're handing it.\n\nNone of this removes the reviewing discipline built up across this whole course: an autonomous agent that edited five files while you made coffee still needs the same diff review you'd give a human's five-file pull request. Checkpoints make it easy to step back to an earlier state — they don't make the change correct by default. Reviewing what an agent did is a different, and in some ways harder, skill than reviewing a suggestion you approved line by line as it appeared."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The honest caveat: this space keeps moving.** By the time you're reading this, further consolidation among open-source agentic VS Code extensions is entirely plausible — Roo Code's 2026 shutdown is proof this isn't hypothetical. The skill that survives any single tool's fate is the same meta-skill from lesson 9-4: does this tool read broadly across your project, plan visibly, edit multiple files competently, and give you an undo trail you actually trust? Any new entrant can be assessed against those same questions in about 30 minutes."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Bring-your-own-key plus full autonomy is a real cost and safety combination, not just a convenience.** An agent with terminal access, no spend limit, and broad auto-approval can run up real API costs or execute a destructive command faster than you'd notice — the same underlying risk that led OpenAI to build kernel-level sandboxing into Codex CLI (lesson 9-9). Cline's model puts more of that responsibility directly on you as the user: set a spend limit and start in Plan mode before you grant broader auto-approval permissions, especially on any project or repository you can't easily restore from a clean state."
+    },
+    {
+      "type": "workshop",
+      "tag": "VSCODE",
+      "title": "Workshop 1 — Install Cline and Complete a Real Multi-File Task Autonomously",
+      "content": "**Goal:** install Cline, connect a real API key, and let it autonomously complete one genuine small multi-file task — then review every part of what it changed before accepting.\n\n**Step 1 — Install the Cline extension** in VS Code: open the Extensions panel, search \"Cline\" (publisher: saoudrizwan), and install it.\n\n**Step 2 — Connect an API key** via the Cline settings panel — Anthropic, OpenAI, or any of Cline's 30-plus supported providers.\n\n**Step 3 — Open or create a small toy project.** Reuse your `ai-course-projects` folder, or start a fresh throwaway project with a handful of real files.\n\n**Step 4 — Start in Plan mode and give Cline one real, small, multi-file task** — for example: \"add a simple rate-limiting check to this API route and add a matching test file.\" Read its plan carefully before approving anything.\n\n**Step 5 — Switch to Act and let it work.** Pay attention to what it asks permission for (running a command, creating a new file) versus what it proceeds with on its own.\n\n**Step 6 — When it's done, open the diff and checkpoint trail and review every changed file line by line** before accepting — treat this exactly like reviewing a colleague's pull request, not like trusting a suggestion because it compiled.\n\n**Outcome:** one real, working multi-file change completed autonomously by Cline, reviewed thoroughly, and either accepted or corrected by you."
+    },
+    {
+      "type": "quiz",
+      "question": "You give Cline a small multi-file task in Act mode. It completes the task in under a minute, and the code appears to run without errors. What should you do before considering the task finished?",
+      "options": [
+        "Nothing further — if the code runs without errors, that's sufficient confirmation it's correct",
+        "Open the diff and checkpoint trail and review every changed file line by line, the same way you'd review a colleague's pull request, since running without errors doesn't confirm the logic is correct or that nothing unintended was changed",
+        "Immediately switch to YOLO mode so future tasks complete even faster",
+        "Delete the checkpoint history to save disk space, since the task already succeeded"
+      ],
+      "correct": 1,
+      "explanation": "Running without errors confirms the code compiles and executes — it says nothing about whether the logic is correct, whether edge cases are handled, or whether the agent made an unintended change somewhere in the diff you haven't looked at yet. This lesson is explicit that checkpoints make it easy to step back, but they don't make a change correct by default — the same review discipline you'd apply to any human-authored PR still applies here. Switching to YOLO mode (C) increases autonomy without addressing the review gap, and deleting checkpoint history (D) removes your ability to step back if a problem surfaces later."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Set Your Autonomy and Spend Guardrails",
+      "content": "**Goal:** set real limits on how autonomously Cline is allowed to operate, and confirm whether your existing MCP investment from Part 15 carries over.\n\n**Step 1 — In Cline's settings, find the spend limit and auto-approval settings** and set a conservative limit for yourself before your next real task.\n\n**Step 2 — If you already have MCP servers configured from Part 15**, try pointing Cline at one of them (your filesystem or GitHub MCP server, for example) and confirm it can actually use it.\n\n**Step 3 — Write down, in your own words, your personal autonomy rule:** which tasks you'll let Cline run with higher spend limits and less per-step approval, versus which tasks always require Plan mode and manual review of every step.\n\n**Step 4 — Ask Claude.ai to stress-test your rule:** *\"Here's my autonomy policy for using Cline on my own projects: [paste it]. What failure mode am I not accounting for?\"*\n\n**Outcome:** a personal, written autonomy policy for agentic coding tools you'll actually refer back to — plus, if applicable, confirmation that your Part 15 MCP work carries over cleanly to a third tool."
+    },
+    {
+      "type": "quiz",
+      "question": "Roo Code shut down all its products in mid-2026 despite having 3 million-plus downloads and a genuinely loyal user base, redirecting its team toward a different product (Roomote) entirely. What does this best illustrate, in the context of lesson 9-4's predictions about the AI coding tool landscape?",
+      "options": [
+        "Open-source tools are inherently less trustworthy than proprietary ones and should be avoided",
+        "Popularity and download counts guarantee a tool's long-term survival in this market",
+        "The consolidation, acquisitions, and shutdowns lesson 9-4 predicted for this fast-moving category are real and can happen quickly, even to a tool with millions of downloads and dedicated fans — which is why the underlying evaluation skill matters more than attachment to any single current tool",
+        "MCP support is the deciding factor in which coding tools survive and which shut down"
+      ],
+      "correct": 2,
+      "explanation": "Lesson 9-4 predicted exactly this: more AI coding tools exist than the market will sustainably support, and shutdowns, pivots, and acquisitions are expected over the following 2-3 years regardless of a tool's current popularity. Roo Code's download count and loyal following (B) didn't prevent its shutdown — popularity isn't a survival guarantee. This isn't an open-source-specific problem (A) — Graphite, a commercial tool, was acquired by Cursor in the same period. MCP support (D) wasn't the deciding factor in Roo Code's shutdown at all; the team's own stated reason was a strategic bet against IDEs as the future of coding."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 9-12 — and Part 9's full tour of the AI coding tool landscape.** From in-editor assistants (Copilot, Continue.dev in Part 6) through autonomous cloud agents (Devin, Codex CLI, Jules/Antigravity), independent PR-review bots (CodeRabbit, Greptile, Graphite), and now open-source agentic editors (Cline, and Roo Code's real 2026 rise-and-shutdown story), you've built a grounded, current map of this space — not a marketing one. Part 7 goes all-in on Claude Code, the tool this course uses for everything from here forward, and the one whose model — interactive by default, scalable to full autonomy — you'll now recognize echoes of in Cline, Codex CLI, and every other agent you've studied in this part."
+    }
+  ],
+  "nextLesson": "7-1",
+  "prevLesson": "9-11"
+}

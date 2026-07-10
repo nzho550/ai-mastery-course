@@ -1,0 +1,91 @@
+{
+  "id": "16-17",
+  "title": "Using Your Company's Internal AI Agent Platform — Bedrock, Vertex & Foundry From an Employee's Seat",
+  "part": 16,
+  "estimatedMinutes": 50,
+  "tags": [
+    "enterprise",
+    "intermediate",
+    "agents",
+    "governance",
+    "bedrock",
+    "vertex-ai",
+    "azure-ai-foundry",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nEvery other lesson in this part covered a named product — Agentforce, Now Assist, Joule, Glean. This lesson is about the growing number of internal AI tools that *aren't* a named product at all: a chatbot your own company built in-house on top of **AWS Bedrock**, **Google Vertex AI Agent Builder**, or **Azure AI Foundry** (increasingly branded **Microsoft Foundry**). You'll likely encounter this as \"the company AI assistant\" with no vendor branding visible, built by your own IT or engineering team for a specific internal purpose. This lesson is written entirely from your seat as the *end user* of that tool — not the builder's — because understanding why it behaves differently from ChatGPT or Claude.ai changes how you should use it and what to expect from it."
+    },
+    {
+      "type": "text",
+      "content": "## What These Three Platforms Actually Are (Briefly, From the Outside)\n\nYou don't need to know how to build on these platforms to use what your company built on top of one — but knowing the shape helps explain the behavior you'll see. **Amazon Bedrock AgentCore** is AWS's \"bring your own framework\" runtime: a company can wrap any model, any agent framework, and any tools inside AWS's security perimeter (VPC networking, IAM permissions, private connectivity). **Azure AI Foundry** leans hard into Microsoft 365 and SharePoint integration — an agent built on Foundry can respect the same document permissions (ACLs) you already have in SharePoint, and increasingly plugs into **Agent365**, Microsoft's control plane for governing a whole fleet of internal agents. **Google Vertex AI Agent Builder** uses Google's Agent Development Kit and integrates with Vertex AI Search for grounding, with particular strength when a company is already deep in Google Workspace or wants Google Search-grounded, citable answers. The common thread: all three let a company build a *custom* agent scoped to *their* data and *their* rules — which is exactly why it won't behave like a general consumer chatbot."
+    },
+    {
+      "type": "text",
+      "content": "## Why It Feels Narrower Than ChatGPT or Claude.ai\n\nIf you've used a general consumer AI tool and then tried your company's internal AI assistant, the first thing you'll likely notice is that it feels more restricted — and that's usually deliberate, not a bug:\n\n- **Narrower scope by design.** Your company almost certainly built this agent to do one or a handful of specific jobs — answer questions about internal HR policy, help with a specific internal system, draft a specific kind of document — rather than to be a general-purpose assistant. Asking it something outside that scope (a coding question, a general trivia question, help with a personal project) will often get refused or redirected, not because the underlying model can't answer, but because the company deliberately fenced it in.\n- **Model lock-in.** Your company chose one model (or a small set) when they built this on Bedrock, Foundry, or Vertex — you don't get to pick between Claude, GPT, and Gemini the way you might across different consumer subscriptions. If the internal tool feels noticeably weaker or stronger than what you use personally, it's often simply a different, earlier-chosen, or more cost-optimized model underneath, not a sign that the platform itself is limited.\n- **Data governance and retention rules you didn't set.** Unlike a personal ChatGPT or Claude.ai account where you control your own data settings, an internal agent's conversation logging, retention period, and who can review your conversations are all decided by your company's IT/security policy — often to satisfy a compliance requirement (data residency, audit trail, industry regulation) that has nothing to do with making the tool better for you.\n- **Refusals that seem oddly conservative.** A consumer tool might happily brainstorm with you on a sensitive or unusual topic; an internal company agent is frequently configured with stricter guardrails than the underlying model actually has, precisely because the company is legally and reputationally on the hook for anything it outputs at work. A refusal from the internal tool often reflects a company policy layered on top, not a limitation of the model."
+    },
+    {
+      "type": "text",
+      "content": "## Where to Report a Wrong Answer or Request a Feature\n\nBecause an internally-built agent has no public support line, a wrong or unhelpful answer can feel like a dead end — but it almost never actually is. Somewhere in your organization, a real team owns this tool: often IT, a dedicated AI/platform engineering group, or whichever department commissioned it (HR, legal, procurement). Practical ways to find them: check for a feedback button or thumbs-down control inside the tool itself (most internally-built agents include one, even if it's easy to miss); check your company's intranet or internal wiki for a page describing the tool, which often names an owning team; ask whoever onboarded you to the tool, or your manager, who owns it. Reporting a bad answer isn't just venting — for an internally-built agent, your feedback is one of the only signals the owning team has that something needs fixing, since they don't have millions of users generating aggregate usage data the way a consumer product does."
+    },
+    {
+      "type": "text",
+      "content": "## Getting the Most Out of a Narrower Tool\n\nOnce you understand *why* it's narrower, you can work with that instead of fighting it. Ask it what it's actually good at rather than assuming — many internal agents include example prompts or a short description of intended use on their landing screen; read it. Give it the specific, structured input its scope was built for (a policy question phrased the way policy questions are usually phrased, a request in the format its documentation shows) rather than an open-ended conversational prompt closer to how you'd talk to Claude.ai. And route anything outside its stated scope to the tool actually built for it — your personal Claude or ChatGPT account for general work, or a different internal tool if your company has more than one — rather than trying to force the narrow tool to do a job it wasn't built for."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**How to tell which platform your company's tool is built on, if you're curious.** You often can't tell from the interface alone, but clues help: an internal agent deeply wired into SharePoint, Teams, and your Microsoft 365 documents with permission-aware search is more likely Azure AI Foundry/Agent365; one deeply wired into Gmail, Drive, and Google Workspace with cited web-grounded answers is more likely Vertex AI Agent Builder; one that feels custom-built with unusual tool integrations and no obvious ecosystem tie-in is plausibly Bedrock AgentCore. This is genuinely optional trivia for an end user — it doesn't change how you should use the tool — but it can help you understand why it integrates smoothly with some of your existing apps and not others."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**A narrower scope and stricter guardrails are not a sign the tool is worse — they're a sign it's built for a different job.** Don't assume your company's internal AI agent should match ChatGPT or Claude.ai feature-for-feature; it was built, scoped, and governed for a specific purpose your company controls, with compliance and data-handling requirements a consumer tool doesn't carry. At the same time, don't assume every refusal or limitation is correct or immovable — if a scope restriction seems to be actively getting in the way of real work, that's exactly the kind of feedback the owning team needs to hear, not something to just work around silently."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 1 — Write Your 'How to Use [My Company's Internal AI Tool]' Reference Note",
+      "content": "You will produce a short, genuinely useful reference note for yourself — the kind of thing you'd want to have read on day one.\n\n**Step 1 — Identify the tool.** Does your employer have an internally-built AI assistant (on Bedrock, Vertex, Foundry, or unbranded)? If you know its name, use it. If your company has more than one (e.g., an HR-specific one and an IT-specific one), pick the one you use most.\n\n**Step 2 — If you have access, actually use it for a real task** you'd normally do anyway this week, and pay close attention to: What did it handle well? Where did it feel narrower or more restrictive than a consumer AI tool? Did it refuse anything, and did the refusal seem like a reasonable guardrail or an overly conservative one?\n\n**Step 3 — If you don't have access yet** (new job, no internal tool exists, or you're a student), instead draft the questions you'd ask IT *before* adopting one: What model(s) does it use? What's the data retention policy for my conversations? Who can review what I've asked it? What's explicitly out of scope? Where do I report a wrong answer?\n\n**Step 4 — Write your reference note** with these sections: **Good for** (2-3 concrete things it handles well, from real use or from what IT told you it's meant for); **Bad for / out of scope** (what to route elsewhere instead, and to which tool); **Known quirks** (anything odd you noticed — a refusal that seemed too strict, a slow response, a model that feels dated); **Who owns it / where to report a problem** (the actual team, feedback button, or contact you found in Step 4 of the lesson's guidance).\n\n**Step 5 — Save this note** somewhere you'll actually reference it — and consider sharing it with a new teammate the next time someone joins your team and has to figure this out from scratch themselves.\n\n**Outcome:** a real, personally useful reference note for getting the most out of your company's internal AI tool — or a concrete list of questions ready to ask IT the day you're handed one."
+    },
+    {
+      "type": "quiz",
+      "question": "A new employee is frustrated that their company's internal AI assistant (built on Azure AI Foundry) refuses to help with a general coding question and gives much shorter, more guarded answers than the ChatGPT they use at home. What's the most accurate way to understand this difference?",
+      "options": [
+        "The company's internal tool is simply a worse, cheaper version of ChatGPT and should be avoided in favor of personal AI tools whenever possible",
+        "The internal tool was deliberately scoped and governed by the company for specific purposes, with narrower scope, a chosen (not user-selectable) model, and stricter guardrails reflecting compliance and reputational requirements — not evidence the underlying technology is inferior",
+        "Azure AI Foundry is technically incapable of answering coding questions, unlike other agent platforms",
+        "The employee should keep pushing the internal tool with different phrasings until it eventually agrees to answer, since all refusals are just prompt-engineering failures"
+      ],
+      "correct": 1,
+      "explanation": "The narrower behavior reflects deliberate company choices — scope, model selection, and guardrails — not a technical ceiling on what Azure AI Foundry (or Bedrock, or Vertex) can do; a company could build a broad, permissive coding assistant on any of these platforms if that were the goal. Option A wrongly generalizes 'narrower' to 'worse' rather than 'different job.' Option C is factually wrong — the platform isn't incapable, the deployment is scoped. Option D misunderstands the refusal as a prompt-engineering problem rather than an intentional policy; the correct move is routing the coding question to the appropriate tool (a personal account or a different internal tool) and, if the scope genuinely seems wrong, reporting it to the owning team."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Draft Your Pre-Adoption Question List for IT",
+      "content": "Whether or not your company has an internal AI tool today, at some point you'll likely be handed one — this workshop prepares you for that moment with a ready-made set of questions.\n\n**Step 1 — Review the four behavioral differences from this lesson**: narrower scope, model lock-in, data governance/retention rules, and stricter-than-consumer guardrails. For each, write one specific question you'd want answered before you start relying on a new internal AI tool at work. Example: for data governance, a real question might be, 'Are my conversations with this tool retained, and for how long, and who besides me can access them?'\n\n**Step 2 — Add a question about scope**: 'What is this tool explicitly meant to help with, and what should I route elsewhere?' — the single most useful question for using any narrow tool effectively from day one.\n\n**Step 3 — Add a question about feedback**: 'If it gives me a wrong or unhelpful answer, who owns this tool and how do I report that?' — so you're not stuck the first time it happens.\n\n**Step 4 — If you already have an internal tool (from Workshop 1), go back and actually try to answer your own questions** using what you found — and note which ones you still can't answer, which is itself useful information (it tells you what to ask IT directly).\n\n**Step 5 — Save this as a short, reusable checklist** — five or six questions, not a long document — that you'd bring to IT or a manager the day you're introduced to any new internal AI tool, at this job or a future one.\n\n**Outcome:** a compact, reusable pre-adoption question list — grounded in the specific behavioral differences this lesson explained — ready to use the next time your employer hands you a new internal AI agent."
+    },
+    {
+      "type": "quiz",
+      "question": "Why does this lesson recommend asking specifically 'what is this tool explicitly meant to help with, and what should I route elsewhere?' as one of the very first questions when adopting a new internal AI tool?",
+      "options": [
+        "Because internal AI tools are always broader than consumer tools, so this question rarely has a useful answer",
+        "Because internal agents built on Bedrock, Vertex, or Foundry are deliberately scoped narrower than general consumer AI tools, so knowing the intended scope up front lets you use it effectively for what it's good at and route everything else to the right tool instead of fighting the guardrails",
+        "Because asking this question is required by law before using any workplace AI system",
+        "Because the answer is always the same regardless of which platform or company built the tool, so it's mostly a formality"
+      ],
+      "correct": 1,
+      "explanation": "This lesson's core theme is that internal company AI agents are deliberately narrower and more governed than consumer tools, built for a specific job rather than general-purpose use. Knowing the intended scope upfront is the single highest-leverage question because it tells you both what to actually rely on the tool for and what to route to a different tool (a personal AI account, or another internal system) instead of repeatedly hitting guardrails and assuming the tool is simply broken or bad. There's no legal requirement behind this question (C), and the answer varies significantly by company and platform (D is wrong) — which is exactly why it needs to be asked each time, not assumed."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-17 — and Part 16.** You now understand, from an end user's seat, why an internal company AI agent built on AWS Bedrock, Google Vertex AI Agent Builder, or Azure AI Foundry behaves differently from ChatGPT or Claude.ai: narrower scope by design, model lock-in, company-set data governance and retention rules, and guardrails stricter than the underlying model actually has. You know how to find who owns such a tool and how to report a wrong answer or request a feature, and you've written a personal reference note (or a pre-adoption question list) for getting the most out of whatever internal AI tool your employer hands you next."
+    }
+  ],
+  "nextLesson": "17-1",
+  "prevLesson": "16-16"
+}
