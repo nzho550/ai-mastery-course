@@ -3,7 +3,14 @@
   "title": "AI for Sales & Business Development",
   "part": 16,
   "estimatedMinutes": 55,
-  "tags": ["document-work", "intermediate", "sales", "business-development", "outreach", "hands-on"],
+  "tags": [
+    "document-work",
+    "intermediate",
+    "sales",
+    "business-development",
+    "outreach",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -16,6 +23,10 @@
     {
       "type": "text",
       "content": "## The Personalised Outreach Framework\n\nThe biggest failure in sales outreach is generic messages that the prospect can tell were sent to 500 people. AI helps you write messages that feel personal and specific — because they are.\n\n**The research-first workflow:**\n1. Find the prospect's name, role, company\n2. Research: recent company news, LinkedIn posts, company blog, any published interviews\n3. Identify: a specific problem your solution solves that this company likely faces\n4. Connection: why you are a credible person to bring them this message\n\n**The personalised outreach prompt:**\n```\nI need to write a cold outreach email to [Name], [Title] at [Company].\n\nContext about them:\n- Company does: [what they do and their business model]\n- Recent news or context: [something specific and recent about their company]\n- Their likely challenges: [what problems companies like theirs typically face]\n- Their LinkedIn / posts show they care about: [any specific interests or priorities]\n\nMy offer:\n- I sell/offer: [what you do in one sentence]\n- Most relevant to them because: [specific connection to their situation]\n- Proof point: [one relevant case study or result]\n- Ask: [what you want them to do — not 'buy', usually just 'talk']\n\nWrite a 100-word personalised email with a compelling subject line. Make it feel like I wrote it specifically for them — not a template. Be direct and specific, not vague and flattering.\n```\n\n**What separates good AI outreach from bad:**\n- Good: references a specific real detail about them (their product launch, a post they wrote, a challenge in their industry)\n- Bad: generic praise ('I'm a huge fan of your company') + generic pitch\n- Good: clear, specific value prop in their terms\n- Bad: feature list that could apply to anyone\n- Good: a specific, low-commitment ask ('15 minutes to see if this applies to you')\n- Bad: asking for a meeting before demonstrating any value"
+    },
+    {
+      "type": "text",
+      "content": "## AI Meeting Agents That Live Inside Your CRM\n\nBeyond outreach and copywriting, a newer category of AI tool joins your sales calls directly and coaches you in real time. **Otter Sales Agent** and **Gong/Chorus** dial into your video calls, transcribe the conversation live, and surface coaching signals as you talk — your talk-time ratio versus the prospect's, moments where you may have missed or glossed over an objection, and competitor mentions. After the call, they don't just produce a summary: they sync it directly into **Salesforce** or **HubSpot**, logging the call notes, updating deal stage fields, and creating next-step tasks automatically — no manual data entry required.\n\nThis is a distinct category from the general-purpose outreach and drafting workflows covered above: it's less about writing and more about live coaching and CRM automation during and immediately after the conversation itself. **Lesson 16-12 covers the broader category of CRM-native AI agents (Agentforce, Breeze) in depth.**"
     },
     {
       "type": "workshop",
@@ -71,6 +82,6 @@
       "content": "**You've completed Part 16.** You now have AI workflows for every major office and knowledge-work task: writing, reports, proposals, data analysis, presentations, emails, meeting management, process documentation, marketing and content, HR and recruiting, and sales. These tools work for any role — no coding or technical background required. Part 7 takes the next step: using AI to plan projects and lead teams more effectively."
     }
   ],
-  "nextLesson": "17-1",
+  "nextLesson": "16-12",
   "prevLesson": "16-9"
 }

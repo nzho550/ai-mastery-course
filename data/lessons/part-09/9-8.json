@@ -1,0 +1,81 @@
+{
+  "id": "9-8",
+  "title": "Devin — The Autonomous PR-Driven Coding Agent",
+  "part": 9,
+  "estimatedMinutes": 55,
+  "tags": [
+    "ai-coding",
+    "advanced",
+    "devin",
+    "autonomous-agents",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nEvery tool in Part 9 so far — Aider, Cody, Tabnine, Bolt, v0, Lovable, Replit — still puts you in the loop turn by turn: you type an instruction, the AI responds, you look at the result immediately. Devin breaks that pattern. You hand it a task, it goes away and works — sometimes for hours, across multiple sessions — and comes back with a finished pull request. By the end of this lesson you'll understand how that autonomous model works, where it's actually being used in production, its newer terminal-native surfaces, and you'll have practiced the skill that matters most for working with any autonomous agent: writing a task brief precise enough to delegate."
+    },
+    {
+      "type": "text",
+      "content": "## A Different Paradigm: Delegate, Don't Pair\n\nDevin, built by Cognition, is not an in-editor assistant. It's not a chat window that proposes a diff for you to click \"accept\" on as you go. Devin is an **autonomous software engineering agent**: you assign it a task — through Slack, a linked ticket, or Devin's own interface — and it goes to work in its own sandboxed cloud environment.\n\nInside that sandbox, Devin can:\n- Read the codebase and plan an approach\n- Write code, run it, and read the output\n- Run the test suite and iterate on failures\n- Search documentation and the web when it gets stuck\n- Work across multiple steps and, if needed, multiple sessions — picking up where it left off\n\nWhen it believes the task is done, it opens a **pull request** for you to review. You didn't watch it write the code line by line. You didn't approve each edit. Your first real checkpoint is the PR.\n\nThis is the same underlying idea as delegating a ticket to a junior engineer: you write a clear brief, they disappear for a while, and what comes back is a PR — not a live pairing session. Compare that to Copilot's inline completions, Cursor's chat-and-accept loop, or even Claude Code's interactive terminal session (Part 13): all of those keep a human in the loop at a fine grain. Devin moves the human checkpoint from \"every edit\" to \"every finished piece of work.\""
+    },
+    {
+      "type": "text",
+      "content": "## Real Enterprise Adoption (2025–2026)\n\nDevin is not a lab demo. By 2025, Cognition had raised funding at a valuation of roughly **$26 billion**, and the reason wasn't hype alone — it reflected real enterprise deployments:\n\n- **Citi and Goldman Sachs** — both financial institutions have piloted or deployed Devin-style autonomous agents for internal engineering work, in industries where code review and audit trails are taken extremely seriously\n- **Mercedes-Benz** — reported use of Devin for internal software engineering tasks\n- **US Army, US Navy, and NASA's Jet Propulsion Laboratory (JPL)** — reported evaluations and deployments in government and aerospace contexts (treat these as reported rather than independently verified — disclosure around government AI adoption is often selective — but the direction is clear: autonomous coding agents have moved well past early-adopter startups)\n\nThe common thread across these deployments: **well-scoped, well-defined tasks** — dependency upgrades, test coverage, bug fixes, migrations — where a clear specification exists and \"correct\" is checkable. This is not (yet) where organizations point Devin at ambiguous, judgment-heavy architecture work."
+    },
+    {
+      "type": "text",
+      "content": "## Devin for Terminal and Devin Desktop\n\nCognition has also started meeting developers where Claude Code already lives: the terminal.\n\n- **Devin for Terminal** brings Devin's autonomous agent into a CLI session on your own machine, rather than only a remote cloud sandbox you access through a web dashboard or Slack\n- **Devin Desktop** gives Devin a local app surface, again narrowing the gap with tools like Claude Code that run directly against your local files and git repo\n\nThis matters for how you think about the competitive landscape: the \"cloud agent that returns a PR\" model and the \"terminal agent that works alongside you\" model are converging. Cognition is building toward both ends of the spectrum, and so, from the other direction, is OpenAI with Codex CLI (next lesson) and Anthropic with Claude Code. These paradigms aren't fixed categories — they're points these companies are actively moving between."
+    },
+    {
+      "type": "text",
+      "content": "## The Honest Tradeoffs\n\nAutonomy is a real capability and a real risk. Be clear-eyed about both sides before you reach for an autonomous agent:\n\n**What autonomy costs you:**\n- **More room to go off-track before you notice.** When Claude Code works interactively with plan mode (Part 13), you review its plan before it touches a file, and you see each step as it happens — you can redirect within seconds. An autonomous agent like Devin can spend an entire session pursuing a subtly wrong interpretation of your brief before you ever see output. A bad initial brief compounds across the whole autonomous run instead of being caught at step one.\n- **PR-review discipline matters more, not less.** With inline suggestions, you review small diffs constantly, as a byproduct of just using the tool. With an autonomous agent, the entire review responsibility concentrates into one moment: the finished PR. It's tempting to rubber-stamp a PR that \"looks done\" — resist that. Read it as carefully as you'd review a contractor's finished work, not a colleague's quick suggestion.\n- **The cost and access model is different.** This isn't a $20/month IDE plugin — Devin is priced and sold as an enterprise/team product, with access typically arranged through a paid plan rather than a casual individual subscription. Confirm current pricing and access directly with Cognition before assuming you can sign up the way you did for Claude Code or Copilot.\n\n**What autonomy buys you:**\n- Genuine hands-off time — you can hand off a well-scoped task and go do something else entirely, including work spanning a different session or a different day\n- Multi-step persistence on tasks that would otherwise require many back-and-forth turns in an interactive tool"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The skill that transfers:** whether you're delegating to Devin, filing a ticket for a human contractor, or writing a detailed prompt for Claude Code to execute unsupervised, the quality of your task brief is the single biggest predictor of the outcome. Vague briefs produce autonomous agents that confidently build the wrong thing."
+    },
+    {
+      "type": "text",
+      "content": "## Where This Fits Your Mental Model\n\nThink of it as a spectrum, not a category war:\n\n| | Interactive pairing | Autonomous delegation |\n|---|---|---|\n| Example tools | Copilot, Cursor, Claude Code (interactive session) | Devin (cloud), Devin for Terminal (early autonomous run) |\n| Human checkpoint | Every suggestion / every step | The finished PR |\n| Best for | Exploratory work, ambiguous problems, work you want to learn from | Well-scoped, well-specified tasks with a clear definition of done |\n| Failure caught | Within seconds | Only at review, potentially after a long run |\n| Cost model | Often per-seat subscription | Often usage-based / enterprise pricing |\n\nYou've spent this course mostly in the left column. This lesson and the next introduce tools built for the right column — and the workshop below lets you feel the difference on a task you actually have."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Write a Task Brief Like You're Delegating to Devin — Then Run It Through Claude Code",
+      "content": "You don't need a Devin account to practice the skill Devin requires: writing a task brief precise enough that an agent can execute it unsupervised and come back with something correct. This workshop has you write that brief for a real task, then actually run it — through Claude Code, in delegate-and-review mode — so you can compare the experience honestly.\n\n**Step 1 — Pick a real, small task from your own backlog.** Something you've been meaning to do in `ai-course-projects` or any real project: a small bug fix, a missing test, a refactor, a README update, adding input validation to a function, etc. It must be small enough to finish in one sitting and well-defined enough that \"done\" is checkable.\n\n**Step 2 — Write it as a Devin-style task brief**, not a casual instruction. Create `notes/devin-style-brief.md` and fill in:\n```markdown\n# Task Brief: [name]\n\n## Objective\nOne sentence: what needs to be true when this is done.\n\n## Acceptance criteria\n- [ ] Specific, checkable criterion 1\n- [ ] Specific, checkable criterion 2\n- [ ] Specific, checkable criterion 3\n\n## Constraints\n- Files/areas that must NOT change\n- Style/conventions to follow\n- Dependencies or libraries to use or avoid\n\n## Definition of done\n- Tests pass / feature works when: ___\n- How you will verify: ___\n```\nBe as precise as you would be if you were about to hand this to someone who would disappear for two hours and come back with a PR — because that's exactly the exercise.\n\n**Step 3 — Open Claude Code in delegate mode.** In your project folder, run:\n```bash\nclaude\n```\nPaste your entire task brief as the first instruction, verbatim — resist the urge to add anything conversational. Then let it work through the brief on its own and produce a diff (or an actual PR, if your repo is on GitHub with `gh` configured). Don't guide it turn by turn.\n\n**Step 4 — Review the result exactly like a PR.** Don't fix anything yet. Just read the diff top to bottom and note:\n- Did it satisfy every acceptance criterion you wrote?\n- Did it touch anything you marked as off-limits?\n- Where did it make a judgment call you didn't specify — and was that judgment call right?\n\n**Step 5 — Now compare.** Pick one earlier lesson where you worked with Claude Code *interactively*, turn by turn, on a similarly sized task. Write 4-6 sentences in `notes/devin-style-brief.md` under a `## Comparison` heading, honestly answering:\n- What did the delegate-and-review approach cost you in review effort compared to the interactive approach?\n- What would have gone wrong if your brief had been vaguer?\n- For which of your own recurring tasks would you actually want \"fire and forget, review the PR\" — and for which do you want to stay turn-by-turn?\n\n**Step 6 — Commit the real artifact:**\n```bash\ngit add notes/devin-style-brief.md\ngit commit -m \"Add Devin-style task brief and delegate-vs-pair comparison\"\n```\n\n**Accomplishment check:** You didn't just read about autonomous agents — you practiced writing the exact kind of brief they require, ran it for real, and have a committed comparison grounded in your own task instead of a hypothetical."
+    },
+    {
+      "type": "quiz",
+      "question": "Your team lead asks you to fix a well-documented bug: a date-formatting function throws on leap years, there's already a failing test that reproduces it, and the fix is contained to one file. You could hand this to an autonomous agent (Devin-style) or pair on it interactively (Claude Code). Which is the better default, and why?",
+      "options": [
+        "Always pair interactively — autonomous agents can't be trusted with production bug fixes",
+        "Hand it to the autonomous agent — the task is small, well-scoped, and has a checkable definition of done (the failing test passing), which is exactly the profile autonomous delegation handles well",
+        "Always use the autonomous agent for every task regardless of scope, since it saves your time",
+        "Neither — this task is too trivial for AI assistance and should be done by hand"
+      ],
+      "correct": 1,
+      "explanation": "This is close to the ideal case for autonomous delegation: a precise brief already exists (the failing test), the scope is contained (one file), and \"done\" is objectively checkable (test passes). This is exactly the profile enterprise Devin deployments target — dependency upgrades, bug fixes, test coverage — not ambiguous architecture work. Pairing interactively (A) isn't wrong, but it's higher-touch than the task requires. Using autonomous agents indiscriminately (C) ignores that judgment-heavy or ambiguous tasks need the tighter feedback loop of interactive pairing. And AI assistance is appropriate here regardless of task size (D) — the point of these tools is to handle exactly this kind of routine, well-specified work."
+    },
+    {
+      "type": "quiz",
+      "question": "You delegated a moderately complex refactor to an autonomous coding agent. Two hours later it returns a PR that touches 14 files, all tests pass, and the diff looks clean at a glance. What should you do before merging?",
+      "options": [
+        "Merge immediately — passing tests and a clean-looking diff are sufficient confidence for an autonomous agent's work",
+        "Read the PR as carefully as you would review a contractor's finished work — passing tests confirm the cases it wrote tests for, not that the whole change is correct, and 14 files is enough surface area for something to have gone quietly wrong",
+        "Ask the agent to explain what it did, and if the explanation sounds confident, merge",
+        "Reject the PR automatically because 14 files is too large for any AI-generated change to be trusted"
+      ],
+      "correct": 1,
+      "explanation": "Passing tests only tell you the agent's own test cases pass — not that it covered the right cases, or that a 14-file refactor didn't introduce a subtle issue outside test coverage. Because autonomous agents get one checkpoint (the PR) instead of continuous review, that checkpoint needs to carry real scrutiny — proportional to the size and risk of the change, not rubber-stamped because it looks finished. A confident-sounding explanation (C) isn't evidence of correctness. Blanket-rejecting based on file count alone (D) throws away legitimate work without actually checking it; the right response is thorough review, not an arbitrary size cutoff."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 9-8 complete.** You understand Devin's autonomous, PR-driven paradigm — assign a task, it works independently in its own sandbox, you review the result — and how that differs from the interactive pairing model of Copilot, Cursor, and Claude Code. You know where it's seeing real enterprise use, its newer terminal-native surfaces, and the honest tradeoffs of delegation versus pairing. Most importantly, you've practiced the transferable skill: writing a task brief precise enough to hand to any autonomous agent. Next: OpenAI's Codex CLI — the direct terminal-native competitor to Claude Code itself."
+    }
+  ],
+  "nextLesson": "9-9",
+  "prevLesson": "9-7"
+}

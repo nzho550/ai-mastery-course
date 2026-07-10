@@ -1,0 +1,79 @@
+{
+  "id": "9-10",
+  "title": "Google Jules & Antigravity — Google's Coding Agents",
+  "part": 9,
+  "estimatedMinutes": 55,
+  "tags": [
+    "ai-coding",
+    "advanced",
+    "jules",
+    "antigravity",
+    "google",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYou already met Gemini as a chat-and-writing model back in lesson 2-4. This lesson is about what happens when Google points that same model family at software engineering instead of email drafts: **Jules**, Google's asynchronous autonomous coding agent, and **Antigravity**, Google's evolving agentic development platform built around it.\n\nBy the end of this lesson you'll be able to describe how Jules and Antigravity work, how they differ from each other, and — just as importantly — how they fit next to the other autonomous coding agents you've already studied: Devin (lesson 9-8) and OpenAI's Codex CLI (lesson 9-9). You'll finish with a real, personal reference document comparing all four agents you now know, including Claude Code, which you're about to study in depth starting with Part 7."
+    },
+    {
+      "type": "text",
+      "content": "## Jules — Google's Asynchronous Coding Agent\n\nJules is Google's autonomous coding agent: you hand it a task, it goes off and works on that task in an isolated cloud environment — cloning your repository, reading the code, planning an approach, writing and running tests, and iterating — without you watching it type. When it's done, it reports back with a diff or a pull request for you to review.\n\nThat asynchronous, background-work model is the same basic shape as Devin's: you delegate a ticket-sized unit of work and come back later to review finished output, rather than pairing with the agent turn by turn the way you do with Claude Code or Copilot's chat.\n\n**Jules's path to general availability:**\n- Jules entered public beta in March 2026\n- Jules reached **general availability in April 2026** — Google has called it one of its defining 2026 stories, and at Google I/O 2026 the developer keynote devoted three separate sessions to it\n- Google's own internal teams now use Jules to triage and patch real issues at scale, which is Google's way of saying \"we trust it enough to eat our own dog food\"\n\n**How you'd actually use it:**\n1. Go to jules.google (or jules.google.com) and connect a GitHub repository\n2. Describe a task in plain English — a bug to fix, a small feature, a dependency bump, a test-coverage gap\n3. Jules clones the repo into its own sandboxed environment, plans its approach, and works asynchronously — you can queue up several tasks and walk away\n4. Jules opens a pull request (or shows you a diff) with its proposed changes, plus a summary of what it did and why\n5. You review like you would any PR — read the diff, check the tests, merge or request changes\n\nThe practical implication: Jules is built for the same category of work as Devin — well-scoped, reviewable, background tasks — using Gemini as the underlying model instead of Devin's own stack."
+    },
+    {
+      "type": "text",
+      "content": "## Antigravity — Google's Agentic Development Platform\n\nWhere Jules is the asynchronous *agent*, Antigravity is Google's broader *platform* for agentic development — the surface where agents (including Jules-style background workers) get managed, orchestrated, and given tools like a real browser.\n\n**A quick history:**\n- Antigravity launched as a free preview on **November 18, 2025** — at that point it was a VS Code fork with agents built in as the primary way of working, rather than an autocomplete bolted onto a traditional editor\n- **Antigravity 2.0**, announced at Google I/O 2026 (May 19, 2026), was a near-total rebuild: gone is the VS Code fork, replaced by a standalone desktop app built for orchestrating multiple agents at once, a new Go-based CLI, a developer SDK for building your own agents on top of the platform, and a \"Managed Agents\" billing tier inside the Gemini API\n\n**What's new in Antigravity 2.0 that matters for you:**\n\n- **Manager View** — a dashboard for overseeing several parallel agent tasks at once, rather than babysitting one agent in one window. This is Google's answer to the same problem Devin's task list and Jules's async queue solve: once you're delegating work instead of typing it yourself, you need a way to see the status of everything in flight, not just one conversation.\n- **Browser Subagent** — an agent that drives a real Chrome browser as part of a coding task: it navigates to your app's local dev server, clicks buttons, fills in forms, takes screenshots, notices what's broken, and loops back to fix it. If that sounds familiar, it should — it's the same underlying idea as the Playwright MCP browser automation and the agentic browsers you studied in lesson 18-14, just aimed inward at *your own app* as part of the build-test-fix loop instead of outward at the open web.\n- **SDK** — lets developers build custom agents and integrations on top of Antigravity rather than being limited to what ships in the box, plus a self-hosted deployment path via the new CLI.\n- Native Git worktree support, subagents that can be spawned programmatically with inherited permissions, hooks that run shell scripts at points in the agent loop, and scheduled/cron-style recurring agent tasks round out the 2.0 release.\n\n**A note on stability:** reviewers have flagged real growing pains — Google cut Antigravity's usage quotas multiple times between December 2025 and March 2026 without much notice, frustrating paying users. If you try it, treat it the way you'd treat any fast-moving preview product: useful, but budget for occasional rough edges and shifting limits."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Same model family, different job.** Gemini itself — the conversational, writing, and reasoning model you used back in lesson 2-4 — is the same underlying model family powering Jules and Antigravity's coding work. Nothing new is being invented here conceptually; Google is applying its general-purpose model to the specific, high-stakes task of autonomous software engineering, the same way OpenAI applied GPT to Codex CLI and Anthropic applied Claude to both Claude Code and (via partnership) Salesforce's Agentforce."
+    },
+    {
+      "type": "text",
+      "content": "## Four Labs, Four Agents: Placing Jules/Antigravity on the Map\n\nYou now know enough to name every major autonomous-coding-agent product from a top AI lab, and roughly place each one on a spectrum from **interactive pairing** (you and the agent work turn-by-turn in the same session) to **autonomous delegate** (you hand off a task and the agent works unsupervised, reporting back later):\n\n| Agent | Lab | Primary interface | Spectrum position |\n|---|---|---|---|\n| **Claude Code** | Anthropic | Terminal, IDE, autonomous SDK modes | Interactive pairing by default, but scales up to fully autonomous with the SDK and headless mode |\n| **Devin** | Cognition (independent) | Web dashboard, Slack/PR integration | Autonomous delegate — assign a ticket, review a PR |\n| **Codex CLI** | OpenAI | Terminal | Interactive-leaning, with autonomous/background modes available |\n| **Jules / Antigravity** | Google | Async web queue (Jules) + IDE-like platform (Antigravity) | Autonomous delegate (Jules) plus a managed multi-agent platform (Antigravity) |\n\nThe honest takeaway isn't \"one of these is best\" — it's that **every major lab has converged on the same idea**: coding agents that can work without a human watching every keystroke are now table stakes, and the real differentiation is in review workflow, tool access (like Antigravity's Browser Subagent), pricing, and how deeply each is wired into tools you may already use for other work (Devin into Slack/Linear, Jules/Antigravity into Google's own developer tooling, Claude Code into the terminal-first workflow you'll spend the rest of this course mastering)."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**If you want to try it yourself:** Jules is at jules.google — sign in with a Google account, connect a real GitHub repo (a small side project is ideal), and give it one well-scoped task, like \"add a unit test for the login function\" or \"fix the typo in the README.\" Antigravity is at antigravity.google — it currently offers a free tier alongside paid Pro/Ultra tiers aimed at professional developers. Neither requires payment to get a feel for how the workflow differs from Claude Code."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Build Your Personal Four-Agent Comparison Reference",
+      "content": "You now have direct or studied knowledge of four major autonomous/agentic coding tools: **Claude Code**, **Devin**, **Codex CLI**, and **Jules/Antigravity**. Instead of a toy exercise, you're going to build a real one-page reference document you will actually reopen the next time you're deciding which tool to reach for.\n\n**Step 1 — Create the document.** Open a blank doc (Google Docs, Notion, a markdown file, whatever you actually use) titled \"My AI Coding Agent Reference.\" This is not a throwaway — save it somewhere you'll find it again in three months.\n\n**Step 2 — Build a table with these columns:** Agent | Best for | Cost model | Autonomy level | When I'd reach for it.\n\n**Step 3 — Fill in one row per agent, honestly, based on what you've read or tried in lessons 9-8, 9-9, and this lesson:**\n- **Claude Code** — you'll deepen this row a lot starting next lesson, but write your current impression now\n- **Devin** — recall its PR-driven, ticket-assignment workflow and Cognition's pricing model\n- **Codex CLI** — recall its terminal-first workflow and OpenAI's pricing/access model\n- **Jules / Antigravity** — use what you just learned: Jules for background async tasks, Antigravity for the broader IDE-like platform with Manager View and the Browser Subagent\n\n**Step 4 — For \"when I'd reach for it,\" be specific and personal.** Not \"for coding tasks\" — instead something like: *\"A well-defined bug in a repo I don't need to watch being fixed in real time\"* (Devin/Jules) versus *\"I'm actively problem-solving and want to see every step\"* (Claude Code interactive) versus *\"I need an agent to visually verify my UI actually works in a browser, not just that the code compiles\"* (Antigravity's Browser Subagent).\n\n**Step 5 — Add one honest caveat row at the bottom:** \"What I still don't know / haven't verified myself\" — autonomous agent tooling changes fast; note what's based on reading versus hands-on use, and put a reminder to revisit this document in 3-6 months.\n\n**Step 6 — Save the document somewhere durable** (not just this course's notes) and actually bookmark it. The next time a coding task lands on your desk and you're not sure which tool fits, this is the document you should open first."
+    },
+    {
+      "type": "quiz",
+      "question": "A engineering manager has a backlog of 15 small, well-defined bugs (each described in one or two sentences, each independent of the others) that nobody has time to fix by hand. Which approach best matches what you now know about autonomous coding agents?",
+      "options": [
+        "Open Claude Code interactively and fix all 15 bugs yourself, one conversation at a time, since interactive pairing gives the most control",
+        "Assign the bugs as individual tasks to an asynchronous agent like Jules or Devin, let them work in the background, and review the resulting PRs in batches",
+        "Wait until a human engineer has free time, since AI agents can't be trusted with bug fixes",
+        "Use Codex CLI's autocomplete to type the fixes faster manually"
+      ],
+      "correct": 1,
+      "explanation": "This is exactly the shape of task asynchronous, autonomous agents like Jules and Devin are built for: many small, independent, well-scoped units of work where a human reviewing a finished diff is far more efficient than a human either writing every fix by hand or supervising an interactive session for each one. Claude Code's interactive mode (A) shines when you need to think through a problem with the agent, not for churning through a backlog of already-understood bugs. Refusing to use AI at all (C) ignores that this is precisely the well-scoped, reviewable work these agents handle well. Autocomplete (D) still requires you to write and understand each fix yourself, which doesn't save the time an asynchronous agent would."
+    },
+    {
+      "type": "quiz",
+      "question": "You're building a web app and want an agent to verify that a new feature actually renders correctly and that the buttons work in a real browser — not just that the code compiles and unit tests pass. Which capability from this lesson specifically addresses that need?",
+      "options": [
+        "Jules's asynchronous task queue",
+        "Antigravity's Manager View, for overseeing multiple parallel tasks",
+        "Antigravity's Browser Subagent, which drives a real Chrome instance to click through the app, take screenshots, and catch visual/interaction bugs",
+        "Codex CLI's terminal-first interface"
+      ],
+      "correct": 2,
+      "explanation": "The Browser Subagent is specifically built for this: it spins up a real browser, navigates to your app, clicks through it, takes screenshots, and loops back to fix what it finds broken — catching the class of bugs that unit tests and compilation checks miss entirely (a button that's unclickable, a layout that's broken, a form that silently fails). This is the same underlying skill as the Playwright MCP browser automation and agentic browsers you covered earlier in the course, now aimed at your own app during development. The Manager View (B) is about overseeing task status, not verifying UI behavior, and neither Jules's queue nor Codex CLI's terminal interface include browser-driving capability."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 9-10 — and Part 9's tour of autonomous coding agents.** You can now name all four major labs' answers to \"AI that writes code\": Anthropic's Claude Code (interactive-first, scaling to autonomous), Cognition's Devin (autonomous, PR-driven), OpenAI's Codex CLI (terminal-first with autonomous modes), and Google's Jules/Antigravity (asynchronous agent plus a multi-agent platform with a real browser subagent). You've also built a personal reference document comparing all four — a real artifact, not a study exercise. Next up: Part 7 goes all-in on Claude Code, the tool you'll use for the rest of this course."
+    }
+  ],
+  "nextLesson": "7-1",
+  "prevLesson": "9-9"
+}

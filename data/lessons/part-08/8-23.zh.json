@@ -10,7 +10,8 @@
     "interoperability",
     "governance",
     "advanced",
-    "concepts"
+    "concepts",
+    "ag-ui"
   ],
   "sections": [
     {
@@ -29,6 +30,10 @@
     {
       "type": "text",
       "content": "## A2A 实际是如何工作的\n\n一个兼容 A2A 的 Agent 会在一个众所周知的 URL 上发布一张 **Agent Card（Agent 名片）**——一份简短的文件，描述这个 Agent 的名称、它的能力，以及如何联系到它。任何其他兼容 A2A 的 Agent 都可以读取这张名片，理解这个 Agent 提供什么，并开始与它进行结构化的对话来委派工作，而不需要为这一对 Agent 专门编写定制的集成代码。\n\n实际效果是这样的：假设你公司基于 Claude Code 的研究 Agent，需要把一个排期任务交给一个完全独立的日程安排 Agent，而后者是由另一家供应商在另一个框架上构建的（比如用 Google 的 Agent Development Kit 构建）。没有 A2A 的话，就得有人为这一对具体的 Agent 专门编写胶水代码。有了 A2A，两个 Agent 都使用同一套发现与交接协议，集成就变成了通用的，而不是定制的——这正是 MCP 曾经为工具带来的好处，现在被应用到了 Agent 与 Agent 之间。\n\n到 2026 年，A2A 已经拥有超过 150 家支持机构，并被集成进主流平台，包括微软 Azure AI Foundry、Copilot Studio、AWS Bedrock AgentCore 和 Google Cloud——这意味着如果你未来接触 Claude Code 之外的企业级 Agent 平台，很可能会遇到它。"
+    },
+    {
+      "type": "text",
+      "content": "## 第三个层次：AG-UI 补齐了这幅图景\n\nMCP 和 A2A 合起来覆盖了 Agent 到工具、以及 Agent 到 Agent 这两个连接。但现实世界中的 Agent 最终还需要第三种连接：它如何与*正在看着它工作的人*对话——那个需要实时展示流式推理过程、工具调用和中间结果，而不只是一个最终答案的聊天窗口、仪表盘或审批界面？这正是 **Agent-User Interaction Protocol（AG-UI，Agent 与用户交互协议）** 要填补的空白。\n\n在 AG-UI 出现之前，每个框架都各自发明了一套把 Agent 状态推送给前端的方式——这意味着为某个 Agent 框架构建的界面，通常无法在不写定制胶水代码的情况下渲染另一个框架的输出，这和 MCP 解决工具碎片化、A2A 解决 Agent 到 Agent 交接碎片化，是同一类问题。AG-UI 把这种数据流标准化：用一套通用的事件格式来表示“Agent 发起了一次工具调用”“Agent 正在思考”“这是一个部分结果”，这样任何兼容的前端都能渲染任何兼容 Agent 的活动状态，而不需要一次性的定制集成工作。\n\n到 2026 年 3 月至 4 月，AG-UI 支持已经落地到 AWS Bedrock AgentCore 和微软的 Agent Framework 中——这证明它正在走 MCP 和 A2A 走过的同一条采用路径：从单一支持者的提案，逐渐发展成技术栈中被广泛支持的一层。三者齐备之后，这幅图景就完整了：**MCP** 是 Agent 到工具，**A2A** 是 Agent 到 Agent，而 **AG-UI** 是 Agent 到人类交互界面——三种不同的连接，三个不同的协议，各自解决着其他协议从未打算解决的那一块。"
     },
     {
       "type": "text",

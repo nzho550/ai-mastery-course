@@ -3,7 +3,14 @@
   "title": "AI 用于销售与业务拓展",
   "part": 16,
   "estimatedMinutes": 55,
-  "tags": ["document-work", "intermediate", "sales", "business-development", "outreach", "hands-on"],
+  "tags": [
+    "document-work",
+    "intermediate",
+    "sales",
+    "business-development",
+    "outreach",
+    "hands-on"
+  ],
   "sections": [
     {
       "type": "text",
@@ -16,6 +23,10 @@
     {
       "type": "text",
       "content": "## 个性化开发框架\n\n销售开发中最大的失败，是发送那些潜在客户一眼就能看出是群发给 500 人的泛泛消息。AI 能帮你写出感觉个性化、且真正是个性化的消息——因为它们确实是。\n\n**先研究后写作的工作流：**\n1. 找到潜在客户的姓名、职位、公司\n2. 研究：最近的公司新闻、LinkedIn 帖子、公司博客、任何公开的采访\n3. 识别：你的方案能解决的、这家公司很可能面临的一个具体问题\n4. 建立联系：为什么你是一个可信的人，来向他们传达这个信息\n\n**个性化开发提示词：**\n```\nI need to write a cold outreach email to [Name], [Title] at [Company].\n\nContext about them:\n- Company does: [what they do and their business model]\n- Recent news or context: [something specific and recent about their company]\n- Their likely challenges: [what problems companies like theirs typically face]\n- Their LinkedIn / posts show they care about: [any specific interests or priorities]\n\nMy offer:\n- I sell/offer: [what you do in one sentence]\n- Most relevant to them because: [specific connection to their situation]\n- Proof point: [one relevant case study or result]\n- Ask: [what you want them to do — not 'buy', usually just 'talk']\n\nWrite a 100-word personalised email with a compelling subject line. Make it feel like I wrote it specifically for them — not a template. Be direct and specific, not vague and flattering.\n```\n\n**好的 AI 开发信与差的 AI 开发信的区别：**\n- 好：引用一个关于对方具体、真实的细节（他们的产品发布、他们写的一篇帖子、他们所在行业的一项挑战）\n- 差：泛泛的赞美（“我非常欣赏贵公司”）+ 泛泛的推销\n- 好：用对方的语言清晰、具体地阐述价值主张\n- 差：一份可以套用给任何人的功能列表\n- 好：一个具体、低承诺的诉求（“15 分钟，看看这是否适用于你”）\n- 差：在展示任何价值之前就要求安排会议"
+    },
+    {
+      "type": "text",
+      "content": "## 内嵌在你 CRM 中的 AI 会议助手\n\n除了开发接触和文案写作之外，还有一类较新的 AI 工具能直接加入你的销售通话，并实时为你提供辅导。**Otter Sales Agent** 和 **Gong/Chorus** 会接入你的视频通话，实时转录对话内容，并在你说话时给出辅导信号——你与潜在客户的发言时长比例、你可能忽略或轻描淡写带过某个异议的时刻，以及竞争对手被提及的情况。通话结束后，它们不仅仅生成一份摘要：还会把内容直接同步到 **Salesforce** 或 **HubSpot** 中，记录通话纪要、更新交易阶段字段，并自动创建下一步任务——无需手动录入数据。\n\n这与上文介绍的通用开发接触和撰写工作流是不同的类别：它更侧重于对话过程中及之后的实时辅导和 CRM 自动化，而不是写作本身。**第 16-12 课将深入介绍 CRM 原生 AI 代理（Agentforce、Breeze）这一更广泛的类别。**"
     },
     {
       "type": "workshop",
@@ -71,6 +82,6 @@
       "content": "**你已经完成了第 16 部分。** 你现在拥有覆盖每一种主要办公和知识工作任务的 AI 工作流：写作、报告、提案、数据分析、演示文稿、邮件、会议管理、流程文档、财务分析，以及销售。这些工具适用于任何角色——不需要编程或技术背景。第 17 部分迈出下一步：用 AI 更有效地管理和领导团队。"
     }
   ],
-  "nextLesson": "17-1",
+  "nextLesson": "16-12",
   "prevLesson": "16-9"
 }

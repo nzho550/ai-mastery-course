@@ -1,0 +1,89 @@
+{
+  "id": "2-18",
+  "title": "Meeting Intelligence Agents — Query, Auto-File & Bot-Free Capture",
+  "part": 2,
+  "estimatedMinutes": 60,
+  "tags": [
+    "tools",
+    "intermediate",
+    "meetings",
+    "agents",
+    "productivity",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 2-10 covered the basics: record, transcribe, summarize, distribute. That's still true, but the tools have moved on. A static summary is no longer the end product — the meeting transcript is now a knowledge base you can *query*, action items can *file themselves* into your task tracker, and some note-takers no longer send a bot into your call at all. This lesson covers that next layer: queryable meeting agents, bot-free local capture, auto-filing with approval gates, and CRM-integrated sales agents. If 2-10 was \"AI writes the minutes,\" this lesson is \"AI is a colleague you can ask questions and hand off work to.\""
+    },
+    {
+      "type": "text",
+      "content": "## From Static Summary to Queryable Agent\n\nThe biggest shift since 2-10: instead of reading a summary once and moving on, you can now *ask questions* about a meeting after it ends — and the tool answers from the actual transcript, not just the summary it wrote.\n\n**Microsoft Teams Copilot Q&A** — Open the Recap tab for a past meeting and ask Copilot things like *\"What did Priya commit to?\"* or *\"Did we agree on a launch date?\"* Copilot searches the full transcript, not just its own summary, so it can surface a detail that never made it into the bullet points.\n\n**Fathom's \"Ask Fathom\"** — A chat interface layered over your entire meeting library. You can ask cross-meeting questions like *\"What has this client said about budget across the last three calls?\"* — something a single per-meeting summary could never answer, because it requires connecting facts across separate transcripts.\n\n**Otter Meeting Agent** — Otter's newer tier goes further: you can ask it to draft a follow-up email, pull every open action item across a whole project's meetings, or answer a factual question live, mid-meeting, without leaving the call.\n\nThe practical implication: your meeting archive stops being a pile of documents you'd have to re-read, and becomes something you can interrogate the way you'd interrogate a colleague who was in the room."
+    },
+    {
+      "type": "text",
+      "content": "## Bot-Free, Local Capture: Granola and Fathom's Free Tier\n\n2-10's tools — Otter, Fireflies, Zoom AI Companion — all work by joining the call as a visible participant (a \"bot\" in the participant list) or running inside the meeting platform itself. Everyone in the meeting can see that a recording tool is present.\n\nA newer category skips that entirely:\n\n**Granola** — Runs locally on your laptop and captures system audio directly — no bot joins the call, no one else sees anything different in the participant list. You take rough notes during the meeting as usual; afterward, Granola merges your notes with what was actually said to produce a much richer, structured summary than either your notes or a raw transcript alone. It also integrates with Claude Code via MCP, so you can pull meeting context directly into a coding session — useful if a call included technical requirements you need while building.\n\n**Fathom (free tier)** — Positioned similarly to Otter but with an uncapped free tier as of 2025–2026, plus the cross-meeting \"Ask Fathom\" querying described above.\n\n**Why this distinction matters:** a bot-based tool announces itself — everyone knows recording is happening because they can see the bot join. A local-capture tool like Granola still requires the same consent obligations (see the warning callout in 2-10 — this hasn't changed), but the *visible signal* that recording is occurring is gone. If you adopt a bot-free tool, you now carry the responsibility of announcing recording verbally at the start of the call, since there's no bot icon doing it for you."
+    },
+    {
+      "type": "text",
+      "content": "## Auto-Filing Action Items — With a Human Approval Gate\n\n2-10 ended with Claude turning a summary into an action-item list you copied into your own tracker. The next layer of automation skips the copy-paste: the tool writes action items directly into Jira, Asana, Trello, or Linear.\n\n**Fireflies AI Skills** — A configurable pipeline that watches for action-item language in a transcript (\"I'll handle,\" \"can you own,\" \"action item for...\" — the same cues from 2-10's Teams Copilot section) and creates a ticket in your connected tracker automatically.\n\n**Spinach.ai** — Built specifically around the standup/sprint-review meeting pattern; it drafts Jira tickets or Asana tasks from what was discussed and, critically, holds them for your review rather than committing them silently.\n\n**Why the approval gate matters:** auto-filing is a step up in leverage, but it's also a step up in risk — a mis-transcribed name or an over-eager \"sounds like an action item\" heuristic now creates a *real ticket* someone might act on, not just a line in a document you'd catch on read-through. Every credible tool in this space defaults to (or lets you configure) a review queue: tickets are drafted, not published, until a human clicks approve. Treat any tool that skips this step as a red flag, not a convenience."
+    },
+    {
+      "type": "text",
+      "content": "## CRM-Integrated Sales Meeting Agents\n\nSales teams have their own flavor of this shift, built around two-way sync with the CRM rather than a task tracker.\n\n**Otter Sales Agent** — Extends the Otter you may already know with CRM write-back: call summaries, next steps, and sentiment can sync into Salesforce or HubSpot against the right contact/opportunity record.\n\n**Gong** and **Chorus** — The established players in \"revenue intelligence.\" Beyond transcription, they analyze talk-time ratio (is the rep talking too much?), flag competitor mentions and objections, and coach reps on patterns across dozens of calls — then push structured data back into Salesforce or HubSpot automatically.\n\nThe common thread: these tools don't just document a meeting, they write into the system of record that other people and processes depend on — a pipeline forecast, a deal stage, a follow-up task. That's more useful than a static summary, and it's also exactly where accuracy problems do the most damage (see the callout below)."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The pattern is spreading beyond dedicated meeting tools.** Slack's 2026 \"Meeting Intelligence\" overhaul brings this same capability into a general workspace app: it captures desktop audio across *any* meeting platform (not just ones Slack controls), summarizes, and can write structured updates back into linked CRM records — all behind an approval gate before anything customer-facing goes out. When a messaging app starts shipping meeting-agent features, it's a signal that \"queryable transcript + auto-filed action + CRM write-back\" is becoming a baseline expectation, not a niche add-on."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Accuracy and trust don't improve just because the interface got smarter.** Querying a meeting agent is only as good as the transcript underneath it — if the transcription mis-heard a number, a name, or a commitment, the agent will answer your question *confidently and wrong*, which is more dangerous than a summary you'd skim and catch an error in. And every CRM auto-write — a note on an opportunity, a task assigned to a rep, a status change — needs a human review step before anything customer-facing goes out. Treat 'the agent answered my question' the same way you'd treat 'the summary said so' in 2-10: useful, fast, and never a substitute for checking the source when the stakes are real."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Set Up a Bot-Free Note-Taker and Query a Past Meeting",
+      "content": "You will set up either Granola or Fathom on a real upcoming call, then test the query feature against a meeting you've already had. This produces a real captured meeting you can actually use — not a demo recording.\n\n**Step 1 — Choose your tool:**\n- **Granola** (granola.ai): download the desktop app, sign in, and grant it system audio permission. It works locally — no bot joins your call.\n- **Fathom** (fathom.video): sign up free, connect your calendar, and enable it for your next Zoom/Teams/Meet call.\n\n**Step 2 — Announce recording verbally.** Since a bot-free tool doesn't visibly join the call, you carry the consent responsibility yourself. At the start of your next real meeting, say out loud: *\"I'm using an AI note-taker that captures this call locally — let me know if you'd rather I not.\"*\n\n**Step 3 — Run it on a real upcoming meeting** (a 1:1, a team check-in, a client call — whatever is next on your calendar). Let it capture the full conversation.\n\n**Step 4 — After the meeting, review the output.** Compare Granola's merged notes (your rough notes + what was said) or Fathom's summary against your own memory of the call. Note anything it got wrong.\n\n**Step 5 — Test the query feature on an older meeting:**\n- In Fathom, use **Ask Fathom** and ask a specific factual question about a *previous* call you've already recorded with it — e.g., *\"What did we agree on timeline for X?\"*\n- In Granola, reopen a past meeting note and ask a follow-up question about a detail you don't remember clearly.\n\n**Step 6 — Write a 2-sentence verdict:** Did the tool answer your follow-up question accurately from the transcript, or did it need correcting? Would you trust this enough to skip re-reading the full transcript next time?\n\n**Outcome:** a real meeting captured with a bot-free tool, plus a tested answer to a real follow-up question — something you'll actually use for your next meeting, not a one-off exercise."
+    },
+    {
+      "type": "quiz",
+      "question": "Your team lead wants to try a bot-free note-taker like Granola for 1:1s because participants find visible recording bots awkward. What's the correct way to handle consent, given that no bot icon appears in the call?",
+      "options": [
+        "No action needed — since the tool runs locally on one laptop, it isn't really 'recording' the meeting",
+        "Verbally announce at the start of each call that an AI note-taker is capturing the conversation locally, since there's no visible bot to signal this automatically",
+        "Only get consent if the meeting is with an external client, not for internal 1:1s",
+        "Add a note in the calendar invite once and assume that covers every future meeting"
+      ],
+      "correct": 1,
+      "explanation": "The consent obligation from lesson 2-10 doesn't disappear just because the capture method changed — it's still audio of a conversation being recorded and processed. What changes with bot-free tools is that there's no automatic visual signal (a bot joining the call) doing the notifying for you, so the responsibility shifts to you to say it out loud. A one-time calendar note (D) is easy to miss and doesn't cover guests who weren't on the original invite. Internal-only exemptions (C) aren't how consent law works in most jurisdictions — the recipient's awareness matters, not their employment relationship to you."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Design Your Personal Auto-Filing Rule",
+      "content": "Auto-filing action items directly into a tracker is powerful, but only if you decide the rules deliberately rather than accepting a tool's defaults. This workshop produces a saved document you'll actually refer back to before turning on any auto-filing feature.\n\n**Step 1 — List which of your recurring meetings would benefit from auto-filed action items.** Be specific: sprint reviews, client status calls, 1:1s, project stand-ups — not \"meetings\" in general.\n\n**Step 2 — For each meeting type, decide which tracker it should file into** (Jira, Asana, Trello, Linear, or none). A client call might warrant a CRM note instead of a ticket; a sprint review clearly maps to Jira.\n\n**Step 3 — Design your approval gate.** Answer concretely:\n- Who reviews drafted tickets before they go live — you, or a team lead?\n- What's the maximum delay before an unreviewed ticket auto-publishes (if any) — or does it never auto-publish without a click?\n- What happens when the tool mis-assigns an action item to the wrong person — is there a correction step built into your workflow?\n\n**Step 4 — Ask Claude.ai:** *\"Here is my draft auto-filing rule for meeting action items: [paste your Step 1-3 answers]. Stress-test this rule — what failure modes am I not accounting for? What would happen if this rule ran unattended for a month?\"* Incorporate anything it surfaces that you'd missed.\n\n**Step 5 — Save the finished rule as a real document** (Google Doc, Notion page, or plain text file in your notes) titled something like \"My Auto-Filing Rule — Meeting Action Items.\" This is the artifact you keep — refer back to it the first time you actually enable an auto-filing feature in Fireflies, Spinach.ai, or similar.\n\n**Outcome:** a written, personally-designed policy — not a hypothetical — that you can hand to a team lead or apply yourself the next time a meeting tool offers to auto-file tickets for you."
+    },
+    {
+      "type": "quiz",
+      "question": "A sales team turns on Otter Sales Agent's CRM write-back so call summaries and next steps sync automatically into Salesforce. Three weeks in, a rep discovers the tool logged an objection as 'resolved' when the prospect had actually said they needed to check with their manager. What does this reveal about CRM-integrated meeting agents?",
+      "options": [
+        "The tool is unreliable and should be abandoned entirely in favor of manual note-taking",
+        "This is exactly why CRM auto-writes need a human review step before anything customer-facing or pipeline-affecting goes live — the transcript-to-CRM pipeline can misclassify nuance like a conditional 'maybe' as a firm resolution",
+        "This only happens with Otter — Gong and Chorus don't have this failure mode",
+        "The rep should have listened to the entire call recording to verify every field before the sync happened"
+      ],
+      "correct": 1,
+      "explanation": "This is the accuracy/trust tradeoff from this lesson in practice: querying or auto-writing from a meeting agent is only as good as its interpretation of the transcript, and a nuanced, conditional statement ('I need to check with my manager') is a common place for that interpretation to go wrong. The fix isn't abandoning the tool (A) — it's the review gate: pipeline-affecting fields like objection status or deal stage should be flagged for a quick human check before they're treated as ground truth, not re-verified from scratch every time (D), and this failure mode isn't tool-specific (C) — it's inherent to any transcript-to-CRM pipeline."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-18.** You now understand the shift from static AI summaries (2-10) to queryable meeting agents — Teams Copilot Q&A, Ask Fathom, Otter Meeting Agent. You know the bot-free local-capture category (Granola, Fathom free tier) and when it shifts the consent burden onto you. You've seen how auto-filing works with a human approval gate (Fireflies AI Skills, Spinach.ai) and how CRM-integrated sales agents (Otter Sales Agent, Gong, Chorus) write back into Salesforce/HubSpot — plus how this pattern is spreading into general tools like Slack's 2026 Meeting Intelligence. You've set up a bot-free note-taker on a real call and written your own auto-filing rule."
+    }
+  ],
+  "nextLesson": "2-11",
+  "prevLesson": "2-10"
+}

@@ -1,0 +1,78 @@
+{
+  "id": "9-9",
+  "title": "OpenAI Codex CLI——Claude Code 的公开竞争对手",
+  "part": 9,
+  "estimatedMinutes": 55,
+  "tags": [
+    "ai-coding",
+    "advanced",
+    "codex-cli",
+    "openai",
+    "terminal",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n学完本课，你将安装并运行 OpenAI 的 Codex CLI——这是与 Claude Code 本身最直接可比的工具——在你自己的 `ai-course-projects` 文件夹上，用它完成一个你在本课程前面已经用 Claude Code 做过的任务，并写出一份基于这次真实体验、而非营销说辞的直接对比。"
+    },
+    {
+      "type": "text",
+      "content": "## Codex CLI：最直接的正面竞争对手\n\n如果说 Devin（上一课）代表的是自主智能体光谱中“交出去不管，只审查 PR”的那一端，那么 OpenAI 的 **Codex CLI** 就紧挨着 Claude Code，站在“智能体在你的终端里，与你并肩工作”的那一端。它是由 OpenAI 打造的终端原生编程智能体，能阅读你的代码库、制定计划、编写并运行代码、执行命令——都直接发生在你自己机器上的终端会话中。\n\nCodex CLI 增长迅速：据 OpenAI 报告，其每周活跃用户约为 **400 万**，使其成为 Claude Code 和 GitHub Copilot 之外使用最广泛的智能体式编程工具之一。它有几个显著特点：\n\n- **内核级沙箱隔离**——Codex CLI 在操作系统内核层面隔离它所运行的命令和文件操作，这是比典型的进程级沙箱更强的隔离边界。这直接呼应了上一课提到的自主性权衡：让一个智能体运行任意 shell 命令，其安全程度完全取决于它的沙箱有多可靠。\n- **子智能体（Subagents）**——Codex CLI 可以为任务的某些部分派生子智能体，这在理念上与你在第 13/20 部分为 Claude Code 搭建的子智能体相似\n- **自定义技能（Custom skills）**——一种打包可复用能力供智能体使用的方式，在概念上与你在第 20 部分搭建的自定义斜杠命令和技能相对应\n- **MCP 支持**——Codex CLI 支持 Model Context Protocol，也就是你在第 15 部分搭建 MCP 服务器时用到的那个开放协议"
+    },
+    {
+      "type": "text",
+      "content": "## Codex CLI 与 Claude Code：一份实用的对比\n\n| | Claude Code | Codex CLI |\n|---|---|---|\n| 模型后端 | Anthropic（Claude） | OpenAI（GPT 系列模型） |\n| 界面 | 终端原生，集成 VS Code | 终端原生 |\n| 沙箱隔离 | 进程级权限系统、钩子（hooks） | 内核级沙箱隔离 |\n| 可扩展性 | 子智能体、自定义斜杠命令、钩子（第 13、20 部分） | 子智能体、自定义技能 |\n| 协议支持 | MCP（第 15 部分） | MCP（第 15 部分） |\n| 获取方式 | Claude Pro/Max 订阅或 API 用量付费 | ChatGPT/OpenAI 方案或 API 用量付费 |\n\n最深层的相似之处：**两者都是智能体式 CLI，会阅读、规划并对你真实的代码库采取行动，而不只是自动补全下一行代码。** 最深层的区别在于底层负责推理的模型——正如本课程中的每一个工具一样，模型质量比外层的包装更重要（第 9-4 课）。这两个工具在抽象意义上都不能说谁“更好”；它们的取舍取决于哪个模型家族在你的具体代码库上给出更好的结果，以及你对每家公司自主命令执行沙箱方案的信任程度。"
+    },
+    {
+      "type": "text",
+      "content": "## 安装并运行 Codex CLI\n\n安装流程与你在第 7-2 课配置 Claude Code 时如出一辙：先全局 npm 安装，然后进行一次交互式的首次运行来完成身份验证。\n\n```bash\nnpm install -g @openai/codex\ncodex\n```\n\n首次运行时，Codex CLI 会引导你连接一个 OpenAI 账号——你需要 OpenAI API 访问权限，或者一个包含 Codex CLI 用量的 ChatGPT 方案，就像 Claude Code 需要 Claude Pro/Max 订阅或 Anthropic API 访问权限一样。安装前请查阅 OpenAI 当前的文档以确认具体的方案要求和定价，因为获取方式和价格都会随时间变化（本部分课程中的每一个工具都需要这样的谨慎态度）。\n\n完成身份验证后，像启动 Claude Code 一样，在一个真实的项目文件夹中运行它：\n```bash\ncd Documents\\ai-course-projects\ncodex\n```\n你会进入一个交互式会话，可以用日常语言给它下达指令，就跟你用 Claude Code 时的任何一次会话一样。"
+    },
+    {
+      "type": "text",
+      "content": "## MCP 与提供商无关——现在你可以亲自验证这一点\n\n回到第 15 部分，你搭建过 MCP 服务器——也许是一个文件系统服务器、一个 GitHub 服务器，或是那部分中的其他服务器。当时你是在 Claude Code 里使用它们的。因为 Codex CLI 同样支持 MCP，你可以把它指向你已经配置好的那些完全相同的 MCP 服务器。\n\n这一点值得停下来体会一下：**MCP 不是 Claude 独有的功能。** 它是一个开放协议，你搭建一次的服务器，现在可以配合任何支持 MCP 的客户端使用——今天是 Claude Code，这里是 Codex CLI，明年发布的任何智能体式工具也不例外。你在第 15 部分投入学习 MCP 的成果是可迁移的，而如果你学的是某个单一工具的专有插件系统，就不会有这种可迁移性。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**两家公司正在趋同于同一种形态。** Claude Code 一直在增加子智能体、钩子和技能（第 13、20 部分）。Codex CLI 从一开始就带着子智能体和技能，外加内核级沙箱隔离。Devin 正在搭建终端和桌面端产品形态，试图在 Claude Code 和 Codex CLI 的主场与它们正面竞争。具体的功能清单会不断变化——但“带有可插拔扩展和 MCP 支持的智能体式 CLI”这一底层趋同趋势，才是值得持续关注的重点。"
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "安装 Codex CLI，与 Claude Code 来一场真实的正面对比",
+      "content": "**目标：** 安装 Codex CLI，在你真实的 `ai-course-projects` 文件夹上，让它完成一个你在本课程前面已经用 Claude Code 做过的任务，并写出一份有据可依、而非假想的正面对比。\n\n**第 1 步——安装 Codex CLI：**\n```bash\nnpm install -g @openai/codex\ncodex --version\n```\n如果你还没有拥有 Codex CLI 访问权限的 OpenAI 账号，请查看 OpenAI 当前的注册流程——你可能需要新建一个账号，或使用现有的 ChatGPT/API 账号。\n\n**第 2 步——挑一个你已经用 Claude Code 做过的任务。** 回顾你 `ai-course-projects` 的 git 历史记录（`git log --oneline`），找一个本课程前面你让 Claude Code 完成过的、规模小且独立的任务——添加一个函数、编写一个测试文件、修复一个 bug、添加校验逻辑、编写一段 README 内容。你需要的是*同一类型的任务*，而不是完全相同的代码——挑一个在不同文件上的等效任务（不要直接重做完全相同的那次提交）。\n\n**第 3 步——用 Codex CLI 完成这个任务：**\n```bash\ncd Documents\\ai-course-projects\ncodex\n```\n给它一条与你当初给 Claude Code 的指令措辞大致相同的指令。\n\n**第 4 步——在它工作时仔细观察：**\n- 它是在运行命令前先询问你，还是在沙箱内静默运行？\n- 它是如何（如果有的话）解释自己的计划的？\n- 最终的改动在风格上是否与 Claude Code 针对同类任务产出的结果不同？\n\n**第 5 步——在 `notes/codex-vs-claude-code.md` 中写一份直接对比：**\n```markdown\n# Codex CLI vs Claude Code — My Comparison\n\n## Task\n[what you asked each tool to do]\n\n## What felt different\n-\n\n## Output quality\n- Claude Code result: ___\n- Codex CLI result: ___\n- Which was more correct / more idiomatic / needed less cleanup?\n\n## Sandboxing / trust\n- Did the kernel-level sandbox in Codex CLI change how confident you felt letting it run commands?\n\n## Which would I reach for, and when?\n-\n```\n\n**第 6 步——提交这份真实的产物：**\n```bash\ngit add notes/codex-vs-claude-code.md\ngit commit -m \"Add Codex CLI vs Claude Code side-by-side comparison\"\n```\n\n**成果检验：** 你现在已经在自己项目中一个等效的真实任务上运行过这两个领先的终端原生编程智能体，并且有了一份基于证据、已提交记录的判断——知道该在什么情况下选用哪一个，而不是凭营销说辞猜测。"
+    },
+    {
+      "type": "quiz",
+      "question": "你已经在第 15 部分为 Claude Code 配置好了 MCP 服务器——一个 GitHub 服务器和一个文件系统服务器。你开始在部分任务中也使用 Codex CLI。关于这些 MCP 服务器，下列哪种说法最准确？",
+      "options": [
+        "你需要为 Codex CLI 从头重建它们，因为 MCP 服务器是与创建它们的客户端绑定的",
+        "由于 Codex CLI 也支持 MCP，同样的服务器原则上也可以连接到 Codex CLI——MCP 是一个与提供商无关的协议，而不是 Claude 专属的功能",
+        "MCP 服务器只能配合 Anthropic 的产品使用，所以 Codex CLI 无法使用它们",
+        "你需要获得 OpenAI 的许可，才能把现有的 MCP 服务器连接到 Codex CLI"
+      ],
+      "correct": 1,
+      "explanation": "MCP（Model Context Protocol）是一个开放协议，而不是 Anthropic 的专有功能——这正是它被称为“协议”的全部意义所在。任何支持 MCP 的客户端，包括 Codex CLI，原则上都可以连接任何 MCP 服务器，包括你已经为配合 Claude Code 使用而搭建的那些。这正是第 15 部分投入的直接回报：你搭建的服务器是可移植的基础设施，而不是被 Claude 锁定的插件。"
+    },
+    {
+      "type": "quiz",
+      "question": "Codex CLI 使用内核级沙箱隔离，而 Claude Code 的权限系统是进程级的。结合你在 Devin 那一课学到的关于自主智能体风险的内容，这个区别在实践中为什么重要？",
+      "options": [
+        "这不重要——沙箱隔离级别只是一个没有实际影响的营销细节",
+        "更强的隔离（内核级）能在智能体运行了意外或有害命令时缩小损害范围，而智能体被允许在没有逐步人工批准的情况下自主行动得越多，这一点就越重要",
+        "内核级沙箱隔离意味着 Codex CLI 的输出永远不需要任何人工审查",
+        "内核级沙箱隔离只影响安装速度，不影响运行时的安全性"
+      ],
+      "correct": 1,
+      "explanation": "智能体的执行环境与你真实系统之间的隔离越强，当智能体误解任务或运行了破坏性命令时造成的损害就越小——这正是 Devin 那一课提出的、关于自主智能体在你察觉之前有更多空间偏离轨道的风险特征。更强的沙箱是对这种风险的一种缓解措施，而不是替代品：即便有出色的沙箱隔离，也不意味着你可以跳过对智能体实际产出内容的审查（这正是选项 C 错误的原因）。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**第 9-9 课完成。** 你已经在自己的项目上安装并运行了 Codex CLI——OpenAI 对 Claude Code 的直接回应——把它与你已经深入了解的工具做了正面对比，并确认了一件重要的事：你在第 15 部分搭建的 MCP 在两者之间都能通用。你现在从两大主要供应商的视角，而不只是一方的视角，理解了终端原生智能体式编程这个领域。"
+    }
+  ],
+  "nextLesson": "9-10",
+  "prevLesson": "9-8"
+}

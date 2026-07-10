@@ -1,0 +1,78 @@
+{
+  "id": "9-9",
+  "title": "OpenAI Codex CLI — Claude Code's Open Competitor",
+  "part": 9,
+  "estimatedMinutes": 55,
+  "tags": [
+    "ai-coding",
+    "advanced",
+    "codex-cli",
+    "openai",
+    "terminal",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nBy the end of this lesson you'll have installed and run OpenAI's Codex CLI — the tool most directly comparable to Claude Code itself — used it on your own `ai-course-projects` folder for a task you've already done with Claude Code earlier in the course, and written a direct side-by-side comparison grounded in that experience rather than in marketing claims."
+    },
+    {
+      "type": "text",
+      "content": "## Codex CLI: The Head-to-Head Competitor\n\nWhere Devin (previous lesson) represents the \"fire and forget, review the PR\" end of the agentic spectrum, OpenAI's **Codex CLI** sits right next to Claude Code on the \"agent in your terminal, working alongside you\" end. It's a terminal-native coding agent, built by OpenAI, that reads your codebase, plans, writes and runs code, and executes commands — directly in your terminal session, on your own machine.\n\nCodex CLI has grown fast: OpenAI has reported roughly **4 million weekly active users**, making it one of the most-used agentic coding tools outside Claude Code and GitHub Copilot. A few things distinguish it:\n\n- **Kernel-level sandboxing** — Codex CLI isolates the commands and file operations it runs at the OS kernel level, a stronger isolation boundary than typical process-level sandboxing. This connects directly to the autonomy tradeoffs from the last lesson: letting an agent run arbitrary shell commands is only as safe as its sandbox.\n- **Subagents** — Codex CLI can spin off subagents for parts of a task, similar in spirit to the subagents you built for Claude Code in Part 13/20\n- **Custom skills** — a way to package repeatable capabilities for the agent, conceptually parallel to the custom slash commands and skills you built in Part 20\n- **MCP support** — Codex CLI speaks Model Context Protocol, the same open protocol you set up MCP servers for in Part 15"
+    },
+    {
+      "type": "text",
+      "content": "## Codex CLI vs Claude Code: A Practical Comparison\n\n| | Claude Code | Codex CLI |\n|---|---|---|\n| Model backend | Anthropic (Claude) | OpenAI (GPT-family models) |\n| Interface | Terminal-native, VS Code integration | Terminal-native |\n| Sandboxing | Process-level permission system, hooks | Kernel-level sandboxing |\n| Extensibility | Subagents, custom slash commands, hooks (Part 13, Part 20) | Subagents, custom skills |\n| Protocol support | MCP (Part 15) | MCP (Part 15) |\n| Access model | Claude Pro/Max subscription or API usage | ChatGPT/OpenAI plan or API usage |\n\nThe deepest similarity: **both are agentic CLIs that read, plan, and act on your actual codebase rather than just autocompleting the next line.** The deepest difference is the model doing the reasoning underneath — and, as with every tool in this course, model quality matters more than the wrapper around it (lesson 9-4). Neither tool is objectively \"better\" in the abstract; they trade off differently depending on which model family gives you better results on your specific codebase, and how much you trust each company's sandboxing approach for autonomous command execution."
+    },
+    {
+      "type": "text",
+      "content": "## Installing and Running Codex CLI\n\nThe install flow mirrors how you set up Claude Code in lesson 7-2: an npm global install, then an interactive first run that authenticates you.\n\n```bash\nnpm install -g @openai/codex\ncodex\n```\n\nOn first run, Codex CLI walks you through connecting an OpenAI account — you need OpenAI API access or a ChatGPT plan that includes Codex CLI usage, the same way Claude Code needs a Claude Pro/Max subscription or Anthropic API access. Check OpenAI's current documentation for exact plan requirements and pricing before you install, since both access models and prices shift over time (the same caution applies to every tool in this part of the course).\n\nOnce authenticated, run it inside a real project folder the same way you'd launch Claude Code:\n```bash\ncd Documents\\ai-course-projects\ncodex\n```\nYou'll land in an interactive session where you can give it instructions in plain English, same as any session you've run with Claude Code."
+    },
+    {
+      "type": "text",
+      "content": "## MCP Is Provider-Agnostic — And Now You Can Prove It\n\nBack in Part 15 you set up MCP servers — maybe a filesystem server, a GitHub server, or one of the others from that part. At the time, you used them from inside Claude Code. Because Codex CLI also speaks MCP, you can point it at the exact same MCP servers you already configured.\n\nThis is worth sitting with for a second: **MCP is not a Claude-only feature.** It's an open protocol, and a server you built once now works with any MCP-compatible client — Claude Code today, Codex CLI here, and whatever agentic tool launches next year. The investment you made learning MCP in Part 15 is portable in a way that learning any single tool's proprietary plugin system would not have been."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Both companies are converging on the same shape.** Claude Code has been adding subagents, hooks, and skills (Part 13, Part 20). Codex CLI arrived with subagents and skills from the start, plus kernel-level sandboxing. Devin is building terminal and desktop surfaces to meet Claude Code and Codex CLI on their own turf. The specific feature list will keep shifting — the underlying convergence toward \"agentic CLI with pluggable extensions and MCP support\" is the trend worth tracking."
+    },
+    {
+      "type": "workshop",
+      "tag": "TERMINAL",
+      "title": "Install Codex CLI and Run a Real Head-to-Head Against Claude Code",
+      "content": "**Goal:** Install Codex CLI, run it on your real `ai-course-projects` folder against a task you've already completed earlier in the course with Claude Code, and write a grounded side-by-side comparison — not a hypothetical one.\n\n**Step 1 — Install Codex CLI:**\n```bash\nnpm install -g @openai/codex\ncodex --version\n```\nIf you don't have an OpenAI account with Codex CLI access, check OpenAI's current sign-up flow — you may need to create one or use an existing ChatGPT/API account.\n\n**Step 2 — Pick a task you've already done with Claude Code.** Look back through your `ai-course-projects` git history (`git log --oneline`) for something small and self-contained you had Claude Code do earlier in this course — adding a function, writing a test file, fixing a bug, adding validation, writing a README section. You need the *exact same kind of task*, not the exact same code — pick an equivalent task on a different file (don't just redo the identical commit).\n\n**Step 3 — Run Codex CLI on that task:**\n```bash\ncd Documents\\ai-course-projects\ncodex\n```\nGive it the same instruction, in roughly the same wording, you originally gave Claude Code.\n\n**Step 4 — Observe closely while it works:**\n- Does it ask before running commands, or run silently within its sandbox?\n- How does it explain its plan, if at all?\n- Does the final diff look different in style from what Claude Code produced for the equivalent task?\n\n**Step 5 — Write a direct comparison** in `notes/codex-vs-claude-code.md`:\n```markdown\n# Codex CLI vs Claude Code — My Comparison\n\n## Task\n[what you asked each tool to do]\n\n## What felt different\n-\n\n## Output quality\n- Claude Code result: ___\n- Codex CLI result: ___\n- Which was more correct / more idiomatic / needed less cleanup?\n\n## Sandboxing / trust\n- Did the kernel-level sandbox in Codex CLI change how confident you felt letting it run commands?\n\n## Which would I reach for, and when?\n-\n```\n\n**Step 6 — Commit the real artifact:**\n```bash\ngit add notes/codex-vs-claude-code.md\ngit commit -m \"Add Codex CLI vs Claude Code side-by-side comparison\"\n```\n\n**Accomplishment check:** You've now run the two leading terminal-native coding agents on an equivalent real task from your own project and have a committed, evidence-based opinion about when to reach for each one — not a guess based on marketing."
+    },
+    {
+      "type": "quiz",
+      "question": "You already have MCP servers configured from Part 15 that you use with Claude Code — a GitHub server and a filesystem server. You start using Codex CLI for some tasks too. What is the most accurate statement about those MCP servers?",
+      "options": [
+        "You need to rebuild them from scratch for Codex CLI, since MCP servers are tied to the client that created them",
+        "Since Codex CLI also supports MCP, the same servers can potentially be connected to Codex CLI as well — MCP is a provider-agnostic protocol, not a Claude-specific feature",
+        "MCP servers only work with Anthropic products, so Codex CLI cannot use them",
+        "You would need OpenAI's permission to connect your existing MCP servers to Codex CLI"
+      ],
+      "correct": 1,
+      "explanation": "MCP (Model Context Protocol) is an open protocol, not a proprietary Anthropic feature — that's the whole point of it being a *protocol*. Any MCP-compatible client, including Codex CLI, can in principle connect to any MCP server, including ones you already built for use with Claude Code. This is a direct payoff of the Part 15 investment: the servers you built are portable infrastructure, not Claude-locked plugins."
+    },
+    {
+      "type": "quiz",
+      "question": "Codex CLI uses kernel-level sandboxing while Claude Code's permission system is process-level. Why does this distinction matter practically, given what you learned about autonomous agent risk in the Devin lesson?",
+      "options": [
+        "It doesn't matter — sandboxing level is a marketing detail with no practical effect",
+        "Stronger isolation (kernel-level) reduces the blast radius if the agent runs an unexpected or harmful command, which matters more the more autonomously the agent is allowed to act without per-step human approval",
+        "Kernel-level sandboxing means Codex CLI never needs any human review of its output",
+        "Kernel-level sandboxing only affects installation speed, not runtime safety"
+      ],
+      "correct": 1,
+      "explanation": "The stronger the isolation between the agent's execution environment and your real system, the smaller the damage if the agent misinterprets a task or runs a destructive command — exactly the risk profile the Devin lesson raised about autonomous agents having more room to go off-track before you notice. A stronger sandbox is a mitigation for that risk, not a replacement for it: even excellent sandboxing doesn't mean you skip reviewing what the agent actually produced (which is why C is wrong)."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**Lesson 9-9 complete.** You've installed and run Codex CLI — OpenAI's direct answer to Claude Code — on your own project, compared it head-to-head against a tool you already know deeply, and confirmed something important: MCP, which you built in Part 15, works across both. You now understand the terminal-native agentic coding space from both major vendors' perspectives, not just one."
+    }
+  ],
+  "nextLesson": "9-10",
+  "prevLesson": "9-8"
+}

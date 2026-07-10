@@ -7,7 +7,8 @@
     "comparison",
     "decision-making",
     "ai-coding",
-    "synthesis"
+    "synthesis",
+    "autonomous-agents"
   ],
   "sections": [
     {
@@ -21,6 +22,10 @@
     {
       "type": "text",
       "content": "## Beyond These Eight: Other Tools You'll Hear About\n\nThe eight tools above are the ones worth learning hands-on in this course — but the landscape is bigger, and new entrants keep changing the competitive picture. Worth knowing about, even without a dedicated lesson:\n\n**Devin (Cognition)** — A cloud-based autonomous coding agent, not an editor: you file a ticket, it plans and executes the work, and you review the resulting pull request. Best on scoped, well-defined tasks (dependency upgrades, test generation, bug fixes); open-ended architecture work still needs a human driving. As noted above, Windsurf has been folded into Devin's product line rather than continuing as a separate editor.\n\n**Zed** — An open-source, AI-native code editor with full \"bring your own model\" support, meaning you can connect it to Claude, GPT, a local model, or any other provider rather than being locked into one vendor's models the way Claude Code, Codex, and Devin currently are.\n\n**Warp 2.0** — A terminal built around agentic workflows, now a serious CLI competitor alongside Claude Code and Codex CLI for developers who live in the terminal.\n\n**Amazon Q Developer** — An IDE-extension-style assistant (like Copilot) that's specifically strong for AWS-centric infrastructure and DevOps work, since it understands AWS's own cloud primitives more natively than general-purpose tools.\n\n**OpenCode** — A model-agnostic, fully open-source CLI agent that has grown into one of the most-starred projects in this space — a sign of how much developer interest there is in tools that aren't locked to one company's models.\n\nThe pattern holds regardless of which specific names are current when you're reading this: most experienced developers don't pick one tool for everything. A common setup is an agentic CLI (Claude Code, Codex CLI) for complex multi-file work, an in-editor assistant (Copilot, Cline, Zed) for daily completions, and an autonomous cloud agent (Devin) for well-scoped batch tasks — three different tools for three different shapes of work, not one tool trying to do everything."
+    },
+    {
+      "type": "text",
+      "content": "## A Different Paradigm: Autonomous Coding Agents\n\nEverything covered above — Copilot, Cursor, Aider, and the rest, plus Devin, Zed, and Warp mentioned just now — is fundamentally an *interactive pairing* tool: you sit with it, give an instruction, watch code appear, and correct it in real time. A separate paradigm matured alongside these in 2026: the **autonomous, task-delegated coding agent**. You don't pair with it in a session — you hand it a scoped task or ticket, it works independently (often for many minutes or longer, sometimes across multiple files and commits), and it opens a pull request for you to review when it's done. The interaction model is delegation and review, not conversation.\n\nThree names worth recognising in this category:\n\n**Devin (Cognition)** — already introduced above; the best-known cloud-based autonomous agent, now absorbing Windsurf's Cascade into its product line.\n\n**OpenAI Codex CLI** — OpenAI's terminal-based autonomous coding agent, built for the same task-delegation model: point it at a repository and a task, and it plans and executes independently rather than completing lines as you type.\n\n**Google Jules / Antigravity** — Google's autonomous coding agent offerings, aimed at the same scoped-task, PR-driven workflow rather than in-editor pairing.\n\nThese three are significant enough to warrant dedicated coverage: **Lessons 9-8, 9-9, and 9-10 cover Devin, Codex CLI, and Jules/Antigravity in depth** — how to set each one up, what its review workflow looks like in practice, and where autonomous delegation fits alongside the interactive tools in this lesson rather than replacing them."
     },
     {
       "type": "text",

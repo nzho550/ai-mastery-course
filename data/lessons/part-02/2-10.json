@@ -36,6 +36,10 @@
       "content": "## Other Tools Worth Knowing\n\n**Fireflies.ai** — Similar to Otter, bot joins calls and produces transcripts + summaries. Integrates with Salesforce, HubSpot, and Slack. Better for sales teams tracking customer conversations.\n\n**Fathom** — Free for Zoom, Teams, and Meet. No minutes cap on the free tier (as of 2025). Focuses on highlight clips and CRM integration. Good alternative if Otter's free limit is too low.\n\n**Grain** — Focused on video highlight clipping — useful if you need to share specific moments from a meeting rather than a full transcript.\n\n**Google Meet + Gemini:** If your organisation uses Google Workspace with Gemini AI, Meet has built-in transcription and Gemini can summarize meet recordings stored in Google Drive."
     },
     {
+      "type": "text",
+      "content": "## Where This Is Heading\n\nTwo shifts are worth watching. First, bot-free local-capture tools like **Granola** are emerging as an alternative to bot-based recorders — they run quietly on your own device, capturing system audio and your notes without a visible bot joining the call. Second, the newest pattern is asking an AI agent questions about past meetings after they end, not just reading a static summary — Teams Copilot now lets you ask follow-up questions directly against a meeting transcript, and Fathom offers \"Ask Fathom\" for the same purpose across your meeting history.\n\nLesson 2-18 goes deep on this next generation of meeting AI — querying meetings, auto-filing action items, and CRM-integrated meeting agents."
+    },
+    {
       "type": "callout",
       "variant": "warning",
       "content": "**Always tell participants when AI is recording.** In most countries (Australia, UK, EU, many US states) recording a conversation without the consent of all parties is illegal. Every tool listed here notifies participants — do not use workarounds to bypass this. If someone objects to being recorded, stop the recording immediately."
@@ -112,6 +116,6 @@
       "content": "**You've completed lesson 2-10.** You now know the AI meeting pipeline (record → transcribe → summarize → distribute) and the main tools: Zoom AI Companion, Otter.ai, Teams Copilot, Fathom, and Fireflies. You've run the pipeline yourself on real audio."
     }
   ],
-  "nextLesson": "2-11",
+  "nextLesson": "2-18",
   "prevLesson": "2-9"
 }

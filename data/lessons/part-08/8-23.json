@@ -10,7 +10,8 @@
     "interoperability",
     "governance",
     "advanced",
-    "concepts"
+    "concepts",
+    "ag-ui"
   ],
   "sections": [
     {
@@ -29,6 +30,10 @@
     {
       "type": "text",
       "content": "## How A2A Actually Works\n\nAn A2A-compatible agent publishes an **Agent Card** — a small file at a well-known URL describing the agent's name, what it's capable of, and how to reach it. Any other A2A-compatible agent can read this card, understand what the agent offers, and start a structured conversation with it to delegate work, without either agent needing custom integration code written specifically for the other.\n\nThe practical effect: imagine your company's Claude Code-based research agent needs to hand off a scheduling task to a completely separate scheduling agent built by a different vendor on a different framework (say, one built with Google's Agent Development Kit). Without A2A, someone has to write custom glue code for that specific pair of agents. With A2A, both agents speak the same discovery-and-handoff protocol, so the integration is generic rather than bespoke — the same benefit MCP gave you for tools, now applied to agents talking to agents.\n\nBy 2026, A2A has crossed 150 supporting organisations and is integrated into major platforms including Microsoft Azure AI Foundry, Copilot Studio, AWS Bedrock AgentCore, and Google Cloud — meaning if you ever work with enterprise agent platforms beyond Claude Code, you're likely to encounter it."
+    },
+    {
+      "type": "text",
+      "content": "## The Third Layer: AG-UI Completes the Picture\n\nMCP and A2A between them cover agent-to-tool and agent-to-agent. There's a third connection every real-world agent eventually needs: how does it talk to the *humans* watching it work — the chat window, dashboard, or approval screen that needs to show streaming reasoning, tool calls, and intermediate results as they happen, not just a final answer? That's the gap the **Agent-User Interaction Protocol (AG-UI)** fills.\n\nBefore AG-UI, every framework invented its own bespoke way to stream an agent's state to a front-end — meaning a UI built for one agent framework usually couldn't render another's output without custom glue code, the same fragmentation problem MCP solved for tools and A2A solved for agent-to-agent handoffs. AG-UI standardises that stream: a common event format for \"the agent started a tool call,\" \"the agent is now thinking,\" \"here's a partial result,\" so any compliant front-end can render any compliant agent's activity without one-off integration work.\n\nBy March–April 2026, AG-UI support had landed in AWS Bedrock AgentCore and Microsoft's Agent Framework — evidence it's following the same adoption arc MCP and A2A did, moving from a single backer's proposal toward a broadly supported layer of the stack. With all three in place, the picture is complete: **MCP** is agent-to-tool, **A2A** is agent-to-agent, and **AG-UI** is agent-to-human-interface — three different connections, three different protocols, each solving the piece the others were never designed for."
     },
     {
       "type": "text",

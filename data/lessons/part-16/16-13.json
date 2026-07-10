@@ -1,0 +1,75 @@
+{
+  "id": "16-13",
+  "title": "AI for Regulated Professions — Legal & Healthcare AI",
+  "part": 16,
+  "estimatedMinutes": 55,
+  "tags": [
+    "enterprise",
+    "intermediate",
+    "legal",
+    "healthcare",
+    "harvey",
+    "clinical-ai",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nMost people taking this course are not lawyers or doctors. So why does a lesson on legal and healthcare AI belong here? Because these two professions are the clearest real-world test case for everything you've already learned about AI risk — hallucination, grounding, human review — applied in domains where getting it wrong has serious consequences. A wrong contract clause can cost a client millions. A misdocumented diagnosis can hurt a patient. Watching how lawyers and clinicians actually adopt AI (carefully, with heavy guardrails) teaches you what 'responsible AI adoption' looks like when the stakes are real — and you may well work alongside people in these fields, or see your own employer copy their patterns."
+    },
+    {
+      "type": "text",
+      "content": "## Legal AI: Research, Drafting, and Contract Review\n\nLaw is built on precision — a single misquoted case or misstated clause can lose a case or blow up a deal. That's exactly why legal AI adoption looks different from general office AI use.\n\n**Harvey** is the AI tool most associated with the current wave of legal AI. Built specifically for law firms, it's now used at many of the world's largest firms for legal research, drafting memos, and reviewing contracts. Lawyers use it to accelerate first-draft work — turning a task that took hours of associate time into a first pass Harvey produces in minutes, which a lawyer then reviews and corrects.\n\n**Spellbook** focuses specifically on contract work: reviewing and drafting contracts inside Microsoft Word, flagging unusual or risky clauses, and suggesting redlines. It's especially popular with in-house counsel — the lawyers who work inside companies (not law firms) reviewing vendor contracts, employment agreements, and NDAs all day.\n\n**CoCounsel**, built by Thomson Reuters, is worth understanding in detail because of *how* it's built. Thomson Reuters owns Westlaw, one of the two dominant legal research databases in the US, containing the full text of statutes, case law, and regulations, continuously updated and maintained by legal editors. CoCounsel's AI answers are grounded in that verified database rather than a general-purpose model's training data alone — so when it cites a case, that case is a real, verifiable Westlaw document, not a plausible-sounding invention.\n\n**Why grounding matters so much more here than in general chat AI:** if you ask a general AI chatbot for a fact and it hallucinates, you might get a wrong trivia answer. If a lawyer files a brief citing a case that doesn't exist — which has actually happened when lawyers used general AI tools without verifying citations — a judge can sanction them and the client's case can be damaged. This is why legal AI vendors compete heavily on the *quality of their underlying source data*, not just the intelligence of the model on top of it."
+    },
+    {
+      "type": "text",
+      "content": "## Healthcare AI: Ambient Clinical Scribes\n\nOne of the biggest sources of physician burnout is documentation — after every patient visit, a doctor has to write up detailed clinical notes, often spending as much time typing as they spent with the patient. Ambient clinical scribes tackle this directly.\n\n**How they work:** with the patient's consent, the doctor's phone or a dedicated device listens to the natural conversation during the visit. AI transcribes the conversation, then generates a structured clinical note — organized into the sections a medical record requires (history, examination findings, assessment, plan) — without the doctor typing anything during the appointment.\n\n**The major players:**\n- **Nuance Dragon Copilot (DAX)** — Microsoft-owned Nuance's ambient documentation product, widely deployed across large US health systems.\n- **Abridge** — a fast-growing ambient scribe platform partnered with major hospital systems, focused specifically on generating notes that integrate with the hospital's existing electronic health record (EHR) system.\n- **Nabla** — another prominent ambient scribe competitor, similarly focused on freeing physician time from typing during and after patient visits.\n\nAmbient scribes are reportedly now used in over 30% of US hospitals — a remarkably fast adoption curve for clinical technology, driven by how directly it addresses physician time and burnout.\n\n**The guardrail that makes this workable:** the AI-generated note is a *draft*. The physician reviews and signs off on every note before it becomes part of the permanent medical record — the AI assists documentation, it does not make or record clinical decisions unsupervised."
+    },
+    {
+      "type": "text",
+      "content": "## The Common Thread: High Stakes Demand Heavier Guardrails\n\nLegal and healthcare AI look different on the surface, but the adoption pattern is the same, and it's worth naming explicitly:\n\n1. **Grounding in verified sources, not just model confidence.** CoCounsel is built on Westlaw's authoritative legal database rather than relying on the model's general training data. This is a stronger version of the grounding principle you saw in Lesson 13-1 (AI Hallucinations — Deep Dive) — in a regulated field, 'sounds right' is not good enough; the output has to trace back to a verifiable source.\n2. **Human review of every output, not spot-checks.** No law firm files a Harvey-drafted brief unreviewed. No hospital enters an Abridge note into the chart unsigned. The AI produces a draft; a licensed professional is the last checkpoint before anything becomes official.\n3. **Audit trails.** Regulated professions require a record of who reviewed what and when — both to catch errors and because it's often a legal or compliance requirement. This is a level of accountability infrastructure that most everyday AI use (drafting an email, summarizing a document) simply doesn't need.\n\nThis also connects directly to Lesson 1-5 (Privacy & Safety — What NOT to Share with AI): legal and medical information are exactly the categories of sensitive data that lesson told you to be careful with in general-purpose consumer AI tools. Professional-grade legal and healthcare AI products are built with dedicated compliance, security, and data-handling infrastructure (e.g., HIPAA-compliant systems for healthcare) that a general ChatGPT or Claude.ai conversation is not automatically covered by."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**This lesson is not legal or medical advice.** It describes what tools exist in professional legal and healthcare settings and how they're used by licensed professionals with institutional guardrails around them. Using a general consumer AI chatbot (Claude, ChatGPT, Gemini) as a substitute for an actual lawyer or doctor — for example, asking it to interpret your own contract or diagnose your own symptoms and acting on that alone — is a mistake this course flagged back in Lesson 1-5. AI can help you understand concepts and prepare questions, but it does not replace a licensed professional's judgment, especially where real legal or medical consequences are on the line."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Build a High-Stakes AI Tool Evaluation Checklist",
+      "content": "You're going to build a real artifact: a checklist you could actually use if your organization (or you personally) were evaluating whether to adopt a high-stakes AI tool — modeled on how legal and healthcare AI gets evaluated before it's trusted.\n\n**Step 1 — Pick your vertical.** Choose whichever is more relevant to you:\n- **Legal**, if you work adjacent to legal, compliance, contracts, or procurement, or you're simply curious how your own company's legal team might evaluate a tool like Harvey or Spellbook\n- **Healthcare**, if you want to understand what your own doctor's ambient scribe (DAX, Abridge, or Nabla) is actually doing with your conversation, or you work adjacent to healthcare/health-tech\n\n**Step 2 — Ask Claude or ChatGPT to help you research** (in plain language, no jargon required): 'I'm building an evaluation checklist for adopting a [legal/healthcare] AI tool similar to [Harvey/CoCounsel/Abridge — pick one]. Walk me through, in plain English, what such a tool actually does and where a human needs to be involved.' Use this to make sure you understand the basic shape of the tool before evaluating it.\n\n**Step 3 — Write your checklist**, covering at minimum these four sections:\n- **Source grounding:** Where does this tool's information come from? Is it grounded in a verified, authoritative database (like Westlaw), or relying purely on a general model's training data? How would you find out?\n- **Human review points:** At exactly which step(s) does a licensed professional have to review, approve, or sign off before the AI's output becomes official or acted upon? Is there any step where the AI's output is used without review — and if so, is that acceptable?\n- **Audit trail:** Does the tool log who reviewed what, and when? Could you reconstruct, after the fact, exactly what the AI produced versus what the human changed?\n- **Assists vs. replaces:** Draw the line explicitly — write one sentence describing what this tool is meant to *assist* a professional with, and one sentence describing what it must *never* be allowed to replace (the professional's own judgment on high-stakes calls).\n\n**Step 4 — Save this checklist somewhere you'll actually find it again** (a note, a doc, a Claude Project). This isn't a throwaway exercise — the same four questions (grounding, review points, audit trail, assists-vs-replaces) apply to evaluating *any* high-stakes AI tool your organization might adopt in the future, not just legal or healthcare ones."
+    },
+    {
+      "type": "quiz",
+      "question": "A paralegal uses an AI legal research tool to find supporting case law for a brief. The tool returns three case citations. What should happen next, given how legal AI is actually used in practice?",
+      "options": [
+        "The citations should be included in the brief as-is — legal AI tools like Harvey and CoCounsel are trained specifically on legal data, so their citations are always reliable",
+        "A licensed attorney should independently verify that each cited case exists, is correctly summarized, and actually supports the argument, before it's filed",
+        "The paralegal should just ask the same AI tool to double-check its own citations and trust that answer",
+        "Citations should be removed entirely and replaced with the attorney's own memory of relevant case law"
+      ],
+      "correct": 1,
+      "explanation": "Independent human verification of every citation is the correct answer and reflects real professional practice — courts have sanctioned lawyers for filing briefs with AI-hallucinated citations that turned out not to exist. Even tools grounded in authoritative databases like Westlaw (CoCounsel) are still AI systems that can make retrieval or summarization errors, and the licensed attorney bears professional responsibility for what's filed, not the tool. Option A is wrong because 'trained on legal data' does not mean 'never wrong' — grounding reduces but does not eliminate the need for review. Option C is wrong because asking the same AI to check itself doesn't provide independent verification. Option D overcorrects — AI research tools are useful for finding candidate cases; the fix is verification, not avoidance."
+    },
+    {
+      "type": "quiz",
+      "question": "A patient visits their doctor and notices a phone propped up during the appointment, later learning it was an ambient clinical scribe (like DAX or Abridge) generating notes from the conversation. Which of the following is the appropriate safeguard already built into how these tools are meant to be used?",
+      "options": [
+        "The AI-generated note is automatically added to the patient's permanent medical record without review, since the recording is a direct and accurate transcript",
+        "The physician reviews and signs off on the AI-generated note before it becomes part of the official medical record, and the patient's consent is required for the recording in the first place",
+        "The scribe tool makes the actual diagnosis and treatment plan, and the physician simply reads it aloud to the patient",
+        "Ambient scribes are banned in healthcare settings due to privacy law, so this scenario would not legally occur"
+      ],
+      "correct": 1,
+      "explanation": "Physician sign-off before the note enters the official record, plus patient consent for the recording itself, are the two real safeguards that make ambient scribes workable in a regulated, high-stakes setting. This mirrors the legal AI pattern: the AI produces a draft, a licensed professional reviews it, and only then does it become official. Option A is wrong and describes exactly the failure mode these safeguards prevent — an unreviewed AI draft becoming part of a legal medical record. Option C inverts reality: the AI documents the conversation, it does not make clinical decisions. Option D is factually wrong — ambient scribes are legal and increasingly common (reportedly used in over 30% of US hospitals) precisely because consent and review requirements make them compliant."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 16-13.** You now understand how AI is used in two of the most regulated, high-stakes professions — legal (Harvey, Spellbook, CoCounsel grounded in Westlaw) and healthcare (Nuance Dragon Copilot/DAX, Abridge, Nabla ambient scribes) — and, more importantly, the underlying pattern that generalizes: verified grounding, mandatory human review, and audit trails scale up with the stakes. You've built a reusable checklist for evaluating any high-stakes AI tool your own organization might consider next."
+    }
+  ],
+  "nextLesson": "17-1",
+  "prevLesson": "16-12"
+}
