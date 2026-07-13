@@ -1,0 +1,89 @@
+{
+  "id": "19-22",
+  "title": "AI Safety for Kids & Family — Parental Controls & Guardrails",
+  "part": 19,
+  "estimatedMinutes": 55,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "family",
+    "parental-controls",
+    "safety",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 19-15 looked at AI companion apps through the lens of adult risk and choice. This lesson looks at the same broad category of technology — chatbots, AI companions, voice assistants — through a different, more urgent lens: what a parent actually needs to know and do, given how many kids are already using this technology, often without their parents realizing it. This isn't abstract: 2026 brought the first major wrongful-death legal settlements involving AI chatbots and minors, a wave of new state and federal legislation, and real platform policy changes. This lesson covers the actual scale of the gap between kids' AI use and parental awareness, what's legally and technically changed in response, and — the concrete part — how to actually set up parental controls across the platforms your kids are most likely using, handled with the same seriousness and non-alarmist tone as Lesson 19-15."
+    },
+    {
+      "type": "text",
+      "content": "## The Scale of the Gap\n\nPew Research Center's most recent survey (fielded fall 2025, published February 2026) found that 64% of US teens report using AI chatbots — but only 51% of their parents said their teen uses them. That 13-point gap is a real, measured blind spot, not a guess: as Pew's senior researcher put it, 'technology is not just a teen issue or a parent issue — it's a family issue.' Most reported teen use is fairly mundane — 57% have used a chatbot to search for information, 54% for schoolwork help — but a meaningful minority goes further: 16% report using a chatbot for casual conversation, and 12% for emotional support or advice.\n\nA separate April 2026 survey of 1,004 US parents by Lurie Children's Hospital found the supervision gap is even starker than the awareness gap alone: 55% of parents say their child uses AI unsupervised, and 28% report having no rules or limits in place at all. Among parents who know their kids use AI, the most common tools are chatbots (68%), voice assistants (58%), and educational apps (32%) — and usage is frequent, with 44% of kids using AI multiple times a week and 24% daily. Younger kids aren't exempt either: an earlier Pew survey found roughly one in ten parents of 5- to 12-year-olds report their child already uses AI chatbots."
+    },
+    {
+      "type": "text",
+      "content": "## What's Actually Gone Wrong — the Legal Record\n\nThe clearest, most consequential case is *Garcia v. Character Technologies*, filed October 2024 by Megan Garcia after her 14-year-old son, Sewell Setzer III, died by suicide following months of intensive conversation with a Character.AI companion. A federal court's refusal to dismiss the case on free-speech grounds set a real precedent — the first federal ruling to establish that a conversational AI can plausibly owe a duty of care to a minor user. In January 2026, Character.AI and Google (whose technology partly underlies Character.AI) reached settlements in principle with the Garcia family and with several other families who filed similar suits, including cases from Colorado, Texas, and New York — terms were not disclosed, and no liability was admitted. The settlements resolved those specific cases, but the underlying legal precedent (that a duty of care claim can proceed to trial) remains in place for other pending cases, and new suits have continued to be filed through 2026, including a Pennsylvania Attorney General action in May 2026 alleging a Character.AI persona named 'Emilie' falsely claimed to be a licensed psychiatrist with a fabricated license number.\n\nCharacter.AI itself responded by removing open-ended chat entirely for accounts identified as under 18, fully in effect by November 25, 2025 (covered in Lesson 19-15) — teens can still view past chats and design characters, but can no longer roleplay with them. Meta separately paused teen access to its AI characters globally in January 2026, shortly before a New Mexico trial over child-safety allegations. Even Character.AI's own CEO, Karandeep Anand, has publicly supported proposed federal restrictions on minors using AI companion apps rather than opposing them — a notable signal about where the industry itself sees this heading."
+    },
+    {
+      "type": "text",
+      "content": "## The Emerging Legal Response\n\nTwo significant proposals are moving through the system in 2026, though neither is fully enacted law yet — worth understanding as 'in progress,' not settled:\n\n**California's Parents & Kids Safe AI Act** is a ballot-measure effort backed by Common Sense Media and OpenAI, announced January 9, 2026. If it qualifies and passes in the November 2026 election, it would require AI companies to use age-assurance technology, prevent minors from forming simulated romantic relationships or emotional dependency with an AI, give parents monitoring and control tools with alerts for signs of self-harm, prohibit child-targeted advertising by chatbots, and subject companies to independent safety audits enforced by the California Attorney General.\n\n**The federal CHATBOT Act** (S. 4407), introduced April 28, 2026 by Senators Ted Cruz, Brian Schatz, John Curtis, and Adam Schiff, takes a different structural approach: it would require **mandatory Family Accounts for any user under 13** (optional for teens 13-17), with the most protective safety settings on by default — disabled engagement-maximizing rewards, blocked financial transactions, disabled notifications, and a required clear disclosure that a chatbot is AI, not a person. Notably, the bill does **not** mandate age verification itself — it applies its rules based on what a provider actually knows or should reasonably know about a user's age, and enforcement would sit with the FTC and state attorneys general, with no ability for an individual family to sue directly. As of mid-2026 it had passed neither chamber."
+    },
+    {
+      "type": "text",
+      "content": "## Concrete Parental Controls You Can Set Up Today\n\nRegardless of where the pending legislation lands, real controls already exist across the platforms kids actually use:\n\n**Character.AI:** age verification runs through a third-party service (Persona), falling back to ID or biometric checks when other signals can't confirm age; under-18 accounts are restricted from open-ended roleplay chat as of November 2025 (see Lesson 19-15 for the full policy).\n\n**ChatGPT (OpenAI):** teen-specific safety rules and age-prediction technology were added in 2025-2026, aimed at automatically applying more conservative defaults when the system detects a likely-minor user, even without a birthdate being entered.\n\n**Meta AI (Instagram/Messenger):** teen access to AI characters was globally paused in January 2026; Meta's Family Center (under Instagram/Facebook settings) provides separate supervision tools for teen accounts more broadly — screen time limits, activity visibility, and content controls that a parent can enable from their own account, linked to a teen's.\n\n**Device- and OS-level controls, not AI-specific but the actual backbone of most household setups:** Apple's **Screen Time** (Settings → Screen Time → set up Family Sharing, then Content & Privacy Restrictions to block or limit specific apps, including AI chatbot apps by name); Google's **Family Link** (a separate app that manages a child's Android device or Google account, including app installation approval and time limits); and Amazon's **Amazon Kids** for Echo devices, which restricts what a child profile's Alexa can access and do compared to an adult account.\n\nThe practical reality: no single control covers every AI tool a determined teen might find. The device-level and account-level controls above are the actual foundation — they control *what apps can be installed or opened at all*, which matters more than any single app's internal age gate, especially since (as Lesson 19-15 notes) a determined teen can often work around an ID-based age check on any individual app."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Distinguish what's law today from what's proposed.** Character.AI's under-18 chat restriction and Meta's paused teen AI-character access are real, currently-in-effect platform policies. The California Parents & Kids Safe AI Act and the federal CHATBOT Act are both still pending as of mid-2026 — a ballot measure awaiting the November 2026 vote and a bill that has not yet passed either chamber of Congress, respectively. Both are worth tracking, but treat them as 'proposed' rather than assuming they're already enforceable rules."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**This is informative and practical, not a reason to panic.** The overwhelming majority of teen AI use documented above is mundane — schoolwork help and information search, not the kind of intensive, isolating companion relationship at the center of the Character.AI lawsuits. The goal of this lesson is awareness and a working set of controls, not fear. If your child (or a teen you know) shows signs of withdrawing from real relationships in favor of AI conversation, expressing distress that an AI chatbot seems to be the primary outlet for, or resisting normal supervision around their AI use specifically, those are the signals worth a direct, calm conversation — and, if there's any indication of self-harm risk, contacting a crisis line (in the US, 988) or a mental health professional, not just adjusting a setting."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Set Up Real Parental Controls on a Real Device",
+      "content": "This workshop has you configure actual controls on a real device or account — not a walkthrough you read and skip.\n\n**Step 1 — Identify the device/account that matters most in your household:** a child or teen's phone/tablet (iOS or Android), a shared family Echo/Alexa device, or a Character.AI/ChatGPT account you know a teen uses.\n\n**Step 2 — Set up the matching control:**\n- **iPhone/iPad:** Settings → Screen Time → Turn On Screen Time (or manage via Family Sharing if set up) → Content & Privacy Restrictions → App Store Purchases / Allowed Apps, and specifically check whether any AI chatbot apps (ChatGPT, Character.AI, Meta AI, others) are installed, and decide deliberately whether to block, time-limit, or allow them.\n- **Android:** install/open **Google Family Link**, link the child's account, and review both installed apps and app-specific time limits — check specifically for any AI chatbot apps.\n- **Amazon Echo:** set up or review an **Amazon Kids** profile in the Alexa app, and check what the child profile can access compared to the adult account.\n- **A specific AI account (ChatGPT, Character.AI, Instagram/Meta AI):** log in (with the teen's knowledge, ideally together) and check the account's actual age setting and any parental-supervision or Family Center features tied to it.\n\n**Step 3 — Make at least one real, deliberate change** — not just a review. Block an app, set a time limit, or turn on a supervision feature that wasn't already active.\n\n**Step 4 — If this applies to your household, have the actual conversation.** Tell your child what you changed and why, in plain terms — the CHATBOT Act's own design principle (clear disclosure, not silent restriction) is a reasonable model for how to talk to a kid about it too.\n\n**Outcome:** a real, verified change to an actual device or account's AI-related controls — plus, if applicable, an honest conversation with the person it affects, which matters more than the technical setting itself."
+    },
+    {
+      "type": "quiz",
+      "question": "Based on Pew Research Center's 2026 survey, what is the most accurate description of the gap between teen AI chatbot use and parental awareness?",
+      "options": [
+        "There is no meaningful gap — parents and teens report AI chatbot use at nearly identical rates",
+        "64% of teens reported using AI chatbots, while only 51% of parents said their teen uses them — a real, measured 13-point awareness gap",
+        "Teens significantly underreport their own AI use compared to what parents observe, meaning parents are more aware than teens admit",
+        "The survey found that fewer than 20% of teens have ever used an AI chatbot"
+      ],
+      "correct": 1,
+      "explanation": "Pew's survey specifically measured both teen self-reported use (64%) and parental awareness of that use (51%), finding a real 13-point gap between the two — parents are meaningfully underestimating how much their teens actually use AI chatbots, not the reverse. This is a substantial, well-documented finding, not a negligible or nonexistent gap, and the 64% figure is far higher than 20%."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Draft Your Actual Conversation About AI Use",
+      "content": "Controls alone don't build trust — this workshop has you draft (and, if applicable, have) an honest, non-judgmental conversation about AI use with a young person in your life.\n\n**Step 1 — Consider the age-gating limits honestly.** As Lesson 19-15 notes, a determined teen can often work around an ID-based age check on any individual platform. Given that, a device-level control isn't a permanent solution on its own — an ongoing, honest relationship around the topic matters as much as any setting. Write 2-3 sentences on why a purely technical approach (blocking, without conversation) might backfire with a teenager specifically.\n\n**Step 2 — Draft an opening line for the actual conversation** — not a lecture, an opener. Something closer to 'I know a lot of people your age talk to AI chatbots sometimes — what's that actually like for you?' than 'I need to check what you've been doing on your phone.'\n\n**Step 3 — Draft 2-3 follow-up questions** aimed at understanding, not catching someone out: What do they actually use AI for? Is there anything about it they'd want you to know, or that surprised them? Have they seen anyone their age treat an AI chatbot as a substitute for a real friend, and what did they think of that?\n\n**Step 4 — If you have a real opportunity to have this conversation, have it**, and afterward write 2-3 sentences on what you learned that you didn't expect.\n\n**Outcome:** a real, usable conversation opener — grounded in this lesson's actual facts about the awareness gap and the settlement/legislation context — that treats a young person as someone to talk with, not just a setting to configure."
+    },
+    {
+      "type": "quiz",
+      "question": "A parent hears about the Character.AI wrongful-death settlements and the pending CHATBOT Act, and wants to know what's actually enforceable today versus what's still proposed. Which statement is accurate as of mid-2026?",
+      "options": [
+        "Both the CHATBOT Act and the California Parents & Kids Safe AI Act are already fully enacted federal and state law",
+        "Character.AI's under-18 open-ended chat restriction (in effect since November 2025) and Meta's paused teen AI-character access (since January 2026) are real, current platform policies; the CHATBOT Act (introduced April 2026) has not passed either chamber of Congress, and the California ballot measure was still pending the November 2026 vote",
+        "None of these — platforms, states, or Congress — have taken any action on AI and minors as of mid-2026",
+        "The CHATBOT Act has already passed and requires all platforms to verify every user's age with government ID"
+      ],
+      "correct": 1,
+      "explanation": "This distinction matters for accurate understanding: Character.AI's under-18 chat restriction and Meta's teen AI-character pause are real, already-in-effect platform policies (not proposed legislation). The CHATBOT Act, introduced April 28, 2026, had not passed either chamber of Congress as of mid-2026, and notably does not mandate age verification at all — it applies rules based on what a provider knows or should reasonably know about a user's age. The California Parents & Kids Safe AI Act was a ballot measure still pending the November 2026 vote, not enacted law. Both A and D overstate the current legal status, and C ignores the real platform-level actions that have already happened."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-22 — and Part 19, AI for Personal Life.** You now understand the real, measured gap between teen AI chatbot use (64%) and parental awareness (51%) per Pew Research, the legal record — the Character.AI wrongful-death settlements and resulting under-18 chat restrictions, Meta's paused teen AI-character access — and the two major pending legislative efforts (California's Parents & Kids Safe AI Act, the federal CHATBOT Act) still working their way through the system. You've set up a real parental control on an actual device or account, and drafted an honest conversation opener rather than relying on restriction alone. Part 4 shifts entirely to computer and command-line basics."
+    }
+  ],
+  "nextLesson": "4-1",
+  "prevLesson": "19-21"
+}

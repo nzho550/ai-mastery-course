@@ -1,0 +1,89 @@
+{
+  "id": "19-20",
+  "title": "AI in Your Car — Assistants, FSD & the Road Ahead",
+  "part": 19,
+  "estimatedMinutes": 50,
+  "tags": [
+    "personal-life",
+    "intermediate",
+    "cars",
+    "voice-assistants",
+    "safety",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nNo other lesson in this course has covered the car — and by 2026, that's a real gap, because AI has arrived on the dashboard from two directions at once that are easy to confuse. One direction is conversational voice assistants: Mercedes, GM, Volvo, Polestar, and BMW have all shipped natural-language AI you can genuinely talk to, the same way you'd talk to ChatGPT or Gemini. The other direction is driver-assistance automation: Tesla's Full Self-Driving and Rivian's new Assistant, which can influence or take over aspects of actually driving the car. These are different categories of AI doing different jobs, and treating them as the same thing is exactly the kind of confusion that leads to real safety mistakes. This lesson covers what's actually shipping in each category, and the literacy you need before you buy, lease, or simply ride in a car that has either one."
+    },
+    {
+      "type": "text",
+      "content": "## Conversational Voice Assistants Take Over the Dashboard\n\nCar voice assistants used to mean rigid commands — 'navigate to' a specific address, nothing more. By 2026, several manufacturers have replaced that with genuinely conversational AI:\n\n**Mercedes-Benz's MBUX Virtual Assistant** (in the new MB.OS-based 2026 CLA-Class) layers multiple AI systems behind one 'Hey Mercedes' wake word: ChatGPT-4o handles general knowledge questions, and Google Cloud's **Automotive AI Agent** — built on Gemini and Google Maps data covering 250 million real-world places, updated near real-time — handles navigation and points-of-interest questions with multi-turn memory (you can pause a conversation and resume it later, and it remembers). The handoff between the two systems is invisible to the driver.\n\n**GM, Volvo, and Polestar** have all adopted Google Gemini directly. GM is rolling Gemini out to roughly 4 million existing Cadillac, Chevrolet, Buick, and GMC vehicles (2022 model year and newer) via its 'Google built-in' platform. Polestar began its rollout April 30, 2026, and Volvo — a lead Google development partner — has it across most of its current lineup. The headline feature is **Gemini Live**: say 'Hey Google, let's talk' for a genuinely open-ended hands-free conversation, not a single command-and-response.\n\n**BMW** took a different path: at CES 2026, it became the first automaker to build its in-car assistant on **Amazon's Alexa+** architecture, debuting in the 2026 BMW iX3. A distinctive feature is continuity with your home — if you discussed a destination with Alexa in your kitchen, you can get in the car and say 'BMW, take me to the place we just talked about' without repeating yourself, and the assistant can control Alexa-linked smart home devices (lights, Ring cameras) while you drive. Core vehicle functions work without an Amazon account; the conversational AI layer requires one, at no extra subscription cost."
+    },
+    {
+      "type": "text",
+      "content": "## Two Very Different Philosophies: Tesla's Grok vs. Rivian's Assistant\n\nTesla and Rivian both shipped voice AI in 2026, but with a capability gap worth understanding before choosing between them.\n\n**Tesla's 'Hey Grok'** (built on xAI's Grok) is hands-free-activated and auto-dismisses after about 15 seconds of inactivity to avoid accidental triggers. It can reference your saved locations by nickname ('Hey Grok, navigate to Kim's parents') — but as of mid-2026, Grok is still in beta and **cannot control the vehicle itself**: it can't adjust climate, media, or driving behavior. Deeper integration allowing Grok to issue voice commands to the FSD driving system is planned but not yet live.\n\n**Rivian's Assistant** ('Hey Rivian'), launched via a May 2026 software update after a months-long delay, went further out of the gate: built on what Rivian calls 'Rivian Unified Intelligence,' it has native control over drive modes, climate, ride height, the front trunk, and cameras — genuine vehicle control, not just information and navigation. Both require a subscription (Rivian's Connect+ at $14.99/month or $149.99/year; Tesla's Grok requires Premium Connectivity) — worth checking the actual monthly cost before assuming a flashy demo video reflects what you'd get by default.\n\nThe practical lesson: 'voice assistant' in a car ad doesn't tell you what it can actually do. Some can only talk to you; others can adjust real vehicle settings. Check specifically before assuming either."
+    },
+    {
+      "type": "text",
+      "content": "## FSD, 'Supervised,' and What Autonomy Actually Means Right Now\n\nTesla's Full Self-Driving (FSD) is the most publicly visible driver-assistance system, and it's also the one most likely to be misunderstood — partly because of its name. As of version 14.x in 2026, Tesla's Self-Driving App added an **intervention-free streak counter**: it tracks how far you've driven without needing to take over, shows your longest all-time streak, and displays a confetti animation for milestones. This is a genuine engagement/gamification mechanic layered onto a safety-critical system, and it's worth naming as exactly that.\n\nThe critical fact underneath the gamification: **the current version is called FSD (Supervised)** — it requires an attentive driver ready to take over at any moment, by design. Tesla has said it is targeting fully unsupervised FSD (no driver attention required) by Q4 2026 at the earliest, rolled out gradually and limited by geography — meaning as of this lesson, **no consumer Tesla is legally or technically operating as a fully self-driving car without driver attention**, regardless of how the streak counter or the product name might suggest otherwise. Tesla has also added meaningful parental controls in 2026: Track Mode (which relaxes some safety features for track driving) is now restricted whenever 'Require Safety Features' is enabled, and parents can block the in-car Browser, Theater, and Arcade apps entirely from Controls → Safety → Parental Controls."
+    },
+    {
+      "type": "text",
+      "content": "## Safety Literacy: These Are Assistants, Not (Yet) Autonomy\n\nAcross every system in this lesson — Tesla FSD, Rivian Assistant, Mercedes MBUX, Gemini-powered GM/Volvo/Polestar, BMW's Alexa+ — the honest umbrella term is 'driver assistance,' not 'self-driving,' with Tesla's still-supervised FSD as the closest thing to an exception, and even that requires an attentive driver today. A few concrete things worth knowing before you own or ride in a car with these features:\n\n- **Marketing names can outrun the actual capability.** 'Full Self-Driving' is a product name, not a technical claim about the current software's legal or safety status — the 'Supervised' qualifier matters as much as the headline name.\n- **A voice assistant that can chat naturally isn't the same thing as a system that can drive.** BMW's Alexa+ can discuss your day; it doesn't touch the steering wheel. Keep those two categories separate in your head, because manufacturers increasingly bundle both under one 'AI' umbrella in marketing.\n- **Gamification elements (streak counters, milestone animations) are a real design choice with real incentive effects** — they're built to encourage you to let the system handle more, which is worth being deliberately aware of rather than just enjoying passively.\n- **Early feedback on conversational assistants has been genuinely mixed** — GM/Volvo/Polestar's Gemini rollout has drawn complaints about being overly chatty or struggling with third-party app integration, a reminder that 'AI-powered' doesn't automatically mean 'reliable' on day one."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Subscription costs vary a lot, and 'free' often has fine print.** BMW's Alexa+ integration needs only a basic (free) Amazon account for most features. Rivian's full Assistant requires Connect+ ($14.99/month or $149.99/year). Tesla's Grok requires Premium Connectivity. GM, Volvo, and Polestar's Gemini integration is generally included with the vehicle's existing connected-services plan. Always check the actual current price for the specific trim and region before assuming a keynote demo reflects your out-the-door cost."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**A gamified streak counter on a driver-assistance system is a real incentive to disengage, not just a fun statistic.** If a system is rewarding you for going longer without intervening, that's a design nudge toward complacency on a task where complacency is the actual risk. Whatever the manufacturer calls the feature, and however many miles the streak counter shows, current-generation systems in this lesson still require an attentive human ready to take over — treat any built-in mechanic that celebrates *not* paying attention with real skepticism."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Audit the AI in Your Own Car (or One You're Considering)",
+      "content": "Find out exactly what your actual car's AI features do — not what a keynote or ad implied.\n\n**Step 1 — Identify your vehicle** (or a specific model you're shopping for) and its manufacturer's AI assistant, if any: Tesla (Grok), Rivian (Rivian Assistant), Mercedes (MBUX Virtual Assistant), GM/Volvo/Polestar (Gemini/Google built-in), BMW (Alexa+), or another brand.\n\n**Step 2 — Find the manufacturer's own documentation** (owner's manual, support site, or official press page — not a third-party review) and answer specifically:\n- Can the assistant control any vehicle function (climate, drive mode, windows), or is it limited to information and navigation?\n- Does it require a paid subscription, and what's the actual current monthly or annual cost?\n- If the car has any driver-assistance/autonomy feature (FSD, Highway Assist, similar), what does the manufacturer's own documentation say about whether driver attention is still required? Quote the actual language if you can find it.\n\n**Step 3 — If your car has parental or driver controls available** (Tesla's Parental Controls, or an equivalent), check whether they're currently configured, and adjust at least one setting deliberately if you share the vehicle with a newer or younger driver.\n\n**Step 4 — Write 2-3 sentences** on what you learned that the marketing didn't make obvious.\n\n**Outcome:** an accurate, source-checked understanding of what your own car's AI can and can't do — the information you'd actually want before trusting it with something safety-critical."
+    },
+    {
+      "type": "quiz",
+      "question": "A car shopper is comparing Tesla's 'Hey Grok' assistant to Rivian's 'Hey Rivian' Assistant as of mid-2026. What is the accurate capability difference between them?",
+      "options": [
+        "They are functionally identical — both can fully control vehicle functions like climate and drive mode",
+        "Grok can control the vehicle's driving behavior directly, while Rivian's Assistant can only answer questions",
+        "Rivian's Assistant has native control over vehicle functions like climate, drive mode, ride height, and the front trunk; Grok, still in beta, can reference saved locations by voice but cannot yet control climate, media, or driving behavior",
+        "Neither assistant can be activated hands-free — both require pressing a physical button first"
+      ],
+      "correct": 2,
+      "explanation": "This is a genuine, documented capability gap as of mid-2026: Rivian's Assistant launched with native control over real vehicle functions (climate, drive mode, ride height, frunk, cameras), while Tesla's Grok — still in beta — is limited to conversational and navigation features like recognizing saved location nicknames, without the ability to adjust climate, media, or driving behavior yet. Both are hands-free activated by a wake phrase ('Hey Grok' / 'Hey Rivian'), so option D is incorrect, and option A/B misstate which system actually has vehicle control."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Your Pre-Purchase AI Question List",
+      "content": "Build a real, reusable list of questions to ask (yourself or a dealer) before you buy, lease, or take a long-term rideshare/rental in a car with these features.\n\n**Step 1 — Draft at least 5 specific questions** covering, at minimum: what the voice assistant can and cannot control; whether any driver-assistance feature requires ongoing driver attention (and what the manufacturer's own documentation says, not what a salesperson says); the actual current subscription cost, not an introductory or promotional rate; whether the system has any gamification or engagement mechanic tied to a safety-relevant behavior; and what parental or secondary-driver controls exist if you'd share the car.\n\n**Step 2 — Test your list** against the research you did in Workshop 1, or against a manufacturer's site for a car you're not currently considering but are curious about. Would your questions have surfaced the Grok-vs-Rivian capability gap, or the 'Supervised' distinction in Tesla's FSD naming, if you hadn't already known about them?\n\n**Step 3 — Refine and save the list** somewhere you'll actually find it again (notes app, a saved doc) — this is the artifact, meant to be reused the next time you or someone you know is car shopping.\n\n**Outcome:** a real, personally-written pre-purchase checklist for AI-equipped cars — grounded in this lesson's specific facts, not generic caution."
+    },
+    {
+      "type": "quiz",
+      "question": "Tesla's FSD v14.x introduced an intervention-free streak counter with milestone celebrations, while the underlying software is still labeled 'FSD (Supervised).' What is the most accurate way to understand this combination?",
+      "options": [
+        "The streak counter proves the car is now capable of fully unsupervised driving, since Tesla wouldn't celebrate long streaks otherwise",
+        "The 'Supervised' label is outdated marketing language that no longer reflects the car's actual legal requirements",
+        "The streak counter is a gamification feature that rewards not intervening, while 'Supervised' means the system still requires an attentive driver ready to take over at any moment — the two coexist, and the celebratory framing doesn't change the underlying attention requirement",
+        "Streak counters and safety requirements are unrelated; the feature exists purely for entertainment with no bearing on how the car should be used"
+      ],
+      "correct": 2,
+      "explanation": "Both facts are true simultaneously, which is exactly the tension worth understanding: Tesla added a genuine engagement mechanic (streak counters, milestone animations) that rewards going longer without intervening, while the software is still officially 'FSD (Supervised)' and requires an attentive driver — full unsupervised FSD is a stated future goal (targeted Q4 2026 at the earliest), not the current reality. Treating the gamified streak as proof of readiness for unsupervised driving (A) or assuming the safety requirement is just leftover language (B) both miss that the attention requirement is the actual, current operating condition of the car, regardless of how the feature is presented."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-20.** You now know the real landscape of in-car AI as of 2026 — conversational assistants from Mercedes (ChatGPT-4o + Google's Automotive AI Agent), GM/Volvo/Polestar (Gemini), and BMW (Alexa+), the genuine capability gap between Tesla's Grok and Rivian's Assistant, and what Tesla's FSD 'Supervised' status and intervention-free streak counters actually mean for how much attention the system still requires from you. You've audited your own car's actual AI capabilities and built a reusable pre-purchase question list. Lesson 19-14 (Photo & Video Editing) picks up the everyday-apps thread — the same 'AI can do more than the marketing implies, so verify before you trust it' habit applies there too."
+    }
+  ],
+  "nextLesson": "19-14",
+  "prevLesson": "19-19"
+}

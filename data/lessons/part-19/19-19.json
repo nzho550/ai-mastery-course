@@ -1,0 +1,93 @@
+{
+  "id": "19-19",
+  "title": "AI Smart Glasses — The New Wearable Frontier",
+  "part": 19,
+  "estimatedMinutes": 55,
+  "tags": [
+    "personal-life",
+    "intermediate",
+    "smart-glasses",
+    "wearables",
+    "privacy",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 19-7 covered always-listening, audio-only AI wearables — pendants and clip-on recorders like Limitless and Plaud that quietly transcribe your day. This lesson covers a different, faster-growing category: AI built into something you're already wearing on your face. Smart glasses shipments surged 167% year-over-year in Q1 2026 according to IDC, and the field has gone from a Meta side-project to a genuine multi-company race involving Google, Samsung, and Snap. This lesson covers what's actually shipping, who's building what, and — because this is core AI-literacy content, not just a gadget roundup — the real privacy incidents that have already happened with this category: a contractor footage-review scandal and a dormant facial-recognition feature found sitting on tens of millions of phones."
+    },
+    {
+      "type": "text",
+      "content": "## The Market Surge — and Meta's Dominance\n\nSmart glasses stopped being a niche category in 2026. IDC reports shipments surged 167% year-over-year in Q1 2026, with the average selling price around $376 and full-year 2026 shipments forecast at roughly 13.6 million units, growing toward 27.3 million by 2030. Meta leads by a wide margin — IDC puts its Q1 2026 share at 69.2%, while Counterpoint Research and Omdia put it even higher, at 81-84%, with the gap likely reflecting different definitions of what counts as a 'smart glasses' shipment. Either way, the takeaway is the same: as of mid-2026, most smart glasses sold anywhere are Meta's, built on a partnership with EssilorLuxottica (the world's largest eyewear maker, owner of Ray-Ban and Oakley)."
+    },
+    {
+      "type": "text",
+      "content": "## Meta's Two-Tier Strategy\n\nOn June 23, 2026, Meta launched a second smart glasses line under its own name — **Meta Adventurer** and **Meta Fury**, both starting at $299, plus a $399 **Meta Glasses by Kylie** model designed with Kylie Jenner. This deliberately drops the Ray-Ban name: the glasses use the same chipset, camera, speakers, battery, and connectivity as the existing Ray-Ban Meta Gen 2 line, just without the premium eyewear branding, at roughly $80 less. Meta's VP of wearables told The Verge the company simply needed a lower price point that EssilorLuxottica's cheaper house brands couldn't credibly carry.\n\nMore significant than the price move: these glasses run **Muse Spark**, the first model out of Meta's Superintelligence Labs — and Meta's first *closed-weight* AI model after years of building its reputation on open-source Llama releases. That's a real strategic pivot, not a footnote. Muse Spark runs in three modes (Instant, Thinking, Contemplating) trading speed for reasoning depth, and Meta claims it matches Llama 4 Maverick's capability at roughly 10x lower compute cost — the efficiency a battery-powered wearable actually needs. CEO Mark Zuckerberg has said daily active users of Meta's glasses have tripled year-over-year."
+    },
+    {
+      "type": "text",
+      "content": "## The Rest of the Field Enters\n\nMeta's lead is not going unchallenged:\n\n- **Google and Samsung's Android XR glasses**, previewed at Google I/O 2026 in May, are a genuine joint effort: Samsung builds the hardware, Google supplies Gemini as the built-in assistant, and two fashion partners — **Gentle Monster** (bold, disruptive styling) and **Warby Parker** (refined, classic styling) — handle the design. Two form factors are planned: audio-only glasses (spoken help, no screen) shipping first this fall, and display glasses with visual overlays following later. They pair with both Android and iOS phones — a deliberate move to not wall off the audience the way Apple's ecosystem typically does.\n- **Samsung's own first-generation Galaxy Glasses** (internally codenamed 'Jinju') is a display-free companion device with a 12MP camera, running Android XR with Gemini, targeting a fall 2026 launch — Samsung is expected to formally unveil it at Galaxy Unpacked. A second-generation model with a true AR display is already planned for 2027.\n- **Snap Specs**, unveiled June 16, 2026, targets a different audience entirely: a genuine standalone AR device with real see-through displays, priced at $2,195 — positioned between Meta's $799 Ray-Ban Display and Apple's $3,499 Vision Pro. It's aimed at developers and enthusiasts, not the mass market Meta and Google/Samsung are chasing.\n\nWorth knowing: Apple is conspicuously late here. Its own smart glasses project has reportedly slipped from a planned late-2026 introduction to late 2027, as Apple works through challenges with visual AI and Siri — the same Siri rebuild covered in Lesson 19-13."
+    },
+    {
+      "type": "text",
+      "content": "## The Real Privacy Risks — Two Documented Incidents\n\nThis is where smart glasses stop being just a gadget story. Two separate, well-documented incidents in 2026 show what can go wrong when a camera lives on your face.\n\n**The contractor footage-review scandal.** In late February 2026, Swedish outlets Svenska Dagbladet and Göteborgs-Posten reported that Meta's AI training pipeline for its glasses (Ray-Ban Meta Wayfarer Gen 2, Ray-Ban Display, and Oakley Meta HSTN) routed footage through Sama, a Meta subcontractor in Nairobi, Kenya, whose workers manually labeled images and video to train the AI. Workers described reviewing footage from inside people's homes — bathrooms, people undressing, sexual activity, and in at least one documented case, a partner recorded without their own consent. Meta's stated face-blurring safeguard did not always work reliably, according to the workers doing the labeling. A class action lawsuit was filed March 4, 2026, alleging Meta marketed privacy as a centerpiece feature while concealing that this was happening. Meta ended its contract with Sama by April 2026 — more than 1,000 Sama workers subsequently lost their jobs as a result.\n\n**The dormant facial-recognition feature.** In June 2026, Wired reported that Meta had quietly built facial-recognition code — internally called 'NameTag,' built on technology licensed from a firm that also contracts with the US Marshals Service — directly into the Meta AI companion app that every pair of Meta glasses requires. It sat, inactive but functional, on more than 50 million phones; a security researcher confirmed it worked on a test image and called it 'one switch away' from live. Meta removed the code from the app after the reporting went public, and told Wired 'no final decision has been made' about ever shipping facial recognition — but Meta's own CTO had separately called facial recognition 'the number one request from users' at a launch event. Texas Attorney General Ken Paxton opened a formal investigation into Meta Glasses in May 2026 over exactly this kind of concern, building on Texas's earlier $1.4 billion settlement with Meta over facial-data collection."
+    },
+    {
+      "type": "text",
+      "content": "## What This Means If You Wear Them — or Someone Near You Does\n\nSmart glasses put a camera at eye level, pointed wherever you look, with a recording indicator (a small LED) that's the *only* signal bystanders get that they're being filmed. That indicator matters more than it might seem: Texas's investigation specifically flagged that the LED is 'easily hidden and not active' in some recording modes, and in July 2026 Meta had to patch a loophole where users had physically drilled out the LED to disable it entirely, forcing Meta to add tamper-detection that shuts off the camera if the light is damaged.\n\nIf you're considering buying a pair: check the specific privacy policy for whether your footage can be used for AI training and whether that's opt-in or opt-out, not just the marketing page. If you're around someone wearing smart glasses: you're allowed to ask whether they're recording, and a company having a recording-indicator LED doesn't mean you've consented to appearing in someone's dataset. Neither of these is paranoia — both are direct responses to incidents that already happened, not hypothetical risks."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**This is a distinct category from Lesson 19-7's audio wearables.** Limitless and Plaud (covered in 19-7) are always-listening audio devices with no camera — the risk there is about recorded conversations. Smart glasses add a camera pointed at whatever you're looking at, which is a meaningfully different — and generally larger — privacy surface, for you and for everyone around you."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**A recording light you can't see isn't proof you're not being recorded, and a feature that's 'dormant' today can become active tomorrow.** The Meta NameTag case shows that facial-recognition capability can exist, fully built, inside an app on your phone with no public disclosure and no user control — until reporting forces a company's hand. Treat both a manufacturer's privacy claims and a device's visible recording indicator as helpful signals, not guarantees."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Investigate One Smart Glasses Product's Actual Privacy Terms",
+      "content": "Before anyone in your life buys a pair of these, look at what the manufacturer actually discloses about data — not the marketing copy.\n\n**Step 1 — Pick one product** to investigate: Meta Ray-Ban/Oakley (or the new Meta Adventurer/Fury line), Google/Samsung's Android XR glasses (audio or display), or Snap Specs.\n\n**Step 2 — Find the real privacy documentation**, not the product page. For Meta, search 'Meta AI glasses privacy policy' and look specifically for language about human review of footage and AI training data. For Google/Samsung, check Google's Android XR privacy documentation and Samsung's Galaxy AI privacy page. For Snap, check Snap's Specs privacy page.\n\n**Step 3 — Answer these specifically, using what you actually find:**\n- Can footage from the glasses be reviewed by a human (employee or contractor) for any reason, and does the policy say so in plain terms?\n- Is AI-training use of your footage/audio opt-in or opt-out by default?\n- What does the recording indicator (LED) actually guarantee — is it described as reliable in all modes, or are there exceptions?\n- Is there a facial-recognition or person-identification feature, active or planned? If the documentation doesn't say, note that explicitly — an absence of disclosure is itself a finding.\n\n**Step 4 — Write 2-3 sentences on whether what you found matches what you assumed before starting.**\n\n**Outcome:** a real, source-checked answer to 'what does this specific product actually do with my data' — the question that matters more than any spec sheet, for a device that's a camera as much as it's a gadget."
+    },
+    {
+      "type": "quiz",
+      "question": "Based on the documented 2026 incidents, what is the most accurate statement about Meta's smart glasses privacy record?",
+      "options": [
+        "Meta's glasses have had no privacy incidents — concerns are purely hypothetical",
+        "Two separate, documented incidents occurred: contractors in Kenya reviewed sensitive footage (including intimate moments) as part of AI training data labeling, and dormant facial-recognition code was found built into the required companion app on over 50 million phones without public disclosure",
+        "The facial-recognition code was actively identifying users' faces and had already been used by law enforcement before it was discovered",
+        "Both incidents were fabricated by competitors to damage Meta's market position"
+      ],
+      "correct": 1,
+      "explanation": "Both incidents are real and documented by independent reporting: Swedish outlets' investigation into Sama's Nairobi contractors (leading to a March 2026 class action lawsuit) and Wired's investigation into the dormant 'NameTag' facial-recognition code (leading to a Texas AG investigation). Option C overstates the facial-recognition finding — the code was confirmed functional in testing but was dormant, not actively deployed or used by law enforcement. Option A and D dismiss well-sourced reporting and regulatory action that actually occurred."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Your Personal Smart Glasses Policy",
+      "content": "Whether or not you plan to buy a pair, work out where your own line is — both as a potential wearer and as someone who might be recorded by someone else's.\n\n**Step 1 — As a potential wearer:** Would the contractor-review scandal or the dormant facial-recognition finding change whether you'd buy a specific brand? Write 2-3 sentences on what disclosure or control would need to exist before you'd trust a pair of AI glasses with a camera pointed at your daily life.\n\n**Step 2 — As a bystander:** Think of a real place in your life — your home, your gym, a family gathering — where you would or wouldn't be comfortable with someone wearing AI glasses. What's the actual difference between those two situations?\n\n**Step 3 — Draft one sentence you could actually say out loud** if you noticed someone's smart glasses recording light on in a moment that mattered to you (e.g., 'Hey, could you take those off for a bit?'). Having the sentence ready is more useful than having an opinion about it in the abstract.\n\n**Outcome:** a short, honest, personally-considered position on smart glasses from both sides of the camera — the actual decision this technology is forcing on everyone, not just the people who buy it."
+    },
+    {
+      "type": "quiz",
+      "question": "A friend is comparing Meta's new $299 Adventurer glasses to Google and Samsung's upcoming Android XR glasses before deciding what to buy. Which statement accurately distinguishes the two as of mid-2026?",
+      "options": [
+        "They are functionally identical products from competing retailers with no meaningful differences",
+        "Meta's Adventurer runs Meta's own closed-weight Muse Spark model and is already shipping; Google/Samsung's Android XR glasses run Gemini, were previewed at I/O 2026 with Warby Parker and Gentle Monster as design partners, and are planned to ship (audio version first) later in the fall",
+        "Google and Samsung's glasses are already the market leader with over 80% share, while Meta has just entered the category",
+        "Both products are AR display glasses with identical $299 pricing"
+      ],
+      "correct": 1,
+      "explanation": "Meta's Adventurer/Fury line (starting at $299) shipped June 23, 2026, running Meta's own Muse Spark model. Google and Samsung's Android XR glasses were previewed — not yet shipped to consumers — at Google I/O 2026 in May, built around Gemini with Gentle Monster and Warby Parker as eyewear design partners, targeting a fall 2026 launch starting with audio-only glasses. Meta remains the dominant player by shipment share (69-84% depending on the research firm), not Google/Samsung, and the Meta Adventurer is a display-free camera/audio device, not an AR display product like Snap's Specs."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-19.** You now know the current state of the AI smart glasses market — Meta's dominant share and new sub-$299 in-house line running its own Muse Spark model, Google and Samsung's incoming Android XR glasses with Gentle Monster and Warby Parker, Samsung's standalone Galaxy Glasses, and Snap's enthusiast-tier Specs — and, more importantly, the two real privacy incidents (contractor footage review, dormant facial recognition) that make this a genuine AI-literacy topic rather than just a gadget trend. Lesson 19-20 moves from what's on your face to what's in your car — AI assistants and driver-assistance systems."
+    }
+  ],
+  "nextLesson": "19-20",
+  "prevLesson": "19-13"
+}

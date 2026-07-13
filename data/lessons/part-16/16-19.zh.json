@@ -1,0 +1,85 @@
+{
+  "id": "16-19",
+  "title": "面向会计与簿记专业人士的 AI",
+  "part": 16,
+  "estimatedMinutes": 55,
+  "tags": [
+    "enterprise",
+    "intermediate",
+    "accounting",
+    "bookkeeping",
+    "quickbooks",
+    "xero",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n第 19-3 课讲的是面向个人理财的 AI——用 Claude 或 ChatGPT 来了解你自己的预算、债务，或一项重大购买决策。本课面向完全不同的受众：那些在专门的执业管理软件中，*专业地*为客户或雇主从事会计和簿记工作的人。如果你是一名簿记员、一名在职会计，或者经营着一家小型会计或税务事务所，2026 年对你日常使用的工具来说是真正具有颠覆性的一年——Intuit 正在停用美国大多数会计师事务所运营了十多年的平台，而 Xero 已经围绕一个全新的财务操作系统，重建了整个 AI 技术栈。本课讲的是实际正在发生的变化、具体的时间表，以及如果你今天还在用 QuickBooks Online Accountant，你该怎么做。"
+    },
+    {
+      "type": "text",
+      "content": "## Intuit 正在停用 QuickBooks Online Accountant——这是真实的时间表\n\n如果你的事务所运行在 **QuickBooks Online Accountant（QBOA）** 上，本课中最重要的一个事实就是：Intuit 将在 **2026 年 12 月 31 日**彻底停用 QBOA，用一个全新的 AI 原生平台 **Intuit Accountant Suite** 取而代之。这不是一次简单的改名——而是一次完整的平台迁移，Intuit 已经开始自动迁移各家事务所：从 2026 年 6 月起，Intuit 开始分批（cohort）迁移事务所，这一过程会持续到年底，所以如果在你所在的批次到来之前你还没有自己完成切换，你的账户也会被自动切换过去。\n\n新平台分为两个层级：**Core** 计划（免费，旨在涵盖 QBOA 已经提供的核心功能）和 **Accelerate** 计划（目前处于测试阶段，从 2026 年 5 月起转为每月 149 美元），面向希望获得下文所述更深层 AI 智能体能力的事务所。另外还有一个独立的 **Books Close** 附加服务——按已接入的客户数量计费（在美国，服务不超过 50 个客户的事务所大约每位客户每月 8 美元）——专门面向希望在月末结账流程中获得 AI 协助的事务所。\n\n如果你还没准备好切换，Intuit 内置了一个缓冲机制：事务所可以在 2026 年 11 月之前恢复使用经典版 QBOA 界面，并且可以随时重新进入 Intuit Accountant Suite，所有数据和设置都会保留。但这个缓冲机制有一个硬性截止点——到 2026 年 12 月 31 日，无论你是否愿意，所有人都会转到新平台上。"
+    },
+    {
+      "type": "text",
+      "content": "## 新平台内置的六个 AI 智能体\n\nIntuit Accountant Suite 的核心是 Intuit 所称的 **Intuit Intelligence**——一个把事务所和客户数据与 AI 结合起来、用于发现洞察、标记风险，并在会计师指导下采取行动的能力层。具体来说，它以六个专门的 AI 智能体的形式出现，每一个都对应特定的 QuickBooks 订阅层级：\n\n- **Accounting Agent（会计智能体）**（QuickBooks Essentials 及以上）——处理日常簿记任务和分类\n- **Payroll Agent（薪酬智能体）**（需要 QuickBooks Payroll 订阅）——自动化薪酬相关工作\n- **Sales Tax Agent（销售税智能体）**（QuickBooks Plus 及以上）——跟踪并管理跨辖区的销售税义务\n- **Payments Agent（支付智能体）**（QuickBooks Essentials 及以上）——管理支付处理流程\n- **Customer Agent（客户智能体）**（QuickBooks Plus 及以上）——处理面向客户的沟通和跟进\n- **Finance Agent（财务智能体）**和 **Project Management Agent（项目管理智能体）**（均需 QuickBooks Advanced 及以上）——提供更高层级的财务分析和执业管理支持\n\n对一名实际工作中的簿记员或会计来说，这意味着：你实际能用到哪些智能体，既取决于你自己所在的 Intuit Accountant Suite 计划，*也*取决于每一位客户各自的 QuickBooks 订阅层级——一家同时服务 QuickBooks Essentials 客户和 Advanced 客户的事务所，至少在过渡期间，会在不同客户档案之间遇到一套真正参差不齐的 AI 工具组合。"
+    },
+    {
+      "type": "quiz",
+      "question": "一名簿记员所在的事务所服务着几位使用 QuickBooks Essentials 的客户，以及一位使用 QuickBooks Advanced 的客户。迁移到 Intuit Accountant Suite 之后，为什么这名簿记员可能发现 Finance Agent 对大多数客户都不可用？",
+      "options": [
+        "Finance Agent 将随 QBOA 一起停用，不会存在于新平台中",
+        "AI 智能体的访问权限不仅取决于簿记员自己的 Intuit Accountant Suite 计划，还取决于每一位客户各自的 QuickBooks 订阅层级——Finance Agent 需要 QuickBooks Advanced，所以无论簿记员事务所选择哪个 Accountant Suite 计划，仍停留在 Essentials 层级的客户都无法使用它",
+        "Finance Agent 只对使用免费 Core 计划的事务所有效，对 Accelerate 计划无效",
+        "Finance Agent 的访问权限只取决于事务所客户总数，与每位客户各自的订阅层级无关"
+      ],
+      "correct": 1,
+      "explanation": "本课特别指出，智能体的访问权限受到两方面限制：会计师自己的 Intuit Accountant Suite 计划，以及每一位客户底层的 QuickBooks 订阅层级。Finance Agent 和 Project Management Agent 都需要 QuickBooks Advanced——所以无论簿记员事务所用的是哪个计划，仍停留在 Essentials 层级的客户都无法使用 Finance Agent（这排除了与之相反的选项 C）。这个智能体并没有被停用（A 错误）——它正是平台中六个新智能体之一。客户总数（D）不是限制因素；每位客户各自的订阅层级才是。"
+    },
+    {
+      "type": "text",
+      "content": "## Xero 的应对方案：Xero OS、JAX 与 XeroForce\n\nXero——Intuit 最大的竞争对手，尤其是在美国以外——在 2026 年采取了不同的路径，围绕它所称的 **Xero OS** 重建了整个 AI 技术栈，这是一个 AI 原生的财务操作系统，如今支撑着两款不同的产品：\n\n**JAX（“Just Ask Xero”）** 是 Xero 的对话式财务智能体，可以通过聊天、短信、邮件或 WhatsApp 访问。自 2025 年 9 月上线以来，JAX 已经扩展到在全球范围内以声称的 97% 准确率对账超过 4000 万笔交易，Xero 报告称，在其统计周期内，发送给 JAX 的消息量按每用户计算增长了 115%——这是真实、重复使用的信号，而不是一次性的新鲜感。2026 年 5 月 12 日，Xero 推出了与 **Anthropic 的 Claude** 的双向集成：JAX 本身现在由 Claude 的推理能力驱动，另外，Xero 订阅用户可以把自己实时的 Xero 财务数据直接拉入 Claude.ai 对话中，用于规划、情景建模和分析——Xero 表示这些财务数据仅用于当次会话，绝不会被用来训练 Claude 的底层模型。此次推广覆盖了 Xero 在 180 多个国家、450 多万家企业的全部订阅用户群。\n\n**XeroForce** 于 2026 年 5 月 14 日以 alpha 版本发布，性质完全不同：这是一个无代码、自然语言工具，让会计师或小企业可以在 Xero 及其连接的第三方应用之上构建*自己的*定制 AI 智能体——在不写代码的情况下，自动化某个特定的重复性工作流程（月末结账步骤、采购订单验证、发薪审批链）。XeroForce 智能体的每一次操作都会被记录在审计日志中——这是 Xero 刻意做出的设计选择，其宣传的理由是：在一个未加说明的自动化操作就是真实责任隐患的行业里，这对合规和客户信任至关重要。截至 2026 年 5 月的 alpha 发布，XeroForce 仅限受邀用户使用，正式发布计划在 2026 年晚些时候进行。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Xero 并没有把宝全部押在一家 AI 供应商身上。** 这次 Claude 集成，是在 2025 年 10 月已有的、与 OpenAI 合作为 Xero 内部提供深度网络研究（税法和市场趋势查询）功能的基础上新增的——Xero 正在刻意地把 AI 工作负载分散到多家模型供应商上，就像大型企业把工作负载分散到多个云服务商那样，而不是锁定在一家。如果你作为从业者正在评估 Xero，不要假定“Xero AI”是一个单一的东西——你正在使用的某个功能，底层运行的模型可能和旁边另一个功能完全不同。"
+    },
+    {
+      "type": "text",
+      "content": "## 如果你今天正在使用 QBOA：实际该怎么做\n\n如果你的事务所目前运行在 QuickBooks Online Accountant 上，请把停用日期当作一个硬性截止日期，而不是一个建议——以下是实际的操作顺序：确认你所在的事务所属于哪个迁移批次（Intuit 从 2026 年 6 月开始分批迁移，并会通知各事务所自己的迁移窗口期）；评估 Core（免费）还是 Accelerate（每月 149 美元）更适合你事务所的规模和客户结构；检查你各位客户各自的 QuickBooks 订阅层级是否真的解锁了你打算使用的智能体（Payroll Agent 需要 QuickBooks Payroll 订阅；Finance Agent 和 Project Management Agent 需要 QuickBooks Advanced）；把经典视图的回退选项（可用至 2026 年 11 月）只当作一座过渡的桥梁，而不是长期方案，因为无论你是否愿意，它都会在年底消失。如果你服务的客户使用不同的 QuickBooks 层级，请预留真实的时间，在依赖某个智能体处理真实客户工作之前，先针对实际客户档案测试它——一个被限定为“QuickBooks Plus 及以上”的智能体，对仍停留在较低层级的客户根本不可用，而在项目进行到一半才发现这一点，比现在就发现要糟糕得多。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "工作坊 1——审计你自己（或某位客户）在 QBOA 停用中的风险敞口",
+      "content": "这个工作坊会产出一份真实、可用的迁移清单——如果你使用 QBOA，就针对你自己的事务所来做；如果不使用，就用本课学到的内容，针对一家假设的事务所来做。\n\n**第 1 步——确定你的起点。** 你的事务所（或你熟悉的某家会计师事务所）目前是否在使用 QuickBooks Online Accountant？如果是，登录并检查是否收到了 Intuit 的迁移批次通知。如果你没有直接访问权限，就调研一下和你规模相当的事务所通常会用什么。\n\n**第 2 步——按 QuickBooks 层级（Essentials、Plus、Advanced）列出每一份客户档案**——哪怕只是粗略统计。这决定了六个 AI 智能体（Accounting、Payroll、Sales Tax、Payments、Customer、Finance、Project Management）中，哪些对每位客户实际可用，而不只是对整个事务所可用。\n\n**第 3 步——决定 Core 还是 Accelerate。** 考虑到你的客户结构和每月 149 美元的 Accelerate 价格，免费的 Core 计划能否满足你的需求，还是更深层的智能体访问权限值得升级？把你的理由写下来，而不只是写下决定本身。\n\n**第 4 步——给自己设定一个内部截止日期**，早于 2026 年 12 月 31 日，主动完成切换，而不是在某个批次中被自动迁移——在业务繁忙季节（比如临近报税截止日期）被自动迁移是一个真实的风险，值得通过提前行动来避免。\n\n**第 5 步——把这些保存成一份你（或你的事务所）真的会遵循的迁移清单**，把截止日期、计划决定和按客户分类的层级审计全部整合在一份文档里。\n\n**产出：** 一份具体的、带有日期的 QBOA 迁移到 Intuit Accountant Suite 的清单——不是对这项变化的泛泛了解，而是一份与你（或一个真实合理的假设情境）的事务所客户结构挂钩的实际计划。"
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "工作坊 2——用 JAX 或 XeroForce 试着回答一个真实的财务问题",
+      "content": "如果你或你的事务所使用 Xero（或者你正在把它和 QuickBooks 做对比评估），这个工作坊会让你真正上手体验 Xero AI 技术栈中最新的一层。\n\n**第 1 步——如果你有 Xero 访问权限：** 打开 JAX（通过 Xero 应用，或者如果你的账户已启用短信/邮件/WhatsApp 功能）并问它一个关于你实际账簿的真实问题——例如“哪些发票已逾期超过 30 天？”或者“汇总一下本月与上月相比的现金流情况。”把它的回答和你手动拉取报表得到的结果做对比。\n\n**第 2 步——如果你的账户已启用 Claude 集成**，连接它并提出一个你确实需要答案的情景规划问题——例如“如果下个季度我失去了两个最大的客户，会对我的现金跑道产生什么影响？”——使用实时数据，而不是手动导出的数据。\n\n**第 3 步——如果你没有 Xero 访问权限**，那就起草一份你如果拿到 alpha 访问权限就会构建的具体 XeroForce 自动化方案——选一项真实的重复性任务（月末结账清单、采购订单验证、发薪审批路由），逐步写出自然语言智能体指令需要包含哪些内容。\n\n**第 4 步——写一段 3-4 句话的结论：** 这个 AI 生成的答案或自动化方案，是你真的会在真实客户工作中信任的东西，还是你每次都需要对照原始数据再核实一遍？怎样才能让你更信任它？\n\n**产出：** 要么是与你实际账簿之间一次真实、经过测试的 JAX 或 Xero 内 Claude 的交互，要么是一份完全说明清楚、一旦获得访问权限就能立刻构建的 XeroForce 自动化方案——外加一份记录下来的、可以随着工具成熟而重新审视的信任度结论。"
+    },
+    {
+      "type": "quiz",
+      "question": "XeroForce 是什么，它和 JAX 有什么不同？",
+      "options": [
+        "XeroForce 只是 JAX 换了个新名字的重新包装版本",
+        "JAX 是 Xero 内置的对话式智能体，用于就你现有的账簿提问并获得洞察；XeroForce 是一个独立的无代码工具，让会计师和企业能够为特定的重复性工作流程构建自己的定制自动化智能体，每一次操作都会被记录在审计日志中",
+        "XeroForce 通过完全自动化报税，彻底取代了对会计师的需求",
+        "XeroForce 只适用于大型企业，不适用于小企业或会计师事务所"
+      ],
+      "correct": 1,
+      "explanation": "JAX 和 XeroForce 解决的是不同的问题：JAX 是一个你可以向其提问的对话式智能体（对账、现金流汇总、实时财务洞察），而 XeroForce 是一个构建器——一个用于搭建定制化、面向特定工作流程的智能体（例如月末结账清单自动化）的无代码工具，构建完成后这些智能体会自主运行，每一次操作都会被审计记录以满足合规要求。它们是互补关系，而不是同一个产品（排除选项 A）。两者都没有消除对会计师专业判断的需求（选项 C 夸大了这一点），而且 XeroForce 明确面向小企业和会计师事务所定位，而不仅仅是大型企业（选项 D 错误）。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已经完成了第 16-19 课。** 你现在了解了 2026 年重塑专业会计与簿记软件的两大转变：Intuit 在 2026 年 12 月 31 日之前彻底停用 QuickBooks Online Accountant，转而推出 Intuit Accountant Suite 及其六个按层级限定的 AI 智能体；以及 Xero 重建的 Xero OS 技术栈——用于对话式财务查询的 JAX、用于构建定制无代码自动化的 XeroForce，以及一项全新的双向 Claude/Anthropic 集成。与第 19-3 课的个人理财视角不同，本课是从在职会计师或簿记员的视角来介绍这些工具的——你已经制定了一份真实的迁移清单，或者针对你自己（或一个真实合理的假设情境）的客户工作测试了一项真实的 AI 功能。"
+    }
+  ],
+  "nextLesson": "16-20",
+  "prevLesson": "16-18"
+}

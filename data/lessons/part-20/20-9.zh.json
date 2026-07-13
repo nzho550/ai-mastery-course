@@ -1,0 +1,95 @@
+{
+  "id": "20-9",
+  "title": "Agent Skills——市场背后的开放标准",
+  "part": 20,
+  "estimatedMinutes": 55,
+  "tags": [
+    "skills",
+    "skill-md",
+    "open-standard",
+    "interoperability",
+    "cross-vendor",
+    "intermediate",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## 你将学到什么\n\n第 20-1 课到 20-8 课教你的是 Claude Code 式的技能构建方式：保存在 `.claude/commands/` 中的 Markdown 文件，通过输入 `/skill-name` 斜杠命令触发，用 `$ARGUMENTS` 传入动态输入。这套机制是真实存在、当前可用的，本课不会推翻你之前学到的任何内容。\n\n但第 20-1 课的警告提示框里说过一句很具体的话：“如果你学完本部分后去找 `SKILL.md` 文件，这里是找不到的——那是第 6-16 课讲的格式。”这句话在写下的当时是准确的。然后，在 2025 年 12 月 18 日，Anthropic 把那个格式——`SKILL.md`，最早于 2025 年 10 月作为 Claude 专属功能推出——发布成了一个开放的、跨厂商的标准。到 2026 年年中，大约有 40 款不同的 AI 工具都在读取同一种文件格式。\n\n本课要补上这个缺口：SKILL.md 到底是什么，为什么整个行业能这么快达成一致，它和你已经构建的斜杠命令技能是什么关系，以及如何把你自己的技能库改造成能在不止 Claude Code 一个地方运行的可移植文件。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**先简单回顾一下，免得把两套系统搞混：** Claude Code 一直有两套独立的技能机制——本部分教的斜杠命令技能（`.claude/commands/*.md`，手动输入调用）和 Agent Skills（`.claude/skills/*/SKILL.md`，Claude 根据任务匹配自动加载）。第 6-16 课也讲过 Agent Skills，但把它描述成 Copilot CLI 和云端代理专属的功能。这两种说法在各自写下的时候都是对的。变化在于：Agent Skills 已经不再是单一厂商的专属功能了——它现在是 Claude、Copilot、ChatGPT、Gemini CLI、Cursor 以及其他几十款工具共同读取的同一种文件格式。"
+    },
+    {
+      "type": "text",
+      "content": "## 2025 年 12 月 18 日——SKILL.md 成为开放标准\n\n2025 年 10 月 16 日，Anthropic 首次把 Agent Skills 作为 Claude 专属能力推出——让 Claude 能按需加载成套的指令、脚本和参考资料，而不用把所有内容都塞进系统提示词里。两个月后，2025 年 12 月 18 日，Anthropic 把这套规范本身——而不仅仅是 Claude 对它的实现——发布成了开放标准，并在 **agentskills.io** 和 GitHub 上提供了参考 SDK。\n\n真正值得关注的是采纳速度。在 12 月 18 日发布后的 48 小时内，微软（VS Code 和 GitHub Copilot）和 OpenAI（ChatGPT 的 Code Interpreter 以及 Codex CLI）就都上线了对 SKILL.md 文件的支持——就 OpenAI 而言，后来有证据显示，相关工程工作在官方发布之前就已经在进行了。到 2026 年 3 月，已经有超过 32 款代理产品读取同一种文件格式。到 2026 年年中，这个开放标准自己的工具展示页列出了大约 40 款兼容产品，包括 Gemini CLI、Cursor、JetBrains Junie、AWS Kiro、Databricks 的 Genie Code，以及 Snowflake 的 Cortex Code——当然还有你已经熟悉的 Claude Code 和 Copilot。\n\n这个格式本身在设计上很简单：一个文件夹，里面有一个带 YAML frontmatter（至少包含 `name` 和 `description`）的 `SKILL.md` 文件，加上一段 Markdown 正文，以及技能所需的可选脚本或参考文件。正是这种简单性——纯文本、没有专有运行时、光是*读取*一个技能就不需要任何厂商 SDK——才让竞争对手能在几天内而不是几个月内完成适配。"
+    },
+    {
+      "type": "text",
+      "content": "## 为什么可移植性现在变得重要\n\n在 2025 年 12 月之前，AI 技能领域并不存在真正意义上的“一次构建，到处运行”。你为 Claude Code 写的斜杠命令技能（也就是 20-1 到 20-8 课教你构建的那种）只能在 Claude Code 里运行——它是 Claude Code 专属的机制，而不是一个可移植文件。为 Copilot CLI（第 6-16 课）写的 SKILL.md 技能，也只能在 Copilot 里运行。一个同时使用 Claude Code 和 Copilot 的团队，就得维护两套逻辑重叠、写法不同、各自更新、逐渐走样的技能库。\n\n这正是 MCP 在 2024 年 11 月为*工具*解决的问题（第 8-1 课）——一次集成，所有客户端都能用。SKILL.md 现在为*流程性知识*做了同样的事：以前被锁在某个厂商专有格式里的“我们团队如何格式化合规报告”或者“如何分诊这个项目的 bug 报告”这类分步指令，现在统统放在一个文件里，Claude Code、Copilot、Codex、Gemini CLI、Cursor 和 JetBrains Junie 都能不经任何转换直接加载。\n\n对个人来说，这主要在你切换工具或同时使用多个工具时才会显现出价值。对团队或组织来说，意义更大：公司现在可以把入职清单、代码评审标准或事故响应手册写成一份 SKILL.md，提交到代码仓库一次，无论工程师个人偏好用哪款 AI 工具都能生效。"
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**这个标准现在由谁治理？** SKILL.md 未来不会只由 Anthropic 一家控制。在 SKILL.md 发布前九天，也就是 2025 年 12 月 9 日，Linux 基金会成立了**智能体 AI 基金会（Agentic AI Foundation，AAIF）**，创始成员包括 Anthropic、OpenAI 和 Block，Google 随后不久也以白金会员身份加入；MCP、AGENTS.md 和 Goose 代理作为首批贡献项目纳入其中。Agent Skills 的治理正是落在这同一个伞形组织之下：这些在 AI 产品上互相竞争的公司，共同发起了一个中立基金会，目的正是确保没有任何一家厂商能单方面主导所有人都依赖的格式的走向。到 2026 年 4 月，AAIF 的成员组织已超过 170 个。这与 MCP 采用的治理模式（第 8-1 课）如出一辙——先发布规范，再把长期治理权交给一个厂商中立的基金会，这样采纳率才能持续复利式增长，而不会因为信任问题而停滞。"
+    },
+    {
+      "type": "text",
+      "content": "## SKILL.md 文件的构造——以及它和你已构建内容的区别\n\n把你在 20-1 课工作坊里构建的技能文件，和同一个任务的 SKILL.md 文件对比一下。\n\n**你的斜杠命令技能（`~/.claude/commands/daily-brief.md`）：**\n```markdown\n# Role\nYou are my personal morning briefing assistant...\n\n# Steps\n1. Use the Gmail MCP to count my unread emails...\n...\n```\n通过输入 `/daily-brief` 调用。只有你输入命令时 Claude 才会读取它。动态输入来自 `$ARGUMENTS`。\n\n**同样的想法改写成可移植的 SKILL.md（`.claude/skills/daily-brief/SKILL.md`）：**\n```markdown\n---\nname: daily-brief\ndescription: Produces a concise morning briefing from email and calendar. Use when the user asks for their daily summary, morning briefing, or \"what's going on today\".\n---\n\n# Daily Briefing Skill\n\n## When to use this\nUse whenever the user asks for a morning briefing, a daily summary, or wants\nto know what's most important today.\n\n## Steps\n1. Check email for unread messages from the last 24 hours\n2. Identify anything time-sensitive or from a manager/client\n3. Check today's calendar\n4. Summarise into the format below\n\n## Output Format\n**Good morning! Here's what matters today:** ...\n```\n\n有三处结构性差异值得注意：\n1. **靠 frontmatter，而不是打字输入的命令。** `name` 和 `description` 字段就是 AI 工具用来匹配你请求的依据——没有 `/daily-brief` 可以输入了。描述写得不好（太模糊，或者太狭窄），技能要么永远不触发，要么在错误的场合触发。\n2. **没有 `$ARGUMENTS`。** SKILL.md 技能不靠命令语法触发——而是靠匹配你已经在用自然语言表达的请求内容。\n3. **技能是一个文件夹，而不是一个文件。** SKILL.md 可以把脚本、模板和参考文档和指令捆绑在一起——AI 工具会先加载元数据（成本很低：大约 100 个技能的摘要总共只占用约 5,000 个 token），只有在任务真正匹配时才会拉取完整正文以及任何捆绑文件。"
+    },
+    {
+      "type": "text",
+      "content": "## 把你现有的技能改造成可移植的 SKILL.md 文件\n\n你在本部分构建的每一个技能——`/daily-brief`、`/summarize`、`/note`、`/meeting-prep`、`/analyze-anything`——都可以改造成 SKILL.md。对于任何你希望不用记住确切命令名就能用上的技能，或者希望哪怕以后改用 Copilot、Codex 或 Gemini CLI 做同样的事也依然能用的技能，这样做都是值得的。\n\n改造模式如下：\n1. 创建一个文件夹：`.claude/skills/<技能名>/`（项目级）或 `~/.claude/skills/<技能名>/`（用户级——和你在 20-1 课学到的两层结构一样）\n2. 把 Role/Context 部分改写成一个足够精确的 `description` 字段，让 Claude 能在恰当的时机加载它——模糊的描述（“帮忙处理邮件”）会导致触发不足或触发过度；具体的描述（“当用户问今天的情况时，生成一份简明的早晨简报”）能可靠触发\n3. 保留你的 Steps、Output Format 和 Constraints 部分——它们几乎可以原样搬进 Markdown 正文\n4. 去掉 `$ARGUMENTS`——把正文写成能直接利用用户自然语言请求里已有内容的形式\n5. 如果技能需要模板文件、脚本或参考数据，就把它加进同一个文件夹——SKILL.md 是唯一*必需*的文件，其余都是可选的辅助材料\n\n**你不会失去什么：** 子代理派生、MCP 工具访问、文件写入，这些在 SKILL.md 技能里照样能用——它们是 Claude Code 本身的能力，不是 `.claude/commands` 格式独有的特性。\n\n**你会刻意失去什么：** 对技能何时触发的精确手动控制。斜杠命令只有在你输入它时才会运行。SKILL.md 技能则是在 AI 工具的匹配机制判断你的请求符合描述时就会运行——大多数时候很方便，但在你把描述写得足够精确之前，偶尔会出乎意料。"
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**对第 6-16 课的更新，一句话说清楚：** 第 6-16 课把 Agent Skills 称为“专门为 GitHub Copilot CLI 和云端代理设计的一种扩展”，这在当时是对的。但自 2025 年 12 月 18 日起，这个说法已经过时——Agent Skills 已经不再是 Copilot 专属的了，它是 Copilot、Claude Code、Codex、Gemini CLI 以及大约三十多款其他工具共用的底层格式。第 6-16 课关于*如何编写* SKILL.md 的内容（YAML frontmatter、`name` + `description`、基于描述的匹配机制）依然完全适用——过时的只是“这是 Copilot 自己的系统”这个框架性说法。"
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "工作坊——把你的一个技能转换成可移植的 SKILL.md",
+      "content": "拿一个你在本部分实际构建并使用过的技能，把它改造成 SKILL.md，然后验证它能自动加载。\n\n**第 1 步——挑选一个要转换的技能。** 从你构建并在用的技能中选一个：`/daily-brief`、`/summarize`、`/note` 或 `/meeting-prep`。在 `~/.claude/commands/` 中打开它的文件。\n\n**第 2 步——创建技能文件夹：**\n```powershell\nNew-Item -ItemType Directory -Force -Path ~/.claude/skills/[skill-name]\n```\n\n**第 3 步——请 Claude Code 完成转换：**\n```\nRead ~/.claude/commands/[skill-name].md. Convert it into a portable SKILL.md\nfile following the Agent Skills open standard: YAML frontmatter with `name`\nand a specific `description` that states exactly when this skill should\ntrigger, followed by the same steps/output format/constraints as a Markdown\nbody — but rewritten so it doesn't depend on $ARGUMENTS. Save it to\n~/.claude/skills/[skill-name]/SKILL.md.\n```\n\n**第 4 步——测试它是否能自动加载。** 开启一个新的 Claude Code 会话，不要输入斜杠命令，而是用自然语言表达同样的请求——比如对 daily-brief，可以问：“今天有什么安排，我该优先处理什么？”观察 Claude 是否识别出了匹配并调用了该技能（Claude Code 会在其工具/技能引用中展示这一点）。\n\n**第 5 步——如果没有触发，就收紧描述。** 如果 Claude 是凭通用知识回答的，而不是使用该技能，说明 `description` 写得太模糊或太狭窄了。请 Claude 把它改得更具体，明确指出应该触发的确切场景和措辞，然后重新测试。\n\n**第 6 步——两个版本都保留。** 你不必删掉原来的斜杠命令——同时保留一个 `/daily-brief` 用于刻意的、按需调用，以及一个在你自然表达时会自动触发的 SKILL.md 版本，这是对两种机制的合理运用。\n\n**完成检查：** 你的技能库中至少有一个技能已经变成了 SKILL.md 的运行方式——可移植、自动触发，并且能被支持这个开放标准的大约 40 款工具中的任何一款读取，而不仅限于 Claude Code。"
+    },
+    {
+      "type": "quiz",
+      "question": "一位同事说：“我在 `.claude/commands/deploy.md` 里写了一个斜杠命令技能——我应该能在 Cursor 里打开它，让 Cursor 根据我的请求自动加载它。”这个预期错在哪里？",
+      "options": [
+        "没有错——所有 Claude Code 技能默认都是可移植的",
+        ".claude/commands/*.md 斜杠命令技能是 Claude Code 专属的机制，靠输入 /deploy 触发；只有 .claude/skills/*/SKILL.md 文件才遵循 Cursor 等其他工具能够读取的开放 Agent Skills 标准",
+        "Cursor 根本不支持任何形式的 AI 技能",
+        "只要把文件重命名为 SKILL.md，它就能在任何地方运行"
+      ],
+      "correct": 1,
+      "explanation": "斜杠命令技能（`.claude/commands/*.md`）是本部分课程教的 Claude Code 约定——手动输入调用，不属于开放标准的一部分。真正可移植、跨厂商的格式是 Agent Skills（`.claude/skills/*/SKILL.md`，或 `~/.claude/skills/`），Anthropic 于 2025 年 12 月 18 日将其发布为开放规范，如今 Cursor、Copilot、Codex、Gemini CLI 以及大约 40 款其他工具都能读取它。重命名文件并不能完成转换——斜杠命令文件用的结构（$ARGUMENTS、没有 frontmatter）和 SKILL.md 要求的结构（YAML frontmatter，包含 name/description）是不同的。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "工作坊——调研跨厂商生态现状",
+      "content": "花 15 分钟梳理一下你实际使用的 AI 工具中，哪些支持开放的 Agent Skills 标准——这决定了改造你的技能库是否真正值得投入精力。\n\n**第 1 步——打开展示页。** 访问 agentskills.io，找到支持该标准的工具列表（如果页面已迁移，可搜索“agentskills.io showcase”）。\n\n**第 2 步——列出你个人或你团队实际使用的 AI 工具。** 包括 Claude Code、GitHub Copilot、任何集成在 IDE 中的 AI（Cursor、JetBrains、VS Code），以及任何 CLI 代理（Codex CLI、Gemini CLI）。\n\n**第 3 步——逐一对照。** 对列表中的每一款工具，检查它是否出现在展示页上。记下哪些原生支持读取 SKILL.md，哪些还不支持。\n\n**第 4 步——判断值不值得转换。** 如果你和你的团队只用 Claude Code，那把斜杠命令技能转成 SKILL.md 带来的好处会少一些——自动触发相比手动输入命令的主要优势依然存在，但跨工具可移植性暂时用不上。如果你或你的团队会用到列表中两款以上的工具，那可移植性就值得优先考虑。\n\n**第 5 步——写一句话**，记录在 `notes/skill-portability.md` 中：你哪一个技能最需要具备可移植性，为什么。\n\n**成果：** 你得到了一个基于自己实际使用工具、而不是跟风炒作、清晰明确的答案——“我要不要费心把技能转换成 SKILL.md”。"
+    },
+    {
+      "type": "quiz",
+      "question": "Anthropic、OpenAI、Google 等竞争对手为什么要在 Linux 基金会旗下共同发起智能体 AI 基金会，来治理 MCP、Agent Skills 这类标准，而不是各自维护一套相互竞争的格式？",
+      "options": [
+        "政府监管要求这么做",
+        "共享的、厂商中立的标准能让每家公司的工具都无需转换就能读取同样的文件——这正是让 MCP 变得有价值的生态复利效应，只是这次应用在流程性技能而不是工具集成上；中立治理也能让采纳者放心，不用担心某个厂商单方面按自己的利益修改格式",
+        "比各自开发规范更省钱",
+        "Linux 基金会要求所有 AI 公司合并各自的智能体产品"
+      ],
+      "correct": 1,
+      "explanation": "这个模式和 MCP（第 8-1 课）如出一辙：当所有主要厂商都读取同一种文件格式时，生态就会产生复利效应——一个技能只写一次，到处都能用。把治理权交给一个中立基金会，而不是让某一个竞争对手主导规范，正是让 Anthropic、OpenAI、Google 这样的直接竞争对手能够共同开发同一个标准、而不会有人对其他人单方面发号施令的原因。"
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**你已完成第 20-9 课。** 你已经理解，Agent Skills 在 2025 年 12 月 18 日不再是单一厂商的专属功能——Anthropic 把 SKILL.md 发布成了一个开放标准，如今由大约 40 款工具读取，并由厂商中立的智能体 AI 基金会治理。你已经把自己的至少一个技能转换成了可移植的 SKILL.md 文件，并且知道什么时候可移植性真正值得花力气去做转换。下一课要讲这种开放性的另一面：既然任何人都能把 SKILL.md 发布到公开市场上，你就需要知道如何在信任并安装别人的技能之前，分辨出哪些是可信的、哪些是危险的。"
+    }
+  ],
+  "nextLesson": "20-10",
+  "prevLesson": "20-8"
+}

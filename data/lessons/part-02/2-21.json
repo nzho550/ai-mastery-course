@@ -1,0 +1,94 @@
+{
+  "id": "2-21",
+  "title": "Google Meet & Chat AI — Gemini Takes Notes for You",
+  "part": 2,
+  "estimatedMinutes": 55,
+  "tags": [
+    "tools",
+    "intermediate",
+    "google",
+    "gemini",
+    "meetings",
+    "google-chat",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 2-16 covered Gemini across Gmail, Docs, Sheets, and Slides — but left out two of the apps Google Workspace users spend the most time in every day: Google Meet and Google Chat. That gap has closed fast. Gemini's \"Take notes for me\" in Meet went from an enterprise-only feature to something available on a $19.99/month personal subscription, and Google Chat quietly picked up its own summarization, smart-reply, and cross-app query capabilities. This lesson covers both — what they do, what they cost, and how they compare to the third-party meeting agents you learned about in lesson 2-18."
+    },
+    {
+      "type": "text",
+      "content": "## \"Take Notes for Me\" in Google Meet — What It Actually Does\n\nGoogle's native Meet note-taker expanded from Workspace business customers to individual **Google AI Pro and Ultra subscribers on June 29, 2026** — Pro runs $19.99/month in the US. If you or your organization is on either tier, this is now built into Meet with no separate tool to install.\n\n**How to turn it on:** click the pencil icon at the top of the Meet window to start note-taking for that call, or go into Meet settings under **Meeting records** to enable it automatically for every call you host.\n\n**Where the output goes:** Gemini transcribes the conversation live and writes a structured summary with action items directly into a **Google Doc saved to your Drive** — no export step. After the meeting ends, you also get a **recap email** with the summary and action items attached. If someone joins late, they can open a **\"so far\" summary** right inside the Meet panel without interrupting the call to ask what they missed.\n\n**Consent is automatic, unlike a bot-free tool.** Every participant is notified on-screen when note-taking is enabled — you don't have to announce it verbally the way lesson 2-18 required for bot-free tools like Granola. The meeting organizer must be on a qualifying plan (AI Pro, Ultra, or an eligible Workspace edition) for the feature to be available at all; if the organizer isn't, no one on the call can turn it on."
+    },
+    {
+      "type": "text",
+      "content": "## The April 2026 Upgrade: Decisions, Next Steps, Details\n\nA significant update in April 2026 let users toggle exactly which sections \"Take notes for me\" generates, from an in-call menu:\n\n- **Summary** — the general overview, as before.\n- **Decisions** — new. Tracks meeting outcomes and tags each one with a status: **Aligned**, **Needs Further Discussion**, **Disagreed**, or **Shelved**. This section is currently English-only.\n- **Next steps** — the actionable items, with who's assigned to each.\n- **Details** — a more granular breakdown of what was discussed, for meetings where the summary alone isn't enough.\n\nHosts can also check a box to capture screenshots of anything presented (slides, shared documents) alongside the notes, with an on-screen notice to participants when that's on. Meeting language support currently covers English, French, German, Italian, Japanese, Korean, Portuguese, and Spanish — one language per meeting; mixed-language calls aren't handled yet."
+    },
+    {
+      "type": "text",
+      "content": "## How This Compares to Lesson 2-18's Meeting Agents\n\nLesson 2-18 covered a landscape of third-party tools — Teams Copilot's Recap Q&A, Fathom's cross-meeting querying, Granola's bot-free local capture, Fireflies' auto-filing. Google Meet's native offering sits in a specific place in that landscape:\n\n- **It's not queryable the way Fathom or Teams Copilot are** — there's no \"ask a question about this meeting\" chat layered on top yet. What you get is a structured document, not a conversational interface into your meeting archive.\n- **It's not bot-free like Granola** — a visible pencil-icon indicator and an on-screen notification tell every participant that notes are being taken, so the consent burden lesson 2-18 placed on Granola users doesn't apply here.\n- **It's tightly integrated with the rest of Workspace** — because the output lands in a Drive doc and an email, it plugs directly into the Gmail and Docs workflows from lesson 2-16 without any copy-paste or export step.\n\nIn short: if your organization already lives in Google Workspace and you're on a qualifying plan, \"Take notes for me\" is the path of least resistance — not because it's more capable than Fathom or Otter, but because it requires zero new logins or integrations."
+    },
+    {
+      "type": "text",
+      "content": "## Google Chat AI\n\nGoogle Chat picked up Gemini features that mirror what Slack AI does in lesson 2-12, plus some that go further because Chat sits inside the same Workspace account as your Gmail, Docs, and Calendar.\n\n**Thread summaries:** in a busy channel, Gemini condenses long conversation threads into a short summary so you can catch up without scrolling through hundreds of messages.\n\n**Context-aware smart replies:** rather than generic one-word suggestions, Gemini reads the actual thread and proposes replies that match what's actually being discussed.\n\n**Ask Gemini in Chat — a command line for work:** Google's April 2026 **Workspace Intelligence** update gave Ask Gemini in Chat a bigger job: daily briefings, retrieving a file by describing it instead of naming it (\"find the budget sheet Priya shared last week\"), generating a document or slide deck on request, and even scheduling a meeting — all without leaving the Chat window. This works by mapping your emails, chats, files, collaborators, and active projects into a shared context layer that Gemini-powered agents can draw on.\n\n**Workspace Studio automations:** a no-code agent builder (launched December 2025) that can trigger a Chat notification based on a Calendar event, sort and label incoming email, or generate a report from a Sheet — configured once, running unattended after that, the same \"configure once, run forever\" pattern lesson 2-18 flagged for extra scrutiny at setup time."
+    },
+    {
+      "type": "text",
+      "content": "## Availability and Cost\n\n| Feature | Where it lives | What you need |\n|---------|----------------|----------------|\n| Take notes for me (Meet) | Personal or Workspace | Google AI Pro ($19.99/mo), Ultra, or a qualifying Workspace edition |\n| Decisions / Next steps / Details toggle | Meet, in-call menu | Same as above |\n| Chat thread summaries & smart replies | Google Chat side panel | Included in Business Standard and above at no extra cost (as of Jan 2025) |\n| Ask Gemini in Chat / Workspace Intelligence | Google Chat | Business Standard+ for basics; AI Expanded Access add-on (from March 2026) for the higher-usage Gemini 3 Pro tier |\n| Workspace Studio agents | Admin-configured, surfaces in Chat | Depends on your organization's Workspace edition |\n\nThe default model powering most of this since March 2026 is **Gemini 3 Flash**; complex reasoning tasks route to **Gemini 3 Pro** for accounts with the AI Expanded Access add-on."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Google's data-privacy position:** according to Google, interactions with Gemini in Meet and Chat stay within your organization, and Gemini doesn't share your content outside your organization without permission — the same boundary that applies to Gemini in Gmail, Docs, and Sheets from lesson 2-16."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The Decisions section is a classifier, not a transcript — treat it that way.** \"Aligned,\" \"Needs Further Discussion,\" \"Disagreed,\" and \"Shelved\" are Gemini's interpretation of what happened in the room, applied automatically and currently only in English. A conditional statement (\"I think we're aligned, pending legal review\") is exactly the kind of nuance that a classifier can round off into a firm \"Aligned\" tag. Before you or a colleague acts on a decision recorded this way — especially anything customer-facing or budget-affecting — check the fuller transcript or your own memory of the call, the same verification discipline lesson 2-18 applied to CRM-integrated meeting agents."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Turn On Take Notes for Me and Test the Decisions Section",
+      "content": "You'll enable Gemini note-taking on a real upcoming Meet call and check its output against what actually happened.\n\n**If you have Google AI Pro/Ultra or a qualifying Workspace plan:**\n\n**Step 1 — Before your next real Meet call**, click the pencil icon at the top of the Meet window (or enable **Meeting records** in settings so it's on automatically).\n\n**Step 2 — In the in-call menu, turn on all four sections:** Summary, Decisions, Next steps, Details. If the option to include screenshots of presented content is relevant to your meeting, enable that too.\n\n**Step 3 — Run the meeting as normal.** Since every participant gets an on-screen notification, you don't need to announce it verbally the way you would for a bot-free tool.\n\n**Step 4 — After the meeting, open the Google Doc that was saved to your Drive** (or the recap email). Read the Decisions section specifically: does each status tag (Aligned / Needs Further Discussion / Disagreed / Shelved) match your own memory of what was actually resolved?\n\n**Step 5 — Cross-check one \"Aligned\" item and one \"Next step\" against the actual conversation.** Was anything rounded off — a conditional \"maybe\" turned into a firm decision, or an action item assigned to the wrong person?\n\n**If you don't have a qualifying plan:** review the feature's official description at workspace.google.com/solutions/ai/ai-note-taking and support.google.com/meet/answer/14754931, then apply lesson 2-16's free-tier workaround for your next meeting instead — open Gemini.google.com in a tab, paste your own rough notes plus a rough transcript if you have one, and ask Gemini to produce a Decisions/Next Steps breakdown manually. Compare how well the free workaround captures nuance versus what the native feature claims to do.\n\n**Outcome:** a real captured meeting (or a tested free-tier equivalent) with a specific, checked verdict on whether the Decisions classifier can be trusted at face value for your next real call."
+    },
+    {
+      "type": "quiz",
+      "question": "During a client call, the client says \"I think we're roughly aligned on scope, but I'd want our legal team to look at the contract language before we call it final.\" Gemini's Decisions section tags this as \"Aligned.\" What's the correct way to handle this before you send a follow-up email confirming the scope is finalized?",
+      "options": [
+        "Send the email — the Decisions section is generated automatically, so it must have parsed the statement correctly",
+        "Trust the tag but soften the wording of your follow-up email slightly, just in case",
+        "Check the fuller transcript or your own memory of the call before treating it as finalized — a conditional statement pending legal review is exactly the kind of nuance an automatic classifier can round off into a firm tag",
+        "Ask the client to repeat their decision in writing before doing anything else, regardless of what the notes say"
+      ],
+      "correct": 2,
+      "explanation": "The warning in this lesson is specific to this exact failure mode: the Decisions section applies a status label automatically, and a nuanced, conditional statement (\"aligned, pending legal review\") is precisely the kind of thing that gets flattened into a firm \"Aligned\" tag. The fix isn't to distrust every AI-generated note (D overcorrects into unnecessary friction for every decision) or to just hedge your language (B doesn't actually verify anything) — it's to check the source, the same verification habit lesson 2-18 required for CRM auto-writes, before treating an automatically-classified decision as ground truth for something customer-facing."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Build Your Ask Gemini in Chat Daily-Briefing Habit",
+      "content": "This workshop gets you using Google Chat's cross-app query capability for something you'll actually rely on, not a one-off test.\n\n**Step 1 — If your organization has Google Chat with Gemini enabled**, open a chat with Gemini (or the Ask Gemini panel) and try each of these real queries, adapted to your actual work:\n- *\"Give me a briefing on what's happened across my chats and email in the last 24 hours.\"*\n- *\"Find the [specific document] that [specific colleague] shared with me recently\"* — describe it, don't name the exact file.\n- *\"Summarize the longest unread thread in [a specific channel].\"*\n\n**Step 2 — Evaluate each answer against what you know is actually true.** Did the file-retrieval-by-description query find the right file? Did the briefing miss anything you know was important?\n\n**Step 3 — If your organization doesn't have this enabled**, use lesson 2-12's free workaround instead: paste your own recent Chat/email activity into Claude.ai or Gemini.google.com and ask for the same kind of daily briefing. Note how much manual copy-paste this requires compared to the native integration.\n\n**Step 4 — Decide on one recurring use.** Pick the single query type from Step 1 that saved you the most time, and commit to running it at a fixed point in your day (e.g., first thing each morning) for the next two weeks.\n\n**Step 5 — Write down your commitment** in a note you'll actually see again: \"Each [morning/before standup/etc.], I will ask Gemini in Chat: [your query].\"\n\n**Outcome:** a real, tested daily habit built on Google Chat's AI — not a hypothetical feature you read about once and forgot."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague argues that Google Chat's 'Ask Gemini' file-retrieval-by-description feature makes it safe to stop bothering with clear file names and folder structure altogether. What's the most accurate response?",
+      "options": [
+        "They're right — Workspace Intelligence's semantic layer makes traditional file organization completely obsolete",
+        "They're wrong to abandon organization entirely: description-based retrieval works well for recent, distinctive files, but it still depends on Gemini correctly interpreting an ambiguous description across a large and growing set of files — clear naming remains a useful fallback, especially for older or easily-confused documents",
+        "File retrieval by description only works for images, not documents or spreadsheets",
+        "This feature doesn't exist yet — it's still in development as of mid-2026"
+      ],
+      "correct": 1,
+      "explanation": "Workspace Intelligence's semantic layer is a genuine convenience — described in this lesson as letting you find a file by describing it rather than naming it — but it's a retrieval aid layered on top of your files, not a replacement for organizing them. As the volume of similar documents grows, ambiguous descriptions (\"the budget sheet\") become more likely to retrieve the wrong file among several candidates. Treating good file names and folder structure as obsolete removes a reliable fallback for exactly the cases where AI retrieval is most likely to guess wrong."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-21.** You now know how Gemini's \"Take notes for me\" works in Google Meet — the Drive-saved doc, the recap email, the April 2026 Decisions/Next Steps/Details toggle — and how it differs from the third-party meeting agents in lesson 2-18: notified rather than bot-free, document-based rather than queryable. You've also seen Google Chat's summarization, smart replies, and the Workspace Intelligence-powered Ask Gemini capability that turns Chat into a cross-app query tool. You've tested the Decisions classifier against a real meeting and built a daily-briefing habit in Chat."
+    }
+  ],
+  "nextLesson": "2-22",
+  "prevLesson": "2-18"
+}

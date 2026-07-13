@@ -1,0 +1,93 @@
+{
+  "id": "2-22",
+  "title": "AI Calendar & Scheduling Assistants",
+  "part": 2,
+  "estimatedMinutes": 55,
+  "tags": [
+    "tools",
+    "intermediate",
+    "calendar",
+    "scheduling",
+    "productivity",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nYour calendar is one of the most automatable parts of your workday — and also one of the riskiest to hand to a tool that might not exist next quarter. This lesson covers the two AI scheduling assistants that matter now, Reclaim.ai and Motion, what they actually do (focus-time protection, conversational meeting negotiation, auto-scheduling), and a cautionary tale from earlier this year about what happens when the calendar tool you've built your week around simply disappears."
+    },
+    {
+      "type": "text",
+      "content": "## The Clockwise Shutdown — A Warning Worth Learning From\n\nUntil recently, Clockwise was one of the most recommended AI calendar tools on the market — 40,000 organizations, including Uber, Netflix, and Atlassian, relied on it to auto-defend focus time and reshuffle flexible meetings. On **March 27, 2026**, it shut down permanently. Its founding team — several of them former RelateIQ employees — joined **Salesforce's Agentforce** team in what Salesforce publicly characterized as an acquihire, not an acquisition of the product or its technology: \"We are not acquiring Clockwise or its technology,\" a Salesforce spokesperson told The Register.\n\nThe practical consequences for users were immediate: **all user data was deleted**, prepaid customers got prorated refunds, and every Smart Hold event Clockwise had created — Focus Time blocks, travel time, meeting breaks — vanished from calendars along with the tool. Roughly 8 million hours of Focus Time blocks and 23 million optimized meetings were affected across Clockwise's customer base.\n\nThe lesson here isn't \"don't use AI calendar tools\" — it's that a scheduling assistant, however good, is a vendor dependency like any other SaaS product: it can be acquihired out of existence with a week's notice. Whatever tool you adopt in this lesson, keep a mental note of what you'd lose and how you'd rebuild it if the same thing happened again."
+    },
+    {
+      "type": "text",
+      "content": "## Reclaim.ai — Defending Your Existing Calendar\n\nReclaim.ai (acquired by Dropbox in August 2024, still operated as a standalone product) takes a **light-touch approach**: it connects to your existing Google Calendar or Outlook Calendar and works in the background to protect the time you've told it matters, rather than replacing your calendar with something new.\n\n**Core features:**\n- **Focus Time AI Agent** — set a weekly Focus Time goal, and Reclaim's agent automatically finds and defends blocks of uninterrupted time for it, moving them around your calendar as new meetings come in. This feature is free on both Google Calendar and Outlook.\n- **Smart Meetings** — automatically finds the best time for any *recurring* meeting across multiple people's calendars, re-optimizing it as schedules shift, something Reclaim specifically markets as a gap in Motion's feature set.\n- **Habits** — recurring personal commitments (a workout, a reading block) that Reclaim schedules flexibly around your actual meeting load, rather than pinning them to a fixed time that gets bulldozed by the first conflicting meeting.\n\n**Setup time:** roughly an afternoon — connect your calendar, set a weekly focus-time goal, define a couple of recurring habits, and most users report feeling productive within the first day or week.\n\n**The company's own numbers** (from its marketing, worth treating as a ceiling rather than a guarantee): users save up to 7.6 hours/week, report a 56% reduction in burnout, and see up to 500% more productive deep-work time. Reclaim also runs a company-wide \"Focus Time Initiative\" built around the finding that employees need roughly 19.6 hours/week of focus time to be fully productive but typically get only about 10.6."
+    },
+    {
+      "type": "text",
+      "content": "## Motion — Building Your Whole Day Automatically\n\nMotion takes the opposite bet: instead of quietly optimizing your existing calendar, it wants to be your **entire schedule**, automatically building and rebuilding your day around tasks, deadlines, and meetings. Motion has evolved from its original \"auto-schedule my tasks\" feature into a broader \"AI Employees\" platform that also handles project management, time tracking, and meeting notetaking.\n\n**How it works:** you add tasks with a deadline and an estimated duration, and Motion drops them into open slots on your calendar automatically. When a new meeting appears, Motion doesn't just work around it — it can reshuffle every task on your list to make room, which is either exactly the automation you want or a source of real friction, depending on how much you like the plan changing without asking.\n\n**The tradeoff, in practice:** one 2026 review found Motion rescheduled a full day's task list 11 times in a single meeting-heavy day — useful if you trust the tool completely, disorienting if you don't. Motion also requires a longer runway to get value from: reviewers report **two to four weeks** of setup and \"teaching\" the AI your priorities before results are reliable, compared to Reclaim's roughly one-afternoon setup.\n\n**Where Motion is the better fit:** if you want a tool that manages your whole productivity stack — tasks, projects, meetings — in one place and you're willing to invest the setup time and hand over more control, Motion's more aggressive automation can outperform Reclaim's lighter touch, particularly for deep, deadline-driven individual work."
+    },
+    {
+      "type": "text",
+      "content": "## Choosing Between Them\n\n| Situation | Better fit |\n|-----------|-----------|\n| You just want your existing calendar to quietly defend focus time | Reclaim.ai |\n| You want AI to auto-schedule recurring meetings across a team | Reclaim.ai's Smart Meetings |\n| You want one tool to manage tasks, projects, and your calendar together | Motion |\n| You want minimal setup time and results within a day | Reclaim.ai |\n| You're willing to invest 2–4 weeks of setup for more autonomous scheduling | Motion |\n| You get anxious when your plan changes without warning | Reclaim.ai |\n\n**The underlying tradeoff is control versus automation.** Reclaim optimizes the calendar you already have; Motion builds and rebuilds your day for you. Neither is objectively better — the right choice depends on how much you want to stay in the loop."
+    },
+    {
+      "type": "text",
+      "content": "## Setting Up Focus-Time Rules and Letting AI Negotiate Meetings\n\nRegardless of which tool you choose, the same three-step pattern applies to both:\n\n**1. Connect your calendar.** Both tools use OAuth to connect to Google Calendar or Outlook — they don't replace your calendar app, they operate on top of it. Nothing you already have scheduled is lost; the AI works around your existing commitments from day one.\n\n**2. Set your focus-time rule explicitly.** Don't accept a tool's default — decide, in writing, how many hours per week you actually need uninterrupted, and during which parts of the day you're most productive for that kind of work. Both tools let you specify this; the AI only defends what you've told it to defend.\n\n**3. Let the AI negotiate, but review what it proposes at first.** Both tools can now handle conversational scheduling — you (or an external contact) describe availability in plain language, and the AI proposes times, checking them against everyone's calendar including your protected focus blocks. Early on, review a week or two of what it schedules before trusting it fully; this is the same \"configure once, review the output\" discipline lesson 2-18 recommended for meeting-agent automations — a scheduling mistake compounds every week it goes unnoticed."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The 19.6 vs. 10.6 hour gap.** Reclaim's research (cited in its Focus Time Initiative materials) puts the average knowledge worker's *need* for weekly focus time at 19.6 hours, against an actual average of about 10.6 hours. Whether or not you use Reclaim specifically, that gap is a useful benchmark: track your own uninterrupted-work hours for a week before adopting any scheduling tool, so you have a real baseline to measure improvement against."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Build in an exit plan before you build a dependency.** The Clockwise shutdown erased calendar automation for 40,000 organizations with essentially no warning to end users beyond a week's notice. Before you hand a scheduling tool control over your calendar: know what data you can export, keep a plain-text or spreadsheet record of your actual focus-time and habit preferences outside the tool, and periodically check that you could rebuild your setup manually if the vendor disappeared. This isn't paranoia — it happened to a market leader in March 2026."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Connect Your Real Calendar and Set a Focus-Time Rule",
+      "content": "You'll connect your actual calendar to an AI scheduling assistant and set a real focus-time goal you'll keep using after this lesson.\n\n**Step 1 — Choose a tool to trial:**\n- **Reclaim.ai** (reclaim.ai) — sign up free, connect Google Calendar or Outlook via OAuth.\n- **Motion** (usemotion.com) — sign up for the free trial, connect your calendar the same way.\n\nIf you're unsure which to pick, start with Reclaim — its setup takes an afternoon rather than weeks, so you'll see results faster within this workshop.\n\n**Step 2 — Before setting anything up, write down your actual current focus-time reality:** for the past week, roughly how many hours did you get of genuinely uninterrupted work time? Be honest — most people underestimate how fragmented their week already is.\n\n**Step 3 — Set your Focus Time goal.** In Reclaim: Habits → Focus Time → set a weekly hour target and your preferred time-of-day window. In Motion: set your working hours and add your first few real tasks with deadlines and estimated durations.\n\n**Step 4 — Add one more real recurring commitment** beyond focus time — a workout, a weekly reading block, prep time before a recurring meeting — so the tool has more than one thing to actually schedule around.\n\n**Step 5 — Let it run for the next real week** on your actual calendar (not a test event). At the end of the week, compare: how many focus-time hours did the tool actually defend, versus your Step 2 baseline? Did anything get moved in a way that annoyed you?\n\n**Outcome:** a real AI scheduling setup, running on your actual calendar, with a measured before/after comparison — not a demo you'll never open again."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague wants to try Motion because it promises to 'auto-schedule your whole day,' but they mention they get anxious when plans change without warning. Based on the tradeoffs in this lesson, what's the most accurate advice?",
+      "options": [
+        "Motion and Reclaim are functionally identical, so it doesn't matter which one they pick",
+        "Motion is objectively the better tool and their anxiety about changing plans is a reason to use it more, not less",
+        "Reclaim's lighter-touch approach — which defends focus time without aggressively reshuffling the rest of the calendar — is likely a better fit, since reviewers report Motion can reschedule an entire day's task list multiple times as new meetings appear",
+        "Neither tool is appropriate — only fully manual calendar management avoids this problem"
+      ],
+      "correct": 2,
+      "explanation": "This lesson specifically documents that Motion's more aggressive automation can reschedule a full day's tasks repeatedly (one review found 11 reshuffles in a single meeting-heavy day) — powerful for someone who fully trusts the automation, disorienting for someone who doesn't. Reclaim's model of quietly defending a focus-time goal without rebuilding the whole day is the better match for someone who wants AI scheduling help but doesn't want to feel like their plan is constantly changing without their input. Dismissing both tools (D) throws away a real productivity gain that's achievable with the right choice."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Write Your Calendar-Tool Exit Plan",
+      "content": "Given what happened to Clockwise's 40,000 customers with a week's notice, this workshop makes sure you're not caught the same way.\n\n**Step 1 — Using the tool you set up in Workshop 1, find its data export option** (check Settings or Account). Actually export your data — your focus-time rules, habits, and any custom scheduling logic you've configured. Save the export somewhere outside the tool itself.\n\n**Step 2 — Write a plain-text or spreadsheet record of your scheduling preferences**, independent of any tool's export format: your weekly focus-time target, the time-of-day window you protect it in, your recurring habits and their ideal timing, and any conversational-scheduling rules you rely on (e.g., \"never book external meetings before 10am\"). This is the record you'd hand to a replacement tool — or rebuild manually — if your current tool disappeared overnight the way Clockwise did.\n\n**Step 3 — Ask Claude.ai:** *\"Here's my calendar-scheduling setup: [paste your Step 2 notes]. If the tool running this disappeared with one week's notice, what would I need to do manually in the first week to avoid losing my protected focus time and recurring commitments?\"* Save its answer alongside your Step 2 notes.\n\n**Step 4 — Set a recurring reminder** (monthly or quarterly) to re-export your data and update this document — a one-time export goes stale as your habits and rules change.\n\n**Outcome:** a real, saved exit plan and data export — something you'll actually have if your scheduling tool's team gets acquihired the way Clockwise's did, instead of losing your setup with no warning."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the most accurate lesson to draw from the Clockwise shutdown when adopting any AI calendar tool?",
+      "options": [
+        "Avoid all AI scheduling tools entirely, since any of them could disappear at any time",
+        "Only use scheduling tools built by the very largest companies, since smaller companies are the only ones that shut down",
+        "Get the productivity benefit, but keep an independent record of your scheduling preferences and periodically export your data, since even a well-funded, widely-used tool (40,000 organizations) can vanish with about a week's notice for reasons unrelated to product quality",
+        "Clockwise's shutdown only matters to enterprise customers, not individual users setting a personal focus-time goal"
+      ],
+      "correct": 2,
+      "explanation": "The Clockwise episode wasn't caused by the product failing or losing customers — it shut down because its team was acquihired, a business decision entirely disconnected from how well the tool worked for its 40,000 organizations. That's exactly why avoiding AI scheduling tools altogether (A) throws away real productivity value over a risk that's manageable with basic precautions, and why company size alone isn't protective (B) — this can happen to well-funded, widely-adopted products. The actionable takeaway is the exit-plan habit from Workshop 2: keep your own record and export your data periodically, regardless of scale of use (D is wrong — individual users lost their Smart Holds too)."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 2-22.** You now understand what happened to Clockwise (shut down March 27, 2026, team acquihired into Salesforce's Agentforce) and why it's a cautionary tale rather than a reason to avoid AI scheduling tools. You know how Reclaim.ai's light-touch focus-time defense differs from Motion's full-day auto-scheduling, and you've connected a real calendar, set an actual focus-time rule, and measured its effect over a real week. You've also written a concrete exit plan and exported your scheduling data — so if your tool disappears the way Clockwise did, you won't lose your setup with it."
+    }
+  ],
+  "nextLesson": "2-11",
+  "prevLesson": "2-21"
+}

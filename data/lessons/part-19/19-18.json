@@ -1,0 +1,89 @@
+{
+  "id": "19-18",
+  "title": "Podcasting AI Production — Adobe Podcast & Descript",
+  "part": 19,
+  "estimatedMinutes": 55,
+  "tags": ["personal-life", "intermediate", "podcasting", "audio", "descript", "adobe-podcast", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nGood podcast audio used to require a treated room, a decent microphone, and hours of manual editing to cut out every \"um,\" mouth click, and dead-air pause. AI has collapsed most of that into two free-to-start web tools: **Adobe Podcast**, which cleans up rough recordings, and **Descript**, which lets you edit audio and video by editing a text transcript.\n\nBy the end of this lesson you'll have a realistic, repeatable workflow — record rough audio, clean it up, cut the filler words, publish — and you'll have run it on a real recording of your own voice, not a sample file."
+    },
+    {
+      "type": "text",
+      "content": "## The Realistic Workflow\n\nThe AI podcasting pipeline has four stages, and you don't need expensive equipment for any of them:\n\n**1. Record rough.** Any decent microphone — a laptop mic, a wired headset, an entry-level USB mic — is enough to start. Record in the quietest room available, but don't obsess over a perfect setup before you begin; the cleanup stage below handles more than you'd expect.\n\n**2. Clean it up.** Adobe Podcast's Enhance Speech strips background noise, room echo, and low-quality mic artifacts, and can now separate speech from music and background noise as independent, adjustable layers.\n\n**3. Cut the filler words and dead air.** Descript's filler-word removal and text-based editing turn a rough take into a tight one — in minutes, not hours of manual scrubbing through a waveform.\n\n**4. Publish.** Export and upload to whichever podcast host you use (Spotify for Podcasters, Buzzsprout, Transistor, etc.) — or, for video podcasts, straight to YouTube."
+    },
+    {
+      "type": "text",
+      "content": "## Adobe Podcast's Enhance Speech\n\nEnhance Speech is a free, no-login-required web tool at podcast.adobe.com: upload a rough recording and it returns a cleaned-up version, stripping background noise, hiss, and room echo so a recording made on a laptop mic in an untreated room can sound close to studio quality.\n\nA major overhaul in March 2026 went further than basic cleanup — Enhance Speech now does **source separation**, giving you independent control over speech, background noise, and background music as separate adjustable layers, including a music-level slider and the ability to download each element as its own stem. That means you can now dial down background music while keeping dialogue clear, something the original version couldn't do.\n\n**Free vs. paid:** the core tool remains free with no account, capped at roughly an hour of processing per day and a 30-minute/500MB limit per file. A Premium tier (from $9.99/month) removes those caps and adds batch processing, longer files, and video support.\n\n**A real limitation to know before you rely on it:** reviews of the March 2026 update are mixed — on heavily degraded audio (voices buried under music, multiple people talking over each other), the AI can overcorrect, and some users report the processed voice sounding faintly robotic at higher enhancement strengths. Treat Enhance Speech as very good at moderate noise problems, not a fix for a genuinely bad original recording. It's also audio cleanup only — it doesn't generate new speech or dialogue, which is what Descript's Overdub (below) is for."
+    },
+    {
+      "type": "text",
+      "content": "## Descript: Edit Audio Like a Text Document\n\nDescript's core idea is simple and genuinely useful: it transcribes your recording, and you edit the *text* — delete a sentence in the transcript and the corresponding audio is cut from the timeline automatically. No waveform-scrubbing required.\n\n**Filler-word removal** is the single most-cited time-saver among Descript users: one click strips \"um,\" \"uh,\" \"like,\" and similar filler words and awkward pauses across an entire recording, with independent testing putting accuracy in the 90-95% range.\n\n**Overdub** is Descript's voice-cloning feature, built specifically for *fixing* your own recordings rather than generating new speech from scratch: give it roughly 10 minutes of your own voice, and afterward you can type a sentence and Descript generates it in your cloned voice — useful for fixing a flubbed word or a mispronounced name without re-recording the whole segment. Overdub now has a free trial on Free and Creator plans (with a 1,000-word vocabulary cap); Pro removes that cap entirely. Descript can also translate and dub a recording into 20+ languages, and its transcription supports 23 languages with speaker identification.\n\n**A meaningful constraint:** Overdub only clones *your own* voice, by design — it isn't built for creating other AI voices or characters, which limits (deliberately) how it could be misused compared to a general-purpose voice cloning tool."
+    },
+    {
+      "type": "text",
+      "content": "## Putting It Together: A Real Episode Workflow\n\n1. **Record** your rough audio or video — a real episode segment, an interview, a solo commentary, whatever you're actually making.\n2. **Enhance** it at podcast.adobe.com — upload the raw file, adjust the speech/noise/music balance if there's any background sound, download the cleaned version.\n3. **Import the cleaned file into Descript.** Let it auto-transcribe.\n4. **Run filler-word removal**, then read through the transcript and manually cut anything else that doesn't belong — a rambling tangent, a repeated sentence, a section that ran too long.\n5. **Fix any flubbed lines with Overdub** rather than re-recording the whole take, if the error is small and isolated.\n6. **Export and publish** to your podcast host or to YouTube for a video episode.\n\nThis is the same amount of *content* production most podcasters were doing manually a few years ago, compressed into a fraction of the editing time — the raw recording still has to be good enough to be worth cleaning, and the actual talking still has to be yours."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Overdub is voice cloning — treat it with the same care as any other voice clone.** It's scoped to your own voice by design, which limits misuse, but the underlying capability is identical to tools this course has flagged elsewhere: once a synthetic version of your voice exists, think about where those files live, who has access to your Descript account, and whether you'd want a listener to know a given sentence was AI-regenerated rather than originally spoken. Most podcasters use Overdub for small factual corrections, not to fabricate content the speaker never actually said — that's a reasonable line to hold for yourself too."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Record, Clean, and Cut a Real Segment",
+      "content": "You'll run a real recording of your own voice through the full cleanup-and-cut pipeline and end up with something genuinely publishable.\n\n**Step 1 — Record 3-5 minutes of real content.** Not a test clip — pick something you'd actually want to exist afterward: a short personal update, an opinion on something in your field, a story worth telling, or the intro segment for a podcast you're actually planning. Use whatever microphone you have.\n\n**Step 2 — Go to podcast.adobe.com** and upload your recording to Enhance Speech. Compare the before and after — listen specifically for background noise, echo, and clarity. If there's background music or noise, try the independent speech/noise/music controls from the March 2026 update.\n\n**Step 3 — Download the cleaned file**, then import it into Descript (descript.com, free account). Let it auto-transcribe.\n\n**Step 4 — Run one-click filler-word removal.** Listen to the result. Then read through the transcript yourself and manually delete anything that doesn't earn its place — a false start, a rambling aside, a sentence you'd cut if you were being honest with yourself.\n\n**Step 5 — Export the final cut** as an audio file. This is a real, finished, publishable segment — save it somewhere you'll actually use it, or upload it if you have a podcast host set up.\n\n**Outcome:** A real, cleaned, tightly-edited audio segment in your own voice — produced with the same pipeline a professional podcast production would use, in a fraction of the time manual editing would take."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 2 — Fix a Real Mistake with Overdub",
+      "content": "You'll use Descript's Overdub to fix an actual mistake in your own recording, rather than re-recording the whole thing — and think through where you'd draw your own line on using it.\n\n**Step 1 — In your Workshop 1 recording (or a new short one), find a real flub:** a mispronounced word, a stumbled phrase, a name you got wrong. If you don't have one, record a fresh 60-second clip and deliberately include one.\n\n**Step 2 — Set up Overdub** (Descript → your account → Overdub, on Free/Creator trial or Pro). Follow the prompts to record the required voice sample — roughly 10 minutes of clear speech reading provided script text.\n\n**Step 3 — Once your voice model is ready, select the flubbed word or phrase in your transcript** and use Overdub to regenerate just that section in your cloned voice, correcting the mistake. Listen back — does it blend seamlessly with the surrounding real audio, or is there an audible seam?\n\n**Step 4 — Write two sentences:** (1) What would you use Overdub for, specifically — small corrections, or more than that? (2) Would you ever disclose to a listener that a specific line was AI-regenerated, and under what circumstance would that matter versus not?\n\n**Outcome:** A real recording with an actual mistake fixed via voice cloning instead of a full re-record, plus a personally-reasoned line for when you would and wouldn't use the feature."
+    },
+    {
+      "type": "quiz",
+      "question": "What did Adobe Podcast's March 2026 Enhance Speech update add that the original version couldn't do?",
+      "options": [
+        "The ability to generate entirely new spoken dialogue from text",
+        "Source separation — independent, adjustable control over speech, background noise, and background music as separate layers, including a music-level slider and downloadable stems",
+        "Automatic translation into 20+ languages",
+        "Real-time enhancement during a live recording"
+      ],
+      "correct": 1,
+      "explanation": "The March 2026 update's headline addition is source separation: instead of one blended cleanup pass, Enhance Speech now lets you independently adjust or mute speech, background noise, and background music, and download each as its own stem. It's still audio cleanup, not speech generation (option A) — that's Descript's Overdub. Translation (option C) is a Descript feature, not Adobe Podcast's."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the key design limitation of Descript's Overdub, and why does it matter?",
+      "options": [
+        "It only works on video files, never on standalone audio",
+        "It clones only your own voice by design, rather than being a general-purpose tool for creating arbitrary AI voices or other people's voices — which is a deliberate, meaningful constraint on how it could be misused",
+        "It requires a Descript Pro subscription with no free trial available at all",
+        "It can only fix single words, never full phrases or sentences"
+      ],
+      "correct": 1,
+      "explanation": "Overdub is scoped specifically to cloning the account holder's own voice for correcting their own recordings — not a general voice-cloning tool for arbitrary voices. That scoping is a deliberate constraint that meaningfully limits misuse potential compared to an unrestricted voice-cloning tool, even though the underlying technology is similar to tools this course has flagged elsewhere for consent concerns."
+    },
+    {
+      "type": "quiz",
+      "question": "A podcaster records a rough interview with heavy background music and multiple people talking over each other, then runs it through Adobe Podcast's Enhance Speech expecting studio-quality output. Based on this lesson, what should they realistically expect?",
+      "options": [
+        "Perfect studio-quality audio in all cases, since Enhance Speech has no real limitations",
+        "The tool may overcorrect on heavily degraded audio like this, and the processed voice can sound faintly robotic at higher enhancement strengths — Enhance Speech is very good for moderate noise problems, not a complete fix for a genuinely difficult original recording",
+        "Enhance Speech will refuse to process the file entirely if any background music is present",
+        "The recording needs to be re-recorded — Enhance Speech cannot help with background noise or overlapping speech at all"
+      ],
+      "correct": 1,
+      "explanation": "This lesson's honest framing of Enhance Speech's March 2026 update is that reviews are mixed on genuinely difficult source material: heavily degraded audio (music-buried voices, overlapping speakers) can cause the AI to overcorrect, with some users reporting a faintly robotic result at higher enhancement strengths. It handles moderate noise problems very well, but it isn't magic — a difficult original recording sets a ceiling on how good the output can realistically be."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-18 — and this part's coverage of AI content-creation tools.** You have a real, repeatable podcast production workflow: record rough, clean up with Adobe Podcast's Enhance Speech (now with independent speech/noise/music control), cut filler words and dead air with Descript's text-based editing, and fix small mistakes with Overdub instead of re-recording. You've run a real recording of your own voice through the full pipeline and produced something genuinely publishable. Next: lesson 19-12 covers real-time voice AI — ChatGPT Advanced Voice and Gemini Live."
+    }
+  ],
+  "nextLesson": "19-12",
+  "prevLesson": "19-17"
+}

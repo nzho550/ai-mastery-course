@@ -1,0 +1,103 @@
+{
+  "id": "16-18",
+  "title": "AI for Educators & Institutions",
+  "part": 16,
+  "estimatedMinutes": 55,
+  "tags": [
+    "enterprise",
+    "intermediate",
+    "education",
+    "edtech",
+    "khanmigo",
+    "magicschool",
+    "academic-integrity",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 19-5 covered AI as a *learning* tool — using Claude or ChatGPT as your own personal tutor. This lesson is different: it's about AI built for the other side of the classroom — the teachers, professors, and school administrators who plan lessons, grade work, and are increasingly asked to police whether a student's work is even their own. If you are (or work alongside) an educator, this is the landscape you're operating in as of 2026: two AI platforms used by millions of teachers for free, a fast-maturing category of grading and integrity tools with real accuracy problems, and a genuine institutional shift in how schools respond to AI-written homework. If you're not an educator, this lesson is still worth your time — it's the clearest example in this course of an entire profession being reshaped by free, vendor-subsidized AI tools in under two years."
+    },
+    {
+      "type": "text",
+      "content": "## Khanmigo for Teachers: Free Nationwide via a Microsoft Partnership\n\n**Khanmigo** is Khan Academy's AI assistant, and its teacher-facing side has scaled dramatically since Microsoft agreed, in May 2024, to donate Azure OpenAI infrastructure so that every K-12 teacher in the United States could use Khanmigo for Teachers for free — a product that had previously cost $4/month. That free-for-US-teachers offer has since gone global: by December 2025, Microsoft and Khan Academy extended free access to Khanmigo for Teachers to 180+ countries and territories (with the notable exceptions of Cuba, Iran, North Korea, Syria, and Russian-occupied Crimea, Donetsk, and Luhansk).\n\nThe growth numbers back up the scale: by the end of the 2024-25 school year, Khanmigo was live in 795 school districts, with 770,000 U.S. students and roughly 2 million users globally — nearly half of them teachers who signed up once the tool became free. Khan Academy's chief learning officer called it the biggest one-year jump in edtech adoption she'd seen in two decades. On the teacher side, Khanmigo drafts lesson plans, differentiates materials for different reading levels, generates rubrics, and — in a feature teachers consistently rate as the most useful — role-plays as a struggling or a defiant student so a teacher can rehearse a difficult classroom conversation before having it for real.\n\nWorth knowing: Khan Academy isn't locked to one model vendor. As of January 2026, Khanmigo runs on a mix of GPT-4 for tutoring dialogue, Microsoft's smaller Phi-3 model for lighter tasks, and — following a new January 2026 partnership — Google's Gemini specifically for its Writing Coach feature. If your school uses Khanmigo, you're likely interacting with more than one underlying model without necessarily being told which one, depending on the task."
+    },
+    {
+      "type": "quiz",
+      "question": "Why is Khanmigo for Teachers free for every K-12 teacher in the United States as of 2026, when it used to cost $4/month?",
+      "options": [
+        "Khan Academy eliminated the paid tier entirely for all users, including students and parents",
+        "Microsoft agreed in May 2024 to donate Azure AI infrastructure specifically to make the teacher-facing product free, an offer later extended globally to 180+ countries by December 2025",
+        "The U.S. federal government mandated free AI tools for all public school teachers",
+        "Khanmigo for Teachers was always free; only the student tutoring product was ever paid"
+      ],
+      "correct": 1,
+      "explanation": "The May 2024 Microsoft-Khan Academy partnership specifically donated Azure OpenAI infrastructure to make Khanmigo for Teachers free for all U.S. K-12 educators — students/parents still pay $4/month (or $44/year) for the tutoring product (ruling out A and D, since the free offer was teacher-specific and the student product remains paid). There's no federal mandate involved (C) — this is a vendor partnership, not government policy. The teacher-free offer has since expanded globally to 180+ countries as of December 2025."
+    },
+    {
+      "type": "text",
+      "content": "## MagicSchool AI: 80+ Tools, Faster Growth Than Any Edtech Platform Before It\n\nWhere Khanmigo is one company's flagship product, **MagicSchool AI** is a dedicated platform built from the ground up for teachers, offering more than 80 purpose-built tools covering lesson planning, differentiated worksheets, IEP (Individualized Education Program) drafting, rubric generation, and parent-communication emails. Founded in 2023 by a former teacher, principal, and district administrator, MagicSchool has grown faster than any education technology platform on record: by early 2026 it had crossed 5-6 million educator sign-ups, used in more than 13,000 schools and districts across 160+ countries — with at least one teacher using it in nearly every school district in the U.S.\n\nThe company raised a $45 million Series B in early 2025 (closing January 31, 2025), led by Valor Equity Partners with Bain Capital Ventures and Adobe Ventures participating — a round that alone represented roughly three-quarters of all AI-in-education funding that quarter, a sign of how much investor attention this specific category has attracted. On compliance, MagicSchool is FERPA, COPPA, GDPR, and SOC 2 certified and holds a 93% rating on the Common Sense Privacy Seal — credentials that matter a great deal in education, where student data protection is a legal requirement, not a nice-to-have.\n\nThe practical difference from Khanmigo: MagicSchool is explicitly a teacher-productivity toolkit (lesson plans, IEPs, rubrics, parent emails) rather than a tutoring product with a teacher side bolted on — many schools run both, using Khanmigo for direct student tutoring support and MagicSchool for the administrative and planning workload that consumes teachers' unpaid hours."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**How many teachers actually use AI?** Depends who's asking and how. A widely cited 2023-24 figure puts K-12 generative-AI use at 83% of teachers (for either personal or school purposes); a 2026 TPT survey of 11,500 educators found 80% using AI in the classroom, while other survey methodologies produce numbers as low as 50-54% (RAND, 2025) depending on whether 'used AI at all' or 'uses AI regularly' is being measured. What's consistent across every survey: adoption roughly doubled or more between 2023 and 2026, and teachers who use AI weekly report meaningful time savings — one estimate puts it at nearly 6 hours per week, or roughly six extra weeks reclaimed across a school year. What's also consistent: formal district guidance lags far behind adoption, with only about 1 in 5 teachers reporting any district AI training as of the most recent EdWeek survey."
+    },
+    {
+      "type": "text",
+      "content": "## The Other Half of the Job: Grading and Academic-Integrity Tools\n\nLesson planning is only one side of a teacher's AI toolkit. A separate, faster-growing category exists specifically for grading and for detecting whether a student used AI to write something they submitted as their own work:\n\n- **Turnitin** — the long-established plagiarism-checking platform now ships an AI Writing Report alongside its classic text-matching, flagging content it assesses as likely AI-generated.\n- **CoGrader** — built specifically to speed up grading itself: it reads student essays against a rubric and drafts scored feedback for a teacher to review and adjust, rather than trying to detect AI use.\n- **GPTZero** and **Winston AI** — dedicated AI-detection tools, positioned as more specialized (and in some third-party tests, more accurate on certain text types) than Turnitin's built-in detector; Winston AI in particular markets strength in scanning handwritten work (via OCR) and detecting deepfakes, not just typed text.\n\nThese tools sound like a clean technical fix for a real problem. In practice, the accuracy picture is messy enough that it's reshaped school policy."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**AI detectors are far less reliable than their marketing suggests — and the errors aren't evenly distributed.** Vendors advertise sensitivity in the 87-99% range, but independent academic testing tells a different story: Turnitin's own published research shows a 4-9% false-positive rate on non-native English speakers' writing versus 1-4% for native speakers — an equity gap the company itself acknowledges. A Stanford study found some detectors falsely flagged over half of TOEFL essays written by non-native speakers as AI-generated, compared to roughly 1-3% for native-English essays — a 5-10x disparity. The consequences are real: Curtin University disabled Turnitin's AI-detection feature entirely on January 1, 2026, becoming the first major university to publicly drop it over reliability and bias concerns, and the European Association for Academic Integrity has called for a moratorium on automatic disciplinary consequences from AI-detection scores pending further research. The direction of travel for many institutions: stop treating a detector score as proof of anything on its own, and require corroborating evidence (drafts, version history, an in-person conversation) before any accusation."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Build a Real Lesson Artifact With an Educator AI Tool",
+      "content": "If you're an educator (or work with school-facing content), this workshop produces something you'll actually use in a classroom. If you're not, complete it for a hypothetical or past class you're familiar with — the artifact is still real practice.\n\n**Step 1 — Choose your tool.** Sign up for Khanmigo for Teachers (khanmigo.ai/teachers — free for US K-12 teachers) or MagicSchool AI (magicschool.ai — free tier available).\n\n**Step 2 — Generate one real artifact you'd actually use**, not a demo: a full lesson plan for a topic you're teaching this term, a differentiated version of an existing worksheet for a specific reading level, an IEP goal draft, or a rubric for an upcoming assignment. Give it real, specific inputs — your actual grade level, actual topic, actual time constraints — not generic placeholders.\n\n**Step 3 — Edit it like you would any colleague's draft.** Check every factual claim it makes about the subject matter, remove anything generic that doesn't fit your actual students, and adjust the reading level if it's off.\n\n**Step 4 — Save the finished artifact** somewhere you'll actually use it (your lesson-planning folder, your LMS, a shared drive with your team) — and if you're on a team, share it with one colleague as a starting point they can adapt, rather than keeping it to yourself.\n\n**Outcome:** a real, edited, ready-to-use lesson plan, worksheet, IEP draft, or rubric — not a one-off demo — plus firsthand experience with the specific tool (Khanmigo or MagicSchool) most likely to already be licensed at your school."
+    },
+    {
+      "type": "quiz",
+      "question": "A district administrator is deciding whether to formally adopt Khanmigo, MagicSchool AI, or both. What's the most accurate way to frame the difference between the two, based on this lesson?",
+      "options": [
+        "They're functionally identical products competing purely on price",
+        "Khanmigo is Khan Academy's broader platform with strong direct-to-student tutoring plus a teacher side, while MagicSchool AI is a dedicated teacher-productivity toolkit (80+ tools for lesson planning, IEPs, rubrics, parent communication) built from the ground up for the teacher side of the job — many schools use both for different purposes",
+        "MagicSchool AI is only for higher education, not K-12",
+        "Khanmigo requires a paid subscription for teachers while MagicSchool AI has always been fully free with no paid tier"
+      ],
+      "correct": 1,
+      "explanation": "The two platforms overlap but aren't identical: Khanmigo's core identity is student tutoring (with a teacher side attached), while MagicSchool was purpose-built as a teacher-productivity toolkit from day one — which is exactly why many districts run both rather than choosing one. Option A ignores this real distinction. Option C is wrong — MagicSchool is heavily used in K-12, its primary market. Option D reverses the facts: Khanmigo for Teachers is free (via the Microsoft partnership) while MagicSchool offers free and paid tiers."
+    },
+    {
+      "type": "text",
+      "content": "## The Real Shift: From 'Detect and Punish' to 'Disclose and Design'\n\nGiven the false-positive problem, a growing number of schools and individual instructors are moving away from relying on detection scores as the primary defense against AI misuse, toward two complementary strategies instead:\n\n- **Disclosure norms** — instead of banning AI outright (unenforceable) or ignoring it (irresponsible), many instructors now require students to disclose *how* they used AI on an assignment — which tools, for what part of the process (brainstorming vs. drafting vs. final polish) — treating undisclosed use as the integrity violation, rather than use itself.\n- **AI-resistant assignment design** — rather than trying to catch AI use after the fact, redesigning the assignment so a generic AI output can't satisfy it: requiring in-class writing components, requiring students to reference and build on a specific, recent class discussion or a source only available in class, grading the reasoning/drafting process (via version history or in-person defense) rather than only the final polished text.\n\nNeither strategy eliminates the underlying tension — a determined student can still misrepresent their process, and a genuinely innovative use of AI can still look suspicious to a keyword-driven detector. But both strategies reduce the institution's dependence on a detection technology with documented, unevenly distributed error rates, which is precisely why bodies like the European Association for Academic Integrity are pushing schools in this direction."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Redesign One Assignment to Reduce Both AI-Shortcut Risk and False-Positive Risk",
+      "content": "This workshop asks you to apply the 'disclose and design' shift from this lesson to one real assignment — a genuine artifact you (or a teacher you know) could use next term.\n\n**Step 1 — Pick one real, existing assignment** you teach, have taught, or are otherwise familiar with (a past school assignment, a training module you deliver at work, or a real assignment a teacher in your life uses) — something specific, not a hypothetical.\n\n**Step 2 — Identify its AI-shortcut risk.** Could a student produce a passing version of this assignment by pasting the prompt into ChatGPT with minimal editing? Be honest about this.\n\n**Step 3 — Redesign it using the two strategies from this lesson.** Add a disclosure requirement (what would you ask students to report about their AI use, and how would you word it so it doesn't feel like a trap?). Then redesign at least one part of the assignment to require something a generic AI output can't supply — a reference to a specific in-class moment, a defense of the work in conversation, a required draft-history submission.\n\n**Step 4 — Ask Claude or ChatGPT to stress-test your redesign**: \"Here's my redesigned assignment: [paste it]. If a student wanted to use AI to shortcut this anyway, how would they do it, and what would close that gap?\" Incorporate anything useful it surfaces.\n\n**Step 5 — Save the final redesigned assignment** as a real document you could hand out next term (or share with the teacher you had in mind in Step 1).\n\n**Outcome:** one real assignment, redesigned to be both harder to shortcut with generic AI output and less dependent on an unreliable detection score — a concrete artifact, not a hypothetical policy."
+    },
+    {
+      "type": "quiz",
+      "question": "A teacher relies solely on a 92%-accuracy AI detector to fail any student whose essay is flagged as AI-generated, with no other evidence considered. Based on what this lesson covered about detector accuracy, what's the biggest problem with this policy?",
+      "options": [
+        "92% accuracy means the policy is essentially error-free and defensible as the sole basis for a grade",
+        "Published false-positive rates are not evenly distributed — non-native English speakers are flagged at rates several times higher than native speakers in independent testing, meaning a 'sole evidence' policy will disproportionately and wrongly penalize ESL students",
+        "AI detectors only work on essays, not other assignment types, so the policy is too narrow rather than too strict",
+        "The teacher should switch to a different detector with a higher advertised accuracy number instead of changing the policy"
+      ],
+      "correct": 1,
+      "explanation": "This lesson's core accuracy warning is specifically about the *uneven distribution* of detector errors — a headline accuracy number can look reassuring while still producing a large equity gap, since ESL/non-native-English writers are flagged at rates several times higher than native speakers in independent studies (per the Stanford research cited in this lesson). That's why institutions like Curtin University and the European Association for Academic Integrity are moving away from single-detector-score policies entirely, not toward a 'better' detector (D) — vendor-advertised accuracy numbers (like 92%) come from internal testing that doesn't capture this disparity, and switching detectors doesn't fix a policy design problem (relying on one score with no corroborating evidence, as flagged in this lesson's warning callout)."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-18.** You now know the two dominant AI platforms serving teachers as professionals — Khanmigo for Teachers (free via Microsoft's Azure partnership, ~2 million users across 795+ districts and 180+ countries) and MagicSchool AI (5-6 million educator sign-ups, 13,000+ schools, 160+ countries, a $45M Series B) — plus the distinct grading and academic-integrity tooling category (Turnitin, CoGrader, GPTZero, Winston AI) and its real, unevenly-distributed accuracy problems. You've built a real classroom artifact with an educator AI tool and redesigned a real assignment using the 'disclose and design' approach that's replacing pure detect-and-punish policy in a growing number of schools."
+    }
+  ],
+  "nextLesson": "16-19",
+  "prevLesson": "16-17"
+}

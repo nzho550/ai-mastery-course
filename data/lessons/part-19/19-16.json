@@ -1,0 +1,89 @@
+{
+  "id": "19-16",
+  "title": "AI Music Generation — Suno, Udio & the New Songwriting Toolkit",
+  "part": 19,
+  "estimatedMinutes": 55,
+  "tags": ["personal-life", "intermediate", "music", "audio", "suno", "udio", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nThis part has covered AI writing, images, video, and voice — but not music, which has quietly become one of the fastest-growing categories in consumer AI. Type a style and a lyric idea into Suno or Udio and get back a full, mixed, multi-instrument song in under a minute — verse, chorus, bridge, vocals, and all. What used to require a studio, a singer, and a mixing engineer now takes a browser tab.\n\nBy the end of this lesson you'll understand what Suno and Udio actually do differently, why 2025-2026 was the moment AI music went from a legal gray area to something the major record labels are formally licensing, and you'll have produced a real, finished track for something you'll actually use — not a throwaway demo."
+    },
+    {
+      "type": "text",
+      "content": "## From Novelty to Legally Mainstream\n\nFor most of 2023-2025, AI music generation lived in a legal gray zone. Suno and Udio trained their models on recorded music without licenses, and in June 2024 Universal Music Group, Sony Music, and Warner Music all sued both companies for copyright infringement.\n\nThat picture changed fast in late 2025. **Warner Music settled with both Suno and Udio.** **Universal Music Group settled with Udio on October 29, 2025**, and **Warner Music settled with Udio again, separately, on November 19, 2025** — in both cases pairing the settlement with a genuine licensing deal: a new, fully-licensed Udio platform (launching through 2026) where participating artists opt in, get paid when their music trains the model, and get paid again when subscribers use their voice or style to create new songs. Udio also signed a **$110 million publishing deal with the National Music Publishers' Association**, split 50/50 between recordings and songs.\n\nThis is the real shift to understand: AI music generation is moving from 'trained on whatever was scraped, fight it out in court later' to 'trained on music the rights holders were paid to license, with artists able to opt in or stay out.' It isn't finished — **Sony Music has not settled with Udio**, Suno remains in active litigation with both UMG and Sony, and in June 2026 the American Federation of Musicians sued UMG and Warner directly, arguing session musicians were licensed into these AI deals without their own compensation or credit. But two of the three majors now have Udio as a formal, paid partner rather than a defendant — that's a fundamentally different industry than the one this technology launched into."
+    },
+    {
+      "type": "text",
+      "content": "## Suno v5.5: Voices, Custom Models, and Suno Studio\n\nSuno released **v5.5 on March 26, 2026**, its most expressive model yet, alongside three features aimed at making generated music feel like *yours* rather than generic:\n\n**Voices** — the most requested feature in Suno's history, available to Pro and Premier subscribers 18 and older. You capture or upload 15 seconds to 4 minutes of your own singing (Suno auto-selects the best 2 minutes, and can isolate your vocal even from a recording with background music), pass a verification step that matches your singing voice to a random spoken phrase, and Suno builds a private voice model only you can use. From then on, you can generate songs where the AI sings *in your own cloned voice* — a genuinely different thing from picking a generic AI singer from a preset list.\n\n**Custom Models** — upload at least 6 tracks from your own back-catalog and Suno trains a personalized version of v5.5 tuned to your sound. Pro and Premier subscribers can create up to three.\n\n**My Taste** — the one personalization feature with no paywall. Suno quietly learns your favorite genres, moods, and reference points over time and applies them automatically whenever you use the Magic Wand shortcut.\n\n**Suno Studio** ships alongside v5.5 for Pro and Premier subscribers, extending the workflow past a single text-prompt-and-done generation into a fuller production surface for arranging and refining what the model gives you, rather than only ever generating a fresh take from scratch.\n\nThe business numbers back up how fast this has moved: on **February 25-26, 2026**, Suno's CEO announced the platform had hit **2 million paid subscribers and $300 million in annual recurring revenue** — doubling its subscriber base in three months and growing revenue 50% in the same window, with over 100 million people having used the platform at all. Pricing: a free tier, Pro at $10/month, and Premier at $30/month."
+    },
+    {
+      "type": "text",
+      "content": "## Udio: Inpainting, Sessions, and the Coming Licensed Platform\n\nUdio has always leaned toward *editing* a generated song rather than only ever regenerating it wholesale, and that's still its core differentiator:\n\n**Inpainting** lets you select a specific section of an existing track — a weak bridge, an off chorus, a verse that doesn't land — and regenerate *just that section* while everything around it stays untouched. This is the single biggest practical advantage Udio has over a pure one-shot generator: instead of rerolling an entire song hoping the next version fixes one problem, you fix the one problem.\n\n**Sessions** is Udio's song-structure tool: a timeline where you arrange verses, choruses, and bridges, and extend or shorten sections to reshape the song's form. It's worth being precise about what Sessions is *not* — there's no stem-level editing, no per-stem EQ, no waveform warp markers, and no take comparison ('Alternates'). It's a structure tool, not a DAW.\n\nUdio's current product remains available through the UMG and Warner transition, running inside a more restricted 'walled garden' with fingerprinting and filtering added as part of the settlements — and notably, **Udio disabled download functionality on October 30, 2025**, the day after the UMG deal, which upset existing users who'd built libraries of tracks they could no longer export. The fully licensed, next-generation Udio platform — where participating artists' voices and styles are usable *with their consent and compensation* — is set to roll out through 2026."
+    },
+    {
+      "type": "text",
+      "content": "## Suno vs. Udio: Which One For What\n\n| | Suno v5.5 | Udio |\n|---|---|---|\n| Standout feature | **Voices** — sing in your own cloned voice | **Inpainting** — regenerate one section, keep the rest |\n| Structure & production | Suno Studio — fuller arrangement/production surface | Sessions — verse/chorus/bridge timeline, not a full DAW |\n| Major-label status (mid-2026) | Warner settled; UMG and Sony still litigating | UMG (Oct 2025) and Warner (Nov 2025) settled and licensed; Sony still litigating |\n| Scale (Feb 2026) | 2M paid subscribers, $300M ARR | Smaller — roughly $10M raised vs. Suno's $125M+ |"
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Two different problems, don't confuse them.** First, licensing status is not fully resolved on either platform — a track you generate today isn't automatically 'safe' for commercial use just because some label deals were signed; check the current terms of service for the tier you're on before using AI-generated music in anything you'll sell, sync to video for a client, or publish commercially. Second, Voices and voice cloning generally raise the same consent question this course has flagged for AI video and photo editing: cloning *your own* voice with your own consent is straightforward, but the same underlying capability could be misused to imitate someone else's singing voice without permission. Treat a cloned singing voice with the same care you'd treat a cloned speaking voice."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop A — Generate a Real, Usable Track",
+      "content": "You'll produce a finished piece of music for something you'll actually use — not a demo you'll forget about.\n\n**Step 1 — Pick a real use case.** Choose one that's genuinely yours:\n- A jingle or theme for a personal project, side business, podcast, or YouTube channel you actually run\n- A birthday, anniversary, or celebration song for a specific real person, using specific real details about them\n- Background/atmosphere music for a real video, presentation, or slideshow you're building (tie this to Workshop C or D from Lesson 19-11 if you made a video there)\n\n**Step 2 — Choose your tool.** Sign up free at suno.com or udio.com.\n\n**Step 3 — Write a detailed prompt.** Vague prompts produce generic results. Specify:\n- Genre and era (e.g. \"upbeat 90s pop-rock\" not just \"upbeat\")\n- Instrumentation (acoustic guitar, synth pads, live drums)\n- Mood and tempo\n- If you want lyrics: write your own custom lyrics referencing the real person/project/occasion rather than letting the AI invent generic ones — this is what makes the track actually *about* something real\n\n**Step 4 — Generate 3-4 versions** and listen critically. Note what's working and what isn't in each one — a good chorus in version 2, better production in version 3.\n\n**Step 5 — Fix, don't just reroll.** If you're on Udio and one section is weak, use **Inpainting** to regenerate just that section instead of the whole song. If you're on Suno, try Suno Studio's arrangement tools, or generate a fresh take of just the weak section using the same style tags.\n\n**Step 6 — Download the finished track** and use it for its actual purpose today: attach it to the project, send it to the person it's for, or drop it into your video.\n\n**Outcome:** A finished, real piece of music serving an actual purpose in your life or work — not a one-off experiment you'll never listen to again."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop B — A Refinement and Consent Pass",
+      "content": "You'll take the track from Workshop A one step further, and think through the consent question that comes with voice cloning.\n\n**Step 1 — If you're 18+ and have a Suno Pro or Premier account, try Voices.** Record or upload a clear a cappella sample of your own singing (15 seconds to 4 minutes). Complete the verification step. Generate a short new take of your Workshop A track — or a new one entirely — using your own cloned singing voice. Listen back: how close is it to how you actually sound?\n\n**If Voices isn't available to you** (age, tier, or region), skip cloning and instead do a focused **inpainting pass** on Udio: pick the single weakest 10-15 seconds of your Workshop A track and regenerate just that section three different ways. Pick the best one.\n\n**Step 2 — Write one sentence on consent.** If you ever clone someone else's voice — a bandmate, a friend who sang backup on a demo, a public figure — what would you need from them first? Compare this to the disclosure question this course raised for AI photo/video editing in Lesson 19-14: it's the same underlying issue, applied to a singing voice instead of a face.\n\n**Step 3 — Save your final version somewhere permanent** — your actual project folder, shared with the person the song is for, or published to wherever your side project lives.\n\n**Outcome:** A refined final track, plus a concrete, personally-reasoned answer to when voice cloning needs explicit consent — not just a rule you're taking on faith."
+    },
+    {
+      "type": "quiz",
+      "question": "What is the single biggest practical difference between Udio's Inpainting and simply regenerating a whole song again from the same prompt?",
+      "options": [
+        "Inpainting is free while full regeneration costs credits",
+        "Inpainting lets you regenerate one specific section of a track while everything else stays exactly as it was, instead of rerolling the entire song and hoping the new version fixes the one part you didn't like",
+        "Inpainting only works on instrumental tracks, not vocals",
+        "There is no real difference — they produce identical results"
+      ],
+      "correct": 1,
+      "explanation": "Option B is correct. Full regeneration is a gamble: you might fix the weak bridge but lose a chorus you loved. Inpainting solves the actual problem — surgically regenerating just the flawed section while the rest of the track, including parts you already liked, stays untouched. This is Udio's core practical advantage over a pure one-shot generator."
+    },
+    {
+      "type": "quiz",
+      "question": "What does Suno's Voices feature specifically enable that distinguishes it from earlier AI music tools?",
+      "options": [
+        "Generating songs faster than previous Suno versions",
+        "Letting subscribers 18+ clone their own singing voice (after a verification step) so generated songs can be sung in that person's actual voice, rather than a generic AI singer",
+        "Automatically writing lyrics based on the user's mood",
+        "Removing the need for a Suno account to generate music"
+      ],
+      "correct": 1,
+      "explanation": "Voices is specifically about identity — capturing and verifying your own singing voice so future generations can use it, rather than picking from a library of generic AI voices. It's restricted to Pro/Premier subscribers 18 and older and requires passing a verification step that matches your singing to a spoken phrase, precisely because a cloneable singing voice raises the same consent concerns as any other voice-cloning technology."
+    },
+    {
+      "type": "quiz",
+      "question": "Why does the UMG and Warner licensing deals with Udio (October and November 2025) matter more than a typical lawsuit settlement?",
+      "options": [
+        "Because it ends all copyright disputes over AI-generated music industry-wide",
+        "Because instead of just paying damages and walking away, the deals convert the labels into paid, opt-in partners — participating artists get compensated both when their music trains the model and when subscribers create new songs using their voice or style",
+        "Because it means every song ever generated by Udio before the deal is now automatically licensed retroactively",
+        "Because Sony Music also joined the same agreement at the same time"
+      ],
+      "correct": 1,
+      "explanation": "The deals are structurally different from a plain settlement: they create an ongoing, compensated, opt-in relationship rather than just resolving past claims. Artists choose to participate, get paid for training use, and get paid again on generation use. Option A overstates the resolution — Sony has not settled with Udio, and Suno remains in litigation with both UMG and Sony, so this is a partial, not industry-wide, resolution. Option D is factually wrong — Sony is notably absent from these agreements."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-16.** You now understand what actually differentiates Suno (Voices, Custom Models, Suno Studio) from Udio (Inpainting, Sessions), and why 2025-2026 marked AI music's shift from a copyright gray zone toward formally licensed partnerships with two of the three major labels — while Sony's holdout and the AFM musicians' lawsuit show that shift is still incomplete. You've generated and refined a real track for something you'll actually use, and thought through when voice cloning needs consent. Next: lesson 19-11 covers AI video generation — and one thing has changed there too, since OpenAI shut down Sora in April 2026."
+    }
+  ],
+  "nextLesson": "19-11",
+  "prevLesson": "19-10"
+}

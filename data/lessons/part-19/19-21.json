@@ -1,0 +1,93 @@
+{
+  "id": "19-21",
+  "title": "AI Dating & Matchmaking",
+  "part": 19,
+  "estimatedMinutes": 50,
+  "tags": [
+    "personal-life",
+    "beginner",
+    "dating",
+    "relationships",
+    "reflection",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nDating apps spent a decade optimizing for the swipe. In 2026, several of the biggest names in the industry are actively dismantling that model in favor of AI-driven matchmaking, and a new wave of voice-first apps has appeared that skip profiles and swiping entirely. At the same time, a large and well-documented survey finding shows something genuinely worth sitting with: most people who use AI dating tools themselves would reject a match who did the same thing. This lesson covers what's actually shipping — the platform shift, the new apps, and the AI features inside the apps you already know — and treats that hypocrisy finding as a real discussion point, not a punchline, in the same practical-but-honest spirit as Lesson 19-15's treatment of AI companions."
+    },
+    {
+      "type": "text",
+      "content": "## The End of the Swipe?\n\nThe clearest sign of the shift is Bumble. Facing a 21% year-over-year drop in paid users (down to 3.2 million in Q1 2026) and a 10% revenue decline, CEO Whitney Wolfe Herd announced in May 2026 that Bumble is 'saying goodbye to the swipe' entirely, replacing it with AI-driven matchmaking in a relaunch planned to roll out starting in Q4 2026 across select markets. Bumble is also dropping its signature women-message-first rule in the process, while saying it wants to preserve 'the essence' of that original design intent.\n\nThe underlying pressure is real: global dating app installs dipped 4% in 2025 amid widespread 'swipe fatigue,' and 57% of online daters report feeling burnt out on the format. **Hinge**, notably, never used swiping in the first place and has used that as a growth story — from $8 million in revenue in 2018 to $550 million in 2024 — by positioning itself around curated, intentional matches rather than volume. Coffee Meets Bagel has leaned further into slow dating with a single curated daily match and a seven-day chat limit designed to push conversations toward meeting in person rather than lingering in-app."
+    },
+    {
+      "type": "text",
+      "content": "## The New Voice-First Apps\n\nAlongside the established platforms pivoting away from swiping, a genuinely new category has launched in 2026: apps that skip profiles, photos, and swiping altogether in favor of a conversation with an AI matchmaker.\n\n**Known** (San Francisco, launched mid-February 2026, over $10 million raised): no profiles, no swiping, no in-app chat between users at all. You're interviewed by voice by an in-app AI matchmaker about your personality, values, and what you're looking for — the founders' bet is that spoken answers are more honest and less curated than typed ones. When it finds a match, you pay $15 to lock in a real-life meetup, which also discourages no-shows. Currently focused on the San Francisco Bay Area.\n\n**Joey AI** (Santa Monica, launched February 2026): entirely phone-call based. You call a phone number, an AI voice named Joey asks you several questions, and hangs up — no app, no profile to build. If Joey later thinks it's found a compatible match, it texts both people to connect them.\n\n**Amata** (New York, expanding from Paris, launched in the US in late 2025/early 2026): you chat with an AI matchmaker (called 'an Amata' in-app) about your preferences and goals. When it proposes a match, a $16 token unlocks AI-planned date logistics — the AI picks a location based on both people's proximity and preferences. To fight flaking, a cancelled date banks your token for later use, and two cancellations in a row pauses new match recommendations for a week. Amata says it's coordinating roughly 2,000 first dates a month in New York alone.\n\nSimilar apps in this same 'no swipe, no DM' space include Sitch, Keeper, Ditto, Iris, and Fate — this is a genuine emerging category, not a one-off experiment."
+    },
+    {
+      "type": "text",
+      "content": "## AI Inside the Apps You Already Use\n\nTinder, Bumble, and Hinge have all shipped substantial AI features in early 2026, even before Bumble's bigger swipe-removal relaunch:\n\n**Tinder** rolled out a speed-dating format in spring 2026 — photo-verified users join scheduled events with three-minute video chats, extendable if there's chemistry — alongside a 'Chemistry' feature piloted in Australia that analyzes camera-roll photos and quiz answers to suggest better matches, aimed at reducing swipe fatigue. Tinder has committed roughly $60 million to AI development.\n\n**Bumble** launched AI profile tools in February 2026 that give personalized feedback on your bio, photos, and prompts, plus a 'Deception Detector' that the company says blocks about 95% of fake accounts before they ever reach a real user.\n\n**Hinge** built its 'AI Core Discovery Algorithm' — the company reports a 15% increase in matches and contact exchanges since the update — alongside AI Convo Starters (suggested opening messages) and Prompt Feedback (tells you if a profile prompt answer is weak). A behavioral guardrail called 'Your Turn Limits' blocks new likes when you have too many unanswered conversations already, turning your own response habits into a factor in what you're shown next."
+    },
+    {
+      "type": "text",
+      "content": "## The Hypocrisy Worth Sitting With\n\nHere's the finding worth taking seriously rather than laughing off: a June 2026 Match Group survey of roughly 1,000 US singles aged 18-39 found that 74% use ChatGPT and 64% say AI helps them write a stronger profile or keep a conversation going — genuinely widespread, normalized use. But in the same survey, 47% view AI negatively in the context of romantic relationships, and two in five (40%) said they would refuse to date someone who uses an AI companion app — a figure that rises to 51% among women aged 18-24. Norton's 2026 Insights Report found a matching pattern from a different angle: 64% of online daters said it would bother them to learn a match had used AI to edit their photos or draft their profile prompts — even though, per the same report, most people use exactly those tools themselves.\n\nThe honest reading isn't 'people are hypocrites, case closed.' Coverage of the Match survey found something more specific: people aren't rejecting AI outright, they're drawing a line between AI that helps with the logistics of dating (writing a bio, keeping a conversation moving, suggesting a match) and AI that would replace the human, authentic part of getting to know someone. As one analysis put it, the actual sentiment is closer to 'help with the hard parts, but hands off for the human parts' — which is a coherent position, even if it produces the double standard of using a tool yourself while judging someone else for the same use."
+    },
+    {
+      "type": "text",
+      "content": "## Using These Tools Without Losing the Plot\n\nA few practical points, given everything above:\n\n- **AI-assisted profile writing works best as editing help, not ghostwriting.** A bio that's 100% AI-generated with no input from you tends to read generically — and if a match later notices the mismatch between your writing and your conversation style, that's the exact 'inauthentic' feeling the Match/Norton surveys found people react against.\n- **Curated or voice-matched introductions (Known, Joey AI, Amata, Hinge's algorithm) are not a background check.** They filter for stated compatibility, not safety. The same real-world precautions that predate AI dating still apply in full: meet in a public place for a first date, video-call before meeting if you haven't already, tell a friend where you're going.\n- **AI-driven catfishing and romance scams have not gone away — if anything, they've gotten more convincing.** A cloned voice, an AI-generated profile photo, or an AI-written message can now pass a casual authenticity check more easily than a few years ago. Healthy skepticism toward anyone who avoids a video call or phone call before meeting is more relevant now, not less."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Two different shifts are happening at once, and it's worth keeping them separate.** One is established apps (Tinder, Bumble, Hinge) adding AI *features* to an existing swipe-based or curated-match format. The other is entirely new apps (Known, Joey AI, Amata) built from the ground up around an AI matchmaker conversation, with no swiping or profile browsing at all. They're solving overlapping problems with different amounts of AI involved — worth knowing which one you're actually trying before judging 'AI dating' as a single category."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**An AI matchmaker curating your date does not replace your own safety judgment.** Whether a match came from a swipe, a curated algorithm, or a $16 AI-planned date logistics service, the underlying safety practices are unchanged: meet the first time in public, verify the person is who their profile/voice claimed to be before meeting, and don't let a platform's vetting language ('Deception Detector,' 'intentional matchmaking') substitute for your own precautions."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Stress-Test an AI-Assisted Dating Profile",
+      "content": "This workshop produces a real, improved piece of writing you can actually use — whether or not you're currently dating.\n\n**Step 1 — Write (or find) a real dating-profile bio or prompt answer.** If you have an active profile, use it. If not, write one honestly as if you were creating a profile today — 2-4 sentences is enough.\n\n**Step 2 — Ask Claude to critique it, not rewrite it from scratch:** \"Here's my dating profile bio: [paste it]. Give me honest feedback — does this sound like a real, specific person, or could it describe almost anyone? What's one detail I could add that would make it distinctly mine? Don't rewrite it for me — tell me what to fix.\"\n\n**Step 3 — Revise it yourself** based on the feedback, keeping your own voice rather than accepting an AI-generated replacement wholesale.\n\n**Step 4 — Ask a second question:** \"If a stranger read this profile and then talked to me for five minutes, would the person match the profile, or would it feel like a mismatch?\" Be honest with yourself about the answer.\n\n**Step 5 — Research one app's actual AI-feature disclosure.** Pick one app mentioned in this lesson (Tinder, Bumble, Hinge, Known, Joey AI, or Amata) and find its actual privacy or 'how it works' page. Note: does it disclose when a suggested opener or bio edit came from AI? Does it explain how your data (photos, voice, camera roll) is used to power matching?\n\n**Outcome:** a genuinely improved, still-authentically-yours profile bio, plus a real answer to how transparent one specific app actually is about its AI use."
+    },
+    {
+      "type": "quiz",
+      "question": "According to the June 2026 Match Group survey of US singles aged 18-39, which combination of findings most accurately describes the 'hypocrisy' pattern in AI dating?",
+      "options": [
+        "Nearly all respondents said they never use AI for dating and strongly disapprove of anyone who does",
+        "74% reported using ChatGPT and 64% said AI helps their dating profile or conversations, while 47% viewed AI negatively in relationships and 40% (51% among women 18-24) said they'd refuse to date someone who uses an AI companion app",
+        "Respondents were evenly split, with exactly half approving and half disapproving of any AI use in dating",
+        "The survey found no meaningful gap between people's own AI use and their judgment of others' AI use"
+      ],
+      "correct": 1,
+      "explanation": "This is the actual documented pattern: widespread personal use of AI for dating-adjacent tasks (74% using ChatGPT, 64% saying it helps with profiles/conversations) coexists with a significant share holding negative views of AI in relationships generally (47%) and specifically saying they'd reject a match who used an AI companion app (40% overall, 51% among women 18-24). This is a real gap between self-reported use and judgment of others' use, not an even split or a uniform rejection of AI — and it isn't simply 'no gap,' since the whole point of the finding is that a gap exists."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Your Honest Answer to the Hypocrisy Question",
+      "content": "This workshop asks you to sit with the actual tension from this lesson rather than resolve it too quickly.\n\n**Step 1 — Answer honestly for yourself:** Would you use (or have you used) AI to help write a dating profile, draft an opening message, or find a match? Be specific about which of those, if any.\n\n**Step 2 — Answer the harder question:** If you found out a match had done the exact same thing you just described, would it bother you? Would it change how you saw them? Write 2-3 honest sentences — don't reach for the 'consistent' answer if it isn't actually your gut reaction.\n\n**Step 3 — If there's a gap between your Step 1 and Step 2 answers, examine it rather than smoothing it over.** The Match survey's own framing is a useful lens: is your line really about AI itself, or is it about which *parts* of dating feel like they should stay unmistakably human (a first message, a joke, noticing something specific about the other person) versus which parts feel fine to get help with (fixing a typo, choosing a better photo)?\n\n**Step 4 — Write one sentence stating where your actual line is**, specific enough that you could apply it the next time you're using — or evaluating — an AI dating tool.\n\n**Outcome:** an honest, examined personal position on AI in dating — not a verdict on the category, but a specific, workable answer to where your own line sits, which is more useful than a general opinion when you're actually on a dating app."
+    },
+    {
+      "type": "quiz",
+      "question": "A friend is excited about trying Amata, which uses an AI matchmaker to find a match and then plans the entire first date's logistics for a $16 token. What is the most accurate safety guidance to give them, based on this lesson?",
+      "options": [
+        "Since the AI vetted the match and planned the date, no additional safety precautions are needed beyond a normal social outing",
+        "AI-curated matchmaking and AI-planned date logistics filter for compatibility, not safety — the same precautions that apply to any first date with someone met online still apply: meet in public, verify identity before meeting, and tell someone where they're going",
+        "AI matchmaking apps like Amata are inherently less safe than traditional swipe-based apps and should be avoided entirely",
+        "The $16 token fee itself functions as a background check on the other person"
+      ],
+      "correct": 1,
+      "explanation": "AI matchmaking services like Amata are designed to find compatible matches and streamline the logistics of a first date — that's a genuinely different function from vetting someone's safety or identity, and no fee (the $16 token) constitutes a background check. Regardless of how the match was found or how sophisticated the curation process is, the standard first-date safety precautions from meeting anyone online — public meeting place, some form of verification before meeting, telling someone your plans — remain necessary. There's no evidence these apps are inherently less safe than swipe-based ones; the risk is the same regardless of matching method, which is exactly why the guidance doesn't change based on which app was used."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-21.** You now understand the shift away from swiping — Bumble's overhaul, Hinge's non-swipe growth, and Coffee Meets Bagel's curated-match model — the new voice-first apps built around an AI matchmaker conversation (Known, Joey AI, Amata), the AI features already inside Tinder, Bumble, and Hinge, and the well-documented gap between widespread personal AI use in dating and people's stated judgment of others who do the same. You've stress-tested an AI-assisted profile and worked out your own honest position on that hypocrisy. Lesson 19-22 closes out Part 19 with AI safety for kids and families — a different but related topic on where AI and personal relationships intersect."
+    }
+  ],
+  "nextLesson": "19-22",
+  "prevLesson": "19-15"
+}

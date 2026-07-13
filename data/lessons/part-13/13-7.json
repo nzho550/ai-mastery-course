@@ -1,0 +1,97 @@
+{
+  "id": "13-7",
+  "title": "Deepfakes & Voice Cloning — Consent, Law & Detection",
+  "part": 13,
+  "estimatedMinutes": 55,
+  "tags": [
+    "safety",
+    "intermediate",
+    "deepfakes",
+    "voice-cloning",
+    "legal",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 19-11 showed you how to use ElevenLabs and similar tools to clone a voice for legitimate content — narration, dubbing, accessibility. This lesson doesn't repeat that tutorial. Instead it covers the other side of the same technology: the law that now governs who's allowed to clone whose voice, the platform rules that took effect in 2026, and — most practically — what to do when you're the one being targeted by a cloned voice on the other end of a phone call. Voice cloning has gone from a novelty to a fraud vector fast enough that the law, platforms, and ordinary people are all still catching up."
+    },
+    {
+      "type": "text",
+      "content": "## Why This Matters Now: The Voice-Phishing Surge\n\nThe numbers here aren't marketing hype — they're the reason state and federal law moved as fast as it did. Deepfake fraud attempts surged roughly **3,000% in 2023** alone as generative AI tools became broadly accessible, and fraud attempts involving deepfakes are estimated to have risen over **2,000% across the last three years** globally. The FBI attributes more than **$893 million** in US losses last year to AI-related scams, including voice-cloning attacks.\n\nWhat makes voice specifically dangerous is how little material an attacker needs: **as little as 3 seconds of audio can produce a voice clone roughly 85% accurate** to the real person — a clip easily pulled from a voicemail greeting, a social media video, or a public talk. On the human side, surveys find **70% of people aren't confident they can distinguish a real voice from an AI clone**, and roughly **40% say they would act on a voicemail from a loved one asking for help** — exactly the trust a scammer is counting on. This is the backdrop for both the law covered below and the personal safeguards in this lesson's workshop."
+    },
+    {
+      "type": "text",
+      "content": "## The Law, Part 1 — State Right of Publicity: Tennessee's ELVIS Act\n\nTennessee's **ELVIS Act** (Ensuring Likeness Voice and Image Security), signed March 21, 2024 and effective July 1, 2024, was the first US law to explicitly extend an individual's right of publicity to their voice — both their actual voice and a **simulation** of it. Before the ELVIS Act, Tennessee's publicity-rights statute (originating from the Elvis Presley estate litigation) covered name, photograph, and likeness, but not voice.\n\n**What it does:** anyone whose voice is cloned without consent has both a civil cause of action and, in some cases, criminal recourse (a Class A misdemeanor — up to 11 months, 29 days in jail and/or a $2,500 fine). Notably, the law also reaches **the tool makers themselves** — it allows a lawsuit against anyone who makes available \"an algorithm, software, tool, or other technology\" whose primary purpose is producing unauthorized voice replicas, not just the person who used it maliciously. Damages triple if the unauthorized voice belonged to someone who served in the armed forces.\n\nThe bill passed near-unanimously (30-0 in the Tennessee Senate, 93-0 in the House) with strong backing from Nashville's music industry, which had watched AI-cloned vocals of real artists go viral without consent. Other states have moved on similar ground since, but Tennessee's is the one to know as the template."
+    },
+    {
+      "type": "text",
+      "content": "## The Law, Part 2 — Federal TAKE IT DOWN Act: Platforms Must Act Within 48 Hours\n\nSigned into federal law on **May 19, 2025**, the TAKE IT DOWN Act criminalizes the nonconsensual publication of intimate images, explicitly including AI-generated \"digital forgeries\" (deepfakes). Its criminal prohibition took effect immediately, but it gave **covered platforms** — essentially, any website or app that primarily hosts user-generated content — exactly one year to build a functioning notice-and-removal system.\n\n**That deadline landed on May 19, 2026.** From that date, a covered platform must have a process letting someone report nonconsensual intimate content (including AI-generated deepfakes) and must act on a valid request within **48 hours**. The FTC began enforcement the same day, with civil penalties up to **$53,088 per violation**, and sent formal warning letters to major platforms including Meta, Apple, Microsoft, TikTok, Reddit, Snapchat, and X in the lead-up to the deadline. The law also includes a good-faith safe harbor: a platform that removes reported content in good faith isn't liable to the content's creator, even if the content is later found not to have violated the Act.\n\nThe practical upshot if you're ever targeted: as of mid-2026, you have a concrete, time-boxed legal lever — a 48-hour platform response requirement — that didn't exist before this deadline."
+    },
+    {
+      "type": "text",
+      "content": "## The Law, Part 3 — EU AI Act: Disclosure, Not Just Removal\n\nWhere the TAKE IT DOWN Act focuses on *removing* harmful content after the fact, **Article 50 of the EU AI Act** (becoming applicable August 2, 2026, with a transition to December 2, 2026 for certain provider-side marking systems) takes a *disclosure-first* approach: it requires that synthetic or AI-manipulated audio, video, images, or text be clearly and distinguishably labeled as such, no later than the first time someone is exposed to it.\n\nFor deepfakes specifically, deployers must disclose that content has been artificially generated or manipulated — a duty that exists regardless of whether the deepfake is malicious or benign, and regardless of production quality. There are narrow exemptions for law enforcement use and for clearly artistic, satirical, or fictional work (which gets a lighter-touch disclosure requirement rather than a full exemption). The European Commission has taken a broad interpretive stance: if an AI system interacts directly with people or produces content resembling a real person, place, or event realistically enough to be mistaken for authentic, the presumption is that disclosure is required.\n\nTogether, these three legal developments — a state voice-specific publicity right, a federal platform-takedown mandate, and an EU disclosure regime — represent three different levers against the same underlying harm: consent violation through synthetic media. None of them alone fully protects you; together they form the current landscape you should know exists."
+    },
+    {
+      "type": "text",
+      "content": "## The Consensual Side: Cloning a Voice With Permission\n\nLesson 19-11 already walked through the mechanics of consensual voice cloning — ElevenLabs' Voice Lab, recording your own voice, generating narration and dubbing. That's not repeated here. What's worth adding, now that you've seen the legal landscape above: consent is doing real legal work, not just ethical work. Under the ELVIS Act's framework, a voice you've cloned with the speaker's documented permission — your own voice for a personal project, a voice actor's under contract, a colleague's for an internal training video with their sign-off — sits on the legal side of a line that unauthorized cloning does not. If you're cloning anyone's voice but your own for any purpose beyond pure experimentation, get that consent in writing before you start, not after someone asks."
+    },
+    {
+      "type": "text",
+      "content": "## Protecting Yourself: What to Do When You're the Target\n\nHuman detection of a high-quality voice clone is unreliable — accuracy drops **below 30%** for the best clones, meaning \"I'd be able to tell\" is not a safe assumption to build a defense on. The practical countermeasures below don't depend on your ear being good enough:\n\n**1. A family or team verification codeword.** Agree in advance on a word or phrase that only real family members (or real colleagues, for business contexts) would know — never share it over a channel that could itself be compromised. If someone calls in apparent distress asking for money, wire transfers, or gift cards, ask for the codeword before doing anything else. A cloned voice can mimic tone and speech patterns; it can't know a codeword you never said in any recorded or public context.\n\n**2. Independent callback verification.** If you get an urgent call from a \"family member\" or \"executive\" asking for money or sensitive action, hang up and call them back on a number you already had saved — never a number the caller gives you, and never by staying on the same line.\n\n**3. Slow down deliberately.** Scammers relying on voice cloning depend on urgency to prevent verification. Any call demanding immediate action, secrecy, or an unusual payment method (gift cards, cryptocurrency, wire transfer) is a red flag regardless of how convincing the voice sounds.\n\n**4. Audit your own cloneable exposure.** Publicly posted videos, voicemail greetings, podcast appearances, and conference talks are all viable source material for a 3-second-or-longer clone. You can't eliminate this exposure entirely if you have any public presence, but you can know what's out there — see the workshop below."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Don't rely on your own judgment to detect a clone by ear.** With human detection accuracy below 30% for high-quality clones, treating \"that sounded like them\" as sufficient verification is exactly the failure mode scammers exploit — especially combined with 40% of people saying they'd act on a distressed voicemail from a loved one. Verification protocols (a codeword, an independent callback) work regardless of how good the clone sounds; your ear does not."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**The law helps, but it's not fast enough to be your only defense.** A 48-hour platform takedown window (TAKE IT DOWN Act) or a civil suit under the ELVIS Act can address a violation after it's discovered — but neither stops a scammer mid-call from getting money wired in the ten minutes before you realize something's wrong. Treat the legal protections in this lesson as recourse, and the verification habits above as prevention. You need both."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 1 — Audit Your Own Cloneable Voice Footprint",
+      "content": "Given that 3 seconds of audio is enough for a usable clone, this workshop finds out how much source material about your own voice is already public.\n\n**Step 1 — Search for your own name plus \"video\"** across YouTube, LinkedIn, company \"about us\" or team pages, conference recordings, podcast appearances, and any local news coverage. List every public source you find where your voice is audible for more than a few seconds.\n\n**Step 2 — Check your voicemail greeting.** If it's your own recorded voice, that's a usable and easily obtained sample — anyone can call your number and get it without you knowing.\n\n**Step 3 — For each source you find, note how easy it would be for a stranger to find it** (a top Google result vs. something buried three pages deep) and roughly how many seconds of clear, isolated speech it contains.\n\n**Step 4 — Decide on at least one concrete action** based on what you found: switching your voicemail to a generic text-to-speech greeting instead of your own voice, requesting removal of an old public recording you no longer need public, or simply accepting the exposure but making sure your family/team codeword (Workshop 2) accounts for it.\n\n**Step 5 — Write down what you found and what you decided to do about it** — a short note, not a formal document, but something concrete enough that you could act on it today.\n\n**Outcome:** a real, specific picture of your own voice's public exposure, and at least one action taken (or deliberately declined) as a result — not an abstract awareness that \"this could happen to someone.\""
+    },
+    {
+      "type": "quiz",
+      "question": "Your elderly parent receives a call from what sounds exactly like your voice, panicked, saying you've been in an accident and need money wired immediately to a stated account. Based on this lesson, what should your parent do?",
+      "options": [
+        "Wire the money immediately — hesitating could mean the difference between helping their child in time or not",
+        "Judge whether the voice really sounds like their child before deciding — if it's convincing enough, that's good evidence it's real",
+        "Ask for a pre-agreed family verification codeword, and separately hang up and call back on a number they already have saved for their child — a cloned voice can mimic tone perfectly but cannot know a codeword that was never spoken in any public or recorded context",
+        "Text the number back asking \"is this really you?\" before wiring anything"
+      ],
+      "correct": 2,
+      "explanation": "This lesson specifically flags that human detection accuracy for high-quality voice clones drops below 30% — so judging by how convincing the voice sounds (B) is exactly the unreliable method scammers exploit, and the urgency in the call is itself designed to prevent verification (A). A pre-agreed codeword and an independent callback to a number the parent already has (not a number provided by the caller, and not a reply to the same channel) are the two countermeasures that don't depend on the voice sounding fake — because a clone can be audio-perfect and still not know the codeword or be reachable at the real number."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Workshop 2 — Set Up a Real Family or Team Verification Codeword",
+      "content": "This produces an actual safeguard you and the people you'd protect will use, not a hypothetical plan.\n\n**Step 1 — Choose your circle.** This could be immediate family, a small group of close relatives, or — for a workplace version — your team or anyone with authority to approve wire transfers or urgent payments on your behalf.\n\n**Step 2 — Agree on a codeword or short phrase together**, in person or over a channel you're certain is secure (not a group chat that could be screenshotted or leaked, ideally spoken in person or over a call you initiated). Make it something memorable but not guessable from public information about any of you — not a pet's name that's on someone's public social media, for instance.\n\n**Step 3 — Agree on the exact protocol**, not just the codeword: what situations trigger asking for it (any urgent request for money, gift cards, wire transfers, or sensitive action over a call or voice message), what happens if the caller can't provide it (hang up, verify independently, do not proceed), and who else in the circle should be notified if this happens.\n\n**Step 4 — Write the protocol down** somewhere every person in the circle can find it later — not just in memory. Include: the trigger conditions, the verification steps (codeword + independent callback), and what NOT to do (don't wire money, don't stay on the line arguing, don't use a number the caller provides).\n\n**Step 5 — Actually tell everyone in the circle**, not just the people most worried about this. A safeguard only one person knows about doesn't work.\n\n**Outcome:** a real, documented, communicated verification protocol that exists outside this lesson — the concrete safeguard the Accomplishment Principle asks every workshop to leave you with."
+    },
+    {
+      "type": "quiz",
+      "question": "A platform receives a valid report that a video posted on it is a nonconsensual AI-generated deepfake of a real person. Under the TAKE IT DOWN Act's requirements that took effect May 19, 2026, what is the platform's obligation?",
+      "options": [
+        "The platform has no specific deadline — it must act \"in a reasonable time,\" which courts will interpret case by case",
+        "The platform must act on the valid removal request within 48 hours, or face potential FTC enforcement and civil penalties",
+        "The platform is only obligated to act if the depicted person has already filed a civil lawsuit under a state law like Tennessee's ELVIS Act",
+        "The platform can wait up to one year, matching the original grace period Congress gave platforms to build their removal systems"
+      ],
+      "correct": 1,
+      "explanation": "The one-year grace period (until May 19, 2026) was for platforms to build their notice-and-removal systems, not the response time once a valid request comes in — as of that deadline, covered platforms must act on a valid removal request within 48 hours, with FTC enforcement (penalties up to $53,088 per violation) behind it. This is a platform-level, notice-and-removal obligation independent of any separate state-law civil suit (C) the depicted person might also have available."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 13-7.** You now understand why voice-cloning fraud accelerated so sharply (a 3,000% surge in 2023, sub-30% human detection accuracy for good clones) and the three legal responses now in force: Tennessee's ELVIS Act extending publicity rights to voice, the federal TAKE IT DOWN Act's 48-hour platform takedown mandate (effective May 19, 2026), and the EU AI Act's Article 50 disclosure requirement for synthetic media. You've distinguished consensual cloning (covered hands-on in lesson 19-11) from the consent violations these laws target, audited your own cloneable voice footprint, and set up a real family or team verification codeword you'll actually use if you're ever targeted."
+    }
+  ],
+  "nextLesson": "15-1",
+  "prevLesson": "13-6"
+}

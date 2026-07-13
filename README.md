@@ -21,7 +21,7 @@ This is the **AI Mastery Course** — a built, deployed, offline-capable website
 - Advanced techniques: RAG, agents, model selection, custom knowledge engines
 - Building custom AI skills/commands for Claude Code
 
-**Course structure:** 21 parts, 259 lessons, ~259 hours total learning time. Available in English and Chinese (language toggle in the header).
+**Course structure:** 21 parts, 280 lessons, ~278 hours total learning time. Available in English and Chinese (language toggle in the header).
 
 **Status:** Live at GitHub Pages ([nzho550/ai-mastery-course](https://github.com/nzho550/ai-mastery-course)). All content authored, site built, i18n complete.
 
@@ -59,27 +59,27 @@ ai-mastery-course/
 | # | Title | Lessons |
 |---|-------|---------|
 | 1 | AI Foundations | 7 |
-| 2 | Your First AI Tools | 20 |
+| 2 | Your First AI Tools | 22 |
 | 3 | Prompt Engineering | 8 |
-| 4 | AI Safety, Privacy & Cost Management | 6 |
+| 4 | AI Safety, Privacy & Cost Management | 7 |
 | 5 | AI for Research & Knowledge Work | 8 |
-| 6 | AI for Document Creation & Office Work | 17 |
+| 6 | AI for Document Creation & Office Work | 22 |
 | 7 | AI for Project Planning & Management | 9 |
-| 8 | AI for Personal Life | 15 |
+| 8 | AI for Personal Life | 22 |
 | 9 | Computer & Command Line Basics | 7 |
 | 10 | VS Code: Complete Beginner Guide | 12 |
 | 11 | AI Inside VS Code | 30 |
-| 12 | Other AI Coding Tools | 12 |
+| 12 | Other AI Coding Tools | 14 |
 | 13 | Claude Code: Complete Guide | 14 |
-| 14 | Building Custom AI Skills | 8 |
+| 14 | Building Custom AI Skills | 10 |
 | 15 | MCP: Model Context Protocol | 23 |
-| 16 | AI Automation & Workflow | 10 |
+| 16 | AI Automation & Workflow | 12 |
 | 17 | AI APIs & Building Your First AI Tool | 10 |
 | 18 | Local AI with Ollama | 7 |
 | 19 | Advanced AI Mastery | 14 |
 | 20 | Loop Engineering | 17 |
 | 21 | Capstone Projects | 5 |
-| **Total** | | **259 lessons** |
+| **Total** | | **280 lessons** |
 
 Business-owner and people-management content (validating/launching a business, performance reviews, hiring, OKRs, keeping tabs on a team's work without micromanaging) lives in Part 11 ("AI Inside VS Code"), lessons 6-24/6-29/6-30, with cross-links from Part 7 ("AI for Project Planning & Management").
 

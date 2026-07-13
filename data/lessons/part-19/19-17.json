@@ -1,0 +1,89 @@
+{
+  "id": "19-17",
+  "title": "Free Pro-Grade Video AI — DaVinci Resolve 21",
+  "part": 19,
+  "estimatedMinutes": 50,
+  "tags": ["personal-life", "intermediate", "video", "davinci-resolve", "editing", "hands-on"],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 19-14 covered AI editing tools baked into apps you already use for casual touch-ups — Google Photos, Photoshop's web tier, CapCut. This lesson is the next rung up: a genuinely professional, timeline-based editor with a serious AI toolset built in — and, remarkably, most of it is free.\n\nBlackmagic Design's **DaVinci Resolve 21**, released in 2026, ships nine AI-powered tools directly in the application: search your footage by what's actually in it, de-age or age a face on camera, generate a stand-in voiceover from a 10-second sample, and more. By the end of this lesson you'll know what's actually in Resolve 21, what's free versus what needs the paid Studio upgrade, how it compares to Adobe's paid Premiere Pro + Firefly path, and you'll have used it on a real editing task."
+    },
+    {
+      "type": "text",
+      "content": "## Why This Is a Different Tier From Lesson 19-14\n\nGoogle Photos, Photoshop's web Generative Fill, and CapCut are built for a quick fix on a photo or clip you already have — remove an object, extend a shot by a couple of seconds, add captions. They're genuinely useful, but they're not built for assembling and grading a full multi-clip project.\n\nDaVinci Resolve is a complete non-linear editor used on real film and TV productions — color grading, multi-track audio (Fairlight), visual effects (Fusion), and now a deep AI toolset, all in one application. It has a real learning curve compared to CapCut's point-and-click simplicity. The trade-off: once you're past that curve, you have professional-grade control that the everyday apps in 19-14 don't offer — and, critically, Blackmagic gives away a genuinely capable free version, not just a trial."
+    },
+    {
+      "type": "text",
+      "content": "## What's Actually New in DaVinci Resolve 21's AI Toolset\n\nResolve 21 ships nine confirmed AI tools. The three most immediately useful for everyday editing:\n\n**AI IntelliSearch** — instead of scrubbing through hours of footage looking for one shot, you search for it. IntelliSearch combines three search methods at once: a visual machine-learning search that scans every frame for objects and people, a transcription search across spoken dialogue, and a metadata search. Ask for \"the shot with the red car\" or search a line of dialogue and Resolve finds it.\n\n**AI Face Age Transformer** — adds or removes age-related facial features on a tracked face, non-destructively, directly on the timeline. No de-aging VFX house required for a subtle age adjustment.\n\n**AI Speech Generator** — creates a synthetic voice from as little as a 10-second audio clip, with controls for speed, pitch, and inflection. Useful for a scratch/placeholder voiceover track while you finish editing, or for small dialogue fixes.\n\nThe remaining six — AI CineFocus (simulated depth-of-field/refocus after the fact), AI Face Reshaper, AI Blemish Removal, AI Slate ID, AI UltraSharpen, and AI Motion Deblur — round out a toolset aimed squarely at the kind of fine, time-consuming correction work that used to require a specialist.\n\nOne more capability worth flagging in the Fairlight audio page, though naming has varied across early hands-on coverage: an automatic dialogue-panning tool that tracks where a speaker is positioned on screen and pans their dialogue audio to match — handy for multi-camera or multi-speaker footage without manually keyframing pan settings for every cut."
+    },
+    {
+      "type": "text",
+      "content": "## Free vs. Studio: What You Actually Get Without Paying\n\nDaVinci Resolve has always shipped a genuinely usable free edition alongside the paid Studio version (a one-time $295 license, not a subscription). With Resolve 21's AI tools, coverage of exactly which tools sit in which tier varies across early hands-on reviews — some testing found AI Clip Analysis (the engine behind IntelliSearch) greyed out or gated behind a Studio upgrade prompt in the free edition. The honest summary: DaVinci Resolve Studio's AI Neural Engine is confirmed to power the full toolset — IntelliSearch, CineFocus, Speech Generator, both face tools, Blemish Removal, Slate ID, UltraSharpen, and Motion Deblur. Some of these tools are also available for free, but exactly which ones varies by release and platform. Before you build a workflow around a specific AI tool, check Blackmagic's current comparison page for your version — don't assume free-tier coverage from an older review."
+    },
+    {
+      "type": "text",
+      "content": "## The Paid Alternative: Premiere Pro + Firefly\n\nIf you're already inside Adobe's ecosystem — or need Adobe's specific model lineup — Premiere Pro is the paid comparison point. At NAB 2026, Adobe added **Kling 3.0 and Kling 3.0 Omni** to Firefly's roster of generative video models, joining Google's **Veo 3.1**, **Nano Banana 2**, and **Runway Gen-4.5** — pushing Firefly past 30 available models in total. Kling 3.0 focuses on fast, high-quality general video generation with strong audio-visual sync; Kling 3.0 Omni adds professional-grade shot control — specifying each shot's camera angle, movement, and duration, with stronger subject consistency across shots. Firefly integrates directly with Premiere: storyboard or generate B-roll in Firefly Boards, then send it straight into your Premiere timeline without a manual export/import step.\n\nSeparately, in February 2026 Adobe ran an **unlimited-generations promotion** across eligible Firefly and Creative Cloud plans — removing daily/monthly credit caps on image and video generation for a defined promotional window tied to your plan's start date, not a permanent removal of limits. Read the terms for your specific plan before assuming \"unlimited\" applies indefinitely.\n\nThe practical takeaway: DaVinci Resolve 21 is the free-but-professional path for editing, correcting, and grading footage you already have. Premiere + Firefly is the paid path when you specifically need Adobe's generative model lineup (Kling, Veo, Nano Banana, Runway) integrated into a timeline. They're solving overlapping but different problems — Resolve's AI tools work on real footage you shot; Firefly's models generate new footage from a prompt."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Who this lesson is for.** If Lesson 19-14's everyday tools (Google Photos, Photoshop web, CapCut) already cover what you need, you don't need to learn a full NLE. This lesson is for someone editing something with real stakes — a client project, a short film, a YouTube channel you're trying to grow past casual — where the control a professional editor offers (precise color grading, multi-track audio, a real timeline) starts to matter more than point-and-click convenience."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop 1 — Install DaVinci Resolve and Search Real Footage with IntelliSearch",
+      "content": "You'll set up Resolve on a real editing project — footage you actually shot or already have — and use IntelliSearch to find shots faster than manual scrubbing.\n\n**Step 1 — Download DaVinci Resolve (free)** from blackmagicdesign.com. It's available for Windows, Mac, and Linux.\n\n**Step 2 — Import a real batch of footage.** Use actual clips you have — phone videos from an event, screen recordings, b-roll you shot for a project. Avoid using stock demo footage; the point is to search footage you don't already have memorized.\n\n**Step 3 — Run AI Clip Analysis** (Media Page → right-click your footage → look for Clip Analysis or IntelliSearch, depending on your version). If it's greyed out on the free edition, note that — it's confirmation of what this lesson covered about free-vs-Studio gating, and you can still complete the rest of the workshop using standard search/filtering instead.\n\n**Step 4 — Search for a specific shot** using a visual description (\"person at a desk\"), a line of spoken dialogue if your footage has audio, or a keyword. Compare how long this took versus manually scrubbing through the same footage looking for it.\n\n**Step 5 — Try AI Speech Generator on a placeholder line.** Generate a 10-second scratch voiceover line from a short sample of your own voice (or a teammate's, with their permission) and drop it onto your timeline as a placeholder — a real, practical use even before your final voiceover is recorded.\n\n**Outcome:** A real project imported into a professional NLE, a confirmed answer to what your version's free tier actually includes, and at least one AI-assisted step (search or scratch voiceover) used on footage you'll actually edit."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Resolve vs. Premiere + Firefly: Pick Your Path",
+      "content": "You'll decide, deliberately, which tool fits your actual next project rather than defaulting to whichever one you've heard of.\n\n**Step 1 — Describe your next real video project** in 2-3 sentences: what it is, who it's for, and what raw material you're starting from (footage you'll shoot, existing clips you need to fix, or a need to generate scenes from scratch).\n\n**Step 2 — Score each tool against your actual project:**\n- Do you need to generate new video from a text prompt (favors Premiere + Firefly's model lineup), or correct/grade/search footage you already have (favors Resolve)?\n- Is cost a factor — Resolve's free tier vs. Premiere's subscription plus Firefly credits?\n- Do you already have Adobe or Blackmagic skills/muscle memory from past editing?\n\n**Step 3 — Ask Claude.ai:** \"Here's my next video project: [paste your Step 1 description]. Based on DaVinci Resolve 21's free AI toolset (IntelliSearch, Face Age Transformer, Speech Generator) versus Premiere Pro with Firefly's Kling/Veo/Runway model integration, which fits my project better and why? What am I underestimating about the learning curve of the one I haven't used before?\"\n\n**Step 4 — Commit to one tool for this specific project** and write down your reasoning in one sentence you can refer back to.\n\n**Outcome:** A deliberate, reasoned tool choice for a real upcoming project, instead of defaulting to whichever tool you already happened to know."
+    },
+    {
+      "type": "quiz",
+      "question": "What does DaVinci Resolve 21's AI IntelliSearch actually search across?",
+      "options": [
+        "Only filenames and folder structure",
+        "A combination of visual machine-learning search across every frame for objects/people, a transcription search of spoken dialogue, and metadata search — all at once",
+        "Only exact keyword matches typed by the editor during import",
+        "Only audio waveforms, not visual content"
+      ],
+      "correct": 1,
+      "explanation": "IntelliSearch combines three search types simultaneously: visual ML search that scans pixels across every frame to find objects or people, transcription search across spoken dialogue, and metadata search. This is what lets you search for something like \"the shot with the red car\" or a specific line of dialogue instead of manually scrubbing through footage."
+    },
+    {
+      "type": "quiz",
+      "question": "A friend tells you \"DaVinci Resolve 21's entire AI toolset is 100% free, no catch.\" Based on this lesson, what's the accurate correction?",
+      "options": [
+        "They're completely correct — every AI tool in Resolve 21 is unconditionally free on every platform",
+        "DaVinci Resolve Studio's one-time $295 license is confirmed to unlock the full AI toolset; some tools are also available for free, but early hands-on testing found tools like AI Clip Analysis (behind IntelliSearch) gated or greyed out in the free edition in some cases — so you should check Blackmagic's current comparison page rather than assume full free-tier coverage",
+        "None of the AI tools are free — Studio is required for all of them, no exceptions",
+        "The AI tools are free but only for the first 30 days after installation"
+      ],
+      "correct": 1,
+      "explanation": "Coverage of exactly which AI tools are free versus Studio-only varies across early reviews and has likely shifted since release. What's confirmed is that Studio's AI Neural Engine powers the complete toolset, and some tools have been reported as gated in the free edition during hands-on testing. The lesson's guidance is to verify current tier coverage directly rather than rely on a fixed claim either way."
+    },
+    {
+      "type": "quiz",
+      "question": "You need to generate a brand-new 8-second cinematic scene from a text description — no existing footage to start from — and you want fine control over camera angle and shot duration. Which tool from this lesson is the better fit?",
+      "options": [
+        "DaVinci Resolve 21's AI IntelliSearch — it can generate new scenes from a search query",
+        "Premiere Pro + Firefly, specifically using a model like Kling 3.0 Omni, which is built for professional shot control including camera angle, movement, and duration",
+        "DaVinci Resolve's AI Face Age Transformer — it works on any generation task",
+        "Neither tool can generate new video content from a text prompt"
+      ],
+      "correct": 1,
+      "explanation": "This is a generation task — creating video that doesn't exist yet from a prompt — which is exactly what Firefly's integrated models (Kling 3.0 Omni, Veo 3.1, Runway Gen-4.5) are built for, with Kling 3.0 Omni specifically offering the professional shot-control (angle, movement, duration) the scenario asks for. Resolve's AI tools (IntelliSearch, Face Age Transformer) work on footage you already have — they search, correct, and grade, they don't generate new scenes from text."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 19-17.** You know what's actually new in DaVinci Resolve 21's AI toolset — IntelliSearch, Face Age Transformer, and Speech Generator among nine total tools — and the real, still-shifting picture of what's free versus Studio-only. You've compared it against the paid Premiere Pro + Firefly path (Kling 3.0/Omni, Veo 3.1, Runway Gen-4.5) and made a deliberate choice for your next real project, and you've used Resolve on footage you actually have. Next: lesson 19-18 covers the audio equivalent of this jump — professional podcast production with Adobe Podcast and Descript."
+    }
+  ],
+  "nextLesson": "19-18",
+  "prevLesson": "19-11"
+}

@@ -1,0 +1,101 @@
+{
+  "id": "20-10",
+  "title": "Installing Third-Party Skills Safely",
+  "part": 20,
+  "estimatedMinutes": 60,
+  "tags": [
+    "skills",
+    "supply-chain-security",
+    "skill-md",
+    "marketplace",
+    "safety",
+    "intermediate",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 20-9 covered the upside of SKILL.md becoming an open standard: your skills are portable, and roughly 40 tools now read the same format. This lesson covers the downside of that same openness. When any tool can read any SKILL.md file, and anyone can publish one to a public registry, you need a way to tell a trustworthy skill from a dangerous one — before you let it run with your files, your network access, and sometimes your credentials.\n\nThis is a supply-chain-safety lesson. The mental model is one you likely already have for npm packages or browser extensions: don't run code from a stranger without checking what it actually does first. Skills need exactly that discipline, and for a specific reason — a skill's instructions are executed by an AI agent that already has your session's tool permissions turned on."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**The one-sentence version:** a skill is not documentation — it's a bundle of instructions your AI agent will execute with your tool access. If you wouldn't run a random script pasted into a forum post, don't install a random SKILL.md either, no matter how polished its description sounds or how many installs it claims."
+    },
+    {
+      "type": "text",
+      "content": "## From One Registry to a Crowded, Unvetted Marketplace\n\nWhen SKILL.md launched as an open standard in December 2025, there was effectively one place to find skills: Anthropic's own repository. That changed fast. By mid-2026, at least half a dozen distinct marketplaces were indexing public skills, with wildly different scale and no shared vetting standard between them:\n\n- **skills.sh (Vercel)** — a registry with a one-command installer (`npx skills add`) working across 20+ agent tools. Vercel's own changelog reported it crossed 600,000+ indexed skills by June 2026, with independent trackers putting the figure closer to 670,000. Its single most-installed skill passed 2 million installs within five months of the registry's January 2026 launch.\n- **SkillsMP** — a community-run crawler that scrapes public GitHub repositories for SKILL.md files and indexes them with semantic search. Reported counts vary a great deal depending on the source and the month measured — from roughly 350,000 in early 2026 to figures approaching 1.9 million by mid-2026 — because it's a scrape, not a curated catalog.\n- **ClawHub, Agensi, GuildSkills, LobeHub**, and others — smaller but active directories, some general-purpose, some focused on specific agent ecosystems.\n\nWhat none of these registries do, beyond basic popularity signals like GitHub stars or install counts, is vet skills before listing them. Anyone can publish. There is no equivalent of an app-store review process."
+    },
+    {
+      "type": "text",
+      "content": "## Why This Is Exactly Like Unvetted npm Packages — and Slightly Worse\n\nThe mental model transfers directly from software you already know not to trust blindly: an unreviewed npm package, an unverified browser extension, a random VS Code extension with no publisher history. In each case, the fix is the same — check what it does before you let it run, prefer known publishers, and don't install by popularity alone.\n\nBut there's a real difference in blast radius. A malicious npm package typically needs your build or your application to *execute* its code before it can do damage — there's a step where the code has to run. A malicious skill doesn't need to escalate anything: the AI agent reading it is *already* an active participant in the session, often already holding broad permissions to touch your files, run shell commands, and reach the network. The skill doesn't have to break out of a sandbox — it just has to convince the agent (or you) to do something within permissions you already granted. Security researchers studying this new attack surface describe it explicitly as an extension of the npm/PyPI supply-chain problem, with the added twist that the \"payload\" can be natural-language instructions, not just code — an *instructional* supply chain, not only a code one."
+    },
+    {
+      "type": "text",
+      "content": "## Concrete Red Flags to Check Before Installing\n\nBefore installing any third-party skill, read the whole file and check it against this list:\n\n- **Permission mismatch.** Does the skill request tool access disproportionate to its stated purpose? A \"formats git commit messages\" skill has no legitimate reason to want network access, shell execution, or credential files.\n- **Credential and environment-variable references.** Look for anything referencing `$ANTHROPIC_API_KEY`, `$HOME`, `$USER`, tokens, API keys, or `.env` files inside the instructions — legitimate skills rarely need to read these directly.\n- **Unexplained executables.** Any bundled script, binary, `.sh`, `.py`, or `.exe` file inside a skill folder that has no obvious functional reason to execute code. A skill that's just formatting text doesn't need a compiled binary in its folder.\n- **Remote code fetching at runtime.** Instructions that tell the agent to download and run something — `curl | bash`-style patterns, \"fetch this URL and execute the result.\"\n- **Obfuscated or machine-only instructions.** Base64 blobs, unusual encoding, or instructions phrased in a way no human would naturally write them — a sign the real content is meant to be missed on a casual read.\n- **Unverified publisher and typosquatting.** An anonymous account with one skill and no history, or a skill name suspiciously close to a well-known one (a classic typosquatting pattern carried over from package registries), paired with inflated install or star counts.\n- **Vague description, broad access.** A description that's generic (\"helps with reports\") combined with instructions that request deep, specific tool access — the mismatch itself is the signal."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**This isn't hypothetical.** By early 2026, security researchers had already found real malicious skills on public registries — including credential stealers and malware payloads discovered on the ClawHub registry. Independent audits of large skill samples have repeatedly found that roughly a quarter to over a third of publicly scraped skills contain at least one identifiable security flaw, and studies specifically testing for prompt-injection patterns found them in a meaningful share of tested skills. One documented pattern researchers call a \"supply chain trojan\": a skill that is a near-exact copy of a legitimate, trusted skill with only a few lines quietly added — invisible on a casual skim, exactly the kind of change these red flags are designed to catch."
+    },
+    {
+      "type": "text",
+      "content": "## A Safe Installation Workflow\n\nBefore you let any third-party skill run for real, work through this sequence:\n\n1. **Read the entire SKILL.md yourself, end to end**, before installing — treat it exactly like reviewing a pull request from a stranger, not like skimming a product description.\n2. **List every file in the folder**, not just SKILL.md. Scripts, templates, and reference files all deserve the same scrutiny as the instructions themselves.\n3. **Check the publisher.** Is this a named individual or organization with a track record, or an anonymous account with a single skill and no other footprint?\n4. **Search for the skill name plus \"malicious\" or \"security\"** before installing anything that would get elevated trust or touch sensitive data.\n5. **Match access to purpose.** If it needs to read files, reach the network, or touch credentials, ask whether that access matches the stated purpose exactly — or exceeds it.\n6. **Sandbox first.** Install and run it once in a throwaway project folder with no real data, and watch what it actually does before trusting it anywhere near production data or your real inbox.\n7. **Prefer known publishers for anything sensitive** — Anthropic's own official skills repository, or your own team's internally reviewed skills, over an anonymous marketplace listing."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The asymmetry to remember:** with a typical dependency, your review focuses on the build pipeline and what code runs when. With a skill, the \"code\" is often plain-language instructions read directly by an agent that already has your session's tool permissions active. That's why reading the actual instructions — not just checking a changelog or a star count — matters even more here than it does for a typical npm audit."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Workshop — Audit a Real SKILL.md Before You'd Trust It",
+      "content": "Put the red-flag checklist to work on a real file — either one of your own or a genuine public one — before deciding whether you'd actually let it run with your permissions.\n\n**Step 1 — Choose your subject.** Either:\n- (a) One of your own converted skills from lesson 20-9 (e.g. `~/.claude/skills/daily-brief/SKILL.md`), or\n- (b) A real public skill — browse `github.com/anthropics/skills` (Anthropic's own official skills repository) or the skills.sh registry and pick any one SKILL.md to inspect\n\n**Step 2 — Read the entire file, not just the description.** Open it in full. Note the `name` and `description`, then read every line of the body and every bundled file in the folder.\n\n**Step 3 — Run the checklist.** For your chosen skill, answer each of these explicitly:\n- What tool access / permissions does this skill's instructions imply it needs (file read/write, network, shell, specific MCP tools)?\n- Does that access match the stated purpose exactly, or does it ask for more than the description justifies?\n- Are there any references to credentials, API keys, or environment variables?\n- Are there any bundled scripts or executables? If so, do they have an obvious, necessary function?\n- Does anything fetch or execute remote content at runtime?\n- Is any part of the instructions obfuscated, oddly encoded, or written in a way a human wouldn't naturally write?\n- Who published it — a known, identifiable source, or an anonymous one-off?\n\n**Step 4 — Ask Claude Code to do the same audit independently:**\n```\nRead [path to the SKILL.md]. Audit it for supply-chain risk: does it request\ntool access beyond its stated purpose, reference credentials or environment\nvariables, include unnecessary executable files, fetch/execute remote\ncontent, or contain obfuscated instructions? Give a verdict: would you trust\nthis skill with full tool access, and why or why not?\n```\nCompare Claude's findings to your own manual read.\n\n**Step 5 — Write your verdict.** In one paragraph: would you install this skill for real use? What, specifically, would need to change for you to trust it (or, if it's already trustworthy, what made it pass)?\n\n**Accomplishment check:** You've done a real supply-chain security review of an actual SKILL.md file — the same discipline you'd apply to reviewing a pull request or vetting an npm package before adding it to a production dependency tree — instead of trusting a description and an install count."
+    },
+    {
+      "type": "quiz",
+      "question": "You're evaluating a public skill described as 'formats git commit messages to conventional-commits style.' The folder contains SKILL.md, a Python script, and a compiled binary. What should this combination make you do?",
+      "options": [
+        "Nothing — skills often bundle helper scripts, this is normal",
+        "Pause and inspect further — a commit-message formatter has no obvious reason to include a compiled binary, and unexplained executables are a documented red flag for supply-chain risk in skill marketplaces",
+        "Install it immediately since it has a script, which proves it's more capable",
+        "Delete Claude Code and reinstall it"
+      ],
+      "correct": 1,
+      "explanation": "A permission/purpose mismatch is one of the clearest red flags: a skill's bundled files should have an obvious function tied to its stated purpose. A pure text-formatting skill has no legitimate reason to ship a compiled binary. That doesn't automatically mean it's malicious, but it means you inspect further — read what the binary is for and why it's there — before installing, rather than trusting the description alone."
+    },
+    {
+      "type": "quiz",
+      "question": "How does installing a malicious third-party AI skill differ from installing a traditional malicious npm package, in terms of risk?",
+      "options": [
+        "Skills are strictly safer because they're just text files, not executable code",
+        "There's no meaningful difference at all",
+        "A skill's instructions are executed by an AI agent that already has your session's tool permissions active — file access, network, sometimes credentials — so a compromised skill doesn't need to escalate privileges the way malicious code in a dependency typically does; it just needs to direct an agent that's already empowered",
+        "Skills can only affect the AI's own answers, never your files or accounts"
+      ],
+      "correct": 2,
+      "explanation": "The key asymmetry is that a skill's \"payload\" is natural-language instructions read directly by an agent that is already an active, permitted participant in your session. A malicious npm package typically needs your build or app to execute its code as a separate step; a malicious skill doesn't need that step — it just needs to convince the agent, which already has your tool access turned on, to act on its instructions. This is why reading the actual instructions matters more for skills than a typical dependency audit."
+    },
+    {
+      "type": "quiz",
+      "question": "By mid-2026, multiple marketplaces (skills.sh, SkillsMP, and others) index hundreds of thousands of publicly listed SKILL.md files. What level of vetting do these registries typically apply before a skill is listed?",
+      "options": [
+        "Full manual security review by the platform before listing",
+        "None beyond, at most, basic popularity signals like GitHub stars or install counts — anyone can publish, and real malicious skills, including credential stealers, have already been found on public registries",
+        "Automatic malware scanning that blocks all unsafe skills before they go live",
+        "A mandatory waiting period before any skill can be installed"
+      ],
+      "correct": 1,
+      "explanation": "These registries are largely scrape-based or open-submission — SkillsMP crawls public GitHub repositories for SKILL.md files with no quality gate beyond star counts, and other marketplaces work similarly. There is no centralized security review before listing. Security researchers have already documented real malicious skills, including credential stealers and malware payloads, on public skill registries — which is exactly why the red-flag checklist and manual review in this lesson matter, rather than trusting a listing's presence on a marketplace as any kind of safety signal."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 20-10 — and with it, Part 20: Building Custom AI Skills.** You've built a working skill library using Claude Code slash commands, learned the advanced patterns (subagents, parameterization, sharing), converted skills into the open, portable SKILL.md format now read by roughly 40 AI tools, and learned to evaluate third-party skills for supply-chain risk before trusting them with your tool access. That's the complete arc: build your own tools, make them portable, and vet anyone else's before you run them."
+    }
+  ],
+  "nextLesson": "8-1",
+  "prevLesson": "20-9"
+}

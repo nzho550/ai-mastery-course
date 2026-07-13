@@ -254,8 +254,39 @@
             "productivity",
             "hands-on"
           ],
-          "nextLesson": "2-11",
+          "nextLesson": "2-21",
           "prevLesson": "2-10"
+        },
+        {
+          "id": "2-21",
+          "title": "Google Meet 与 Chat 中的 AI——Gemini 帮你做会议记录",
+          "estimatedMinutes": 55,
+          "tags": [
+            "tools",
+            "intermediate",
+            "google",
+            "gemini",
+            "meetings",
+            "google-chat",
+            "hands-on"
+          ],
+          "nextLesson": "2-22",
+          "prevLesson": "2-18"
+        },
+        {
+          "id": "2-22",
+          "title": "AI 日历与日程安排助手",
+          "estimatedMinutes": 55,
+          "tags": [
+            "tools",
+            "intermediate",
+            "calendar",
+            "scheduling",
+            "productivity",
+            "hands-on"
+          ],
+          "nextLesson": "2-11",
+          "prevLesson": "2-21"
         },
         {
           "id": "2-11",
@@ -270,7 +301,7 @@
             "hands-on"
           ],
           "nextLesson": "2-12",
-          "prevLesson": "2-18"
+          "prevLesson": "2-22"
         },
         {
           "id": "2-12",
@@ -592,8 +623,23 @@
             "policy",
             "compliance"
           ],
-          "nextLesson": "15-1",
+          "nextLesson": "13-7",
           "prevLesson": "13-5"
+        },
+        {
+          "id": "13-7",
+          "title": "深度伪造与声音克隆——同意、法律与识别",
+          "estimatedMinutes": 55,
+          "tags": [
+            "safety",
+            "intermediate",
+            "deepfakes",
+            "voice-cloning",
+            "legal",
+            "hands-on"
+          ],
+          "nextLesson": "15-1",
+          "prevLesson": "13-6"
         }
       ]
     },
@@ -613,7 +659,7 @@
             "knowledge-work"
           ],
           "nextLesson": "15-2",
-          "prevLesson": "13-6"
+          "prevLesson": "13-7"
         },
         {
           "id": "15-2",
@@ -977,8 +1023,89 @@
             "azure-ai-foundry",
             "hands-on"
           ],
-          "nextLesson": "17-1",
+          "nextLesson": "16-18",
           "prevLesson": "16-16"
+        },
+        {
+          "id": "16-18",
+          "title": "面向教育工作者与教育机构的 AI",
+          "estimatedMinutes": 55,
+          "tags": [
+            "enterprise",
+            "intermediate",
+            "education",
+            "edtech",
+            "khanmigo",
+            "magicschool",
+            "academic-integrity",
+            "hands-on"
+          ],
+          "nextLesson": "16-19",
+          "prevLesson": "16-17"
+        },
+        {
+          "id": "16-19",
+          "title": "面向会计与簿记专业人士的 AI",
+          "estimatedMinutes": 55,
+          "tags": [
+            "enterprise",
+            "intermediate",
+            "accounting",
+            "bookkeeping",
+            "quickbooks",
+            "xero",
+            "hands-on"
+          ],
+          "nextLesson": "16-20",
+          "prevLesson": "16-18"
+        },
+        {
+          "id": "16-20",
+          "title": "面向 FP&A 与企业财务的 AI",
+          "estimatedMinutes": 55,
+          "tags": [
+            "enterprise",
+            "intermediate",
+            "fpa",
+            "corporate-finance",
+            "cfo",
+            "forecasting",
+            "hands-on"
+          ],
+          "nextLesson": "16-21",
+          "prevLesson": "16-19"
+        },
+        {
+          "id": "16-21",
+          "title": "面向房地产专业人士的 AI",
+          "estimatedMinutes": 50,
+          "tags": [
+            "enterprise",
+            "intermediate",
+            "real-estate",
+            "zillow",
+            "compass",
+            "proptech",
+            "hands-on"
+          ],
+          "nextLesson": "16-22",
+          "prevLesson": "16-20"
+        },
+        {
+          "id": "16-22",
+          "title": "面向保险行业的 AI——核保、理赔与反欺诈",
+          "estimatedMinutes": 55,
+          "tags": [
+            "enterprise",
+            "intermediate",
+            "insurance",
+            "underwriting",
+            "claims",
+            "fraud",
+            "hands-on"
+          ],
+          "nextLesson": "17-1",
+          "prevLesson": "16-21"
         }
       ]
     },
@@ -999,7 +1126,7 @@
             "management"
           ],
           "nextLesson": "17-2",
-          "prevLesson": "16-17"
+          "prevLesson": "16-22"
         },
         {
           "id": "17-2",
@@ -1272,8 +1399,24 @@
             "repurposing",
             "productivity"
           ],
-          "nextLesson": "19-11",
+          "nextLesson": "19-16",
           "prevLesson": "19-9"
+        },
+        {
+          "id": "19-16",
+          "title": "AI 音乐创作——Suno、Udio 与全新的作曲工具箱",
+          "estimatedMinutes": 55,
+          "tags": [
+            "personal-life",
+            "intermediate",
+            "music",
+            "audio",
+            "suno",
+            "udio",
+            "hands-on"
+          ],
+          "nextLesson": "19-11",
+          "prevLesson": "19-10"
         },
         {
           "id": "19-11",
@@ -1288,8 +1431,39 @@
             "runway",
             "hands-on"
           ],
+          "nextLesson": "19-17",
+          "prevLesson": "19-16"
+        },
+        {
+          "id": "19-17",
+          "title": "免费的专业级视频 AI——DaVinci Resolve 21",
+          "estimatedMinutes": 50,
+          "tags": [
+            "personal-life",
+            "intermediate",
+            "video",
+            "davinci-resolve",
+            "editing",
+            "hands-on"
+          ],
+          "nextLesson": "19-18",
+          "prevLesson": "19-11"
+        },
+        {
+          "id": "19-18",
+          "title": "播客 AI 制作——Adobe Podcast 与 Descript",
+          "estimatedMinutes": 55,
+          "tags": [
+            "personal-life",
+            "intermediate",
+            "podcasting",
+            "audio",
+            "descript",
+            "adobe-podcast",
+            "hands-on"
+          ],
           "nextLesson": "19-12",
-          "prevLesson": "19-10"
+          "prevLesson": "19-17"
         },
         {
           "id": "19-12",
@@ -1306,7 +1480,7 @@
             "hands-on"
           ],
           "nextLesson": "19-13",
-          "prevLesson": "19-11"
+          "prevLesson": "19-18"
         },
         {
           "id": "19-13",
@@ -1320,8 +1494,38 @@
             "windows-copilot",
             "hands-on"
           ],
-          "nextLesson": "19-14",
+          "nextLesson": "19-19",
           "prevLesson": "19-12"
+        },
+        {
+          "id": "19-19",
+          "title": "AI 智能眼镜——可穿戴设备的新前沿",
+          "estimatedMinutes": 55,
+          "tags": [
+            "personal-life",
+            "intermediate",
+            "smart-glasses",
+            "wearables",
+            "privacy",
+            "hands-on"
+          ],
+          "nextLesson": "19-20",
+          "prevLesson": "19-13"
+        },
+        {
+          "id": "19-20",
+          "title": "车载 AI——语音助手、FSD 与未来的路",
+          "estimatedMinutes": 50,
+          "tags": [
+            "personal-life",
+            "intermediate",
+            "cars",
+            "voice-assistants",
+            "safety",
+            "hands-on"
+          ],
+          "nextLesson": "19-14",
+          "prevLesson": "19-19"
         },
         {
           "id": "19-14",
@@ -1336,7 +1540,7 @@
             "hands-on"
           ],
           "nextLesson": "19-15",
-          "prevLesson": "19-13"
+          "prevLesson": "19-20"
         },
         {
           "id": "19-15",
@@ -1350,8 +1554,38 @@
             "ethics",
             "reflection"
           ],
-          "nextLesson": "4-1",
+          "nextLesson": "19-21",
           "prevLesson": "19-14"
+        },
+        {
+          "id": "19-21",
+          "title": "AI 约会与红娘配对",
+          "estimatedMinutes": 50,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "dating",
+            "relationships",
+            "reflection",
+            "hands-on"
+          ],
+          "nextLesson": "19-22",
+          "prevLesson": "19-15"
+        },
+        {
+          "id": "19-22",
+          "title": "儿童与家庭 AI 安全——家长控制与防护措施",
+          "estimatedMinutes": 55,
+          "tags": [
+            "personal-life",
+            "beginner",
+            "family",
+            "parental-controls",
+            "safety",
+            "hands-on"
+          ],
+          "nextLesson": "4-1",
+          "prevLesson": "19-21"
         }
       ]
     },
@@ -1371,7 +1605,7 @@
             "concepts"
           ],
           "nextLesson": "4-2",
-          "prevLesson": "19-15"
+          "prevLesson": "19-22"
         },
         {
           "id": "4-2",
@@ -2262,8 +2496,39 @@
             "vscode",
             "hands-on"
           ],
-          "nextLesson": "7-1",
+          "nextLesson": "9-13",
           "prevLesson": "9-11"
+        },
+        {
+          "id": "9-13",
+          "title": "AWS Kiro——智能体 IDE 中的规范驱动开发",
+          "estimatedMinutes": 55,
+          "tags": [
+            "ai-coding",
+            "advanced",
+            "aws-kiro",
+            "spec-driven-development",
+            "aws",
+            "hands-on"
+          ],
+          "nextLesson": "9-14",
+          "prevLesson": "9-12"
+        },
+        {
+          "id": "9-14",
+          "title": "AI 代码安全扫描——Snyk、Semgrep 与 SAST 的现实检验",
+          "estimatedMinutes": 55,
+          "tags": [
+            "ai-coding",
+            "advanced",
+            "security",
+            "sast",
+            "snyk",
+            "semgrep",
+            "hands-on"
+          ],
+          "nextLesson": "7-1",
+          "prevLesson": "9-13"
         }
       ]
     },
@@ -2283,7 +2548,7 @@
             "overview"
           ],
           "nextLesson": "7-2",
-          "prevLesson": "9-12"
+          "prevLesson": "9-14"
         },
         {
           "id": "7-2",
@@ -2575,8 +2840,40 @@
             "team",
             "build"
           ],
-          "nextLesson": "8-1",
+          "nextLesson": "20-9",
           "prevLesson": "20-7"
+        },
+        {
+          "id": "20-9",
+          "title": "Agent Skills——市场背后的开放标准",
+          "estimatedMinutes": 55,
+          "tags": [
+            "skills",
+            "skill-md",
+            "open-standard",
+            "interoperability",
+            "cross-vendor",
+            "intermediate",
+            "hands-on"
+          ],
+          "nextLesson": "20-10",
+          "prevLesson": "20-8"
+        },
+        {
+          "id": "20-10",
+          "title": "安全地安装第三方技能",
+          "estimatedMinutes": 60,
+          "tags": [
+            "skills",
+            "supply-chain-security",
+            "skill-md",
+            "marketplace",
+            "safety",
+            "intermediate",
+            "hands-on"
+          ],
+          "nextLesson": "8-1",
+          "prevLesson": "20-9"
         }
       ]
     },
@@ -2596,7 +2893,7 @@
             "overview"
           ],
           "nextLesson": "8-2",
-          "prevLesson": "20-8"
+          "prevLesson": "20-10"
         },
         {
           "id": "8-2",
@@ -3060,8 +3357,39 @@
             "gumloop",
             "hands-on"
           ],
-          "nextLesson": "11-1",
+          "nextLesson": "10-11",
           "prevLesson": "10-9"
+        },
+        {
+          "id": "10-11",
+          "title": "AI SRE 与事件响应代理",
+          "estimatedMinutes": 60,
+          "tags": [
+            "automation",
+            "advanced",
+            "sre",
+            "incident-response",
+            "agentjacking",
+            "security",
+            "hands-on"
+          ],
+          "nextLesson": "10-12",
+          "prevLesson": "10-10"
+        },
+        {
+          "id": "10-12",
+          "title": "AI 辅助的基础设施即代码",
+          "estimatedMinutes": 55,
+          "tags": [
+            "automation",
+            "advanced",
+            "infrastructure-as-code",
+            "terraform",
+            "kubernetes",
+            "governance"
+          ],
+          "nextLesson": "11-1",
+          "prevLesson": "10-11"
         }
       ]
     },
@@ -3081,7 +3409,7 @@
             "overview"
           ],
           "nextLesson": "11-2",
-          "prevLesson": "10-10"
+          "prevLesson": "10-12"
         },
         {
           "id": "11-2",

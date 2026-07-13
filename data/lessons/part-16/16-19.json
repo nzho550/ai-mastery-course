@@ -1,0 +1,85 @@
+{
+  "id": "16-19",
+  "title": "AI for Accounting & Bookkeeping Professionals",
+  "part": 16,
+  "estimatedMinutes": 55,
+  "tags": [
+    "enterprise",
+    "intermediate",
+    "accounting",
+    "bookkeeping",
+    "quickbooks",
+    "xero",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLesson 19-3 covered AI for personal finance — using Claude or ChatGPT to understand your own budget, debt, or a big purchase decision. This lesson is for a different audience entirely: people who do accounting and bookkeeping *professionally*, for clients or employers, inside dedicated practice-management software. If you're a bookkeeper, a staff accountant, or you run a small accounting or tax practice, 2026 is a genuinely disruptive year for the tools you use daily — Intuit is retiring the platform most U.S. accounting firms have run their practice on for over a decade, and Xero has rebuilt its entire AI stack around a new financial operating system. This lesson covers what's actually changing, on what timeline, and what to do about it if you're using QuickBooks Online Accountant today."
+    },
+    {
+      "type": "text",
+      "content": "## Intuit Is Retiring QuickBooks Online Accountant — Here's the Real Timeline\n\nIf your practice runs on **QuickBooks Online Accountant (QBOA)**, the single most consequential fact in this lesson is this: Intuit is discontinuing QBOA entirely on **December 31, 2026**, replacing it with a new AI-native platform called **Intuit Accountant Suite**. This isn't a rebrand — it's a full platform migration, and Intuit has already started moving firms over automatically: beginning in June 2026, Intuit began migrating firms in cohorts, a process that continues through the end of the year, so if you haven't switched yourself by the time your cohort comes up, your account switches for you.\n\nThe new platform has two tiers: a **Core** plan (free, and intended to cover the key functionality QBOA already provided) and an **Accelerate** plan (in beta, moving to $149/month starting May 2026) aimed at firms wanting the deeper AI agent capability described below. A separate **Books Close** add-on — priced per onboarded client (roughly $8/client/month for firms with up to 50 clients in the U.S.) — targets firms that want AI assistance specifically with the month-end close process.\n\nIf you're not ready to switch, Intuit has built in a safety valve: firms can revert to the classic QBOA view through November 2026, and can re-enter Intuit Accountant Suite at any time with all data and settings retained. But the safety valve has a hard stop — by December 31, 2026, everyone is on the new platform, voluntarily or not."
+    },
+    {
+      "type": "text",
+      "content": "## Six AI Agents Inside the New Platform\n\nIntuit Accountant Suite is built around what Intuit calls **Intuit Intelligence** — a layer that combines firm and client data with AI to surface insights, flag risks, and, with an accountant's guidance, take action. Concretely, this arrives as six specialized AI agents, each gated to a specific QuickBooks subscription tier:\n\n- **Accounting Agent** (QuickBooks Essentials and up) — handles routine bookkeeping tasks and categorization\n- **Payroll Agent** (requires a QuickBooks Payroll subscription) — automates payroll-adjacent work\n- **Sales Tax Agent** (QuickBooks Plus and up) — tracks and manages sales tax obligations across jurisdictions\n- **Payments Agent** (QuickBooks Essentials and up) — manages payment processing workflows\n- **Customer Agent** (QuickBooks Plus and up) — handles client-facing communication and follow-up\n- **Finance Agent** and **Project Management Agent** (both QuickBooks Advanced and up) — higher-level financial analysis and practice-management support\n\nThe practical implication for a working bookkeeper or accountant: which agents you actually get access to depends on both which Intuit Accountant Suite plan you're on *and* which QuickBooks subscription tier each individual client is on — a firm serving a mix of QuickBooks Essentials and Advanced clients will have a genuinely uneven AI toolkit from one client file to the next, at least during the transition."
+    },
+    {
+      "type": "quiz",
+      "question": "A bookkeeper's firm serves several clients on QuickBooks Essentials and one client on QuickBooks Advanced. After migrating to Intuit Accountant Suite, why might the bookkeeper find the Finance Agent unavailable for most of their clients?",
+      "options": [
+        "The Finance Agent is being discontinued along with QBOA and won't exist in the new platform",
+        "AI agent access is gated by each individual client's QuickBooks subscription tier, not just by the bookkeeper's Intuit Accountant Suite plan — the Finance Agent requires QuickBooks Advanced, so Essentials-tier clients won't have it regardless of which Accountant Suite plan the bookkeeper is on",
+        "The Finance Agent only works for firms on the free Core plan, not Accelerate",
+        "Finance Agent access depends solely on how many total clients the firm has, not on individual client subscription tiers"
+      ],
+      "correct": 1,
+      "explanation": "This lesson specifically flags that agent access is gated two ways: by the accountant's own Intuit Accountant Suite plan AND by each individual client's underlying QuickBooks subscription tier. The Finance Agent and Project Management Agent both require QuickBooks Advanced — so a client still on Essentials won't have Finance Agent access no matter what plan the bookkeeper's firm is on (ruling out C, which reverses this). The agent isn't being discontinued (A) — it's one of the six new agents in the platform. Total client count (D) isn't the gating factor; per-client subscription tier is."
+    },
+    {
+      "type": "text",
+      "content": "## Xero's Answer: Xero OS, JAX, and XeroForce\n\nXero — Intuit's largest rival, especially outside the U.S. — took a different approach in 2026, rebuilding its AI stack around what it calls **Xero OS**, an AI-native financial operating system that now powers two distinct products:\n\n**JAX (\"Just Ask Xero\")** is Xero's conversational financial agent, reachable via chat, SMS, email, or WhatsApp. Since launching in September 2025, JAX has scaled to reconcile over 40 million transactions globally at a claimed 97% accuracy, and Xero reports messages sent to JAX grew 115% per user over the period measured — a sign of real, repeat usage rather than a one-time novelty. On May 12, 2026, Xero rolled out a bidirectional integration with **Anthropic's Claude**: JAX itself is now powered by Claude's reasoning, and separately, Xero subscribers can pull their live Xero financial data directly into a Claude.ai conversation for planning, scenario modeling, and analysis — Xero has stated this financial data is used only for the individual session and is never used to train Claude's underlying models. The rollout reached Xero's full subscriber base of 4.5+ million businesses across 180+ countries.\n\n**XeroForce**, launched in alpha on May 14, 2026, is different in kind: it's a no-code, natural-language tool that lets an accountant or small business build their *own* custom AI agents on top of Xero and connected third-party apps — automating a specific recurring workflow (month-end close steps, purchase-order validation, payrun approval chains) without writing code. Every action XeroForce agents take is logged in an audit trail, a deliberate design choice Xero markets as critical for compliance and client trust in a profession where an unexplained automated action is a real liability. As of its May 2026 alpha launch, XeroForce is invite-only, with general release planned later in 2026."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Xero isn't betting on one AI vendor.** The Claude integration sits alongside an existing October 2025 collaboration with OpenAI for deep web research inside Xero (tax law and market-trend lookups) — Xero is deliberately spreading its AI workloads across multiple model providers, the way large enterprises spread workloads across multiple cloud vendors, rather than locking into one. If you're evaluating Xero as a practitioner, don't assume 'Xero AI' means one thing — which feature you're using may be running on a different underlying model than the one next to it."
+    },
+    {
+      "type": "text",
+      "content": "## If You're Using QBOA Today: What To Actually Do\n\nIf your practice currently runs on QuickBooks Online Accountant, treat the retirement date as a hard deadline, not a suggestion — here's the practical sequence: confirm which cohort your firm falls into (Intuit began cohort migrations in June 2026 and will notify firms of their migration window), review whether Core (free) or Accelerate ($149/month) fits your firm's size and client mix, check whether your clients' individual QuickBooks subscription tiers actually unlock the agents you're expecting to use (Payroll Agent needs a QuickBooks Payroll subscription; Finance and Project Management Agents need QuickBooks Advanced), and use the classic-view fallback (available through November 2026) only as a bridge — not a long-term plan, since it disappears at year-end regardless of your preference. If you serve clients on a mix of QuickBooks tiers, budget real time to test each agent against an actual client file before relying on it for real client work — an agent gated to 'QuickBooks Plus and up' will simply not be available for a client still on a lower tier, and finding that out mid-engagement is worse than finding it out now."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 1 — Audit Your Own (or a Client's) Exposure to the QBOA Retirement",
+      "content": "This workshop produces a real, usable migration checklist — for your own practice if you use QBOA, or for a hypothetical practice if you don't, using what you've learned in this lesson.\n\n**Step 1 — Determine your starting point.** Does your firm (or an accounting practice you're familiar with) currently use QuickBooks Online Accountant? If yes, log in and check for any migration-cohort notification from Intuit. If you don't have direct access, research what a firm your size would typically be on.\n\n**Step 2 — List every client file by QuickBooks tier** (Essentials, Plus, Advanced) — even a rough count. This determines which of the six AI agents (Accounting, Payroll, Sales Tax, Payments, Customer, Finance, Project Management) will actually be available per client, not just per firm.\n\n**Step 3 — Decide Core vs. Accelerate.** Given your client mix and the $149/month Accelerate price point, would the free Core plan cover what you need, or does the deeper agent access justify the upgrade? Write your reasoning down, not just the decision.\n\n**Step 4 — Set your own internal deadline**, earlier than December 31, 2026, to complete a voluntary switch rather than being auto-migrated in a cohort — auto-migration during a busy season (e.g., near a tax deadline) is a real risk worth avoiding by moving early.\n\n**Step 5 — Save this as a real migration checklist** you (or your firm) will actually follow, with the deadline, plan decision, and per-client tier audit all in one document.\n\n**Outcome:** a concrete, dated migration checklist for the QBOA-to-Intuit-Accountant-Suite transition — not a general awareness of the change, but an actual plan tied to your (or a realistic hypothetical) practice's client mix."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Workshop 2 — Test-Drive JAX or XeroForce on a Real Financial Question",
+      "content": "If you or your firm uses Xero (or you're evaluating it against QuickBooks), this workshop gets you real, hands-on experience with the newest layer of Xero's AI stack.\n\n**Step 1 — If you have Xero access:** open JAX (via the Xero app, or SMS/email/WhatsApp if your account has it enabled) and ask it a real question about your actual books — e.g., \"Which invoices are more than 30 days overdue?\" or \"Summarize this month's cash flow versus last month.\" Compare its answer against what you'd get by pulling the report manually.\n\n**Step 2 — If your account has the Claude integration enabled**, connect it and ask a scenario-planning question you actually need answered — e.g., \"If I lost my two largest clients next quarter, what would that do to my cash runway?\" — using live data instead of a manual export.\n\n**Step 3 — If you don't have Xero access**, instead draft the exact XeroForce automation you'd build if you had alpha access — pick one real recurring task (month-end close checklist, PO validation, payrun approval routing) and write out, step by step, what the natural-language agent instructions would need to say.\n\n**Step 4 — Write a 3-4 sentence verdict**: was the AI-generated answer or automation plan something you'd actually trust for real client work, or would you need to double-check it against the source data every time? What would make you trust it more?\n\n**Outcome:** either a real, tested interaction with JAX or Claude-in-Xero against your actual books, or a fully specified XeroForce automation ready to build the moment you get access — plus a documented trust verdict you can revisit as the tools mature."
+    },
+    {
+      "type": "quiz",
+      "question": "What is XeroForce, and how is it different from JAX?",
+      "options": [
+        "XeroForce is just a rebranded version of JAX with a new name",
+        "JAX is Xero's built-in conversational agent for asking questions and getting insights about your existing books; XeroForce is a separate, no-code tool that lets accountants and businesses build their own custom automated agents for specific recurring workflows, with every action logged in an audit trail",
+        "XeroForce replaces the need for an accountant entirely by fully automating tax filing",
+        "XeroForce only works for large enterprises, not small businesses or accounting practices"
+      ],
+      "correct": 1,
+      "explanation": "JAX and XeroForce solve different problems: JAX is a conversational agent you ask questions of (reconciliation, cash flow summaries, live financial insights), while XeroForce is a builder — a no-code tool for constructing custom, workflow-specific agents (like a month-end close checklist automation) that then run on their own, with every action audit-logged for compliance. They're complementary, not the same product (ruling out A). Neither eliminates the need for an accountant's judgment (C overstates this), and XeroForce is explicitly positioned for small businesses and accounting practices, not just large enterprises (D is wrong)."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 16-19.** You now know the two major shifts reshaping professional accounting and bookkeeping software in 2026: Intuit's full retirement of QuickBooks Online Accountant by December 31, 2026 in favor of Intuit Accountant Suite and its six tier-gated AI agents, and Xero's rebuilt Xero OS stack — JAX for conversational financial queries, XeroForce for building custom no-code automations, and a new bidirectional Claude/Anthropic integration. Unlike lesson 19-3's personal-finance framing, this lesson covered these tools from a practicing accountant or bookkeeper's seat — and you've built a real migration checklist or tested a real AI feature against your own (or a realistic hypothetical) client work."
+    }
+  ],
+  "nextLesson": "16-20",
+  "prevLesson": "16-18"
+}

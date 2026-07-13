@@ -1,0 +1,95 @@
+{
+  "id": "20-9",
+  "title": "Agent Skills — The Open Standard Behind the Marketplace",
+  "part": 20,
+  "estimatedMinutes": 55,
+  "tags": [
+    "skills",
+    "skill-md",
+    "open-standard",
+    "interoperability",
+    "cross-vendor",
+    "intermediate",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nLessons 20-1 through 20-8 taught you to build skills the Claude Code way: Markdown files in `.claude/commands/`, triggered by typing a `/skill-name` slash command, with `$ARGUMENTS` for dynamic input. That mechanism is real, current, and still works exactly as you learned it — nothing in this lesson invalidates it.\n\nBut lesson 20-1's warning callout said something specific: \"if you go looking for `SKILL.md` files after this part, that's why you won't find them here — revisit lesson 6-16 for that format.\" That statement was accurate when it was written. Then, on December 18, 2025, Anthropic published that other format — `SKILL.md`, first shipped as a Claude-only feature in October 2025 — as an open, cross-vendor standard. By mid-2026, roughly 40 different AI tools read the exact same file format.\n\nThis lesson closes the gap: what SKILL.md actually is, why the industry converged on it so fast, how it relates to the slash-command skills you already built, and how to turn your own skill library into portable files that work in more than just Claude Code."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Quick recap, so the two systems don't blur together:** Claude Code has always had two separate skill mechanisms — the slash-command skills this part teaches (`.claude/commands/*.md`, typed and invoked manually) and Agent Skills (`.claude/skills/*/SKILL.md`, auto-loaded by Claude based on task match). Lesson 6-16 covered Agent Skills too, but described them as a feature specific to Copilot's CLI and cloud agent. Both descriptions were correct when written. What's new is that Agent Skills stopped being a single-vendor feature — it's now the one file format that Claude, Copilot, ChatGPT, Gemini CLI, Cursor, and dozens of others all read."
+    },
+    {
+      "type": "text",
+      "content": "## December 18, 2025 — SKILL.md Becomes an Open Standard\n\nOn October 16, 2025, Anthropic first shipped Agent Skills as a Claude-specific capability — a way for Claude to load folders of instructions, scripts, and reference material on demand rather than cramming everything into a system prompt. Two months later, on December 18, 2025, Anthropic published the specification itself — not just Claude's implementation of it — as an open standard, with a reference SDK hosted at **agentskills.io** and on GitHub.\n\nThe adoption speed is the real story. Within 48 hours of the December 18 announcement, both Microsoft (VS Code and GitHub Copilot) and OpenAI (ChatGPT's Code Interpreter and the Codex CLI) shipped support for reading SKILL.md files — in OpenAI's case, evidence later surfaced that engineering work was already underway before the public announcement. By March 2026, more than 32 agent products read the same file format. By mid-2026, the open standard's own tool showcase listed roughly 40 compatible products, including Gemini CLI, Cursor, JetBrains Junie, AWS Kiro, Databricks' Genie Code, and Snowflake's Cortex Code — alongside Claude Code and Copilot, which you already know.\n\nThe format itself is simple by design: a folder containing a `SKILL.md` file with YAML frontmatter (at minimum a `name` and a `description`) plus a Markdown body, and optionally scripts or reference files the skill needs. That simplicity — plain text, no proprietary runtime, no vendor SDK required just to *read* a skill — is exactly what made it possible for competitors to adopt it in days rather than months."
+    },
+    {
+      "type": "text",
+      "content": "## Why Portability Now Matters\n\nBefore December 2025, \"build once\" for AI skills didn't really exist. A slash-command skill you wrote for Claude Code (the kind you built in 20-1 through 20-8) only runs in Claude Code — it's a Claude Code-specific mechanism, not a portable file. A SKILL.md skill written for Copilot's CLI (lesson 6-16) only ran in Copilot. A team using both Claude Code and Copilot maintained two skill libraries with overlapping logic, written two different ways, updated separately, drifting out of sync.\n\nThat's the exact problem MCP solved for *tools* back in November 2024 (lesson 8-1) — one integration, every client. SKILL.md now does the same thing for *procedural knowledge*: the step-by-step \"here's how our team formats a compliance report\" or \"here's how to triage this project's bug reports\" instructions that used to live in one vendor's proprietary format now live in one file that Claude Code, Copilot, Codex, Gemini CLI, Cursor, and JetBrains Junie can all load without translation.\n\nFor an individual, this mostly matters when you switch tools or use more than one. For a team or an organization, it's bigger: a company can now write its onboarding checklist, its code review standards, or its incident-response runbook as a single SKILL.md, commit it to the repo once, and have it work no matter which AI tool an individual engineer prefers."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Who governs the standard now?** SKILL.md isn't controlled by Anthropic alone going forward. On December 9, 2025 — nine days before the SKILL.md announcement — the Linux Foundation formed the **Agentic AI Foundation (AAIF)**, with Anthropic, OpenAI, and Block as founding members and Google joining shortly after as a platinum member; MCP, AGENTS.md, and the Goose agent were contributed as its first projects. Agent Skills governance sits under that same umbrella: the companies that compete on AI products co-founded a neutral foundation specifically so that no single vendor controls the direction of a format all of them now depend on. By April 2026, AAIF had grown past 170 member organizations. This is the same governance pattern MCP used (lesson 8-1) — publish the spec, then hand long-term stewardship to a vendor-neutral foundation so adoption keeps compounding instead of stalling on trust concerns."
+    },
+    {
+      "type": "text",
+      "content": "## Anatomy of a SKILL.md File — And How It Differs From What You Built\n\nCompare the skill file you built in the 20-1 workshop to a SKILL.md file for the same task.\n\n**Your slash-command skill (`~/.claude/commands/daily-brief.md`):**\n```markdown\n# Role\nYou are my personal morning briefing assistant...\n\n# Steps\n1. Use the Gmail MCP to count my unread emails...\n...\n```\nInvoked by typing `/daily-brief`. Claude only reads it when you type the command. Dynamic input comes from `$ARGUMENTS`.\n\n**The same idea as a portable SKILL.md (`.claude/skills/daily-brief/SKILL.md`):**\n```markdown\n---\nname: daily-brief\ndescription: Produces a concise morning briefing from email and calendar. Use when the user asks for their daily summary, morning briefing, or \"what's going on today\".\n---\n\n# Daily Briefing Skill\n\n## When to use this\nUse whenever the user asks for a morning briefing, a daily summary, or wants\nto know what's most important today.\n\n## Steps\n1. Check email for unread messages from the last 24 hours\n2. Identify anything time-sensitive or from a manager/client\n3. Check today's calendar\n4. Summarise into the format below\n\n## Output Format\n**Good morning! Here's what matters today:** ...\n```\n\nThree structural differences matter:\n1. **Frontmatter, not a typed command.** The `name` and `description` fields are what the AI tool matches against your request — there's no `/daily-brief` to type. Get the description wrong (too vague, or too narrow) and the skill either never fires or fires on the wrong requests.\n2. **No `$ARGUMENTS`.** SKILL.md skills aren't triggered by command syntax — they're triggered by matching *what you're already asking for* in natural language.\n3. **A skill is a folder, not a file.** SKILL.md can bundle scripts, templates, and reference documents alongside the instructions — the AI tool loads the metadata first (cheap: roughly 100 skills' worth of summaries fits in about 5,000 tokens) and only pulls in the full body, and any bundled files, when a task actually matches."
+    },
+    {
+      "type": "text",
+      "content": "## Reformatting Your Existing Skills as Portable SKILL.md Files\n\nEvery skill you built in this part — `/daily-brief`, `/summarize`, `/note`, `/meeting-prep`, `/analyze-anything` — can be reformatted as a SKILL.md. It's worth doing for any skill you'd want available without remembering its exact command name, or that you'd want to keep working if you ever try Copilot, Codex, or Gemini CLI for the same task.\n\nThe conversion pattern:\n1. Create a folder: `.claude/skills/<skill-name>/` (project-level) or `~/.claude/skills/<skill-name>/` (user-level — the same two-tier structure you learned in 20-1)\n2. Turn your Role/Context into a `description` field precise enough that Claude picks the right moments to load it — vague descriptions (\"helps with email\") under-trigger or over-trigger; specific ones (\"produces a concise morning briefing when the user asks what's on today\") trigger reliably\n3. Keep your Steps, Output Format, and Constraints sections — they translate almost unchanged into the Markdown body\n4. Drop `$ARGUMENTS` — write the body so it works from whatever the user's natural-language request already contains\n5. If the skill needs a template file, a script, or reference data, add it to the same folder — SKILL.md is the only *required* file; everything else is optional supporting material\n\n**What you don't lose:** subagent spawning, MCP tool access, and file writing all still work inside a SKILL.md skill — those are Claude Code capabilities, not properties of the `.claude/commands` format specifically.\n\n**What you do lose, deliberately:** precise manual control over exactly when a skill fires. A slash command only ever runs when you type it. A SKILL.md skill runs whenever the AI tool's matching decides your request fits the description — usually convenient, occasionally surprising until you tighten the description."
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "content": "**The upgrade to lesson 6-16, in one line:** 6-16 was correct when it called Agent Skills \"a different kind of extension, designed specifically for the GitHub Copilot CLI and cloud agent.\" As of December 18, 2025, that framing is outdated — Agent Skills isn't Copilot-specific anymore, it's the shared format underneath Copilot, Claude Code, Codex, Gemini CLI, and roughly three dozen other tools. Everything 6-16 taught about *writing* a SKILL.md (YAML frontmatter, `name` + `description`, description-based matching) still applies unchanged — only \"this is Copilot's system\" is no longer accurate."
+    },
+    {
+      "type": "workshop",
+      "tag": "CLAUDECODE",
+      "title": "Workshop — Convert One of Your Skills to a Portable SKILL.md",
+      "content": "Take one skill you actually built earlier in this part and reformat it as a portable SKILL.md, then verify it loads automatically.\n\n**Step 1 — Pick a skill to convert.** Choose one you built and use: `/daily-brief`, `/summarize`, `/note`, or `/meeting-prep`. Open its file in `~/.claude/commands/`.\n\n**Step 2 — Create the skill folder:**\n```powershell\nNew-Item -ItemType Directory -Force -Path ~/.claude/skills/[skill-name]\n```\n\n**Step 3 — Ask Claude Code to do the conversion:**\n```\nRead ~/.claude/commands/[skill-name].md. Convert it into a portable SKILL.md\nfile following the Agent Skills open standard: YAML frontmatter with `name`\nand a specific `description` that states exactly when this skill should\ntrigger, followed by the same steps/output format/constraints as a Markdown\nbody — but rewritten so it doesn't depend on $ARGUMENTS. Save it to\n~/.claude/skills/[skill-name]/SKILL.md.\n```\n\n**Step 4 — Test that it auto-loads.** Start a new Claude Code session and, without typing the slash command, phrase the same request in natural language — e.g. for daily-brief: \"What's on today, what should I prioritise?\" Watch whether Claude recognises the match and pulls in the skill (Claude Code surfaces this in its tool/skill references).\n\n**Step 5 — Tighten the description if it didn't fire.** If Claude answered from general knowledge instead of using the skill, the `description` was too vague or too narrow. Ask Claude to make it more specific about the exact phrases and situations that should trigger it, then retest.\n\n**Step 6 — Keep both versions.** You don't have to delete the original slash command — having `/daily-brief` for deliberate, on-demand use *and* a SKILL.md version that fires automatically when you phrase things naturally is a reasonable use of both mechanisms.\n\n**Accomplishment check:** You have at least one skill in your library that now works the SKILL.md way — portable, auto-triggered, and readable by any of the roughly 40 tools that support the open standard, not just Claude Code."
+    },
+    {
+      "type": "quiz",
+      "question": "A colleague says: 'I wrote a slash-command skill in `.claude/commands/deploy.md` — I should be able to open it in Cursor and have Cursor auto-load it based on what I'm asking.' What's wrong with this expectation?",
+      "options": [
+        "Nothing — all Claude Code skills are portable by default",
+        ".claude/commands/*.md slash-command skills are a Claude Code-specific mechanism triggered by typing /deploy; only .claude/skills/*/SKILL.md files follow the open Agent Skills standard that Cursor and other tools can read",
+        "Cursor doesn't support any form of AI skills",
+        "The file just needs to be renamed to SKILL.md and it will work anywhere"
+      ],
+      "correct": 1,
+      "explanation": "Slash-command skills (`.claude/commands/*.md`) are the Claude Code convention this part of the course teaches — typed and invoked manually, not part of the open standard. The portable, cross-vendor format is Agent Skills (`.claude/skills/*/SKILL.md` or `~/.claude/skills/`), which Anthropic published as an open spec on December 18, 2025, and which Cursor, Copilot, Codex, Gemini CLI, and roughly 40 other tools now read. Renaming a file doesn't convert it — the slash-command file uses a different structure ($ARGUMENTS, no frontmatter) than SKILL.md requires (YAML frontmatter with name/description)."
+    },
+    {
+      "type": "workshop",
+      "tag": "BROWSER",
+      "title": "Workshop — Survey the Cross-Vendor Landscape",
+      "content": "Spend 15 minutes mapping which AI tools you actually use support the open Agent Skills standard — this tells you where reformatting your skills is actually worth the effort.\n\n**Step 1 — Open the showcase.** Visit agentskills.io and find the list of tools that support the standard (search \"agentskills.io showcase\" if the page has moved).\n\n**Step 2 — List the AI tools you personally use or that your team uses.** Include Claude Code, GitHub Copilot, any IDE-integrated AI (Cursor, JetBrains, VS Code), and any CLI agent (Codex CLI, Gemini CLI).\n\n**Step 3 — Cross-reference.** For each tool on your list, check whether it's on the showcase. Note which ones read SKILL.md natively and which don't (yet).\n\n**Step 4 — Decide what's worth converting.** If you and your team only ever use Claude Code, converting slash-command skills to SKILL.md buys you less — the main benefit (auto-triggering vs. typed command) still applies, but cross-tool portability doesn't matter yet. If you or your team touch two or more tools on the list, portability is worth prioritising.\n\n**Step 5 — Write one sentence** in `notes/skill-portability.md`: which of your skills would benefit most from being portable, and why.\n\n**Outcome:** A clear, personal answer to \"should I bother converting my skills to SKILL.md\" — grounded in which tools you actually use, not hype."
+    },
+    {
+      "type": "quiz",
+      "question": "Why did Anthropic, OpenAI, Google, and other competitors co-found the Agentic AI Foundation under the Linux Foundation to govern standards like MCP and Agent Skills, rather than each maintaining its own competing format?",
+      "options": [
+        "Government regulation required it",
+        "A shared, vendor-neutral standard lets every company's tools read the same files without translation — the same compounding-ecosystem effect that made MCP valuable, applied to procedural skills instead of tool integrations; neutral governance also reassures adopters that no single vendor will unilaterally change the format to its own advantage",
+        "It was cheaper than building their own specification",
+        "The Linux Foundation required all AI companies to merge their agent products"
+      ],
+      "correct": 1,
+      "explanation": "The pattern mirrors MCP (lesson 8-1): when every major vendor reads the same file format, the ecosystem compounds — a skill written once works everywhere, and adoption doesn't stall on vendor-trust concerns. Handing stewardship to a neutral foundation (rather than one competitor controlling the spec) is what let direct competitors like Anthropic, OpenAI, and Google co-develop the same standard without one of them dictating terms to the others."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed lesson 20-9.** You understand that Agent Skills stopped being a single-vendor feature on December 18, 2025, when Anthropic published SKILL.md as an open standard now read by roughly 40 tools and governed by the vendor-neutral Agentic AI Foundation. You've converted at least one of your own skills into a portable SKILL.md file, and you know when portability is actually worth the conversion effort. The next lesson covers the other side of that openness: with anyone able to publish a SKILL.md to a public marketplace, you need to know how to tell a trustworthy skill from a dangerous one before you install someone else's."
+    }
+  ],
+  "nextLesson": "20-10",
+  "prevLesson": "20-8"
+}
