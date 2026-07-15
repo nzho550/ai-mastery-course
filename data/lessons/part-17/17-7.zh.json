@@ -91,6 +91,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 17 部分。** 你现在拥有了一套完整的 AI 增强型专业工作流，涵盖项目（规划、问题解决、文档记录、质量审阅、利益相关方沟通）和团队 AI 采用（政策、推广、培训、衡量）。这些技能是会累积的——最有效的 AI 使用者，靠的不是使用最多的工具，而是为日常工作建立起了可靠的工作流。第 19 部分把 AI 应用到个人生活中：家庭、旅行、健康、学习和日常决策。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "为你的团队构建一份完整的 AI 推广计划",
+      "content": "工作坊 A 帮你独立起草了一份政策。这个工作坊更进一步：你将产出一份文档，把政策要点、第一个试点任务和用来证明成效的衡量指标结合在一起——这是你真正会拿去交给经理、争取批准一次真实推广的那一份成果。\n\n**第 1 步——获取你的真实输入信息。** 如果你正在带领或影响一个真实的团队，收集以下信息：团队目前正在使用或考虑使用的 2-3 款工具、团队中最耗时的那项重复性任务，以及你已经听到（或预计会听到）的某位具体同事提出的一个真实反对意见。如果你目前并不管理团队，就用一个贴近现实的情境：一个 10 人规模的运营团队，从未使用过 AI 工具，团队中有一位资深成员担心自己的工作会因此不保。\n\n**第 2 步——把你的输入信息粘贴给 Claude 或 ChatGPT，并提问：**\n```\nHere is my team context: [paste tools, task, and the objection you're expecting]\n\nBuild a one-page AI rollout plan with these sections:\n1. Policy essentials — 4-5 bullet rules covering what data can and can't go into AI tools, and what always needs human review\n2. Phase 1 pilot — the specific task, who does it, and how long the pilot runs\n3. First-win framing — the exact one-sentence result I'd want to be able to report back after the pilot\n4. Response to the objection I described — specific, not generic reassurance\n5. One metric I'll track from week one, and how I'll measure the baseline before the pilot starts\n\nKeep it to one page. Write it for a manager who has 5 minutes to read it, not a policy committee.\n```\n\n**第 3 步——必做的对抗性审查。** 把计划粘贴回去，问：`\"Find 3 specific problems with this rollout plan — places where a real team would resist, where the policy is too vague to actually stop a data leak, or where the 'first win' is either too small to matter or too risky to be a good pilot.\"` 在继续之前，至少修正其中一个问题。\n\n**第 4 步——保存它。** 这是你真正会带去经理办公室或团队会议、启动一次真实推广的文档，而不是一个假设性的练习——下一个工具或下一个团队，也可以复用同样的结构。\n\n**将其应用到其他场景：**\n- **制造业：** 试点选在轮班交接报告，而不是办公室任务，把车间一线员工作为需要说服的对象\n- **非营利组织：** 推广计划聚焦于志愿者协调人员，并包含一个覆盖捐赠人和受助人信息的数据隐私章节\n- **零售/酒店：** 试点选在排班或客户反馈总结，把一线员工（而非办公室员工）作为试点对象\n- **咨询行业：** 推广计划中加入一个客户保密章节，明确说明哪些内容绝不能粘贴进共享的 AI 工具\n- **医疗行政（非临床）：** 推广计划面向排班或账单处理人员，政策部分明确涉及受保护健康信息（PHI）"
     }
   ],
   "nextLesson": "17-8",

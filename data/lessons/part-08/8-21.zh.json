@@ -106,6 +106,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 8-21 课。** Memory MCP 把 Claude 从一个逐次会话的工具，转变为一个能够不断积累你工作、你的项目，以及与你共事的人的相关背景的真正长期协作者。两阶段工作流程——在开始时加载上下文，在结束时保存上下文——正是让其他一切都变得更有生产力的习惯。第 8-22 课是压轴课：六个关键 MCP 在一个完整工作流程中协同工作。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 E——从记忆中生成一份项目交接文档",
+      "content": "你将生成一份真实的、可分享的交接文档——那种你会交给新队友、客户，或未来的自己的文档——完全从你已经填充的知识图谱中提取，而不是从零写起。这会把一个只对你（在 Claude 内部）有用的可查询图谱，转变为任何人都能读懂的成果。\n\n**第 1 步——确保你至少已经在 Memory MCP 中填充了一个真实项目**（上面的工作坊 A/B，或本课主设置流程的第 2 步）。如果还没有，继续之前先花 5 分钟为你正在做的一个真实项目添加实体。\n\n**第 2 步——打开 Claude Code，粘贴：**\n```\nSearch memory for everything about [project name]. Using only what's\nactually stored in memory (don't invent details), write a project\nhandoff document with these sections:\n\n1. Project overview — what it is, current status, deadline if any\n2. Key people — who's involved and their role\n3. Technical decisions — what was decided and why\n4. Open questions / blockers — what's unresolved right now\n5. Where things stand — what a new person should do first\n\nWrite it as if a new team member (or a freelancer picking this up)\nwill read it with zero other context.\n```\n\n**第 3 步——对照你所知道的真实情况阅读这份草稿。** 记忆中可能包含过时或不完整的观察记录——标记出任何文档言之凿凿、但你知道其实已经发生变化的内容，并直接修正它，而不是让 Claude 再猜一次。\n\n**第 4 步——必做的对抗性审查。** 把草稿粘贴回去，问：\n```\nDon't validate this handoff document — find 3 specific problems: gaps\na new reader would trip over, anything that assumes context not\nactually explained, and anything that's stated as settled but is\nactually still an open question.\n```\n\n**第 5 步——修复至少一个被指出的缺口**，然后保存完成的文档（`Documents/handoff-<project>.md` 或你的团队 wiki），并更新记忆实体，注明现在已经有一份交接文档以及它保存在哪里。\n\n**产出：** 一份从持久化记忆中生成、而不是凭空写就的真实交接文档——证明一个维护良好的知识图谱，会在除你以外的人需要这些背景的那一刻立刻回本。\n\n**推广到不同岗位：**\n- QA 工程师：在轮岗离开一个项目之前生成一份测试套件归属交接文档\n- 医疗 IT 系统管理员：为值班轮换生成一份系统配置交接文档\n- 金融系统分析师：生成一份记录对账流程及其例外情况的交接文档\n- 政府技术（GovTech）开发者：为公共部门系统的承包商交接生成一份交接文档\n- 制造自动化工程师：在工厂停产之前，为一个 PLC/自动化项目生成一份交接文档"
     }
   ],
   "nextLesson": "8-22",

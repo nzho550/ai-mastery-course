@@ -84,6 +84,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 16-16 课。** 你现在了解了大多数员工实际会遇到的主要企业级 AI 搜索与知识问答工具——Glean、Microsoft 365 Copilot Search（以 SharePoint 为权威内容支柱、底层依托 Microsoft Graph），以及 Google Gemini Enterprise（包括新的自主代理 Gemini Spark）——以及它们与第 8 部分个人配置的 MCP 连接在治理、访问控制和查询记录责任方面的区别。你已经向一个企业搜索工具提出并测试了一个真实的跨文档问题，严格核实了它的答案是否真正可以追溯到真实来源，并且梳理了你自己工作单位对这些工具的治理模式。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "把真实的内部问题变成一份知识缺口报告",
+      "content": "你将用一批真实的内部问题，对你能接触到的企业搜索工具进行压力测试，然后把结果整理成一份结构化的“发现的知识缺口”报告——一份真的可以交给知识管理或 IT 团队的报告，这是工作坊 1 中单个问题检查的一个更系统化的版本。\n\n**第 1 步——收集 8-10 个真实的内部问题。** 从你（或同事）近期真正需要知道答案的事情里挑选：一个政策问题、一个“我们通常怎么处理 X”的流程问题、一个“我们当初对 Y 是怎么决定的”的问题，或者一个福利或 IT 权限相关的问题。如果你无法接触到工作单位的企业搜索工具，就用你手头有的任何东西（公司内网搜索、共享云盘搜索，甚至一份贴近真实的假设清单），并在报告中明确注明这个限制条件。\n\n**第 2 步——逐一运行每个问题并记录结果。** 对每个问题，记录：它是否给出了答案、是否引用了来源、你核实后引用是否真的支持这个说法，以及来源是否是最新的还是可能已经过时。一个简单的表格就够用。\n\n**第 3 步——把你记录的结果粘贴进 Claude 或 ChatGPT 并要求：**\n```\nHere are the results of testing our enterprise search tool against 8-10 real internal questions: [paste your table/notes]\n\nTurn this into a structured \"knowledge gaps found\" report with these sections:\n1. Summary — how many questions got a fully traceable, current answer vs. a weak or missing one\n2. The specific gaps found, grouped by type (no source, stale source, citation didn't support the claim, no answer at all)\n3. For each gap, a one-line hypothesis of the underlying cause (missing document, outdated document never retired, permissions issue, content never indexed)\n4. Three concrete recommendations for the knowledge-management or IT team, ranked by how many people this gap likely affects\n\nFormat as a report a knowledge-management lead could act on directly.\n```\n\n**第 4 步——必做的对抗性审查。** 把报告粘贴回去并问：`“找出这份报告中 3 个具体的问题——那些你从过小的样本中做出了过度概括的地方，或者某个缺口其实可能只是一次搜索措辞不当、而不是真正内容缺失的地方。”` 在把它定为最终版之前，至少修复其中一个问题。\n\n**第 5 步——保存并（如果合适的话）分享出去。** 这份报告对任何拥有你公司知识库或搜索工具的人来说都是真正有用的，即便你只测试了寥寥几个问题——因为它是具体的证据，而不是一句含糊的抱怨。\n\n**你的交付成果：** 一份基于真实测试问题、结构化的知识缺口报告，随时可以交给知识管理或 IT 团队。"
     }
   ],
   "nextLesson": "16-17",

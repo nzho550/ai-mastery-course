@@ -113,6 +113,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**You've completed lesson 10-1.** You understand the trigger → action model, how AI adds a reasoning step in the middle, the difference between workflow automation and AI agents, and which tool fits which situation. The next three lessons build real working automations using n8n, Zapier, and Make."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Across industries:**\n- Healthcare-IT: A patient intake form triggers a scheduling notification; adding an AI step lets it read free-text symptoms and route urgent cases to a nurse triage queue instead of a generic first-come queue.\n- Legal: A new matter opened in the practice management system triggers document assembly; an AI step reads the intake notes and drafts a matter-specific conflict-check summary instead of filling a generic template.\n- Manufacturing: A sensor reading over threshold triggers a maintenance ticket; an AI step reads the last 10 readings and drafts a likely-cause note so the technician isn't starting from zero.\n- Nonprofit: A new donation triggers a thank-you email; an AI step reads the donor's giving history and tailors the message instead of sending the same form letter to a first-time $20 donor and a ten-year $5,000 donor.\n- Retail/Hospitality: A low-inventory alert triggers a reorder; an AI step reads recent sales velocity and seasonal trends before deciding the reorder quantity instead of using a fixed threshold."
     }
   ],
   "nextLesson": "10-2",

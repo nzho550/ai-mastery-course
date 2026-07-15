@@ -122,6 +122,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 18-8 课。** 你现在拥有了完整的图景：你在 AI 学习版图中所处的位置、接下来两个级别具体是什么样子，以及一条清晰的前进路径。AI 领域发展迅速——但你在这门课程中打下的基础，无论工具如何更迭，都将保持相关性。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——构建你个人的 2 级过渡计划",
+      "content": "本课描绘了 AI 学习的三个级别。现在，把这张地图变成一份你真正会用上的、个人化的过渡计划——而不是一份假设性的计划。\n\n**第 1 步——选定你真实的目标。** 诚实地做出决定：你是要留在 1 级并继续深耕，还是要积极向 2 级（AI 应用开发者）迈进？用一句话写下你目前的真实职位，以及对你而言最关键的技能缺口。\n\n**第 2 步——打开 [Claude.ai](https://claude.ai)，把下面这段提示词填入你的真实信息后粘贴进去：**\n```\nI currently work as a [your real job title] and my day-to-day involves\n[2-3 sentences about your actual responsibilities and tools].\n\nI want to move toward Level 2 (AI application developer) as described in\nthis course: building AI-powered applications in code, calling LLM APIs\nprogrammatically, and eventually working with RAG and agent frameworks.\n\nBased on my current role, identify:\n1. The 3 skills I most likely already have that transfer directly\n2. The 3 biggest gaps I need to close first\n3. A realistic first project I could build in my actual job context that\n   would close the biggest gap\n4. A rough 90-day plan with weekly milestones\n```\n\n**第 3 步——批判性地阅读这份计划。** 那个\"现实可行的第一个项目\"是否真的契合你的实际工作，还是一套放在任何人身上都适用的泛泛建议？如果显得笼统，就反问它：\"结合[你所在的实际团队、工具，或工作中一个真实存在的问题]，让这更具体。\"\n\n**第 4 步——必做的对抗性审查。** 把完成的计划粘贴回去，说：\n```\nDon't validate this plan — find 3 specific problems with it. Consider:\nis the timeline realistic given my actual job constraints, does it assume\naccess to tools or time I don't have, and does the \"first project\" solve\na problem that anyone at my company would actually care about?\n```\n至少修正它指出的一个真实问题——不要只是记下来就算了。\n\n**第 5 步——把它保存在你会再次看到的地方**（一份笔记、30 天后的日历提醒）——一份没人会再翻看的计划，就不是一份真正的计划。\n\n**你的产出：** 一份为期 90 天、针对你真实职位、并经过现实压力测试的过渡计划。\n\n**将其应用到其他场景：**\n- 数据工程师——计划聚焦于从仪表盘查询转向为流水线文档构建一个 RAG 管线\n- DevOps/SRE——计划聚焦于构建一个基于 Claude API 的事故摘要工具\n- 医疗 IT 系统管理员——计划聚焦于一个合规、隐私安全的内部 AI 助手项目\n- 政府科技（GovTech）开发者——计划聚焦于一个基于 RAG 的公共记录检索工具\n- 自由职业/咨询类开发者——计划聚焦于把某项 AI 驱动的成果打包成一项付费客户服务"
     }
   ],
   "nextLesson": "18-9",

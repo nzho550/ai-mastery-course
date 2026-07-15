@@ -86,6 +86,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 19-19 课。** 你现在了解了 AI 智能眼镜市场的现状——Meta 的主导份额及其运行自家 Muse Spark 模型、售价低于 299 美元的自有品牌产品线，Google 和三星即将推出的、有 Gentle Monster 与 Warby Parker 加持的 Android XR 眼镜，三星独立的 Galaxy Glasses，以及 Snap 面向发烧友的高端 Specs。更重要的是，你也了解了两起真实发生的隐私事件（承包商审查录像、休眠的面部识别功能），这正是这个话题成为真正的 AI 素养议题、而不只是一个数码产品潮流的原因。第 19-20 课将从你脸上的设备，转向你车里的 AI——车载助手与驾驶辅助系统。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——制定你的家庭 AI 设备隐私政策",
+      "content": "这个工作坊会产出一份真实的书面文档——而不只是脑子里的一个想法——用来真正约束你家中已联网的 AI 设备，包括任何已经在使用的智能眼镜、可穿戴设备或语音助手。\n\n**第 1 步——做一次真实的盘点。** 在家里走一圈，列出每一台能看、能听或能录制的 AI 设备：智能眼镜、像 Limitless 或 Plaud 这样的音频可穿戴设备（见第 19-7 课）、智能音箱、门铃摄像头、手机助手。记下每台设备的所有者/使用者是谁。\n\n**第 2 步——请 Claude 帮你起草一份真实的家庭政策：**\n```\nHelp me draft a short, practical household AI-device privacy policy.\n\nOur real devices: [list from Step 1]\nWho lives in or regularly visits our home: [describe — e.g., two adults,\na teenager, an elderly parent who visits weekly, frequent guests]\nOur specific concerns: [e.g., recording in the kitchen/living room, a\nvisiting relative not knowing they're being recorded, kids' device use]\n\nDraft a one-page policy covering: where recording devices are and aren't\nallowed in our home, how we'll tell guests or visitors if a device might\nrecord them, how often we'll check privacy settings on each device, and\nwho in the household is responsible for reviewing settings when a device\nis added or updated.\n```\n\n**第 3 步——把草案与真实设置对照检查。** 对清单上的每一台设备，实际打开它的隐私/数据设置，确认你的草案是否符合现实（比如：录制指示灯是否可靠？录像是否会经过人工审查？能否关闭云存储？）。\n\n**第 4 步——必做的对抗性审查。** 把接近定稿的政策粘贴回 Claude：\n```\nDon't validate this — find 3 specific problems or gaps in this household\nAI-device policy: anything unrealistic that we won't actually follow,\nany device or situation we forgot to cover, and anywhere the policy is\nvague enough that it won't actually change behavior.\n```\n至少修正一个真实存在的漏洞。\n\n**第 5 步——让它落到实处。** 打印出来，或保存在家人真正会看到的地方（共享笔记文档、冰箱门上），并和家里其他能理解的成员简单过一遍。\n\n**产出：** 一份真实的、活的家庭 AI 设备政策——基于你真实的设备盘点，而不是假设情形——下次家里新增一台设备时，你可以随时更新它。\n\n**将其应用到其他场景：**\n- 无论这如何适用于你的生活：照护者可以专门加一节，覆盖被照顾亲属自己家中的录制设备\n- 无论这如何适用于你的生活：需要长期管理慢性健康状况的人，可以注明哪些设备绝不应该出现在健康相关对话附近\n- 无论这如何适用于你的生活：新移民可以加一条说明，介绍隐私规范或法律与家乡有何不同，帮助还在适应的家人\n- 无论这如何适用于你的生活：军属或有亲人外派的家庭，可以加入规则，说明外派成员的智能设备在其离家期间可以和不可以分享哪些内容\n- 无论这如何适用于你的生活：退休人士可以把政策的重点放在来访的孙辈和可能没料到会被录制的陌生访客身上"
     }
   ],
   "nextLesson": "19-20",

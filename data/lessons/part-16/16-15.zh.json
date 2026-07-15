@@ -78,6 +78,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 16-15 课。** 你现在了解到，ServiceNow 的 Now Assist 和 SAP 的 Joule 是绝大多数企业员工每天在 IT 工单系统、人力资源案例管理、报销和采购系统中已经在接触的内部、面向员工的 AI 层——在受众、风险和升级路径上，与第 16-12 课中面向客户的 CRM/支持代理有着明显区别。你已经识别（或计划测试）了你雇主自己的 ITSM/ERP AI 工具在一项真实自助服务任务上的表现，并为这些工具处理错你自己案例的情况制定了个人升级预案。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "把一个真实的工单队列变成一份结构化的分诊报告",
+      "content": "你将拿一个真实（或贴近真实）的 IT 工单或工作单积压队列，用 AI 把它转化成一份结构化的分诊报告——一份服务台经理可以立刻据此行动的报告，这正是 Now Assist 和 Joule 在 ServiceNow 与 SAP 内部自动完成的转换，只不过这里你要亲手做一遍，好彻底弄清楚背后到底发生了什么。\n\n**第 1 步——拿到你的原始积压数据。** 如果你能接触到一个真实的工单队列（你自己未结的 IT 工单、你负责管理的工作单列表，或者从公司的 ITSM 工具导出的数据），就用它——哪怕只有 15-20 条工单也够用。如果你没有访问权限，就先请 Claude 或 ChatGPT 生成一份贴近真实的样本：`“为一家中型公司生成一份贴近真实的 IT 服务台工单积压清单，共 20 条，混合包含密码重置、软件访问申请、硬件故障，以及几条描述模糊或不完整的工单，附带时间戳、申请人最初设定的优先级，以及用真实员工实际写作方式（而不是过于工整）写成的简短描述。”`\n\n**第 2 步——把原始积压数据粘贴进 Claude 或 ChatGPT 并要求：**\n```\nHere is a raw IT/work-order ticket backlog: [paste your backlog]\n\nTurn this into a structured triage report with these sections:\n1. Summary — total tickets, breakdown by category, how many look mis-prioritized by the requester\n2. Top 5 tickets that should be escalated first, each with a one-line reason\n3. Tickets that look like duplicates or could be batch-resolved together\n4. Recommended re-prioritization, with your reasoning for anything you'd move up or down\n5. Anything ambiguous enough that it needs a human to clarify with the requester before it can be worked\n\nFormat as a report a service-desk manager could read in 2 minutes and start assigning from.\n```\n\n**第 3 步——必做的对抗性审查。** 把生成的报告粘贴回去并问：`“找出这份分诊报告中 3 个具体的问题——那些你在推断紧急程度或根本原因、但工单文本其实并不支持的地方，或者仅凭这份报告重新排序可能导致某个真正高优先级的工单被埋没的地方。”` 在把这份报告当作最终结果之前，至少修复它找出的一个问题。\n\n**第 4 步——把这份报告保存为一个可复用的模板。** 同样这 5 个部分的结构适用于任何积压队列——你今天未结的工单、你在同事休假时代管的队列，或者下个季度一套完全不同的工单系统。如果你确实在管理一个队列，可以每周重新运行一次，比较这个组合随时间的变化。\n\n**你的交付成果：** 一份针对真实（或贴近真实）工单队列、真实且经过人工审阅的分诊与积压报告——一份今天就能交给经理的东西，而不是一次性的演示。"
     }
   ],
   "nextLesson": "16-16",

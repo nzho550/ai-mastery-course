@@ -112,6 +112,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**You've completed lesson 11-1.** You understand what an API is (the agreed-upon interface between systems), how request/response works (method + URL + headers + body → JSON response + status code), what authentication headers look like, how rate limits work, and how to read JSON. The rest of Part 11 builds on this foundation to connect specifically to the Anthropic API."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Across industries:**\n- Real Estate: An agent who wires their CRM to auto-draft listing descriptions through an API doesn't need to code, but knowing that a 401 means \"check the API key\" (not \"call support\") saves a support ticket every time a key rotates.\n- Marketing/Sales: A marketing ops lead connecting Zapier to an AI lead-scoring step should recognize that a 429 means \"you're sending requests too fast,\" not \"the integration is broken\" — the fix is a delay, not a rebuild.\n- Healthcare-IT: A clinic administrator integrating an AI transcription tool needs to tell a 403 (key valid but lacking permission) apart from a 401 (key invalid) — the first means \"ask IT to expand access,\" the second means \"the key was revoked.\"\n- Finance/Accounting: An analyst building a Power Automate flow against a market-data API uses the exact same JSON navigation skill taught here — `response.data[0].value` works the same whether the API is Anthropic's or Bloomberg's.\n- Nonprofit: A program manager wiring a donor database to auto-draft thank-you letters benefits from knowing that every failure carries a status code — that's the first thing to check before assuming the integration is broken."
     }
   ],
   "nextLesson": "11-2",

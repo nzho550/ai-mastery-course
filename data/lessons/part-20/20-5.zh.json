@@ -65,6 +65,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 20-5 课。** 你已经搭建了三项文档智能技能：用于结构化提取的 `/extract-data`、把原始笔记变成专业记录的 `/meeting-minutes`，以及用于并列文档对比的 `/compare-docs`。这些技能可以处理你每天打交道的真实文档——发票、合同、会议笔记、提案。下一课：生产力套件——用于晨间简报、代码审查和每周复盘的日常技能。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 C——为你自己的文档搭建专属提取技能",
+      "content": "几乎每份工作都有一种反复出现、且总是需要提取相同字段的文档类型。这个练习会为这种具体文档搭建一个永久保存、专门定制版本的 /extract-data——不是通用工具，而是针对你真实文书工作调校过的技能。\n\n**第一步——确定你的文档类型。** 选一种你个人处理最频繁的文档：采购订单、化验申请单、变更请求工单、资助申请、工单、支持升级表单。写下你总是需要提取的 6-10 个字段。\n\n**第二步——收集 2-3 份真实样本**（先脱敏任何敏感信息——姓名、账号、患者或客户身份信息）。\n\n**第三步——打开 Claude Code，搭建这个专属技能。** 创建 `~/.claude/commands/extract-[your-doc-type].md`：\n```\nCreate a skill file at ~/.claude/commands/extract-[doc-type].md, a specialist\nversion of the /extract-data pattern pre-configured for [your document type].\n\nFields to always extract: [list your 6-10 fields]\nOutput: a markdown table with columns Field | Value | Location | Confidence\nFallback: if a field is missing, write [NOT FOUND] — never guess\nConstraint: flag any field that appears more than once with conflicting values\n```\n\n**第四步——在你真实（已脱敏）的样本上运行它：**\n```\n/extract-[doc-type] [paste or path to your first example]\n```\n逐一核对每个提取值与原文档。如果有错误，告诉 Claude 它漏掉了什么，让它修正。\n\n**第五步——必做的对抗性审查。** 把技能文件本身粘贴回 Claude：\n```\nDon't validate this skill file — find 3 specific problems with it. Consider:\nfields that will be genuinely ambiguous in real examples of this document type,\nwhat happens when the document format varies slightly, and whether the\nfallback behavior actually prevents guessing. Be specific, not generic.\n```\n在认为这个技能完成之前，至少修复 Claude 指出的三个问题中的一个。\n\n**第六步——保存并复用。** 在接下来一周里，用这个完成的技能处理你遇到的下 3 份同类型真实文档，记录它相比手动录入节省了多少时间。\n\n**你的交付成果：** 一个围绕你实际处理的文档搭建、并经过测试的永久提取技能——而不是一个演示。\n\n**场景延伸：**\n- 财务系统分析师：用于对账报告或供应商发票的提取技能\n- QA 工程师：用于缺陷报告工单（复现步骤、严重程度、受影响版本）的提取技能\n- 医疗 IT 系统管理员：用于入院/转诊表单的提取技能（测试前先脱敏 PHI）\n- 政府科技开发者：用于许可证或福利申请的提取技能\n- 制造自动化工程师：用于质检或不合格报告的提取技能"
     }
   ],
   "nextLesson": "20-6",

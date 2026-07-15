@@ -82,6 +82,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**第 6-19 课完成。** 文档是 Copilot 写作能力最能体现出来的地方——也是切换到 Claude 后质量提升最明显的地方。通过把文档中机械性的部分（docstring 结构、README 章节、提交信息格式）自动化，你能腾出精力去关注只有你才能提供的部分：为什么这样做、业务背景，以及代码本身看不出来的那些知识。第 6-20 课将介绍安全、隐私与内容排除——如何在受监管、注重安全的环境中安全地使用 Copilot。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "实战 D——为真实项目做文档同步审计",
+      "content": "审计并修复你项目文档与代码实际行为之间的差距——最终留下一份准确的 README，以及一套能持续捕捉文档漂移的固定流程。\n\n**第 1 步——选择一个真实的代码仓库**，一个你维护或贡献过的、有 README（哪怕只是粗略的）、并且自 README 上次更新以来发生过实质性变化的仓库。\n\n**第 2 步——在模型选择器中切换到 Claude**——这是一项写作/分析任务。\n\n**第 3 步——运行同步检查：**\n```\n@workspace Compare the README's installation instructions, configuration section, and usage examples against the actual project setup, config files, and entry points.\nList: (1) steps in the README that are no longer accurate, (2) setup steps the project now requires that the README doesn't mention, (3) usage examples that reference commands or functions that no longer exist or have changed signatures.\nBe specific — cite the exact README line and the exact code/config that contradicts it.\n```\n\n**第 4 步——直接在 README 中修复每一处不一致。** 不要只是标注出来——重写受影响的部分，让每一条命令和每一个步骤都可以直接复制粘贴且准确无误。\n\n**第 5 步——添加一个审计信息部分**（如果你的项目还没有的话），说明记录了什么、记录在哪里、保留多久——哪怕只是一段占位性的文字，对未来的合规需求来说也比完全没有更有用。\n\n**第 6 步——必做的对抗式审查。** 把更新后的 README 粘贴回去并提问：\n```\nFind 3 specific problems with this README: places where a new developer would still get stuck, get wrong output, or be missing a prerequisite you didn't mention. Be concrete, not general.\n```\n至少修复它找出的三个问题中的一个。\n\n**第 7 步——通过逐字逐句地照着自己的 README 操作来验证**，一步一步来，如果可能的话在一个干净的终端或全新克隆的仓库中进行。如果某一步失败了，说明 README 仍然是错的——继续修正。\n\n**成果：** 一份真正与你今天正在运行的代码相匹配的 README，并且是通过真正执行它来验证的——而不只是生成出来就被盲目信任。这就是本次的产出：不是一个演示仓库，而是你真实项目里，每一位新贡献者实际会用到的入口文档。\n\n**将其应用到其他场景：**\n- **QA 工程师：** 把你测试套件的 README 与它在本地运行实际需要的 fixture、环境变量和 CI 配置对照同步。\n- **数据工程师：** 对照真实的 DAG/调度配置和当前的源表名称，审计你数据管道的 README。\n- **医疗 IT 系统管理员：** 对照当前实际的服务器/服务名称和访问流程，审计一份系统运维手册。\n- **GovTech 开发者：** 把你所在服务的部署 README 与当前实际的审批和环境晋升步骤同步。\n- **技术文档撰写者：** 对你团队访问量最高的 3 个文档页面运行这项审计，记录哪些说法已经过时。"
     }
   ],
   "nextLesson": "6-20",

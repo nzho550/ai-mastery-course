@@ -115,6 +115,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**You've completed lesson 15-3.** You now know three levels of AI web research: smart searching, page extraction, and automated crawling. You can evaluate sources using the CRAAP criteria, handle conflicting information systematically, and turn any public web page into structured, analysed data without writing code."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Across industries:**\n- Retail/Hospitality: A revenue manager checking competitor room rates weekly uses Playwright to crawl five booking pages instead of checking each site by hand, then runs the CRAAP check before trusting a third-party rate-comparison blog's numbers.\n- QA Engineer: Researching a flaky dependency's known issues, a QA engineer uses Perplexity's Reddit focus mode to find real practitioner reports, then cross-checks the top complaint against the vendor's official changelog before filing a bug.\n- Healthcare-IT: A systems analyst evaluating a new patient-portal vendor extracts uptime and security claims from the vendor's public documentation pages, then applies the hierarchy-of-evidence check to separate the marketing page from the actual SOC 2 report.\n- Freelance/Consulting Developer: A freelancer pricing a project searches Perplexity with a date constraint (\"published after January 2025\") so the going-rate figures quoted to a client aren't pulled from a stale 2021 blog post.\n- Education: A curriculum lead researching a new ed-tech tool's classroom outcomes runs the same question through Academic and Reddit focus modes, notices the peer-reviewed consensus and teachers' lived experience diverge, and reports both."
     }
   ],
   "nextLesson": "15-4",

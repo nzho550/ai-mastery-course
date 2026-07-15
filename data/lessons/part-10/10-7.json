@@ -89,6 +89,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**You've completed lesson 10-7.** You've documented your personal AI workflow and automation strategy. Next: lesson 10-8 puts everything together in a real project — building, deploying, and auto-updating a live website. **Skill tip:** The workflows you designed in this lesson are perfect candidates for Claude Code custom skills — save them as skill files in `~/.claude/commands/` and trigger them with a single command instead of re-building the context each time. Part 20 teaches exactly how to do this, including skills that chain workflows together."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Across industries:**\n- Consulting: A consultant's playbook routes client research to one tool, deliverable drafting to another, and time tracking to a scheduled automation — the same three-tool-max discipline this lesson teaches for developers.\n- Education: A teacher's personal stack routes lesson planning to a chat AI, grading-feedback drafts to a semi-automated workflow, and parent-communication reminders to a calendar automation, reviewed weekly.\n- Financial-Systems Analyst: A daily digest automation pulls overnight batch-job status and market data, summarised by AI, so the analyst starts the day with one brief instead of five dashboards.\n- Marketing/Sales: A playbook routes lead research to one tool, campaign copy drafting to another, and a weekly performance digest to a scheduled automation — with an explicit list of what stays manual, like client-facing tone and final sign-off.\n- Government: A caseworker's stack automates status-update reminders and document routing, but explicitly keeps eligibility decisions manual — mirroring this lesson's 'what I don't automate and why' section."
     }
   ],
   "nextLesson": "10-8",

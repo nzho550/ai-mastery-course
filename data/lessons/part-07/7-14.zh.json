@@ -80,6 +80,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 7-14 课——也完成了第 7 部分。** 你现在能够区分凭感觉写代码和规范驱动开发，也理解了后者存在的原因：为了在单次对话（即便有 Plan Mode）也无法独自保证的多次会话中，抵御意图漂移和上下文衰减。你了解了将这种模式正式化的真实工具——GitHub Spec Kit、AWS Kiro，以及在仓库中维护持续更新规范文件的 Agent OS 惯例。你已经写过一份真实的规范，用 Claude Code 依据它实现，并对照验收标准而不是凭感觉审查了这份差异——你也为自己设定了何时值得为这份开销买单的规则。接下来是第 20 部分（构建自定义 AI 技能），你将在那里把类似这样的工作流打包成可复用的斜杠命令。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 3——为你已经构建好的工作补写一份规范",
+      "content": "你将为自己某个项目中已经存在的一个功能写一份规范——从没有先写规范就构建出来的代码中，反向推导出 Problem / Requirements / Acceptance Criteria / Out of Scope 这套结构。这会产出一份你今天就能提交的真实规范文件，同时让你直接练习从实现中读出意图，而不是把意图写进实现里。\n\n**第 1 步——挑选一个真实的功能**，是你（或某次 Claude Code 会话）在过去几个月里构建的、事先没有写规范的功能——要足够不简单，让一个新贡献者仅仅浏览代码猜不出它的完整行为。\n\n**第 2 步——在这个项目中打开 Claude Code，粘贴：**\n```\nRead [file(s)/module] and reverse-engineer a spec for this feature.\n\nProduce:\n1. Problem — what need does this code satisfy? Infer it from the code\n   and any comments/commit messages, don't guess wildly.\n2. Requirements — the specific behaviors this code actually implements\n   (not what you assume it should do — what it DOES do)\n3. Acceptance Criteria — a checklist someone could use to verify a\n   reimplementation matches current behavior\n4. Out of Scope — edge cases or inputs the current code visibly does\n   NOT handle\n\nFlag anywhere the code's actual behavior looks like it might be an\nunintentional bug rather than a deliberate requirement.\n```\n\n**第 3 步——逐行对照真实代码审查这份草稿规范。** 凡是 Claude 猜错意图的地方，纠正它——即便代码没有完美表达出来，你才是“当初想要什么”的事实来源。\n\n**第 4 步——必做的对抗性审查。** 把改好的规范粘贴回去：\n```\nDon't validate this spec — find 3 specific problems: (1) any\nrequirement that doesn't match what the code actually does, (2) any\nacceptance criterion that isn't actually testable, (3) anything in\n\"Out of Scope\" that's actually silently handled (or silently broken).\n```\n\n**第 5 步——修复审查发现的至少一个真实缺口**，把完成的文件保存为 `specs/<feature-name>.md`，与它所描述的代码一起提交。\n\n**产出：** 一份为真实已上线代码补写的真实规范——这是本课另一个 BUILD 工作坊在实现之前产出的同一种成果，现在换成了事后产出，为你任何未被记录的既有工作补上这个缺口。\n\n**推广到不同岗位：**\n- QA 工程师：为一套现有测试套件的覆盖规则补写规范，让覆盖率的缺口对照一份写下来的约定变得可见\n- DevOps/SRE：为一个现有的部署或回滚脚本补写规范\n- 数据工程师：为一个现有 ETL 流水线的转换规则补写规范\n- 自由职业/独立顾问开发者：为一份在时间压力下交付的客户成果补写规范，以便干净利落地交接\n- 技术文档撰写者：为一个现有 CLI 工具“文档记载”与“实际行为”之间的差异补写规范"
     }
   ],
   "prevLesson": "7-13",

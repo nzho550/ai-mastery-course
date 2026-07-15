@@ -65,6 +65,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 20-6 课。** 你现在拥有了一套完整的生产力套件：`/morning-brief`（每日规划）、`/code-review`（质量保障）、`/weekly-review`（复盘）以及 `/standup`（每日同步）。它们共同取代了任何知识工作者一周中最重复的规划和审查任务。下一课：技能串联——搭建能够触发其他技能的技能，构建你的个人 AI 工作流系统。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "练习 B——为你的岗位搭建交接或升级报告技能",
+      "content": "本课的四个技能（morning-brief、code-review、weekly-review、standup）都是为通用知识工作者设计的。这个练习会搭建第五个、真正针对具体岗位的技能：一份把真实工作总结给依赖它的另一个人的交接或升级报告。\n\n**第一步——确定你的交接时刻。** 找出一个你需要向另一个人或下一班次总结现状的固定节点：值班交接、冲刺结束时向 PM 汇报状态、每日支持队列总结、每周资助/实验室进度记录。明确受众是谁，以及他们需要在 60 秒内读懂什么。\n\n**第二步——梳理你的真实输入数据。** 列出这个技能应该读取的内容：git log、事件追踪系统导出、工单队列、实验记录文件——任何你实际能访问到的东西。\n\n**第三步——搭建这个技能。** 打开 Claude Code：\n```\nBuild ~/.claude/commands/handoff.md using the 6-part skill architecture\n(role, context, steps, output format, constraints, fallback):\n\nRole: [describe who this skill is speaking as]\nInputs: [your real data sources from Step 2]\nSteps: read the inputs, identify what changed since the last handoff,\nidentify anything unresolved or blocking, identify the single most\nimportant thing the next person needs to know\nOutput: a handoff note under 200 words with sections: Status, Unresolved,\nWatch for, Contact if unclear\nFallback: if an input source is unavailable, note it and continue with\nwhat's available — never fabricate status\n```\n\n**第四步——在真实的、当前的数据上运行它：**\n```\n/handoff\n```\n把自己当成第一次读到这份报告的接收人来阅读。有没有遗漏什么你会想追问的信息？\n\n**第五步——必做的对抗性审查。** 把生成的交接报告粘贴回 Claude：\n```\nDon't validate this handoff note — find 3 specific problems with it: information\nthat's missing but would matter to the receiver, anything ambiguous enough to\ncause a mistake, and anything included that the receiver doesn't actually need.\n```\n至少修复其中一个被指出的问题，然后重新运行这个技能。\n\n**第六步——本周用它完成一次真实的交接**，并询问真正的接收人：它是否传达了对方需要的信息。\n\n**你的交付成果：** 一个围绕你真实要交接的数据搭建、并经过真实接收人检验的永久交接/升级报告技能。\n\n**场景延伸：**\n- DevOps/SRE：值班事件交接，总结未处理告警、近期部署和当前影响范围\n- 客户支持运营工程师：班次结束队列交接，按 SLA 风险对未解决工单排序\n- 数据工程师：管道健康交接，总结失败任务、数据质量告警和待处理的回填工作\n- EdTech 开发者：向非技术产品负责人做的冲刺交接\n- 非营利/大学实验室研究工程师：资助项目的每周进度记录"
     }
   ],
   "nextLesson": "20-7",

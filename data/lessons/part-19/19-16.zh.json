@@ -82,6 +82,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 19-16 课。** 你现在理解了 Suno（Voices、Custom Models、Suno Studio）与 Udio（Inpainting、Sessions）之间真正的差异，也理解了为什么 2025-2026 年标志着 AI 音乐从版权灰色地带转向与三大唱片公司中的两家正式建立授权合作关系——尽管索尼的坚持不和解以及 AFM 音乐家工会的诉讼表明，这一转变仍未完成。你已经生成并打磨了一首自己会实际用到的曲目，也思考清楚了声音克隆在什么情况下需要征得同意。接下来：第 19-11 课讲的是 AI 视频生成——那里也发生了一件大事，因为 OpenAI 已于 2026 年 4 月关停了 Sora。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 C——打造你的个人人生原声带档案",
+      "content": "工作坊 A 和 B 带你完成了生成和打磨一首曲目的过程。这个工作坊要把这件事变得更持久：建立一个与你人生中真实、反复出现的时刻绑定的 AI 生成歌曲小型个人档案——那种你五年后会在硬盘里重新发现、并庆幸自己做过的东西。\n\n**第 1 步——列出你人生中 2-3 个值得写成歌的真实场合**：某位亲属的重要生日、你正在做的一个小型副业或生意的宣传曲、一个纪念日、给即将搬走的朋友写的告别歌、给某个具体孩子写的摇篮曲。写下真实的名字和真实的细节——只有具体才有效。\n\n**第 2 步——针对每个场合，请 Claude 或 ChatGPT 用你的真实细节帮你起草歌词：**\n```\nHelp me write song lyrics for [occasion — e.g., my mother's 70th birthday].\nReal details to include: [specific memories, inside jokes, names, places —\nbe as specific as possible].\nTone: [celebratory / bittersweet / funny / tender]\nStructure: verse-chorus-verse-chorus-bridge-chorus, roughly 3 minutes when sung.\nAvoid generic greeting-card language — make every line specific to this person/event.\n```\n\n**第 3 步——生成曲目**：在 Suno 或 Udio 中，用你的歌词加上风格/情绪描述来生成。生成 2-3 个版本，选出最好的一个。\n\n**第 4 步——必做的对抗性审查。** 在认定任何一首曲目完成之前，把歌词粘贴回去，问：\n```\nDon't validate this — find 3 specific problems with these lyrics: anything that\nfeels generic instead of specific to this real person/event, anything emotionally\noff-key for the occasion, and anything a listener who knows this person would\nfind confusing or inaccurate.\n```\n在定稿前，至少修正一个真实存在的问题。\n\n**第 5 步——建立档案。** 创建一个文件夹（用云存储，而不只是放在手机里），取一个你以后一眼就能认出的名字——\"人生原声带\"就很合适。给每首完成的曲目取一个包含场合和年份的文件名，再配一份简短的文字说明：这首歌是给谁的、什么时候做的、内容指涉什么——这样未来的你（或这首歌所献给的人）才能理解背景。\n\n**产出：** 不只是一首样曲，而是一份真实的、会不断增长的个人档案的起点——与真实的人和真实的时刻绑定的音乐，被保存在一个不会随着这次创作会话结束而消失的地方。\n\n**将其应用到其他场景：**\n- 无论这如何适用于你的生活：小企业主可以为反复出现的促销活动打造一个季节性宣传曲库\n- 无论这如何适用于你的生活：退休人士可以把家族故事写成歌曲送给孙辈\n- 无论这如何适用于你的生活：自由职业者可以为客户演示或作品集网站制作一段有辨识度的片头/片尾曲\n- 无论这如何适用于你的生活：新移民可以把家乡一句喜爱的话或一段记忆谱成曲，作为纪念\n- 无论这如何适用于你的生活：家长可以为每个孩子的生日建立一份不断增长的\"每年一首歌\"档案"
     }
   ],
   "nextLesson": "19-11",

@@ -95,6 +95,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**Capstone 14-1 complete.** You have a live portfolio website with an auto-deploy pipeline. Every tool you learned — Claude Code, VS Code, Git, GitHub MCP, GitHub Actions — came together in this single session. Your portfolio now validates and deploys automatically on every push. The next capstone builds a command-line research tool using the Anthropic API."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Adapt this capstone:** The same brief-Claude-Code-then-deploy process builds a very different portfolio depending on what you're actually showcasing.\n- Designer/visual creative: skip the code project cards — build around image galleries and before/after case studies, with the design decisions explained, not the stack\n- Sales or account manager: replace \"Projects\" with quantified wins — deals closed, accounts grown, client testimonials — as a one-page results page instead of a GitHub link list\n- Teacher/educator: showcase curriculum you've designed and student outcomes instead of code — sample lesson plans and a \"philosophy\" section instead of \"tools I use\"\n- Product manager: build each \"project\" as a problem → solution → impact case study with real metrics, not a repo link\n- Freelance writer/journalist: turn it into a clips page — published pieces grouped by topic or outlet, with a one-line hook for each instead of a tech stack list"
     }
   ],
   "nextLesson": "14-2",

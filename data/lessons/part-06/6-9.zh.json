@@ -117,6 +117,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**第 6-9 课完成。** 你现在可以把 MCP 服务器连接到 Copilot 智能体模式，接入 Jira 以便在不离开 VS Code 的情况下读取和更新工单，并为每种任务挑选合适的模型。这三项能力合在一起——智能体自主性、通过 MCP 实现的外部工具访问，以及有意识的模型选择——正是区分一个普通 Copilot 用户和一个真正比不用 AI 更快的人的关键所在。第 6-4 课介绍了 Continue.dev，这个免费开源的替代方案，用你选择的任意 AI 后端，遵循类似的智能体 + MCP 模式。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 E——添加第二个 MCP 服务器并交付跨工具状态报告",
+      "content": "到目前为止这节课中的每个工作坊都只使用一个 MCP 服务器（Jira）。这个工作坊会连接第二个服务器，并结合有意识的模型切换，产出一份真实的成果：一份实时从两个系统中提取数据的状态报告，而不是手动复制粘贴出来的。\n\n**第 1 步——添加第二个 MCP 服务器**\n打开智能体模式，查看你的 Tools 列表——GitHub 工具（`search_issues`、`list_pull_requests` 等）可能已经可用。如果没有，就在你的 `.vscode/mcp.json` 中，在 `atlassian` 旁边添加一个 `github` 条目，使用个人访问令牌，采用和 Jira 相同的 `command`/`args`/`env` 结构。\n\n**第 2 步——验证两个服务器都已启用**\n在智能体模式中，点击 Tools，确认在同一个会话里能同时看到 Atlassian 工具和 GitHub 工具。\n\n**第 3 步——切换到侧重写作的模型**\n在起草任何内容之前，用模型选择器切换到 Claude Sonnet 或 Claude Opus——这是一个写作任务，不是编码任务。\n\n**第 4 步——生成真实的报告**\n填入你实际的项目名称和日期范围，然后发送：\n```\nUsing the Jira and GitHub tools available to you, build a status report for [YOUR PROJECT] covering [DATE RANGE]:\n1. Search Jira for tickets moved to Done or In Review in that window\n2. Search GitHub for merged PRs and still-open PRs in the same window for this repo\n3. Combine both into one report with three sections: Shipped, In Progress, Blocked\n4. For each item, include the issue/PR key, a one-line description, and who it's assigned to\n5. End with a \"Risks and Blockers\" section based on any tickets flagged as blocked or PRs open more than 5 days\nWrite it in a tone suitable for a non-technical stakeholder.\n```\n\n**第 5 步——保存这份成果**\n把输出保存为 `status-report-[date].md`，放进你的项目或团队 wiki。这是真实的交付物——不是一个演示文件。\n\n**第 6 步——对抗性审查（必须完成）**\n```\nFind 3 specific problems with this status report: places where it might be misleading, missing context a stakeholder would need, or where it states something as fact that it only inferred from ticket or PR titles. Then fix at least one of those problems.\n```\n在你认为这份报告完成之前，至少修复一个问题。\n\n**应用到你的场景：**\n- QA 工程师：把 GitHub 搜索换成 TestRail 或 Zephyr 的 MCP 查询，在工单状态旁一并报告测试通过率的变化趋势\n- 数据工程师：改为从 dbt 或 Airflow 的 MCP 服务器拉取数据，把流水线失败情况和跟踪它们的 Jira 工单放在一起报告\n- DevOps/SRE：加入 PagerDuty 或 Datadog 的 MCP 数据源，把事件数据和为修复它们而开的 Jira 工单结合起来\n- 医疗 IT 系统管理员：不要在草稿中保留可识别身份的工单细节，并增加一步，让 AI 在你保存文件之前检查是否有任何 PHI（受保护健康信息）"
     }
   ],
   "nextLesson": "6-10",

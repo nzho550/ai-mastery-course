@@ -93,6 +93,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**You've completed Part 18 — Local AI.** You can now install, run, and connect local models to your development tools. Part 19 shifts into advanced technique: Chain-of-Thought, Tree-of-Thought, ReAct, and other advanced prompting patterns that push what any model — local or cloud — can do for you."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Across industries:**\n- Consulting: Choosing between Claude, GPT, and a local model for a client engagement often comes down to the same decision tree used here — what the contract says about where client data can go, and how much that constrains the allowed AI stack.\n- QA Engineer: Picking a test framework or static-analysis tool by running your own suite's failure modes against each candidate, rather than trusting a vendor's benchmark, is the same discipline as this lesson's benchmark-matrix workshop.\n- DevOps/SRE: Choosing between self-hosted and managed logging/monitoring stacks follows the identical tradeoff — cost and hardware constraints first, then testing candidates against real traffic patterns instead of published throughput numbers.\n- Nonprofit: A small nonprofit choosing free/open-source software over paid SaaS for case management works through the same decision tree — budget ceiling first, task fit second, then a real trial before committing.\n- Retail/Hospitality: Picking a POS or inventory system means the same three-question framework: what hardware and budget exist, what's the core task, and does a hands-on trial with real store data confirm the vendor's claims."
     }
   ],
   "nextLesson": "18-1",

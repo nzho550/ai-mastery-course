@@ -78,6 +78,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 16-19 课。** 你现在了解了 2026 年重塑专业会计与簿记软件的两大转变：Intuit 在 2026 年 12 月 31 日之前彻底停用 QuickBooks Online Accountant，转而推出 Intuit Accountant Suite 及其六个按层级限定的 AI 智能体；以及 Xero 重建的 Xero OS 技术栈——用于对话式财务查询的 JAX、用于构建定制无代码自动化的 XeroForce，以及一项全新的双向 Claude/Anthropic 集成。与第 19-3 课的个人理财视角不同，本课是从在职会计师或簿记员的视角来介绍这些工具的——你已经制定了一份真实的迁移清单，或者针对你自己（或一个真实合理的假设情境）的客户工作测试了一项真实的 AI 功能。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "把真实的交易数据变成一份对账与异常标记报告",
+      "content": "你将拿真实（或贴近真实）的交易数据，用 AI 生成一份结构化的对账与异常标记报告——一份簿记员或初级会计真的可以交给复核 CPA 的报告，这正是 Intuit 的 Accounting Agent 和 Xero 的 JAX 自动完成的初步工作，这里你要亲手做一遍，好清楚看到人工到底还需要检查哪些内容。\n\n**第 1 步——拿到你的原始交易数据。** 如果你能接触到一份真实（如需要可做匿名化处理）的银行或信用卡对账单、一份 QuickBooks/Xero 交易导出数据，或一份总账摘录，就用它——哪怕只是一个小型账户一个月的数据也够用。如果你没有访问权限，就先请 Claude 或 ChatGPT 生成一份贴近真实的样本：`“为一个小企业支票账户生成一份贴近真实的 1 个月交易清单——40-50 笔交易，商户名称有清晰的也有含糊的，至少 3 笔看起来像是潜在的重复记录或分类错误，还有 1 笔看起来像是真正的异常（金额或时间不寻常），写作方式要贴近真实银行导出数据的样子，而不是过于工整。”`\n\n**第 2 步——把原始交易数据粘贴进 Claude 或 ChatGPT 并要求：**\n```\nHere is a raw transaction list: [paste your data]\n\nTurn this into a structured reconciliation and anomaly report with these sections:\n1. Summary — total transactions, total flagged for review, categories with the most activity\n2. Likely duplicate or miscategorized transactions, each with a one-line reason\n3. Anomalies — transactions unusual in amount, timing, or vendor pattern compared to the rest of the data, each with a one-line reason they stand out\n4. Recommended next actions, ranked by dollar impact\n5. A mandatory \"flag for CPA verification\" section listing anything a licensed accountant should confirm before this report is treated as final — including any categorization you're not fully confident about\n\nFormat as a report a reviewing accountant could work from directly.\n```\n\n**第 3 步——必做的对抗性审查。** 把报告粘贴回去并问：`“找出这份报告中 3 个具体的问题——那些你在推断某个类别或标记某个异常、但原始数据其实并不能清楚支持的地方，或者你判定为重复的两笔交易实际上可能是合法的独立收费。”` 在把这份报告当作最终结果之前，至少修复其中一个问题，并确认“需 CPA 核实”这一部分确实列出了每一个真正不确定的判断。\n\n**第 4 步——把这份报告保存为一个可复用的月度模板。** 同样这 5 个部分的结构适用于任何时间段——这个月真实的交易记录、某位客户的账簿，或者下个周期一个完全不同的账户。\n\n**你的交付成果：** 一份真实、经过人工审阅、附带必做“需 CPA 核实”部分的对账与异常标记报告——一份真正的初步成果，而不是最终的会计记录。"
     }
   ],
   "nextLesson": "16-20",

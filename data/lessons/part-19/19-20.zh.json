@@ -82,6 +82,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 19-20 课。** 你现在了解了 2026 年车载 AI 的真实版图——来自奔驰（ChatGPT-4o + Google 的 Automotive AI Agent）、通用/沃尔沃/极星（Gemini）以及宝马（Alexa+）的对话式助手，特斯拉 Grok 与 Rivian Assistant 之间真实存在的能力差距，以及特斯拉 FSD 的“Supervised（监督）”状态和无接管连续里程计数器，对系统当前仍需要你付出多少注意力究竟意味着什么。你已经审查了自己车辆的实际 AI 能力，并打造了一份可复用的购车前问题清单。第 19-14 课（照片与视频编辑）延续了日常应用这条线索——“AI 能做的事情可能超出营销宣传的范畴，所以要先核实再信任”这个习惯，在那里同样适用。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——制定一份真实的家庭车载 AI 使用协议",
+      "content": "这个工作坊会把工作坊 1 中的审查结果，变成一份你家会真正使用、真正签署的文档——不只是你现在掌握的知识，而是一份能改变下次有人坐上驾驶座时实际行为的真实协议。\n\n**第 1 步——汇总你真实的调查结果。** 把你在工作坊 1 中了解到的、你实际车辆的 AI 功能整理到一起：语音助手能控制什么、不能控制什么，是否有任何驾驶辅助功能仍需要你保持注意力，以及实际的订阅费用。\n\n**第 2 步——请 Claude 帮你起草一份真实的家庭协议：**\n```\nHelp me draft a short, practical family car-AI usage agreement.\n\nOur actual vehicle and AI features: [list what you found in your audit —\ne.g., Tesla FSD Supervised, or Gemini-based Google built-in, or none]\nWho drives this car: [list drivers, including ages if there's a newer/\nyounger driver]\nOur specific concerns: [e.g., a teen driver who might over-trust\ndriver-assistance features, using voice commands while driving, letting\nkids interact with the in-car assistant]\n\nDraft a short agreement covering: what the driver-assistance system does\nand doesn't do (in plain language, not marketing language), when it's\nokay versus not okay to use voice commands, and what happens if someone\nis caught treating a driver-assistance feature as if it were fully\nautonomous.\n```\n\n**第 3 步——把它与工作坊 1 中厂商的真实文档对照检查**——确保你草拟协议中的任何内容，都不与厂商实际所说的系统要求相矛盾。\n\n**第 4 步——必做的对抗性审查。** 把你的草案粘贴回 Claude：\n```\nDon't validate this — find 3 specific problems with this family car-AI\nagreement: anywhere the language is too vague to actually change behavior,\nany real driving situation in our household it doesn't cover, and anything\nthat contradicts what the manufacturer's own documentation says the system\nrequires.\n```\n至少修正一个真实存在的问题。\n\n**第 5 步——让它落到实处。** 把最终版本打印或保存在真正会被看到的地方（手套箱、共享的家庭文档），如果家里有新手或年轻驾驶者，直接和他们一起过一遍，而不只是交给他们了事。\n\n**产出：** 一份关于你家实际如何使用车辆 AI 功能的真实、具体的协议——基于你车辆实际的能力，而不是泛泛的提醒。\n\n**将其应用到其他场景：**\n- 无论这如何适用于你的生活：家长可以把协议的重点专门放在青少年驾驶者使用驾驶辅助功能上\n- 无论这如何适用于你的生活：照护者可以为仍在开车并使用语音辅助的年迈亲属增加相应指引\n- 无论这如何适用于你的生活：退休人士可以围绕长途自驾游中驾驶辅助功能使用更频繁的场景来定制协议\n- 无论这如何适用于你的生活：军属家庭可以起草一个版本，覆盖配偶外派期间车辆完全由其独自使用的情形\n- 无论这如何适用于你的生活：需要长期管理慢性健康状况的人，可以注明哪些情况（疲劳、服药时间）最需要格外谨慎地对待驾驶辅助功能的依赖"
     }
   ],
   "nextLesson": "19-14",

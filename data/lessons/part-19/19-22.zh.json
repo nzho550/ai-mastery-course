@@ -82,6 +82,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 19-22 课——以及第 19 部分，AI 助力个人生活。** 你现在了解了皮尤研究中心记录的、青少年 AI 聊天机器人使用（64%）与家长知情程度（51%）之间真实存在的差距、相关的法律记录——Character.AI 过失致死和解案件及由此带来的 18 岁以下聊天限制、Meta 暂停青少年访问 AI 角色的功能——以及两项仍在推进中的重大立法（加州的《家长与儿童 AI 安全法案》、联邦 CHATBOT 法案）目前所处的阶段。你已经在一台真实设备或账户上设置了实际的家长控制，并草拟了一句真诚的对话开场白，而不是仅仅依赖限制手段。第 4 部分将把话题完全转向电脑和命令行基础。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——制定一份真实的家庭 AI 使用协议",
+      "content": "工作坊 1 改变了一项真实的设置。这个工作坊要产出一份文档，向受影响的人解释这些设置——一份真实的、书面的家庭 AI 使用协议，而不只是一次技术配置。\n\n**第 1 步——梳理你家真实的情况。** 列出你家里实际的孩子/青少年、他们的年龄、你已经知道他们在使用哪些 AI 工具（来自工作坊 1 的调查或你的直接了解），以及你已经设置的任何限制。\n\n**第 2 步——请 Claude 帮你起草一份真实的协议：**\n```\nHelp me draft a short, honest family AI-use agreement.\n\nOur household: [ages/roles of kids or teens, e.g., a 14-year-old and an\n8-year-old]\nWhat we know they currently use: [list — e.g., ChatGPT for homework help,\na Character.AI account, a smart speaker in the kitchen]\nControls we've already set up: [from Workshop 1 — e.g., Screen Time\nrestrictions, Family Link]\nOur actual concerns: [e.g., AI companion apps replacing real friendships,\nunsupervised late-night chatbot use, AI homework help crossing into\ncheating]\n\nDraft a one-page family agreement, written so a [age]-year-old would\nunderstand it, covering: which AI tools are fine to use freely, which\nneed a parent's awareness first, what to do if an AI conversation makes\nthem uncomfortable, and how we'll revisit this agreement as they get\nolder.\n```\n\n**第 3 步——检查一下语气是否合适。** 像你的孩子将要读到这份协议那样去读一遍——它听起来像是自上而下强加的规矩，还是像一份写的时候真的考虑到了他们的文档？如果读起来纯粹是限制性的，就调整它。\n\n**第 4 步——必做的对抗性审查。** 把草案粘贴回 Claude：\n```\nDon't validate this — find 3 specific problems with this family AI-use\nagreement: anything that sounds like a lecture rather than a real\nagreement, any real AI tool or situation in our household it doesn't\ncover, and anywhere it's vague enough that a kid could reasonably say\nthey didn't understand what was expected.\n```\n至少修正一个真实存在的问题。\n\n**第 5 步——让它落到实处。** 直接和你的孩子或青少年一起过一遍这份协议——不是单方面宣读，而是让他们可以提出异议、参与修改。把最终版本保存在显眼的地方，并定一个真实的日期（例如 6 个月后）重新审视它。\n\n**产出：** 一份经过实际讨论、双方都理解的家庭 AI 使用协议——基于你真实的家庭和真实的孩子，而不是一份通用模板。\n\n**将其应用到其他场景：**\n- 无论这如何适用于你的生活：有较年幼孩子的家长，可以把协议的重点放在语音助手的使用上，而不是聊天机器人\n- 无论这如何适用于你的生活：抚养孙辈的照护者，可以根据自己对新技术的熟悉程度调整协议\n- 无论这如何适用于你的生活：军属家庭可以起草一个版本，覆盖父母外派、无法直接监督期间的 AI 使用情况\n- 无论这如何适用于你的生活：新移民家庭可以加入一节内容，说明语言学习类 AI 工具，以及它们如何与协议的其他规则相配合\n- 无论这如何适用于你的生活：本身也是家长的研究生，可以加一条说明，讲清楚自己会如何为孩子透明地示范自己的 AI 使用方式"
     }
   ],
   "nextLesson": "4-1",

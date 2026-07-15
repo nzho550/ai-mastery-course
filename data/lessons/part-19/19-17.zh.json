@@ -82,6 +82,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 19-17 课。** 你现在了解了 DaVinci Resolve 21 的 AI 工具集里究竟新增了什么——九个工具中包括 IntelliSearch、Face Age Transformer 和 Speech Generator——以及关于哪些免费、哪些仅限 Studio 版这一仍在变化中的真实情况。你已经把它与付费的 Premiere Pro + Firefly 路线（Kling 3.0/Omni、Veo 3.1、Runway Gen-4.5）做了对比，为接下来真正要做的项目做出了深思熟虑的选择，并且已经在自己实际拥有的素材上使用过 Resolve。接下来：第 19-18 课讲的是音频领域的同一次跃升——用 Adobe Podcast 和 Descript 进行专业播客制作。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——制作一段真实的个人档案视频",
+      "content": "这个工作坊会用 DaVinci Resolve 处理你已经拥有的素材——而不是素材库里的样片——制作出一段完成的、可以长久保存的视频：一段真实的家族历史短片、一段年度回顾，或是一个你会真正保留并反复观看的个人档案项目。\n\n**第 1 步——收集真实素材。** 把你自己人生中的真实片段整理到一起：老手机视频、屏幕录制、某一年的素材，或者（如果你能获取到）数字化后的、关于某位亲属或某个年代的老家庭录像。目标是至少 10-15 段真实素材。\n\n**第 2 步——在动手剪辑时间线之前，先请 Claude 帮你搭建结构：**\n```\nI have raw footage for a personal video project: [describe what you have —\ne.g., 15 clips from my daughter's first year, or old home movies of my\ngrandfather from the 1970s that I'm digitizing].\nPurpose: [what this video is for and who it's for]\nLength target: [e.g., 3-5 minutes]\n\nHelp me structure this: what order should the footage go in to tell a\ncoherent story, what moments deserve the most time, and what's a natural\nopening and closing shot?\n```\n\n**第 3 步——把素材导入 Resolve**，使用 AI IntelliSearch（如果你的版本没有开放 IntelliSearch，就用标准搜索）在素材中定位具体片段，并按照 Claude 建议的结构搭建时间线。\n\n**第 4 步——剪出一版真实的粗剪。** 按顺序组接素材，调整节奏、剪短过长的部分，加上带有真实姓名/日期的标题卡，并做一次基础调色。\n\n**第 5 步——必做的对抗性审查。** 完整看一遍你的粗剪，然后问 Claude：\n```\nDon't validate this — here's my plan for a personal video: [describe the\nfinal structure/order]. Find 3 specific problems: places where the pacing\ndrags, moments that need more context for someone who wasn't there, and\nanything emotionally important that seems to be missing or underweighted.\n```\n在导出之前，至少在你实际的剪辑中修正一个问题。\n\n**第 6 步——正确地导出和归档。** 导出最终文件，至少保存在两个地方（云端 + 本地备份），并分享给视频所讲述或所献给的人。\n\n**产出：** 一段用你自己真实素材制作完成的、可以长久保存的视频——不是一个你会删掉的练习作业，而是真正属于你家庭或你自己档案的一部分。\n\n**将其应用到其他场景：**\n- 无论这如何适用于你的生活：研究生可以制作一段记录论文或田野调查历程的里程碑短片\n- 无论这如何适用于你的生活：小企业主可以用真实的客户和工作场地素材剪出一段\"我们的第一年\"视频\n- 无论这如何适用于你的生活：自由职业者可以用过往真实项目的素材剪出一段作品集短片\n- 无论这如何适用于你的生活：照护者可以剪辑一段与所照顾亲属相处片段的视频纪念\n- 无论这如何适用于你的生活：军属或有亲人在外部署的家庭，可以用真实素材剪一封\"视频家书\"寄给在外的家人"
     }
   ],
   "nextLesson": "19-18",

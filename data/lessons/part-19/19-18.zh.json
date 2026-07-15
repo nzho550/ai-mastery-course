@@ -82,6 +82,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 19-18 课——也完成了本部分关于 AI 内容创作工具的内容。** 你现在拥有一套真实可行、可以反复使用的播客制作工作流：录制粗剪音频、用 Adobe Podcast 的 Enhance Speech 清理（如今具备独立的人声/噪音/音乐控制功能）、用 Descript 基于文字的编辑方式剪掉口头禅和死寂停顿，并用 Overdub 修正小错误而不必重新录制。你已经用自己真实的声音录音跑完了完整的流水线，并制作出了一个真正可以发布的成品。接下来：第 19-12 课讲的是实时语音 AI——ChatGPT Advanced Voice 和 Gemini Live。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 A——制作一段真实的口述回忆录或口述历史录音",
+      "content": "这个工作坊会把本课的\"录制 → 清理 → 剪辑\"流水线用在真正能够长久保存的东西上：一段值得保留的真实采访或个人录音，而不是一段练习片段。\n\n**第 1 步——选定一位真实的人物和真实的主题。** 采访父母、祖父母或其他亲属，谈谈他们人生中某个具体阶段，或者录制你自己的口述回忆录，讲述你人生中真实的一段经历（一次搬迁、一次职业转变、养育子女）。如果要采访的人无法当面进行，就用电话或视频通话完成，并把音频录下来。\n\n**第 2 步——请 Claude 帮你准备真实的采访问题：**\n```\nI'm recording an oral history interview with [who — e.g., my grandmother,\nage 84] about [real topic — e.g., her childhood during a specific decade,\nimmigrating to this country, her career].\nWhat I already know: [list what you know so you don't ask redundant questions]\nWhat I want to make sure I capture: [specific stories, facts, or feelings]\n\nGive me 10-12 open-ended questions, ordered to build trust early and go\ndeeper as the conversation progresses. Flag which 2-3 are the most\nimportant if time runs short.\n```\n\n**第 3 步——录制这场真实的对话**（第一次尝试 20-40 分钟就足够）。用你手头有的任何麦克风即可。\n\n**第 4 步——让它走完整条流水线：** 先用 Adobe Podcast 的 Enhance Speech 清理，再导入 Descript，自动转录，并运行口头禅去除功能。\n\n**第 5 步——必做的对抗性审查。** 阅读清理后的文字稿，然后问 Claude：\n```\nDon't validate this — here's a transcript of a real oral-history interview\nI recorded: [paste transcript or a representative excerpt]. Find 3 specific\nproblems: important follow-up questions I should have asked but didn't,\nplaces where a detail is unclear or unexplained for a future listener, and\nany moment where the pacing or editing might have cut something that\nmattered.\n```\n至少修正一个真实存在的缺口——如果可能的话，做一次简短的补充录音来填补它。\n\n**第 6 步——妥善归档。** 导出最终音频，清楚标注人物姓名、日期和主题，并至少保存在两个地方。如果合适的话，把副本分享给你采访的那个人。\n\n**产出：** 一段真实的人、真实故事的、经过清理、可以长久保存的录音——一旦这个人或这个时刻不再，这类家庭或个人档案资料就真正无可替代。\n\n**将其应用到其他场景：**\n- 无论这如何适用于你的生活：自由职业者可以录制一集个人的\"我是如何走到今天\"的职业故事，作为面向未来客户的常青介绍素材\n- 无论这如何适用于你的生活：小企业主可以录制一段关于生意起步经过的口述历史，用于真实的档案或营销用途\n- 无论这如何适用于你的生活：退休人士可以分多次录制自己的人生故事，作为送给孙辈的礼物\n- 无论这如何适用于你的生活：研究生可以把一段口述历史采访录制下来，作为真实研究的一手资料\n- 无论这如何适用于你的生活：需要长期管理慢性健康状况的人，可以录制自己的健康历程，作为面对相同诊断的其他人的一份参考资源"
     }
   ],
   "nextLesson": "19-12",

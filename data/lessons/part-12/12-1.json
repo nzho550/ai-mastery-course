@@ -98,6 +98,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**You've completed lesson 12-1.** You now have a clear mental model of when local AI earns its place in a workflow. The next lesson covers installing Ollama — your gateway to running models locally."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Across industries:**\n- Healthcare-IT: A clinic summarizing patient intake notes with a local model avoids sending PHI to a cloud API — keeping HIPAA exposure at zero even though the summaries are rougher than what Claude Sonnet would produce.\n- Legal: A solo practitioner reviewing privileged client documents runs them through a local model on a laptop, trading some analysis depth for certainty that nothing crosses a wire outside the firm.\n- Financial-Systems Analyst: Batch-processing thousands of internal transaction memos overnight on a local model turns a would-be five-figure API bill into a one-time hardware cost.\n- GovTech Developer: An agency working on a classified or air-gapped network has no choice but local inference — cloud AI isn't an option regardless of quality, so the decision becomes purely about picking the best model that fits the hardware.\n- Manufacturing: A shop-floor diagnostic tool needs to keep working when the plant's internet drops mid-shift; a local model answering routine troubleshooting questions offline beats a cloud tool that goes dark."
     }
   ],
   "nextLesson": "12-2",

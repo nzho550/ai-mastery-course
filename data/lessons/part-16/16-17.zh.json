@@ -84,6 +84,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 16-17 课——也完成了第 16 部分。** 你现在从最终用户的视角理解了，为什么一个基于 AWS Bedrock、Google Vertex AI Agent Builder 或 Azure AI Foundry 构建的公司内部 AI 代理，表现会和 ChatGPT 或 Claude.ai 不一样：刻意设计的更窄范围、模型锁定、公司设定的数据治理与保留规则，以及比底层模型实际具备的更严格的护栏。你知道该如何找到这类工具的负责人，以及如何反馈错误答案或提出功能请求，并且你已经写下了一份个人参考笔记（或一份采用前问题清单），用来从你雇主下次交给你的任何内部 AI 工具中获得最大收益。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "为你公司的内部 AI 代理平台构建一份真实的用例评估",
+      "content": "你将从自己的工作中挑选一项具体的、经常重复出现的任务，写一份真实的评估，判断你公司的内部 AI 代理平台（如果你没有访问权限，就用 Claude/ChatGPT 作为替代）到底是否值得用在这项任务上——一份真的可以交给这个工具的负责人、作为一个真实采用案例的报告，而不只是个人的一句观感。\n\n**第 1 步——挑选一项真实的、经常重复的任务。** 选一件你（或你这个岗位上的人）至少每周都会做一次的事情：起草某一类特定的邮件、总结某一类经常出现的文档、回答某一类经常出现的内部问题，或者准备某一份经常出现的报告。要具体——“把团队每周的状态更新总结成一封给经理的邮件”，而不是“提高整体效率”。\n\n**第 2 步——真正把这项任务跑一遍。** 如果你能接触到公司的内部 AI 代理平台，本周就用它对这项真实任务实际跑 2-3 次，输入真实数据。如果你还没有访问权限，就用 Claude 或 ChatGPT 跑同样的任务作为替代——并在你的报告中明确注明这是一个替代方案，不是真正的平台。\n\n**第 3 步——把你的记录和输出结果粘贴进 Claude 或 ChatGPT 并要求：**\n```\nHere's a task I ran through an AI tool 2-3 times this week: [describe the task and paste the outputs/notes]\n\nTurn this into a structured use-case evaluation with these sections:\n1. Task description and how often it recurs\n2. Time spent with AI assistance vs. my honest estimate of time spent without it\n3. Quality assessment — where the AI output was usable as-is, where it needed real editing, and where it was wrong or unusable\n4. Recommendation — adopt for this task, adopt with modification, or don't adopt, with reasoning\n5. What would need to be true for the recommendation to change\n\nFormat as a one-page writeup someone who owns this tool (or is deciding whether to license one) could actually use.\n```\n\n**第 4 步——必做的对抗性审查。** 把这份报告粘贴回去并问：`“找出这份评估中 3 个具体的问题——那些我的样本量太小、不足以支撑这个建议的地方，那些我对 AI 的输出结果过于宽容、没有仔细核实的地方，或者这项任务中某个真实的边界情况没有被我这 2-3 次测试覆盖到的地方。”` 在最终定稿之前，至少修复其中一个问题。\n\n**第 5 步——保存并推送出去。** 如果你的工作单位对这个工具确实有一个真正的负责人（按照本课关于如何找到负责人的指引），就把它发给对方——一份具体、有证据支撑的用例报告，正是能真正影响下一步要构建或采购什么的反馈类型。\n\n**你的交付成果：** 一份针对你工作中一项经常重复的任务、真实且有证据支撑的用例评估——随时可以用来指导你自己的采用决策，或交给这个工具的负责人。"
     }
   ],
   "nextLesson": "16-18",

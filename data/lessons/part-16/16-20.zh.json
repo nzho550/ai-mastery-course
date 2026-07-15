@@ -95,6 +95,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 16-20 课。** 你现在了解了 AI 采用中 FP&A 与企业财务的一面——不同于第 16-19 课聚焦的簿记与税务——包括 CFO 的态度数据（87% 认为 AI 重要，但只有大约三分之一报告成果“非常积极”）、主要平台（Planful Predict、Vena、Datarails FinanceOS）和专门面向审计的工具（DataSnipper、MindBridge），以及即便智能体 AI 承担了越来越多的真实工作量，CFO 们普遍仍然期望保留人工监督。你已经用自己的判断对一份 AI 生成的预测做了压力测试，并为一个真实的 FP&A AI 使用场景设计了一个具体的人工监督检查点。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "把真实的预算对实际数据变成一份差异分析报告",
+      "content": "本课的工作坊 1 让你对一份 AI 生成的*预测*做了压力测试。这个工作坊则是补充性的、回顾性的技能：把真实的预算对实际执行数据变成一份结构化的差异分析报告——这种文档要呈交给部门负责人或 CFO，用来解释数字为什么会落在这个位置，而不只是数字本身是多少。\n\n**第 1 步——拿到真实（或贴近真实）的预算对实际数据。** 如果你能接触到某个部门、项目，甚至自己家庭的真实预算和实际执行数据，就用它——哪怕只是 6-8 个科目的粗略月度对比也够用。如果你没有访问权限，就先请 Claude 或 ChatGPT 生成一份贴近真实的样本：`“为一家中型公司的某个部门生成一份贴近真实的月度预算对实际执行数据表——8 个科目（工资、软件、差旅、市场营销等），包含预算数字和实际数字，其中至少 3 个科目在某个方向上有明显差异，1 个科目有不寻常的一次性原因。”`\n\n**第 2 步——把预算对实际执行数据表粘贴进 Claude 或 ChatGPT 并要求：**\n```\nHere is a budget-vs-actuals table: [paste your data]\n\nTurn this into a structured variance-analysis report with these sections:\n1. Summary — total budget, total actual, overall variance in dollars and percent\n2. Line-by-line variance, flagging anything over 10% (or a threshold you set) as significant\n3. For each significant variance, a plausible driver hypothesis — clearly labeled as a hypothesis, not a confirmed cause\n4. Recommended follow-up questions to ask the budget owner for each significant variance, to confirm or correct the hypothesis\n5. A written narrative paragraph suitable for a board or leadership summary\n\nFormat as a report a finance leader could present without further editing to the numbers.\n```\n\n**第 3 步——必做的对抗性审查。** 把报告粘贴回去并问：`“找出这份差异分析中 3 个具体的问题——那些你把一个驱动因素假设当作已确认事实来陈述的地方，那些某个差异阈值标记出了无关紧要的项目、却漏掉了美元金额上更重要的项目的地方，或者那些叙述性总结把数字背后真实的复杂情况过度简化了的地方。”` 在把它当作最终结果之前，至少修复其中一个问题。\n\n**第 4 步——把明细表和叙述内容分开保存。** 逐项明细表是你每个周期都会更新的工作文档；叙述性段落则是你向领导层沟通差异情况时可复用的模板。\n\n**你的交付成果：** 一份真实、经过人工审阅的差异分析报告——包含逐项明细和一段可直接呈交领导层的叙述——基于真实或贴近真实的预算对实际执行数据构建而成。"
     }
   ],
   "nextLesson": "16-21",

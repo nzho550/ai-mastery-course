@@ -125,6 +125,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**You've completed lesson 11-9 and all of Part 11.** You've gone from zero API knowledge to building real tools, understanding token economics, and optimizing for cost. The summarizer you built is a template for any AI CLI tool. Part 18 takes a different direction: running AI entirely on your own machine with Ollama."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Across industries:** The core move here — classify first, then route the expensive resource only at complex cases — shows up far outside API bills.\n- Consulting: A partner who reviews every client deliverable personally is the \"always use Opus\" mistake; routing routine deliverables to a senior associate and reserving partner time for genuinely complex judgment calls is the same routing principle.\n- Healthcare: A triage system that routes straightforward complaints to a nurse practitioner and escalates only complex cases to a specialist is the same \"classify, then route\" pattern that keeps Haiku/Sonnet costs sane.\n- Manufacturing: A QC line that inspects every unit at full intensity is over-engineered; sampling-based inspection with escalation only on detected defects mirrors model routing — the expensive full inspection only runs on flagged units.\n- Education: A teacher who gives every assignment the same depth of feedback burns out fast; quick checks on routine homework with deep feedback reserved for major assessments is the same cost/quality tradeoff taught in this lesson.\n- Financial-Systems Analyst: A reconciliation process that manually reviews every transaction doesn't scale — automating the majority that match cleanly and routing only exceptions to a human analyst applies token-minimization and model-routing logic to headcount instead of tokens."
     }
   ],
   "nextLesson": "11-10",

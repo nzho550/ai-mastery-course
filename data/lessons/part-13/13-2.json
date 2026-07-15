@@ -105,6 +105,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**You've completed lesson 13-2.** Your AI privacy policy is now grounded in real experience, not just principles. The next lesson covers cost management — how to control your API spending and not get surprised by a bill."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Across industries:**\n- Healthcare: A clinician drafting patient notes with cloud AI replaces the patient's name and record number with \"[Patient A]\" before pasting — the same anonymization technique this lesson teaches for client data.\n- Legal: A paralegal summarizing a deposition anonymizes the deponent's name and case number before using Claude, since the transcript is discovery material under a protective order, not the firm's to share with a third party.\n- Government: A caseworker never pastes a constituent's ID number or case file into a personal AI account — anonymized placeholders or no AI at all for that step.\n- Nonprofit: A grant writer drafting a budget narrative replaces named beneficiaries with role descriptions (\"a program participant\") before asking AI to tighten the prose.\n- Financial-Systems Analyst: An analyst debugging a reconciliation script anonymizes account numbers and customer names in the sample data before pasting it to Claude — the same SQL placeholder technique from this lesson."
     }
   ],
   "nextLesson": "13-3",

@@ -79,8 +79,14 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 16-22 课——也完成了第 16 部分。** 你现在了解了 2026 年保险核保从试点走向生产环境的转变（从数天到数分钟的时间线、AIG 有名有姓的 Claude/Palantir/Salesforce 部署，以及大多数成功的保险公司所采用的人机混合运营模式）、围绕这一转变日益收紧的监管框架（NAIC 示范通告的采纳、欧盟《AI 法案》的高风险分类），以及由 AI 照片/文档编辑驱动的、与之并行的理赔欺诈军备竞赛——在这场竞赛中，保险公司检测欺诈的信心远远落后于他们对这一问题的普遍认知。你已经调研了你自己保险公司的 AI 立场，并建立了一个真实的留证习惯，以保护自己作为一名诚实索赔人的权益。接下来将开始第 17 部分，介绍适用于任何角色或行业的项目工作技能。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "把一份真实理赔档案变成一份结构化摘要与风险标记报告",
+      "content": "你将拿一份真实（或贴近真实）的保险理赔或保单档案，用 AI 生成一份理算员或核保员在做决定前会审阅的结构化摘要与风险标记报告——这正是 AIG 的 Underwriter Companion 自动完成的初步工作，这里则由你手动完成，并加入一个必须由持证专业人员核实的步骤，因为本课后半部分的全部内容，正是在讲为什么这一步不能省略。\n\n**第 1 步——获取你的原始理赔或保单档案。** 如果你从事保险行业，并且能接触到一份真实（已匿名化）的理赔档案、投保申请或保单资料，就使用它。如果没有，先让 Claude 或 ChatGPT 生成一份贴近真实的样例：`\"Generate a realistic auto or homeowners insurance claim file — incident description, claimant statement, an adjuster's initial notes, a repair estimate, and 2-3 details that are minor inconsistencies (not necessarily fraud, just the kind of thing that needs a closer look), written the way a real claim file actually reads (not overly clean).\"`\n\n**第 2 步——把原始理赔档案粘贴给 Claude 或 ChatGPT，并提问：**\n```\nHere is a raw insurance claim file: [paste your file]\n\nTurn this into a structured summary and risk-flag report with these sections:\n1. Summary — incident type, claimed amount, key facts in 3-4 sentences\n2. Consistency check — any details across the statement, notes, and estimate\n   that don't line up, each with a one-line description of the discrepancy\n3. Risk flags — anything that warrants a closer look (timing, documentation\n   gaps, amount relative to typical claims of this type), clearly labeled as\n   flags to investigate, not conclusions of wrongdoing\n4. A mandatory \"flag for licensed adjuster/underwriter verification\" section\n   listing every flag and inconsistency that requires human confirmation\n   before any decision is made\n\nFormat as a report a reviewing adjuster or underwriter could work from directly.\n```\n\n**第 3 步——必做的对抗性审查。** 把报告粘贴回去，问：`\"Find 3 specific problems with this report — places where a 'risk flag' is really just an ordinary, innocent explanation being treated as suspicious, or where the language implies fraud or wrongdoing rather than simply flagging something to verify.\"` 至少修复其中一处——鉴于本课关于欺诈标记假阳性和公平性问题的数据，这里的措辞精确度并非可有可无。\n\n**第 4 步——把报告保存为可复用的模板**，并且每次复用时都把持证专业人员核实部分当作不可协商的一环——这份报告只是初步分诊辅助工具，绝不是最终的承保或欺诈认定。\n\n**你的交付物：** 一份真实的、经人工审核的理赔档案摘要与风险标记报告，其中包含一个必须由持证理算员/核保员核实的部分——一份真正的分诊工作产物，而不是最终认定。"
     }
   ],
-  "nextLesson": "17-1",
+  "nextLesson": "16-23",
   "prevLesson": "16-21"
 }

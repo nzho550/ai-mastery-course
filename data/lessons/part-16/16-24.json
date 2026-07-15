@@ -1,0 +1,77 @@
+{
+  "id": "16-24",
+  "title": "AI for Nonprofits & Social Impact",
+  "part": 16,
+  "estimatedMinutes": 50,
+  "tags": [
+    "enterprise",
+    "intermediate",
+    "nonprofit",
+    "fundraising",
+    "grant-writing",
+    "social-impact",
+    "hands-on"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "content": "## What You'll Learn\n\nNonprofits run on a chronic resource gap: more mission than staff, more need than budget, and development/program teams that are often one or two people doing the work of five. That gap is exactly why AI adoption in the sector has moved fast — and why this lesson matters even if you don't work at a nonprofit: it's a clean case study in what happens when a resource-constrained organization adopts AI broadly but informally, without the governance layer that regulated industries (Lessons 16-13, 16-22) are required to build. You'll learn where AI is genuinely helping nonprofit teams, where donors and funders are pushing back, and how to build one real grant or donor document using AI the way development professionals actually do it."
+    },
+    {
+      "type": "text",
+      "content": "## Adoption Is Nearly Universal — Impact Is Not\n\nAccording to the 2026 Nonprofit AI Adoption Report (Virtuous and Fundraising.AI, surveying 346 nonprofits), 92% of nonprofits now use AI tools in some capacity — a striking number for a sector often assumed to be behind on technology. But adoption and impact are two different things: only 7% of nonprofits report major gains in organizational capability from AI, while most report only small-to-moderate improvements, concentrated in faster drafts, quicker research, and better first-pass content quality — not transformed operations.\n\nThe gap between those numbers is a governance story, not a capability story: 81% of nonprofits report AI use that's individual and ad hoc — one staffer using ChatGPT for their own drafts — while only 4% have documented, repeatable AI workflows the whole team follows. And 76% of nonprofits still have no formal AI policy at all. This is the same 'pilot purgatory' pattern from insurance (Lesson 16-22), just without the regulatory pressure forcing a resolution."
+    },
+    {
+      "type": "text",
+      "content": "## Where AI Is Actually Landing: Grant Writing and Donor Communication\n\nGrant writing is one of the highest-friction, most time-consuming tasks in any development office — a single grant application can take 20-40 hours to research, draft, and tailor to a funder's specific priorities — which makes it the place AI adoption has landed earliest and hardest. According to the State of AI in Nonprofits 2025 report (TechSoup and Tapp Network), 60% of nonprofit professionals show strong interest in using AI for grant writing and fundraising, and 24.6% are already doing it in practice — drafting first passes of narrative sections, tailoring boilerplate language to a specific funder's stated priorities, and summarizing program outcome data into the kind of narrative a grant reviewer wants to read.\n\nDonor communication is the second major use case: AI-drafted thank-you letters, impact updates, and newsletter content that a small development team could never hand-write at the volume a growing donor base requires — with a human still reviewing before anything goes out under the organization's name."
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": "**Funders are actively divided on AI-generated content — check before you submit.** Only 43% of donors say AI use by a nonprofit would have a positive or neutral effect on their giving; 31% say it would make them *less* likely to donate. On the funder side specifically, 23% of foundations currently will not accept grant applications containing generative-AI content at all, only 10% explicitly will, and a full 67% haven't decided or published a policy. This means the single most important step before using AI on any real grant application is checking that specific funder's current AI policy — not assuming the norms from one funder apply to the next. A polished, AI-assisted application submitted to a foundation that bans AI content isn't just risky, it can disqualify the application outright."
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "Draft a Real Grant Narrative Section or Donor Impact Update",
+      "content": "You're going to produce a real, usable draft of one of the two highest-value nonprofit documents — a grant narrative section or a donor impact update — the way development professionals actually use AI: as a fast first-draft engine that a human then owns and refines.\n\n**Step 1 — Pick your document and gather real inputs.** If you volunteer for, work at, or support a nonprofit, use real information: the organization's mission, one specific program, and real (even rough) outcome data or stories. If you don't have access to a real nonprofit's data, pick a cause you care about and invent realistic-but-labeled placeholder data — the exercise is about the drafting workflow, not fabricating a real claim.\n\n**Step 2 — Check the funder's AI policy first (if this is a real grant).** Search '[funder name] generative AI policy grant applications' before drafting anything — per this lesson, 23% of foundations currently reject AI-assisted content outright.\n\n**Step 3 — Paste your real inputs into Claude or ChatGPT:**\n```\nI'm drafting a [grant narrative section / donor impact update] for [organization name],\na nonprofit focused on [mission/program].\n\nHere's the real information to work from:\n[program description, outcome data, a specific story or statistic if you have one]\n\nWrite a first draft of [the \"need\" section of a grant narrative / a donor impact update]\nthat is specific to this data — not generic nonprofit language. Avoid claims the data\ndoesn't actually support.\n```\n\n**Step 4 — The mandatory adversarial review.** Paste the draft back and ask: `\"Find 3 places where this draft makes a claim that isn't directly supported by the data I gave you, or where it sounds like generic nonprofit boilerplate instead of something specific to this organization.\"` Fix at least one.\n\n**Step 5 — Human ownership pass.** Read the final draft aloud. Does it sound like your organization's real voice, or like AI-generic nonprofit-speak? Rewrite at least one sentence in your own words — this is the step that keeps the 4% of nonprofits with real documented AI workflows different from the 81% doing purely ad hoc, ungoverned drafting.\n\n**Adapt this:**\n- **Volunteer coordinator:** draft a volunteer recruitment appeal from real program need data instead of a grant narrative\n- **Program manager:** draft an annual outcomes summary for a board meeting from real program metrics\n- **Advocacy/policy nonprofit:** draft a policy-brief executive summary from real research findings\n- **Small arts/community organization:** draft a sponsorship pitch to a local business from real attendance/impact numbers\n- **Faith-based or membership organization:** draft a member-facing impact update using the same specificity-over-boilerplate principle"
+    },
+    {
+      "type": "quiz",
+      "question": "Only 7% of nonprofits report major organizational-capability gains from AI, despite 92% adoption. According to this lesson, what best explains that gap?",
+      "options": [
+        "AI tools simply don't work well for nonprofit-specific tasks like grant writing or donor communication",
+        "Adoption is overwhelmingly individual and ad hoc (81%) rather than documented and repeatable (only 4%) — meaning most 'adoption' is one staffer's personal workflow, not an organizational capability the whole team benefits from",
+        "Nonprofits are lying about their adoption rates to appear more technologically advanced",
+        "Only large, well-funded nonprofits are able to use AI tools at all"
+      ],
+      "correct": 1,
+      "explanation": "The lesson explicitly frames this as a governance gap, not a capability gap: near-universal individual use (92% adoption, but 81% ad hoc) without organizational workflows (only 4% documented and repeatable) means the gains stay siloed with whichever staffer happens to use the tools well, instead of compounding across the organization. Option A contradicts the lesson's own evidence that grant writing and donor communication are landing well at the individual level. Options C and D aren't supported by anything in the lesson."
+    },
+    {
+      "type": "workshop",
+      "tag": "REFLECT",
+      "title": "Write a One-Page AI Disclosure Policy for a Nonprofit",
+      "content": "Given that 76% of nonprofits have no AI policy and donor sentiment is genuinely divided, this workshop has you draft the artifact most nonprofits in this lesson's data are missing.\n\n**Step 1 — Pick a real or hypothetical nonprofit** (your own volunteer organization is ideal if you have one).\n\n**Step 2 — Ask Claude or ChatGPT:** `\"Help me draft a one-page AI use policy for a small nonprofit. Cover: what AI tools are approved for use, what must always have human review before publishing (grant applications, donor communications, public statements), what should never be pasted into a consumer AI tool (donor PII, financial data), and how we'll disclose AI use to funders and donors if asked.\"`\n\n**Step 3 — Cross-check against this lesson's data.** Does your draft policy account for the fact that some funders reject AI-assisted applications outright? Does it address the donor-sentiment split (43% neutral-or-positive, 31% less likely to give)?\n\n**Step 4 — Save it as a real, usable one-pager.** If you're actually involved with a nonprofit, this is worth genuinely proposing — you'd be moving that organization from the 76% with no policy into the far smaller group with one."
+    },
+    {
+      "type": "quiz",
+      "question": "A nonprofit development director is preparing to submit a grant application with AI-drafted narrative sections. What does this lesson say is the essential step before submission?",
+      "options": [
+        "Submit as-is — AI-drafted content is now standard practice and accepted everywhere",
+        "Verify that specific funder's current policy on AI-generated content, since foundations are genuinely split (23% reject it, 10% explicitly accept it, 67% undecided) and a policy violation can disqualify an otherwise strong application",
+        "Remove all AI involvement from the process entirely, since it's too risky to use for any grant work",
+        "Only worry about funder AI policy for large government grants, not private foundations"
+      ],
+      "correct": 1,
+      "explanation": "The lesson's core caution is that funder AI policy varies enough (23% reject, 10% accept, 67% undecided) that checking the specific funder's current stance is a mandatory step, not a nice-to-have — an application can be disqualified on policy grounds regardless of its quality. Option A ignores the real split in funder policy. Option C overcorrects — the lesson shows AI is genuinely useful for first drafts when a funder allows it. Option D is unsupported; the lesson doesn't distinguish government from private-foundation policy."
+    },
+    {
+      "type": "callout",
+      "variant": "success",
+      "content": "**You've completed Lesson 16-24.** You now understand the shape of AI adoption in the nonprofit sector — nearly universal but mostly ungoverned (92% adoption, only 4% with documented workflows), concentrated in grant writing and donor communication, and complicated by a real split in donor and funder sentiment toward AI-generated content. You've drafted a real grant or donor document the way development professionals actually use AI, and built a one-page AI policy — the exact artifact most nonprofits in this lesson's data are still missing."
+    }
+  ],
+  "nextLesson": "16-25",
+  "prevLesson": "16-23"
+}

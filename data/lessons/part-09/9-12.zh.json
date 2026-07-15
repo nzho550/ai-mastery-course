@@ -79,6 +79,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 9-12 课——以及第 9 部分对 AI 编程工具全景的完整巡览。** 从编辑器内助手（第 6 部分的 Copilot、Continue.dev），到自主的云端代理（Devin、Codex CLI、Jules/Antigravity），再到独立的 PR 审阅机器人（CodeRabbit、Greptile、Graphite），如今又到了开源智能体化编辑器（Cline，以及 Roo Code 在 2026 年真实上演的崛起与关停），你已经建立起了对这个领域扎实、贴近现实的认知——而不是营销话术式的认知。第 7 部分将全力聚焦 Claude Code，这是本课程从此往后一直使用的工具，你现在也会认出，它那种默认交互式、可扩展到完全自主的模式，在 Cline、Codex CLI 以及你在本部分学过的每一个代理身上都留下了回响。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 3——把你项目的隐性知识编码进 .clinerules",
+      "content": "**目标：** 把你自己项目里实际使用的编码规范，变成一份 Cline 会自动遵循的 `.clinerules` 文件——然后在信任这份规则文件之前，先对它本身做压力测试，找出其中的缺口。\n\n**第 1 步——打开一个你实际维护的真实项目**，不要用玩具项目——如果你的 `ai-course-projects` 文件夹已经形成了真实的规范，可以用它，或者用一个至少有几十个文件的真实工作或个人仓库。\n\n**第 2 步——让 Cline 挖掘你真实的规范**，而不是泛泛的最佳实践。给它这样的指令：\n```\nRead through this codebase and draft a .clinerules file. Base every rule strictly on patterns you actually observe in this code — naming conventions, error-handling style, how tests are structured, and any anti-patterns that show up more than once. Do not include generic best-practice advice that isn't backed by what's actually in this repo. Flag anywhere the codebase is inconsistent with itself instead of picking a rule.\n```\n\n**第 3 步——逐行阅读这份草稿。** 删掉任何真正只是泛泛套话（“写干净的代码”）、而不是你项目特有内容的部分。纠正 Cline 对你自己规范理解有误的地方。\n\n**第 4 步——把它保存为项目根目录下的 `.clinerules`**，重启 Cline 会话让它加载生效，然后在 Plan 模式下给 Cline 一个真实的小任务——一个新函数、一个小修复。\n\n**第 5 步——检查输出是否真的遵循了这些规则。** 命名是否一致？错误处理是否遵循了文档里写的模式？如果 Cline 忽略了某条规则，记下是哪一条、为什么——模糊的规则会被忽视，具体的规则才会被遵循。\n\n**第 6 步——对抗式审查，必做。** 把你的 `.clinerules` 内容粘贴进 Claude Code 或 Claude.ai：\n```\nHere is my .clinerules file: [paste it]. Find 3 specific problems: a rule that contradicts another rule, a rule too vague for an agent to act on consistently, and a real convention you'd expect in a codebase like this that's missing entirely. Be specific, not general.\n```\n直接在文件中修复它找出的三个问题中的至少一个。\n\n**第 7 步——把 `.clinerules` 提交**到你的项目中。这就是本次的产出：一份活的、纳入版本控制的文档，让你团队（或你自己）那些没有写下来的规范，变成一个智能体——以及一位新的人类队友——真正能够遵循的东西，而不再是只存在于你脑子里的隐性知识。\n\n**将其应用到其他场景：**\n- **数据工程师：** 把你数据管道实际的命名和 schema 校验规范编码进去，让 Cline 不再每个任务都自创一套新模式。\n- **GovTech 开发者：** 把你所在机构的无障碍访问和审计日志要求，变成可强制执行的规则，而不是一份没人会重新读的 wiki 页面。\n- **自由职业/咨询开发者：** 为每个客户仓库单独保留一份 `.clinerules`，确保一个客户的风格永远不会渗透进另一个客户的代码库。\n- **EdTech 开发者：** 把学生数据处理规则（日志中不得出现个人隐私信息、面向学生的页面不得接入第三方追踪器）编码进去，让 Cline 自动检查。\n- **制造自动化工程师：** 把你团队“失败即关闭”的错误处理规范，变成一条智能体无法悄悄跳过的规则。"
     }
   ],
   "nextLesson": "9-13",

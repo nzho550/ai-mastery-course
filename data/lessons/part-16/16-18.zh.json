@@ -96,6 +96,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 16-18 课。** 你现在了解了服务于作为专业人士的教师的两大主流 AI 平台——Khanmigo for Teachers（通过微软的 Azure 合作免费提供，覆盖 795 多个学区和 180 多个国家，约 200 万用户）和 MagicSchool AI（500 万至 600 万教育工作者注册，1.3 万多所学校，160 多个国家，一轮 4500 万美元的 B 轮融资）——以及与之不同的评分与学术诚信工具类别（Turnitin、CoGrader、GPTZero、Winston AI）及其真实存在、分布不均的准确性问题。你已经用一款教育者 AI 工具制作了一份真实的课堂成果，并用“披露并设计”的方法重新设计了一项真实作业——这种方法正在越来越多的学校中取代纯粹的“检测并惩罚”政策。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "对照评分标准，给一批真实的学生作业打分",
+      "content": "备课只是教师 AI 工作量的一半——评分是另一半，也是“必做人工审阅”这个习惯最重要的一半，因为一个分数对一个真实的学生会带来真实的后果。这个工作坊会让你在 AI 完成初评的基础上，产出一份真实的、基于评分标准的反馈——而你才是真正的评分人。\n\n**第 1 步——找到真实（或贴近真实）的学生作业和一份评分标准。** 如果你目前正在教学，就用 4-6 份真实的、已经提交的作业，以及你针对这份作业实际使用的评分标准。如果你不是教育工作者，或者手头没有现成的学生作业，就先请 Claude 或 ChatGPT 生成贴近真实的样本：`“为提示语‘[挑选一个适合你所选年级的真实提示语]’生成 4 篇学生短文（每篇 150-250 词），分别对应四种不同的质量水平——优秀、中等、较差，以及一篇带有某个常见误解的作文，写作方式要贴近那个年龄段学生真实的写作风格，而不是过于工整。”` 然后为这个提示语编写或改编一份简单的四项评分标准。\n\n**第 2 步——把一份学生作业和你的评分标准粘贴进 Claude 或 ChatGPT 并要求：**\n```\nHere is my grading rubric: [paste rubric]\nHere is one student's submission: [paste submission]\n\nScore this against each rubric criterion, with a one-sentence justification per\ncriterion quoting or referencing the specific part of the submission that\nsupports the score. Then draft 2-3 sentences of feedback for the student:\none specific strength, one specific area to improve, and one concrete next\nstep. Do not inflate the score to be encouraging — score accurately and keep\nthe encouragement in the feedback language, not the score.\n```\n对每份作业都重复这个过程。\n\n**第 3 步——必做的对抗性审查。** 在给任何一个分数定稿之前，把 AI 的评分和反馈粘贴回去并问：`“找出这份评分中 3 个具体的问题——那些理由其实和评分标准的对应项不完全匹配的地方，那些相对于所引用的证据来看分数显得偏高或偏严苛的地方，或者那些反馈通用到套在任何学生的作业上都成立的地方。”` 在算作一个真正的分数之前，每份作业至少修复其中一个问题。\n\n**第 4 步——定稿并保存。** 把你自己最终的分数（可能与 AI 的初评不同）连同你编辑过的 AI 起草反馈一起记录下来——这才是你真正交还给学生的成果，而不是 AI 未经审阅的原始输出。\n\n**你的交付成果：** 一份针对 4-6 份学生作业、真实的、按评分标准打分的反馈集，每一份都经过了人工审阅，每篇作业至少修正了一处问题——这正是本课学术诚信讨论中明确指出的、AI 检测和评分工具都需要的“人在回路”评分习惯。"
     }
   ],
   "nextLesson": "16-19",

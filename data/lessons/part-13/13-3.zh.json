@@ -104,6 +104,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已完成第 13-3 课。** 支出限额已设置，用量已经理清，至少已经应用了一项优化。成本管理算不上光鲜亮丽，但正是它把那些能构建可持续 AI 工具的人，与那些收到意外账单后关停一切的人区分开来。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 E —— 把你的成本架构翻译成一份通俗易懂的 ROI 一页纸文档",
+      "content": "这节课里的一切——模型路由、缓存、批处理、`max_tokens`——都是工程师的行话。批准你预算的人、给客户合同签字的人，或者决定一个 AI 功能是否值得开发的人，通常听不懂这些术语，“我们加上了 prompt caching”这句话对他们来说毫无意义。这个工作坊要求你把同样的成本思路，翻译成一份非技术利益相关方真的会读、也会批准的文档。\n\n**第 1 步 —— 选一个真实存在或正在计划中的 AI 功能或工作流** —— 第 11-8 课中的摘要工具、你已经搭建的某个自动化流程，或者你正打算向经理或客户提出的方案。\n\n**第 2 步 —— 让 Claude 把本课中的四种成本模式，翻译成适合你特定受众的大白话版本：**\n```\nI need to explain the cost profile of an AI feature to [a non-technical manager / a client / a nonprofit board]. The technical cost levers are: model routing (cheap model vs. expensive model), prompt caching (reusing a cached system prompt), the Batch API (delayed processing for a 50% discount), and setting max_tokens (capping response length). Translate each of these into one plain-language sentence a non-engineer would understand, framed around dollars, not tokens.\n```\n\n**第 3 步 —— 搭建一份一页纸的成本/ROI 文档**，包含三个部分：(a) 当前成本，用大白话说明，附上一个真实或估算的具体金额；(b) 应用了适合你这项功能的优化措施之后的成本，附上具体的金额或百分比降幅；(c) 一句话说明“为什么这值得做”，把节省下来的成本与利益相关方真正在意的事情挂钩——周转时间、人手需求、服务质量。\n\n**第 4 步 —— 必做的对抗性审查。** 问 Claude：*“不要认可这个 ROI 故事——找出其中 3 个具体问题：一个过于乐观的假设、一项我没有考虑到的隐性成本（工程时间、监控、错误处理），或者一个节省实际上不会兑现的场景。”* 在把这份文档定稿之前，至少修复它指出的一个漏洞。\n\n**第 5 步 —— 把这份文档保存**为 `notes/ai-cost-roi-onepager.md`，并提交：`git add notes/ai-cost-roi-onepager.md && git commit -m \"Add plain-language AI cost/ROI one-pager\"`\n\n**将其应用到其他场景：**\n- 自由职业/咨询开发者：把这份一页纸文档包装成一份面向客户的成本透明备忘录，用来证明你提议的 AI 辅助方案及其持续运行成本是合理的\n- 制造业：把它包装成面向工厂经理的合理性说明，把 API 成本与缺陷检测吞吐量挂钩，而不是工程指标\n- 非营利组织：把它包装成拨款预算中的一个明细项，因为资助方往往希望看到一个具体、站得住脚的月度数字，而不是笼统的“AI 成本”\n- 政府科技（GovTech）开发者：把它包装成一份采购合理性文档，因为 M-25-22 式的采购规则要求有据可查的成本追踪和供应商比较\n- 医疗 IT：把它包装成面向医院管理者的合理性说明，把 AI 转录成本与完成同一任务所需的当前人力成本做对比"
     }
   ],
   "nextLesson": "13-4",

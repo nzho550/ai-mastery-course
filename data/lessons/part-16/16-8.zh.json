@@ -70,6 +70,12 @@
       "explanation": "选项 B 准确捕捉了正确的分工方式。AI 擅长快速产出大量内容（多份草稿、变体和格式），但缺乏让内容值得信赖、与众不同所需的内部知识、真实经验和真实观点。来自你公司实际结果的具体数据点、来自真实客户互动的轶事、基于你实际经验的反主流观点——正是这些把千篇一律的 AI 内容转化为值得一读的内容。AI 负责结构和产量；你负责实质内容和语调。"
     },
     {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "工作坊 E——搭建你的品牌语调指南",
+      "content": "你将搭建一份真实、可复用的品牌语调指南——这正是“用 AI 维持品牌语调”那一节提到过、但从未真正让你动手搭建的那个产出物。一旦它存在，未来本课（以及之后）的每一次 AI 写作会话，都能从一份真实的文档开始，而不必每次都凭记忆重新解释你的语调。\n\n**第一步——收集你的原始素材。** 收集 5-8 篇你（或你的团队）已经发布、并且真正引以为豪的内容——博客文章、LinkedIn 帖子、邮件、广告文案，任何你手头有的东西。如果你还没有真实内容（刚入行营销，或者是在为一个假设的品牌搭建），先请 Claude 生成一套真实感的素材：`\"Generate 5 short marketing pieces (a LinkedIn post, an email subject+opener, an ad headline, a blog intro, a product description) for a realistic [industry] brand with [personality description].\"`\n\n**第二步——把这些示例粘贴给 Claude，问：**\n```\nHere are 5-8 pieces of content I consider strong examples of our brand voice: [paste all examples]\n\nAnalyze these and build a Brand Voice Guide with these sections:\n1. Tone (3-4 adjectives, each with a one-sentence definition and a \"not this\" contrast)\n2. Vocabulary (words/phrases we favor, words/phrases we avoid)\n3. Sentence structure patterns (length, rhythm, how we open and close)\n4. Things we never say (clichés, jargon, overused phrases specific to this voice)\n5. Things we always do (recurring structural or stylistic habits across these examples)\n6. A \"voice test\" paragraph: rewrite one generic sentence in this voice, so future writers can see the transformation\n\nBase every section on patterns you actually observe in the examples I gave you, not generic marketing advice.\n```\n\n**第三步——强制性的对抗式审查。** 把生成的指南粘贴回去，问：`\"Find 3 specific problems with this guide — places where the description is too vague to actually constrain a future draft, or where it contradicts one of the examples I gave you.\"` 至少修复其中一个——通常的做法是，请 Claude 把一个模糊的形容词（比如“友好”）用一句具体的示例句子变得可操作。\n\n**第四步——压力测试。** 请 Claude 只用这份指南（不提供任何额外示例），写一篇新内容（一条关于新主题的 LinkedIn 帖子）。它听起来像你的品牌吗？如果不像，说明指南某处仍然太模糊——回到第三步。\n\n**第五步——保存它。** 把这份指南存成一个文件，或者更好的做法是，把它上传到一个 Claude 项目中（本课方法三），这样未来本课工作流中的每一次营销会话，都能从一份真实、经过测试的语调文档开始，而不是临时的口头描述。\n\n**你的交付成果：** 一份经过测试、可复用的品牌语调指南文档，你可以把它粘贴进任何 AI 写作会话，或者上传进 Claude 项目。"
+    },
+    {
       "type": "callout",
       "variant": "success",
       "content": "**你已完成第 16-8 课。** 你现在拥有一套完整的 AI 营销工具箱：内容生产流程、品牌语调维护技巧，以及适用于社交媒体、邮件营销活动和 SEO 内容的实用工作流。思维方式上的关键转变：不要再把 AI 当作你营销技能的替代品，而要把它当作一台生产机器——你提供策略和判断，它提供速度。"

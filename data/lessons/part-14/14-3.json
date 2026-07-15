@@ -83,6 +83,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**Capstone 14-3 complete.** You have a live AI automation running in the background. Every email you label gets a draft reply without any further action from you. This is AI working for you, not just with you. The next capstone assembles your complete AI development environment into one documented setup."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Adapt this capstone:** The label-trigger-draft-review pipeline stays identical — only the label and the system prompt change per role.\n- Sales rep: label inbound leads \"New Inquiry\" and draft a first-response email with next-step questions, ready for review before sending\n- Customer support: label tickets by category and draft replies matching your team's tone and standard resolutions, still gated on human send\n- Recruiter/HR: draft candidate follow-ups and rejection emails from a \"Needs Response\" label, keeping every send a deliberate human action\n- Teacher: draft replies to parent emails asking about grades, homework, or schedules — flagged for review since anything about a specific student needs a human check\n- Manager: draft replies to routine internal requests — time-off approvals, status-update asks — so you're editing instead of writing from scratch"
     }
   ],
   "nextLesson": "14-4",

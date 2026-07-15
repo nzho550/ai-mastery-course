@@ -21,7 +21,7 @@ This is the **AI Mastery Course** — a built, deployed, offline-capable website
 - Advanced techniques: RAG, agents, model selection, custom knowledge engines
 - Building custom AI skills/commands for Claude Code
 
-**Course structure:** 21 parts, 280 lessons, ~278 hours total learning time. Available in English and Chinese (language toggle in the header).
+**Course structure:** 21 parts, 284 lessons, ~281 hours total learning time. Available in English and Chinese (language toggle in the header).
 
 **Status:** Live at GitHub Pages ([nzho550/ai-mastery-course](https://github.com/nzho550/ai-mastery-course)). All content authored, site built, i18n complete.
 
@@ -63,7 +63,7 @@ ai-mastery-course/
 | 3 | Prompt Engineering | 8 |
 | 4 | AI Safety, Privacy & Cost Management | 7 |
 | 5 | AI for Research & Knowledge Work | 8 |
-| 6 | AI for Document Creation & Office Work | 22 |
+| 6 | AI for Document Creation & Office Work | 26 |
 | 7 | AI for Project Planning & Management | 9 |
 | 8 | AI for Personal Life | 22 |
 | 9 | Computer & Command Line Basics | 7 |
@@ -79,7 +79,7 @@ ai-mastery-course/
 | 19 | Advanced AI Mastery | 14 |
 | 20 | Loop Engineering | 17 |
 | 21 | Capstone Projects | 5 |
-| **Total** | | **280 lessons** |
+| **Total** | | **284 lessons** |
 
 Business-owner and people-management content (validating/launching a business, performance reviews, hiring, OKRs, keeping tabs on a team's work without micromanaging) lives in Part 11 ("AI Inside VS Code"), lessons 6-24/6-29/6-30, with cross-links from Part 7 ("AI for Project Planning & Management").
 

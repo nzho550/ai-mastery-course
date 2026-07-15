@@ -78,6 +78,12 @@
       "type": "callout",
       "variant": "success",
       "content": "**你已经完成了第 16-21 课。** 你现在了解了 Zillow 在 2026 年 3 月的两次重要发布（带有公平住房护栏的 AI mode 对话式搜索，以及 Zillow Preview 的预上市 MLS 房源），Compass 面向经纪人的 Home Platform 和 AI 生产力工具，以及为什么“82% 的经纪人使用 AI”这个统计数字需要结合它究竟来自两份不同的、与 NAR 相关联的调查中的哪一份来理解。你已经针对一个真实问题测试了一项 2026 年真实上线的房地产 AI 功能，并建立了一份可复用的怀疑清单，用于在信任打着 AI 标签的房地产宣称之前先加以评估。"
+    },
+    {
+      "type": "workshop",
+      "tag": "BUILD",
+      "title": "构建一份真实的比较市场分析与房源简报",
+      "content": "你将产出一名真正的房地产经纪人用来给房产定价和营销的两份文档——一份比较市场分析（CMA）和一份带有买家异议应对简报的房源描述——用 AI 完成初稿，用你自己的判断（如果你不是经纪人，也可以是一名持牌经纪人的判断）来把关最终定稿。\n\n**第 1 步——挑选一处真实（或贴近真实）的房产。** 如果你是经纪人，或者能接触到一份真实的房源，或者你（或你认识的人）正在真正考虑出售的一套房子，就用它，再加上 3-5 套你能在 Zillow、Redfin 或本地 MLS（如果有权限）上找到的真实可比销售房源。如果你无法拿到真实的可比房源，就先请 Claude 或 ChatGPT 生成贴近真实的样本：`“为 [描述：3 卧 2 卫，约 1800 平方英尺] 的房产，在 [描述：郊区/城市] 市场中，生成 4 套贴近真实的可比销售房源——包括成交价、成交日期、面积，以及与标的房产相比一两个显著差异（比如厨房已装修、地块更小等）。”`\n\n**第 2 步——把房产详情和可比房源粘贴进 Claude 或 ChatGPT 并要求：**\n```\nHere is the subject property: [describe it]\nHere are 3-5 comparable sales: [paste comps]\n\nProduce two things:\n1. A comparative market analysis — an estimated price range with reasoning\n   tied to specific comps (adjust for the notable differences you were given),\n   and a one-paragraph pricing recommendation\n2. A listing description (150-200 words, MLS-style) plus a buyer-objection-\n   handling brief listing the 3 most likely buyer objections for this specific\n   property (price, condition, location, etc.) and a concrete, honest response\n   to each\n```\n\n**第 3 步——必做的对抗性审查。** 把这两份文档粘贴回去并问：`“找出这份 CMA 和房源简报中 3 个具体的问题——那些某个可比房源的调整幅度没有得到充分论证的地方，那些房源描述夸大了数据并不支持的内容的地方，或者某个异议应对听起来是在回避而不是坦诚回应的地方。”` 在把任何一份文档当作最终版之前，至少修复其中一个问题。\n\n**第 4 步——把两份文档都保存为真实可用的文档。** CMA 是你真的会拿去和卖家逐条讲解的东西；房源简报是你真的会用来准备买家看房或应对异议的东西。如果本课前面提到的 Zillow AI mode 或 Compass 你有访问权限，可以把你手工做出的 CMA 和这两个工具针对同一处房产给出的结果做个对比。\n\n**你的交付成果：** 一份真实的、带有可站得住脚的定价区间的比较市场分析，外加一份房源描述和买家异议简报——可以直接用在一处真实或贴近真实的房产上，而不是一次演示。"
     }
   ],
   "nextLesson": "16-22",

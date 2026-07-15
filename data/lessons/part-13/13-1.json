@@ -110,6 +110,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**You've completed lesson 13-1.** Hallucinations are not a bug to be fixed — they're a structural property of how language models work. The professionals who use AI most effectively are the ones who've internalized this and built verification into their workflow automatically."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Across industries:**\n- Healthcare-IT: An AI-drafted patient-education handout states a drug interaction confidently — a pharmacist cross-checks it against the interaction database before it reaches a patient, the same \"ask for citations, then verify\" habit this lesson teaches.\n- Legal: A junior associate accepts a Claude-drafted brief's case citation without opening a legal database — sanctions follow when the case doesn't exist, and the fix is the same verification step as any other citation hallucination.\n- Financial-Systems Analyst: An AI summary of a new tax rule sounds authoritative but reflects the model's training cutoff, not this year's actual regulation — treated as a lead to verify against the primary source, not a finished answer.\n- Manufacturing: An AI-suggested torque spec for a fastener looks precise and confident but doesn't match the part's actual engineering datasheet — a technical-specification hallucination caught only by checking the manufacturer's documentation.\n- QA Engineer: A test-generation prompt confidently describes an edge-case behavior that doesn't match the system under test — a reasoning hallucination caught only by running the test, not by trusting the description."
     }
   ],
   "nextLesson": "13-2",

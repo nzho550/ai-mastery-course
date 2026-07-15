@@ -108,6 +108,11 @@
       "type": "callout",
       "variant": "success",
       "content": "**You've completed lesson 11-6.** You can now estimate the cost of any API call before running it and calculate exact costs from responses. This knowledge becomes critical in lesson 11-9 when you optimize real workloads. Next: making responses feel instant with streaming."
+    },
+    {
+      "type": "callout",
+      "variant": "info",
+      "content": "**Across industries:**\n- Legal: A firm billing AI-assisted contract review per matter needs the input/output cost split from this lesson — a prompt that asks for a verdict plus citations, not a full re-summary of the contract, keeps both the API bill and the client invoice predictable.\n- Marketing/Sales: An agency running AI-generated ad copy for 50 clients uses this same cost formula to quote a fair monthly retainer — 200 short campaigns a month is a very different number than 200 long ones.\n- Consulting: A consultant pricing an AI-assisted research engagement estimates input tokens for the source documents and output tokens for the deliverable separately, using the exact formula in this lesson, instead of guessing at a flat fee.\n- Nonprofit: A program director with a fixed annual grant for AI tools needs to know Haiku-versus-Sonnet token costs before committing to \"AI-assisted case notes for every caseworker\" — the math determines whether the grant covers 12 months or 3.\n- GovTech: A public-sector developer justifying an AI line item to a procurement officer needs token-level cost math, not a vague \"AI is expensive\" — the formula in this lesson is exactly what procurement will ask to see."
     }
   ],
   "nextLesson": "11-7",
